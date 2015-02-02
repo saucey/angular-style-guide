@@ -20,6 +20,7 @@
     "tests"
   ],
   "devDependencies": {
-    "drupal-normalize-css": "latest"
+    "drupal-normalize-css": "latest",
+    "compass-mixins": "~1.0.2"
   }
 }
