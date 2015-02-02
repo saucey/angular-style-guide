@@ -1,1 +1,27 @@
-// .
+
+//
+// Main file for Aegon SASS library
+// Syntax is in SCSS, project using lib-sass to compile the styles.
+// --------------------------------------------------
+
+/* Force the charset
+================================================== */
+
+@charset "UTF-8";
+
+
+/* Bower Components
+================================================== */
+
+// @import "vendors/example_bower";
+
+
+/* Groups of core files
+================================================== */
+
+@import "base/all";
+@import "helpers/all";
+@import "layout/all";
+@import "components/all";
+@import "pages/all";
+@import "themes/all";
