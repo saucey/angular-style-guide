@@ -13,7 +13,9 @@
 /* Bower Components
 ================================================== */
 
-// @import "vendors/example_bower";
+/* Compass Mixins */
+// @import "compass-mixins/lib/compass/utilities/general";
+@import "compass-mixins/lib/compass/utilities/sprites";
 
 
 /* Groups of core files
