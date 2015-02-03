@@ -14,7 +14,10 @@
 ================================================== */
 
 /* Compass Mixins */
-@import "compass-mixins/lib/compass";
+@import "vendors/compass-mixins/lib/compass";
+
+/* Reset file from Drupal Normalize.css */
+@import "vendors/drupal-normalize-css/normalize";
 
 
 /* Groups of core files
