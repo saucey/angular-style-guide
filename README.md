@@ -15,6 +15,12 @@ The library will host the SASS library required for cXstudio Drupal projects and
 * Don't use anymore vendor prefixes. They will be added by Autoprefixer as Grunt task inside father projects.
 
 
-## First usage after git clone
+## Usage
 
 * This library will be used as submodule ot other projects. Where added, please run also **bower install** in relative subfolder to create Bower dependencies as vendors/ folder.
+* Sometime could happen that the dependecies in assets/aegon-sass-library change, please re-run **bower install** (in case of weird errors, just remove the vendor folders from SASS library and run again **bower install**)
+
+## Notes
+
+* We are going to import the compiled CSS version of SASS file: aegon-library.scss in other projects as extra file.
+  That's mean we dopn't have to implement really everything taken from other projects, if the styles are not really useful first of all in Drupal websites environments.
