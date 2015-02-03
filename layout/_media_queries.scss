@@ -3,29 +3,29 @@
 // Media Queries
 // --------------------------------------------------
 
-/* Large desktop */
-@media (min-width: 1200px) { ... }
+// /* Large desktop */
+// @media (min-width: 1200px) { ... }
  
-/* Portrait tablet to landscape and desktop */
-@media (min-width: 768px) and (max-width: 979px) { ... }
+// /* Portrait tablet to landscape and desktop */
+// @media (min-width: 768px) and (max-width: 979px) { ... }
  
-/* Landscape phone to portrait tablet */
-@media (max-width: 767px) { ... }
+// /* Landscape phone to portrait tablet */
+// @media (max-width: 767px) { ... }
  
-/* Landscape phones and down */
-@media (max-width: 480px) { ... }
+// /* Landscape phones and down */
+// @media (max-width: 480px) { ... }
 
 
 
 
-/* Extra small devices (phones, less than 768px) */
-/* No media query since this is the default in Bootstrap */
+// /* Extra small devices (phones, less than 768px) */
+// /* No media query since this is the default in Bootstrap */
 
-/* Small devices (tablets, 768px and up) */
-@media (min-width: @screen-sm-min) { ... }
+// /* Small devices (tablets, 768px and up) */
+// @media (min-width: @screen-sm-min) { ... }
 
-/* Medium devices (desktops, 992px and up) */
-@media (min-width: @screen-md-min) { ... }
+// /* Medium devices (desktops, 992px and up) */
+// @media (min-width: @screen-md-min) { ... }
 
-/* Large devices (large desktops, 1200px and up) */
-@media (min-width: @screen-lg-min) { ... }
+// /* Large devices (large desktops, 1200px and up) */
+// @media (min-width: @screen-lg-min) { ... }
