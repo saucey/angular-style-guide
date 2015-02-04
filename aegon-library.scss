@@ -23,11 +23,11 @@
 /* Groups of core files
 ================================================== */
 
-/* Reset/normalize / Typography rules */
-@import "base/all";
-
 /* SASS variables, functions, mixins, class and placeholders helpers */
 @import "helpers/all";
+
+/* Core / Typography rules */
+@import "base/all";
 
 /* Grid system, header, footer, sidebars, forms */
 @import "layout/all";
