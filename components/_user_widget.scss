@@ -1,0 +1,17 @@
+.user_widget {
+  width: 320px;
+
+  .topmenu {
+    .username {
+      color: $green;
+    }
+  }
+
+  .username {
+    color: $black;
+  }
+  .lastlogin {
+    color: $green;
+    font-size: $small;
+  }
+}

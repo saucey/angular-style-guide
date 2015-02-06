@@ -3,33 +3,8 @@
 // http://csswizardry.com/2011/09/when-using-ids-can-be-a-pain-in-the-class/
 // http://screwlewse.com/2010/07/dont-use-id-selectors-in-css/
 // http://oli.jp/2011/ids/
-// 
 
-/* Need refactor */
-
-// STYLES THAT ARE PARTICULAR only to parts of the site
-#dux1, #dux2 {
-  #topmenu {
-    .username {
-      color: $green;
-    }
-  }
-  
-  #userwidget {
-    width: 320px;
-    .username {
-      color: $black;
-    }
-    .lastlogin {
-      color: $green;
-      font-size: $small;
-    }
-  }
-}
-
-
-
-#lhfs {
+.lhfs_widget {
   .tip {
     background-color: $sky;
     padding: 20px 15px;
