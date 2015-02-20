@@ -1,0 +1,30 @@
+
+button {
+  background-color: $blue;
+  color: $white;
+  font-size: $medium;
+  border-radius: 3px;
+  padding: 10px;
+  border: 0;
+  &.arrow {
+    &:after {
+      padding: 11px;
+      margin-right: -10px;
+      font-family: $font_icons;
+      content: ">";
+      background-color: $light_blue;
+    }
+  }
+  &.white {
+    background-color: $white;
+    color: $blue;
+    &:before {
+      padding: 11px;
+      margin-left: -10px;
+      font-family: $font_icons;
+      content: ">";
+      background-color: $white;
+      color: $blue;
+    }
+  }
+}
