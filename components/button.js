@@ -2,11 +2,18 @@
  * Example JavaScript component
  */
 
-(function() {
+// Closure with jQuery support
+(function($) {
   'use strict';
 
-  var button_var = {};
+  // Add new item to public Drupal object
+  Drupal.behaviors.button_example = {
+    attach: function () {
 
-  return button_var;
+      var button_var = {};
 
-}).call(this);
+      return button_var;
+    }
+  };
+
+})(jQuery);
