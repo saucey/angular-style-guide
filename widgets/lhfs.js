@@ -13,11 +13,20 @@
       // Check if div#lhfs_widget exist
       if ($('#lhfs_widget').length > 0) {
 
-        // Run your DOM manipulation stuff
-        $(".tip").removeClass("visible");
-        $(".tip").addClass("visible");
-        $("li.payment").removeClass("data");
-        $("li.payment").addClass("data");
+        window.edit = function (show) {
+          jQuery('.details').toggleClass('edit', show);
+          jQuery('.actions').toggleClass('edit', show);
+        }
+
+        $("button").focus(function () {this.blur()})  //avoid the blue (on mac) frame around a button when it is clicked
+
+        $("#lhfs_widget .tip").removeClass("visible");
+        $("#lhfs_widget .tip").addClass("visible");
+        $("#lhfs_widget li.payment").removeClass("data");
+        $("#lhfs_widget li.payment").addClass("data");
+        $("#lhfs_widget li.payment ul.horizontal").removeClass("visible");
+        $("#lhfs_widget li.payment ul.horizontal").addClass("visible");
+        $($("#lhfs_widget li.payment ul.horizontal")[0]).addClass("visible");
       }
     }
   };
