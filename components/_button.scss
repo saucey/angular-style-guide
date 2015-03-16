@@ -1,15 +1,20 @@
-
 button {
+  cursor: pointer;
+  height: 38px;
   background-color: $blue;
   color: $white;
   font-size: $medium;
-  border-radius: 3px;
-  padding: 10px;
+  border-radius: $elements_border_radius;
+  padding: 9px 8px;
   border: 0;
+  white-space: nowrap;
   &.arrow {
     &:after {
+      height: 38px;
+      //line-height: 21px;
       padding: 11px;
       margin-right: -10px;
+      margin-left: 10px;
       font-family: $font_icons;
       content: ">";
       background-color: $light_blue;

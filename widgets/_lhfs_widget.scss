@@ -201,6 +201,14 @@ $frame_border_radius: 3px;
       }
     }
   }
+
+  // fix responsive peculiarities
+  .row-fluid [class*='span'] {
+    display: inline;
+    @media screen and(max-width: $rc-s-max-width) {
+      min-height: 5px;
+    }
+  }
 }
 
 ul.actions {
@@ -226,7 +234,7 @@ ul.actions {
 ul.horizontal {
   margin: 10px 0 10px 0;
   padding: 1px 0;
-  width: 100%;
+  //width: 100%;
   display: none; //together with the .data class for li.payment toggles on and off the visibility of the data elements
   &.clear {
     width: 100%;
@@ -239,14 +247,14 @@ ul.horizontal {
   }
   li {
     &.label {
-      font-family: $font_light;
+      font-family: $font_normal;
     }
     &.value {
       font-family: $font_light;
     }
     display: inline-block;
     float: left;
-    width: 50%; //default value, can be overwritten by css, of course
+    //width: 50%; //default value, can be overwritten by css, of course
     &:last-of-type {
       float: none;
       clear:both; //

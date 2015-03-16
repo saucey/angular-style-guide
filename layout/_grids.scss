@@ -145,7 +145,7 @@
   }
 }
 
-@media screen and(min-width: 641px) and(max-width: 900px) {
+@media screen and(min-width: $rc-m-min-width) and(max-width: $rc-m-max-width) {
   .row-fluid {
     margin-bottom: 5px;
   }
@@ -157,7 +157,7 @@
     }
   }
 }
-@media screen and(max-width: 640px) {
+@media screen and(max-width: $rc-s-max-width) {
   .row-fluid {
     margin-bottom: 0;
     .span14 {

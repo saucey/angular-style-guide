@@ -46,3 +46,17 @@ $large: 22px;
 $x-large: 25px;
 $xx-large: 40px;
 $xxx-large: 46px;
+
+// RESPONSIVE CUTOFFS
+// smartphone
+$rc-s-min-width: 0;
+$rc-s-max-width: 640px;
+// tablet
+$rc-m-min-width: 641px;
+$rc-m-max-width: 900px;
+// desktop
+$rc-l-min-width: 901px;
+$rc-l-max-width: 16000px;
+
+// INTERFACE ELEMENTS
+$elements_border_radius: 3px;
