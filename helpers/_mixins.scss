@@ -67,3 +67,12 @@
     }
   }
 }
+
+@mixin inlineFrame () {
+    padding: 20px 15px;
+    border-radius: $frame_border_radius;
+    display: none;
+    &.visible {
+      display: block;
+    }  
+}

@@ -24,15 +24,20 @@ $white: #ffffff;
 $grey: #edebe5;
 // GREENS
 $green: #49af57;
+$light_green: #c8e7cc;
 // REDS
 $red: #ca4642;
+$light_red: #eacbca;
 // YELLOWS
 $yellow: #ffea53;
+// BROWNS
+$beige: #eeebe5;
 
 $font_fallback: Arial,Verdana,sans-serif;
-$font_light: 'sslight', $font_fallback;
-$font_normal: 'ssregular', $font_fallback;
-$font_bold: 'ssbold', $font_fallback;
+$font_light: 'senticosansdtlight', $font_fallback;
+$font_normal: 'senticosansdtregular', $font_fallback;
+$font_medium: 'senticosansdtmedium', $font_fallback;
+$font_bold: 'senticosansdtcondbold', $font_fallback;
 $font_icons: 'aegon_icons', $font_fallback;
 // SIZES
 $small: 14px;
