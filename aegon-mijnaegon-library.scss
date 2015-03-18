@@ -20,5 +20,8 @@
 /* Groups of mijnaegon files
 ================================================== */
 
+/* SASS variables, functions, mixins, class and placeholders helpers */
+@import "helpers/all";
+
 /* All library widgets and specific modules */
 @import "widgets/all";
