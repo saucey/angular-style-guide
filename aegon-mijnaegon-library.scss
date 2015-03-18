@@ -1,0 +1,24 @@
+
+//
+// Main file for Mijnaegon SASS library
+// Syntax is in SCSS, project using lib-sass to compile the styles.
+// --------------------------------------------------
+
+/* Force the charset
+================================================== */
+
+@charset "UTF-8";
+
+
+/* Bower Components
+================================================== */
+
+/* Compass Mixins */
+@import "vendors/compass-mixins/lib/compass";
+
+
+/* Groups of mijnaegon files
+================================================== */
+
+/* All library widgets and specific modules */
+@import "widgets/all";
