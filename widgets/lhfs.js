@@ -11,11 +11,11 @@
     attach: function () {
 
       // Check if div#lhfs_widget exist
-      if ($('#lhfs_widget').length > 0) {
+      if ($('.lhfs_widget').length > 0) {
 
         window.edit = function (show) {
-          jQuery('.details').toggleClass('edit', show);
-          jQuery('.actions').toggleClass('edit', show);
+          $('.details').toggleClass('edit', show);
+          $('.actions').toggleClass('edit', show);
         }
 
         $("button").focus(function () {this.blur()})  //avoid the blue (on mac) frame around a button when it is clicked
@@ -27,6 +27,8 @@
         $("#lhfs_widget li.payment ul.horizontal").removeClass("visible");
         $("#lhfs_widget li.payment ul.horizontal").addClass("visible");
         $($("#lhfs_widget li.payment ul.horizontal")[0]).addClass("visible");
+
+        $(".lhfs_widget select").msDropDown();
       }
     }
   };
