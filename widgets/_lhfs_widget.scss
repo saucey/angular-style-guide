@@ -4,97 +4,10 @@
 // http://screwlewse.com/2010/07/dont-use-id-selectors-in-css/
 // http://oli.jp/2011/ids/
 
-$frame_border_radius: 3px;
-.frame {
-  position: relative;
-  min-width: 220px;
-  min-height: 100px;
-  padding: 15px;
-  border: 2px solid $grey;
-  border-radius: $frame_border_radius;
-}
-@mixin bubble($width: 10px, $border: 2px, $quadrant: 0, $top: "", $right: "", $bottom: "", $left: "", $border-color: white, $background-color: grey) { //creates a bubble nose on a frame
-  //$quadrant works like the coordinates in border 0 = top, 1 = left, 2 = bottom, 3 = right
-  //offset values right, left, top and bottom indicate the distance from one of the extremes
-  //of the quadrant, thus
-  //$quadrant: 0 and $right: 20px;
-  //means that the bubble nose is on the top and 20px from the right
-  //it should be self-evident that nonsensical combinations such as
-  //$quadrant: 0 (top) and $bottom: 20px
-  //will produce nonsensical results, so quadrant
-  //0 or 2 will only work with EITHER left or right
-  //and 1 or 3 with EITHER top or bottom
-  //if the nose is supposed to be solid, background-color can be set to transparent
-
-  &:before, &:after {
-    content: '';
-    display: block;
-    position: absolute;
-    $pos: -2 * $width;
-    @if $quadrant == 0 {
-      top: $pos;
-      border-color: transparent transparent $border-color transparent;
-    };
-    @if $quadrant == 1 {
-      right: $pos;
-      border-color: transparent transparent transparent $border-color;
-    }
-    @if $quadrant == 2 {
-      bottom: $pos;
-      border-color: $border-color transparent transparent transparent;
-    }
-    @if $quadrant == 3 {
-      left: $pos;
-      border-color: transparent $border-color transparent transparent;
-    }
-    @if $top != "" {top: $top};
-    @if $right != "" {right: $right};
-    @if $bottom != "" {bottom: $bottom};
-    @if $left != "" {left: $left};
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: $width;
-    border-radius: inherit;
-  }
-  &:after {
-    $pos: (-2 * $width) + $border;
-    @if $quadrant == 0 {
-      top: $pos;
-      border-color: transparent transparent $background-color transparent;
-    }
-    @if $quadrant == 1 {
-      right: $pos;
-      border-color: transparent transparent transparent $background-color;
-    }
-    @if $quadrant == 2 {
-      bottom: $pos;
-      border-color: $background-color transparent transparent transparent;
-    }
-    @if $quadrant == 3 {
-      left: $pos;
-      border-color: transparent $background-color transparent transparent;
-    }
-  }
-}
 .bubble {
   @include bubble(10px, 2px, $quadrant: 3, $bottom: 20px, $border-color: $grey, $background-color: $white);
 }
 
-.error {
-  @include inlineFrame();
-  background-color: $light_red;
-  div.header {
-    .icon {
-      font-family: $font_icons;
-      color: $red;
-    }
-    float: left;
-    font-family: $font_bold;
-    color: $red;
-    margin-right: 20px;
-  }
-}
 
 #lhfs_widget {
   .tip {
@@ -104,7 +17,7 @@ $frame_border_radius: 3px;
     .intro {
       &:before {
         font-family: $font_icons;
-        content: "O";
+        content: "\e62f";
         margin-left: -20px; //this is faking it, compensating for the space requirement of :before, display: inline does not seem to work
         margin-right: 5px;
         left: -10px;
@@ -127,7 +40,7 @@ $frame_border_radius: 3px;
         &:before {
           font-family: $font_icons;
           color: $blue;
-          content: "\e604";
+          content: "\e605";
           margin-left: -20px; //this is faking it, compensating for the space requirement of :before, display: inline does not seem to work
           left: -10px;
           position: relative;
@@ -151,13 +64,39 @@ $frame_border_radius: 3px;
 }
 
 #lhfs_widget {
-  input, select {
-    $input_width: 228px;
-    $input_margin: 5px;
+  $input_width: 228px;
+  $input_margin: 5px;
+  $input_height: 44px;
+  input, select, .ddTitle {
+    height: $input_height;
+    padding: 9px 10px;
+    padding-right: 10px;
+    border-radius: $elements_border_radius;
+    border: 1px solid $grey;
+    background-color: $beige;
+    white-space: nowrap;
     display: none;
     margin-top: 0px;
     margin-bottom: 0px;
     width: $input_width;
+}
+
+  .ddTitle .arrow {
+    &:after {
+      font-size: 11px;
+      font-family: $font_icons;
+
+      content: "\e631";
+    }
+  }
+
+  input, select {
+    &.error {
+      border: 1px solid $red;
+      &:before {
+
+      }
+    }
     &.half {
       width: $input_width / 2 - $input_margin;
       margin-right: $input_margin * 2;
@@ -184,6 +123,11 @@ $frame_border_radius: 3px;
       display: inline;
     }
   }
+  li.label {
+    &:after {
+      content: ":";
+    }
+  }
   label.left {
     float:left;
   }
@@ -191,13 +135,20 @@ $frame_border_radius: 3px;
   .edit {
     li.label {
       font-family: $font_normal;
+      text-align: right;
+      padding-right: 55px;
+      &:after {
+        content: "";
+      }
     }
-    input, select {
+    input, select, .ddTitle {
       display: block;
     }
     li.value {
       span {
-        display: none;
+        &.content, &.help {
+          display: none;
+        }
       }
     }
   }
@@ -208,6 +159,15 @@ $frame_border_radius: 3px;
     @media screen and(max-width: $rc-s-max-width) {
       min-height: 5px;
     }
+  }
+}
+
+.help {
+  margin-right: 20px;
+  &:before {
+    font-family: $font_icons;
+    font-size: 16px;
+    content: "\e630";
   }
 }
 
@@ -233,6 +193,9 @@ ul.actions {
 
 ul.horizontal {
   margin: 10px 0 10px 0;
+  @media screen and(max-width: $rc-s-max-width) {
+    margin-bottom: 30px;
+  }
   padding: 1px 0;
   //width: 100%;
   display: none; //together with the .data class for li.payment toggles on and off the visibility of the data elements
