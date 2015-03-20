@@ -1,0 +1,17 @@
+
+//
+// Main file for Admin Menu
+// Syntax is in SCSS, project using lib-sass to compile the styles.
+// --------------------------------------------------
+
+/* Force the charset
+================================================== */
+
+@charset "UTF-8";
+
+
+/* Groups of admin context files
+================================================== */
+
+/* Modules */
+@import "modules/aegon/admin_menu";
