@@ -18,8 +18,6 @@
                            $('body.imce').length < 1 &&
                            ext_cookie_val === 'nocookie';
 
-      console.log('runCreatePopup', runCreatePopup);
-
       if (runCreatePopup) {
 
         // Create and append the popup div
