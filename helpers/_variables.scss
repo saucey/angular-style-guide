@@ -16,12 +16,14 @@ $black: #1d1d1b; //actually, this is a very dark blue, so that is why it is here
 $dark_blue: #00304c;
 $blue: #3395d3;
 $light_blue: #66b0de;
+$slightly_lighter_blue: 99CAE9;
 $sky: #8cd1e6;
 // ORANGES
 $orange: #f9a600;
 // GREYS
 $white: #ffffff;
 $grey: #edebe5;
+$slightly_darker_grey: #e0e0e0;
 // GREENS
 $green: #49af57;
 $light_green: #c8e7cc;
@@ -60,5 +62,6 @@ $rc-l-max-width: 16000px;
 
 // INTERFACE ELEMENTS
 $elements_border_radius: 3px;
+$elements_height: 44px;
 
 $frame_border_radius: 3px;

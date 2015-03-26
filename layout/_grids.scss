@@ -88,12 +88,13 @@
 
 .container_12 .row-fluid {
   [class*='span'] {
+    //currently both following lines are superseded by margin-left: 0 further below; check if that creates errors
     margin-left: 2%;
     *margin-left: 1.9375%;
 
-    &:first-child {
+    //&:first-child { //this was causing a problem in lhfs form, so it is deactivated, but if anything is strange in deployment of grid at a later point, this might be a point to start debugging
       margin-left: 0;
-    }
+    //}
   }
   .span12 {
     width: 100%;

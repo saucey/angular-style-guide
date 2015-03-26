@@ -14,6 +14,7 @@
     background-color: $sky;
     @include inlineFrame();
     padding-left: 40px;
+    //margin-bottom: 18px;
     .intro {
       &:before {
         font-family: $font_icons;
@@ -29,7 +30,7 @@
       margin-bottom: 20px;
     }
   }
-  &>ul {
+  form>ul, &>ul {
     margin: 30px 0;
     width: 100%;
     li.payment {
@@ -46,6 +47,7 @@
           position: relative;
         }
         padding-left: 40px;
+        margin-bottom: 20px;
       }
       &.data {
         .details {
@@ -66,20 +68,28 @@
 #lhfs_widget {
   $input_width: 228px;
   $input_margin: 5px;
-  $input_height: 44px;
-  input, select, .ddTitle {
+  $input_height: $elements_height;
+
+  input[type=text], input[type=email], input[type=number], select, .ddTitle {
     height: $input_height;
     padding: 9px 10px;
     padding-right: 10px;
     border-radius: $elements_border_radius;
-    border: 1px solid $grey;
+    border: 1px solid $slightly_darker_grey;
     background-color: $beige;
     white-space: nowrap;
     display: none;
     margin-top: 0px;
     margin-bottom: 0px;
-    width: $input_width;
-}
+
+    &:invalid {
+      //border: 1px solid $red;
+    }
+    &:focus {
+      //outline: 0;
+      //border: 1px solid $slightly_lighter_blue;
+    }
+  }
 
   .ddTitle .arrow {
     &:after {
@@ -90,13 +100,8 @@
     }
   }
 
-  input, select {
-    &.error {
-      border: 1px solid $red;
-      &:before {
-
-      }
-    }
+  input[type=text], input[type=email], input[type=number], select, .dd {
+    width: $input_width;
     &.half {
       width: $input_width / 2 - $input_margin;
       margin-right: $input_margin * 2;
@@ -119,11 +124,25 @@
   }
 
   li.value {
+    @media screen and(min-width: $rc-m-min-width) and(max-width: $rc-l-max-width) {
+      height: $elements_height;
+    }
     span {
-      display: inline;
+      &.content, &.help {
+        display: inline;
+      }
+      &.help {
+        @media screen and(max-width: $rc-s-max-width) {
+          display: none;
+        }
+      }
     }
   }
   li.label {
+    min-height: 0;
+    @media screen and(min-width: $rc-m-min-width) and(max-width: $rc-l-max-width) {
+      height: inherit;  //$elements_height;
+    }
     &:after {
       content: ":";
     }
@@ -133,15 +152,39 @@
   }
 
   .edit {
+    ul.error {
+      display: block;
+      opacity: 0;
+      height: 24px;
+      min-height: 0;
+      [class*='span'] {
+        min-height: 0;  //overwriting min-height from row-fluid
+        line-height: 18px;  //overwriting line-height from *body
+      }
+      &+ ul.horizontal {
+        //margin-top: -10px;
+      }
+      &> li {
+        color: $red;
+        font-size: $small;
+        margin-left: 0;
+      }
+      &.visible {
+        opacity: 1;
+      }
+    }
     li.label {
       font-family: $font_normal;
       text-align: right;
+      @media screen and(max-width: $rc-s-max-width) {
+        text-align: left;
+      }
       padding-right: 55px;
       &:after {
         content: "";
       }
     }
-    input, select, .ddTitle {
+    input[type=text], input[type=email], input[type=number], select, .ddTitle {
       display: block;
     }
     li.value {
@@ -183,7 +226,11 @@ ul.actions {
   &.edit {
     text-align: right;
     li {
-      display: block;
+      text-align: left;
+      &.edit {
+        padding-left: 0;
+        display: block;
+      }
       &.view {
         display: none;
       }
@@ -192,7 +239,10 @@ ul.actions {
 }
 
 ul.horizontal {
-  margin: 10px 0 10px 0;
+  &.row-fluid {
+    height: 50px;
+  }
+  margin: 0;
   @media screen and(max-width: $rc-s-max-width) {
     margin-bottom: 30px;
   }
@@ -224,3 +274,26 @@ ul.horizontal {
     }
   }
 }
+
+    #lhfs_widget input {
+      outline: 0px;
+      &:focus:invalid ~ .errorText {
+        display: block;
+      }
+      &:invalid {
+        border: 1px solid $red;
+      }
+      &~ .errorText, &:valid ~ .errorText {
+        display: none;
+      }
+    }
+    .errorText {
+      $errorText_line-height: 14px;
+      line-height: $errorText_line-height;
+      //position: absolute;
+      font-size: $small;
+      color: $red;
+      //border: 1px solid red;
+      position: relative;
+      top: - ($elements_height + $errorText_line-height);
+    }

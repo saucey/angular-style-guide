@@ -26,9 +26,10 @@ html {
 body {
   background-color: $white;
   & * {
-     font-family: $font_light;
-     font-size: $medium;
-     color: $black;
+    font-family: $font_light;
+    font-size: $medium;
+    line-height: 25px;
+    color: $black;
   }
 }
 
@@ -38,10 +39,22 @@ a {
   text-decoration: none;
 }
 
+div.success {
+  background-color: $light_green;
+  .header {
+    color: $black;  
+  }
+}
 div.error {
-  @include inlineFrame();
   background-color: $light_red;
+  .header {
+    color: $red;  
+  }
+}
+div.error, div.success {
+  @include inlineFrame();
   padding-left: 40px;
+  //margin-bottom: 10px;
   .header {
     &:before {
       font-family: $font_icons;
@@ -51,7 +64,6 @@ div.error {
       left: -10px;
       position: relative;
     }
-    color: $red;
     //font-size: $large;
     font-family: $font_medium;
     margin-bottom: 10px;
@@ -83,3 +95,10 @@ div.error {
   border-radius: $frame_border_radius;
 }
 
+// UTILITY STYLES
+span.middle-enforcer {
+  display: inline-block;
+  width: 0;
+  height: 100%;
+  vertical-align: middle;
+}
