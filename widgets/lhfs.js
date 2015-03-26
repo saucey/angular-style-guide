@@ -18,17 +18,28 @@
           $('.actions').toggleClass('edit', show);
         }
 
-        $("button").focus(function () {this.blur()})  //avoid the blue (on mac) frame around a button when it is clicked
-
-        $("#lhfs_widget .tip").removeClass("visible");
-        $("#lhfs_widget .tip").addClass("visible");
-        $("#lhfs_widget li.payment").removeClass("data");
-        $("#lhfs_widget li.payment").addClass("data");
+        //$("#lhfs_widget .tip").removeClass("visible");
+        //$("#lhfs_widget .tip").addClass("visible");
+        //$("#lhfs_widget li.payment").removeClass("data");
+        //$("#lhfs_widget li.payment").addClass("data");
         $("#lhfs_widget li.payment ul.horizontal").removeClass("visible");
         $("#lhfs_widget li.payment ul.horizontal").addClass("visible");
-        $($("#lhfs_widget li.payment ul.horizontal")[0]).addClass("visible");
+        //$($("#lhfs_widget li.payment ul.horizontal")[0]).addClass("visible");
+        $("#lhfs_widget li.payment ul.horizontal.error").removeClass("visible");
 
         $(".lhfs_widget select").msDropDown();
+
+        //transfer classes from select to root object of msDropDown (conserve .half, for example)
+        $(".ddOutOfVision > select").each(function() {
+          $(this).parent().next().addClass(this.className);
+        });
+
+        //put an event listener on the invalid element for inputs (to display the error text, if necessary)
+        $("input").bind("invalid", function(event) {
+          console.log($(this).closest("ul").prev("ul.error").addClass("visible"));
+        });
+
+        $("form [name=lhfs_form]").validate({errorClass: "errorText"});
       }
     }
   };
