@@ -1,0 +1,495 @@
+
+//
+// View elements
+// --------------------------------------------------
+
+.view-product-table-index {
+  .view-header,
+  .product-table-subtitle {
+    font-size: 36px;
+    font-weight: light;
+    line-height: normal;
+    margin-bottom: .588em;
+    color: $blue_whale_approx;
+  }
+  .product-table-subtitle {
+    font-family: $font_5, $font_2, $font_3, $font_4;
+    font-size: 18px;
+    margin-bottom: 15px;
+  }
+  li {
+    font-size: 18px;
+    font-weight: lighter;
+    line-height: normal;
+    float: left;
+    width: 50%;
+    margin-bottom: 13px;
+    padding-left: 1.118em;
+    color: $lochmara_approx;
+    background: $url_1 0 -.98em no-repeat;
+  }
+}
+
+.views-field-field-downloads-file-name,
+.views-field-field-downloads1-file-name,
+.views-field-field-compare-table1-field-downloads-file-name,
+.views-field-field-compare-table2-field-downloads-file-name,
+.views-field-field-product-youtube-field-downloads-file-name,
+.views-field-field-generic-page-data-field-generic-page-details-field-downloads-file-name,
+.views-field-field-generic-page-data-field-generic-page-details-field-compare-table1-field-downloads-file-name,
+.views-field-field-generic-page-data-field-generic-page-details-field-compare-table2-field-downloads-file-name {
+  .field-item {
+    margin: 0 0 10px;
+  }
+  .file span {
+    color: $lochmara_approx;
+  }
+}
+
+.view-faq-search-block {
+  .views-widget-filter-search_api_views_fulltext {
+    width: 100%;
+    padding: 0;
+  }
+  .pager {
+    margin-top: 10px;
+    li {
+      display: inline-block;
+      padding: 0;
+      background: none;
+    }
+  }
+  .view-content .field-content {
+    a {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: none;
+    }
+    .feedback-on a {
+      width: 24px;
+    }
+    .feedback-data-form .btn a {
+      width: 230px;
+      padding: 15px 45px 15px 15px;
+      color: $white;
+    }
+  }
+  .ajax-progress.ajax-progress-throbber {
+    display: none;
+  }
+}
+
+.view-news-search {
+  .view-content {
+    .views-row {
+      padding: 20px 20px 20px 0;
+      border-bottom: 1px solid $quill_gray_approx;
+      background: $url_24 no-repeat right center;
+    }
+    .views-field-title a {
+      font: 18px/26px $font_6, $font_2, $font_3, $font_4;
+      margin: 0;
+      padding: 0;
+      color: $curious_blue_approx;
+      border: none;
+    }
+    .field-content a {
+      display: inline;
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: none;
+    }
+  }
+  .views-field-search-api-excerpt {
+    color: $rangoon_green_approx;
+    strong {
+      font-weight: normal;
+      background-color: $link_water_approx;
+    }
+  }
+  .pager {
+    margin-top: 10px;
+    li {
+      padding: 0;
+      background: none;
+    }
+  }
+  .views-field-body-value {
+    display: none;
+  }
+  .view-header {
+    display: none;
+  }
+  .resultcount-header {
+    margin-top: 15px;
+  }
+  .filtering {
+    .views-widget {
+      float: left;
+
+      .customSelect {
+        padding-left: 0;
+        padding-right: 10px;
+      }
+    }
+    .dd2 {
+      .ddTitle {
+        border: none;
+        background: none;
+        box-shadow: none;
+        padding-left: 0;
+        padding-right: 10px;
+        span {
+          &.ddTitleText {
+            font: 17px/22px $font_5, $font_2, $font_3, $font_4;
+            color: $curious_blue_approx;
+          }
+          &.arrow {
+            right: 0;
+            background: $url_25 0 0 no-repeat;
+          }
+        }
+      }
+      &:hover .ddTitle span.arrow {
+        background-position: 0 0;
+      }
+    }
+  }
+  .views-widget-sort-by {
+    width: auto;
+    label {
+      float: left;
+    }
+  }
+  .dd2 .ddChild a {
+    padding: 0 0 0 10px;
+  }
+  .views-widget-filter-search_api_views_fulltext {
+    width: 100%;
+    padding: 0;
+  }
+  .ajax-progress.ajax-progress-throbbe {
+    display: none;
+  }
+  .views-field-field-downloads-file-name .file a {
+    padding: 0;
+    background: none;
+  }
+}
+
+.view-id-site_search {
+  .views-widget-filter-search_api_views_fulltext {
+    width: 100%;
+    padding: 0;
+  }
+  .views-exposed-form {
+    .views-widget-sort-by .form-item-sort-by {
+      float: right;
+    }
+  }
+  .view-header {
+    display: none;
+  }
+  .resultcount-header {
+    margin-top: 15px;
+  }
+  .filtering {
+    .views-widget {
+      float: none;
+      .customSelect {
+        padding-left: 0;
+        padding-right: 10px;
+      }
+    }
+    .dd2 {
+      .ddTitle {
+        border: none;
+        background: none;
+        box-shadow: none;
+        padding-left: 0;
+        padding-right: 10px;
+        span {
+          &.ddTitleText {
+            font: 17px/22px $font_5, $font_2, $font_3, $font_4;
+            color: $curious_blue_approx;
+          }
+          &.arrow {
+            right: 0;
+            background: $url_21 0 -1057px no-repeat;
+          }
+        }
+      }
+      &:hover .ddTitle span.arrow {
+        background-position: 0 -1057px;
+      }
+    }
+  }
+  .dd2 .ddChild a {
+    padding: 0 0 0 10px;
+  }
+  .view-content {
+    .views-row {
+      padding: 20px 20px 20px 0;
+      border-bottom: 1px solid $quill_gray_approx;
+      background: $url_24 no-repeat right center;
+      .views-field-type {
+        color: $stack_approx;
+      }
+    }
+    .views-field-title a {
+      font: 18px/26px $font_6, $font_2, $font_3, $font_4;
+      margin: 0;
+      padding: 0;
+      color: $curious_blue_approx;
+      border: none;
+    }
+  }
+  .views-field-search-api-excerpt {
+    color: $rangoon_green_approx;
+    strong {
+      font-weight: normal;
+      background-color: $link_water_approx;
+    }
+  }
+  .second-box {
+    margin-top: 50px;
+    .resultcount-header {
+      display: none;
+    }
+    .filtering {
+      display: none;
+    }
+    .hide-show-firstsecond-box {
+      font: 40px/40px $font_1, $font_2, $font_3, $font_4;
+      display: inline-block;
+      margin-bottom: 10px;
+      color: $curious_blue_approx;
+    }
+  }
+  .views-field-field-downloads-file-name .file a {
+    padding: 0;
+    background: none;
+  }
+  .views-field-field-downloads1-file-name .file a {
+    padding: 0;
+    background: none;
+  }
+  .views-field-field-compare-table1-field-downloads-file-name .file a {
+    padding: 0;
+    background: none;
+  }
+  .views-field-field-compare-table2-field-downloads-file-name .file a {
+    padding: 0;
+    background: none;
+  }
+  .views-field-field-product-youtube-field-downloads-file-name .file a {
+    padding: 0;
+    background: none;
+  }
+  .views-field-field-generic-page-data-field-generic-page-details-field-downloads-file-name .file a {
+    padding: 0;
+    background: none;
+  }
+  .views-field-field-generic-page-data-field-generic-page-details-field-compare-table1-field-downloads-file-name .file a {
+    padding: 0;
+    background: none;
+  }
+  .views-field-field-generic-page-data-field-generic-page-details-field-compare-table2-field-downloads-file-name .file a {
+    padding: 0;
+    background: none;
+  }
+}
+
+.view-news-search,
+.view-faq-search-block,
+.view-id-site_search {
+  .views-exposed-widgets {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    margin: 0;
+  }
+  .views-submit-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: auto;
+    margin: 0;
+    padding: 0;
+    .form-submit {
+      width: 40px;
+      height: 38px;
+      margin: 0;
+      text-indent: -9999px;
+      border: 1px solid $curious_blue_approx;
+      border-left: 0;
+      border-radius: 0 3px 3px 0;
+      background: $curious_blue_approx $url_13 no-repeat center center;
+      &:hover {
+        background-color: $shakespeare_approx;
+      }
+      &:active {
+        background-color: $lochmara_approx;
+      }
+    }
+  }
+  .views-exposed-form {
+    .views-exposed-widget {
+      padding: 0;
+    }
+    input.form-text {
+      font: 17px/14px $font_1, $font_2, $font_3, $font_4;
+      width: 100%;
+      height: 38px;
+      padding-left: 15px;
+      color: $rangoon_green_approx;
+      border: 1px solid $celeste_approx;
+      border-right: 0;
+      border-radius: 3px 0 0 3px;
+      background-color: $cararra_approx;
+      box-shadow: inset 1px 0 1px 0 $ebb_approx;
+    }
+  }
+}
+
+.view-news-search,
+.view-id-site_search {
+  .ddChild {
+    &:before {
+      position: absolute;
+      right: 13px;
+      bottom: 100%;
+      width: 0;
+      height: 0;
+      content: '';
+      border-width: 0 8px 8px;
+      border-style: solid;
+      border-color: $curious_blue_approx transparent;
+    }
+    &:after {
+      position: absolute;
+      right: 15px;
+      bottom: 100%;
+      width: 0;
+      height: 0;
+      content: '';
+      border-width: 0 6px 6px;
+      border-style: solid;
+      border-color: $curious_blue_approx transparent;
+    }
+    &.noBorderTop {
+      &:before {
+        right: 13px;
+      }
+      &:after {
+        right: 15px;
+      }
+    }
+    &.borderTop {
+      &:before {
+        top: 100%;
+        right: 13px;
+        border-width: 8px 8px 0;
+      }
+      &:after {
+        top: 100%;
+        right: 15px;
+        border-width: 6px 6px 0;
+      }
+    }
+  }
+  .dd2 .ddChild {
+    top: 40px;
+    overflow: hidden;
+    max-height: none;
+    border: none;
+    background: $curious_blue_approx;
+    a {
+      padding: 10px;
+      color: $white;
+      border: none;
+      &.selected {
+        background: none;
+      }
+    }
+  }
+  .ddTitle.noBorderTop {
+    &:before {
+      border: none;
+    }
+    &:after {
+      border: none;
+    }
+  }
+}
+
+.views-field-created {
+  margin: 5px 0;
+  color: $stack_approx;
+}
+
+.views-widget-filter-type,
+.views-widget-sort-by {
+  width: 50%;
+  label {
+    font-weight: normal;
+    line-height: 34px;
+    float: left;
+    width: auto;
+    margin-right: 10px;
+  }
+}
+
+.view-empty {
+  margin: 60px 0;
+}
+
+.views-exposed-form-news-search-page .views-widget-sort-order {
+  display: none;
+}
+
+.view-e-commerce-block-home-element {
+  .field--name-field-sub-title {
+    margin-bottom: 0;
+    color: $rangoon_green_approx;
+  }
+  .field--name-field-e-com-price {
+    margin-bottom: 5px;
+  }
+  .field--name-field-e-price {
+    margin-bottom: 5px;
+  }
+  .rating-count {
+    margin-left: 10px;
+    color: $stack_approx;
+  }
+  .span6:first-child {
+    border-right: 1px solid $mercury_approx;
+  }
+}
+
+
+.view-empty {
+  margin: 30px 0;
+}
+.table-menu-wrapper {
+  width: 100%;
+}
+.resp_cust_tables {
+  margin-right: 0;
+  width: 100%;
+}
+.views-widget-filter-type label {
+  float: none;
+}
+.views-widget-sort-by label {
+  float: none;
+}
+.filtering .form-item .customSelect {
+  width: 130px;
+}
+.view-fondsrates table {
+  table-layout: auto;
+}

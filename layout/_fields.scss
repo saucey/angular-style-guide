@@ -1,0 +1,441 @@
+
+//
+// Field elements
+// --------------------------------------------------
+
+.field--name-field-pros-text,
+.field--name-field-cons-text {
+  font: 18px/26px $font_5, $font_2, $font_3, $font_4;
+  color: $rangoon_green_approx;
+  p {
+    margin-bottom: 15px;
+    &:first-child {
+      margin-bottom: 10px;
+    }
+  }
+  .field-items .field-item {
+    font-family: $font_1, $font_2, $font_3, $font_4;
+    margin: 0 0 15px;
+    padding: 0 0 0 45px;
+    background: $url_5 0 33px no-repeat;
+  }
+}
+
+.field--name-field-pros-text {
+  margin-bottom: 35px;
+}
+
+.field--name-field-cons-text {
+  .field-items .field-item {
+    background-position: 0 -190px;
+  }  
+}
+
+.field--name-field-pros-label,
+.field--name-field-cons-label {
+  font-weight: bold;
+}
+.field--name-field-sub-title {
+  font-weight: light;
+  line-height: normal;
+  margin-bottom: 1em;
+  color: $lochmara_approx;
+}
+
+.field--name-field-usp-image {
+  float: left;
+  width: auto;
+  margin-right: 2%;
+}
+
+.field-collection-view {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.field--name-field-usp-text {
+  color: $blue_whale_approx;
+}
+
+.field--name-field-usp-text-content {
+  margin-bottom: 30px;
+  float: left;
+  width: 76%;
+  .field-item {
+    padding-left: 23px;
+    background: $url_0 0 7px no-repeat;
+  }
+}
+
+.sticker-container {
+  float: left;
+  width: 24%;
+  .field--name-field-sticker-percentage,
+  .field--name-field-sticker-text {
+    line-height: normal;
+    text-align: center;
+    color: $white;
+  }
+  .field--name-field-sticker-percentage {
+    font-size: 40px;
+  }
+}
+
+.field--name-field-button-text-link {
+  margin: .941em 0 0;
+}
+
+.field--name-field-text-button-link {
+  margin: 0 0 30px;
+  .text-link-button .fieldset-legend .field-item {
+    font-size: 40px;
+    line-height: 40px;
+    margin-bottom: 30px;
+    color: $curious_blue_approx;
+  }
+  .button-link-link-text a {
+    padding-left: 15px;
+    background: $url_1 0 -213px no-repeat;
+  }
+}
+
+.field--name-field-text-link-element-link {
+  margin: 10px 0 0;
+  .field-item a {
+    font-size: 18px;
+    line-height: 27px;
+    padding-left: 25px;
+    color: $lochmara_approx;
+    background: $url_3 0 3px no-repeat;
+  }
+}
+
+.usp-sticker {
+  width: 100%;
+  .field-collection-container {
+    margin-right: 2%;
+  }
+  .field-item {
+    margin-bottom: 5px;
+    &:last-child {
+      margin: 0;
+    }
+  }
+}
+
+.field--name-field-what-is-not-covered-title,
+.field--name-field-what-is-covered-title {
+  .field-items {
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 26px;
+    margin-bottom: 6px;
+    color: $rangoon_green_approx;
+  }
+}
+
+.field--name-field-what-is-not-covered-title {
+  margin-top: 30px;
+}
+
+.field--name-field-what-is-covered-text,
+.field--name-field-what-is-not-covered-text {
+  border-top: 1px solid $tiara_approx;
+  .field-item {
+    font: 16px/40px $font_1, $font_2, $font_3, $font_4;
+    padding: 0 0 0 35px;
+    background: $white $url_5 12px -661px no-repeat;
+    &.even {
+      background-color: $cararra_approx;
+    }
+  }
+}
+
+.field--name-field-what-is-not-covered-text {
+
+  .field-item {
+    background-position: 12px -876px;
+  }
+}
+
+.field--name-field-cost-table-titile {
+  font: bold 18px/26px $font_5, $font_2, $font_3, $font_4;
+  color: $rangoon_green_approx;
+}
+
+.field-collection-item-field-cost-element-cost-table {
+  margin-bottom: 40px;
+}
+
+.field-collection-item-field-cost-table-data {
+  margin-bottom: 20px;
+}
+
+.field--name-field-cost-table-data-attribute,
+.field--name-field-cost-table-data-value {
+  font: 18px/20px $font_1, $font_2, $font_3, $font_4;
+  float: left;
+  width: 50%;
+  color: $rangoon_green_approx;
+}
+
+.field--name-field-cost-table-data-attribute {
+  width: 40%;
+  margin-right: 10%;
+}
+
+.field--name-field-cost-table {
+  .field-item {
+    p:first-child {
+      font: bold 18px/26px $font_5, $font_2, $font_3, $font_4;
+      color: $rangoon_green_approx;
+    }
+    table td p {
+      font: normal 18px/23px 'senticosansdtlight', Arial, Verdana, sans-serif;
+      color: $blue_whale_approx;
+    }
+    &:last-child table {
+      margin: 0;
+    }
+  }
+  table {
+    margin-bottom: 40px;
+    border: none;
+    tr {
+      background: $white;
+      td {
+        padding: 0 0 20px;
+        color: $blue_whale_approx;
+        border: none;
+      }
+      &:last-child td {
+        padding: 0;
+      }
+    }
+  }
+}
+
+.field--name-field-topics {
+  .field--name-field-title-type1 {
+    font: bold 22px/22px $font_5, $font_2, $font_3, $font_4;
+    margin: 0 0 15px;
+    padding: 0;
+    color: $curious_blue_approx;
+    border: none;
+  }
+  .field-item .field:last-child.field--name-field-description-type1 {
+    margin: 0;
+  }
+}
+
+.products-blue-block {
+  .field-collection-item-field-situation-products {
+    padding: 20px;
+    border-radius: 3px;
+    background: $curious_blue_approx;
+  }
+  .field--name-field-title-type1 {
+    color: $white;
+    font: bold 27px/32px $font_5, $font_2, $font_3, $font_4;
+    height: 65px;
+    margin: 0 0 20px;
+  }
+  .pbb-desc {
+    margin: 0 0 50px;
+  }
+  .field--name-field-product-attributes {
+    .field--name-field-title-type1 {
+      font: 18px/18px $font_1, $font_2, $font_3, $font_4;
+      height: inherit;
+      margin: 0 0 10px;
+      .field-item {
+        margin: 0;
+      }
+    }
+    .field--name-field-description-type1 {
+      font: bold 18px/18px $font_5, $font_2, $font_3, $font_4;
+      .field-item {
+        margin: 0;
+      }
+    }
+  }
+  .pbb-view {
+    .field--name-field-description-type1 {
+      height: 195px;
+      .field-items .field-item {
+        height: 180px;
+        margin-bottom: 15px;
+      }
+    }
+    .button-link-button-text {
+      float: none;
+    }
+  }
+  .field--name-field-description-type1 .field-item {
+    color: $white;
+  }
+  .field-collection-container .field--name-field-product-attributes .field-item {
+    margin: 0 0 20px;
+  }
+  .btn a {
+    width: 100%;
+  }
+}
+
+.field--name-field-description-type3 {
+  font: 18px/26px $font_1, $font_2, $font_3, $font_4;
+  .field-item {
+    margin: 0 0 30px;
+    &:last-child {
+      margin: 0;
+    }
+  }
+}
+
+.field--name-field-downloads,
+.field--name-field-downloads1,
+.field--name-field-fonds-downloads {
+  .field-item {
+    margin: 0 0 10px;
+  }
+  .file {
+    a {
+      padding-left: 20px;
+      color: $lochmara_approx;
+      background: $url_22 0 center no-repeat;
+    }
+    img {
+      display: none;
+    }
+    span {
+      color: $lochmara_approx;
+    }
+  }
+}
+
+.field--name-field-downloads,
+.field--name-field-downloads1 {
+  margin: 30px 0 0;
+}
+
+.editor-downloads {
+  &.field--name-field-downloads1 {
+    display: inline-block;
+    margin: 0;
+  }
+  &.field--name-field-downloads {
+    display: inline-block;
+    margin: 0;
+  }
+}
+
+.field-faq-answer {
+  display: none;
+  padding: 10px;
+  border-bottom: 1px solid $celeste_approx;
+  ul {
+    margin-bottom: 15px;
+  }
+  p {
+    margin-bottom: 15px;
+  }
+}
+
+.field-faq-question-more {
+  display: none;
+}
+
+.field-faq-answer-search {
+  display: none;
+  padding: 10px;
+  border-bottom: 1px solid $celeste_approx;
+}
+
+.field-faq-question-more-search {
+  display: none;
+}
+
+.field-faq-question-search {
+  h3 {
+    font: normal 18px/23px $font_1, $font_2, $font_3, $font_4;
+    margin: 0;
+    padding: 12px 30px 12px 5px;
+    cursor: pointer;
+    color: $blue_whale_approx;
+    border-bottom: 1px solid $celeste_approx;
+    background: $url_23 100% 22px no-repeat;
+  }
+  &.open h3 {
+    background-position: 100% -122px;
+  }
+  &.faq-last-item {
+    h3 {
+      padding-bottom: 1px;
+      border: none;
+    }
+    &.open h3 {
+      background-position: 100% 22px;
+    }
+  }
+}
+
+.field-item span.file input,
+.field-item span.file button {
+  display: none;
+}
+
+.field--name-field-description-type3-single {
+  .show-more, .show-less {
+    display: block;
+    border: none;
+  }
+}
+
+.field--name-field-usp-field-collection .content {
+  margin: 0;
+}
+
+.field--name-field-text-link .text-link-wrapper {
+  padding: 25px 18px;
+  border-radius: 3px;
+  background: $cararra_approx;
+  .fieldset-wrapper {
+    margin: 0;
+  }
+}
+
+.field--name-field-specifications-table .product-compare-table table tbody {
+  border-top: 1px solid $quill_gray_approx;
+}
+
+.field--name-field-cost-element-cost-table .last-child .field-collection-item-field-cost-element-cost-table {
+  margin: 0;
+  .last-child .field-collection-item-field-cost-table-data {
+    margin: 0;
+  }
+}
+
+.field--name-field-campaign-usp-content .field-item {
+  padding-left: 23px;
+  background: $url_0 0 7px no-repeat;
+}
+
+
+//
+// Media Queries
+// --------------------------------------------------
+
+@include breakpoint($brk-not-mobile) {
+
+  .field--name-field-sub-title {
+    font-size: 25px;
+  }
+  .field--name-field-usp-text {
+    font-size: 18px;
+    line-height: 26px;
+  }
+  .field-collection-view .content {
+    margin: 0;
+  }
+}

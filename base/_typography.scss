@@ -5,34 +5,47 @@
 
 /* Need refactor */
 
+/*----- Headings -----*/
 h1 {
   font-family: $font_light;
   font-size: $xxx-large;
-  color: $blue;
 }
+h1.title,
+h2.node__title,
+h2.home-title,
+h3.accord-header,
+.node--e-commerce-block h2,
+.node--e-commerce-block h3 {
+  margin-top: 0;
+}
+
 .subtext {
   font-family: $font_light;
   font-size: $x-large;
-  color: $blue;
 }
+
 .subheader {
   font-family: $font_normal;
   font-size: $large;
 }
+
 h2 {
   font-family: $font_light;
   font-size: $xx-large;
   color: $blue;
   margin: 5px 0 20px 0;
 }
+
 h3 {
   font-family: $font_normal;
   font-size: $large;
 }
+
 h4 {
   font-family: $font_normal;
   font-size: $medium;
 }
+
 ul {
   padding-left: 0px;
   padding-right: 0px;
@@ -68,7 +81,6 @@ ul {
     }
     &.arrow {
       margin-left: $li_left;
-      color: $blue;
       &:before {
         font-family: $font_icons;
         left: -$li_left;
@@ -76,4 +88,23 @@ ul {
       }
     }
   }
+}
+
+p {
+  font-size: 18px;
+  line-height: 23px;
+  font-family: 'senticosansdtlight', Arial, Verdana, sans-serif;
+  margin: 0;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
 }

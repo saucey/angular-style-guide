@@ -1,31 +1,387 @@
 
 //
-// Media Queries
+// Generic and Ungrouped Media Queries
 // --------------------------------------------------
 
-// /* Large desktop */
-// @media (min-width: 1200px) { ... }
- 
-// /* Portrait tablet to landscape and desktop */
-// @media (min-width: 768px) and (max-width: 979px) { ... }
- 
-// /* Landscape phone to portrait tablet */
-// @media (max-width: 767px) { ... }
- 
-// /* Landscape phones and down */
-// @media (max-width: 480px) { ... }
+@include breakpoint($brk-hidpi) {
 
+  .field--name-field-cons-text {
+    background-position: 0 -192px;
+    .field-items .field-item {
+      background-image: $url_42;
+      background-size: 900px 900px;
+    }
+  }
+  .show_more_link_div {
+    .show-more {
+      background-image: $url_43;
+      background-size: 11px 480px;
+    }
+    .show-less {
+      background-image: $url_43;
+      background-size: 11px 480px;
+    }
+  }
+  .calculation-content {
+    background-image: $url_51;
+    background-size: 40px 12px;
+    h3 {
+      background-image: $url_52;
+      background-size: 14px 18px;
+    }
+  }
+  .calc-example-bg {
+    background-image: $url_51;
+    background-size: 40px 12px;
+  }
+  .calc-ex-header {
+    background-image: $url_52;
+    background-size: 14px 18px;
+  }
+  .next-step {
+    background-image: $url_53;
+    background-size: 8px 160px;
+  }
+  .linkarrow {
+    background-image: $url_54;
+    background-size: 7px 9px;
+  }
+  .field-faq-question {
+    h3 {
+      background-image: $url_57;
+      background-size: 25px 150px;
+    }
+    &.open h3 {
+      background-image: $url_57;
+      background-size: 25px 150px;
+    }
+  }
+  .service-link-container {
+    h3 {
+      background-image: $url_57;
+      background-size: 25px 150px;
+    }
+    &.open h3 {
+      background-image: $url_57;
+      background-size: 25px 150px;
+    }
+  }
+  .view-id-site_search {
+    .views-submit-button .form-submit {
+      background-image: $url_50;
+      background-size: 41px 70px;
+    }
+    .filtering .dd2 .ddTitle span.arrow {
+      background-image: $url_59;
+      background-size: 12px 1519px;
+    }
+    .view-content .views-row {
+      background-image: $url_60;
+      background-size: 7px 10px;
+    }
+  }
+  .serv_top_task {
+    h3 {
+      margin: 0;
+      padding-bottom: 15px;
+    }
+    .toggle-content {
+      background-image: $url_62;
+      background-size: 259px 5px;
+    }
+    .linkarrow {
+      background-image: $url_63;
+      background-size: 6px 8px;
+    }
+  }
+  .service-div-see-more {
+    .show-more {
+      background-image: $url_43;
+      background-size: 11px 480px;
+    }
+    .show-less {
+      background-image: $url_43;
+      background-size: 11px 480px;
+    }
+  }
+  .field--name-field-bullet-list-text ul li {
+    background-image: $url_41;
+    background-size: 6px 6px;
+  }
+  ol li {
+    background-image: $url_41;
+    background-size: 6px 6px;
+  }
+  ul li {
+    background-image: $url_41;
+    background-size: 6px 6px;
+  }
+  .field--name-field-pros-text .field-items .field-item {
+    background-image: $url_42;
+    background-size: 900px 900px;
+  }
+  .field--name-field-what-is-covered-text .field-item {
+    background: $white $url_42 12px -661px no-repeat;
+    background-size: 900px 900px;
+  }
+  .field--name-field-what-is-not-covered-text .field-item {
+    background: $white $url_42 12px -661px no-repeat;
+    background-size: 900px 900px;
+    background-position: 9px -876px;
+  }
+  .btn-orange-icon-arrow-right a,
+  .btn-blue-icon-arrow-right a {
+    background-image: $url_44;
+    background-size: 23px 70px;
+  }
+  .btn-orange-icon-arrow-left a {
+    background-image: $url_45;
+    background-size: 23px 70px;
+  }
+  .btn-blue-icon-arrow-left a {
+    background-image: $url_45;
+    background-size: 23px 70px;
+  }
+  .btn-orange-icon-square-arrow-right a {
+    background-image: $url_46;
+    background-size: 41px 70px;
+  }
+  .btn-blue-icon-square-arrow-right a {
+    background-image: $url_46;
+    background-size: 41px 70px;
+  }
+  .btn-orange-gradient-icon-square-arrow-right a {
+    background-image: $url_47;
+    background-size: 45px 70px;
+  }
+  .btn-orange-gradient-icon-square-call a {
+    background-image: $url_48;
+    background-size: 45px 70px;
+  }
+  .btn-blue-icon-square-call a {
+    background-image: $url_48;
+    background-size: 45px 70px;
+  }
+  .btn-blue-icon-square-chat a {
+    background-image: $url_49;
+    background-size: 45px 70px;
+  }
+  .btn-blue-icon-square-search a {
+    background-image: $url_50;
+    background-size: 41px 70px;
+  }
+  .node--situation-explanation .field--name-field-description-type1 .field-item a {
+    background-image: $url_54;
+    background-size: 7px 9px;
+  }
+  .pbb-desc .sm-btn {
+    &.read-more a {
+      background-image: $url_55;
+      background-size: 14px 78px;
+    }
+    &.read-less a {
+      background-image: $url_55;
+      background-size: 14px 78px;
+    }
+  }
+  .field--name-field-downloads .file a {
+    background-image: $url_56;
+    background-size: 10px 12px;
+  }
+  .product-service-link a {
+    background-image: $url_54;
+    background-size: 7px 9px;
+  }
+  link a {
+    background-image: $url_54;
+    background-size: 7px 9px;
+  }
+  .block--views-exp-faq-search-block .views-submit-button .form-submit {
+    background-image: $url_50;
+    background-size: 41px 70px;
+  }
+  .view-faq-search-block .views-submit-button .form-submit {
+    background-image: $url_50;
+    background-size: 41px 70px;
+  }
+  .view-news-search .views-submit-button .form-submit {
+    background-image: $url_50;
+    background-size: 41px 70px;
+  }
+  .e-commerce .field--name-field-bullet-content .field-item {
+    background-image: $url_58;
+    background-size: 13px 10px;
+  }
+  ul.table-menu label.checkbox > input[type='checkbox'] {
+    + span.checkbox {
+      background-image: $url_61;
+      background-size: 32px 200px;
+    }
+    &:checked + span.checkbox {
+      background-image: $url_61;
+      background-size: 32px 200px;
+    }
+  }
+  .btn-login a {
+    background-image: $url_64;
+    background-size: 14px 80px;
+  }
+  img.service-icon {
+    width: 25px;
+    height: 25px;
+  }
 
+  .mainmenu .level-2-item .arrow {
+    background-image: $url_74;
+    background-size: 21px 200px;
+  }
+  .stick-bottom a {
+    background-image: $url_75;
+    background-size: 25px 25px;
+  }
 
+  /**
+   * From aegon.mobile.styles.css
+   */
+  .direct-regelen-mobile-left-side {
+    margin-bottom: 18px;
+  }
+  .menu-home {
+    background-image: $url_67;
+    background-size: 13px 12px;
+  }
+  .menu-klantenservice {
+    background-image: $url_68;
+    background-size: 13px 12px;
+  }
+  .toggle-title {
+    background-image: $url_43;
+    background-size: 11px 480px;
+  }
+  .image-left {
+    margin-right: 20px;
+  }
+  .image-right {
+    margin-left: 20px;
+  }
+  .block--aegon-menu-product-list-home {
+    h2 {
+      background-image: $url_70;
+      background-size: 15px 14px;
+    }
+    .sm .see-less-item a {
+      background-image: $url_71;
+      background-size: 23px 70px;
+    }
+    .show_more_link_div a {
+      &.show-more {
+        background-image: $url_53;
+        background-size: 8px 160px;
+      }
+      &.show-less {
+        background-image: $url_53;
+        background-size: 8px 160px;
+      }
+    }
+  }
+  #more-content-mobile-menu {
+    background-image: $url_62;
+    background-size: 259px 5px;
+  }
+  #more-content-mobile-links {
+    background-image: $url_62;
+    background-size: 259px 5px;
+  }
+  .block--views-service-link-block-2 {
+    a {
+      background-image: $url_46;
+      background-size: 6px 8px;
+    }
+    .views-field-title h3 {
+      background-image: $url_72;
+      background-size: 15px 14px;
+    }
+  }
+  .node--chapter-element {
+    .show-more a {
+      background-image: $url_43;
+      background-size: 11px 480px;
+    }
+    .show-less a {
+      background-image: $url_43;
+      background-size: 11px 480px;
+    }
+  }
+  .mobile-menu .search input[type="search"] {
+    width: 100%;
+    height: 35px;
+    border: 2px solid $deep_cerulean_approx;
+    //Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
+    border-radius: 34px;
+    background: $white $url_65 13px center no-repeat;
+    padding-left: 34px;
+    font-size: 17px;
+    font-family: $font_1, $font_2, $font_3, $font_4;
+    color: $regent_gray_approx;
+  }
+  .cbp-spmenu-vertical li.mob-2-item {
+    background-image: $url_66;
+    background-size: 23px 9px;
+  }
+  html.js .node--product {
+    fieldset.collapsible.collapsed .fieldset-legend .fieldset-title {
+      background-image: $url_43;
+      background-size: 11px 480px;
+    }
+    fieldset.collapsible .fieldset-legend .fieldset-title {
+      background-image: $url_43;
+      background-size: 11px 480px;
+    }
+  }
+  .node--situation-element .situations-mobile a {
+    background-image: $url_46;
+    background-size: 41px 70px;
+  }
+  .more-situations a {
+    background-image: $url_46;
+    background-size: 41px 70px;
+  }
+  .show-more a {
+    background-image: $url_43;
+    background-size: 11px 480px;
+  }
+  .show-less a {
+    background-image: $url_43;
+    background-size: 11px 480px;
+  }
+  .field--name-field-text-and-image .field-item li {
+    background-image: $url_69;
+    background-size: 25px 1px;
+  }
+  .link-block-arrow li {
+    background-image: $url_46;
+    background-size: 6px 8px;
+  }
+  .brandbox-links a {
+    background-image: $url_59;
+    background-size: 12px 1519px;
+  }
+  .field--name-body .link_block .linkarrow {
+    background-image: $url_54;
+    background-size: 7px 9px;
+  }
+  .social-icons li a {
+    background-image: $url_73;
+    background-size: 204px 28px;
+  }
+  .goTop a {
+    background-image: $url_59;
+    background-size: 12px 1519px;
+  }
 
-// /* Extra small devices (phones, less than 768px) */
-// /* No media query since this is the default in Bootstrap */
-
-// /* Small devices (tablets, 768px and up) */
-// @media (min-width: @screen-sm-min) { ... }
-
-// /* Medium devices (desktops, 992px and up) */
-// @media (min-width: @screen-md-min) { ... }
-
-// /* Large devices (large desktops, 1200px and up) */
-// @media (min-width: @screen-lg-min) { ... }
+  /* from admin_menu/css/menu.css */
+  .mobile-menu .mob-2-item .arrow {
+    background-image: $url_74;
+    background-size: 21px 200px;
+  }
+}

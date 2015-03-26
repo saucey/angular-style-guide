@@ -9,31 +9,31 @@
  * http://www.paulirish.com/2012/box-sizing-border-box-ftw/
  */
 
-*,
-*:after,
-*:before {
-  // -webkit-box-sizing: border-box;
-  // -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
 html {
+  font-family: sans-serif;
   box-sizing: border-box;
 }
 
-/* Need refactor */
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
 
 body {
+  font-family: 'senticosansdtlight', Arial, Verdana, sans-serif;
+  font-size: 18px;
+  line-height: 23px;
+
+  overflow-x: hidden;
+
   background-color: $white;
-  // & * {
-  //   font-family: $font_light;
-  //   font-size: $medium;
-  //   color: $black;
-  // }
 }
 
 a {
-  font-family: $font_normal;
-  color: $blue;
   text-decoration: none;
+
+  color: $palette1;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: transparent;
 }

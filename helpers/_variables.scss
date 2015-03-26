@@ -41,3 +41,101 @@ $large: 22px;
 $x-large: 25px;
 $xx-large: 40px;
 $xxx-large: 46px;
+
+
+/**
+ * VARIABLES for AEGON.nl current website.
+ * Current analisys and refactor of current colors used inside the website.
+ * NOTES: at moment names of colors are anonyms and related to the current
+ * palettes used into website.
+ */
+
+$palette1: #0077C8;
+$palette2: #00304c; // Dark blue
+
+
+/**
+ * BREAKPOINTS for AEGON.nl current website.
+ */
+
+$breakpoint-force-media-all: true;
+
+/**
+ * Mobile
+ *
+ * Example: @include breakpoint($brk-mobile) {}
+ */
+$brk-mobile: 'only screen' (max-width 640px);
+
+/**
+ * Not Mobile
+ *
+ * Example: @include breakpoint($brk-not-mobile) {}
+ */
+$brk-not-mobile: 'only screen' (min-width 641px);
+
+/**
+ * Generic Tablet
+ *
+ * Example: @include breakpoint($brk-tablet) {}
+ */
+$brk-tablet: 'only screen' (641px 900px);
+
+/**
+ * iPad portrait
+ *
+ * Example: @include breakpoint($brk-ipad-portrait) {}
+ */
+$brk-ipad-portrait: 'only screen' (901px 1023px) (orientation portrait);
+
+/**
+ * iPad landscape
+ *
+ * Example: @include breakpoint($brk-ipad-landscape) {}
+ */
+$brk-ipad-landscape: 'only screen' (1024px 1349px) (orientation landscape);
+
+/**
+ * Large desktop
+ *
+ * Example: @include breakpoint($brk-large-desktop) {}
+ */
+$brk-large-desktop: 'only screen' (1350px);
+
+/**
+ * Device Pixel Ratio of at least 1.5
+ *
+ * Example: @include breakpoint($brk-hidpi) {}
+ */
+$brk-hidpi: min-resolution 1.5dppx;
+
+/**
+ * Large desktop
+ *
+ * Example: @include breakpoint($brk-print) {}
+ */
+$brk-print: 'print';
+
+
+
+
+// #popup-buttons:after {
+//   @include breakpoint($brk-mobile) {
+//     content: 'Breakpoint: Mobile';
+//   }
+//   @include breakpoint($brk-tablet) {
+//     content: 'Breakpoint: Tablet';
+//   }
+//   @include breakpoint($brk-ipad-portrait) {
+//     content: 'Breakpoint: iPad portrait';
+//   }
+//   @include breakpoint($brk-ipad-landscape) {
+//     content: 'Breakpoint: iPad landscape';
+//   }
+//   @include breakpoint($brk-large-desktop) {
+//     content: 'Breakpoint: Large desktop';
+//   }
+//   @include breakpoint($brk-print) {
+//     content: 'Breakpoint: Print';
+//   }
+// }

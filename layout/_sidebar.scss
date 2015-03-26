@@ -1,0 +1,208 @@
+
+//
+// Sidebar
+// 
+// Example: Sidebars / Menu / Aside
+// --------------------------------------------------
+
+/*----- Menu -----*/
+.stickleft,
+.home-page aside.home {
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  bottom: 0;
+  left: 0;
+
+  width: 170px;
+
+  background: #3395d3;
+}
+
+.stickleft-open {
+  left: 300px;
+}
+
+.home-page aside.home {
+  float: left;
+
+  background: none;
+}
+
+.mainmenu h2 {
+  font: 27px/30px 'senticosansdtlight', Arial, Verdana, sans-serif;
+
+  margin: 0;
+  padding: .7em 0 .5em;
+
+  color: #007ac7;
+}
+
+.mainmenu .level3 h2 {
+  margin: 0 0 .5em;
+}
+
+.mainmenu .menu-title {
+  font-size: 27px;
+  line-height: normal;
+
+  margin: 0;
+
+  color: #0077c8;
+}
+
+.cbp-spmenu-inner .second-level-item {
+  margin-top: 45px;
+}
+
+.mainmenu .cbp-spmenu li,
+.mainmenu .level-2-item .level-3-item a {
+  margin: 0 0 15px;
+}
+
+.mainmenu .cbp-spmenu a,
+.mainmenu .level-2-item .level-3-item a {
+  line-height: normal;
+
+  padding: 0 0 0 30px;
+}
+
+.mainmenu .cbp-spmenu li.close-btn{
+  margin: 0;
+}
+
+.border-Bblue {
+  padding-bottom: 15px;
+
+  border-bottom: 1px solid #d9ebf7;
+}
+
+aside ul li,
+.links--inline li,
+.menu li,
+.action-links li,
+footer ul li,
+.l-region--footer-bottom-left ul li,
+.field-collection-view-links li,
+.link-block-arrow li,
+.field--name-field-text-and-image li,
+.contextual-links li,
+.form-item ul li,
+.products-blue-block ul li {
+  padding: 0;
+
+  background: none;
+}
+
+.products-blue-block ul li {
+  color: #fff;
+}
+
+.block--aegon-menu-aegon-desktop-menu .mobile-level3 {
+  display: none;
+}
+
+.mainmenu {
+  .level-2-item {
+    .btn-green a {
+      background: none;
+    }
+    .btn-orange-icon-arrow-right a {
+      padding-right: 35px;
+      background: $url_8 100% 50% no-repeat !important;
+    }
+    .btn-blue-icon-arrow-right a {
+      padding-right: 35px;
+      background: $url_8 100% 50% no-repeat !important;
+    }
+    .btn-green-icon-arrow-right a {
+      padding-right: 35px;
+      background: $url_8 100% 50% no-repeat !important;
+    }
+    .btn-orange-icon-arrow-left a,
+    .btn-blue-icon-arrow-left a,
+    .btn-green-icon-arrow-left a {
+      padding: 15px 15px 15px 35px;
+      text-align: right;
+      background: $url_9 0 50% no-repeat !important;
+    }
+    .btn-orange-icon-square-arrow-right a {
+      background: $url_2 100% 50% no-repeat !important;
+    }
+    .btn-blue-icon-square-arrow-right a {
+      background: $url_2 100% 50% no-repeat !important;
+    }
+    .btn-green-icon-square-arrow-right a {
+      background: $url_2 100% 50% no-repeat !important;
+    }
+    .btn-orange-gradient-icon-square-call a {
+      color: $rangoon_green_approx !important;
+      color: $rangoon_green_approx;
+      background: $url_11 100% 50% no-repeat !important;
+    }
+    .btn-blue-icon-square-call a {
+      color: $rangoon_green_approx;
+      background: $url_11 100% 50% no-repeat !important;
+    }
+    .btn-orange-gradient-icon-square-chat a {
+      color: $rangoon_green_approx;
+      background: $url_12 100% 50% no-repeat !important;
+    }
+    .btn-blue-icon-square-chat a {
+      color: $rangoon_green_approx;
+      background: $url_12 100% 50% no-repeat !important;
+    }
+    .btn-blue-icon-square-search a {
+      background: $url_13 100% 50% no-repeat;
+    }
+    .btn a {
+      height: auto;
+    }
+    &.item-open:hover .btn a {
+      //Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
+      border-radius: 3px;
+      background-color: inherit;
+    }
+  }
+}
+
+//
+// Media Queries
+// --------------------------------------------------
+
+// Hide desktop menu
+#block-aegon-menu-aegon-desktop-menu {
+  display: none;
+}
+
+@include breakpoint($brk-not-mobile) {
+
+  // Hide desktop menu
+  #block-aegon-menu-aegon-desktop-menu {
+    display: block;
+  }
+
+  aside.mobile {
+    display: none;
+  }
+  .cbp-spmenu ul.col2 {
+    border: none;
+    li {
+      float: left;
+      width: 50%;
+    }
+  }
+}
+
+@include breakpoint($brk-large-desktop) {
+
+  .cbp-spmenu ul {
+    &.pull-left {
+      border: none;
+    }
+    &.pull-right {
+      border: none;
+      padding-right: 1em;
+    }
+  }
+}
