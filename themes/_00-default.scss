@@ -1,0 +1,34 @@
+
+//
+// Theme file
+// Colors and skins are reported here
+// --------------------------------------------------
+
+/* TODO: color variables need refactor */
+
+h1 {
+  color: $blue;
+}
+
+.subtext {
+  color: $blue;
+}
+
+ul {
+  li {
+    &:before {
+      color: $blue;
+    }
+    &.arrow {
+      color: $blue;
+    }
+  }
+}
+
+p {
+  color: $palette2;
+}
+
+.wrapper {
+  background: $white;
+}
