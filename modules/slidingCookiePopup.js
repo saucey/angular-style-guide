@@ -9,15 +9,29 @@
    */
   Drupal.behaviors.slidingCookiePopup = {
 
+    getEuCookieDomain: function() {
+
+      // Return EU Cookie Domain set in Drupal eu_cookie_compliance module
+      return Drupal.settings.eu_cookie_compliance.domain;
+    },
+
     attach: function () {
 
-      // Retrieve CookieOptIn setting
-      var ext_cookie_val = this.getCookie('AEGON.CookieOptIn.setting');
+      // For localhost env, overwrite the module eu_cookie_compliance.domain
+      if (doc.domain === 'localhost') {
+        Drupal.settings.eu_cookie_compliance.domain = 'localhost';
+      }
 
-      var runCreatePopup = $('body.logged-in').length < 1 &&
+      // Local scope variables
+      var ext_cookie_val = this.getCookie('AEGON.CookieOptIn.setting'),
+          runCreatePopup = $('body.logged-in').length < 1 &&
                            $('body.imce').length < 1 &&
                            ext_cookie_val === 'nocookie';
 
+      // Avoid to load sliding popup for admin
+      if (!!Drupal.admin) { return; }
+
+      // Run createPopup
       if (runCreatePopup) {
 
         // Create and append the popup div
@@ -73,8 +87,9 @@
     setStatus: function (status) {
       var date = new Date();
       date.setDate(date.getDate() + 100);
-      var cookie = "cookie-agreed=" + status + ";expires=" + date.toUTCString() + ";path=" + Drupal.settings.basePath;
-      if(Drupal.settings.eu_cookie_compliance.domain) {
+      var cookie = "cookie-agreed=" + status + ";expires=" +
+                   date.toUTCString() + ";path=" + Drupal.settings.basePath;
+      if (this.getEuCookieDomain() && this.getEuCookieDomain() !== 'localhost') {
         cookie += ";domain="+Drupal.settings.eu_cookie_compliance.domain;
       }
       document.cookie = cookie;
@@ -136,7 +151,7 @@
         date.setDate(date.getDate() + 100);
         cookie  = 'AEGON.CookieOptIn.setting = ' + selVal + ';';
         cookie += 'expires=' + date.toUTCString() + '; path=/';
-        if (Drupal.settings.eu_cookie_compliance.domain) {
+        if (that.getEuCookieDomain() && that.getEuCookieDomain() !== 'localhost') {
           cookie += ';domain=' + Drupal.settings.eu_cookie_compliance.domain;
         }
 
@@ -429,14 +444,6 @@
             .add('.custom-menu-dropdown a')
             .on('click', noThanksPreference);
         }
-      }
-
-      // Remove sliding popu for backoffice
-      var st = doc.domain.split('nl.aegon.'),
-          isAdmin = doc.location.pathname.search('/admin');
-
-      if (st[1] === 'com' || isAdmin !== -1) {
-        SlidingPopup.remove();
       }
     },
 
