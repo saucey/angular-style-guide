@@ -11,7 +11,7 @@
     top:4px;
     left:5px;
     &+ span.checkbox {
-      background:url(../assets/images/icons/btn-checkbox.png) center 0 no-repeat;
+      background:url(../images/icons/btn-checkbox.png) center 0 no-repeat;
       display:inline-block;
       height:32px;
       width:32px;
@@ -20,7 +20,7 @@
       left:0;
     }
     &:checked + span.checkbox{
-      background:url(../assets/images/icons/btn-checkbox.png) center 100% no-repeat;
+      background:url(../images/icons/btn-checkbox.png) center 100% no-repeat;
     }
   }
 }
