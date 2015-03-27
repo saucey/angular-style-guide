@@ -39,7 +39,7 @@
           console.log($(this).closest("ul").prev("ul.error").addClass("visible"));
         });
 
-        $("form [name=lhfs_form]").validate({errorClass: "errorText"});
+        // $("form [name=lhfs_form]").validate({errorClass: "errorText"});
       }
     }
   };
