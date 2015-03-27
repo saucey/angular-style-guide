@@ -1,30 +1,52 @@
-
 button {
+  cursor: pointer;
+  height: 38px;
   background-color: $blue;
   color: $white;
   font-size: $medium;
-  border-radius: 3px;
-  padding: 10px;
+  border-radius: $elements_border_radius;
+  padding: 8px 10px 12px 10px;
   border: 0;
+  white-space: nowrap;
+  &.right {
+    margin-left: 10px;
+  }
+  &.left {
+    margin-right: 10px;
+  }
+  &.top {
+    margin-bottom: 10px;
+  }
+  &.bottom {
+    margin-top: 10px;
+  }
   &.arrow {
     &:after {
-      padding: 11px;
-      margin-right: -10px;
+      font-size: 11px;
       font-family: $font_icons;
-      content: ">";
+      content: "\e600";
+      padding: 16px 14px;
+      margin-right: -10px;
+      margin-left: 10px;
       background-color: $light_blue;
+    }
+    &.blue:after {
+      margin-left: 0;
+      background-color: $blue;
     }
   }
   &.white {
     background-color: $white;
     color: $blue;
-    &:before {
-      padding: 11px;
-      margin-left: -10px;
-      font-family: $font_icons;
-      content: ">";
-      background-color: $white;
-      color: $blue;
-    }
+    // currently deactivated as the current design calls for something without arrow
+    // &:before {
+    //   font-size: 11px;
+    //   font-family: $font_icons;
+    //   content: "\e600";
+    //   padding: 11px;
+    //   margin-left: -10px;
+    //   background-color: $white;
+    //   color: $blue;
+    // }
   }
 }

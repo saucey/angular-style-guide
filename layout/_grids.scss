@@ -14,7 +14,6 @@
   [class*='span'] {
     display: block;
     float: left;
-    //Instead of the line below you could use @includebox-sizing($bs)
     box-sizing: border-box;
     width: 100%;
     min-height: 30px;
@@ -145,19 +144,11 @@
   }
 }
 
-@media screen and(min-width: 641px) and(max-width: 900px) {
-  .row-fluid {
-    margin-bottom: 5px;
-  }
-  .container_12 .row-fluid.col3 .span4 {
-    width: 49%;
-    *width: 48.9375%;
-    &:last-child {
-      margin: 5px 0 0;
-    }
-  }
-}
-@media screen and(max-width: 640px) {
+/**
+ * Mobile
+ */
+@include breakpoint($brk-mobile) {
+
   .row-fluid {
     margin-bottom: 0;
     .span14 {
@@ -170,6 +161,24 @@
     margin-left: 0;
   }
 }
+
+/**
+ * Generic Tablet
+ */
+@include breakpoint($brk-tablet) {
+
+  .row-fluid {
+    margin-bottom: 5px;
+  }
+  .container_12 .row-fluid.col3 .span4 {
+    width: 49%;
+    *width: 48.9375%;
+    &:last-child {
+      margin: 5px 0 0;
+    }
+  }
+}
+
 
 /**
  * DL DT DD

@@ -3,12 +3,6 @@
 // Core
 // --------------------------------------------------
 
-/**
- * * { Box-sizing: Border-box } FTW
- * Apply a natural box layout model to all elements, but allowing components to change
- * http://www.paulirish.com/2012/box-sizing-border-box-ftw/
- */
-
 html {
   font-family: sans-serif;
   box-sizing: border-box;
@@ -21,21 +15,22 @@ html {
 }
 
 body {
-  font-family: 'senticosansdtlight', Arial, Verdana, sans-serif;
-  font-size: 18px;
-  line-height: 23px;
+  font-family: $font_light, $font_fallback;
+  font-size: $medium;
+  line-height: 25px;
 
   overflow-x: hidden;
   position: relative;
   left: 0;
 
   background-color: $white;
+  color: $black;
 }
 
 a {
   text-decoration: none;
 
-  color: $palette1;
+  color: $blue;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
   -webkit-tap-highlight-color: transparent;
 }

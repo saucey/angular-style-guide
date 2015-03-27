@@ -9,9 +9,75 @@
   min-height: 100px;
   padding: 15px;
   border: 2px solid $grey;
-  border-radius: 3px;
+  border-radius: $frame_border_radius;
 }
 
 .bubble {
   @include bubble(10px, 2px, $quadrant: 3, $bottom: 20px, $border-color: $grey, $background-color: $white);
+}
+
+div.success {
+  background-color: $light_green;
+  .header {
+    color: $black;  
+  }
+}
+
+div.error {
+  background-color: $light_red;
+  .header {
+    color: $red;  
+  }
+}
+
+div.error, div.success {
+  @include inlineFrame();
+  padding-left: 40px;
+  //margin-bottom: 10px;
+  .header {
+    &:before {
+      font-family: $font_icons;
+      content: "\e62e";
+      margin-left: -20px; //this is faking it, compensating for the space requirement of :before, display: inline does not seem to work
+      margin-right: 5px;
+      left: -10px;
+      position: relative;
+    }
+    //font-size: $large;
+    font-family: $font_medium;
+    margin-bottom: 10px;
+  }
+  button {
+    &:first-of-type {
+      float: right;
+      display: block;
+      @media screen and(max-width: $rc-s-max-width) {
+        display: none;
+      }
+    }
+    &:last-of-type {
+      display: none;
+      margin-top: 20px;
+      @media screen and(max-width: $rc-s-max-width) {
+        display: block;
+      }
+    }
+  }
+}
+
+.frame {
+  position: relative;
+  min-width: 220px;
+  min-height: 100px;
+  padding: 15px;
+  border: 2px solid $grey;
+  border-radius: $frame_border_radius;
+}
+
+// UTILITY STYLES
+span.middle-enforcer {
+  display: inline-block;
+  width: 0;
+  height: 100%;
+  vertical-align: middle;
 }

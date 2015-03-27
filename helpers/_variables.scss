@@ -3,19 +3,13 @@
 // Variables
 // --------------------------------------------------
 
-
-
-// Some ideas:
-// https://github.com/twbs/bootstrap-sass/blob/master/templates/project/_bootstrap-variables.sass
-
-//variable definitions
-
 // COLORS, following fabrique's scheme '
 // BLUE hues
 $black: #1d1d1b; //actually, this is a very dark blue, so that is why it is here
 $dark_blue: #00304c;
 $blue: #3395d3;
 $light_blue: #66b0de;
+$slightly_lighter_blue: #99CAE9;
 $sky: #8cd1e6;
 $fun_blue_approx: #2163ae;
 $lochmara_approx: #007ac7;
@@ -24,17 +18,23 @@ $orange: #f9a600;
 // GREYS
 $white: #ffffff;
 $grey: #edebe5;
+$slightly_darker_grey: #e0e0e0;
 // GREENS
 $green: #49af57;
+$light_green: #c8e7cc;
 // REDS
 $red: #ca4642;
+$light_red: #eacbca;
 // YELLOWS
 $yellow: #ffea53;
+// BROWNS
+$beige: #eeebe5;
 
 $font_fallback: Arial, Verdana, sans-serif;
-$font_light: 'sslight', $font_fallback;
-$font_normal: 'ssregular', $font_fallback;
-$font_bold: 'ssbold', $font_fallback;
+$font_light: 'senticosansdtlight', $font_fallback;
+$font_normal: 'senticosansdtregular', $font_fallback;
+$font_medium: 'senticosansdtmedium', $font_fallback;
+$font_bold: 'senticosansdtcondbold', $font_fallback;
 $font_icons: 'aegon_icons', $font_fallback;
 
 // SIZES
@@ -45,9 +45,27 @@ $x-large: 25px;
 $xx-large: 40px;
 $xxx-large: 46px;
 
+// RESPONSIVE CUTOFFS
+// smartphone
+$rc-s-min-width: 0;
+$rc-s-max-width: 640px;
+// tablet
+$rc-m-min-width: 641px;
+$rc-m-max-width: 900px;
+// desktop
+$rc-l-min-width: 901px;
+$rc-l-max-width: 16000px;
+
+// INTERFACE ELEMENTS
+$elements_border_radius: 3px;
+$elements_height: 44px;
+
+$frame_border_radius: 3px;
+
+
 
 /**
- * VARIABLES for AEGON.nl current website.
+ * TEMP: VARIABLES for AEGON.nl current website.
  * Current analisys and refactor of current colors used inside the website.
  * NOTES: at moment names of colors are anonyms and related to the current
  * palettes used into website.

@@ -1,55 +1,289 @@
-// 
-// Reason to don't use id selectors instead of class selectors
-// http://csswizardry.com/2011/09/when-using-ids-can-be-a-pain-in-the-class/
-// http://screwlewse.com/2010/07/dont-use-id-selectors-in-css/
-// http://oli.jp/2011/ids/
-
-.lhfs_widget {
+#lhfs_widget {
   .tip {
     background-color: $sky;
-    padding: 20px 15px;
-    border-radius: inherit; //get border-radius from enclosing frame
-    display: none;
-    &.visible {
-      display: block;
-    }
+    @include inlineFrame();
+    padding-left: 40px;
+    //margin-bottom: 18px;
     .intro {
+      &:before {
+        font-family: $font_icons;
+        content: "\e62f";
+        margin-left: -20px; //this is faking it, compensating for the space requirement of :before, display: inline does not seem to work
+        margin-right: 5px;
+        left: -10px;
+        position: relative;
+      }
       color: $white;
+      font-size: $large;
+      font-family: $font_normal;
+      margin-bottom: 20px;
     }
   }
-  &>ul {
+  form>ul, &>ul {
     margin: 30px 0;
     width: 100%;
     li.payment {
+      .details {
+        display: none;
+      }
+      .description {
+        &:before {
+          font-family: $font_icons;
+          color: $blue;
+          content: "\e605";
+          margin-left: -20px; //this is faking it, compensating for the space requirement of :before, display: inline does not seem to work
+          left: -10px;
+          position: relative;
+        }
+        padding-left: 40px;
+        margin-bottom: 20px;
+      }
       &.data {
-        ul {
-          display:block;
+        .details {
+          display: block;
         }
         .description {
           display: none;
         }
       }
 
-      span.title, span.police-number {
-        font-family: $font_bold;  //font-weight bold does not work for this font family >:(;
+      div.title, span.police-number {
+        font-family: $font_medium;  //font-weight bold does not work for this font family >:(;
       }
-      ul {
-        margin: 30px 0 10px 0;
-        padding: 1px 0;
-        display: none; //together with the .data class for li.payment toggles on and off the visibility of the data elements
-        width: 100%;
-        &.visible {
-          display: block;
-        }
-        li {
-          //display: inline-block;
-          float: left;
-          width: 50%;
-          &:last-of-type {
-            display: block;
-          }
+    }
+  }
+}
+
+#lhfs_widget {
+  $input_width: 228px;
+  $input_margin: 5px;
+  $input_height: $elements_height;
+
+  input[type=text], input[type=email], input[type=number], select, .ddTitle {
+    height: $input_height;
+    padding: 9px 10px;
+    padding-right: 10px;
+    border-radius: $elements_border_radius;
+    border: 1px solid $slightly_darker_grey;
+    background-color: $beige;
+    white-space: nowrap;
+    display: none;
+    margin-top: 0px;
+    margin-bottom: 0px;
+
+    &:invalid {
+      //border: 1px solid $red;
+    }
+    &:focus {
+      //outline: 0;
+      //border: 1px solid $slightly_lighter_blue;
+    }
+  }
+
+  .ddTitle .arrow {
+    &:after {
+      font-size: 11px;
+      font-family: $font_icons;
+
+      content: "\e631";
+    }
+  }
+
+  input[type=text], input[type=email], input[type=number], select, .dd {
+    width: $input_width;
+    &.half {
+      width: $input_width / 2 - $input_margin;
+      margin-right: $input_margin * 2;
+      float: left;
+      &:last-child {
+        float: none;
+      }
+    }
+    &.quarter {
+      width: $input_width / 4 - $input_margin * 2;
+      margin-right: $input_margin * 2;
+      float: left;
+      &:last-child {
+        float: none;
+      }
+    }
+  }
+  input[type=checkbox], input[type=radio] {
+    width: auto;
+  }
+
+  li.value {
+    @media screen and(min-width: $rc-m-min-width) and(max-width: $rc-l-max-width) {
+      height: $elements_height;
+    }
+    span {
+      &.content, &.help {
+        display: inline;
+      }
+      &.help {
+        @media screen and(max-width: $rc-s-max-width) {
+          display: none;
         }
       }
     }
   }
+  li.label {
+    min-height: 0;
+    @media screen and(min-width: $rc-m-min-width) and(max-width: $rc-l-max-width) {
+      height: inherit;  //$elements_height;
+    }
+    &:after {
+      content: ":";
+    }
+  }
+  label.left {
+    float:left;
+  }
+
+  .edit {
+    ul.error {
+      display: block;
+      opacity: 0;
+      height: 24px;
+      min-height: 0;
+      [class*='span'] {
+        min-height: 0;  //overwriting min-height from row-fluid
+        line-height: 18px;  //overwriting line-height from *body
+      }
+      &+ ul.horizontal {
+        //margin-top: -10px;
+      }
+      &> li {
+        color: $red;
+        font-size: $small;
+        margin-left: 0;
+      }
+      &.visible {
+        opacity: 1;
+      }
+    }
+    li.label {
+      font-family: $font_normal;
+      text-align: right;
+      @media screen and(max-width: $rc-s-max-width) {
+        text-align: left;
+      }
+      padding-right: 55px;
+      &:after {
+        content: "";
+      }
+    }
+    input[type=text], input[type=email], input[type=number], select, .ddTitle {
+      display: block;
+    }
+    li.value {
+      span {
+        &.content, &.help {
+          display: none;
+        }
+      }
+    }
+  }
+
+  // fix responsive peculiarities
+  .row-fluid [class*='span'] {
+    display: inline;
+    @media screen and(max-width: $rc-s-max-width) {
+      min-height: 5px;
+    }
+  }
+}
+
+.help {
+  margin-right: 20px;
+  &:before {
+    font-family: $font_icons;
+    font-size: 16px;
+    content: "\e630";
+  }
+}
+
+ul.actions {
+  text-align: left;
+  li {
+    float: none;
+    display: block;
+    &.edit {
+      display: none;
+    }
+  }
+  &.edit {
+    text-align: right;
+    li {
+      text-align: left;
+      &.edit {
+        padding-left: 0;
+        display: block;
+      }
+      &.view {
+        display: none;
+      }
+    }
+  }
+}
+
+ul.horizontal {
+  &.row-fluid {
+    height: 50px;
+  }
+  margin: 0;
+  @media screen and(max-width: $rc-s-max-width) {
+    margin-bottom: 30px;
+  }
+  padding: 1px 0;
+  //width: 100%;
+  display: none; //together with the .data class for li.payment toggles on and off the visibility of the data elements
+  &.clear {
+    width: 100%;
+    height: 1px;
+    margin: 0 0 -1px;
+    clear: both;
+  }
+  &.visible {
+    display: block;
+  }
+  li {
+    &.label {
+      font-family: $font_normal;
+    }
+    &.value {
+      font-family: $font_light;
+    }
+    display: inline-block;
+    float: left;
+    //width: 50%; //default value, can be overwritten by css, of course
+    &:last-of-type {
+      float: none;
+      clear:both; //
+    }
+  }
+}
+
+#lhfs_widget input {
+  outline: 0px;
+  &:focus:invalid ~ .errorText {
+    display: block;
+  }
+  &:invalid {
+    border: 1px solid $red;
+  }
+  &~ .errorText, &:valid ~ .errorText {
+    display: none;
+  }
+}
+
+.errorText {
+  $errorText_line-height: 14px;
+  line-height: $errorText_line-height;
+  //position: absolute;
+  font-size: $small;
+  color: $red;
+  //border: 1px solid red;
+  position: relative;
+  top: - ($elements_height + $errorText_line-height);
 }
