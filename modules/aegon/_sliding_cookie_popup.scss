@@ -6,7 +6,7 @@
 body.sliding-popup-processed {
 
   .sliding-popup-top {
-	background: transparent;  
+    background: transparent;  
 
     .btn-close {
       position: absolute;
@@ -16,31 +16,8 @@ body.sliding-popup-processed {
       height: 20px;
       margin: -10px 15px 0 0;
       text-decoration: none;
-      background: $url_30 0 0 no-repeat;
+      background: url(../../../images/icons/icon-close-cookie.png) 0 0 no-repeat;
       background-size: 20px 20px;
-    }
-    .popup-content #popup-buttons {
-      .find-more-button {
-        margin-right: 10px;
-      }
-      .btn button {
-        font: 18px/22px $font_5, $font_2, $font_3, $font_4;
-        display: inline-block;
-        width: 230px;
-        margin: 0;
-        cursor: pointer;
-        text-align: left;
-        border: none;
-        border-top-right-radius: 3px;
-        border-bottom-right-radius: 3px;
-        box-shadow: none;
-        text-shadow: none;
-      }
-      .btn-blue-icon-arrow-right button {
-        padding: 15px 35px 15px 15px;
-        color: $white;
-        background: $url_18 100% 50% no-repeat;
-      }
     }
     .popup-content {
       position: relative;
@@ -54,24 +31,20 @@ body.sliding-popup-processed {
         max-width: 100%;
         margin: 0;
         p {
-          font-family: $font_2, $font_7, $font_4;
+          font-family: $font_fallback;
           font-size: 12px;
           font-weight: normal;
           line-height: 16px;
           margin: 0 26px 0 0;
-          color: $white;
+          color: $white !important;
         }
         a {
           text-decoration: underline;
-          color: $white;
+          color: $white !important;
         }
       }
       #popup-buttons {
-        float: none;
-        max-width: 100%;
-        margin: 0;
         display: none;
-        text-align: right;
       }
     }
     .agreed {
@@ -128,7 +101,7 @@ body.sliding-popup-processed {
           width: 75px;
           height: 69px;
           margin: 0 auto;
-          background: $url_32 0 0 no-repeat;
+          background: url(../../../images/icons/cookie-opt-in-table-header-icons.png) 0 0 no-repeat;
         }
         .setting-analytics .icon {
           background-position: -75px 0;
@@ -140,26 +113,25 @@ body.sliding-popup-processed {
       tbody {
         .check-yes {
           text-indent: -9999px;
-          background: $url_33 center center no-repeat;
+          background: url(../../../images/icons/check-medium.png) center center no-repeat;
         }
         .check-no {
           text-indent: -9999px;
-          background: $url_34 center center no-repeat;
+          background: url(../../../images/icons/cross-medium.png) center center no-repeat;
         }
       }
     }
   }
   .ui-widget {
-    font-family: $font_1, $font_2, $font_3, $font_4;
+    font-family: $font_light, $font_fallback;
     font-size: 18px;
     line-height: 23px;
     z-index: 10000;
   }
   .ui-widget-overlay {
     z-index: 10000;
+    background: rgba(0,0,0,.3);
     opacity: 1;
-    background: $url_31 0 0 repeat;
-    filter: alpha(opacity=100);
   }
   .ui-widget-content a {
     color: $lochmara_approx;
