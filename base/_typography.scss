@@ -50,6 +50,7 @@ ul {
     list-style: none;
     font-family: $font_light;
     font-size: $medium;
+    @include rem('line-height', 26);
     &:before {
       display: block;
       position: relative;
