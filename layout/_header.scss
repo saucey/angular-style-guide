@@ -2,3 +2,93 @@
 //
 // Header
 // --------------------------------------------------
+
+header {
+
+  .mobileheader {
+    margin: 0 auto;
+    @include rem('padding', 9, 0);
+  }
+
+  .desktopheader {
+    display: none;
+    @include rem('min-height', 90);
+    @include rem('padding', 25, 0);
+    margin: 0 7.3%;
+  }
+}
+
+.mobileheader {
+
+  .tap-menu {
+    display: inline-block;
+    text-align: center;
+    @include rem('padding', 8, 0);
+
+    a {
+      width: 20px;
+      height: 17px;
+      background: url('../images/ui/tap-menu.png') no-repeat top left transparent;
+      text-indent: -9999px;
+      display: inline-block;
+    }
+  }
+
+  .mobile-logo {
+    margin: 0;
+    text-align: center;
+
+    a {
+      display: inline-block;
+    }
+
+    img {
+      display: block;
+      width: 109px;
+      height: 39px;
+    }
+  }
+
+  .btn-login {
+    margin: 0;
+    text-align: center;
+    @include rem('padding', 6, 0);
+  }
+}
+
+.desktopheader {
+
+  .region-header-left {
+    float: left;
+    width: auto;
+  }
+
+  .region-header {
+    float: right;
+
+    .block {
+      float: left;
+      width: auto;
+      position: relative;
+    }
+  }
+}
+
+
+// 
+// Media queries
+// --------------------------------------------------
+
+@include breakpoint($brk-tablet) {
+
+  header {
+
+    .mobileheader {
+      display: none;
+    }
+
+    .desktopheader {
+      display: block;
+    }
+  }
+}

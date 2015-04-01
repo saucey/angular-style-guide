@@ -9,6 +9,7 @@ $black: #1d1d1b; //actually, this is a very dark blue, so that is why it is here
 $dark_blue: #00304c;
 $blue: #3395d3;
 $light_blue: #66b0de;
+$very_light_blue: #335970;
 $slightly_lighter_blue: #99CAE9;
 $sky: #8cd1e6;
 $fun_blue_approx: #2163ae;
@@ -63,85 +64,72 @@ $elements_height: 44px;
 $frame_border_radius: 3px;
 
 
-
-/**
- * TEMP: VARIABLES for AEGON.nl current website.
- * Current analisys and refactor of current colors used inside the website.
- * NOTES: at moment names of colors are anonyms and related to the current
- * palettes used into website.
- */
-
-$palette1: #0077C8;
-$palette2: #00304c; // Dark blue
-
-
 /**
  * BREAKPOINTS for AEGON.nl current website.
+ * Approach: Mobile First Method
  */
-
-$breakpoint-force-media-all: true;
 
 /**
  * Mobile
  *
  * Example: @include breakpoint($brk-mobile) {}
+ * 
+ * IMPORTANT: try to avoid the breakpoint below, since the theme is already
+ * mobile first and everything need to be written mobile as default.
  */
 $brk-mobile: 'only screen' (max-width 640px);
 
 /**
- * Not Mobile
- *
- * Example: @include breakpoint($brk-not-mobile) {}
- */
-$brk-not-mobile: 'only screen' (min-width 641px);
-
-/**
- * Generic Tablet
+ * Generic Tablet and upper
  *
  * Example: @include breakpoint($brk-tablet) {}
  */
-$brk-tablet: 'only screen' (641px 900px);
+$brk-tablet: 'only screen' (641px);
 
 /**
- * iPad portrait
+ * iPad portrait and upper
  *
  * Example: @include breakpoint($brk-ipad-portrait) {}
  */
-$brk-ipad-portrait: 'only screen' (901px 1023px) (orientation portrait);
+$brk-ipad-portrait: 'only screen' (901px);
 
 /**
- * iPad landscape
+ * iPad landscape and upper
  *
  * Example: @include breakpoint($brk-ipad-landscape) {}
  */
-$brk-ipad-landscape: 'only screen' (1024px 1349px) (orientation landscape);
+$brk-ipad-landscape: 'only screen' (1024px) (orientation landscape);
 
 /**
- * Large desktop
+ * Large desktop and upper
  *
  * Example: @include breakpoint($brk-large-desktop) {}
  */
 $brk-large-desktop: 'only screen' (1350px);
 
 /**
- * Device Pixel Ratio of at least 1.5
+ * Device Pixel Ratio of at least 1.5 and upper
  *
  * Example: @include breakpoint($brk-hidpi) {}
  */
 $brk-hidpi: min-resolution 1.5dppx;
 
 /**
- * Large desktop
+ * Media print
  *
  * Example: @include breakpoint($brk-print) {}
  */
 $brk-print: 'print';
 
 
-// #popup-buttons:after {
-//   @include breakpoint($brk-mobile) {
-//     content: 'Breakpoint: Mobile';
-//   }
+/**
+ * Playground example
+ * Note: hide section below to reproduce CSS breakpoints
+ */
+// #back-top:after {
+//   // @include breakpoint($brk-mobile) {
+//   //   content: 'Breakpoint: Mobile';
+//   // }
 //   @include breakpoint($brk-tablet) {
 //     content: 'Breakpoint: Tablet';
 //   }
@@ -154,6 +142,9 @@ $brk-print: 'print';
 //   @include breakpoint($brk-large-desktop) {
 //     content: 'Breakpoint: Large desktop';
 //   }
+//   // @include breakpoint($brk-hidpi) {
+//   //   content: 'Breakpoint: hidpi';
+//   // }
 //   @include breakpoint($brk-print) {
 //     content: 'Breakpoint: Print';
 //   }

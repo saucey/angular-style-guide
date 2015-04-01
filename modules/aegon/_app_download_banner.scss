@@ -57,22 +57,17 @@ $url_0: url(../img/dark_background_stripes.gif);
   border-bottom: 1px solid $color_gray_nurse_approx;
   background: $wild_sand;
   background: linear-gradient(to bottom, $wild_sand 0, $color_celeste_approx 100%);
-  //Instead of the line below you could use @includebox-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
   box-shadow: 0 1px 2px $black_50;
-  //Instead of the line below you could use @includebox-sizing($bs)
-  box-sizing: content-box;
-  * {
-    //Instead of the line below you could use @includebox-sizing($bs)
-    box-sizing: content-box;
-    &:after {
-      //Instead of the line below you could use @includebox-sizing($bs)
-      box-sizing: content-box;
-    }
-    &:before {
-      //Instead of the line below you could use @includebox-sizing($bs)
-      box-sizing: content-box;
-    }
-  }
+  // box-sizing: content-box;
+  // * {
+  //   box-sizing: content-box;
+  //   &:after {
+  //     box-sizing: content-box;
+  //   }
+  //   &:before {
+  //     box-sizing: content-box;
+  //   }
+  // }
 }
 .smartbanner__container {
   margin: 0 auto;

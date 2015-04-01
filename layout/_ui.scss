@@ -1,6 +1,6 @@
 
 //
-// Generic UI elements
+// Layout UI elements
 // --------------------------------------------------
 
 .frame {
@@ -16,6 +16,7 @@
   @include bubble(10px, 2px, $quadrant: 3, $bottom: 20px, $border-color: $grey, $background-color: $white);
 }
 
+/*----- Messages status -----*/
 div.success {
   background-color: $light_green;
   .header {
@@ -65,19 +66,172 @@ div.error, div.success {
   }
 }
 
-.frame {
-  position: relative;
-  min-width: 220px;
-  min-height: 100px;
-  padding: 15px;
-  border: 2px solid $grey;
-  border-radius: $frame_border_radius;
-}
-
-// UTILITY STYLES
+/*----- UTILITY STYLES -----*/
 span.middle-enforcer {
   display: inline-block;
   width: 0;
   height: 100%;
   vertical-align: middle;
+}
+
+/*----- Back to top -----*/
+.goTop-wrapper {
+  position: fixed;
+  top: 0;
+  right: 7.26496%;
+  z-index: 1;
+
+  .goTop a {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    text-indent: -9999px;
+    background: #3395D3 url(../images/ui/icon-arrow-up.png) center center no-repeat;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.3);
+
+    &:hover {
+      background-color: #51A5DA;
+    }
+
+    &:active {
+      background-color: #007BC8;
+    }
+  }
+}
+
+/*----- Login link @ header -----*/
+.login-link {
+  display: inline-block;
+  @include rem('line-height', 35);
+  @include rem('padding', 0, 8);
+  @include rem('border-radius', 3);
+  font-family: 'senticosansdtregular';
+  white-space: nowrap;
+  background-color: $green;
+  color: $white;
+
+  &:hover {
+    background-color: $light_green;
+    color: $green;   
+  }
+
+  &:active {
+    background-color: $green;
+    color: $white;
+  }
+}
+
+/*----- Easy Breadcrumb @ header -----*/
+.easy-breadcrumb {
+  width: auto;
+  float: left;
+  display: inline-block;
+  @include rem('margin-top', 6);
+
+  ul {
+
+    li {
+      float: left;
+      @include rem('padding-left', 15);
+      @include rem('margin-right', 10);
+      background: url('../images/ui/icon-arrow-narrow-right-blue.png') center left no-repeat;
+      color: #00304C;
+
+      &.first {
+        background: none;
+        padding: 0;
+      }
+    }
+  }
+}
+
+/*----- Search form @ header -----*/
+.block-search {
+
+  .container-inline {
+    position: absolute;
+    right: 20px;
+  }
+
+  input.form-text {
+    width: 130px;
+    height: 38px;
+    margin: 0;
+    @include rem('padding', 5, 25, 5, 10);
+    @include rem('border-radius', 3);
+    border: solid 1px #C5D6DD;
+    outline: none;
+    background: $white;
+    color: #1D1D19;
+    box-shadow: inset 0 1px 0 0 rgba(0,48,76,0.4);
+    transition: all .5s;
+
+    &:focus {
+      width: 260px;
+      box-shadow: 0 0 5px rgba(109,207,246,.5);
+    }
+
+    &.form-autocomplete {
+      background-image: none;
+    }
+  }
+
+  .form-actions {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    .form-submit {
+      background: url(../images/ui/icon-search-header.png) 100% center no-repeat;
+      width: 36px;
+      height: 38px;
+      text-indent: -9999px;
+      border: none;
+      padding: 0;
+    }
+  }
+}
+
+
+// 
+// Media queries
+// --------------------------------------------------
+
+@include breakpoint($brk-tablet) {
+
+  .goTop-wrapper {
+    display: none;
+  }
+
+  .login-link {
+    @include rem('line-height', 38);
+    @include rem('padding', 0, 10, 0, 35);
+    background-image: url(../images/ui/icon-lock.png);
+    background-position: 13% 50%;
+    background-repeat: no-repeat;
+
+    &:hover {
+      background-image: url(../images/ui/icon-lock-green.png);
+    }
+
+    &:active {
+      background-image: url(../images/ui/icon-lock.png);
+    }
+  }
+}
+
+@include breakpoint($brk-ipad-portrait) {
+
+  .block-search input.form-text:focus {
+    width: 400px;
+  }
+}
+
+@include breakpoint($brk-ipad-landscape) {
+
+  .block-search input.form-text:focus {
+    width: 500px;
+  }
 }

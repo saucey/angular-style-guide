@@ -2,3 +2,219 @@
 //
 // Footer
 // --------------------------------------------------
+
+.footer-wrap {
+  margin: 0;
+  @include rem('margin-top', 50);
+
+  .footer-blk,
+  .footer-quick-links {
+    background: $dark_blue;
+  }
+}
+
+.footer-blk {
+  @include rem('padding-top', 40);
+  @include rem('line-height', 22);
+  font-family: $font_normal;
+
+  .region.first {
+    display: none;
+    overflow: hidden;
+    @include rem('margin-bottom', 40);
+
+    ul {
+      margin: 0;
+    }
+  }
+
+  .region.second {
+
+    .social-icons {
+      border-bottom: 1px solid $very_light_blue;
+      @include rem('margin-bottom', 25);
+      @include rem('padding-bottom', 25);
+
+      ul {
+        padding: 0;
+        margin: 0;
+
+        li {
+          float: left;
+          display: block;
+          @include rem('padding-right', 17);
+          margin: 0;
+
+          a {
+            display: inline-block;
+            width: 28px;
+            height: 28px;
+            text-indent: -9999px;
+
+            background-position: top left;
+            background-repeat: no-repeat;
+
+            &.youtube {
+              width: 25px;
+              background-image: url(../images/ui/icon-social-youtube.png);
+            }
+
+            &.twitter {
+              width: 27px;
+              background-image: url(../images/ui/icon-social-twitter.png);
+            }
+
+            &.rss {
+              width: 26px;
+              background-image: url(../images/ui/icon-social-rss.png);
+            }
+
+            &.googleplus {
+              width: 32px;
+              background-image: url(../images/ui/icon-social-googleplus.png);
+            }
+
+            &.facebook {
+              width: 16px;
+              background-image: url(../images/ui/icon-social-facebook.png);
+            }
+          }
+        }
+      }
+    }
+
+    .span4 {
+      @include rem('margin-bottom', 25);
+
+      &:last-child {
+        @include rem('margin-bottom', 10);
+      }
+    }
+
+    .finance-link {
+      float: left;
+      font-size: 15px;
+      width: 80%;
+
+      a {
+        color: $white;
+      }
+    }
+
+    .finance-img {
+      float: left;
+      margin-right: 2%;
+    }
+  }
+
+  h5 {
+    font-weight: normal;
+    color: #fff;
+    // margin: 0 0 25px;
+    @include rem('margin', 0, 0, 25);
+    // font: 18px/26px 'senticosansdtlight',Arial,Verdana,sans-serif;
+    font-family: $font_light;
+    font-size: 18px;
+  }
+
+  ul {
+    li {
+      @include rem('line-height', 26);
+      @include rem('margin', 0, 0, 15);
+
+      &:last-child {
+        margin: 0;
+      }
+    }
+  }
+}
+
+.footer-quick-links {
+  @include rem('padding', 15, 0);
+
+  .center {
+    overflow: hidden;
+    @include rem('padding-top', 15);
+    border-top: 1px solid $very_light_blue;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+
+    li {
+      float: left;
+      @include rem('margin', 0, 20, 0, 0);
+
+      a {
+        @include rem('font-size', 14);
+        @include rem('line-height', 14);
+
+        &:hover {
+          color: $white;
+        }
+      }
+
+      &:last-child {
+        margin: 0;
+      }
+    }
+  }
+}
+
+
+// 
+// Media queries
+// --------------------------------------------------
+
+@include breakpoint($brk-tablet) {
+
+  .footer-blk {
+
+    .region.first {
+      display: block;
+    }
+
+    .region.second {
+      @include rem('padding-top', 25);
+      border-top: 1px solid $very_light_blue;
+
+      .social-icons {
+        border-bottom: none;
+
+        ul li {
+          @include rem('padding-right', 10);
+        }
+      }
+
+      .span4, .span4:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+      }
+    }
+  }
+
+  .footer-quick-links {
+    @include rem('padding', 25, 0); 
+
+    .center {
+      @include rem('padding-top', 25);
+    }   
+  }
+}
+
+@include breakpoint($brk-large-desktop) {
+
+  .footer-blk {
+
+    .region.second {
+
+      .social-icons {
+
+        ul li {
+          @include rem('padding-right', 20);
+        }
+      }
+    }
+  }
+}

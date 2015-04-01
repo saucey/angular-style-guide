@@ -3,7 +3,63 @@
 // Mixins
 // --------------------------------------------------
 
-@mixin bubble($width: 10px, $border: 2px, $quadrant: 0, $top: "", $right: "", $bottom: "", $left: "", $border-color: white, $background-color: grey) { //creates a bubble nose on a frame
+/**
+ * Mixin converter for Pixel to REM, plus fallback in pixel for older browser
+ * @param  {float}  $property  Name of property
+ * @param  {[type]} $values... Top, Right, Bottom, Left pixel values
+ * @return {css}    Property converted in REM and fallback
+ *
+ * Example: @include('padding', .5, .5, .15, .15);
+ */
+@mixin rem($property, $values...) {
+  $base_pixel_size: 16px;
+  $max: length($values);
+  $pxValues: '';
+  $remValues: '';
+
+  @for $i from 1 through $max {
+
+    @if nth($values, $i) != 'important' {
+
+      // $value: strip-unit(nth($values, $i));
+      $value: nth($values, $i);
+
+      $remVal: ($value / 16);
+      $pxValues: #{$pxValues + $value}px;
+      $remValues: #{$remValues + $remVal}rem;
+    }
+
+    @if $i < $max {
+      $pxValues: #{$pxValues + " "};
+      $remValues: #{$remValues + " "};
+    }
+
+    @if $i == $max {
+      @if nth($values, $i) == 'important' {
+        $pxValues: #{$pxValues + " !important"};
+        $remValues: #{$remValues + " !important"};
+      }
+    }
+  }
+
+  #{$property}: $pxValues;
+  #{$property}: $remValues;
+}
+
+/**
+ * Bubble
+ * @param  {[type]} $width:            10px          [description]
+ * @param  {[type]} $border:           2px           [description]
+ * @param  {[type]} $quadrant:         0             [description]
+ * @param  {[type]} $top:              ""            [description]
+ * @param  {[type]} $right:            ""            [description]
+ * @param  {[type]} $bottom:           ""            [description]
+ * @param  {[type]} $left:             ""            [description]
+ * @param  {[type]} $border-color:     white         [description]
+ * @param  {[type]} $background-color: grey          [description]
+ * @return {[type]}                    [description]
+ */
+@mixin bubble ($width: 10px, $border: 2px, $quadrant: 0, $top: "", $right: "", $bottom: "", $left: "", $border-color: white, $background-color: grey) { //creates a bubble nose on a frame
   //$quadrant works like the coordinates in border 0 = top, 1 = left, 2 = bottom, 3 = right
   //offset values right, left, top and bottom indicate the distance from one of the extremes
   //of the quadrant, thus
@@ -68,6 +124,10 @@
   }
 }
 
+/**
+ * [inlineFrame description]
+ * @return {[type]} [description]
+ */
 @mixin inlineFrame () {
   padding: 20px 15px;
   border-radius: $frame_border_radius;

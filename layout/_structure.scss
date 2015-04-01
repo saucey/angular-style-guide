@@ -3,6 +3,42 @@
 // Main structure
 // --------------------------------------------------
 
+.clearfix {
+
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
 .wrapper {
   background-color: $white;
+}
+
+
+// 
+// Media queries
+// --------------------------------------------------
+
+@include breakpoint($brk-tablet) {
+
+  .scroll {
+    position: relative;
+    width: auto;
+    @include rem('padding-left', 170);
+  }
+}
+
+
+
+/**
+ * TEMP STUFF for DEV
+ */
+#inpage-chat {
+  display: none;
 }
