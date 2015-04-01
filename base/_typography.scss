@@ -88,9 +88,7 @@ ul {
 }
 
 p {
-  font-size: 18px;
   line-height: 23px;
-  font-family: 'senticosansdtlight', Arial, Verdana, sans-serif;
   margin: 0;
 }
 
@@ -104,4 +102,16 @@ p {
 
 .text-right {
   text-align: right;
+}
+
+
+// 
+// Media queries
+// --------------------------------------------------
+
+@include breakpoint($brk-tablet) {
+
+  p {
+    @include rem('margin', 0, 0, 15);
+  }
 }

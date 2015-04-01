@@ -1,0 +1,38 @@
+/**
+ * @file
+ * Theme for for tabs primary.
+ */
+
+ul.tabs {
+  padding: 0 4.6875%;
+
+  &.primary {
+    overflow: hidden;
+    @include rem('margin', 0, 0, 16, 0);
+    border-bottom: 1px solid #bbb;
+    list-style-type: none;
+
+    li {
+      display: block;
+      float: left;
+      margin-right: 1em;
+      padding: 0;
+      background: none;
+
+      a {
+        display: block;
+        @include rem('padding', 4, 12);
+      }
+    }
+  }
+
+  a {
+    padding: 0.3em 0.8em;
+    background-color: #eee;
+    text-decoration: none;
+
+    &.active {
+      background-color: #ccc;
+    }
+  }
+}

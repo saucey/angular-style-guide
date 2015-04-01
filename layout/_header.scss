@@ -3,23 +3,16 @@
 // Header
 // --------------------------------------------------
 
-header {
+header.header {
+  margin: 0 auto;
+  @include rem('padding', 9, 0);
 
-  .mobileheader {
-    margin: 0 auto;
-    @include rem('padding', 9, 0);
+  .btn-login {
+    text-align: center;
+    @include rem('padding', 6, 15, 6, 0);
   }
 
-  .desktopheader {
-    display: none;
-    @include rem('min-height', 90);
-    @include rem('padding', 25, 0);
-    margin: 0 7.3%;
-  }
-}
-
-.mobileheader {
-
+  // Mobile elements
   .tap-menu {
     display: inline-block;
     text-align: center;
@@ -35,38 +28,35 @@ header {
   }
 
   .mobile-logo {
-    margin: 0;
+    // margin: 0;
     text-align: center;
 
     a {
       display: inline-block;
+      // width: 109px;
+      // height: 39px;
     }
 
     img {
       display: block;
-      width: 109px;
-      height: 39px;
+      width: 100%;
+      height: 100%;
     }
   }
 
-  .btn-login {
-    margin: 0;
-    text-align: center;
-    @include rem('padding', 6, 0);
-  }
-}
-
-.desktopheader {
-
+  // Desktop elements
   .region-header-left {
+    display: none;
     float: left;
     width: auto;
   }
 
   .region-header {
+    display: none;
     float: right;
 
     .block {
+      display: none;
       float: left;
       width: auto;
       position: relative;
@@ -81,14 +71,34 @@ header {
 
 @include breakpoint($brk-tablet) {
 
-  header {
+  header.header {
+    margin: 0 7.3%;
+    @include rem('min-height', 90);
+    @include rem('padding', 25, 0);
 
-    .mobileheader {
+    .btn-login {
+      float: right;
+      width: auto;
+      padding: 0;
+    }
+
+    // Mobile elements
+    .tap-menu,
+    .mobile-logo {
       display: none;
     }
 
-    .desktopheader {
+    // Desktop elements
+    .region-header-left {
       display: block;
+    }
+
+    .region-header {
+      display: block;
+
+      .block {
+        display: block;
+      }
     }
   }
 }
