@@ -7,7 +7,6 @@
 
 @font-face {
   font-family:'senticosansdtlight';
-  // font-family:'sslight';
   src: url('../fonts/senticosansdt-light-webfont.eot');
   src: url('../fonts/senticosansdt-light-webfont.eot?#iefix') format('embedded-opentype'),
        url('../fonts/senticosansdt-light-webfont.woff') format('woff'),
@@ -19,7 +18,6 @@
 
 @font-face {
   font-family:'senticosansdtregular';
-  // font-family:'ssregular';
   src: url('../fonts/senticosansdt-regular-webfont.eot');
   src: url('../fonts/senticosansdt-regular-webfont.eot?#iefix') format('embedded-opentype'),
        url('../fonts/senticosansdt-regular-webfont.woff') format('woff'),
@@ -41,7 +39,6 @@
 
 @font-face {
   font-family:'senticosansdtmedium';
-  // font-family:'ssbold';
   src: url('../fonts/senticosansdt-medium-webfont.eot');
   src: url('../fonts/senticosansdt-medium-webfont.eot?#iefix') format('embedded-opentype'),
        url('../fonts/senticosansdt-medium-webfont.woff') format('woff'),
@@ -50,7 +47,11 @@
   font-style: normal;
 }
 
-// icon font created by icomoon; see how to change the name from icomoon to aegon_icons for the files without breaking anything (in the first attempt it _did_ break stuff)
+/**
+ * icon font created by icomoon; see how to change the name from icomoon to
+ * aegon_icons for the files without breaking anything (in the first attempt it
+ * _did_ break stuff)
+ */
 @font-face {
     font-family:'aegon_icons';
     src: url('../fonts/icomoon.eot');
