@@ -1,0 +1,45 @@
+.submessages {
+  position: relative;
+  display: block;
+  border: none;
+  @include rem('border-radius', 5);
+  @include rem('padding', 3, 0);
+
+  &:before {
+    font-family: 'aegon_icons';
+    position: absolute;
+    top: 7px;
+    left: -38px;
+    font-size: 25px;
+  }
+
+  &.submessages--status {
+    color: $green;
+
+    &:before {
+      content: '\e632';
+    }
+  }
+
+  &.submessages--error {
+    color: $dark_yellow;
+
+    &:before {
+      content: '\e632';
+    }
+  }
+
+  &.submessages--warning {
+    color: $red;
+
+    &:before {
+      content: '\e62b';
+    }
+  }
+}
+
+// 
+// Media queries
+// --------------------------------------------------
+
+// @include breakpoint($brk-tablet) {}
