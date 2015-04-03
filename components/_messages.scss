@@ -1,62 +1,9 @@
-
-
-/*----- Messages status -----*/
-// div.success {
-//   background-color: $light_green;
-//   .header {
-//     color: $black;  
-//   }
-// }
-
-// div.error {
-//   background-color: $light_red;
-//   .header {
-//     color: $red;  
-//   }
-// }
-
-// div.error, div.success {
-//   @include inlineFrame();
-//   padding-left: 40px;
-//   //margin-bottom: 10px;
-//   .header {
-//     &:before {
-//       font-family: $font_icons;
-//       content: "\e62e";
-//       margin-left: -20px; //this is faking it, compensating for the space requirement of :before, display: inline does not seem to work
-//       margin-right: 5px;
-//       left: -10px;
-//       position: relative;
-//     }
-//     //font-size: $large;
-//     font-family: $font_medium;
-//     margin-bottom: 10px;
-//   }
-//   button {
-//     &:first-of-type {
-//       float: right;
-//       display: block;
-//       @media screen and(max-width: $rc-s-max-width) {
-//         display: none;
-//       }
-//     }
-//     &:last-of-type {
-//       display: none;
-//       margin-top: 20px;
-//       @media screen and(max-width: $rc-s-max-width) {
-//         display: block;
-//       }
-//     }
-//   }
-// }
-
 .messages {
   position: relative;
   border: none;
-  border-radius: 5px;
-  background-color: #ddd;
-  margin: 10px 0 35px 0;
-  padding: 20px 30px;
+  @include rem('border-radius', 5);
+  @include rem('padding', 20, 30);
+  background-image: none;
 
   .header {
     margin-bottom: .2em;
@@ -64,11 +11,27 @@
     font-weight: bold;
   }
 
-  &.warning {
-    background-color: #edd5d9;
+  &.messages--status {
+    background-color: $light_green;
 
     .header {
-      color: #C41F2C;
+      color: $dark_green;
+    }
+  }
+
+  &.messages--warning {
+    background-color: $pink;
+
+    .header {
+      color: $dark_pink;
+    }
+  }
+
+  &.messages--error {
+    background-color: $light_yellow;
+
+    .header {
+      color: $dark_yellow;
     }
   }
 }
@@ -80,37 +43,114 @@
 @include breakpoint($brk-tablet) {
 
   .messages {
+    @include rem('padding-left', 70);
 
-    &.warning {
-      padding: 20px 30px 20px 70px;
+    .icon {
+      position: absolute;
+      top: 50%;
+      left: 20px;
+      @include rem('font-size', 30);
+      @include rem('margin-top', -15);
+      font-family: 'aegon_icons';
+    }
+
+    &.messages--status {
+
+      .icon:before {
+        content: '\e632';
+        color: $green;
+      }
+    }
+
+    &.messages--error {
+
+      .icon:before {
+        content: '\e60d';
+        color: $dark_yellow;
+      }
+    }
+
+    &.messages--warning {
 
       .icon {
-        position: absolute;
-        top: 50%;
-        left: 20px;
-        font-size: 30px;
-        margin-top: -15px;
-        // @include rem('margin-top', -15);
 
         .path1:before {
-          font-family: 'aegon_icons';
+          font-family: inherit;
           content: '\e62e';
           color: $white;
         }
 
         .path2:before {
-          font-family: 'aegon_icons';
+          font-family: inherit;
           content: "\e634";
           margin-left: -1.1826171875em;
-          color: #c50b1f;
+          color: $red;
         }
 
         .path3:before {
-          font-family: 'aegon_icons';
+          font-family: inherit;
           content: "\e635";
           margin-left: -1.165em;
-          color: #c50b1f;
+          color: $red;
         }
+      }
+    }
+  }
+}
+
+
+/**
+ * @Jorg you need to align the stuff commented below, with the Drupal way.
+ * If you need more specific specification different from the default ones like:
+ * - .success => .messages.messages--status
+ * - .warning => .messages.messages--warning
+ * - .error => .messages.messages--error
+ */
+
+div.success {
+  background-color: $light_green;
+  .header {
+    color: $black;  
+  }
+}
+
+div.error {
+  background-color: $light_red;
+  .header {
+    color: $red;  
+  }
+}
+
+div.error, div.success {
+  @include inlineFrame();
+  padding-left: 40px;
+  //margin-bottom: 10px;
+  .header {
+    &:before {
+      font-family: $font_icons;
+      content: "\e62e";
+      margin-left: -20px; //this is faking it, compensating for the space requirement of :before, display: inline does not seem to work
+      margin-right: 5px;
+      left: -10px;
+      position: relative;
+    }
+    //font-size: $large;
+    font-family: $font_medium;
+    margin-bottom: 10px;
+  }
+  button {
+    &:first-of-type {
+      float: right;
+      display: block;
+      @media screen and(max-width: $rc-s-max-width) {
+        display: none;
+      }
+    }
+    &:last-of-type {
+      display: none;
+      margin-top: 20px;
+      @media screen and(max-width: $rc-s-max-width) {
+        display: block;
       }
     }
   }
