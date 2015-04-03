@@ -32,6 +32,9 @@
 /* Core / Typography rules */
 @import "base/all";
 
+/* All system vendor modules */
+@import "modules/system";
+
 /* Grid system, header, footer, sidebars, forms */
 @import "layout/all";
 
@@ -41,5 +44,5 @@
 /* Pages specific styles */
 @import "pages/all";
 
-/**/
+/* All modules, theme modules*/
 @import "modules/all";
