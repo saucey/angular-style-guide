@@ -1,0 +1,117 @@
+
+
+/*----- Messages status -----*/
+// div.success {
+//   background-color: $light_green;
+//   .header {
+//     color: $black;  
+//   }
+// }
+
+// div.error {
+//   background-color: $light_red;
+//   .header {
+//     color: $red;  
+//   }
+// }
+
+// div.error, div.success {
+//   @include inlineFrame();
+//   padding-left: 40px;
+//   //margin-bottom: 10px;
+//   .header {
+//     &:before {
+//       font-family: $font_icons;
+//       content: "\e62e";
+//       margin-left: -20px; //this is faking it, compensating for the space requirement of :before, display: inline does not seem to work
+//       margin-right: 5px;
+//       left: -10px;
+//       position: relative;
+//     }
+//     //font-size: $large;
+//     font-family: $font_medium;
+//     margin-bottom: 10px;
+//   }
+//   button {
+//     &:first-of-type {
+//       float: right;
+//       display: block;
+//       @media screen and(max-width: $rc-s-max-width) {
+//         display: none;
+//       }
+//     }
+//     &:last-of-type {
+//       display: none;
+//       margin-top: 20px;
+//       @media screen and(max-width: $rc-s-max-width) {
+//         display: block;
+//       }
+//     }
+//   }
+// }
+
+.messages {
+  position: relative;
+  border: none;
+  border-radius: 5px;
+  background-color: #ddd;
+  margin: 10px 0 35px 0;
+  padding: 20px 30px;
+
+  .header {
+    margin-bottom: .2em;
+    font-family: $font_normal;
+    font-weight: bold;
+  }
+
+  &.warning {
+    background-color: #edd5d9;
+
+    .header {
+      color: #C41F2C;
+    }
+  }
+}
+
+// 
+// Media queries
+// --------------------------------------------------
+
+@include breakpoint($brk-tablet) {
+
+  .messages {
+
+    &.warning {
+      padding: 20px 30px 20px 70px;
+
+      .icon {
+        position: absolute;
+        top: 50%;
+        left: 20px;
+        font-size: 30px;
+        margin-top: -15px;
+        // @include rem('margin-top', -15);
+
+        .path1:before {
+          font-family: 'aegon_icons';
+          content: '\e62e';
+          color: $white;
+        }
+
+        .path2:before {
+          font-family: 'aegon_icons';
+          content: "\e634";
+          margin-left: -1.1826171875em;
+          color: #c50b1f;
+        }
+
+        .path3:before {
+          font-family: 'aegon_icons';
+          content: "\e635";
+          margin-left: -1.165em;
+          color: #c50b1f;
+        }
+      }
+    }
+  }
+}
