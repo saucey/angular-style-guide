@@ -4,9 +4,17 @@
 // --------------------------------------------------
 
 h1 {
+  @include rem('font-size', 36);
+  @include rem('line-height', 36);
+  @include rem('margin', 25, 0);
+  // font-size: $xxx-large;
   font-family: $font_light;
-  font-size: $xxx-large;
+  font-weight: normal;
   color: $blue;
+
+  &.title {
+    margin-top: 0;
+  }
 }
 
 .subtext {
@@ -24,6 +32,7 @@ h2 {
   font-family: $font_light;
   font-size: $xx-large;
   color: $blue;
+  font-weight: normal;
   margin: 5px 0 20px 0;
 }
 
@@ -51,6 +60,7 @@ ul {
     font-family: $font_light;
     font-size: $medium;
     @include rem('line-height', 26);
+    // NEED REFACTOR
     &:before {
       display: block;
       position: relative;
@@ -79,6 +89,7 @@ ul {
     }
     &.arrow {
       margin-left: $li_left;
+      background-image: url('../images/ui/icon-arrow-right-blue.png');
       &:before {
         font-family: $font_icons;
         left: -$li_left;
@@ -111,6 +122,11 @@ p {
 // --------------------------------------------------
 
 @include breakpoint($brk-tablet) {
+
+  h1 {
+    @include rem('font-size', 46);
+    @include rem('line-height', 46);
+  }
 
   p {
     @include rem('margin', 0, 0, 15);

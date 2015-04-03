@@ -16,54 +16,8 @@
   @include bubble(10px, 2px, $quadrant: 3, $bottom: 20px, $border-color: $grey, $background-color: $white);
 }
 
-/*----- Messages status -----*/
-div.success {
-  background-color: $light_green;
-  .header {
-    color: $black;  
-  }
-}
-
-div.error {
-  background-color: $light_red;
-  .header {
-    color: $red;  
-  }
-}
-
-div.error, div.success {
-  @include inlineFrame();
-  padding-left: 40px;
-  //margin-bottom: 10px;
-  .header {
-    &:before {
-      font-family: $font_icons;
-      content: "\e62e";
-      margin-left: -20px; //this is faking it, compensating for the space requirement of :before, display: inline does not seem to work
-      margin-right: 5px;
-      left: -10px;
-      position: relative;
-    }
-    //font-size: $large;
-    font-family: $font_medium;
-    margin-bottom: 10px;
-  }
-  button {
-    &:first-of-type {
-      float: right;
-      display: block;
-      @media screen and(max-width: $rc-s-max-width) {
-        display: none;
-      }
-    }
-    &:last-of-type {
-      display: none;
-      margin-top: 20px;
-      @media screen and(max-width: $rc-s-max-width) {
-        display: block;
-      }
-    }
-  }
+.bubbleTopRight {
+  @include bubble(10px, 2px, $quadrant: 0, $right: 20px, $border-color: $grey, $background-color: $white);  
 }
 
 /*----- UTILITY STYLES -----*/
@@ -192,6 +146,14 @@ span.middle-enforcer {
       padding: 0;
     }
   }
+}
+
+/*----- throbber -----*/
+.throbber {
+  display: block;
+  background-image: url('../images/ui/loader-blue.gif');
+  width: 32px;
+  height: 32px;
 }
 
 
