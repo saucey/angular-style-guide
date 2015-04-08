@@ -22,18 +22,18 @@
   }
 
   &.submessages--error {
-    color: $dark_yellow;
+    color: $pink;
 
     &:before {
-      content: '\e632';
+      content: '\e62b';
     }
   }
 
   &.submessages--warning {
-    color: $red;
+    color: $dark_yellow;
 
     &:before {
-      content: '\e62b';
+      content: '\e632';
     }
   }
 }
