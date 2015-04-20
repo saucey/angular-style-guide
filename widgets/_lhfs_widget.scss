@@ -1,3 +1,11 @@
+/**
+ * Rocco: Not good using ID in dom to add styles since the id are mostly used on 
+ * Widgets side and we need to leave JAVA devs free to work without impediments
+ * and change id according their html output logics. Instead much better using 
+ * classes, how we are doing and agreeing at team lions, since they are 
+ * providing multiple ID for multiple widgets.
+ */
+
 #lhfs_widget {
   .tip {
     background-color: $sky;
@@ -23,9 +31,6 @@
     margin: 30px 0;
     width: 100%;
     li.payment {
-      .details {
-        display: none;
-      }
       .description {
         &:before {
           font-family: $font_icons;
@@ -38,14 +43,24 @@
         padding-left: 40px;
         margin-bottom: 20px;
       }
-      &.data {
-        .details {
-          display: block;
-        }
-        .description {
-          display: none;
-        }
-      }
+      /**
+       * Avoid to put inside the style functional CSS logic, since we are 
+       * already quite busy doing the responsiveness according to the mockup 
+       * received from design team. We totally should avoid to cross the path of
+       * JAVA devs, because otherwise we will have triple discussion on each 
+       * widgets.
+       */
+      // .details {
+      //   display: none;
+      // }
+      // &.data {
+      //   .details {
+      //     display: block;
+      //   }
+      //   .description {
+      //     display: none;
+      //   }
+      // }
 
       div.title, span.police-number {
         font-family: $font_medium;  //font-weight bold does not work for this font family >:(;
@@ -194,6 +209,12 @@
   }
 }
 
+/**
+ * Please, move global stuff in the proper files or include common class 
+ * declaration name under proper widget ID.
+ * For global UI component use layout/_ui.scss or make a new file under 
+ * components/ folder
+ */
 .help {
   margin-right: 20px;
   &:before {
@@ -203,87 +224,96 @@
   }
 }
 
-ul.actions {
-  text-align: left;
-  li {
-    float: none;
-    display: block;
-    &.edit {
-      display: none;
-    }
-  }
-  &.edit {
-    text-align: right;
+/**
+ * Rocco: I wrapped everything below, under .lhfs_widget class, since your 
+ * initial style is breaking other stuff used in other widgets. Comprising 
+ * the contract_overview widget started from you and ended by me.
+ */
+
+#lhfs_widget {
+
+  ul.actions {
+    text-align: left;
     li {
-      text-align: left;
+      float: none;
+      display: block;
       &.edit {
-        padding-left: 0;
-        display: block;
-      }
-      &.view {
         display: none;
       }
     }
-  }
-}
-
-ul.horizontal {
-  &.row-fluid {
-    height: 50px;
-  }
-  margin: 0;
-  @media screen and(max-width: $rc-s-max-width) {
-    margin-bottom: 30px;
-  }
-  padding: 1px 0;
-  //width: 100%;
-  display: none; //together with the .data class for li.payment toggles on and off the visibility of the data elements
-  &.clear {
-    width: 100%;
-    height: 1px;
-    margin: 0 0 -1px;
-    clear: both;
-  }
-  &.visible {
-    display: block;
-  }
-  li {
-    &.label {
-      font-family: $font_normal;
-    }
-    &.value {
-      font-family: $font_light;
-    }
-    display: inline-block;
-    float: left;
-    //width: 50%; //default value, can be overwritten by css, of course
-    &:last-of-type {
-      float: none;
-      clear:both; //
+    &.edit {
+      text-align: right;
+      li {
+        text-align: left;
+        &.edit {
+          padding-left: 0;
+          display: block;
+        }
+        &.view {
+          display: none;
+        }
+      }
     }
   }
-}
 
-#lhfs_widget input {
-  outline: 0px;
-  &:focus:invalid ~ .errorText {
-    display: block;
+  ul.horizontal {
+    &.row-fluid {
+      height: 50px;
+    }
+    margin: 0;
+    @media screen and(max-width: $rc-s-max-width) {
+      margin-bottom: 30px;
+    }
+    padding: 1px 0;
+    //width: 100%;
+    display: none; //together with the .data class for li.payment toggles on and off the visibility of the data elements
+    &.clear {
+      width: 100%;
+      height: 1px;
+      margin: 0 0 -1px;
+      clear: both;
+    }
+    &.visible {
+      display: block;
+    }
+    li {
+      &.label {
+        font-family: $font_normal;
+      }
+      &.value {
+        font-family: $font_light;
+      }
+      display: inline-block;
+      float: left;
+      //width: 50%; //default value, can be overwritten by css, of course
+      &:last-of-type {
+        float: none;
+        clear:both; //
+      }
+    }
   }
-  &:invalid {
-    border: 1px solid $red;
-  }
-  &~ .errorText, &:valid ~ .errorText {
-    display: none;
-  }
-}
 
-.errorText {
-  $errorText_line-height: 14px;
-  line-height: $errorText_line-height;
-  //position: absolute;
-  font-size: $small;
-  color: $red;
-  //border: 1px solid red;
-  position: relative;
-  top: - ($elements_height + $errorText_line-height);
+  input {
+    outline: 0px;
+    &:focus:invalid ~ .errorText {
+      display: block;
+    }
+    &:invalid {
+      border: 1px solid $red;
+    }
+    &~ .errorText, &:valid ~ .errorText {
+      display: none;
+    }
+  }
+
+  .errorText {
+    $errorText_line-height: 14px;
+    line-height: $errorText_line-height;
+    //position: absolute;
+    font-size: $small;
+    color: $red;
+    //border: 1px solid red;
+    position: relative;
+    top: - ($elements_height + $errorText_line-height);
+  }
 }
