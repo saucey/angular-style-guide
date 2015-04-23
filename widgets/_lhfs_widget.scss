@@ -8,8 +8,7 @@
   @include bubble(10px, 2px, $quadrant: 3, $bottom: 20px, $border-color: $grey, $background-color: $white);
 }
 
-
-#lhfs_widget {
+.lhfs_widget {
   .tip {
     background-color: $sky;
     @include inlineFrame();
@@ -18,7 +17,7 @@
     .intro {
       &:before {
         font-family: $font_icons;
-        content: "\e62f";
+        content: $font_icons_tip;
         margin-left: -20px; //this is faking it, compensating for the space requirement of :before, display: inline does not seem to work
         margin-right: 5px;
         left: -10px;
@@ -30,10 +29,11 @@
       margin-bottom: 20px;
     }
   }
+
   form>ul, &>ul {
     margin: 30px 0;
     width: 100%;
-    li.payment {
+    li.product {
       .details {
         display: none;
       }
@@ -41,7 +41,7 @@
         &:before {
           font-family: $font_icons;
           color: $blue;
-          content: "\e605";
+          content: $font_icons_headhphones;
           margin-left: -20px; //this is faking it, compensating for the space requirement of :before, display: inline does not seem to work
           left: -10px;
           position: relative;
@@ -65,63 +65,7 @@
   }
 }
 
-#lhfs_widget {
-  $input_width: 228px;
-  $input_margin: 5px;
-  $input_height: $elements_height;
-
-  input[type=text], input[type=email], input[type=number], select, .ddTitle {
-    height: $input_height;
-    padding: 9px 10px;
-    padding-right: 10px;
-    border-radius: $elements_border_radius;
-    border: 1px solid $slightly_darker_grey;
-    background-color: $beige;
-    white-space: nowrap;
-    display: none;
-    margin-top: 0px;
-    margin-bottom: 0px;
-
-    &:invalid {
-      //border: 1px solid $red;
-    }
-    &:focus {
-      //outline: 0;
-      //border: 1px solid $slightly_lighter_blue;
-    }
-  }
-
-  .ddTitle .arrow {
-    &:after {
-      font-size: 11px;
-      font-family: $font_icons;
-
-      content: "\e631";
-    }
-  }
-
-  input[type=text], input[type=email], input[type=number], select, .dd {
-    width: $input_width;
-    &.half {
-      width: $input_width / 2 - $input_margin;
-      margin-right: $input_margin * 2;
-      float: left;
-      &:last-child {
-        float: none;
-      }
-    }
-    &.quarter {
-      width: $input_width / 4 - $input_margin * 2;
-      margin-right: $input_margin * 2;
-      float: left;
-      &:last-child {
-        float: none;
-      }
-    }
-  }
-  input[type=checkbox], input[type=radio] {
-    width: auto;
-  }
+.lhfs_widget {
 
   li.value {
     @media screen and(min-width: $rc-m-min-width) and(max-width: $rc-l-max-width) {
@@ -151,6 +95,9 @@
     float:left;
   }
 
+  input[type=text], input[type=email], input[type=number], select, .ddTitle {
+    display: none;
+  }
   .edit {
     ul.error {
       display: block;
@@ -173,7 +120,7 @@
         opacity: 1;
       }
     }
-    li.label {
+    li.label, label {
       font-family: $font_normal;
       text-align: right;
       @media screen and(max-width: $rc-s-max-width) {
@@ -182,6 +129,11 @@
       padding-right: 55px;
       &:after {
         content: "";
+      }
+      &.required:after {
+        margin-left: 5px;
+        content: "*";
+        color: $red;
       }
     }
     input[type=text], input[type=email], input[type=number], select, .ddTitle {
@@ -205,12 +157,163 @@
   }
 }
 
+.inline_alert {
+  @include inlineFrame();
+  display: block;
+  //padding-top: 0;
+  //padding-bottom: 0;
+  border: 1px solid $light_red;
+  background-color: $lighter_red;
+  hr {
+    height: 1px;
+    color: $light_red;
+    width: 100%;
+  }
+  ul.payments {
+    margin: 15px -15px;
+    button.white {
+      background-color: transparent;
+      &:before {
+        background-color: transparent;      
+      }
+    }
+    & > li {
+      & > ul {
+        padding: 10px 15px;
+        border: 1px solid $light_red;
+        border-width: 1px 0 0 0;
+        width: 100%;
+        display: table;
+        & > li {
+          //display: table-cell;
+          float: none;
+          //this should ultimately be replaced by grid classes, but they were causing a bit of a mess so this is an arrangement to set it up
+          &:first-of-type:last-of-type {  //this only applies to a li if it is the only one..
+            text-align: right;
+          }
+          &:nth-of-type(2) {
+            width: 120px;
+            span.debit {
+              font-family: $font_medium;
+              &:before {
+                content: "€";
+              }
+            }
+          }
+          &:nth-of-type(3) {
+            width: 80px;
+          }
+          &:nth-of-type(4) {
+            width: 120px;
+          }
+        }
+      }
+    }
+  }
+  h3 {
+    color: $black;
+    font-weight: bold;
+  }
+}
+
+.lhfs_widget > div.payments {
+  $open_color: $red;
+  $paid_color: $green;
+  .status span {
+    &:before {
+      font-family: $font_icons;
+      margin-right: 5px;
+    }
+    &.open {
+      color: $open_color;
+      &:before {
+        content: $font_icons_tip;
+      }
+    }
+    &.paid {
+      color: $paid_color;
+      &:before {
+        content: $font_icons_check;
+      }
+    }
+  }
+  & > ul {
+    & > li {
+      & > ul, & > ul.visible {
+        display: table;
+        width: 100%;
+        border-top: none;
+        border-bottom: 1px solid $slightly_darker_grey;
+        padding: 10px 15px;
+        &.header {
+          background-color: $beige;
+          border-top: 1px solid $slightly_darker_grey;
+          border-bottom: none;
+          & > li {
+            font-family: $font_medium;
+          }
+        }
+        //this should ultimately be replaced by grid classes, but they were causing a bit of a mess so this is an arrangement to set it up
+        & > li {
+          &:nth-of-type(1) {
+            width: 200px;
+          }
+          &:nth-of-type(2) {
+            width: 120px;
+          }
+          &:nth-of-type(4) {
+            width: 120px;
+          }
+          &:nth-of-type(5) {
+            width: 20px;
+          }
+        }
+      }
+    }
+  }
+
+  .method {
+    color: $slightly_darker_grey;
+  }
+
+  .details {
+    background-color: transparent;
+    &:before {
+      font-family: $font_icons;
+      content: $font_icons_plus;
+      color: $grey;
+      background-color: transparent;
+    }
+  }
+  .amount {
+    &:before {
+      content: "€";
+    }
+  }
+  .date {
+    color: $blue;
+  }
+}
+
 .help {
   margin-right: 20px;
+  display: inline-block;
+  position: relative;
+  &.dialog {
+    $help_dialog_width: 400px;
+    @include bubble($width: 10px, $left: $help_dialog_width / 2, $quadrant: 0, $background-color: $slightly_lighter_blue);
+    background-color: $slightly_lighter_blue;
+    display: block;
+    position: absolute;
+    padding: 18px;
+    max-width: $help_dialog_width;
+    border-radius: $frame_border_radius;
+  }
   &:before {
     font-family: $font_icons;
     font-size: 16px;
-    content: "\e630";
+    content: $font_icons_help;
+    position: absolute;
   }
 }
 
@@ -230,15 +333,37 @@ ul.actions {
       &.edit {
         padding-left: 0;
         display: block;
+        div.disabler {  //required element for disabling of submit elements depending on validity
+          z-index: $elements_disabler_z-index;
+          position: relative;
+          left: 0;
+          top:-$elements_button_height;
+          background-color: white;
+          opacity: 0.5;
+          width: 100%;
+          height: $elements_button_height;
+          display: block; //always-on, state is indicated by z-index of the buttons; see if the always-on creates problems with backgrounds other than white
+        }
       }
       &.view {
         display: none;
+      }
+      button {
+        position: relative;
+        z-index: $elements_button_enabled_z-index;
+        &.disabled {
+          z-index: $elements_button_disabled_z-index;
+        }
       }
     }
   }
 }
 
+li.right {
+  text-align: right;
+}
 ul.horizontal {
+  display: table;
   &.row-fluid {
     height: 50px;
   }
@@ -248,7 +373,7 @@ ul.horizontal {
   }
   padding: 1px 0;
   //width: 100%;
-  display: none; //together with the .data class for li.payment toggles on and off the visibility of the data elements
+  display: none; //together with the .data class for li.product toggles on and off the visibility of the data elements
   &.clear {
     width: 100%;
     height: 1px;
@@ -265,35 +390,75 @@ ul.horizontal {
     &.value {
       font-family: $font_light;
     }
-    display: inline-block;
-    float: left;
-    //width: 50%; //default value, can be overwritten by css, of course
-    &:last-of-type {
-      float: none;
-      clear:both; //
-    }
+    display: table-cell;
   }
 }
 
-    #lhfs_widget input {
-      outline: 0px;
-      &:focus:invalid ~ .errorText {
-        display: block;
-      }
-      &:invalid {
-        border: 1px solid $red;
-      }
-      &~ .errorText, &:valid ~ .errorText {
-        display: none;
+//FORM ERROR DISPLAY
+form {
+  &:valid {
+    ul.actions.edit {
+      button {
+        z-index: $elements_button_enabled_z-index;
       }
     }
-    .errorText {
-      $errorText_line-height: 14px;
+  }
+  &:invalid {
+    ul.actions.edit {
+      button:not(.cancel) {
+        z-index: $elements_button_disabled_z-index;
+      }
+      //div.disabler {
+      //  display: block;
+      //}
+    }
+  }
+}
+//#lhfs_widget  //add to input, if required
+.lhfs_widget {
+  $errorText_line-height: 14px;
+  select {
+    &.visited:invalid {
+      &~ .ddTitle {
+        border-color: $red;
+      }
+      &~ .errorText {
+        display: block;
+        //opacity: 1;
+      }
+    }
+  }
+  input {
+    &.visited:invalid ~ .errorText {
+      display: block;
+    }
+    &.visited:invalid {
+      border-color: $red;
+    }
+    &.visited:invalid ~ span.checkbox {
+      border-color: $red;
+    }
+  }
+  input, select {
+    &~ .errorText {
       line-height: $errorText_line-height;
-      //position: absolute;
       font-size: $small;
       color: $red;
-      //border: 1px solid red;
       position: relative;
       top: - ($elements_height + $errorText_line-height);
     }
+    &~ .errorText, &:valid ~ .errorText {
+      display: none;
+    }
+    &[type=checkbox]~ .errorText {
+      left: -45px;
+      top: - ($elements_checkbox_top + $elements_checkbox_height + $errorText_line-height);
+    }
+  }
+  select ~ .errorText {
+    top: -$errorText_line-height;
+  }
+  select.visited:invalid ~ .ddTitle {
+    margin-top: -$errorText_line-height;
+  }
+}

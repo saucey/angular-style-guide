@@ -1,0 +1,57 @@
+$input_width: 228px;
+$input_margin: 5px;
+$input_height: $elements_height;
+
+input[type=text], input[type=email], input[type=number], select, div.dd div.ddTitle, label.dd div.ddTitle {
+  height: $input_height;
+  padding: 9px 10px;
+  padding-right: 10px;
+  border-radius: $elements_border_radius;
+  border: $elements_border;
+  box-shadow: none; //FF adds a glow to elements with an error onblur
+  outline: 0px;
+  background-color: $beige;
+  white-space: nowrap;
+  margin-top: 0px;
+  margin-bottom: 0px;
+
+  &:invalid {
+    //border: 1px solid $red;
+  }
+  &:focus {
+    //outline: 0;
+    //border: 1px solid $slightly_lighter_blue;
+  }
+}
+
+.ddTitle .arrow {
+  &:after {
+    font-size: 11px;
+    font-family: $font_icons;
+
+    content: $font_icons_arrow_down;
+  }
+}
+
+input[type=text], input[type=email], input[type=number], select, div.dd {
+  width: $input_width;
+  &.half {
+    width: $input_width / 2 - $input_margin;
+    margin-right: $input_margin * 2;
+    float: left;
+    &:last-child {  //last-child works also in conjunction with selects and textareas, last-of-type won't; just keep an eye out if there are still other DOM elements after an input
+      float: none;
+    }
+  }
+  &.quarter {
+    width: $input_width / 4 - $input_margin * 2;
+    margin-right: $input_margin * 2;
+    float: left;
+    &:last-child {
+      float: none;
+    }
+  }
+}
+input[type=checkbox], input[type=radio] {
+  width: auto;
+}
