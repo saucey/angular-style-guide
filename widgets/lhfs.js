@@ -12,34 +12,36 @@
 
       // Check if div#lhfs_widget exist
       if ($('.lhfs_widget').length > 0) {
-
-        window.edit = function (show) {
-          $('.details').toggleClass('edit', show);
-          $('.actions').toggleClass('edit', show);
-        }
-
         //$("#lhfs_widget .tip").removeClass("visible");
-        //$("#lhfs_widget .tip").addClass("visible");
-        //$("#lhfs_widget li.payment").removeClass("data");
-        //$("#lhfs_widget li.payment").addClass("data");
-        $("#lhfs_widget li.payment ul.horizontal").removeClass("visible");
-        $("#lhfs_widget li.payment ul.horizontal").addClass("visible");
-        //$($("#lhfs_widget li.payment ul.horizontal")[0]).addClass("visible");
-        $("#lhfs_widget li.payment ul.horizontal.error").removeClass("visible");
+        $("#lhfs_widget .tip").addClass("visible");
+        //$("#lhfs_widget li.product").removeClass("data");
+        //$("#lhfs_widget li.product").addClass("data");
+        $("#lhfs_widget li.product .description").show(); //show this as part of a maximum display, usually it's an either/or with the product data
+        $("#lhfs_widget li.product ul.horizontal").removeClass("visible");
+        $("#lhfs_widget li.product ul.horizontal").addClass("visible");
+        //$($("#lhfs_widget li.product ul.horizontal")[0]).addClass("visible");
+        $("#lhfs_widget li.product ul.horizontal.error").removeClass("visible");
 
-        $(".lhfs_widget select").msDropDown();
-
-        //transfer classes from select to root object of msDropDown (conserve .half, for example)
-        $(".ddOutOfVision > select").each(function() {
-          $(this).parent().next().addClass(this.className);
+        $(".help").mouseover(function () {
+          if (this.title) {
+            //alert(this.title);
+            $(".dialog.help").remove();
+            var dialog = document.createElement("DIV");
+            dialog.className = "help dialog";
+            dialog.innerHTML = this.title;
+            this.title = "";
+            $("#lhfs_widget").append(dialog); //this has 2 happen b4 measurements of dialog are taken, otherwise they won't be initialized
+            var offset = $(this).offset();
+            offset.top = offset.top + $(this).height() + 10;
+            offset.left = offset.left - $(dialog).width() / 2 - 18;
+            $(dialog).offset(offset);
+            var that = this;
+            $(document).click(function () {
+              $(dialog).remove();
+              that.title = dialog.innerHTML;
+            });
+          }
         });
-
-        //put an event listener on the invalid element for inputs (to display the error text, if necessary)
-        $("input").bind("invalid", function(event) {
-          console.log($(this).closest("ul").prev("ul.error").addClass("visible"));
-        });
-
-        $("form [name=lhfs_form]").validate({errorClass: "errorText"});
       }
     }
   };
