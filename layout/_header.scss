@@ -1,0 +1,105 @@
+
+//
+// Header
+// --------------------------------------------------
+
+header.header {
+  margin: 0 auto;
+  @include rem('padding', 12, 0);
+
+  .btn-login {
+    position: relative;
+    @include rem('padding', 6, 15, 6, 0);
+    text-align: center;
+  }
+
+  // Mobile elements
+  .tap-menu {
+    display: inline-block;
+    text-align: center;
+    @include rem('padding', 8, 0);
+
+    a {
+      width: 20px;
+      height: 17px;
+      background: url('../images/ui/tap-menu.png') no-repeat top left transparent;
+      text-indent: -9999px;
+      display: inline-block;
+    }
+  }
+
+  .mobile-logo {
+    // margin: 0;
+    text-align: center;
+
+    a {
+      display: inline-block;
+      // width: 109px;
+      // height: 39px;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  // Desktop elements
+  .region-header-left {
+    display: none;
+    float: left;
+    width: auto;
+  }
+
+  .region-header {
+    display: none;
+    float: right;
+
+    .block {
+      display: none;
+      float: left;
+      width: auto;
+      position: relative;
+    }
+  }
+}
+
+
+// 
+// Media queries
+// --------------------------------------------------
+
+@include breakpoint($brk-tablet) {
+
+  header.header {
+    margin: 0 7.3%;
+    @include rem('min-height', 90);
+    @include rem('padding', 25, 0);
+
+    .btn-login {
+      float: right;
+      width: auto;
+      padding: 0;
+    }
+
+    // Mobile elements
+    .tap-menu,
+    .mobile-logo {
+      display: none;
+    }
+
+    // Desktop elements
+    .region-header-left {
+      display: block;
+    }
+
+    .region-header {
+      display: block;
+
+      .block {
+        display: block;
+      }
+    }
+  }
+}

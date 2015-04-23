@@ -2,24 +2,23 @@
 //
 // Responsive Grid
 // --------------------------------------------------
-
 .row-fluid {
-  margin-bottom: 5px;
   &:before, &:after {
     line-height: 0;
     display: table;
     content: '';
+  }
+  &:after {
     clear: both;
   }
-  [class*='span'] {
+  [class*="span"] {
     display: block;
-    float: left;
-    //Instead of the line below you could use @includebox-sizing($bs)
-    box-sizing: border-box;
     width: 100%;
     min-height: 30px;
+    float: left;
     margin-left: 1.7094017094017095%;
     *margin-left: 1.655982905982906%;
+    box-sizing: border-box;
     &:first-child {
       margin-left: 0;
     }
@@ -38,6 +37,10 @@
     .container_12 {
       width: 100%;
       *width: 99.94680851063829%;
+    }
+    &.center {
+      float: none;
+      margin: 0 auto;
     }
   }
   .span11 {
@@ -91,6 +94,7 @@
     //currently both following lines are superseded by margin-left: 0 further below; check if that creates errors
     margin-left: 2%;
     *margin-left: 1.9375%;
+    min-height: 10px;
 
     //&:first-child { //this was causing a problem in lhfs form, so it is deactivated, but if anything is strange in deployment of grid at a later point, this might be a point to start debugging
       margin-left: 0;
@@ -170,13 +174,14 @@
     margin-bottom: 5px;
     margin-left: 0;
   }
+section.content.fullwidth {
+  width: auto;
+  margin: 0;
 }
 
 /**
  * DL DT DD
  */
-
-
 .container_12 {
 
   dl.row-fluid {
@@ -206,6 +211,26 @@
           margin-left: 0;
         }
       }
+    }
+  }
+}
+
+
+// 
+// Media queries
+// --------------------------------------------------
+
+@include breakpoint($brk-mobile) {
+
+  .container_12  {
+    .row-fluid [class*="span"] {
+      margin-left: 0;
+      width: 100%;
+    }
+    .form-item [class*="span"] {
+      margin-left: 0;
+      margin-bottom: 5px;
+      width: 100%;
     }
   }
 }

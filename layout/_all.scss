@@ -1,11 +1,18 @@
 //
 // All layout files
+// 
+// NOTE: Respect the order of loaded files.
 // --------------------------------------------------
 
 @import "grids";
-// @import "header";
-// @import "footer";
-// @import "sidebar";
-// @import "forms";
+@import "header";
+@import "footer";
+@import "sidebar";
+@import "form-elements";
+@import "structure";
+@import "fields";
+@import "blocks";
+@import "nodes";
+@import "views";
 @import "ui";
 @import "media_queries";

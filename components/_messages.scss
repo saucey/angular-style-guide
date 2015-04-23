@@ -1,0 +1,161 @@
+.messages {
+  position: relative;
+  border: none;
+  @include rem('border-radius', 5);
+  @include rem('padding', 20, 30);
+  background-image: none;
+
+  .header {
+    margin-bottom: .2em;
+    font-family: $font_normal;
+    font-weight: bold;
+  }
+
+  /**
+   * Colors below follow the current aegon's messages theme
+   */
+
+  &.messages--status {
+    background-color: $light_green;
+
+    .header {
+      color: $green;
+    }
+  }
+
+  &.messages--error {
+    background-color: $pink;
+
+    .header {
+      color: $dark_pink;
+    }
+  }
+
+  &.messages--warning {
+    background-color: $sky;
+
+    .header {
+      color: $white;
+    }
+  }
+}
+
+// 
+// Media queries
+// --------------------------------------------------
+
+@include breakpoint($brk-tablet) {
+
+  .messages {
+    @include rem('padding-left', 70);
+
+    .icon {
+      position: absolute;
+      top: 50%;
+      left: 20px;
+      @include rem('font-size', 30);
+      @include rem('margin-top', -15);
+      font-family: 'aegon_icons';
+    }
+
+    &.messages--status {
+
+      .icon:before {
+        content: '\e632';
+        color: $green;
+      }
+    }
+
+    &.messages--error {
+
+      .icon {
+
+        .path1:before {
+          font-family: inherit;
+          content: '\e62e';
+          color: $white;
+        }
+
+        .path2:before {
+          font-family: inherit;
+          content: "\e634";
+          margin-left: -1.1826171875em;
+          color: $red;
+        }
+
+        .path3:before {
+          font-family: inherit;
+          content: "\e635";
+          margin-left: -1.185em;
+          color: $red;
+        }
+      }
+    }
+
+    &.messages--warning {
+
+      .icon:before {
+        content: '\e60d';
+        color: $white;
+      }
+    }
+  }
+}
+
+
+/**
+ * @Jorg you need to align the stuff commented below, with the Drupal way.
+ * If you need more specific specification different from the default ones like:
+ * - .success => .messages.messages--status
+ * - .warning => .messages.messages--warning
+ * - .error => .messages.messages--error
+ */
+
+div.success {
+  background-color: $light_green;
+  .header {
+    color: $black;  
+  }
+}
+
+div.error {
+  background-color: $light_red;
+  .header {
+    color: $red;  
+  }
+}
+
+div.error, div.success {
+  @include inlineFrame();
+  padding-left: 40px;
+  //margin-bottom: 10px;
+  .header {
+    &:before {
+      font-family: $font_icons;
+      content: "\e62e";
+      margin-left: -20px; //this is faking it, compensating for the space requirement of :before, display: inline does not seem to work
+      margin-right: 5px;
+      left: -10px;
+      position: relative;
+    }
+    //font-size: $large;
+    font-family: $font_medium;
+    margin-bottom: 10px;
+  }
+  button {
+    &:first-of-type {
+      float: right;
+      display: block;
+      @media screen and(max-width: $rc-s-max-width) {
+        display: none;
+      }
+    }
+    &:last-of-type {
+      display: none;
+      margin-top: 20px;
+      @media screen and(max-width: $rc-s-max-width) {
+        display: block;
+      }
+    }
+  }
+}

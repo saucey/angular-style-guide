@@ -3,40 +3,35 @@
 // Core
 // --------------------------------------------------
 
-/**
- * * { Box-sizing: Border-box } FTW
- * Apply a natural box layout model to all elements, but allowing components to change
- * http://www.paulirish.com/2012/box-sizing-border-box-ftw/
- */
+html {
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
 
 *,
-*:after,
-*:before {
-  // -webkit-box-sizing: border-box;
-  // -moz-box-sizing: border-box;
-  box-sizing: border-box;
+*:before,
+*:after {
+  box-sizing: inherit;
 }
-
-html {
-  box-sizing: border-box;
-}
-
-/* Need refactor */
 
 body {
-  background-color: $white;
-  & * {
-    font-family: $font_light;
-    font-size: $medium;
-    line-height: 25px;
-    color: $black;
-  }
+  font-family: $font_light, $font_fallback;
+  font-size: $medium;
+  line-height: 25px;
+
+  overflow-x: hidden;
+  position: relative;
+  left: 0;
+
+  background-color: $blue;
+  color: $black;
 }
 
 a {
-  font-family: $font_normal;
-  color: $blue;
   text-decoration: none;
+  color: $blue;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: transparent;
 }
 
 div.success {
@@ -117,4 +112,16 @@ span.middle-enforcer {
   width: 0;
   height: 100%;
   vertical-align: middle;
+}
+
+
+// 
+// Media queries
+// --------------------------------------------------
+
+@include breakpoint($brk-tablet) {
+
+  body {
+    background-color: $white;
+  }
 }

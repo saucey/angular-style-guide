@@ -1,6 +1,6 @@
 
 //
-// Main file for Aegon SASS library
+// Main file for Admin Menu
 // Syntax is in SCSS, project using lib-sass to compile the styles.
 // --------------------------------------------------
 
@@ -19,30 +19,17 @@
 /* Breakpoint SASS */
 @import "vendors/breakpoint-sass/stylesheets/breakpoint";
 
-/* Reset file from Drupal Normalize.css */
-@import "vendors/drupal-normalize-css/normalize";
 
-
-/* Groups of core files
+/* Groups of mijnaegon files
 ================================================== */
 
 /* SASS variables, functions, mixins, class and placeholders helpers */
 @import "helpers/all";
 
-/* Core / Typography rules */
-@import "base/all";
 
-/* All system vendor modules */
-@import "modules/system";
+/* Groups of admin context files
+================================================== */
 
-/* Grid system, header, footer, sidebars, forms */
-@import "layout/all";
-
-/* All library components and specific modules */
-@import "components/all";
-
-/* Pages specific styles */
-@import "pages/all";
-
-/* All modules, theme modules*/
-@import "modules/all";
+/* Modules */
+@import "modules/aegon/admin_menu";
+@import "pages/admin";

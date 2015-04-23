@@ -12,6 +12,7 @@ button {
   &:hover {
     opacity: 0.8;
   }
+  //padding: 8px 10px 12px 10px;
   &.right {
     margin-left: 10px;
   }
@@ -66,5 +67,5 @@ button {
       margin-left: 0;
       background-color: $white;
     }
-}
+  }
 }

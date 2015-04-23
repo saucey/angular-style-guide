@@ -3,46 +3,47 @@
 // Variables
 // --------------------------------------------------
 
-
-
-// Some ideas:
-// https://github.com/twbs/bootstrap-sass/blob/master/templates/project/_bootstrap-variables.sass
-
-//variable definitions
-
 // COLORS, following fabrique's scheme '
 // BLUE hues
 $black: #1d1d1b; //actually, this is a very dark blue, so that is why it is here
 $dark_blue: #00304c;
 $blue: #3395d3;
 $light_blue: #66b0de;
+$very_light_blue: #335970;
 $slightly_lighter_blue: #99CAE9;
 $sky: #8cd1e6;
+$fun_blue_approx: #2163ae;
+$lochmara_approx: #007ac7;
 // ORANGES
 $orange: #f9a600;
 // GREYS
 $white: #ffffff;
 $grey: #edebe5;
 $slightly_darker_grey: #e0e0e0;
-//$dark_grey: 
 // GREENS
 $green: #49af57;
-$light_green: #c8e7cc;
+$light_green: #C1ECD5;
+$dark_green: #7FAE3F;
 // REDS
-$red: #c50b1f;	//#ca4642;
-$light_red: #eacbca;
-$lighter_red: #f3e7e6;
+$red: #C50B1F;
+$light_red: #E6CECD;
 // YELLOWS
 $yellow: #ffea53;
+$light_yellow: #fffce5;
+$dark_yellow: #B0A126;
 // BROWNS
 $beige: #eeebe5;
+// PINK
+$pink: #edd5d9;
+$dark_pink: #C41F2C;
 
-$font_fallback: Arial,Verdana,sans-serif;
+$font_fallback: Arial, Verdana, sans-serif;
 $font_light: 'senticosansdtlight', $font_fallback;
 $font_normal: 'senticosansdtregular', $font_fallback;
 $font_medium: 'senticosansdtmedium', $font_fallback;
 $font_bold: 'senticosansdtcondbold', $font_fallback;
 $font_icons: 'aegon_icons', $font_fallback;
+
 $font_icons_help: "\e62f";
 $font_icons_error: "\e62e";
 $font_icons_tip: "\e631";
@@ -52,6 +53,7 @@ $font_icons_headhphones: "\e605";
 $font_icons_check: "\e632";
 $font_icons_plus: "\e62d";
 $font_icons_radio: "\e633";
+
 // SIZES
 $small: 14px;
 $medium: 18px;
@@ -86,3 +88,89 @@ $elements_radio_height: 32px;
 $elements_radio_top: 17px;
 
 $frame_border_radius: 3px;
+
+/**
+ * BREAKPOINTS for AEGON.nl current website.
+ * Approach: Mobile First Method
+ */
+
+/**
+ * Mobile
+ *
+ * Example: @include breakpoint($brk-mobile) {}
+ * 
+ * IMPORTANT: try to avoid the breakpoint below, since the theme is already
+ * mobile first and everything need to be written mobile as default.
+ */
+$brk-mobile: 'only screen' (max-width 640px);
+
+/**
+ * Generic Tablet and upper
+ *
+ * Example: @include breakpoint($brk-tablet) {}
+ */
+$brk-tablet: 'only screen' (641px);
+
+/**
+ * iPad portrait and upper
+ *
+ * Example: @include breakpoint($brk-ipad-portrait) {}
+ */
+$brk-ipad-portrait: 'only screen' (901px);
+
+/**
+ * iPad landscape and upper
+ *
+ * Example: @include breakpoint($brk-ipad-landscape) {}
+ */
+$brk-ipad-landscape: 'only screen' (1024px) (orientation landscape);
+
+/**
+ * Large desktop and upper
+ *
+ * Example: @include breakpoint($brk-large-desktop) {}
+ */
+$brk-large-desktop: 'only screen' (1350px);
+
+/**
+ * Device Pixel Ratio of at least 1.5 and upper
+ *
+ * Example: @include breakpoint($brk-hidpi) {}
+ */
+$brk-hidpi: min-resolution 1.5dppx;
+
+/**
+ * Media print
+ *
+ * Example: @include breakpoint($brk-print) {}
+ */
+$brk-print: 'print';
+
+
+/**
+ * Playground example
+ * Note: hide section below to reproduce CSS breakpoints
+ */
+// #back-top:after {
+//   // @include breakpoint($brk-mobile) {
+//   //   content: 'Breakpoint: Mobile';
+//   // }
+//   @include breakpoint($brk-tablet) {
+//     content: 'Breakpoint: Tablet';
+//   }
+//   @include breakpoint($brk-ipad-portrait) {
+//     content: 'Breakpoint: iPad portrait';
+//   }
+//   @include breakpoint($brk-ipad-landscape) {
+//     content: 'Breakpoint: iPad landscape';
+//   }
+//   @include breakpoint($brk-large-desktop) {
+//     content: 'Breakpoint: Large desktop';
+//   }
+//   // @include breakpoint($brk-hidpi) {
+//   //   content: 'Breakpoint: hidpi';
+//   // }
+//   @include breakpoint($brk-print) {
+//     content: 'Breakpoint: Print';
+//   }
+// }
