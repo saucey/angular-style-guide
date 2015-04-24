@@ -34,21 +34,19 @@
 
       // $("#shw-user-details").load(this.apiUrl + 'user');
       // $("#shw-contract-overview").load(this.apiUrl + 'contract_overview');
-      $('#shw-user-details').html('
-        <div id="user_widget" class="user_widget">
-          <div id="user_widget_topmenu" class="topmenu">
-            <div class="username">Michiel van der Most Spijk</div>
-          </div>
+      // $('#shw-user-details').html('<div id="user_widget" class="user_widget">
+      //     <div id="user_widget_topmenu" class="topmenu">
+      //       <div class="username">Michiel van der Most Spijk</div>
+      //     </div>
 
-          <div id="user_widget_dropdown" class="frame bubbleTopRight">
-            <div class="username">user name</div>
-            <div class="email">usermail@somesite.com</div>
-            <div class="lastlogin">Uw vorige bezoek was op 08-01-2015 om 14:11 uur</div>
-            <button class="arrow">Mijn overzicht</button>
-            <button class="white">uitloggen</button>
-          </div>
-        </div>
-      ');
+      //     <div id="user_widget_dropdown" class="frame bubbleTopRight">
+      //       <div class="username">user name</div>
+      //       <div class="email">usermail@somesite.com</div>
+      //       <div class="lastlogin">Uw vorige bezoek was op 08-01-2015 om 14:11 uur</div>
+      //       <button class="arrow">Mijn overzicht</button>
+      //       <button class="white">uitloggen</button>
+      //     </div>
+      //   </div>');
     },
 
     simulation: function () {
