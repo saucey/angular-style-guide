@@ -46,3 +46,6 @@
 
 /* All modules, theme modules*/
 @import "modules/all";
+
+/* All library components and specific modules */
+@import "widgets/all";	//for some strange reason, this had somehow disappeared after the merge with master, no idea if this scss file is the correct location, though
