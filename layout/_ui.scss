@@ -77,30 +77,6 @@ span.middle-enforcer {
   }
 }
 
-/*----- Easy Breadcrumb @ header -----*/
-.easy-breadcrumb {
-  width: auto;
-  float: left;
-  display: inline-block;
-  @include rem('margin-top', 6);
-
-  ul {
-
-    li {
-      float: left;
-      @include rem('padding-left', 15);
-      @include rem('margin-right', 10);
-      background: url('../images/ui/icon-arrow-narrow-right-blue.png') center left no-repeat;
-      color: #00304C;
-
-      &.first {
-        background: none;
-        padding: 0;
-      }
-    }
-  }
-}
-
 /*----- Search form @ header -----*/
 .block-search {
 
