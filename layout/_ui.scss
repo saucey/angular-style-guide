@@ -28,6 +28,18 @@ span.middle-enforcer {
   vertical-align: middle;
 }
 
+div.lightbox {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: $black;
+  opacity: 0.4;
+  z-index: 5;
+}
+
 /*----- Back to top -----*/
 .goTop-wrapper {
   position: fixed;
@@ -52,28 +64,6 @@ span.middle-enforcer {
     &:active {
       background-color: #007BC8;
     }
-  }
-}
-
-/*----- Login link @ header -----*/
-.login-link {
-  display: inline-block;
-  @include rem('line-height', 35);
-  @include rem('padding', 0, 8);
-  @include rem('border-radius', 3);
-  font-family: 'senticosansdtregular';
-  white-space: nowrap;
-  background-color: $green;
-  color: $white;
-
-  &:hover {
-    background-color: $light_green;
-    color: $green;   
-  }
-
-  &:active {
-    background-color: $green;
-    color: $white;
   }
 }
 
@@ -141,22 +131,6 @@ span.middle-enforcer {
 
   .goTop-wrapper {
     display: none;
-  }
-
-  .login-link {
-    @include rem('line-height', 38);
-    @include rem('padding', 0, 10, 0, 35);
-    background-image: url(../images/ui/icon-lock.png);
-    background-position: 13% 50%;
-    background-repeat: no-repeat;
-
-    &:hover {
-      background-image: url(../images/ui/icon-lock-green.png);
-    }
-
-    &:active {
-      background-image: url(../images/ui/icon-lock.png);
-    }
   }
 }
 
