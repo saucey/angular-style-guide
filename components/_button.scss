@@ -1,13 +1,18 @@
 button {
   cursor: pointer;
-  height: 38px;
+  height: $elements_button_height;
+  padding: 8px 10px 12px 10px;
   background-color: $blue;
   color: $white;
   font-size: $medium;
   border-radius: $elements_border_radius;
-  padding: 8px 10px 12px 10px;
   border: 0;
+  outline: 0;
   white-space: nowrap;
+  &:hover {
+    opacity: 0.8;
+  }
+  //padding: 8px 10px 12px 10px;
   &.right {
     margin-left: 10px;
   }
@@ -20,11 +25,15 @@ button {
   &.bottom {
     margin-top: 10px;
   }
+  &.red {
+    background-color: $red;
+  }
   &.arrow {
     &:after {
+      //height: 38px;
       font-size: 11px;
       font-family: $font_icons;
-      content: "\e600";
+      content: $font_icons_arrow_right;
       padding: 16px 14px;
       margin-right: -10px;
       margin-left: 10px;
@@ -34,19 +43,29 @@ button {
       margin-left: 0;
       background-color: $blue;
     }
+    &.red:after {
+      margin-left: 0;
+      background-color: $red;
+    }
   }
   &.white {
     background-color: $white;
     color: $blue;
-    // currently deactivated as the current design calls for something without arrow
-    // &:before {
-    //   font-size: 11px;
-    //   font-family: $font_icons;
-    //   content: "\e600";
-    //   padding: 11px;
-    //   margin-left: -10px;
-    //   background-color: $white;
-    //   color: $blue;
-    // }
+    &.arrow:before { //currently deactivated as the current design calls for something without arrow
+      font-size: 11px;
+      font-family: $font_icons;
+      content: $font_icons_arrow_right;
+      padding: 11px;
+      margin-left: -10px;
+      background-color: $white;
+      color: $blue;
+    }
+      &:after {
+      content: "";
+      padding: 0;
+      margin-right: 0;
+      margin-left: 0;
+      background-color: $white;
+    }
   }
 }

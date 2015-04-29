@@ -1,26 +1,49 @@
-.checkbox {
-  display: inline-block;
-  padding-left: 18px;
-  position: relative;
-  line-height: 32px;
-  text-align: left;
-  margin-top: 4px;
-  width: auto;
-  > input[type="checkbox"] {
-    opacity:0;
-    top:4px;
-    left:5px;
-    &+ span.checkbox {
-      background:url(../images/icons/btn-checkbox.png) center 0 no-repeat;
-      display:inline-block;
-      height:32px;
-      width:32px;
-      position:absolute;
-      top:-4px;
-      left:0;
-    }
-    &:checked + span.checkbox{
-      background:url(../images/icons/btn-checkbox.png) center 100% no-repeat;
-    }
-  }
+label.checkbox {
+	display: inline-block;
+	//background-color: red;
+	padding-left: 18px;
+	position: relative;
+	line-height: $elements_checkbox_height;
+	text-align: left;
+	margin-top: $elements_checkbox_top;
+	width: auto;
+	> input[type="checkbox"] {
+		opacity:0;
+		top: $elements_checkbox_top;
+		left:5px;
+		&:checked + span.checkbox{
+  			&:before {
+  				text-align: right;
+  				list-style-type: disc;
+  				position: relative;
+    			content: $font_icons_check;
+    			color: $blue;
+    			left: -5px;
+    			//top: 3px;
+			}
+			//background: url(../assets/images/icons/btn-checkbox.png) center 100% no-repeat;
+    		background-color: $beige;
+		}
+		&+ span.checkbox {
+  			&:before {
+    			font-family: $font_icons;
+    			font-size: 20px;
+    			content: "";
+			}
+			&.hidden {
+				display: none;
+			}
+			//background: url(../assets/images/icons/btn-checkbox.png) center 0 no-repeat;
+		    border: $elements_border;
+    		border-radius: $elements_border_radius;
+    		background-color: $beige;
+			display:inline-block;
+			height: $elements_checkbox_height;
+			width: $elements_checkbox_height;
+			position: absolute;
+			top: -$elements_checkbox_top;
+			left: -3px;
+			cursor: pointer;
+		}
+	}
 }

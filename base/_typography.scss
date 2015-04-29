@@ -11,6 +11,7 @@ h1 {
   font-family: $font_light;
   font-weight: normal;
   color: $blue;
+  line-height: $xxx-large;
 
   &.title {
     margin-top: 0;
@@ -34,12 +35,15 @@ h2 {
   color: $blue;
   font-weight: normal;
   margin: 5px 0 20px 0;
+  line-height: $xx-large;
 }
 
 h3 {
   font-family: $font_normal;
   font-size: $large;
+  line-height: $large;
   color: $blue;
+  margin: 10px auto;
 }
 
 h4 {

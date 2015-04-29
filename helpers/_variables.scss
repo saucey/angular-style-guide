@@ -27,6 +27,7 @@ $dark_green: #7FAE3F;
 // REDS
 $red: #C50B1F;
 $light_red: #E6CECD;
+$lighter_red: #f3e7e6;
 // YELLOWS
 $yellow: #ffea53;
 $light_yellow: #fffce5;
@@ -43,6 +44,16 @@ $font_normal: 'senticosansdtregular', $font_fallback;
 $font_medium: 'senticosansdtmedium', $font_fallback;
 $font_bold: 'senticosansdtcondbold', $font_fallback;
 $font_icons: 'aegon_icons', $font_fallback;
+
+$font_icons_help: "\e62f";
+$font_icons_error: "\e62e";
+$font_icons_tip: "\e631";
+$font_icons_arrow_right: "\e600";
+$font_icons_arrow_down: "\e630";
+$font_icons_headhphones: "\e605";
+$font_icons_check: "\e632";
+$font_icons_plus: "\e62d";
+$font_icons_radio: "\e633";
 
 // SIZES
 $small: 14px;
@@ -64,11 +75,20 @@ $rc-l-min-width: 901px;
 $rc-l-max-width: 16000px;
 
 // INTERFACE ELEMENTS
-$elements_border_radius: 3px;
+$elements_border_radius: 5px;
+$elements_border_width: 1px;
+$elements_border: $elements_border_width solid $slightly_darker_grey;
 $elements_height: 44px;
+$elements_button_height: 38px;
+$elements_button_disabled_z-index: 1;
+$elements_button_enabled_z-index: 3;
+$elements_disabler_z-index: 2;
+$elements_checkbox_height: 32px;
+$elements_checkbox_top: 4px;
+$elements_radio_height: 32px;
+$elements_radio_top: 17px;
 
 $frame_border_radius: 3px;
-
 
 /**
  * BREAKPOINTS for AEGON.nl current website.

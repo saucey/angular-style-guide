@@ -90,14 +90,15 @@
 }
 
 .container_12 .row-fluid {
-  [class*="span"] {
+  [class*='span'] {
+    //currently both following lines are superseded by margin-left: 0 further below; check if that creates errors
     margin-left: 2%;
     *margin-left: 1.9375%;
     min-height: 10px;
 
-    &:first-child {
+    //&:first-child { //this was causing a problem in lhfs form, so it is deactivated, but if anything is strange in deployment of grid at a later point, this might be a point to start debugging
       margin-left: 0;
-    }
+    //}
   }
   .span12 {
     width: 100%;
@@ -146,6 +147,32 @@
   .span1 {
     width: 6.5%;
     *width: 6.4375%;
+  }
+}
+
+@media screen and(min-width: $rc-m-min-width) and(max-width: $rc-m-max-width) {
+  .row-fluid {
+    margin-bottom: 5px;
+  }
+  .container_12 .row-fluid.col3 .span4 {
+    width: 49%;
+    *width: 48.9375%;
+    &:last-child {
+      margin: 5px 0 0;
+    }
+  }
+}
+@media screen and(max-width: $rc-s-max-width) {
+  .row-fluid {
+    margin-bottom: 0;
+    .span14 {
+      margin-bottom: 5px;
+    }
+  }
+  .container_12 .row-fluid [class*='span'] {
+    width: 100%;
+    margin-bottom: 5px;
+    margin-left: 0;
   }
 }
 
