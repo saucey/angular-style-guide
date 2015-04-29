@@ -1,0 +1,277 @@
+.user_detail_widget {
+  // position: relative;
+  // float: right;
+  text-align: right;
+  @include rem('padding', 23, 0);
+  z-index: 0;
+
+  .inplace {
+    position: relative;
+    display: inline-block;
+    float: right;
+    margin: 0;
+
+    .btn-login {
+      z-index: 1;
+      position: relative;
+      top: 0px;
+      right: 0px;
+    }
+
+    // &:hover > .dropdown,
+    // .dropdown:hover,
+    // .btn-login:hover {
+    //   display: block;
+    //   
+    //   ~ .btn-login {
+    //     background-color: $white;
+    //     border-bottom-style: none;
+    //   }
+    // }
+  }
+
+  > .text {
+    // Default status
+    opacity: 0;
+    transition: .15s;
+
+    span.name {
+      display: none;
+    }
+  }
+
+  .dropdown {
+    display: block;
+    z-index: 0;
+    position: absolute;
+    top: 42px;
+    right: 0;
+    @include rem('width', 300);
+    @include rem('height', 220);
+    @include rem('border-radius', 2);
+    background-color: $white;
+    border: 1px solid $slightly_darker_grey;
+
+    .text {
+      text-align: left;
+      white-space: normal;
+      text-overflow: initial;
+      overflow: initial;
+
+      span {
+        display: block;
+        @include rem('padding', 6);        
+      }
+    }
+  }
+
+  .highlight {
+    display: block;
+    background-color: $green;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    @include rem('padding', 23, 0);
+
+    &.desktop {
+      display: none;
+      animation: slidingHighlightOnTop 1s 1 3s forwards;
+    }
+  }
+
+  .btn-login {
+    height: 44px;
+    @include rem('padding', 0, 13, 2, 13);
+    @include rem('line-height', 36);
+
+    @include rem('border-radius', 2);
+    user-select: none;
+    outline: 0;
+
+    font-family: 'senticosansdtregular';
+    background-color: transparent;
+    border-width: 1px;
+    border-style: solid;
+
+    // Properties for animation
+    border-color: $slightly_darker_grey;
+    color: $green;
+
+    &:after {
+      content: '';
+      display: inline-block;
+      border: 0 solid $green;
+      @include rem('width', 8);
+      @include rem('height', 8);
+      @include rem('border-width', 3);
+      @include rem('margin-left', 12);
+      border-top-style: none;
+      border-left-style: none;
+      transform: translateY(-3px) rotate(45deg);
+    }
+
+    background-color: $white;
+    border-bottom-style: none;
+
+    &.tap {
+      border-bottom-style: solid;
+
+      & ~ .dropdown {
+        display: none;
+      }
+    }
+
+    &.off,
+    &.off:after {
+      animation: none;
+      background-color: $white;
+    }
+  }
+
+  /**
+   * End animation with jQuery support
+   */
+  &.processed {
+
+    .highlight.desktop {
+      display: none;
+    }
+
+    > .text {
+      opacity: 1;
+    }
+  }
+}
+
+
+// 
+// Media queries
+// --------------------------------------------------
+
+@include breakpoint($brk-tablet) {
+
+  .user_detail_widget {
+
+    > .text {
+      @include rem('line-height', 44);
+    }
+
+    .text {
+
+      span.name {
+        display: inline;
+        @include rem('padding', 0, 25, 0, 0);
+        color: $green;
+      }
+    }
+
+    .dropdown {
+      display: none;
+
+      .text span.name {
+        display: none;
+      }
+    }
+
+    .highlight.desktop {
+      display: block;
+
+      .text {
+        margin: 0;
+        text-align: left;
+        @include rem('line-height', 44);
+        @include rem('padding', 0, 170, 0, 30);
+
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+
+        color: $white;
+
+        span.welcome {
+          font-family: $font_normal;
+        }
+      }
+    }
+
+    .highlight.mobile {
+      display: none;
+    }
+
+    .btn-login {
+      background-color: transparent;
+      border-bottom-style: solid;
+      animation: buttonLoginToDefault 4s normal 0s forwards;
+
+      &:after {
+        animation: buttonAfterLoginToDefault 4s normal 0s forwards;
+      }
+
+      &:before {
+        content: '\e606';
+        font-family: 'aegon_icons';
+        display: inline-block;
+        @include rem('font-size', 23);
+        @include rem('margin-right', 12);
+        transform: translateY(3px);
+      }
+
+      &.tap {
+        display: block;
+        background-color: $white;
+        border-bottom-style: none;
+
+        ~ .dropdown {
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+
+// 
+// Animation
+// --------------------------------------------------
+
+@keyframes buttonLoginToDefault {
+  0%, 75% {
+    border-color: $white;
+    color: $white;
+  }
+
+  100% {
+    border-color: $slightly_darker_grey;
+    color: $green;
+  }
+}
+
+@keyframes buttonAfterLoginToDefault {
+  0%, 75% {
+    border-color: $white;
+  }
+
+  100% {
+    border-color: $green;
+  }
+}
+
+@keyframes slidingHighlightOnTop {
+  from {
+    transform: translateY(0%);
+  }
+
+  to {
+    transform: translateY(-120%);
+  }
+}
+
+//
+// Only for Fabricator tool
+// --------------------------------------------------
+#user-detail .f-item-preview {
+  overflow: hidden;
+}
