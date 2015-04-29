@@ -91,14 +91,23 @@
 
 .container_12 .row-fluid {
   [class*='span'] {
-    //currently both following lines are superseded by margin-left: 0 further below; check if that creates errors
+    // currently both following lines are superseded by margin-left: 0 further 
+    // below; check if that creates errors
     margin-left: 2%;
     *margin-left: 1.9375%;
     min-height: 10px;
 
-    //&:first-child { //this was causing a problem in lhfs form, so it is deactivated, but if anything is strange in deployment of grid at a later point, this might be a point to start debugging
+    // Aded by Jorg: this was causing a problem in lhfs form, so it is
+    // deactivated, but if anything is strange in deployment of grid at a later
+    // point, this might be a point to start debugging
+    // 
+    // Added by Rocco: When you have conflict in your style's widget, please
+    // provide that changes in your specific widget's file wrapped by your 
+    // specific widget's class. I'll do it for you in widgets/_lhfs.scss file.
+    // Please check relative commit and explanation.
+    &:first-child {
       margin-left: 0;
-    //}
+    }
   }
   .span12 {
     width: 100%;
