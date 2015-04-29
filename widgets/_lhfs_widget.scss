@@ -459,3 +459,19 @@ form {
     margin-top: -$errorText_line-height;
   }
 }
+
+/**
+ * Added by Rocco: Please check the explanation wrote in layout/_grid.scss at 
+ * line 100, related to this specific declaration below, that helps to visuaize 
+ * your widget in the right way.
+ */
+.lhfs_widget {
+
+  [class*='span'] {
+    margin-left: 0;
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}
