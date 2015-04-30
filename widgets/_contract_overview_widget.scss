@@ -90,7 +90,9 @@
       left: 0;
 
       margin-left: -40px;
-      margin-top: -13px;
+      // margin-top: -13px;
+      transform: translateY(-50%);
+
       font-size: 25px;
       font-weight: bold;
     }
