@@ -1,4 +1,4 @@
-button {
+button, .button {
   cursor: pointer;
   height: $elements_button_height;
   padding: 8px 10px 12px 10px;
@@ -66,6 +66,43 @@ button {
       margin-right: 0;
       margin-left: 0;
       background-color: $white;
+    }
+  }
+}
+
+// Added by Rocco: @Jorg please check it out. i'm concerning about responsive
+// approach and Leon complaining about different style and alignment approach in
+// cross-browsers (take a look on firefox for example).
+// So, you can also use your approach if current lhfs design has somethig else, 
+// but do it in your file and class .lhfs_widget.
+// But like this is not ok for UI components that are already decided fro ma 
+// long time, as well in prodution. We cannot do this different style, for 
+// border-radius as an exmaple.
+// 
+// Below you can see approach that overwrite some of your styles.
+.responsive-approach {
+  // height: $elements_button_height; We don't need. Let's be responsive, 
+  // handling everything with only the line-height.
+  height: initial;
+  @include rem('line-height', 38);
+  @include rem('padding', 0, 10);
+  @include rem('border-radius', 3);
+  display: inline-block;
+  user-select: none;
+
+  &:active {
+    opacity: initial;
+  }
+
+  &.arrow {
+    &:after {
+      display: inline-block;
+      height: inherit;
+      line-height: inherit;
+      vertical-align: top;
+      float: none;
+      @include rem('padding', 0, 14);
+      @include rem('border-radius', 0, 3, 3, 0);
     }
   }
 }
