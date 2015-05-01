@@ -127,12 +127,13 @@
       &:after {
         content: "";
       }
-      &.required:after {
-        margin-left: 5px;
-        content: "*";
-        color: $red;
-      }
     }
+    li.label.required:after, label.checkbox.required span.text:after {
+      margin-left: 5px;
+      content: "*";
+      color: $red;
+    }
+
     input[type=text], input[type=email], input[type=number], select, .ddTitle {
       display: block;
     }
