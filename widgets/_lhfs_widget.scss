@@ -128,7 +128,7 @@
         content: "";
       }
     }
-    li.label.required:after, label.checkbox.required span.text:after {
+    li.label.required:after, label.checkbox.required span.label:after {
       margin-left: 5px;
       content: "*";
       color: $red;
