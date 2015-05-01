@@ -47,4 +47,7 @@ label.checkbox {
 			cursor: pointer;
 		}
 	}
+	&.required {
+		margin-top: 15px;	//make space for the error message on top of the checkbox in case one needs to be displayed
+	}
 }
