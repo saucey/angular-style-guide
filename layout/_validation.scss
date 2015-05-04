@@ -1,0 +1,69 @@
+form {
+  &:valid {
+    ul.actions.edit {
+      button {
+        z-index: $elements_button_enabled_z-index;
+      }
+    }
+  }
+  &:invalid {
+    ul.actions.edit {
+      button:not(.cancel) {
+        z-index: $elements_button_disabled_z-index;
+      }
+      //div.disabler {
+      //  display: block;
+      //}
+    }
+  }
+}
+
+  $errorText_line-height: 14px;
+  .errorText {
+    text-align: left;
+  }
+  select {
+    &.visited:invalid {
+      &~ .ddTitle {
+        border-color: $red;
+      }
+      &~ .errorText {
+        display: block;
+        //opacity: 1;
+      }
+    }
+  }
+  input {
+    &.visited:invalid ~ .errorText {
+      display: block;
+    }
+    &.visited:invalid {
+      border-color: $red;
+    }
+    &.visited:invalid ~ span.checkbox {
+      border-color: $red;
+    }
+  }
+  input, select {
+    &~ .errorText {
+      line-height: $errorText_line-height;
+      font-size: $small;
+      color: $red;
+      position: relative;
+      top: - ($elements_height + $errorText_line-height);
+    }
+    &~ .errorText, &:valid ~ .errorText {
+      display: none;
+    }
+    &[type=checkbox]~ .errorText {
+      left: -20px;
+      top: - ($elements_checkbox_top + $elements_checkbox_height + $errorText_line-height);
+    }
+  }
+  select ~ .errorText {
+    top: -$errorText_line-height;
+  }
+  select.visited:invalid ~ .ddTitle {
+    margin-top: -$errorText_line-height;
+  }
+
