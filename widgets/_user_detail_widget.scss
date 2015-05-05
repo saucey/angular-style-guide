@@ -1,56 +1,48 @@
 .user_detail_widget {
   // position: relative;
-  // float: right;
+  float: right;
   text-align: right;
-  @include rem('padding', 23, 0);
+  // @include rem('padding', 23, 0);
   z-index: 0;
 
   .inplace {
     position: relative;
     display: inline-block;
-    float: right;
+    // float: right;
     margin: 0;
 
-    .btn-login {
-      z-index: 1;
+    .btn-login-loggedin {
+      z-index: 2;
       position: relative;
       top: 0px;
       right: 0px;
     }
-
-    // &:hover > .dropdown,
-    // .dropdown:hover,
-    // .btn-login:hover {
-    //   display: block;
-    //   
-    //   ~ .btn-login {
-    //     background-color: $white;
-    //     border-bottom-style: none;
-    //   }
-    // }
   }
 
   > .text {
+    float: left;
+    display: inline-block;
     // Default status
     opacity: 0;
     transition: .15s;
 
-    span.name {
+    p.name {
       display: none;
     }
   }
 
   .dropdown {
     display: block;
-    z-index: 0;
+    z-index: 1;
     position: absolute;
     top: 42px;
     right: 0;
     @include rem('width', 300);
-    @include rem('height', 220);
+    // @include rem('height', 220);
     @include rem('border-radius', 2);
     background-color: $white;
     border: 1px solid $slightly_darker_grey;
+    box-shadow: 0 1px 0px rgba(0,0,0,0.3);
 
     .text {
       text-align: left;
@@ -58,9 +50,29 @@
       text-overflow: initial;
       overflow: initial;
 
-      span {
+      p {
         display: block;
-        @include rem('padding', 6);        
+        @include rem('padding', 0, 12);
+        @include rem('margin', 18, 0);
+      }
+
+      p.name {
+        @include rem('padding', 0, 20);
+        white-space: nowrap;
+        color: $green;
+
+        &:before {
+          content: '\e606';
+          font-family: 'aegon_icons';
+          display: inline-block;
+          @include rem('font-size', 23);
+          @include rem('margin-right', 12);
+          transform: translateY(3px);
+        }
+      }
+
+      .action {
+        @include rem('padding', 0, 12); 
       }
     }
   }
@@ -68,21 +80,46 @@
   .highlight {
     display: block;
     background-color: $green;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: -1;
-    @include rem('padding', 23, 0);
 
     &.desktop {
       display: none;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 0;
+      @include rem('padding', 23, 0);
       animation: slidingHighlightOnTop 1s 1 3s forwards;
+    }
+
+    &.mobile {
+      @include rem('font-size', 16);
+      @include rem('margin', 0, 12);
+      overflow: hidden;
+      background-color: transparent;
+      animation: slidingHighlightOnTopMobile 1s 1 3s forwards;
+      max-height: 500px;
+
+      .text {
+        padding: 0;
+        background-color: $green;
+
+        p {
+          @include rem('padding', 12);
+          margin-bottom: 0;
+          color: $white;
+        }
+      }
+    }
+
+    strong {
+      font-family: $font_normal;
+      font-weight: 300;
     }
   }
 
-  .btn-login {
+  .btn-login-loggedin {
     height: 44px;
     @include rem('padding', 0, 13, 2, 13);
     @include rem('line-height', 36);
@@ -91,13 +128,14 @@
     user-select: none;
     outline: 0;
 
-    font-family: 'senticosansdtregular';
-    background-color: transparent;
+    font-family: $font_normal;
+    background-color: $white;
     border-width: 1px;
     border-style: solid;
 
     // Properties for animation
     border-color: $slightly_darker_grey;
+    border-bottom-color: transparent;
     color: $green;
 
     &:after {
@@ -113,11 +151,8 @@
       transform: translateY(-3px) rotate(45deg);
     }
 
-    background-color: $white;
-    border-bottom-style: none;
-
     &.tap {
-      border-bottom-style: solid;
+      border-bottom-color: $slightly_darker_grey;
 
       & ~ .dropdown {
         display: none;
@@ -128,6 +163,10 @@
     &.off:after {
       animation: none;
       background-color: $white;
+    }
+
+    &:hover {
+      opacity: initial;
     }
   }
 
@@ -140,8 +179,17 @@
       display: none;
     }
 
+    .highlight.mobile {
+      display: none;
+    }
+
     > .text {
       opacity: 1;
+    }
+
+    .btn-login-loggedin,
+    .btn-login-loggedin:after {
+      animation: none;
     }
   }
 }
@@ -161,7 +209,7 @@
 
     .text {
 
-      span.name {
+      p.name {
         display: inline;
         @include rem('padding', 0, 25, 0, 0);
         color: $green;
@@ -171,7 +219,7 @@
     .dropdown {
       display: none;
 
-      .text span.name {
+      .text p.name {
         display: none;
       }
     }
@@ -191,8 +239,12 @@
 
         color: $white;
 
-        span.welcome {
+        .welcome {
           font-family: $font_normal;
+        }
+
+        p {
+          display: inline-block;
         }
       }
     }
@@ -201,9 +253,9 @@
       display: none;
     }
 
-    .btn-login {
+    .btn-login-loggedin {
       background-color: transparent;
-      border-bottom-style: solid;
+      border-bottom-color: $slightly_darker_grey;
       animation: buttonLoginToDefault 4s normal 0s forwards;
 
       &:after {
@@ -222,7 +274,7 @@
       &.tap {
         display: block;
         background-color: $white;
-        border-bottom-style: none;
+        border-bottom-color: transparent;
 
         ~ .dropdown {
           display: block;
@@ -267,4 +319,23 @@
   to {
     transform: translateY(-120%);
   }
+}
+
+@keyframes slidingHighlightOnTopMobile {
+  from {
+    max-height: 500px;
+  }
+
+  to {
+    max-height: 0px;
+  }
+}
+
+
+// 
+// Logics based on the section
+// --------------------------------------------------
+
+body.section-mijnaegon .myaegon {
+  display: none;
 }
