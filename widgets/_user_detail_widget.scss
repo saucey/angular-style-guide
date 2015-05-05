@@ -1,15 +1,14 @@
 .user_detail_widget {
-  // position: relative;
+  // Default display. In section logic below there is the switch for display
+  display: none; 
   float: right;
-  text-align: right;
-  // @include rem('padding', 23, 0);
   z-index: 0;
 
   .inplace {
     position: relative;
     display: inline-block;
-    // float: right;
     margin: 0;
+    height: 36px;
 
     .btn-login-loggedin {
       z-index: 2;
@@ -35,10 +34,10 @@
     display: block;
     z-index: 1;
     position: absolute;
-    top: 42px;
+    top: auto;
     right: 0;
-    @include rem('width', 300);
-    // @include rem('height', 220);
+    margin-top: -1px;
+    @include rem('width', 280);
     @include rem('border-radius', 2);
     background-color: $white;
     border: 1px solid $slightly_darker_grey;
@@ -72,7 +71,8 @@
       }
 
       .action {
-        @include rem('padding', 0, 12); 
+        @include rem('padding', 0, 12);
+        white-space: nowrap;
       }
     }
   }
@@ -120,15 +120,17 @@
   }
 
   .btn-login-loggedin {
-    height: 44px;
-    @include rem('padding', 0, 13, 2, 13);
+    @include rem('padding', 0, 10, 1, 10);
     @include rem('line-height', 36);
+    height: initial;
+    padding-bottom: 6px;
 
     @include rem('border-radius', 2);
     user-select: none;
     outline: 0;
 
     font-family: $font_normal;
+    @include rem('font-size', 16);
     background-color: $white;
     border-width: 1px;
     border-style: solid;
@@ -139,8 +141,8 @@
     color: $green;
 
     &:after {
+      display: none;
       content: '';
-      display: inline-block;
       border: 0 solid $green;
       @include rem('width', 8);
       @include rem('height', 8);
@@ -153,6 +155,7 @@
 
     &.tap {
       border-bottom-color: $slightly_darker_grey;
+      padding-bottom: 0;
 
       & ~ .dropdown {
         display: none;
@@ -196,6 +199,26 @@
 
 
 // 
+// Logics based on the section and status
+// --------------------------------------------------
+
+body.section-mijnaegon .myaegon {
+  display: none;
+}
+
+body.widget-logged-in {
+
+  .login-link {
+    display: none;
+  }
+
+  .user_detail_widget {
+    display: block;
+  }
+}
+
+
+// 
 // Media queries
 // --------------------------------------------------
 
@@ -212,6 +235,7 @@
       p.name {
         display: inline;
         @include rem('padding', 0, 25, 0, 0);
+
         color: $green;
       }
     }
@@ -231,7 +255,9 @@
         margin: 0;
         text-align: left;
         @include rem('line-height', 44);
-        @include rem('padding', 0, 170, 0, 30);
+        @include rem('padding-right', 170);
+        margin-left: 7.3%;
+        margin-right: 7.3%;
 
         white-space: nowrap;
         text-overflow: ellipsis;
@@ -244,7 +270,7 @@
         }
 
         p {
-          display: inline-block;
+          display: inline;
         }
       }
     }
@@ -254,13 +280,13 @@
     }
 
     .btn-login-loggedin {
+      @include rem('padding', 0, 13, 2, 13);
+      @include rem('line-height', 36);
+      font-size: inherit;
+      // @include rem('min-height', 44);
       background-color: transparent;
       border-bottom-color: $slightly_darker_grey;
       animation: buttonLoginToDefault 4s normal 0s forwards;
-
-      &:after {
-        animation: buttonAfterLoginToDefault 4s normal 0s forwards;
-      }
 
       &:before {
         content: '\e606';
@@ -271,10 +297,16 @@
         transform: translateY(3px);
       }
 
+      &:after {
+        display: inline-block;
+        animation: buttonAfterLoginToDefault 4s normal 0s forwards;
+      }
+
       &.tap {
         display: block;
         background-color: $white;
         border-bottom-color: transparent;
+        padding-bottom: 0px;
 
         ~ .dropdown {
           display: block;
@@ -329,13 +361,4 @@
   to {
     max-height: 0px;
   }
-}
-
-
-// 
-// Logics based on the section
-// --------------------------------------------------
-
-body.section-mijnaegon .myaegon {
-  display: none;
 }
