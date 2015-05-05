@@ -25,9 +25,7 @@
       // Set url API
       // this.apiUrl = settings.basePath + settings.pathToTheme +
       //   '/includes/fake-widgets.php?id=';
-      // this.apiUrl = '/data/widgets/user_detail.json';
-      this.apiUrl = 'http://localhost:3000/data/widgets/user_detail.json';
-      // this.apiUrl = 'http://echo.jsontest.com/key/value/one/two';
+      this.apiUrl = '/data/widgets/user_detail.json';
 
       this.getData();
     },
@@ -35,9 +33,12 @@
     getDataType: function () {
 
       var apiUrlOrig = this.apiUrl.split('/').splice(0, 3).join('/'),
+          // Check if is a relative address without protocol http/https
+          localDomain = this.apiUrl.indexOf('://') === -1,
+          // Check if current apiUrl is the same domain of current address
           sameDomain = doc.location.origin.indexOf(apiUrlOrig) !== -1;
 
-      return sameDomain ? 'json' : 'jsonp';
+      return (sameDomain || localDomain) ? 'json' : 'jsonp';
     },
 
     getData: function () {
