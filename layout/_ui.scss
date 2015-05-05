@@ -122,10 +122,40 @@ div.lightbox {
   height: 32px;
 }
 
+/*----- UI mobile tap status -----*/
+body.mobile-tap {
+
+  section.content:after {
+    display: none;
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0,0,0,.3);
+  }
+}
 
 // 
 // Media queries
 // --------------------------------------------------
+
+@include breakpoint($brk-mobile) {
+
+  /*----- UI mobile tap status -----*/
+  body.mobile-tap {
+
+    section.content {
+      position: relative;
+      overflow: hidden;
+
+      &:after {
+        display: block;
+      }
+    }
+  }
+}
 
 @include breakpoint($brk-tablet) {
 
