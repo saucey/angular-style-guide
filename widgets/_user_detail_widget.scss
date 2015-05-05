@@ -19,15 +19,7 @@
   }
 
   > .text {
-    float: left;
-    display: inline-block;
-    // Default status
-    opacity: 0;
-    transition: .15s;
-
-    p.name {
-      display: none;
-    }
+    display: none;
   }
 
   .dropdown {
@@ -312,6 +304,25 @@ body.widget-logged-in {
           display: block;
         }
       }
+    }
+  }
+}
+
+@include breakpoint($brk-ipad-portrait) {
+  
+  .user_detail_widget {
+
+    > .text {
+      float: left;
+      display: inline-block;
+
+      // Default status
+      opacity: 0;
+      transition: .15s;
+
+      // p.name {
+      //   display: none;
+      // }
     }
   }
 }
