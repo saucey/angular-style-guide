@@ -11,6 +11,8 @@
   var $ = win.jQuery,
       Drupal = win.Drupal;
 
+  var template = '<div id="user_detail_widget" class="user_detail_widget">\n<div class="inplace">\n<button class="btn-login-loggedin">Ingelogd</button>\n<div class="dropdown">\n<div class="highlight mobile">\n<div class="text">\n<p class="welcome">\n<strong>Welcome <span class="user_detail_widget_name">username</span>.</strong> Uw vorige bezoek was op <span class="user_detail_widget_last_access">00-00-0000 om 00:00 uur</span></p>\n</div>\n</div>\n<div class="text">\n<p class="name"><span class="user_detail_widget_name">username</span></p>\n<p class="log">Uw vorige bezoek was op <span class="user_detail_widget_last_access">00-00-0000 om 00:00 uur</span></p>\n<p class="action">\n<a href="#" class="button arrow responsive-approach">Uitloggen</a>\n<a href="#" class="button white responsive-approach myaegon">Mijn Overzicht</a>\n</p>\n</div>\n</div>\n</div>\n<div class="text">\n<p class="name"><span class="user_detail_widget_name">username</span></p>\n</div>\n<div class="highlight desktop">\n<div class="text">\n<p class="welcome">Welcome <span class="user_detail_widget_name">username</span>.</p>\n<p class="log">Uw vorige bezoek was op <span class="user_detail_widget_last_access">00-00-0000 om 00:00 uur</span></p>\n</div>\n</div>\n</div>';
+
   // Add new item to public Drupal object
   Drupal.behaviors.userDetailWidget = {
 
@@ -58,6 +60,9 @@
 
     initialize: function (data) {
 
+      // Append the template
+      $(template).appendTo('#shw-user-details');
+
       // Check if is logged and go ahead
       if (data.logged_in) {
 
@@ -81,23 +86,33 @@
 
     events: function (switchOff) {
 
-      var isTapped,
-          isMobile,
-          mobileTapPresent,
+      var that = this,
           btnLoggedIn = this.widget.find('button.btn-login-loggedin');
+
+      // Local functions
+      var Fn = {
+
+        isMobile: function () {
+          return doc.documentElement.offsetWidth < 640;
+        },
+
+        mobileTapPresent: function () {
+          return $('body').hasClass("mobile-tap");
+        },
+
+        isTapped: function () {
+          return btnLoggedIn.hasClass('tap');
+        }
+      };
 
       // Bind window resize
       var windowResize = function () {
 
-        isTapped = btnLoggedIn.hasClass('tap');
-        isMobile = doc.documentElement.offsetWidth < 640;
-        mobileTapPresent = $('body').hasClass("mobile-tap");
-
-        if (isMobile && !mobileTapPresent && !isTapped) {
+        if (Fn.isMobile() && !Fn.mobileTapPresent() && !Fn.isTapped()) {
 
           $('body').toggleClass("mobile-tap");
         
-        } else if (!isMobile) {
+        } else if (!Fn.isMobile()) {
 
           $('body').removeClass("mobile-tap");
         }
@@ -110,14 +125,17 @@
 
       // Action for Click on login button
       var loginButtonClick = function() {
-        $(this).toggleClass("tap");
+
+        // console.log(Fn.isMobile(), Fn.mobileTapPresent());
 
         // Toggle only if is not already present and mobile
-        if (isMobile && !mobileTapPresent) {
+        if (Fn.isMobile() && !Fn.mobileTapPresent()) {
           $('body').toggleClass("mobile-tap");
-        } else if (!isMobile) {
+        } else {
           $('body').removeClass("mobile-tap");
         }
+
+        $(this).toggleClass("tap");
       };
 
       // Switch all OFF
