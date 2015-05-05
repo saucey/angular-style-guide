@@ -3,19 +3,20 @@
  * User details script
  */
 
-(function($, doc) {
+(function(doc, win) {
 
   'use strict';
+
+  // Register vars for local scope
+  var $ = win.jQuery,
+      Drupal = win.Drupal;
 
   // Add new item to public Drupal object
   Drupal.behaviors.userDetailWidget = {
 
     attach: function (context, settings) {
 
-      // Cache the div
-      this.widget = $('#user_detail_widget');
-
-      // Setup
+      // setup
       this.setup(settings);
     },
 
@@ -28,22 +29,18 @@
       this.apiUrl = 'http://localhost:3000/data/widgets/user_detail.json';
       // this.apiUrl = 'http://echo.jsontest.com/key/value/one/two';
 
-      // If widget exist go ahead
-      if (this.widget.length > 0) {
-        this.events();
-      }
-
-      this.getUserData();
+      this.getData();
     },
 
     getDataType: function () {
 
-      var apiUrlOrig = this.apiUrl.split('/').splice(0, 3).join('/');
+      var apiUrlOrig = this.apiUrl.split('/').splice(0, 3).join('/'),
+          sameDomain = doc.location.origin.indexOf(apiUrlOrig) !== -1;
 
-      return doc.location.origin.indexOf(apiUrlOrig) !== -1 ? 'json' : 'jsonp';
+      return sameDomain ? 'json' : 'jsonp';
     },
 
-    getUserData: function () {
+    getData: function () {
 
       var that = this;
 
@@ -51,34 +48,96 @@
         url: this.apiUrl,
         dataType: this.getDataType(),
         success: function(data){
-          var text = '';
-          var len = data.length;
 
-          // Parse data into widget
-          that.parseWidget(data);
+          // Activate the widget
+          that.initialize(data);
         }
       });
     },
 
-    parseWidget: function (data) {
+    initialize: function (data) {
 
-      $('span[data-id="user_detail_widget_name"]').text(data.username);
-      $('span[data-id="user_detail_widget_last_access"]').text(data.last_access);
+      // Check if is logged and go ahead
+      if (data.logged_in) {
 
-      // console.log(data);
+        // Cache the div
+        this.widget = $('#user_detail_widget');
+
+        this.parseWidget(data);
+        this.events();
+      }
     },
 
-    events: function () {
+    parseWidget: function (data) {
+
+      // Parse data
+      $('span.user_detail_widget_name').text(data.username);
+      $('span.user_detail_widget_last_access').text(data.last_access);
+
+      // Show/hide logged's items
+      $('body').addClass('widget-logged-in');
+    },
+
+    events: function (switchOff) {
+
+      var isTapped,
+          isMobile,
+          mobileTapPresent,
+          btnLoggedIn = this.widget.find('button.btn-login-loggedin');
+
+      // Bind window resize
+      var windowResize = function () {
+
+        isTapped = btnLoggedIn.hasClass('tap');
+        isMobile = doc.documentElement.offsetWidth < 640;
+        mobileTapPresent = $('body').hasClass("mobile-tap");
+
+        if (isMobile && !mobileTapPresent && !isTapped) {
+
+          $('body').toggleClass("mobile-tap");
+        
+        } else if (!isMobile) {
+
+          $('body').removeClass("mobile-tap");
+        }
+      };
+
+      // Action for Hover on login button
+      var loginButtonHover = function() {
+        $(this).addClass( "off" ).off('hover');
+      };
+
+      // Action for Click on login button
+      var loginButtonClick = function() {
+        $(this).toggleClass("tap");
+
+        // Toggle only if is not already present and mobile
+        if (isMobile && !mobileTapPresent) {
+          $('body').toggleClass("mobile-tap");
+        } else if (!isMobile) {
+          $('body').removeClass("mobile-tap");
+        }
+      };
+
+      // Switch all OFF
+      if (switchOff) {
+
+        $(window).off('resize', windowResize);
+        this.widget.find('button.btn-login-loggedin').off('hover', loginButtonHover);
+        this.widget.find('button.btn-login-loggedin').off('click', loginButtonClick);
+
+        // Stop here
+        return;
+      }
+
+      // Bind resize window to add/remove body class .mobile-tap
+      $(window).on('resize', windowResize).resize();
 
       // Hover on button login set class .off on itself and unbind
-      this.widget.find('button.btn-login-loggedin').on('hover', function() {
-        $(this).addClass( "off" ).off('hover');
-      });
+      btnLoggedIn.on('hover', loginButtonHover);
 
       // Click on button login toggle class .tap on itself
-      this.widget.find('button.btn-login-loggedin').on('click', function() {
-        $(this).toggleClass("tap");
-      });
+      btnLoggedIn.on('click', loginButtonClick);
 
       // In the end of animation of .highlight div, add class .processed to 
       // widget's container to hide itself
@@ -86,7 +145,13 @@
         msAnimationEnd animationend', function() {
           $(this).parents('.user_detail_widget').addClass('processed');
       });
+    },
+
+    deinitialize: function () {
+
+      // Switch off all events
+      this.events(true);
     }
   };
 
-})(jQuery, this.document);
+})(this.document, this);
