@@ -1,11 +1,1037 @@
 // MSDropDown - jquery.dd.js
 // author: Marghoob Suleman - Search me on google
-// Date: 12th Aug, 2009, {18 Dec, 2010 (2.36)}
-// Version: 2.37 {date: 17 June, 2011}
-// Revision: 33
+// Date: 12th Aug, 2009, {18 Dec, 2010 (2.36)}, {date: 02 July, 2011}
+// Version: 2.37.5
+// Revision: 34
 // web: www.giftlelo.com | www.marghoobsuleman.com
+// Git: https://github.com/marghoobsuleman/ms-Dropdown/tree/ms-dd-238/msdropdown
 /*
 // msDropDown is free jQuery Plugin: you can redistribute it and/or modify
 // it under the terms of the either the MIT License or the Gnu General Public License (GPL) Version 2
 */
-;(function($){var bs="";var bt=function(p,q){var r=p;var s=this;var q=$.extend({height:120,visibleRows:7,rowHeight:23,showIcon:true,zIndex:9999,mainCSS:'dd',useSprite:false,animStyle:'slideDown',onInit:'',style:''},q);this.ddProp=new Object();var u="";var v={};v.insideWindow=true;v.keyboardAction=false;v.currentKey=null;var x=false;var y={postElementHolder:'_msddHolder',postID:'_msdd',postTitleID:'_title',postTitleTextID:'_titletext',postChildID:'_child',postAID:'_msa',postOPTAID:'_msopta',postInputID:'_msinput',postArrowID:'_arrow',postInputhidden:'_inp'};var z={dd:q.mainCSS,ddTitle:'ddTitle',arrow:'arrow',ddChild:'ddChild',ddTitleText:'ddTitleText',disabled:.30,ddOutOfVision:'ddOutOfVision',borderTop:'borderTop',noBorderTop:'noBorderTop',selected:'selected'};var A={actions:"focus,blur,change,click,dblclick,mousedown,mouseup,mouseover,mousemove,mouseout,keypress,keydown,keyup",prop:"size,multiple,disabled,tabindex"};this.onActions=new Object();var B=$(r).prop("id");if(typeof(B)=="undefined"||B.length<=0){B="msdrpdd"+$.msDropDown.counter++;$(r).attr("id",B)};var C=$(r).prop("style");q.style+=(C==undefined)?"":C;var D=$(r).children();x=($(r).prop("size")>1||$(r).prop("multiple")==true)?true:false;if(x){q.visibleRows=$(r).prop("size")};var E={};var F=0;var G=false;var H;var I={};var J=function(a){if(typeof(I[a])=="undefined"){I[a]=document.getElementById(a)}return I[a]};var K=function(a){return B+y[a]};var L=function(a){var b=a;var c=$(b).prop("style");return c};var M=function(a){var b=$("#"+B+" option:selected");if(b.length>1){for(var i=0;i<b.length;i++){if(a==b[i].index){return true}}}else if(b.length==1){if(b[0].index==a){return true}};return false};var N=function(a,b,c,d){var e="";var f=(d=="opt")?K("postOPTAID"):K("postAID");var g=(d=="opt")?f+"_"+(b)+"_"+(c):f+"_"+(b);var h="";var i="";if(q.useSprite!=false){i=' '+q.useSprite+' '+a.className}else{h=$(a).prop("title");h=(h.length==0)?"":'<img src="'+h+'" align="absmiddle" /> '};var j=$(a).text();var k=$(a).val();var l=($(a).prop("disabled")==true)?"disabled":"enabled";E[g]={html:h+j,value:k,text:j,index:a.index,id:g};var m=L(a);if(M(a.index)==true){e+='<a href="javascript:void(0);" class="'+z.selected+' '+l+i+'"'}else{e+='<a  href="javascript:void(0);" class="'+l+i+'"'};if(m!==false&&m!==undefined){e+=" style='"+m+"'"};e+=' id="'+g+'">';e+=h+'<span class="'+z.ddTitleText+'">'+j+'</span></a>';return e};var O=function(t){var b=t.toLowerCase();if(b.length==0)return-1;var a="";for(var i in E){var c=E[i].text.toLowerCase();if(c.substr(0,b.length)==b){a+="#"+E[i].id+", "}};return(a=="")?-1:a};var P=function(){var f=D;if(f.length==0)return"";var g="";var h=K("postAID");var i=K("postOPTAID");f.each(function(c){var d=f[c];if(d.nodeName=="OPTGROUP"){g+="<div class='opta'>";g+="<span style='font-weight:bold;font-style:italic; clear:both;'>"+$(d).prop("label")+"</span>";var e=$(d).children();e.each(function(a){var b=e[a];g+=N(b,c,a,"opt")});g+="</div>"}else{g+=N(d,c,"","")}});return g};var Q=function(){var a=K("postID");var b=K("postChildID");var c=q.style;sDiv="";sDiv+='<div id="'+b+'" class="'+z.ddChild+'"';if(!x){sDiv+=(c!="")?' style="'+c+'"':''}else{sDiv+=(c!="")?' style="border-top:1px solid #c3c3c3;display:block;position:relative;'+c+'"':''};sDiv+='>';return sDiv};var R=function(){var a=K("postTitleID");var b=K("postArrowID");var c=K("postTitleTextID");var d=K("postInputhidden");var e="";var f="";if(J(B).options.length>0){e=$("#"+B+" option:selected").text();f=$("#"+B+" option:selected").prop("title")};f=(f.length==0||f==undefined||q.showIcon==false||q.useSprite!=false)?"":'<img src="'+f+'" align="absmiddle" /> ';var g='<div id="'+a+'" class="'+z.ddTitle+'"';g+='>';g+='<span id="'+b+'" class="'+z.arrow+'"></span><span class="'+z.ddTitleText+'" id="'+c+'">'+f+'<span class="'+z.ddTitleText+'">'+e+'</span></span></div>';return g};var S=function(){var c=K("postChildID");$("#"+c+" a.enabled").unbind("click");$("#"+c+" a.enabled").bind("click",function(a){a.preventDefault();V(this);bA();if(!x){$("#"+c).unbind("mouseover");X(false);var b=(q.showIcon==false)?$(this).text():$(this).html();bv(b);s.close()}})};var T=function(){var d=false;var e=K("postID");var f=K("postTitleID");var g=K("postTitleTextID");var h=K("postChildID");var i=K("postArrowID");var j=$("#"+B).width();j=j+2;var k=q.style;if($("#"+e).length>0){$("#"+e).remove();d=true};var l='<div id="'+e+'" class="'+z.dd+'"';l+=(k!="")?' style="'+k+'"':'';l+='>';l+=R();l+=Q();l+=P();l+="</div>";l+="</div>";if(d==true){var m=K("postElementHolder");$("#"+m).after(l)}else{$("#"+B).after(l)};if(x){var f=K("postTitleID");$("#"+f).hide()};$("#"+e).css("width",j+"px");$("#"+h).css("width",(j-2)+"px");if(D.length>q.visibleRows){var n=parseInt($("#"+h+" a:first").css("padding-bottom"))+parseInt($("#"+h+" a:first").css("padding-top"));var o=((q.rowHeight)*q.visibleRows)-n;$("#"+h).css("height",o+"px")}else if(x){var o=$("#"+B).height();$("#"+h).css("height",o+"px")};if(d==false){bu();W(B)};if($("#"+B).prop("disabled")==true){$("#"+e).css("opacity",z.disabled)};Z();$("#"+f).bind("mouseover",function(a){bD(1)});$("#"+f).bind("mouseout",function(a){bD(0)});S();$("#"+h+" a.disabled").css("opacity",z.disabled);if(x){$("#"+h).bind("mouseover",function(c){if(!v.keyboardAction){v.keyboardAction=true;$(document).bind("keydown",function(a){var b=a.keyCode;v.currentKey=b;if(b==39||b==40){a.preventDefault();a.stopPropagation();bx();bA()};if(b==37||b==38){a.preventDefault();a.stopPropagation();by();bA()}})}})};$("#"+h).bind("mouseout",function(a){X(false);$(document).unbind("keydown");v.keyboardAction=false;v.currentKey=null});$("#"+f).bind("click",function(b){X(false);if($("#"+h+":visible").length==1){$("#"+h).unbind("mouseover")}else{$("#"+h).bind("mouseover",function(a){X(true)});s.open()}});$("#"+f).bind("mouseout",function(a){X(false)});if(q.showIcon&&q.useSprite!=false){bz()}};var U=function(a){for(var i in E){if(E[i].index==a){return E[i]}};return-1};var V=function(a){var b=K("postChildID");if($("#"+b+" a."+z.selected).length==1){u=$("#"+b+" a."+z.selected).text()};if(!x){$("#"+b+" a."+z.selected).removeClass(z.selected)};var c=$("#"+b+" a."+z.selected).prop("id");if(c!=undefined){var d=(v.oldIndex==undefined||v.oldIndex==null)?E[c].index:v.oldIndex};if(a&&!x){$(a).addClass(z.selected)};if(x){var e=v.currentKey;if($("#"+B).prop("multiple")==true){if(e==17){v.oldIndex=E[$(a).prop("id")].index;$(a).toggleClass(z.selected)}else if(e==16){$("#"+b+" a."+z.selected).removeClass(z.selected);$(a).addClass(z.selected);var f=$(a).prop("id");var g=E[f].index;for(var i=Math.min(d,g);i<=Math.max(d,g);i++){$("#"+U(i).id).addClass(z.selected)}}else{$("#"+b+" a."+z.selected).removeClass(z.selected);$(a).addClass(z.selected);v.oldIndex=E[$(a).prop("id")].index}}else{$("#"+b+" a."+z.selected).removeClass(z.selected);$(a).addClass(z.selected);v.oldIndex=E[$(a).prop("id")].index}}};var W=function(a){var b=a;J(b).refresh=function(e){$("#"+b).msDropDown(q)}};var X=function(a){v.insideWindow=a};var Y=function(){return v.insideWindow};var Z=function(){var b=K("postID");var c=A.actions.split(",");for(var d=0;d<c.length;d++){var e=c[d];var f=bB(e);if(f==true){switch(e){case"focus":$("#"+b).bind("mouseenter",function(a){J(B).focus()});break;case"click":$("#"+b).bind("click",function(a){$("#"+B).trigger("click")});break;case"dblclick":$("#"+b).bind("dblclick",function(a){$("#"+B).trigger("dblclick")});break;case"mousedown":$("#"+b).bind("mousedown",function(a){$("#"+B).trigger("mousedown")});break;case"mouseup":$("#"+b).bind("mouseup",function(a){$("#"+B).trigger("mouseup")});break;case"mouseover":$("#"+b).bind("mouseover",function(a){$("#"+B).trigger("mouseover")});break;case"mousemove":$("#"+b).bind("mousemove",function(a){$("#"+B).trigger("mousemove")});break;case"mouseout":$("#"+b).bind("mouseout",function(a){$("#"+B).trigger("mouseout")});break}}}};var bu=function(){var a=K("postElementHolder");$("#"+B).after("<div class='"+z.ddOutOfVision+"' style='height:0px;overflow:hidden;position:absolute;' id='"+a+"'></div>");$("#"+B).appendTo($("#"+a))};var bv=function(a){var b=K("postTitleTextID");$("#"+b).html(a)};var bw=function(w){var a=w;var b=K("postChildID");var c=$("#"+b+" a:visible");var d=c.length;var e=$("#"+b+" a:visible").index($("#"+b+" a.selected:visible"));var f;switch(a){case"next":if(e<d-1){e++;f=c[e]};break;case"previous":if(e<d&&e>0){e--;f=c[e]};break};if(typeof(f)=="undefined"){return false};$("#"+b+" a."+z.selected).removeClass(z.selected);$(f).addClass(z.selected);var g=f.id;if(!x){var h=(q.showIcon==false)?E[g].text:$("#"+g).html();bv(h);bz(E[g].index)};if(a=="next"){if(parseInt(($("#"+g).position().top+$("#"+g).height()))>=parseInt($("#"+b).height())){$("#"+b).scrollTop(($("#"+b).scrollTop())+$("#"+g).height()+$("#"+g).height())}}else{if(parseInt(($("#"+g).position().top+$("#"+g).height()))<=0){$("#"+b).scrollTop(($("#"+b).scrollTop()-$("#"+b).height())-$("#"+g).height())}}};var bx=function(){bw("next")};var by=function(){bw("previous")};var bz=function(i){if(q.useSprite!=false){var a=K("postTitleTextID");var b=(typeof(i)=="undefined")?J(B).selectedIndex:i;var c=J(B).options[b].className;if(c.length>0){var d=K("postChildID");var e=$("#"+d+" a."+c).prop("id");var f=$("#"+e).css("background-image");var g=$("#"+e).css("background-position");var h=$("#"+e).css("padding-left");if(f!=undefined){$("#"+a).find("."+z.ddTitleText).attr('style',"background:"+f)};if(g!=undefined){$("#"+a).find("."+z.ddTitleText).css('background-position',g)};if(h!=undefined){$("#"+a).find("."+z.ddTitleText).css('padding-left',h)};$("#"+a).find("."+z.ddTitleText).css('background-repeat','no-repeat');$("#"+a).find("."+z.ddTitleText).css('padding-bottom','2px')}}};var bA=function(){var a=K("postChildID");var b=$("#"+a+" a."+z.selected);if(b.length==1){var c=$("#"+a+" a."+z.selected).text();var d=$("#"+a+" a."+z.selected).prop("id");if(d!=undefined){var e=E[d].value;J(B).selectedIndex=E[d].index};if(q.showIcon&&q.useSprite!=false)bz()}else if(b.length>1){for(var i=0;i<b.length;i++){var d=$(b[i]).prop("id");var f=E[d].index;J(B).options[f].selected="selected"}};var g=J(B).selectedIndex;s.ddProp["selectedIndex"]=g};var bB=function(a){if($("#"+B).prop("on"+a)!=undefined){return true};var b=$("#"+B).data("events");if(b&&b[a]){return true};return false};var bC=function(){var b=K("postChildID");if(bB('change')==true){var c=E[$("#"+b+" a.selected").prop("id")].text;if($.trim(u)!==$.trim(c)&&u!==""){$("#"+B).trigger("change")}};if(bB('mouseup')==true){$("#"+B).trigger("mouseup")};if(bB('blur')==true){$(document).bind("mouseup",function(a){$("#"+B).focus();$("#"+B)[0].blur();bA();$(document).unbind("mouseup")})}};var bD=function(a){var b=K("postArrowID");if(a==1)$("#"+b).css({backgroundPosition:'0 100%'});else $("#"+b).css({backgroundPosition:'0 0'})};var bE=function(){for(var i in J(B)){if(typeof(J(B)[i])!='function'&&J(B)[i]!==undefined&&J(B)[i]!==null){s.set(i,J(B)[i],true)}}};var bF=function(a,b){if(U(b)!=-1){J(B)[a]=b;var c=K("postChildID");$("#"+c+" a."+z.selected).removeClass(z.selected);$("#"+U(b).id).addClass(z.selected);var d=U(J(B).selectedIndex).html;bv(d)}};var bG=function(i,a){if(a=='d'){for(var b in E){if(E[b].index==i){delete E[b];break}}};var c=0;for(var b in E){E[b].index=c;c++}};var bH=function(){var a=K("postChildID");var b=K("postID");var c=$("#"+b).position();var d=$("#"+b).height();var e=$(window).height();var f=$(window).scrollTop();var g=$("#"+a).height();var h={zIndex:q.zIndex,top:(c.top+d)+"px",display:"none"};var i=q.animStyle;var j=false;var k=z.noBorderTop;$("#"+a).removeClass(z.noBorderTop);$("#"+a).removeClass(z.borderTop);if((e+f)<Math.floor(g+d+c.top)){var l=c.top-g;if((c.top-g)<0){l=10};h={zIndex:q.zIndex,top:l+"px",display:"none"};i="show";j=true;k=z.borderTop};return{opp:j,ani:i,css:h,border:k}};var bI=function(){if(s.onActions["onOpen"]!=null){eval(s.onActions["onOpen"])(s)}};var bJ=function(){bC();if(s.onActions["onClose"]!=null){eval(s.onActions["onClose"])(s)}};this.open=function(){if((s.get("disabled",true)==true)||(s.get("options",true).length==0))return;var e=K("postChildID");if(bs!=""&&e!=bs){$("#"+bs).slideUp("fast");$("#"+bs).css({zIndex:'0'})};if($("#"+e).css("display")=="none"){u=E[$("#"+e+" a.selected").prop("id")].text;var f="";H=$("#"+e).height();$("#"+e+" a").show();$(document).bind("keydown",function(a){var b=a.keyCode;if(b==8){a.preventDefault();a.stopPropagation();f=(f.length==0)?"":f.substr(0,f.length-1)};switch(b){case 39:case 40:a.preventDefault();a.stopPropagation();bx();break;case 37:case 38:a.preventDefault();a.stopPropagation();by();break;case 27:case 13:s.close();bA();break;default:if(b>46){f+=String.fromCharCode(b)};var c=O(f);if(c!=-1){$("#"+e).css({height:'auto'});$("#"+e+" a").hide();$(c).show();var d=bH();$("#"+e).css(d.css);$("#"+e).css({display:'block'})}else{$("#"+e+" a").show();$("#"+e).css({height:H+'px'})};break};if(bB("keydown")==true){J(B).onkeydown()}});$(document).bind("keyup",function(a){if($("#"+B).prop("onkeyup")!=undefined){J(B).onkeyup()}});$(document).bind("mouseup",function(a){if(Y()==false){s.close()}});var g=bH();$("#"+e).css(g.css);if(g.opp==true){$("#"+e).css({display:'block'});$("#"+e).addClass(g.border);bI()}else{$("#"+e)[g.ani]("fast",function(){$("#"+e).addClass(g.border);bI()})};if(e!=bs){bs=e}}};this.close=function(){var b=K("postChildID");var c=$("#"+K("postTitleID")).position().top;var d=bH();G=false;if(d.opp==true){$("#"+b).animate({height:0,top:c,},function(){$("#"+b).css({height:H+'px',display:'none'});bJ()})}else{$("#"+b).slideUp("fast",function(a){bJ();$("#"+b).css({zIndex:'0'});$("#"+b).css({height:H+'px'})})};bz();$(document).unbind("keydown");$(document).unbind("keyup");$(document).unbind("mouseup")};this.selectedIndex=function(i){if(typeof(i)=="undefined"){return s.get("selectedIndex")}else{s.set("selectedIndex",i)}};this.debug=function(a){if(typeof(a)=="undefined"||a==true){$("."+z.ddOutOfVision).removeAttr("style")}else{$("."+z.ddOutOfVision).attr("style","height:0px;overflow:hidden;position:absolute")}};this.set=function(a,b,c){if(a==undefined||b==undefined)throw{message:"set to what?"};s.ddProp[a]=b;if(c!=true){switch(a){case"selectedIndex":bF(a,b);break;case"disabled":s.disabled(b,true);break;case"multiple":J(B)[a]=b;x=($(r).prop("size")>0||$(r).prop("multiple")==true)?true:false;if(x){var d=$("#"+B).height();var f=K("postChildID");$("#"+f).css("height",d+"px");var g=K("postTitleID");$("#"+g).hide();var f=K("postChildID");$("#"+f).css({display:'block',position:'relative'});S()};break;case"size":J(B)[a]=b;if(b==0){J(B).multiple=false};x=($(r).prop("size")>0||$(r).prop("multiple")==true)?true:false;if(b==0){var g=K("postTitleID");$("#"+g).show();var f=K("postChildID");$("#"+f).css({display:'none',position:'absolute'});var h="";if(J(B).selectedIndex>=0){var i=U(J(B).selectedIndex);h=i.html;V($("#"+i.id))};bv(h)}else{var g=K("postTitleID");$("#"+g).hide();var f=K("postChildID");$("#"+f).css({display:'block',position:'relative'})};break;default:try{J(B)[a]=b}catch(e){};break}}};this.get=function(a,b){if(a==undefined&&b==undefined){return s.ddProp};if(a!=undefined&&b==undefined){return(s.ddProp[a]!=undefined)?s.ddProp[a]:null};if(a!=undefined&&b!=undefined){return J(B)[a]}};this.visible=function(a){var b=K("postID");if(a==true){$("#"+b).show()}else if(a==false){$("#"+b).hide()}else{return $("#"+b).css("display")}};this.add=function(a,b){var c=a;var d=c.text;var e=(c.value==undefined||c.value==null)?d:c.value;var f=(c["title"]==undefined||c["title"]==null)?'':c["title"];var i=(b==undefined||b==null)?J(B).options.length:b;J(B).options[i]=new Option(d,e);if(f!='')J(B).options[i]["title"]=f;var g=U(i);if(g!=-1){var h=N(J(B).options[i],i,"","");$("#"+g.id).html(h)}else{var h=N(J(B).options[i],i,"","");var j=K("postChildID");$("#"+j).append(h);S()}};this.remove=function(i){J(B).remove(i);if((U(i))!=-1){$("#"+U(i).id).remove();bG(i,'d')};if(J(B).length==0){bv("")}else{var a=U(J(B).selectedIndex).html;bv(a)};s.set("selectedIndex",J(B).selectedIndex)};this.disabled=function(a,b){J(B).disabled=a;var c=K("postID");if(a==true){$("#"+c).css("opacity",z.disabled);s.close()}else if(a==false){$("#"+c).css("opacity",1)};if(b!=true){s.set("disabled",a)}};this.form=function(){return(J(B).form==undefined)?null:J(B).form};this.item=function(){if(arguments.length==1){return J(B).item(arguments[0])}else if(arguments.length==2){return J(B).item(arguments[0],arguments[1])}else{throw{message:"An index is required!"}}};this.namedItem=function(a){return J(B).namedItem(a)};this.multiple=function(a){if(typeof(a)=="undefined"){return s.get("multiple")}else{s.set("multiple",a)}};this.size=function(a){if(typeof(a)=="undefined"){return s.get("size")}else{s.set("size",a)}};this.addMyEvent=function(a,b){s.onActions[a]=b};this.fireEvent=function(a){eval(s.onActions[a])(s)};var bK=function(){s.set("version",$.msDropDown.version);s.set("author",$.msDropDown.author)};var bL=function(){T();bE();bK();if(q.onInit!=''){eval(q.onInit)(s)}};bL()};$.msDropDown={version:2.37,author:"Marghoob Suleman",counter:20,create:function(a,b){return $(a).msDropDown(b).data("dd")}};$.fn.extend({msDropDown:function(b){return this.each(function(){var a=new bt(this,b);$(this).data('dd',a)})}});if(typeof($.fn.prop)=='undefined'){$.fn.prop=function(w){return $(this).attr(w)}}})(jQuery);
+;(function($) { 
+       
+   var msOldDiv = ""; 
+   var dd = function(element, options)
+   {
+    var sElement = element;
+    var $this =  this; //parent this
+    var options = $.extend({
+      height:120,
+      visibleRows:7,
+      rowHeight:23,
+      showIcon:true,
+      zIndex:9999,
+      mainCSS:'dd',
+      useSprite:false,
+      animStyle:'slideDown',
+      onInit:'',
+      style:''
+    }, options);
+    this.ddProp = new Object();//storing propeties;
+    var oldSelectedValue = "";
+    var actionSettings ={};
+    actionSettings.insideWindow = true;
+    actionSettings.keyboardAction = false;
+    actionSettings.currentKey = null;
+    var ddList = false;
+    var config = {postElementHolder:'_msddHolder', postID:'_msdd', postTitleID:'_title',postTitleTextID:'_titletext',postChildID:'_child',postAID:'_msa',postOPTAID:'_msopta',postInputID:'_msinput', postArrowID:'_arrow', postInputhidden:'_inp'};
+    var styles = {dd:options.mainCSS, ddTitle:'ddTitle', arrow:'arrow', ddChild:'ddChild', ddTitleText:'ddTitleText', disabled:.30, ddOutOfVision:'ddOutOfVision', borderTop:'borderTop', noBorderTop:'noBorderTop', selected:'selected'};
+    var attributes = {actions:"focus,blur,change,click,dblclick,mousedown,mouseup,mouseover,mousemove,mouseout,keypress,keydown,keyup", prop:"size,multiple,disabled,tabindex"};
+    this.onActions = new Object();
+    var elementid = $(sElement).prop("id");
+    if(typeof(elementid)=="undefined" || elementid.length<=0) {
+      //assign and id;
+      elementid = "msdrpdd"+$.msDropDown.counter++;//I guess it makes unique for the page.
+      $(sElement).attr("id", elementid);
+    };
+    var inlineCSS = $(sElement).prop("style");
+    options.style += (inlineCSS==undefined) ? "" : inlineCSS;
+    var allOptions = $(sElement).children();
+    ddList = ($(sElement).prop("size")>1 || $(sElement).prop("multiple")==true) ? true : false;
+    if(ddList) {options.visibleRows = $(sElement).prop("size");};
+    var a_array = {};//stores id, html & value etc
+    var currentP = 0;
+    var isFilter = false;
+    var oldHeight;
+    var cacheElement = {};
+  
+  var getElement = function(ele) {
+    if(typeof(cacheElement[ele])=="undefined") {
+      cacheElement[ele] = document.getElementById(ele);
+    }
+    return cacheElement[ele];
+  };
+  var getPostID = function (id) {
+    return elementid+config[id];
+  };
+  var getOptionsProperties = function (option) {
+    var currentOption = option;
+    var styles = $(currentOption).prop("style");
+    return styles;
+  };
+  var matchIndex = function (index) {
+    var selectedIndex = $("#"+elementid+" option:selected");
+    if(selectedIndex.length>1) {
+      for(var i=0;i<selectedIndex.length;i++) {
+        if(index == selectedIndex[i].index) {
+          return true;
+        };
+      };
+    } else if(selectedIndex.length==1) {
+      if(selectedIndex[0].index==index) {
+        return true;
+      };
+    };
+    return false;
+  };
+  var createA = function(currentOptOption, current, currentopt, tp) {
+    var aTag = "";
+    //var aidfix = getPostID("postAID");
+    var aidoptfix = (tp=="opt") ? getPostID("postOPTAID") : getPostID("postAID");   
+    var aid = (tp=="opt") ? aidoptfix+"_"+(current)+"_"+(currentopt) : aidoptfix+"_"+(current);
+    var arrow = "";
+    var clsName = "";
+    if(options.useSprite!=false) {
+     clsName = ' '+options.useSprite+' '+currentOptOption.className;
+     
+    } else {
+     arrow = $(currentOptOption).prop("title");
+     arrow = (arrow.length==0) ? "" : '<img src="'+arrow+'" align="absmiddle" /> ';                                
+    };
+    var sText = $(currentOptOption).text();
+    var sValue = $(currentOptOption).val();
+    var sEnabledClass = ($(currentOptOption).prop("disabled")==true) ? "disabled" : "enabled";
+    a_array[aid] = {html:arrow + sText, value:sValue, text:sText, index:currentOptOption.index, id:aid};
+    var innerStyle = getOptionsProperties(currentOptOption);
+    if(matchIndex(currentOptOption.index)==true) {
+     aTag += '<a href="javascript:void(0);" class="'+styles.selected+' '+sEnabledClass+clsName+'"';
+    } else {
+    aTag += '<a  href="javascript:void(0);" class="'+sEnabledClass+clsName+'"';
+    };
+    if(innerStyle!==false && innerStyle!==undefined) {
+    aTag +=  " style='"+innerStyle+"'";
+    };
+    aTag +=  ' id="'+aid+'">';
+    aTag += arrow + '<span class="'+styles.ddTitleText+'">' +sText+'</span></a>';
+    return aTag;
+  };
+  var in_array = function(t) {
+    var sText = t.toLowerCase();
+    if(sText.length==0) return -1;
+    var a = "";
+    for(var i in a_array) {
+      var a_text = a_array[i].text.toLowerCase();
+      if(a_text.substr(0, sText.length) == sText) {
+        a += "#"+a_array[i].id+ ", ";
+      };
+    };
+    return (a=="") ? -1 : a;
+  };
+  var createATags = function () {
+    var childnodes = allOptions;
+    if(childnodes.length==0) return "";
+    var aTag = "";
+    var aidfix = getPostID("postAID");
+    var aidoptfix = getPostID("postOPTAID");
+    childnodes.each(function(current){
+                 var currentOption = childnodes[current];
+                 //OPTGROUP
+                 if(currentOption.nodeName == "OPTGROUP") {
+                    aTag += "<div class='opta'>";
+                   aTag += "<span style='font-weight:bold;font-style:italic; clear:both;'>"+$(currentOption).prop("label")+"</span>";
+                   var optChild = $(currentOption).children();
+                   optChild.each(function(currentopt){
+                              var currentOptOption = optChild[currentopt];
+                               aTag += createA(currentOptOption, current, currentopt, "opt");
+                              });
+                   aTag += "</div>";
+                   
+                 } else {
+                   aTag += createA(currentOption, current, "", "");
+                 };
+                 });
+    return aTag;
+  };
+  var createChildDiv = function () {
+    var id = getPostID("postID");
+    var childid = getPostID("postChildID");
+    var sStyle = options.style;
+    sDiv = "";
+    sDiv += '<div id="'+childid+'" class="'+styles.ddChild+'"';
+    if(!ddList) {
+      sDiv += (sStyle!="") ? ' style="'+sStyle+'"' : ''; 
+    } else {
+      sDiv += (sStyle!="") ? ' style="border-top:1px solid #c3c3c3;display:block;position:relative;'+sStyle+'"' : ''; 
+    };
+    sDiv += '>';    
+    return sDiv;
+  };
+
+  var createTitleDiv = function () {
+    var titleid = getPostID("postTitleID");
+    var arrowid = getPostID("postArrowID");
+    var titletextid = getPostID("postTitleTextID");
+    var inputhidden = getPostID("postInputhidden");
+    var sText = "";
+    var arrow = "";
+    if(getElement(elementid).options.length>0) {
+      sText = $("#"+elementid+" option:selected").text();
+      arrow = $("#"+elementid+" option:selected").prop("title");
+    };
+    arrow = (arrow.length==0 || arrow==undefined || options.showIcon==false || options.useSprite!=false) ? "" : '<img src="'+arrow+'" align="absmiddle" /> ';   
+    var sDiv = '<div id="'+titleid+'" class="'+styles.ddTitle+'"';
+    sDiv += '>';
+    sDiv += '<span id="'+arrowid+'" class="'+styles.arrow+'"></span><span class="'+styles.ddTitleText+'" id="'+titletextid+'">'+arrow + '<span class="'+styles.ddTitleText+'">'+sText+'</span></span></div>';
+    return sDiv;
+  };
+  var applyEventsOnA = function() {
+    var childid = getPostID("postChildID");
+    $("#"+childid+ " a.enabled").unbind("click"); //remove old one
+      $("#"+childid+ " a.enabled").bind("click", function(event) {
+                             event.preventDefault();
+                             manageSelection(this);
+                             setValue();
+                             if(!ddList) {
+                               $("#"+childid).unbind("mouseover");
+                               setInsideWindow(false);                               
+                               var sText = (options.showIcon==false) ? $(this).text() : $(this).html();
+                                setTitleText(sText);
+                                //$this.data("dd").close();
+                                $this.close();
+                             };
+                             //actionSettings.oldIndex = a_array[$($this).prop("id")].index;
+                             });    
+  };
+  var createDropDown = function () {
+    var changeInsertionPoint = false;
+    var id = getPostID("postID");
+    var titleid = getPostID("postTitleID");
+    var titletextid = getPostID("postTitleTextID");
+    var childid = getPostID("postChildID");
+    var arrowid = getPostID("postArrowID");
+    var iWidth = $("#"+elementid).width();
+    iWidth = iWidth+2;//it always give -2 width; i dont know why
+    var sStyle = options.style;
+    if($("#"+id).length>0) {
+      $("#"+id).remove();
+      changeInsertionPoint = true;
+    };
+    var sDiv = '<div id="'+id+'" class="'+styles.dd+'"';
+    sDiv += (sStyle!="") ? ' style="'+sStyle+'"' : '';
+    sDiv += '>';
+    //create title bar
+    sDiv += createTitleDiv();
+    //create child
+    sDiv += createChildDiv();
+    sDiv += createATags();
+    sDiv += "</div>";
+    sDiv += "</div>";
+    if(changeInsertionPoint==true) {
+      var sid =getPostID("postElementHolder");
+      $("#"+sid).after(sDiv);
+    } else {
+      $("#"+elementid).after(sDiv);
+    };
+    if(ddList) {
+      var titleid = getPostID("postTitleID"); 
+      $("#"+titleid).hide();
+    };
+    
+    $("#"+id).css("width", iWidth+"px");
+    $("#"+childid).css("width", (iWidth-2)+"px");
+    if(allOptions.length>options.visibleRows) {
+      var margin = parseInt($("#"+childid+" a:first").css("padding-bottom")) + parseInt($("#"+childid+" a:first").css("padding-top"));
+      var iHeight = ((options.rowHeight)*options.visibleRows) - margin;
+      $("#"+childid).css("height", iHeight+"px");
+    } else if(ddList) {
+      var iHeight = $("#"+elementid).height();
+      $("#"+childid).css("height", iHeight+"px");
+    };
+    //set out of vision
+    if(changeInsertionPoint==false) {
+      setOutOfVision();
+      addRefreshMethods(elementid);
+    };
+    if($("#"+elementid).prop("disabled")==true) {
+      $("#"+id).css("opacity", styles.disabled);
+    };
+    applyEvents();
+    //add events
+    //arrow hightlight
+    $("#"+titleid).bind("mouseover", function(event) {
+                          hightlightArrow(1);
+                          });
+    $("#"+titleid).bind("mouseout", function(event) {
+                          hightlightArrow(0);
+                          });
+      //open close events
+    applyEventsOnA();
+    $("#"+childid+ " a.disabled").css("opacity", styles.disabled);
+    //alert("ddList "+ddList)
+    if(ddList) {
+      $("#"+childid).bind("mouseover", function(event) {if(!actionSettings.keyboardAction) {
+                                 actionSettings.keyboardAction = true;
+                                 $(document).bind("keydown", function(event) {
+                                                  var keyCode = event.keyCode;  
+                                                  actionSettings.currentKey = keyCode;
+                                                  if(keyCode==39 || keyCode==40) {
+                                                    //move to next
+                                                    event.preventDefault(); event.stopPropagation();
+                                                    next();
+                                                    setValue();
+                                                  };
+                                                  if(keyCode==37 || keyCode==38) {
+                                                    event.preventDefault(); event.stopPropagation();
+                                                    //move to previous
+                                                    previous();
+                                                    setValue();
+                                                  };
+                                                    });
+                                 
+                                 }});
+    };
+    $("#"+childid).bind("mouseout", function(event) {setInsideWindow(false);$(document).unbind("keydown");actionSettings.keyboardAction = false;actionSettings.currentKey=null;});
+    $("#"+titleid).bind("click", function(event) {
+                        setInsideWindow(false);
+                        if($("#"+childid+":visible").length==1) {
+                          $("#"+childid).unbind("mouseover");
+                        } else {
+                          $("#"+childid).bind("mouseover", function(event) {setInsideWindow(true);});
+                          //alert("open "+elementid + $this);
+                          //$this.data("dd").openMe();
+                          $this.open();
+                        };
+                        });
+    $("#"+titleid).bind("mouseout", function(evt) {
+                         setInsideWindow(false);
+                         });
+    if(options.showIcon && options.useSprite!=false) {
+      setTitleImageSprite();
+    };
+  };
+  var getByIndex = function (index) {
+    for(var i in a_array) {
+      if(a_array[i].index==index) {
+        return a_array[i];
+      };
+    };
+    return -1;
+  };
+  var manageSelection = function (obj) {
+    var childid = getPostID("postChildID");
+    if($("#"+childid+ " a."+styles.selected).length==1) { //check if there is any selected
+      oldSelectedValue = $("#"+childid+ " a."+styles.selected).text(); //i should have value here. but sometime value is missing
+      //alert("oldSelectedValue "+oldSelectedValue);
+    };
+    if(!ddList) {
+      $("#"+childid+ " a."+styles.selected).removeClass(styles.selected);
+    }; 
+    var selectedA = $("#"+childid + " a."+styles.selected).prop("id");
+    if(selectedA!=undefined) {
+      var oldIndex = (actionSettings.oldIndex==undefined || actionSettings.oldIndex==null) ? a_array[selectedA].index : actionSettings.oldIndex;
+    };
+    if(obj && !ddList) {
+      $(obj).addClass(styles.selected);
+    };  
+    if(ddList) {
+      var keyCode = actionSettings.currentKey;
+      if($("#"+elementid).prop("multiple")==true) {
+        if(keyCode == 17) {
+          //control
+            actionSettings.oldIndex = a_array[$(obj).prop("id")].index;
+            $(obj).toggleClass(styles.selected);
+          //multiple
+        } else if(keyCode==16) {
+          $("#"+childid+ " a."+styles.selected).removeClass(styles.selected);
+          $(obj).addClass(styles.selected);
+          //shift
+          var currentSelected = $(obj).prop("id");
+          var currentIndex = a_array[currentSelected].index;
+          for(var i=Math.min(oldIndex, currentIndex);i<=Math.max(oldIndex, currentIndex);i++) {
+            $("#"+getByIndex(i).id).addClass(styles.selected);
+          };
+        } else {
+          $("#"+childid+ " a."+styles.selected).removeClass(styles.selected);
+          $(obj).addClass(styles.selected);
+          actionSettings.oldIndex = a_array[$(obj).prop("id")].index;
+        };
+      } else {
+          $("#"+childid+ " a."+styles.selected).removeClass(styles.selected);
+          $(obj).addClass(styles.selected);
+          actionSettings.oldIndex = a_array[$(obj).prop("id")].index;       
+      };
+      //isSingle
+    };    
+  };
+  var addRefreshMethods = function (id) {
+    //deprecated
+    var objid = id;
+    getElement(objid).refresh = function(e) {
+       $("#"+objid).msDropDown(options);
+    };
+  };
+  var setInsideWindow = function (val) {
+    actionSettings.insideWindow = val;
+  };
+  var getInsideWindow = function () {
+    return actionSettings.insideWindow;
+    //will work on this
+    /*
+    var childid = getPostID("postChildID");
+    return ($("#"+childid + ":visible").length == 0) ? false : true;
+    */
+  };
+  var applyEvents = function () {
+    var mainid = getPostID("postID");
+    var actions_array = attributes.actions.split(",");
+    for(var iCount=0;iCount<actions_array.length;iCount++) {
+      var action = actions_array[iCount];
+      //var actionFound = $("#"+elementid).prop(action);
+      var actionFound = has_handler(action);
+      if(actionFound==true) {
+        switch(action) {
+          case "focus": 
+          $("#"+mainid).bind("mouseenter", function(event) {
+                             getElement(elementid).focus();
+                             //$("#"+elementid).focus();
+                             });
+          break;
+          case "click": 
+          $("#"+mainid).bind("click", function(event) {
+                             //getElement(elementid).onclick();
+                             $("#"+elementid).trigger("click");
+                             });
+          break;
+          case "dblclick": 
+          $("#"+mainid).bind("dblclick", function(event) {
+                             //getElement(elementid).ondblclick();
+                             $("#"+elementid).trigger("dblclick");
+                             });
+          break;
+          case "mousedown": 
+          $("#"+mainid).bind("mousedown", function(event) {
+                             //getElement(elementid).onmousedown();
+                             $("#"+elementid).trigger("mousedown");
+                             });
+          break;
+          case "mouseup": 
+          //has in close mthod
+          $("#"+mainid).bind("mouseup", function(event) {
+                             //getElement(elementid).onmouseup();
+                             $("#"+elementid).trigger("mouseup");
+                             //setValue();
+                             });
+          break;
+          case "mouseover": 
+          $("#"+mainid).bind("mouseover", function(event) {
+                             //getElement(elementid).onmouseover();                            
+                             $("#"+elementid).trigger("mouseover");
+                             });
+          break;
+          case "mousemove": 
+          $("#"+mainid).bind("mousemove", function(event) {
+                             //getElement(elementid).onmousemove();
+                             $("#"+elementid).trigger("mousemove");
+                             });
+          break;
+          case "mouseout": 
+          $("#"+mainid).bind("mouseout", function(event) {
+                             //getElement(elementid).onmouseout();
+                             $("#"+elementid).trigger("mouseout");
+                             });
+          break;          
+        };
+      };
+    };
+    
+  };
+  var setOutOfVision = function () {
+    var sId = getPostID("postElementHolder");
+    $("#"+elementid).after("<div class='"+styles.ddOutOfVision+"' style='height:0px;overflow:hidden;position:absolute;' id='"+sId+"'></div>");
+    $("#"+elementid).appendTo($("#"+sId));
+  };
+  var setTitleText = function (sText) {
+    var titletextid = getPostID("postTitleTextID");
+    $("#"+titletextid).html(sText);   
+  };
+  var navigateA = function(w) {
+    var where = w;
+    var childid = getPostID("postChildID");
+    var visibleA = $("#"+childid + " a:visible");
+    var totalA = visibleA.length;
+    var currentP = $("#"+childid +" a:visible").index($("#"+childid +" a.selected:visible"));
+    var nextA;
+    switch(where) {
+      case "next":
+        if(currentP < totalA-1) {
+          currentP++;
+          nextA = visibleA[currentP];
+        };
+      break;
+      case "previous":
+        if(currentP < totalA && currentP>0) {
+          currentP--;
+          nextA = visibleA[currentP];
+        };
+      break;  
+    };
+    if(typeof(nextA)=="undefined") {
+      return false;
+    };
+    $("#"+childid + " a."+styles.selected).removeClass(styles.selected);  
+    $(nextA).addClass(styles.selected);
+    var selectedA = nextA.id;
+    if(!ddList) {
+      var sText = (options.showIcon==false) ? a_array[selectedA].text : $("#"+selectedA).html();
+      setTitleText(sText);
+      setTitleImageSprite(a_array[selectedA].index);
+    };
+    if(where=="next")  {
+      if(parseInt(($("#"+selectedA).position().top+$("#"+selectedA).height()))>=parseInt($("#"+childid).height())) {
+        $("#"+childid).scrollTop(($("#"+childid).scrollTop())+$("#"+selectedA).height()+$("#"+selectedA).height());
+      };
+    } else {
+      if(parseInt(($("#"+selectedA).position().top+$("#"+selectedA).height())) <=0) {
+        $("#"+childid).scrollTop(($("#"+childid).scrollTop()-$("#"+childid).height())-$("#"+selectedA).height());
+      };        
+    };  
+  };
+  var next = function () {
+    navigateA("next");
+  };
+  var previous = function () {
+    navigateA("previous");
+  };
+  var setTitleImageSprite = function(i) {
+    if(options.useSprite!=false) {
+      var titletextid = getPostID("postTitleTextID");
+      var index = (typeof(i)=="undefined") ? getElement(elementid).selectedIndex : i;
+      var sClassName = getElement(elementid).options[index].className;
+      if(sClassName.length>0) {
+        var childid = getPostID("postChildID");
+        var id = $("#"+childid + " a."+sClassName).prop("id");
+        var backgroundImg = $("#"+id).css("background-image");
+        var backgroundPosition = $("#"+id).css("background-position");
+        var paddingLeft = $("#"+id).css("padding-left");
+        if(backgroundImg!=undefined) {
+          $("#"+titletextid).find("."+styles.ddTitleText).attr('style', "background:"+backgroundImg);
+        };
+        if(backgroundPosition!=undefined) {
+          $("#"+titletextid).find("."+styles.ddTitleText).css('background-position', backgroundPosition);
+        };
+        if(paddingLeft!=undefined) {
+          $("#"+titletextid).find("."+styles.ddTitleText).css('padding-left', paddingLeft); 
+        };
+        $("#"+titletextid).find("."+styles.ddTitleText).css('background-repeat', 'no-repeat');        
+        $("#"+titletextid).find("."+styles.ddTitleText).css('padding-bottom', '2px');
+      };
+    };    
+  };
+  var setValue = function () {
+    //alert("setValue "+elementid);
+    var childid = getPostID("postChildID");
+    var allSelected = $("#"+childid + " a."+styles.selected);
+    if(allSelected.length==1) {
+      var sText = $("#"+childid + " a."+styles.selected).text();
+      var selectedA = $("#"+childid + " a."+styles.selected).prop("id");
+      if(selectedA!=undefined) {
+        var sValue = a_array[selectedA].value;
+        getElement(elementid).selectedIndex = a_array[selectedA].index;
+      };
+      //set image on title if using sprite
+      
+      if(options.showIcon && options.useSprite!=false)
+        setTitleImageSprite();
+    } else if(allSelected.length>1) { 
+      //var alls = $("#"+elementid +" > option:selected").removeprop("selected");
+      for(var i=0;i<allSelected.length;i++) {
+        var selectedA = $(allSelected[i]).prop("id");
+        var index = a_array[selectedA].index;
+        getElement(elementid).options[index].selected = "selected";
+      };
+    };
+    //alert(getElement(elementid).selectedIndex);
+    var sIndex = getElement(elementid).selectedIndex;
+    $this.ddProp["selectedIndex"]= sIndex;
+    //alert("selectedIndex "+ $this.ddProp["selectedIndex"] + " sIndex "+sIndex);
+  };
+  var has_handler = function (name) {
+    // True if a handler has been added in the html.
+    if ($("#"+elementid).prop("on" + name) != undefined) {
+      return true;
+    };
+    // True if a handler has been added using jQuery.
+    var evs = $("#"+elementid).data("events");
+    if (evs && evs[name]) {
+      return true;
+    };
+    return false;
+  };
+  var checkMethodAndApply = function () {
+    var childid = getPostID("postChildID");
+    if(has_handler('change')==true) {
+      //alert(1);
+      var currentSelectedValue = a_array[$("#"+childid +" a.selected").prop("id")].text;
+      if($.trim(oldSelectedValue) !== $.trim(currentSelectedValue) && oldSelectedValue!==""){
+        $("#"+elementid).trigger("change");
+      };
+    };
+    if(has_handler('mouseup')==true) {
+      $("#"+elementid).trigger("mouseup");
+    };
+    if(has_handler('blur')==true) { 
+      $(document).bind("mouseup", function(evt) {
+                           $("#"+elementid).focus();
+                           $("#"+elementid)[0].blur();
+                           setValue();
+                           $(document).unbind("mouseup");
+                        });
+    };
+  };
+  var hightlightArrow = function(ison) {
+    var arrowid = getPostID("postArrowID");
+    if(ison==1)
+      $("#"+arrowid).css({backgroundPosition:'0 100%'});
+    else 
+      $("#"+arrowid).css({backgroundPosition:'0 0'});
+  };
+  var setOriginalProperties = function() {
+    //properties = {};
+    //alert($this.data("dd"));
+    for(var i in getElement(elementid)) {
+      if(typeof(getElement(elementid)[i])!='function' && getElement(elementid)[i]!==undefined && getElement(elementid)[i]!==null) {
+        $this.set(i, getElement(elementid)[i], true);//true = setting local properties
+      };
+    };
+  };
+  var setValueByIndex = function(prop, val) {
+      if(getByIndex(val) != -1) {
+        getElement(elementid)[prop] = val;
+        var childid = getPostID("postChildID");
+        $("#"+childid+ " a."+styles.selected).removeClass(styles.selected);
+        $("#"+getByIndex(val).id).addClass(styles.selected);
+        var sText = getByIndex(getElement(elementid).selectedIndex).html;
+        setTitleText(sText);        
+      };
+  };
+  var addRemoveFromIndex = function(i, action) {
+    if(action=='d') {
+      for(var key in a_array) {
+        if(a_array[key].index == i) {
+          delete a_array[key];
+          break;
+        };
+      };
+    };
+    //update index
+    var count = 0;
+    for(var key in a_array) {
+      a_array[key].index = count;
+      count++;
+    };
+  };
+  var shouldOpenOpposite = function() {
+    var childid = getPostID("postChildID");
+    var main = getPostID("postID");
+    var pos = $("#"+main).position();
+    var mH = $("#"+main).height();
+    var wH = $(window).height();
+    var st = $(window).scrollTop();
+    var cH = $("#"+childid).height();
+    var css = {zIndex:options.zIndex, top:(pos.top+mH)+"px", display:"none"};
+    var ani = options.animStyle;
+    var opp = false;
+    var borderTop = styles.noBorderTop;
+    $("#"+childid).removeClass(styles.noBorderTop);
+    $("#"+childid).removeClass(styles.borderTop);
+    if( (wH+st) < Math.floor(cH+mH+pos.top) ) {
+      var tp = pos.top-cH;
+      if((pos.top-cH)<0) {
+        tp = 10;
+      };
+      css = {zIndex:options.zIndex, top:tp+"px", display:"none"};
+      ani = "show";
+      opp = true;
+      borderTop = styles.borderTop;
+    };
+    return {opp:opp, ani:ani, css:css, border:borderTop};
+  };  
+  var fireOpenEvent = function() {
+      if($this.onActions["onOpen"]!=null) {
+        eval($this.onActions["onOpen"])($this);
+      };    
+  };
+  var fireCloseEvent = function() {
+      checkMethodAndApply();
+      if($this.onActions["onClose"]!=null) {
+        eval($this.onActions["onClose"])($this);
+      };    
+  };
+  /************* public methods *********************/
+  this.open = function() {
+    if(($this.get("disabled", true) == true) || ($this.get("options", true).length==0)) return;
+    var childid = getPostID("postChildID");
+    if(msOldDiv!="" && childid!=msOldDiv) { 
+      $("#"+msOldDiv).slideUp("fast");
+      $("#"+msOldDiv).css({zIndex:'0'});
+    };
+    if($("#"+childid).css("display")=="none") {
+      oldSelectedValue = a_array[$("#"+childid +" a.selected").prop("id")].text;
+      //keyboard action
+      var sText ="";
+      oldHeight = $("#"+childid).height();
+      $("#"+childid +" a").show();
+      $(document).bind("keydown", function(event) {
+                          var keyCode = event.keyCode;
+                          //alert("keyCode "+keyCode);
+                          
+                          if(keyCode==8) {
+                              event.preventDefault(); event.stopPropagation();
+                              //remove char
+                              sText = (sText.length==0) ? "" : sText.substr(0, sText.length-1);
+                          };
+                          switch(keyCode) {
+                            case 39:
+                            case 40:
+                              //move to next
+                              event.preventDefault(); event.stopPropagation();
+                              next();                             
+                            break;
+                            case 37:
+                            case 38:
+                              //move to previous
+                              event.preventDefault(); event.stopPropagation();
+                              previous();
+                            break;
+                            case 27:
+                            case 13:
+                              $this.close();
+                              setValue();
+                            break;
+                            default:
+                              if(keyCode>46) {
+                                sText += String.fromCharCode(keyCode);
+                              };
+                              var ind = in_array(sText);
+                              if(ind != -1) {
+                                $("#"+childid).css({height:'auto'});
+                                $("#"+childid +" a").hide();
+                                $(ind).show();                                
+                                var wf = shouldOpenOpposite();
+                                $("#"+childid).css(wf.css);
+                                $("#"+childid).css({display:'block'});
+                              } else {
+                                $("#"+childid +" a").show();
+                                $("#"+childid).css({height:oldHeight+'px'});
+                              };
+                            break;
+                          };
+                          if(has_handler("keydown")==true) {
+                            getElement(elementid).onkeydown();
+                          };        
+                        });
+          
+      $(document).bind("keyup", function(event) {
+        if($("#"+elementid).prop("onkeyup")!=undefined) {
+          //$("#"+elementid).keyup();
+          getElement(elementid).onkeyup();
+        };                         
+      });
+      //end keyboard action
+      
+      //close onmouseup
+      $(document).bind("mouseup", function(evt){
+                          if(getInsideWindow()==false) {
+                          //alert("evt.target: "+evt.target);
+                           //$this.data("dd").close();
+                           $this.close();
+                          };
+                         });                            
+      
+      //check open
+      var wf = shouldOpenOpposite();
+      $("#"+childid).css(wf.css);
+      if(wf.opp==true) {
+        $("#"+childid).css({display:'block'});
+        $("#"+childid).addClass(wf.border);
+        fireOpenEvent();
+      } else {
+        $("#"+childid)[wf.ani]("fast", function() {
+                              $("#"+childid).addClass(wf.border);
+                              fireOpenEvent();
+                              });
+      };
+      if(childid != msOldDiv) {
+        msOldDiv = childid;
+      };
+    };
+  };
+  this.close = function() {
+        var childid = getPostID("postChildID");
+        var top = $("#"+getPostID("postTitleID")).position().top;
+        var wf = shouldOpenOpposite();
+        //var oldHeight = $("#"+childid).height();
+        isFilter = false;
+        if(wf.opp==true) {
+          $("#"+childid).animate({
+                    height:0,
+                    top: top
+                    }, function() {
+                        $("#"+childid).css({height:oldHeight+'px', display:'none'});
+                        fireCloseEvent();
+                    });
+        } 
+        else {
+          $("#"+childid).slideUp("fast", function(event) {
+                                fireCloseEvent();
+                                $("#"+childid).css({zIndex:'0'});
+                                $("#"+childid).css({height:oldHeight+'px'});
+                                });
+        };
+        setTitleImageSprite();
+        $(document).unbind("keydown");
+        $(document).unbind("keyup");
+        $(document).unbind("mouseup");        
+    
+  };
+  this.selectedIndex = function(i) {
+    if(typeof(i)=="undefined") {
+      return $this.get("selectedIndex");
+    } else {
+      $this.set("selectedIndex", i);
+    };
+  };
+  this.debug = function(is) {
+    if(typeof(is)=="undefined" || is==true) {
+      $("."+styles.ddOutOfVision).removeAttr("style");
+    } else {
+      $("."+styles.ddOutOfVision).attr("style", "height:0px;overflow:hidden;position:absolute");
+    };
+  };
+  //update properties
+  this.set = function(prop, val, isLocal) {
+    //alert("- set " + prop + " : "+val);
+    if(prop==undefined || val==undefined) throw {message:"set to what?"}; 
+    $this.ddProp[prop] = val;
+    if(isLocal!=true) { 
+      switch(prop) {
+        case "selectedIndex":
+          setValueByIndex(prop, val);
+        break;
+        case "disabled":
+          $this.disabled(val, true);
+        break;
+        case "multiple":
+          getElement(elementid)[prop] = val;
+          ddList = ($(sElement).prop("size")>0 || $(sElement).prop("multiple")==true) ? true : false; 
+          if(ddList) {
+            //do something
+            var iHeight = $("#"+elementid).height();
+            var childid = getPostID("postChildID");
+            $("#"+childid).css("height", iHeight+"px");         
+            //hide titlebar
+            var titleid = getPostID("postTitleID");
+            $("#"+titleid).hide();
+            var childid = getPostID("postChildID");
+            $("#"+childid).css({display:'block',position:'relative'});
+            applyEventsOnA();
+          };
+        break;
+        case "size":
+          getElement(elementid)[prop] = val;
+          if(val==0) {
+            getElement(elementid).multiple = false;
+          };
+          ddList = ($(sElement).prop("size")>0 || $(sElement).prop("multiple")==true) ? true : false; 
+          if(val==0) {
+            //show titlebar
+            var titleid = getPostID("postTitleID");
+            $("#"+titleid).show();
+            var childid = getPostID("postChildID");
+            $("#"+childid).css({display:'none',position:'absolute'});
+            var sText = "";
+            if(getElement(elementid).selectedIndex>=0) {
+              var aObj = getByIndex(getElement(elementid).selectedIndex);
+              sText = aObj.html;
+              manageSelection($("#"+aObj.id));
+            }; 
+            setTitleText(sText);
+          } else {
+            //hide titlebar
+            var titleid = getPostID("postTitleID");
+            $("#"+titleid).hide();
+            var childid = getPostID("postChildID");
+            $("#"+childid).css({display:'block',position:'relative'});            
+          };
+        break;
+        default:
+        try{
+          //check if this is not a readonly properties
+          getElement(elementid)[prop] = val;
+        } catch(e) {
+          //silent
+        };        
+        break;
+      };
+    };
+    //alert("get " + prop + " : "+$this.ddProp[prop]);
+    //$this.set("selectedIndex", 0);
+  };
+  this.get = function(prop, forceRefresh) {
+    if(prop==undefined && forceRefresh==undefined) {
+      //alert("c1 : " +$this.ddProp);
+      return $this.ddProp;
+    };
+    if(prop!=undefined && forceRefresh==undefined) {
+      //alert("c2 : " +$this.ddProp[prop]);
+      return ($this.ddProp[prop]!=undefined) ? $this.ddProp[prop] : null;
+    };
+    if(prop!=undefined && forceRefresh!=undefined) {
+      //alert("c3 : " +getElement(elementid)[prop]);
+      return getElement(elementid)[prop];
+    };
+  };
+  this.visible = function(val) {
+    var id = getPostID("postID");
+    if(val==true) {
+      $("#"+id).show();
+    } else if(val==false) {
+      $("#"+id).hide();
+    } else {
+      return $("#"+id).css("display");
+    };
+  };
+  this.add = function(opt, index) {
+    var objOpt = opt;
+    var sText = objOpt.text;
+    var sValue = (objOpt.value==undefined || objOpt.value==null) ? sText : objOpt.value;
+    var img = (objOpt["title"]==undefined || objOpt["title"]==null) ? '' : objOpt["title"];
+    var i = (index==undefined || index==null) ? getElement(elementid).options.length : index;
+    getElement(elementid).options[i] = new Option(sText, sValue);
+    if(img!='') getElement(elementid).options[i]["title"] = img;
+    //check if exist
+    var ifA = getByIndex(i);
+    if(ifA != -1) {
+      //replace
+      var aTag = createA(getElement(elementid).options[i], i, "", "");
+      $("#"+ifA.id).html(aTag);
+      //a_array[key]
+    } else {
+      var aTag = createA(getElement(elementid).options[i], i, "", "");
+      //add
+      var childid = getPostID("postChildID");
+      $("#"+childid).append(aTag);
+      applyEventsOnA();
+    };
+  };  
+  this.remove = function(i) {
+    getElement(elementid).remove(i);
+    if((getByIndex(i))!= -1) { $("#"+getByIndex(i).id).remove();addRemoveFromIndex(i, 'd');};
+    //alert("a" +a);
+    if(getElement(elementid).length==0) {
+      setTitleText("");
+    } else {
+      var sText = getByIndex(getElement(elementid).selectedIndex).html;
+      setTitleText(sText);
+    };
+    $this.set("selectedIndex", getElement(elementid).selectedIndex);
+  };
+  this.disabled = function(dis, isLocal) {
+    getElement(elementid).disabled = dis;
+    //alert(getElement(elementid).disabled);
+    var id = getPostID("postID");
+    if(dis==true) {
+      $("#"+id).css("opacity", styles.disabled);
+      $this.close();
+    } else if(dis==false) {
+      $("#"+id).css("opacity", 1);
+    };
+    if(isLocal!=true) {
+      $this.set("disabled", dis);
+    };
+  };
+  //return form element
+  this.form = function() {
+    return (getElement(elementid).form == undefined) ? null : getElement(elementid).form;
+  };
+  this.item = function() {
+    //index, subindex - use arguments.length
+    if(arguments.length==1) {
+      return getElement(elementid).item(arguments[0]);
+    } else if(arguments.length==2) {
+      return getElement(elementid).item(arguments[0], arguments[1]);
+    } else {
+      throw {message:"An index is required!"};
+    };
+  };
+  this.namedItem = function(nm) {
+    return getElement(elementid).namedItem(nm);
+  };
+  this.multiple = function(is) {
+    if(typeof(is)=="undefined") {
+      return $this.get("multiple");
+    } else {
+      $this.set("multiple", is);
+    };
+    
+  };
+  this.size = function(sz) {
+    if(typeof(sz)=="undefined") {
+      return $this.get("size");
+    } else {
+      $this.set("size", sz);
+    };    
+  };  
+  this.addMyEvent = function(nm, fn) {
+    $this.onActions[nm] = fn;
+  };
+  this.fireEvent = function(nm) {
+    eval($this.onActions[nm])($this);
+  };
+  //end 
+  var updateCommonVars = function() {
+    $this.set("version", $.msDropDown.version);
+    $this.set("author", $.msDropDown.author);
+  };
+  var init = function() {
+    //create wrapper
+    createDropDown();
+    //update propties
+    //alert("init");
+    setOriginalProperties();
+    updateCommonVars();
+    if(options.onInit!='') {
+      eval(options.onInit)($this);
+    };    
+  };
+  init();
+  };
+  //static
+  $.msDropDown = {
+    version: 2.37,
+    author: "Marghoob Suleman",
+    counter:20,
+    create: function(id, opt) {
+      return $(id).msDropDown(opt).data("dd");
+    }
+  };
+  $.fn.extend({
+          msDropDown: function(options)
+          {
+              return this.each(function()
+              {
+                 //if ($(this).data('dd')) return; // need to comment when using refresh method - will remove in next version
+                 var mydropdown = new dd(this, options);
+                 $(this).data('dd', mydropdown);
+              });
+          }
+    });
+  //fixed for prop
+  if(typeof($.fn.prop)=='undefined') {
+    $.fn.prop = function(w) {
+      return $(this).attr(w);
+    };
+  };       
+  
+})(jQuery);
