@@ -272,6 +272,7 @@ body.widget-logged-in {
     }
 
     .btn-login-loggedin {
+      display: inline-block;
       @include rem('padding', 0, 13, 2, 13);
       @include rem('line-height', 36);
       font-size: inherit;
@@ -295,7 +296,6 @@ body.widget-logged-in {
       }
 
       &.tap {
-        display: block;
         background-color: $white;
         border-bottom-color: transparent;
         padding-bottom: 0px;
