@@ -3,11 +3,14 @@
  */
 .breadcrumb {
   width: auto;
-  float: left;
+  float: none;
   display: inline-block;
-  @include rem('margin-top', 6);
+  // @include rem('margin-top', 6);
+  margin: 0;
+  vertical-align: middle;
 
   ul {
+    overflow: hidden;
 
     li {
       float: left;

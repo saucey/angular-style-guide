@@ -7,9 +7,10 @@ header.header {
   position: relative;
   margin: 0 auto;
   padding: 0;
-  // @include rem('line-height', 63);
+  @include rem('height', 63);
   @include rem('min-height', 63);
   display: table;
+  width: 100%;
 
   .sx,
   .md,
@@ -75,13 +76,10 @@ header.header {
   // Desktop elements
   .region-header-left {
     display: none;
-    float: left;
-    width: auto;
   }
 
   .region-header {
     display: none;
-    float: right;
 
     .block {
       display: none;
@@ -100,22 +98,13 @@ header.header {
 @include breakpoint($brk-tablet) {
 
   header.header {
-    display: block;
     @include rem('min-height', 90);
-    @include rem('padding', 25, 0);
-    padding-right: 7.3%;
-    padding-left: 7.3%;
-
-    .btn-login {
-      float: right;
-      width: auto;
-      padding: 0;
-    }    
+    padding: 0 7.3%;
 
     .dx {
-      float: right;
+      float: none;
       width: auto;
-      padding-right: 0;
+      padding: 0;
     }
 
     // Mobile elements
@@ -125,12 +114,10 @@ header.header {
     }
 
     // Desktop elements
-    .region-header-left {
-      display: block;
-    }
-
+    .region-header-left,
     .region-header {
-      display: block;
+      display: table-cell;
+      vertical-align: middle;
 
       .block {
         display: block;
