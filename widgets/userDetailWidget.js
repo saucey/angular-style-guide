@@ -34,11 +34,11 @@
 
     getDataType: function () {
 
-      var apiUrlOrig = this.apiUrl.split('/').splice(0, 3).join('/'),
+      var apiUrlOrig = this.apiUrl.split('/').splice(2, 1).join('/'),
           // Check if is a relative address without protocol http/https
           localDomain = this.apiUrl.indexOf('://') === -1,
           // Check if current apiUrl is the same domain of current address
-          sameDomain = doc.location.origin.indexOf(apiUrlOrig) !== -1;
+          sameDomain = doc.location.host.indexOf(apiUrlOrig) !== -1;
 
       return (sameDomain || localDomain) ? 'json' : 'jsonp';
     },
@@ -93,7 +93,7 @@
       var Fn = {
 
         isMobile: function () {
-          return doc.documentElement.offsetWidth < 640;
+          return doc.documentElement.offsetWidth <= 640;
         },
 
         mobileTapPresent: function () {
