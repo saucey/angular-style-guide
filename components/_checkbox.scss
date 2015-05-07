@@ -1,7 +1,8 @@
 label.checkbox {
+	padding-right: 0;
 	display: inline-block;
 	//background-color: red;
-	padding-left: 18px;
+	padding-left: 35px;
 	position: relative;
 	line-height: $elements_checkbox_height;
 	text-align: left;
@@ -45,6 +46,9 @@ label.checkbox {
 			top: -$elements_checkbox_top;
 			left: -3px;
 			cursor: pointer;
+			&+ span.label {
+			  	float: left;
+			}
 		}
 	}
 	&.required {

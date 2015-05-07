@@ -117,13 +117,15 @@
         opacity: 1;
       }
     }
-    li.label, label {
-      font-family: $font_normal;
-      text-align: right;
+    li.label {
+      padding-right: 55px;
       @media screen and(max-width: $rc-s-max-width) {
         text-align: left;
       }
-      padding-right: 55px;
+    }
+    li.label, label {
+      font-family: $font_normal;
+      text-align: right;
       &:after {
         content: "";
       }
@@ -399,11 +401,7 @@ ul.horizontal {
  */
 .lhfs_widget {
 
-  [class*='span'] {
-    margin-left: 0;
-
-    &:first-child {
-      margin-left: 0;
-    }
+  .product.data.span12 {
+    margin-left: 0; //overrides the setting for a left margin of 2% for all spans starting at the second one in a list, which creates an indent in lhfs widget design in the .product ul
   }
 }

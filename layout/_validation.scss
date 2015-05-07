@@ -56,7 +56,7 @@ form {
       display: none;
     }
     &[type=checkbox]~ .errorText {
-      left: -20px;
+      left: -35px;
       top: - ($elements_checkbox_top + $elements_checkbox_height + $errorText_line-height);
     }
   }
