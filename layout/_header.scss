@@ -12,26 +12,26 @@ header.header {
   display: table;
   width: 100%;
 
-  .sx,
-  .md,
-  .dx {
+  .left,
+  .middle,
+  .right {
     display: table-cell;
     vertical-align: middle;
   }
 
-  .sx {
+  .left {
     width: 30%;
     text-align: left;
     padding-left: 1.5rem;
     @include rem('min-height', 63);
   }
 
-  .md {
+  .middle {
     width: 40%;
     text-align: center;
   }
 
-  .dx {
+  .right {
     width: 30%;
     text-align: right;
     padding-right: 1.5rem;
@@ -101,7 +101,7 @@ header.header {
     @include rem('min-height', 90);
     padding: 0 7.3%;
 
-    .dx {
+    .right {
       float: none;
       width: auto;
       padding: 0;
