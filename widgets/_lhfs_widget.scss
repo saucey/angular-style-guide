@@ -34,9 +34,6 @@
     margin: 30px 0;
     width: 100%;
     li.product {
-      .details {
-        display: none;
-      }
       .description {
         &:before {
           font-family: $font_icons;
@@ -48,14 +45,6 @@
         }
         padding-left: 40px;
         margin-bottom: 20px;
-      }
-      &.data {
-        .details {
-          display: block;
-        }
-        .description {
-          display: none;
-        }
       }
 
       div.title, span.police-number {
@@ -105,9 +94,6 @@
         min-height: 0;  //overwriting min-height from row-fluid
         line-height: 18px;  //overwriting line-height from *body
       }
-      &+ ul.horizontal {
-        //margin-top: -10px;
-      }
       &> li {
         color: $red;
         font-size: $small;
@@ -154,65 +140,6 @@
     @media screen and(max-width: $rc-s-max-width) {
       min-height: 5px;
     }
-  }
-}
-
-.inline_alert {
-  @include inlineFrame();
-  display: block;
-  //padding-top: 0;
-  //padding-bottom: 0;
-  border: 1px solid $light_red;
-  background-color: $lighter_red;
-  hr {
-    height: 1px;
-    color: $light_red;
-    width: 100%;
-  }
-  ul.payments {
-    margin: 15px -15px;
-    button.white {
-      background-color: transparent;
-      &:before {
-        background-color: transparent;      
-      }
-    }
-    & > li {
-      & > ul {
-        padding: 10px 15px;
-        border: 1px solid $light_red;
-        border-width: 1px 0 0 0;
-        width: 100%;
-        display: table;
-        & > li {
-          //display: table-cell;
-          float: none;
-          //this should ultimately be replaced by grid classes, but they were causing a bit of a mess so this is an arrangement to set it up
-          &:first-of-type:last-of-type {  //this only applies to a li if it is the only one..
-            text-align: right;
-          }
-          &:nth-of-type(2) {
-            width: 120px;
-            span.debit {
-              font-family: $font_medium;
-              &:before {
-                content: "€";
-              }
-            }
-          }
-          &:nth-of-type(3) {
-            width: 80px;
-          }
-          &:nth-of-type(4) {
-            width: 120px;
-          }
-        }
-      }
-    }
-  }
-  h3 {
-    color: $black;
-    font-weight: bold;
   }
 }
 
@@ -292,6 +219,65 @@
   }
   .date {
     color: $blue;
+  }
+}
+
+.inline_alert {
+  @include inlineFrame();
+  display: block;
+  //padding-top: 0;
+  //padding-bottom: 0;
+  border: 1px solid $light_red;
+  background-color: $lighter_red;
+  hr {
+    height: 1px;
+    color: $light_red;
+    width: 100%;
+  }
+  ul.payments {
+    margin: 15px -15px;
+    button.white {
+      background-color: transparent;
+      &:before {
+        background-color: transparent;      
+      }
+    }
+    & > li {
+      & > ul {
+        padding: 10px 15px;
+        border: 1px solid $light_red;
+        border-width: 1px 0 0 0;
+        width: 100%;
+        display: table;
+        & > li {
+          //display: table-cell;
+          float: none;
+          //this should ultimately be replaced by grid classes, but they were causing a bit of a mess so this is an arrangement to set it up
+          &:first-of-type:last-of-type {  //this only applies to a li if it is the only one..
+            text-align: right;
+          }
+          &:nth-of-type(2) {
+            width: 120px;
+            span.debit {
+              font-family: $font_medium;
+              &:before {
+                content: "€";
+              }
+            }
+          }
+          &:nth-of-type(3) {
+            width: 80px;
+          }
+          &:nth-of-type(4) {
+            width: 120px;
+          }
+        }
+      }
+    }
+  }
+  h3 {
+    color: $black;
+    font-weight: bold;
   }
 }
 
