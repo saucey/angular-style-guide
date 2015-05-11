@@ -387,7 +387,8 @@ ul.horizontal {
  */
 .lhfs_widget {
 
-  .product.data.span12 {
+  .product.data.span12, .row-fluid li.value[class*='span'] {
     margin-left: 0; //overrides the setting for a left margin of 2% for all spans starting at the second one in a list, which creates an indent in lhfs widget design in the .product ul
   }
+
 }
