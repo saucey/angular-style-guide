@@ -1,19 +1,43 @@
 /*jshint multistr: true */
 /**
  * User details script
+ * Dependencies: 
+ * - vendors/jquery.cookie.js (Cookie jQuery handlers)
+ * - modernizr.custom.js (Proper cross-browser style)
  */
 
 (function(doc, win) {
 
   'use strict';
 
-  // Register vars for local scope
+  /**
+   * Register global variables for local scope
+   */
   var $ = win.jQuery,
       Drupal = win.Drupal;
 
+  /**
+   * User widget's configuration
+   */
+
+  // This is the template of user_detail_widget wrapper taken from Aegon 
+  // Technical Design Libraryand converted in JavaScript string.
   var template = '<div id="user_detail_widget" class="user_detail_widget">\n<div class="inplace">\n<button class="btn-login-loggedin">Ingelogd</button>\n<div class="dropdown">\n<div class="highlight mobile">\n<div class="text">\n<p class="welcome">\n<strong>Welcome <span class="user_detail_widget_name">username</span>.</strong> Uw vorige bezoek was op <span class="user_detail_widget_last_access">00-00-0000 om 00:00 uur</span></p>\n</div>\n</div>\n<div class="text">\n<p class="name"><span class="user_detail_widget_name">username</span></p>\n<p class="log">Uw vorige bezoek was op <span class="user_detail_widget_last_access">00-00-0000 om 00:00 uur</span></p>\n<p class="action">\n<a href="#" class="button arrow responsive-approach">Uitloggen</a>\n<a href="#" class="button white responsive-approach myaegon">Mijn Overzicht</a>\n</p>\n</div>\n</div>\n</div>\n<div class="text">\n<p class="name"><span class="user_detail_widget_name">username</span></p>\n</div>\n<div class="highlight desktop">\n<div class="text">\n<p class="welcome">Welcome <span class="user_detail_widget_name">username</span>.</p>\n<p class="log">Uw vorige bezoek was op <span class="user_detail_widget_last_access">00-00-0000 om 00:00 uur</span></p>\n</div>\n</div>\n</div>';
 
-  // Add new item to public Drupal object
+  // User widget JSON endpoint (hostname is declared in 
+  // Drupal.settings.onlineAegonNl.hostname object's item).
+  var realEndpoint = '/services/US_RestGatewayWeb/rest/requestResponse/BS_PARTIJ_03/retrieve';
+
+  // ID string where the user widget will be appended
+  var appendUserWidgetTo = '#shw-user-details';
+
+  // MijnAegon cookie's name
+  var mijnAegonCookieLoggedInName = 'mijn_last_login';
+
+  /**
+   * User widget's Drupal script.
+   * Add new item to public Drupal object
+   */
   Drupal.behaviors.userDetailWidget = {
 
     attach: function (context, settings) {
@@ -24,70 +48,130 @@
 
     setup: function (settings) {
 
-      // Set url API
-      // this.apiUrl = settings.basePath + settings.pathToTheme +
-      //   '/includes/fake-widgets.php?id=';
-      this.apiUrl = '/data/widgets/user_detail.json';
+      // Set url API for local and real environments
+      if (settings.onlineAegonNl.hostname === 'local') {
+        this.apiUrl = '/file/example/user_detail_bs.json';
+      } else {
+        this.apiUrl = settings.onlineAegonNl.hostname + realEndpoint;
+      }
 
       this.getData();
     },
 
-    getDataType: function () {
-
-      var apiUrlOrig = this.apiUrl.split('/').splice(2, 1).join('/'),
-          // Check if is a relative address without protocol http/https
-          localDomain = this.apiUrl.indexOf('://') === -1,
-          // Check if current apiUrl is the same domain of current address
-          sameDomain = doc.location.host.indexOf(apiUrlOrig) !== -1;
-
-      return (sameDomain || localDomain) ? 'json' : 'jsonp';
-    },
-
     getData: function () {
 
-      var that = this;
+      // Local variables
+      var that = this,
+          dataType = this.getDataType(),
+          jsonpPayload,
+          retreiveBSPartij,
+          checkSanityOfJson;
 
-      $.ajax({
-        url: this.apiUrl,
-        dataType: this.getDataType(),
-        success: function(data){
-
-          // Activate the widget
-          that.initialize(data);
+      // Payload for JSONP
+      jsonpPayload = {
+        'retrieveRequest': {
+          'AILHEADER': {
+            'CLIENTID': 'MobileKlantenApp',
+            'CORRELATIONID': '##UAT##'
+          }
         }
+      };
+
+      checkSanityOfJson = function (jsonObject) {
+
+        // Check for retrieveResponse in the passed object
+        if ('retrieveResponse' in jsonObject) {
+          return true;
+        }
+
+        // Return false by default
+        return false;
+      };
+
+      // AJAX Success function
+      retreiveBSPartij = function (jsonData) {
+
+        // Local variables
+        var isString, parsedJson, data, isLogged;
+
+        // Check is jsonData is string that need to be parsed
+        isString = typeof parsedJson === 'string';
+
+        // Parse the JSON if needed
+        parsedJson = isString ? $.parseJSON(jsonData) : jsonData;
+
+        // Check if container and output of JSON is properly setup
+        if (!checkSanityOfJson(parsedJson)) { return; }
+
+        // Boolean to declare and check is user is logged in
+        isLogged = (parsedJson.retrieveResponse.PROCES.STATUS === '00000');
+        
+        // Data ready to be passed to initialize() below
+        data = {
+
+          // Set flag for user logged in
+          'loggedIn': isLogged && 1 || 0,
+
+          // Get user's name from json object
+          'userName': parsedJson.retrieveResponse.PARTIJ._AE_PERSOON._AE_SAMNAAM,
+
+          // Get last login time from cookie or from now()
+          'lastAccess': $.cookie('mijn_last_login') || $.now()
+        };
+
+        // Activate the widget
+        that.initialize(data);
+      };
+
+      // Load AJAX request
+      $.ajax({
+        timeout: 10000,
+        type: (dataType === 'jsonp' ? 'POST' : 'GET'),
+        url: this.apiUrl,
+        data: (dataType === 'jsonp' ? jsonpPayload : null),
+        dataType: dataType,
+        success: retreiveBSPartij,
+        error: this.clearCookie()
       });
     },
 
     initialize: function (data) {
 
-      // Append the template
-      $(template).appendTo('#shw-user-details');
-
       // Check if is logged and go ahead
-      if (data.logged_in) {
+      if (data.loggedIn === 1) {
 
-        // Cache the div
-        this.widget = $('#user_detail_widget');
+        var domWidget = this.parseWidget(data);
 
-        this.parseWidget(data);
+        // Append the template and cache it
+        this.widget = $(domWidget).appendTo(appendUserWidgetTo);
+
+        // Load events
         this.events();
       }
     },
 
     parseWidget: function (data) {
 
+      // Convert template in jQuery DOM
+      var $template = $(template);
+
+      // Convert lastAcess in formatted date
+      var dateFormatted = this.formatDatetime(data.lastAccess);
+
       // Parse data
-      $('span.user_detail_widget_name').text(data.username);
-      $('span.user_detail_widget_last_access').text(data.last_access);
+      $template.find('span.user_detail_widget_name').text(data.userName);
+      $template.find('span.user_detail_widget_last_access').text(dateFormatted);
 
       // Show/hide logged's items
       $('body').addClass('widget-logged-in');
+
+      return $template;
     },
 
     events: function (switchOff) {
 
-      var that = this,
-          btnLoggedIn = this.widget.find('button.btn-login-loggedin');
+      // Cache the button in local variable
+      var btnLoggedIn = this.widget.find('button.btn-login-loggedin');
 
       // Local functions
       var Fn = {
@@ -126,8 +210,6 @@
       // Action for Click on login button
       var loginButtonClick = function() {
 
-        // console.log(Fn.isMobile(), Fn.mobileTapPresent());
-
         // Toggle only if is not already present and mobile
         if (Fn.isMobile() && !Fn.mobileTapPresent()) {
           $('body').toggleClass("mobile-tap");
@@ -136,6 +218,15 @@
         }
 
         $(this).toggleClass("tap");
+      };
+
+      // Action on click of section.content to handle properly .tap on 
+      // buttonlink and class mobile-tap on body in case is on mobile view
+      var sectionContentClick = function() {
+        if ($('body').hasClass('mobile-tap')) {
+          $('body').removeClass('mobile-tap');
+          btnLoggedIn.addClass('tap');
+        }
       };
 
       // Switch all OFF
@@ -158,6 +249,10 @@
       // Click on button login toggle class .tap on itself
       btnLoggedIn.on('click', loginButtonClick);
 
+      // Bind click on section.content to remove the dark overlay related to
+      // body.mobile-tap and run the logic 
+      $('section.content').on('click', sectionContentClick);
+
       // In the end of animation of .highlight div, add class .processed to 
       // widget's container to hide itself
       this.widget.find('.highlight').one('webkitAnimationEnd oanimationend \
@@ -166,7 +261,53 @@
       });
     },
 
+    formatDatetime: function (date) {
+
+      // Local variables
+      var dateFormatted, day, month, year, hours, minutes;
+      
+      // Istantiate Date object
+      var dateIstance = new Date(date);
+
+      // Extraxt single date elements
+      day = dateIstance.getDate();
+      month = dateIstance.getMonth();
+      year = dateIstance.getFullYear();
+      hours = dateIstance.getHours();
+      minutes = dateIstance.getMinutes();
+
+      // Generate right format in Dutch
+      dateFormatted = day+'-'+month+'-'+year+' om '+hours+':'+minutes+' uur';
+
+      return dateFormatted;
+    },
+
+    getDataType: function () {
+
+      var apiUrlOrig = this.apiUrl.split('/').splice(2, 1).join('/'),
+
+          // Check if is a relative address without protocol http/https
+          localDomain = this.apiUrl.indexOf('://') === -1,
+
+          // Check if current apiUrl is the same domain of current address
+          sameDomain = doc.location.host.indexOf(apiUrlOrig) !== -1;
+
+      return (sameDomain || localDomain) ? 'json' : 'jsonp';
+    },
+
+    clearCookie: function () {
+
+      // Remove mijn_last_login's cookie
+      $.removeCookie(mijnAegonCookieLoggedInName);
+    },
+
     deinitialize: function () {
+
+      // Remove classes to hide logged's items
+      $('body').removeClass('widget-logged-in mobile-tap');
+
+      // Remove mijn_last_login's cookie
+      this.clearCookie();
 
       // Switch off all events
       this.events(true);
