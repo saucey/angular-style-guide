@@ -106,6 +106,8 @@ button, .button {
       float: none;
       @include rem('padding', 0, 14);
       @include rem('border-radius', 0, 3, 3, 0);
+      // ANOTHER FIX to reset normal top behaviour
+      top: initial;
     }
   }
 }
