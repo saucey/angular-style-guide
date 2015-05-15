@@ -20,6 +20,8 @@
    * User widget's configuration
    */
 
+  // services => mijnservices
+
   // This is the template of user_detail_widget wrapper taken from Aegon 
   // Technical Design Libraryand converted in JavaScript string.
   var template = '<div id="user_detail_widget" class="user_detail_widget">\n<div class="inplace">\n<button class="btn-login-loggedin">Ingelogd</button>\n<div class="dropdown">\n<div class="highlight mobile">\n<div class="text">\n<p class="welcome">\n<strong>Welcome <span class="user_detail_widget_name">username</span>.</strong> Uw vorige bezoek was op <span class="user_detail_widget_last_access">00-00-0000 om 00:00 uur</span></p>\n</div>\n</div>\n<div class="text">\n<p class="name"><span class="user_detail_widget_name">username</span></p>\n<p class="log">Uw vorige bezoek was op <span class="user_detail_widget_last_access">00-00-0000 om 00:00 uur</span></p>\n<p class="action">\n<a href="#" class="button arrow responsive-approach">Uitloggen</a>\n<a href="#" class="button white responsive-approach myaegon">Mijn Overzicht</a>\n</p>\n</div>\n</div>\n</div>\n<div class="text">\n<p class="name"><span class="user_detail_widget_name">username</span></p>\n</div>\n<div class="highlight desktop">\n<div class="text">\n<p class="welcome">Welcome <span class="user_detail_widget_name">username</span>.</p>\n<p class="log">Uw vorige bezoek was op <span class="user_detail_widget_last_access">00-00-0000 om 00:00 uur</span></p>\n</div>\n</div>\n</div>';
@@ -71,7 +73,7 @@
       jsonpPayload = {
         'retrieveRequest': {
           'AILHEADER': {
-            'CLIENTID': 'MobileKlantenApp',
+            'CLIENTID': 'MijnAegonUserWidget',
             'CORRELATIONID': '##UAT##'
           }
         }
@@ -137,20 +139,28 @@
 
     initialize: function (data) {
 
+      // Local variables
+      var that = this;
+
+      // Callback to prevent appendTo before correct end of parseWidget()
+      var callback = function (domWidget) {
+
+        // Append the template and cache it
+        that.widget = $(domWidget).appendTo(appendUserWidgetTo);        
+      };
+
       // Check if is logged and go ahead
       if (data.loggedIn === 1) {
 
-        var domWidget = this.parseWidget(data);
-
-        // Append the template and cache it
-        this.widget = $(domWidget).appendTo(appendUserWidgetTo);
+        // Parse the DOM before appendTo
+        this.parseWidget(data, callback);
 
         // Load events
         this.events();
       }
     },
 
-    parseWidget: function (data) {
+    parseWidget: function (data, callback) {
 
       // Convert template in jQuery DOM
       var $template = $(template);
@@ -165,7 +175,19 @@
       // Show/hide logged's items
       $('body').addClass('widget-logged-in');
 
-      return $template;
+      // Cross-browser imlementation to provide workaround for no CSS animation
+      if ($('html').hasClass('no-cssanimations')) {
+
+        // For desktop
+        $template.find('.highlight.desktop').delay(3000)
+          .animate({'margin-top': '-500px', 'bottom': '500px'}, 1000);
+
+        // For mobile
+        $template.find('.highlight.mobile').delay(3000).slideUp(500);
+      }
+
+      // Finally run the callback
+      if (typeof callback === 'function') { callback($template); }
     },
 
     events: function (switchOff) {
@@ -204,7 +226,9 @@
 
       // Action for Hover on login button
       var loginButtonHover = function() {
-        $(this).addClass( "off" ).off('hover');
+
+        // Add class off and deinitialize the mouseenter event
+        $(this).addClass( "off" ).off('mouseenter');
       };
 
       // Action for Click on login button
@@ -233,8 +257,10 @@
       if (switchOff) {
 
         $(window).off('resize', windowResize);
-        this.widget.find('button.btn-login-loggedin').off('hover', loginButtonHover);
-        this.widget.find('button.btn-login-loggedin').off('click', loginButtonClick);
+        this.widget.find('button.btn-login-loggedin')
+          .off('mouseenter', loginButtonHover);
+        this.widget.find('button.btn-login-loggedin')
+          .off('click', loginButtonClick);
 
         // Stop here
         return;
@@ -244,7 +270,7 @@
       $(window).on('resize', windowResize).resize();
 
       // Hover on button login set class .off on itself and unbind
-      btnLoggedIn.on('hover', loginButtonHover);
+      btnLoggedIn.on('mouseenter', loginButtonHover);
 
       // Click on button login toggle class .tap on itself
       btnLoggedIn.on('click', loginButtonClick);
