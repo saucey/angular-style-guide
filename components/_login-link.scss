@@ -11,6 +11,10 @@
   background-color: $green;
   color: $white;
 
+  &:before {
+    display: none;
+  }
+
   &:hover {
     background-color: $light_green;
     color: $green;   
@@ -41,6 +45,7 @@
       @extend a[class*="menu-"]:before;
       @include rem('margin-top', -18);
       @include rem('font-size', 19);
+      display: block;
       left: 4%;
       height: auto;
       color: $white;
