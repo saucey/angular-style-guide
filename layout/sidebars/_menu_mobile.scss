@@ -1,0 +1,371 @@
+
+//
+// Aegon menu desktop
+// --------------------------------------------------
+
+aside.mobile {
+  width: 80%;
+  background: $blue;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  z-index: 9999;
+  overflow: hidden;
+  // For older browser
+  transform: translateX(-100%);
+  // For browsers support tranlate 3D
+  transform: translate3d(-100%, 0, 0);
+  // Transition and 3D settings
+  transition: transform 0.3s ease-in-out;
+  backface-visibility: hidden;
+  perspective: 1000;
+
+  /**
+   * Main menu container
+   */
+  nav.mobile-menu {
+    position: absolute;
+    @include rem('top', 55);
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: visible;
+    // For older browser
+    transform: translateX(0);
+    // For browsers support tranlate 3D
+    transform: translate3d(0, 0, 0);
+    // Transition and 3D settings
+    transition: transform 0.2s ease-in-out;
+    backface-visibility: hidden;
+    perspective: 1000;
+
+    // Animations
+    &.slide-to-left {
+      // For older browser
+      transform: translateX(100%);
+      // For browsers support tranlate 3D
+      transform: translate3d(100%, 0, 0);
+    }
+
+    &.slide-to-right {
+      // For older browser
+      transform: translateX(-100%);
+      // For browsers support tranlate 3D
+      transform: translate3d(-100%, 0, 0);
+    }
+
+    // All levels
+    .mobile-level1 {
+      display: block;
+      left: -100%;
+    }
+
+    .mobile-level2 {
+      display: block;
+      left: 0;
+    }
+
+    .mobile-level3 {
+      // None by default
+      display: none;
+      left: 100%;
+    }
+
+    .mobile-level1,
+    .mobile-level2,
+    .mobile-level3 {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      overflow-x: hidden;
+      overflow-y: auto;
+
+      &.show {
+        display: block;
+      }
+    }
+  }
+
+  ul {
+    margin: 0;
+  }
+
+  .mobile-level2 {
+
+    li {
+      position: relative;
+      @include rem('line-height', 75);
+
+      &:after {
+        content: '';
+        z-index: 1;
+        display: block;
+        position: absolute;
+        top: 100%;
+        left: 0%;
+
+        background-color: $blue;
+        border: 0 solid $lighter_blue;
+        @include rem('width', 13);
+        @include rem('height', 13);
+        @include rem('border-width', 1);
+        border-top-style: none;
+        border-right-style: none;
+        transform: translate(65px,-6px) rotate(-45deg)  skew(15deg, 15deg);
+      }
+
+      &.active {
+        background-color: $dark_blue;
+
+        &:after {
+          background-color: $dark_blue;
+        }
+      }
+
+      &:first-child:after,
+      &:last-child:after {
+        display: none;
+      }
+    }
+
+    a {
+      @include rem('padding-left', 60);
+
+      &:before {
+        @include rem('font-size', 24);
+        @include rem('margin-left', 20);
+      }
+
+      &:after {
+        position: absolute;
+        top: 0%;
+        right: 0;
+        display: block;
+        @include rem('margin-right', 20);
+        font-size: 10px;
+        font-family: 'aegon_icons';
+        @extend .icon-uniE600:before;
+      }
+    }
+  }
+
+  .mobile-level3 {
+
+    li {
+      @include rem('padding-top', 15);
+      @include rem('padding-bottom', 15);
+      @include rem('padding-right', 10);
+      @include rem('line-height', 25);
+
+      &:first-child {
+        line-height: normal;
+        padding: 0;
+      }
+    }
+
+    a {
+      white-space: normal;
+    }
+
+    a:before {
+      top: 50%;
+      left: 0;
+      @include rem('margin-left', 20);
+      @include rem('width', 7);
+      @include rem('height', 7);
+      @include rem('margin-top', -4);
+      content: '';
+      border-style: solid;
+      border-color: $white;
+      border-width: 2px 2px 0 0;
+      transform: rotate(45deg);
+    }
+  }
+
+  li {
+    border-width: 0;
+    border-style: solid;
+    border-color: $lighter_blue;
+    @include rem('border-bottom-width', 1);
+    @include rem('line-height', 55);
+    padding: 0;
+    white-space: nowrap;
+
+    &:first-child {
+      line-height: normal;
+    }
+
+    &.noborder {
+      border-bottom-width: 0;
+    }
+
+    a {
+      position: relative;
+      display: block;
+      @include rem('padding', 0, 0, 0, 40);
+      color: $white;
+
+      &:before {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        @include rem('margin-left', 12);
+        transform: translateY(-50%);
+        width: auto;
+        height: auto;
+        margin-top: 0;
+        @include rem('font-size', 20);
+      }
+    }
+
+    &.menu-title {
+      color: $white;
+      @include rem('padding', 0, 0, 0, 15);
+      @include rem('font-size', 26);
+      @include rem('line-height', 60);
+    }
+
+    &.border-Bwhite {
+      border-color: $white;
+    }
+
+    &.category {
+      @include rem('padding', 3, 15);
+      @include rem('line-height', 20);
+      font-weight: bold;
+      background-color: $lighter_blue;
+      white-space: normal;
+    }
+  }
+
+  /**
+   * Mobile menu back button
+   */
+  a.mm-back {
+    display: inline-block;
+    position: relative;
+    @include rem('padding', 0, 12, 0, 12);
+    @include rem('margin', 1, 19, 10);
+    @include rem('line-height', 36);
+    @include rem('border-radius', 5);
+
+    background-color: #0068A7;
+
+    &:after {
+      content: '';
+      z-index: -1;
+      position: absolute;
+      top: 23%;
+      left: -12%;
+      @include rem('width', 20);
+      @include rem('height', 20);
+      @include rem('border-radius', 3);
+      transform: rotate(45deg) skew(15deg, 15deg);
+      background-color: inherit;
+    }
+
+    &.terug:after {
+      left: auto;
+      right: -12%;
+    }
+
+    &:before {
+      display: none;
+    }
+  }
+
+  /**
+   * Search form on top
+   */
+  .mob-search-form {
+    display: block;
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    .container-inline {
+      @include rem('padding', 9, 11);
+    }
+
+    .form-item {
+      position: relative;
+    }
+
+    input.form-text {
+      width: 100%;
+      border: 0 solid #006FB1;
+      @include rem('padding', 6, 6, 6, 36);
+      @include rem('border-width', 1);
+      @include rem('border-radius', 30);
+      height: auto;
+      @include rem('line-height', 20);
+      background-color: $white;
+    }
+
+    // Magnifying glass over input field
+    label.element-invisible {
+      display: block;
+      text-indent: -9999px;
+      @extend .ico-mglass;
+      position: absolute;
+      top: 50%;
+      @include rem('left', 16);
+      transform: translateY(-50%);
+      @include rem('margin-top', -2);
+      @include rem('width', 10.5);
+      @include rem('height', 10.5);
+      border-color: $blue;
+
+      &:after {
+        @include rem('top', 8);
+        @include rem('left', -5);
+        @include rem('width', 6);
+        transform: rotate(-45deg);
+        background: $blue;
+      }
+    }
+
+    .form-actions, .element-invisible {
+      display: none;
+    }
+  }
+
+  /**
+   * Login link
+   */
+  .login-link-inv {
+    background-image: url(../images/ui/icon-lock.png);
+    background-repeat: no-repeat;
+    background-position: 3% 50%;
+  }
+}
+
+//
+// Media Queries
+// --------------------------------------------------
+
+@include breakpoint($brk-mobile) {
+
+  .wrapper.ui-panel-animate {
+    position: absolute;
+    top: 0;
+    left: 0%;
+    right: 0%;
+    width: 100%;
+    height: 100%;
+  }
+
+  .pushmenu-to-right {
+
+    .wrapper.ui-panel-animate {
+      /* for older browsers */
+      transform: translateX(80%);
+      /* for browsers support tranlate 3D */
+      transform: translate3d(80%, 0, 0);
+    }
+  }
+}
