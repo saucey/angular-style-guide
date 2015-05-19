@@ -57,13 +57,13 @@
 
       // Local variables
       var that = this,
-          dataType = this.getDataType(),
-          jsonpPayload,
+          // dataType = this.getDataType(),
+          jsonPayload,
           retreiveBSPartij,
           checkSanityOfJson;
 
       // Payload for JSONP
-      jsonpPayload = {
+      jsonPayload = {
         'retrieveRequest': {
           'AILHEADER': {
             'CLIENTID': 'MijnAegonUserWidget',
@@ -121,10 +121,11 @@
       // Load AJAX request
       $.ajax({
         timeout: 10000,
-        type: (dataType === 'jsonp' ? 'POST' : 'GET'),
+        // type: (dataType === 'jsonp' ? 'POST' : 'GET'),
+        type: 'GET',
         url: this.apiUrl,
-        data: (dataType === 'jsonp' ? jsonpPayload : null),
-        dataType: dataType,
+        data: jsonPayload,
+        dataType: 'json',
         success: retreiveBSPartij,
         error: this.clearCookie()
       });
