@@ -1,104 +1,152 @@
-(function($) {
+(function(Drupal, $) {
 
   'use strict';
 
   /**
    * JS code for Aegon Menu
-   * @type {Object}
+   * Dependencies: $.browser
    */
   Drupal.behaviors.aegonMenu = {
 
-    attach: function() {
+    /**
+     * Istructions for Menu Global.
+     * (Desktop and other devices, apart mobile with screen below < 640 pixels)
+     */
+    menuDesktop: function (menu) {
 
-      $("div.mobile-level3").each(function() {
-        $("nav").append(this);
+      // Click on backdrop or a#close
+      menu.find('.nav-backdrop').add('a.close').on('click', function () {
+        $('body').removeClass('pushmenu-to-right');
+        menu.removeClass('open');
+        menu.find('.level-2-item').removeClass('item-open');
       });
+
+      // Push menu instructions
+      menu.find("#showLeftPush").click(function () {
+
+        $('body').toggleClass('pushmenu-to-right');
+
+        if (menu.hasClass('open') && !$('body').hasClass('pushmenu-to-right')) {
+
+          menu.removeClass('open');
+
+        } else {
+
+          menu.addClass('open');
+        }
+
+        menu.find('.level-2-item').removeClass('item-open');
+      });
+
+      // Clicks on .level-2-item
+      menu.find('.level-2-item').on('click', function (e) {
+
+        var isSubmenu = $(e.target).is('ul') || $(e.target).is('li');
+
+        // Stop propagation if not .close
+        if ($(e.target).hasClass('close') || isSubmenu) { return; }
+
+        $('body').removeClass('pushmenu-to-right');
+
+        if ($(this).hasClass('item-open')) {
+
+          // Remove class .open to hide backdrop
+          menu.removeClass('open');
+
+        } else {
+
+          // Add class .open to show backdrop
+          menu.addClass('open');
+        }
+
+        // Remove all .item-open apart this
+        menu.find('.level-2-item').not(this).removeClass('item-open');
+
+        // Toggle .item-open only for this
+        $(this).toggleClass('item-open');
+
+        // Fix for Safari on Mac with wrong position fixed support
+        if ($.browser.safari === true) {
+          var layoutHeaderHeight = $('header.header').height();
+          var newTop = $(this).position().top + layoutHeaderHeight;
+          $(this).children("ul").css("top", -newTop + "px");
+        }
+      });
+
+      return this;
+    },
+
+    /**
+     * Istructions for Menu Mobile.
+     * (All screens below < 640 pixels)
+     */
+    menuMobile: function (menu) {
 
       // Mobile navigation
-      $("#openmenu").click(function() {
-        if ($(this).attr("id") === "openmenu") {
-          $("#st-container").addClass("ss-panel-open");
-          $(".container").addClass("ss-container-open");
-          $(".mobile-level1").addClass("mm-opened").addClass("mm-subopened");
-          $(".mobile-level2").addClass("mm-opened");
-          $(".mobile").addClass("tapmenu-open");
-          $(".ui-panel-dismiss").addClass("ui-panel-dismiss-open");
-          $(this).attr('id', 'closemenu');
-        } else if ($(this).attr("id") === "closemenu") {
-          $("#st-container").removeClass("ss-panel-open");
-          $(".container").removeClass("ss-container-open");
-          $(".mobile").removeClass("tapmenu-open");
-          $(".ui-panel-dismiss").removeClass("ui-panel-dismiss-open");
-          $(this).attr('id', 'openmenu');
-        }
-      });
+      $('#openmenu').on('click', function() {
 
-      $(".mob-2-item a").click(function() {
-        var Third = $(this).attr("id");
-        if ($(".mobile-level3").hasClass(Third)) {
-          $(this).closest(".cbp-spmenu").addClass("mm-subopened");
-          $(".mobile-level3." + Third).addClass("mm-opened");
-        }
-      });
+        $('body').toggleClass('pushmenu-to-right');
 
-      // Back
-      $(".mm-back").click(function() {
-        $(this).closest(".cbp-spmenu").removeClass("mm-opened");
-        if ($(this).closest(".cbp-spmenu").hasClass("mobile-level3")) {
-          $(".mobile-level2").removeClass("mm-subopened");
-        } else if ($(this).closest(".cbp-spmenu").hasClass("mobile-level2")) {
-          $(".mobile-level2").addClass("level2-push-right");
-          $(".mobile-level1").removeClass("mm-subopened").addClass("mm-opened");
+        if (menu.hasClass('open') && !$('body').hasClass('pushmenu-to-right')) {
+
+          menu.removeClass('open');
+          $('body').removeClass('mobile-tap');
+
         } else {
-          $(".mobile-level1").addClass("mm-subopened");
-          $(".mobile-level2").removeClass("level2-push-right").addClass("mm-opened");
+
+          menu.addClass('open');
+          $('body').addClass('mobile-tap');
         }
       });
 
-      // Terug
-      $(".terug").click(function() {
-        $(this).closest(".cbp-spmenu").addClass("mm-subopened");
-        $(".mobile-level2").addClass("mm-opened");
-      });
+      // All clicks on #scroll div
+      $('#scroll').on('mousedown touchmove', function (e) {
 
-      $(".ui-panel-dismiss").click(function() {
-        $("#st-container").removeClass("ss-panel-open");
-        $(".container").removeClass("ss-container-open");
-        $(".mobile").removeClass("tapmenu-open");
-        $(".mobile-level2").removeClass("level2-push-right");
-        $(".ui-panel-dismiss").removeClass("ui-panel-dismiss-open");
-        $("#closemenu").attr('id', 'openmenu');
-      });
+        if (e.target.id === 'openmenu') { return; }
 
-      //Touch move to close
-      $(".ui-panel-dismiss").bind("touchmove", this.touchMoveHandler);
+        if ($('body').hasClass('pushmenu-to-right')) {
 
-      //Swipe Left to Close
-      $(".mobile-menu").bind("swipeleft", this.swipLeftHandler);
-
-      $(".home-tab-menu").bind("click", function() {
-        if ($("nav.homepage-menu #mobile-level2").length < 1) {
-          $("nav.homepage-menu #mobile-level1").removeClass("mm-subopened");
+          $('body').removeClass('pushmenu-to-right mobile-tap');
         }
       });
+
+      // Menu back links
+      menu.find('.mm-back').on('click', function() {
+
+        if ($(this).hasClass('menu')) {
+          menu.find('nav').addClass('slide-to-left').removeClass('slide-to-right');
+          return;
+        }
+
+        menu.find('nav').removeClass('slide-to-left slide-to-right');
+      });
+
+      // Links in mobile-level2
+      menu.find('.mobile-level2 a[class*="menu-"]').on('click', function (e) {
+
+        var targetLevel3 = e.target.className.split(' ')[0];
+
+        menu.find('nav').addClass('slide-to-right');
+
+        menu.find('.mobile-level3.'+targetLevel3).addClass('show')
+          .siblings('.mobile-level3').removeClass('show')
+      });
+
+      return this;
     },
 
-    touchMoveHandler: function () {
-      $("#st-container").removeClass("ss-panel-open");
-      $(".container").removeClass("ss-container-open");
-      $(".mobile").removeClass("tapmenu-open");
-      $(".mobile-level2").removeClass("level2-push-right");
-      $(".ui-panel-dismiss").removeClass("ui-panel-dismiss-open");
-      $("#closemenu").attr('id', 'openmenu');
-    },
+    /**
+     * Drupal's attach method
+     */
+    attach: function() {
 
-    swipLeftHandler: function () {
-      $("#st-container").removeClass("ss-panel-open");
-      $(".container").removeClass("ss-container-open");
-      $(".mobile").removeClass("tapmenu-open");
-      $(".mobile-level2").removeClass("level2-push-right");
-      $(".ui-panel-dismiss").removeClass("ui-panel-dismiss-open");
-      $("#closemenu").attr('id', 'openmenu');
+      // Register DOMs of aside menus
+      var menuDesktopDOM = $('aside.desktop'),
+          menuMobileDOM = $('aside.mobile');
+
+      // Run all instructions for different breakpoints
+      this.menuDesktop(menuDesktopDOM).menuMobile(menuMobileDOM);
     }
   };
-}(jQuery));
+
+}(this.Drupal, this.jQuery));
