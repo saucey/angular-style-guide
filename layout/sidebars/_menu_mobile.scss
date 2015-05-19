@@ -304,11 +304,18 @@ aside.mobile {
       height: auto;
       @include rem('line-height', 20);
       background-color: $white;
+      background-image: none;
+
+      &.form-autocomplete {
+        background-image: none;        
+      }
     }
 
     // Magnifying glass over input field
     label.element-invisible {
       display: block;
+      overflow: visible;
+      clip: auto;
       text-indent: -9999px;
       @extend .ico-mglass;
       position: absolute;
