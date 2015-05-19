@@ -132,6 +132,14 @@
           .siblings('.mobile-level3').removeClass('show')
       });
 
+      // Exception in case there is only one mobile-level.
+      // Slide the nav menu to left
+      var mobileLevel2sCount = menu.find('.mobile-level2').length;
+
+      if (mobileLevel2sCount < 1) {
+        menu.find('nav').addClass('slide-to-left');
+      }
+
       return this;
     },
 
