@@ -108,7 +108,11 @@ aside.desktop {
         @include rem('border-width', 1);
         border-top-style: none;
         border-right-style: none;
-        transform: translate(65px,-6px) rotate(-45deg)  skew(15deg, 15deg);
+        transform: translate(65px, -6px) rotate(-45deg) skew(15deg, 15deg);
+      }
+
+      &.hide-arrow:after {
+        display: none;
       }
 
       &:hover:after {
@@ -163,6 +167,17 @@ aside.desktop {
         &:after {
           display: none;
         }
+
+        // Negative values to hide the 1px line of arrows
+        position: absolute;
+        @include rem('top', -1);
+        left: 0;
+        height: 101%;
+        @include rem('border-top-width', 1);
+        border-top-style: solid;
+        border-top-color: $lighter_blue;
+        span { @include rem('margin-top', 1); }
+        &:before { @include rem('margin-top', -9); }
       }
     }
 
