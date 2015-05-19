@@ -9,7 +9,7 @@
   Drupal.behaviors["text-input"] = {
     attach: function () {
     	var visited = function () {  //this is to implement a different error behaviour between when the form is loaded and once an element has been visited
-console.log("text-input init");
+        // console.log("text-input init");
     		if ($(this).is(".dd")) {
     			$(this).find("select").addClass("visited");
     		}
