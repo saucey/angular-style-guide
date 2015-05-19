@@ -5,15 +5,12 @@
 // --------------------------------------------------
 
 @import "grids";
-@import "header";
-@import "footer";
-@import "sidebar";
+@import "structure/all";
+@import "sidebars/all";
 @import "form-elements";
-@import "structure";
 @import "fields";
 @import "blocks";
 @import "nodes";
 @import "views";
 @import "ui";
-@import "media_queries";
 @import "validation";

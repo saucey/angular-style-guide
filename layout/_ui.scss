@@ -67,53 +67,6 @@ div.lightbox {
   }
 }
 
-/*----- Search form @ header -----*/
-.block-search {
-
-  .container-inline {
-    position: absolute;
-    right: 109px;
-  }
-
-  input.form-text {
-    width: 130px;
-    height: 38px;
-    margin: 0;
-    @include rem('padding', 5, 25, 5, 10);
-    @include rem('border-radius', 3);
-    border: solid 1px #C5D6DD;
-    outline: none;
-    background: $white;
-    color: #1D1D19;
-    box-shadow: inset 0 1px 0 0 rgba(0,48,76,0.4);
-    transition: all .5s;
-
-    &:focus {
-      width: 260px;
-      box-shadow: 0 0 5px rgba(109,207,246,.5);
-    }
-
-    &.form-autocomplete {
-      background-image: none;
-    }
-  }
-
-  .form-actions {
-    position: absolute;
-    top: 0;
-    right: 0;
-
-    .form-submit {
-      background: url(../images/ui/icon-search-header.png) 100% center no-repeat;
-      width: 36px;
-      height: 38px;
-      text-indent: -9999px;
-      border: none;
-      padding: 0;
-    }
-  }
-}
-
 /*----- throbber -----*/
 .throbber {
   display: block;
@@ -136,6 +89,7 @@ body.mobile-tap {
     background-color: rgba(0,0,0,.3);
   }
 }
+
 
 // 
 // Media queries

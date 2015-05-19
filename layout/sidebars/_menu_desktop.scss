@@ -1,0 +1,514 @@
+
+//
+// Aegon menu desktop
+// --------------------------------------------------
+
+aside.desktop {
+  display: none;
+  @include rem('width', 170);
+  background: $blue;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 9999;
+
+  a {
+    background-color: $blue;
+    color: $white;
+
+    &:hover {
+      background-color: #D6EAF6;
+      color: $blue;
+    }
+  }
+
+  .logo {
+    z-index: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 170px;
+    height: 90px;
+    text-indent: -9999px;
+    background-image: url('../images/logo_aegon.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-color: $white;
+
+    a {
+      display: block;
+      height: inherit;
+      background-color: transparent;
+
+      &:hover {
+        background-color: transparent;
+      }
+    }
+  }
+
+  .mainmenu {
+    z-index: 2;
+    position: absolute;
+    top: 90px;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: $blue;
+    font-family: $font_normal;
+
+    .submenu {
+      display: block;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+      text-align: left;
+      font-family: inherit;
+    } 
+  }
+
+  /**
+   * Generic LI
+   */
+  .submenu > li {
+    position: relative;
+    display: block;
+    width: inherit;
+    @include rem('height', 90);
+    @include rem('line-height', 90);
+    border: none;
+    font-family: inherit;
+
+    > a {
+      border-width: 0;
+      border-style: solid;
+      border-color: $lighter_blue;
+      @include rem('border-bottom-width', 1);
+
+      position: relative;
+      display: block;
+      width: 100%;
+      height: 100%;
+
+      @include rem('line-height', 22);
+      @include rem('padding-left', 60);
+
+      &:after {
+        content: '';
+        z-index: 1;
+        display: block;
+        position: absolute;
+        top: 100%;
+        left: 0%;
+
+        background-color: $blue;
+        border: 0 solid $lighter_blue;
+        @include rem('width', 13);
+        @include rem('height', 13);
+        @include rem('border-width', 1);
+        border-top-style: none;
+        border-right-style: none;
+        transform: translate(65px,-6px) rotate(-45deg)  skew(15deg, 15deg);
+      }
+
+      &:hover:after {
+        background-color: #D6EAF6;
+      }
+
+      & ~ .arrow {
+        display: none;
+      }
+
+      span {
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        transform: translateY(-50%);
+        padding-left: 60px;
+      }
+    }
+
+    /**
+     * Active links
+     */
+    &.active > a {
+      background-color: #00334E;
+
+      &:hover {
+        background-color: #D6EAF6;
+        color: $blue;
+      }
+
+      &:after {
+        background-color: #00334E;
+      }
+
+      &:hover:after {
+        background-color: #D6EAF6;
+      }
+    }
+
+    /**
+     * li.item-open
+     */
+    &.item-open {
+
+      > a {
+        background-color: $white;
+        color: $blue;
+        z-index: 3;
+
+        &:after {
+          display: none;
+        }
+      }
+    }
+
+    &:nth-last-child(2),
+    &:last-child {
+
+      > a:after {
+        display: none;
+      }
+    }
+  }
+
+  /**
+   * Home tap
+   */
+  li.home-tap {
+    @include rem('height', 60);
+    @include rem('line-height', 60);
+
+    a {
+      overflow: hidden;
+      white-space: nowrap;
+      @include rem('line-height', 60);
+
+      &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 12%;
+        @include rem('width', 13);
+        @include rem('height', 0);
+        @include rem('margin-top', -6);
+
+        // border-top: 0.375em double #fff;
+        // border-bottom: 0.125em solid #fff;
+
+        box-shadow: 0  1px 0 1px $white,
+                    0  6px 0 1px $white,
+                    0 11px 0 1px $white;
+      }
+
+      &:hover:before {
+        color: $blue;
+        border-color: $blue;
+        box-shadow: 0  1px 0 1px $blue,
+                    0  6px 0 1px $blue,
+                    0 11px 0 1px $blue;
+      }
+
+      &:after {
+        display: none;
+      }
+    }
+  }
+
+  /**
+   * Stick Bottom
+   */
+  li.stick-bottom {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 2;
+    // width: 170px;
+
+    @include rem('height', 110);
+    @include rem('line-height', 110);
+
+    a {
+      border-width: 0;
+      @include rem('border-top-width', 1);
+      background-color: #2981B8;
+      color: $white;
+    }
+  }
+
+  /**
+   * Levels
+   */
+  .level-2-item {
+
+    ul {
+      visibility: hidden;
+      overflow-y: auto;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      @include rem('left', 170);
+      @include rem('width', 430);
+      @include rem('padding', 15, 30);
+      background: $white;
+
+      opacity: 0;
+      transition: visibility 0.2s ease-in-out 0s, opacity .2s ease-in-out;
+    }
+
+    &.item-open ul {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+  /**
+   * Level3 ul panel
+   */
+  .level-3-item, .push-submenu {
+
+    a {
+      position: relative;
+      padding: 0 0 0 25px;
+      margin: 0 0 15px 0;
+      line-height: normal;
+      display: block;
+      background-color: transparent;
+      color: $blue;
+
+      &:after {
+        position: absolute;
+        top: 50%;
+        left: 1%;
+        display: block;
+        width: 8px;
+        height: 8px;
+        margin-top: -4px;
+
+        // content: '';
+        // border-style: solid;
+        // border-color: $blue;
+        // border-width: 2px 2px 0 0;
+        // transform: rotate(45deg);
+
+        font-size: 10px;
+        font-family: 'aegon_icons';
+        @extend .icon-uniE600:before;
+      }
+    }
+  }
+
+  .category,
+  .menu-title {
+    padding: 0;
+    margin: 15px 0 24px;
+    font-size: 30px;
+    line-height: 30px;
+    color: #007AC7;
+  }
+
+  .category {
+    font-size: 27px;
+    margin: 35px 0 10px;
+  }
+
+  /**
+   * Utility
+   */
+  .nav-backdrop {
+    transform: translate3d(0, 0, 0);
+    display: block;
+    visibility: hidden;
+    z-index: 0;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+
+    opacity: 0;
+    transition: visibility 0.2s ease-in-out 0s, opacity .2s ease-in-out;
+  }
+
+  &.open {
+
+    .nav-backdrop {
+      visibility: visible;
+      opacity: 0.5;
+    }
+  }
+
+  /**
+   * border-Bblue
+   */
+  .border-Bblue {
+    border-bottom: 1px solid $pastel_light_blue;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+  }
+
+  /**
+   * Close button
+   */
+  a.close {
+    z-index: 10;
+    position: absolute;
+    @include rem('top', 15);
+    @include rem('right', 15);
+    @include rem('width', 38);
+    @include rem('height', 38);
+    @include rem('line-height', 38);
+    @include rem('border-radius', 38);
+    margin: 0;
+    padding: 0;
+    border: none;
+    color: $blue;
+    background-color: $blue;
+    text-align: center;
+
+    transition: all .1s linear;
+
+    &:before {
+      display: block;
+      @extend .icon-uniE60D:before;
+      font-family: 'aegon_icons';
+      position: absolute;
+      top: 0;
+      left: 0;
+      @include rem('font-size', 40);
+      background-color: transparent;
+      color: $white;
+      width: inherit;
+      height: inherit;
+    }
+
+    &:hover {
+      color: $white;
+      background-color: $white;
+
+      &:before {
+        color: $blue;
+      }
+    }
+
+    &:after {
+      display: none;
+    }
+  }
+
+  /**
+   * Login link
+   */
+  .login-link-inv {
+    background-image: url(../images/ui/icon-lock-green.png);
+    background-repeat: no-repeat;
+    background-position: 3% 50%;
+  }
+
+  /**
+   * push-submenu
+   */
+  
+  .push-submenu {
+    z-index: 1;
+    position: absolute;
+    overflow-y: auto;
+    @include rem('left', -300);
+    @include rem('width', 300);
+    height: 100%;
+    background-color: $white;
+
+    opacity: 0;
+    transition: opacity .35s ease-in-out;
+
+    .push-submenu-inner {
+      @include rem('padding', 15, 24);
+    }
+
+    a {
+      @include rem('padding-left', 30);
+    }
+
+    a:after {
+      display: none;
+    }
+
+    a[class*="menu-"]:before {
+      top: 50%;
+      bottom: 0;
+      left: -1%;
+      @include rem('margin-top', -3);
+      transform: translateY(-50%);
+      @include rem('font-size', 19);
+      height: auto;
+    }
+
+    .second-level-item {
+      @include rem('padding-top', 20);
+    }
+  }
+}
+
+
+// 
+// Exceptions
+// --------------------------------------------------
+
+body.section-mijnaegon {
+
+  aside.desktop .submenu > li > a:after {
+    display: none;
+  }
+}
+
+// 
+// pushmenu-to-right
+// --------------------------------------------------
+
+@include breakpoint($brk-tablet) {
+
+  .pushmenu-to-right {
+
+    .wrapper.ui-panel-animate {
+      /* for older IE */
+      transform: translateX(18.75rem);
+      transform: translateX(300px);
+      /* for browsers support tranlate 3D */
+      transform: translate3d(18.75rem, 0, 0);
+      transform: translate3d(300px, 0, 0);
+    }
+
+    aside.desktop {
+
+      .push-submenu {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      li.home-tap a {
+        background-color: $white;
+        color: $blue;
+
+        &:before {
+          color: $blue;
+          border-color: $blue;
+          box-shadow: 0  1px 0 1px $blue,
+                      0  6px 0 1px $blue,
+                      0 11px 0 1px $blue;
+        }
+      }
+
+      .nav-backdrop {
+        visibility: visible;
+        opacity: 0.5;
+      }
+    }
+  }
+}
