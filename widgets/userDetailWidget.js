@@ -6,29 +6,21 @@
  * - modernizr.custom.js (Proper cross-browser style)
  */
 
-(function(doc, win) {
+(function(doc, win, $, Drupal) {
 
   'use strict';
-
-  /**
-   * Register global variables for local scope
-   */
-  var $ = win.jQuery,
-      Drupal = win.Drupal;
 
   /**
    * User widget's configuration
    */
 
-  // services => mijnservices
-
   // This is the template of user_detail_widget wrapper taken from Aegon 
-  // Technical Design Libraryand converted in JavaScript string.
+  // Technical Design Library and converted in JavaScript string.
   var template = '<div id="user_detail_widget" class="user_detail_widget">\n<div class="inplace">\n<button class="btn-login-loggedin">Ingelogd</button>\n<div class="dropdown">\n<div class="highlight mobile">\n<div class="text">\n<p class="welcome">\n<strong>Welcome <span class="user_detail_widget_name">username</span>.</strong> Uw vorige bezoek was op <span class="user_detail_widget_last_access">00-00-0000 om 00:00 uur</span></p>\n</div>\n</div>\n<div class="text">\n<p class="name"><span class="user_detail_widget_name">username</span></p>\n<p class="log">Uw vorige bezoek was op <span class="user_detail_widget_last_access">00-00-0000 om 00:00 uur</span></p>\n<p class="action">\n<a href="#" class="button arrow responsive-approach">Uitloggen</a>\n<a href="#" class="button white responsive-approach myaegon">Mijn Overzicht</a>\n</p>\n</div>\n</div>\n</div>\n<div class="text">\n<p class="name"><span class="user_detail_widget_name">username</span></p>\n</div>\n<div class="highlight desktop">\n<div class="text">\n<p class="welcome">Welcome <span class="user_detail_widget_name">username</span>.</p>\n<p class="log">Uw vorige bezoek was op <span class="user_detail_widget_last_access">00-00-0000 om 00:00 uur</span></p>\n</div>\n</div>\n</div>';
 
   // User widget JSON endpoint (hostname is declared in 
   // Drupal.settings.onlineAegonNl.hostname object's item).
-  var realEndpoint = '/services/US_RestGatewayWeb/rest/requestResponse/BS_PARTIJ_03/retrieve';
+  var realEndpoint = '/mijnservices/US_RestGatewayWeb/rest/requestResponse/BS_PARTIJ_03/retrieve';
 
   // ID string where the user widget will be appended
   var appendUserWidgetTo = '#shw-user-details';
@@ -54,7 +46,8 @@
       if (settings.onlineAegonNl.hostname === 'local') {
         this.apiUrl = '/file/example/user_detail_bs.json';
       } else {
-        this.apiUrl = settings.onlineAegonNl.hostname + realEndpoint;
+        // this.apiUrl = settings.onlineAegonNl.hostname + realEndpoint;
+        this.apiUrl = realEndpoint;
       }
 
       this.getData();
@@ -91,22 +84,22 @@
       };
 
       // AJAX Success function
-      retreiveBSPartij = function (jsonData) {
+      retreiveBSPartij = function (json) {
 
         // Local variables
-        var isString, parsedJson, data, isLogged;
+        var isString, parseJSON, data, isLogged;
 
-        // Check is jsonData is string that need to be parsed
-        isString = typeof parsedJson === 'string';
+        // Check is json is string that need to be parsed
+        isString = typeof json === 'string';
 
         // Parse the JSON if needed
-        parsedJson = isString ? $.parseJSON(jsonData) : jsonData;
+        parseJSON = isString ? $.parseJSON(json) : json;
 
         // Check if container and output of JSON is properly setup
-        if (!checkSanityOfJson(parsedJson)) { return; }
+        if (!checkSanityOfJson(parseJSON)) { return; }
 
         // Boolean to declare and check is user is logged in
-        isLogged = (parsedJson.retrieveResponse.PROCES.STATUS === '00000');
+        isLogged = (parseJSON.retrieveResponse.PROCES.STATUS === '00000');
         
         // Data ready to be passed to initialize() below
         data = {
@@ -115,7 +108,7 @@
           'loggedIn': isLogged && 1 || 0,
 
           // Get user's name from json object
-          'userName': parsedJson.retrieveResponse.PARTIJ._AE_PERSOON._AE_SAMNAAM,
+          'userName': parseJSON.retrieveResponse.PARTIJ._AE_PERSOON._AE_SAMNAAM,
 
           // Get last login time from cookie or from now()
           'lastAccess': $.cookie('mijn_last_login') || $.now()
@@ -172,6 +165,9 @@
       $template.find('span.user_detail_widget_name').text(data.userName);
       $template.find('span.user_detail_widget_last_access').text(dateFormatted);
 
+      // Launch also the function to append the user name in menu
+      this.shwUserDetailsInmenu(data.userName);
+
       // Show/hide logged's items
       $('body').addClass('widget-logged-in');
 
@@ -188,6 +184,23 @@
 
       // Finally run the callback
       if (typeof callback === 'function') { callback($template); }
+    },
+
+    shwUserDetailsInmenu: function (name) {
+
+      // Create DOM for the link
+      var linkDesktop = $('<a />', {'class': 'menu-user-link'});
+      var linkMobile = $('<a />', {'class': 'menu-user-link-white'});
+
+      // Set the text with user's name passed
+      linkDesktop.text(name).attr('href', '#');
+      linkMobile.text(name).attr('href', '#');
+
+      // Append the DOM for the link just created and remove old login link
+      $('li[data-id="shw-user-details-inmenu"]').append(linkDesktop)
+        .find('.login-link-inv').remove();
+      $('li[data-id="shw-mob-user-details-inmenu"]').append(linkMobile)
+        .find('.login-link-inv').remove();
     },
 
     events: function (switchOff) {
@@ -340,4 +353,4 @@
     }
   };
 
-})(this.document, this);
+})(this.document, this, this.jQuery, this.Drupal);
