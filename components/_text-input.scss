@@ -4,8 +4,6 @@ $input_height: $elements_height;
 
 input[type=text], input[type=email], input[type=number], select, div.dd div.ddTitle, label.dd div.ddTitle {
   height: $input_height;
-  padding: 9px 10px;
-  padding-right: 10px;
   border-radius: $elements_border_radius;
   border: $elements_border;
   box-shadow: none; //FF adds a glow to elements with an error onblur
@@ -15,14 +13,9 @@ input[type=text], input[type=email], input[type=number], select, div.dd div.ddTi
   margin-top: 0px;
   margin-bottom: 0px;
 }
-
-.ddTitle .arrow {
-  &:after {
-    font-size: 11px;
-    font-family: $font_icons;
-
-    content: $font_icons_arrow_down;
-  }
+input[type=text], input[type=email], input[type=number] {
+  padding: 9px 10px;
+  padding-right: 10px;
 }
 
 input[type=text], input[type=email], input[type=number], select, div.dd {

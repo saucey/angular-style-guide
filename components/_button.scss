@@ -83,18 +83,6 @@ button, .button {
 // 
 // Below you can see approach that overwrite some of your styles.
 
-// Jörg: oK, my five cents on this: please check with BI and design before going on about
-// how I don't know to make stuff responsive; it is a BI and design decision to not allow
-// buttons that have over one line of text, period. The behaviour in FF was a bug, as
-// I am sure happens to the best of us, and I would have liked your input on how to fix it
-// instead of a lecture on how I don't have a bloody idea of what I am doing. That is
-// exactly the style of cooperation I am taking offense with. People are sometimes doing
-// things for reasons and not because they don't know better. Berating and lecturing them
-// without making even the slightest attempt to understand those reasons is _very_
-// unprofessional and arrogant, pressupposing you know everything better than everybody
-// else.
-// TODO: Also, writing comments like this in code is what I am usually taking offense with,
-// so I will delete this once we get the discussion started.
 //
 .responsive-approach {
   // height: $elements_button_height; We don't need. Let's be responsive, 
