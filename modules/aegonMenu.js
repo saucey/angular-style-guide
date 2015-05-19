@@ -129,7 +129,7 @@
         menu.find('nav').addClass('slide-to-right');
 
         menu.find('.mobile-level3.'+targetLevel3).addClass('show')
-          .siblings('.mobile-level3').removeClass('show')
+          .siblings('.mobile-level3').removeClass('show');
       });
 
       // Exception in case there is only one mobile-level.
