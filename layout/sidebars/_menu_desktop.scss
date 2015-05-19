@@ -421,10 +421,13 @@ aside.desktop {
   /**
    * Login link
    */
-  .login-link-inv {
-    background-image: url(../images/ui/icon-lock-green.png);
-    background-repeat: no-repeat;
-    background-position: 3% 50%;
+  .login-link-inv:before {
+    @extend .icon-uniE636:before;
+    @extend a[class*="menu-"]:before;
+    color: $green;
+    // background-image: url(../images/ui/icon-lock-green.png);
+    // background-repeat: no-repeat;
+    // background-position: 3% 50%;
   }
 
   /**

@@ -5,10 +5,6 @@
 
 /****** Aegon icons ******/
 [class*="icon-"]:before {
-  // position: absolute;
-  // top: 50%;
-  // left: 0;
-
   font-family: 'aegon_icons';
 }
 
@@ -78,6 +74,10 @@
 
 .icon-uniE62B:before {
   content: '\e62b';
+}
+
+.icon-uniE636:before {
+  content: '\e636';
 }
 
 // Pure CSS magnifying glass

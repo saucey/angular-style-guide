@@ -29,18 +29,31 @@
 @include breakpoint($brk-tablet) {
 
   .login-link {
+    position: relative;
     @include rem('line-height', 38);
     @include rem('padding', 0, 10, 0, 35);
-    background-image: url(../images/ui/icon-lock.png);
-    background-position: 13% 50%;
-    background-repeat: no-repeat;
+    // background-image: url(../images/ui/icon-lock.png);
+    // background-position: 13% 50%;
+    // background-repeat: no-repeat;
 
-    &:hover {
-      background-image: url(../images/ui/icon-lock-green.png);
+    &:before {
+      @extend .icon-uniE636:before;
+      @extend a[class*="menu-"]:before;
+      @include rem('margin-top', -18);
+      @include rem('font-size', 19);
+      left: 4%;
+      height: auto;
+      color: $white;
     }
 
-    &:active {
-      background-image: url(../images/ui/icon-lock.png);
+    &:hover:before {
+      color: $green;
+      // background-image: url(../images/ui/icon-lock-green.png);
+    }
+
+    &:active:before {
+      color: $white;
+      // background-image: url(../images/ui/icon-lock.png);
     }
   }
 }
