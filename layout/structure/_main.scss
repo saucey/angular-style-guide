@@ -20,6 +20,20 @@
   background-color: $white;
 }
 
+html, body {
+  height: 100%;
+  overflow-y: hidden;
+}
+
+section.scroll {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow-y: auto;
+}
+
 
 // 
 // Media queries
@@ -27,10 +41,12 @@
 
 @include breakpoint($brk-tablet) {
 
-  .scroll {
-    position: relative;
-    width: auto;
-    @include rem('padding-left', 170);
+  .wrapper.ui-panel-animate {
+    height: 100%;
+  }
+
+  section.scroll {
+    @include rem('left', 170);
   }
 }
 

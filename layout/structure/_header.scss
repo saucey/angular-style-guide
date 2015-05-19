@@ -6,7 +6,7 @@
 header.header {
   position: relative;
   margin: 0 auto;
-  padding: 0;
+  padding: 0 7.3%;
   @include rem('height', 63);
   @include rem('min-height', 63);
   display: table;
@@ -22,7 +22,7 @@ header.header {
   .left {
     width: 30%;
     text-align: left;
-    padding-left: 1.5rem;
+    padding-left: 0;
     @include rem('min-height', 63);
   }
 
@@ -34,19 +34,47 @@ header.header {
   .right {
     width: 30%;
     text-align: right;
-    padding-right: 1.5rem;
+    padding-right: 0;
   }
 
   // Mobile elements
   .tap-menu {
 
     a {
+      position: relative;
       width: 20px;
       height: 17px;
-      background: url('../images/ui/tap-menu.png') no-repeat top left transparent;
-      text-indent: -9999px;
+      // overflow: hidden;
       display: inline-block;
       vertical-align: middle;
+      text-indent: -9999px;
+      @include rem('line-height', 60);
+
+      &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        @include rem('width', 19);
+        @include rem('height', 15);
+        @include rem('margin-top', -7.5);
+
+        border-top: 0.22em solid $fun_blue_approx;
+        border-bottom: 0.22em solid $fun_blue_approx;
+      }
+
+      &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        @include rem('width', 19);
+        @include rem('height', 15);
+        @include rem('margin-top', -2);
+        border-top: 0.22em solid $fun_blue_approx;
+      }
     }
   }
 
@@ -55,14 +83,21 @@ header.header {
     a {
       display: inline-block;
       vertical-align: middle;
-    }
-
-    img {
-      display: block;
+      text-indent: -9999px;
       width: 100%;
-      height: 100%;
-      max-width: 90px;
-      padding-top: 6px;
+      // height: 100%;
+      @include rem('min-height', 32);
+      @include rem('min-width', 50);
+      @include rem('max-width', 170);
+
+      // @include rem('max-width', 90);
+      // @include rem('padding-top', 6);
+
+      background-image: url('../images/logo_aegon.png');
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: auto 100%;
+      background-color: $white;
     }
   }
 
@@ -99,7 +134,6 @@ header.header {
 
   header.header {
     @include rem('min-height', 90);
-    padding: 0 7.3%;
 
     .right {
       float: none;
