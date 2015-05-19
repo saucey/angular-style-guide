@@ -7,7 +7,7 @@ aside.desktop {
   display: none;
   @include rem('width', 170);
   background: $blue;
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
@@ -344,7 +344,7 @@ aside.desktop {
     right: 0;
     bottom: 0;
     left: 0;
-    width: 100%;
+    width: 200%;
     height: 100%;
     background: #000;
 
@@ -421,13 +421,13 @@ aside.desktop {
   /**
    * Login link
    */
-  .login-link-inv:before {
-    @extend .icon-uniE636:before;
-    @extend a[class*="menu-"]:before;
-    color: $green;
-    // background-image: url(../images/ui/icon-lock-green.png);
-    // background-repeat: no-repeat;
-    // background-position: 3% 50%;
+  .login-link-inv {
+    // @extend .icon-uniE636:before;
+    // @extend a[class*="menu-"]:before;
+    // color: $green;
+    background-image: url(../images/ui/icon-lock-green.png);
+    background-repeat: no-repeat;
+    background-position: 3% 50%;
   }
 
   /**
@@ -495,6 +495,9 @@ body.section-mijnaegon {
   .pushmenu-to-right {
 
     .wrapper.ui-panel-animate {
+      position: fixed;
+      top: 0;
+      bottom: 0;
       /* for older IE */
       transform: translateX(18.75rem);
       transform: translateX(300px);
