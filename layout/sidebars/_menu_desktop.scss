@@ -533,3 +533,15 @@ body.section-mijnaegon {
     }
   }
 }
+
+
+// 
+// Hacks
+// --------------------------------------------------
+
+html.lt-ie9 {
+
+  aside.desktop {
+    position: absolute;
+  }
+}
