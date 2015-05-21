@@ -344,10 +344,13 @@ aside.mobile {
   /**
    * Login link
    */
-  .login-link-inv {
-    background-image: url(../images/ui/icon-lock.png);
-    background-repeat: no-repeat;
-    background-position: 3% 50%;
+  .login-link-inv:before {
+    // @extend a[class*="menu-"]:before;
+    font-family: $font_icons;
+    @extend .menu-lock:before;
+    color: $white;
+    font-weight: normal;
+    -webkit-font-smoothing: antialiased;
   }
 }
 
@@ -357,16 +360,8 @@ aside.mobile {
 
 @include breakpoint($brk-mobile) {
 
-  // .wrapper.ui-panel-animate {
-  //   position: absolute;
-  //   top: 0;
-  //   left: 0%;
-  //   right: 0%;
-  //   width: 100%;
-  //   height: 100%;
-  // }
-
   .pushmenu-to-right {
+    @extend body.mobile-tap;
 
     .wrapper.ui-panel-animate {
       position: fixed;

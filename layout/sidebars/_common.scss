@@ -63,17 +63,15 @@ a.menu-4546:before {
 a.menu-4497:before {
   @extend .icon-uniE60A;
 }
-a.menu-user-link-white:before,
 a.menu-user-link:before {
-  @extend .icon-uniE606;
-  color: $green;
-}
-a.menu-user-link-white:before {
-  color: $white;
+  @extend .icon-uniE636:before;
 }
 a.menu-home:before,
 a.menu-5653:before {
-  // @extend .icon-uniE611;
+  @extend .icon-uniE647:before;
+}
+a.menu-lock:before {
+  @extend .icon-uniE648:before;
 }
 
 

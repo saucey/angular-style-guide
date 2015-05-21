@@ -304,12 +304,6 @@ aside.desktop {
         height: 8px;
         margin-top: -4px;
 
-        // content: '';
-        // border-style: solid;
-        // border-color: $blue;
-        // border-width: 2px 2px 0 0;
-        // transform: rotate(45deg);
-
         font-size: 10px;
         font-family: 'aegon_icons';
         @extend .icon-uniE600:before;
@@ -421,13 +415,10 @@ aside.desktop {
   /**
    * Login link
    */
-  .login-link-inv {
-    // @extend .icon-uniE636:before;
-    // @extend a[class*="menu-"]:before;
-    // color: $green;
-    background-image: url(../images/ui/icon-lock-green.png);
-    background-repeat: no-repeat;
-    background-position: 3% 50%;
+  .login-link-inv:before {
+    @extend a[class*="menu-"]:before;
+    @extend .menu-lock:before;
+    color: $blue;
   }
 
   /**

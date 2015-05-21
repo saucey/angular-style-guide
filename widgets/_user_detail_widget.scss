@@ -54,7 +54,7 @@
         color: $green;
 
         &:before {
-          content: '\e606';
+          content: '\e636';
           font-family: 'aegon_icons';
           display: inline-block;
           @include rem('font-size', 23);
@@ -199,7 +199,7 @@ body.section-mijnaegon .myaegon {
   display: none;
 }
 
-body.widget-logged-in {
+body.shw-widgets-logged-in {
 
   header.header .login-link {
     display: none;
@@ -282,7 +282,7 @@ body.widget-logged-in {
       animation: buttonLoginToDefault 4s normal 0s forwards;
 
       &:before {
-        content: '\e606';
+        content: '\e636';
         font-family: 'aegon_icons';
         display: inline-block;
         @include rem('font-size', 23);
