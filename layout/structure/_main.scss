@@ -20,18 +20,25 @@
   background-color: $white;
 }
 
-html, body {
-  height: 100%;
-  overflow-y: hidden;
-}
+// html, body {
+//   height: 100%;
+//   overflow-y: hidden;
+// }
 
-section.scroll {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  overflow-y: auto;
+// section.scroll {
+//   position: absolute;
+//   top: 0;
+//   right: 0;
+//   bottom: 0;
+//   left: 0;
+//   overflow-y: auto;
+// }
+
+.wrapper.ui-panel-animate {
+  transition: transform 0.2s ease-in-out;
+  // transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: none;
 }
 
 
@@ -41,12 +48,12 @@ section.scroll {
 
 @include breakpoint($brk-tablet) {
 
-  .wrapper.ui-panel-animate {
-    height: 100%;
-  }
+  // .wrapper.ui-panel-animate {
+  //   height: 100%;
+  // }
 
   section.scroll {
-    @include rem('left', 170);
+    @include rem('margin-left', 170);
   }
 }
 
