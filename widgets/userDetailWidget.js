@@ -85,7 +85,7 @@
 
       // Update path links
       logoutPathLink = settings.basePath + 'pkmslogout?filename=WSBLogout.html';
-      mijnaegonPathLink = settings.basePath + 'pkmslogout?filename=WSBLogout.html';
+      mijnaegonPathLink = settings.basePath + 'mijnaegon';
 
       // Start retrieving data
       this.getData();
@@ -204,9 +204,9 @@
       // Templating data
       $template.find('span.user_detail_widget_name').text(data.userName);
       $template.find('a.user_detail_widget_logout_link').attr(
-        'href', mijnaegonPathLink);
-      $template.find('a.user_detail_widget_mijnaegon_link').attr(
         'href', logoutPathLink);
+      $template.find('a.user_detail_widget_mijnaegon_link').attr(
+        'href', mijnaegonPathLink);
 
       // Exception in case data.lastAccess is empty
       if (data.lastAccess === false) {
@@ -250,7 +250,7 @@
 
       // Create DOM for the link
       var linkDesktop = $('<a />', {'class': 'menu-user-link'});
-      var linkMobile = $('<a />', {'class': 'menu-user-link-white'});
+      var linkMobile = $('<a />', {'class': 'menu-user-link'});
 
       // Set the text with user's name passed
       linkDesktop.text(name).attr('href', '#');
