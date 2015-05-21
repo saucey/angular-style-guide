@@ -11,12 +11,23 @@
   'use strict';
 
   /**
+   * Register or retrieve the public container for our shw widgets.
+   * Purpose of this window global object is for register some public functions.
+   * Need to be initialized on top of each widgets.
+   */
+  win.shwGlobal = win.shwGlobal || {};
+
+  /**
    * User widget's configuration
    */
 
+  // Path links handled by the script below for templating
+  var logoutPathLink = 'pkmslogout?filename=WSBLogout.html';
+  var mijnaegonPathLink = 'pkmslogout?filename=WSBLogout.html';
+
   // This is the template of user_detail_widget wrapper taken from Aegon 
   // Technical Design Library and converted in JavaScript string.
-  var template = '<div id="user_detail_widget" class="user_detail_widget">\n<div class="inplace">\n<button class="btn-login-loggedin">Ingelogd</button>\n<div class="dropdown">\n<div class="highlight mobile">\n<div class="text">\n<p class="welcome">\n<strong>Welcome <span class="user_detail_widget_name">username</span>.</strong> Uw vorige bezoek was op <span class="user_detail_widget_last_access">00-00-0000 om 00:00 uur</span></p>\n</div>\n</div>\n<div class="text">\n<p class="name"><span class="user_detail_widget_name">username</span></p>\n<p class="log">Uw vorige bezoek was op <span class="user_detail_widget_last_access">00-00-0000 om 00:00 uur</span></p>\n<p class="action">\n<a href="#" class="button arrow responsive-approach">Uitloggen</a>\n<a href="#" class="button white responsive-approach myaegon">Mijn Overzicht</a>\n</p>\n</div>\n</div>\n</div>\n<div class="text">\n<p class="name"><span class="user_detail_widget_name">username</span></p>\n</div>\n<div class="highlight desktop">\n<div class="text">\n<p class="welcome">Welcome <span class="user_detail_widget_name">username</span>.</p>\n<p class="log">Uw vorige bezoek was op <span class="user_detail_widget_last_access">00-00-0000 om 00:00 uur</span></p>\n</div>\n</div>\n</div>';
+  var template = '<div id="user_detail_widget" class="user_detail_widget">\n<div class="inplace">\n<button class="btn-login-loggedin">Ingelogd</button>\n<div class="dropdown">\n<div class="highlight mobile">\n<div class="text">\n<p class="welcome">\n<strong>Welcome <span class="user_detail_widget_name">username</span>.</strong> <span class="last_access_wrapper">Uw vorige bezoek was op <span class="user_detail_widget_last_access">00-00-0000 om 00:00 uur</span></span></p>\n</div>\n</div>\n<div class="text">\n<p class="name"><span class="user_detail_widget_name">username</span></p>\n<p class="log">Uw vorige bezoek was op <span class="user_detail_widget_last_access">00-00-0000 om 00:00 uur</span></p>\n<p class="action">\n<a href="#" class="user_detail_widget_logout_link button arrow responsive-approach">Uitloggen</a>\n<a href="#" class="user_detail_widget_mijnaegon_link button white responsive-approach myaegon">Mijn Overzicht</a>\n</p>\n</div>\n</div>\n</div>\n<div class="text">\n<p class="name"><span class="user_detail_widget_name">username</span></p>\n</div>\n<div class="highlight desktop">\n<div class="text">\n<p class="welcome">Welcome <span class="user_detail_widget_name">username</span>.</p>\n<p class="log">Uw vorige bezoek was op <span class="user_detail_widget_last_access">00-00-0000 om 00:00 uur</span></p>\n</div>\n</div>\n</div>';
 
   // User widget JSON endpoint (hostname is declared in 
   // Drupal.settings.onlineAegonNl.hostname object's item).
@@ -38,18 +49,45 @@
 
       // setup
       this.setup(settings);
+
+      // Register a public method for deinitialize
+      win.shwGlobal.logout = (function() {
+        this.deinitialize()
+      }).bind(this);
     },
 
     setup: function (settings) {
+
+      // Check if current website is not local or DEV environemnt
+      var notLocalOrDev = (
+        settings.onlineAegonNl.hostname !== 'local' &&
+        win.location.hostname.search('www.dev.') !== -1
+      );
+
+      // Try to avoid multiple requests to the backend environment, if the
+      // browser never ever had a logged session. Implement the block only for 
+      // Testing, UAT and Production environments.
+      if (notLocalOrDev) {
+        if (!this.getCookie()) {
+          return;
+        }
+      }
 
       // Set url API for local and real environments
       if (settings.onlineAegonNl.hostname === 'local') {
         this.apiUrl = '/file/example/user_detail_bs.json';
       } else {
-        // this.apiUrl = settings.onlineAegonNl.hostname + realEndpoint;
         this.apiUrl = realEndpoint;
+
+        // Old implementation before the /mijnservices path for SSO
+        // this.apiUrl = settings.onlineAegonNl.hostname + realEndpoint;
       }
 
+      // Update path links
+      logoutPathLink = settings.basePath + 'pkmslogout?filename=WSBLogout.html';
+      mijnaegonPathLink = settings.basePath + 'pkmslogout?filename=WSBLogout.html';
+
+      // Start retrieving data
       this.getData();
     },
 
@@ -111,7 +149,8 @@
           'userName': parseJSON.retrieveResponse.PARTIJ._AE_PERSOON._AE_SAMNAAM,
 
           // Get last login time from cookie or from now()
-          'lastAccess': $.cookie('mijn_last_login') || $.now()
+          // 'lastAccess': that.getCookie() || false
+          'lastAccess': that.getCookie() || false
         };
 
         // Activate the widget
@@ -127,7 +166,7 @@
         data: jsonPayload,
         dataType: 'json',
         success: retreiveBSPartij,
-        error: this.clearCookie()
+        error: this.clearCookie
       });
     },
 
@@ -156,21 +195,41 @@
 
     parseWidget: function (data, callback) {
 
+      // Vars for local scope
+      var $template, dateFormatted;
+
       // Convert template in jQuery DOM
-      var $template = $(template);
+      $template = $(template);
 
-      // Convert lastAcess in formatted date
-      var dateFormatted = this.formatDatetime(data.lastAccess);
-
-      // Parse data
+      // Templating data
       $template.find('span.user_detail_widget_name').text(data.userName);
-      $template.find('span.user_detail_widget_last_access').text(dateFormatted);
+      $template.find('a.user_detail_widget_logout_link').attr(
+        'href', mijnaegonPathLink);
+      $template.find('a.user_detail_widget_mijnaegon_link').attr(
+        'href', logoutPathLink);
+
+      // Exception in case data.lastAccess is empty
+      if (data.lastAccess === false) {
+
+        // Remove span.last_access_wrapper and mobile p.log
+        $template.find('span.last_access_wrapper').remove();
+        $template.find('p.log').remove();
+
+      } else {
+
+        // Convert lastAcess in formatted date
+        dateFormatted = this.formatDatetime(data.lastAccess);
+
+        // Parse date time
+        $template.find('span.user_detail_widget_last_access').text(dateFormatted);
+      }
+      
 
       // Launch also the function to append the user name in menu
       this.shwUserDetailsInmenu(data.userName);
 
       // Show/hide logged's items
-      $('body').addClass('widget-logged-in');
+      $('body').addClass('shw-widgets-logged-in');
 
       // Cross-browser imlementation to provide workaround for no CSS animation
       if ($('html').hasClass('no-cssanimations')) {
@@ -205,6 +264,9 @@
     },
 
     events: function (switchOff) {
+
+      // Stop execution if this.widget is empty
+      if(typeof this.widget === 'undefined') { return; }
 
       // Cache the button in local variable
       var btnLoggedIn = this.widget.find('button.btn-login-loggedin');
@@ -305,16 +367,19 @@
 
       // Local variables
       var dateFormatted, day, month, year, hours, minutes;
-      
-      // Istantiate Date object
-      var dateIstance = new Date(date);
+
+      // Add UTC in the end, in case is not available in the string passed
+      if (date.search('UTC') === -1) { date = date + ' UTC'; }
+
+      // Convert in Date object from string
+      date = new Date(date);
 
       // Extraxt single date elements
-      day = dateIstance.getDate();
-      month = dateIstance.getMonth();
-      year = dateIstance.getFullYear();
-      hours = dateIstance.getHours();
-      minutes = dateIstance.getMinutes();
+      day = date.getDate();
+      month = date.getMonth();
+      year = date.getFullYear();
+      hours = date.getHours();
+      minutes = date.getMinutes();
 
       // Generate right format in Dutch
       dateFormatted = day+'-'+month+'-'+year+' om '+hours+':'+minutes+' uur';
@@ -335,16 +400,25 @@
       return (sameDomain || localDomain) ? 'json' : 'jsonp';
     },
 
-    clearCookie: function () {
+    getCookie: function () {
 
-      // Remove mijn_last_login's cookie
+      // Return cookie value or FALSE
+      return $.cookie(mijnAegonCookieLoggedInName) || false;
+    },
+
+    clearCookie: function (response) {
+
+      // Remove mijn_last_login's cookie as first
       $.removeCookie(mijnAegonCookieLoggedInName);
+
+      // Then throw an error in console
+      if (response) { throw response.responseText; }
     },
 
     deinitialize: function () {
 
       // Remove classes to hide logged's items
-      $('body').removeClass('widget-logged-in mobile-tap');
+      $('body').removeClass('shw-widgets-logged-in mobile-tap');
 
       // Remove mijn_last_login's cookie
       this.clearCookie();
