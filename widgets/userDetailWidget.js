@@ -52,7 +52,7 @@
 
       // Register a public method for deinitialize
       win.shwGlobal.logout = (function() {
-        this.deinitialize()
+        this.deinitialize();
       }).bind(this);
     },
 
