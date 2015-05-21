@@ -125,7 +125,7 @@
         // Local scope vars
         var targetLevel3Class, level3;
 
-        var targetLevel3Class = e.target.className.split(' ')[0];
+        targetLevel3Class = e.target.className.split(' ')[0];
 
         level3 = menu.find('.mobile-level3.' + targetLevel3Class);
 
