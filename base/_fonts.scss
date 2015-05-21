@@ -47,18 +47,13 @@
   font-style: normal;
 }
 
-/**
- * icon font created by icomoon; see how to change the name from icomoon to
- * aegon_icons for the files without breaking anything (in the first attempt it
- * _did_ break stuff)
- */
 @font-face {
     font-family:'aegon_icons';
-    src: url('../fonts/icomoon.eot');
-    src: url('../fonts/icomoon.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/icomoon.woff') format('woff'),
-         url('../fonts/icomoon.ttf') format('truetype'),
-         url('../fonts/icomoon.svg#icomoon') format('svg');
+    src: url('../fonts/aegon_icons.eot');
+    src: url('../fonts/aegon_icons.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/aegon_icons.woff') format('woff'),
+         url('../fonts/aegon_icons.ttf') format('truetype'),
+         url('../fonts/aegon_icons.svg#aegon_icons') format('svg');
     font-weight: normal;
     font-style: normal;
 }
