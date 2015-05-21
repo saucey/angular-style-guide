@@ -90,12 +90,10 @@
         if (menu.hasClass('open') && !$('body').hasClass('pushmenu-to-right')) {
 
           menu.removeClass('open');
-          $('body').removeClass('mobile-tap');
 
         } else {
 
           menu.addClass('open');
-          $('body').addClass('mobile-tap');
         }
       });
 
@@ -106,7 +104,7 @@
 
         if ($('body').hasClass('pushmenu-to-right')) {
 
-          $('body').removeClass('pushmenu-to-right mobile-tap');
+          $('body').removeClass('pushmenu-to-right');
         }
       });
 
@@ -124,12 +122,24 @@
       // Links in mobile-level2
       menu.find('.mobile-level2 a[class*="menu-"]').on('click', function (e) {
 
-        var targetLevel3 = e.target.className.split(' ')[0];
+        // Local scope vars
+        var targetLevel3Class, level3;
 
-        menu.find('nav').addClass('slide-to-right');
+        var targetLevel3Class = e.target.className.split(' ')[0];
 
-        menu.find('.mobile-level3.'+targetLevel3).addClass('show')
-          .siblings('.mobile-level3').removeClass('show');
+        level3 = menu.find('.mobile-level3.' + targetLevel3Class);
+
+        // If the related level3 is present do stuff and block the normal 
+        // behaviour of the link
+        if (level3.length > 0) {
+
+          menu.find('nav').addClass('slide-to-right');
+
+          level3.addClass('show').siblings('.mobile-level3')
+            .removeClass('show');
+
+          e.preventDefault();
+        }
       });
 
       // Exception in case there is only one mobile-level.
