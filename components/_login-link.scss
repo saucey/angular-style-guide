@@ -36,29 +36,24 @@
     position: relative;
     @include rem('line-height', 38);
     @include rem('padding', 0, 10, 0, 35);
-    background-image: url(../images/ui/icon-lock.png);
-    background-position: 13% 50%;
-    background-repeat: no-repeat;
 
-    // &:before {
-    //   @extend .icon-uniE636:before;
-    //   @extend a[class*="menu-"]:before;
-    //   @include rem('margin-top', -18);
-    //   @include rem('font-size', 19);
-    //   display: block;
-    //   left: 4%;
-    //   height: auto;
-    //   color: $white;
-    // }
-
-    &:hover {
-      // color: $green;
-      background-image: url(../images/ui/icon-lock-green.png);
+    &:before {
+      @extend .icon-uniE648:before;
+      @extend a[class*="menu-"]:before;
+      @include rem('margin-top', -18);
+      @include rem('font-size', 19);
+      display: block;
+      left: 4%;
+      height: auto;
+      color: $white;
     }
 
-    &:active {
-      // color: $white;
-      background-image: url(../images/ui/icon-lock.png);
+    &:hover:before {
+      color: $green;
+    }
+
+    &:active:before {
+      color: $white;
     }
   }
 }
