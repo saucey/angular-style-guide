@@ -18,27 +18,12 @@
 
 .wrapper {
   background-color: $white;
-}
 
-// html, body {
-//   height: 100%;
-//   overflow-y: hidden;
-// }
-
-// section.scroll {
-//   position: absolute;
-//   top: 0;
-//   right: 0;
-//   bottom: 0;
-//   left: 0;
-//   overflow-y: auto;
-// }
-
-.wrapper.ui-panel-animate {
-  transition: transform 0.2s ease-in-out;
-  // transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-  perspective: none;
+  &.ui-panel-animate {
+    transition: transform 0.2s ease-in-out;
+    backface-visibility: hidden;
+    perspective: none;
+  }
 }
 
 
@@ -47,10 +32,6 @@
 // --------------------------------------------------
 
 @include breakpoint($brk-tablet) {
-
-  // .wrapper.ui-panel-animate {
-  //   height: 100%;
-  // }
 
   section.scroll {
     @include rem('margin-left', 170);
