@@ -207,6 +207,7 @@ aside.mobile {
       display: block;
       @include rem('padding', 0, 0, 0, 40);
       color: $white;
+      background-image: none;
 
       &:before {
         position: absolute;
