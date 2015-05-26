@@ -5,7 +5,8 @@
 
 /****** Aegon icons ******/
 [class*="icon-"]:before {
-  font-family: 'aegon_icons';
+  font-family: $font_icons;
+  -webkit-font-smoothing: antialiased;
 }
 
 .icon-uniE600:before {
@@ -92,6 +93,11 @@
   content: '\e638';
 }
 
+.icon-pdf:before {
+  content: '\e?';
+  content: '\e604';
+}
+
 // Pure CSS magnifying glass
 // Credits: http://codepen.io/rosschapman/pen/GvBtw
 .ico-mglass {
@@ -113,5 +119,4 @@
     left:5px;
     transform: rotate(45deg);
   }
-  
 }
