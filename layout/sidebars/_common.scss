@@ -15,7 +15,7 @@
 // --------------------------------------------------
 
 a[class*="menu-"]:before {
-  font-family: 'aegon_icons';
+  font-family: $font_icons;
   @include rem('font-size', 24);
   position: absolute;
   top: 50%;
