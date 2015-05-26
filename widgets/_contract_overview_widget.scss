@@ -94,7 +94,8 @@
       transform: translateY(-50%);
 
       font-size: 25px;
-      font-weight: bold;
+      font-weight: normal;
+      -webkit-font-smoothing: antialiased;
     }
   }
 }
