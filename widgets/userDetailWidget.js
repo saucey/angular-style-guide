@@ -23,7 +23,7 @@
 
   // Path links handled by the script below for templating
   var logoutPathLink = 'pkmslogout?filename=WSBLogout.html';
-  var mijnaegonPathLink = 'pkmslogout?filename=WSBLogout.html';
+  var mijnaegonPathLink = 'mijnaegon/';
 
   // This is the template of user_detail_widget wrapper taken from Aegon 
   // Technical Design Library and converted in JavaScript string.
@@ -78,14 +78,11 @@
         this.apiUrl = '/file/example/user_detail_bs.json';
       } else {
         this.apiUrl = realEndpoint;
-
-        // Old implementation before the /mijnservices path for SSO
-        // this.apiUrl = settings.onlineAegonNl.hostname + realEndpoint;
       }
 
       // Update path links
-      logoutPathLink = settings.basePath + 'pkmslogout?filename=WSBLogout.html';
-      mijnaegonPathLink = settings.basePath + 'mijnaegon';
+      logoutPathLink = settings.basePath + logoutPathLink;
+      mijnaegonPathLink = settings.basePath + mijnaegonPathLink;
 
       // Start retrieving data
       this.getData();
@@ -253,8 +250,8 @@
       var linkMobile = $('<a />', {'class': 'menu-user-link'});
 
       // Set the text with user's name passed
-      linkDesktop.text(name).attr('href', '#');
-      linkMobile.text(name).attr('href', '#');
+      linkDesktop.text(name).attr('href', mijnaegonPathLink);
+      linkMobile.text(name).attr('href', mijnaegonPathLink);
 
       // Append the DOM for the link just created and remove old login link
       $('li[data-id="shw-user-details-inmenu"]').append(linkDesktop)
