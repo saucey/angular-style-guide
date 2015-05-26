@@ -27,6 +27,10 @@
 
     attach: function (context, settings) {
 
+      $('.my_documents_widget article h2').on('click', function () {
+        $(this).parent('article').toggleClass('open')
+          .siblings().removeClass('open');
+      });
     }
   };
 
