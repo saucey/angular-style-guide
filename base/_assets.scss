@@ -7,6 +7,7 @@
 [class*="icon-"]:before {
   font-family: $font_icons;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .icon-uniE600:before {
