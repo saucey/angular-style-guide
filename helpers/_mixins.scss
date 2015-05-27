@@ -4,6 +4,20 @@
 // --------------------------------------------------
 
 /**
+ * Remove the unit of a length
+ * @param {Number} $number - Number to remove unit from
+ * @return {Number} - Unitless number
+ */
+
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+
+  @return $number;
+}
+
+/**
  * Mixin converter for Pixel to REM, plus fallback in pixel for older browser
  * @param  {float}  $property  Name of property
  * @param  {[type]} $values... Top, Right, Bottom, Left pixel values
@@ -21,8 +35,8 @@
 
     @if nth($values, $i) != 'important' {
 
-      // $value: strip-unit(nth($values, $i));
       $value: nth($values, $i);
+      $value: strip-unit($value);
 
       $remVal: ($value / 16);
       $pxValues: #{$pxValues + $value}px;
@@ -136,11 +150,4 @@
   &.visible {
     display: block;
   }  
-}
-
-@mixin user-select ($value) {
-  -moz-user-select: $value;
-  -webkit-user-select: $value;
-  -ms-user-select: $value;
-  user-select: $value;
 }

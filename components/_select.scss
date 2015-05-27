@@ -1,5 +1,5 @@
 div.dd {
-  @include user-select(none);
+  user-select: none;
   font-family: inherit;	//this overwrites the parameters from dd.scss
   font-size: inherit;
   .divider {  //fixing this style from the 3.5.2 version of msDD
