@@ -65,12 +65,14 @@
         // Toggle .item-open only for this
         $(this).toggleClass('item-open');
 
-        // Fix for Safari on Mac with wrong position fixed support
-        if ($.browser.safari === true) {
-          var layoutHeaderHeight = $('header.header').height();
-          var newTop = $(this).position().top + layoutHeaderHeight;
-          $(this).children("ul").css("top", -newTop + "px");
-        }
+        // Position fixed is not used anymore. But to be sure, I leave this
+        // source code here.
+        // Fix for Safari on Mac with wrong position fixed support.
+        // if ($.browser.safari === true) {
+        //   var layoutHeaderHeight = $('header.header').height();
+        //   var newTop = $(this).position().top + layoutHeaderHeight;
+        //   $(this).children("ul").css("top", -newTop + "px");
+        // }
       });
 
       return this;
