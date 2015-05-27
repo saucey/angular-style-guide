@@ -48,6 +48,7 @@
     @include rem('line-height', 60);
     font-weight: bold;
     cursor: pointer;
+    user-select: none;
 
     &:before {
       display: inline-block;
@@ -114,7 +115,7 @@
 
       > dl {
         display: block;
-        max-height: initial;
+        max-height: inherit;
         @include rem('padding', 10, 0);
       }
     }
@@ -125,6 +126,7 @@
       @include rem('margin', 5, 0, 20, 0);
       @include rem('line-height', 40);
       font-weight: normal;
+      cursor: default;
 
       &:before {
         position: absolute;
