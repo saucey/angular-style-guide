@@ -294,7 +294,7 @@ aside.desktop {
       line-height: normal;
       display: block;
       background-color: transparent;
-      color: $blue;
+      color: $lochmara_approx;
 
       &:after {
         position: absolute;
@@ -315,10 +315,10 @@ aside.desktop {
   .category,
   .menu-title {
     padding: 0;
-    margin: 15px 0 24px;
-    font-size: 30px;
-    line-height: 30px;
-    color: #007AC7;
+    @include rem('margin', 15, 0, 24, 0);
+    @include rem('font-size', 28);
+    @include rem('line-height', 30);
+    color: $lochmara_approx;
   }
 
   .category {
@@ -425,7 +425,6 @@ aside.desktop {
   /**
    * push-submenu
    */
-  
   .push-submenu {
     z-index: 1;
     position: absolute;
@@ -458,6 +457,14 @@ aside.desktop {
       transform: translateY(-50%);
       @include rem('font-size', 19);
       height: auto;
+    }
+
+    // Emulation of .border-Bblue
+    .first-level-item {
+
+      li:last-child {
+        @extend .border-Bblue;
+      }
     }
 
     .second-level-item {
