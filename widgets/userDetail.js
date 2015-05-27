@@ -145,9 +145,8 @@
           // Get user's name from json object
           'userName': parseJSON.retrieveResponse.PARTIJ._AE_PERSOON._AE_SAMNAAM,
 
-          // Get last login time from cookie or from now()
-          // 'lastAccess': that.getCookie() || false
-          'lastAccess': that.getCookie() || false
+          // Get last login time from cookie or give false
+          'lastAccess': that.getCookie()
         };
 
         // Activate the widget
@@ -221,7 +220,6 @@
         $template.find('span.user_detail_widget_last_access').text(dateFormatted);
       }
       
-
       // Launch also the function to append the user name in menu
       this.shwUserDetailsInmenu(data.userName);
 
@@ -231,9 +229,17 @@
       // Cross-browser imlementation to provide workaround for no CSS animation
       if ($('html').hasClass('no-cssanimations')) {
 
+        $template.find('.btn-login-loggedin').addClass('ieChangeColors');
+
         // For desktop
         $template.find('.highlight.desktop').delay(3000)
-          .animate({'margin-top': '-500px', 'bottom': '500px'}, 1000);
+          .animate({'margin-top': '-500px', 'bottom': '500px'},
+            250,
+            'linear',
+            function () {
+              $template.find('.btn-login-loggedin').removeClass('ieChangeColors');
+            }
+          );
 
         // For mobile
         $template.find('.highlight.mobile').delay(3000).slideUp(500);
@@ -364,6 +370,9 @@
 
       // Local variables
       var dateFormatted, day, month, year, hours, minutes;
+
+      // Convert hyphens with spaces
+      if (date.search('-') !== -1) { date = date.replace(/-/g, ' '); }
 
       // Add UTC in the end, in case is not available in the string passed
       if (date.search('UTC') === -1) { date = date + ' UTC'; }
