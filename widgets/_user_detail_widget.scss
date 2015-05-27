@@ -190,6 +190,14 @@
   }
 }
 
+// 
+// Fixes for IE<10
+// --------------------------------------------------
+
+html.lt-ie9 .user_detail_widget > .text {
+  opacity: 1 !important;
+}
+
 
 // 
 // Logics based on the section and status
@@ -302,6 +310,14 @@ body.shw-widgets-logged-in {
 
         ~ .dropdown {
           display: block;
+        }
+      }
+
+      &.ieChangeColors {
+        color: $white;
+
+        &:after {
+          border-color: $white;
         }
       }
     }
