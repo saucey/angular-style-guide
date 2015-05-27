@@ -7,10 +7,21 @@
    * @type {Object}
    */
   Drupal.behaviors.uiElements = {
+
     attach: function () {
 
       // Run all UI helper functions
-      this.backTop();
+      this.globals()
+        .backTop()
+        .pointerEventsPolyfillInit();
+    },
+
+    globals: function () {
+
+      // Copy jQuery to $ as item of window public object
+      win.$ = $;
+
+      return this;
     },
 
     backTop: function () {
@@ -42,6 +53,16 @@
           $('#back-top a').hide();
         }, 4e3));
       });
+
+      return this;
+    },
+
+    pointerEventsPolyfillInit: function () {
+
+      // Initialize polyfill for "pointer-events: none"
+      PointerEventsPolyfill.initialize();
+
+      return this;
     }
   };
   
