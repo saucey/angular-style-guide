@@ -131,7 +131,8 @@ aside.desktop {
         left: 0;
         right: 0;
         transform: translateY(-50%);
-        padding-left: 60px;
+        @include rem('padding-left', 60);
+        @include rem('padding-right', 5);
       }
     }
 
