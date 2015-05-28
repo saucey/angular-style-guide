@@ -4,18 +4,13 @@
 // --------------------------------------------------
 
 h1 {
-  @include rem('font-size', 36);
+  @include rem('font-size', $xxx-large);
   @include rem('line-height', 36);
   @include rem('margin', 25, 0);
-  // font-size: $xxx-large;
   font-family: $font_light;
   font-weight: normal;
   color: $blue;
   line-height: $xxx-large;
-
-  &.title {
-    margin-top: 0;
-  }
 }
 
 .subtext {
