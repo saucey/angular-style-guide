@@ -21,7 +21,7 @@
    * User widget's configuration
    */
 
-  // Path links handled by the script below for templating
+  // Path links handled by the script below for templating. (no initial slash)
   var logoutPathLink = 'pkmslogout?filename=WSBLogout.html';
   var mijnaegonPathLink = 'mijnaegon/';
 
@@ -39,6 +39,9 @@
   // MijnAegon cookie's name
   var mijnAegonCookieLoggedInName = 'mijn_last_login';
 
+  // Set the seconds to force not showing the green bar animated
+  var secondsForProcessedStatus = 15;
+
   /**
    * User widget's Drupal script.
    * Add new item to public Drupal object
@@ -47,7 +50,7 @@
 
     attach: function (context, settings) {
 
-      // setup
+      // Run before real initialization
       this.setup(settings);
 
       // Register a public method for deinitialize
@@ -217,7 +220,8 @@
         dateFormatted = this.formatDatetime(data.lastAccess);
 
         // Parse date time
-        $template.find('span.user_detail_widget_last_access').text(dateFormatted);
+        $template.find('span.user_detail_widget_last_access')
+          .text(dateFormatted);
       }
       
       // Launch also the function to append the user name in menu
@@ -237,7 +241,8 @@
             250,
             'linear',
             function () {
-              $template.find('.btn-login-loggedin').removeClass('ieChangeColors');
+              $template.find('.btn-login-loggedin')
+                .removeClass('ieChangeColors');
             }
           );
 
@@ -245,8 +250,27 @@
         $template.find('.highlight.mobile').delay(3000).slideUp(500);
       }
 
-      // Finally run the callback
+      // Compare datetime with mijnaegon last login and add .processed class
+      if (this.expiredTimeFromLogin()) { $template.addClass('processed'); }
+
+      // Finally run the callback to append all our shw-DOM in the proper 
+      // shw place
       if (typeof callback === 'function') { callback($template); }
+    },
+
+    expiredTimeFromLogin: function () {
+
+      var timeCookie = this.getCookie();
+
+      // Stop execution an return false if no mijnaegon cookie registered
+      if (!timeCookie) { return false; }
+
+      // If is not the first time after login, don't show the animation by 
+      // adding the .processed class.
+      var futureTMS = this.formatDatetime(timeCookie, true) + 
+                      (secondsForProcessedStatus * 1000);
+
+      return ($.now() > futureTMS) && true;
     },
 
     shwUserDetailsInmenu: function (name) {
@@ -366,7 +390,7 @@
       });
     },
 
-    formatDatetime: function (date) {
+    formatDatetime: function (date, timestamp) {
 
       // Local variables
       var dateFormatted, day, month, year, hours, minutes;
@@ -380,12 +404,20 @@
       // Convert in Date object from string
       date = new Date(date);
 
+      // Return the timestamp if true is passed as param
+      if (timestamp) { return date.getTime(); }
+
       // Extraxt single date elements
       day = date.getDate();
       month = date.getMonth() + 1;
       year = date.getFullYear();
       hours = date.getHours();
       minutes = date.getMinutes();
+
+      // Convert time elements with proper zero prefix
+      month = String(month).length < 2 && '0'+month || month;
+      hours = String(hours).length < 2 && '0'+hours || hours;
+      minutes = String(minutes).length < 2 && '0'+minutes || minutes;
 
       // Generate right format in Dutch
       dateFormatted = day+'-'+month+'-'+year+' om '+hours+':'+minutes+' uur';
