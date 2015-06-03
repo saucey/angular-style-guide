@@ -2,6 +2,7 @@ div.dd {
   user-select: none;
   font-family: inherit;	//this overwrites the parameters from dd.scss
   font-size: inherit;
+  margin-left: -5px; //somehow the selects got an additional left margin after msDD update to 3.5x
   .divider {  //fixing this style from the 3.5.2 version of msDD
     display: none;
   }
