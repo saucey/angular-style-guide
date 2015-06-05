@@ -49,7 +49,6 @@
   Drupal.behaviors.userDetailWidget = {
 
     attach: function (context, settings) {
-
       // Run before real initialization
       this.setup(settings);
 
@@ -193,7 +192,6 @@
     },
 
     parseWidget: function (data, callback) {
-
       // Vars for local scope
       var $template, dateFormatted;
 
@@ -218,7 +216,7 @@
 
         // Convert lastAcess in formatted date
         dateFormatted = this.formatDatetime(data.lastAccess);
-
+console.log("date ");
         // Parse date time
         $template.find('span.user_detail_widget_last_access')
           .text(dateFormatted);
@@ -230,8 +228,8 @@
       // Show/hide logged's items
       $('body').addClass('shw-widgets-logged-in');
 
-      // Cross-browser imlementation to provide workaround for no CSS animation
-      if ($('html').hasClass('no-cssanimations')) {
+      // Cross-browser implementation to provide workaround for no CSS animation
+      if ( $('html').hasClass('no-cssanimations') && !$.cookie("hasBeenShown") ) {
 
         $template.find('.btn-login-loggedin').addClass('ieChangeColors');
 
@@ -249,6 +247,13 @@
         // For mobile
         $template.find('.highlight.mobile').delay(3000).slideUp(500);
       }
+
+      if ( $.cookie("hasBeenShown") ) {
+        $template.find(".highlight").addClass("has-been-shown");
+      }
+      // cookie to make sure that the next time this template is shown,
+      // the welcome animation is off
+      $.cookie("hasBeenShown", "1");
 
       // Compare datetime with mijnaegon last login and add .processed class
       if (this.expiredTimeFromLogin()) { $template.addClass('processed'); }
