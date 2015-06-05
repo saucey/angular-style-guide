@@ -72,6 +72,11 @@
 
   .highlight {
     display: block;
+    &.has-been-shown { //if user has already seen the highlight, we don't want to show this again
+      &.desktop, &.mobile {
+        display: none;
+      }
+    }
     background-color: $green;
 
     &.desktop {
