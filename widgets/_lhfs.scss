@@ -19,7 +19,7 @@
         font-family: $font_icons;
         content: $font_icons_tip;
         margin-left: -20px; //this is faking it, compensating for the space requirement of :before, display: inline does not seem to work
-        margin-right: 5px;
+        margin-right: -5px;
         left: -10px;
         position: relative;
       }
