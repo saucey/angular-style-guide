@@ -86,4 +86,24 @@ button, .button {
   &.transparent {
     background-color: transparent;
   }
+  &.edit {
+    display: block;
+    @media screen and(min-width: $rc-m-min-width) and(max-width: $rc-l-max-width) {
+      display: none;
+    }
+    &.transparent {
+      display: none;
+      @media screen and(min-width: $rc-m-min-width) and(max-width: $rc-l-max-width) {
+        &:after {
+          content: $font_icons_edit;
+          font-family: $font_icons;
+        }
+        float: right;
+        display: block;
+      }
+    }
+    &:before {
+      content: "Wijzig  ";
+    }
+  }
 }
