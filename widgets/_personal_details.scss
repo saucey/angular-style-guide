@@ -1,0 +1,236 @@
+// 
+// Reason to don't use id selectors instead of class selectors
+// http://csswizardry.com/2011/09/when-using-ids-can-be-a-pain-in-the-class/
+// http://screwlewse.com/2010/07/dont-use-id-selectors-in-css/
+// http://oli.jp/2011/ids/
+
+.personal_details_widget {
+  form>ul, & ul.products {
+    margin: 30px 0;
+    width: 100%;
+    li.product {
+      .description {
+        &:before {
+          font-family: $font_icons;
+          color: $blue;
+          content: $font_icons_headhphones;
+          margin-left: -20px; //this is faking it, compensating for the space requirement of :before, display: inline does not seem to work
+          left: -10px;
+          position: relative;
+        }
+        padding-left: 40px;
+        margin-bottom: 20px;
+      }
+
+      div.title {
+        font-family: $font_medium;  //font-weight bold does not work for this font family >:(;
+      }
+    }
+  }
+
+  ul.horizontal {
+    display: block;
+  }
+  li.value {
+    @media screen and(min-width: $rc-m-min-width) and(max-width: $rc-l-max-width) {
+      line-height: 24px;
+      min-height: $elements_height;
+    }
+    span {
+      &.content, &.help {
+        display: inline;
+      }
+      &.help {
+        @media screen and(max-width: $rc-s-max-width) {
+          display: none;
+        }
+      }
+    }
+  }
+  li.label {
+    min-height: 0;
+    @media screen and(min-width: $rc-m-min-width) and(max-width: $rc-l-max-width) {
+      //height: inherit;  //$elements_height;
+    }
+    &:after {
+      content: ":";
+    }
+  }
+  label.left {
+    float:left;
+  }
+
+  input[type=text], input[type=email], input[type=number], select, .ddTitle {
+    display: none;
+  }
+  .edit {
+    ul.error {
+      display: block;
+      opacity: 0;
+      height: 24px;
+      min-height: 0;
+      [class*='span'] {
+        min-height: 0;  //overwriting min-height from row-fluid
+        line-height: 18px;  //overwriting line-height from *body
+      }
+      &> li {
+        color: $red;
+        font-size: $small;
+        margin-left: 0;
+      }
+      &.visible {
+        opacity: 1;
+      }
+    }
+    li.label {
+      padding-right: 55px;
+      @media screen and(max-width: $rc-s-max-width) {
+        text-align: left;
+      }
+    }
+    li.label, label {
+      font-family: $font_normal;
+      text-align: right;
+      &:after {
+        content: "";
+      }
+    }
+    li.label.required:after, label.checkbox.required span.label:after {
+      margin-left: 5px;
+      content: "*";
+      color: $red;
+    }
+
+    input[type=text], input[type=email], input[type=number], select, .ddTitle {
+      display: block;
+    }
+    li.value {
+      span {
+        &.content, &.help {
+          display: none;
+        }
+      }
+    }
+  }
+
+  // fix responsive peculiarities
+  .row-fluid [class*='span'] {
+    display: inline;
+    @media screen and(max-width: $rc-s-max-width) {
+      min-height: 5px;
+    }
+  }
+
+  .residential_address {
+    bottom-margin: 40px;
+  }
+}
+
+.help {
+  margin-right: 20px;
+  display: inline-block;
+  position: relative;
+  &.dialog {
+    z-index: 2;
+    opacity: 0.9;
+    $help_dialog_width: 400px;
+    @include bubble($width: 10px, $left: $help_dialog_width / 2, $quadrant: 0, $background-color: $slightly_lighter_blue);
+    background-color: $slightly_lighter_blue;
+    display: block;
+    position: absolute;
+    padding: 18px;
+    max-width: $help_dialog_width;
+    border-radius: $frame_border_radius;
+  }
+  &:before {
+    font-family: $font_icons;
+    font-size: 16px;
+    content: $font_icons_help;
+    position: absolute;
+  }
+}
+
+ul.actions {
+  text-align: left;
+  li {
+    float: none;
+    display: block;
+    &.edit {
+      display: none;
+    }
+  }
+  &.edit {
+    text-align: right;
+    li {
+      text-align: left;
+      &.edit {
+        padding-left: 0;
+        display: block;
+        div.disabler {  //required element for disabling of submit elements depending on validity
+          z-index: $elements_disabler_z-index;
+          position: relative;
+          left: 0;
+          top:-$elements_button_height;
+          background-color: white;
+          opacity: 0.5;
+          width: 100%;
+          height: $elements_button_height;
+          display: block; //always-on, state is indicated by z-index of the buttons; see if the always-on creates problems with backgrounds other than white
+        }
+      }
+      &.view {
+        display: none;
+      }
+      button {
+        position: relative;
+        z-index: $elements_button_enabled_z-index;
+        &.disabled {
+          z-index: $elements_button_disabled_z-index;
+        }
+      }
+    }
+  }
+}
+
+li.right {
+  text-align: right;
+}
+ul.horizontal {
+  display: table;
+  &.row-fluid {
+    height: 50px;
+  }
+  margin: 0;
+  @media screen and(max-width: $rc-s-max-width) {
+    margin-bottom: 30px;
+  }
+  padding: 1px 0;
+  //width: 100%;
+  display: none; //together with the .data class for li.product toggles on and off the visibility of the data elements
+  &.clear {
+    width: 100%;
+    height: 1px;
+    margin: 0 0 -1px;
+    clear: both;
+  }
+  &.visible {
+    display: block;
+  }
+  li {
+    &.label {
+      font-family: $font_normal;
+    }
+    &.value {
+      font-family: $font_light;
+    }
+    display: table-cell;
+  }
+}
+
+.lhfs_widget {
+
+  .product.data.span12, .row-fluid li.value[class*='span'] {
+    margin-left: 0; //overrides the setting for a left margin of 2% for all spans starting at the second position in a list, which creates an indent in lhfs widget design in the .product ul
+  }
+
+}
