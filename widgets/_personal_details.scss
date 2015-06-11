@@ -5,19 +5,11 @@
 // http://oli.jp/2011/ids/
 
 .personal_details_widget {
-  form>ul, & ul.products {
+  form>ul {
     margin: 30px 0;
     width: 100%;
     li.product {
       .description {
-        &:before {
-          font-family: $font_icons;
-          color: $blue;
-          content: $font_icons_headhphones;
-          margin-left: -20px; //this is faking it, compensating for the space requirement of :before, display: inline does not seem to work
-          left: -10px;
-          position: relative;
-        }
         padding-left: 40px;
         margin-bottom: 20px;
       }
