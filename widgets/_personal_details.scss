@@ -113,6 +113,11 @@
     }
   }
 
+  ul.horizontal.row-fluid {  //trying to fix the height set by the grid of 50px; there might be a necessity to adapt the margin-bottom in responsiveness and hopefully this change can be adapted in the future over all widgets and / or implemented in grid.scss
+    height: auto;
+    margin-bottom: 20px;
+  }
+
   // fix responsive peculiarities
   .row-fluid [class*='span'] {
     display: inline;
