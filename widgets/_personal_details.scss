@@ -84,13 +84,13 @@
     }
     li.label {
       padding-right: 55px;
+      text-align: right;
       @media screen and(max-width: $rc-s-max-width) {
         text-align: left;
       }
     }
     li.label, label {
       font-family: $font_normal;
-      text-align: right;
       &:after {
         content: "";
       }
@@ -129,113 +129,4 @@
   .residential_address {
     bottom-margin: 40px;
   }
-}
-
-.help {
-  margin-right: 20px;
-  display: inline-block;
-  position: relative;
-  &.dialog {
-    z-index: 2;
-    opacity: 0.9;
-    $help_dialog_width: 400px;
-    @include bubble($width: 10px, $left: $help_dialog_width / 2, $quadrant: 0, $background-color: $slightly_lighter_blue);
-    background-color: $slightly_lighter_blue;
-    display: block;
-    position: absolute;
-    padding: 18px;
-    max-width: $help_dialog_width;
-    border-radius: $frame_border_radius;
-  }
-  &:before {
-    font-family: $font_icons;
-    font-size: 16px;
-    content: $font_icons_help;
-    position: absolute;
-  }
-}
-
-ul.actions {
-  text-align: left;
-  li {
-    float: none;
-    display: block;
-    &.edit {
-      display: none;
-    }
-  }
-  &.edit {
-    text-align: right;
-    li {
-      text-align: left;
-      &.edit {
-        padding-left: 0;
-        display: block;
-        div.disabler {  //required element for disabling of submit elements depending on validity
-          z-index: $elements_disabler_z-index;
-          position: relative;
-          left: 0;
-          top:-$elements_button_height;
-          background-color: white;
-          opacity: 0.5;
-          width: 100%;
-          height: $elements_button_height;
-          display: block; //always-on, state is indicated by z-index of the buttons; see if the always-on creates problems with backgrounds other than white
-        }
-      }
-      &.view {
-        display: none;
-      }
-      button {
-        position: relative;
-        z-index: $elements_button_enabled_z-index;
-        &.disabled {
-          z-index: $elements_button_disabled_z-index;
-        }
-      }
-    }
-  }
-}
-
-li.right {
-  text-align: right;
-}
-ul.horizontal {
-  display: table;
-  &.row-fluid {
-    height: 50px;
-  }
-  margin: 0;
-  @media screen and(max-width: $rc-s-max-width) {
-    margin-bottom: 30px;
-  }
-  padding: 1px 0;
-  //width: 100%;
-  display: none; //together with the .data class for li.product toggles on and off the visibility of the data elements
-  &.clear {
-    width: 100%;
-    height: 1px;
-    margin: 0 0 -1px;
-    clear: both;
-  }
-  &.visible {
-    display: block;
-  }
-  li {
-    &.label {
-      font-family: $font_normal;
-    }
-    &.value {
-      font-family: $font_light;
-    }
-    display: table-cell;
-  }
-}
-
-.lhfs_widget {
-
-  .product.data.span12, .row-fluid li.value[class*='span'] {
-    margin-left: 0; //overrides the setting for a left margin of 2% for all spans starting at the second position in a list, which creates an indent in lhfs widget design in the .product ul
-  }
-
 }
