@@ -3,10 +3,11 @@ label.radio {
 	//background-color: red;
 	padding-left: 18px;
 	position: relative;
-	line-height: $elements_radio_height;
+	line-height: $elements_radio_line-height;
 	text-align: left;
 	margin-top: $elements_radio_top;
 	width: auto;
+	padding-right: 15px;
 	> input[type="radio"] {
 		opacity:0;
 		top: $elements_radio_top;
@@ -19,7 +20,7 @@ label.radio {
     			content: $font_icons_radio;
     			color: $blue;
     			left: -3px;
-    			top: 4px;
+    			top: 12px;
 			}
     		background-color: $beige;
 		}
