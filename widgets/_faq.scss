@@ -1,0 +1,66 @@
+.faq {
+  div.answer, div.title {
+  	border-bottom: 1px solid $light_grey;
+  }
+  div.title {
+    width: 100%;
+    &:after {
+      color: $blue;
+      font-size: 12px;
+      font-family: $font_icons;
+      content: $font_icons_arrow_down;
+      float: right;
+    }
+  }
+  div.answer {
+    display: none;
+    padding-top: 15px;
+    & > p {
+      padding-left: 10px;
+      border-left: 2px solid $blue;
+    }
+  }
+  label {
+    cursor: pointer;
+  }
+  input {
+  	display: none;
+  	~ [class^=thumbs_]:before {
+  	  color: $light_grey;
+  	}
+  	&:checked {
+      ~ [class^=thumbs_]:before {
+  	    color: $blue;
+  	  }
+  	  + div.title {
+  	    &:after {
+  	      transform: rotate(180deg);
+  	    }
+  	  }
+  	  ~ div.answer, ~ div.feedback {
+  	    display: block;
+  	  }
+  	}
+  }
+  .feedback {
+    display: none;
+    label {
+      display: inline;
+    }
+    [class^=thumbs_]:before {
+      display: inline-block;  //has to be block or inline-block for transform 2 work on :before
+      font-family: $font_icons;
+  	  content: $font_icons_fistfull;    
+    }
+  	/*.thumbs_down {
+  	  &:before {
+  	    color: $blue;
+  	  }
+  	}*/
+  	.thumbs_up {
+  	  &:before {
+        transform: rotate(180deg);
+  	  }
+  	}
+  }
+}
