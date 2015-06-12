@@ -5,27 +5,12 @@
 // http://oli.jp/2011/ids/
 
 .personal_details_widget {
-  form>ul {
-    margin: 30px 0;
-    width: 100%;
-    li.product {
-      .description {
-        padding-left: 40px;
-        margin-bottom: 20px;
-      }
-
-      div.title {
-        font-family: $font_medium;  //font-weight bold does not work for this font family >:(;
-      }
-    }
-  }
-
-  ul.horizontal {
+  ul.horizontal { //overwriting the default "none" setting, but this might be an obsolete approach anyway, so the "none" setting could be eliminated in general setup
     display: block;
   }
   li.value {
     @media screen and(min-width: $rc-m-min-width) and(max-width: $rc-l-max-width) {
-      line-height: 24px;
+      line-height: 100%;
       min-height: $elements_height;
     }
     span {
@@ -41,9 +26,6 @@
   }
   li.label {
     min-height: 0;
-    @media screen and(min-width: $rc-m-min-width) and(max-width: $rc-l-max-width) {
-      //height: inherit;  //$elements_height;
-    }
     &:after {
       content: ":";
     }
@@ -52,9 +34,6 @@
     float:left;
   }
 
-  input[type=text], input[type=email], input[type=number], select, .ddTitle {
-    display: none;
-  }
   .edit {
     ul.error {
       display: block;
@@ -93,16 +72,6 @@
       color: $red;
     }
 
-    input[type=text], input[type=email], input[type=number], select, .ddTitle {
-      display: block;
-    }
-    li.value {
-      span {
-        &.content, &.help {
-          display: none;
-        }
-      }
-    }
   }
 
   ul.horizontal.row-fluid {  //trying to fix the height set by the grid of 50px; there might be a necessity to adapt the margin-bottom in responsiveness and hopefully this change can be adapted in the future over all widgets and / or implemented in grid.scss
