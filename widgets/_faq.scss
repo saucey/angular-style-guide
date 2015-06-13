@@ -1,4 +1,7 @@
 .faq {
+  & * {
+    font-family: $font_light;  //has 2B redefined, since all text here is held within labels, and those are usually defined bolder (ie. regular)
+  }
   div.answer, div.title, div.feedback {
   	border-bottom: 1px solid $lighter_grey;
   }
@@ -22,6 +25,7 @@
   }
   label {
     cursor: pointer;
+    font-weight: normal;  //needs to be defined here 2 override the Drupal standard definition of bold for labels
   }
   input {
   	display: none;
