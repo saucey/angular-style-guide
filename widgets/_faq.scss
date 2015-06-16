@@ -2,8 +2,10 @@
   & * {
     font-family: $font_light;  //has 2B redefined, since all text here is held within labels, and those are usually defined bolder (ie. regular)
   }
-  div.answer, div.title, div.feedback {
+  li.question[class*=span] {
+    margin-left: 0; //overrides the setting for a left margin of 2% for all spans starting at the second one in a list, which creates an indent in faq design in the .product ul
   	border-bottom: 1px solid $lighter_grey;
+  	padding: 10px 0 10px 0;
   }
   div.title {
     width: 100%;
@@ -15,12 +17,25 @@
       float: right;
     }
   }
+  div.line {
+    border-bottom: 1px solid $lighter_grey;
+    height: 1px;
+    margin: 10px 0 0 0;
+    padding: 0;
+  }
   div.answer {
     display: none;
-    padding-top: 15px;
+    margin: 12px 0 0 12px;
+    padding: 5px 0 5px 12px;
+    border-left: 2px solid $blue;
     & > p {
-      padding-left: 10px;
-      border-left: 2px solid $blue;
+    	margin-bottom: 0;
+    }
+    ul {
+      list-style: circle inside;
+      li {
+        list-style: inherit;
+      }
     }
   }
   label {
@@ -32,6 +47,9 @@
   	~ [class^=thumbs_] {
   	  color: $light_grey;
   	}
+    ~ div.line {
+      display: none;
+    }
   	&:checked {
       ~ [class^=thumbs_] {
   	    color: $blue;
@@ -41,29 +59,38 @@
   	      transform: rotate(180deg);
   	    }
   	  }
-  	  ~ div.answer, ~ div.feedback {
+  	  ~ div.answer, ~ div.feedback, ~ div.line {
   	    display: block;
   	  }
   	}
   }
   .feedback {
     display: none;
+    margin: 0 15px 0 15px;
+    .intro {
+      &:after {
+        content: "\00A0\00A0";  //non-breaking space in unicode
+      }
+    }
+    .line {
+      margin-bottom: 10px;
+    }
     label {
       display: inline;
     }
     [class^=thumbs_]:after {
       display: inline-block;  //has to be block or inline-block for transform 2 work on :before
       font-family: $font_icons;
-  	  content: $font_icons_fistfull;    
+  	  content: $font_icons_fistfull; 
+  	  margin: 0 5px 0 2px;   
     }
-  	.thumbs_up {
-  	  &:after {
-        transform: rotateX(180deg);
-        //transform: rotateY(180deg);
-  	  }
+  	.thumbs_up:after {
+      transform: rotateX(180deg);
+      //transform: rotateY(180deg);
+    }
+  	.thumbs_down:after {
+  	  position: relative;
+  	  top: 8px;
   	}
-  }
-  li.question[class*='span'] {
-    margin-left: 0; //overrides the setting for a left margin of 2% for all spans starting at the second one in a list, which creates an indent in faq design in the .product ul
   }
 }
