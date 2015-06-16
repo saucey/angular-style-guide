@@ -82,7 +82,7 @@
       display: inline-block;  //has to be block or inline-block for transform 2 work on :before
       font-family: $font_icons;
   	  content: $font_icons_fistfull; 
-  	  margin: 0 5px 0 2px;   
+  	  margin: 0 3px 0 2px;   
     }
   	.thumbs_up:after {
       transform: rotateX(180deg);
