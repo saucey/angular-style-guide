@@ -2,12 +2,21 @@
   .news_element {
     background-color: $white;
     margin-bottom: 20px;
-  }
-  img {
-    width: 100%;
-    min-height: 100px;
-  }
-  div.date {
-    color: $light_grey;
+    div.title {
+      font-family: $font_medium;
+      font-size: $large;
+      margin-bottom: 20px;
+      margin-top: 10px;
+    }
+    img {
+      width: 100%;
+      min-height: 100px;
+    }
+    .content {
+      padding: 17px 10px;
+    }
+    div.date {
+      color: $light_grey;
+    }
   }
 }
