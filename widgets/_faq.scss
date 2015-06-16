@@ -29,11 +29,11 @@
   }
   input {
   	display: none;
-  	~ [class^=thumbs_]:before {
+  	~ [class^=thumbs_] {
   	  color: $light_grey;
   	}
   	&:checked {
-      ~ [class^=thumbs_]:before {
+      ~ [class^=thumbs_] {
   	    color: $blue;
   	  }
   	  + div.title {
@@ -51,19 +51,15 @@
     label {
       display: inline;
     }
-    [class^=thumbs_]:before {
+    [class^=thumbs_]:after {
       display: inline-block;  //has to be block or inline-block for transform 2 work on :before
       font-family: $font_icons;
   	  content: $font_icons_fistfull;    
     }
-  	/*.thumbs_down {
-  	  &:before {
-  	    color: $blue;
-  	  }
-  	}*/
   	.thumbs_up {
-  	  &:before {
-        transform: rotate(180deg);
+  	  &:after {
+        transform: rotateX(180deg);
+        //transform: rotateY(180deg);
   	  }
   	}
   }
