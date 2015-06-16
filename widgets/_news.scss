@@ -1,26 +1,13 @@
 .news {
-  margin: -20px;  // to make an edge-to-edge background color
-  padding: 20px;  // to keep the margins the same in spite of the -20px margin...
-  div.title {
-    font-family: $font_medium;  //font-weight bold does not work for this font family >:(;
-    font-size: $large;
-    margin-bottom: 20px;
-    margin-top: 10px;
-  }
-  .news_articles .news_article {
+  .news_element {
     background-color: $white;
-    padding: 15px;
     margin-bottom: 20px;
   }
   img {
     width: 100%;
     min-height: 100px;
-    margin: -15px;  //to counteract the padding of the envolving DOM element
   }
   div.date {
     color: $light_grey;
-  }
-  .content {
-    margin-bottom: 10px;
   }
 }
