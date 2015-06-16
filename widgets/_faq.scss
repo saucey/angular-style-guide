@@ -63,4 +63,7 @@
   	  }
   	}
   }
+  li.question[class*='span'] {
+    margin-left: 0; //overrides the setting for a left margin of 2% for all spans starting at the second one in a list, which creates an indent in faq design in the .product ul
+  }
 }
