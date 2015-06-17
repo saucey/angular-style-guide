@@ -102,21 +102,15 @@
   }
 }
 
-
-/**
- * @Jorg you need to align the stuff commented below, with the Drupal way.
- * If you need more specific specification different from the default ones like:
- * - .success => .messages.messages--status
- * - .warning => .messages.messages--warning
- * - .error => .messages.messages--error
- */
-
 div.success {
+  $width: 400px;
   background-color: $white; //$light_green;
+  position: fixed;
+  top: 200px;
+  left: 50%;
+  margin-left: -($width / 2);
   z-index: 6;
-  margin: 0 auto;
-  width: 400px;
-  position: relative;
+  width: $width;
   .header {
     color: $black;  
   }
