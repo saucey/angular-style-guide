@@ -2,12 +2,12 @@
   & * {
     font-family: $font_light;  //has 2B redefined, since all text here is held within labels, and those are usually defined bolder (ie. regular)
   }
-  li.question[class*=span] {
+  .question[class*=span] {
     margin-left: 0; //overrides the setting for a left margin of 2% for all spans starting at the second one in a list, which creates an indent in faq design in the .product ul
   	border-bottom: 1px solid $lighter_grey;
   	padding: 10px 0 10px 0;
   }
-  h3.title {
+  .title {
     width: 100%;
     font-size: $medium;
     //line-height: initial;
@@ -27,7 +27,7 @@
     margin: 10px 0 0 0;
     padding: 0;
   }
-  div.answer {
+  .answer {
     display: none;
     margin: 12px 0 0 12px;
     padding: 5px 0 5px 12px;
