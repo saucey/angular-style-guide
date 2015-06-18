@@ -82,6 +82,9 @@
         content: "\00A0\00A0";  //non-breaking space in unicode
       }
     }
+    .content {
+      margin-left: 10px;
+    }
     .line {
       margin-bottom: 10px;
     }
