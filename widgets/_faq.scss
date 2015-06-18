@@ -7,8 +7,12 @@
   	border-bottom: 1px solid $lighter_grey;
   	padding: 10px 0 10px 0;
   }
-  div.title {
+  h3.title {
     width: 100%;
+    font-size: $medium;
+    //line-height: initial;
+    color: $black;
+    //margin: initial;
     &:after {
       color: $blue;
       font-size: 12px;
