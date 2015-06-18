@@ -114,6 +114,12 @@ div.success {
   .header {
     color: $black;  
   }
+  + .lightbox {
+    display: none;
+  }
+  &.visible + .lightbox {
+    display: block;
+  }
 }
 div.error {
   background-color: $light_red;
