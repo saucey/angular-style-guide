@@ -46,6 +46,9 @@
     cursor: pointer;
     font-weight: normal;  //needs to be defined here 2 override the Drupal standard definition of bold for labels
   }
+  .response {
+    display: none;
+  }
   input {
   	display: none;
   	~ [class^=thumbs_] {
@@ -58,14 +61,17 @@
       ~ [class^=thumbs_] {
   	    color: $blue;
   	  }
-  	  + div.title {
+  	  + .title {
   	    &:after {
   	      transform: rotate(180deg);
   	    }
   	  }
-  	  ~ div.answer, ~ div.feedback, ~ div.line {
+  	  ~ .answer, ~ .feedback, ~ div.line {
   	    display: block;
   	  }
+      ~ .response {
+        display: block;
+      }
   	}
   }
   .feedback {
