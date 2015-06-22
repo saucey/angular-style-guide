@@ -82,11 +82,14 @@
 
     dd:first-child {
 
-      a:before {
-        display: inline;
-        @include rem('font-size', 10);
-        line-height: inherit;
-        vertical-align: middle;
+      a {
+        font-family: $font_normal;
+        &:before {
+          display: inline;
+          @include rem('font-size', 10);
+          line-height: inherit;
+          vertical-align: middle;
+        }
       }
     }
   }
