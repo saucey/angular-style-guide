@@ -338,8 +338,8 @@ body.shw-widgets-logged-in {
       display: inline-block;
 
       // Default status
-      opacity: 0;
-      transition: .15s;
+      opacity: 1;
+      transition: opacity .15s;
     }
   }
 }
