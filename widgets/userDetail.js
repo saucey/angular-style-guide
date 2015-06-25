@@ -132,26 +132,23 @@
 
         // Parse the JSON if needed
         parseJSON = isString ? $.parseJSON(json) : json;
-
         // Check if container and output of JSON is properly setup
         if (!checkSanityOfJson(parseJSON)) { return; }
 
         // Boolean to declare and check is user is logged in
         isLogged = (parseJSON.retrieveResponse.PROCES.STATUS === '00000');
-        
         // Data ready to be passed to initialize() below
         data = {
 
           // Set flag for user logged in
-          'loggedIn': isLogged && 1 || 0,
+          'loggedIn': isLogged,
 
           // Get user's name from json object
-          'userName': parseJSON.retrieveResponse.PARTIJ._AE_PERSOON._AE_SAMNAAM,
+          'userName': parseJSON.retrieveResponse.PARTIJ._AE_PERSOON._AE_SAMNAAM || "n.a.",
 
           // Get last login time from cookie or give false
           'lastAccess': that.getCookie()
         };
-
         // Activate the widget
         that.initialize(data);
       };
@@ -178,11 +175,11 @@
       var callback = function (domWidget) {
 
         // Append the template and cache it
-        that.widget = $(domWidget).appendTo(appendUserWidgetTo);        
+        that.widget = domWidget;  //$(domWidget).appendTo(appendUserWidgetTo);        
       };
 
       // Check if is logged and go ahead
-      if (data.loggedIn === 1) {
+      if (data.loggedIn) {
 
         // Parse the DOM before appendTo
         this.parseWidget(data, callback);
@@ -205,7 +202,6 @@
         'href', logoutPathLink);
       $template.find('a.user_detail_widget_mijnaegon_link').attr(
         'href', mijnaegonPathLink);
-
       // Exception in case data.lastAccess is empty
       if (data.lastAccess === false) {
 
@@ -217,10 +213,6 @@
 
         // Convert lastAcess in formatted date
         dateFormatted = this.formatDatetime(data.lastAccess);
-        console.log("date ");
-        // Parse date time
-        $template.find('span.user_detail_widget_last_access')
-          .text(dateFormatted);
       }
       
       // Launch also the function to append the user name in menu
@@ -468,7 +460,6 @@
       this.clearCookie();
       
       // remove the cookie that determines if the green bar is shown
-      console.log("logout");
       $.removeCookie("hasBeenShown");
 
       // Switch off all events
