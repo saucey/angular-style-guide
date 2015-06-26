@@ -151,9 +151,9 @@
         @include rem('font-size', 14);
         @include rem('line-height', 14);
 
-        &:hover {
+        //&:hover {  //link should be white all the time
           color: $white;
-        }
+        //}
       }
 
       &:last-child {
