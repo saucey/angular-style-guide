@@ -4,6 +4,12 @@
  * Dependencies: 
  * - vendors/jquery.cookie.js (Cookie jQuery handlers)
  * - modernizr.custom.js (Proper cross-browser style)
+ *
+ * Events trigger on window object: shwUserLogout, shwUserLoggedIn.
+ * Usage:
+ * $(window).on('shwUserLoggedIn', function() {
+ *   // Do whatever you want here
+ * });
  */
 
 (function(doc, win, $, Drupal) {
@@ -49,13 +55,29 @@
    */
   Drupal.behaviors.userDetailWidget = {
 
+    // Initial container for data object
+    shwData: null,
+
+    // Initial container for entire raw json object
+    shwRawData: null,
+
     attach: function (context, settings) {
       // Run before real initialization
       this.setup(settings);
 
       // Register a public method for deinitialize
-      win.shwGlobal.logout = (function() {
-        this.deinitialize();
+      win.shwGlobal.userLogout = (function(onlyLocal) {
+        return this.deinitialize(onlyLocal);
+      }).bind(this);
+
+      // Register a public method for loggedin
+      win.shwGlobal.userLoggedIn = (function() {
+        return this.userLoggedIn();
+      }).bind(this);
+
+      // Register a public method for getRelNumByType
+      win.shwGlobal.getRelNumByType = (function(type) {
+        return this.getRelNumByType(type);
       }).bind(this);
     },
 
@@ -95,7 +117,6 @@
 
       // Local variables
       var that = this,
-          // dataType = this.getDataType(),
           jsonPayload,
           retreiveBSPartij,
           checkSanityOfJson;
@@ -132,11 +153,21 @@
 
         // Parse the JSON if needed
         parseJSON = isString ? $.parseJSON(json) : json;
+
         // Check if container and output of JSON is properly setup
-        if (!checkSanityOfJson(parseJSON)) { return; }
+        if (!checkSanityOfJson(parseJSON)) {
+
+          return;
+
+        } else {
+
+          // Register raw json data if OK
+          that.shwRawData = parseJSON.retrieveResponse;
+        }
 
         // Boolean to declare and check is user is logged in
         isLogged = (parseJSON.retrieveResponse.PROCES.STATUS === '00000');
+
         // Data ready to be passed to initialize() below
         data = {
 
@@ -156,7 +187,6 @@
       // Load AJAX request
       $.ajax({
         timeout: 10000,
-        // type: (dataType === 'jsonp' ? 'POST' : 'GET'),
         type: 'GET',
         url: this.apiUrl,
         data: jsonPayload,
@@ -170,6 +200,9 @@
 
       // Local variables
       var that = this;
+
+      // Update the global shwData
+      this.shwData = data;
 
       // Callback to prevent appendTo before correct end of parseWidget()
       var callback = function (domWidget) {
@@ -217,6 +250,9 @@
       
       // Launch also the function to append the user name in menu
       this.shwUserDetailsInmenu(data.userName);
+
+      // Trigger an event
+      $(win).trigger('shwUserLoggedIn');
 
       // Show/hide logged's items
       $('body').addClass('shw-widgets-logged-in');
@@ -423,19 +459,6 @@
       return dateFormatted;
     },
 
-    getDataType: function () {
-
-      var apiUrlOrig = this.apiUrl.split('/').splice(2, 1).join('/'),
-
-          // Check if is a relative address without protocol http/https
-          localDomain = this.apiUrl.indexOf('://') === -1,
-
-          // Check if current apiUrl is the same domain of current address
-          sameDomain = doc.location.host.indexOf(apiUrlOrig) !== -1;
-
-      return (sameDomain || localDomain) ? 'json' : 'jsonp';
-    },
-
     getCookie: function () {
 
       // Return cookie value or FALSE
@@ -451,7 +474,12 @@
       if (response) { throw response.responseText; }
     },
 
-    deinitialize: function () {
+    /**
+     * Method to logout an user 
+     * @param  {boolean} onlyLocal  Pass true if you want destroy only local session
+     * @return {boolean} wrapper for this.userLoggedIn()
+     */
+    deinitialize: function (onlyLocal) {
 
       // Remove classes to hide logged's items
       $('body').removeClass('shw-widgets-logged-in mobile-tap');
@@ -464,6 +492,67 @@
 
       // Switch off all events
       this.events(true);
+
+      // Set loggedIn to false
+      this.shwData.loggedIn = false;
+
+      // Trigger an event
+      $(win).trigger('shwUserLogout');
+
+      // Logout also remotely
+      if (!onlyLocal) { location.href = logoutPathLink; }
+
+      // Return current status
+      return this.userLoggedIn();
+    },
+
+    /**
+     * Check if the user is loggen in or not
+     * @return {boolean} true or false if user is logged or not
+     */
+    userLoggedIn: function () {
+
+      // Return loggedIn value or false if not existent
+      return this.shwData.loggedIn || false;
+    },
+
+    /**
+     * This method permit to retrieve all elements associated with
+     * _AE_RELNUM_TYPE present in json data, retrieved from remote API.
+     * 
+     * @param  {string} type   Pass a string af filter parameter
+     * @return {string|array}  Return a numeric string or array collection
+     */
+    getRelNumByType: function (type) {
+
+      // Force to uppercase
+      type = type.toUpperCase();
+
+      // Return null if no _AE_PARTIJ_IDENTIFICATIE
+      if (this.shwRawData && this.shwRawData.PARTIJ &&
+        !this.shwRawData.PARTIJ._AE_PARTIJ_IDENTIFICATIE) { return null; }
+
+      // Create a local variable with identificatie array
+      var arrIdentifications = this.shwRawData.PARTIJ._AE_PARTIJ_IDENTIFICATIE;
+
+      // If no type param, return the whole array
+      if (!type) { return arrIdentifications; }
+
+      // Filter the array based on type param passed
+      var arrFiltered = arrIdentifications.filter(function(obj){
+        return obj._AE_RELNUM_TYPE === type ? true : false;
+      });
+
+      // Create empty values array
+      var values = [];
+
+      // Populate values array with all values present in the filtered array
+      arrFiltered.forEach(function(value){
+        values.push(value.RELNUM);
+      });
+
+      // Return single value or multiple values as array
+      return values.length <= 1 ? values[0] : values;
     }
   };
 
