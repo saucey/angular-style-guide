@@ -2,6 +2,7 @@
 //
 // Responsive Grid
 // --------------------------------------------------
+
 .row-fluid {
   &:before, &:after {
     line-height: 0;
@@ -159,32 +160,6 @@
   }
 }
 
-@media screen and(min-width: $rc-m-min-width) and(max-width: $rc-m-max-width) {
-  .row-fluid {
-    margin-bottom: 5px;
-  }
-  .container_12 .row-fluid.col3 .span4 {
-    width: 49%;
-    *width: 48.9375%;
-    &:last-child {
-      margin: 5px 0 0;
-    }
-  }
-}
-@media screen and(max-width: $rc-s-max-width) {
-  .row-fluid {
-    margin-bottom: 0;
-    .span14 {
-      margin-bottom: 5px;
-    }
-  }
-  .container_12 .row-fluid [class*='span'] {
-    width: 100%;
-    margin-bottom: 5px;
-    margin-left: 0;
-  }
-}
-
 section.content.fullwidth {
   width: auto;
   margin: 0;
@@ -233,15 +208,37 @@ section.content.fullwidth {
 
 @include breakpoint($brk-mobile) {
 
-  .container_12  {
-    .row-fluid [class*="span"] {
-      margin-left: 0;
-      width: 100%;
-    }
-    .form-item [class*="span"] {
-      margin-left: 0;
-      margin-bottom: 5px;
-      width: 100%;
+  .row-fluid {
+    margin-bottom: 0;
+
+    .span14 {
+      @include rem('margin-bottom', 5);
     }
   }
+
+  .container_12  {
+
+    .row-fluid [class*="span"],
+    .form-item [class*="span"] {
+      margin-left: 0;
+      width: 100%;
+      @include rem('margin-bottom', 5);
+    }
+  }
+}
+
+@media screen and(min-width: $rc-m-min-width) and(max-width: $rc-m-max-width) {
+
+  .row-fluid {
+    @include rem('margin-bottom', 5);
+  }
+
+  .container_12 .row-fluid.col3 .span4 {
+    width: 49%;
+    *width: 48.9375%;
+
+    &:last-child {
+      @include rem('margin', 5, 0, 0);
+    }
+  }  
 }
