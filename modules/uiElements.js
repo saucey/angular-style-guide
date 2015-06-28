@@ -1,3 +1,4 @@
+/* global PointerEventsPolyfill:false */
 (function ($, win) {
 
   'use strict';
