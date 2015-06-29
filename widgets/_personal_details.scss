@@ -87,6 +87,13 @@
     }
   }
 
+  .NL, .world {
+    display: none;
+    &.visible {
+      display: block;
+    }
+  }
+
   .residential_address {
     bottom-margin: 40px;
   }
