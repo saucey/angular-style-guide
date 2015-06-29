@@ -1,0 +1,38 @@
+//
+// Extra features
+// --------------------------------------------------
+
+
+// Hint:
+// Use only this .hide-if-shw-loggedout if necessary and let all elements 
+// visible by default.
+.hide-if-shw-loggedout {
+  display: none;
+}
+
+// Hide/show any elements based on current user status
+.shw-widgets-logged-in {
+
+  // Below i'm using different type of display, to restore the initial behaviour
+  // and overwrite the previous "none" set by .hide-if-shw-loggedin
+  // Example:
+  // .show-if-shw-loggedin -> show as inline by default
+  // .show-if-shw-loggedin.block -> show as block
+  // .show-if-shw-loggedin.inline -> show as inline
+  // .show-if-shw-loggedin.inline-block -> show as inline-block
+  .show-if-shw-loggedin, .hide-if-shw-loggedout {
+    display: inline;
+
+    &.inline {
+      display: inline;
+    }
+
+    &.inline-block {
+      display: inline-block;
+    }
+
+    &.block {
+      display: block;
+    }
+  }
+}
