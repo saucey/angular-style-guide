@@ -1,0 +1,19 @@
+
+/* Bower Components
+================================================== */
+
+/* Compass Mixins */
+@import "aegon-sass-library/vendors/compass-mixins/lib/compass";
+
+/* Breakpoint SASS */
+@import "aegon-sass-library/vendors/breakpoint-sass/stylesheets/breakpoint";
+
+
+/* EXTRA sub libs dependencies
+================================================== */
+
+/* SASS variables, functions, mixins, class and placeholders helpers */
+@import "aegon-sass-library/helpers/all";
+
+/* All library widgets and specific modules */
+@import "aegon-sass-library/widgets/user_detail";
