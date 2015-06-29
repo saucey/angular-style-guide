@@ -83,7 +83,15 @@ a.menu-6863:before {
 a.menu-6860:before {
   @extend .icon-uniE604;
 }
-
+a.menu-mijn-aegon:before {
+  content: $font_icons_man;
+}
+a.menu-mijn-gegevens:before {
+  content: $font_icons_document_n_pen;
+}
+a.menu-mijn-documenten:before {
+  content: $font_icons_document_n_check;
+}
 
 //
 // Media Queries
