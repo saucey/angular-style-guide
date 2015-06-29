@@ -17,15 +17,16 @@
 a[class*="menu-"]:before {
   font-family: $font_icons;
   @include rem('font-size', 24);
-  position: absolute;
-  top: 50%;
-  left: 7%;
-  display: block;
-  text-align: center;
-  @include rem('width', 30);
-  @include rem('height', 20);
-  @include rem('margin-top', -10);
+  // position: absolute;
+  // top: 50%;
+  // left: 7%;
+  // display: block;
+   text-align: center;
+   @include rem('width', 80);
+  // @include rem('height', 20);
+  // @include rem('margin-top', -10);
   -webkit-font-smoothing: antialiased;
+  //@include rem('margin-right', 15);
 }
 
 a.menu-klantenservice,
