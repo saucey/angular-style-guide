@@ -92,6 +92,7 @@
     }
 
     &.mobile {
+      //display: none;
       @include rem('font-size', 16);
       @include rem('margin', 0, 12);
       overflow: hidden;

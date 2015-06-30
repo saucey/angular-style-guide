@@ -287,6 +287,7 @@
   display: inline-block;
   position: relative;
   &.dialog {
+    z-index: 5;
     $help_dialog_width: 400px;
     @include bubble($width: 10px, $left: $help_dialog_width / 2, $quadrant: 0, $background-color: $slightly_lighter_blue);
     background-color: $slightly_lighter_blue;
