@@ -35,8 +35,8 @@ label.radio {
     		border-radius: $elements_radio_height / 2;
     		background-color: $beige;
 			display:inline-block;
-			height: $elements_radio_height - 1;	
-			width: $elements_radio_height - 1;
+			height: $elements_radio_height - 2;	
+			width: $elements_radio_height - 2;
 			position: absolute;
 			top: -$elements_radio_top;
 			left: -3px;
