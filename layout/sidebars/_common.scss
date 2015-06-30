@@ -14,46 +14,58 @@
 // Aegon menu icons
 // --------------------------------------------------
 
-a[class*="menu-"]:before {
+a.icon:before {
   font-family: $font_icons;
   @include rem('font-size', 24);
-  // position: absolute;
-  // top: 50%;
-  // left: 7%;
-  // display: block;
-  // text-align: center;
-   @include rem('width', 80);
-  // @include rem('height', 20);
-  // @include rem('margin-top', -10);
+  @include rem('width', 80);
   -webkit-font-smoothing: antialiased;
-  //@include rem('margin-right', 15);
+}
+
+nav.mainmenu a[class*="menu-"]:before {
+  position: absolute;
+  top: 50%;
+  left: 7%;
+  display: block;
+  text-align: center;
+  width: 0;
+  @include rem('height', 20);
+  @include rem('margin-top', -10);
+  @include rem('margin-right', 15);
 }
 
 a.menu-klantenservice,
+a.menu-service-contact,
 a.menu-4532:before,
 a.menu-5659:before {
   @extend .icon-uniE605;
 }
+a.menu-inloggen,
 a.menu-4610:before,
 a.menu-5694:before {
   @extend .icon-uniE610;
 }
+a.menu-sparen,
 a.menu-5074:before {
   @extend .icon-uniE607;
 }
+a.menu-actueel,
 a.menu-5662:before {
   @extend .icon-uniE608;
 }
+a.menu-uitgelicht,
 a.menu-4547:before,
 a.menu-5657:before {
   @extend .icon-uniE611;
 }
+a.menu-beleggen,
 a.menu-4494:before {
   @extend .icon-uniE608;
 }
+a.menu-verzekeren,
 a.menu-4495:before {
   @extend .icon-uniE609;
 }
+a.menu-hypotheek,
 a.menu-4496:before,
 a.menu-4537:before {
   @extend .icon-uniE60B;
@@ -61,6 +73,7 @@ a.menu-4537:before {
 a.menu-4546:before {
   @extend .icon-uniE629;
 }
+a.menu-pensioen,
 a.menu-4497:before {
   @extend .icon-uniE60A;
 }
