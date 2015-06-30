@@ -1,0 +1,19 @@
+
+/* Bower Components
+================================================== */
+
+/* Compass Mixins */
+@import "vendors/compass-mixins/lib/compass";
+
+/* Breakpoint SASS */
+@import "vendors/breakpoint-sass/stylesheets/breakpoint";
+
+
+/* EXTRA sub libs dependencies
+================================================== */
+
+/* SASS variables, functions, mixins, class and placeholders helpers */
+@import "helpers/all";
+
+/* All library widgets and specific modules */
+@import "widgets/user_detail";
