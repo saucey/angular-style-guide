@@ -14,14 +14,15 @@
 // Aegon menu icons
 // --------------------------------------------------
 
-a.icon:before {
+.icon:before,
+[class*="icon-"]:before, {
   font-family: $font_icons;
-  @include rem('font-size', 24);
-  @include rem('width', 80);
   -webkit-font-smoothing: antialiased;
+  padding-right: 8px;
 }
 
 nav.mainmenu a[class*="menu-"]:before {
+  @include rem('font-size', 24);
   position: absolute;
   top: 50%;
   left: 7%;
@@ -84,6 +85,7 @@ a.menu-home:before,
 a.menu-5653:before {
   @extend .icon-uniE647:before;
 }
+.icon-lock:before,
 a.menu-lock:before {
   @extend .icon-uniE648:before;
 }
