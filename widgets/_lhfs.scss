@@ -282,9 +282,10 @@
 }
 
 .help {
-  margin-right: 30px;
-  margin-left: -20px;
+  margin: 0;
+  margin-right: 10px;
   display: inline-block;
+  float: right;
   position: relative;
   &.dialog {
     z-index: 5;
