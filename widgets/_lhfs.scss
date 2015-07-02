@@ -282,6 +282,9 @@
 }
 
 .help {
+  &[title=''] {
+    display: none;
+  }
   margin: 0;
   margin-right: 10px;
   display: inline-block;
