@@ -17,13 +17,17 @@
 .icon:before,
 [class*="icon-"]:before, {
   font-family: $font_icons;
+  @include rem('font-size', 24);
   -webkit-font-smoothing: antialiased;
-  padding-right: 8px;
+  @include rem('line-height', 90);
+  //line-height: 90px;  //height of the aside.desktop.submenu
+  left: 12%;
+  position: absolute;
 }
 
 nav.mainmenu a[class*="menu-"]:before {
   @include rem('font-size', 24);
-  position: absolute;
+  /*position: absolute;
   top: 50%;
   left: 7%;
   display: block;
@@ -31,7 +35,7 @@ nav.mainmenu a[class*="menu-"]:before {
   width: 0;
   @include rem('height', 20);
   @include rem('margin-top', -10);
-  @include rem('margin-right', 15);
+  @include rem('margin-right', 15);*/
 }
 
 a.menu-klantenservice,
