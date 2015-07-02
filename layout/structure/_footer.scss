@@ -5,7 +5,7 @@
 
 .footer-wrap {
   margin: 0;
-  @include rem('margin-top', 50);
+  //@include rem('margin-top', 50);
 
   .footer-blk,
   .footer-quick-links {
@@ -164,7 +164,7 @@
 }
 
 
-// 
+//
 // Media queries
 // --------------------------------------------------
 
@@ -196,11 +196,11 @@
   }
 
   .footer-quick-links {
-    @include rem('padding', 25, 0); 
+    @include rem('padding', 25, 0);
 
     .center {
       @include rem('padding-top', 25);
-    }   
+    }
   }
 }
 
