@@ -20,7 +20,7 @@
   -webkit-font-smoothing: antialiased;
 }
 
-nav.mainmenu a[class*="menu-"]:before {
+nav.mainmenu a[class*="icon-"]:before {
   @include rem('font-size', 24);
   @include rem('line-height', 90);
   left: 12%;
@@ -36,77 +36,77 @@ nav.mainmenu a[class*="menu-"]:before {
   @include rem('margin-right', 15);*/
 }
 
-a.menu-klantenservice,
-a.menu-service-contact,
-a.menu-4532:before,
-a.menu-5659:before {
+.icon-klantenservice,
+.icon-service-contact,
+.icon-4532:before,
+.icon-5659:before {
   @extend .icon-uniE605;
 }
-a.menu-inloggen,
-a.menu-4610:before,
-a.menu-5694:before {
+.icon-inloggen,
+.icon-4610:before,
+.icon-5694:before {
   @extend .icon-uniE610;
 }
-a.menu-sparen,
-a.menu-5074:before {
+.icon-sparen,
+.icon-5074:before {
   @extend .icon-uniE607;
 }
-a.menu-actueel,
+.icon-actueel,
 a.menu-5662:before {
   @extend .icon-uniE608;
 }
-a.menu-uitgelicht,
-a.menu-4547:before,
-a.menu-5657:before {
+.icon-uitgelicht,
+.icon-4547:before,
+.icon-5657:before {
   @extend .icon-uniE611;
 }
-a.menu-beleggen,
-a.menu-4494:before {
+.icon-beleggen,
+.icon-4494:before {
   @extend .icon-uniE608;
 }
-a.menu-verzekeren,
-a.menu-4495:before {
+.icon-verzekeren,
+.icon-4495:before {
   @extend .icon-uniE609;
 }
-a.menu-hypotheek,
-a.menu-4496:before,
-a.menu-4537:before {
+.icon-hypotheek,
+.icon-4496:before,
+.icon-4537:before {
   @extend .icon-uniE60B;
 }
-a.menu-4546:before {
+.icon-4546:before {
   @extend .icon-uniE629;
 }
-a.menu-pensioen,
-a.menu-4497:before {
+.icon-pensioen,
+.icon-4497:before {
   @extend .icon-uniE60A;
 }
-a.menu-user-link:before {
+.icon-user-link:before {
   @extend .icon-uniE636:before;
 }
-a.menu-home:before,
-a.menu-5653:before {
+.icon-home:before,
+.icon-5653:before {
   @extend .icon-uniE647:before;
 }
 .icon-lock:before,
-a.menu-lock:before {
+.icon-lock:before {
   @extend .icon-uniE648:before;
 }
-a.menu-6861:before {
+.icon-6861:before {
   @extend .icon-uniE646;
 }
-a.menu-6863:before {
+.icon-6863:before {
   @extend .icon-uniE62C;
 }
-a.menu-6860:before {
+.icon-6860:before {
   @extend .icon-uniE604;
 }
-a.menu-mijn-aegon:before {
+.icon-mijn-aegon:before {
   content: $font_icons_man;
 }
-a.menu-mijn-gegevens:before {
+.icon-mijn-gegevens:before {
   content: $font_icons_document_n_pen;
 }
-a.menu-mijn-documenten:before {
+.icon-mijn-documenten:before {
   content: $font_icons_document_n_check;
 }
 
