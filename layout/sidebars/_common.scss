@@ -15,7 +15,7 @@
 // --------------------------------------------------
 
 .icon:before,
-[class*="icon-"]:before, {
+[class*="icon-"]:before {
   font-family: $font_icons;
   -webkit-font-smoothing: antialiased;
 }
@@ -34,6 +34,12 @@ nav.mainmenu a[class*="icon-"]:before {
   @include rem('height', 20);
   @include rem('margin-top', -10);
   @include rem('margin-right', 15);*/
+}
+
+.push-submenu {
+  [class*="icon-"]:before {
+    padding-right: 8px;
+  }
 }
 
 .icon-klantenservice,
