@@ -17,16 +17,14 @@
 .icon:before,
 [class*="icon-"]:before, {
   font-family: $font_icons;
-  @include rem('font-size', 24);
   -webkit-font-smoothing: antialiased;
-  @include rem('line-height', 90);
-  //line-height: 90px;  //height of the aside.desktop.submenu
-  left: 12%;
-  position: absolute;
 }
 
 nav.mainmenu a[class*="menu-"]:before {
   @include rem('font-size', 24);
+  @include rem('line-height', 90);
+  left: 12%;
+  position: absolute;
   /*position: absolute;
   top: 50%;
   left: 7%;
