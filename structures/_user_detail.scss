@@ -215,11 +215,13 @@ body.section-mijnaegon .myaegon {
 
 body.shw-widgets-logged-in {
 
-  header.header .login-link-wrapper {
+  header.header .login-link-wrapper,
+  .link-logged-in a {
     display: none;
   }
 
-  .user_detail_widget {
+  .user_detail_widget,
+  .link-logged-in .link-alternative a {
     display: block;
   }
 }
