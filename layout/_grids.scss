@@ -201,6 +201,38 @@ section.content.fullwidth {
   }
 }
 
+// Grid system variant for empowered DL>DT with table/row behaviour.
+// Explanation: to simulate a better vertical-align, as row-fluid showed in 
+// widget Communication Preferences, according to functional design. 
+dl.table.row-fluid {
+  display: table;
+  width: 100%;
+  overflow: visible;
+
+  dt, dd  {
+    vertical-align: middle;
+
+    &[class*='span'] {
+      display: table-cell;
+      float: none;
+      margin-left: 2%;
+      *margin-left: 1.9375%;
+
+      &:first-child, &:first-of-type {
+        margin-left: 0;
+      }
+    }
+
+    &.top {
+      vertical-align: top;
+    }
+
+    &.bottom {
+      vertical-align: bottom;
+    }
+  }
+}
+
 
 // 
 // Media queries
