@@ -120,7 +120,3 @@ button, .button {
     font-size: 16px;
   }
 }
-
-nav.mainmenu a[class*="menu-"]:before {
-  @include rem('font-size', 24);
-}
