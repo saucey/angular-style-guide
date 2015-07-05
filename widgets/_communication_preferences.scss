@@ -1,0 +1,148 @@
+.communication_preferences {
+
+  dl.table.row-fluid {
+
+    > dt {
+      position: relative;
+      display: block;
+      min-width: 100%;
+
+      font-family: $font_normal;
+      @include rem('padding-right', 22);
+    }
+
+    > dd {
+      display: block;
+      margin-left: 0;
+    }
+  }
+
+  span.icon-questionmark {
+    user-select: none;
+    cursor: default;
+    font-family: $font_icons;
+    @include rem('font-size', 16);
+    color: $dark_blue;
+  }
+
+  span[tooltip] {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    @include rem('width', 20);
+    text-align: center;
+
+    &:before {
+      visibility: hidden;
+      opacity: 0;
+
+      position: absolute;
+      @include rem('top', 15);
+      left: 0%;
+
+      display: block;
+      width: 0;
+      height: 0;
+
+      content: '';
+      border-style: solid;
+      @include rem('border-width', 10);
+      border-color: transparent transparent $slightly_lighter_blue transparent;
+
+      transition: .1s all .3s;
+    }
+
+    &:after {
+      visibility: hidden;
+      opacity: 0;
+
+      position: absolute;
+      @include rem('top', 15+18px);
+      @include rem('right', -10);
+
+      font-family: $font_light;
+      content: attr(tooltip);
+
+      font-size: $small;
+      color: $black;
+      text-align: left;
+      @include rem('padding', 12);
+
+      display: block;
+      width: 300px;
+
+      z-index: 5;
+      background-color: $slightly_lighter_blue;
+      @include rem('border-radius', $frame_border_radius);
+
+      transition: .1s all .3s;
+    }
+
+    &:hover:before,
+    &:hover:after {
+      visibility: visible;
+      opacity: 1;
+      transition: .1s all 0s;
+    }
+  }
+
+  label.checkbox {
+    display: block;
+    @include rem('margin-bottom', 10);
+
+    // Another bullshit fixer
+    > input[type='checkbox'] + span.checkbox {
+      top: 0;
+      left: 0;
+    }
+  }
+
+  button.edit.right {
+    line-height: inherit;
+  }
+}
+
+
+// 
+// Media queries
+// --------------------------------------------------
+
+@include breakpoint($brk-tablet) {
+
+  .communication_preferences {
+
+    dl.table.row-fluid {
+
+      > dt, > dd {
+        display: table-cell;
+        min-width: inherit;
+
+        &.top span[tooltip] {
+          top: 0;
+          margin-top: 0;
+        }
+      }
+
+      > dd {
+        @include rem('padding-left', 16);
+      }
+    }
+
+    span[tooltip] {
+      top: 50%;
+      @include rem('margin-top', -12.5px);
+
+      &:before {
+        top: 15px;
+        left: 0%;
+      }
+
+      &:after {
+        left: -150px;
+        top: 15+18px;
+      }
+    }
+  }
+}
