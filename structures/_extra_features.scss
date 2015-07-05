@@ -20,7 +20,9 @@
   // .show-if-shw-loggedin.block -> show as block
   // .show-if-shw-loggedin.inline -> show as inline
   // .show-if-shw-loggedin.inline-block -> show as inline-block
-  .show-if-shw-loggedin, .hide-if-shw-loggedout {
+  .show-if-shw-loggedin,
+  .mijnaegon-replacement-link,
+  .hide-if-shw-loggedout {
     display: inline;
 
     &.inline {
@@ -35,4 +37,24 @@
       display: block;
     }
   }
+
+  // Additional class to hide if shw widget is logged in
+  .hide-if-shw-loggedin {
+    display: none;
+  }
+}
+
+// Additional and weird case requested by Tom Missaar considering the snippet
+// sent by him, that for obvious reason I don't add here, read below: 
+// - There are hidden links with class ‘mijnaegon-replacement-link’ that need to
+// displayed only when a user is logged in.
+// - Also the nearest <a> element in the same parent should be removed from DOM
+// when user is logged in. Unfortunately impossible to use a nearest css3 
+// selector, cause the + element need to be after, and not before like in this
+// case.
+// 
+// HINT: if you can add the class .hide-if-shw-loggedin to the interested link,
+// please remove the opprobrium below.
+.shw-widgets-logged-in div[class*="field--name-field-url-"] > a {
+  display: none;
 }
