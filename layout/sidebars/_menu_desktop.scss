@@ -22,6 +22,16 @@ aside.desktop {
       background-color: #D6EAF6;
       color: $blue;
     }
+
+  }
+
+  .push-submenu {
+    .icon-user-link {
+      color: $green;
+      &:before {
+        color: inherit;
+      }
+    }
   }
 
   .logo {
