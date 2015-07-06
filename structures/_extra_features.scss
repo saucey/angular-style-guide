@@ -10,6 +10,11 @@
   display: none;
 }
 
+// Default hide status for stuff not visible when logged out
+.mijnaegon-replacement-link {
+  @extend .hide-if-shw-loggedout;
+}
+
 // Hide/show any elements based on current user status
 .shw-widgets-logged-in {
 
