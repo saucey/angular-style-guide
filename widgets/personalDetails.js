@@ -12,6 +12,9 @@
    * Add new item to public Drupal object
    */
   Drupal.behaviors.personalDetailsWidget = {
+    validation: {  //  this is part of the form validation routine; when it is working correctly, this should be bumped to a general level
+      zip: "^d+\w*$",
+    },
 
     attach: function () {
 console.log("attach");
