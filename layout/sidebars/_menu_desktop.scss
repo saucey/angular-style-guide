@@ -75,7 +75,7 @@ aside.desktop {
       margin: 0;
       text-align: left;
       font-family: inherit;
-    } 
+    }
   }
 
   /**
@@ -411,12 +411,13 @@ aside.desktop {
     }
 
     &:hover {
-      color: $white;
+    /*  color: $white;
       background-color: $white;
 
       &:before {
         color: $blue;
-      }
+
+      }*/
     }
 
     &:after {
@@ -485,7 +486,7 @@ aside.desktop {
 }
 
 
-// 
+//
 // Exceptions
 // --------------------------------------------------
 
@@ -496,7 +497,7 @@ body.section-mijnaegon {
   }
 }
 
-// 
+//
 // pushmenu-to-right
 // --------------------------------------------------
 
@@ -547,7 +548,7 @@ body.section-mijnaegon {
 }
 
 
-// 
+//
 // Hacks
 // --------------------------------------------------
 
