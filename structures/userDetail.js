@@ -70,7 +70,8 @@
     attach: function (context, settings) {
       // Run before real initialization
       this.setup(settings);
-
+//only for development: simulate the cookie that is set by ASSO; the cookie as
+//$.cookie(mijnAegonCookieLoggedInName, "\"11-12-2015 12:34:56\"");
       // Register a public method for deinitialize
       win.shwGlobal.userLogout = (function(onlyLocal) {
         return this.deinitialize(onlyLocal);
@@ -105,10 +106,8 @@
       }
 
       // Set url API for local and real environments
-console.log("protocol " + window.location.protocol + "/" + (window.location.protocol === "file:"));
-      if (settings.onlineAegonNl.hostname === 'local' || window.location.protocol === "file:") {
-console.log("default user data");
-        this.apiUrl = 'file/example/user_detail_bs.json';
+      if (settings.onlineAegonNl.hostname === 'local') {
+        this.apiUrl = '/file/example/user_detail_bs.json';
       } else {
         this.apiUrl = realEndpoint;
       }
@@ -303,7 +302,7 @@ console.log("default user data");
     expiredTimeFromLogin: function () {
 
       var timeCookie = this.getCookie();
-
+console.log("expired " + timeCookie);
       // Stop execution an return false if no mijnaegon cookie registered
       if (!timeCookie) { return false; }
 
@@ -311,7 +310,7 @@ console.log("default user data");
       // adding the .processed class.
       var futureTMS = this.formatDatetime(timeCookie, true) + 
                       (secondsForProcessedStatus * 1000);
-
+console.log("future " + futureTMS);
       return ($.now() > futureTMS) && true;
     },
 
@@ -445,7 +444,7 @@ console.log("default user data");
 
       // Convert in Date object from string
       date = new Date(date);
-
+//date = new Date(2016,11,11,12,34,56);
       // Return the timestamp if true is passed as param
       if (timestamp) { return date.getTime(); }
 
@@ -463,7 +462,7 @@ console.log("default user data");
 
       // Generate right format in Dutch
       dateFormatted = day+'-'+month+'-'+year+' om '+hours+':'+minutes+' uur';
-
+console.log("date formatted " + dateFormatted);
       return dateFormatted;
     },
 
