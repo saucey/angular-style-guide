@@ -1,6 +1,7 @@
 .faq {
   & * {
     font-family: $font_light;  //has 2B redefined, since all text here is held within labels, and those are usually defined bolder (ie. regular)
+    margin: 0 0 40px 0;
   }
   .question[class*=span] {
     margin-left: 0; //overrides the setting for a left margin of 2% for all spans starting at the second one in a list, which creates an indent in faq design in the .product ul
@@ -94,8 +95,8 @@
     [class^=thumbs_]:after {
       display: inline-block;  //has to be block or inline-block for transform 2 work on :before
       font-family: $font_icons;
-  	  content: $font_icons_fistfull; 
-  	  margin: 0 3px 0 2px;   
+  	  content: $font_icons_fistfull;
+  	  margin: 0 3px 0 2px;
     }
   	.thumbs_up:after {
       transform: rotateX(180deg);
