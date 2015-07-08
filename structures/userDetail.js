@@ -195,6 +195,7 @@
       $.ajax({
         timeout: 10000,
         type: 'GET',
+        encoding:"UTF-8",
         url: this.apiUrl,
         data: jsonPayload,
         dataType: 'json',
