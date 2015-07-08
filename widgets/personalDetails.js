@@ -17,7 +17,6 @@
     },
 
     attach: function () {
-console.log("attach");
       $("input[name=ra_NL]").click( function () {
         var NL = parseInt($(this).val()) > 0;
         $(".address .residential .NL").toggleClass("visible", NL);
