@@ -22,13 +22,28 @@
     display: none;
   }
 
+  label {
+    font-weight: normal;
+  }
+  input#UDW_dd_show {
+    display: none;
+    &:checked {
+      ~.dropdown {
+        display: block;
+      }
+      ~.btn-login-loggedin:after {
+        transform: rotate(180deg)
+      }
+    }
+  }
+
   .dropdown {
-    display: block;
+    display: none;
     z-index: 1;
     position: absolute;
     top: auto;
     right: 0;
-    margin-top: -2px;
+    @include rem('margin-top', -1);
     @include rem('width', 280);
     @include rem('border-radius', 2);
     background-color: $white;
@@ -53,8 +68,8 @@
         color: $green;
 
         &:before {
-          content: '\e636';
-          font-family: 'aegon_icons';
+          content: $font_icons_man;
+          font-family: $font_icons;
           display: inline-block;
           @include rem('font-size', 23);
           @include rem('margin-right', 12);
@@ -122,7 +137,7 @@
     @include rem('line-height', 36);
     height: auto;
     padding-bottom: 6px;
-
+    cursor: pointer;
     @include rem('border-radius', 2);
     user-select: none;
     outline: 0;
@@ -139,16 +154,19 @@
     color: $green;
 
     &:after {
-      display: none;
-      content: '';
-      border: 0 solid $green;
-      @include rem('width', 8);
-      @include rem('height', 8);
-      @include rem('border-width', 3);
-      @include rem('margin-left', 12);
-      border-top-style: none;
-      border-left-style: none;
-      transform: translateY(-3px) rotate(45deg);
+      font-family: $font_icons;
+      @include rem('font-size', 12);
+      //display: none;
+      content: $font_icons_arrow_down;
+      @include rem('margin-left', 6);
+      //border: 0 solid $green;
+      //@include rem('width', 8);
+      //@include rem('height', 8);
+      //@include rem('border-width', 3);
+      //@include rem('margin-left', 12);
+      //border-top-style: none;
+      //border-left-style: none;
+      //transform: translateY(-3px) rotate(45deg);
     }
 
     &.tap {
