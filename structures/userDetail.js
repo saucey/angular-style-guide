@@ -70,11 +70,13 @@
     attach: function (context, settings) {
       // Run before real initialization
       this.setup(settings);
-//only for development: simulate the cookie that is set by ASSO; the cookie as
+//only for development: simulate the cookie that is set by ASSO; keep this as long as the UDW is not entirely out of the deep water, comment out if required
+/*
 var cookieRawBak = $.cookie.raw;
 $.cookie.raw = true;
-$.cookie(mijnAegonCookieLoggedInName, '"11-12-2015 12:34:56"');
+$.cookie(mijnAegonCookieLoggedInName, '"2015-12-11 12:34:56"');
 $.cookie.raw = cookieRawBak;
+*/
       // Register a public method for deinitialize
       win.shwGlobal.userLogout = (function(onlyLocal) {
         return this.deinitialize(onlyLocal);
@@ -445,7 +447,6 @@ $.cookie.raw = cookieRawBak;
         //this is drop-dead-ugly, but it does the job
         date = dp[1] + "/" + dp[2] + "/" + dp[0] + " " + dp[3] + ":" + dp[4] + ":" + dp[5] + " UTC";
       }
-
       // Convert string into Date object
       date = new Date(date);
       // Return the timestamp if true is passed as param
