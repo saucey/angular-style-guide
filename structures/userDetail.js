@@ -71,7 +71,10 @@
       // Run before real initialization
       this.setup(settings);
 //only for development: simulate the cookie that is set by ASSO; the cookie as
-//$.cookie(mijnAegonCookieLoggedInName, "\"11-12-2015 12:34:56\"");
+var cookieRawBak = $.cookie.raw;
+$.cookie.raw = true;
+$.cookie(mijnAegonCookieLoggedInName, '"11-12-2015 12:34:56"');
+$.cookie.raw = cookieRawBak;
       // Register a public method for deinitialize
       win.shwGlobal.userLogout = (function(onlyLocal) {
         return this.deinitialize(onlyLocal);
