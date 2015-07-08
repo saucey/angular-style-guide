@@ -1,7 +1,6 @@
 .faq {
   & * {
     font-family: $font_light;  //has 2B redefined, since all text here is held within labels, and those are usually defined bolder (ie. regular)
-    margin: 0 0 40px 0;
   }
   .question[class*=span] {
     margin-left: 0; //overrides the setting for a left margin of 2% for all spans starting at the second one in a list, which creates an indent in faq design in the .product ul
