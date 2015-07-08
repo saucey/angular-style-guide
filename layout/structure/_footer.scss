@@ -14,6 +14,10 @@
   }
 }
 
+t-row {
+  display:table-row;
+}
+
 .footer-blk {
   @include rem('padding-top', 40);
   @include rem('line-height', 22);
