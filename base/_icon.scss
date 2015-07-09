@@ -2,13 +2,8 @@
 [class*="icon-"]:before {
   font-family: $font_icons;
   -webkit-font-smoothing: antialiased;
-}
-
-/****** Aegon icons ******/
-[class*="icon-"]:before {
-  font-family: $font_icons;
-  -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  padding-right: 8px;
 }
 
 .icon-uniE600:before {
