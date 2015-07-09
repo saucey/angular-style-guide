@@ -11,14 +11,8 @@
 
 
 //
-// Aegon menu icons
+// Aegon menu-specific icon adaptations
 // --------------------------------------------------
-
-.icon:before,
-[class*="icon-"]:before {
-  font-family: $font_icons;
-  -webkit-font-smoothing: antialiased;
-}
 
 nav.mainmenu a[class*="icon-"]:before {
   @include rem('font-size', 24);
@@ -42,83 +36,6 @@ nav.mainmenu a[class*="icon-"]:before {
   }
 }
 
-.icon-klantenservice,
-.icon-service-contact,
-.icon-4532:before,
-.icon-5659:before {
-  @extend .icon-uniE605;
-}
-.icon-inloggen,
-.icon-4610:before,
-.icon-5694:before {
-  @extend .icon-uniE610;
-}
-.icon-sparen,
-.icon-5074:before {
-  @extend .icon-uniE607;
-}
-.icon-actueel,
-a.menu-5662:before {
-  @extend .icon-uniE608;
-}
-.icon-uitgelicht,
-.icon-4547:before,
-.icon-5657:before {
-  @extend .icon-uniE611;
-}
-.icon-beleggen,
-.icon-4494:before {
-  @extend .icon-uniE608;
-}
-.icon-verzekeren,
-.icon-4495:before {
-  @extend .icon-uniE609;
-}
-.icon-hypotheek,
-.icon-4496:before,
-.icon-4537:before {
-  @extend .icon-uniE60B;
-}
-.icon-4546:before {
-  @extend .icon-uniE629;
-}
-.icon-pensioen,
-.icon-4497:before {
-  @extend .icon-uniE60A;
-}
-.icon-user-link:before {
-  @extend .icon-uniE636:before;
-}
-.icon-home:before,
-.icon-5653:before {
-  @extend .icon-uniE647:before;
-}
-.icon-lock:before,
-.icon-lock:before {
-  @extend .icon-uniE648:before;
-}
-.icon-6861:before {
-  @extend .icon-uniE646;
-}
-.icon-6863:before {
-  @extend .icon-uniE62C;
-}
-.icon-6860:before {
-  @extend .icon-uniE604;
-}
-.icon-mijn-aegon:before {
-  content: $font_icons_man;
-}
-.icon-mijn-gegevens:before {
-  content: $font_icons_document_n_pen;
-}
-.icon-mijn-documenten:before {
-  content: $font_icons_document_n_check;
-}
-
-.icon-mijn-producten:before {
-  content: $font_icons_producten;
-}
 //
 // Media Queries
 // --------------------------------------------------
