@@ -20,7 +20,7 @@
   font-family: $font_normal;
 
   .region.first {
-    display: none;
+    display: table-row;
     overflow: hidden;
     @include rem('margin-bottom', 40);
 
