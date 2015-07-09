@@ -444,7 +444,7 @@ aside.desktop {
     }
 
     a {
-      @include rem('padding-left', 30);
+      @include rem('padding-left', -30);
     }
 
     a:after {
