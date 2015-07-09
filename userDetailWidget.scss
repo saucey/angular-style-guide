@@ -18,3 +18,9 @@
 /* All library widgets and specific modules */
 @import "structures/extra_features";
 @import "structures/user_detail";
+
+@import "base/fonts";
+@import "base/colors";
+
+@import "components/button";
+@import "layout/sidebars/common";	//provides the icon
