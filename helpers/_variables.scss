@@ -17,6 +17,7 @@ $fun_blue_approx: #2163ae;
 $lochmara_approx: #007ac7;
 // ORANGES
 $orange: #f9a600;
+$orange_highlight : #ffbe3d;
 // GREYS
 $white: #ffffff;
 $lighter_grey: #EFEBE7;
@@ -110,7 +111,7 @@ $frame_border_radius: 3px;
  * Mobile
  *
  * Example: @include breakpoint($brk-mobile) {}
- * 
+ *
  * IMPORTANT: try to avoid the breakpoint below, since the theme is already
  * mobile first and everything need to be written mobile as default.
  */
