@@ -38,9 +38,22 @@
       color: $white;
     }
   }
+
+  &.messages--functional {
+    background-color: $lighter_grey;
+    padding-left: 20px;
+
+    .content {
+      margin-bottom: 20px;
+    }
+
+    .header {
+      color: $black;
+    }
+  }
 }
 
-// 
+//
 // Media queries
 // --------------------------------------------------
 
@@ -112,7 +125,7 @@ div.success {
   z-index: 6;
   width: $width;
   .header {
-    color: $black;  
+    color: $black;
   }
   + .lightbox {
     display: none;
@@ -124,7 +137,7 @@ div.success {
 div.error {
   background-color: $light_red;
   .header {
-    color: $red;  
+    color: $red;
   }
 }
 div.error, div.success {

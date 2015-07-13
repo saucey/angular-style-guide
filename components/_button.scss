@@ -16,7 +16,7 @@ button, .button {
   a {
     color: inherit;
   }
-  
+
   &:hover {
     opacity: 0.8;
   }
@@ -40,6 +40,9 @@ button, .button {
   }
   &.green {
     background-color: $green;
+  }
+  &.orange {
+    background-color: $orange;
   }
   &.arrow {
     &:after {
@@ -70,6 +73,10 @@ button, .button {
     &.green:after {
       margin-left: 0;
       background-color: $green;
+    }
+    &.orange:after {
+      margin-left: 10px;
+      background-color: $orange_highlight;
     }
   }
   &.white, &.transparent {
