@@ -33,15 +33,15 @@ form {
       }
     }
   }
-  input {
-    &.visited:invalid ~ .errorText {
-      display: block;
-    }
-    &.visited:invalid {
+  input.visited {
+    &:invalid, &.invalid {
       border-color: $red;
-    }
-    &.visited:invalid ~ span.checkbox {
-      border-color: $red;
+      & ~ .errorText {
+        display: block;
+      }
+      & ~ span.checkbox {
+        border-color: $red;
+      }
     }
   }
   input, select {
