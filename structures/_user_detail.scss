@@ -31,8 +31,11 @@
       ~.dropdown {
         display: block;
       }
-      ~.btn-login-loggedin:after {
-        transform: rotate(180deg)
+      ~.btn-login-loggedin {
+        border-bottom-color: $white;
+        &:after {
+          transform: rotate(180deg);
+        }
       }
     }
   }
@@ -133,6 +136,9 @@
   }
 
   .btn-login-loggedin {
+    z-index: 2;
+    background-color: $white;
+    margin-bottom: -1px;
     @include rem('padding', 0, 10, 1, 10);
     @include rem('line-height', 36);
     height: auto;
@@ -144,7 +150,6 @@
 
     font-family: $font_normal;
     @include rem('font-size', 16);
-    background-color: $white;
     border-width: 1px;
     border-style: solid;
 
@@ -305,7 +310,7 @@ body.shw-widgets-logged-in {
       @include rem('padding', 0, 13, 2, 13);
       @include rem('line-height', 36);
       font-size: inherit;
-      background-color: transparent;
+      //background-color: transparent;
       border-bottom-color: $slightly_darker_grey;
       animation: buttonLoginToDefault 4s normal 0s forwards;
 
