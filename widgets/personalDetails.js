@@ -7,6 +7,12 @@
 
   'use strict';
 
+  var testSelector = function (selector) {
+    document.querySelector('*');  //checks if querySelector is implemented and raises an error if not
+    try {document.querySelector(selector)} catch (e) {return false}
+    return true;
+  }
+
   /**
    * MyPersonalDetails's Drupal script.
    * Add new item to public Drupal object
@@ -17,6 +23,13 @@
     },
 
     attach: function () {
+      $("form[name=personal_details_form]").validVal({
+        validate: {
+          onKeyup: true,
+        },
+        //  configuration goes here
+      });
+
       $("input[name=ra_NL]").click( function () {
         var NL = parseInt($(this).val()) > 0;
         $(".address .residential .NL").toggleClass("visible", NL);
