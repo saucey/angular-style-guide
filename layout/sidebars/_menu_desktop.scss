@@ -441,6 +441,10 @@ aside.desktop {
 
     .push-submenu-inner {
       @include rem('padding', 15, 24);
+
+      a {
+        padding: 0 0 0 0;
+      }
     }
 
     a {
