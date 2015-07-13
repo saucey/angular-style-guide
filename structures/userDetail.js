@@ -49,12 +49,6 @@
   // Set the seconds to force not showing the green bar animated
   var secondsForProcessedStatus = 15;
 
-  var testSelector = function (selector) {
-    document.querySelector('*');  //checks if querySelector is implemented and raises an error if not
-    try {document.querySelector(selector)} catch (e) {return false}
-    return true;
-  }
-
   /**
    * User widget's Drupal script.
    * Add new item to public Drupal object
