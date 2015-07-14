@@ -92,8 +92,8 @@ $.cookie.raw = cookieRawBak;
 
     setup: function (settings) {
 
-      // Check if current website is not local or DEV environemnt
-      notLocalOrDev = (
+      // Check if current website is not local or DEV environment
+      var notLocalOrDev = (
         settings.onlineAegonNl.hostname !== 'local' &&
         win.location.hostname.search('www.dev.') !== -1
       );
@@ -102,8 +102,8 @@ $.cookie.raw = cookieRawBak;
       // browser never ever had a logged session. Implement the block only for
       // Testing, UAT and Production environments.
       if (notLocalOrDev) {
-        if (!this.getCookie()) {
-          return;
+        if (!this.lastLogin()) {
+          //return;
         }
       }
 
@@ -187,7 +187,7 @@ $.cookie.raw = cookieRawBak;
           'userName': parseJSON.retrieveResponse.PARTIJ._AE_PERSOON._AE_SAMNAAM || "n.a.",
 
           // Get last login time from cookie or give false
-          'lastAccess': that.getCookie()
+          'lastAccess': that.lastLogin()
         };
         // Activate the widget
         that.initialize(data);
@@ -202,7 +202,7 @@ $.cookie.raw = cookieRawBak;
         data: jsonPayload,
         dataType: 'json',
         success: retreiveBSPartij,
-        error: this.clearCookie
+        error: this.clearLastLogin
       });
     },
 
@@ -305,7 +305,7 @@ $.cookie.raw = cookieRawBak;
 
     expiredTimeFromLogin: function () {
 
-      var timeCookie = this.getCookie();
+      var timeCookie = this.lastLogin();
       // Stop execution an return false if no mijnaegon cookie registered
       if (!timeCookie) { return false; }
 
@@ -468,13 +468,13 @@ $.cookie.raw = cookieRawBak;
       return dateFormatted;
     },
 
-    getCookie: function () {
+    lastLogin: function () {
 
       // Return cookie value or FALSE
       return $.cookie(mijnAegonCookieLoggedInName) || false;
     },
 
-    clearCookie: function (response) {
+    clearLastLogin: function (response) {
 
       // Remove mijn_last_login's cookie as first
       $.removeCookie(mijnAegonCookieLoggedInName);
@@ -494,8 +494,8 @@ $.cookie.raw = cookieRawBak;
       $('body').removeClass('shw-widgets-logged-in mobile-tap');
 
       // Remove mijn_last_login's cookie
-      this.clearCookie();
-
+      this.clearLastLogin();
+      
       // remove the cookie that determines if the green bar is shown
       $.removeCookie("hasBeenShown");
 
