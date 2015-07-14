@@ -63,7 +63,7 @@
   	  }
   	  + .title {
   	    &:after {
-  	      transform: rotate(180deg);
+  	      @include transform(rotate(180deg));
   	    }
   	  }
   	  ~ .answer, ~ .feedback, ~ div.line {
