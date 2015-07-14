@@ -300,7 +300,7 @@ aside.desktop {
 
     a {
       position: relative;
-      padding: 0 0 0 0px;
+      padding: 0 0 0 20px;
       margin: 0 0 15px 0;
       line-height: normal;
       display: block;
@@ -441,6 +441,10 @@ aside.desktop {
 
     .push-submenu-inner {
       @include rem('padding', 15, 24);
+
+      a {
+        padding: 0 0 0 0;
+      }
     }
 
     a {
@@ -545,6 +549,6 @@ body.section-mijnaegon {
 html.lt-ie9 {
 
   aside.desktop {
-    position: absolute;
+    position: fixed;
   }
 }
