@@ -93,7 +93,7 @@ $.cookie.raw = cookieRawBak;
     setup: function (settings) {
 
       // Check if current website is not local or DEV environment
-      var notLocalOrDev = (
+      notLocalOrDev = (
         settings.onlineAegonNl.hostname !== 'local' &&
         win.location.hostname.search('www.dev.') !== -1
       );
