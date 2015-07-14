@@ -49,9 +49,6 @@
   // Set the seconds to force not showing the green bar animated
   var secondsForProcessedStatus = 15;
 
-  // Boolean to check if not on local or DEV environemnt
-  var notLocalOrDev = true;
-
   /**
    * User widget's Drupal script.
    * Add new item to public Drupal object
@@ -93,7 +90,7 @@ $.cookie.raw = cookieRawBak;
     setup: function (settings) {
 
       // Check if current website is not local or DEV environment
-      notLocalOrDev = (
+      var notLocalOrDev = (
         settings.onlineAegonNl.hostname !== 'local' &&
         win.location.hostname.search('www.dev.') !== -1
       );
@@ -108,7 +105,7 @@ $.cookie.raw = cookieRawBak;
       }
 
       // Set url API for local and real environments
-      if (!notLocalOrDev) {
+      if (settings.onlineAegonNl.hostname === 'local') {
         this.apiUrl = '/file/example/user_detail_bs.json';
       } else {
         this.apiUrl = realEndpoint;
@@ -480,7 +477,7 @@ $.cookie.raw = cookieRawBak;
       $.removeCookie(mijnAegonCookieLoggedInName);
 
       // Then throw an error in console
-      if (response && !notLocalOrDev) { throw response.responseText; }
+      //if (response) { throw response.responseText; }
     },
 
     /**
