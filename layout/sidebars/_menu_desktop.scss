@@ -189,7 +189,6 @@ aside.desktop {
         border-top-style: solid;
         border-top-color: $lighter_blue;
         span { @include rem('margin-top', 1); }
-        &:before { @include rem('margin-top', -9); }
       }
     }
 
