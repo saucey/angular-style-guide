@@ -1,7 +1,7 @@
 /*jshint multistr: true */
 /**
  * User details script
- * Dependencies: 
+ * Dependencies:
  * - vendors/jquery.cookie.js (Cookie jQuery handlers)
  * - modernizr.custom.js (Proper cross-browser style)
  *
@@ -31,12 +31,12 @@
   var logoutPathLink = 'pkmslogout?filename=WSBLogout.html';
   var mijnaegonPathLink = 'mijnaegon/';
 
-  // This is the template of user_detail_widget wrapper taken from Aegon 
+  // This is the template of user_detail_widget wrapper taken from Aegon
   // Technical Design Library and converted in JavaScript string.
   // back to including the html via template file; separation of concerns is still a thing and debugging the layout is a lot easier this way
   // var template = '<div id="user_detail_widget" class="user_detail_widget">\n<div class="inplace">\n<button class="btn-login-loggedin">Ingelogd</button>\n<div class="dropdown">\n<div class="highlight mobile">\n<div class="text">\n<p class="welcome">\n<strong>Welcome <span class="user_detail_widget_name">username</span>.</strong> <span class="last_access_wrapper">Uw vorige bezoek was op <span class="user_detail_widget_last_access">00-00-0000 om 00:00 uur</span></span></p>\n</div>\n</div>\n<div class="text">\n<p class="name"><span class="user_detail_widget_name">username</span></p>\n<p class="log">Uw vorige bezoek was op <span class="user_detail_widget_last_access">00-00-0000 om 00:00 uur</span></p>\n<p class="action">\n<a href="#" class="user_detail_widget_logout_link button arrow">Uitloggen</a>\n<a href="#" class="user_detail_widget_mijnaegon_link button white myaegon">Mijn Overzicht</a>\n</p>\n</div>\n</div>\n</div>\n<div class="text">\n<p class="name"><span class="user_detail_widget_name">username</span></p>\n</div>\n<div class="highlight desktop">\n<div class="text">\n<p class="welcome">Welcome <span class="user_detail_widget_name">username</span>.</p>\n<p class="log">Uw vorige bezoek was op <span class="user_detail_widget_last_access">00-00-0000 om 00:00 uur</span></p>\n</div>\n</div>\n</div>';
 
-  // User widget JSON endpoint (hostname is declared in 
+  // User widget JSON endpoint (hostname is declared in
   // Drupal.settings.onlineAegonNl.hostname object's item).
   var realEndpoint = '/mijnservices/US_RestGatewayWeb/rest/requestResponse/BS_PARTIJ_03/retrieve';
 
@@ -48,6 +48,9 @@
 
   // Set the seconds to force not showing the green bar animated
   var secondsForProcessedStatus = 15;
+
+  // Boolean to check if not on local or DEV environemnt
+  var notLocalOrDev = true;
 
   /**
    * User widget's Drupal script.
@@ -90,13 +93,13 @@ $.cookie.raw = cookieRawBak;
     setup: function (settings) {
 
       // Check if current website is not local or DEV environemnt
-      var notLocalOrDev = (
-        settings.onlineAegonNl.hostname !== 'local' &&
-        win.location.hostname.search('www.dev.') !== -1
+      notLocalOrDev = (
+        settings.onlineAegonNl.hostname == undefined ||
+        (settings.onlineAegonNl.hostname !== 'local' && win.location.hostname.search('www.dev.') !== -1)
       );
 
       // Try to avoid multiple requests to the backend environment, if the
-      // browser never ever had a logged session. Implement the block only for 
+      // browser never ever had a logged session. Implement the block only for
       // Testing, UAT and Production environments.
       if (notLocalOrDev) {
         if (!this.lastLogin()) {
@@ -105,7 +108,7 @@ $.cookie.raw = cookieRawBak;
       }
 
       // Set url API for local and real environments
-      if (settings.onlineAegonNl.hostname === 'local') {
+      if (!notLocalOrDev) {
         this.apiUrl = '/file/example/user_detail_bs.json';
       } else {
         this.apiUrl = realEndpoint;
@@ -215,7 +218,7 @@ $.cookie.raw = cookieRawBak;
       var callback = function (domWidget) {
 
         // Append the template and cache it
-        that.widget = domWidget;  //$(domWidget).appendTo(appendUserWidgetTo);        
+        that.widget = domWidget;  //$(domWidget).appendTo(appendUserWidgetTo);
       };
 
       // Check if is logged and go ahead
@@ -255,7 +258,7 @@ $.cookie.raw = cookieRawBak;
         dateFormatted = this.formatDatetime(data.lastAccess);
         $template.find(".user_detail_widget_last_access").text(dateFormatted);
       }
-      
+
       // Launch also the function to append the user name in menu
       this.shwUserDetailsInmenu(data.userName);
 
@@ -295,7 +298,7 @@ $.cookie.raw = cookieRawBak;
       // the welcome animation is off
       $.cookie("hasBeenShown", "1");
 
-      // Finally run the callback to append all our shw-DOM in the proper 
+      // Finally run the callback to append all our shw-DOM in the proper
       // shw place
       if (typeof callback === 'function') { callback($template); }
     },
@@ -306,9 +309,9 @@ $.cookie.raw = cookieRawBak;
       // Stop execution an return false if no mijnaegon cookie registered
       if (!timeCookie) { return false; }
 
-      // If is not the first time after login, don't show the animation by 
+      // If is not the first time after login, don't show the animation by
       // adding the .processed class.
-      var futureTMS = this.formatDatetime(timeCookie, true) + 
+      var futureTMS = this.formatDatetime(timeCookie, true) +
                       (secondsForProcessedStatus * 1000);
       return ($.now() > futureTMS) && true;
     },
@@ -360,7 +363,7 @@ $.cookie.raw = cookieRawBak;
         if (Fn.isMobile() && !Fn.mobileTapPresent() && !Fn.isTapped()) {
 
           $('body').toggleClass("mobile-tap");
-        
+
         } else if (!Fn.isMobile()) {
 
           $('body').removeClass("mobile-tap");
@@ -387,7 +390,7 @@ $.cookie.raw = cookieRawBak;
         $(this).toggleClass("tap");
       };
 
-      // Action on click of section.content to handle properly .tap on 
+      // Action on click of section.content to handle properly .tap on
       // buttonlink and class mobile-tap on body in case is on mobile view
       var sectionContentClick = function() {
         if ($('body').hasClass('mobile-tap')) {
@@ -419,10 +422,10 @@ $.cookie.raw = cookieRawBak;
       btnLoggedIn.on('click', loginButtonClick);
 
       // Bind click on section.content to remove the dark overlay related to
-      // body.mobile-tap and run the logic 
+      // body.mobile-tap and run the logic
       $('section.content').on('click', sectionContentClick);
 
-      // In the end of animation of .highlight div, add class .processed to 
+      // In the end of animation of .highlight div, add class .processed to
       // widget's container to hide itself
       this.widget.find('.highlight').one('webkitAnimationEnd oanimationend \
         msAnimationEnd animationend', function() {
@@ -477,11 +480,11 @@ $.cookie.raw = cookieRawBak;
       $.removeCookie(mijnAegonCookieLoggedInName);
 
       // Then throw an error in console
-      if (response) { throw response.responseText; }
+      if (response && !notLocalOrDev) { throw response.responseText; }
     },
 
     /**
-     * Method to logout an user 
+     * Method to logout an user
      * @param  {boolean} onlyLocal  Pass true if you want destroy only local session
      * @return {boolean} wrapper for this.userLoggedIn()
      */
@@ -525,7 +528,7 @@ $.cookie.raw = cookieRawBak;
     /**
      * This method permit to retrieve all elements associated with
      * _AE_RELNUM_TYPE present in json data, retrieved from remote API.
-     * 
+     *
      * @param  {string} type   Pass a string af filter parameter
      * @return {string|array}  Return a numeric string or array collection
      */
