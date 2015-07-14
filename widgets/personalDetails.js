@@ -35,14 +35,14 @@
         $(".address .residential .NL").toggleClass("visible", NL);
         $(".address .residential .world").toggleClass("visible", !NL);
       });
-      $("input[name=ra_NL]").click();
+      $("input[name=ra_NL]:checked").click();
 
       $("input[name=ca_NL]").click( function () {
         var NL = parseInt($(this).val()) > 0;
         $(".address .correspondential .NL").toggleClass("visible", NL);
         $(".address .correspondential .world").toggleClass("visible", !NL);
       });
-      $("input[name=ca_NL]").click();
+      $("input[name=ca_NL]:checked").click();
     }
   };
 
