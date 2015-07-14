@@ -6,14 +6,14 @@
   'use strict';
 
   // Add new item to public Drupal object
-  Drupal.behaviors.checkbox = {
+  Drupal.behaviors.radio = {
     attach: function () {
     	var visited = function () {  //this is to implement a different error behaviour between when the form is loaded and once an element has been visited
-//console.log("checkbox init");
+//console.log("radio init");
         $(this).addClass("visited");
       };
-      $("span.checkbox").focus(visited);
-      $("span.checkbox").click(visited);
+      $("span.radio").focus(visited);
+      $("span.radio").click(visited);
     }
   };
 })(jQuery);
