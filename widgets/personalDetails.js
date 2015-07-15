@@ -23,13 +23,14 @@
     },
 
     attach: function () {
-      $("form[name=personal_details_form]").validVal({
-        validate: {
-          onKeyup: true,
-        },
-        //  configuration goes here
-      });
-
+      if (!testSelector("form:invalid")) {  //if the userAgent does not know the :invalid pseudoclass, we need the validation workaround provided by validVal
+        $("form[name=personal_details_form]").validVal({
+          validate: {
+            onKeyup: true,
+          },
+        });
+      }
+      
       $("input[name=ra_NL]").click( function () {
         var NL = parseInt($(this).val()) > 0;
         $(".address .residential .NL").toggleClass("visible", NL);
