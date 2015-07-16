@@ -14,6 +14,8 @@
       };
       $("span.radio").focus(visited);
       $("span.radio").click(visited);
-    }
+      this.attached = true;  //used to determine if this function has already run
+    },
+    attached: false,
   };
 })(jQuery);

@@ -19,6 +19,8 @@
         };
       $("input, textarea").focus(visited);
       $("input, select, textarea, div.dd, span.checkbox").click(visited); //strictly speaking, this line with only the checkbox selector should be put into checkbox.js as well, but accompanied by all the previous lines this seems to be an awful lot of baggage just to maintain the appearance of modularity
-    }
+      this.attached = true;
+    },
+    attached: false,
   };
 })(jQuery);

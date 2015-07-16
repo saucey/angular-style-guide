@@ -14,6 +14,8 @@
       };
       $("span.checkbox").focus(visited);
       $("span.checkbox").click(visited);
-    }
+      this.attached = true;
+    },
+    attached: false,
   };
 })(jQuery);
