@@ -312,7 +312,7 @@ body.shw-widgets-logged-in {
       font-size: inherit;
       //background-color: transparent;
       border-bottom-color: $slightly_darker_grey;
-      animation: buttonLoginToDefault 4s normal 0s forwards;
+      animation: buttonLoginToDefault 2s normal 0s forwards;
 
       &:before {
         content: $font_icons_man;
@@ -325,7 +325,7 @@ body.shw-widgets-logged-in {
 
       &:after {
         display: inline-block;
-        animation: buttonAfterLoginToDefault 4s normal 0s forwards;
+        animation: buttonAfterLoginToDefault 2s normal 0s forwards;
       }
 
       &.tap {
