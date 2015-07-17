@@ -225,6 +225,9 @@
         // Load events
         this.events();
       }
+      else {
+        $(".login-link").addClass("visible");
+      }
     },
 
     parseWidget: function (data, callback) {
