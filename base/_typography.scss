@@ -141,8 +141,8 @@ p {
 @include breakpoint($brk-mobile){
 
   h1 {
-    @include rem('font-size', 22);
-    @include rem('line-height', 22);
+    @include rem('font-size', 18);
+    @include rem('line-height', 18);
   }
 
   p {

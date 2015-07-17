@@ -18,52 +18,53 @@ form {
   }
 }
 
-  $errorText_line-height: 14px;
-  .errorText {
-    text-align: left;
-  }
-  select {
-    &.visited:invalid {
-      &~ .ddTitle {
-        border-color: $red;
-      }
-      &~ .errorText {
-        display: block;
-        //opacity: 1;
-      }
-    }
-  }
-  input.visited {
-    &:invalid, &.invalid {
+$errorText_line-height: 14px;
+.errorText {
+  text-align: left;
+}
+select {
+  &.visited:invalid {
+    &~ .ddTitle {
       border-color: $red;
-      & ~ .errorText {
-        display: block;
-      }
-      & ~ span.checkbox {
-        border-color: $red;
-      }
     }
-  }
-  input, select {
     &~ .errorText {
-      line-height: $errorText_line-height;
-      font-size: $small;
-      color: $red;
-      position: relative;
-      top: - ($elements_height + $errorText_line-height);
-    }
-    &~ .errorText, &:valid ~ .errorText {
-      display: none;
-    }
-    &[type=checkbox]~ .errorText {
-      left: -35px;
-      top: - ($elements_checkbox_top + $elements_checkbox_height + $errorText_line-height);
+      display: block;
+      //opacity: 1;
     }
   }
-  select ~ .errorText {
-    top: -$errorText_line-height;
+}
+input.visited {
+  &:invalid, &.invalid {
+    border-color: $red;
+    & ~ .errorText {
+      display: block;
+    }
+    & ~ span.checkbox {
+      border-color: $red;
+    }
   }
-  select.visited:invalid ~ .ddTitle {
-    margin-top: -$errorText_line-height;
+}
+input, select {
+  &~ .errorText {
+    line-height: $errorText_line-height;
+    font-size: $small;
+    color: $red;
+    position: relative;
+    top: - ($elements_height + $errorText_line-height);
   }
+  &~ .errorText, &:valid ~ .errorText {
+    display: none;
+  }
+  &[type=checkbox]~ .errorText {
+    left: -35px;
+    top: - ($elements_checkbox_top + $elements_checkbox_height + $errorText_line-height);
+  }
+}
+  
+select ~ .errorText {
+  top: -$errorText_line-height;
+}
+select.visited:invalid ~ .ddTitle {
+  margin-top: -$errorText_line-height;
+}
 

@@ -1,6 +1,6 @@
 button, div.button > a, .button {
   display: inline-block;
-  cursor: pointer;
+  cursor: pointer; 
   height: auto;
   @include rem('line-height', 38);
   @include rem('padding', 0, 10);
@@ -91,6 +91,7 @@ button, div.button > a, .button {
       margin-left: -10px;
       background-color: inherit;
       color: $blue;
+      position: absolute;
     }
       &:after {
       content: "";
