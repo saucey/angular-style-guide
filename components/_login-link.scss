@@ -2,7 +2,10 @@
  * Login link
  */
 .login-link {
-  display: inline-block;
+  display: none;
+  &.visible {
+    display: inline-block;  
+  }
   @include rem('line-height', 35);
   @include rem('padding', 0, 8);
   @include rem('border-radius', 3);
