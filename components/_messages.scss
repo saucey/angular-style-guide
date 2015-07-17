@@ -51,6 +51,21 @@
       color: $black;
     }
   }
+
+    &.messages--mobileStatus {
+    background-color: $blue;
+    padding-left: 20px;
+    height: auto;
+
+    .content {
+      margin: 20px;
+    }
+
+    .header {
+      color: $black;
+    }
+  }
+
 }
 
 //
