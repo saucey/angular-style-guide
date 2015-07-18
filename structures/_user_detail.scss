@@ -46,7 +46,7 @@
     position: absolute;
     top: auto;
     right: 0;
-    @include rem('margin-top', -1);
+    @include rem('margin-top', -3);
     @include rem('width', 280);
     @include rem('border-radius', 2);
     background-color: $white;
@@ -147,6 +147,7 @@
     @include rem('border-radius', 2);
     user-select: none;
     outline: 0;
+    border-bottom-color: $slightly_darker_grey;
 
     font-family: $font_normal;
     @include rem('font-size', 16);
@@ -155,10 +156,10 @@
 
     // Properties for animation
     border-color: $slightly_darker_grey;
-    border-bottom-color: transparent;
     color: $green;
 
     &:after {
+      animation: buttonAfterLoginToDefault 2s normal 0s forwards;
       font-family: $font_icons;
       @include rem('font-size', 12);
       content: $font_icons_arrow_down;
@@ -311,7 +312,7 @@ body.shw-widgets-logged-in {
       @include rem('line-height', 36);
       font-size: inherit;
       //background-color: transparent;
-      border-bottom-color: $slightly_darker_grey;
+      //border-bottom-color: transparent;
       animation: buttonLoginToDefault 2s normal 0s forwards;
 
       &:before {
@@ -321,11 +322,6 @@ body.shw-widgets-logged-in {
         @include rem('font-size', 23);
         @include rem('margin-right', 12);
         transform: translateY(3px);
-      }
-
-      &:after {
-        display: inline-block;
-        animation: buttonAfterLoginToDefault 2s normal 0s forwards;
       }
 
       &.tap {
