@@ -507,7 +507,7 @@ body.section-mijnaegon {
       /* for older IE */
       transform: translateX(18.75rem);
       transform: translateX(300px);
-      /* for browsers support tranlate 3D */
+      /* for browsers support translate 3D */
       transform: translate3d(18.75rem, 0, 0);
       transform: translate3d(300px, 0, 0);
     }
@@ -549,5 +549,19 @@ html.lt-ie9 {
 
   aside.desktop {
     position: fixed;
+  }
+  .submenu [class*='icon-']:before {
+    padding-top: 42px;
+  }
+  body.pushmenu-to-right {  //showing the left pushmenu
+    aside.desktop {
+      position: relative;
+    }
+    .push-submenu {
+      position: relative;
+    }
+    .stick-bottom {
+      display: none;
+    }
   }
 }
