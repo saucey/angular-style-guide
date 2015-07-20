@@ -60,7 +60,7 @@ ul {
     font-size: $medium;
     @include rem('line-height', 26);
     $li_left: 20px;
-    margin-left: $li_left;
+    //margin-left: $li_left;
     &:before {
       font-family: $font_icons;
       display: block;
