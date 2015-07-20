@@ -24,14 +24,14 @@
 
     attach: function () {
       $(".help").mouseover(function () {
-        if (this.title > " ") { //the temporary content has 2B " ", since "" will set display to "none" according to stylesheet definition, 
+        if (this.title !== " " && this.title.length > 0) { //the temporary content has 2B " ", since "" will set display to "none" according to stylesheet definition, 
           //alert(this.title);
           $(".dialog.help").remove();
           var dialog = document.createElement("DIV");
           dialog.className = "help dialog";
           dialog.innerHTML = this.title;
           this.title = " ";
-          $("#lhfs_widget").append(dialog); //this has 2 happen b4 measurements of dialog are taken, otherwise they won't be initialized
+          $("#personal_details_widget").append(dialog); //this has 2 happen b4 measurements of dialog are taken, otherwise they won't be initialized
           var offset = $(this).offset();
           offset.top = offset.top + $(this).height() + 10;
           offset.left = offset.left - $(dialog).width() / 2 - 18;
