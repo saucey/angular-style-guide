@@ -51,32 +51,64 @@
       color: $black;
     }
   }
-
-    &.messages--mobileStatus {
-    background-color: $blue;
-    padding-left: 20px;
-    height: auto;
-
-    .content {
-      margin: 5px 20px 20px 0px;
-    }
-
-    .header {
-      color: $black;
-    }
-
-    .moveright {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    }
-  }
-
 }
 
 //
 // Media queries
 // --------------------------------------------------
+
+
+@include breakpoint($brk-mobile) {
+      
+    &.messages--googleStatus {
+    background-color: $blue;
+    padding-left: 20px;
+    height: auto;
+
+
+    .header {
+      font-size: 12px;
+    }
+
+    .content {
+    position: relative;
+    width: 55%;
+    font-size: 10px;
+    line-height: 12px;
+    display: inline-block;
+    color: $white;
+    }
+
+    p {
+    font-size: 11px;
+    line-height: 14px;
+    }
+
+    button {
+    position: absolute;
+    right: 20px;
+    font-size: small;
+    }
+
+    .googleStatus-img {
+      float: left;
+      height: 45px;
+      width: 45px;
+      margin-right: 10px;
+      margin-left: 8px;
+    }
+
+      .icon:before {
+      content: '\e60d';
+      color: $white;
+      font-size: 16px;
+      position: absolute;
+      left: 7px;
+      right: 0px;
+      top: 4px;
+    }
+  }
+}
 
 @include breakpoint($brk-tablet) {
 
@@ -133,6 +165,14 @@
         color: $white;
       }
     }
+
+    &.messages--mobileStatus {
+
+      .icon:before {
+        content: '\e60d';
+        color: $white;
+      }
+    }  
   }
 }
 
