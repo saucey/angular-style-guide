@@ -45,6 +45,8 @@
 
   // MijnAegon cookie's name
   var mijnAegonCookieLoggedInName = 'mijn_last_login';
+  // hasBeenShown cookie name
+  var hasBeenShownCookieName = "hasBeenShown";
 
   // Set the seconds to force not showing the green bar animated
   var secondsForProcessedStatus = 15;
@@ -269,7 +271,7 @@
       $('body').addClass('shw-widgets-logged-in');
 
       // Cross-browser implementation to provide workaround for no CSS animation
-      if ( $('html').hasClass('no-cssanimations') && !$.cookie("hasBeenShown") ) {
+      if ( $('html').hasClass('no-cssanimations') && !this.hasBeenShown() ) {
 
         $template.find('.btn-login-loggedin').addClass('ieChangeColors');
 
@@ -288,13 +290,13 @@
         $template.find('.highlight.mobile').delay(3000).slideUp(500);
       }
 
-      if ( $.cookie("hasBeenShown") ) {
+      if ( this.hasBeenShown() ) {
         $template.addClass('processed');
       }
 
-      // cookie to make sure that the next time this template is shown,
+      // set the cookie to make sure that the next time this template is shown,
       // the welcome animation is off
-      $.cookie("hasBeenShown", "1");
+      this.hasBeenShown(true);
 
       // Finally run the callback to append all our shw-DOM in the proper
       // shw place
@@ -472,6 +474,22 @@
       return $.cookie(mijnAegonCookieLoggedInName) || false;
     },
 
+    // manage the cookie which handles if the green bar has been shown or not
+    hasBeenShown: function (value) {
+      // hasBeenShown() returns the current value
+      // hasBeenShown(true) sets the value to 1
+      // hasBeenShown(false) removes the cookie
+      if (arguments.length) {
+        if (value) {
+          $.cookie(hasBeenShownCookieName, "1", {path: "/"});
+        }
+        else {
+          $.removeCookie(hasBeenShownCookieName);
+        }
+      }
+      return $.cookie(hasBeenShownCookieName) || false; //make sure that a false value is returned for every false-ish (undefined, "", 0) value
+    },
+
     clearLastLogin: function (response) {
 
       // Remove mijn_last_login's cookie as first
@@ -494,7 +512,7 @@
       this.clearLastLogin();
       
       // remove the cookie that determines if the green bar is shown
-      $.removeCookie("hasBeenShown");
+      this.hasBeenShown(false);
 
       // Switch off all events
       this.events(true);
