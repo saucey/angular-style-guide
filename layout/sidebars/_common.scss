@@ -30,6 +30,10 @@ nav.mainmenu a[class*="icon-"]:before {
   @include rem('margin-right', 15);*/
 }
 
+ul.submenu li {
+  margin-left: 0;
+}
+
 .push-submenu {
   [class*="icon-"]:before {
     padding-right: 8px;

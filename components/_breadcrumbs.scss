@@ -9,28 +9,23 @@
   vertical-align: middle;
 
   ul {
-    overflow: hidden;
+    //overflow: hidden;
 
     li {
       display: inline;
       float: none;
       @include rem('padding-left', 0);
       @include rem('margin-right', 6);
-      color: #00304C;
+      color: $dark_blue;
 
       &:before {
-        content: '';
+        @include rem('font-size', $small - 2);
+        content: $font_icons_arrow_right_skinny;
         display: inline-block;
-        @include rem('width', 7);
-        @include rem('height', 7);
-        @include rem('max-width', 7);
-        @include rem('max-height', 7);
-        @include rem('margin-right', 10);
-        border-width: 2px 2px 0 0;
-        border-style: solid;
-        border-color: $blue;
-        transform: rotate(45deg);
-
+        top: 0px;
+        left: 0px;
+        position: relative;
+        @include rem('margin-right', 20);
       }
 
       &.first {
