@@ -60,7 +60,6 @@ ul {
     font-size: $medium;
     @include rem('line-height', 26);
     $li_left: 20px;
-    //margin-left: $li_left;
     &:before {
       font-family: $font_icons;
       display: block;
@@ -72,16 +71,19 @@ ul {
       font-size: $small;
     }
     &.bullet {
+      margin-left: $li_left;
       &:before {
         content: '\2022';
       }
     }
     &.check {
+      margin-left: $li_left;
       &:before {
         content: $font_icons_check;
       }
     }
     &.arrow {
+      margin-left: $li_left;
       &:before {
         content: $font_icons_arrow_right;
       }
