@@ -11,7 +11,8 @@ aside.mobile {
   left: 0;
   height: 100%;
   z-index: 9999;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   // For older browser
   transform: translateX(-100%);
   // For browsers support tranlate 3D
