@@ -484,7 +484,7 @@
           $.cookie(hasBeenShownCookieName, "1", {path: "/"});
         }
         else {
-          $.removeCookie(hasBeenShownCookieName);
+          $.removeCookie(hasBeenShownCookieName, {path: "/"});
         }
       }
       return $.cookie(hasBeenShownCookieName) || false; //make sure that a false value is returned for every false-ish (undefined, "", 0) value

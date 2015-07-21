@@ -47,7 +47,7 @@
       if (!testSelector("form:invalid")) {  //if the userAgent does not know the :invalid pseudoclass, we need the validation workaround provided by validVal
         $("form[name=personal_details_form]").validVal({
           validate: {
-            onKeyup: true,
+            onKeyup: true, //if checking is required in RealTime, this has to be true
           },
         });
       }
