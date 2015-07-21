@@ -116,9 +116,10 @@ p {
 
 .ul-arrows {
   list-style-item: none;
-  list-style-image: &:before {
-        content: $font_icons_arrow_right;
-      }
+  list-style-image: none;
+  &:before {
+    content: $font_icons_arrow_right;
+  }
 }
 
 
