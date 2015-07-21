@@ -20,6 +20,12 @@ form {
 
 $errorText_line-height: 14px;
 .errorText {
+  &.manual {  //for when it is necessary to have the errorText styling, but text is to be shown independently of automatic validation
+    display: none;
+    &.visible {
+      display: block;
+    }
+  }
   text-align: left;
 }
 /*  //commenting out these styles will deactivate validation for onKeyUp
