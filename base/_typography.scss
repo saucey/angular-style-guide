@@ -114,6 +114,13 @@ p {
   font-family: $font_normal;
 }
 
+.ul-arrows {
+  list-style-item: none;
+  list-style-image: &:before {
+        content: $font_icons_arrow_right;
+      }
+}
+
 
 //
 // Media queries
