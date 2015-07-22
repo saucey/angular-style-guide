@@ -168,6 +168,12 @@
 // Media queries
 // --------------------------------------------------
 
+@include breakpoint($brk-mobile) {
+  .footer-blk block__content {
+    margin-bottom: 30px;
+  }
+}
+
 @include breakpoint($brk-tablet) {
 
   .footer-blk {
