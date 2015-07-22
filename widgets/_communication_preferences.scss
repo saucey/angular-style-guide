@@ -91,12 +91,13 @@
   label.checkbox {
     display: block;
     @include rem('margin-bottom', 10);
-
+/*
     // Another bullshit fixer
     > input[type='checkbox'] + span.checkbox {
       top: 0;
       left: 0;
     }
+*/
   }
 
   button.edit.right {
