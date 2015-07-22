@@ -3,7 +3,7 @@ button, .button {
   cursor: pointer; 
   height: auto;
   @include rem('line-height', 38);
-  /* @include rem('padding', 0, 10); */
+  @include rem('padding', 0, 10);
   @include rem('border-radius', $elements_border_radius);
   @include rem('font-size', $medium);
   white-space: nowrap;
@@ -128,4 +128,7 @@ button, .button {
   &[class*="icon-"]:before {
     font-size: 16px;
   }
+}
+div.button {
+  @include rem('padding', 0, 0);
 }
