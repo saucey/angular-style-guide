@@ -17,7 +17,7 @@
 nav.mainmenu a[class*="icon-"]:before {
   @include rem('font-size', 24);
   @include rem('line-height', 90);
-  left: 10%;
+  left: 5%;
   position: absolute;
   /*position: absolute;
   top: 50%;

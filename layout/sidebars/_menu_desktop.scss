@@ -30,6 +30,8 @@ aside.desktop {
       color: $green;
       &:before {
         color: inherit;
+        display: inline-block;
+        width: 30px;
       }
     }
   }
@@ -218,7 +220,7 @@ aside.desktop {
         display: block;
         position: absolute;
         top: 50%;
-        left: 12%;
+        left: 8%;
         @include rem('width', 13);
         @include rem('height', 0);
         @include rem('margin-top', -6);
