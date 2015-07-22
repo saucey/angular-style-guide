@@ -39,6 +39,15 @@
     }
   }
 
+    &.messages--alert {
+    background-color: $sky;
+
+    .header {
+      color: $white;
+      margin-bottom: 15px;
+    }
+  }
+
   &.messages--functional {
     background-color: $lighter_grey;
     padding-left: 20px;
@@ -136,6 +145,10 @@
 
       .icon {
 
+      position: absolute;
+      left: 2%;
+      top: 32%;
+
         .path1:before {
           font-family: inherit;
           content: '\e62e';
@@ -165,6 +178,35 @@
         color: $white;
       }
     }
+
+    &.messages--alert{
+
+    .icon {
+    position: absolute;
+  left: 2%;
+  top: 32%;
+
+        .pathA:before {
+          font-family: inherit;
+          content: '\e62e';
+          color: $white;
+        }
+
+        .pathB:before {
+          font-family: inherit;
+          content: "\e634";
+          margin-left: -1.1826171875em;
+          color: $dark_blue;
+        }
+
+        .pathC:before {
+          font-family: inherit;
+          content: "\e635";
+          margin-left: -1.185em;
+          color: $dark_blue;
+        }
+        }
+      }
 
     &.messages--mobileStatus {
 
@@ -201,7 +243,7 @@ div.error {
     color: $red;
   }
 }
-div.error, div.success {
+div.error, div.success, div.alert {
   @include inlineFrame();
   padding-left: 40px;
   //margin-bottom: 10px;
