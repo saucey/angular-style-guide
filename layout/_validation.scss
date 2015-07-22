@@ -28,7 +28,6 @@ $errorText_line-height: 14px;
   }
   text-align: left;
 }
-/*  //commenting out these styles will deactivate validation for onKeyUp
 select {
   &.visited:invalid {
     &~ .ddTitle {
@@ -50,7 +49,6 @@ input.visited {
     }
   }
 }
-*/
 input, select {
   &~ .errorText {
     line-height: $errorText_line-height;
