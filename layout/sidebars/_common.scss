@@ -37,6 +37,8 @@ ul.submenu li {
 .push-submenu {
   [class*="icon-"]:before {
     padding-right: 8px;
+    width: 30px;
+    display:inline-block;
   }
 }
 
