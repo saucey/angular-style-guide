@@ -20,8 +20,8 @@
   font-family: $font_normal;
 
 // fix to wrap on words spilling out of the div; content managers should soft-wrap long words using <wbr>, because word-break: break-all will look bad
- @import word-break(break-word);
- @import hyphens(auto);
+ @include word-break(break-word);
+ @include hyphens(auto);
  
   .region.first {
     display: table-row;
