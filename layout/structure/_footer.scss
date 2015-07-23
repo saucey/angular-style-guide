@@ -19,9 +19,10 @@
   @include rem('line-height', 22);
   font-family: $font_normal;
 
-// fix to wrap ong words spilling out of the div
- -ms-word-break: break-all; word-break: break-all; /* Non standard for webkit */ word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; -ms-hyphens: auto; hyphens: auto;
-
+// fix to wrap on words spilling out of the div; content managers should soft-wrap long words using <wbr>, because word-break: break-all will look bad
+ @import word-break(break-word);
+ @import hyphens(auto);
+ 
   .region.first {
     display: table-row;
     overflow: hidden;
