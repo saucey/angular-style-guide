@@ -183,25 +183,25 @@
 
     .icon {
     position: absolute;
-  left: 2%;
-  top: 32%;
+    left: 2%;
+    top: 32%;
 
         .pathA:before {
           font-family: inherit;
-          content: '\e62e';
+          content: '\e631';
           color: $white;
         }
 
         .pathB:before {
           font-family: inherit;
-          content: "\e634";
+          content: "";
           margin-left: -1.1826171875em;
           color: $dark_blue;
         }
 
         .pathC:before {
           font-family: inherit;
-          content: "\e635";
+          content: "";
           margin-left: -1.185em;
           color: $dark_blue;
         }
