@@ -23,26 +23,7 @@
     },
 
     attach: function () {
-      $(".help").mouseover(function () {
-        if (this.title !== " " && this.title.length > 0) { //the temporary content has 2B " ", since "" will set display to "none" according to stylesheet definition, 
-          //alert(this.title);
-          $(".dialog.help").remove();
-          var dialog = document.createElement("DIV");
-          dialog.className = "help dialog";
-          dialog.innerHTML = this.title;
-          this.title = " ";
-          $("#personal_details_widget").append(dialog); //this has 2 happen b4 measurements of dialog are taken, otherwise they won't be initialized
-          var offset = $(this).offset();
-          offset.top = offset.top + $(this).height() + 10;
-          offset.left = offset.left - $(dialog).width() / 2 - 18;
-          $(dialog).offset(offset);
-          var that = this;
-          $(document).click(function () {
-            $(dialog).remove();
-             that.title = dialog.innerHTML;
-          });
-        }
-      });
+      Drupal.behaviors.tooltip.activate("#personal_details_widget");
 
       if (!testSelector("form:invalid")) {  //if the userAgent does not know the :invalid pseudoclass, we need the validation workaround provided by validVal
         $("form[name=personal_details_form]").validVal({
