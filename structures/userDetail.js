@@ -553,7 +553,7 @@
       type = type.toUpperCase();
 
       // Return null if no _AE_PARTIJ_IDENTIFICATIE
-      if (this.shwRawData && this.shwRawData.PARTIJ &&
+      if (!this.shwRawData || !this.shwRawData.PARTIJ ||
         !this.shwRawData.PARTIJ._AE_PARTIJ_IDENTIFICATIE) { return null; }
 
       // Create a local variable with identificatie array

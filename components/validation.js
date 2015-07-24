@@ -38,7 +38,12 @@
       $(form_selector).find("input, select, textarea").filter(":visible")
       // add blurred, so that validation takes place on all visible elements
         .addClass("blurred");
-      return $(form_selector).find("input.invalid, select.invalid, textarea.invalid, input:invalid, select:invalid, textarea:invalid").length;      
+      try {
+        return $(form_selector).find("input.invalid, select.invalid, textarea.invalid, input:invalid, select:invalid, textarea:invalid").length;
+      }
+      catch (e) {
+        return $(form_selector).find("input.invalid, select.invalid, textarea.invalid").length;        
+      }
     }
   };
 })(jQuery);
