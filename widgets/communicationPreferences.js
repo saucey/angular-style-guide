@@ -7,12 +7,6 @@
 
   'use strict';
 
-  var testSelector = function (selector) {
-    document.querySelector('*');  //checks if querySelector is implemented and raises an error if not
-    try {document.querySelector(selector)} catch (e) {return false}
-    return true;
-  }
-
   /**
    * MyPersonalDetails's Drupal script.
    * Add new item to public Drupal object
@@ -21,13 +15,7 @@
     attach: function () {
       Drupal.behaviors.tooltip.activate("#communication_preferences");
 
-      if (!testSelector("form:invalid")) {  //if the userAgent does not know the :invalid pseudoclass, we need the validation workaround provided by validVal
-        $("form[name=personal_details_form]").validVal({
-          validate: {
-            onKeyup: false, //if checking is required in RealTime, this has to be true
-          },
-        });
-      }
+      Drupal.behaviors.validation.IEFix("form[name=communication_preferences_form]", false);
 
     },
   };

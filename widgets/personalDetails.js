@@ -25,21 +25,18 @@
     attach: function () {
       Drupal.behaviors.tooltip.activate("#personal_details_widget");
 
-      if (!testSelector("form:invalid")) {  //if the userAgent does not know the :invalid pseudoclass, we need the validation workaround provided by validVal
-        $("form[name=personal_details_form]").validVal({
-          validate: {
-            onKeyup: true, //if checking is required in RealTime, this has to be true
-          },
-        });
-      }
+      Drupal.behaviors.validation.IEFix("form[name=personal_details_form]", false);
+      Drupal.behaviors.validation.prepareSubmit("form[name=personal_details_form]");
 
+      // activate the tabs for Dutch or foreign addresses
+      // residential address
       $("input[name=ra_NL]").click( function () {
         var NL = parseInt($(this).val()) > 0;
         $(".address .residential .NL").toggleClass("visible", NL);
         $(".address .residential .world").toggleClass("visible", !NL);
       });
       $("input[name=ra_NL]:checked").click();
-
+      // communication address
       $("input[name=ca_NL]").click( function () {
         var NL = parseInt($(this).val()) > 0;
         $(".address .correspondential .NL").toggleClass("visible", NL);
