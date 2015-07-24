@@ -16,7 +16,6 @@
       Drupal.behaviors.tooltip.activate("#communication_preferences");
 
       Drupal.behaviors.validation.IEFix("form[name=communication_preferences_form]", false);
-
     },
   };
 

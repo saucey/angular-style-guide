@@ -33,15 +33,12 @@
         });
       }
     },
-    // 
-    prepareSubmit: function (form_selector) {
-      // use filter, because the first selector on its own runs a lot faster without :visible and filter then only takes up the selection
-console.log("fs " + form_selector);
-      $(form_selector).submit( function () {
-        $(form_selector).find("input, select, textarea").filter(":visible")
-        // add blurred, so that validation takes place on all visible elements
-          .addClass("blurred");
-      });
+
+    invalid: function (form_selector) {
+      $(form_selector).find("input, select, textarea").filter(":visible")
+      // add blurred, so that validation takes place on all visible elements
+        .addClass("blurred");
+      return $(form_selector).find("input.invalid, select.invalid, textarea.invalid, input:invalid, select:invalid, textarea:invalid").length;      
     }
   };
 })(jQuery);
