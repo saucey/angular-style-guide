@@ -29,7 +29,7 @@ $errorText_line-height: 14px;
   text-align: left;
 }
 select {
-  &.visited:invalid {
+  &.blurred:invalid {
     &~ .ddTitle {
       border-color: $red;
     }
@@ -38,14 +38,15 @@ select {
     }
   }
 }
-input.visited {
+input.blurred {
   &:invalid, &.invalid {
     border-color: $red;
     & ~ .errorText {
       display: block;
     }
     & ~ span.checkbox {
-      border-color: $red;
+      // styles for check boxes could go here 
+      //border-color: $red;
     }
   }
 }
@@ -69,7 +70,7 @@ input, select {
 select ~ .errorText {
   top: -$errorText_line-height;
 }
-select.visited:invalid ~ .ddTitle {
+select.blurred:invalid ~ .ddTitle {
   margin-top: -$errorText_line-height;
 }
 
