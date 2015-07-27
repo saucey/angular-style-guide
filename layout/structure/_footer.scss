@@ -173,7 +173,7 @@
 // --------------------------------------------------
 
 @include breakpoint($brk-mobile) {
-  .footer-blk block__content {
+  .footer-blk .block__content {
     margin-bottom: 30px;
   }
 }
@@ -203,6 +203,7 @@
         padding-bottom: 0;
       }
     }
+
   }
 
   .footer-quick-links {
