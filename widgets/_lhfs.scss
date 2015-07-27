@@ -306,6 +306,10 @@
     font-size: 16px;
     content: $font_icons_help;
     position: absolute;
+    left: 50% !important;
+  }
+  &:after {
+    left: 50% !important;
   }
 }
 
