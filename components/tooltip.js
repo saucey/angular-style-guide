@@ -22,11 +22,15 @@
           this.title = " ";
           $(selector).append(dialog); //this has 2 happen b4 measurements of dialog are taken, otherwise they won't be initialized
           var offset = $(this).offset();
-          offset.top = offset.top + $(this).height() + 10;
+          offset.top = offset.top + $(this).height() + 20;
           offset.left = offset.left - $(dialog).width() / 2 - 18;
           $(dialog).offset(offset);
           var that = this;
           $(document).click(function () {
+            $(dialog).remove();
+             that.title = dialog.innerHTML;
+          });
+          $(".dialog.help").mouseout(function(){
             $(dialog).remove();
              that.title = dialog.innerHTML;
           });
