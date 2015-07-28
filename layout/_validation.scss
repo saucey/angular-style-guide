@@ -39,7 +39,7 @@ select {
   }
 }
 input.blurred {
-  &:invalid, &.invalid {
+  &.invalid, &:invalid {
     border-color: $red;
     & ~ .errorText {
       display: block;
