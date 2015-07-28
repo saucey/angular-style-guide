@@ -27,11 +27,11 @@
           $(dialog).offset(offset);
           var that = this;
           $(document).click(function () {
-            $(dialog).remove();
+            $(".dialog").remove();
              that.title = dialog.innerHTML;
           });
           $(".help.dialog").mouseout(function(){
-            $(dialog).remove();
+            $("help.dialog").remove();
             that.title = dialog.innerHTML;
           });
         }
