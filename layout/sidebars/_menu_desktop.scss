@@ -546,8 +546,7 @@ body.section-mijnaegon {
 //
 // Hacks
 // --------------------------------------------------
-
-html.lt-ie9 {
+html.lt-ie9, html.gte-ie9 {
 
   aside.desktop {
     position: fixed;
