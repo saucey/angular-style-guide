@@ -108,7 +108,7 @@ button, .button {
   &.edit {
     display: block;
     @media screen and(min-width: $rc-m-min-width) and(max-width: $rc-l-max-width) {
-      display: none;
+    //  display: none;  Behaviour could be by design. Let's keep it for now as a comment.
     }
     &.transparent {
       display: none;
@@ -131,5 +131,6 @@ button, .button {
   }
 }
 div.button {
-  @include rem('padding', 0, 0);
+ //  @include rem('padding', 0, 0);
+ padding: 0 0.625rem;
 }
