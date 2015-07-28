@@ -15,7 +15,7 @@
       $(selector + " .help").mouseover(function () {
         if (this.title !== " " && this.title.length > 0) { //the temporary content has 2B " ", since "" will set display to "none" according to stylesheet definition, 
           //alert(this.title);
-          $(".dialog.help").remove();
+          $(".help.dialog").remove();
           var dialog = document.createElement("DIV");
           dialog.className = "help dialog";
           dialog.innerHTML = this.title;
@@ -30,9 +30,9 @@
             $(dialog).remove();
              that.title = dialog.innerHTML;
           });
-          $(".dialog.help").mouseout(function(){
+          $(".help.dialog").mouseout(function(){
             $(dialog).remove();
-             that.title = dialog.innerHTML;
+            that.title = dialog.innerHTML;
           });
         }
       });
