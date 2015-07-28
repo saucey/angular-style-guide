@@ -265,6 +265,9 @@ aside.desktop {
       @include rem('border-top-width', 1);
       background-color: #2981B8;
       color: $white;
+      &[class*="icon-"]:before {
+        @include rem('line-height', 110);
+      }
     }
   }
 
