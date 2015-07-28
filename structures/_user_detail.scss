@@ -106,8 +106,8 @@
       z-index: 0;
       @include rem('padding', 23, 0);
       animation: slidingHighlightOnTop 1s 1 5s forwards;
-      max-height: 150px !important;
-      height: 150px !important;
+      max-height: 90px !important;
+      height: 90px !important;
     }
 
     &.mobile {
@@ -117,8 +117,8 @@
       overflow: hidden;
       background-color: transparent;
       animation: slidingHighlightOnTopMobile 1s 1 5s forwards;
-      max-height: 150px !important;
-      height: 150px !important;
+      max-height: 90px !important;
+      height: 90px !important;
 
       .text {
         padding: 0;
