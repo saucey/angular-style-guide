@@ -35,6 +35,9 @@
     },
 
     invalid: function (form_selector) {
+      if (!this.test()) {
+        $(form_selector).trigger( "validate" );
+      }
       $(form_selector).find("input, select, textarea").filter(":visible")
       // add blurred, so that validation takes place on all visible elements
         .addClass("blurred");
