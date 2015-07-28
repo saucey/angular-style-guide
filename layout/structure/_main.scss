@@ -52,8 +52,7 @@
 
   section.scroll {
     @include rem('margin-left', 170);
-  }
-}
+  } 
 
 @include breakpoint($brk-large-desktop) {
 
