@@ -39,3 +39,8 @@
     }
   }
 }
+
+// Safari on both Win and Mac is making an exemption here; this is a fix, but not a solution...
+.safari .breadcrumb ul > li:before {
+  top: -18px;
+}
