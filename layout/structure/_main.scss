@@ -33,6 +33,7 @@
 .divider-line {
   margin: 0 0 60px 0;
 }
+
 //
 // Media queries
 // --------------------------------------------------
@@ -49,10 +50,6 @@
     margin: 0px;
   }
 }
-
-  section.scroll {
-    @include rem('margin-left', 170);
-  } 
 
 @include breakpoint($brk-large-desktop) {
 
