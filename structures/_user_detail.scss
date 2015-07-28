@@ -95,6 +95,8 @@
       }
     }
     background-color: $green;
+    color: @white !important;
+    padding: 0 0 0 80px;
 
     &.desktop {
       display: none;
