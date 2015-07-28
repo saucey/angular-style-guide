@@ -30,8 +30,8 @@
             $(".dialog").remove();
              that.title = dialog.innerHTML;
           });
-          $(".help.dialog").mouseout(function(){
-            $("help.dialog").remove();
+          $(dialog).mouseout(function(){
+            $(dialog).remove();
             that.title = dialog.innerHTML;
           });
         }
