@@ -108,7 +108,7 @@ button, .button {
   &.edit {
     display: block;
     @media screen and(min-width: $rc-m-min-width) and(max-width: $rc-l-max-width) {
-    display: none;
+      display: none;  
     }
     &.transparent {
       display: none;
@@ -133,4 +133,18 @@ button, .button {
 div.button {
  //  @include rem('padding', 0, 0);
  padding: 0 0.625rem;
+}
+
+//
+// Media queries
+// --------------------------------------------------
+
+@include breakpoint($brk-mobile){
+  button.edit {
+  display: block;
+  }
+
+  ul.actions {
+  margin: 0px 0 40px 0;
+  }
 }

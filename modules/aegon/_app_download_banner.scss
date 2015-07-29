@@ -138,43 +138,76 @@ $url_0: url(../img/dark_background_stripes.gif);
 }
 
 .smartbanner_android {
-  border-color: $color_shark_approx;
-  border-top: 5px solid $color_sushi_approx;
-  background-color: $color_masala_approx;
-  //Instead of the line below you could use @includebox-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
-  box-shadow: none;
-  .smartbanner__icon {
-    background-color: transparent;
-    //Instead of the line below you could use @includebox-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
-    box-shadow: none;
-  }
+  font-family: senticosansdtregular;
+  position: absolute;
+  z-index: 9999999;
+  top: 0;
+  left: 0;
+  display: none;
+  overflow: hidden;
+  width: 80%;
+  height: 78px;
+  //border-bottom: 1px solid $color_gray_nurse_approx;
+  //background: $wild_sand;
+  //background: linear-gradient(to bottom, $wild_sand 0, $color_celeste_approx 100%);
+  background-color: #3395d3;
+    padding-left: 20px;
+    height: auto;
+  box-shadow: 0 1px 2px $black_50;
+
   .smartbanner__close {
-    line-height: 17px;
-    width: 17px;
-    height: 17px;
-    color: $color_bombay_approx;
-    border: 0;
-    background: $color_mirage_approx;
-    //Instead of the line below you could use @includebox-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
-    box-shadow: 0 1px 2px $black_80 inset, 0 1px 1px $white_30;
-    //Instead of the line below you could use @includetext-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
-    text-shadow: 0 1px 1px $black;
-    &:active {
-      color: $color_gallery_approx;
-    }
-    &:hover {
-      color: $color_gallery_approx;
+    font-family: senticosansdtregular; 
+    font-size: 18px;
+    font-weight: normal;
+    line-height: 16px;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    display: block;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    text-decoration: none;
+    color: $white;
+    border: 1px solid #fff;
+    border-radius: 18px;
+    background: $dark_blue;
+    text-shadow: none;
+  &:active {
+    font-size: 18px;
+    background: $orange;
+  }
+  &:hover {
+    font-weight: bold;
+    background: $orange_highlight;
     }
   }
   .smartbanner__info {
-    color: $color_celeste_approx;
-    //Instead of the line below you could use @includetext-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
-    text-shadow: 0 1px 2px $black;
-  }
-  .smartbanner__title {
-    font-weight: bold;
+    font-family: senticosansdtregular;
+    font-size: 12px;
+    line-height: 1.2em;
+    position: absolute;
+    top: 18px;
+    left: 105px;
+    width: 44%;
     color: $white;
   }
+  .smartbanner__title {
+    font-family: senticosansdtregular;
+    font-size: 14px;
+    line-height: 18px;
+    color: $white;
+  }
+
+  .smartbanner-button {
+  position: absolute;
+  top: 20px;
+  right: 35px;
+
+  @extend .button;
+  @extend .orange;
+  @extend .arrow;
+}
   .smartbanner-button__text {
     display: block;
     padding: 0 10px;
