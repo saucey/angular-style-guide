@@ -142,23 +142,31 @@ p {
 @include breakpoint($brk-mobile){
 
   h1 {
-    @include rem('font-size', 20);
-    @include rem('line-height', 20);
+    @include rem('font-size', 22);
+    @include rem('line-height', 22);
   }
 
-  h2 {@include rem('font-size', 18);
+  h2 {@include rem('font-size', 20);
+      @include rem('line-height', 20);
+  }
+
+  h3 {@include rem('font-size', 18);
       @include rem('line-height', 18);
   }
 
-  h3 {@include rem('font-size', 16);
+  h4 {@include rem('font-size', 16);
       @include rem('line-height', 16);
   }
 
-  h4 {@include rem('font-size', 14);
-      @include rem('line-height', 14);
+  p {
+    @include rem('font-size', 16);
   }
 
-  p {
-    @include rem('font-size', 14);
+  ul {
+    @include rem('font-size', 16);
+  }
+
+  li {
+    @include rem('font-size', 16);
   }
 }
