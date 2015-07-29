@@ -108,7 +108,7 @@ button, .button {
   &.edit {
     display: block;
     @media screen and(min-width: $rc-m-min-width) and(max-width: $rc-l-max-width) {
-    //  display: none;  Behaviour could be by design. Let's keep it for now as a comment.
+    display: none;
     }
     &.transparent {
       display: none;
