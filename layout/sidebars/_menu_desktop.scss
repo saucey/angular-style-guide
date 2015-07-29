@@ -569,3 +569,10 @@ html.lt-ie9, html.gte-ie9 {
     }
   }
 }
+
+html.lt-ie9  li.stick-bottom a[class*="icon-"]:before {
+  @include rem('margin-top', 10);
+}
+html.gte-ie9  li.stick-bottom a[class*="icon-"]:before {
+  @include rem('margin-top', 0);
+}
