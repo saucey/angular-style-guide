@@ -115,26 +115,53 @@
   color: #6a6a6a;
 }
 .smartbanner_android {
-  border-color: #212228;
-  /* background: #3d3d3d url('../img/dark_background_stripes.gif'); */
-  background-color: #3d3d3d;
-  border-top: 5px solid #88b131;
-  box-shadow: none;
-  z-index: 9999;
+  font-family: senticosansdtregular;
+  position: absolute;
+  z-index: 9999999;
+  top: 0;
+  left: 0;
+  display: none;
+  overflow: hidden;
+  width: 80%;
+  height: 78px;
+  //border-bottom: 1px solid $color_gray_nurse_approx;
+  //background: $wild_sand;
+  //background: linear-gradient(to bottom, $wild_sand 0, $color_celeste_approx 100%);
+  background-color: #3395d3;
+  padding-left: 20px;
+  height: auto;
+  box-shadow: 0 1px 2px $black_50;
 }
 .smartbanner_android .smartbanner__icon {
   background-color: transparent;
   box-shadow: none;
 }
 .smartbanner_android .smartbanner__close {
-  border: 0;
-  width: 17px;
-  height: 17px;
-  line-height: 17px;
-  color: #b1b1b3;
-  background: #1c1e21;
-  text-shadow: 0 1px 1px #000;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.8) inset, 0 1px 1px rgba(255,255,255,0.3);
+    font-family: senticosansdtregular; 
+    font-size: 18px;
+    font-weight: normal;
+    line-height: 16px;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    display: block;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    text-decoration: none;
+    color: $white;
+    border: 1px solid #fff;
+    border-radius: 18px;
+    background: $dark_blue;
+    text-shadow: none;
+  &:active {
+    font-size: 18px;
+    background: $orange;
+  }
+  &:hover {
+    font-weight: bold;
+    background: $orange_highlight;
+    }
 }
 .smartbanner_android .smartbanner__close:active,
 .smartbanner_android .smartbanner__close:hover { color: #eee; }

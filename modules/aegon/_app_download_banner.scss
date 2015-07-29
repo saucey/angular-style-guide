@@ -154,8 +154,9 @@ $url_0: url(../img/dark_background_stripes.gif);
     padding-left: 20px;
     height: auto;
   box-shadow: 0 1px 2px $black_50;
+  }
 
-  .smartbanner__close {
+ .smartbanner_android .smartbanner__close {
     font-family: senticosansdtregular; 
     font-size: 18px;
     font-weight: normal;
@@ -182,7 +183,7 @@ $url_0: url(../img/dark_background_stripes.gif);
     background: $orange_highlight;
     }
   }
-  .smartbanner__info {
+ .smartbanner_android .smartbanner__info {
     font-family: senticosansdtregular;
     font-size: 12px;
     line-height: 1.2em;
@@ -192,14 +193,14 @@ $url_0: url(../img/dark_background_stripes.gif);
     width: 44%;
     color: $white;
   }
-  .smartbanner__title {
+  .smartbanner_android  .smartbanner__title {
     font-family: senticosansdtregular;
     font-size: 14px;
     line-height: 18px;
     color: $white;
   }
 
-  .smartbanner-button {
+ .smartbanner_android .smartbanner-button {
   position: absolute;
   top: 20px;
   right: 35px;
@@ -208,10 +209,9 @@ $url_0: url(../img/dark_background_stripes.gif);
   @extend .orange;
   @extend .arrow;
 }
-  .smartbanner-button__text {
+.smartbanner_android .smartbanner-button__text {
     display: block;
     padding: 0 10px;
     text-align: center;
     text-transform: none;
-  }
 }
