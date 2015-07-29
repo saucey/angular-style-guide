@@ -16,6 +16,16 @@ form {
       //}
     }
   }
+  &.invalid {
+    ul.actions.edit {
+      button:not(.cancel) {
+        z-index: $elements_button_disabled_z-index;
+      }
+      //div.disabler {
+      //  display: block;
+      //}
+    }
+  }
 }
 
 $errorText_line-height: 14px;
@@ -37,9 +47,27 @@ select {
       display: block;
     }
   }
+  &.blurred.invalid {
+    &~ .ddTitle {
+      border-color: $red;
+    }
+    &~ .errorText {
+      display: block;
+    }
+  }
 }
 input.blurred {
-  &.invalid, &:invalid {
+  &.invalid {
+    border-color: $red;
+    & ~ .errorText {
+      display: block;
+    }
+    & ~ span.checkbox {
+      // styles for check boxes could go here 
+      //border-color: $red;
+    }
+  }
+  &:invalid {
     border-color: $red;
     & ~ .errorText {
       display: block;
@@ -58,7 +86,10 @@ input, select {
     position: relative;
     top: - ($elements_height + $errorText_line-height);
   }
-  &~ .errorText, &:valid ~ .errorText {
+  &~ .errorText {
+    display: none;
+  }
+  &:valid ~ .errorText {
     display: none;
   }
   &[type=checkbox]~ .errorText {
