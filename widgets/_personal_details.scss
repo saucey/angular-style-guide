@@ -16,6 +16,7 @@
     span {
       &.content, &.help {
         display: inline;
+        line-height: 150%;
       }
       &.help {
         @media screen and(max-width: $rc-s-max-width) {
