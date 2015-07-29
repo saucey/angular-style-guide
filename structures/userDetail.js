@@ -233,6 +233,11 @@
     },
 
     parseWidget: function (data, callback) {
+
+      // reload page
+      // Added argument true to bypass cache in MSIE9
+      location.reload(true);
+
       // Vars for local scope
       var $template, dateFormatted;
 
