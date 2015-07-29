@@ -170,17 +170,19 @@
   text-shadow: 0 1px 2px #000;
 }
 .smartbanner_android .smartbanner__title {
-  color: #fff;
-  font-weight: bold;
+    font-family: senticosansdtregular;
+    font-size: 14px;
+    line-height: 18px;
+    color: $white;
 }
 .smartbanner_android .smartbanner-button {
-  min-width: 12%;
-  border: 1px solid #dddcdc;
-  padding: 1px;
-  color: #d1d1d1;
-  background: 0;
-  border-radius: 0;
-  box-shadow: none;
+  position: absolute;
+  top: 20px;
+  right: 35px;
+
+  @extend .button;
+  @extend .orange;
+  @extend .arrow;
 }
 .smartbanner_android .smartbanner-button:active,
 .smartbanner_android .smartbanner-button:hover { background: 0; }
