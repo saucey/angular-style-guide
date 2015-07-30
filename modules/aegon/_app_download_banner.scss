@@ -62,14 +62,14 @@ $url_0: url(../img/dark_background_stripes.gif);
     height: auto;
   box-shadow: 0 1px 2px $black_50;
 }
-.smartbanner__container {
+.sb-container {
   margin: 0 auto;
   background-color: #3395d3;
   position: absolute;
   width: 100%;
   height: 78px;
 }
-.smartbanner__close {
+.sb-close {
     font-family: senticosansdtregular; 
     font-size: 18px;
     font-weight: normal;
@@ -96,7 +96,7 @@ $url_0: url(../img/dark_background_stripes.gif);
     background: $orange_highlight;
   }
 }
-.smartbanner__icon {
+.sb-icon {
   position: absolute;
   top: 10px;
   left: 35px;
@@ -110,7 +110,7 @@ $url_0: url(../img/dark_background_stripes.gif);
   //Instead of the line below you could use @includebox-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, //$shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
   //box-shadow: 0 1px 3px $black_30;
 }
-.smartbanner__info {
+.sb-info {
   font-family: senticosansdtregular;
   font-size: 12px;
   line-height: 1.2em;
@@ -120,14 +120,14 @@ $url_0: url(../img/dark_background_stripes.gif);
   width: 44%;
   color: $white;
 }
-.smartbanner__title {
+.sb-title {
   font-family: senticosansdtregular;
   font-size: 14px;
   line-height: 18px;
   color: $white;
 }
 
-.smartbanner-button {
+.sb-button {
   position: absolute;
   top: 20px;
   right: 35px;
@@ -156,7 +156,7 @@ $url_0: url(../img/dark_background_stripes.gif);
   box-shadow: 0 1px 2px $black_50;
   }
 
- .smartbanner_android .smartbanner__close {
+ .smartbanner_android .sb-close {
     font-family: senticosansdtregular; 
     font-size: 18px;
     font-weight: normal;
@@ -183,7 +183,7 @@ $url_0: url(../img/dark_background_stripes.gif);
     background: $orange_highlight;
     }
   }
- .smartbanner_android .smartbanner__info {
+ .smartbanner_android .sb-info {
     font-family: senticosansdtregular;
     font-size: 12px;
     line-height: 1.2em;
@@ -193,14 +193,14 @@ $url_0: url(../img/dark_background_stripes.gif);
     width: 44%;
     color: $white;
   }
-  .smartbanner_android  .smartbanner__title {
+  .smartbanner_android  .sb-title {
     font-family: senticosansdtregular;
     font-size: 14px;
     line-height: 18px;
     color: $white;
   }
 
- .smartbanner_android .smartbanner-button {
+ .smartbanner_android .sb-button {
   position: absolute;
   top: 20px;
   right: 35px;
@@ -209,7 +209,7 @@ $url_0: url(../img/dark_background_stripes.gif);
   @extend .orange;
   @extend .arrow;
 }
-.smartbanner_android .smartbanner-button__text {
+.smartbanner_android .sb-text {
     display: block;
     padding: 0 10px;
     text-align: center;
