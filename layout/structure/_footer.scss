@@ -134,7 +134,7 @@
   }
 }
 
-.footer-quick-links {
+.footer-quick-links ul li a {
   @include rem('padding', 15, 0);
 
   .center {
@@ -176,6 +176,28 @@
   .footer-blk .block__content {
     margin-bottom: 30px;
   }
+
+  .row-fluid .span4 {
+    display: none;
+  }
+
+  .footer-blk .region.second .social-icons {
+  display: block;
+  }
+
+  .region .second .row-fluid:last-child {
+  display: block;
+  }
+
+  .footer-blk .region.second .span4 {
+    display: block;
+  }
+
+  .footer-quick-links ul li a {
+    color: #3294D2;
+    font-size: 14px;
+  }
+
 }
 
 @include breakpoint($brk-tablet) {
