@@ -189,15 +189,22 @@
   display: block;
   }
 
+  .footer-blk .region.second {
+    padding-bottom: 10px;
+    letter-spacing: 1px;
+  }
+
   .footer-blk .region.second .span4 {
     display: block;
   }
 
-  .footer-quick-links ul li a {
-    color: #3294D2;
-    font-size: 14px;
+  .footer-wrap .footer-quick-links {
+    border-top: 1px solid $very_light_blue;
   }
 
+  .footer-quick-links ul li a {
+    font-size: 14px;
+  }
 }
 
 @include breakpoint($brk-tablet) {
