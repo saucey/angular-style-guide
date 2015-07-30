@@ -7,21 +7,11 @@
 
   'use strict';
 
-  var testSelector = function (selector) {
-    document.querySelector('*');  //checks if querySelector is implemented and raises an error if not
-    try {document.querySelector(selector)} catch (e) {return false}
-    return true;
-  }
-
   /**
    * MyPersonalDetails's Drupal script.
    * Add new item to public Drupal object
    */
   Drupal.behaviors.personalDetailsWidget = {
-    validation: {  //  this is part of the form validation routine; when it is working correctly, this should be bumped to a general level
-      zip: "^d+\w*$",
-    },
-
     attach: function () {
       Drupal.behaviors.tooltip.activate("#personal_details_widget");
 
@@ -42,7 +32,9 @@
         $(".address .correspondential .world").toggleClass("visible", !NL);
       });
       $("input[name=ca_NL]:checked").click();
-    }
+      this.attached = true;
+    },
+    attached: false,
   };
 
 })(this.document, this, this.jQuery, this.Drupal);
