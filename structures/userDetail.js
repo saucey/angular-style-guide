@@ -233,6 +233,7 @@
     },
 
     parseWidget: function (data, callback) {
+
       // Vars for local scope
       var $template, dateFormatted;
 
