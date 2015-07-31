@@ -38,14 +38,14 @@
       if (!this.test()) {
         $(form_selector).trigger( "validate" );
       }
-      $(form_selector).find("input, select, textarea").filter(":visible")
+      $(form_selector).find("input, select, textarea").removeClass("blurred").filter(":visible")
       // add blurred, so that validation takes place on all visible elements
         .addClass("blurred");
       try {
-        return $(form_selector).find("input.invalid, select.invalid, textarea.invalid, input:invalid, select:invalid, textarea:invalid").length;
+        return $(form_selector).find("input.invalid.blurred, select.invalid.blurred, textarea.invalid.blurred, input:invalid.blurred, select:invalid.blurred, textarea:invalid.blurred").length;
       }
       catch (e) {
-        return $(form_selector).find("input.invalid, select.invalid, textarea.invalid").length;        
+        return $(form_selector).find("input.invalid.blurred, select.invalid.blurred, textarea.invalid.blurred").length;        
       }
     }
   };
