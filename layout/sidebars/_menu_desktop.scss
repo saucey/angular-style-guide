@@ -394,24 +394,24 @@ aside.desktop {
     @include rem('width', 38);
     @include rem('height', 38);
     @include rem('line-height', 38);
-    @include rem('border-radius', 38);
+    border-radius: 50%;
     margin: 0;
     padding: 0;
-    border: none;
-    color: $blue;
+ //   border: none;
+ //   color: $blue;
     background-color: $blue;
-    text-align: center;
+//  text-align: center;
 
-    transition: all .1s linear;
+  //  transition: all .1s linear;
 
     &:before {
       display: block;
       @extend .icon-uniE60D:before;
       font-family: 'aegon_icons';
-      position: absolute;
+    //  position: absolute;
       top: 0;
       left: 0;
-      @include rem('font-size', 40);
+      font-size: 2.5em;
       background-color: transparent;
       color: $white;
       width: inherit;
