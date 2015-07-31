@@ -186,6 +186,10 @@
           // Get last login time from cookie or give false
           'lastAccess': that.lastLogin()
         };
+        // append akos number to utag_data, if it exists, if not, at least create it (and hope tealium appends, instead of re-creating)
+        win.utag_data = win.utag_data || {};
+        win.utag_data.customer_akos = this.getRelNumByType('akos');
+
         // Activate the widget
         that.initialize(data);
       };
