@@ -22,8 +22,11 @@
   overflow: hidden;
   -webkit-text-size-adjust: none;
 }
-.smartbanner__container { margin: 0 auto; }
-.smartbanner__close {
+.sb-container { 
+  margin: 0 auto; 
+  }
+
+.sb-close {
   position: absolute;
   left: 5px;
   top: 5px;
@@ -43,12 +46,12 @@
   box-shadow: 0 2px 3px rgba(0,0,0,0.4);
   -webkit-font-smoothing: subpixel-antialiased;
 }
-.smartbanner__close:active,
+.sb-close:active,
 .smartbanner__close:hover {
   font-size: 13px;
   color: #aaa;
 }
-.smartbanner__icon {
+.sb-icon {
   position: absolute;
   left: 30px;
   top: 10px;
@@ -60,24 +63,24 @@
   border-radius: 10px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.3);
 }
-.smartbanner__info {
+.sb-info {
   position: absolute;
   left: 98px;
   top: 18px;
   width: 44%;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.2em;
   font-weight: bold;
   color: #6a6a6a;
   text-shadow: 0 1px 0 rgba(255,255,255,0.8);
 }
-.smartbanner__title {
+.sb-title {
   font-size: 13px;
   color: #4d4d4d;
   line-height: 18px;
   font-weight: bold;
 }
-.smartbanner-button {
+.sb-button {
   position: absolute;
   right: 20px;
   top: 24px;
@@ -103,8 +106,8 @@
   border-radius: 3px;
   box-shadow: 0 1px 0 rgba(255,255,255,0.6), 0 1px 0 rgba(255,255,255,0.7) inset;
 }
-.smartbanner-button:active,
-.smartbanner-button:hover {
+.sb-button:active,
+.sb-button:hover {
   background: #dcdcdc;
   background: -moz-linear-gradient(top, #dcdcdc 0, #efefef 100%);
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #dcdcdc), color-stop(100%, #efefef));
