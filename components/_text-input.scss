@@ -6,7 +6,7 @@ input[type=text], input[type=email], input[type=number], select, div.dd div.ddTi
   height: $input_height;
   border-radius: $elements_border_radius;
   border: $elements_border;
-  box-shadow: none; //FF adds a glow to elements with an error onblur
+  box-shadow: none;
   outline: 0px;
   background-color: $beige;
   white-space: nowrap;
@@ -37,6 +37,7 @@ input[type=text], input[type=email], input[type=number], select, div.dd {
     }
   }
 }
+
 input[type=checkbox], input[type=radio] {
   width: auto;
 }
