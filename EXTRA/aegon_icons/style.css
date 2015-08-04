@@ -1,10 +1,10 @@
 @font-face {
 	font-family: 'aegon_icons';
-	src:url('fonts/aegon_icons.eot?-hjoavx');
-	src:url('fonts/aegon_icons.eot?#iefix-hjoavx') format('embedded-opentype'),
-		url('fonts/aegon_icons.woff?-hjoavx') format('woff'),
-		url('fonts/aegon_icons.ttf?-hjoavx') format('truetype'),
-		url('fonts/aegon_icons.svg?-hjoavx#aegon_icons') format('svg');
+	src:url('fonts/aegon_icons.eot?s8eqvi');
+	src:url('fonts/aegon_icons.eot?#iefixs8eqvi') format('embedded-opentype'),
+		url('fonts/aegon_icons.ttf?s8eqvi') format('truetype'),
+		url('fonts/aegon_icons.woff?s8eqvi') format('woff'),
+		url('fonts/aegon_icons.svg?s8eqvi#aegon_icons') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -26,228 +26,183 @@
 .aegon-iconuniE600:before {
 	content: "\e600";
 }
-
 .aegon-iconuniE601:before {
 	content: "\e601";
 }
-
 .aegon-iconuniE602:before {
 	content: "\e602";
 }
-
 .aegon-iconuniE603:before {
 	content: "\e603";
 }
-
 .aegon-iconuniE604:before {
 	content: "\e604";
 }
-
 .aegon-iconuniE605:before {
 	content: "\e605";
 }
-
 .aegon-iconuniE606:before {
 	content: "\e606";
 }
-
 .aegon-iconuniE607:before {
 	content: "\e607";
 }
-
 .aegon-iconuniE608:before {
 	content: "\e608";
 }
-
 .aegon-iconuniE609:before {
 	content: "\e609";
 }
-
 .aegon-iconuniE60A:before {
 	content: "\e60a";
 }
-
 .aegon-iconuniE60B:before {
 	content: "\e60b";
 }
-
 .aegon-iconuniE60C:before {
 	content: "\e60c";
 }
-
 .aegon-iconuniE60D:before {
 	content: "\e60d";
 }
-
 .aegon-iconuniE60E:before {
 	content: "\e60e";
 }
-
 .aegon-iconuniE60F:before {
 	content: "\e60f";
 }
-
 .aegon-iconuniE610:before {
 	content: "\e610";
 }
-
 .aegon-iconuniE611:before {
 	content: "\e611";
 }
-
 .aegon-iconuniE612:before {
 	content: "\e612";
 }
-
 .aegon-iconuniE613:before {
 	content: "\e613";
 }
-
 .aegon-iconuniE614:before {
 	content: "\e614";
 }
-
 .aegon-iconuniE615:before {
 	content: "\e615";
 }
-
 .aegon-iconuniE616:before {
 	content: "\e616";
 }
-
 .aegon-iconuniE617:before {
 	content: "\e617";
 }
-
 .aegon-iconuniE618:before {
 	content: "\e618";
 }
-
 .aegon-iconuniE619:before {
 	content: "\e619";
 }
-
 .aegon-iconuniE61A:before {
 	content: "\e61a";
 }
-
 .aegon-iconuniE61B:before {
 	content: "\e61b";
 }
-
 .aegon-iconuniE61C:before {
 	content: "\e61c";
 }
-
 .aegon-iconuniE61D:before {
 	content: "\e61d";
 }
-
 .aegon-iconuniE61E:before {
 	content: "\e61e";
 }
-
 .aegon-iconuniE61F:before {
 	content: "\e61f";
 }
-
 .aegon-iconuniE620:before {
 	content: "\e620";
 }
-
 .aegon-iconuniE621:before {
 	content: "\e621";
 }
-
 .aegon-iconuniE622:before {
 	content: "\e622";
 }
-
 .aegon-iconuniE623:before {
 	content: "\e623";
 }
-
 .aegon-iconuniE624:before {
 	content: "\e624";
 }
-
 .aegon-iconuniE625:before {
 	content: "\e625";
 }
-
 .aegon-iconuniE626:before {
 	content: "\e626";
 }
-
 .aegon-iconuniE627:before {
 	content: "\e627";
 }
-
 .aegon-iconuniE628:before {
 	content: "\e628";
 }
-
 .aegon-iconuniE629:before {
 	content: "\e629";
 }
-
 .aegon-iconuniE62A:before {
 	content: "\e62a";
 }
-
 .aegon-iconuniE62B:before {
 	content: "\e62b";
 }
-
 .aegon-iconuniE62C:before {
 	content: "\e62c";
 }
-
 .aegon-iconuniE62D:before {
 	content: "\e62d";
 }
-
 .aegon-iconuniE62E:before {
 	content: "\e62e";
 }
-
 .aegon-iconuniE62F:before {
 	content: "\e62f";
 }
-
 .aegon-iconuniE630:before {
 	content: "\e630";
 }
-
 .aegon-iconuniE631:before {
 	content: "\e631";
 }
-
 .aegon-iconuniE632:before {
 	content: "\e632";
 }
-
 .aegon-iconuniE633:before {
 	content: "\e633";
 }
-
 .aegon-iconuniE634:before {
 	content: "\e634";
 }
-
 .aegon-iconuniE635:before {
 	content: "\e635";
 }
-
-.aegon-iconuniE646:before {
+.aegon-iconuniE636:before {
 	content: "\e636";
 }
-
-.aegon-iconuniE647:before {
+.aegon-iconuniE637:before {
 	content: "\e637";
 }
-
-.aegon-iconuniE648:before {
+.aegon-iconuniE638:before {
 	content: "\e638";
 }
-
+.aegon-iconuniE639:before {
+	content: "\e639";
+}
+.aegon-iconuniE63A:before {
+	content: "\e63a";
+}
+.aegon-iconskinnyArrow:before {
+	content: "\e63b";
+}
+.aegon-iconclose_X:before {
+	content: "\e63c";
+}
