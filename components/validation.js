@@ -29,7 +29,7 @@
         // react to different formats of validator
         switch (typeof validator) {
           case "function":
-
+            
             break;
           case "object": //regex
             // get rid of the / / around the pattern
@@ -79,8 +79,10 @@
     },
     // nested validators are possible, enclose non - \w - names in ['']
     validators: {
-      ['zip']: {
-        nl: /^\s*\d{4}\s*[a-zA-Z]{2}\s*$/,
+      zip: {
+        nl: function (obj) {
+          var pat = /^\s*\d{4}\s*[a-zA-Z]{2}\s*$/
+        },
       },
     }
   };
