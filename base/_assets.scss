@@ -27,6 +27,11 @@
 }
 
 // shows a loading spinner
+
+.progress-loader {
+  margin-bottom: 25px;
+}
+
 .loading {
   background: url('../images/spinner.gif') no-repeat;
   background-position-x: center;
