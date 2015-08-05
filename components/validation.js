@@ -31,14 +31,18 @@
           case "function":
             
             break;
-          case "object": //regex
-            // get rid of the / / around the pattern
-            validator = validator.source;
-            // if there is already a pattern defined, this takes prevalence
-            this.pattern = this.pattern || validator;
+          case "object":
+            if (validator instanceof RegExp) {
+              // get rid of the / / around the pattern
+              validator = validator.source;
+              // if there is already a pattern defined, this takes prevalence
+              this.pattern = this.pattern || validator;
+            }
             break;
         }
       });
+
+      this.validators2validVal();
     },
 
     testSelector: function (selector) {
@@ -55,12 +59,20 @@
     // fixes form validation for IE, using validVal, since :invalid is not implemented in IE
     IEFix: function (form_selector, keyup) {
       if (!this.test()) {  //if the userAgent does not know the :invalid pseudoclass, we need the validation workaround provided by validVal
-        $(form_selector).validVal({
-          validate: {
-            onKeyup: keyup, //if checking is required in RealTime, this has to be true
-          },
-        });
+        this.activate(form_selector, keyup);
       }
+    },
+    otherFix: function (form_selector, keyup) {
+      //only activate, if required, aka if there is a validator required on the form that is a function
+      this.activate(form_selector, keyup);
+    },
+    activate: function (form_selector, keyup) {
+      $(form_selector).validVal({
+        validate: {
+          onKeyup: keyup, //if checking is required in RealTime, this has to be true
+        },
+        customValidations: this.vvValidators,
+      });
     },
 
     invalid: function (form_selector) {
@@ -77,13 +89,47 @@
         return $(form_selector).find("input.invalid.blurred, select.invalid.blurred, textarea.invalid.blurred").length;        
       }
     },
+
+    // converts .validators in2 a format readable by validVal; nested validators become one key
+    vvValidators: {},
+    validators2validVal: function (obj, path) {
+      obj = obj || this.validators;
+      path = path || ["vv"];
+      if (typeof obj === "object") {
+        if (obj instanceof RegExp) {
+          this.vvValidators[path.join(".")] = obj;
+        }
+        else {  // we just assume we are dealing with a RegExp
+          for (var o in obj) {
+            var nPath = [];
+            // nPath = path won't work because it is interpreted as a pointer to the array, instead of a proper clone
+            for (var i = 0; i < path.length; i++) {
+              nPath.push(path[i]);
+            }
+            nPath.push(o);
+
+            this.validators2validVal(obj[o], nPath);
+          }
+        }
+      }
+      else {
+        this.vvValidators[path.join(".")] = obj;
+      }
+    },
+
     // nested validators are possible, enclose non - \w - names in ['']
     validators: {
       zip: {
         nl: function (obj) {
-          var pat = /^\s*\d{4}\s*[a-zA-Z]{2}\s*$/
+          var pat = /^\s*\d{4}\s*[a-zA-Z]{2}\s*$/;
         },
       },
+      bla: /.*/,
+      bobo: {
+        bimbo: {
+          bebo: function () {},
+        }
+      }
     }
   };
 })(jQuery);

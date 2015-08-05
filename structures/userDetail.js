@@ -188,7 +188,7 @@
         };
         // append akos number to utag_data, if it exists, if not, at least create it (and hope tealium appends, instead of re-creating)
         win.utag_data = win.utag_data || {};
-        win.utag_data.customer_akos = this.getRelNumByType('akos');
+        win.utag_data.customer_akos = that.getRelNumByType('akos');
 
         // Activate the widget
         that.initialize(data);
