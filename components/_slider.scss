@@ -90,7 +90,7 @@ input[type=range]:focus::-webkit-slider-runnable-track {
   background: $blue;
 }
 input[type=range]::-moz-range-track {
-  width: 300px;
+  width: 200px;
   height: 7px;
   background: $blue;
   border: none;
@@ -113,7 +113,7 @@ input[type=range]:-moz-focusring{
 }
 
 input[type=range]::-ms-track {
-  width: 300px;
+  width: 200px;
   height: 7px;
   
   /*remove bg colour from the track, we'll use ms-fill-lower and ms-fill-upper instead */
