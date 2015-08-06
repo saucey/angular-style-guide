@@ -15,8 +15,11 @@
     attach: function () {
       Drupal.behaviors.tooltip.activate("#personal_details_widget");
 
-      Drupal.behaviors.validation.IEFix("form[name=personal_details_form]", false);
-      // Drupal.behaviors.validation.otherFix("form[name=personal_details_form]", false);
+      var Validation = Drupal.behaviors.validation;
+      var formSelector = "form[name=personal_details_form]";
+      if (!Validation.IEFix(formSelector, false)) {
+        Validation.otherFix(formSelector, false);
+      }
 
       // activate the tabs for Dutch or foreign addresses
       // residential address

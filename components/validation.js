@@ -29,7 +29,8 @@
         // react to different formats of validator
         switch (typeof validator) {
           case "function":
-            
+console.log("function: " + v);
+            $(this).addClass("vv" + v);
             break;
           case "object":
             if (validator instanceof RegExp) {
@@ -59,8 +60,9 @@
     // fixes form validation for IE, using validVal, since :invalid is not implemented in IE
     IEFix: function (form_selector, keyup) {
       if (!this.test()) {  //if the userAgent does not know the :invalid pseudoclass, we need the validation workaround provided by validVal
-        this.activate(form_selector, keyup);
+        return this.activate(form_selector, keyup);
       }
+      return false;
     },
     otherFix: function (form_selector, keyup) {
       //only activate, if required, aka if there is a validator required on the form that is a function
@@ -73,6 +75,7 @@
         },
         customValidations: this.vvValidators,
       });
+      return true;
     },
 
     invalid: function (form_selector) {
@@ -100,6 +103,7 @@
           this.vvValidators[path.join(".")] = obj;
         }
         else {  // we just assume we are dealing with a RegExp
+          // create the json path for this particular validator in this.validators
           for (var o in obj) {
             var nPath = [];
             // nPath = path won't work because it is interpreted as a pointer to the array, instead of a proper clone
@@ -120,14 +124,25 @@
     // nested validators are possible, enclose non - \w - names in ['']
     validators: {
       zip: {
-        nl: function (obj) {
-          var pat = /^\s*\d{4}\s*[a-zA-Z]{2}\s*$/;
-        },
+        nl: /^\s*\d{4}\s*[a-zA-Z]{2}\s*$/i,
       },
       bla: /.*/,
-      bobo: {
-        bimbo: {
-          bebo: function () {},
+      example: {
+        for: {
+          a: {
+            function: {
+              validation: function (val) {
+                if (val.match(/^\d+$/i)) {  //just use any error condition here
+                  console.dir(this);  //any kind of code here
+                  return true;  //does not trigger the error behaviour
+                }
+                else {
+                  alert(val); //any kind of error treatment code here
+                  return false; //triggers the error behaviour
+                }
+              },
+            },
+          },
         }
       }
     }
