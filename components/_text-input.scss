@@ -2,7 +2,7 @@ $input_width: 228px;
 $input_margin: 5px;
 $input_height: $elements_height;
 
-input[type=text], input[type=email], input[type=number], select, div.dd div.ddTitle, label.dd div.ddTitle {
+input[type=text], input[type=email], input[type=number], select, div.dd div.ddTitle, label.dd div.ddTitle,  {
   height: $input_height;
   border-radius: $elements_border_radius;
   border: $elements_border;
@@ -16,6 +16,17 @@ input[type=text], input[type=email], input[type=number], select, div.dd div.ddTi
 input[type=text], input[type=email], input[type=number] {
   padding: 9px 10px;
   padding-right: 10px;
+}
+
+textarea {
+  border-radius: $elements_border_radius;
+  border: $elements_border;
+  box-shadow: none;
+  outline: 0px;
+  background-color: $beige;
+  white-space: nowrap;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 input[type=text], input[type=email], input[type=number], select, div.dd {
@@ -40,5 +51,14 @@ input[type=text], input[type=email], input[type=number], select, div.dd {
 
 input[type=checkbox], input[type=radio] {
   width: auto;
+}
+
+.inputscontainer {
+  display:table-row;
+
+  .incont-cell {
+  display: table-cell;
+  padding: 0 10px 0 10px;
+  }
 }
 
