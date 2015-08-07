@@ -2,23 +2,26 @@
  * Example JavaScript component
  */
 // Closure with jQuery support
+
+// jQuery-UI slider
+
 (function($) {
   'use strict';
 
   // Add new item to public Drupal object
     Drupal.behaviors.slider = {
       attach: function () {
-
-     if($.ui){
-     alert("jQuery-UI is loaded");//jQuery UI is loaded
-     }
-     else
-     {
-       alert("jQuery-UI not loaded");//jQuery UI is not loaded
-     } 
-
-     $(function() {
-    $( "#slider-1" ).slider();
+      $(function() {
+    $( "#slider-1" ).slider({
+      range: "max",
+      min: 0,
+      max: 10,
+      value: 0,
+      animate:"slow",
+      slide: function( event, ui ) {
+        $( "#amount" ).val( ui.value );
+      }
+      });
   });
 
     }, // hoort bij attach
