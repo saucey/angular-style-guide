@@ -28,7 +28,6 @@
         }
 
         if (restrained) {
-console.log(this);
           this.oldValue = this.value;
           this.oldPos = $(this).caret();  //get the cursor position
           $(this).on("keyup", that.restrain)
@@ -40,7 +39,6 @@ console.log(this);
         // react to different formats of validator
         switch (typeof validator) {
           case "function":
-//console.log("function: " + v);
             // refers to the class initialized in validators2validVal
             $(this).addClass("vv" + v);
             // add convenience function for changing the error text pertaining to this object
@@ -66,11 +64,7 @@ console.log(this);
       // [this] will be the DOM object this function has been grafted upon
       var name = this.attributes['data-validate-restrained'].value;
       var validator = Drupal.behaviors.validation.vvValidators["vv." + name];
-console.dir(validator);
-console.dir("old value: " + this.oldValue);
-console.dir("old pos: " + this.oldPos);
       if (validator instanceof RegExp) {
-        console.log(validator.test(this.value));
         if (!validator.test(this.value)) {
           this.value = this.oldValue;
           $(this).caret(this.oldPos);
