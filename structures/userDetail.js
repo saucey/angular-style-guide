@@ -490,7 +490,6 @@
         }
         else {
           $.removeCookie(hasBeenShownCookieName, {path: "/"});
-          $.cookie('hasBeenShownCookieName', null, { path: '/' });
         }
       }
       return $.cookie(hasBeenShownCookieName) || false; //make sure that a false value is returned for every false-ish (undefined, "", 0) value
@@ -500,9 +499,6 @@
 
       // Remove mijn_last_login's cookie as first
       $.removeCookie(mijnAegonCookieLoggedInName);
-      // Added a line to make sure the cookie is removed
-      $.cookie('mijnAegonCookieLoggedInName', null, { path: '/' });
-
 
       // Then throw an error in console
       //if (response) { throw response.responseText; }
@@ -522,7 +518,6 @@
       
       // remove the cookie that determines if the green bar is shown
       this.hasBeenShown(false);
-      $.cookie('hasBeenShownCookieName', null, { path: '/' });
 
       // Switch off all events
       this.events(true);
