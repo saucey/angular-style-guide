@@ -30,7 +30,9 @@
         if (restrained) {
 console.log(this);
           this.oldValue = this.value;
-          $(this).on("keydown", that.restrain);
+          this.oldPos = $(this).caret();  //get the cursor position
+          $(this).on("keyup", that.restrain)
+            .click(function () {this.oldPos = $(this).caret()});
         }
         
         // makes the element where the last error occurred accessible as a static object
@@ -66,13 +68,21 @@ console.log(this);
       var validator = Drupal.behaviors.validation.vvValidators["vv." + name];
 console.dir(validator);
 console.dir("old value: " + this.oldValue);
+console.dir("old pos: " + this.oldPos);
       if (validator instanceof RegExp) {
         console.log(validator.test(this.value));
         if (!validator.test(this.value)) {
           this.value = this.oldValue;
+          $(this).caret(this.oldPos);
         }
       }
-      else {}
+      else {
+        if (!validator(this.value)) {
+          this.value = this.oldValue;
+          $(this).caret(this.oldPos);
+        }
+      }
+      this.oldPos = $(this).caret();  //get the cursor position
       this.oldValue = this.value;
     },
 
@@ -161,7 +171,7 @@ console.dir("old value: " + this.oldValue);
           return matt;
         },
       },
-      number: /^\d*$/,
+      integer: /^\d*$/,
       text: /^\w*$/,
       example: {
         ['for']: {
