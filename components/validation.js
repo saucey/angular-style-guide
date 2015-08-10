@@ -12,11 +12,12 @@
       this.attached = true;  //used to determine if this function has already run
     },
     attached: false,
-
+    lastErrorObj: null,
     init: function () {
       var that = this;
-      $("[data-validate]").each( function () {
-        var v = this.attributes['data-validate'].value;
+      $("[data-validate], [data-validate-restrained]").each( function () {
+        var v = (this.attributes['data-validate'] || this.attributes['data-validate-restrained']).value;
+        var restrained = this.attributes['data-validate-restrained'] !== undefined;
         // check if validator key is in the form [key], if not, it needs a . in front for eval
         v = v[0] === "[" ? v : "." + v;
         try {
@@ -25,12 +26,25 @@
         catch (e) {
           window.console && window.console.warn("error getting validator " + v + ". Maybe it was not defined?");
         }
+
+        if (restrained) {
+console.log(this);
+          this.oldValue = this.value;
+          $(this).on("keydown", that.restrain);
+        }
         
+        // makes the element where the last error occurred accessible as a static object
+        that.lastErrorObj = this;
         // react to different formats of validator
         switch (typeof validator) {
           case "function":
-console.log("function: " + v);
+//console.log("function: " + v);
+            // refers to the class initialized in validators2validVal
             $(this).addClass("vv" + v);
+            // add convenience function for changing the error text pertaining to this object
+            this.errorText = function (text) {
+              $("~ .errorText", this).html(text);
+            }
             break;
           case "object":
             if (validator instanceof RegExp) {
@@ -44,6 +58,22 @@ console.log("function: " + v);
       });
 
       this.validators2validVal();
+    },
+
+    restrain: function () {
+      // [this] will be the DOM object this function has been grafted upon
+      var name = this.attributes['data-validate-restrained'].value;
+      var validator = Drupal.behaviors.validation.vvValidators["vv." + name];
+console.dir(validator);
+console.dir("old value: " + this.oldValue);
+      if (validator instanceof RegExp) {
+        console.log(validator.test(this.value));
+        if (!validator.test(this.value)) {
+          this.value = this.oldValue;
+        }
+      }
+      else {}
+      this.oldValue = this.value;
     },
 
     testSelector: function (selector) {
@@ -93,7 +123,7 @@ console.log("function: " + v);
       }
     },
 
-    // converts .validators in2 a format readable by validVal; nested validators become one key
+    // converts .validators into a straight format readable by validVal; nested validators become one key, aka a: {b: {c: /validator/}} becomes a.b.c = validator
     vvValidators: {},
     validators2validVal: function (obj, path) {
       obj = obj || this.validators;
@@ -121,23 +151,37 @@ console.log("function: " + v);
       }
     },
 
-    // nested validators are possible, enclose non - \w - names in ['']
+    // nested validators are possible, enclose non - \w - names or JS-keywords in ['']
     validators: {
       zip: {
-        nl: /^\s*\d{4}\s*[a-zA-Z]{2}\s*$/i,
+        nl: function (val, keyup) {
+          var matt = val.match(/^\s*(\d{4})\s*([a-zA-Z]{2})\s*$/i);
+          this.value = matt ? matt[1] + " " + matt[2].toUpperCase() : this.value;
+          // this.errorText("bluuuuub");
+          return matt;
+        },
       },
-      bla: /.*/,
+      number: /^\d*$/,
+      text: /^\w*$/,
       example: {
-        for: {
+        ['for']: {
           a: {
-            function: {
-              validation: function (val) {
+            regex: /^.*$/,
+            ['function']: {
+              // val is the value of the form element
+              // keyup indicates if the validation was triggered on keyup (which is helpful if on keyup needs different behaviour than on blur or on submit)
+              validation: function (val, keyup) {
                 if (val.match(/^\d+$/i)) {  //just use any error condition here
+                  
                   console.dir(this);  //any kind of code here
+                  
                   return true;  //does not trigger the error behaviour
                 }
                 else {
-                  alert(val); //any kind of error treatment code here
+                  
+                  console.log(val); //any kind of error treatment code here
+                  this.errorText("bluuuuub");  // convenience function, writes an error message different from the one predefined in the .errorText DOM object on the template
+                  
                   return false; //triggers the error behaviour
                 }
               },
