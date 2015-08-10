@@ -49,15 +49,29 @@
 
 .ui-slider-handle {
       -webkit-appearance: none;
-      border: none;
-      height: 18px !important;
-      width: 18px !important;
+      border: 1px solid #e6e6e6;
+      height: 20px !important;
+      width: 20px !important;
       border-radius: 50%;
-      background: $sky !important;
+      background: $white;
       top: 0px;
       box-shadow: 1px 1px 1px #888888;
       position: absolute;
-      top: -6px;
+      top: -7px;
+      outline: 0;
+    }
+
+    .ui-slider-handle:hover {
+      -webkit-appearance: none;
+      border: 1px solid #e6e6e6;
+      height: 30px !important;
+      width: 30px !important;
+      border-radius: 50%;
+      background: $white;
+      top: 0px;
+      box-shadow: 1px 1px 1px #888888;
+      position: absolute;
+      top: -12px;
       outline: 0;
     }
 
