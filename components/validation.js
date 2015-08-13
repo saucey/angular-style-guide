@@ -18,10 +18,12 @@
       $("[data-validate], [data-validate-restrained]").each( function () {
         var v = (this.attributes['data-validate'] || this.attributes['data-validate-restrained']).value;
         var restrained = this.attributes['data-validate-restrained'] !== undefined;
+        var validator;
         // check if validator key is in the form [key], if not, it needs a . in front for eval
         v = v[0] === "[" ? v : "." + v;
         try {
-          var validator = eval("that.validators" + v) || (v.bla.bla); // if validator is empty, also throw an error
+          //validator = eval("that.validators" + v) || (v.bla.bla); // if validator is empty, also throw an error
+          console.log("bla");
         }
         catch (e) {
           window.console && window.console.warn("error getting validator " + v + ". Maybe it was not defined?");
@@ -31,7 +33,7 @@
           this.oldValue = this.value;
           this.oldPos = $(this).caret();  //get the cursor position
           $(this).on("keyup", that.restrain)
-            .click(function () {this.oldPos = $(this).caret()});
+            .click(function () {this.oldPos = $(this).caret(); });
         }
         
         // makes the element where the last error occurred accessible as a static object
@@ -44,7 +46,7 @@
             // add convenience function for changing the error text pertaining to this object
             this.errorText = function (text) {
               $("~ .errorText", this).html(text);
-            }
+            };
             break;
           case "object":
             if (validator instanceof RegExp) {
@@ -84,7 +86,7 @@
       if (!document.querySelector) {    //checks if querySelector is implemented and raises an error if not
         throw "Cannot test for selector " + selector + " because document.querySelector is not available.";
       }
-      try {document.querySelector(selector)} catch (e) {return false}
+      try {document.querySelector(selector);} catch (e) {return false;}
       return true;
     },
 
@@ -139,14 +141,16 @@
         else {  // we just assume we are dealing with a RegExp
           // create the json path for this particular validator in this.validators
           for (var o in obj) {
-            var nPath = [];
-            // nPath = path won't work because it is interpreted as a pointer to the array, instead of a proper clone
-            for (var i = 0; i < path.length; i++) {
-              nPath.push(path[i]);
-            }
-            nPath.push(o);
+            if (o) {
+              var nPath = [];
+              // nPath = path won't work because it is interpreted as a pointer to the array, instead of a proper clone
+              for (var i = 0; i < path.length; i++) {
+                nPath.push(path[i]);
+              }
+              nPath.push(o);
 
-            this.validators2validVal(obj[o], nPath);
+              this.validators2validVal(obj[o], nPath);
+            }
           }
         }
       }
@@ -158,7 +162,7 @@
     // nested validators are possible, enclose non - \w - names or JS-keywords in ['']
     validators: {
       zip: {
-        nl: function (val, keyup) {
+        nl: function (val) {
           var matt = val.match(/^\s*(\d{4})\s*([a-zA-Z]{2})\s*$/i);
           this.value = matt ? matt[1] + " " + matt[2].toUpperCase() : this.value;
           // this.errorText("bluuuuub");
@@ -168,21 +172,24 @@
       integer: /^\d*$/,
       text: /^\w*$/,
       example: {
-        ['for']: {
+        'for': {
           a: {
             regex: /^.*$/,
-            ['function']: {
+            'function': {
               // val is the value of the form element
               // keyup indicates if the validation was triggered on keyup (which is helpful if on keyup needs different behaviour than on blur or on submit)
               validation: function (val, keyup) {
                 if (val.match(/^\d+$/i)) {  //just use any error condition here
-                  
                   console.dir(this);  //any kind of code here
                   
                   return true;  //does not trigger the error behaviour
                 }
                 else {
                   
+                  if (keyup) {
+                    console.log("error was triggered on keyup, not on blur");
+                    //the error was triggered on keyup, not on blur
+                  }
                   console.log(val); //any kind of error treatment code here
                   this.errorText("bluuuuub");  // convenience function, writes an error message different from the one predefined in the .errorText DOM object on the template
                   
