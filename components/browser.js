@@ -13,7 +13,7 @@ use sparingly!
       var ie = navigator.userAgent.match(/^.*(msie)\s+(\d+).*$/i);
       var tri = navigator.userAgent.match(/^.*(Trident)\s*\/\s*(\d+).*$/i);
       // pre-define conditions for easier debugging
-      var gteie9 = (ie && (ie[1] == "MSIE") && (parseInt(ie[2]) > 8));
+      var gteie9 = (ie && (ie[1] === "MSIE") && (parseInt(ie[2]) > 8));
       var gtie10 = (!ie && tri);
       // tri but no ie mean IE 11, IE < 11 all have MSIE in the user agent
       $("html").addClass(gteie9 || gtie10 ? "gte-ie9" : "");

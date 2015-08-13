@@ -41,7 +41,7 @@
   var realEndpoint = '/mijnservices/US_RestGatewayWeb/rest/requestResponse/BS_PARTIJ_03/retrieve';
 
   // ID string where the user widget will be appended
-  var appendUserWidgetTo = '#shw-user-details';
+  // var appendUserWidgetTo = '#shw-user-details';
 
   // MijnAegon cookie's name
   var mijnAegonCookieLoggedInName = 'mijn_last_login';
@@ -247,7 +247,7 @@
       // Templating data
       $template.find('span.user_detail_widget_name').text(data.userName);
       var that = this;
-      $template.find('a.user_detail_widget_logout_link').click( function (e) {
+      $template.find('a.user_detail_widget_logout_link').click( function () {
         that.deinitialize();
       });
       $template.find('a.user_detail_widget_mijnaegon_link').attr(
@@ -495,7 +495,8 @@
       return $.cookie(hasBeenShownCookieName) || false; //make sure that a false value is returned for every false-ish (undefined, "", 0) value
     },
 
-    clearLastLogin: function (response) {
+    // clearLastLogin: function (response) {
+    clearLastLogin: function () {
 
       // Remove mijn_last_login's cookie as first
       $.removeCookie(mijnAegonCookieLoggedInName);
