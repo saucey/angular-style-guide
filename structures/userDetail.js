@@ -512,6 +512,8 @@
     deinitialize: function (onlyLocal) {
       // Remove classes to hide logged's items
       $('body').removeClass('shw-widgets-logged-in mobile-tap');
+      $('body').removeClass('sliding-popup-processed');
+      $('body').removeClass('section-particulier');
 
       // Remove mijn_last_login's cookie
       this.clearLastLogin();
