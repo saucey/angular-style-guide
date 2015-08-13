@@ -12,19 +12,18 @@
     Drupal.behaviors.slider = {
       attach: function () {
       $(function() {
-    $( "#slider-1" ).slider({
-      range: "max",
-      min: 0,
-      max: 10,
-      value: 0,
-      animate:"slow",
-      slide: function( event, ui ) {
-        $( "#amount" ).val( ui.value );
-      }
-      });
-  });
-
-    }, // hoort bij attach
+        $( "#slider-1" ).slider({
+          range: "max",
+          min: 0,
+          max: 10,
+          value: 0,
+          animate:"slow",
+          slide: function(event, ui) {
+            $("#amount").val(ui.value);
+          }
+          });
+        });
+    }, // end attach
     attached: false,
-  }; // hoort bij Drupal
-})(jQuery); // hoort bij function($)
+  }; // end Drupal
+})(jQuery); 
