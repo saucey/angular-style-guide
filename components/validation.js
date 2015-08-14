@@ -16,14 +16,15 @@
     init: function () {
       var that = this;
       $("[data-validate], [data-validate-restrained]").each( function () {
+        // get the predefined validator from the json-object defined in data-validate
         var v = (this.attributes['data-validate'] || this.attributes['data-validate-restrained']).value;
         var restrained = this.attributes['data-validate-restrained'] !== undefined;
         var validator;
         // check if validator key is in the form [key], if not, it needs a . in front for eval
-        v = v[0] === "[" ? v : "." + v;
+        v = (v && v.length === 0) || v[0] === "[" ? v : "." + v;
         try {
-          //validator = eval("that.validators" + v) || (v.bla.bla); // if validator is empty, also throw an error
-          console.log("bla");
+          // if validator is empty, also throw an error; disable for jshint, since it appears not possible to smuggle js-code into js by way of code on the template, and the alternative of implementing this test is bazillions of lines long
+          validator = eval("that.validators" + v) || (v.bla.bla); // jshint ignore:line
         }
         catch (e) {
           window.console && window.console.warn("error getting validator " + v + ". Maybe it was not defined?");
@@ -109,15 +110,20 @@
         validate: {
           onKeyup: keyup, //if checking is required in RealTime, this has to be true
         },
+        form: {
+          onInvalid: function () {},  //turn off error alert on submit
+        },
         customValidations: this.vvValidators,
       });
       return true;
     },
-
+    validate: function (form_selector) {
+      $(form_selector).trigger( "validate" );
+    },
     invalid: function (form_selector) {
-      if (!this.test()) {
-        $(form_selector).trigger( "validate" );
-      }
+      //if (!this.test()) { //apply validaVal always, not just in IE9
+        this.validate(form_selector);
+      //}
       $(form_selector).find("input, select, textarea").removeClass("blurred").filter(":visible")
       // add blurred, so that validation takes place on all visible elements
         .addClass("blurred");
@@ -174,7 +180,9 @@
       example: {
         'for': {
           a: {
-            regex: /^.*$/,
+            regex: {
+              validation: /^.*$/,
+            },
             'function': {
               // val is the value of the form element
               // keyup indicates if the validation was triggered on keyup (which is helpful if on keyup needs different behaviour than on blur or on submit)
