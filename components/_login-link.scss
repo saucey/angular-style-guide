@@ -14,19 +14,19 @@
   background-color: $green;
   color: $white;
 
-  &:before {
-    display: none;
-  }
+//  &:before {
+//    display: none;
+//  }
 
-  &:hover {
-    background-color: $light_green;
-    color: $green;   
-  }
+//  &:hover {
+//    background-color: $light_green;
+//    color: $green;   
+//  }
 
-  &:active {
-    background-color: $green;
-    color: $white;
-  }
+//  &:active {
+//   background-color: $green;
+//    color: $white;
+ // }
 }
 
 // 
@@ -37,28 +37,28 @@
 
   .login-link {
     position: relative;
-    @include rem('line-height', 38);
-    @include rem('padding', 0, 10, 0, 35);
+ //   @include rem('line-height', 38);
+//    @include rem('padding', 0, 10, 0, 10);
 
-    &:before {
-      @extend .icon-uniE648:before;
-      @extend a[class*="menu-"]:before;
-      @include rem('margin-top', -18);
-      @include rem('font-size', 19);
-      display: block;
-      left: 4%;
-      height: auto;
-      color: $white;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
+//    &:before {
+//      @extend .icon-uniE648:before;
+//      @extend a[class*="menu-"]:before;
+//      @include rem('margin-top', -18);
+//      @include rem('font-size', 19);
+//      display: block;
+//      left: 4%;
+//      height: auto;
+//      color: $white;
+//     -webkit-font-smoothing: antialiased;
+//      -moz-osx-font-smoothing: grayscale;
+//    }
 
-    &:hover:before {
-      color: $green;
-    }
+//    &:hover:before {
+//      color: $green;
+//    }
 
-    &:active:before {
-      color: $white;
-    }
-  }
+//    &:active:before {
+//      color: $white;
+//    }
+   }
 }
