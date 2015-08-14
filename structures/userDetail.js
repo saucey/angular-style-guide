@@ -245,6 +245,10 @@
       $template = $(".user_detail_widget"); //$(template);
 
       // Templating data
+
+      // hide the ugly white box initially
+      $(".inplace").hide();
+
       $template.find('span.user_detail_widget_name').text(data.userName);
       var that = this;
       $template.find('a.user_detail_widget_logout_link').click( function () {
@@ -270,10 +274,14 @@
       this.shwUserDetailsInmenu(data.userName);
 
       // Trigger an event
+
       $(win).trigger('shwUserLoggedIn');
 
       // Show/hide logged's items
       $('body').addClass('shw-widgets-logged-in');
+      
+      // show the element nicely
+      $(".inplace").show(1000);
 
       // Cross-browser implementation to provide workaround for no CSS animation
       if ( $('html').hasClass('no-cssanimations') && !this.hasBeenShown() ) {
