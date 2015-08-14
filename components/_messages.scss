@@ -33,18 +33,41 @@
 
   &.messages--warning {
     background-color: $sky;
+    color: $white;
 
-    .header {
+    .wrap.header {
+      color: $white;
+    }
+
+    .wrap.content {
       color: $white;
     }
   }
 
-    &.messages--alert {
-    background-color: $sky;
+  &.messages--attention {
+    background-color: $blue;
+    color: $white;
+
+    .wrap {
+      display: inline-block;
+      clear: none;
+      position: relative;
+      width: 73%;
+      margin: 0 0 15px 0;
+    }
 
     .header {
       color: $white;
-      margin-bottom: 15px;
+      margin-bottom: 5px;
+    }
+
+    .icon:before {
+        content: '\e636';
+        color: $white;
+      }
+
+    button {
+      
     }
   }
 
@@ -74,49 +97,53 @@
     padding-left: 20px;
     height: auto;
 
+      .header {
+        font-size: 12px;
+      }
 
-    .header {
-      font-size: 12px;
-    }
-
-    .content {
-    position: relative;
-    width: 55%;
-    font-size: 10px;
-    line-height: 12px;
-    display: inline-block;
-    color: $white;
-    }
-
-    p {
-    font-size: 11px;
-    line-height: 14px;
-    }
-
-    button {
-    position: absolute;
-    right: 20px;
-    font-size: small;
-    }
-
-    .googleStatus-img {
-      float: left;
-      height: 45px;
-      width: 45px;
-      margin-right: 10px;
-      margin-left: 8px;
-    }
-
-      .icon:before {
-      content: '\e60d';
+      .content {
+      position: relative;
+      width: 55%;
+      font-size: 10px;
+      line-height: 12px;
+      display: inline-block;
       color: $white;
-      font-size: 16px;
+      }
+
+      p {
+      font-size: 11px;
+      line-height: 14px;
+      }
+
+      button {
       position: absolute;
-      left: 7px;
-      right: 0px;
-      top: 4px;
-    }
+      right: 20px;
+      font-size: small;
+      }
+
+      .googleStatus-img {
+        float: left;
+        height: 45px;
+        width: 45px;
+        margin-right: 10px;
+        margin-left: 8px;
+      }
+
+        .icon:before {
+        content: '\e60d';
+        color: $white;
+        font-size: 16px;
+        position: absolute;
+        left: 7px;
+        right: 0px;
+        top: 4px;
+      }
   }
+      &.messages--attention {
+      .icon {
+       display: none;
+      }
+    }
 }
 
 @include breakpoint($brk-tablet) {
@@ -126,7 +153,7 @@
 
     .icon {
       position: absolute;
-      top: 50%;
+      top: 30%;
       left: 20px;
       @include rem('font-size', 30);
       @include rem('margin-top', -15);
@@ -147,7 +174,7 @@
 
       position: absolute;
       left: 2%;
-      top: 32%;
+      top: 30%;
 
         .path1:before {
           font-family: inherit;
@@ -173,9 +200,35 @@
 
     &.messages--warning {
 
-      .icon:before {
-        content: '\e60d';
-        color: $white;
+      .content {
+      color: $black;
+      }
+
+      .icon {
+
+      position: absolute;
+      left: 2%;
+      top: 30%;
+
+        .path1:before {
+          font-family: inherit;
+          content: '\e62e';
+          color: $white;
+        }
+
+        .path2:before {
+          font-family: inherit;
+          content: "\e634";
+          margin-left: -1.1826171875em;
+          color: $white;
+        }
+
+        .path3:before {
+          font-family: inherit;
+          content: "\e635";
+          margin-left: -1.185em;
+          color: $sky;
+        }
       }
     }
 
