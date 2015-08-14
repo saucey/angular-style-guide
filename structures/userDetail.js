@@ -279,7 +279,7 @@
 
       // Show/hide logged's items
       $('body').addClass('shw-widgets-logged-in');
-      
+
       // show the element nicely
       $(".inplace").show(1000);
 
@@ -289,7 +289,8 @@
         $template.find('.btn-login-loggedin').addClass('ieChangeColors');
 
         // For desktop
-        $template.find('.highlight.desktop').delay(3000)
+        $template.find('.highlight.desktop').delay()
+      //  $template.find('.highlight.desktop').delay(3000)
           .animate({'margin-top': '-500px', 'bottom': '500px'},
             250,
             'linear',
@@ -300,7 +301,8 @@
           );
 
         // For mobile
-        $template.find('.highlight.mobile').delay(3000).slideUp(500);
+        $template.find('.highlight.mobile').delay(3000).slideUp();
+     //   $template.find('.highlight.mobile').delay(3000).slideUp(500);
       }
 
       if ( this.hasBeenShown() ) {
