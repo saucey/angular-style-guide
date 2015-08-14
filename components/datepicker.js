@@ -11,7 +11,9 @@
       $( "#datepicker" ).datepicker({
       showButtonPanel: true,
       minDate: -20, 
-      maxDate: "+1M +10D"
+      maxDate: "+1M +10D",
+      changeMonth: true,
+      changeYear: true
     });
 
       this.attached = true;  //used to determine if this function has already run
