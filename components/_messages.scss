@@ -234,6 +234,9 @@
 
     &.messages--alert{
 
+    background: $lighter_red;
+    border: 1px solid $light_red;
+
     .icon {
     position: absolute;
     left: 2%;
@@ -242,21 +245,21 @@
         .pathA:before {
           font-family: inherit;
           content: '\e631';
-          color: $white;
+          color: $dark_red;
         }
 
         .pathB:before {
           font-family: inherit;
           content: "";
           margin-left: -1.1826171875em;
-          color: $dark_blue;
+          color: $dark_red;
         }
 
         .pathC:before {
           font-family: inherit;
           content: "";
           margin-left: -1.185em;
-          color: $dark_blue;
+          color: $dark_red;
         }
         }
       }

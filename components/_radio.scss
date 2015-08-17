@@ -19,7 +19,7 @@ label.radio {
   				position: relative;
     			content: $font_icons_radio;
     			color: $blue;
-    			left: -2px;
+    			left: -3px;
     			top: 12px;
 			}
     		background-color: $beige;
@@ -28,7 +28,7 @@ label.radio {
   			&:before {
   				display: block;
     			font-family: $font_icons;
-    			font-size: 32px;
+    			font-size: 30px;
     			content: "";
 			}
 		    border: $elements_border;
