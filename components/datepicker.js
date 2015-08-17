@@ -13,11 +13,10 @@
       attach: function () {
       $(function() {
         $( "#datepicker" ).datepicker({
-      showButtonPanel: true,
-      minDate: -20, 
-      maxDate: "+1M +10D",
-      changeMonth: true,
-      changeYear: true
+      showOn: "button",
+      buttonImage: "images/calendar.gif",
+      buttonImageOnly: true,
+      buttonText: "Select date"
           });
         });
     }, // end attach
