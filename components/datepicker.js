@@ -9,7 +9,7 @@
   'use strict';
 
   // Add new item to public Drupal object
-    Drupal.behaviors.slider = {
+    Drupal.behaviors.datepicker = {
       attach: function () {
       $(function() {
         $( "#datepicker" ).datepicker({
