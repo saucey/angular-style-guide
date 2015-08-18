@@ -177,6 +177,9 @@
       },
       integer: /^\d*$/,
       text: /^\w*$/,
+      email: /^[A-Z0-9]([\w\.\-]*[A-Z0-9])*@([A-Z0-9]([\w\.\-]*[A-Z0-9]|[A-Z0-9])*\.)[A-Z]{2,}$/i,  ///^([A-Z0-9_][\-A-Z0-9_\.]*@[A-Z0-9_][\-\.A-Z0-9_]+\.[A-Z]{2,8})?$/i
+      phone: /^(\+|0{1,2})[1-9][.\-\s\d]*\d+$/, // this assumes that there cannot be phone numbers in an international format with less than 3 characters, which should be reasonable...
+
       example: {
         'for': {
           a: {
