@@ -5,6 +5,7 @@
   z-index: 0;
 
   .inplace {
+    visibility: hidden;
     position: relative;
     display: inline-block;
     float: right;
@@ -141,6 +142,10 @@
     }
   }
 
+  header.header .login-link-wrapper {
+    display: none;
+  }
+
   .btn-login-loggedin {
     z-index: 2;
     background-color: $white;
@@ -235,7 +240,7 @@ body.section-mijnaegon .myaegon {
 
 body.shw-widgets-logged-in {
 
-  header.header .login-link-wrapper,
+  // removed header.header .login-link-wrapper 
   .link-logged-in a {
     display: none;
   }
@@ -244,6 +249,7 @@ body.shw-widgets-logged-in {
   .link-logged-in .link-alternative a {
     display: block;
   }
+
 }
 
 .link-alternative a {
