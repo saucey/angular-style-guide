@@ -64,6 +64,10 @@
     shwRawData: null,
 
     attach: function (context, settings) {
+
+      // hide the green button div
+      $(".login-link-wrapper").css("display", "none !important"); 
+
       // Run before real initialization
       this.setup(settings);
 
@@ -232,7 +236,10 @@
         this.events();
       }
       else {
-        $(".login-link").addClass("visible");
+        // $(".login-link").addClass("visible");
+
+        // show the green button div in case user is not logged in
+        $(".login-link-wrapper").css("display", "block !important"); 
       }
     },
 
@@ -243,8 +250,8 @@
 
       // Convert template in jQuery DOM
       $template = $(".user_detail_widget"); //$(template);
-
-      // Templating data
+      $template.css('display', 'none');
+      // Templating data 
 
       $template.find('span.user_detail_widget_name').text(data.userName);
       var that = this;
@@ -274,32 +281,32 @@
 
       $(win).trigger('shwUserLoggedIn');
 
-      // Show/hide logged's items
-      $('body').addClass('shw-widgets-logged-in');
-
       // Cross-browser implementation to provide workaround for no CSS animation
       if ( $('html').hasClass('no-cssanimations') && !this.hasBeenShown() ) {
 
         $template.find('.btn-login-loggedin').addClass('ieChangeColors');
 
         // For desktop
-        $template.find('.highlight.desktop').delay()
-      //  $template.find('.highlight.desktop').delay(3000)
+        $template.find('.highlight.desktop').delay(3000)
           .animate({'margin-top': '-500px', 'bottom': '500px'},
             250,
             'linear',
             function () {
+              // Show/hide logged's items
+              $('body').fadeIn(2000).addClass('shw-widgets-logged-in');
               $template.find('.btn-login-loggedin')
                 .removeClass('ieChangeColors');
+
             }
           );
 
         // For mobile
-        $template.find('.highlight.mobile').delay(3000).slideUp();
-     //   $template.find('.highlight.mobile').delay(3000).slideUp(500);
+        $template.find('.highlight.mobile').delay(3000).slideUp(500);
       }
 
       if ( this.hasBeenShown() ) {
+        // Show/hide logged's items
+        $('body').fadeIn(2000).addClass('shw-widgets-logged-in');
         $template.addClass('processed');
       }
 
@@ -491,6 +498,7 @@
       if (arguments.length) {
         if (value) {
           $.cookie(hasBeenShownCookieName, "1", {path: "/"});
+
         }
         else {
           $.removeCookie(hasBeenShownCookieName, {path: "/"});
