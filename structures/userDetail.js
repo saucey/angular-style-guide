@@ -294,7 +294,7 @@
               // If animation is done, show .inplace 
               $('.inplace').fadeIn(2000).css('visibility', 'visible');
               // Show/hide logged's items
-              $template.find('.btn-login-loggedin');
+              $template.find('.btn-login-loggedin')
                 .removeClass('ieChangeColors');
             }
           );
@@ -306,7 +306,7 @@
       if ( this.hasBeenShown() ) {
         // If animation is done, show .inplace 
         $('.inplace').fadeIn(2000).css('visibility', 'visible');
-        
+
         // Show/hide logged's items
         $template.addClass('processed');
       }
