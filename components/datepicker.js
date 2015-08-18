@@ -14,9 +14,10 @@
       $(function() {
         $( "#datepicker" ).datepicker({
       showOn: "button",
-      buttonImage: "images/calendar.gif",
+      buttonImage: "calendar.png",
       buttonImageOnly: true,
-      buttonText: "Select date"
+      buttonText: "Select date",
+      showButtonPanel: true
           });
         });
     }, // end attach
