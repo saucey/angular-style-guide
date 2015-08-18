@@ -16,8 +16,7 @@
       showOn: "button",
       buttonImage: "calendar.png",
       buttonImageOnly: true,
-      buttonText: "Select date",
-      showButtonPanel: true
+      buttonText: "Select date"
           });
         });
     }, // end attach
