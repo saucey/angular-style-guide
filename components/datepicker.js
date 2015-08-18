@@ -12,10 +12,12 @@
     Drupal.behaviors.datepicker = {
       attach: function () {
       $(function() {
-        $( "#datepicker" ).datepicker({
-      showOn: "button",
-      buttonImage: "calendar.png",
-      buttonImageOnly: true,
+        $( ".datepicker" ).datepicker({
+ //     showOn: "button",
+ //     buttonImage: "https://image.freepik.com/free-photo/calendar-31th-vector_318-1908.jpg",
+ //     buttonImageOnly: true,
+      changeMonth: true,
+      changeYear: true,
       buttonText: "Select date"
           });
         });

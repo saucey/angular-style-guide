@@ -65,9 +65,6 @@
 
     attach: function (context, settings) {
 
-      // hide the green button div
-      $(".login-link-wrapper").css("display", "none !important"); 
-
       // Run before real initialization
       this.setup(settings);
 
@@ -238,8 +235,8 @@
       else {
         // $(".login-link").addClass("visible");
 
-        // show the green button div in case user is not logged in
-        $(".login-link-wrapper").css("display", "block !important"); 
+        // If user is not logged in show Login button
+        $('.login-link-wrapper').fadeIn(2000).css('display', 'block');
       }
     },
 
@@ -250,7 +247,7 @@
 
       // Convert template in jQuery DOM
       $template = $(".user_detail_widget"); //$(template);
-      $template.css('display', 'none');
+
       // Templating data 
 
       $template.find('span.user_detail_widget_name').text(data.userName);
@@ -281,6 +278,8 @@
 
       $(win).trigger('shwUserLoggedIn');
 
+      $('body').addClass('shw-widgets-logged-in');
+      
       // Cross-browser implementation to provide workaround for no CSS animation
       if ( $('html').hasClass('no-cssanimations') && !this.hasBeenShown() ) {
 
@@ -292,11 +291,11 @@
             250,
             'linear',
             function () {
+              // If animation is done, show .inplace 
+              $('.inplace').fadeIn(2000).css('visibility', 'visible');
               // Show/hide logged's items
-              $('body').fadeIn(2000).addClass('shw-widgets-logged-in');
-              $template.find('.btn-login-loggedin')
+              $template.find('.btn-login-loggedin');
                 .removeClass('ieChangeColors');
-
             }
           );
 
@@ -305,8 +304,10 @@
       }
 
       if ( this.hasBeenShown() ) {
+        // If animation is done, show .inplace 
+        $('.inplace').fadeIn(2000).css('visibility', 'visible');
+        
         // Show/hide logged's items
-        $('body').fadeIn(2000).addClass('shw-widgets-logged-in');
         $template.addClass('processed');
       }
 
