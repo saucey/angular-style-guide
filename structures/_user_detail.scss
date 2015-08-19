@@ -5,7 +5,6 @@
   z-index: 0;
 
   .inplace {
-    visibility: hidden;
     position: relative;
     display: inline-block;
     float: right;
@@ -142,8 +141,8 @@
     }
   }
 
-  header.header .login-link-wrapper {
-    display: none;
+.login-link-wrapper {
+    display: none !important;
   }
 
   .btn-login-loggedin {
