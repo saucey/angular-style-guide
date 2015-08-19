@@ -88,7 +88,58 @@
     }
   }
 
-// hier stond highlight 1
+  .highlight {
+    display: block;
+    &.has-been-shown { //if user has already seen the highlight, we don't want to show this again
+      &.desktop, &.mobile {
+        display: none;
+      }
+    }
+    background-color: $green;
+    color: #ffffff !important;
+    padding: 0 0 0 80px;
+
+    &.desktop {
+      display: none;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 0;
+      @include rem('padding', 23, 0);
+      animation: slidingHighlightOnTop 1s 1 5s forwards;
+      max-height: 90px !important;
+      height: 90px !important;
+    }
+
+    &.mobile {
+      //display: none;
+      @include rem('font-size', 16);
+      @include rem('margin', 0, 12);
+      overflow: hidden;
+      background-color: transparent;
+      animation: slidingHighlightOnTopMobile 1s 1 5s forwards;
+      max-height: 90px !important;
+      height: 90px !important;
+
+      .text {
+        padding: 0;
+        background-color: $green;
+
+        p {
+          @include rem('padding', 12);
+          margin-bottom: 0;
+          color: $white;
+        }
+      }
+    }
+
+    strong {
+      font-family: $font_normal;
+      font-weight: 300;
+    }
+  } // end highlight
 
 .login-link-wrapper {
     display: none !important;
@@ -204,61 +255,6 @@ body.shw-widgets-logged-in {
   display: none;
 }
 
-//
-// HIGHLIGHT TIJDELIJK
-
-  .highlight {
-    display: block;
-    &.has-been-shown { //if user has already seen the highlight, we don't want to show this again
-      &.desktop, &.mobile {
-        display: none;
-      }
-    }
-    background-color: $green;
-    color: #ffffff !important;
-    padding: 0 0 0 80px;
-
-    &.desktop {
-      display: none;
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      z-index: 0;
-      @include rem('padding', 23, 0);
-      animation: slidingHighlightOnTop 1s 1 5s forwards;
-      max-height: 90px !important;
-      height: 90px !important;
-    }
-
-    &.mobile {
-      //display: none;
-      @include rem('font-size', 16);
-      @include rem('margin', 0, 12);
-      overflow: hidden;
-      background-color: transparent;
-      animation: slidingHighlightOnTopMobile 1s 1 5s forwards;
-      max-height: 90px !important;
-      height: 90px !important;
-
-      .text {
-        padding: 0;
-        background-color: $green;
-
-        p {
-          @include rem('padding', 12);
-          margin-bottom: 0;
-          color: $white;
-        }
-      }
-    }
-
-    strong {
-      font-family: $font_normal;
-      font-weight: 300;
-    }
-  } // end highlight
 
 //
 // Media queries
@@ -290,7 +286,36 @@ body.shw-widgets-logged-in {
       }
     }
 
-    // HIER STONDEN HIGHLIGHT DESKTOP EN MOBILE
+    .highlight.desktop {
+      display: block;
+
+      .text {
+        margin: 0;
+        text-align: left;
+        @include rem('line-height', 44);
+        @include rem('padding-right', 170);
+        margin-left: 7.3%;
+        margin-right: 7.3%;
+
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+
+        color: $white;
+
+        .welcome {
+          font-family: $font_normal;
+        }
+
+        p {
+          display: inline;
+        }
+      }
+    } // end highlight desktop
+
+    .highlight.mobile {
+      display: none;
+    } // end highlight mobile
 
     .btn-login-loggedin {
       display: inline-block;
@@ -330,39 +355,6 @@ body.shw-widgets-logged-in {
     }
   }
 }
-
-// TIJDELIJK HIGHLIGHT DESKTOP & MOBILE
-
-    .highlight.desktop {
-      display: block;
-
-      .text {
-        margin: 0;
-        text-align: left;
-        @include rem('line-height', 44);
-        @include rem('padding-right', 170);
-        margin-left: 7.3%;
-        margin-right: 7.3%;
-
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        overflow: hidden;
-
-        color: $white;
-
-        .welcome {
-          font-family: $font_normal;
-        }
-
-        p {
-          display: inline;
-        }
-      }
-    } // end highlight desktop
-
-    .highlight.mobile {
-      display: none;
-    } // end highlight mobile
 
 @include breakpoint($brk-ipad-portrait) {
 
