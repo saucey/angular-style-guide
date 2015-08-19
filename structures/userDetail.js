@@ -375,7 +375,7 @@
 
         if (Fn.isMobile() && !Fn.mobileTapPresent() && !Fn.isTapped()) {
 
-          //$('body').toggleClass("mobile-tap");
+          $('body').toggleClass("mobile-tap");
 
         } else if (!Fn.isMobile()) {
 
