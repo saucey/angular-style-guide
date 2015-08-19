@@ -64,10 +64,6 @@
     shwRawData: null,
 
     attach: function (context, settings) {
-
-      // hide the green button div
-      $(".login-link-wrapper").css("display", "none !important"); 
-
       // Run before real initialization
       this.setup(settings);
 
@@ -236,10 +232,7 @@
         this.events();
       }
       else {
-        // $(".login-link").addClass("visible");
-
-        // show the green button div in case user is not logged in
-        $(".login-link-wrapper").css("display", "block !important"); 
+        $(".login-link").addClass("visible");
       }
     },
 
@@ -250,8 +243,11 @@
 
       // Convert template in jQuery DOM
       $template = $(".user_detail_widget"); //$(template);
-      $template.css('display', 'none');
-      // Templating data 
+
+      // Templating data
+
+      // hide the ugly white box initially
+      $(".inplace").hide();
 
       $template.find('span.user_detail_widget_name').text(data.userName);
       var that = this;
@@ -281,6 +277,12 @@
 
       $(win).trigger('shwUserLoggedIn');
 
+      // Show/hide logged's items
+      $('body').addClass('shw-widgets-logged-in');
+      
+      // show the element nicely
+      $(".inplace").show(1000);
+
       // Cross-browser implementation to provide workaround for no CSS animation
       if ( $('html').hasClass('no-cssanimations') && !this.hasBeenShown() ) {
 
@@ -292,11 +294,8 @@
             250,
             'linear',
             function () {
-              // Show/hide logged's items
-              $('body').fadeIn(2000).addClass('shw-widgets-logged-in');
               $template.find('.btn-login-loggedin')
                 .removeClass('ieChangeColors');
-
             }
           );
 
@@ -305,8 +304,6 @@
       }
 
       if ( this.hasBeenShown() ) {
-        // Show/hide logged's items
-        $('body').fadeIn(2000).addClass('shw-widgets-logged-in');
         $template.addClass('processed');
       }
 
@@ -498,7 +495,6 @@
       if (arguments.length) {
         if (value) {
           $.cookie(hasBeenShownCookieName, "1", {path: "/"});
-
         }
         else {
           $.removeCookie(hasBeenShownCookieName, {path: "/"});
