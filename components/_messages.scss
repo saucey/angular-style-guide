@@ -143,7 +143,13 @@
       .icon {
        display: none;
       }
+
+
     }
+
+      &.messages--alert {
+      background: $lighter_red;
+      }
 }
 
 @include breakpoint($brk-tablet) {
