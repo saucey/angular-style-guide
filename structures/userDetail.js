@@ -375,6 +375,7 @@
 
         if (Fn.isMobile() && !Fn.mobileTapPresent() && !Fn.isTapped()) {
 
+          var dummy = true; // jshint ignore:line
           //$('body').toggleClass("mobile-tap");
 
         } else if (!Fn.isMobile()) {
