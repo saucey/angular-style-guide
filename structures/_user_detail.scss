@@ -10,7 +10,9 @@
     float: right;
     margin: 0;
     height: 36px;
-    background-color: transparent;
+ // rolled back
+ //   background-color: transparent;
+
     .btn-login-loggedin {
       z-index: 2;
       position: relative;
@@ -141,9 +143,10 @@
     }
   } // end highlight
 
-.login-link-wrapper {
-    display: none !important;
-  }
+// roled back
+// .login-link-wrapper {
+//    display: none !important;
+// }
 
   .btn-login-loggedin {
     z-index: 2;
@@ -240,6 +243,9 @@ body.section-mijnaegon .myaegon {
 body.shw-widgets-logged-in {
 
   // removed header.header .login-link-wrapper 
+  // rolled back
+
+  header.header .login-link-wrapper,
   .link-logged-in a {
     display: none;
   }
