@@ -292,7 +292,7 @@
             'linear',
             function () {
               // If animation is done, show .inplace 
-              $('.inplace').fadeIn(2000).css('visibility', 'visible');
+              $('.user_detail_widget').fadeIn(2000).css('display', 'block');
               // Show/hide logged's items
               $template.find('.btn-login-loggedin')
                 .removeClass('ieChangeColors');
@@ -304,11 +304,11 @@
       }
 
       if ( this.hasBeenShown() ) {
-        // If animation is done, show .inplace 
-        $('.inplace').fadeIn(2000).css('visibility', 'visible');
-
         // Show/hide logged's items
         $template.addClass('processed');
+
+        // If animation is done, show .user_detail_widget 
+        $('.user_detail_widget').fadeIn(2000).css('display', 'block');
       }
 
       // set the cookie to make sure that the next time this template is shown,
@@ -448,6 +448,7 @@
         msAnimationEnd animationend', function() {
           $(this).parents('.user_detail_widget').addClass('processed');
       });
+      $('.user_detail_widget').fadeIn(2000).css('display', 'block');
     },
 
     formatDatetime: function (date, timestamp) {
