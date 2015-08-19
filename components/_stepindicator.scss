@@ -1,0 +1,56 @@
+.stepindicator {
+
+	span {
+		color: $blue;
+	}
+
+	li {
+		counter-increment: li;  
+		display: inline-block;
+		@include rem('margin', 0, 20, 5, 0);
+
+		span {
+			color: initial;
+			&:before {
+				font-weight: bold;
+		    content: counter(li);
+		    background-color: #D7D8D2;
+				height: 20px;
+				width: 20px;
+				@include rem('padding', 5, 10);
+				@include rem('border-radius', 20);
+				@include rem('margin-right', 5);
+		  }
+		}
+
+		.active,
+		.visited {
+			color: $blue;
+		}
+
+		.active {
+			&:before {
+				box-shadow: 0 0 0 3px $blue inset;
+		    -webkit-box-shadow: 0 0 0 3px $blue inset;
+		    -moz-box-shadow: 0 0 0 3px $blue inset;
+		    color: $blue;
+		    background: none;
+			}
+		}
+
+		.visited {
+			&:before {
+				background-color: $blue;
+		    font-family: 'aegon_icons';
+		    content: '\e632';
+		    font-size: 14px;
+		    color: #fff;
+		    @include rem('padding', 9, 8);
+		  }
+		}
+	}
+
+	.no-label li {
+		@include rem('margin', 0, 5, 5, 0);
+	}
+}
