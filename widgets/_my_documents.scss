@@ -1,5 +1,7 @@
 .my_documents_widget {
 
+min-height: 1000px;
+
   article {
     @include rem('margin', 0, 0);
     border-bottom-style: solid;
@@ -107,6 +109,8 @@
 @include breakpoint($brk-tablet) {
 
   .my_documents_widget {
+
+  min-height: 1000px;
 
     article {
       @include rem('margin', 30, 0);
