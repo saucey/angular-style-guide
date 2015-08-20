@@ -29,12 +29,16 @@
 // shows a loading spinner
 
 .progress-loader {
-  margin-bottom: 25px;
+  // Removed margin-bottom: 25px;
+  // Added 3 lines below for IE9 fix
+  margin: 0 auto 25px auto;
+  display: table;
+  text-align: center;
 }
 
 .loading {
-  background: url('../images/spinner.gif') no-repeat;
-  background-position-x: center;
+  background: url('../images/spinner.gif') no-repeat 50% 0%;
+  // removed background-position-x: center; because of FF bug
   width: 300px;
   height: 50px;
   margin: -40px auto 0 auto;
