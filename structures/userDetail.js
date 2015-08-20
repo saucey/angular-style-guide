@@ -594,7 +594,14 @@
 
       // Return single value or multiple values as array
       return values.length <= 1 ? values[0] : values;
-    }
+    },
+
+    getAkos: function () {  //if just the highest number is required, use .getAkos()[0]
+      return this.getRelNumByType('akos')
+        .sort(function (x, y){
+          return parseInt(y) - parseInt(x);
+        });
+    },
   };
 
 })(this.document, this, this.jQuery, this.Drupal);
