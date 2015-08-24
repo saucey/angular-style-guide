@@ -1,13 +1,27 @@
 .licenseplate {
 	.country {
-		background: #3C82CE;
-		display: block;
-		width: 60px;
-		text-align: center;
-		color: white;
-		font-weight: bold;
+		background: #3395d3;
+	    display: inline-block;
+	    width: 60px;
+	    text-align: center;
+	    color: white;
+	    position: absolute;
+	    font-family: tahoma, arial;
+	    font-size: 1.3rem;
+	    letter-spacing: 0.12rem;
+	    padding-top: 10px;
+	    height: 44px;
+	    text-transform: uppercase;
+	    @include rem('border-radius', $elements_border_radius, 0rem, 0rem, $elements_border_radius);
 	}
+
 	.license-number {
-		background: #F6CD23;
+		background: #F6CD23 !important;
+		font-weight: bold;
+		text-transform: uppercase;
+		padding-left: 88px;
+		font-family: arial;
+	    font-size: 1.3rem;
+	    letter-spacing: 0.12rem;
 	}
 }
