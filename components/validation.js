@@ -185,7 +185,7 @@
         var check = function (val, country) { // defines the general sanity check for iban, aka modified(iban) % 97 == 1
           var iban = val.replace(/\s/g, "");  // get rid of all space-related characters
           iban = iban.replace(/^(..)(..)(.*)/, "$3$1$2"); // Move the four initial characters to the end of the string
-          var country = country || RegExp.$1.toLowerCase();  // get the country to relate to rxs
+          country = country || RegExp.$1.toLowerCase();  // get the country to relate to rxs
           iban = iban.replace(/([a-z])/ig, numberize); // replace all letters by numbers, such that A = 10, B = 11... 
           // TODO: the iban is too long for js to calculate with, so it has 2B chopped up
           // algorithm for that is here: http://www.tbg5-finance.org/?ibandocs.shtml
@@ -193,15 +193,20 @@
         };
 
 console.dir(this);
+        if (!country) {
           var that = this;
           var checks = {};
-          for (var c in rxs) {
-            checks[c] = function () {
+          for (var c in rxs) {  // jshint ignore:line
+            checks[c] = function () {  // jshint ignore:line
 console.dir(this);
               return that.iban(val, c);
-            }
+            };  // jshint ignore:line
           }
           return checks;
+        }
+        else {
+          return check(val, country);
+        }
       },
       integer: /^\d*$/,
       text: /^\w*$/,
