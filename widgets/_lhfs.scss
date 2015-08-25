@@ -404,3 +404,24 @@ ul.horizontal {
   }
 
 }
+
+//
+// Media queries
+// --------------------------------------------------
+
+
+@include breakpoint($brk-mobile){
+
+    .help {
+      &.dialog {
+        right: 2%;
+      }
+
+      &:before {
+      }
+
+      &:after {
+        left: 88% !important;
+      }
+    }
+  }
