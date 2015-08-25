@@ -2,7 +2,7 @@
  * Example JavaScript component
  */
 // Closure with jQuery support
-(function($) {
+(function($, Drupal) {
   'use strict';
 
   // Add new item to public Drupal object
@@ -20,7 +20,7 @@
         var v = (this.attributes['data-validate'] || this.attributes['data-validate-restrained']).value;
         var restrained = this.attributes['data-validate-restrained'] !== undefined;
         var validator;
-        // check if validator key is in the form [key], if not, it needs a . in front for eval
+        // check if validator key is in the form ['key'], if not, it needs a . in front for eval
         v = (v && v.length === 0) || v[0] === "[" ? v : "." + v;
         try {
           // if validator is empty, also throw an error; disable for jshint, since it appears not possible to smuggle js-code into js by way of code on the template, and the alternative of implementing this test is bazillions of lines long
@@ -175,10 +175,38 @@
           return matt;
         },
       },
+      iban: function (val, country) { // as defined in https://en.wikipedia.org/wiki/International_Bank_Account_Number#Validating_the_IBAN @ 24/08/15
+        var rxs = {
+          nl: /^NL\d\d[a-z0-9]{4}\d{10}$/i,
+        };
+        var numberize = function (letter) {
+            return "" + (letter.toLowerCase().charCodeAt(0) - 87);
+        };
+        var check = function (val, country) { // defines the general sanity check for iban, aka modified(iban) % 97 == 1
+          var iban = val.replace(/\s/g, "");  // get rid of all space-related characters
+          iban = iban.replace(/^(..)(..)(.*)/, "$3$1$2"); // Move the four initial characters to the end of the string
+          var country = country || RegExp.$1.toLowerCase();  // get the country to relate to rxs
+          iban = iban.replace(/([a-z])/ig, numberize); // replace all letters by numbers, such that A = 10, B = 11... 
+          // TODO: the iban is too long for js to calculate with, so it has 2B chopped up
+          // algorithm for that is here: http://www.tbg5-finance.org/?ibandocs.shtml
+          return (parseInt(iban) % 97) === 1;
+        };
+
+console.dir(this);
+          var that = this;
+          var checks = {};
+          for (var c in rxs) {
+            checks[c] = function () {
+console.dir(this);
+              return that.iban(val, c);
+            }
+          }
+          return checks;
+      },
       integer: /^\d*$/,
       text: /^\w*$/,
       email: /^[A-Z0-9]([\w\.\-]*[A-Z0-9])*@([A-Z0-9]([\w\.\-]*[A-Z0-9]|[A-Z0-9])*\.)[A-Z]{2,}$/i,  ///^([A-Z0-9_][\-A-Z0-9_\.]*@[A-Z0-9_][\-\.A-Z0-9_]+\.[A-Z]{2,8})?$/i
-      phone: /^(\+|0{1,2})[1-9][.\- \d]*\d+$/, // this assumes that there cannot be phone numbers in an international format with less than 3 characters, which should be reasonable...
+      phone: /^(|(\+|0{1,2})[1-9][.\- \d]*\d+)$/, // this assumes that there cannot be phone numbers in an international format with less than 3 characters, which should be reasonable...
       mobile: {
         nl: /^(06)[1-9][0-9]{7}$/,
       },
@@ -216,4 +244,5 @@
       }
     }
   };
-})(jQuery);
+
+})(this.jQuery, this.Drupal);
