@@ -56,10 +56,10 @@
     }
     li.label {
       //padding-right: 55px;
-      text-align: right;
-      @media screen and(max-width: $rc-s-max-width) {
-        text-align: left;
-      }
+      //text-align: right;
+      //@media screen and(max-width: $rc-s-max-width) {
+      //  text-align: left;
+      //}
     }
     li.label, label {
       font-family: $font_normal;
