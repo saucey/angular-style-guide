@@ -81,6 +81,12 @@
       win.shwGlobal.getRelNumByType = (function(type) {
         return this.getRelNumByType(type);
       }).bind(this);
+
+      // Register a public method for getAkos
+      win.shwGlobal.getAkos = (function() {
+        return this.getAkos();
+      }).bind(this);
+
       this.attached = true;
     },
     attached: false,
