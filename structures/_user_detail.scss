@@ -70,7 +70,7 @@
 
       p.name {
         @include rem('padding', 0, 20);
-        margin-right: 15px;
+        margin-right: 25px;
         white-space: nowrap;
         color: $green;
 
@@ -278,9 +278,9 @@ body.shw-widgets-logged-in {
     .text {
 
       p.name {
-        display: inline;
-        @include rem('padding', 0, 25, 0, 0);
-        margin-right: 15px;
+        display: inline-block;
+        @include rem('padding', 0, 10, 0, 0);
+        margin-right: 25px;
         color: $green;
       }
     }
