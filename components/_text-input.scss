@@ -16,6 +16,10 @@ input[type=text], input[type=email], input[type=number], select, div.dd div.ddTi
 input[type=text], input[type=email], input[type=number] {
   padding: 9px 10px;
   padding-right: 10px;
+
+  &.inactive {
+    color: #A9A9A9;
+  }
 }
 
 textarea {
