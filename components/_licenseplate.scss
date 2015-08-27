@@ -19,9 +19,25 @@
 		background: #F6CD23 !important;
 		font-weight: bold;
 		text-transform: uppercase;
-		padding-left: 88px;
+		padding: 4px 0 0 88px;
 		font-family: arial;
 	    font-size: 1.3rem;
 	    letter-spacing: 0.12rem;
 	}
+
+	::-webkit-input-placeholder {
+   color: $black;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: $black;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: $black;
+}
+
+:-ms-input-placeholder {  
+   color: $black;
+}
 }
