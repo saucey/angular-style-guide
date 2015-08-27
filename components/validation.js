@@ -175,34 +175,46 @@
           return matt;
         },
       },
-      iban: function (val, country) { // as defined in https://en.wikipedia.org/wiki/International_Bank_Account_Number#Validating_the_IBAN @ 24/08/15
+      iban: function (val, country) { 
         var rxs = {
+          // patterns as defined in https://en.wikipedia.org/wiki/International_Bank_Account_Number#Validating_the_IBAN >= 24/08/15
           nl: /^NL\d\d[a-z0-9]{4}\d{10}$/i,
+          de: /^DE\d\d\d{18}$/i,
         };
-        var numberize = function (letter) {
+        var numberize = function (letter) { // turns a letter into a number, with a = 10, b = 11...
             return "" + (letter.toLowerCase().charCodeAt(0) - 87);
         };
-        var check = function (val, country) { // defines the general sanity check for iban, aka modified(iban) % 97 == 1
-          var iban = val.replace(/\s/g, "");  // get rid of all space-related characters
-          iban = iban.replace(/^(..)(..)(.*)/, "$3$1$2"); // Move the four initial characters to the end of the string
-          country = country || RegExp.$1.toLowerCase();  // get the country to relate to rxs
+        var bigMod = function(divident, divisor) {  // needed for big-number (such as modified IBANs) modulo calculation
+            // implementation taken from http://stackoverflow.com/questions/929910/modulo-in-javascript-large-number
+            // based on http://www.devx.com/tips/Tip/39012
+            var partLength = 10;
+
+            while (divident.length > partLength) {
+                var part = divident.substring(0, partLength);
+                divident = (part % divisor) +  divident.substring(partLength);          
+            }
+
+            return divident % divisor;
+        };
+        var check = function (val) { // defines the general sanity check for iban, aka modified(iban) % 97 == 1
+          var iban = val.replace(/^(..)(..)(.*)/, "$3$1$2"); // Move the four initial characters to the end of the string
           iban = iban.replace(/([a-z])/ig, numberize); // replace all letters by numbers, such that A = 10, B = 11... 
-          // TODO: the iban is too long for js to calculate with, so it has 2B chopped up
-          // algorithm for that is here: http://www.tbg5-finance.org/?ibandocs.shtml
-          return (parseInt(iban) % 97) === 1;
+          return bigMod(iban, 97) === 1;
         };
 
-console.dir(this);
+        val = val.replace(/\s/g, "");  // get rid of all space-related characters
+
         if (!country) {
-          var that = this;
+          //var that = this;
           var checks = {};
           for (var c in rxs) {  // jshint ignore:line
+            // THERE IS NO NEED TO PUT AN IF AROUND THIS AS REQUIRED BY JSHINT, SINCE THE INDICES FOR rxs ARE COMPLETELY UNDER OUR CONTROL! hence the ignore...
             checks[c] = function () {  // jshint ignore:line
-console.dir(this);
-              return that.iban(val, c);
+              return Drupal.behaviors.validation.validators.iban(val, c) && val.match(rxs[c]);
             };  // jshint ignore:line
           }
-          return checks;
+          country = val.replace(/^(..).*/, "$1").toLowerCase();  // get the country to relate to rxs
+          return (check(val, country) && val.match(rxs[country])) ? checks : false;
         }
         else {
           return check(val, country);
@@ -214,6 +226,9 @@ console.dir(this);
       phone: function (val) {
         // this needs to be implemented as a function, since validVal has a problem with the following regex
         return val.match(/^(|(\+|0{1,2})[1-9][.\- \d]*\d+)$/); // this assumes that there cannot be phone numbers in an international format with less than 3 characters, which should be reasonable...
+      },
+      address: {
+        global: /^[A-Za-z0-9 '.\-]*$/i,
       },
       mobile: {
         nl: function (val) {
