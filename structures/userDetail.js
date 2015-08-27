@@ -92,26 +92,26 @@
     attached: false,
 
     setup: function (settings) {
+      // Check if current website is backend
+      if (window.location.hostname.search('.aegon.com') !== -1) {
+        return;
+      }
 
-      // Check if current website is not local or DEV environment
-      var notLocalOrDev = (
-        settings.onlineAegonNl.hostname !== 'local' &&
+      // Check if current website is local or DEV environment
+      var localOrDev = (
+        settings.onlineAegonNl.hostname === 'local' ||
         win.location.hostname.search('www.dev.') !== -1
       );
 
-      // Try to avoid multiple requests to the backend environment, if the
-      // browser never ever had a logged session. Implement the block only for
-      // Testing, UAT and Production environments.
-      if (notLocalOrDev) {
+      // If LOCAL or DEV env use sample json file for user details
+      // otherwise, use real endpoint
+      if (localOrDev) {
+        this.apiUrl = '/file/example/user_detail_bs.json';
+      }
+      else {
         if (!this.lastLogin()) {
           return;
         }
-      }
-
-      // Set url API for local and real environments
-      if (settings.onlineAegonNl.hostname === 'local') {
-        this.apiUrl = '/file/example/user_detail_bs.json';
-      } else {
         this.apiUrl = realEndpoint;
       }
 
@@ -609,7 +609,7 @@
         .sort(function (x, y){
           return parseInt(y) - parseInt(x);
         });
-    },
+    }
   };
 
 })(this.document, this, this.jQuery, this.Drupal);
