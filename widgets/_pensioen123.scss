@@ -44,7 +44,9 @@
     margin-top: 100px;
     background: #fff;
   }
+}
 
+.pensioen123_widget {
   .user-details {
     .span4 {
       padding: 0 20px;
@@ -71,14 +73,39 @@
 
   .icon-overview {
     margin: 30px 0;
-
-    .span12 {
+    .row-fluid {
       border-bottom: 1px solid #ccc;
+    }
+    .icon {
+      width: 40px;
+      margin: 5px 10px 0 0;
+      height: auto;
+      &.big {
+        width: 80px;
+        float: left;
+      }
+    }
+    .span12 {
+      &.details {
+        padding: 15px;
+      }
+      &.details, .more-details {
+        width: 100%;
+        background: #F2F2F2;
+        margin-left: 0;
+        display: none;
+
+        span {
+          display: block;
+        }
+      }
 
       p {
         margin: 0.9375rem 0;
       }
     }
+
+
   }
 }
 
