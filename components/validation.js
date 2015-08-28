@@ -238,7 +238,9 @@
           return val.match(/^(|(06)[1-9][0-9]{7})$/);
         },
       },
-      'house-nr': /^[a-z0-9\.]*$/i,
+      'house-nr': function (val) {
+        return val.match(/^[a-z0-9\.]*$/i);
+      },
       example: {
         'for': {
           a: {
@@ -269,7 +271,7 @@
             },
           },
         }
-      }
+      },
     }
   };
 
