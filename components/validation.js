@@ -19,16 +19,7 @@
         // get the predefined validator from the json-object defined in data-validate
         var v = (this.attributes['data-validate'] || this.attributes['data-validate-restrained']).value;
         var restrained = this.attributes['data-validate-restrained'] !== undefined;
-        var validator;
-        // check if validator key is in the form ['key'], if not, it needs a . in front for eval
-        v = (v && v.length === 0) || v[0] === "[" ? v : "." + v;
-        try {
-          // if validator is empty, also throw an error; disable for jshint, since it appears not possible to smuggle js-code into js by way of code on the template, and the alternative of implementing this test is bazillions of lines long
-          validator = eval("that.validators" + v) || (v.bla.bla); // jshint ignore:line
-        }
-        catch (e) {
-          window.console && window.console.warn("error getting validator " + v + ". Maybe it was not defined?");
-        }
+        var validator = that.validator(v);
 
         if (restrained) {
           this.oldValue = this.value;
@@ -62,11 +53,27 @@
 
       this.validators2validVal();
     },
-
+    validator: function (v) {
+      var validator;
+      // check if validator key is in the form ['key'], if not, it needs a . in front for eval
+      v = (v && v.length === 0) || v[0] === "[" ? v : "." + v;
+      try {
+        // if validator is empty, also throw an error; disable for jshint, since it appears not possible to smuggle js-code into js by way of code on the template, and the alternative of implementing this test is bazillions of lines long
+        validator = eval("this.validators" + v) || (v.bla.bla); // jshint ignore:line
+      }
+      catch (e) {
+        window.console && window.console.warn("error getting validator " + v + ". Maybe it was not defined?");
+      }
+      return validator;
+    },
     restrain: function () {
       // [this] will be the DOM object this function has been grafted upon
       var name = this.attributes['data-validate-restrained'].value;
-      var validator = Drupal.behaviors.validation.vvValidators["vv." + name];
+      // make the names work with vvValidators (aka, no [])
+      var tmp = name.split(/(\.|(['"]\])?\[['"]|['"]\])/g);
+      var names = [];
+      for (var i = 0; i < tmp.length; i+=3) {if (tmp[i]) {names[names.length] = tmp[i]}}
+      var validator = Drupal.behaviors.validation.vvValidators["vv." + names.join(".")];
       if (validator instanceof RegExp) {
         if (!validator.test(this.value)) {
           this.value = this.oldValue;
