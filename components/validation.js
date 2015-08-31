@@ -178,50 +178,46 @@
           return matt;
         },
       },
-      iban: function (val, country) { 
-        var rxs = {
-          // patterns as defined in https://en.wikipedia.org/wiki/International_Bank_Account_Number#Validating_the_IBAN >= 24/08/15
+      iban: {
+        rxs: {
           nl: /^NL\d\d[a-z0-9]{4}\d{10}$/i,
           de: /^DE\d\d\d{18}$/i,
-        };
-        var numberize = function (letter) { // turns a letter into a number, with a = 10, b = 11...
-            return "" + (letter.toLowerCase().charCodeAt(0) - 87);
-        };
-        var bigMod = function(divident, divisor) {  // needed for big-number (such as modified IBANs) modulo calculation
-            // implementation taken from http://stackoverflow.com/questions/929910/modulo-in-javascript-large-number
-            // based on http://www.devx.com/tips/Tip/39012
-            var partLength = 10;
+        },
+        nl: function (val) {return Drupal.behaviors.validation.validators.iban.fix(val, "nl");},
+        de: function (val) {return Drupal.behaviors.validation.validators.iban.fix(val, "de");},
+        auto: function (val) {
+console.log("iban auto");
+console.dir(this);
+          var country = val.replace(/^(..).*/, "$1").toLowerCase();  // get the country to relate to rxs
+          return Drupal.behaviors.validation.validators.iban.fix(val, country);
+        },
+        fix: function (val, country) { 
+          var numberize = function (letter) { // turns a letter into a number, with a = 10, b = 11...
+              return "" + (letter.toLowerCase().charCodeAt(0) - 87);
+          };
+          var bigMod = function(divident, divisor) {  // needed for big-number (such as modified IBANs) modulo calculation
+              // implementation taken from http://stackoverflow.com/questions/929910/modulo-in-javascript-large-number
+              // based on http://www.devx.com/tips/Tip/39012
+              var partLength = 10;
 
-            while (divident.length > partLength) {
-                var part = divident.substring(0, partLength);
-                divident = (part % divisor) +  divident.substring(partLength);          
-            }
+              while (divident.length > partLength) {
+                  var part = divident.substring(0, partLength);
+                  divident = (part % divisor) +  divident.substring(partLength);          
+              }
 
-            return divident % divisor;
-        };
-        var check = function (val) { // defines the general sanity check for iban, aka modified(iban) % 97 == 1
-          var iban = val.replace(/^(..)(..)(.*)/, "$3$1$2"); // Move the four initial characters to the end of the string
-          iban = iban.replace(/([a-z])/ig, numberize); // replace all letters by numbers, such that A = 10, B = 11... 
-          return bigMod(iban, 97) === 1;
-        };
+              return divident % divisor;
+          };
+          var check = function (val) { // defines the general sanity check for iban, aka modified(iban) % 97 == 1
+            var iban = val.replace(/^(..)(..)(.*)/, "$3$1$2"); // Move the four initial characters to the end of the string
+            iban = iban.replace(/([a-z])/ig, numberize); // replace all letters by numbers, such that A = 10, B = 11... 
+            return bigMod(iban, 97) === 1;
+          };
 
-        val = val.replace(/\s/g, "");  // get rid of all space-related characters
-
-        if (!country) {
-          //var that = this;
-          var checks = {};
-          for (var c in rxs) {  // jshint ignore:line
-            // THERE IS NO NEED TO PUT AN IF AROUND THIS AS REQUIRED BY JSHINT, SINCE THE INDICES FOR rxs ARE COMPLETELY UNDER OUR CONTROL! hence the ignore...
-            checks[c] = function () {  // jshint ignore:line
-              return Drupal.behaviors.validation.validators.iban(val, c) && val.match(rxs[c]);
-            };  // jshint ignore:line
-          }
-          country = val.replace(/^(..).*/, "$1").toLowerCase();  // get the country to relate to rxs
-          return (check(val, country) && val.match(rxs[country])) ? checks : false;
-        }
-        else {
-          return check(val, country);
-        }
+          val = val.replace(/\s/g, "");  // get rid of all space-related characters
+          var rxs = Drupal.behaviors.validation.validators.iban.rxs;
+console.log("MATCH " + val.match(rxs[country]));
+          return val.match(rxs[country]) ? check(val, country) : false;
+        },
       },
       integer: /^\d*$/,
       text: /^\w*$/,
