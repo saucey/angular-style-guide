@@ -101,6 +101,59 @@ min-height: 100vh !important;
   }
 }
 
+  // 
+  // MY DOCUMENTS NIEUW
+  // --------------------------------------------------
+
+  .inline-h2 {
+    display: inline;
+    margin-bottom: 20px;
+  }
+
+  .doc-search-wrap {
+    margin-bottom: 10px;
+    display: inline;
+    float: right;
+    margin-bottom: 20px;
+
+    .search {
+      width: 145px !important;
+      background-color: white;
+      background-image: url("/images/icons/icon-search-header.png");
+      background-repeat: no-repeat;
+      background-position: right center;
+      background-size: 30px 30px;
+      border: 2px solid $lighter_grey;
+      padding: 0 20px 0 10px;
+    }
+
+    .search:focus {
+      width: 350px !important;
+      box-shadow: 1px 1px 3px $lighter_grey;
+      background-image: url("/images/ui/btn-close.png");
+      background-repeat: no-repeat;
+      background-position: 325px center;
+      background-size: 16px 16px;
+    }
+
+  .numberdocuments {
+    margin-right: 20px;
+    display: inline-block; 
+    color: $blue;
+  }
+}
+
+.number-search-results {
+  width: 100%;
+  display: block;
+  padding: 15px 0 0 0;
+  margin: 0 0 20px 0;
+
+  .bold {
+  font-family: $font_bold;
+  }
+}
+
 
 // 
 // Media queries
@@ -163,63 +216,6 @@ min-height: 100vh !important;
       }
     }
   }
-
-  // 
-  // NEW STUFF 
-
-  .doc-search-wrap {
-    margin-bottom: 10px;
-    display: block;
-    float: right;
-  }
-
-  .numberdocuments {
-    margin-right: 20px;
-    display: inline-block; 
-    color: $blue;
-  }
-
-  table {
-    width: 100%;
-
-
-  tr {
-      background: none;
-      line-height: 38px !important;
-
-      td {
-        padding: 0 0 0 10px;
-        a:before {
-      }
-    }
-
-    tr:first-child a:before {
-      content: none;
-    }
-
-  .alt {
-    width: 100%;
-
-    tr {
-      background: none;
-      line-height: 48px !important;
-
-      td {
-        padding: 0 0 0 10px;
-        }
-      }
-    }
-
-    tr:nth-child(even) {
-    background-color: $lighter_grey;
-    }
-    tr:nth-child(odd) {
-       background-color:#fff;
-    }
-    th  {
-      background-color: $lighter_grey;
-      padding: 0 0 0 10px;
-      font-weight: bold;
-    }
-  }
 }
+
+
