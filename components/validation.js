@@ -186,8 +186,6 @@
         nl: function (val) {return Drupal.behaviors.validation.validators.iban.fix(val, "nl");},
         de: function (val) {return Drupal.behaviors.validation.validators.iban.fix(val, "de");},
         auto: function (val) {
-console.log("iban auto");
-console.dir(this);
           var country = val.replace(/^(..).*/, "$1").toLowerCase();  // get the country to relate to rxs
           return Drupal.behaviors.validation.validators.iban.fix(val, country);
         },
@@ -215,7 +213,6 @@ console.dir(this);
 
           val = val.replace(/\s/g, "");  // get rid of all space-related characters
           var rxs = Drupal.behaviors.validation.validators.iban.rxs;
-console.log("MATCH " + val.match(rxs[country]));
           return val.match(rxs[country]) ? check(val, country) : false;
         },
       },

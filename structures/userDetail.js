@@ -348,10 +348,10 @@
       linkMobile.text(name).attr('href', mijnaegonPathLink);
 
       // Append the DOM for the link just created and remove old login link
-      $('li[data-id="shw-user-details-inmenu"]').append(linkDesktop)
-        .find('.login-link-inv').remove();
-      $('li[data-id="shw-mob-user-details-inmenu"]').append(linkMobile)
-        .find('.login-link-inv').remove();
+      $('li[data-id="shw-user-details-inmenu"]').empty().append(linkDesktop);
+        //.find('.login-link-inv').remove();
+      $('li[data-id="shw-mob-user-details-inmenu"]').empty().append(linkMobile);
+        //.find('.login-link-inv').remove();
     },
 
     events: function (switchOff) {
