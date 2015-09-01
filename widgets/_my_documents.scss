@@ -105,43 +105,14 @@ min-height: 100vh !important;
   // MY DOCUMENTS NIEUW
   // --------------------------------------------------
 
+  #sparen {
+    padding: 0 0 20px 0;
+  }
+
   .inline-h2 {
     display: inline;
     margin-bottom: 20px;
   }
-
-  .doc-search-wrap {
-    margin-bottom: 10px;
-    display: inline;
-    float: right;
-    margin-bottom: 20px;
-
-    .search {
-      width: 145px !important;
-      background-color: white;
-      background-image: url("/images/icons/icon-search-header.png");
-      background-repeat: no-repeat;
-      background-position: right center;
-      background-size: 30px 30px;
-      border: 2px solid $lighter_grey;
-      padding: 0 20px 0 10px;
-    }
-
-    .search:focus {
-      width: 350px !important;
-      box-shadow: 1px 1px 3px $lighter_grey;
-      background-image: url("/images/ui/btn-close.png");
-      background-repeat: no-repeat;
-      background-position: 325px center;
-      background-size: 16px 16px;
-    }
-
-  .numberdocuments {
-    margin-right: 20px;
-    display: inline-block; 
-    color: $blue;
-  }
-}
 
 .number-search-results {
   width: 100%;
@@ -152,6 +123,30 @@ min-height: 100vh !important;
   .bold {
   font-family: $font_bold;
   }
+}
+
+.docs-show-all {
+  display: block;
+  padding: 3px 5px 3px 5px;
+  margin: 0 auto 0 auto;
+  background: #EFEBE7;
+  text-align: center;
+  color: #3395d3;
+  width: 110px;
+  cursor: pointer;
+  border-bottom-right-radius: 0.1875rem;
+  border-bottom-left-radius: 0.1875rem;
+
+   &:after {
+    display: block;
+    font-size: 0.625rem;
+    font-family: "aegon_icons";
+    content: "\e600";
+    -ms-transform: rotate(90deg); /* IE 9 */
+    -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+    transform: rotate(90deg);
+    margin: -6px 0 -4px 0;
+   }
 }
 
 
