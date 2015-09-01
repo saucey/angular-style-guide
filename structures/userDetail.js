@@ -255,7 +255,7 @@
       // Templating data
 
       // hide the ugly white box initially
-      $(".inplace").hide();
+      //$(".inplace").hide();
 
       $template.find('span.user_detail_widget_name').text(data.userName);
       var that = this;
@@ -289,7 +289,7 @@
       $('body').addClass('shw-widgets-logged-in');
       
       // show the element nicely
-      $(".inplace").show(1000);
+      //$(".inplace").show(1000);
 
       // Cross-browser implementation to provide workaround for no CSS animation
       if ( $('html').hasClass('no-cssanimations') && !this.hasBeenShown() ) {
