@@ -95,17 +95,21 @@
     }
   }
 
-  .icon-overview {
+  .product-overview {
     margin: 30px 0;
+
+    &.mobile {
+      display: none;
+    }
 
     .row-fluid {
       border-bottom: 1px solid #ccc;
     }
 
     .icon {
-      width: 40px;
-      margin: 5px 10px 0 0;
+      width: 43px;
       height: auto;
+      margin: 5px 10px 0 0;
 
       &.big {
         width: 80px;
@@ -115,8 +119,27 @@
 
     .span12 {
 
+      .span6 {
+        display: table;
+        height: 70px;
+
+        div {
+          display: table-cell;
+          vertical-align: middle;
+
+          p {
+            margin: 0;
+          }
+        }
+      }
+
       &.details {
         padding: 15px;
+
+        .table {
+          display: table;
+          position: relative; 
+        }
       }
 
       &.details {
@@ -129,6 +152,7 @@
         }
 
         .description {
+          width: 100%;
           display: table-cell; 
           float: left;
           vertical-align: top;
@@ -175,6 +199,7 @@
 
       .more-details {
         display: none;
+
       }
 
       &.details, .more-details {
@@ -187,7 +212,7 @@
       }
 
       p {
-        margin: 0.9375rem 0;
+        // margin: 1.4rem 0;
       }
     }
 
@@ -251,16 +276,34 @@
       }
     }
 
-    .icon-overview {
+    .product-overview {
 
-      .icon {
-        width: 50%;
-        margin: 0;
-        padding: 0;
+      &.mobile {
+        display: block;
       }
+      &.desktop {
+        display: none;
+      }
+      .icon {
+        width: 20%;
+        margin: 10px 1% 4px 5px;
+        padding: 0;
+
+        &.active {
+          outline: 12px #F2F2F2 solid;
+        }
+      } 
 
       .span12 {
         margin-bottom: 0;
+
+        .span6 {
+          div {
+            overflow:hidden;
+            text-align: center;
+
+          }
+        }
 
         .title {
           color: $blue;
@@ -268,7 +311,8 @@
         }
 
         &.details {
-
+          margin-top: -6px;
+          padding: 15px 15px 0 15px;
           .image {
             display: none;
           }
@@ -292,10 +336,11 @@
           }
         }
       }
-    }
+      
 
-    .span4 {
-      display: block;
+      .span4 {
+        display: block;
+      }
     }
   }
 }
