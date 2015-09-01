@@ -10,6 +10,12 @@
   Drupal.behaviors.lhfs_widget = {
     attach: function () {
 
+      var Validation = Drupal.behaviors.validation;
+      var formSelector = "form[name=lhfs_form]";
+      if (!Validation.IEFix(formSelector, false)) {
+        Validation.otherFix(formSelector, false);
+      }
+
       // Check if div#lhfs_widget exist
       if ($('.lhfs_widget').length > 0) {
         $("#lhfs_widget .tip").addClass("visible");
