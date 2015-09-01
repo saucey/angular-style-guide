@@ -32,7 +32,7 @@
         });
 
         $('.details').each(function() {
-          if($(this).hasClass('open') && $(this).data('icon') != icon) {
+          if($(this).hasClass('open') && $(this).data('icon') !== icon) {
             $(this).slideUp('fast');
           }
         }).promise().done( function(){ 
