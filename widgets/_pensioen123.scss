@@ -100,10 +100,97 @@
 
     &.mobile {
       display: none;
+
     }
 
     .row-fluid {
       border-bottom: 1px solid #ccc;
+
+      .span12 {
+
+        .span6 {
+          display: table;
+          height: 70px;
+
+          div {
+            display: table-cell;
+            vertical-align: middle;
+
+            p {
+              margin: 0;
+            }
+          }
+        }
+
+        &.details, .more-details {
+          width: 100%;
+          background: #F2F2F2;
+          margin-left: 0;
+
+          span {
+            display: block;
+          }
+        }
+
+        &.details {
+          padding: 15px;
+          display: none;
+
+          .table {
+            display: table;
+            position: relative; 
+          }
+
+          .image {
+            width: 95px; 
+            display: table-cell;
+            vertical-align: top;
+          }
+
+          .description {
+            width: 100%;
+            display: table-cell; 
+            float: left;
+            vertical-align: top;
+          }
+
+          .more-details {
+            display: none;
+          }
+
+          .close {
+            margin-right: 25px;
+
+            &:after {
+              -webkit-transform: rotate(270deg);
+              -ms-transform: rotate(270deg);
+              transform: rotate(270deg);
+            }
+          }
+
+          .more {
+            &:after {
+              -webkit-transform: rotate(90deg);
+              -ms-transform: rotate(90deg);
+              transform: rotate(90deg);
+            }
+          }
+
+          .close:after, .more:after {
+            display: inline-block;
+            font-size: 15px;
+            font-size: 0.9375rem;
+            position: absolute;
+            margin-left: 5px;
+            font-family: 'aegon_icons';
+            content: '\e600';
+            font-weight: normal;
+            -webkit-font-smoothing: antialiased;
+            transition: -webkit-transform .2s ease;
+            transition: transform .2s ease;
+          }
+        }
+      }
     }
 
     .icon {
@@ -114,105 +201,6 @@
       &.big {
         width: 80px;
         float: left;
-      }
-    }
-
-    .span12 {
-
-      .span6 {
-        display: table;
-        height: 70px;
-
-        div {
-          display: table-cell;
-          vertical-align: middle;
-
-          p {
-            margin: 0;
-          }
-        }
-      }
-
-      &.details {
-        padding: 15px;
-
-        .table {
-          display: table;
-          position: relative; 
-        }
-      }
-
-      &.details {
-        display: none;
-
-        .image {
-          width: 80px; 
-          display: table-cell;
-          vertical-align: top;
-        }
-
-        .description {
-          width: 100%;
-          display: table-cell; 
-          float: left;
-          vertical-align: top;
-        }
-
-        .more:after {
-          display: inline-block;
-          font-size: 15px;
-          font-size: 0.9375rem;
-          position: absolute;
-          margin-left: 5px;
-          font-family: 'aegon_icons';
-          content: '\e600';
-          font-weight: normal;
-          -webkit-font-smoothing: antialiased;
-          transition: -webkit-transform .2s ease;
-          transition: transform .2s ease;
-          -webkit-transform: rotate(90deg);
-          -ms-transform: rotate(90deg);
-          transform: rotate(90deg);
-        }
-
-        .close {
-          margin-right: 25px;
-        }
-
-        .close:after {
-          display: inline-block;
-          font-size: 15px;
-          font-size: 0.9375rem;
-          position: absolute;
-          margin-left: 5px;
-          font-family: 'aegon_icons';
-          content: '\e600';
-          font-weight: normal;
-          -webkit-font-smoothing: antialiased;
-          transition: -webkit-transform .2s ease;
-          transition: transform .2s ease;
-          -webkit-transform: rotate(270deg);
-          -ms-transform: rotate(270deg);
-          transform: rotate(270deg);
-        }
-      }
-
-      .more-details {
-        display: none;
-
-      }
-
-      &.details, .more-details {
-        width: 100%;
-        background: #F2F2F2;
-        margin-left: 0;
-        span {
-          display: block;
-        }
-      }
-
-      p {
-        // margin: 1.4rem 0;
       }
     }
 
@@ -284,62 +272,102 @@
       &.desktop {
         display: none;
       }
-      .icon {
-        width: 20%;
-        margin: 10px 1% 4px 5px;
-        padding: 0;
+      
+      .row-fluid {
+        .span12 {
+          margin-bottom: 0;
 
-        &.active {
-          outline: 12px #F2F2F2 solid;
-        }
-      } 
-
-      .span12 {
-        margin-bottom: 0;
-
-        .span6 {
-          div {
-            overflow:hidden;
-            text-align: center;
-
-          }
-        }
-
-        .title {
-          color: $blue;
-          font-size: 1.5625rem;
-        }
-
-        &.details {
-          margin-top: -6px;
-          padding: 15px 15px 0 15px;
-          .image {
+          .tab {
             display: none;
-          }
 
-          .description {
-            padding-right: 15px;
-          }
-
-          .close {
-            visibility: hidden;
-
-            &:after {
-              visibility: visible;
-              top: 0;
-              right: 0;
+            &.open {
+              display:block;
             }
           }
-          
-          .more {
-            display: none;
+
+          .span6 {
+            margin-bottom: 0;
+            div {
+              overflow:hidden;
+              position:relative;
+
+            }
+          }
+
+          .title {
+            color: $blue;
+            font-size: 1.5625rem;
+            
+            &:after {
+              display: inline-block;
+              font-size: 15px;
+              font-size: 0.9375rem;
+              position: absolute;
+              right: 0;
+              margin-right: 5px;
+              font-family: 'aegon_icons';
+              content: '\e600';
+              font-weight: normal;
+              -webkit-font-smoothing: antialiased;
+              transition: -webkit-transform .2s ease;
+              transition: transform .2s ease;
+              -webkit-transform: rotate(90deg);
+              -ms-transform: rotate(90deg);
+              transform: rotate(90deg);
+            }
+
+            &.arrowup:after {
+              -webkit-transform: rotate(270deg);
+              -ms-transform: rotate(270deg);
+              transform: rotate(270deg);
+            }
+          }
+
+          &.details {
+            margin-top: -6px;
+            padding: 15px 15px 0 15px;
+            .image {
+              display: none;
+            }
+
+            .description {
+              padding-right: 15px;
+            }
+
+            .close {
+              visibility: hidden;
+
+              &:after {
+                visibility: visible;
+                top: 0;
+                right: 0;
+              }
+            }
+            
+            .more {
+              display: none;
+            }
           }
         }
       }
       
 
+      .icon {
+        width: 20%;
+        margin: 8px 0 0 4%;
+        padding: 0;
+
+        &.active {
+          outline: 8px #F2F2F2 solid;
+        }
+      }
+      .icon:first-child {
+        margin: 0 0 0 8px;
+      } 
+      
+
       .span4 {
-        display: block;
+        display: block; /* Fix for tech library */
       }
     }
   }
