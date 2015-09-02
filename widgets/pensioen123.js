@@ -36,7 +36,7 @@
             that.addClass('arrowup');
             el.slideDown('fast');
             el.addClass('open');
-          })
+          });
         }
       });
 
