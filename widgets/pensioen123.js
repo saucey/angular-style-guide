@@ -16,6 +16,30 @@
 
       $('.user-details .span4').setAllToMaxHeight();
 
+      $('a.title').click(function(e) {
+        e.preventDefault();
+        var that = $(this);
+        var el = that.closest('.row-fluid').find('.tab');
+
+        if(el.hasClass('open')) {
+          $(this).removeClass('arrowup');
+          el.removeClass('open');
+          el.slideUp('fast');
+        } else {
+          $('.tab').each(function() {
+            if($(this).hasClass('open')) {
+              $(this).closest('.row-fluid').find('.title').removeClass('arrowup');
+              $(this).removeClass('open');
+              $(this).slideUp('fast');
+            }
+          }).promise().done(function() {
+            that.addClass('arrowup');
+            el.slideDown('fast');
+            el.addClass('open');
+          });
+        }
+      });
+
       //TODO:Demo functionality, have to change depending on the content we will get later
       $('.icon').click(function() {
         var that = $(this);
@@ -47,8 +71,6 @@
         var parent = $(this).parent().parent();
         parent.slideUp('fast');
         parent.removeClass('open');
-
-        // $(this).closest('.row-fluid').find('.details').slideToggle('fast');
       });
 
       $('.more').click(function(e) {
