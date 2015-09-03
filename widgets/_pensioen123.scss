@@ -7,6 +7,14 @@
 .pensioen123_container {
   // TODO: refactor for sass optimisation
 
+  .blue {
+    background: blue;
+    width: 25%;
+    height: 100px;
+    display: block;
+    float: left;
+  }
+
   min-height: 979px;
   width: 100%;
   background: url('../images/background/pensioen123_bg.jpg') no-repeat;
@@ -118,6 +126,24 @@
             display: table-cell;
             vertical-align: middle;
 
+            .icon {
+              cursor: pointer;
+              width: 43px;
+              height: auto;
+              margin: 5px 10px 0 0;
+              display: inline-block;
+              position: relative;
+
+              img {
+                width: 100%;
+
+                &.selected {
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                }
+              }
+            }
             p {
               margin: 0;
             }
@@ -147,6 +173,13 @@
             width: 95px; 
             display: table-cell;
             vertical-align: top;
+
+            .icon {
+              &.big {
+                float: left;
+                width: 80px;
+              }
+            }
           }
 
           .description {
@@ -194,18 +227,6 @@
         }
       }
     }
-
-    .icon {
-      width: 43px;
-      height: auto;
-      margin: 5px 10px 0 0;
-
-      &.big {
-        width: 80px;
-        float: left;
-      }
-    }
-
 
   }
 }
@@ -285,6 +306,19 @@
             div {
               overflow:hidden;
               position:relative;
+              .icon {
+                width: 21%;
+                display: block;
+                float: left;
+                margin: 0;
+                margin: 0 2% 10px 2%;
+                
+
+                img {
+                  width: 100%;
+                }
+
+              }
 
             }
           }
@@ -351,15 +385,6 @@
         }
       }
       
-
-      .icon {
-        width: 20%;
-        margin: 0 3% 8px 0;
-        padding: 0;
-
-      }
-      
-
       .span4 {
         display: block; /* Fix for tech library */
       }
