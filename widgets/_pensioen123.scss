@@ -98,15 +98,17 @@
   .product-overview {
     margin: 30px 0;
 
-    &.mobile {
-      display: none;
-
-    }
-
     .row-fluid {
       border-bottom: 1px solid #ccc;
 
       .span12 {
+
+        .tab {
+          @media screen and(min-width: 640px) {
+            display: block !important;
+          }
+          
+        }
 
         .span6 {
           display: table;
@@ -265,13 +267,6 @@
     }
 
     .product-overview {
-
-      &.mobile {
-        display: block;
-      }
-      &.desktop {
-        display: none;
-      }
       
       .row-fluid {
         .span12 {
@@ -297,6 +292,7 @@
           .title {
             color: $blue;
             font-size: 1.5625rem;
+            cursor: pointer;
             
             &:after {
               display: inline-block;
@@ -334,6 +330,10 @@
               padding-right: 15px;
             }
 
+            .more-details {
+              display: none !important;
+            }
+
             .close {
               visibility: hidden;
 
@@ -354,16 +354,10 @@
 
       .icon {
         width: 20%;
-        margin: 8px 0 0 4%;
+        margin: 0 3% 8px 0;
         padding: 0;
 
-        &.active {
-          outline: 8px #F2F2F2 solid;
-        }
       }
-      .icon:first-child {
-        margin: 0 0 0 8px;
-      } 
       
 
       .span4 {
