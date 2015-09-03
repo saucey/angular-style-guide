@@ -24,20 +24,17 @@
             el = '.details',
             details = that.closest('.row-fluid').find(el + "[data-icon='" + icon + "']");
 
-        $('.icon').each(function() {
-          if($(this).hasClass('active')) {
-            $(this).removeClass('active');
-          }
-        }).promise().done(function() {
-          that.addClass('active');
-        });
 
         $('.details').each(function() {
           if($(this).hasClass('open') && $(this).data('icon') !== icon) {
+            $(this).removeClass('open');
             $(this).slideUp('fast');
-
           }
         }).promise().done( function(){ 
+          if(!details.hasClass('open')) {
+            details.find('.more-details').removeAttr('style');
+            details.find('.more').removeAttr('style');
+          }
           details.slideDown('fast');
           details.addClass('open'); 
         });
@@ -49,8 +46,6 @@
         var parent = $(this).parent().parent();
         parent.slideUp('fast');
         parent.removeClass('open');
-
-        
       });
 
       /*
@@ -59,7 +54,7 @@
       $('.more').click(function(e) {
         e.preventDefault();
         $(this).closest('.details').find('.more-details').slideToggle('fast');
-        $(this).css('display', 'none');
+        $(this).hide();
       });
 
       /*
