@@ -106,13 +106,15 @@ button, .button {
     background-color: transparent;
   }
   &.edit {
+    margin-top: 0;  //fixing margin-top error introduced in commit b1ec15
     display: block;
     @media screen and(min-width: $rc-m-min-width) and(max-width: $rc-l-max-width) {
       display: none;  
     }
     &.transparent {
       display: none;
-      @media screen and(min-width: $rc-m-min-width) and(max-width: $rc-l-max-width) {
+      @media screen and(min-width: $rc-m-min-width) and (max-width: $rc-l-max-width) {
+        line-height: 20px;
         &:after {
           content: $font_icons_edit;
           font-family: $font_icons;
