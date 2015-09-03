@@ -1,0 +1,16 @@
+/* Fix for IE9 for the validation form (layout/_validation.scss)  */
+
+select {
+  &.blurred.invalid {
+    &~ .errorText {
+      display: block;
+    }
+  }
+}
+input.blurred {
+  &.invalid {
+    & ~ .errorText {
+      display: block;
+    }
+  }
+}
