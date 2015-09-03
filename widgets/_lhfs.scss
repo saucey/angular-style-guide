@@ -104,14 +104,14 @@
       }
     }
     li.label {
-      padding-right: 55px;
-      @media screen and(max-width: $rc-s-max-width) {
-        text-align: left;
-      }
     }
     li.label, label {
       font-family: $font_normal;
       text-align: right;
+      padding-right: 55px;
+      @media screen and(max-width: $rc-s-max-width) {
+        text-align: left;
+      }
       &:after {
         content: "";
       }
