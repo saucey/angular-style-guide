@@ -16,10 +16,59 @@
 
       $('.user-details .span4').setAllToMaxHeight();
 
-      $('a.title').click(function(e) {
+
+      //TODO:Demo functionality, may change depending on the content we will get later
+      $('.icon').click(function() {
+        var that = $(this),
+            icon = that.data('icon'),
+            el = '.details',
+            details = that.closest('.row-fluid').find(el + "[data-icon='" + icon + "']");
+
+        $('.icon').each(function() {
+          if($(this).hasClass('active')) {
+            $(this).removeClass('active');
+          }
+        }).promise().done(function() {
+          that.addClass('active');
+        });
+
+        $('.details').each(function() {
+          if($(this).hasClass('open') && $(this).data('icon') !== icon) {
+            $(this).slideUp('fast');
+
+          }
+        }).promise().done( function(){ 
+          details.slideDown('fast');
+          details.addClass('open'); 
+        });
+        
+      });
+
+      $('.close').click(function(e) {
         e.preventDefault();
-        var that = $(this);
-        var el = that.closest('.row-fluid').find('.tab');
+        var parent = $(this).parent().parent();
+        parent.slideUp('fast');
+        parent.removeClass('open');
+
+        
+      });
+
+      /*
+       * Clicking the more link will show the more-details div
+       */
+      $('.more').click(function(e) {
+        e.preventDefault();
+        $(this).closest('.details').find('.more-details').slideToggle('fast');
+        $(this).css('display', 'none');
+      });
+
+      /*
+       * Mobile functionality
+       * By clicking on .title the tab with icons will slide down
+       */
+      $('.title').click(function() {
+        var that = $(this),
+            el = that.closest('.row-fluid').find('.tab');
 
         if(el.hasClass('open')) {
           $(this).removeClass('arrowup');
@@ -38,45 +87,6 @@
             el.addClass('open');
           });
         }
-      });
-
-      //TODO:Demo functionality, have to change depending on the content we will get later
-      $('.icon').click(function() {
-        var that = $(this);
-        var icon = that.data('icon');
-        var el = '.details';
-        var details = that.closest('.row-fluid').find(el + "[data-icon='" + icon + "']");
-
-        $('.icon').each(function() {
-          if($(this).hasClass('active')) {
-            $(this).removeClass('active');
-          }
-        }).promise().done(function() {
-          that.addClass('active');
-        });
-
-        $('.details').each(function() {
-          if($(this).hasClass('open') && $(this).data('icon') !== icon) {
-            $(this).slideUp('fast');
-          }
-        }).promise().done( function(){ 
-          details.slideDown('fast');
-          details.addClass('open'); 
-        });
-        
-      });
-
-      $('.close').click(function(e) {
-        e.preventDefault();
-        var parent = $(this).parent().parent();
-        parent.slideUp('fast');
-        parent.removeClass('open');
-      });
-
-      $('.more').click(function(e) {
-        e.preventDefault();
-        $(this).closest('.details').find('.more-details').slideToggle('fast');
-        $(this).css('display', 'none');
       });
     }
   };
