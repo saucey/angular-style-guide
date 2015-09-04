@@ -50,9 +50,19 @@
             });
           }
         });
-
+        $("select").change(function () {
+          var index = this.selectedIndex;
+          var $details = $(this).closest(".details");
+          var $iban = $details.find("ul.account");
+          var $form = $(this).closest("form");
+          var form = this.form;
+          $iban.toggle(index != 1);
+          $(form).find("ul.incasso").toggle(index != 2);
+        });
       }
-    }
+      this.attached = true;
+    },
+    attached: false,
   };
 
 })(jQuery);
