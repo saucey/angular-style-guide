@@ -22,17 +22,17 @@
         var that = $(this),
             icon = that.data('icon'),
             el = '.details',
-            details = that.closest('.row-fluid').find(el + "[data-icon='" + icon + "']"),
-            selectedImg = '<img src="https://s3-eu-west-1.amazonaws.com/anl-ma-staticcontent/content/pensioen123/general/selected.png" class="selected">';
+            details = that.closest('.row-fluid').find(el + "[data-icon='" + icon + "']");
+            // selectedImg = '<img src="" class="selected">';
 
 
         // Loop through all elements with the class icon
         $('.icon').each(function() {
           // If there is an img with the class selected, remove it from the dom
-          $(this).find('.selected').remove();
+          $(this).find('.active').remove();
         }).promise().done(function() {
           // Append overlay image to the clicked icon
-          that.append(selectedImg);
+          that.append('<div class="active"></div>');
         });
 
         // Close all open details tabs
@@ -71,7 +71,7 @@
         // Loop through all elements with the class icon
         $('.icon').each(function() {
           // If there is an img with the class selected, remove it from the dom
-          $(this).find('.selected').remove();
+          $(this).find('.active').remove();
         });
       });
 
