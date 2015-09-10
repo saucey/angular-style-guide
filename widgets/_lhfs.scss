@@ -104,17 +104,21 @@
       }
     }
     li.label {
-      padding-right: 55px;
-      @media screen and(max-width: $rc-s-max-width) {
-        text-align: left;
-      }
     }
     li.label, label {
       font-family: $font_normal;
       text-align: right;
+      padding-right: 55px;
+      line-height: 44px;
+      @media screen and(max-width: $rc-s-max-width) {
+        text-align: left;
+      }
       &:after {
         content: "";
       }
+    }
+    label.checkbox {
+      line-height: 32px;
     }
     li.label.required:after, label.checkbox.required span.label:after {
       margin-left: 5px;
@@ -365,7 +369,7 @@ ul.horizontal {
     //height: 50px;
   }
   margin: 0;
-  margin-bottom: 20px;
+  // margin-bottom: 20px;
   @media screen and(max-width: $rc-s-max-width) {
     margin-bottom: 30px;
   }
