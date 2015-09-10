@@ -1,8 +1,3 @@
-/*jshint multistr: true */
-/**
- * Mijn Documenten widget script
- * Dependencies: null
- */
 (function(doc, win, $, Drupal) {
 
   'use strict';
@@ -15,19 +10,25 @@
 
     attach: function () {
       $('#sortabletable').DataTable({
-      	"info": false,
-      /*	"orderFixed": [ 2, 'asc' ], */
-      	"orderClasses": false
-  		}
-      );
+        "info": false,
+        "orderClasses": true,
+        "type": 'column',
+        "target": '.narrow-td',
+        "order": [[ 3, "desc" ]],
+        "responsive": true
+      }
+    );
 
       // show max 5 rows
       $('#sortabletable tr:gt(5)').hide();
+      // add placeholder to input
+      $('.dataTables_filter input').attr("placeholder", "Zoeken");
         $(".docs-show-all").click(function(){
           $('#sortabletable tr:gt(5)').toggle();
           // rotate arrow
           $('.docs-show-all').toggleClass('changed');
-        });
+     });
+
     }
   };
 
