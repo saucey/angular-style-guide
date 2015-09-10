@@ -1,0 +1,145 @@
+//
+// STYLES SPECIFIC FOR DATATABLES-plugin (www.datatables.net)
+// Overriding styles from vendors/_jquery.dataTables.min.scss
+// ---------------------------------------------------------
+
+table 
+{
+
+}
+
+thead {
+	border: none;
+}
+
+.dataTables_wrapper {
+}
+
+.dataTables_paginate {
+	display: none;
+}
+
+.dataTables_length {
+ 	display: none; 
+}
+
+.table.dataTable thead .sorting_asc {
+	url:("aegon/lib/aegon-assets-library/images/sort_asc.png");
+}
+
+.dataTables_filter {
+	margin-bottom: 15px;
+}
+
+table.dataTable.no-footer {
+	border: none;
+	border-top: 1px solid #d8d7d1;
+	border-bottom: 1px solid #d8d7d1 !important;
+}
+
+#sortabletable {
+
+}
+
+
+table.dataTable.stripe tbody tr.even, table.dataTable.display tbody tr.even {
+
+}
+
+table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
+
+}
+
+
+@media screen and (max-width: 767px) {
+    .dataTables_wrapper .dataTables_info,.dataTables_wrapper .dataTables_paginate {
+        float: none;
+        text-align: center
+    }
+
+    .dataTables_wrapper .dataTables_paginate {
+        margin-top: 0.5em
+    }
+}
+
+.docs-show-all.changed:after {
+        transform: rotate(-90deg);
+    }
+
+@media screen and (max-width: 640px) {
+
+    .dataTables_wrapper .dataTables_filter input:focus {
+        outline: none !important;
+        box-shadow: none !important;
+    }
+
+    table.datatable {
+        margin-top: 10px !important;
+        border-top: none !important;
+    }
+
+    table.dataTable thead{
+        display: none;
+        clear: both;
+    }
+
+    table.dataTable tbody td {
+        display: block;
+        clear: both;
+        width: 100%;
+        padding: 4px 0 0 10px;
+    }
+
+    table.dataTable tbody td a.icon-pdf {
+        float: left;
+        font-size: 32px;
+        margin-top: 12px;
+        left: 0px;
+    }
+
+    .dataTables_filter {
+        display:none;
+    }
+
+    table.dataTable > tbody > tr.child ul li  {
+        margin-left: -33px;
+    }
+
+    table.dataTable > tbody > tr.child ul li:last-child {
+        margin-bottom: -20px;
+    }
+
+    table.dataTable > tbody > tr.child span.dtr-title {
+        display: block !important;
+    }
+
+    table.dataTable tbody tr td:first-child:after {
+        right: 25px;
+	    height: 16px;
+	    width: 16px;
+	    position: absolute;
+	    font-family: "aegon_icons";
+	    font-weight: normal;
+	    color: #3395d3;
+	    content: "\e62d";
+	    top: 12px;
+    }
+
+    table.dataTable.no-footer {
+        border-top: none !important;
+    }
+
+    .narrow-td {
+        left: 0px;
+	    top: -5px;
+	    position: relative;
+     }
+
+     .doctitle {
+        left: 35px;
+    	position: absolute;
+     }
+}
+
+
+

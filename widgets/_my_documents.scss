@@ -137,7 +137,11 @@ min-height: 100vh !important;
   border-bottom-right-radius: 0.1875rem;
   border-bottom-left-radius: 0.1875rem;
 
-   &:after {
+  &:before {
+    content: "Toon alles";
+  }
+
+  &:after {
     display: block;
     font-size: 0.625rem;
     font-family: "aegon_icons";
@@ -147,8 +151,29 @@ min-height: 100vh !important;
     transform: rotate(90deg);
     margin: -6px 0 -4px 0;
    }
+
+  .changed::after { 
+
+    /* this selector is more specific, so it takes precedence over the other :after */
+      transform: rotate(-90deg) !important;
+  }
+
+    /* change text */
+  .changed::before { 
+      content: "Toon minder";
+  }
 }
 
+.dataTables_wrapper .dataTables_filter input {
+    width: 110px !important;
+    background-color: white;
+    background-image: url("/images/icons/icon-search-header.png") !important;
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: 30px 30px;
+    border: 2px solid #EFEBE7;
+    padding: 0 20px 0 10px;
+}
 
 // 
 // Media queries
@@ -211,6 +236,7 @@ min-height: 100vh !important;
       }
     }
   }
-}
+  }
+
 
 
