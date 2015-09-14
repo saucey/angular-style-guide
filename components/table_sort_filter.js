@@ -31,16 +31,6 @@
         }
       });
 
-     //  // show max 5 rows
-     //  $('#sortabletable tr:gt(5)').hide();
-     //  // add placeholder to input
-     //  $('.dataTables_filter input').attr("placeholder", "Zoeken");
-     //    $(".docs-show-all").click(function(){
-     //      $('#sortabletable tr:gt(5)').toggle();
-     //      // rotate arrow
-     //      $('.docs-show-all').toggleClass('changed');
-     // });
-
     }
   };
 
