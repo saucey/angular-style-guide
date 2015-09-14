@@ -144,11 +144,6 @@
     }
   } // end highlight
 
-// roled back
-// .login-link-wrapper {
-//    display: none !important;
-// }
-
   .btn-login-loggedin {
     z-index: 2;
     background-color: $white;
@@ -223,6 +218,10 @@
     }
   }
 }
+// Hide login button by default
+.login-link-wrapper {
+  display: none;
+}
 
 //
 // Fixes for IE<10
@@ -243,10 +242,6 @@ body.section-mijnaegon .myaegon {
 
 body.shw-widgets-logged-in {
 
-  // removed header.header .login-link-wrapper 
-  // rolled back
-
-  header.header .login-link-wrapper,
   .link-logged-in a {
     display: none;
   }
