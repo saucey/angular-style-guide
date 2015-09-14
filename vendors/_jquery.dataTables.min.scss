@@ -508,17 +508,6 @@ table.dataTable,table.dataTable th,table.dataTable td {
         display: block !important;
     }
 
-    table.dataTable tbody tr td:first-child:after {
-        right: 15px;
-        height: 16px;
-        width: 16px;
-        position: absolute;
-        font-family: "aegon_icons";
-        font-weight: normal;
-        color: #3395d3;
-        content: "\e62d";
-    }
-
     table.dataTable.no-footer {
         border-top: none !important;
     }

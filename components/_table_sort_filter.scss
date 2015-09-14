@@ -50,6 +50,45 @@ table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
 
 }
 
+.docs-show-all {
+  display: block;
+  padding: 3px 5px 3px 5px;
+  margin: 0 auto 0 auto;
+  background: #EFEBE7;
+  text-align: center;
+  color: #3395d3;
+  width: 110px;
+  cursor: pointer;
+  border-bottom-right-radius: 0.1875rem;
+  border-bottom-left-radius: 0.1875rem;
+
+  &:before {
+    content: "Toon alles";
+  }
+
+  &:after {
+    display: block;
+    font-size: 0.625rem;
+    font-family: "aegon_icons";
+    content: "\e600";
+    -ms-transform: rotate(90deg); /* IE 9 */
+    -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+    transform: rotate(90deg);
+    margin: -6px 0 -4px 0;
+   }
+
+  .changed::after { 
+
+    /* this selector is more specific, so it takes precedence over the other :after */
+      transform: rotate(-90deg) !important;
+  }
+
+    /* change text */
+  .docs-show-all .changed::before { 
+      content: "Verbergen" !important;
+  }
+}
+
 
 @media screen and (max-width: 767px) {
     .dataTables_wrapper .dataTables_info,.dataTables_wrapper .dataTables_paginate {
@@ -73,6 +112,10 @@ table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
         box-shadow: none !important;
     }
 
+    table.dataTable.dtr-inline.collapsed  {
+    	border-bottom: 1px solid grey;
+    }
+
     table.datatable {
         margin-top: 10px !important;
         border-top: none !important;
@@ -84,17 +127,24 @@ table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
     }
 
     table.dataTable tbody td {
-        display: block;
+        display: inline-block;
         clear: both;
         width: 100%;
-        padding: 4px 0 0 10px;
+        padding: 6px 0 4px 10px;
     }
 
     table.dataTable tbody td a.icon-pdf {
         float: left;
-        font-size: 32px;
-        margin-top: 12px;
-        left: 0px;
+	    font-size: 32px;
+	    margin-top: 12px;
+	    left: 0px;
+	    height: 16px;
+	    width: 16px;
+    }
+
+    table.dataTable tbody td a.icon-pdf:before {
+    	top: 14px;
+    	position: absolute;
     }
 
     .dataTables_filter {
@@ -102,7 +152,7 @@ table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
     }
 
     table.dataTable > tbody > tr.child ul li  {
-        margin-left: -33px;
+        margin-left: 10px;
     }
 
     table.dataTable > tbody > tr.child ul li:last-child {
@@ -111,18 +161,6 @@ table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
 
     table.dataTable > tbody > tr.child span.dtr-title {
         display: block !important;
-    }
-
-    table.dataTable tbody tr td:first-child:after {
-        right: 25px;
-	    height: 16px;
-	    width: 16px;
-	    position: absolute;
-	    font-family: "aegon_icons";
-	    font-weight: normal;
-	    color: #3395d3;
-	    content: "\e62d";
-	    top: 12px;
     }
 
     table.dataTable.no-footer {
@@ -135,10 +173,37 @@ table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
 	    position: relative;
      }
 
+    table.dataTable > tbody > tr.child span.dtr-title {
+     	display: none !important;
+     }
+
+     table.dataTable > tbody > tr.child span.dtr-data a {
+
+     }
+
      .doctitle {
         left: 35px;
     	position: absolute;
      }
+
+     .doctitle a {
+     	position: absolute;
+    	top: -43px;
+    	left: 20px;
+    	}
+
+     table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child, table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child {
+     	padding-left: 10px;
+     }
+
+     table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child:before, table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child:before {
+    // 	display:none;
+     }
+
+     table.dataTable tbody tr {
+     	background: none;
+     }
+
 }
 
 
