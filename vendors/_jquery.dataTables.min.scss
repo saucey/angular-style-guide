@@ -34,8 +34,40 @@ table.dataTable thead .sorting,table.dataTable thead .sorting_asc,table.dataTabl
     background-position: center right
 }
 
-table.dataTable thead .sorting {
-    background-image: url("images/sort_both.png")
+table.dataTable thead tr th.sorting:after {
+    font-family: 'aegon_icons';
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+    content: '\e630';
+    color: #D8D7D1;
+    position: absolute;
+    right: 10px;
+}
+
+table.dataTable thead .sorting_desc:after {
+    font-family: 'aegon_icons';
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+    content: '\e630';
+    color: #D8D7D1;
+    position: absolute;
+    right: 10px;
+  //  -ms-transform: rotate(90deg); /* IE 9 */
+  //  -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+    transform: rotate90deg);
+}
+
+table.dataTable thead .sorting_asc:after {
+    font-family: 'aegon_icons';
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+    content: '\e630';
+    color: #D8D7D1;
+    position: absolute;
+    right: 10px;
+ //   -ms-transform: rotate(90deg); /* IE 9 */
+ //   -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+    transform: rotate90deg);
 }
 
 table.dataTable thead .sorting_asc {

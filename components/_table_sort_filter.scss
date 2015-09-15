@@ -89,6 +89,15 @@ table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
   }
 }
 
+.narrow-td {
+        left: 0px;
+	    top: 5px;
+	    position: relative;
+	    font-size: 28px !important;
+	    width: 50px;
+    	text-align: center;
+     }
+
 
 @media screen and (max-width: 767px) {
     .dataTables_wrapper .dataTables_info,.dataTables_wrapper .dataTables_paginate {
@@ -130,21 +139,22 @@ table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
         display: inline-block;
         clear: both;
         width: 100%;
-        padding: 6px 0 4px 10px;
+        padding: 6px 0 4px 20px;
     }
 
     table.dataTable tbody td a.icon-pdf {
-        float: left;
-	    font-size: 32px;
-	    margin-top: 12px;
-	    left: 0px;
-	    height: 16px;
-	    width: 16px;
+        font-size: 24px;
+	    height: 32px;
+	    width: 32px;
+	    top: -34px;
+	    left: 275px;
+	    position: absolute;
     }
 
     table.dataTable tbody td a.icon-pdf:before {
-    	top: 14px;
-    	position: absolute;
+    	top: -4x;
+    	right: 0px;
+    	font-size: 28px !important;
     }
 
     .dataTables_filter {
@@ -171,6 +181,9 @@ table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
         left: 0px;
 	    top: -5px;
 	    position: relative;
+	    font-size: 28px !important;
+	    width: 50px;
+    	text-align: center;
      }
 
     table.dataTable > tbody > tr.child span.dtr-title {
@@ -181,27 +194,62 @@ table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
 
      }
 
-     .doctitle {
-        left: 35px;
-    	position: absolute;
-     }
 
-     .doctitle a {
-     	position: absolute;
-    	top: -43px;
-    	left: 20px;
-    	}
+	table.dataTable.dtr-inline.collapsed > tbody > tr.parent > td:first-child:before, table.dataTable.dtr-inline.collapsed > tbody > tr.parent > th:first-child:before {
+		top: 5px;
+	}
 
-     table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child, table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child {
-     	padding-left: 10px;
-     }
-
-     table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child:before, table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child:before {
-    // 	display:none;
-     }
+	table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child:before, table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child:before {
+		top: 5px;
+	}
 
      table.dataTable tbody tr {
      	background: none;
+     }
+
+     .sortabletable tbody td ul {
+     	width: 100%;
+     }
+
+     .sortabletable tbody td ul li {
+     	width: 100%;
+     }
+
+     table.dataTable.dtr-inline.collapsed > tbody > .child > .child:before {
+     	display: none;
+     } 
+
+     table.dataTable.dtr-inline.collapsed > tbody > .child > .child > ul:first-child {
+     //	display: none;
+     } 
+
+     table.dataTable.stripe tbody tr.odd:first-child {
+     	border: none;
+     }
+
+     table.dataTable.stripe tbody tr.odd {
+     	border-top: 1px solid #E0E0E0;
+     	display: block;
+     }
+
+     table.dataTable.stripe tbody tr.even {
+     	border-top: 1px solid #E0E0E0;
+     	display: block;
+     }
+
+     table.dataTable > tbody > tr.child ul {
+     	display: inline-block;
+	    list-style-type: none;
+	    margin: -10px 0 0 -10px;
+	    padding: 0;
+     }
+
+     table.dataTable tbody tr .row {
+     	border-bottom: 1px solid grey;
+     }
+
+     table.dataTable > tbody > tr.child ul li:first-child {
+     	display: none;
      }
 
 }
