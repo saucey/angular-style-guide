@@ -10,14 +10,16 @@
 
     attach: function () {
 
-      var table = $('#sortabletable').DataTable({
+      var table = $('.sortabletable').DataTable({
         "info": false,
         "orderClasses": false,
-        "type": 'column',
         "target": '.narrow-td',
         "order": [[ 3, "desc" ]],
         "responsive": true,
-        "pageLength": 5
+        "pageLength": 5,
+        "columnDefs": [
+        { type: 'date-dd-mm-yyyy', targets: 0 }
+        ]
       }
     );
 
