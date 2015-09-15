@@ -241,6 +241,7 @@
       }
       else {
         $(".login-link").addClass("visible");
+        $('.login-link-wrapper').css('display', 'block');
       }
     },
 
