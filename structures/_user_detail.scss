@@ -100,7 +100,7 @@
     }
     background-color: $green;
     color: #ffffff !important;
-    padding: 0 0 0 80px;
+    // padding: 0 0 0 80px;
 
     &.desktop {
       display: none;
@@ -123,8 +123,8 @@
       overflow: hidden;
       background-color: transparent;
       animation: slidingHighlightOnTopMobile 1s 1 5s forwards;
-      max-height: 90px !important;
-      height: 90px !important;
+      //max-height: 90px !important;
+      //height: 90px !important;
 
       .text {
         padding: 0;
