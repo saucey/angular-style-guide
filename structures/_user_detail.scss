@@ -45,7 +45,7 @@
 
   .dropdown {
     display: none;
-    z-index: 1;
+    z-index: 2;
     position: absolute;
     top: auto;
     right: 0;
@@ -100,7 +100,7 @@
     }
     background-color: $green;
     color: #ffffff !important;
-    padding: 0 0 0 80px;
+    // padding: 0 0 0 80px;
 
     &.desktop {
       display: none;
@@ -123,8 +123,8 @@
       overflow: hidden;
       background-color: transparent;
       animation: slidingHighlightOnTopMobile 1s 1 5s forwards;
-      max-height: 90px !important;
-      height: 90px !important;
+      //max-height: 90px !important;
+      //height: 90px !important;
 
       .text {
         padding: 0;
@@ -143,11 +143,6 @@
       font-weight: 300;
     }
   } // end highlight
-
-// roled back
-// .login-link-wrapper {
-//    display: none !important;
-// }
 
   .btn-login-loggedin {
     z-index: 2;
@@ -223,6 +218,10 @@
     }
   }
 }
+// Hide login button by default
+.login-link-wrapper {
+  display: none;
+}
 
 //
 // Fixes for IE<10
@@ -243,10 +242,6 @@ body.section-mijnaegon .myaegon {
 
 body.shw-widgets-logged-in {
 
-  // removed header.header .login-link-wrapper 
-  // rolled back
-
-  header.header .login-link-wrapper,
   .link-logged-in a {
     display: none;
   }

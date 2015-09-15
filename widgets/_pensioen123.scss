@@ -240,6 +240,21 @@
               margin: 0;
             }
           }
+          table {
+            margin-bottom: 10px;
+          }
+
+          table, p {
+            &.half-width {
+              @media screen and(min-width: $rc-m-min-width) and(max-width: $rc-m-max-width) {
+                width: 100%;
+                float: none;
+              }
+              width: 48%;
+              float: left;
+              margin-right: 1%;
+            }
+          }
 
           .close {
             margin-right: 25px;
