@@ -84,7 +84,8 @@ table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
   }
 
     /* change text */
-  .docs-show-all .changed::before { 
+
+  .changed::before { 
       content: "Verbergen" !important;
   }
 }
@@ -257,6 +258,19 @@ table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
      table.dataTable > tbody > tr.child ul li:first-child {
      	display: none;
      }
+
+       .changed::after { 
+
+    	/* this selector is more specific, so it takes precedence over the other :after */
+      	transform: rotate(-90deg) !important;
+	  }
+
+	    /* change text */
+	    
+	  	.changed::before { 
+	    content: "Verbergen" !important;
+	  }
+
 }
 
 
