@@ -63,8 +63,12 @@ table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
   border-bottom-left-radius: 0.1875rem;
 
   &:before {
-    content: "Toon alles";
+    content: "Toon alles" !important;
   }
+
+  &.changed:before { 
+	    content: "Verbergen" !important;
+	}
 
   &:after {
     display: block;
@@ -92,12 +96,21 @@ table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
 
 .narrow-td {
         left: 0px;
-	    top: 5px;
 	    position: relative;
 	    font-size: 28px !important;
-	    width: 50px;
+	    width: 30px;
     	text-align: center;
      }
+
+.narrow-td a {
+	right: 10px;
+    display: block;
+    position: absolute;
+}
+
+table.dataTable thead tr th.narrow-td:after {
+	content: "";
+}
 
 @media screen and (max-width: 767px) {
     .dataTables_wrapper .dataTables_info,.dataTables_wrapper .dataTables_paginate {
@@ -182,7 +195,7 @@ table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
 	    top: -5px;
 	    position: relative;
 	   	font-size: 28px !important;
-	    width: 50px;
+	    width: 30px;
     	text-align: center;
 	    font-size: 28px !important;
 	    width: 50px;

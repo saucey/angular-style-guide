@@ -40,7 +40,7 @@ table.dataTable thead tr th.sorting:after {
     -webkit-font-smoothing: antialiased;
     content: '\e630';
     color: #D8D7D1;
-    position: absolute;
+    float: right;
     right: 10px;
 }
 
@@ -50,11 +50,8 @@ table.dataTable thead .sorting_desc:after {
     -webkit-font-smoothing: antialiased;
     content: '\e630';
     color: #D8D7D1;
-    position: absolute;
+    float: right;
     right: 10px;
-  //  -ms-transform: rotate(90deg); /* IE 9 */
-  //  -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
-    transform: rotate(90deg);
 }
 
 table.dataTable thead .sorting_asc:after {
@@ -63,27 +60,27 @@ table.dataTable thead .sorting_asc:after {
     -webkit-font-smoothing: antialiased;
     content: '\e630';
     color: #D8D7D1;
-    position: absolute;
+    float: right;
     right: 10px;
- //   -ms-transform: rotate(90deg); /* IE 9 */
- //   -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
-    transform: rotate(90deg);
+ //   -ms-transform: rotate(180deg); /* IE 9 */
+ //   -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+    transform: rotate(180deg);
 }
 
 table.dataTable thead .sorting_asc {
-    background-image: url("images/sort_asc.png")
+  //  background-image: url("images/sort_asc.png")
 }
 
 table.dataTable thead .sorting_desc {
-    background-image: url("images/sort_desc.png")
+  //  background-image: url("images/sort_desc.png")
 }
 
 table.dataTable thead .sorting_asc_disabled {
-    background-image: url("images/sort_asc_disabled.png")
+  //  background-image: url("images/sort_asc_disabled.png")
 }
 
 table.dataTable thead .sorting_desc_disabled {
-    background-image: url("images/sort_desc_disabled.png")
+  //  background-image: url("images/sort_desc_disabled.png")
 }
 
 table.dataTable tbody tr {
