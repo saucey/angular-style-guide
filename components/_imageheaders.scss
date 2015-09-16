@@ -1,38 +1,51 @@
 //
 // Header component
 // --------------------------------------------------
-.image-header {
-  h1 {
-    position: absolute;
-    font-family: $font_thin;
-    text-shadow: 0px 3px 5px rgba(150, 150, 150, 1);
-    bottom: 50px;
-    margin-left: 50px;
-    @include rem('font-size', $xxxx-large);
-    @include rem('line-height', 36);
-    color: $white;
-  }
-  img {
-    max-width: 100%;
-    height: auto;
-  }
-}
+$line-height-jumbo: $jumbo * 1.5;
+$line-height-xxxx-large: $xxxx-large * 1.5;
+$line-height-xxx-large: $xxx-large * 1.5;
+$line-height-xx-large: $xx-large * 1.5;
 
-@include breakpoint($brk-large-desktop) {
+@include breakpoint($brk-tablet:) {
   .image-header {
-    h1 {
-      @include rem('font-size', $jumbo);
-      @include rem('line-height', 36);
+    &.image-header--type-one {
+      h1 {
+        @include rem('font-size', $xxx-large);
+        @include rem('line-height', $line-height-xxx-large);
+      }
     }
   }
 
 }
 
-@include breakpoint($brk-tablet) {
-  .image-header {
+.image-header {
+  position: relative;
+  &.image-header--type-one {
     h1 {
-      @include rem('font-size', $xxx-large);
-      @include rem('line-height', 36)
+      position: absolute;
+      font-family: $font_thin;
+      // text-shadow: 0px 3px 5px rgba(150, 150, 150, 1);
+      margin-bottom: 5%;
+      bottom: 0;
+      margin-left: 50px;
+      @include rem('font-size', $xxxx-large);
+      @include rem('line-height', $line-height-xxxx-large);
+      color: $white;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+}
+
+@include breakpoint($brk-large-desktop) {
+  .image-header {
+    &.image-header--type-one {
+      h1 {
+        @include rem('font-size', $jumbo);
+        @include rem('line-height', $line-height-jumbo);
+      }
     }
   }
 
@@ -40,9 +53,11 @@
 
 @include breakpoint($brk-mobile) {
   .image-header {
-    h1 {
-      @include rem('font-size', $large);
-      @include rem('line-height', 36);
+    &.image-header--type-one {
+      h1 {
+        @include rem('font-size', $xx-large);
+        @include rem('line-height', $line-height-xx-large);
+      }
     }
   }
 }
