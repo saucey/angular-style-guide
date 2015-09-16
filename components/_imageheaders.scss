@@ -4,14 +4,15 @@
 $line-height-jumbo: $jumbo * 1.5;
 $line-height-xxxx-large: $xxxx-large * 1.5;
 $line-height-xxx-large: $xxx-large * 1.5;
+$line-height-xx-large: $xx-large * 1.5;
 $line-height-x-large: $x-large * 1.5;
 
 @include breakpoint($brk-tablet) {
   .image-header {
     &.image-header--type-one {
       h1 {
-        @include rem('font-size', $xx-large);
-        @include rem('line-height', $line-height-xx-large);
+        @include rem('font-size', $xxx-large);
+        @include rem('line-height', $line-height-xxx-large);
       }
     }
   }
