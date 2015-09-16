@@ -14,12 +14,10 @@
         "info": false,
         "orderClasses": false,
         "target": '.narrow-td',
-        "order": [[ 3, "desc" ]],
+        "ordering": true,
         "responsive": true,
         "pageLength": 5,
-        "columnDefs": [
-        { type: 'date-dd-mm-yyyy', targets: 0 }
-        ]
+        "order": [ 2, 'desc' ]
       }
     );
 
