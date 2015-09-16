@@ -1,20 +1,20 @@
 table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child,
 table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child {
   position: relative;
-  padding-left: 40px;
+//  padding-left: 40px;
   cursor: pointer;
 }
 
 table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child:before,
 table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child:before {
-    top: 10px;
-    right: 26px;
-    height: 16px;
-    width: 16px;
-    display: block;
+    left: 0px;
+    height: 32px;
+    width: 24px;
+    display: inline-block;
     position: absolute;
     display: block;
     font-family: "aegon_icons";
+    font-size: 12px;
     color: #3395d3;
     content: "\e62d";
 }
@@ -25,11 +25,8 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child.dataTables_em
 }
 table.dataTable.dtr-inline.collapsed > tbody > tr.parent > td:first-child:before,
 table.dataTable.dtr-inline.collapsed > tbody > tr.parent > th:first-child:before {
-  
-    -ms-transform: rotate(-90deg);
-    -webkit-transform: rotate(-90deg);
-    transform: rotate(-90deg);
-    top: 18px;
+
+    top: 10px;
     left: 0px;
 }
 
@@ -107,10 +104,5 @@ table.dataTable > tbody > tr.child span.dtr-title {
   font-weight: bold;
 }
 
-table.dataTable > tbody > tr.child span.dtr-title {
-  display: inline-block;
-  min-width: 75px;
-  font-weight: bold;
-}
 
 
