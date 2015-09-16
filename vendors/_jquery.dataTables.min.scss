@@ -34,122 +34,56 @@ table.dataTable thead .sorting,table.dataTable thead .sorting_asc,table.dataTabl
     background-position: center right
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-table.dataTable thead .th {
-    
-}
-
-table.dataTable thead .sorting:after {
-=======
 table.dataTable thead tr th.sorting:after {
->>>>>>> 95e11791bf73ca856948e4d1e8a1c809f327e46d
-=======
-table.dataTable thead tr th.sorting:after {
->>>>>>> master
     font-family: 'aegon_icons';
     font-size: 14px;
     -webkit-font-smoothing: antialiased;
     content: '\e630';
     color: #D8D7D1;
-<<<<<<< HEAD
-<<<<<<< HEAD
-    display: block;
-    float: right;
-}
-
-table.dataTable thead .sorting:last-child:after {
-    content: "";
-}
-
-table.dataTable thead .sorting_asc:last-child:after {
-    content: "";
-}
-
-table.dataTable thead .sorting_desc:last-child:after {
-    content: "";
-}
-
-table.dataTable thead .sorting_asc:after {
-=======
-=======
->>>>>>> master
     position: absolute;
     right: 10px;
 }
 
 table.dataTable thead .sorting_desc:after {
-<<<<<<< HEAD
->>>>>>> 95e11791bf73ca856948e4d1e8a1c809f327e46d
-=======
->>>>>>> master
     font-family: 'aegon_icons';
     font-size: 14px;
     -webkit-font-smoothing: antialiased;
     content: '\e630';
     color: #D8D7D1;
-<<<<<<< HEAD
-<<<<<<< HEAD
-    display: block;
-    float: right;
-    -ms-transform: rotate(180deg); /* IE 9 */
-    -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
-    transform: rotate(180deg);
-}
-
-table.dataTable thead .sorting_desc:after {
-=======
-=======
->>>>>>> master
     position: absolute;
     right: 10px;
   //  -ms-transform: rotate(90deg); /* IE 9 */
   //  -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
-    transform: rotate90deg);
+    transform: rotate(90deg);
 }
 
 table.dataTable thead .sorting_asc:after {
-<<<<<<< HEAD
->>>>>>> 95e11791bf73ca856948e4d1e8a1c809f327e46d
-=======
->>>>>>> master
     font-family: 'aegon_icons';
     font-size: 14px;
     -webkit-font-smoothing: antialiased;
     content: '\e630';
     color: #D8D7D1;
-<<<<<<< HEAD
-<<<<<<< HEAD
-    display: block;
-    float:right;
-=======
-=======
->>>>>>> master
     position: absolute;
     right: 10px;
  //   -ms-transform: rotate(90deg); /* IE 9 */
  //   -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
-    transform: rotate90deg);
-<<<<<<< HEAD
->>>>>>> 95e11791bf73ca856948e4d1e8a1c809f327e46d
-=======
->>>>>>> master
+    transform: rotate(90deg);
 }
 
 table.dataTable thead .sorting_asc {
- //   background-image: url("images/sort_asc_disabled.png");
+    background-image: url("images/sort_asc.png")
 }
 
 table.dataTable thead .sorting_desc {
- //   background-image: url("images/sort_desc_disabled.png");
+    background-image: url("images/sort_desc.png")
 }
 
 table.dataTable thead .sorting_asc_disabled {
-//    background-image: url("images/sort_asc_disabled.png");
+    background-image: url("images/sort_asc_disabled.png")
 }
 
 table.dataTable thead .sorting_desc_disabled {
-//    background-image: url("images/sort_desc_disabled.png");
+    background-image: url("images/sort_desc_disabled.png")
 }
 
 table.dataTable tbody tr {
