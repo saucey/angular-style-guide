@@ -98,23 +98,15 @@ table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
 	    width: 50px;
     	text-align: center;
      }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> 95e11791bf73ca856948e4d1e8a1c809f327e46d
-=======
-
->>>>>>> master
 
 @media screen and (max-width: 767px) {
     .dataTables_wrapper .dataTables_info,.dataTables_wrapper .dataTables_paginate {
         float: none;
-        text-align: center
+        text-align: center;
     }
 
     .dataTables_wrapper .dataTables_paginate {
-        margin-top: 0.5em
+        margin-top: 0.5em;
     }
 }
 
@@ -138,7 +130,7 @@ table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
         border-top: none !important;
     }
 
-    table.dataTable thead{
+    table.dataTable thead {
         display: none;
         clear: both;
     }
@@ -163,13 +155,6 @@ table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
     	top: -4x;
     	right: 0px;
     	font-size: 28px !important;
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
->>>>>>> 95e11791bf73ca856948e4d1e8a1c809f327e46d
-=======
->>>>>>> master
     }
 
     .dataTables_filter {
@@ -196,22 +181,15 @@ table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
         left: 0px;
 	    top: -5px;
 	    position: relative;
-<<<<<<< HEAD
-<<<<<<< HEAD
 	   	font-size: 28px !important;
 	    width: 50px;
     	text-align: center;
-
-=======
 	    font-size: 28px !important;
 	    width: 50px;
     	text-align: center;
->>>>>>> 95e11791bf73ca856948e4d1e8a1c809f327e46d
-=======
 	    font-size: 28px !important;
 	    width: 50px;
     	text-align: center;
->>>>>>> master
      }
 
     table.dataTable > tbody > tr.child span.dtr-title {
@@ -231,8 +209,6 @@ table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
      	background: none;
      }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
      .sortabletable tbody td ul {
      	width: 100%;
      }
@@ -245,7 +221,7 @@ table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
      	position: absolute;
     	top: -43px;
     	left: 20px;
-    	}
+    }
 
     table.dataTable.dtr-inline.collapsed > tbody > .child > .child:before {
      	display: none;
@@ -256,13 +232,12 @@ table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
      } 
 
 
-        table.dataTable.stripe tbody tr.odd:first-child {
+    table.dataTable.stripe tbody tr.odd:first-child {
      	border: none;
      }
 
 
-        table.dataTable.stripe tbody tr.odd {
-=======
+    table.dataTable.stripe tbody tr.odd {}
 
 	table.dataTable.dtr-inline.collapsed > tbody > tr.parent > td:first-child:before, table.dataTable.dtr-inline.collapsed > tbody > tr.parent > th:first-child:before {
 		top: 5px;
@@ -274,7 +249,7 @@ table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
 
      table.dataTable tbody tr {
      	background: none;
-=======
+    }
 
 	table.dataTable.dtr-inline.collapsed > tbody > tr.parent > td:first-child:before, table.dataTable.dtr-inline.collapsed > tbody > tr.parent > th:first-child:before {
 		top: 5px;
@@ -331,7 +306,6 @@ table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
 
      table.dataTable > tbody > tr.child ul li:first-child {
      	display: none;
->>>>>>> master
      }
 
      .sortabletable tbody td ul {
@@ -355,18 +329,11 @@ table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
      }
 
      table.dataTable.stripe tbody tr.odd {
->>>>>>> 95e11791bf73ca856948e4d1e8a1c809f327e46d
      	border-top: 1px solid #E0E0E0;
      	display: block;
      }
 
-<<<<<<< HEAD
-
-          table.dataTable.stripe tbody tr.even {
-     	border-top: 1px solid #E0E0E0;
-     	display: block;
-=======
-     table.dataTable.stripe tbody tr.even {
+    table.dataTable.stripe tbody tr.even {
      	border-top: 1px solid #E0E0E0;
      	display: block;
      }
@@ -384,7 +351,6 @@ table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
 
      table.dataTable > tbody > tr.child ul li:first-child {
      	display: none;
->>>>>>> 95e11791bf73ca856948e4d1e8a1c809f327e46d
      }
 
      table.dataTable > tbody > tr.child ul {
@@ -402,19 +368,19 @@ table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
      	display: none;
      }
 
-       .changed::after { 
+    .changed::after { 
 
     	/* this selector is more specific, so it takes precedence over the other :after */
       	transform: rotate(-90deg) !important;
-	  }
+	}
 
 	    /* change text */
 	    
-	  	.changed::before { 
+	.changed::before { 
 	    content: "Verbergen" !important;
-	  }
-
+	}
 }
+
 
 
 
