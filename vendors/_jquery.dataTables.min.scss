@@ -54,7 +54,7 @@ table.dataTable thead .sorting_desc:after {
     right: 10px;
   //  -ms-transform: rotate(90deg); /* IE 9 */
   //  -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
-    transform: rotate90deg);
+    transform: rotate(90deg);
 }
 
 table.dataTable thead .sorting_asc:after {
@@ -67,7 +67,7 @@ table.dataTable thead .sorting_asc:after {
     right: 10px;
  //   -ms-transform: rotate(90deg); /* IE 9 */
  //   -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
-    transform: rotate90deg);
+    transform: rotate(90deg);
 }
 
 table.dataTable thead .sorting_asc {
