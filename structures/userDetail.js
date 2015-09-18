@@ -241,7 +241,6 @@
       }
       else {
         $(".login-link").addClass("visible");
-        $('.login-link-wrapper').css('display', 'block');
       }
     },
 
@@ -524,6 +523,9 @@
 
       // Remove mijn_last_login's cookie as first
       $.removeCookie(mijnAegonCookieLoggedInName);
+
+      // On logout or if user is not logged in show login button
+      $('.login-link-wrapper').css('display', 'block'); 
 
       // Then throw an error in console
       //if (response) { throw response.responseText; }
