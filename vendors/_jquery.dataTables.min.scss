@@ -49,7 +49,8 @@ table.dataTable thead .sorting_desc:after {
     font-size: 14px;
     -webkit-font-smoothing: antialiased;
     content: '\e630';
-    color: #D8D7D1;
+    // color: #D8D7D1;
+    color: #000000;
     float: right;
     right: 10px;
 }
@@ -59,7 +60,8 @@ table.dataTable thead .sorting_asc:after {
     font-size: 14px;
     -webkit-font-smoothing: antialiased;
     content: '\e630';
-    color: #D8D7D1;
+    // color: #D8D7D1;
+    color: #000000;
     float: right;
     right: 10px;
  //   -ms-transform: rotate(180deg); /* IE 9 */
@@ -68,11 +70,13 @@ table.dataTable thead .sorting_asc:after {
 }
 
 table.dataTable thead .sorting_asc {
-  //  background-image: url("images/sort_asc.png")
+  //  background-image: url("images/sort_asc.png");
+   font-family: 'senticosansdtregular', Arial, Verdana, sans-serif;
 }
 
 table.dataTable thead .sorting_desc {
-  //  background-image: url("images/sort_desc.png")
+  //  background-image: url("images/sort_desc.png");
+   font-family: 'senticosansdtregular', Arial, Verdana, sans-serif;
 }
 
 table.dataTable thead .sorting_asc_disabled {
@@ -311,7 +315,8 @@ table.dataTable,table.dataTable th,table.dataTable td {
 
 .dataTables_wrapper .dataTables_filter {
     float: right;
-    text-align: right
+    text-align: right;
+    margin-top: -40px;
 }
 
 .dataTables_wrapper .dataTables_filter input {
