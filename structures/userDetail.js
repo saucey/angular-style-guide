@@ -294,7 +294,7 @@
       // Shows and hides the dropdown menu and grey overlay on mobile (< 641px) when logging in (only once)
       if(!this.hasBeenShown() && $(window).width() < 641) {
         $('section.content').prepend('<div class="greyoverlay"></div>').promise().done(function() { $('.dropdown, .greyoverlay').css('display', 'block'); });
-        $('.dropdown, .greyoverlay').delay(2900).fadeOut(100).promise().done(function(){ $('.dropdown').css('display', ''); $('.greyoverlay').remove(); });
+        $('.dropdown').delay(3000).slideUp(500).promise().done(function(){ $('.dropdown').css('display', ''); $('.greyoverlay').fadeOut(100); $('.highlight.mobile').css('display', 'none');  });
       }
 
       // Cross-browser implementation to provide workaround for no CSS animation
@@ -314,7 +314,7 @@
           );
 
         // For mobile
-        $template.find('.highlight.mobile').delay(3000).slideUp(500);
+        // $template.find('.highlight.mobile').delay(3000).slideUp(500);
       }
 
       if ( this.hasBeenShown() ) {
