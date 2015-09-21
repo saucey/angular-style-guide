@@ -16,8 +16,8 @@ $line-height-large: $large * 1.5;
   }
   h4 {
     margin:0;
-    font-size: $large;
-    line-height: $line-height-large;
+    @include rem('font-size', $large);
+    @include rem('line-height', $line-height-large);
   }
   &.image-header--type-one {
     h1 {
@@ -26,8 +26,8 @@ $line-height-large: $large * 1.5;
       // text-shadow: 0px 3px 5px rgba(150, 150, 150, 1);
       bottom: 0;
       margin-left: 5%;
-      @include rem('font-size', $xxxx-large);
-      @include rem('line-height', $line-height-xxxx-large);
+      @include rem('font-size', $xxx-large);
+      @include rem('line-height', $line-height-xxx-large);
       color: $white;
     }
   }
@@ -131,19 +131,27 @@ $line-height-large: $large * 1.5;
   .image-header {
     &.image-header--type-one {
       h1 {
-        @include rem('font-size', $xxx-large);
-        @include rem('line-height', $line-height-xxx-large);
+        @include rem('font-size', $xxxx-large);
+        @include rem('line-height', $line-height-xxxx-large);
       }
     } 
   }
 }
 
 @include breakpoint($brk-large-desktop) {
-  .image-header {
+  .image-header {  
     &.image-header--type-one {
       h1 {
         @include rem('font-size', $jumbo);
         @include rem('line-height', $line-height-jumbo);
+      }
+    }
+    &.image-header--type-three {
+      .content {
+        h1 {
+          @include rem('font-size', $xxxx-large);
+          @include rem('line-height', $line-height-xxxx-large);
+        }
       }
     }
   } 
