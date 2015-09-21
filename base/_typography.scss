@@ -82,6 +82,13 @@ ul {
         content: $font_icons_check;
       }
     }
+    &.green-check {
+      margin-left: $li_left;
+      &:before {
+        content: $font_icons_check;
+        color: $green;
+      }
+    }
     &.arrow {
       margin-left: $li_left;
       &:before {

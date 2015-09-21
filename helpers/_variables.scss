@@ -48,6 +48,7 @@ $font_light: 'senticosansdtlight', $font_fallback;
 $font_normal: 'senticosansdtregular', $font_fallback;
 $font_medium: 'senticosansdtmedium', $font_fallback;
 $font_bold: 'senticosansdtcondbold', $font_fallback;
+$font_thin: 'senticosansdtthin', $font_fallback;
 $font_icons: 'aegon_icons'; // No fallback here >> !unnecessary
 
 // rearranged icon code definitions numerically; please adhere to that order for future definitions, it makes it way easier to determine which codes are already defined / used when comparing to icomoon
@@ -76,6 +77,8 @@ $large: 22px;
 $x-large: 25px;
 $xx-large: 40px;
 $xxx-large: 46px;
+$xxxx-large: 60px;
+$jumbo: 100px;
 
 // RESPONSIVE CUTOFFS
 // smartphone
