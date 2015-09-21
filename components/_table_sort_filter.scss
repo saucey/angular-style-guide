@@ -37,17 +37,20 @@ table.dataTable.no-footer {
 	border-bottom: 1px solid #d8d7d1 !important;
 }
 
-#sortabletable {
-
-}
-
-
-table.dataTable.stripe tbody tr.even, table.dataTable.display tbody tr.even {
-
-}
-
-table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
-
+.clear_button {
+    position: absolute;
+    top: -38px;
+    right: 1px;
+    display: block;
+    width: 36px;
+    height: 36px;
+    background: white;
+    background-image: url("../images/ui/btn-close.png") !important;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 16px 16px;
+    cursor: pointer;
+    display: none;
 }
 
 .docs-show-all {
