@@ -117,6 +117,9 @@
         content: "";
       }
     }
+    label.checkbox {
+      line-height: 32px;
+    }
     li.label.required:after, label.checkbox.required span.label:after {
       margin-left: 5px;
       content: "*";

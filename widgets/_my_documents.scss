@@ -125,30 +125,18 @@ min-height: 100vh !important;
   }
 }
 
-.docs-show-all {
-  display: block;
-  padding: 3px 5px 3px 5px;
-  margin: 0 auto 0 auto;
-  background: #EFEBE7;
-  text-align: center;
-  color: #3395d3;
-  width: 110px;
-  cursor: pointer;
-  border-bottom-right-radius: 0.1875rem;
-  border-bottom-left-radius: 0.1875rem;
 
-   &:after {
-    display: block;
-    font-size: 0.625rem;
-    font-family: "aegon_icons";
-    content: "\e600";
-    -ms-transform: rotate(90deg); /* IE 9 */
-    -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
-    transform: rotate(90deg);
-    margin: -6px 0 -4px 0;
-   }
+
+.dataTables_wrapper .dataTables_filter input {
+    width: 110px !important;
+    background-color: white;
+    background-image: url("/images/icons/icon-search-header.png") !important;
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: 30px 30px;
+    border: 2px solid #EFEBE7;
+    padding: 0 20px 0 10px;
 }
-
 
 // 
 // Media queries
@@ -211,6 +199,7 @@ min-height: 100vh !important;
       }
     }
   }
-}
+  }
+
 
 

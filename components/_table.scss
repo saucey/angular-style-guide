@@ -1,7 +1,16 @@
 table {
 	width: 100%;
 	border-top: 1px solid #d8d7d1;
+	border-bottom: 1px solid #d8d7d1;
+
+	th  {
+	  background-color: $lighter_grey;
+	  padding: 0 0 0 10px;
+	  font-weight: bold;
+	}
 }
+
+
 
 .table-gradient {
 background: #efebe7; /* Old browsers */
@@ -12,7 +21,7 @@ background: -o-linear-gradient(top,  #efebe7 0%,#efebe7 86%,#CCCBC7 100%); /* Op
 background: -ms-linear-gradient(top,  #efebe7 0%,#efebe7 86%,#CCCBC7 100%); /* IE10+ */
 background: linear-gradient(to bottom,  #efebe7 0%,#efebe7 86%,#CCCBC7 100%); /* W3C */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#efebe7', endColorstr='#CCCBC7',GradientType=0 ); /* IE6-8 */
-}
+} 
 
 tr {
   background: none;
@@ -22,11 +31,6 @@ tr {
     padding: 0 0 0 10px;
     a:before {
   }
-}
-
-.narrow-td {
-	width: 50px;
-    text-align: center;
 }
 
 tr:first-child a:before {

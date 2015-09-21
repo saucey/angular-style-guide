@@ -109,6 +109,12 @@
     .row-fluid {
       border-bottom: 1px solid #ccc;
 
+      .logo {
+        max-height: 35px;
+        margin-bottom: 15px;
+        float: right;
+      }
+
       .span12 {
 
         .tab {
@@ -145,15 +151,25 @@
                 }
               }
 
-              .active {
-                background: url('https://s3-eu-west-1.amazonaws.com/anl-ma-staticcontent/content/pensioen123/general/selected.png');
-                background-size: contain;
+              .active, .cross {
                 position: absolute;
                 background-repeat: no-repeat;
-                top: 0;
                 width: 100%;
                 height: 100%;
-                
+              }
+
+              .active {
+                background-image: url('http://i.imgur.com/eo43FSx.png');
+                background-size: contain;
+                top: 0;
+                z-index: 1;
+              }
+
+              .cross {
+                background-image: url('https://s3-eu-west-1.amazonaws.com/anl-ma-staticcontent/content/pensioen123/test/kruis.png');
+                background-size: 100% 100%;
+                top: -3px;
+                z-index: 2;
               }
             }
             p {
@@ -192,6 +208,14 @@
                 width: 80px;
               }
             }
+            .cross {
+                background-image: url('https://s3-eu-west-1.amazonaws.com/anl-ma-staticcontent/content/pensioen123/test/kruis.png');
+                position: absolute;
+                background-size: 80px 80px;
+                background-repeat: no-repeat;
+                width: 80px;
+                height: 80px;
+              }
           }
 
           .description {
@@ -214,6 +238,21 @@
             margin: 0 0 0.9375rem 0;
             p {
               margin: 0;
+            }
+          }
+          table {
+            margin-bottom: 10px;
+          }
+
+          table, p {
+            &.half-width {
+              @media screen and(min-width: $rc-m-min-width) and(max-width: $rc-m-max-width) {
+                width: 100%;
+                float: none;
+              }
+              width: 48%;
+              float: left;
+              margin-right: 1%;
             }
           }
 
