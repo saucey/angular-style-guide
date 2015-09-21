@@ -22,7 +22,7 @@
 // fix to wrap on words spilling out of the div; content managers should soft-wrap long words using <wbr>, because word-break: break-all will look bad
  @include word-break(break-word);
  @include hyphens(auto);
- 
+
   .region.first {
     display: table-row;
     overflow: hidden;
@@ -36,7 +36,7 @@
   .region.second {
 
     .social-icons {
-      border-bottom: 1px solid $very_light_blue;
+      border-bottom: 1px solid $blue_gray;
       @include rem('margin-bottom', 25);
       @include rem('padding-bottom', 25);
 
@@ -140,7 +140,7 @@
   .center {
     overflow: hidden;
     @include rem('padding-top', 15);
-    border-top: 1px solid $very_light_blue;
+    border-top: 1px solid $blue_gray;
   }
 
   ul {
@@ -199,7 +199,7 @@
   }
 
   .footer-wrap .footer-quick-links {
-    border-top: 1px solid $very_light_blue;
+    border-top: 1px solid $blue_gray;
   }
 
   .footer-quick-links ul li a {
@@ -217,7 +217,7 @@
 
     .region.second {
       @include rem('padding-top', 25);
-      border-top: 1px solid $very_light_blue;
+      border-top: 1px solid $blue_gray;
 
       .social-icons {
         border-bottom: none;
