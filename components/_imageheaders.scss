@@ -5,7 +5,6 @@ $line-height-jumbo: $jumbo * 1.5;
 $line-height-xxxx-large: $xxxx-large * 1.5;
 $line-height-xxx-large: $xxx-large * 1.5;
 $line-height-xx-large: $xx-large * 1.5;
-$line-height-x-large: $x-large * 1.5;
 $line-height-large: $large * 1.5;
 
 .image-header {
@@ -77,8 +76,8 @@ $line-height-large: $large * 1.5;
   .image-header {
     &.image-header--type-one {
       h1 {
-        @include rem('font-size', $x-large);
-        @include rem('line-height', $line-height-x-large);
+        @include rem('font-size', $xx-large);
+        @include rem('line-height', $line-height-xx-large);
       }
     }
     &.image-header--type-two {
@@ -124,17 +123,6 @@ $line-height-large: $large * 1.5;
         }
       }
     }
-  }
-}
-
-@include breakpoint($brk-tablet and 'only screen' (max-width 1024px)) {
-  .image-header {
-    &.image-header--type-one {
-      h1 {
-        @include rem('font-size', $xxxx-large);
-        @include rem('line-height', $line-height-xxxx-large);
-      }
-    } 
   }
 }
 
