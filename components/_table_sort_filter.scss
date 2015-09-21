@@ -37,17 +37,20 @@ table.dataTable.no-footer {
 	border-bottom: 1px solid #d8d7d1 !important;
 }
 
-#sortabletable {
-
-}
-
-
-table.dataTable.stripe tbody tr.even, table.dataTable.display tbody tr.even {
-
-}
-
-table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
-
+.clear_button {
+    position: absolute;
+    top: -38px;
+    right: 1px;
+    display: block;
+    width: 36px;
+    height: 36px;
+    background: white;
+    background-image: url("../images/ui/btn-close.png") !important;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 16px 16px;
+    cursor: pointer;
+    display: none;
 }
 
 .docs-show-all {
@@ -63,8 +66,12 @@ table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
   border-bottom-left-radius: 0.1875rem;
 
   &:before {
-    content: "Toon alles";
+    content: "Toon alles" !important;
   }
+
+  &.changed:before { 
+	    content: "Verbergen" !important;
+	}
 
   &:after {
     display: block;
@@ -92,12 +99,21 @@ table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
 
 .narrow-td {
         left: 0px;
-	    top: 5px;
 	    position: relative;
 	    font-size: 28px !important;
-	    width: 50px;
+	    width: 30px;
     	text-align: center;
      }
+
+.narrow-td a {
+	right: 10px;
+    display: block;
+    position: absolute;
+}
+
+table.dataTable thead tr th.narrow-td:after {
+	content: "";
+}
 
 @media screen and (max-width: 767px) {
     .dataTables_wrapper .dataTables_info,.dataTables_wrapper .dataTables_paginate {
@@ -182,7 +198,7 @@ table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
 	    top: -5px;
 	    position: relative;
 	   	font-size: 28px !important;
-	    width: 50px;
+	    width: 30px;
     	text-align: center;
 	    font-size: 28px !important;
 	    width: 50px;

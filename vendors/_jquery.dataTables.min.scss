@@ -40,7 +40,7 @@ table.dataTable thead tr th.sorting:after {
     -webkit-font-smoothing: antialiased;
     content: '\e630';
     color: #D8D7D1;
-    position: absolute;
+    float: right;
     right: 10px;
 }
 
@@ -49,12 +49,10 @@ table.dataTable thead .sorting_desc:after {
     font-size: 14px;
     -webkit-font-smoothing: antialiased;
     content: '\e630';
-    color: #D8D7D1;
-    position: absolute;
+    // color: #D8D7D1;
+    color: #000000;
+    float: right;
     right: 10px;
-  //  -ms-transform: rotate(90deg); /* IE 9 */
-  //  -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
-    transform: rotate(90deg);
 }
 
 table.dataTable thead .sorting_asc:after {
@@ -62,28 +60,31 @@ table.dataTable thead .sorting_asc:after {
     font-size: 14px;
     -webkit-font-smoothing: antialiased;
     content: '\e630';
-    color: #D8D7D1;
-    position: absolute;
+    // color: #D8D7D1;
+    color: #000000;
+    float: right;
     right: 10px;
- //   -ms-transform: rotate(90deg); /* IE 9 */
- //   -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
-    transform: rotate(90deg);
+ //   -ms-transform: rotate(180deg); /* IE 9 */
+ //   -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+    transform: rotate(180deg);
 }
 
 table.dataTable thead .sorting_asc {
-    background-image: url("images/sort_asc.png")
+  //  background-image: url("images/sort_asc.png");
+   font-family: 'senticosansdtregular', Arial, Verdana, sans-serif;
 }
 
 table.dataTable thead .sorting_desc {
-    background-image: url("images/sort_desc.png")
+  //  background-image: url("images/sort_desc.png");
+   font-family: 'senticosansdtregular', Arial, Verdana, sans-serif;
 }
 
 table.dataTable thead .sorting_asc_disabled {
-    background-image: url("images/sort_asc_disabled.png")
+  //  background-image: url("images/sort_asc_disabled.png")
 }
 
 table.dataTable thead .sorting_desc_disabled {
-    background-image: url("images/sort_desc_disabled.png")
+  //  background-image: url("images/sort_desc_disabled.png")
 }
 
 table.dataTable tbody tr {
@@ -314,7 +315,8 @@ table.dataTable,table.dataTable th,table.dataTable td {
 
 .dataTables_wrapper .dataTables_filter {
     float: right;
-    text-align: right
+    text-align: right;
+    margin-top: -40px;
 }
 
 .dataTables_wrapper .dataTables_filter input {
@@ -332,10 +334,10 @@ table.dataTable,table.dataTable th,table.dataTable td {
     &:focus {
       width: 350px !important;
       box-shadow: 1px 1px 3px #EFEBE7;
-      background-image: url("/images/ui/btn-close.png") !important;
+ //     background-image: url("/images/ui/btn-close.png") !important;
       background-repeat: no-repeat;
       background-position: 356px center;
-      background-size: 16px 16px;
+ //     background-size: 16px 16px;
     }
 
     &:before {
