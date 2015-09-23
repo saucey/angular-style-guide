@@ -323,7 +323,7 @@ table.dataTable,table.dataTable th,table.dataTable td {
     margin-left: 0.5em;
     width: 110px !important;
     background-color: white;
-    background-image: url("/images/icons/icon-search-header.png") !important;
+    background-image: url("..l/images/icons/icon-search-header.png") !important;
     background-repeat: no-repeat;
     background-position: right center;
     background-size: 30px 30px;
@@ -334,7 +334,7 @@ table.dataTable,table.dataTable th,table.dataTable td {
     &:focus {
       width: 350px !important;
       box-shadow: 1px 1px 3px #EFEBE7;
- //     background-image: url("/images/ui/btn-close.png") !important;
+ //     background-image: url("../images/ui/btn-close.png") !important;
       background-repeat: no-repeat;
       background-position: 356px center;
  //     background-size: 16px 16px;
