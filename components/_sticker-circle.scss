@@ -1,0 +1,25 @@
+$sticker-circle-size: 160px;
+
+.sticker-circle {
+  display: block;
+  width: $sticker-circle-size;
+  height: $sticker-circle-size;
+  border-radius: 50%;
+  color: $white;
+  position: relative;
+  text-align:center;
+  background: $dark_blue;
+  font-family: $font_light;
+
+  .rating {
+    font-size: ($sticker-circle-size / 3);
+    line-height: ($sticker-circle-size / 3);
+    padding-top: ($sticker-circle-size / 6);
+  }
+
+  .reviews {
+    font-size: ($sticker-circle-size / 9);
+    line-height: ($sticker-circle-size / 9 + 5);
+    padding: 2px ($sticker-circle-size / 10);
+  }
+}

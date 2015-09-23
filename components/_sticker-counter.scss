@@ -1,0 +1,33 @@
+.sticker-counter {
+
+  h3 {}
+
+  .counter {
+    position: relative;
+    display: inline-block;
+
+    span {
+      display: inline-block;
+      background: $dark_blue;
+      padding: 2px 3px;
+      color: $white;
+      border-radius: 4px;
+      font-size: $xx-large;
+      line-height: $xx-large;
+
+      &:not(:last-of-type) {
+        margin-right: 2px;
+      }
+    }
+
+    &:first-child:before {
+      content: "";
+      display: block;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+      top: 48%;
+      position: absolute;
+      width: 100%;
+    }
+  }
+
+}
