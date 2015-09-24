@@ -11,7 +11,11 @@ $sticker-circle-size: 160px;
   background: $dark_blue;
   font-family: $font_light;
 
-  &:hover {
+  a {
+    color: $white;
+    text-decoration: none;
+  }
+  a:hover {
     color: $white;
     text-decoration: none;
   }
