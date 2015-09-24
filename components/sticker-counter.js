@@ -6,7 +6,7 @@
   'use strict';
 
   // Add new item to public Drupal object
-  Drupal.behaviors.select = {
+  Drupal.behaviors.sticker_counter = {
     attach: function (context) {
       var $counterElement = $('.counter', context),
           charsWithSpans = '';
