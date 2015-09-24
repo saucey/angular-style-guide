@@ -1,6 +1,12 @@
 .sticker-counter {
 
-  h3 {}
+  .counter-text {
+    font-family: $font_light;
+    font-size: $large;
+    line-height: $large;
+    color: $blue;
+    margin: 10px auto;
+  }
 
   .counter {
     position: relative;
