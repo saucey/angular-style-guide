@@ -17,7 +17,7 @@
 
       $counterElement.html(charsWithSpans);
     }
-  }
+  };
 
 })(jQuery);
 
