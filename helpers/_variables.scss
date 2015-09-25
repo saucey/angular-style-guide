@@ -5,40 +5,47 @@
 
 // BLUE hues
 $black: #1d1d1b; //actually, this is a very dark blue, so that is why it is here
-$dark_blue: #00304c;
-$blue: #3395d3;
-$light_blue: #66b0de;
-$very_light_blue: #335970;
-$lighter_blue: #85BFE5;
-$pastel_light_blue: #D9EBF7;
-$slightly_lighter_blue: #99CAE9;
-$sky: #8cd1e6;
+$dark_blue: #00304c; //
+$blue_gray: #335970;
 $fun_blue_approx: #2163ae;
+$slightly_darker_blue: #007bc8;
+$blue: #3395d3; //
+$light_blue: #66b0de; //
+$lighter_blue: #85BFE5;
+$slightly_lighter_blue: #99CAE9; //
+$pastel_light_blue: #D9EBF7;
+$sky: #8cd1e6; //
 $lochmara_approx: #007ac7;
+
+
 // ORANGES
-$orange: #f9a600;
-$orange_highlight : #ffbe3d;
+$orange_highlight : #fcbd3e; //
+$orange: #f9a600; //
+$dark_orange: #f39300; //
 // GREYS
-$white: #ffffff;
+$white: #ffffff; //
 $lighter_grey: #EFEBE7;
-$light_grey: #8E8E8C;
-$grey: #edebe5;
+$grey: #edebe5; //
 $slightly_darker_grey: #e0e0e0;
+$dark_grey: #d8d7d1;
+$darker_grey: #8E8E8C;
+
 // GREENS
-$green: #49af57;
-$light_green: #C1ECD5;
+$green: #49af57; //
+$light_green: #c8e7cc; //
 $dark_green: #7FAE3F;
 // REDS
 $red: #C50B1F;
-$dark_red: #ca4642;
-$light_red: #E6CECD;
+$dark_red: #ca4642; //
+$light_red: #eacbca; //
 $lighter_red: #f3e7e6;
 // YELLOWS
-$yellow: #ffea53;
 $light_yellow: #fffce5;
+$yellow: #ffea53; //
 $dark_yellow: #B0A126;
+
 // BROWNS
-$beige: #eeebe5;
+$beige: $grey; //
 // PINK
 $pink: #edd5d9;
 $dark_pink: #C41F2C;
@@ -48,6 +55,7 @@ $font_light: 'senticosansdtlight', $font_fallback;
 $font_normal: 'senticosansdtregular', $font_fallback;
 $font_medium: 'senticosansdtmedium', $font_fallback;
 $font_bold: 'senticosansdtcondbold', $font_fallback;
+$font_thin: 'senticosansdtthin', $font_fallback;
 $font_icons: 'aegon_icons'; // No fallback here >> !unnecessary
 
 // rearranged icon code definitions numerically; please adhere to that order for future definitions, it makes it way easier to determine which codes are already defined / used when comparing to icomoon
@@ -76,6 +84,8 @@ $large: 22px;
 $x-large: 25px;
 $xx-large: 40px;
 $xxx-large: 46px;
+$xxxx-large: 60px;
+$jumbo: 100px;
 
 // RESPONSIVE CUTOFFS
 // smartphone
