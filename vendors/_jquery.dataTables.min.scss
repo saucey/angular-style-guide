@@ -36,7 +36,7 @@ table.dataTable thead .sorting,table.dataTable thead .sorting_asc,table.dataTabl
 
 table.dataTable thead tr th.sorting:after {
     font-family: 'aegon_icons';
-    font-size: 14px;
+    font-size: 12px;
     -webkit-font-smoothing: antialiased;
     content: '\e630';
     color: #D8D7D1;
@@ -46,7 +46,7 @@ table.dataTable thead tr th.sorting:after {
 
 table.dataTable thead .sorting_desc:after {
     font-family: 'aegon_icons';
-    font-size: 14px;
+    font-size: 12px;
     -webkit-font-smoothing: antialiased;
     content: '\e630';
     color: #000000;
@@ -56,7 +56,7 @@ table.dataTable thead .sorting_desc:after {
 
 table.dataTable thead .sorting_asc:after {
     font-family: 'aegon_icons';
-    font-size: 14px;
+    font-size: 12px;
     -webkit-font-smoothing: antialiased;
     content: '\e630';
     color: #000000;
@@ -332,10 +332,10 @@ table.dataTable,table.dataTable th,table.dataTable td {
     &:focus {
       width: 350px !important;
       box-shadow: 1px 1px 3px #EFEBE7;
- //     background-image: url("../images/ui/btn-close.png") !important;
+      background-image: url("../images/ui/btn-close.png") !important;
       background-repeat: no-repeat;
       background-position: 356px center;
- //     background-size: 16px 16px;
+      background-size: 16px 16px;
     }
 
     &:before {
