@@ -136,6 +136,15 @@ table.dataTable thead tr th.narrow-td:after {
         transform: rotate(-90deg);
     }
 
+.dataTables_info {
+    position: absolute;
+    top: -40px;
+}
+
+.inline-h2 {
+    display: block !important;
+}
+
 @media screen and (max-width: 640px) {
 
     .dataTables_wrapper .dataTables_filter input:focus {
