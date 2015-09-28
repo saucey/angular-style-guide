@@ -11,7 +11,7 @@
     attach: function () {
 
       var table = $('.sortabletable').DataTable({
-        "info": false,
+        "info": true,
         "orderClasses": false,
         "target": '.narrow-td',
         "aoColumns": [
@@ -25,6 +25,8 @@
         "pageLength": 5,
         "order": [ 2, 'desc' ]
       });
+
+      $('.dataTables_filter input').attr("placeholder", "Zoeken");
 
       //Add a div to display a reset button (initially hidden with css)
       $("#sortabletable_filter").append("<div class='clear_button'></div>"); 
