@@ -1,4 +1,4 @@
-.user_detail_widget {
+ff.user_detail_widget {
   // Default display. In section logic below there is the switch for display
   display: none;
   float: right;
@@ -35,9 +35,12 @@
         display: block;
       }
       ~.btn-login-loggedin {
+      z-index: 9;
         border-bottom-color: $white;
         &:after {
           transform: rotate(180deg);
+          -ms-transform: rotate(180deg); /* IE 9 */
+          -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
         }
       }
     }
@@ -119,10 +122,11 @@
     &.mobile {
       //display: none;
       @include rem('font-size', 16);
-      @include rem('margin', 0, 12);
+      //@include rem('margin', 0, 12);
+      margin-bottom: 10px;
       overflow: hidden;
       background-color: transparent;
-      animation: slidingHighlightOnTopMobile 1s 1 5s forwards;
+      animation: slidingHighlightOnTopMobile 1s 3s 5 forwards;
       //max-height: 90px !important;
       //height: 90px !important;
 

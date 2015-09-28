@@ -115,6 +115,12 @@ table.dataTable thead tr th.narrow-td:after {
 	content: "";
 }
 
+.dataTables_info {
+    position: absolute !important;
+    top: -45px;
+    left: 300px;
+}
+
 @media screen and (max-width: 767px) {
     .dataTables_wrapper .dataTables_info,.dataTables_wrapper .dataTables_paginate {
         float: none;
