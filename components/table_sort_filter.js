@@ -29,9 +29,9 @@
       $('.dataTables_filter input').attr("placeholder", "Zoeken");
 
       //Add a div to display a reset button (initially hidden with css)
-      $("#sortabletable_filter").append("<div class='clear_button'></div>"); 
+      $(".dataTables_filter").append("<div class='clear_button'></div>"); 
 
-      $('.dataTables_wrapper .dataTables_filter input').change(function(){
+      $('.dataTables_wrapper .dataTables_filter input').focus(function(){
 
         //show clear-button if input is not empty
         if($(".dataTables_wrapper .dataTables_filter > input").attr("value") === ''){
@@ -39,12 +39,6 @@
         } else {
             $(".clear_button").show();
         }
-      });
-
-      $('.clear_button').on('click', function(){ 
-       $('.dataTables_wrapper .dataTables_filter input').val('');
-        $('.dataTables_wrapper .dataTables_filter input').trigger('keyup.DT');
-        $(".clear_button").hide();
       });
 
       $('.docs-show-all').on('click', function(){ 
@@ -57,12 +51,18 @@
         }
       });
 
+       $('.clear_button').on('click', function(){ 
+       $('.dataTables_wrapper .dataTables_filter input').val('');
+        $('.dataTables_wrapper .dataTables_filter input').trigger('keyup.DT');
+        $(".clear_button").hide();
+      });
+
     },
 
     sortTable: function (table_class, div_class, sortDefColumn) {
 
-      var table = $(table_class).DataTable({
-        "info": false,
+          var table = $(table_class).DataTable({
+         "info": true,
         "orderClasses": false,
         "target": '.narrow-td',
         "aoColumns": [
@@ -77,10 +77,30 @@
         "order": [ sortDefColumn, 'desc' ]
       }    
     );
+  var wrapperId = $(table_class).attr('id')+'_wrapper';
+  
+  $('#' + wrapperId + ' .dataTables_filter input').attr("placeholder", "Zoeken");
+   
+  //Add a div to display a reset button (initially hidden with css)
+    $('#' + wrapperId + ' .dataTables_filter').append("<div class='clear_button'></div>"); 
+  
+    $('#' + wrapperId + ' .dataTables_filter input').focus(function(){
 
-   //   $("#sortabletable_filter").append("<div class='clear_button'></div>");  
-
-      $(div_class).on('click', function(){ 
+        //show clear-button if input is not empty
+        if($("#" + wrapperId + " .dataTables_filter > input").attr("value") === ''){
+            $("#" + wrapperId + " .clear_button").hide();
+        } else {
+            $("#" + wrapperId + " .clear_button").show();
+        }
+      });
+    
+    $('#' + wrapperId + ' .clear_button').on('click', function(){ 
+       $('#' + wrapperId + ' .dataTables_filter input').val('');
+      $('#' + wrapperId + ' .dataTables_filter input').trigger('keyup.DT');
+      $('#' + wrapperId + ' .clear_button').hide();
+    });
+    
+    $(div_class).on('click', function(){ 
         if($(this).hasClass('changed')) {
           $(this).removeClass('changed');
           table.page.len(5).draw();
@@ -89,6 +109,7 @@
           table.page.len(-1).draw();
         }
       });
+
 
     }
 
