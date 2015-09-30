@@ -92,6 +92,10 @@
     attached: false,
 
     setup: function (settings) {
+
+      // Make sure the button is always shown, later on we will check against login status
+      $('.login-link-wrapper').css('display', 'block');
+
       // Check if current website is backend
       if (window.location.hostname.search('.aegon.com') !== -1) {
         return;
@@ -233,6 +237,9 @@
       // Check if is logged and go ahead
       if (data.loggedIn) {
 
+        // User is logged in, so we can get rid of the button
+        $('.login-link-wrapper').css('display', 'none');
+
         // Parse the DOM before appendTo
         this.parseWidget(data, callback);
 
@@ -241,7 +248,7 @@
       }
       else {
         $(".login-link").addClass("visible");
-        $('.login-link-wrapper').css('display', 'block'); 
+
       }
     },
 
