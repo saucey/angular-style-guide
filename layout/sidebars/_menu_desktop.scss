@@ -476,6 +476,8 @@ aside.desktop {
     // Emulation of .border-Bblue
     .first-level-item {
 
+      display: block !important;
+
       li:last-child {
         @extend .border-Bblue;
       }
