@@ -629,10 +629,14 @@
     },
 
     getAkos: function () {  //if just the highest number is required, use .getAkos()[0]
-      return this.getRelNumByType('akos')
-        .sort(function (x, y){
-          return parseInt(y) - parseInt(x);
-        });
+      var akos = this.getRelNumByType('akos');
+
+      if (akos === null) {
+        return null;
+      }
+      return akos.sort(function (x, y){
+        return parseInt(y) - parseInt(x);
+      });
     }
   };
 
