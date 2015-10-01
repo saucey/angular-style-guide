@@ -31,10 +31,10 @@
       //Add a div to display a reset button (initially hidden with css)
       $(".dataTables_filter").append("<div class='clear_button'></div>"); 
 
-      $('.dataTables_wrapper .dataTables_filter input').focus(function(){
+      $('.dataTables_wrapper .dataTables_filter input').change(function(){
 
         //show clear-button if input is not empty
-        if($(".dataTables_wrapper .dataTables_filter > input").attr("value") === ''){
+        if( !$(this).val()){
             $(".clear_button").hide();
         } else {
             $(".clear_button").show();
@@ -84,10 +84,9 @@
   //Add a div to display a reset button (initially hidden with css)
     $('#' + wrapperId + ' .dataTables_filter').append("<div class='clear_button'></div>"); 
   
-    $('#' + wrapperId + ' .dataTables_filter input').focus(function(){
-
+    $('#' + wrapperId + ' .dataTables_filter input').change(function(){
         //show clear-button if input is not empty
-        if($("#" + wrapperId + " .dataTables_filter > input").attr("value") === ''){
+        if(!$("#" + wrapperId + " .dataTables_filter > input").val()){
             $("#" + wrapperId + " .clear_button").hide();
         } else {
             $("#" + wrapperId + " .clear_button").show();
