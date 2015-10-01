@@ -51,6 +51,7 @@ min-height: 100vh !important;
     font-weight: bold;
     cursor: pointer;
     user-select: none;
+    margin-bottom: 35px;
 
     &:before {
       display: inline-block;
@@ -125,12 +126,10 @@ min-height: 100vh !important;
   }
 }
 
-
-
 .dataTables_wrapper .dataTables_filter input {
     width: 110px !important;
     background-color: white;
-    background-image: url("/images/icons/icon-search-header.png") !important;
+    background-image: url("../images/icons/icon-search-header.png");
     background-repeat: no-repeat;
     background-position: right center;
     background-size: 30px 30px;
@@ -170,6 +169,7 @@ min-height: 100vh !important;
       @include rem('line-height', 40);
       font-weight: normal;
       cursor: default;
+      margin-bottom: 35px;
 
       &:before {
         position: absolute;

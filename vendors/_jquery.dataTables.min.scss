@@ -332,10 +332,10 @@ table.dataTable,table.dataTable th,table.dataTable td {
     &:focus {
       width: 350px !important;
       box-shadow: 1px 1px 3px #EFEBE7;
-      background-image: url("../images/ui/btn-close.png") !important;
+  //    background-image: url("../images/icons/icon-search-header.png") !important;
       background-repeat: no-repeat;
       background-position: 356px center;
-      background-size: 16px 16px;
+  //    background-size: 16px 16px;
     }
 
     &:before {

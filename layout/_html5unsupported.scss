@@ -14,3 +14,8 @@ input.blurred {
     }
   }
 }
+
+// remove clear button on inputs in MSIE
+::-ms-clear {
+   display: none;
+}
