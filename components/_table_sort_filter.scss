@@ -12,6 +12,14 @@ thead {
 	border: none;
 }
 
+table.dataTable thead th,table.dataTable tfoot th {
+    border-right: 1px solid white;
+}
+
+table.dataTable td {
+    border-right: 1px solid white;
+}
+
 .dataTables_wrapper {
 }
 
