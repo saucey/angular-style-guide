@@ -171,9 +171,14 @@ a.menu-5662:before {
 .icon-mijn-documenten:before {
   content: $font_icons_document_n_check;
 }
-
 .icon-mijn-producten:before {
   content: $font_icons_producten;
+}
+.icon-call:before {
+  content: $font_icons_call;
+}
+.icon-chat:before {
+  content: $font_icons_chat;
 }
 
 // Do not apply icons to old aegon menu.
