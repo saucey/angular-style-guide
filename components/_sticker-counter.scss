@@ -1,4 +1,11 @@
+// margin is fixed for flexible content pages, it's based on a big header plus margin,
+// since the sticker is placed in columns without a fixed height, it's not possible to
+// align vertically
+$sticker-circle-marginTop: $xx-large + 20;
+$sticker-counter-marginTop: $xx-large + 20;
+
 .sticker-counter {
+  margin-top: $sticker-counter-marginTop;
 
   .counter-text {
     font-family: $font_light;
@@ -24,15 +31,16 @@
       &:not(:last-of-type) {
         margin-right: 2px;
       }
+
+      &:first-child:before {
+        content: "";
+        display: block;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+        top: 48%;
+        position: absolute;
+        width: 100%;
+      }
     }
 
-    &:first-child:before {
-      content: "";
-      display: block;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.6);
-      top: 48%;
-      position: absolute;
-      width: 100%;
-    }
   }
 }
