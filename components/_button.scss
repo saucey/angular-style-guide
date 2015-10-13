@@ -83,6 +83,9 @@ button, .button {
       &.icon-chat:after {
         content: $font_icons_chat;
       }
+      &.icon-search:after {
+        content: $font_icons_search;
+      }
     }
     &.arrow:after {
       content: $font_icons_arrow_right;
