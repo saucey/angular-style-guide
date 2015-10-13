@@ -31,7 +31,7 @@
   }
 
   form>ul, & ul.products {
-    margin: 30px 0;
+    margin: 0;
     width: 100%;
     li.product {
       .description {
@@ -335,7 +335,7 @@ ul.actions {
         padding-left: 0;
         display: block;
         div.disabler {  //required element for disabling of submit elements depending on validity
-          z-index: $elements_disabler_z-index;
+          z-index: $elements_button_enabled_z-index;
           position: relative;
           left: 0;
           top:-$elements_button_height;
@@ -352,9 +352,10 @@ ul.actions {
       button {
         position: relative;
         z-index: $elements_button_enabled_z-index;
-        &.disabled {
-          z-index: $elements_button_disabled_z-index;
+        &.cancel {
+          z-index: 4;
         }
+
       }
     }
   }
