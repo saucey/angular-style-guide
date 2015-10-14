@@ -78,12 +78,12 @@ table.dataTable.no-footer {
   }
 
   &.changed:before { 
-	    content: "Verbergen" !important;
+	  content: "Verbergen" !important;
   }
 
   &.changed::after { 
     /* this selector is more specific, so it takes precedence over the other :after */
-      transform: rotate(-90deg) !important;
+    transform: rotate(-90deg) !important;
   }
 
   &:after {
