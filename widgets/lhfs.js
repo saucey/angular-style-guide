@@ -165,6 +165,40 @@
           }
           
         });
+      
+        $('table.lhfsPayments').each(function(i) {
+          var that = $(this);
+          var showAll = that.next('.docs-show-all');
+
+          i = $(this).DataTable({
+            "info": true,
+            "orderClasses": false,
+            "target": '.narrow-td',
+            "bFilter": false,
+            "aoColumns": [
+                null,
+                null,
+                { "sType": "date-eu" },
+                null  
+            ],
+            "ordering": false,
+            "responsive": true,
+            "pageLength": 5,
+            "order": [ 2, 'desc' ]
+          });
+
+          showAll.on('click', function(){ 
+            if($(this).hasClass('changed')) {
+              $(this).removeClass('changed');
+              i.page.len(5).draw();
+            } else {
+              $(this).toggleClass('changed');
+              i.page.len(-1).draw();
+            }
+          });
+        });
+      
+
       }
       this.attached = true;
     },
