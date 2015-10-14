@@ -168,7 +168,7 @@
       
         $('table.lhfsPayments').each(function(i) {
           var that = $(this);
-          var showAll = that.next('.docs-show-all');
+          var showAll = that.next('.payments-show-all');
 
           i = $(this).DataTable({
             "info": true,
