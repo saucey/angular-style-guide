@@ -61,30 +61,29 @@
 
     sortTable: function (table_class, div_class, sortDefColumn) {
 
-          var table = $(table_class).DataTable({
-         "info": true,
+      var table = $(table_class).DataTable({
+        "info": true,
         "orderClasses": false,
         "target": '.narrow-td',
         "aoColumns": [
-            null,
-            null,
-            { "sType": "date-eu" },
-            null  
-        ],
+          null,
+          null,
+          { "sType": "date-eu" },
+          null  
+          ],
         "ordering": true,
         "responsive": true,
         "pageLength": 5,
         "order": [ sortDefColumn, 'desc' ]
-      }    
-    );
-  var wrapperId = $(table_class).attr('id')+'_wrapper';
+      });
+      var wrapperId = $(table_class).attr('id')+'_wrapper';
   
-  $('#' + wrapperId + ' .dataTables_filter input').attr("placeholder", "Zoeken");
+      $('#' + wrapperId + ' .dataTables_filter input').attr("placeholder", "Zoeken");
    
-  //Add a div to display a reset button (initially hidden with css)
-    $('#' + wrapperId + ' .dataTables_filter').append("<div class='clear_button'></div>"); 
-  
-    $('#' + wrapperId + ' .dataTables_filter input').change(function(){
+      //Add a div to display a reset button (initially hidden with css)
+      $('#' + wrapperId + ' .dataTables_filter').append("<div class='clear_button'></div>"); 
+    
+      $('#' + wrapperId + ' .dataTables_filter input').change(function(){
         //show clear-button if input is not empty
         if(!$("#" + wrapperId + " .dataTables_filter > input").val()){
             $("#" + wrapperId + " .clear_button").hide();
@@ -93,13 +92,13 @@
         }
       });
     
-    $('#' + wrapperId + ' .clear_button').on('click', function(){ 
-       $('#' + wrapperId + ' .dataTables_filter input').val('');
-      $('#' + wrapperId + ' .dataTables_filter input').trigger('keyup.DT');
-      $('#' + wrapperId + ' .clear_button').hide();
-    });
+      $('#' + wrapperId + ' .clear_button').on('click', function(){ 
+         $('#' + wrapperId + ' .dataTables_filter input').val('');
+        $('#' + wrapperId + ' .dataTables_filter input').trigger('keyup.DT');
+        $('#' + wrapperId + ' .clear_button').hide();
+      });
     
-    $(div_class).on('click', function(){ 
+      $(div_class).on('click', function(){ 
         if($(this).hasClass('changed')) {
           $(this).removeClass('changed');
           table.page.len(5).draw();
@@ -108,11 +107,7 @@
           table.page.len(-1).draw();
         }
       });
-
-
-    }
-
-
+    },
   };
 
 })(this.document, this, this.jQuery, this.Drupal);
