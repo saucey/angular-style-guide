@@ -61,7 +61,7 @@ table.dataTable.no-footer {
     display: none;
 }
 
-.docs-show-all {
+.docs-show-all, .payments-show-all {
   display: block;
   padding: 3px 5px 3px 5px;
   margin: 0 auto 0 auto;
@@ -79,7 +79,12 @@ table.dataTable.no-footer {
 
   &.changed:before { 
 	    content: "Verbergen" !important;
-	}
+  }
+
+  &.changed::after { 
+    /* this selector is more specific, so it takes precedence over the other :after */
+      transform: rotate(-90deg) !important;
+  }
 
   &:after {
     display: block;
@@ -92,17 +97,6 @@ table.dataTable.no-footer {
     margin: -6px 0 -4px 0;
    }
 
-  .changed::after { 
-
-    /* this selector is more specific, so it takes precedence over the other :after */
-      transform: rotate(-90deg) !important;
-  }
-
-    /* change text */
-
-  .changed::before { 
-      content: "Verbergen" !important;
-  }
 }
 
 .narrow-td {
