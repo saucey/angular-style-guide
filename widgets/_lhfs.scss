@@ -84,6 +84,11 @@
   input[type=text], input[type=email], input[type=number], select, .ddTitle {
     display: none;
   }
+  
+  .dd {
+    width: 100% !important;
+    max-width: 224px;
+  }
   .edit {
     ul.error {
       display: block;
@@ -108,7 +113,6 @@
     li.label, label {
       font-family: $font_normal;
       text-align: right;
-      padding-right: 55px;
       line-height: 44px;
       @media screen and(max-width: $rc-s-max-width) {
         text-align: left;
@@ -295,10 +299,9 @@
   &[title=''] {
     display: none;
   }
-  margin: 0;
-  margin-right: 10px;
+  margin: 10px 7px 0 0;
   display: inline-block;
-  float: right;
+  float: left;
   position: relative;
   &.dialog {
     z-index: 5;
@@ -421,6 +424,12 @@ ul.horizontal {
 
 
 // TODO: Clean up dataTable (quick fix so we can show LHFS phase 3)
+  
+@media screen and (max-width: 740px) {
+  input[type=text] {
+    width: 100%;
+  }
+}
 @media screen and (max-width: 640px) {
   .lhfs_widget {
 
@@ -473,6 +482,7 @@ ul.horizontal {
 @include breakpoint($brk-mobile){
 
     .help {
+      float: right;
       &.dialog {
         right: 2%;
       }
