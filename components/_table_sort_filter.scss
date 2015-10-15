@@ -124,19 +124,19 @@ table.dataTable thead tr th.narrow-td:after {
 }
 
 @media screen and (max-width: 767px) {
-    .dataTables_wrapper .dataTables_info,.dataTables_wrapper .dataTables_paginate {
-        float: none;
-        text-align: center;
-    }
+  .dataTables_wrapper .dataTables_info,.dataTables_wrapper .dataTables_paginate {
+      float: none;
+      text-align: center;
+  }
 
-    .dataTables_wrapper .dataTables_paginate {
-        margin-top: 0.5em;
-    }
+  .dataTables_wrapper .dataTables_paginate {
+      margin-top: 0.5em;
+  }
 }
 
 .docs-show-all.changed:after {
-        transform: rotate(-90deg);
-    }
+  transform: rotate(-90deg);
+}
 
 .dataTables_info {
     position: absolute;
