@@ -27,7 +27,12 @@
 }
 
 .divider-line {
-  margin: 0 0 60px 0;
+  margin-bottom: 25px;
+
+  &.row-fluid {
+    border-bottom: 1px solid $lighter_grey;
+    padding-bottom: 25px;
+  }
 }
 
 //
@@ -53,8 +58,15 @@
     width: 1350px;
     max-width: 1350px;
   }
-}
 
+  .divider-line {
+    margin-bottom: 60px;
+
+    &.row-fluid {
+      padding-bottom: 60px;
+    }
+  }
+}
 
 /**
  * TEMP STUFF for DEV
