@@ -171,7 +171,7 @@
           var showAll = that.next('.payments-show-all');
 
           i = $(this).DataTable({
-            "info": true,
+            "info": false,
             "orderClasses": false,
             "target": '.narrow-td',
             "bFilter": false,
@@ -182,7 +182,7 @@
                 null  
             ],
             "ordering": false,
-            "responsive": true,
+            "responsive": false,
             "pageLength": 5,
             "order": [ 2, 'desc' ]
           });
