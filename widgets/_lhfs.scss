@@ -167,6 +167,12 @@
         content: $font_icons_check;
       }
     }
+    &.info {
+      color: $black;
+      &:before {
+        content: $font_icons_info_black;
+      }
+    }
   }
   & > ul {  //this setup is for phase 3; it is not really optimal, instead of > give the root ul a class name
     & > li {
@@ -407,13 +413,62 @@ ul.horizontal {
   .product.data.span12, .row-fluid li.value[class*='span'] {
     margin-left: 0; //overrides the setting for a left margin of 2% for all spans starting at the second one in a list, which creates an indent in lhfs widget design in the .product ul
   }
-
 }
 
 //
 // Media queries
 // --------------------------------------------------
 
+
+// TODO: Clean up dataTable (quick fix so we can show LHFS phase 3)
+@media screen and (max-width: 640px) {
+  .lhfs_widget {
+
+    table.dataTable {
+      tbody {
+        td {
+          width: auto;
+          display: table-cell;
+          padding: 6px 0;
+
+          li.status {
+            height: 30px;
+          }
+
+          &:nth-child(2) {
+            width: 30%;
+            min-width: 120px;
+          }
+          &:nth-child(3) {
+            max-width: 30px;
+          }
+          &:nth-child(4) {
+            width:100%;
+            text-align:center;
+          }
+          &:first-child {
+            width:100%;
+            display: block;
+            padding: 0;
+
+            &:before {
+              content: 'Datum: ';
+              font-weight: bold;
+            }
+          }
+
+          .open, .paid, .info {
+            visibility: hidden;
+
+            &:before {
+              visibility: visible;
+            }
+          }
+        }
+      }
+    }
+  }
+}
 
 @include breakpoint($brk-mobile){
 
