@@ -344,7 +344,7 @@ ul.actions {
         padding-left: 0;
         display: block;
         div.disabler {  //required element for disabling of submit elements depending on validity
-          z-index: $elements_button_enabled_z-index;
+          z-index: $elements_button_disabled_z-index;
           position: relative;
           left: 0;
           top:-$elements_button_height;
@@ -361,9 +361,6 @@ ul.actions {
       button {
         position: relative;
         z-index: $elements_button_enabled_z-index;
-        &.cancel {
-          z-index: 4;
-        }
 
       }
     }
@@ -373,13 +370,22 @@ ul.actions {
 li.right {
   text-align: right;
 }
+
+ul.account {
+  margin-top: 18px;
+}
+
+ul.interval {
+  margin-bottom: -18px;
+}
+
 ul.horizontal {
   display: table;
+
   &.row-fluid {
     //height: 50px;
   }
-  margin: 0;
-  // margin-bottom: 20px;
+
   @media screen and(max-width: $rc-s-max-width) {
     margin-bottom: 30px;
   }
