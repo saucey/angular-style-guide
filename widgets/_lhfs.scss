@@ -33,6 +33,10 @@
   form>ul, & ul.products {
     margin: 0;
     width: 100%;
+
+    &.edit {
+      margin-top: 10px;
+    }
     li.product {
       .description {
         &:before {
