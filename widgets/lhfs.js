@@ -52,21 +52,13 @@
         });
 
         var form = $('#lhfs_widget').find('form'),
-            $iban = form.find('ul.account'),
             $incasso = form.find('.incasso'),
-            ibanInputField = $iban.find('input'),
-            incassoCheckbox = $incasso.find('input'),
-            selectDefaultValue = $('select').val();
+            incassoCheckbox = $incasso.find('input');
 
-        var showIbanField = function() {
-            $iban.show();
-            ibanInputField.show();
-        };
-
-        var hideIbanField = function() {
-            $iban.hide();
-            ibanInputField.hide();
-        };
+        var val,
+            parent,
+            $iban,
+            ibanInputField;
 
         var showIncassoField = function() {
             $incasso.show();
@@ -77,38 +69,70 @@
             $incasso.hide();
             incassoCheckbox.hide();
         };
-          
-        // Check for default value of the select dropdown and show/hide fields accordingly
-        if (selectDefaultValue === 'f' || selectDefaultValue === 'F') {
-            hideIbanField();
+
+        // Multiple select elements on the page are possible
+        // Loop through all of them and change the closest input field according to the value
+        $('#lhfs_widget select').each(function() {
+          val = $(this).val(),
+          parent = $(this).closest('.product'),
+          $iban = parent.find('ul.account'),
+          ibanInputField = $iban.find('input');
+
+          // Check for default value of the select elements and show/hide fields accordingly
+          if (val === 'f' || val === 'F') {
+            $iban.hide();
+            ibanInputField.hide();
             hideIncassoField();
-        } else if(selectDefaultValue === 'p' || selectDefaultValue === 'P' || selectDefaultValue === 'i' || selectDefaultValue === 'I'){
+          } else if(val === 'd' || val === 'D'){
+            showIncassoField();
+          } else if(val === 'p' || val === 'P' || val === 'i' || val === 'I'){
             hideIncassoField();
-        }
+          }
+        });  
 
         // Behaviour when switching payment methods
-        $("select").change(function () {
-          var val = $(this).val();
+        $('#lhfs_widget  select').change(function () {
+          val = $(this).val(),
+          parent = $(this).closest('.product'),
+          $iban = parent.find('ul.account'),
+          ibanInputField = $iban.find('input');
 
           // Disable submit button and uncheck checkbox by default
           incassoCheckbox.attr('checked', false);
+          
+          // Check all select elements if there is one selected with a value 'd', hide incasso field if this is the case
+          if(val !== 'd' || val !== 'D') {
+            var dSelected = 0;
+            $('select').each(function() {
+              if($(this).val() === 'd' || $(this).val() === 'D') {
+                dSelected++;
+              }
+            }).promise().done(function() {
+              if(dSelected === 0) {
+                hideIncassoField();
+              }
+            });
+          }
+
           // Show iban field only if value = p, d or i
           if(val === 'p' || val === 'P' ||  val === 'd' || val === 'D' || val === 'i' || val === 'I') {
-            showIbanField();
-            hideIncassoField();
+            $iban.show();
+            ibanInputField.show();
           } 
-          // Hide iban and show checkbox
+
+          // Show iban and show checkbox
           if(val === 'd' || val === 'D') {
-            showIbanField();
+            $iban.show();
+            ibanInputField.show();
             showIncassoField();
           }
 
           // Hide iban and checkbox and enable submit button
           if(val === 'f' || val === 'F') {
-            hideIbanField();
-            hideIncassoField();
+            $iban.hide();
+            ibanInputField.hide();
           }
-          
+                    
         });
       
         $('table.lhfsPayments').each(function(i) {
@@ -142,8 +166,7 @@
             }
           });
         });
-      
-
+    
       }
       this.attached = true;
     },
