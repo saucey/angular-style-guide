@@ -77,58 +77,13 @@
             $incasso.hide();
             incassoCheckbox.hide();
         };
-
-        var enableSubmitButton = function() {
-          $('.disabler').css('z-index', '2');
-        };
-
-        var disableSubmitButton = function() {
-          $('.disabler').css('z-index', '3');
-        };
-
-        ibanInputField.keyup(function() {
-          if($('select').val() === 'd' || $('select').val() === 'D') {
-            if(ibanInputField.val().length > 0 && incassoCheckbox.is(':checked')){
-              enableSubmitButton();
-            } else {
-              disableSubmitButton();
-            }
-          } else if(ibanInputField.val().length > 0){
-              enableSubmitButton();
-            } else  {
-              disableSubmitButton();
-          }
-        });
-
-        incassoCheckbox.change(function() {
-          if($('select').val() === 'd' || $('select').val() === 'D') {
-            if(ibanInputField.val().length > 0 && incassoCheckbox.is(':checked')){
-              enableSubmitButton();
-            } else {
-              disableSubmitButton();
-            }
-          } else {
-            if(incassoCheckbox.is(':checked')) {
-              enableSubmitButton();
-            } else {
-              disableSubmitButton();
-            }
-          }
-        });
           
         // Check for default value of the select dropdown and show/hide fields accordingly
         if (selectDefaultValue === 'f' || selectDefaultValue === 'F') {
             hideIbanField();
             hideIncassoField();
-            enableSubmitButton();
         } else if(selectDefaultValue === 'p' || selectDefaultValue === 'P' || selectDefaultValue === 'i' || selectDefaultValue === 'I'){
             hideIncassoField();
-            // Checks if user already has a value filled in
-            if(ibanInputField.val()) {
-              enableSubmitButton();
-            } else {
-              disableSubmitButton();
-            }
         }
 
         // Behaviour when switching payment methods
@@ -136,7 +91,6 @@
           var val = $(this).val();
 
           // Disable submit button and uncheck checkbox by default
-          disableSubmitButton();
           incassoCheckbox.attr('checked', false);
           // Show iban field only if value = p, d or i
           if(val === 'p' || val === 'P' ||  val === 'd' || val === 'D' || val === 'i' || val === 'I') {
@@ -149,19 +103,10 @@
             showIncassoField();
           }
 
-          // On switching between payment methods check if there is already a value filled in and enable the button
-          if(val === 'p' || val === 'P' || val === 'i' || val === 'I') {
-            if(ibanInputField.val()) {
-              enableSubmitButton();
-            } else {
-              disableSubmitButton();
-            }
-          }
           // Hide iban and checkbox and enable submit button
           if(val === 'f' || val === 'F') {
             hideIbanField();
             hideIncassoField();
-            enableSubmitButton();
           }
           
         });
