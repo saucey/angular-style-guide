@@ -1,12 +1,24 @@
 $sticker-circle-size: 160px;
 
+// margin is fixed for flexible content pages, it's based on a big header plus margin,
+// since the sticker is placed in columns without a fixed height, it's not possible to
+// align vertically
+$sticker-circle-marginTop: $xx-large + 20;
+
+.sticker-circle-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
 .sticker-circle {
+  margin: $sticker-circle-marginTop auto 0 auto;
   display: block;
   width: $sticker-circle-size;
   height: $sticker-circle-size;
   border-radius: 50%;
   color: $white;
-  position: relative;
   text-align:center;
   background: $dark_blue;
   font-family: $font_light;

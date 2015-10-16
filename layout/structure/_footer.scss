@@ -5,7 +5,6 @@
 
 .footer-wrap {
   margin: 0;
-  //@include rem('margin-top', 50);
 
   .footer-blk,
   .footer-quick-links {
@@ -155,9 +154,7 @@
         @include rem('font-size', 14);
         @include rem('line-height', 14);
 
-        //&:hover {  //link should be white all the time
-          color: $white;
-        //}
+        color: $white;
       }
 
       &:last-child {
@@ -173,37 +170,41 @@
 // --------------------------------------------------
 
 @include breakpoint($brk-mobile) {
-  .footer-blk .block__content {
-    margin-bottom: 30px;
+
+  .footer-blk {
+
+    .block__content {
+      margin-bottom: 30px;
+    }
+
+    .row-fluid .span4 {
+      display: none;
+    }
+
+    .region.second {
+      padding-bottom: 10px;
+      letter-spacing: 1px;
+
+      .social-icons {
+        display: block;
+      }
+
+      .row-fluid:last-child {
+        display: block;
+      }
+
+      .span4 {
+        display: block;
+      }
+    }
   }
 
-  .row-fluid .span4 {
-    display: none;
-  }
-
-  .footer-blk .region.second .social-icons {
-  display: block;
-  }
-
-  .region .second .row-fluid:last-child {
-  display: block;
-  }
-
-  .footer-blk .region.second {
-    padding-bottom: 10px;
-    letter-spacing: 1px;
-  }
-
-  .footer-blk .region.second .span4 {
-    display: block;
-  }
-
-  .footer-wrap .footer-quick-links {
+  .footer-quick-links {
     border-top: 1px solid $blue_gray;
-  }
 
-  .footer-quick-links ul li a {
-    font-size: 14px;
+    ul li a {
+      font-size: 14px;
+    }
   }
 }
 
@@ -232,7 +233,6 @@
         padding-bottom: 0;
       }
     }
-
   }
 
   .footer-quick-links {
@@ -246,16 +246,7 @@
 
 @include breakpoint($brk-large-desktop) {
 
-  .footer-blk {
-
-    .region.second {
-
-      .social-icons {
-
-        ul li {
-          @include rem('padding-right', 20);
-        }
-      }
-    }
+  .footer-blk .region.second .social-icons ul li {
+    @include rem('padding-right', 20);
   }
 }

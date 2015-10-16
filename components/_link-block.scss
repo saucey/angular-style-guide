@@ -1,0 +1,30 @@
+.link-block {
+  li {
+    display: block;
+    border-bottom: 1px solid $lighter_grey;
+    padding: 10px;
+  }
+
+  a {
+    display: block;
+    font-size: $medium;
+    line-height: $x-large;
+    height: $x-large;
+
+    > span {
+      vertical-align: middle;
+      height: $x-large;
+      display: inline-block;
+
+      &.image-wrapper {
+        width: $x-large;
+        overflow: hidden;
+
+        img {
+          max-width: $x-large;
+          max-height: $x-large;
+        }
+      }
+    }
+  }
+}
