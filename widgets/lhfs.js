@@ -10,6 +10,8 @@
   Drupal.behaviors.lhfs_widget = {
     attach: function () {
 
+      Drupal.behaviors.tooltip.activate("#lhfs_widget");
+
       var Validation = Drupal.behaviors.validation;
       var formSelector = "form[name=modifyBetaalGegevensForm]";
       if (!Validation.IEFix(formSelector, false)) {
@@ -28,28 +30,6 @@
           .css("top", (($(window).height() - $(".success").height()) / 2) + "px");  //center .success vertically
         $(".lightbox")
           .appendTo("body"); //move .lightbox to the body & after .success so that the visible style for .success still applies
-
-
-        $(".help").mouseover(function () {
-          if (this.title > " ") { //the temporary content has 2B " ", since "" will set display to "none" according to stylesheet definition, 
-            //alert(this.title);
-            $(".dialog.help").remove();
-            var dialog = document.createElement("DIV");
-            dialog.className = "help dialog";
-            dialog.innerHTML = this.title;
-            this.title = " ";
-            $("#lhfs_widget").append(dialog); //this has 2 happen b4 measurements of dialog are taken, otherwise they won't be initialized
-            var offset = $(this).offset();
-            offset.top = offset.top + $(this).height() + 10;
-            offset.left = offset.left - $(dialog).width() / 2 - 18;
-            $(dialog).offset(offset);
-            var that = this;
-            $(document).click(function () {
-              $(dialog).remove();
-              that.title = dialog.innerHTML;
-            });
-          }
-        });
 
         var form = $('#lhfs_widget').find('form'),
             $incasso = form.find('.incasso'),
