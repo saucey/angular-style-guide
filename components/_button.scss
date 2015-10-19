@@ -123,7 +123,7 @@ button, .button {
       color: $blue;
       position: absolute;
     }
-    &:after {
+    &.arrow:after {
       content: "";
       padding: 0;
       margin-right: 0;
