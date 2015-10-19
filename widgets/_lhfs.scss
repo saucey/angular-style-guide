@@ -36,6 +36,15 @@
 
     &.edit {
       margin-top: 10px;
+
+      @media screen and(max-width: $rc-s-max-width) {
+        margin-top: 0px;
+
+        .span6:first-child {
+          line-height: 0px;
+          min-height: 0px;
+        }
+      } 
     }
     li.product {
       .description {
@@ -390,9 +399,6 @@ ul.horizontal {
     //height: 50px;
   }
 
-  @media screen and(max-width: $rc-s-max-width) {
-    margin-bottom: 30px;
-  }
   padding: 1px 0;
   //width: 100%;
   display: none; //together with the .data class for li.product toggles on and off the visibility of the data elements
@@ -433,15 +439,21 @@ ul.horizontal {
 // --------------------------------------------------
 
 
-// TODO: Clean up dataTable (quick fix so we can show LHFS phase 3)
-  
+// Fix for grid layout
 @media screen and (max-width: 740px) {
-  input[type=text] {
-    width: 100%;
+  .lhfs_widget {
+    input[type=text] {
+      width: 100%;
+    }
   }
 }
-@media screen and (max-width: 640px) {
+
+@include breakpoint($brk-mobile){
   .lhfs_widget {
+
+    input[type=text] {
+      width: 228px;
+    }
 
     table.dataTable {
       tbody {
@@ -487,9 +499,6 @@ ul.horizontal {
       }
     }
   }
-}
-
-@include breakpoint($brk-mobile){
 
     .help {
       float: right;
