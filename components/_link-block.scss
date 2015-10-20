@@ -23,4 +23,11 @@
       }
     }
   }
+
+  // Override default drupal styling
+  .field-collection-view {
+    border-bottom: none;
+    margin: 0;
+    padding: 0;
+  }
 }
