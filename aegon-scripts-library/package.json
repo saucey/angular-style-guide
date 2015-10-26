@@ -1,0 +1,13 @@
+{
+  "name": "aegon-scripts-library",
+  "version": "0.0.1",
+  "homepage": "https://www.aegon.nl",
+  "author": "cXstudio | HCL Tech",
+  "license": "no license",
+  "repository": {
+    "type": "git",
+    "url": "https://bitbucket.org/cxstudio/aegon-scripts-library"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
