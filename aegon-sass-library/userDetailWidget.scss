@@ -1,0 +1,26 @@
+
+/* Bower Components
+================================================== */
+
+/* Compass Mixins */
+@import "vendors/compass-mixins/lib/compass";
+
+/* Breakpoint SASS */
+@import "vendors/breakpoint-sass/stylesheets/breakpoint";
+
+
+/* EXTRA sub libs dependencies
+================================================== */
+
+/* SASS variables, functions, mixins, class and placeholders helpers */
+@import "helpers/all";
+
+/* All library widgets and specific modules */
+@import "structures/extra_features";
+@import "structures/user_detail";
+
+@import "base/fonts";
+@import "base/colors";
+
+@import "components/button";
+@import "base/icon";	//provides the icon styles, aka the webfont icons

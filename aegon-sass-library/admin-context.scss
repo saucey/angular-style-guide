@@ -1,0 +1,35 @@
+
+//
+// Main file for Admin Menu
+// Syntax is in SCSS, project using lib-sass to compile the styles.
+// --------------------------------------------------
+
+/* Force the charset
+================================================== */
+
+@charset "UTF-8";
+
+
+/* Bower Components
+================================================== */
+
+/* Compass Mixins */
+@import "vendors/compass-mixins/lib/compass";
+
+/* Breakpoint SASS */
+@import "vendors/breakpoint-sass/stylesheets/breakpoint";
+
+
+/* Groups of mijnaegon files
+================================================== */
+
+/* SASS variables, functions, mixins, class and placeholders helpers */
+@import "helpers/all";
+
+
+/* Groups of admin context files
+================================================== */
+
+/* Modules */
+@import "modules/aegon/admin_menu";
+@import "pages/admin";

@@ -1,0 +1,276 @@
+
+//
+// Responsive Grid
+// --------------------------------------------------
+
+.row-fluid {
+  &:before, &:after {
+    line-height: 0;
+    display: table;
+    content: '';
+  }
+  &:after {
+    clear: both;
+  }
+  [class*="span"] {
+    display: block;
+    width: 100%;
+    min-height: 30px;
+    float: left;
+    margin-left: 1.7094017094017095%;
+    *margin-left: 1.655982905982906%;
+    box-sizing: border-box;
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+  .span14 {
+    width: 100%;
+    *width: 99.94658119658119%;
+  }
+  .span13 {
+    width: 92.73504273504273%;
+    *width: 92.68162393162392%;
+  }
+  .span12 {
+    width: 85.47008547008546%;
+    *width: 85.41666666666666%;
+    .container_12 {
+      width: 100%;
+      *width: 99.94680851063829%;
+    }
+    &.center {
+      float: none;
+      margin: 0 auto;
+    }
+  }
+  .span11 {
+    width: 78.2051282051282%;
+    *width: 78.1517094017094%;
+  }
+  .span10 {
+    width: 70.94017094017094%;
+    *width: 70.88675213675214%;
+  }
+  .span9 {
+    width: 63.675213675213676%;
+    *width: 63.621794871794876%;
+  }
+  .span8 {
+    width: 56.41025641025641%;
+    *width: 56.35683760683761%;
+  }
+  .span7 {
+    width: 49.14529914529914%;
+    *width: 49.09188034188034%;
+  }
+  .span6 {
+    width: 41.880341880341874%;
+    *width: 41.82692307692307%;
+  }
+  .span5 {
+    width: 34.61538461538461%;
+    *width: 34.56196581196581%;
+  }
+  .span4 {
+    width: 27.35042735042735%;
+    *width: 27.297008547008545%;
+  }
+  .span3 {
+    width: 20.085470085470085%;
+    *width: 20.03205128205128%;
+  }
+  .span2 {
+    width: 12.820512820512821%;
+    *width: 12.767094017094017%;
+  }
+  .span1 {
+    width: 5.555555555555555%;
+    *width: 5.502136752136752%;
+  }
+}
+
+.container_12 .row-fluid {
+  [class*='span'] {
+    // currently both following lines are superseded by margin-left: 0 further 
+    // below; check if that creates errors
+    margin-left: 2%;
+    *margin-left: 1.9375%;
+    min-height: 10px;
+
+    // Aded by Jorg: this was causing a problem in lhfs form, so it is
+    // deactivated, but if anything is strange in deployment of grid at a later
+    // point, this might be a point to start debugging
+    // 
+    // Added by Rocco: When you have conflict in your style's widget, please
+    // provide that changes in your specific widget's file wrapped by your 
+    // specific widget's class. I'll do it for you in widgets/_lhfs.scss file.
+    // Please check relative commit and explanation.
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+  .span12 {
+    width: 100%;
+    *width: 99.9375%;
+  }
+  .span11 {
+    width: 91.5%;
+    *width: 91.4375%;
+  }
+  .span10 {
+    width: 83%;
+    *width: 82.9375%;
+  }
+  .span9 {
+    width: 74.5%;
+    *width: 74.4375%;
+  }
+  .span8 {
+    width: 66%;
+    *width: 65.9375%;
+  }
+  .span7 {
+    width: 57.5%;
+    *width: 57.4375%;
+  }
+  .span6 {
+    width: 49%;
+    *width: 48.9375%;
+  }
+  .span5 {
+    width: 40.5%;
+    *width: 40.4375%;
+  }
+  .span4 {
+    width: 32%;
+    *width: 31.9375%;
+  }
+  .span3 {
+    width: 23.5%;
+    *width: 23.4375%;
+  }
+  .span2 {
+    width: 15%;
+    *width: 14.9375%;
+  }
+  .span1 {
+    width: 6.5%;
+    *width: 6.4375%;
+  }
+}
+
+section.content.fullwidth {
+  width: auto;
+  margin: 0;
+}
+
+/**
+ * DL DT DD
+ */
+.container_12 {
+
+  dl.row-fluid {
+    overflow:hidden;
+
+    dt  {
+      float:left;
+
+      &[class*='span'] {
+        margin-left: 2%;
+        *margin-left: 1.9375%;
+
+        &:first-child, &:first-of-type {
+          margin-left: 0;
+        }
+      }
+    }
+
+    dd {
+      float:left;
+
+      &[class*='span'] {
+        margin-left: 2%;
+        *margin-left: 1.9375%;
+
+        &:first-child, &:first-of-type {
+          margin-left: 0;
+        }
+      }
+    }
+  }
+}
+
+// Grid system variant for empowered DL>DT with table/row behaviour.
+// Explanation: to simulate a better vertical-align, as row-fluid showed in 
+// widget Communication Preferences, according to functional design. 
+dl.table.row-fluid {
+  display: table;
+  width: 100%;
+  overflow: visible;
+
+  dt, dd  {
+    vertical-align: middle;
+
+    &[class*='span'] {
+      display: table-cell;
+      float: none;
+      margin-left: 2%;
+      *margin-left: 1.9375%;
+
+      &:first-child, &:first-of-type {
+        margin-left: 0;
+      }
+    }
+
+    &.top {
+      vertical-align: top;
+    }
+
+    &.bottom {
+      vertical-align: bottom;
+    }
+  }
+}
+
+
+// 
+// Media queries
+// --------------------------------------------------
+
+@include breakpoint($brk-mobile) {
+
+  .row-fluid {
+    margin-bottom: 0;
+
+    .span14 {
+      @include rem('margin-bottom', 5);
+    }
+  }
+
+  .container_12  {
+
+    .row-fluid [class*="span"],
+    .form-item [class*="span"] {
+      margin-left: 0;
+      width: 100%;
+      @include rem('margin-bottom', 5);
+    }
+  }
+}
+
+@media screen and(min-width: $rc-m-min-width) and(max-width: $rc-m-max-width) {
+
+  .row-fluid {
+    @include rem('margin-bottom', 5);
+  }
+
+  .container_12 .row-fluid.col3 .span4 {
+    width: 49%;
+    *width: 48.9375%;
+
+    &:last-child {
+      @include rem('margin', 5, 0, 0);
+    }
+  }
+}

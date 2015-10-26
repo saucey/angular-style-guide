@@ -1,0 +1,76 @@
+
+//
+// Main structure
+// --------------------------------------------------
+
+.clearfix {
+
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+.wrapper {
+  background-color: $white;
+
+  &.ui-panel-animate {
+    transition: transform 0.2s ease-in-out;
+    backface-visibility: hidden;
+    perspective: none;
+  }
+}
+
+.divider-line {
+  margin-bottom: 25px;
+
+  &.row-fluid {
+    border-bottom: 1px solid $lighter_grey;
+    padding-bottom: 25px;
+  }
+}
+
+//
+// Media queries
+// --------------------------------------------------
+
+@include breakpoint($brk-tablet) {
+
+  section.scroll {
+    @include rem('margin-left', 170);
+  }
+}
+
+@include breakpoint($brk-mobile) {
+  .region-content {
+    margin: 0px;
+  }
+}
+
+@include breakpoint($brk-large-desktop) {
+
+  .wrapper {
+    width: 1350px;
+    max-width: 1350px;
+  }
+
+  .divider-line {
+    margin-bottom: 60px;
+
+    &.row-fluid {
+      padding-bottom: 60px;
+    }
+  }
+}
+
+/**
+ * TEMP STUFF for DEV
+ */
+#inpage-chat {
+  display: none;
+}

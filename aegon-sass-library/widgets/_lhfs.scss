@@ -1,0 +1,516 @@
+// 
+// Reason to don't use id selectors instead of class selectors
+// http://csswizardry.com/2011/09/when-using-ids-can-be-a-pain-in-the-class/
+// http://screwlewse.com/2010/07/dont-use-id-selectors-in-css/
+// http://oli.jp/2011/ids/
+
+.bubble {
+  @include bubble(10px, 2px, $quadrant: 3, $bottom: 20px, $border-color: $grey, $background-color: $white);
+}
+
+.lhfs_widget {
+  .tip {
+    background-color: $sky;
+    @include inlineFrame();
+    padding-left: 40px;
+    //margin-bottom: 18px;
+    .intro {
+      &:before {
+        font-family: $font_icons;
+        content: $font_icons_tip;
+        margin-left: -20px; //this is faking it, compensating for the space requirement of :before, display: inline does not seem to work
+        margin-right: -5px;
+        left: -10px;
+        position: relative;
+      }
+      color: $white;
+      font-size: $large;
+      font-family: $font_normal;
+      margin-bottom: 20px;
+    }
+  }
+
+  form>ul, & ul.products {
+    margin: 0;
+    width: 100%;
+
+    &.edit {
+      margin-top: 10px;
+
+      @media screen and(max-width: $rc-s-max-width) {
+        margin-top: 0px;
+
+        .span6:first-child {
+          line-height: 0px;
+          min-height: 0px;
+        }
+      } 
+    }
+    li.product {
+      .description {
+        &:before {
+          font-family: $font_icons;
+          color: $blue;
+          content: $font_icons_headhphones;
+          margin-left: -20px; //this is faking it, compensating for the space requirement of :before, display: inline does not seem to work
+          left: -10px;
+          position: relative;
+        }
+        padding-left: 40px;
+        margin-bottom: 20px;
+      }
+
+      div.title, span.police-number {
+        font-family: $font_medium;  //font-weight bold does not work for this font family >:(;
+      }
+    }
+  }
+
+  li.value {
+    @media screen and(min-width: $rc-m-min-width) and(max-width: $rc-l-max-width) {
+      height: $elements_height;
+    }
+    span {
+      &.content, &.help {
+        display: inline;
+      }
+      &.help {
+        @media screen and(max-width: $rc-s-max-width) {
+          display: none;
+        }
+      }
+    }
+  }
+  li.label {
+    min-height: 0;
+    @media screen and(min-width: $rc-m-min-width) and(max-width: $rc-l-max-width) {
+      height: inherit;  //$elements_height;
+    }
+    &:after {
+      content: ":";
+    }
+  }
+  label.left {
+    float:left;
+  }
+
+  input[type=text], input[type=email], input[type=number], select, .ddTitle {
+    display: none;
+  }
+  
+  .dd {
+    width: 100% !important;
+    max-width: 224px;
+  }
+  .edit {
+    ul.error {
+      display: block;
+      opacity: 0;
+      height: 24px;
+      min-height: 0;
+      [class*='span'] {
+        min-height: 0;  //overwriting min-height from row-fluid
+        line-height: 18px;  //overwriting line-height from *body
+      }
+      &> li {
+        color: $red;
+        font-size: $small;
+        margin-left: 0;
+      }
+      &.visible {
+        opacity: 1;
+      }
+    }
+    li.label {
+    }
+    li.label, label {
+      font-family: $font_normal;
+      text-align: right;
+      line-height: 44px;
+      @media screen and(max-width: $rc-s-max-width) {
+        text-align: left;
+      }
+      &:after {
+        content: "";
+      }
+    }
+    label.checkbox {
+      line-height: 32px;
+    }
+    li.label.required:after, label.checkbox.required span.label:after {
+      margin-left: 5px;
+      content: "*";
+      color: $red;
+    }
+
+    input[type=text], input[type=email], input[type=number], select, .ddTitle {
+      display: block;
+    }
+    li.value {
+      span {
+        &.content, &.help {
+          display: none;
+        }
+      }
+    }
+  }
+
+  // fix responsive peculiarities
+  .row-fluid [class*='span'] {
+    display: inline;
+    @media screen and(max-width: $rc-s-max-width) {
+      min-height: 5px;
+    }
+  }
+}
+
+.lhfs_widget div.payments {
+  $open_color: $red;
+  $paid_color: $green;
+  .status span {
+    &:before {
+      font-family: $font_icons;
+      margin-right: 5px;
+    }
+    &.open {
+      color: $open_color;
+      &:before {
+        content: $font_icons_tip;
+      }
+    }
+    &.paid {
+      color: $paid_color;
+      &:before {
+        content: $font_icons_check;
+      }
+    }
+    &.info {
+      color: $black;
+      &:before {
+        content: $font_icons_info_black;
+      }
+    }
+  }
+  & > ul {  //this setup is for phase 3; it is not really optimal, instead of > give the root ul a class name
+    & > li {
+      & > ul, & > ul.visible {
+        display: table;
+        width: 100%;
+        border-top: none;
+        border-bottom: 1px solid $slightly_darker_grey;
+        padding: 10px 15px;
+        &.header {
+          background-color: $beige;
+          border-top: 1px solid $slightly_darker_grey;
+          border-bottom: none;
+          & > li {
+            font-family: $font_medium;
+          }
+        }
+        //this should ultimately be replaced by grid classes, but they were causing a bit of a mess so this is an arrangement to set it up
+        & > li {
+          &:nth-of-type(1) {
+            width: 200px;
+          }
+          &:nth-of-type(2) {
+            width: 120px;
+          }
+          &:nth-of-type(4) {
+            width: 120px;
+          }
+          &:nth-of-type(5) {
+            width: 20px;
+          }
+        }
+      }
+    }
+  }
+
+  .method {
+    color: $slightly_darker_grey;
+  }
+
+  .details {
+    background-color: transparent;
+    &:before {
+      font-family: $font_icons;
+      content: $font_icons_plus;
+      color: $grey;
+      background-color: transparent;
+    }
+  }
+  .amount {
+    &:before {
+      content: "€";
+    }
+  }
+  .date {
+    color: $blue;
+  }
+}
+
+.inline_alert {
+  @include inlineFrame();
+  display: block;
+  //padding-top: 0;
+  //padding-bottom: 0;
+  border: 1px solid $light_red;
+  background-color: $lighter_red;
+  hr {
+    height: 1px;
+    color: $light_red;
+    width: 100%;
+  }
+  ul.payments {
+    margin: 15px -15px;
+    button.white {
+      background-color: transparent;
+      &:before {
+        background-color: transparent;      
+      }
+    }
+    & > li {
+      & > ul {
+        padding: 10px 15px;
+        border: 1px solid $light_red;
+        border-width: 1px 0 0 0;
+        width: 100%;
+        display: table;
+        & > li {
+          //display: table-cell;
+          float: none;
+          //this should ultimately be replaced by grid classes, but they were causing a bit of a mess so this is an arrangement to set it up
+          &:first-of-type:last-of-type {  //this only applies to a li if it is the only one..
+            text-align: right;
+          }
+          &:nth-of-type(2) {
+            width: 120px;
+            span.debit {
+              font-family: $font_medium;
+              &:before {
+                content: "€";
+              }
+            }
+          }
+          &:nth-of-type(3) {
+            width: 80px;
+          }
+          &:nth-of-type(4) {
+            width: 120px;
+          }
+        }
+      }
+    }
+  }
+  h3 {
+    color: $black;
+    font-weight: bold;
+  }
+}
+
+.help {
+  &[title=''] {
+    display: none;
+  }
+  margin: 10px 7px 0 0;
+  display: inline-block;
+  float: left;
+  position: relative;
+  &.dialog {
+    z-index: 5;
+    $help_dialog_width: 400px;
+    @include bubble($width: 10px, $left: $help_dialog_width / 2, $quadrant: 0, $background-color: $slightly_lighter_blue);
+    background-color: $slightly_lighter_blue;
+    display: block;
+    position: absolute;
+    padding: 18px;
+    max-width: $help_dialog_width;
+    border-radius: $frame_border_radius;
+  }
+  &:before {
+    font-family: $font_icons;
+    font-size: 16px;
+    content: $font_icons_help;
+    position: absolute;
+    left: 50% !important;
+    width: 18px;
+  }
+  &:after {
+    left: 50% !important;
+  }
+}
+
+ul.actions {
+  text-align: left;
+  li {
+    float: none;
+    display: block;
+    &.edit {
+      display: none;
+    }
+  }
+  &.edit {
+    text-align: right;
+    li {
+      text-align: left;
+      &.edit {
+        padding-left: 0;
+        display: block;
+        div.disabler {  //required element for disabling of submit elements depending on validity
+          z-index: $elements_button_disabled_z-index;
+          position: relative;
+          left: 0;
+          top:-$elements_button_height;
+          background-color: white;
+          opacity: 0.5;
+          width: 100%;
+          height: $elements_button_height;
+          display: block; //always-on, state is indicated by z-index of the buttons; see if the always-on creates problems with backgrounds other than white
+        }
+      }
+      &.view {
+        display: none;
+      }
+      button {
+        position: relative;
+        z-index: $elements_button_enabled_z-index;
+
+      }
+    }
+  }
+}
+
+li.right {
+  text-align: right;
+}
+
+ul.account {
+  margin-top: 18px;
+}
+
+ul.interval {
+  margin-bottom: -18px;
+}
+
+ul.horizontal {
+  display: table;
+
+  &.row-fluid {
+    //height: 50px;
+  }
+
+  padding: 1px 0;
+  //width: 100%;
+  display: none; //together with the .data class for li.product toggles on and off the visibility of the data elements
+  &.clear {
+    width: 100%;
+    height: 1px;
+    margin: 0 0 -1px;
+    clear: both;
+  }
+  &.visible {
+    display: block;
+  }
+  li {
+    &.label {
+      font-family: $font_normal;
+    }
+    &.value {
+      font-family: $font_light;
+    }
+    display: table-cell;
+  }
+}
+
+/**
+ * Added by Rocco: Please check the explanation wrote in layout/_grid.scss at 
+ * line 100, related to this specific declaration below, that helps to visuaize 
+ * your widget in the right way.
+ */
+.lhfs_widget {
+
+  .product.data.span12, .row-fluid li.value[class*='span'] {
+    margin-left: 0; //overrides the setting for a left margin of 2% for all spans starting at the second one in a list, which creates an indent in lhfs widget design in the .product ul
+  }
+}
+
+//
+// Media queries
+// --------------------------------------------------
+
+
+// Fix for grid layout
+@media screen and (max-width: 740px) {
+  .lhfs_widget {
+    input[type=text] {
+      width: 100%;
+    }
+  }
+}
+
+@include breakpoint($brk-mobile){
+  .lhfs_widget {
+
+    input[type=text] {
+      width: 228px;
+    }
+
+    table.dataTable {
+      tbody {
+        td {
+          width: auto;
+          display: table-cell;
+          padding: 6px 0;
+
+          li.status {
+            height: 30px;
+          }
+
+          &:nth-child(2) {
+            width: 30%;
+            min-width: 120px;
+          }
+          &:nth-child(3) {
+            max-width: 30px;
+          }
+          &:nth-child(4) {
+            width:100%;
+            text-align:center;
+          }
+          &:first-child {
+            width:100%;
+            display: block;
+            padding: 0;
+
+            &:before {
+              content: 'Datum: ';
+              font-weight: bold;
+            }
+          }
+
+          .open, .paid, .info {
+            visibility: hidden;
+
+            &:before {
+              visibility: visible;
+            }
+          }
+        }
+      }
+    }
+  }
+
+    .help {
+      float: right;
+      &.dialog {
+        right: 2%;
+      }
+
+      &:before {
+      }
+
+      &:after {
+        left: 88% !important;
+      }
+    }
+  }

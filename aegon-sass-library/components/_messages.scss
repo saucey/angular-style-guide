@@ -1,0 +1,271 @@
+.messages {
+  position: relative;
+  border: none;
+  @include rem('border-radius', 5);
+  @include rem('padding', 20, 30);
+  background-image: none;
+
+  .header {
+    margin-bottom: .2em;
+    font-family: $font_normal;
+    font-weight: bold;
+  }
+
+  /**
+   * Colors below follow the current aegon's messages theme
+   */
+  &.messages--status {
+    background-color: $light_green;
+
+    .header {
+      color: $green;
+    }
+  }
+
+  &.messages--error {
+    background-color: $pink;
+
+    .header {
+      color: $dark_pink;
+    }
+  }
+
+  &.messages--warning {
+    background-color: $sky;
+    color: $white;
+
+    .wrap.header {
+      color: $white;
+    }
+
+    .wrap.content {
+      color: $white;
+    }
+  }
+
+  &.messages--attention {
+    background-color: $blue;
+    color: $white;
+
+    .wrap {
+      margin: 0 0 15px 0;
+    }
+
+    .header {
+      color: $white;
+      margin-bottom: 5px;
+    }
+  }
+
+  &.messages--functional {
+    background-color: $lighter_grey;
+    padding-left: 20px;
+
+    .content {
+      margin-bottom: 20px;
+    }
+
+    .header {
+      color: $black;
+    }
+  }
+}
+
+//
+// Media queries
+// --------------------------------------------------
+
+@include breakpoint($brk-mobile) {
+
+  &.messages--googleStatus {
+    background-color: $blue;
+    padding-left: 20px;
+    height: auto;
+
+    .header {
+      font-size: 12px;
+    }
+
+    .content {
+      position: relative;
+      width: 55%;
+      font-size: 10px;
+      line-height: 12px;
+      display: inline-block;
+      color: $white;
+    }
+
+    p {
+      font-size: 11px;
+      line-height: 14px;
+    }
+
+    button {
+      position: absolute;
+      right: 15px;
+      font-size: small;
+    }
+
+    .googleStatus-img {
+      float: left;
+      height: 45px;
+      width: 45px;
+      margin-right: 10px;
+      margin-left: 8px;
+    }
+
+    .icon:before {
+      content: '\e60d';
+      color: $white;
+      font-size: 16px;
+      position: absolute;
+      left: 7px;
+      right: 0px;
+      top: 4px;
+    }
+  }
+
+  &.messages--alert {
+    background: $lighter_red;
+  }
+}
+
+@include breakpoint($brk-tablet) {
+
+  .messages {
+    @include rem('padding-left', 70);
+
+    .icon {
+      position: absolute;
+      left: 20px;
+      @include rem('font-size', 30);
+      font-family: 'aegon_icons';
+    }
+
+    &.messages--warning {
+      .icon:before {
+        content: $font_icons_info;
+        color: $white;
+      }
+      .content {
+        color: $black;
+      }
+    }
+
+    &.messages--status {
+      .icon:before {
+        content: '\e632';
+        color: $green;
+      }
+    }
+
+    &.messages--error {
+      .icon {
+        .path1:before {
+          content: '\e62e';
+          color: $white;
+        }
+
+        .path2:before {
+          content: "\e634";
+          margin-left: -1.1826171875em;
+          color: $red;
+        }
+
+        .path3:before {
+          content: "\e635";
+          margin-left: -1.185em;
+          color: $red;
+        }
+      }
+    }
+
+    &.messages--alert {
+      background: $lighter_red;
+      border: 1px solid $light_red;
+
+      .icon {
+        .pathA:before {
+          content: '\e631';
+          color: $dark_red;
+        }
+      }
+    }
+
+    &.messages--mobileStatus {
+      .icon:before {
+        content: '\e60d';
+        color: $white;
+      }
+    }
+
+    &.messages--attention {
+      .icon:before {
+        content: '\e636';
+        color: $white;
+      }
+    }
+  }
+}
+
+div.success {
+  $width: 400px;
+  background-color: $white;
+  position: fixed;
+  top: 200px;
+  left: 50%;
+  margin-left: -($width / 2);
+  z-index: 6;
+  width: $width;
+  .header {
+    color: $black;
+  }
+  + .lightbox {
+    display: none;
+  }
+  &.visible + .lightbox {
+    display: block;
+  }
+}
+
+div.error {
+  background-color: $light_red;
+  .header {
+    color: $red;
+  }
+}
+
+div.error, div.success, div.alert {
+  @include inlineFrame();
+  padding-left: 40px;
+
+  .header {
+    &:before {
+      font-family: $font_icons;
+      content: $font_icons_error;
+      margin-left: -20px; //this is faking it, compensating for the space requirement of :before, display: inline does not seem to work
+      margin-right: 5px;
+      left: -10px;
+      position: relative;
+    }
+    font-family: $font_medium;
+    margin-bottom: 10px;
+  }
+
+  button.blue.arrow {
+    &:first-of-type {
+      float: right;
+      display: block;
+      @media screen and(max-width: $rc-s-max-width) {
+        display: none;
+      }
+    }
+    &:last-of-type {
+      display: none;
+      margin-top: 20px;
+      @media screen and(max-width: $rc-s-max-width) {
+        display: block;
+      }
+    }
+  }
+}

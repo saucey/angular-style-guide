@@ -1,0 +1,33 @@
+.service-link-block {
+  .service-link-wrapper {
+    border-bottom: 1px solid $lighter_grey;
+    padding: 10px;
+
+    > span {
+      height: $x-large;
+      display: inline-block;
+      font-size: $medium;
+      line-height: $x-large;
+      vertical-align: middle;
+
+      &.image-wrapper {
+        width: $x-large;
+        overflow: hidden;
+        text-align: center;
+        margin-right: 5px;
+
+        img {
+          max-width: $x-large;
+          max-height: $x-large;
+        }
+      }
+    }
+  }
+
+  // Override default drupal styling
+  .field-collection-view {
+    border-bottom: none;
+    margin: 0;
+    padding: 0;
+  }
+}

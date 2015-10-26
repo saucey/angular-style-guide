@@ -1,0 +1,46 @@
+/**
+ * Breadcrumb / Easy Breadcrumb @ Drupal @ header
+ */
+.breadcrumb {
+  width: auto;
+  float: none;
+  display: inline-block;
+  margin: 0;
+  vertical-align: middle;
+
+  ul {
+    //overflow: hidden;
+
+    li {
+      display: inline;
+      float: none;
+      @include rem('padding-left', 0);
+      @include rem('margin-right', 6);
+      color: $dark_blue;
+
+      &:before {
+        @include rem('font-size', $small - 2);
+        content: $font_icons_arrow_right_skinny;
+        display: inline-block;
+        top: 0px;
+        left: 0px;
+        position: relative;
+        @include rem('margin-right', 20);
+      }
+
+      &.first {
+        background: none;
+        padding: 0;
+
+        &:before {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+// Safari on both Win and Mac is making an exemption here; this is a fix, but not a solution...
+.safari .breadcrumb ul > li:before {
+  top: -18px;
+}

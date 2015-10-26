@@ -1,0 +1,28 @@
+div.dd {
+  user-select: none;
+  font-family: inherit;	//this overwrites the parameters from dd.scss
+  font-size: inherit;
+  margin-left: -5px; //somehow the selects got an additional left margin after msDD update to 3.5x
+  .divider {  //fixing this style from the 3.5.2 version of msDD
+    display: none;
+  }
+  div.ddTitle {
+    .ddArrow {
+      margin-top: -12px;
+      &:after {
+        font-size: 11px;
+        font-family: $font_icons;
+        content: $font_icons_arrow_down;
+      }
+    }
+    padding-top: 3px;
+    padding-left: 10px;
+    span.ddTitleText span.description::before {
+      content: "";
+    }
+  }
+
+  &.ddcommon {
+    outline: 0;
+  }
+}

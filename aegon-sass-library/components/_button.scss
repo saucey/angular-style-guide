@@ -1,0 +1,178 @@
+@mixin btn-right-icon() {
+  @include rem('font-size', 11);
+  font-family: $font_icons;
+  position: relative;
+  margin-right: -10px;
+  margin-left: 10px;
+  background-color: $light_blue;
+
+  display: inline-block;
+  height: inherit;
+  line-height: inherit;
+  vertical-align: top;
+  float: none;
+  @include rem('padding', 0, 14);
+  @include rem('border-radius', 0, $elements_border_radius, $elements_border_radius, 0);
+}
+
+button, .button {
+  display: inline-block;
+  cursor: pointer;
+  height: auto;
+  @include rem('line-height', 38);
+  @include rem('padding', 0, 10);
+  @include rem('border-radius', $elements_border_radius);
+  @include rem('font-size', $medium);
+  white-space: nowrap;
+  border: 0;
+  outline: 0;
+  user-select: none;
+
+  background-color: $blue;
+  color: $white;
+  a {
+    color: inherit;
+  }
+
+  &:hover {
+    opacity: 0.8;
+  }
+  &:active {
+    opacity: inherit;
+  }
+  &.right {
+    margin-left: 10px;
+  }
+  &.left {
+    margin-right: 10px;
+  }
+  &.top {
+    margin-bottom: 10px;
+  }
+  &.bottom {
+    margin-top: 10px;
+  }
+  &.red {
+    background-color: $red;
+  }
+  &.green {
+    background-color: $green;
+  }
+  &.orange {
+    background-color: $orange;
+  }
+
+  &[class*="icon-"]:before {
+    font-size: 16px;
+  }
+
+  &.icon-right, &.arrow {
+    &:after {
+      @include btn-right-icon();
+    }
+
+    &[class*="icon-"] {
+      &:before {
+        content: "";
+        display: none;
+      }
+
+      &.icon-call:after {
+        content: $font_icons_call;
+      }
+      &.icon-chat:after {
+        content: $font_icons_chat;
+      }
+      &.icon-search:after {
+        content: $font_icons_search;
+      }
+    }
+    &.arrow:after {
+      content: $font_icons_arrow_right;
+    }
+    &.blue:after {
+      margin-left: 0;
+      background-color: $blue;
+    }
+    &.red:after {
+      margin-left: 0;
+      background-color: $red;
+    }
+    &.green:after {
+      margin-left: 0;
+      background-color: $green;
+    }
+    &.orange:after {
+      margin-left: 10px;
+      background-color: $orange_highlight;
+    }
+  }
+
+  &.white, &.transparent {
+    background-color: $white;
+    color: $blue;
+    &.arrow:before { //currently deactivated as the current design calls for something without arrow
+      background-color: transparent;
+      margin-left: -25px;
+      margin-top: -10px;
+      @include rem('font-size', 11);
+      font-size: 11px;
+      font-family: $font_icons;
+      content: $font_icons_arrow_right;
+      padding: 11px;
+      color: $blue;
+      position: absolute;
+    }
+    &.arrow:after {
+      content: "";
+      padding: 0;
+      margin-right: 0;
+      margin-left: 0;
+      background-color: inherit;
+    }
+  }
+  &.transparent {
+    background-color: transparent;
+  }
+  &.edit {
+    margin-top: 0;  //fixing margin-top error introduced in commit b1ec15
+    display: block;
+    @media screen and(min-width: $rc-m-min-width) and(max-width: $rc-l-max-width) {
+      display: none;
+    }
+    &.transparent {
+      display: none;
+      @media screen and(min-width: $rc-m-min-width) and (max-width: $rc-l-max-width) {
+        line-height: 20px;
+        &:after {
+          content: $font_icons_edit;
+          font-family: $font_icons;
+        }
+        float: right;
+        display: block;
+      }
+    }
+    &:before {
+      font-family: $font_light;
+      content: "Wijzig  ";
+    }
+  }
+}
+div.button {
+  //  @include rem('padding', 0, 0);
+  padding: 0 0.625rem 0 0.625rem;
+}
+
+//
+// Media queries
+// --------------------------------------------------
+
+@include breakpoint($brk-mobile){
+  button.edit {
+    display: block;
+  }
+
+  ul.actions {
+    margin: 0px 0 40px 0;
+  }
+}

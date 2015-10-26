@@ -1,0 +1,364 @@
+
+/**
+ * @file
+ * Administration menu.
+ *
+ * Implementation of Sons of Suckerfish Dropdowns.
+ *
+ * @see www.htmldog.com/articles/suckerfish
+ */
+
+//colors
+$color_woodsmoke_approx: #101010;
+$mine_shaft: #323232;
+$color_gallery_approx: #eee;
+$color_scarpa_flow_approx: #52565e;
+$color_log_cabin_approx: #202020;
+$color_gravel_approx: #45454a;
+$white: #fff;
+$color_tundora_approx: #444;
+$color_celeste_approx: #ccc;
+
+//fonts
+$font_0: lucida grande;
+$font_1: tahoma;
+$font_2: verdana;
+$font_3: arial;
+$font_4: sans-serif;
+
+//urls
+$url_0: url(images/bkg.png);
+$url_1: url(images/icon_users.png);
+$url_2: url(images/bkg_tab.png);
+$url_3: url(images/arrow.png);
+
+//@extend-elements
+//original selectors
+//#admin-menu, #admin-menu .dropdown
+%admenu_ext_1 {
+  line-height: 1.4em;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  z-index: 10010;
+}
+
+//original selectors
+//#admin-menu a, #admin-menu li > span
+%admenu_ext_2 {
+  background: transparent none;
+  border: none;
+  color: $color_gallery_approx;
+  font-weight: normal;
+  text-align: left;
+  text-decoration: none;
+}
+
+//original selectors
+//#admin-menu .dropdown a, #admin-menu .dropdown li > span
+%admenu_ext_3 {
+  border-right: 1px solid $mine_shaft;
+  display: block;
+  padding: 4px 8px;
+}
+
+
+#admin-menu {
+  background: $color_woodsmoke_approx;
+  font-size: 9px;
+  font-family: $font_0, $font_1, $font_2, $font_3, $font_4;
+  left: 0;
+  position: absolute;
+  text-align: left;
+  top: 0;
+  width: 100%;
+  @extend %admenu_ext_1;
+  .dropdown {
+    @extend %admenu_ext_1;
+    position: static;
+    .admin-menu-icon {
+      a {
+        padding: 1px 8px 4px;
+      }
+      img {
+        vertical-align: bottom;
+      }
+      ul a {
+        padding: 4px 8px;
+      }
+    }
+    .admin-menu-action {
+      float: right;
+      a {
+        border-left: 1px solid $mine_shaft;
+        border-right: none;
+      }
+    }
+    .admin-menu-search {
+      float: right;
+    }
+    a {
+      @extend %admenu_ext_3;
+    }
+    li {
+      background-image: none;
+      float: left;
+      height: 100%;
+      list-style-image: none;
+      list-style-type: none;
+      margin: 0 !important;
+      padding: 0;
+      li {
+        background: $color_log_cabin_approx;
+        filter: Alpha(opacity=88);
+        opacity: 0.88;
+        width: 160px;
+        a {
+          border-right: none;
+          border-top: 1px solid $mine_shaft;
+        }
+        li {
+          filter: Alpha(opacity=100);
+          opacity: 1;
+          li {
+            li {
+              &:hover ul {
+                display: block;
+                left: auto;
+              }
+              &.iehover ul {
+                display: block;
+                left: auto;
+              }
+            }
+            &:hover ul {
+              display: block;
+              left: auto;
+            }
+            &.iehover ul {
+              display: block;
+              left: auto;
+            }
+          }
+          &:hover ul {
+            display: block;
+            left: auto;
+          }
+          &.iehover ul {
+            display: block;
+            left: auto;
+          }
+        }
+        &.expandable {
+          background-color: $color_gravel_approx;
+          ul {
+            margin: -20px 0 0 160px;
+          }
+          &:hover {
+            a {
+              border-color: $color_tundora_approx;
+              color: $color_gallery_approx;
+            }
+            li {
+              a {
+                border-color: $mine_shaft;
+              }
+              &.expandable:hover {
+                a {
+                  border-color: $color_tundora_approx;
+                  color: $color_gallery_approx;
+                }
+                li a {
+                  border-color: $mine_shaft;
+                }
+              }
+            }
+          }
+        }
+        &:hover {
+          background-color: $color_woodsmoke_approx;
+          ul {
+            display: block;
+            left: auto;
+          }
+          a {
+            color: $white;
+          }
+          li {
+            &:hover {
+              a {
+                color: $white;
+              }
+              li:hover a {
+                color: $white;
+              }
+            }
+            a {
+              color: $color_gallery_approx;
+            }
+          }
+        }
+        &.iehover {
+          background-color: $color_woodsmoke_approx;
+          ul {
+            display: block;
+            left: auto;
+          }
+          li {
+            a {
+              color: $color_gallery_approx;
+            }
+            &.iehover {
+              li {
+                a {
+                  color: $color_gallery_approx;
+                }
+                &.iehover a {
+                  color: $white;
+                  width: 90%;
+                }
+              }
+              a {
+                color: $white;
+                width: 90%;
+              }
+            }
+          }
+          a {
+            color: $white;
+            width: 90%;
+          }
+        }
+      }
+      ul {
+        background: none;
+        display: none;
+        left: -999em;
+        line-height: 1.2em;
+        margin: 0;
+        position: absolute;
+        width: 160px;
+      }
+      > span {
+        @extend %admenu_ext_3;
+      }
+      &:hover ul {
+        display: block;
+        left: auto;
+        ul {
+          display: none;
+          left: -999em;
+          ul {
+            display: none;
+            left: -999em;
+            ul {
+              display: none;
+              left: -999em;
+              ul {
+                display: none;
+                left: -999em;
+              }
+            }
+          }
+        }
+      }
+      &.iehover ul {
+        display: block;
+        left: auto;
+        ul {
+          display: none;
+          left: -999em;
+          ul {
+            display: none;
+            left: -999em;
+            ul {
+              display: none;
+              left: -999em;
+              ul {
+                display: none;
+                left: -999em;
+              }
+            }
+          }
+        }
+      }
+      &.admin-menu-action:hover ul {
+        right: 0;
+      }
+    }
+    .admin-menu-tab {
+      padding-bottom: 1px;
+      a {
+        border-right: 1px solid $color_scarpa_flow_approx;
+      }
+    }
+    .admin-menu-search-results {
+      display: block !important;
+      left: auto !important;
+      top: 100%;
+    }
+    .admin-menu-users a {
+      background-color: transparent;
+      padding-right: 22px;
+    }
+  }
+  a {
+    @extend %admenu_ext_2;
+  }
+  li {
+    &.highlight {
+      background-color: $color_gallery_approx !important;
+      > a {
+        border-color: $color_celeste_approx !important;
+        color: $color_woodsmoke_approx !important;
+      }
+    }
+    > span {
+      @extend %admenu_ext_2;
+    }
+  }
+  .admin-menu-search {
+    .form-item {
+      margin: 0;
+      padding: 0;
+    }
+    input {
+      background: $white none center right no-repeat;
+      border: none;
+      //Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
+      border-radius: 5px;
+      font-size: 10px;
+      margin: 1px 0;
+      outline: none;
+      padding: 2px 22px 2px 4px;
+      width: 158px;
+    }
+  }
+  .admin-menu-search-results {
+    width: 186px;
+    li {
+      width: 186px;
+    }
+  }
+}
+#admin-menu-wrapper {
+  overflow: hidden;
+}
+@media print {
+  #admin-menu {
+    display: none !important;
+  }
+  body.admin-menu {
+    margin-top: 0 !important;
+  }
+}
+tr.admin-menu-tweak-permissions-processed {
+  cursor: pointer;
+  cursor: hand;
+}
+body.admin-menu {
+  margin-top: 20px !important;
+}
+html.js fieldset.collapsible div.fieldset-wrapper {
+  overflow: visible;
+}

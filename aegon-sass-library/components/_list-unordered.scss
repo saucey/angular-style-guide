@@ -1,0 +1,7 @@
+ul.links {
+  @include rem('padding', 20, 0);
+
+  &.links--inline {
+    @include rem('padding', 30, 0);
+  }
+}

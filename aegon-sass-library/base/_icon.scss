@@ -1,0 +1,194 @@
+.icon:before,
+[class*="icon-"]:before {
+  font-family: $font_icons;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding-right: 8px;
+}
+
+.icon-uniE600:before {
+  content: '\e600';
+}
+
+.icon-uniE601:before {
+  content: '\e601';
+}
+
+.icon-uniE602:before {
+  content: '\e602';
+}
+
+.icon-uniE603:before {
+  content: '\e603';
+}
+
+.icon-uniE604:before {
+  content: '\e604';
+}
+
+.icon-uniE605:before {
+  content: '\e605';
+}
+
+.icon-uniE606:before {
+  content: '\e606';
+}
+
+.icon-uniE607:before {
+  content: '\e607';
+}
+
+.icon-uniE608:before {
+  content: '\e608';
+}
+
+.icon-uniE609:before {
+  content: '\e609';
+}
+
+.icon-uniE610:before {
+  content: '\e610';
+}
+
+.icon-uniE611:before {
+  content: '\e611';
+}
+
+.icon-uniE629:before {
+  content: '\e629';
+}
+
+.icon-uniE60B:before {
+  content: '\e60b';
+}
+
+.icon-uniE60A:before {
+  content: '\e60a';
+}
+
+.icon-uniE60D:before {
+  content: '\e60d';
+}
+
+.icon-uniE62B:before {
+  content: '\e62b';
+}
+
+.icon-uniE636:before {
+  content: '\e636';
+}
+
+.icon-uniE646:before {
+  content: '\e636';
+}
+
+.icon-uniE647:before {
+  content: '\e637';
+}
+
+.icon-uniE648:before {
+  content: '\e638';
+}
+
+.icon-uniE62C:before {
+  content: '\e62c';
+}
+
+.icon-pdf:before {
+  content: '\e639';
+}
+
+.icon-klantenservice,
+.icon-service-contact,
+.icon-service--contact,
+.icon-4532:before,
+.icon-5659:before {
+  @extend .icon-uniE605;
+}
+.icon-inloggen,
+.icon-4610:before,
+.icon-5694:before {
+  @extend .icon-uniE610;
+}
+.icon-sparen,
+.icon-5074:before {
+  @extend .icon-uniE607;
+}
+.icon-actueel,
+a.menu-5662:before {
+  @extend .icon-uniE608;
+}
+.icon-uitgelicht,
+.icon-4547:before,
+.icon-5657:before {
+  @extend .icon-uniE611;
+}
+.icon-beleggen,
+.icon-4494:before {
+  @extend .icon-uniE608;
+}
+.icon-verzekeren,
+.icon-4495:before {
+  @extend .icon-uniE609;
+}
+.icon-hypotheek,
+.icon-4496:before,
+.icon-4537:before {
+  @extend .icon-uniE60B;
+}
+.icon-4546:before {
+  @extend .icon-uniE629;
+}
+.icon-pensioen,
+.icon-4497:before {
+  @extend .icon-uniE60A;
+}
+.icon-user-link:before {
+  @extend .icon-uniE636:before;
+}
+.icon-home:before,
+.icon-5653:before {
+  @extend .icon-uniE647:before;
+}
+.icon-lock:before {
+  @extend .icon-uniE648:before;
+}
+.icon-6861:before {
+  @extend .icon-uniE646;
+}
+.icon-6863:before {
+  @extend .icon-uniE62C;
+}
+.icon-6860:before {
+  @extend .icon-uniE604;
+}
+.icon-mijn-aegon:before {
+  content: $font_icons_man;
+}
+.icon-mijn-gegevens:before {
+  content: $font_icons_document_n_pen;
+}
+.icon-mijn-documenten:before {
+  content: $font_icons_document_n_check;
+}
+.icon-mijn-producten:before {
+  content: $font_icons_producten;
+}
+.icon-call:before {
+  content: $font_icons_call;
+}
+.icon-chat:before {
+  content: $font_icons_chat;
+}
+.icon-search:before {
+  content: $font_icons_search;
+}
+.icon-info:before {
+  content: $font_icons_info;
+}
+
+// Do not apply icons to old aegon menu.
+// TODO: Refactor menu's in Drupal module 'aegon_menu' to adapt to ATDL.
+[id*="aegon-menu-aegon"] [class*="menu-"][class*="icon-"]:before {
+  content: '';
+}

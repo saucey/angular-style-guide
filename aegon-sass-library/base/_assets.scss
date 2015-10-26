@@ -1,0 +1,49 @@
+
+//
+// Assets
+// --------------------------------------------------
+
+// Pure CSS magnifying glass
+// Credits: http://codepen.io/rosschapman/pen/GvBtw
+.ico-mglass {
+  position:relative;
+  display:inline-block;
+  background: #fff;
+  border-radius: 30px;
+  height: 6px;
+  width: 6px;
+  border: 2px solid #888;
+  
+  &:after {
+    content: '';
+    height: 2px;
+    width: 6px;
+    background: #888;
+    position:absolute;
+    top:7px;
+    left:5px;
+    transform: rotate(45deg);
+  }
+}
+
+// shows a loading spinner
+
+.progress-loader {
+  // Removed margin-bottom: 25px;
+  // Added 3 lines below for IE9 fix
+  margin: 0 auto 25px auto;
+  display: table;
+  text-align: center;
+}
+
+.loading {
+  background: url('../images/spinner.gif') no-repeat 50% 0%;
+  // removed background-position-x: center; because of FF bug
+  width: 300px;
+  height: 50px;
+  margin: -40px auto 0 auto;
+  display: table-cell;
+  padding-top: 10px;
+  color: $blue;
+  font-size: 1.0625rem;
+}

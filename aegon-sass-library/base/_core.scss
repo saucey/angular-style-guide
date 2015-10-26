@@ -1,0 +1,50 @@
+
+//
+// Core
+// --------------------------------------------------
+
+html {
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: $font_light, $font_fallback;
+  font-size: $medium;
+  line-height: 25px;
+
+  overflow-x: hidden;
+  position: relative;
+  left: 0;
+
+  //background-color: $blue;
+  color: $black;
+}
+
+a {
+  text-decoration: none;
+  color: $blue;
+}
+
+a, button {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: transparent;
+}
+
+
+// 
+// Media queries
+// --------------------------------------------------
+
+@include breakpoint($brk-tablet) {
+
+  body {
+    background-color: $white;
+  }
+}

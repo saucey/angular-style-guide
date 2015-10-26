@@ -1,0 +1,31 @@
+{
+  "name": "drupal-normalize-css",
+  "version": "3.0.2",
+  "description": "A Normalize.css implementation for Drupal based theme with support of SASS.",
+  "homepage": "https://github.com/xdemocle/drupal-normalize-css",
+  "authors": [
+    "Rocco R. <im@rocco.me>"
+  ],
+  "main": "normalize.css",
+  "keywords": [
+    "css",
+    "scss",
+    "sass",
+    "normalize",
+    "drupal",
+    "reset"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "CHANGELOG.md",
+    "CONTRIBUTING.md",
+    "component.json",
+    "package.json",
+    "test.html",
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

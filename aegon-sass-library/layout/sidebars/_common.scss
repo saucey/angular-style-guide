@@ -1,0 +1,58 @@
+
+//
+// Common styles for menus
+// --------------------------------------------------
+
+.region-navigation {
+  width: 0;
+  height: 0;
+  position: static;
+}
+
+
+//
+// Aegon menu-specific icon adaptations
+// --------------------------------------------------
+
+nav.mainmenu a[class*="icon-"]:before {
+  @include rem('font-size', 24);
+  @include rem('line-height', 90);
+  left: 5%;
+  position: absolute;
+  /*position: absolute;
+  top: 50%;
+  left: 7%;
+  display: block;
+  text-align: center;
+  width: 0;
+  @include rem('height', 20);
+  @include rem('margin-top', -10);
+  @include rem('margin-right', 15);*/
+}
+
+ul.submenu li {
+  margin-left: 0;
+}
+
+.push-submenu {
+  [class*="icon-"]:before {
+    padding-right: 8px;
+    width: 30px;
+    display:inline-block;
+  }
+}
+
+//
+// Media Queries
+// --------------------------------------------------
+
+@include breakpoint($brk-tablet) {
+
+  aside.desktop {
+    display: block;
+  }
+
+  aside.mobile {
+    display: none;
+  }
+}

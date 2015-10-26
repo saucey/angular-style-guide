@@ -1,0 +1,463 @@
+// 
+// Reason to don't use id selectors instead of class selectors
+// http://csswizardry.com/2011/09/when-using-ids-can-be-a-pain-in-the-class/
+// http://screwlewse.com/2010/07/dont-use-id-selectors-in-css/
+// http://oli.jp/2011/ids/
+
+.pensioen123_container {
+  // TODO: refactor for sass optimisation
+
+  .blue {
+    background: blue;
+    width: 25%;
+    height: 100px;
+    display: block;
+    float: left;
+  }
+
+  min-height: 979px;
+  width: 100%;
+  background: url('../images/background/pensioen123_bg.jpg') no-repeat;
+  background-size: 1350px 979px;
+  z-index: 1;
+
+  .wrapper {
+    margin-right: 5.625rem;
+    z-index: 4;
+    position: relative;
+
+    @media screen and(max-width: 1000px) {
+      margin-right: 0;
+    }
+  }
+
+  .wrapper, aside.desktop  {
+    background: transparent;
+  }
+
+  section.scroll {
+    @media screen and(max-width: 1000px) {
+      width: 90%;
+      margin: 0 auto;
+    }
+  }
+
+  .fullwidth-header {
+    background: #fff;
+    height: 5.625rem;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 3;
+  }
+
+  .overlay {
+    background: #3E97CF;
+    position: absolute;
+    z-index: 2;
+    opacity: .5;
+    width: 100%;
+    height: 100%;
+  }
+
+  .content {
+    margin-top: 100px;
+    background: #fff;
+  }
+}
+
+.pensioen123_widget {
+
+  .user-details {
+    display: table;
+
+    .span4 {
+      padding: 0 20px;
+      background: #3E97CF;
+      color: #fff;
+      text-align: center;
+      display: table; 
+      height: 200px !important; // !important needed due javascript calculating height on load , without overwrite height won't overwrite
+      overflow: hidden;
+
+      h2 {
+        color: #fff;
+        margin: 5px 0;
+      }
+
+      &.video {
+        padding: 0;
+        display:table-cell;
+        vertical-align: middle;
+
+        iframe {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      .innerbox {
+        display: table-cell; 
+        vertical-align: middle;
+      }
+    }
+  }
+
+  .product-overview {
+    margin: 30px 0;
+
+    .row-fluid {
+      border-bottom: 1px solid #ccc;
+
+      .logo {
+        max-height: 35px;
+        margin-bottom: 15px;
+        float: right;
+      }
+
+      .span12 {
+
+        .tab {
+          @media screen and(min-width: 640px) {
+            display: block !important;
+
+          }
+          
+        }
+
+        .span6 {
+          display: table;
+          height: 70px;
+
+          div {
+            display: table-cell;
+            vertical-align: middle;
+
+            .icon {
+              cursor: pointer;
+              width: 43px;
+              height: auto;
+              margin-top: 5px;
+              display: inline-block;
+              position: relative;
+
+              img {
+                width: 100%;
+
+                &.selected {
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                }
+              }
+
+            }
+            p {
+              margin: 0;
+            }
+          }
+        }
+
+        &.details, .more-details {
+          width: 100%;
+          background: #F2F2F2;
+          margin-left: 0;
+
+          span {
+            display: block;
+          }
+        }
+
+        &.details {
+          padding: 15px;
+          display: none;
+
+          .table {
+            display: table;
+            position: relative; 
+          }
+
+          .image {
+            width: 95px; 
+            display: table-cell;
+            vertical-align: top;
+
+            .icon {
+              &.big {
+                float: left;
+                width: 80px;
+              }
+            }
+          }
+
+          .description {
+            width: 100%;
+            display: table-cell; 
+            float: left;
+            vertical-align: top;
+          }
+
+          .more-details {
+            display: none;
+          }
+
+          .highlighted {
+            background-color: #3395d3;
+            padding: 15px;
+            border-radius: 5px;
+            border-radius: 0.3125rem;
+            color: $white;
+            margin: 0 0 0.9375rem 0;
+            p {
+              margin: 0;
+            }
+          }
+
+          .table-right {
+            width: 50%;
+            float: right;
+
+            .title {
+              font-weight: bolder;
+            }
+
+            .footer {
+              font-size: 14px;
+              padding-right: 3em;
+            }
+          }
+
+          table {
+            margin-bottom: 10px;
+          }
+
+          table, p, div {
+            &.half-width {
+              @media screen and(min-width: $rc-m-min-width) and(max-width: $rc-m-max-width) {
+                width: 100%;
+                float: none;
+              }
+              width: 48%;
+              float: left;
+              margin-right: 1%;
+
+              p {
+                padding-right: 3em;
+              }
+            }
+          }
+
+          .close {
+            margin-right: 25px;
+
+            &:after {
+              -webkit-transform: rotate(270deg);
+              -ms-transform: rotate(270deg);
+              transform: rotate(270deg);
+            }
+          }
+
+          .more {
+            &:after {
+              -webkit-transform: rotate(90deg);
+              -ms-transform: rotate(90deg);
+              transform: rotate(90deg);
+            }
+          }
+
+          .close:after, .more:after {
+            display: inline-block;
+            font-size: 15px;
+            font-size: 0.9375rem;
+            position: absolute;
+            margin-left: 5px;
+            font-family: 'aegon_icons';
+            content: '\e600';
+            font-weight: normal;
+            -webkit-font-smoothing: antialiased;
+            transition: -webkit-transform .2s ease;
+            transition: transform .2s ease;
+          }
+        }
+      }
+    }
+
+  }
+}
+
+// 
+// Media queries
+// --------------------------------------------------
+
+@include breakpoint($brk-mobile) {
+  .pensioen123_container {
+    background: #4398CD;
+
+    .wrapper {
+      margin-right: 0;
+    }
+
+    .fullwidth-header {
+      height: 3.9375rem;
+    }
+
+    .content {
+      margin-top: 20px;
+    }
+  }
+
+  .pensioen123_widget {
+
+    .user-details {
+
+      .span4 {
+        height:100px !important; // !important needed due javascript calculating height on load , without overwrite height won't overwrite
+        
+        h2 {
+          color: #fff;
+          margin: 5px 0;
+        }
+
+        &.video {
+          padding: 0;
+
+          iframe {
+            width: 100%;
+            height: 100%;
+
+          }
+        }
+
+        .innerbox {
+          display: table-cell; 
+          vertical-align: middle;
+
+          div {
+            vertical-align: middle;
+            width: 300px;
+            display: table-cell;
+          }
+        }
+      }
+    }
+
+    .product-overview {
+      
+      .row-fluid {
+        .span12 {
+          margin-bottom: 0;
+
+          .tab {
+            display: none;
+            float: left;
+
+            &.open {
+              display:block;
+            }
+          }
+
+          .span6 {
+            margin-bottom: 0;
+            div {
+              overflow:hidden;
+              position:relative;
+              .icon {
+                width: 25%;
+                display: block;
+                float: left;
+                margin: 0;
+        
+                img {
+                  width: 100%;
+                }
+
+              }
+
+            }
+          }
+
+          .title {
+            color: $blue;
+            font-size: 1.5625rem;
+            cursor: pointer;
+            
+            &:after {
+              display: inline-block;
+              font-size: 15px;
+              font-size: 0.9375rem;
+              position: absolute;
+              right: 0;
+              margin-right: 5px;
+              font-family: 'aegon_icons';
+              content: '\e600';
+              font-weight: normal;
+              -webkit-font-smoothing: antialiased;
+              transition: -webkit-transform .2s ease;
+              transition: transform .2s ease;
+              -webkit-transform: rotate(90deg);
+              -ms-transform: rotate(90deg);
+              transform: rotate(90deg);
+            }
+
+            &.arrowup:after {
+              -webkit-transform: rotate(270deg);
+              -ms-transform: rotate(270deg);
+              transform: rotate(270deg);
+            }
+          }
+
+          &.details {
+            margin-top: -6px;
+            padding: 15px 15px 0 15px;
+            .image {
+              display: none;
+            }
+
+            .description {
+              padding-right: 15px;
+            }
+
+            .more-details {
+              display: none !important;
+            }
+
+            .close {
+              visibility: hidden;
+
+              &:after {
+                visibility: visible;
+                top: 0;
+                right: 0;
+              }
+            }
+            
+            .more {
+              display: none;
+            }
+          }
+        }
+      }
+      
+      .span4 {
+        display: block; /* Fix for tech library */
+      }
+    }
+  }
+}
+
+
+.user-details h2.teaser {
+  font-size: 28px;
+  line-height: 36px;
+  font-weight: bolder;
+}
+
+@include breakpoint($brk-mobile) {
+
+.user-details h2.teaser {
+      @include rem('font-size', 22);
+      @include rem('line-height', 22);
+      font-weight: normal;
+  }
+}
+

@@ -1,0 +1,153 @@
+
+//
+// Mixins
+// --------------------------------------------------
+
+/**
+ * Remove the unit of a length
+ * @param {Number} $number - Number to remove unit from
+ * @return {Number} - Unitless number
+ */
+
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+
+  @return $number;
+}
+
+/**
+ * Mixin converter for Pixel to REM, plus fallback in pixel for older browser
+ * @param  {float}  $property  Name of property
+ * @param  {[type]} $values... Top, Right, Bottom, Left pixel values
+ * @return {css}    Property converted in REM and fallback
+ *
+ * Example: @include('padding', .5, .5, .15, .15);
+ */
+@mixin rem($property, $values...) {
+  $base_pixel_size: 16px;
+  $max: length($values);
+  $pxValues: '';
+  $remValues: '';
+
+  @for $i from 1 through $max {
+
+    @if nth($values, $i) != 'important' {
+
+      $value: nth($values, $i);
+      $value: strip-unit($value);
+
+      $remVal: ($value / 16);
+      $pxValues: #{$pxValues + $value}px;
+      $remValues: #{$remValues + $remVal}rem;
+    }
+
+    @if $i < $max {
+      $pxValues: #{$pxValues + " "};
+      $remValues: #{$remValues + " "};
+    }
+
+    @if $i == $max {
+      @if nth($values, $i) == 'important' {
+        $pxValues: #{$pxValues + " !important"};
+        $remValues: #{$remValues + " !important"};
+      }
+    }
+  }
+
+  #{$property}: $pxValues;
+  #{$property}: $remValues;
+}
+
+/**
+ * Bubble
+ * @param  {[type]} $width:            10px          [description]
+ * @param  {[type]} $border:           2px           [description]
+ * @param  {[type]} $quadrant:         0             [description]
+ * @param  {[type]} $top:              ""            [description]
+ * @param  {[type]} $right:            ""            [description]
+ * @param  {[type]} $bottom:           ""            [description]
+ * @param  {[type]} $left:             ""            [description]
+ * @param  {[type]} $border-color:     white         [description]
+ * @param  {[type]} $background-color: grey          [description]
+ * @return {[type]}                    [description]
+ */
+@mixin bubble ($width: 10px, $border: 2px, $quadrant: 0, $top: "", $right: "", $bottom: "", $left: "", $border-color: white, $background-color: grey) { //creates a bubble nose on a frame
+  //$quadrant works like the coordinates in border 0 = top, 1 = left, 2 = bottom, 3 = right
+  //offset values right, left, top and bottom indicate the distance from one of the extremes
+  //of the quadrant, thus
+  //$quadrant: 0 and $right: 20px;
+  //means that the bubble nose is on the top and 20px from the right
+  //it should be self-evident that nonsensical combinations such as
+  //$quadrant: 0 (top) and $bottom: 20px
+  //will produce nonsensical results, so quadrant
+  //0 or 2 will only work with EITHER left or right
+  //and 1 or 3 with EITHER top or bottom
+  //if the nose is supposed to be solid, background-color can be set to transparent
+
+  &:before, &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    $pos: -2 * $width;
+    @if $quadrant == 0 {
+      top: $pos;
+      border-color: transparent transparent $border-color transparent;
+    };
+    @if $quadrant == 1 {
+      right: $pos;
+      border-color: transparent transparent transparent $border-color;
+    }
+    @if $quadrant == 2 {
+      bottom: $pos;
+      border-color: $border-color transparent transparent transparent;
+    }
+    @if $quadrant == 3 {
+      left: $pos;
+      border-color: transparent $border-color transparent transparent;
+    }
+    @if $top != "" {top: $top};
+    @if $right != "" {right: $right};
+    @if $bottom != "" {bottom: $bottom};
+    @if $left != "" {left: $left};
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: $width;
+    border-radius: inherit;
+  }
+  &:after {
+    $pos: (-2 * $width) + $border;
+    @if $quadrant == 0 {
+      top: $pos;
+      border-color: transparent transparent $background-color transparent;
+    }
+    @if $quadrant == 1 {
+      right: $pos;
+      border-color: transparent transparent transparent $background-color;
+    }
+    @if $quadrant == 2 {
+      bottom: $pos;
+      border-color: $background-color transparent transparent transparent;
+    }
+    @if $quadrant == 3 {
+      left: $pos;
+      border-color: transparent $background-color transparent transparent;
+    }
+  }
+}
+
+/**
+ * [inlineFrame description]
+ * @return {[type]} [description]
+ */
+@mixin inlineFrame () {
+  padding: 20px 15px;
+  border-radius: $frame_border_radius;
+  display: none;
+  margin-bottom: 18px;
+  &.visible {
+    display: block;
+  }  
+}

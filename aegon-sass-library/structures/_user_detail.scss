@@ -1,0 +1,424 @@
+.user_detail_widget {
+  // Default display. In section logic below there is the switch for display
+  display: none;
+  float: right;
+  z-index: 0;
+
+  .inplace {
+    position: relative;
+    display: inline-block;
+    float: right;
+    margin: 0;
+    height: 36px;
+ // rolled back
+ //   background-color: transparent;
+
+    .btn-login-loggedin {
+      z-index: 2;
+      position: relative;
+      top: 0px;
+      right: 0px;
+    }
+  }
+
+  > .text {
+    display: none;
+  }
+
+  label {
+    font-weight: normal;
+  }
+  input#UDW_dd_show {
+    display: none;
+    &:checked {
+      ~.dropdown {
+        display: block;
+      }
+      ~.btn-login-loggedin {
+      z-index: 9;
+        border-bottom-color: $white;
+        &:after {
+          transform: rotate(180deg);
+          -ms-transform: rotate(180deg); /* IE 9 */
+          -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+        }
+      }
+    }
+  }
+
+  .dropdown {
+    display: none;
+    z-index: 2;
+    position: absolute;
+    top: auto;
+    right: 0;
+    @include rem('margin-top', -3);
+    @include rem('width', 280);
+    @include rem('border-radius', 2);
+    background-color: $white;
+    border: 1px solid $slightly_darker_grey;
+    box-shadow: 0 1px 0px rgba(0,0,0,0.3);
+
+    .text {
+      text-align: left;
+      white-space: normal;
+      text-overflow: initial;
+      overflow: initial;
+
+      p {
+        display: block;
+        @include rem('padding', 0, 12);
+        @include rem('margin', 18, 0);
+      }
+
+      p.name {
+        @include rem('padding', 0, 20);
+        margin-right: 25px;
+        white-space: nowrap;
+        color: $green;
+
+        &:before {
+          content: $font_icons_man;
+          font-family: $font_icons;
+          display: inline-block;
+          @include rem('font-size', 23);
+          @include rem('margin-right', 12);
+          transform: translateY(3px);
+        }
+      }
+
+      .action {
+        @include rem('padding', 0, 12);
+        white-space: nowrap;
+      }
+    }
+  }
+
+  .highlight {
+    display: block;
+    &.has-been-shown { //if user has already seen the highlight, we don't want to show this again
+      &.desktop, &.mobile {
+        display: none;
+      }
+    }
+    background-color: $green;
+    color: #ffffff !important;
+    // padding: 0 0 0 80px;
+
+    &.desktop {
+      display: none;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 2;
+      @include rem('padding', 23, 0);
+      animation: slidingHighlightOnTop 1s 1 5s forwards;
+      max-height: 90px !important;
+      height: 90px !important;
+    }
+
+    &.mobile {
+      //display: none;
+      @include rem('font-size', 16);
+      //@include rem('margin', 0, 12);
+      margin-bottom: 10px;
+      overflow: hidden;
+      background-color: transparent;
+      animation: slidingHighlightOnTopMobile 1s 3s 5 forwards;
+      //max-height: 90px !important;
+      //height: 90px !important;
+
+      .text {
+        padding: 0;
+        background-color: $green;
+
+        p {
+          @include rem('padding', 12);
+          margin-bottom: 0;
+          color: $white;
+        }
+      }
+    }
+
+    strong {
+      font-family: $font_normal;
+      font-weight: 300;
+    }
+  } // end highlight
+
+  .btn-login-loggedin {
+    z-index: 2;
+    background-color: $white;
+    margin-bottom: -1px;
+    @include rem('padding', 0, 10, 1, 10);
+    @include rem('line-height', 36);
+    height: auto;
+    padding-bottom: 6px;
+    padding-top: 6px;
+    cursor: pointer;
+    @include rem('border-radius', 2);
+    user-select: none;
+    outline: 0;
+    border-bottom-color: $slightly_darker_grey;
+
+    font-family: $font_normal;
+    @include rem('font-size', 16);
+    border-width: 1px;
+    border-style: solid;
+
+    // Properties for animation
+    border-color: $slightly_darker_grey;
+    color: $green;
+
+    &:after {
+      animation: buttonAfterLoginToDefault 2s normal 0s forwards;
+      font-family: $font_icons;
+      @include rem('font-size', 12);
+      content: $font_icons_arrow_down;
+      @include rem('margin-left', 6);
+    }
+
+    &.tap {
+      border-bottom-color: $slightly_darker_grey;
+      padding-bottom: 0;
+
+      & ~ .dropdown {
+        display: none;
+      }
+    }
+
+    &.off,
+    &.off:after {
+      animation: none;
+      background-color: $white;
+    }
+
+    &:hover {
+      opacity: initial;
+    }
+  }
+
+  /**
+   * End animation with jQuery support
+   */
+  &.processed {
+
+    .highlight.desktop {
+      display: none;
+    }
+
+    .highlight.mobile {
+      display: none;
+    }
+
+    > .text {
+      opacity: 1;
+    }
+
+    .btn-login-loggedin,
+    .btn-login-loggedin:after {
+      animation: none;
+    }
+  }
+}
+// Hide login button by default
+.login-link-wrapper {
+  display: none;
+}
+
+//
+// Fixes for IE<10
+// --------------------------------------------------
+
+html.lt-ie9 .user_detail_widget > .text {
+  opacity: 1 !important;
+}
+
+
+//
+// Logics based on the section and status
+// --------------------------------------------------
+
+body.section-mijnaegon .myaegon {
+  display: none;
+}
+
+body.shw-widgets-logged-in {
+
+  .link-logged-in a {
+    display: none;
+  }
+
+  .user_detail_widget,
+  .link-logged-in .link-alternative a {
+    display: block;
+  }
+
+}
+
+.link-alternative a {
+  display: none;
+}
+
+//
+// Media queries
+// --------------------------------------------------
+
+@include breakpoint($brk-tablet) {
+
+  .user_detail_widget {
+
+    > .text {
+      @include rem('line-height', 44);
+    }
+
+    .text {
+
+      p.name {
+        display: inline-block;
+        @include rem('padding', 0, 10, 0, 0);
+        margin-right: 25px;
+        color: $green;
+      }
+    }
+
+    .dropdown {
+      display: none;
+
+      .text p.name {
+        display: none;
+      }
+    }
+
+    .highlight.desktop {
+      display: block;
+
+      .text {
+        margin: 0;
+        text-align: left;
+        @include rem('line-height', 44);
+        @include rem('padding-right', 170);
+        margin-left: 7.3%;
+        margin-right: 7.3%;
+
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+
+        color: $white;
+
+        .welcome {
+          font-family: $font_normal;
+        }
+
+        p {
+          display: inline;
+        }
+      }
+    } // end highlight desktop
+
+    .highlight.mobile {
+      display: none;
+    } // end highlight mobile
+
+    .btn-login-loggedin {
+      display: inline-block;
+      @include rem('padding', 0, 13, 2, 13);
+      @include rem('line-height', 36);
+      font-size: inherit;
+      //background-color: transparent;
+      //border-bottom-color: transparent;
+      animation: buttonLoginToDefault 2s normal 0s forwards;
+
+      &:before {
+        content: $font_icons_man;
+        font-family: $font_icons;
+        display: inline-block;
+        @include rem('font-size', 23);
+        @include rem('margin-right', 12);
+        transform: translateY(3px);
+      }
+
+      &.tap {
+        background-color: $white;
+        border-bottom-color: transparent;
+        padding-bottom: 0px;
+
+        ~ .dropdown {
+          display: block;
+        }
+      }
+
+      &.ieChangeColors {
+        color: $white;
+
+        &:after {
+          border-color: $white;
+        }
+      }
+    }
+  }
+}
+
+@include breakpoint($brk-ipad-portrait) {
+
+  .user_detail_widget {
+
+    > .text {
+      float: left;
+      display: inline-block;
+
+      // Default status
+      opacity: 1;
+      transition: opacity .15s;
+    }
+  }
+}
+
+//
+// Animation
+// --------------------------------------------------
+
+@keyframes buttonLoginToDefault {
+  0%, 75% {
+    border-color: $white;
+    color: $white;
+  }
+
+  100% {
+    border-color: $slightly_darker_grey;
+    color: $green;
+  }
+}
+
+@keyframes buttonAfterLoginToDefault {
+  0%, 75% {
+    border-color: $white;
+  }
+
+  100% {
+    border-color: $green;
+  }
+}
+
+@keyframes slidingHighlightOnTop {
+  from {
+    transform: translateY(0%);
+  }
+
+  to {
+    transform: translateY(-120%);
+  }
+}
+
+@keyframes slidingHighlightOnTopMobile {
+  from {
+    max-height: 500px;
+  }
+
+  to {
+    max-height: 0px;
+  }
+}

@@ -1,0 +1,147 @@
+
+//
+// Layout UI elements
+// --------------------------------------------------
+
+.frame {
+  position: relative;
+  min-width: 220px;
+  min-height: 100px;
+  padding: 15px;
+  border: 2px solid $grey;
+  border-radius: $frame_border_radius;
+}
+
+.bubble {
+  @include bubble(10px, 2px, $quadrant: 3, $bottom: 20px, $border-color: $grey, $background-color: $white);
+}
+
+.bubbleTopRight {
+  @include bubble(10px, 2px, $quadrant: 0, $right: 20px, $border-color: $grey, $background-color: $white);  
+}
+
+/*----- UTILITY STYLES -----*/
+span.middle-enforcer {
+  display: inline-block;
+  width: 0;
+  height: 100%;
+  vertical-align: middle;
+}
+
+div.lightbox {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: $black;
+  opacity: 0.4;
+  z-index: 5;
+}
+
+div.greyoverlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  z-index: 1;
+  opacity: 0.7;
+  display: none;
+}
+
+/*----- Back to top -----*/
+.goTop-wrapper {
+  position: fixed;
+  top: 0;
+  right: 7.26496%;
+  z-index: 1;
+
+  .goTop a {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    text-indent: -9999px;
+    background: #3395D3 url(../images/ui/icon-arrow-up.png) center center no-repeat;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.3);
+
+    &:hover {
+      background-color: #51A5DA;
+    }
+
+    &:active {
+      background-color: #007BC8;
+    }
+  }
+}
+
+/*----- throbber -----*/
+.throbber {
+  display: block;
+  background-image: url('../images/ui/loader-blue.gif');
+  width: 32px;
+  height: 32px;
+}
+
+/*----- UI mobile tap status -----*/
+body.mobile-tap {
+
+  section.content:after {
+    display: none;
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+}
+
+
+// 
+// Media queries
+// --------------------------------------------------
+
+@include breakpoint($brk-mobile) {
+
+  /*----- UI mobile tap status -----*/
+  body.mobile-tap {
+    section.content {
+      position: relative;
+      overflow: hidden;
+
+      &:after {
+        display: block;
+      }
+    }
+    &:not(.pushmenu-to-right) {
+      section.content {
+        overflow: visible;
+      }
+    }
+  }
+}
+
+@include breakpoint($brk-tablet) {
+
+  .goTop-wrapper {
+    display: none;
+  }
+}
+
+@include breakpoint($brk-ipad-portrait) {
+
+  .block-search input.form-text:focus {
+    width: 400px;
+  }
+}
+
+@include breakpoint($brk-ipad-landscape) {
+
+  .block-search input.form-text:focus {
+    width: 500px;
+  }
+}

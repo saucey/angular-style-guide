@@ -1,0 +1,232 @@
+// this is the file 
+//colors
+$color_gray_nurse_approx: #e8e8e8;
+$wild_sand: #f4f4f4;
+$color_celeste_approx: #cdcdcd;
+$black_50: rgba(0,0,0,.5);
+$white: #fff;
+$color_cod_gray_approx: #070707;
+$black_40: rgba(0,0,0,.4);
+$color_silver_chalice_approx: #aaa;
+$black_60: rgba(0,0,0,.6);
+$black_30: rgba(0,0,0,.3);
+$color_dove_gray_approx: #6a6a6a;
+$white_80: rgba(255,255,255,.8);
+$color_emperor_approx: #4d4d4d;
+$color_silver_approx: #bfbfbf;
+$gallery: #efefef;
+$color_alto_approx: #dcdcdc;
+$white_60: rgba(255,255,255,.6);
+$white_70: rgba(255,255,255,.7);
+$color_shark_approx: #212228;
+$color_sushi_approx: #88b131;
+$color_masala_approx: #3d3d3d;
+$color_bombay_approx: #b1b1b3;
+$color_mirage_approx: #1c1e21;
+$black_80: rgba(0,0,0,.8);
+$white_30: rgba(255,255,255,.3);
+$black: #000;
+$color_gallery_approx: #eee;
+$color_pelorous_approx: #42b6c9;
+$color_scooter_approx: #2ac7e1;
+
+//fonts
+$font_0: Helvetica Neue;
+$font_1: sans-serif;
+$font_2: ArialRoundedMTBold;
+$font_3: Arial;
+
+//urls
+$url_0: url(../img/dark_background_stripes.gif);
+
+.sb-show {
+  margin-top: 82px;
+  .smartbanner {
+    display: block;
+  }
+}
+.smartbanner {
+  font-family: senticosansdtregular;
+  position: absolute;
+  z-index: 9999999;
+  top: 0;
+  left: 0;
+  display: none;
+  overflow: hidden;
+  width: 100%;
+  height: 78px;
+  //border-bottom: 1px solid $color_gray_nurse_approx;
+  //background: $wild_sand;
+  //background: linear-gradient(to bottom, $wild_sand 0, $color_celeste_approx 100%);
+  background-color: #3395d3;
+    padding-left: 20px;
+    height: auto;
+  box-shadow: 0 1px 2px $black_50;
+}
+.sb-container {
+  margin: 0 auto;
+  background-color: #3395d3;
+  width: 100%;
+  height: 78px;
+}
+.sb-close {
+    font-family: senticosansdtregular; 
+    font-size: 18px;
+    font-weight: normal;
+    line-height: 16px;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    display: block;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    text-decoration: none;
+    color: $white;
+    border: 1px solid #fff;
+    border-radius: 18px;
+    background: $dark_blue;
+    text-shadow: none;
+  &:active {
+    font-size: 18px;
+    background: $orange;
+  }
+  &:hover {
+    font-weight: bold;
+    background: $orange_highlight;
+  }
+}
+.sb-icon {
+  position: absolute;
+  top: 10px;
+  left: 35px;
+  display: block;
+  width: 57px;
+  height: 57px;
+  //Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
+  border-radius: 10px;
+  background: $black_60;
+  background-size: cover;
+  //Instead of the line below you could use @includebox-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, //$shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+  //box-shadow: 0 1px 3px $black_30;
+}
+.sb-info {
+  font-family: senticosansdtregular;
+  font-size: 12px;
+  line-height: 1.2em;
+  position: absolute;
+  top: 18px;
+  left: 105px;
+  width: 44%;
+  color: $white;
+}
+
+.sb-info strong {
+  font-family: senticosansdtregular;
+  font-size: 14px;
+  line-height: 18px;
+  color: $white;
+}
+
+.sb-title {
+  font-family: senticosansdtregular;
+  font-size: 14px;
+  line-height: 18px;
+  color: $white;
+}
+
+.sb-button {
+  position: absolute;
+  top: 20px;
+  right: 35px;
+
+  @extend .button;
+  @extend .orange;
+  @extend .arrow;
+}
+
+.smartbanner .android {
+  font-family: senticosansdtregular;
+  position: absolute;
+  z-index: 9999999;
+  top: 0;
+  left: 0;
+  display: none;
+  overflow: hidden;
+  width: 100%;
+  height: 78px;
+  background-color: #3395d3;
+  padding-left: 20px;
+  height: auto;
+  box-shadow: 0 1px 2px $black_50;
+
+  .sb-container {
+    margin: 0 auto;
+    background-color: #3395d3;
+    width: 100%;
+    height: 78px;
+  }
+
+  .sb-close {
+    font-family: senticosansdtregular; 
+    font-size: 18px;
+    font-weight: normal;
+    line-height: 16px;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    display: block;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    text-decoration: none;
+    color: $white;
+    border: 1px solid #fff;
+    border-radius: 18px;
+    background: $dark_blue;
+    text-shadow: none;
+    &:active {
+      font-size: 18px;
+      background: $orange;
+    }
+    &:hover {
+      font-weight: bold;
+      background: $orange_highlight;
+    }
+  }
+    
+  .sb-info {
+    font-family: senticosansdtregular;
+    font-size: 12px;
+    line-height: 1.2em;
+    position: absolute;
+    top: 18px;
+    left: 105px;
+    width: 44%;
+    color: $white;
+  }
+    
+  .sb-title {
+    font-family: senticosansdtregular;
+    font-size: 14px;
+    line-height: 18px;
+    color: $white;
+  }
+    
+  .sb-button {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+
+    @extend .button;
+    @extend .orange;
+    @extend .arrow;
+  }
+  
+  .sb-text {
+    display: block;
+    padding: 0 10px;
+    text-align: center;
+    text-transform: none;
+  }
+}
