@@ -22,28 +22,28 @@
         var that = $(this),
             icon = that.data('icon'),
             el = '.details',
+            allIcons = that.closest('.row-fluid').find('.icon').not('.icon.big'),
             details = that.closest('.row-fluid').find(el + "[data-icon='" + icon + "']");
-            // selectedImg = '<img src="" class="selected">';
 
-
-        // Loop through all elements with the class icon
-        $('.icon').each(function() {
-          // If there is an img with the class selected, remove it from the dom
-          $(this).find('.active').remove();
-        }).promise().done(function() {
-          // Append overlay image to the clicked icon
-          that.append('<div class="active"></div>');
-        });
-
-        // Close all open details tabs
-        $('.details').not(details).slideUp('fast').promise().done(function() {
-          // Remove styles from .more and .more-details if they were clicked before
-          details.find('.more').removeAttr('style');
-          details.find('.more-details').removeAttr('style');
-          // Open details tab
-          details.slideDown('fast');
-        });
-                 
+        // Set all icons back to opacity 1
+        $('.product-overview').find('.icon').not('.icon.big').css('opacity', '1');
+        
+        // Check if the selected details tab is already open
+        if(details.is(':visible')) {
+          // If so; close it
+          details.slideUp('fast'); 
+        } else {
+          // Set all the icons in the row to opacity 0.25
+          allIcons.not(that).css('opacity', '0.25');
+          // Close all open details tabs
+          $('.details').slideUp('fast').promise().done(function() {
+            // Remove styles from .more and .more-details if they were clicked before
+            details.find('.more').removeAttr('style');
+            details.find('.more-details').removeAttr('style');
+            // Open details tab
+            details.slideDown('fast');
+          });
+        }          
       });
 
       // Open icon tab on mobile devices
@@ -55,16 +55,26 @@
         $('.title').not(that).removeClass('arrowup');
         that.addClass('arrowup');
 
-        // Close all open tabs
-        $('.tab').not(el).slideUp('fast').promise().done(function() {
-          // Open selected tab
-          el.slideDown('fast');
-        });
+        if(el.is(':visible')) {
+          el.slideUp('fast');
+          that.removeClass('arrowup');
+        } else {
+          // Close all open tabs
+          $('.tab').slideUp('fast').promise().done(function() {
+            // Open selected tab
+            el.slideDown('fast');
+          });
+        }
+        
       });
 
       // Close details tab
       $('.close').click(function(e) {
         e.preventDefault();
+
+        // Set opacity 1 to all icons
+        $('.product-overview').find('.icon').not('.icon.big').css('opacity', '1');
+
         var parent = $(this).parent().parent();
         parent.slideUp('fast');
 
