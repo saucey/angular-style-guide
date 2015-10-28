@@ -1,0 +1,53 @@
+.situation-element {
+  background: $grey;
+  padding: 20px;
+  margin: 0 0 20px;
+  .situation-header {
+    color: $black;
+    margin: 0 0 5px;
+  }
+  .situation-text {
+    a {
+      background: $blue;
+      color: $white;
+      padding: 0 3px;
+    }    
+  }
+  .situation-text-mobile{    
+    display: none;
+  }
+}
+
+@include breakpoint($brk-mobile) {
+  .situation-element {
+    .situation-header {
+    }
+    .situation-text{    
+      display: none;
+    } 
+    .situation-text-mobile{  
+      margin-top:20px;  
+      display: block;
+      a {
+        position:relative;
+        margin: 0 0 10px;
+        display:block;
+        white-space: normal;
+        line-height: 23px;
+        padding: 15px 40px 15px 15px;
+      }
+      a:after {
+        position: absolute;
+        display: inline-block;
+        right: 10px;
+        top: 0;
+        line-height: 44px;
+        margin-top: 0;
+        padding-top: 6px;
+        height: 100%;
+        vertical-align: middle;
+
+      }
+    }  
+  }
+}
