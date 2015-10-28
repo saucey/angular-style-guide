@@ -10,15 +10,15 @@ The library will host the SASS library required for cXstudio Drupal projects and
 * Instead included **compass-mixins** as bower project. In main.scss we are importing only the mixins that we need at moment, for example: sprites.
 * Library doesn't require any file help or development project environment. It will be shared with repos listed below:
 	* aegon-technical-design-library
-	* aegon-drupal-base-theme
+	* aegon_theme (for drupal)
+	* mijnaegon_theme (subtheme for drupal)
 	* any other projects
 * Don't use anymore vendor prefixes. They will be added by Autoprefixer as Grunt task inside father projects.
 
-
 ## Usage
 
-* This library will be used as submodule ot other projects. Where added, please run also **bower install** in relative subfolder to create Bower dependencies as vendors/ folder.
-* Sometime could happen that the dependecies in assets/aegon-sass-library change, please re-run **bower install** (in case of weird errors, just remove the vendor folders from SASS library and run again **bower install**)
+* This library will be used as submodule on other projects. Where added, please run also **bower install** in relative subfolder to create Bower dependencies as vendors/ folder.
+* It could happen that the dependencies in assets/aegon-sass-library change, please re-run **bower install** (in case of weird errors, just remove the vendor folders from SASS library and run again **bower install**)
 
 ## Notes
 
