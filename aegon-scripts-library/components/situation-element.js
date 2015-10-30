@@ -7,12 +7,14 @@
   // Add new item to public Drupal object
   Drupal.behaviors.situation_element = {
     attach: function () {
-      $('.situation-element').each(function() {
-        var sitationLink = $(this).find('a').clone().addClass('button arrow');
-        var mobileElement = $(this).find('.situation-text-mobile');
-        mobileElement.append(sitationLink);
-     });
-    }
+      if ($(window).width() < 640) {
+        $('.situation-element').each(function() {
+          var situationAnchors = $(this).find('a').clone().addClass('button arrow');
+          var textElement = $(this).find('.situation-text');
+            textElement.empty();
+            textElement.append(situationAnchors);
+       });
+      }
+    } 
   };
-
 })(jQuery);
