@@ -38,7 +38,7 @@
   section.scroll {
     @media screen and(max-width: 1000px) {
       width: 90%;
-      margin: 0 auto;
+      margin: 0 auto; 
     }
   }
 
@@ -83,6 +83,12 @@
       h2 {
         color: #fff;
         margin: 5px 0;
+
+        &.teaser {
+          @include rem('font-size', 28);
+          @include rem('line-height', 36);
+          font-weight: bolder;
+        }
       }
 
       &.video {
@@ -120,9 +126,7 @@
         .tab {
           @media screen and(min-width: 640px) {
             display: block !important;
-
           }
-          
         }
 
         .span6 {
@@ -150,8 +154,8 @@
                   left: 0;
                 }
               }
-
             }
+
             p {
               margin: 0;
             }
@@ -166,6 +170,10 @@
           span {
             display: block;
           }
+
+          .title {
+            font-weight: bold;
+          }
         }
 
         &.details {
@@ -175,6 +183,20 @@
           .table {
             display: table;
             position: relative; 
+
+              tr:nth-child(even) {
+              background-color: $lighter_grey;
+              }
+
+              tr:nth-child(odd) {
+                 background-color:#fff;
+              }
+
+              th  {
+                background-color: $lighter_grey;
+                padding: 0 0 0 10px;
+                font-weight: bold;
+              }
           }
 
           .image {
@@ -213,25 +235,23 @@
             }
           }
 
-          .table-right {
-            width: 50%;
-            float: right;
-
-            .title {
-              font-weight: bolder;
-            }
-
-            .footer {
-              font-size: 14px;
-              padding-right: 3em;
-            }
-          }
-
+        
           table {
             margin-bottom: 10px;
           }
 
           table, p, div {
+            .title {
+              font-weight: bolder;
+            }
+            .footer {
+              font-size: 14px;
+              padding-right: 3em;
+            }
+            &.full-width {
+              width: 100%;
+              float: left;
+            }
             &.half-width {
               @media screen and(min-width: $rc-m-min-width) and(max-width: $rc-m-max-width) {
                 width: 100%;
@@ -241,6 +261,9 @@
               float: left;
               margin-right: 1%;
 
+              .right {
+                float: right;
+              }
               p {
                 padding-right: 3em;
               }
@@ -311,11 +334,17 @@
     .user-details {
 
       .span4 {
-        height:100px !important; // !important needed due javascript calculating height on load , without overwrite height won't overwrite
+        height:100px !important; // !important needed due javascript calculating height on load
         
         h2 {
           color: #fff;
           margin: 5px 0;
+
+          &.teaser {
+            @include rem('font-size', 22);
+            @include rem('line-height', 22);
+            font-weight: normal;
+          }
         }
 
         &.video {
@@ -370,9 +399,7 @@
                 img {
                   width: 100%;
                 }
-
               }
-
             }
           }
 
@@ -442,22 +469,6 @@
         display: block; /* Fix for tech library */
       }
     }
-  }
-}
-
-
-.user-details h2.teaser {
-  font-size: 28px;
-  line-height: 36px;
-  font-weight: bolder;
-}
-
-@include breakpoint($brk-mobile) {
-
-.user-details h2.teaser {
-      @include rem('font-size', 22);
-      @include rem('line-height', 22);
-      font-weight: normal;
   }
 }
 
