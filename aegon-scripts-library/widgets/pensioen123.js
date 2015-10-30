@@ -37,7 +37,8 @@
           allIcons.not(that).css('opacity', '0.25');
           // Close all open details tabs
           $('.details').slideUp('fast').promise().done(function() {
-            // Remove styles from .more and .more-details if they were clicked before
+            // Remove styles from .description, .more and .more-details if they were clicked before
+            details.find('.description').removeAttr('style');
             details.find('.more').removeAttr('style');
             details.find('.more-details').removeAttr('style');
             // Open details tab
@@ -47,7 +48,7 @@
       });
 
       // Open icon tab on mobile devices
-      $('.title').click(function() {
+      $('.span6 .title').click(function() {
         var that = $(this),
             el = that.closest('.row-fluid').find('.tab');
         
@@ -64,8 +65,7 @@
             // Open selected tab
             el.slideDown('fast');
           });
-        }
-        
+        }    
       });
 
       // Close details tab
@@ -88,7 +88,10 @@
       // Open more-details
       $('.more').click(function(e) {
         e.preventDefault();
-        $(this).closest('.details').find('.more-details').slideToggle('fast');
+        // Hide layer1 and show layer2
+        $(this).closest('.details').find('.description').slideToggle('fast').promise().done(function() {
+            $(this).closest('.details').find('.more-details').slideToggle('slow');
+        });
         // Hide lees meer
         $(this).hide();
       });
