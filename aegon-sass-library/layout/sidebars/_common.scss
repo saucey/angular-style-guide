@@ -30,6 +30,11 @@ nav.mainmenu a[class*="icon-"]:before {
   @include rem('margin-right', 15);*/
 }
 
+nav.mainmenu a[class*="icon-mijn-betalingen"]:before {
+  font-size: 22px !important;
+  font-size: 1.2rem !important;
+}
+
 ul.submenu li {
   margin-left: 0;
 }
