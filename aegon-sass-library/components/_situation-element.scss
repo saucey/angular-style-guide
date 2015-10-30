@@ -13,19 +13,11 @@
       padding: 0 3px;
     }    
   }
-  .situation-text-mobile{    
-    display: none;
-  }
 }
 
 @include breakpoint($brk-mobile) {
   .situation-element {
-    .situation-header {
-    }
-    .situation-text{    
-      display: none;
-    } 
-    .situation-text-mobile{  
+    .situation-text{  
       margin-top:20px;  
       display: block;
       a {
