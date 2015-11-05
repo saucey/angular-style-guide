@@ -111,8 +111,7 @@ min-height: 100vh !important;
   }
 
   .inline-h2 {
-    display: inline;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
   }
 
 .number-search-results {
@@ -135,6 +134,10 @@ min-height: 100vh !important;
     background-size: 30px 30px;
     border: 2px solid #EFEBE7;
     padding: 0 20px 0 10px;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+  background-position: right center !important;
 }
 
 // 
