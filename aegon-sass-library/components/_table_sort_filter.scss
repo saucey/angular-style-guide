@@ -12,12 +12,22 @@ thead {
 	border: none;
 }
 
+table.dataTable {
+    width: 100% !important; 
+}
+
 table.dataTable thead th,table.dataTable tfoot th {
     border-right: 1px solid white;
 }
 
 table.dataTable td {
     border-right: 1px solid white;
+}
+
+.dataTables_filter input {
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    transition: all .5s;
 }
 
 .dataTables_wrapper {
