@@ -12,6 +12,11 @@
 
       var table = $('.sortabletable').DataTable({
         "info": true,
+        "oLanguage": {
+          "sInfo": "_END_ van _TOTAL_ documenten",
+          "sInfoEmpty": "Geen resultaten gevonden",
+          "sInfoFiltered": "",
+        },
         "orderClasses": false,
         "target": '.narrow-td',
         "aoColumns": [
@@ -23,7 +28,21 @@
         "ordering": true,
         "responsive": true,
         "pageLength": 5,
-        "order": [ 2, 'desc' ]
+        "order": [ 2, 'desc' ],
+        "fnDrawCallback": function( oSettings ) {
+          if(oSettings.fnRecordsTotal() <= 5) {
+            $('.docs-show-all').hide();
+          }
+        }
+      });
+
+      // On search check if there are more or less than 5 results , hide or show Show all button
+      table.on( 'search.dt', function () {
+        if(table.page.info().recordsDisplay < 5) {
+          $('.docs-show-all').hide();
+        } else {
+          $('.docs-show-all').show();
+        }
       });
 
       $('.dataTables_filter input').attr("placeholder", "Zoeken");
@@ -52,7 +71,7 @@
       });
 
        $('.clear_button').on('click', function(){ 
-       $('.dataTables_wrapper .dataTables_filter input').val('');
+        $('.dataTables_wrapper .dataTables_filter input').val('');
         $('.dataTables_wrapper .dataTables_filter input').trigger('keyup.DT');
         $(".clear_button").hide();
       });
