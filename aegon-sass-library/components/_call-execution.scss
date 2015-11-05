@@ -1,0 +1,22 @@
+.call-execution-block {
+  background: $grey;
+  padding: 20px;
+  margin: 0 0 20px;
+}
+
+@include breakpoint($brk-tablet) {
+  .call-execution-block {
+
+    h2, h3 {
+      color: $black;
+    }
+
+    &.blue-background {
+      background: $blue;
+
+      * {
+        color: $white;
+      }
+    }
+  }
+}
