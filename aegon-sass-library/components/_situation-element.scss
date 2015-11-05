@@ -13,13 +13,22 @@
       padding: 0 3px;
     }    
   }
+  .situation-buttons {
+    display: none;
+  }
 }
 
 @include breakpoint($brk-mobile) {
   .situation-element {
-    .situation-text{  
-      margin-top:20px;  
+
+    .situation-text {
+      display: none;
+    }
+
+    .situation-buttons {
       display: block;
+      margin-top:20px;
+
       a {
         position:relative;
         margin: 0 0 10px;
@@ -28,6 +37,7 @@
         line-height: 23px;
         padding: 15px 40px 15px 15px;
       }
+
       a:after {
         position: absolute;
         display: inline-block;
@@ -39,6 +49,6 @@
         height: 100%;
         vertical-align: middle;
       }
-    }  
+    }
   }
 }
