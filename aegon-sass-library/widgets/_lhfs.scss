@@ -166,6 +166,42 @@
       min-height: 5px;
     }
   }
+  .payments-show-all {
+    display: block;
+    padding: 3px 5px 3px 5px;
+    margin: 0 auto 0 auto;
+    background: #EFEBE7;
+    text-align: center;
+    color: #3395d3;
+    width: 110px;
+    cursor: pointer;
+    border-bottom-right-radius: 0.1875rem;
+    border-bottom-left-radius: 0.1875rem;
+
+    &:before {
+      content: "Toon alles" !important;
+    }
+
+    &.changed:before { 
+      content: "Verbergen" !important;
+    }
+
+    &.changed::after { 
+      /* this selector is more specific, so it takes precedence over the other :after */
+      transform: rotate(-90deg) !important;
+    }
+
+    &:after {
+      display: block;
+      font-size: 0.625rem;
+      font-family: "aegon_icons";
+      content: "\e600";
+      -ms-transform: rotate(90deg); /* IE 9 */
+      -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+      transform: rotate(90deg);
+      margin: -6px 0 -4px 0;
+     }
+  }
 }
 
 .lhfs_widget div.payments {
