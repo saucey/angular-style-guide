@@ -1,12 +1,7 @@
 .my_documents_widget {
 
-min-height: 100vh !important;
-
   article {
     @include rem('margin', 0, 0);
-    border-bottom-style: solid;
-    border-bottom-color: $slightly_darker_grey;
-    @include rem('border-bottom-width', 1);
 
     &:first-of-type {
       @include rem('margin-top', 30);
@@ -44,10 +39,10 @@ min-height: 100vh !important;
 
   h2 {
     position: relative;
-    @include rem('font-size', 30);
-    @include rem('margin', 0);
-    @include rem('padding', 20, 0, 20, 15);
-    @include rem('line-height', 60);
+    @include rem('font-size', 25);
+    @include rem('margin-top', 25);
+    //@include rem('padding', 20, 0, 20, 15);
+    @include rem('line-height', 25);
     font-weight: bold;
     cursor: pointer;
     user-select: none;
@@ -56,12 +51,12 @@ min-height: 100vh !important;
     &:before {
       display: inline-block;
       @include rem('font-size', 25);
-      @include rem('margin', 0, 20, 0, 0);
+      //@include rem('margin', 0, 20, 0, 0);
       font-weight: normal;
       -webkit-font-smoothing: antialiased;
     }
 
-    &:after {
+    /*&:after {
       display: inline-block;
       @include rem('font-size', 15);
       position: absolute;
@@ -74,7 +69,7 @@ min-height: 100vh !important;
       -webkit-font-smoothing: antialiased;
       transition: transform .2s ease;
       transform: rotate(90deg);
-    }
+    }*/
   }
 
   dl.row-fluid {
@@ -100,31 +95,44 @@ min-height: 100vh !important;
   .icon-pdf:before {
     @include rem('font-size', 25);
   }
+
+  .docs-show-all {
+    display: block;
+    padding: 3px 5px 3px 5px;
+    margin: 0 auto 0 auto;
+    background: #EFEBE7;
+    text-align: center;
+    color: #3395d3;
+    width: 110px;
+    cursor: pointer;
+    border-bottom-right-radius: 0.1875rem;
+    border-bottom-left-radius: 0.1875rem;
+
+    &:before {
+      content: "Toon alles" !important;
+    }
+
+    &.changed:before { 
+      content: "Verbergen" !important;
+    }
+
+    &.changed::after { 
+      /* this selector is more specific, so it takes precedence over the other :after */
+      transform: rotate(-90deg) !important;
+    }
+
+    &:after {
+      display: block;
+      font-size: 0.625rem;
+      font-family: "aegon_icons";
+      content: "\e600";
+      -ms-transform: rotate(90deg); /* IE 9 */
+      -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+      transform: rotate(90deg);
+      margin: -6px 0 -4px 0;
+     }
+  }
 }
-
-  // 
-  // MY DOCUMENTS NIEUW
-  // --------------------------------------------------
-
-  #sparen {
-    padding: 0 0 20px 0;
-  }
-
-  .inline-h2 {
-    margin-bottom: 40px;
-  }
-
-.number-search-results {
-  width: 100%;
-  display: block;
-  padding: 15px 0 0 0;
-  margin: 0 0 20px 0;
-
-  .bold {
-  font-family: $font_bold;
-  }
-}
-
 
 // 
 // Media queries
@@ -133,8 +141,6 @@ min-height: 100vh !important;
 @include breakpoint($brk-tablet) {
 
   .my_documents_widget {
-
-  min-height: 100vh !important;
 
     article {
       @include rem('margin', 30, 0);
@@ -152,10 +158,10 @@ min-height: 100vh !important;
     }
 
     h2 {
-      @include rem('font-size', 40);
+      @include rem('font-size', 25);
       @include rem('padding', 0, 0);
       @include rem('margin', 5, 0, 20, 0);
-      @include rem('line-height', 40);
+      @include rem('line-height', 25);
       font-weight: normal;
       cursor: default;
       margin-bottom: 35px;

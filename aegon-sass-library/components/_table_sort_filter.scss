@@ -8,40 +8,21 @@
   .dataTables_paginate, .dataTables_length {
     display: none;
   }
-
-  .inline-h2 {
-    display: block !important;
-  }
   
   .dataTables_filter {
     margin-bottom: 15px;
-  }
 
-  .dataTables_filter input {
-    -webkit-transition: all .5s;
-    -moz-transition: all .5s;
-    transition: all .5s;
+    input {
+      background-position: right center !important;
+      -webkit-transition: all .5s;
+      -moz-transition: all .5s;
+      transition: all .5s;
+    }
   }
 
   .dataTables_info {
     position: absolute !important;
-    top: -45px;
-  }
-
-  .clear_button {
-    position: absolute;
-    top: -38px;
-    right: 1px;
-    display: block;
-    width: 36px;
-    height: 36px;
-    background: white;
-    background-image: url("../images/ui/btn-close.png") !important;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 16px 16px;
-    cursor: pointer;
-    display: none;
+    top: -41px;
   }
 
   table.dataTable {
@@ -87,6 +68,10 @@
 
   .dataTables_wrapper {
 
+    .dataTables_info {
+      top: -38px;
+    }
+
     .dataTables_filter {
       display:none;
     }
@@ -129,7 +114,9 @@
             height: 32px;
             width: 32px;
             top: -34px;
-            left: 275px;
+            left: initial;
+            float: right;
+            right: 15px;
             position: absolute;
 
             &:before {
@@ -165,6 +152,11 @@
 
         &.collapsed {
           border-bottom: 1px solid grey;
+
+          tbody tr td:first-child:before {
+            content: "\e901";
+          }
+
         }
 
         tbody {
@@ -174,6 +166,8 @@
           .child .child:before {
             display: none !important;
           } 
+
+
         }
       }
 
@@ -198,60 +192,4 @@
       }
     }
   }
-}
-
-// @TODO: Include this in table_sort_filter
-
-.dataTables_wrapper .dataTables_filter input {
-    width: 110px !important;
-    background-color: white;
-    background-image: url("../images/icons/icon-search-header.png");
-    background-repeat: no-repeat;
-    background-position: right center;
-    background-size: 30px 30px;
-    border: 2px solid #EFEBE7;
-    padding: 0 20px 0 10px;
-}
-
-.dataTables_wrapper .dataTables_filter input {
-  background-position: right center !important;
-}
-
-
-// Docs-show-all is outside of the datatTables wrapper
-.docs-show-all {
-  display: block;
-  padding: 3px 5px 3px 5px;
-  margin: 0 auto 0 auto;
-  background: #EFEBE7;
-  text-align: center;
-  color: #3395d3;
-  width: 110px;
-  cursor: pointer;
-  border-bottom-right-radius: 0.1875rem;
-  border-bottom-left-radius: 0.1875rem;
-
-  &:before {
-    content: "Toon alles" !important;
-  }
-
-  &.changed:before { 
-    content: "Verbergen" !important;
-  }
-
-  &.changed::after { 
-    /* this selector is more specific, so it takes precedence over the other :after */
-    transform: rotate(-90deg) !important;
-  }
-
-  &:after {
-    display: block;
-    font-size: 0.625rem;
-    font-family: "aegon_icons";
-    content: "\e600";
-    -ms-transform: rotate(90deg); /* IE 9 */
-    -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
-    transform: rotate(90deg);
-    margin: -6px 0 -4px 0;
-   }
 }
