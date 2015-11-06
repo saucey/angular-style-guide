@@ -53,7 +53,7 @@
     top: auto;
     right: 0;
     @include rem('margin-top', -3);
-    @include rem('width', 280);
+    @include rem('padding', 0, 18);
     @include rem('border-radius', 2);
     background-color: $white;
     border: 1px solid $slightly_darker_grey;
@@ -67,13 +67,13 @@
 
       p {
         display: block;
-        @include rem('padding', 0, 12);
+ //       @include rem('padding', 0, 12);
         @include rem('margin', 18, 0);
       }
 
       p.name {
         @include rem('padding', 0, 20);
-        margin-right: 25px;
+//        margin-right: 25px;
         white-space: nowrap;
         color: $green;
 
@@ -88,7 +88,7 @@
       }
 
       .action {
-        @include rem('padding', 0, 12);
+//        @include rem('padding', 0, 12);
         white-space: nowrap;
       }
     }
@@ -135,7 +135,7 @@
         background-color: $green;
 
         p {
-          @include rem('padding', 12);
+ //         @include rem('padding', 12);
           margin-bottom: 0;
           color: $white;
         }
@@ -151,7 +151,7 @@
   .btn-login-loggedin {
     z-index: 2;
     background-color: $white;
-    margin-bottom: -1px;
+    margin-bottom: 2px;
     @include rem('padding', 0, 10, 1, 10);
     @include rem('line-height', 36);
     height: auto;
@@ -173,12 +173,13 @@
     color: $green;
 
     &:after {
+      display: inline-block;
       animation: buttonAfterLoginToDefault 2s normal 0s forwards;
       font-family: $font_icons;
       @include rem('font-size', 12);
       content: $font_icons_arrow_down;
       @include rem('margin-left', 6);
-    }
+   }
 
     &.tap {
       border-bottom-color: $slightly_darker_grey;
@@ -279,7 +280,7 @@ body.shw-widgets-logged-in {
       p.name {
         display: inline-block;
         @include rem('padding', 0, 10, 0, 0);
-        margin-right: 25px;
+ //      margin-right: 25px;
         color: $green;
       }
     }
@@ -323,7 +324,7 @@ body.shw-widgets-logged-in {
       display: none;
     } // end highlight mobile
 
-    .btn-login-loggedin {
+     .user_detail_widget_name {
       display: inline-block;
       @include rem('padding', 0, 13, 2, 13);
       @include rem('line-height', 36);
@@ -332,12 +333,12 @@ body.shw-widgets-logged-in {
       //border-bottom-color: transparent;
       animation: buttonLoginToDefault 2s normal 0s forwards;
 
-      &:before {
+      &:after {
         content: $font_icons_man;
         font-family: $font_icons;
         display: inline-block;
         @include rem('font-size', 23);
-        @include rem('margin-right', 12);
+        @include rem('margin-left', 12);
         transform: translateY(3px);
       }
 
@@ -421,4 +422,12 @@ body.shw-widgets-logged-in {
   to {
     max-height: 0px;
   }
+}
+
+//
+// Temporarily added as plain css. @TODO: Clean up code style and insert in sass syntax.
+// -------------------------------------------------------------------------------------------------------------------
+
+a.user_detail_widget_mijnaegon_link.button.white.myaegon {
+    padding: 0;
 }
