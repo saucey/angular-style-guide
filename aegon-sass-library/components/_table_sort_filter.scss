@@ -200,6 +200,24 @@
   }
 }
 
+// @TODO: Include this in table_sort_filter
+
+.dataTables_wrapper .dataTables_filter input {
+    width: 110px !important;
+    background-color: white;
+    background-image: url("../images/icons/icon-search-header.png");
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: 30px 30px;
+    border: 2px solid #EFEBE7;
+    padding: 0 20px 0 10px;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+  background-position: right center !important;
+}
+
+
 // Docs-show-all is outside of the datatTables wrapper
 .docs-show-all {
   display: block;
