@@ -9,7 +9,7 @@
   Drupal.behaviors.table_sort_filter = {
 
     attach: function () {
-
+      var wrapperId = 'sortabletable';
       var table = $('.sortabletable').DataTable({
         "info": true,
         "oLanguage": {
@@ -36,8 +36,10 @@
         }
       });
 
+      console.log($('.' + wrapperId).find('.docs-show-all'));
+
       // On search check if there are more or less than 5 results , hide or show Show all button
-      table.on( 'search.dt', function () {
+      $('.' + wrapperId).on( 'search.dt', function () {
         if(table.page.info().recordsDisplay < 5) {
           $('.docs-show-all').hide();
         } else {
@@ -82,6 +84,11 @@
 
       var table = $(table_class).DataTable({
         "info": true,
+        "oLanguage": {
+          "sInfo": "_END_ van _TOTAL_ documenten",
+          "sInfoEmpty": "Geen resultaten gevonden",
+          "sInfoFiltered": "",
+        },
         "orderClasses": false,
         "target": '.narrow-td',
         "aoColumns": [
@@ -93,10 +100,25 @@
         "ordering": true,
         "responsive": true,
         "pageLength": 5,
-        "order": [ sortDefColumn, 'desc' ]
+        "order": [ sortDefColumn, 'desc' ],
+        "fnDrawCallback": function( oSettings ) {
+          console.log(oSettings);
+          if(oSettings.fnRecordsTotal() <= 5) {
+            $('.docs-show-all'+div_class).hide();
+          }
+        }
       });
       var wrapperId = $(table_class).attr('id')+'_wrapper';
-  
+    
+      // On search check if there are more or less than 5 results , hide or show Show all button
+      $(table_class).on( 'search.dt', function () {
+        if(table.page.info().recordsDisplay < 5) {
+          $('.docs-show-all'+div_class).hide();
+        } else {
+          $('.docs-show-all'+div_class).show();
+        }
+      });
+
       $('#' + wrapperId + ' .dataTables_filter input').attr("placeholder", "Zoeken");
    
       //Add a div to display a reset button (initially hidden with css)
