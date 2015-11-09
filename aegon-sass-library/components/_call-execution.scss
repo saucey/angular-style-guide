@@ -1,22 +1,77 @@
 .call-execution-block {
+  position: relative;
   background: $grey;
   padding: 20px;
   margin: 0 0 20px;
+  border-radius: $elements_border_radius;
+
+  h2, h3 {
+    color: $black;
+    min-height: (2 * $large) + 5px;
+  }
+
+  .button, button {
+    margin-top: 20px;
+
+  }
+
+  .price {
+    display: block;
+    font-size: $xx-large;
+    line-height: $xx-large;
+    padding-bottom: 10px;
+    text-align: right;
+  }
+
+  &.blue-background {
+    background: $blue;
+    color: $white;
+
+    * {
+      color: inherit;
+    }
+
+    h3 {
+      font-size: $x-large;
+      line-height: $x-large * 1.2;
+      min-height: $x-large * 2.4;
+    }
+  }
 }
 
 @include breakpoint($brk-tablet) {
-  .call-execution-block {
+  // 33% columns on small tablets
+  .container_12 .span4 .call-execution-block .description {
+    min-height: 200px;
+  }
 
-    h2, h3 {
-      color: $black;
-    }
+  // 50% columns on small tablets
+  .container_12 .span6 .call-execution-block .description,
+  .col3 .span4 .call-execution-block .description {
+    min-height: 150px;
+  }
+}
 
-    &.blue-background {
-      background: $blue;
+@include breakpoint($brk-ipad-portrait) {
+  // 33% columns on medium sized tablets
+  .container_12 .span4 .call-execution-block .description {
+    min-height: 180px;
+  }
+}
 
-      * {
-        color: $white;
-      }
+@include breakpoint($brk-ipad-landscape) {
+  // 33% columns on larger sized tablets
+  .container_12 .span4 .call-execution-block .description {
+    min-height: 150px;
+  }
+}
+
+@include breakpoint($brk-large-desktop) {
+  // both types of columns on large devices
+  .container_12 .span6,
+  .container_12 .span4 {
+    .call-execution-block .description {
+      min-height: 100px;
     }
   }
 }
