@@ -46,7 +46,7 @@
     
       // On search, check if there are more or less than 5 results , hide or show Show all button
       $(table_class).on( 'search.dt', function () {
-        if(table.page.info().recordsDisplay < 5) {
+        if(table.page.info().recordsDisplay <= 5) {
           $('.docs-show-all'+div_class).hide();
         } else {
           $('.docs-show-all'+div_class).show();
