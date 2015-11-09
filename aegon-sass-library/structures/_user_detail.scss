@@ -146,8 +146,6 @@
     @include rem('padding', 0, 10, 1, 10);
     @include rem('line-height', 36);
     height: auto;
-    padding-bottom: 6px;
-    padding-top: 6px;
     cursor: pointer;
     @include rem('border-radius', 2);
     user-select: none;
@@ -155,7 +153,6 @@
     border-bottom-color: $slightly_darker_grey;
 
     font-family: $font_normal;
-    @include rem('font-size', 16);
     border-width: 1px;
     border-style: solid;
 
