@@ -11,8 +11,19 @@
   }
 
   .button, button {
-    margin-top: 20px;
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    max-width: 80%;
 
+    &:after {
+      content: "";
+      clear: both;
+    }
+  }
+
+  .description {
+    padding-bottom: 70px;
   }
 
   .price {
@@ -41,14 +52,24 @@
 
 @include breakpoint($brk-tablet) {
   // 33% columns on small tablets
-  .container_12 .span4 .call-execution-block .description {
-    min-height: 200px;
+  .container_12 .span4 {
+    .call-execution-block {
+      min-height: 365px;
+    }
+    .call-execution-block .description {
+      min-height: 200px;
+    }
   }
 
   // 50% columns on small tablets
-  .container_12 .span6 .call-execution-block .description,
-  .col3 .span4 .call-execution-block .description {
-    min-height: 150px;
+  .container_12 .span6,
+  .col3 .span4 {
+    .call-execution-block {
+      min-height: 365px;
+    }
+    .call-execution-block .description {
+      min-height: 150px;
+    }
   }
 }
 
@@ -61,8 +82,13 @@
 
 @include breakpoint($brk-ipad-landscape) {
   // 33% columns on larger sized tablets
-  .container_12 .span4 .call-execution-block .description {
-    min-height: 150px;
+  .container_12 .span4 {
+    .call-execution-block {
+      min-height: 400px;
+    }
+    .call-execution-block .description {
+      min-height: 150px;
+    }
   }
 }
 
@@ -70,6 +96,9 @@
   // both types of columns on large devices
   .container_12 .span6,
   .container_12 .span4 {
+    .call-execution-block {
+      min-height: 260px;
+    }
     .call-execution-block .description {
       min-height: 100px;
     }
