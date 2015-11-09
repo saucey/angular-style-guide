@@ -10,6 +10,7 @@
   }
   
   .dataTables_filter {
+    width: 100%;
     margin-bottom: 15px;
 
     input {
@@ -17,6 +18,9 @@
       -webkit-transition: all .5s;
       -moz-transition: all .5s;
       transition: all .5s;
+      &:focus {
+        width: 35% !important;
+      }
     }
   }
 
