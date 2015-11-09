@@ -35,6 +35,11 @@
     thead {
       border: none;
 
+      td, th {
+        @include rem('padding', 10, 40, 10, 10);
+        white-space: nowrap;
+      }
+
       tr th.narrow-td:after{
           content: "";
       }
