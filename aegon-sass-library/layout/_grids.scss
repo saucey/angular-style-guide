@@ -110,6 +110,7 @@
       margin-left: 0;
     }
   }
+
   .span12 {
     width: 100%;
     *width: 99.9375%;
@@ -158,6 +159,78 @@
     width: 6.5%;
     *width: 6.4375%;
   }
+}
+
+
+// Flex-box implementation:
+//
+// Make sure all columns in this row have the same height. This is now only used for rows with this specific class,
+// but we might make it available to all fluid rows.
+//
+// For examples, take a look at the call/execution elements in the flexible campaign pages.
+.container_12 .row-fluid.same-height {
+  display:flex;
+  display: -webkit-flex;
+  flex-direction: row;
+  -webkit-flex-direction: row;
+  -webkit-align-content: stretch;
+  align-content: stretch;
+
+  > div[class*='span'] {
+    margin: 10px;
+    display: flex;
+    width: auto;
+  }
+
+  .span12 {
+    flex: 12;
+    -webkit-flex: 12;
+  }
+  .span11 {
+    flex: 11;
+    -webkit-flex: 11;
+  }
+  .span10 {
+    flex: 10;
+    -webkit-flex: 10;
+  }
+  .span9 {
+    flex: 9;
+    -webkit-flex: 9;
+  }
+  .span8 {
+    flex: 8;
+    -webkit-flex: 8;
+  }
+  .span7 {
+    -webkit-flex: 7;
+    flex: 7;
+  }
+  .span6 {
+    -webkit-flex: 6;
+    flex: 6;
+  }
+  .span5 {
+    -webkit-flex: 5;
+    flex: 5;
+  }
+  .span4 {
+    -webkit-flex: 4;
+    flex: 4;
+  }
+  .span3 {
+    -webkit-flex: 3;
+    flex: 3;
+  }
+  .span2 {
+    -webkit-flex: 2;
+    flex: 2;
+  }
+  .span1 {
+    -webkit-flex: 1;
+    flex: 1;
+  }
+  // End of flex-box implementation
 }
 
 section.content.fullwidth {
@@ -233,7 +306,6 @@ dl.table.row-fluid {
   }
 }
 
-
 // 
 // Media queries
 // --------------------------------------------------
@@ -264,7 +336,7 @@ dl.table.row-fluid {
     @include rem('margin-bottom', 5);
   }
 
-  .container_12 .row-fluid.col3 .span4 {
+  .container_12 .row-fluid .span4 {
     width: 49%;
     *width: 48.9375%;
 
