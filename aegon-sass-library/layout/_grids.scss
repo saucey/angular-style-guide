@@ -161,7 +161,6 @@
   }
 }
 
-
 // Flex-box implementation:
 //
 // Make sure all columns in this row have the same height. This is now only used for rows with this specific class,
@@ -170,16 +169,20 @@
 // For examples, take a look at the call/execution elements in the flexible campaign pages.
 .container_12 .row-fluid.same-height {
   display:flex;
-  display: -webkit-flex;
   flex-direction: row;
-  -webkit-flex-direction: row;
-  -webkit-align-content: stretch;
   align-content: stretch;
+  flex: 1;
 
-  > div[class*='span'] {
+  div[class*='span'] {
     margin: 10px;
     display: flex;
-    width: auto;
+    flex: 1;
+    align-content: stretch;
+
+    > div {
+      width: 100%;
+      min-height: 100%;
+    }
   }
 
   .span12 {

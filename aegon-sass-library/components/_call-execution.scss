@@ -1,4 +1,7 @@
-.call-execution-block {
+// Tmp workaround, because there is an extra div inbetween inserted by drupal
+// When fixed, just replace this complicated selector with: ".call-execution-block"
+[class*='node-call-exec-'],
+:not([class*='node-call-exec-']) > .call-execution-block {
   position: relative;
   background: $grey;
   padding: 20px;
@@ -34,7 +37,10 @@
     text-align: right;
   }
 
-  &.blue-background {
+  // Tmp workaround, because there is an extra div inbetween inserted by drupal
+  // When fixed, just replace this complicated selector with: "&.blue-background"
+  &.blue-background,
+  &.view-mode-call_exec_blue_block {
     background: $blue;
     color: $white;
 
@@ -49,6 +55,7 @@
     }
   }
 }
+
 
 @include breakpoint($brk-tablet) {
   // 33% columns on small tablets
