@@ -170,13 +170,13 @@
 .container_12 .row-fluid.same-height {
   display:flex;
   flex-direction: row;
+  flex-wrap: wrap;
   align-content: stretch;
-  flex: 1;
 
   div[class*='span'] {
     margin: 10px;
     display: flex;
-    flex: 1;
+    flex: 3;
     align-content: stretch;
 
     > div {
@@ -184,56 +184,6 @@
       min-height: 100%;
     }
   }
-
-  .span12 {
-    flex: 12;
-    -webkit-flex: 12;
-  }
-  .span11 {
-    flex: 11;
-    -webkit-flex: 11;
-  }
-  .span10 {
-    flex: 10;
-    -webkit-flex: 10;
-  }
-  .span9 {
-    flex: 9;
-    -webkit-flex: 9;
-  }
-  .span8 {
-    flex: 8;
-    -webkit-flex: 8;
-  }
-  .span7 {
-    -webkit-flex: 7;
-    flex: 7;
-  }
-  .span6 {
-    -webkit-flex: 6;
-    flex: 6;
-  }
-  .span5 {
-    -webkit-flex: 5;
-    flex: 5;
-  }
-  .span4 {
-    -webkit-flex: 4;
-    flex: 4;
-  }
-  .span3 {
-    -webkit-flex: 3;
-    flex: 3;
-  }
-  .span2 {
-    -webkit-flex: 2;
-    flex: 2;
-  }
-  .span1 {
-    -webkit-flex: 1;
-    flex: 1;
-  }
-  // End of flex-box implementation
 }
 
 section.content.fullwidth {
@@ -331,6 +281,14 @@ dl.table.row-fluid {
       @include rem('margin-bottom', 5);
     }
   }
+
+  .container_12  {
+    .row-fluid.same-height div[class*="span"]{
+      margin-left: 0;
+      flex: 1;  
+      flex-basis: 100%;
+    }
+  }
 }
 
 @media screen and(min-width: $rc-m-min-width) and(max-width: $rc-m-max-width) {
@@ -347,5 +305,10 @@ dl.table.row-fluid {
       clear: both;
       @include rem('margin', 5, 0, 0);
     }
+  }
+
+  .container_12 .row-fluid.same-height div[class*="span"] {
+    flex: 2;
+    flex-basis: 46%;
   }
 }
