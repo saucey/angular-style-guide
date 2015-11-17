@@ -55,6 +55,15 @@
       color: $white;
       margin-bottom: 5px;
     }
+    .content {
+      display: table;
+      p {
+        display: table-cell;
+      }
+      button {
+        display: table-cell;
+      }
+    }
   }
 
   &.messages--functional {
