@@ -4,68 +4,6 @@
 // http://screwlewse.com/2010/07/dont-use-id-selectors-in-css/
 // http://oli.jp/2011/ids/
 
-.pensioen123_container {
-  // TODO: refactor for sass optimisation
-
-  .blue {
-    background: blue;
-    width: 25%;
-    height: 100px;
-    display: block;
-    float: left;
-  }
-
-  min-height: 979px;
-  width: 100%;
-  background: url('../images/background/pensioen123_bg.jpg') no-repeat;
-  background-size: 1350px 979px;
-  z-index: 1;
-
-  .wrapper {
-    margin-right: 5.625rem;
-    z-index: 4;
-    position: relative;
-
-    @media screen and(max-width: 1000px) {
-      margin-right: 0;
-    }
-  }
-
-  .wrapper, aside.desktop  {
-    background: transparent;
-  }
-
-  section.scroll {
-    @media screen and(max-width: 1000px) {
-      width: 90%;
-      margin: 0 auto; 
-    }
-  }
-
-  .fullwidth-header {
-    background: #fff;
-    height: 5.625rem;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    z-index: 3;
-  }
-
-  .overlay {
-    background: #3E97CF;
-    position: absolute;
-    z-index: 2;
-    opacity: .5;
-    width: 100%;
-    height: 100%;
-  }
-
-  .content {
-    margin-top: 100px;
-    background: #fff;
-  }
-}
-
 .pensioen123_widget {
 
   .user-details {
@@ -77,8 +15,17 @@
       color: #fff;
       text-align: center;
       display: table; 
-      height: 200px !important; // !important needed due javascript calculating height on load , without overwrite height won't overwrite
+      height: 200px;
       overflow: hidden;
+
+      @media screen and(min-width: $rc-m-min-width) and(max-width: $rc-m-max-width) {
+        // overwrite grids.scss
+        &:last-child {
+          clear: none;
+          margin: 0;
+          margin-left: 2%;
+        }
+      }
 
       h2 {
         color: #fff;
@@ -119,6 +66,8 @@
         max-height: 35px;
         margin-bottom: 15px;
         float: right;
+        width: auto;
+        max-width: 100%;
       }
 
       .span12 {
@@ -312,29 +261,24 @@
 // Media queries
 // --------------------------------------------------
 
-@include breakpoint($brk-mobile) {
-  .pensioen123_container {
-    background: #4398CD;
-
-    .wrapper {
-      margin-right: 0;
-    }
-
-    .fullwidth-header {
-      height: 3.9375rem;
-    }
-
-    .content {
-      margin-top: 20px;
-    }
-  }
+@media screen and(max-width: $rc-m-max-width) {
 
   .pensioen123_widget {
+    .product-overview {
+      .row-fluid .span12 .span4 {
+        width: 32% ;
+        clear: none;
+      }
+    }
 
     .user-details {
 
       .span4 {
         height:100px !important; // !important needed due javascript calculating height on load
+        // overwrite grids.scss
+        width: 100% !important;
+        margin-left: 0 !important;
+        margin-bottom: 0.3125rem;
         
         h2 {
           color: #fff;
@@ -349,11 +293,12 @@
 
         &.video {
           padding: 0;
+          min-height: 200px;
 
           iframe {
             width: 100%;
             height: 100%;
-
+            min-height: 200px;
           }
         }
 
@@ -369,6 +314,11 @@
         }
       }
     }
+  }
+}
+@include breakpoint($brk-mobile) {
+
+  .pensioen123_widget {
 
     .product-overview {
       
@@ -383,6 +333,10 @@
             &.open {
               display:block;
             }
+          }
+
+          .span4 {
+            width: 100%;
           }
 
           .span6 {
