@@ -367,6 +367,7 @@ aside.mobile {
 
     .wrapper.ui-panel-animate {
       position: fixed;
+      height: 100%;
       /* for older browsers */
       transform: translateX(80%);
       /* for browsers support tranlate 3D */
