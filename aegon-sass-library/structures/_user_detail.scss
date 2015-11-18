@@ -231,6 +231,11 @@
   display: none;
 }
 
+// Hide the banner with a request to the user to provide a mobile number by default.
+.messages.messages--attention.request_mobile_number {
+  display: none;
+}
+
 //
 // Fixes for IE<10
 // --------------------------------------------------

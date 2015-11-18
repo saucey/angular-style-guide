@@ -243,9 +243,9 @@
         // User is logged in, so we can get rid of the button
         $('.login-link-wrapper').css('display', 'none');
 
-        // User has given a mobile number we can get rid of the banner asking for it
-        if (data.userMobile !== "") {
-          $('.request_mobile_number.messages.messages--attention').css('display', 'none');
+        // User has not given a mobile number thus we need the banner asking for it
+        if (!data.userMobile) {
+          $('.messages.messages--attention.request_mobile_number').css('display', 'block');
         }
 
         // Parse the DOM before appendTo
