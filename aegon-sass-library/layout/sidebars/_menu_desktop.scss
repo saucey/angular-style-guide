@@ -16,6 +16,11 @@ aside.desktop {
   left: 0;
   z-index: 9999;
 
+  &.open {
+    overflow-x: visible;
+    overflow-y: visible;
+  }
+
   a {
     background-color: $blue;
     background-image: none;
