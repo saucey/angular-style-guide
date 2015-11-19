@@ -195,6 +195,9 @@
           'nameAddition': userObj.PARTIJ._AE_PERSOON.VOORV || "",
           'lastName': userObj.PARTIJ.ANAAM || "",
 
+          // Get user's mobile from json object
+          'userMobile': userObj.PARTIJ.MOBIEL || "", //we need this later to verify if a mobile number is available
+
           // Get last login time from cookie or give false
           'lastAccess': that.lastLogin()
         };
@@ -239,6 +242,11 @@
 
         // User is logged in, so we can get rid of the button
         $('.login-link-wrapper').css('display', 'none');
+
+        // User has not given a mobile number thus we need the banner asking for it
+        if (!data.userMobile) {
+          $('.messages.messages--attention.request_mobile_number').css('display', 'block');
+        }
 
         // Parse the DOM before appendTo
         this.parseWidget(data, callback);
