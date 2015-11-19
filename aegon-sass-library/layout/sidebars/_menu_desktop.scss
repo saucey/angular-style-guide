@@ -202,7 +202,6 @@ aside.desktop {
       }
     }
 
-    &:nth-last-child(2),
     &:last-child {
 
       > a:after {
@@ -251,29 +250,6 @@ aside.desktop {
 
       &:after {
         display: none;
-      }
-    }
-  }
-
-  /**
-   * Stick Bottom
-   */
-  li.stick-bottom {
-    position: relative;
-
-    z-index: 2;
-    // width: 170px;
-
-    @include rem('height', 110);
-    @include rem('line-height', 110);
-
-    a {
-      border-width: 0;
-      @include rem('border-top-width', 1);
-      background-color: #2981B8;
-      color: $white;
-      &[class*="icon-"]:before {
-        @include rem('line-height', 105);
       }
     }
   }
@@ -577,15 +553,5 @@ html.lt-ie9, html.gte-ie9 {
     .push-submenu {
       position: relative;
     }
-    .stick-bottom {
-      display: none;
-    }
   }
-}
-
-html.gte-ie9  li.stick-bottom a[class*="icon-"]:before {
-  @include rem('margin-top', 10);
-}
-html.lt-ie9  li.stick-bottom a[class*="icon-"]:before {
-  @include rem('margin-top', 10);
 }
