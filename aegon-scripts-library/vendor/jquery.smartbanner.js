@@ -81,7 +81,7 @@
               link = link + '&referrer=' + this.options.GooglePlayParams;
             }
 
-            var banner = '<div id="smartbanner" class="'+this.type+'"><div class="sb-container"><a href="#" class="sb-close">&times;</a><span class="sb-icon"></span><div class="sb-info"><span class="sb-title">'+this.title+'</span><span>'+this.author+'</span><span>'+inStore+'</span></div><a href="'+link+'" class="sb-button"><span>'+this.options.button+'</span></a></div></div>';
+            var banner = '<div id="smartbanner" class="smartbanner '+this.type+'"><div class="sb-container"><a href="#" class="sb-close">&times;</a><span class="sb-icon"></span><div class="sb-info"><span class="sb-title">'+this.title+'</span><span>'+this.author+'</span><span>'+inStore+'</span></div><a href="'+link+'" class="sb-button"><span>'+this.options.button+'</span></a></div></div>';
             (this.options.layer) ? $(this.options.appendToSelector).append(banner) : $(this.options.appendToSelector).prepend(banner);
 
             if (this.options.icon) {
@@ -119,7 +119,6 @@
                     .css('-moz-transform', 'scale('+this.scale+')')
                     .css('width', $(window).width() / this.scale)
             }
-            $('#smartbanner').css('position', (this.options.layer) ? 'absolute' : 'static')
         }
 
       , listen: function () {
