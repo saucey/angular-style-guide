@@ -165,12 +165,12 @@ ul {
   h2 {
     @include rem('font-size', 22);
     @include rem('line-height', 22);
-    color: $blue;
   }
 
   h3 {
     @include rem('font-size', 18);
     @include rem('line-height', 18);
+    color: $blue;
   }
 
   h4 {
