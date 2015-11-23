@@ -9,7 +9,7 @@
   float: none;
   height: 100%;
   vertical-align: middle;
-
+  box-sizing: border-box;
   @include rem('border-radius', 0, $elements_border_radius, $elements_border_radius, 0);
   line-height: 44px;
   margin-top: 0;
