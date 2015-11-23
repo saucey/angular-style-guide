@@ -11,7 +11,7 @@ aside.desktop {
   top: 0;
   bottom: 0;
   left: 0;
-  z-index: 9999;
+  z-index: 1;
 
   a {
     background-color: $blue;
@@ -37,7 +37,6 @@ aside.desktop {
   }
 
   .logo {
-    z-index: 0;
     position: absolute;
     top: 0;
     left: 0;
