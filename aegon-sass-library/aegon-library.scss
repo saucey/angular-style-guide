@@ -20,7 +20,7 @@
 @import "vendors/breakpoint-sass/stylesheets/breakpoint";
 
 /* Reset file from Drupal Normalize.css */
-@import "vendors/drupal-normalize-css/normalize";
+@import "vendors/drupal-normalize-css/normalize.scss";
 
 /* include other 3rd party files from vendors, such as jquery-ui etc. that have to be referenced by _all.scss */
 @import "vendors/all";
