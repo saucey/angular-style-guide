@@ -5,60 +5,72 @@
 
 h1 {
   @include rem('font-size', $xxx-large);
-  @include rem('line-height', 36);
+  @include rem('line-height', $xxx-large + 9);
   @include rem('margin', 25, 0);
   font-family: $font_light;
   font-weight: normal;
   color: $blue;
-  line-height: $xxx-large;
 }
 
 .subtext {
   font-family: $font_light;
-  font-size: $x-large;
+  @include rem('font-size', $x-large);
+  @include rem('line-height', $x-large + 5);
   color: $blue;
 }
 
 .subheader {
   font-family: $font_normal;
-  font-size: $large;
+  @include rem('font-size', $large);
+  @include rem('line-height', $x-large);
+  color: $black;
 }
 
 h2 {
   font-family: $font_light;
-  font-size: $xx-large;
+  @include rem('font-size', $xx-large);
+  @include rem('line-height', $xxx-large);
   color: $blue;
   font-weight: normal;
-  margin: 5px 0 20px 0;
-  line-height: $xx-large;
+  margin: 5px 0 20px;
 }
 
 h3 {
-  font-family: $font_light;
-  font-size: $large;
-  line-height: $large;
-  color: $blue;
+  font-family: $font_normal;
+  @include rem('font-size', $large);
+  @include rem('line-height', $x-large);
+  color: $black;
   margin: 10px auto;
 }
 
 h4 {
   font-family: $font_normal;
-  font-size: $medium;
+  @include rem('font-size', $medium);
+  @include rem('line-height', $large);
 }
 
 h5 {
   font-family: $font_light;
-  font-size: $small;
+  @include rem('font-size', $small);
+}
+
+p, ul li, ol li {
+  font-family: $font_light;
+  @include rem('font-size', $medium);
+  @include rem('line-height', $medium + 5);
+}
+
+p {
+  margin: 0;
 }
 
 ul {
-  padding-left: 0px;
-  padding-right: 0px;
+  padding-left: 0;
+  padding-right: 0;
+
   li {
     list-style: none;
-    font-family: $font_light;
-    font-size: $medium;
-    @include rem('line-height', 26);
+    @include rem('line-height', $medium + 8);
     $li_left: 20px;
     &:before {
       font-family: $font_icons;
@@ -97,10 +109,12 @@ ul {
     }
   }
 }
-
-p {
-  line-height: 23px;
-  margin: 0;
+.ul-arrows {
+  list-style-type: none;
+  list-style-image: none;
+  &:before {
+    content: $font_icons_arrow_right;
+  }
 }
 
 .text-left {
@@ -121,17 +135,12 @@ p {
   font-family: $font_normal;
 }
 
-.ul-arrows {
-  list-style-item: none;
-  list-style-image: none;
-  &:before {
-    content: $font_icons_arrow_right;
-  }
-}
-
 
 //
 // Media queries
+//
+//
+// @todo: Still not sure about this part, check with D&A team:
 // --------------------------------------------------
 
 @include breakpoint($brk-tablet) {
@@ -154,29 +163,30 @@ p {
   }
 
   h2 {
-      @include rem('font-size', 22);
-      @include rem('line-height', 22);
+    @include rem('font-size', 22);
+    @include rem('line-height', 22);
+    color: $blue;
   }
 
   h3 {
-      @include rem('font-size', 18);
-      @include rem('line-height', 18);
+    @include rem('font-size', 18);
+    @include rem('line-height', 18);
   }
 
   h4 {
-      @include rem('font-size', 18);
-      @include rem('line-height', 18);
+    @include rem('font-size', 18);
+    @include rem('line-height', 18);
   }
 
   p {
-    @include rem('font-size', 14);
+    @include rem('font-size', 18);
   }
 
   ul {
-    @include rem('font-size', 14);
+    @include rem('font-size', 18);
   }
 
   li {
-    @include rem('font-size', 14);
+    @include rem('font-size', 18);
   }
 }
