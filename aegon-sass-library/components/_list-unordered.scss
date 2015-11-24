@@ -1,7 +1,59 @@
+ul {
+  padding-left: 0;
+  padding-right: 0;
+}
+
 ul.links {
   @include rem('padding', 20, 0);
 
   &.links--inline {
     @include rem('padding', 30, 0);
+  }
+}
+
+ul.bullet li, ul.check li, ul.green-check li, ul.ul-arrows li, ul.arrow li,
+ul li.check, ul li.green-check, ul li.arrow {
+  list-style: none;
+  $li_left: 25px;
+  @include rem('margin-left', $li_left);
+  &:before {
+    display: block;
+    position: relative;
+    max-width: 0;
+    max-height: 0;
+    color: $blue;
+    content: '\2022'; // dot
+    font-family: $font_icons;
+    left: -$li_left;
+    font-size: $small;
+  }
+}
+
+// The following blocks are meant to be backwards compatible,
+//
+// old style: <ul><li class="arrow">
+//
+// new style: <ul class="arrow"><li>
+//
+ul.arrow li,
+ul.ul-arrows li,
+ul li.arrow {
+  &:before {
+    content: $font_icons_arrow_right;
+  }
+}
+
+ul.check li,
+ul li.check,
+ul.green-check li,
+ul li.green-check {
+  &:before {
+    content: $font_icons_check;
+  }
+}
+ul.green-check li,
+ul li.green-check {
+  :before {
+    color: $green;
   }
 }
