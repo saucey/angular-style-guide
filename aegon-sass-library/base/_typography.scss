@@ -146,8 +146,8 @@ ul {
 @include breakpoint($brk-tablet) {
 
   h1 {
-    @include rem('font-size', 46);
-    @include rem('line-height', 46);
+    @include rem('font-size', $xxx-large);
+    @include rem('line-height', $xxx-large);
   }
 
   p {
@@ -155,38 +155,21 @@ ul {
   }
 }
 
-@include breakpoint($brk-mobile){
+@include breakpoint($brk-mobile) {
 
   h1 {
-    @include rem('font-size', 25);
-    @include rem('line-height', 25);
+    @include rem('font-size', $x-large);
+    @include rem('line-height', $x-large + 3);
   }
 
   h2 {
-    @include rem('font-size', 22);
-    @include rem('line-height', 22);
+    @include rem('font-size', $large);
+    @include rem('line-height', $x-large);
   }
 
   h3 {
-    @include rem('font-size', 18);
-    @include rem('line-height', 18);
+    @include rem('font-size', $medium);
+    @include rem('line-height', $large);
     color: $blue;
-  }
-
-  h4 {
-    @include rem('font-size', 18);
-    @include rem('line-height', 18);
-  }
-
-  p {
-    @include rem('font-size', 18);
-  }
-
-  ul {
-    @include rem('font-size', 18);
-  }
-
-  li {
-    @include rem('font-size', 18);
   }
 }
