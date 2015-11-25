@@ -36,7 +36,53 @@
         $(".address .correspondential .world").toggleClass("visible", !NL);
       });
       $("input[name=ca_NL]:checked").click();
-      this.attached = true;
+
+      // AJAX call on changing the postal code / house nr
+      $('#personal_details_widget input[rel^=address-lookup]').change(function(){
+        
+        var $personalDetailsWidgetForm = $(formSelector);
+
+        var $zipcodeField = $personalDetailsWidgetForm.find('#ra_NL_zip');
+        var $housenumberField = $personalDetailsWidgetForm.find('#ra_NL_number');
+
+        var $streetField = $personalDetailsWidgetForm.find("#ra_NL_street");
+        var $cityField = $personalDetailsWidgetForm.find("#ra_NL_city");
+
+        if ($zipcodeField.val().length > 0 && $housenumberField.val().length > 0) {
+
+            $.ajax({
+                url : Drupal.settings.aegon.endpoint_postalcode_service,
+                timeout: Drupal.settings.aegon.timeout_postalcode_service, // Allow for a 2 second lookup.
+                data : {
+                    _AE_ADRES_HUISNR : $housenumberField.val(),
+                    _AE_ADRES_PCODE : $zipcodeField.val(),
+                    AILHEADER_CLIENTID : Drupal.settings.site_name
+                },
+                beforeSend: function( xhr ) {
+                    // Add HTTP Authentication.
+                    if (Drupal.settings.aegon.http_authorization_postalcode_service != undefined) {
+                        xhr.setRequestHeader("Authorization", "Basic " + Drupal.settings.aegon.http_authorization_postalcode_service);
+                    }
+                },
+                success: function(response){
+                    if (response.retrieveAddressResponse._AE_ADRES !== undefined) {
+                        $streetField.val(response.retrieveAddressResponse._AE_ADRES.STRAAT);
+                        $cityField.val(response.retrieveAddressResponse._AE_ADRES.PLAATS);
+                    }
+                    
+                    if (response.retrieveAddressResponse.PROCES.STATUS !== "0100") {
+                        $streetField.val('');
+                        $cityField.val('');
+                        // TODO: The value from response.retrieveAddressResponse.PROCES.STATUST field has to be shown
+                    }
+                },
+                error: function(response){
+                    console.log(response);
+                }
+            });
+          }
+        });
+    this.attached = true;
     },
     attached: false,
   };
