@@ -32,6 +32,10 @@
   table.dataTable {
     width: 100% !important;
 
+    button {
+      margin: 0;
+    }
+
     thead {
       border: none;
 
