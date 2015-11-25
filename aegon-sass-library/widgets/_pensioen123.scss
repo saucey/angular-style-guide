@@ -134,11 +134,11 @@
             position: relative; 
 
               tr:nth-child(even) {
-              background-color: $lighter_grey;
+                background-color: #fff;
               }
 
               tr:nth-child(odd) {
-                 background-color:#fff;
+                 background-color:$lighter_grey;
               }
 
               th  {
