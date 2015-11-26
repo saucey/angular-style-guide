@@ -19,11 +19,10 @@
         // language code for the App Store (defaults to us)
         appStoreLanguage: 'nl',
         title: 'Mijn Aegon',
-        author: 'AEGON Nederland N.V.',
         button: 'Bekijk',
         store: {
-          ios: 'On the App Store',
-          android: 'In Google Play'
+          ios: 'App Store',
+          android: 'Google Play'
         },
         price: 'Gratis'
         // , force: 'android' // Uncomment for platform emulation
