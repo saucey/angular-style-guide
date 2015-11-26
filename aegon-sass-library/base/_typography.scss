@@ -64,59 +64,6 @@ p {
   margin: 0;
 }
 
-ul {
-  padding-left: 0;
-  padding-right: 0;
-
-  li {
-    list-style: none;
-    @include rem('line-height', $medium + 8);
-    $li_left: 20px;
-    &:before {
-      font-family: $font_icons;
-      display: block;
-      position: relative;
-      max-width: 0;
-      max-height: 0;
-      color: $blue;
-      left: -$li_left;
-      font-size: $small;
-    }
-    &.bullet {
-      margin-left: $li_left;
-      &:before {
-        content: '\2022';
-      }
-    }
-    &.check {
-      margin-left: $li_left;
-      &:before {
-        content: $font_icons_check;
-      }
-    }
-    &.green-check {
-      margin-left: $li_left;
-      &:before {
-        content: $font_icons_check;
-        color: $green;
-      }
-    }
-    &.arrow {
-      margin-left: $li_left;
-      &:before {
-        content: $font_icons_arrow_right;
-      }
-    }
-  }
-}
-.ul-arrows {
-  list-style-type: none;
-  list-style-image: none;
-  &:before {
-    content: $font_icons_arrow_right;
-  }
-}
-
 .text-left {
   text-align: left;
 }
@@ -130,11 +77,9 @@ ul {
 }
 
 // font families
-
 .font_normal {
   font-family: $font_normal;
 }
-
 
 //
 // Media queries
