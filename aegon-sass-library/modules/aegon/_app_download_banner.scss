@@ -1,7 +1,9 @@
 .smartbanner {
   position: relative;
   z-index: 3;
-  margin-left: 170px;
+  @media screen and(min-width: $rc-m-min-width) {
+    margin-left: 170px;
+  }
 }
 .sb-container {
   margin: 0 auto;
