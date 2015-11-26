@@ -57,7 +57,7 @@ h5 {
 p, ul li, ol li {
   font-family: $font_light;
   @include rem('font-size', $medium);
-  @include rem('line-height', $medium + 5);
+  @include rem('line-height', $medium + 8);
 }
 
 p {
@@ -84,8 +84,6 @@ p {
 //
 // Media queries
 //
-//
-// @todo: Still not sure about this part, check with D&A team:
 // --------------------------------------------------
 
 @include breakpoint($brk-tablet) {

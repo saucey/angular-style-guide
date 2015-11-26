@@ -194,7 +194,14 @@
       }
     }
   }
+}
+
+@include breakpoint($brk-mobile) {
+
+  .my_documents_widget table {
+    font-size: $small;
   }
+}
 
 
 
