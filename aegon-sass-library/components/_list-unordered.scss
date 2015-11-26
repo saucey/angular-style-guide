@@ -53,7 +53,7 @@ ul li.green-check {
 }
 ul.green-check li,
 ul li.green-check {
-  :before {
+  &:before {
     color: $green;
   }
 }
