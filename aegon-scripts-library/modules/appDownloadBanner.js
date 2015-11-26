@@ -20,10 +20,10 @@
         appStoreLanguage: 'nl',
         title: 'Mijn Aegon',
         button: 'Bekijk',
-        store: {
-          ios: 'App Store',
-          android: 'Google Play'
-        },
+        inAppStore: 'App Store', // Text of price for iOS
+        inGooglePlay: 'Google Play', // Text of price for Android
+        inAmazonAppStore: 'Amazon Appstore',
+        inWindowsStore: 'Windows Store', //Text of price for Windows
         price: 'Gratis'
         // , force: 'android' // Uncomment for platform emulation
       });
