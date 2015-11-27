@@ -109,7 +109,7 @@
   }
 }
 
-.field-name-faq-link-more {
+.field--name-faq-link-more {
   margin-top: -25px;
 }
 
@@ -118,7 +118,7 @@
 // --------------------------------------------------
 
 @include breakpoint($brk-large-desktop) {
-  .field-name-faq-link-more {
+  .field--name-faq-link-more {
     margin-top: -60px;
   }
 }
