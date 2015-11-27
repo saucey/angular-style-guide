@@ -12,7 +12,6 @@ aside.desktop {
   bottom: 0;
   left: 0;
   z-index: 1;
-
   a {
     background-color: $blue;
     background-image: none;
@@ -514,6 +513,7 @@ body.section-mijnaegon {
       bottom: 0;
       right: 0;
       left: 0;
+      height:100%;
       /* for older IE */
       transform: translateX(18.75rem);
       transform: translateX(300px);
@@ -564,13 +564,11 @@ html.lt-ie9, html.gte-ie9 {
   }
   body.pushmenu-to-right {  //showing the left pushmenu
     aside.desktop {
-      position: relative;
+      position: absolute;
+
     }
     .push-submenu {
       position: relative;
-    }
-    .stick-bottom {
-      display: none;
     }
   }
 }
