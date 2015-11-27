@@ -68,15 +68,9 @@
         data.AILHEADER_CLIENTID = Drupal.settings.site_name;
 
         $.ajax({
-          url : Drupal.settings.aegon.endpoint_postalcode_service,
-          timeout: Drupal.settings.aegon.timeout_postalcode_service, // Default 5000ms
+          url : '/services/US_RestGatewayWeb/rest/requestResponse/BS_UtillitiesPostalArea_03/retrieveAddress',
+          timeout: 5000, // Default 5000ms
           data : data,
-          beforeSend: function( xhr ) {
-              // Add HTTP Authentication.
-              if (Drupal.settings.aegon.http_authorization_postalcode_service !== undefined) {
-                  xhr.setRequestHeader("Authorization", "Basic " + Drupal.settings.aegon.http_authorization_postalcode_service);
-              }
-          },
           success: function(response){
               if (response.retrieveAddressResponse._AE_ADRES !== undefined) {
                 if(type !== 'ca') {
