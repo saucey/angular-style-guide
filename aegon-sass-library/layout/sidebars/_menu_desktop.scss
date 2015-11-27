@@ -3,9 +3,6 @@
 // Aegon menu desktop
 // --------------------------------------------------
 
-html,body {
-  height: 100%;
-}
 aside.desktop {
   display: none;
   @include rem('width', 170);
