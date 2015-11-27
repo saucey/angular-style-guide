@@ -80,6 +80,11 @@
 @include breakpoint($brk-mobile) {
 
   .dataTables_wrapper {
+    font-size: $small;
+
+    ul, li, p, .button, button {
+      font-size: $small;
+    }
 
     .dataTables_info {
       top: -38px;
