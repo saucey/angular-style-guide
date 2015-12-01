@@ -64,6 +64,11 @@ button, .button {
   &.orange {
     background-color: $orange;
   }
+  &.orange-gradient {
+    @include linear-gradient(to bottom,#ffba00 0%,#f39200 100%);
+    box-shadow: inset 0px -1px 0px 0px #9A6701;
+    color: $black;
+  }
 
   &[class*="icon-"]:before {
     font-size: 16px;
@@ -81,16 +86,16 @@ button, .button {
         content: "";
         display: none;
       }
+    }
 
-      &.icon-call:after {
-        content: $font_icons_call;
-      }
-      &.icon-chat:after {
-        content: $font_icons_chat;
-      }
-      &.icon-search:after {
-        content: $font_icons_search;
-      }
+    &.icon-call:after {
+      content: $font_icons_call;
+    }
+    &.icon-chat:after {
+      content: $font_icons_chat;
+    }
+    &.icon-search:after {
+      content: $font_icons_search;
     }
     &.arrow:after {
       content: $font_icons_arrow_right;
@@ -110,6 +115,12 @@ button, .button {
     &.orange:after {
       margin-left: 10px;
       background-color: $orange_highlight;
+    }
+    &.orange-gradient:after {
+      height:98%;
+      color: white;
+      background-color: rgba(255, 255, 255, .2);
+      border-left: 1px solid rgba(255, 255, 255, .3);
     }
   }
 
