@@ -166,6 +166,13 @@
             display: table-cell; 
             float: left;
             vertical-align: top;
+            padding-top: 4px;
+
+            img {
+              max-width: 100%;
+              display: block;
+              margin: 0 auto;
+            }
           }
 
           .more-details {
@@ -241,10 +248,10 @@
             display: inline-block;
             font-size: 15px;
             font-size: 0.9375rem;
-            position: absolute;
             margin-left: 5px;
             font-family: 'aegon_icons';
             content: '\e600';
+            vertical-align: bottom;
             font-weight: normal;
             -webkit-font-smoothing: antialiased;
             transition: -webkit-transform .2s ease;
