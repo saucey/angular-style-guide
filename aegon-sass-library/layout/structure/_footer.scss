@@ -133,7 +133,7 @@
   }
 }
 
-.footer-quick-links ul li a {
+.footer-quick-links {
   @include rem('padding', 15, 0);
 
   .center {
