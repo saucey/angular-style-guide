@@ -6,6 +6,10 @@
 
 .pensioen123_widget {
 
+  button, .button, .top p {
+    @include rem('margin', 0, 0, 30);
+  }
+
   .user-details {
     display: table;
 
