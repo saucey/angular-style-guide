@@ -1,42 +1,43 @@
 @mixin btn-right-icon() {
-  @include rem('font-size', 11);
-  font-family: $font_icons;
   position: absolute;
-  right: 0;
   top: 0;
-  background-color: $light_blue;
+  right: 0;
   display: inline-block;
   float: none;
-  height: 100%;
-  vertical-align: middle;
   box-sizing: border-box;
-  @include rem('border-radius', 0, $elements_border_radius, $elements_border_radius, 0);
-  line-height: 44px;
+  height: 100%;
   margin-top: 0;
   padding: 1px 10px 0;
+  vertical-align: middle;
+  background-color: $light_blue;
+  font-family: $font_icons;
+  line-height: 44px;
+
+  @include rem("font-size", 11);
+  @include rem("border-radius", 0, $elements_border_radius, $elements_border_radius, 0);
 }
 
-button, .button {
-  display: inline-block;
+button,
+.button {
   position: relative;
-  cursor: pointer;
+  display: inline-block;
   height: auto;
-  @include rem('border-radius', $elements_border_radius);
-  font-size: $medium;
-  line-height: 23px;
+  margin: 0 0 10px;
   padding: 10px;
+  cursor: pointer;
+  user-select: none;
   white-space: normal;
+  color: $white;
   border: 0;
   outline: 0;
-  user-select: none;
-  margin: 0 0 10px;
   background-color: $blue;
-  color: $white;
+  font-size: $medium;
+  line-height: 23px;
 
+  @include rem("border-radius", $elements_border_radius);
   a {
     color: inherit;
   }
-
   &:hover {
     opacity: 0.8;
   }
@@ -65,29 +66,26 @@ button, .button {
     background-color: $orange;
   }
   &.orange-gradient {
-    @include linear-gradient(to bottom,#ffba00 0%,#f39200 100%);
-    box-shadow: inset 0px -1px 0px 0px #9A6701;
     color: $black;
-  }
+    box-shadow: inset 0 -1px 0 0 #9a6701;
 
+    @include linear-gradient(to bottom,#ffba00 0%,#f39200 100%);
+  }
   &[class*="icon-"]:before {
     font-size: 16px;
   }
-
-  &.icon-right, &.arrow {
+  &.icon-right,
+  &.arrow {
     padding-right: 46px;
-
     &:after {
       @include btn-right-icon();
     }
-
     &[class*="icon-"] {
       &:before {
-        content: "";
         display: none;
+        content: "";
       }
     }
-
     &.icon-call:after {
       content: $font_icons_call;
     }
@@ -117,33 +115,35 @@ button, .button {
       background-color: $orange_highlight;
     }
     &.orange-gradient:after {
-      height:98%;
+      height: 98%;
       color: white;
-      background-color: rgba(255, 255, 255, .2);
-      border-left: 1px solid rgba(255, 255, 255, .3);
+      border-left: 1px solid rgba(255, 255, 255, 0.3);
+      background-color: rgba(255, 255, 255, 0.2);
     }
   }
-
-  &.white, &.transparent {
-    background-color: $white;
+  &.white,
+  &.transparent {
     color: $blue;
-    &.arrow:before { //currently deactivated as the current design calls for something without arrow
-      background-color: transparent;
-      margin-left: -25px;
-      margin-top: -10px;
-      @include rem('font-size', 11);
-      font-size: 11px;
-      font-family: $font_icons;
-      content: $font_icons_arrow_right;
-      padding: 11px;
-      color: $blue;
+    background-color: $white;
+    &.arrow:before {
       position: absolute;
+      margin-top: -10px;
+      margin-left: -25px;
+      padding: 11px;
+      content: $font_icons_arrow_right;
+      color: $blue;
+      //currently deactivated as the current design calls for something without arrow
+      background-color: transparent;
+      font-family: $font_icons;
+      font-size: 11px;
+
+      @include rem("font-size", 11);
     }
     &.arrow:after {
-      content: "";
-      padding: 0;
       margin-right: 0;
       margin-left: 0;
+      padding: 0;
+      content: "";
       background-color: inherit;
     }
   }
@@ -151,26 +151,26 @@ button, .button {
     background-color: transparent;
   }
   &.edit {
-    margin-top: 0;  //fixing margin-top error introduced in commit b1ec15
     display: block;
+    margin-top: 0;  //fixing margin-top error introduced in commit b1ec15
     @media screen and(min-width: $rc-m-min-width) and(max-width: $rc-l-max-width) {
       display: none;
     }
     &.transparent {
       display: none;
       @media screen and(min-width: $rc-m-min-width) and (max-width: $rc-l-max-width) {
+        display: block;
+        float: right;
         line-height: 20px;
         &:after {
           content: $font_icons_edit;
           font-family: $font_icons;
         }
-        float: right;
-        display: block;
       }
     }
     &:before {
-      font-family: $font_light;
       content: "Wijzig  ";
+      font-family: $font_light;
     }
   }
 }
@@ -179,12 +179,11 @@ button, .button {
 // Media queries
 // --------------------------------------------------
 
-@include breakpoint($brk-mobile){
+@include breakpoint($brk-mobile) {
   button.edit {
     display: block;
   }
-
   ul.actions {
-    margin: 0px 0 40px 0;
+    margin: 0 0 40px 0;
   }
 }

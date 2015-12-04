@@ -6,43 +6,37 @@ $sticker-counter-marginTop: $xx-large + 20;
 
 .sticker-counter {
   margin-top: $sticker-counter-marginTop;
-
   .counter-text {
+    margin: 10px auto;
+    color: $blue;
     font-family: $font_light;
     font-size: $large;
     line-height: $large;
-    color: $blue;
-    margin: 10px auto;
   }
-
   .counter {
     position: relative;
     display: inline-block;
-
     span {
       display: inline-block;
-      background: $dark_blue;
       padding: 2px 3px;
       color: $white;
       border-radius: 4px;
+      background: $dark_blue;
       font-family: $font_bold;
       font-size: $xx-large;
       line-height: $xx-large;
-
       &:not(:last-of-type) {
         margin-right: 2px;
       }
-
       &:first-child:before {
-        content: "";
-        display: block;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.6);
-        top: 48%;
         position: absolute;
+        top: 48%;
         left: 0;
+        display: block;
         width: 100%;
+        content: "";
+        border-bottom: 1px solid rgba(255, 255, 255, 0.6);
       }
     }
-
   }
 }
