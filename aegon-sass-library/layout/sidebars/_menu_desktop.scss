@@ -4,6 +4,9 @@
 // --------------------------------------------------
 
 aside.desktop {
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
   display: none;
   @include rem('width', 170);
   background: $blue;
@@ -12,6 +15,12 @@ aside.desktop {
   bottom: 0;
   left: 0;
   z-index: 1;
+
+  &.open {
+    overflow-x: visible;
+    overflow-y: visible;
+  }
+
   a {
     background-color: $blue;
     background-image: none;
@@ -89,6 +98,16 @@ aside.desktop {
     @include rem('line-height', 90);
     border: none;
     font-family: inherit;
+
+    &.service > a {
+      border-width: 0;
+      @include rem('border-bottom-width', 1);
+      background-color: #2981B8;
+      color: $white;
+      &[class*="icon-"]:before {
+        @include rem('line-height', 105);
+      }
+    }
 
     > a {
       border-width: 0;
@@ -241,30 +260,6 @@ aside.desktop {
 
       &:after {
         display: none;
-      }
-    }
-  }
-
-  /**
-   * Stick Bottom
-   */
-  li.stick-bottom {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    z-index: 2;
-    // width: 170px;
-
-    @include rem('height', 110);
-    @include rem('line-height', 110);
-
-    a {
-      border-width: 0;
-      @include rem('border-top-width', 1);
-      background-color: #2981B8;
-      color: $white;
-      &[class*="icon-"]:before {
-        @include rem('line-height', 110);
       }
     }
   }
@@ -549,7 +544,6 @@ body.section-mijnaegon {
     }
   }
 }
-
 
 //
 // Hacks
