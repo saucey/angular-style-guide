@@ -542,19 +542,8 @@ body.section-mijnaegon {
         opacity: 0.5;
       }
     }
-    .stick-bottom {
-      display: none;
-    }
   }
 }
-
-html.gte-ie9  li.stick-bottom a[class*="icon-"]:before {
-  @include rem('margin-top', 10);
-}
-html.lt-ie9  li.stick-bottom a[class*="icon-"]:before {
-  @include rem('margin-top', 10);
-}
-
 
 //
 // Hacks
