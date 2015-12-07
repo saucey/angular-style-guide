@@ -19,12 +19,11 @@
         // language code for the App Store (defaults to us)
         appStoreLanguage: 'nl',
         title: 'Mijn Aegon',
-        author: 'AEGON Nederland N.V.',
         button: 'Bekijk',
-        store: {
-          ios: 'On the App Store',
-          android: 'In Google Play'
-        },
+        inAppStore: 'App Store', // Text of price for iOS
+        inGooglePlay: 'Google Play', // Text of price for Android
+        inAmazonAppStore: 'Amazon Appstore',
+        inWindowsStore: 'Windows Store', //Text of price for Windows
         price: 'Gratis'
         // , force: 'android' // Uncomment for platform emulation
       });

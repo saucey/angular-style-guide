@@ -21,6 +21,8 @@
       &:before {
         @include rem('font-size', $small - 2);
         content: $font_icons_arrow_right_skinny;
+        font-family: aegon_icons;
+        color: $blue;
         display: inline-block;
         top: 0px;
         left: 0px;
@@ -38,9 +40,4 @@
       }
     }
   }
-}
-
-// Safari on both Win and Mac is making an exemption here; this is a fix, but not a solution...
-.safari .breadcrumb ul > li:before {
-  top: -18px;
 }

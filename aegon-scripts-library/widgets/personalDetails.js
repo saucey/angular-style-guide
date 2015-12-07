@@ -36,7 +36,82 @@
         $(".address .correspondential .world").toggleClass("visible", !NL);
       });
       $("input[name=ca_NL]:checked").click();
-      this.attached = true;
+
+      // AJAX call on changing the postal code / house nr
+      var $personalDetailsWidgetForm = $(formSelector);
+
+      var $zipcodeField = $personalDetailsWidgetForm.find('#ra_NL_zip');
+      var $zipcodeField_ca = $personalDetailsWidgetForm.find('#ca_NL_zip');
+
+      var $housenumberField = $personalDetailsWidgetForm.find('#ra_NL_number');
+      var $housenumberField_ca = $personalDetailsWidgetForm.find('#ca_NL_number');
+
+      var $streetField = $personalDetailsWidgetForm.find("#ra_NL_street");
+      var $streetField_ca = $personalDetailsWidgetForm.find("#ca_NL_street");
+
+      var $cityField = $personalDetailsWidgetForm.find("#ra_NL_city");
+      var $cityField_ca = $personalDetailsWidgetForm.find("#ca_NL_city");
+
+      var getAddress = function(type) {
+        var data;
+        if(type !== 'ca') {
+          data = {
+            _AE_ADRES_HUISNR : $housenumberField.val(),
+            _AE_ADRES_PCODE : $zipcodeField.val()
+          };
+        } else {
+          data = {
+            _AE_ADRES_HUISNR : $housenumberField_ca.val(),
+            _AE_ADRES_PCODE : $zipcodeField_ca.val()
+          };
+        }
+        data.AILHEADER_CLIENTID = Drupal.settings.site_name;
+
+        $.ajax({
+          url : '/services/US_RestGatewayWeb/rest/requestResponse/BS_UtillitiesPostalArea_03/retrieveAddress',
+          timeout: 5000, // Default 5000ms
+          data : data,
+          success: function(response){
+              if (response.retrieveAddressResponse._AE_ADRES !== undefined) {
+                if(type !== 'ca') {
+                  $streetField.val(response.retrieveAddressResponse._AE_ADRES.STRAAT);
+                  $cityField.val(response.retrieveAddressResponse._AE_ADRES.PLAATS);
+                } else {
+                  $streetField_ca.val(response.retrieveAddressResponse._AE_ADRES.STRAAT);
+                  $cityField_ca.val(response.retrieveAddressResponse._AE_ADRES.PLAATS);
+                }  
+              }
+              
+              if (response.retrieveAddressResponse.PROCES.STATUS !== "0100") {
+                if(type !== 'ca') {
+                  $streetField.val('');
+                  $cityField.val('');
+                } else {
+                  $streetField_ca.val('');
+                  $cityField_ca.val('');
+                } 
+              }
+          },
+          error: function(response){
+              console.log('Error:' + response);
+          }
+        });
+      };
+
+      
+      $('#personal_details_widget input[rel^=address-lookup]').change(function(){
+        if ($zipcodeField.val().length > 0 && $housenumberField.val().length > 0) {
+          getAddress();
+        }
+      });
+
+      $('#personal_details_widget input[rel^=ca-address-lookup]').change(function(){
+        if ($zipcodeField_ca.val().length > 0 && $housenumberField_ca.val().length > 0) {
+          getAddress('ca');
+        }
+      });
+
+    this.attached = true;
     },
     attached: false,
   };

@@ -32,6 +32,10 @@
   table.dataTable {
     width: 100% !important;
 
+    button {
+      margin: 0;
+    }
+
     thead {
       border: none;
 
@@ -76,6 +80,11 @@
 @include breakpoint($brk-mobile) {
 
   .dataTables_wrapper {
+    font-size: $small;
+
+    ul, li, p, .button, button {
+      font-size: $small;
+    }
 
     .dataTables_info {
       top: -38px;

@@ -8,16 +8,19 @@
   // Add new item to public Drupal object
   Drupal.behaviors.sticker_counter = {
     attach: function (context) {
-      var $counterElement = $('.counter', context),
-          charsWithSpans = '';
 
-      $.each(($counterElement.text().trim().split('')), function (index, char) {
-        charsWithSpans += '<span>' + char + '</span>';
+      // Iterate over all elements with class "counter"
+      $('.sticker-counter .counter', context).each(function (index, counterElement) {
+        var charsWithSpans = '',
+            $counterElement = $(counterElement);
+
+        // Trim number and replace with spans around each character
+        $.each($counterElement.text().trim().split(''), function (index, char) {
+          charsWithSpans += '<span>' + char + '</span>';
+          $counterElement.html(charsWithSpans);
+        });
       });
-
-      $counterElement.html(charsWithSpans);
     }
   };
-
 })(jQuery);
 
