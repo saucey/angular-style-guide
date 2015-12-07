@@ -14,17 +14,13 @@ aside.desktop {
   top: 0;
   bottom: 0;
   left: 0;
-<<<<<<< HEAD
-  z-index: 9999;
+  z-index: 1;
 
   &.open {
     overflow-x: visible;
     overflow-y: visible;
   }
 
-=======
-  z-index: 1;
->>>>>>> master
   a {
     background-color: $blue;
     background-image: none;
@@ -102,6 +98,16 @@ aside.desktop {
     @include rem('line-height', 90);
     border: none;
     font-family: inherit;
+
+    &.service > a {
+      border-width: 0;
+      @include rem('border-bottom-width', 1);
+      background-color: #2981B8;
+      color: $white;
+      &[class*="icon-"]:before {
+        @include rem('line-height', 105);
+      }
+    }
 
     > a {
       border-width: 0;
@@ -254,29 +260,6 @@ aside.desktop {
 
       &:after {
         display: none;
-      }
-    }
-  }
-
-  /**
-   * Stick Bottom
-   */
-  li.stick-bottom {
-    position: relative;
-
-    z-index: 2;
-    // width: 170px;
-
-    @include rem('height', 110);
-    @include rem('line-height', 110);
-
-    a {
-      border-width: 0;
-      @include rem('border-bottom-width', 1);
-      background-color: #2981B8;
-      color: $white;
-      &[class*="icon-"]:before {
-        @include rem('line-height', 105);
       }
     }
   }
