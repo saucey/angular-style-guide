@@ -76,9 +76,13 @@
                 if(type !== 'ca') {
                   $streetField.val(response.retrieveAddressResponse._AE_ADRES.STRAAT);
                   $cityField.val(response.retrieveAddressResponse._AE_ADRES.PLAATS);
+                  $streetField.removeClass('invalid');
+                  $cityField.removeClass('invalid');
                 } else {
                   $streetField_ca.val(response.retrieveAddressResponse._AE_ADRES.STRAAT);
                   $cityField_ca.val(response.retrieveAddressResponse._AE_ADRES.PLAATS);
+                  $streetField_ca.removeClass('invalid');
+                  $cityField_ca.removeClass('invalid');
                 }  
               }
               
@@ -90,7 +94,7 @@
                   $streetField_ca.val('');
                   $cityField_ca.val('');
                 } 
-              }
+              } 
           },
           error: function(response){
               console.log('Error:' + response);
