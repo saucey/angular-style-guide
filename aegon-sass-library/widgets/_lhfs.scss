@@ -3,7 +3,6 @@
 // http://csswizardry.com/2011/09/when-using-ids-can-be-a-pain-in-the-class/
 // http://screwlewse.com/2010/07/dont-use-id-selectors-in-css/
 // http://oli.jp/2011/ids/
-
 .bubble {
   @include bubble(10px, 2px, $quadrant: 3, $bottom: 20px, $border-color: $grey, $background-color: $white);
 }
@@ -29,22 +28,19 @@
       margin-bottom: 20px;
     }
   }
-
-  form>ul, & ul.products {
+  form>ul,
+  & ul.products {
     margin: 0;
     width: 100%;
-
     &.edit {
       margin-top: 10px;
-
       @media screen and(max-width: $rc-s-max-width) {
         margin-top: 0px;
-
         .span6:first-child {
           line-height: 0px;
           min-height: 0px;
         }
-      } 
+      }
     }
     li.product {
       margin: 25px 0 15px 0;
@@ -63,18 +59,19 @@
       div.title {
         margin-bottom: 18px;
       }
-      div.title, span.police-number {
-        font-family: $font_medium;  //font-weight bold does not work for this font family >:(;
+      div.title,
+      span.police-number {
+        font-family: $font_medium; //font-weight bold does not work for this font family >:(;
       }
     }
   }
-
   li.value {
     @media screen and(min-width: $rc-m-min-width) and(max-width: $rc-l-max-width) {
       height: $elements_height;
     }
     span {
-      &.content, &.help {
+      &.content,
+      &.help {
         display: inline;
       }
       &.help {
@@ -87,20 +84,22 @@
   li.label {
     min-height: 0;
     @media screen and(min-width: $rc-m-min-width) and(max-width: $rc-l-max-width) {
-      height: inherit;  //$elements_height;
+      height: inherit; //$elements_height;
     }
     &:after {
       content: ":";
     }
   }
   label.left {
-    float:left;
+    float: left;
   }
-
-  input[type=text], input[type=email], input[type=number], select, .ddTitle {
+  input[type=text],
+  input[type=email],
+  input[type=number],
+  select,
+  .ddTitle {
     display: none;
   }
-  
   .dd {
     width: 100% !important;
     max-width: 224px;
@@ -112,8 +111,8 @@
       height: 24px;
       min-height: 0;
       [class*='span'] {
-        min-height: 0;  //overwriting min-height from row-fluid
-        line-height: 18px;  //overwriting line-height from *body
+        min-height: 0; //overwriting min-height from row-fluid
+        line-height: 18px; //overwriting line-height from *body
       }
       &> li {
         color: $red;
@@ -124,9 +123,9 @@
         opacity: 1;
       }
     }
-    li.label {
-    }
-    li.label, label {
+    li.label {}
+    li.label,
+    label {
       font-family: $font_normal;
       text-align: right;
       line-height: 44px;
@@ -141,24 +140,28 @@
       text-align: left;
       line-height: 32px;
     }
-    li.label.required:after, label.checkbox.required span.label:after {
+    li.label.required:after,
+    label.checkbox.required span.label:after {
       margin-left: 5px;
       content: "*";
       color: $red;
     }
-
-    input[type=text], input[type=email], input[type=number], select, .ddTitle {
+    input[type=text],
+    input[type=email],
+    input[type=number],
+    select,
+    .ddTitle {
       display: block;
     }
     li.value {
       span {
-        &.content, &.help {
+        &.content,
+        &.help {
           display: none;
         }
       }
     }
   }
-
   // fix responsive peculiarities
   .row-fluid [class*='span'] {
     display: inline;
@@ -177,30 +180,28 @@
     cursor: pointer;
     border-bottom-right-radius: 0.1875rem;
     border-bottom-left-radius: 0.1875rem;
-
     &:before {
       content: "Toon alles" !important;
     }
-
-    &.changed:before { 
+    &.changed:before {
       content: "Verbergen" !important;
     }
-
-    &.changed::after { 
+    &.changed::after {
       /* this selector is more specific, so it takes precedence over the other :after */
       transform: rotate(-90deg) !important;
     }
-
     &:after {
       display: block;
       font-size: 0.625rem;
       font-family: "aegon_icons";
       content: "\e600";
-      -ms-transform: rotate(90deg); /* IE 9 */
-      -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+      -ms-transform: rotate(90deg);
+      /* IE 9 */
+      -webkit-transform: rotate(90deg);
+      /* Chrome, Safari, Opera */
       transform: rotate(90deg);
       margin: -6px 0 -4px 0;
-     }
+    }
   }
 }
 
@@ -231,9 +232,11 @@
       }
     }
   }
-  & > ul {  //this setup is for phase 3; it is not really optimal, instead of > give the root ul a class name
+  & > ul {
+    //this setup is for phase 3; it is not really optimal, instead of > give the root ul a class name
     & > li {
-      & > ul, & > ul.visible {
+      & > ul,
+      & > ul.visible {
         display: table;
         width: 100%;
         border-top: none;
@@ -265,11 +268,9 @@
       }
     }
   }
-
   .method {
     color: $slightly_darker_grey;
   }
-
   .details {
     background-color: transparent;
     &:before {
@@ -291,9 +292,8 @@
 
 .inline_alert {
   @include inlineFrame();
+  padding: 20px 15px 0 15px;
   display: block;
-  //padding-top: 0;
-  //padding-bottom: 0;
   border: 1px solid $light_red;
   background-color: $lighter_red;
   hr {
@@ -301,12 +301,33 @@
     color: $light_red;
     width: 100%;
   }
+  .top {
+    display: table;
+  }
+  .euro {
+    font-size: 30px;
+    min-width: 25px;
+    float: left;
+    color: $red;
+    display: table-cell;
+    div {
+      position: absolute;
+      margin-top: 10px;
+    }
+  }
+  .message {
+    display: table-cell;
+    span {
+      color: #8E8E8C;
+    }
+  }
   ul.payments {
-    margin: 15px -15px;
+    margin: 20px -15px 0 -15px;
     button.white {
       background-color: transparent;
+      margin: 0 5% 0 0;
       &:before {
-        background-color: transparent;      
+        background-color: transparent;
       }
     }
     & > li {
@@ -317,34 +338,37 @@
         width: 100%;
         display: table;
         & > li {
-          //display: table-cell;
           float: none;
-          //this should ultimately be replaced by grid classes, but they were causing a bit of a mess so this is an arrangement to set it up
-          &:first-of-type:last-of-type {  //this only applies to a li if it is the only one..
-            text-align: right;
-          }
-          &:nth-of-type(2) {
-            width: 120px;
-            span.debit {
-              font-family: $font_medium;
-              &:before {
-                content: "€";
-              }
+          width: 21%;
+          &:first-child {
+            width: 40%;
+            a {
+              color: #1d1d1b;
             }
           }
-          &:nth-of-type(3) {
-            width: 80px;
+          &:first-of-type:last-of-type {
+            //this only applies to a li if it is the only one..
+            text-align: right;
           }
-          &:nth-of-type(4) {
-            width: 120px;
+          span.debit {
+            font-family: $font_medium;
+            &:before {
+              content: "€";
+            }
+          }
+          a.contact {
+            margin-right: 50px;
+            margin-left: 20px;
+            color: #3395d3;
           }
         }
       }
     }
   }
   h3 {
-    color: $black;
+    color: $red;
     font-weight: bold;
+    display: inline-block;
   }
 }
 
@@ -396,11 +420,12 @@ ul.actions {
       &.edit {
         padding-left: 0;
         display: block;
-        div.disabler {  //required element for disabling of submit elements depending on validity
+        div.disabler {
+          //required element for disabling of submit elements depending on validity
           z-index: $elements_button_disabled_z-index;
           position: relative;
           left: 0;
-          top:-$elements_button_height;
+          top: -$elements_button_height;
           background-color: white;
           opacity: 0.5;
           width: 100%;
@@ -414,7 +439,6 @@ ul.actions {
       button {
         position: relative;
         z-index: $elements_button_enabled_z-index;
-
       }
     }
   }
@@ -434,11 +458,9 @@ ul.interval {
 
 ul.horizontal {
   display: table;
-
   &.row-fluid {
     //height: 50px;
   }
-
   padding: 1px 0;
   //width: 100%;
   display: none; //together with the .data class for li.product toggles on and off the visibility of the data elements
@@ -459,17 +481,20 @@ ul.horizontal {
       font-family: $font_light;
     }
     display: table-cell;
+    vertical-align: middle;
   }
 }
+
 
 /**
  * Added by Rocco: Please check the explanation wrote in layout/_grid.scss at 
  * line 100, related to this specific declaration below, that helps to visuaize 
  * your widget in the right way.
  */
-.lhfs_widget {
 
-  .product.data.span12, .row-fluid li.value[class*='span'] {
+.lhfs_widget {
+  .product.data.span12,
+  .row-fluid li.value[class*='span'] {
     margin-left: 0; //overrides the setting for a left margin of 2% for all spans starting at the second one in a list, which creates an indent in lhfs widget design in the .product ul
   }
 }
@@ -477,9 +502,45 @@ ul.horizontal {
 //
 // Media queries
 // --------------------------------------------------
+// iPad portrait breakpoint
+@media screen and (max-width: 902px) {
+  .inline_alert {
+    h3 {
+      display: block;
+    }
+    ul.payments {
+      & > li {
+        & > ul {
+          & > li {
+            display: block;
+            &.pay {
+              display: none;
+            }
+            a.contact {
+              display: block;
+              margin: 0;
+            }
+            &:first-child {
+              width: 100%;
+              a {
+                color: #3395d3;
+              }
+            }
+            &:first-of-type:last-of-type {
+              //this only applies to a li if it is the only one..
+              text-align: left;
+            }
+            &:nth-of-type(3) {
+              float: right;
+              margin-top: -28px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
 
-
-// Fix for grid layout
 @media screen and (max-width: 740px) {
   .lhfs_widget {
     input[type=text] {
@@ -488,24 +549,20 @@ ul.horizontal {
   }
 }
 
-@include breakpoint($brk-mobile){
+@include breakpoint($brk-mobile) {
   .lhfs_widget {
-
     input[type=text] {
       width: 228px;
     }
-
     table.dataTable {
       tbody {
         td {
           width: auto;
           display: table-cell;
           padding: 6px 0;
-
           li.status {
             height: 30px;
           }
-
           &:nth-child(2) {
             width: 30%;
             min-width: 120px;
@@ -514,23 +571,22 @@ ul.horizontal {
             max-width: 30px;
           }
           &:nth-child(4) {
-            width:100%;
-            text-align:center;
+            width: 100%;
+            text-align: center;
           }
           &:first-child {
-            width:100%;
+            width: 100%;
             display: block;
             padding: 0;
-
             &:before {
               content: 'Datum: ';
               font-weight: bold;
             }
           }
-
-          .open, .paid, .info {
+          .open,
+          .paid,
+          .info {
             visibility: hidden;
-
             &:before {
               visibility: visible;
             }
@@ -539,18 +595,14 @@ ul.horizontal {
       }
     }
   }
-
-    .help {
-      float: right;
-      &.dialog {
-        right: 2%;
-      }
-
-      &:before {
-      }
-
-      &:after {
-        left: 88% !important;
-      }
+  .help {
+    float: right;
+    &.dialog {
+      right: 2%;
+    }
+    &:before {}
+    &:after {
+      left: 88% !important;
     }
   }
+}
