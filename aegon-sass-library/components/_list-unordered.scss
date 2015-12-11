@@ -25,8 +25,14 @@ ul li.check, ul li.green-check, ul li.arrow {
     content: '\2022'; // dot
     font-family: $font_icons;
     left: -$li_left;
-    font-size: $small;
+    @include rem('font-size', $small);
   }
+}
+
+ul.bullet li:before {
+  @include rem('font-size', $medium);
+  top: -3px;
+  left: -22px;
 }
 
 // The following blocks are meant to be backwards compatible,

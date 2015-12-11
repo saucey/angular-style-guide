@@ -68,7 +68,7 @@
         data.AILHEADER_CLIENTID = Drupal.settings.site_name;
 
         $.ajax({
-          url : '/services/US_RestGatewayWeb/rest/requestResponse/BS_UtillitiesPostalArea_03/retrieveAddress',
+          url : '/mijnservices/US_RestGatewayWeb/rest/requestResponse/BS_UtillitiesPostalArea_03/retrieveAddress',
           timeout: 5000, // Default 5000ms
           data : data,
           success: function(response){

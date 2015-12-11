@@ -10,31 +10,7 @@
 
   h2, h3 {
     color: $black;
-    min-height: (2 * $large) + 5px;
-  }
-
-  .button, button {
-    position: absolute;
-    right: 20px;
-    bottom: 20px;
-    max-width: 80%;
-
-    &:after {
-      content: "";
-      clear: both;
-    }
-  }
-
-  .description {
-    padding-bottom: 70px;
-  }
-
-  .price {
-    display: block;
-    font-size: $xx-large;
-    line-height: $xx-large;
-    padding-bottom: 10px;
-    text-align: right;
+    @include rem('min-height', (2 * $large) + 5px);
   }
 
   // Tmp workaround, because there is an extra div inbetween inserted by drupal
@@ -49,13 +25,48 @@
     }
 
     h3 {
-      font-size: $x-large;
-      line-height: $x-large * 1.2;
-      min-height: $x-large * 2.4;
+      @include rem('font-size', $x-large);
+      @include rem('line-height', $x-large * 1.2);
+      @include rem('min-height', $x-large * 2.4);
     }
   }
 }
 
+.call-execution-block {
+  .button, button {
+    display: block;
+    margin-top: 15px;
+    width: 100%;
+    text-align: left;
+  }
+
+  .price {
+    display: block;
+    font-size: $xx-large;
+    line-height: $xx-large;
+    padding-bottom: 10px;
+    text-align: right;
+  }
+}
+
+
+@include breakpoint('only screen' (480px)) {
+  // anything larger than tablet:
+  .call-execution-block {
+    .description {
+      padding-bottom: 70px;
+    }
+
+    .button, button {
+      position: absolute;
+      right: 20px;
+      bottom: 20px;
+      width: auto;
+      max-width: 80%;
+      display: inline-block;
+    }
+  }
+}
 
 @include breakpoint($brk-tablet) {
   // 33% columns on small tablets
