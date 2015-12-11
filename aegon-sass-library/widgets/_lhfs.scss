@@ -303,6 +303,7 @@
   }
   .top {
     display: table;
+    position: relative;
   }
   .euro {
     font-size: 30px;
@@ -313,6 +314,8 @@
     div {
       position: absolute;
       margin-top: 10px;
+      top: 0;
+      left: 0;
     }
   }
   .message {
