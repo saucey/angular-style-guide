@@ -169,8 +169,6 @@
 // For examples, take a look at the call/execution elements in the flexible campaign pages.
 .container_12 .row-fluid.same-height {
 
-  @include word-wrap();
-
   display:flex;
   flex-direction: row;
   flex-wrap: wrap;
