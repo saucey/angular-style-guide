@@ -19,6 +19,7 @@
         // get the predefined validator from the json-object defined in data-validate
         var v = (this.attributes['data-validate'] || this.attributes['data-validate-restrained']).value;
         var restrained = this.attributes['data-validate-restrained'] !== undefined;
+        var iban = this.attributes['data-validate'].value === 'iban.nl';  
         var validator;
         // check if validator key is in the form ['key'], if not, it needs a . in front for eval
         v = (v && v.length === 0) || v[0] === "[" ? v : "." + v;
@@ -35,6 +36,42 @@
           this.oldPos = $(this).caret();  //get the cursor position
           $(this).on("keyup", that.restrain)
             .click(function () {this.oldPos = $(this).caret(); });
+        }
+
+        if(iban) {
+
+          $(this).on({
+            // Dont allow user to use spaces
+            keydown: function(e) {
+              if (e.which === 32)
+                return false;
+            },
+            change: function() {
+              this.value = this.value.replace(/\s/g, "");
+            },
+            // Convert string to uppercase & add spaces
+            blur: function() {
+              var newVal,
+                oldVal = this.value;
+
+                // Removes all spaces
+                newVal = oldVal.replace(/\s+/g, '');
+
+                if (newVal.length > 0) {
+                  // Convert value to uppercase
+                  newVal = newVal.toUpperCase();
+                  // Add space after every 4th character
+                  newVal = newVal.match(new RegExp('.{1,4}', 'g')).join(" ");
+                  this.value = newVal;
+                } else {
+                  this.value = '';
+                }
+            },
+            // Remove all spaces that we add on blur 
+            focus: function() {
+              this.value = this.value.replace(/\s+/g, '');
+            }
+          });
         }
         
         // makes the element where the last error occurred accessible as a static object
