@@ -1,17 +1,17 @@
 .situation-element {
-  background: $grey;
-  padding: 20px;
   margin: 0 0 20px;
+  padding: 20px;
+  background: $grey;
   .situation-header {
-    color: $black;
     margin: 0 0 5px;
+    color: $black;
   }
   .situation-text {
     a {
-      background: $blue;
-      color: $white;
       padding: 0 3px;
-    }    
+      color: $white;
+      background: $blue;
+    }
   }
   .situation-buttons {
     display: none;
@@ -20,15 +20,12 @@
 
 @include breakpoint($brk-mobile) {
   .situation-element {
-
     .situation-text {
       display: none;
     }
-
     .situation-buttons {
       display: block;
-      margin-top:20px;
-
+      margin-top: 20px;
       a.button {
         display: block;
       }

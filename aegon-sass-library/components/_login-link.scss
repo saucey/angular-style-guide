@@ -3,10 +3,8 @@
  */
 .login-link {
   display: none;
-
-  &.visible {
-    display: inline-block;  
-  }
-
   background-color: $green;
+  &.visible {
+    display: inline-block;
+  }
 }

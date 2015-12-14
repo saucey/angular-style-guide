@@ -11,8 +11,8 @@ $line-height-x-large: $x-large * 1.5;
 @include breakpoint($brk-tablet) {
   .image-header {
     > h1 {
-      @include rem('font-size', $xxx-large);
-      @include rem('line-height', $line-height-xxx-large);
+      @include rem("line-height", $line-height-xxx-large);
+      @include rem("font-size", $xxx-large);
     }
   }
 }
@@ -27,64 +27,65 @@ $line-height-x-large: $x-large * 1.5;
     position: absolute;
     bottom: 0;
     margin-left: 5%;
-    @include rem('font-size', $xxxx-large);
-    @include rem('line-height', $line-height-xxx-large);
     color: $white;
-  }
 
+    @include rem("line-height", $line-height-xxx-large);
+    @include rem("font-size", $xxxx-large);
+  }
   h4 {
-    margin:0;
-    @include rem('font-size', $large);
-    @include rem('line-height', $line-height-large);
-  }
+    margin: 0;
 
-  
+    @include rem("line-height", $line-height-large);
+    @include rem("font-size", $large);
+  }
   .header-element {
     position: absolute;
-    margin: 5%;
     bottom: 0;
+    margin: 5%;
     h1 {
-        position:relative;
-        @include rem('font-size', $xxx-large);
-        @include rem('line-height', $line-height-xxx-large);
-        color: $white;
-        margin: 0;
+      position: relative;
+      margin: 0;
+      color: $white;
+
+      @include rem("line-height", $line-height-xxx-large);
+      @include rem("font-size", $xxx-large);
     }
     .header-element-wrapper {
-      background-color: rgba(255, 255, 255, 0.8);
-      position:relative;
+      position: relative;
       width: 80%;
       padding: 20px;
+      background-color: rgba(255, 255, 255, 0.8);
     }
- }
+  }
 }
 
-@include breakpoint($brk-mobile and 'only screen' (max-width 1024px)) {
+@include breakpoint($brk-mobile and "only screen" (max-width 1024px)) {
   .image-header {
     > h1 {
-      @include rem('font-size', $xx-large);
-      @include rem('line-height', $line-height-xx-large);
-      }
+      @include rem("line-height", $line-height-xx-large);
+      @include rem("font-size", $xx-large);
+    }
     .header-element {
       position: relative;
       margin-top: -100px;
       .header-element-wrapper {
-        display: block;
-        background-color: rgba(255, 255, 255, 0.8);
         top: 0;
+        display: block;
         width: 100%;
         border-radius: 4px;
+        background-color: rgba(255, 255, 255, 0.8);
       }
       h1 {
         position: absolute;
         top: -60px;
-        @include rem('font-size', $xx-large);
-        @include rem('line-height', $line-height-xx-large);
-        color: $white;
         margin-bottom: 0;
+        color: $white;
+
+        @include rem("line-height", $line-height-xx-large);
+        @include rem("font-size", $xx-large);
       }
       h4 {
-        margin:0;
+        margin: 0;
       }
     }
   }
@@ -93,13 +94,13 @@ $line-height-x-large: $x-large * 1.5;
 @include breakpoint($brk-large-desktop) {
   .image-header {
     h1 {
-      @include rem('font-size', $jumbo);
-      @include rem('line-height', $line-height-jumbo);
+      @include rem("line-height", $line-height-jumbo);
+      @include rem("font-size", $jumbo);
     }
     .header-element {
       h1 {
-        @include rem('font-size', $xxxx-large);
-        @include rem('line-height', $line-height-xxxx-large);
+        @include rem("line-height", $line-height-xxxx-large);
+        @include rem("font-size", $xxxx-large);
       }
     }
   }

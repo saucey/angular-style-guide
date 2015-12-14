@@ -13,34 +13,31 @@ $sticker-circle-marginTop: $xx-large + 20;
 }
 
 .sticker-circle {
-  margin: $sticker-circle-marginTop auto 0 auto;
   display: block;
   width: $sticker-circle-size;
   height: $sticker-circle-size;
-  border-radius: 50%;
+  margin: $sticker-circle-marginTop auto 0 auto;
+  text-align: center;
   color: $white;
-  text-align:center;
+  border-radius: 50%;
   background: $dark_blue;
   font-family: $font_light;
-
   a {
-    color: $white;
     text-decoration: none;
+    color: $white;
   }
   a:hover {
-    color: $white;
     text-decoration: none;
+    color: $white;
   }
-
   .rating {
+    padding-top: ($sticker-circle-size / 6);
     font-size: ($sticker-circle-size / 3);
     line-height: ($sticker-circle-size / 3);
-    padding-top: ($sticker-circle-size / 6);
   }
-
   .reviews {
+    padding: 2px ($sticker-circle-size / 10);
     font-size: ($sticker-circle-size / 9);
     line-height: ($sticker-circle-size / 9 + 5);
-    padding: 2px ($sticker-circle-size / 10);
   }
 }

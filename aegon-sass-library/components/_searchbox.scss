@@ -1,43 +1,39 @@
   .doc-search-wrap {
-    margin-bottom: 10px;
-    display: inline-block;
-    float: right;
-    margin-bottom: 20px;
-
-    .search {
-      width: 145px !important;
-      background-color: white;
-      background-image: url("/images/icons/icon-search-header.png");
-      background-repeat: no-repeat;
-      background-position: right center;
-      background-size: 30px 30px;
-      border: 2px solid $lighter_grey;
-      padding: 0 20px 0 10px;
-    }
-
-    .search:focus {
-      width: 350px !important;
-      box-shadow: 1px 1px 3px $lighter_grey;
-      background-image: url("/images/ui/btn-close.png");
-      background-repeat: no-repeat;
-      background-position: 325px center;
-      background-size: 16px 16px;
-    }
-
+  display: inline-block;
+  float: right;
+  margin-bottom: 10px;
+  margin-bottom: 20px;
+  .search {
+    width: 145px !important;
+    padding: 0 20px 0 10px;
+    border: 2px solid $lighter_grey;
+    background-color: white;
+    background-image: url("/images/icons/icon-search-header.png");
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: 30px 30px;
+  }
+  .search:focus {
+    width: 350px !important;
+    background-image: url("/images/ui/btn-close.png");
+    background-repeat: no-repeat;
+    background-position: 325px center;
+    background-size: 16px 16px;
+    box-shadow: 1px 1px 3px $lighter_grey;
+  }
   .numberdocuments {
+    display: inline-block;
     margin-right: 20px;
-    display: inline-block; 
     color: $blue;
   }
 }
 
 .number-search-results {
-  width: 100%;
   display: block;
-  padding: 15px 0 0 0;
+  width: 100%;
   margin: 0 0 20px 0;
-
+  padding: 15px 0 0 0;
   .bold {
-  font-family: $font_bold;
+    font-family: $font_bold;
   }
 }

@@ -2,67 +2,77 @@ $input_width: 228px;
 $input_margin: 5px;
 $input_height: $elements_height;
 
-input[type=text], input[type=email], input[type=number], select, div.dd div.ddTitle, label.dd div.ddTitle,  {
+input[type=text],
+input[type=email],
+input[type=number],
+select,
+div.dd div.ddTitle,
+label.dd div.ddTitle, {
   height: $input_height;
-  border-radius: $elements_border_radius;
-  border: $elements_border;
-  box-shadow: none;
-  outline: 0px;
-  background-color: $beige;
+  margin-top: 0;
+  margin-bottom: 0;
   white-space: nowrap;
-  margin-top: 0px;
-  margin-bottom: 0px;
+  border: $elements_border;
+  border-radius: $elements_border_radius;
+  outline: 0;
+  background-color: $beige;
+  box-shadow: none;
 }
-input[type=text], input[type=email], input[type=number] {
+input[type=text],
+input[type=email],
+input[type=number] {
   padding: 9px 10px;
   padding-right: 10px;
-
   &.inactive {
-    color: #A9A9A9;
+    color: #a9a9a9;
   }
 }
 
 textarea {
-  border-radius: $elements_border_radius;
-  border: $elements_border;
-  box-shadow: none;
-  outline: 0px;
-  background-color: $beige;
+  margin-top: 0;
+  margin-bottom: 0;
   white-space: nowrap;
-  margin-top: 0px;
-  margin-bottom: 0px;
+  border: $elements_border;
+  border-radius: $elements_border_radius;
+  outline: 0;
+  background-color: $beige;
+  box-shadow: none;
 }
 
-input[type=text], input[type=email], input[type=number], select, div.dd {
+input[type=text],
+input[type=email],
+input[type=number],
+select,
+div.dd {
   width: $input_width;
   &.half {
+    float: left;
     width: $input_width / 2 - $input_margin;
     margin-right: $input_margin * 2;
-    float: left;
-    &:last-child {  //last-child works also in conjunction with selects and textareas, last-of-type won't; just keep an eye out if there are still other DOM elements after an input
+    &:last-child {
+      //last-child works also in conjunction with selects and textareas, last-of-type won't; just keep an eye out if there are still other DOM elements after an input
       float: none;
     }
   }
   &.quarter {
+    float: left;
     width: $input_width / 4 - $input_margin * 2;
     margin-right: $input_margin * 2;
-    float: left;
     &:last-child {
       float: none;
     }
   }
 }
 
-input[type=checkbox], input[type=radio] {
+input[type=checkbox],
+input[type=radio] {
   width: auto;
 }
 
 .inputscontainer {
-  display:table-row;
-
+  display: table-row;
   .incont-cell {
-  display: table-cell;
-  padding: 0 10px 0 10px;
+    display: table-cell;
+    padding: 0 10px 0 10px;
   }
 }
-
