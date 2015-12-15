@@ -96,6 +96,10 @@ p {
     @include rem('font-size', $xxx-large);
     @include rem('line-height', $xxx-large);
   }
+  
+  h1, h2, h3 {
+	  @include word-wrap();
+  }
 
   p {
     @include rem('margin', 0, 0, 15);
