@@ -19,27 +19,11 @@
         // get the predefined validator from the json-object defined in data-validate
         var v = (this.attributes['data-validate'] || this.attributes['data-validate-restrained']).value;
         var restrained = this.attributes['data-validate-restrained'] !== undefined;
-        var iban = this.attributes['data-validate'].value === 'iban.nl';  
+        // var iban = this.attributes['data-validate'].value === 'iban.nl';  
         var validator;
-        // check if validator key is in the form ['key'], if not, it needs a . in front for eval
-        v = (v && v.length === 0) || v[0] === "[" ? v : "." + v;
-        try {
-          // if validator is empty, also throw an error; disable for jshint, since it appears not possible to smuggle js-code into js by way of code on the template, and the alternative of implementing this test is bazillions of lines long
-          validator = eval("that.validators" + v) || (v.bla.bla); // jshint ignore:line
-        }
-        catch (e) {
-          window.console && window.console.warn("error getting validator " + v + ". Maybe it was not defined?");
-        }
 
-        if (restrained) {
-          this.oldValue = this.value;
-          this.oldPos = $(this).caret();  //get the cursor position
-          $(this).on("keyup", that.restrain)
-            .click(function () {this.oldPos = $(this).caret(); });
-        }
-
-        if(iban) {
-
+        // IBAN field logic
+        if(v === 'iban.nl') {
           $(this).on({
             // Dont allow user to use spaces
             keydown: function(e) {
@@ -73,6 +57,23 @@
               this.value = this.value.replace(/\s+/g, '');
             }
           });
+        }
+
+        // check if validator key is in the form ['key'], if not, it needs a . in front for eval
+        v = (v && v.length === 0) || v[0] === "[" ? v : "." + v;
+        try {
+          // if validator is empty, also throw an error; disable for jshint, since it appears not possible to smuggle js-code into js by way of code on the template, and the alternative of implementing this test is bazillions of lines long
+          validator = eval("that.validators" + v) || (v.bla.bla); // jshint ignore:line
+        }
+        catch (e) {
+          window.console && window.console.warn("error getting validator " + v + ". Maybe it was not defined?");
+        }
+
+        if (restrained) {
+          this.oldValue = this.value;
+          this.oldPos = $(this).caret();  //get the cursor position
+          $(this).on("keyup", that.restrain)
+            .click(function () {this.oldPos = $(this).caret(); });
         }
         
         // makes the element where the last error occurred accessible as a static object
