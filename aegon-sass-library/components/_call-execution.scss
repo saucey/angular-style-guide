@@ -1,69 +1,66 @@
 // Tmp workaround, because there is an extra div inbetween inserted by drupal
 // When fixed, just replace this complicated selector with: ".call-execution-block"
-[class*='node-call-exec-'],
-:not([class*='node-call-exec-']) > .call-execution-block {
+[class*="node-call-exec-"],
+:not([class*="node-call-exec-"]) > .call-execution-block {
   position: relative;
-  background: $grey;
-  padding: 20px;
   margin: 0 0 20px;
+  padding: 20px;
   border-radius: $elements_border_radius;
-
-  h2, h3 {
+  background: $grey;
+  h2,
+  h3 {
     color: $black;
     @include rem('min-height', (2 * $large) + 5px);
-  }
-
+ }
   // Tmp workaround, because there is an extra div inbetween inserted by drupal
   // When fixed, just replace this complicated selector with: "&.blue-background"
   &.blue-background,
   &.view-mode-call_exec_blue_block {
-    background: $blue;
     color: $white;
-
+    background: $blue;
     * {
       color: inherit;
     }
-
     h3 {
-      @include rem('font-size', $x-large);
-      @include rem('line-height', $x-large * 1.2);
-      @include rem('min-height', $x-large * 2.4);
+      @include rem("min-height", $x-large * 2.4);
+      @include rem("line-height", $x-large * 1.2);
+      @include rem("font-size", $x-large);
     }
   }
 }
 
 .call-execution-block {
-  .button, button {
+  .button,
+  button {
     display: block;
-    margin-top: 15px;
     width: 100%;
+    margin-top: 15px;
     text-align: left;
   }
-
   .price {
     display: block;
-    font-size: $xx-large;
-    line-height: $xx-large;
     padding-bottom: 10px;
     text-align: right;
+    font-size: $xx-large;
+    line-height: $xx-large;
   }
 }
 
 
-@include breakpoint('only screen' (480px)) {
+@include breakpoint("only screen" (480px)) {
   // anything larger than tablet:
   .call-execution-block {
     .description {
       padding-bottom: 70px;
     }
-
-    .button, button {
+    .button,
+    button {
       position: absolute;
       right: 20px;
       bottom: 20px;
+      display: inline-block;
       width: auto;
       max-width: 80%;
-      display: inline-block;
     }
   }
 }
@@ -78,7 +75,6 @@
       min-height: 200px;
     }
   }
-
   // 50% columns on small tablets
   .container_12 .span6,
   .col3 .span4 {

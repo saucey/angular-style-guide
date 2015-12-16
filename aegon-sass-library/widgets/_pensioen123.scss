@@ -6,6 +6,10 @@
 
 .pensioen123_widget {
 
+  button, .button, .top p {
+    @include rem('margin', 0, 0, 30);
+  }
+
   .user-details {
     display: table;
 
@@ -88,14 +92,14 @@
 
             .icon {
               cursor: pointer;
-              width: 43px;
               height: auto;
               margin-top: 5px;
               display: inline-block;
               position: relative;
 
               img {
-                width: 100%;
+                width: auto;
+                max-height: 43px;
 
                 &.selected {
                   position: absolute;
@@ -166,6 +170,13 @@
             display: table-cell; 
             float: left;
             vertical-align: top;
+            padding-top: 4px;
+
+            img {
+              max-width: 100%;
+              display: block;
+              margin: 0 auto;
+            }
           }
 
           .more-details {
@@ -241,10 +252,10 @@
             display: inline-block;
             font-size: 15px;
             font-size: 0.9375rem;
-            position: absolute;
             margin-left: 5px;
             font-family: 'aegon_icons';
             content: '\e600';
+            vertical-align: bottom;
             font-weight: normal;
             -webkit-font-smoothing: antialiased;
             transition: -webkit-transform .2s ease;
@@ -352,6 +363,7 @@
         
                 img {
                   width: 100%;
+                  max-height: initial;
                 }
               }
             }
@@ -404,6 +416,9 @@
 
             .close {
               visibility: hidden;
+              position: absolute;
+              top: 0;
+              right: -30px;
 
               &:after {
                 visibility: visible;

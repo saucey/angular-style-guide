@@ -38,22 +38,30 @@
       $("input[name=ca_NL]:checked").click();
 
       // AJAX call on changing the postal code / house nr
-      var $personalDetailsWidgetForm = $(formSelector);
 
-      var $zipcodeField = $personalDetailsWidgetForm.find('#ra_NL_zip');
-      var $zipcodeField_ca = $personalDetailsWidgetForm.find('#ca_NL_zip');
+      var data,
+          $personalDetailsWidgetForm = $(formSelector),
+          $zipcodeField = $personalDetailsWidgetForm.find('#ra_NL_zip'),
+          $zipcodeField_ca = $personalDetailsWidgetForm.find('#ca_NL_zip'),
+          $housenumberField = $personalDetailsWidgetForm.find('#ra_NL_number'),
+          $housenumberField_ca = $personalDetailsWidgetForm.find('#ca_NL_number'),
+          $streetField = $personalDetailsWidgetForm.find("#ra_NL_street"),
+          $streetField_ca = $personalDetailsWidgetForm.find("#ca_NL_street"),
+          $cityField = $personalDetailsWidgetForm.find("#ra_NL_city"),
+          $cityField_ca = $personalDetailsWidgetForm.find("#ca_NL_city");
 
-      var $housenumberField = $personalDetailsWidgetForm.find('#ra_NL_number');
-      var $housenumberField_ca = $personalDetailsWidgetForm.find('#ca_NL_number');
-
-      var $streetField = $personalDetailsWidgetForm.find("#ra_NL_street");
-      var $streetField_ca = $personalDetailsWidgetForm.find("#ca_NL_street");
-
-      var $cityField = $personalDetailsWidgetForm.find("#ra_NL_city");
-      var $cityField_ca = $personalDetailsWidgetForm.find("#ca_NL_city");
+      // Removes classes from fields that are added on by Validval
+      var removeAttr = function(type) {
+        if(type !== 'ca') {
+          $streetField.removeClass('invalid inactive');
+          $cityField.removeClass('invalid inactive');
+        } else {
+          $streetField_ca.removeClass('invalid inactive');
+          $cityField_ca.removeClass('invalid inactive');
+        }
+      };
 
       var getAddress = function(type) {
-        var data;
         if(type !== 'ca') {
           data = {
             _AE_ADRES_HUISNR : $housenumberField.val(),
@@ -68,7 +76,8 @@
         data.AILHEADER_CLIENTID = Drupal.settings.site_name;
 
         $.ajax({
-          url : '/services/US_RestGatewayWeb/rest/requestResponse/BS_UtillitiesPostalArea_03/retrieveAddress',
+          cache : false,
+          url : '/mijnservices/US_RestGatewayWeb/rest/requestResponse/BS_UtillitiesPostalArea_03/retrieveAddress',
           timeout: 5000, // Default 5000ms
           data : data,
           success: function(response){
@@ -76,9 +85,11 @@
                 if(type !== 'ca') {
                   $streetField.val(response.retrieveAddressResponse._AE_ADRES.STRAAT);
                   $cityField.val(response.retrieveAddressResponse._AE_ADRES.PLAATS);
+                  removeAttr();
                 } else {
                   $streetField_ca.val(response.retrieveAddressResponse._AE_ADRES.STRAAT);
                   $cityField_ca.val(response.retrieveAddressResponse._AE_ADRES.PLAATS);
+                  removeAttr('ca');
                 }  
               }
               
@@ -90,7 +101,7 @@
                   $streetField_ca.val('');
                   $cityField_ca.val('');
                 } 
-              }
+              } 
           },
           error: function(response){
               console.log('Error:' + response);

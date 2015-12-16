@@ -4,209 +4,174 @@
 // ---------------------------------------------------------
 
 .dataTables_wrapper {
-
-  .dataTables_paginate, .dataTables_length {
+  .dataTables_paginate,
+  .dataTables_length {
     display: none;
   }
-  
   .dataTables_filter {
     width: 100%;
     margin-bottom: 15px;
-
     input {
+      -webkit-transition: all 0.5s;
+         -moz-transition: all 0.5s;
+              transition: all 0.5s;
       background-position: right center !important;
-      -webkit-transition: all .5s;
-      -moz-transition: all .5s;
-      transition: all .5s;
       &:focus {
         width: 35% !important;
       }
     }
   }
-
   .dataTables_info {
     position: absolute !important;
     top: -41px;
   }
-
   table.dataTable {
     width: 100% !important;
-
     button {
       margin: 0;
     }
-
     thead {
       border: none;
-
-      td, th {
-        @include rem('padding', 10, 40, 10, 10);
+      td,
+      th {
         white-space: nowrap;
-      }
 
-      tr th.narrow-td:after{
-          content: "";
+        @include rem("padding", 10, 40, 10, 10);
       }
-
+      tr th.narrow-td:after {
+        content: "";
+      }
       .sorting_asc {
-        url:("aegon/lib/aegon-assets-library/images/sort_asc.png");
+        url: ("aegon/lib/aegon-assets-library/images/sort_asc.png");
       }
     }
-
     tbody td {
-        border-right: 1px solid white;
-    }  
-
-    tfoot th, thead th {
       border-right: 1px solid white;
     }
-
+    tfoot th,
+    thead th {
+      border-right: 1px solid white;
+    }
     &.no-footer {
       border: none;
       border-top: 1px solid #d8d7d1;
       border-bottom: 1px solid #d8d7d1 !important;
     }
-
     .narrow-td {
-      left: 0px;
       position: relative;
-      font-size: 28px !important;
+      left: 0;
       width: 30px;
       text-align: center;
+      font-size: 28px !important;
     }
   }
 }
 
 @include breakpoint($brk-mobile) {
-
   .dataTables_wrapper {
     font-size: $small;
-
-    ul, li, p, .button, button {
+    ul,
+    li,
+    p,
+    .button,
+    button {
       font-size: $small;
     }
-
     .dataTables_info {
       top: -38px;
     }
-
     .dataTables_filter {
-      display:none;
+      display: none;
     }
-
     table.dataTable {
       margin-top: 10px !important;
       border-top: none !important;
-
       thead {
         display: none;
         clear: both;
-
       }
-
       tbody {
-
         tr.child ul {
           display: inline-block;
-          list-style-type: none;
           margin: -10px 0 0 -10px;
           padding: 0;
-
+          list-style-type: none;
           li:first-child {
             display: none;
           }
-         }
-
+        }
         td {
           display: inline-block;
           clear: both;
           width: 100%;
           padding: 6px 0 4px 20px;
-
-          ul, ul li {
+          ul,
+          ul li {
             width: 100%;
           }
-
           a.icon-pdf {
-            font-size: 24px;
-            height: 32px;
-            width: 32px;
+            position: absolute;
             top: -34px;
+            right: 15px;
             left: auto;
             float: right;
-            right: 15px;
-            position: absolute;
-
+            width: 32px;
+            height: 32px;
+            font-size: 24px;
             &:before {
               top: -4x;
-              right: 0px;
+              right: 0;
               font-size: 28px !important;
             }
           }
         }
-
         tr {
           background: none;
-
-          .child ul li  {
+          .child ul li {
             margin-left: 10px;
-
             &:last-child {
               margin-bottom: -20px;
             }
           }
-
           .child span.dtr-title {
             display: block !important;
           }
-
           .row {
             border-bottom: 1px solid grey;
-           }
+          }
         }
       }
-
       &.dtr-inline {
-
         &.collapsed {
           border-bottom: 1px solid grey;
-
           tbody tr td:first-child:before {
             content: "\e901";
           }
-
         }
-
         tbody {
           tr.parent td:first-child:before {
             top: initial;
           }
           .child .child:before {
             display: none !important;
-          } 
-
-
+          }
         }
       }
-
       &.stripe {
         tbody tr.odd:first-child {
           border: none;
         }
-
         tbody tr.odd {
-          border-top: 1px solid #E0E0E0;
           display: block;
+          border-top: 1px solid #e0e0e0;
         }
-
         tbody tr.even {
-          border-top: 1px solid #E0E0E0;
           display: block;
+          border-top: 1px solid #e0e0e0;
         }
       }
-
       .no-footer {
-          border-top: none !important;
+        border-top: none !important;
       }
     }
   }

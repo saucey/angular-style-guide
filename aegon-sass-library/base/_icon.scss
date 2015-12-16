@@ -6,6 +6,11 @@
   padding-right: 8px;
 }
 
+a.icon-user-link:before {
+  display: inline-block;
+  min-width: 1.5em;
+}
+
 .icon-uniE600:before {
   content: '\e600';
 }
@@ -140,6 +145,7 @@ a.menu-5662:before {
   @extend .icon-uniE629;
 }
 .icon-pensioen,
+.icon-pensioen-en-lijfrente,
 .icon-4497:before {
   @extend .icon-uniE60A;
 }
@@ -198,6 +204,6 @@ a.menu-5662:before {
 
 // Do not apply icons to old aegon menu.
 // TODO: Refactor menu's in Drupal module 'aegon_menu' to adapt to ATDL.
-[id*="aegon-menu-aegon"] [class*="menu-"][class*="icon-"]:before {
+.submenu [class*="menu-"][class*="icon-"]:before {
   content: '';
 }
