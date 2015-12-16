@@ -217,3 +217,10 @@
   background: linear-gradient($direction, $color-stops);
 }
 
+@mixin word-wrap() { 
+  overflow-wrap: break-word; 
+  word-wrap: break-word; 
+  -ms-word-break: break-all; 
+  word-break: break-word; 
+  hyphens: auto; 
+}

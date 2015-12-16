@@ -1,56 +1,54 @@
 .stepindicator {
+  li {
+    display: inline-block;
+    counter-increment: li;
+    color: initial;
 
-	li {
-		counter-increment: li;  
-		display: inline-block;
-		@include rem('margin', 0, 20, 15, 0);
-		color: initial;
+    @include rem("margin", 0, 20, 15, 0);
+    &:before {
+      left: 0;
+      // Had to overwrite multiple styling properties from the default styling the li gets from _typograhy.scss
+      display: inline;
+      width: 20px;
+      max-width: none;
+      height: 20px;
+      max-height: none;
+      content: counter(li);
+      color: white;
+      background-color: #d7d8d2;
+      font-family: "senticosansdtlight", Arial, Verdana, sans-serif;
+      font-size: initial;
+      font-weight: bold;
 
-		&:before {
-			// Had to overwrite multiple styling properties from the default styling the li gets from _typograhy.scss
-			display: inline;
-			content: counter(li);
-			background-color: #D7D8D2;
-			height: 20px;
-			width: 20px;
-			max-height: none;
-			max-width: none;
-			left: 0;
-			color: white;
-			font-size: initial;
-			font-weight: bold;
-			font-family: 'senticosansdtlight', Arial, Verdana, sans-serif;
-			@include rem('padding', 5, 10);
-			@include rem('border-radius', 20);
-			@include rem('margin-right', 5);
-		}
-		
-		&.active, 
-		&.visited {
-			color: $blue;
-		}
+      @include rem("margin-right", 5);
+      @include rem("border-radius", 20);
+      @include rem("padding", 5, 10);
+    }
+    &.active,
+    &.visited {
+      color: $blue;
+    }
+    &.active {
+      &:before {
+        color: $blue;
+        background: none;
+        -webkit-box-shadow: 0 0 0 3px $blue inset;
+           -moz-box-shadow: 0 0 0 3px $blue inset;
+                box-shadow: 0 0 0 3px $blue inset;
+      }
+    }
+    &.visited {
+      &:before {
+        content: "\e632";
+        color: #fff;
+        background-color: $blue;
+        font-family: "aegon_icons";
+        font-size: 14px;
 
-		&.active {
-			&:before {
-				box-shadow: 0 0 0 3px $blue inset;
-				-webkit-box-shadow: 0 0 0 3px $blue inset;
-				-moz-box-shadow: 0 0 0 3px $blue inset;
-				color: $blue;
-				background: none;
-			}
-		}
-
-		&.visited {
-			&:before {
-				background-color: $blue;
-				font-family: 'aegon_icons';
-				content: '\e632';
-				font-size: 14px;
-				color: #fff;
-				@include rem('padding', 9, 8);
-			}
-		}
-	}
+        @include rem("padding", 9, 8);
+      }
+    }
+  }
 }
 
 // 
@@ -58,13 +56,12 @@
 // --------------------------------------------------
 
 @include breakpoint($brk-mobile) {
-	.stepindicator {
-		li {
-			@include rem('margin', 0, 5, 15, 0);
-
-			span {
-				display: none;
-			}
-		}
-	}
+  .stepindicator {
+    li {
+      @include rem("margin", 0, 5, 15, 0);
+      span {
+        display: none;
+      }
+    }
+  }
 }
