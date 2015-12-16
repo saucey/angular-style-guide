@@ -1,21 +1,23 @@
 ol {
-  padding-left: 0;
   padding-right: 0;
+  padding-left: 0;
 }
 
 ol li {
   list-style: none;
   counter-increment: list;
+
   $ol_li_left: 35px;
   @include rem('line-height', $medium + 8);
   @include rem('margin-left', $ol_li_left);
   &:before {
-    display: block;
     position: relative;
+    display: block;
     max-width: 0;
     max-height: 0;
-    color: $blue;
     content: counter(list) ".";
-    @include rem('left', -$ol_li_left);
+    color: $blue;
+
+    @include rem("left", -$ol_li_left);
   }
 }

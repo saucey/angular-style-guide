@@ -1,38 +1,46 @@
 ul {
-  padding-left: 0;
   padding-right: 0;
+  padding-left: 0;
 }
 
 ul.links {
-  @include rem('padding', 20, 0);
-
+  @include rem("padding", 20, 0);
   &.links--inline {
-    @include rem('padding', 30, 0);
+    @include rem("padding", 30, 0);
   }
 }
 
-ul.bullet li, ul.check li, ul.green-check li, ul.ul-arrows li, ul.arrow li,
-ul li.check, ul li.green-check, ul li.arrow {
+ul.bullet li,
+ul.check li,
+ul.green-check li,
+ul.ul-arrows li,
+ul.arrow li,
+ul li.check,
+ul li.green-check,
+ul li.arrow {
   list-style: none;
+
   $li_left: 25px;
-  @include rem('margin-left', $li_left);
+  @include rem("margin-left", $li_left);
   &:before {
-    display: block;
     position: relative;
+    left: -$li_left;
+    display: block;
     max-width: 0;
     max-height: 0;
+    content: "\2022"; // dot
     color: $blue;
-    content: '\2022'; // dot
     font-family: $font_icons;
-    left: -$li_left;
-    @include rem('font-size', $small);
+
+    @include rem("font-size", $small);
   }
 }
 
 ul.bullet li:before {
-  @include rem('font-size', $medium);
   top: -3px;
   left: -22px;
+
+  @include rem("font-size", $medium);
 }
 
 // The following blocks are meant to be backwards compatible,

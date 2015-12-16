@@ -2,38 +2,32 @@
   position: relative;
   display: block;
   border: none;
-  @include rem('border-radius', 5);
-  @include rem('padding', 3, 0);
 
+  @include rem("padding", 3, 0);
+  @include rem("border-radius", 5);
   &:before {
-    font-family: 'aegon_icons';
     position: absolute;
     top: 7px;
     left: -38px;
+    font-family: "aegon_icons";
     font-size: 25px;
   }
-
   &.submessages--status {
     color: $green;
-
     &:before {
-      content: '\e632';
+      content: "\e632";
     }
   }
-
   &.submessages--error {
     color: $dark_red;
-
     &:before {
-      content: '\e62b';
+      content: "\e62b";
     }
   }
-
   &.submessages--warning {
     color: $dark_yellow;
-
     &:before {
-      content: '\e632';
+      content: "\e632";
     }
   }
 }

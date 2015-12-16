@@ -354,6 +354,13 @@ aside.mobile {
     font-weight: normal;
     -webkit-font-smoothing: antialiased;
   }
+
+  /**
+   * Contact & service link
+   */
+  li.mob-2-item.service {
+    background-color: #2981B8;
+  }
 }
 
 //
@@ -367,6 +374,7 @@ aside.mobile {
 
     .wrapper.ui-panel-animate {
       position: fixed;
+      height: 100%;
       /* for older browsers */
       transform: translateX(80%);
       /* for browsers support tranlate 3D */

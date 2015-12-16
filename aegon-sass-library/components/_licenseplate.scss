@@ -1,43 +1,41 @@
 .licenseplate {
-	.country {
-		background: #3395d3;
-	    display: inline-block;
-	    width: 60px;
-	    text-align: center;
-	    color: white;
-	    position: absolute;
-	    font-family: tahoma, arial;
-	    font-size: 1.3rem;
-	    letter-spacing: 0.12rem;
-	    padding-top: 10px;
-	    height: 44px;
-	    text-transform: uppercase;
-	    @include rem('border-radius', $elements_border_radius, 0rem, 0rem, $elements_border_radius);
-	}
+  .country {
+    position: absolute;
+    display: inline-block;
+    width: 60px;
+    height: 44px;
+    padding-top: 10px;
+    text-align: center;
+    letter-spacing: 0.12rem;
+    text-transform: uppercase;
+    color: white;
+    background: #3395d3;
+    font-family: tahoma, arial;
+    font-size: 1.3rem;
 
-	.license-number {
-		background: #F6CD23 !important;
-		font-weight: bold;
-		text-transform: uppercase;
-		padding: 4px 0 0 88px;
-		font-family: arial;
-	    font-size: 1.3rem;
-	    letter-spacing: 0.12rem;
-	}
-
-	::-webkit-input-placeholder {
-   color: $black;
-}
-
-:-moz-placeholder { /* Firefox 18- */
-   color: $black;
-}
-
-::-moz-placeholder {  /* Firefox 19+ */
-   color: $black;
-}
-
-:-ms-input-placeholder {  
-   color: $black;
-}
+    @include rem("border-radius", $elements_border_radius, 0rem, 0rem, $elements_border_radius);
+  }
+  .license-number {
+    padding: 4px 0 0 88px;
+    letter-spacing: 0.12rem;
+    text-transform: uppercase;
+    background: #f6cd23 !important;
+    font-family: arial;
+    font-size: 1.3rem;
+    font-weight: bold;
+  }
+  ::-webkit-input-placeholder {
+    color: $black;
+  }
+  :-moz-placeholder {
+    /* Firefox 18- */
+    color: $black;
+  }
+  ::-moz-placeholder {
+    /* Firefox 19+ */
+    color: $black;
+  }
+  :-ms-input-placeholder {
+    color: $black;
+  }
 }

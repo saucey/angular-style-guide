@@ -211,6 +211,7 @@
 
       // Load AJAX request
       $.ajax({
+        cache: false,
         timeout: 10000,
         type: 'GET',
         encoding:"UTF-8",
