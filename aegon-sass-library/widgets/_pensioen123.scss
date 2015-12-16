@@ -92,14 +92,14 @@
 
             .icon {
               cursor: pointer;
-              width: 43px;
               height: auto;
               margin-top: 5px;
               display: inline-block;
               position: relative;
 
               img {
-                width: 100%;
+                width: auto;
+                max-height: 43px;
 
                 &.selected {
                   position: absolute;
@@ -363,6 +363,7 @@
         
                 img {
                   width: 100%;
+                  max-height: initial;
                 }
               }
             }
@@ -415,6 +416,9 @@
 
             .close {
               visibility: hidden;
+              position: absolute;
+              top: 0;
+              right: -30px;
 
               &:after {
                 visibility: visible;
