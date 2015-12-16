@@ -6,7 +6,7 @@
   "license": "no license",
   "repository": {
     "type": "git",
-    "url": "https://swfactory.aegon.com/stash/projects/WEB/repos/aegon-scripts-library"
+    "url": "https://swfactory.aegon.com/bitbucket/projects/WEB/repos/aegon-scripts-library"
   },
   "dependencies": {},
   "devDependencies": {}
