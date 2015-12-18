@@ -206,6 +206,5 @@ a.menu-5662:before {
 // TODO: Refactor menu's in Drupal module 'aegon_menu' to adapt to ATDL.
 .submenu [class*="menu-"][class*="icon-"]:before {
   content: '';
-  display: block;
-  width: 0;
+  display: none;
 }
