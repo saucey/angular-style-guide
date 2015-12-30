@@ -113,11 +113,20 @@
   .feedback-on {
     margin-left: 20px;
     .percent {
-      display: none;
+       display: none;
     }
   }
   .feedback-title, .feedback-on {
+     float: left;
+  }
+  .question-vote {
+    border-top: 1px solid #CCC;
+    margin: 15px 0 0;
+    padding: 10px 0;
     float: left;
+  }
+  .question-vote .contact-text {
+    margin: 12px;
   }
 }
 
