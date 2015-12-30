@@ -7,32 +7,24 @@
   // Add new item to public Drupal object
   Drupal.behaviors.quickquote = {
     attach: function () {
-      function ammount() {
-        $( "#ammount-slider" ).slider({
-          value:500,
-          min: 0,
-          max: 5000,
-          step: 100,
+      Drupal.behaviors.tooltip.activate(".quickquote");
+      function quickquoteSlider(sliderClass,inputClass,sliderValue,sliderMin,sliderMax,sliderStep, Currenty) {
+        $(sliderClass).slider({
+          range: "max",
+          value:sliderValue,
+          min: sliderMin,
+          max: sliderMax,
+          step: sliderStep,
           slide: function( event, ui ) {
-            $( "#ammount-input" ).val( "€" + ui.value );
+            $(inputClass).val( Currenty + ui.value );
           }
         });
-        $( "#ammount-input" ).val( "€" + $( "#ammount-slider" ).slider( "value" ) );
+        $(inputClass).val( Currenty + $(sliderClass).slider( "value" ) );
       }
-      ammount();
-      function time() {
-        $( "#time-slider" ).slider({
-          value:10,
-          min: 0,
-          max: 30,
-          step: 1,
-          slide: function( event, ui ) {
-            $( "#time-input" ).val(ui.value);
-          }
-        });
-        $( "#time-input" ).val($( "#ammount-slider" ).slider( "value" ) );
-      }
-      time();
+
+      quickquoteSlider("#ammount-slider","#ammount-input",500,0,5000,100,"€");
+      quickquoteSlider("#time-slider","#time-input",10,0,30,1,"");
+      
     }
   };
 })(jQuery);

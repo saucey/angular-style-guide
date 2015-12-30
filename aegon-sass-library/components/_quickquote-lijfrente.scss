@@ -3,78 +3,62 @@
   height: auto;
   position: relative;
   background: $pastel_light_blue;
-  padding: 2em;
+  @include rem('padding', 30);
+  // padding: 2em;
 
   h3 {
-    color: $blue;
-    margin-bottom: 2em;
+    color: $slightly_darker_blue;
+    @include rem('margin', 0, 0, 30, 10);
     font-family: $font_normal;
     font-weight: bold;
+    &:before {
+      font-family: $font_icons;
+      content: $font_icons_calculator;
+      left: -10px;
+      position: relative;
+    }
   }  
-
-  .calculation{
+  .calculation {
     position: relative;
     width: 80%;
-    label {
-      color: $light_blue;
-      display: inline-block;
-    }
-    input {
-      display: inline-block;
-      background: $white;  
-      float:right;
-      margin-right: 10px;
-    }
-    .help {
-      position: absolute;
-      right: 0;
-    }
+    .input-header {
+      overflow: auto;
+      @include rem('margin', 0, 100, 20, 0);
 
-    .slider {
-      background: black;
-      
-      .slider-container{
-        width: 100%;
-
-        .ui-slider {
-          position: relative;
-          height: 7px;
-          width: 100% !important;
-          text-align: center !important;
-          border: none;
-          border-radius: 3px;
+      label {
+        color: $light_blue;
+        display: inline-block;
+        font-weight: normal;
+      }
+      .input-container {
+        float:right;
+        position: relative;
+        input {
+          display: inline-block;
+          background: $white;  
         }
-        .ui-slider .ui-slider-range {
-          background: $light_blue;
-        }
-        .ui-slider-handle {
-          position: absolute;
-          top: 0;
-          top: -7px;
-          width: 20px !important;
-          height: 20px !important;
-          border: 1px solid #e6e6e6;
-          border-radius: 50%;
-          outline: 0;
-          background: $white;
-          box-shadow: 1px 1px 1px #888;
-
-          -webkit-appearance: none;
-        }
-        .ui-slider-handle:hover {
-          position: absolute;
-          top: 0;
-          top: -12px;
-          width: 30px !important;
-          height: 30px !important;
-          border: 1px solid #e6e6e6;
-          border-radius: 50%;
-          outline: 0;
-          background: $white;
-          box-shadow: 1px 1px 1px #888;
-          -webkit-appearance: none;
+        .year {
+          display: inline-block;
+          margin: 0 4px 0 14px;
         }
       }
+      .help {
+        position: absolute;
+        right: 0;
+      }
+    }
+    .slider-container {
+      @include rem('margin', 0, 0, 32, 0);
+    }
+  }
+  .ammount.slider {
+    input {
+      width: 100px;
+    }
+  } 
+  .time.slider {
+    input {
+      width: 50px;
     }
   }
 }

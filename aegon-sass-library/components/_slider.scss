@@ -1,57 +1,28 @@
-
-///////////////////////////////////////////
-//
-// jQuery UI slider
-
-
-.slider-container {
-  position: relative;
-  display: table;
-  clear: left;
-  width: 200px;
-  margin-top: 40px;
-  #slider-1 {
-    width: 200px;
-    background: $blue;
-  }
-  #slider-1 .ui-slider-range-max {
-    background: #f5f5f5;
-    -webkit-box-shadow: inset 1px 1px 1px 0 #999;
-       -moz-box-shadow: 1px 1px 1px 0 #999;
-            box-shadow: inset 1px 1px 1px 0 #999;
-  }
-  // text input showing the slected number
-  .slider1-amount {
-    position: absolute !important;
-    top: -20px;
-    left: 220px;
-    width: 60px !important;
-    text-align: center;
-    color: $blue;
-    border: 0;
-  }
+.slider-container{
+  width: 100%;
   .ui-slider {
-    position: absolute;
-    width: 200px !important;
+    position: relative;
+    background: $slightly_darker_blue;
     height: 7px;
-    text-align: center !important;
+    width: 100%;
     border: none;
     border-radius: 3px;
   }
-  #ui-slider .ui-slider-range {
-    background: $light_blue;
+  .ui-slider .ui-slider-range {
+    background: $white;
+    
   }
   .ui-slider-handle {
     position: absolute;
     top: 0;
     top: -7px;
-    width: 20px !important;
-    height: 20px !important;
-    border: 1px solid #e6e6e6;
+    width: 20px;
+    height: 20px;
+    border: 1px solid $slightly_darker_grey;
     border-radius: 50%;
     outline: 0;
     background: $white;
-    box-shadow: 1px 1px 1px #888;
+    box-shadow: 1px 1px 1px $darker_grey;
 
     -webkit-appearance: none;
   }
@@ -59,42 +30,13 @@
     position: absolute;
     top: 0;
     top: -12px;
-    width: 30px !important;
-    height: 30px !important;
-    border: 1px solid #e6e6e6;
+    width: 30px;
+    height: 30px;
+    border: 1px solid $slightly_darker_grey;
     border-radius: 50%;
     outline: 0;
     background: $white;
-    box-shadow: 1px 1px 1px #888;
-
+    box-shadow: 1px 1px 1px $darker_grey;
     -webkit-appearance: none;
-  }
-  // legend
-  .range-legend {
-    position: absolute;
-    top: -30px;
-    display: block;
-    clear: both;
-    width: 200px;
-    ul {
-      display: table;
-      width: 100%;
-      margin: 0;
-      padding: 0;
-      table-layout: fixed;
-      list-style-type: none;
-    }
-    li {
-      display: table-cell;
-      width: 5%; //recalculate based on the desired number of figures
-      text-align: center;
-      font-size: 12px;
-    }
-    li:first-child {
-      text-align: left;
-    }
-    li:last-child {
-      text-align: right;
-    }
   }
 }

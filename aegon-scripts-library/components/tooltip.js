@@ -14,7 +14,6 @@
     activate: function (selector) {
       $(selector + " .help").mouseover(function () {
         if (this.title !== " " && this.title.length > 0) { //the temporary content has 2B " ", since "" will set display to "none" according to stylesheet definition, 
-          //alert(this.title);
           $(".help.dialog").remove();
           var dialog = document.createElement("DIV");
           dialog.className = "help dialog";
