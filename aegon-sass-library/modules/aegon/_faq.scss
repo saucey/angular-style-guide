@@ -37,6 +37,9 @@
     }
     ul {
       list-style: circle inside;
+      .rate-widget-thumbs_up_down & {
+        list-style: none;
+      }
       li {
         list-style: inherit;
       }
@@ -106,6 +109,15 @@
   	  position: relative;
   	  top: 8px;
   	}
+  }
+  .feedback-on {
+    margin-left: 20px;
+    .percent {
+      display: none;
+    }
+  }
+  .feedback-title, .feedback-on {
+    float: left;
   }
 }
 
