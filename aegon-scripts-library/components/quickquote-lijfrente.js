@@ -30,7 +30,7 @@
             $( "#time-input" ).val(ui.value);
           }
         });
-        $( "#time-input" ).val( "€" + $( "#ammount-slider" ).slider( "value" ) );
+        $( "#time-input" ).val($( "#ammount-slider" ).slider( "value" ) );
       }
       time();
     }
