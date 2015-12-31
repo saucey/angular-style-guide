@@ -1,12 +1,10 @@
-.quickquote {
+.quickquote.lijfrente {
   width: 100%;
   height: auto;
   position: relative;
   background: $pastel_light_blue;
   @include rem('padding', 30);
-  // padding: 2em;
-
-  h3 {
+   h3 {
     color: $slightly_darker_blue;
     @include rem('margin', 0, 0, 30, 10);
     font-family: $font_normal;
@@ -24,7 +22,6 @@
     .input-header {
       overflow: auto;
       @include rem('margin', 0, 100, 20, 0);
-
       label {
         color: $light_blue;
         display: inline-block;
