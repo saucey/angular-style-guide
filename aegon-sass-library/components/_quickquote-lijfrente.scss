@@ -4,7 +4,6 @@
   position: relative;
   background: $pastel_light_blue;
   border-radius: 6px;
-  @include rem('padding', 30);
   .triangle {
     width: 0;
     height: 0;
@@ -13,6 +12,7 @@
     border-color: #ffffff transparent transparent transparent;
     -webkit-transform: rotate(360deg);
     top: 0;
+    left: 30px;
     position: absolute;
   }
    h3 {
@@ -30,6 +30,7 @@
   .calculation {
     position: relative;
     width: 80%;
+    @include rem('padding', 30);
     .input-header {
       overflow: auto;
       @include rem('margin', 0, 100, 20, 0);
@@ -58,15 +59,25 @@
     .slider-container {
       @include rem('margin', 0, 0, 32, 0);
     }
-  }
-  .amount.slider {
-    input {
-      width: 100px;
+    .amount.slider {
+      input {
+        width: 100px;
+      }
+    } 
+    .time.slider {
+      input {
+        width: 50px;
+      }
     }
-  } 
-  .time.slider {
-    input {
-      width: 50px;
+  }
+  .result {
+    background: $slightly_darker_blue;
+    border-radius: 0 0 6px 6px;
+    color: $white;
+    @include rem('padding', 30);
+    .uitkering-result, .rente-result {
+      @include rem("font-size", $large);
+      @include rem('margin', 0, 0, 20, 0);
     }
   }
 }
