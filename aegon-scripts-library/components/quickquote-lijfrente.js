@@ -7,7 +7,7 @@
   // Add new item to public Drupal object
   Drupal.behaviors.quickquote = {
     attach: function () {
-      Drupal.behaviors.quickquote.slider("#ammount-slider","#ammount-input",500,0,5000,100,"€");
+      Drupal.behaviors.quickquote.slider("#amount-slider","#amount-input",500,0,5000,100,"€");
       Drupal.behaviors.quickquote.slider("#time-slider","#time-input",10,0,30,1,"");      
     },
     slider: function(sliderClass,inputClass,sliderValue,sliderMin,sliderMax,sliderStep, Currenty) {
