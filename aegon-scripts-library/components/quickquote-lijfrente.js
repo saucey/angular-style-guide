@@ -20,6 +20,9 @@
           }
         });
         $(inputClass).val( Currenty + $(sliderClass).slider( "value" ) );
+        $(inputClass).keyup(function() {
+          $(sliderClass).slider("value" , $(this).val().replace(/\u20ac/g, ''))
+        });
       }
 
       quickquoteSlider("#ammount-slider","#ammount-input",500,0,5000,100,"€");
