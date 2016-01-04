@@ -93,13 +93,13 @@ $xxx-large: 46px;
 $xxxx-large: 60px;
 $jumbo: 100px;
 
-$line-height-jumbo: $jumbo * 1.2;
-$line-height-xxxx-large: $xxxx-large * 1.2;
-$line-height-xxx-large: $xxx-large + 9;
-$line-height-xx-large: $xxx-large;
+$line-height-medium: $medium + 8;
 $line-height-large: $x-large;
 $line-height-x-large: $x-large + 5;
-$line-height-medium: $medium + 8;
+$line-height-xx-large: $xxx-large;
+$line-height-xxx-large: $xxx-large + 9;
+$line-height-xxxx-large: $xxxx-large * 1.2;
+$line-height-jumbo: $jumbo * 1.2;
 
 // RESPONSIVE CUTOFFS
 // smartphone
