@@ -1,12 +1,17 @@
 .dataTables_wrapper {
   position: relative;
+  margin-top: 50px;
   .dataTables_length,
   .dataTables_paginate {
     display: none;
   }
   .dataTables_filter {
     width: 100%;
-    margin-bottom: 15px;
+    position: absolute;
+    top: -50px;
+    @include breakpoint($brk-mobile) {
+      display: none;
+    }
     input {
       margin: 0 0 20px 8px;
       width: 110px;
@@ -26,7 +31,7 @@
   }
   .dataTables_info {
     position: absolute;
-    top: 20px;
+    top: -35px;
   }
   table {
     width: 100% !important;
