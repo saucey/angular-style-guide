@@ -17,7 +17,6 @@ $pastel_light_blue: #D9EBF7;
 $sky: #8cd1e6; //
 $lochmara_approx: #007ac7;
 
-
 // ORANGES
 $orange_highlight : #fcbd3e; //
 $orange: #f9a600; //
@@ -93,6 +92,14 @@ $xx-large: 40px;
 $xxx-large: 46px;
 $xxxx-large: 60px;
 $jumbo: 100px;
+
+$line-height-medium: $medium + 8;
+$line-height-large: $x-large;
+$line-height-x-large: $x-large + 5;
+$line-height-xx-large: $xxx-large;
+$line-height-xxx-large: $xxx-large + 9;
+$line-height-xxxx-large: $xxxx-large * 1.2;
+$line-height-jumbo: $jumbo * 1.2;
 
 // RESPONSIVE CUTOFFS
 // smartphone
