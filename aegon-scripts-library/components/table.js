@@ -6,13 +6,15 @@
    * MyDocuments's Drupal script.
    * Add new item to public Drupal object
    */
-  Drupal.behaviors.table_sort_filter = {
+  Drupal.behaviors.table = {
 
     attach: function () {
-      this.createTable('.table');
+      this.createTable('.tableDemo');
     },
 
-    createTable: function(table_class, options) {
+    createTable: function(table_class, options, showmore_btn) {
+
+      var showmore = (showmore_btn === undefined ? true : false);
 
       var defaults = {
         info: true,
@@ -34,31 +36,29 @@
         responsive: true,
         pageLength: 5,
         order: [ 2, 'desc' ],
-        "fnDrawCallback": function( oSettings ) {
-          // Callback function, check if there are more or less than 5 queries and show/hide the Show all button
-          if(oSettings.fnRecordsTotal() <= 5) {
-            $(this).parent().next('.show-all-payments').hide();
-          }
-        },
-        fnInitComplete: function() {
+        fnInitComplete: function(oSettings) {
           var that = $(this),
-              api = this.api(),
-              showAllButton = that.parent().next('.show-all-payments');
+              api = this.api();
 
-          // Show less or more entires clicking on Toon alles
-          showAllButton.on('click', function(){ 
-            $(this).hasClass('changed') ? api.page.len(5).draw() : api.page.len(-1).draw();
-            $(this).toggleClass('changed');
-          });
+          if(showmore && oSettings.fnRecordsTotal() > 5) {
+            // Create show all button
+            that.after('<div class="show-all-payments"></div>');
 
-          // Hide / show Toon alles button depending on the amount of results
-          $(table_class).on( 'search.dt', function () {
-            if(api.page.info().recordsDisplay <= 5) {
-              showAllButton.hide();
-            } else {
-              showAllButton.show();
-            }
-          });
+            var showAllBtn = that.parent().find('.show-all-payments');
+
+            showAllBtn.on('click', function(){ 
+              $(this).hasClass('changed') ? api.page.len(5).draw() : api.page.len(-1).draw();
+              $(this).toggleClass('changed');
+            });
+
+            $(table_class).on( 'search.dt', function () {
+              if(api.page.info().recordsDisplay <= 5) {
+                 showAllBtn.hide();
+              } else {
+                 showAllBtn.show();
+              }
+            });
+          }
 
           // Set placeholder for searchbox 
           that.parent().find('.dataTables_filter input').attr("placeholder", "Zoeken");
