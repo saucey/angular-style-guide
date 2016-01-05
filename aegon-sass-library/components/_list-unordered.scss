@@ -28,7 +28,6 @@ ul li.arrow {
     display: block;
     max-width: 0;
     max-height: 0;
-    content: "\2022"; // dot
     color: $blue;
     font-family: $font_icons;
 
@@ -37,10 +36,11 @@ ul li.arrow {
 }
 
 ul.bullet li:before {
-  top: -3px;
   left: -22px;
+  font-family: $font_bold;
+  content: "\2022"; // dot
 
-  @include rem("font-size", $medium);
+  @include rem("font-size", $large);
 }
 
 // The following blocks are meant to be backwards compatible,

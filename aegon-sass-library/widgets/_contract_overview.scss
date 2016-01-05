@@ -39,6 +39,14 @@
       margin-bottom: 0;
       padding: 6px 0;
 
+      &.inactive {
+        color: #999999;
+
+        li a.label, li:before {
+          color: #999999;
+        }
+      }
+
       li {
         float: none;
         display: block;

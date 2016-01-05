@@ -5,7 +5,7 @@
 
 h1 {
   @include rem('font-size', $xxx-large);
-  @include rem('line-height', $xxx-large + 9);
+  @include rem('line-height', $line-height-xxx-large);
   @include rem('margin', 25, 0);
   font-family: $font_light;
   font-weight: normal;
@@ -15,21 +15,21 @@ h1 {
 .subtext {
   font-family: $font_light;
   @include rem('font-size', $x-large);
-  @include rem('line-height', $x-large + 5);
+  @include rem('line-height', $line-height-x-large);
   color: $blue;
 }
 
 .subheader {
   font-family: $font_normal;
   @include rem('font-size', $large);
-  @include rem('line-height', $x-large);
+  @include rem('line-height', $line-height-large);
   color: $black;
 }
 
 h2 {
   font-family: $font_light;
   @include rem('font-size', $xx-large);
-  @include rem('line-height', $xxx-large);
+  @include rem('line-height', $line-height-xx-large);
   color: $blue;
   font-weight: normal;
   margin: 5px 0 20px;
@@ -38,7 +38,7 @@ h2 {
 h3 {
   font-family: $font_normal;
   @include rem('font-size', $large);
-  @include rem('line-height', $x-large);
+  @include rem('line-height', $line-height-large);
   color: $black;
   margin: 10px auto;
 }
@@ -46,7 +46,7 @@ h3 {
 h4 {
   font-family: $font_normal;
   @include rem('font-size', $medium);
-  @include rem('line-height', $large);
+  @include rem('line-height', $line-height-medium);
 }
 
 h5 {
@@ -57,7 +57,7 @@ h5 {
 p, ul li, ol li {
   font-family: $font_light;
   @include rem('font-size', $medium);
-  @include rem('line-height', $medium + 8);
+  @include rem('line-height', $line-height-medium);
 }
 
 p {
@@ -94,7 +94,7 @@ p {
 
   h1 {
     @include rem('font-size', $xxx-large);
-    @include rem('line-height', $xxx-large);
+    @include rem('line-height', $line-height-xxx-large);
   }
   
   h1, h2, h3 {
@@ -115,12 +115,12 @@ p {
 
   h2 {
     @include rem('font-size', $large);
-    @include rem('line-height', $x-large);
+    @include rem('line-height', $line-height-large);
   }
 
   h3 {
     @include rem('font-size', $medium);
-    @include rem('line-height', $large);
+    @include rem('line-height', $line-height-medium);
     color: $blue;
   }
 }

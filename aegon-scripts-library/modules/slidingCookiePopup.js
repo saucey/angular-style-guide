@@ -229,7 +229,7 @@
         }
 
         // Trigger tealium to record 'cookie settings changed' event
-        if (typeof win.utag === 'object') {
+        if (typeof win.utag === 'object' && typeof win.utag.view === 'function') {
           win.utag.view({
             page_cat_1_type: 'cookie',
             page_cat_2_name: cookieOpslaan,
@@ -282,7 +282,7 @@
         if (e.target.id === 'no-thankx') {
 
           // Trigger tealium call to record 'cookie pop up closed' event
-          if (typeof win.utag === 'object') {
+          if (typeof win.utag === 'object' && typeof win.utag.view === 'function') {
             win.utag.view({
               page_cat_1_type: 'cookie',
               page_cat_2_name: 'cookiemelding sluiten',
@@ -315,7 +315,7 @@
           success: function (data) {
 
             // Trigger tealium to record 'cookies settings screen viewed' event
-            if (typeof win.utag === 'object') {
+            if (typeof win.utag === 'object' && typeof win.utag.view === 'function') {
               win.utag.view({
                 page_cat_1_type: 'cookie',
                 page_cat_2_name: 'cookie instellingen',
