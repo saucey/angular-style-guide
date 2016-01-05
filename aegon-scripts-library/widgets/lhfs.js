@@ -116,7 +116,7 @@
         });
         
         // Used only for the lhfs payment table in our technical library
-        Drupal.behaviors.table.createTable('.lhfsPaymentDemo', {ordering: false});
+        Drupal.behaviors.table.createTable('.lhfsPaymentDemo', {ordering: false, responsive: false, info: false});
     
       }
       this.attached = true;
