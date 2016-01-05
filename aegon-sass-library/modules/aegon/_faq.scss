@@ -38,10 +38,15 @@
     ul {
       list-style: circle inside;
       .rate-widget-thumbs_up_down & {
-        list-style: none;
+        list-style: none !important;
       }
       li {
         list-style: inherit;
+        .rate-widget-thumbs_up_down & {
+          a {
+            float: left !important;
+          }
+        }
       }
     }
   }
