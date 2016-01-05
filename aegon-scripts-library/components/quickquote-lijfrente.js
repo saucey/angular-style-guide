@@ -24,7 +24,7 @@
       });
       $(inputClass).val( Currenty + $(sliderClass).slider( "value" ) );
       $(inputClass).keyup(function() {
-        $(sliderClass).slider("value" , $(this).val().replace(/\u20ac/g, ''))
+        $(sliderClass).slider("value" , $(this).val().replace(/\u20ac/g, ''));
       });
     }
   };

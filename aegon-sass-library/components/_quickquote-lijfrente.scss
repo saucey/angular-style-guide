@@ -81,3 +81,84 @@
     }
   }
 }
+
+@include breakpoint($brk-tablet) { 
+  .quickquote.lijfrente {
+    .triangle {
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 20px 30px 0 30px;
+      border-color: #ffffff transparent transparent transparent;
+      -webkit-transform: rotate(360deg);
+      top: 0;
+      left: 30px;
+      position: absolute;
+    }
+     h3 {
+      color: $slightly_darker_blue;
+      @include rem('margin', 0, 0, 30, 10);
+      font-family: $font_normal;
+      font-weight: bold;
+      &:before {
+        font-family: $font_icons;
+        content: $font_icons_calculator;
+        left: -10px;
+        position: relative;
+      }
+    }  
+    .calculation {
+      position: relative;
+      width: 80%;
+      @include rem('padding', 30);
+      .input-header {
+        overflow: auto;
+        @include rem('margin', 0, 100, 20, 0);
+        label {
+          color: $light_blue;
+          display: inline-block;
+          font-weight: normal;
+        }
+        .input-container {
+          float:right;
+          position: relative;
+          input {
+            display: inline-block;
+            background: $white;  
+          }
+          .year {
+            display: inline-block;
+            margin: 0 4px 0 14px;
+          }
+        }
+        .help {
+          position: absolute;
+          right: 0;
+        }
+      }
+      .slider-container {
+        @include rem('margin', 0, 0, 32, 0);
+      }
+      .amount.slider {
+        input {
+          width: 100px;
+        }
+      } 
+      .time.slider {
+        input {
+          width: 50px;
+        }
+      }
+    }
+    .result {
+      background: $slightly_darker_blue;
+      border-radius: 0 0 6px 6px;
+      color: $white;
+      @include rem('padding', 30);
+      .uitkering-result, .rente-result {
+        @include rem("font-size", $large);
+        @include rem('margin', 0, 0, 20, 0);
+      }
+    }
+  }
+}
