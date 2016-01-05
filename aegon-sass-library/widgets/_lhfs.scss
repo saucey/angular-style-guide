@@ -169,40 +169,6 @@
       min-height: 5px;
     }
   }
-  .payments-show-all {
-    display: block;
-    padding: 3px 5px 3px 5px;
-    margin: 0 auto 0 auto;
-    background: #EFEBE7;
-    text-align: center;
-    color: #3395d3;
-    width: 110px;
-    cursor: pointer;
-    border-bottom-right-radius: 0.1875rem;
-    border-bottom-left-radius: 0.1875rem;
-    &:before {
-      content: "Toon alles" !important;
-    }
-    &.changed:before {
-      content: "Verbergen" !important;
-    }
-    &.changed::after {
-      /* this selector is more specific, so it takes precedence over the other :after */
-      transform: rotate(-90deg) !important;
-    }
-    &:after {
-      display: block;
-      font-size: 0.625rem;
-      font-family: "aegon_icons";
-      content: "\e600";
-      -ms-transform: rotate(90deg);
-      /* IE 9 */
-      -webkit-transform: rotate(90deg);
-      /* Chrome, Safari, Opera */
-      transform: rotate(90deg);
-      margin: -6px 0 -4px 0;
-    }
-  }
 }
 
 .lhfs_widget div.payments {
@@ -558,12 +524,35 @@ ul.horizontal {
     input[type=text] {
       width: 228px;
     }
-    table.dataTable {
+    .dataTables_info {
+      display: none;
+    }
+    table {
+      display: table;
+      thead {
+        display: none;
+        clear: both;
+      }
       tbody {
+        tr {
+          height: initial;
+
+          display: block;
+          border-top: 1px solid #e0e0e0;
+
+          &:first-child {
+            border-top: 0;
+          }
+        }
+        tr.even {
+          background: #fff;
+          
+        }
         td {
           width: auto;
           display: table-cell;
           padding: 6px 0;
+          height: 65px;
           li.status {
             height: 30px;
           }
@@ -579,9 +568,11 @@ ul.horizontal {
             text-align: center;
           }
           &:first-child {
+            margin-top: 15px;
             width: 100%;
             display: block;
             padding: 0;
+            height: initial;
             &:before {
               content: 'Datum: ';
               font-weight: bold;

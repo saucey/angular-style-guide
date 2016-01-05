@@ -1,6 +1,9 @@
 .dataTables_wrapper {
   position: relative;
   margin-top: 50px;
+  @include breakpoint($brk-mobile) {
+      margin-top: 35px;
+    }
   .dataTables_length,
   .dataTables_paginate {
     display: none;
@@ -31,7 +34,10 @@
   }
   .dataTables_info {
     position: absolute;
-    top: -35px;
+    top: -40px;
+    @include breakpoint($brk-mobile) {
+      top: -27px;
+    }
   }
   table {
     width: 100% !important;
@@ -52,6 +58,10 @@
       th {
         vertical-align: middle;
         border-right: 1px solid white;
+
+        button { 
+          margin: 0;
+        }
       }
       th {
         cursor: pointer;
@@ -152,12 +162,17 @@
     }
   }
 }
-
-.table_title {
-  display: block;
-  margin-bottom: 8px;
+.table-title {
+  font-family: $font_light;
+  @include rem('font-size', 30);
+  color: $blue;
+}
+.table-desc {
+  display:block;
+  position:absolute;
+  margin-top: 10px;
   color: #1d1d1b;
-  font-family: "senticosansdtregular", Arial, Verdana, sans-serif;
+  font-family: $font_normal;
   @include rem('font-size',18);
   font-weight: bold;
 }
