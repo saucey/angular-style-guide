@@ -280,9 +280,6 @@
 @include breakpoint($brk-large-desktop) {
   .blog{
     .blog-page{
-      .text{
-        height: auto;
-      }
       .blog-articles{
         .blog-article{
           .blog-image{
