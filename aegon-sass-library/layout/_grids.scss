@@ -317,16 +317,6 @@ dl.table.row-fluid {
   .row-fluid {
     margin-bottom: 0;
 
-    .span1.gutter {
-      width: 0;
-      min-height:0;
-      
-      & + .span12{
-        width:100%;
-        margin-left: 0;
-      }
-    }
-
     .span14 {
       @include rem('margin-bottom', 5);
     }
