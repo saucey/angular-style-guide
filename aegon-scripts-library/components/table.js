@@ -9,12 +9,10 @@
   Drupal.behaviors.table = {
 
     attach: function () {
-      this.createTable('.tableDemo');
+      this.createTable('#tableDemos', {ordering: false, info: false, bFilter: false});
     },
 
-    createTable: function(table_class, options, showmore_btn) {
-
-      var showmore = (showmore_btn === undefined ? true : false);
+    createTable: function(table_class, options) {
 
       var defaults = {
         info: true,
@@ -24,6 +22,7 @@
           sInfoEmpty: "Geen resultaten gevonden",
           sInfoFiltered: "",
         },
+        sDom: '<"top"<"left"i><"right"f>>rtlp',
         target: '.narrow-td',
         bFilter: true,
         aoColumns: [
@@ -40,25 +39,26 @@
           var that = $(this),
               api = this.api();
 
-          if(showmore && oSettings.fnRecordsTotal() > 5) {
-            // Create show all button
-            that.after('<div class="show-all-payments"></div>');
+            if(oSettings.fnRecordsTotal() > 5) {
 
-            var showAllBtn = that.parent().find('.show-all-payments');
+              // Create show all button
+              that.after('<div class="show-all-payments"></div>');
 
-            showAllBtn.on('click', function(){ 
-              $(this).hasClass('changed') ? api.page.len(5).draw() : api.page.len(-1).draw();
-              $(this).toggleClass('changed');
-            });
+              var showAllBtn = that.parent().find('.show-all-payments');
 
-            $(table_class).on( 'search.dt', function () {
-              if(api.page.info().recordsDisplay <= 5) {
-                 showAllBtn.hide();
-              } else {
-                 showAllBtn.show();
-              }
-            });
-          }
+              showAllBtn.on('click', function(){ 
+                $(this).hasClass('changed') ? api.page.len(5).draw() : api.page.len(-1).draw();
+                $(this).toggleClass('changed');
+              });
+
+              $(table_class).on( 'search.dt', function () {
+                if(api.page.info().recordsDisplay <= 5) {
+                   showAllBtn.hide();
+                } else {
+                   showAllBtn.show();
+                }
+              });
+            } 
 
           // Set placeholder for searchbox 
           that.parent().find('.dataTables_filter input').attr("placeholder", "Zoeken");
