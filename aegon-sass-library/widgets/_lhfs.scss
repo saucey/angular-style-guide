@@ -179,27 +179,26 @@
   $open_color: $red;
   $paid_color: $green;
   .status span {
-    &:before {
+    &.icon:before {
       font-family: $font_icons;
-      margin-right: 5px;
     }
-    &.open {
+    &.icon-open:before {
+      content: $font_icons_tip;
+    }
+    &.open,&.icon-open:before {
       color: $open_color;
-      &:before {
-        content: $font_icons_tip;
-      }
     }
-    &.paid {
+    &.icon-paid:before {
+      content: $font_icons_check;
+    }
+    &.paid,&.icon-paid:before {
       color: $paid_color;
-      &:before {
-        content: $font_icons_check;
-      }
     }
-    &.info {
+    &.icon-info:before {
+      content: $font_icons_info_black;
+    }
+    &.info,&.icon-info:before {
       color: $black;
-      &:before {
-        content: $font_icons_info_black;
-      }
     }
   }
   & > ul {
@@ -539,8 +538,7 @@ ul.horizontal {
       }
       tbody {
         tr {
-          height: initial;
-
+          height: auto;
           display: block;
           border-top: 1px solid #e0e0e0;
 
@@ -555,8 +553,7 @@ ul.horizontal {
         td {
           width: auto;
           display: table-cell;
-          padding: 6px 0;
-          height: 65px;
+          padding: 10px 0;
           li.status {
             height: 30px;
           }
@@ -576,7 +573,7 @@ ul.horizontal {
             width: 100%;
             display: block;
             padding: 0;
-            height: initial;
+            height: auto;
             &:before {
               content: 'Datum: ';
               font-weight: bold;
@@ -585,10 +582,7 @@ ul.horizontal {
           .open,
           .paid,
           .info {
-            visibility: hidden;
-            &:before {
-              visibility: visible;
-            }
+            display: none;
           }
         }
       }
