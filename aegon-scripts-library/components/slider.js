@@ -1,29 +1,27 @@
 /**
- * Example JavaScript component
+ * jQuery UI Slider
  */
-// Closure with jQuery support
+(function($) {
+  'use strict';
 
-// jQuery-UI slider
-
-// (function($) {
-//   'use strict';
-
-//   // Add new item to public Drupal object
-//     Drupal.behaviors.slider = {
-//       attach: function () {
-//       $(function() {
-//         $( "#slider-1" ).slider({
-//           range: "max",
-//           min: 0,
-//           max: 10,
-//           value: 0,
-//           animate:"slow",
-//           slide: function(event, ui) {
-//             $("#amount").val(ui.value);
-//           }
-//           });
-//         });
-//     }, // end attach
-//     attached: false,
-//   }; // end Drupal
-// })(jQuery); 
+  // Add new item to public Drupal object
+  Drupal.behaviors.slider = {
+    activate: function(sliderClass,inputClass,sliderValue,sliderMin,sliderMax,sliderStep,Currenty) {
+      Drupal.behaviors.tooltip.activate(".quickquote");
+      $(sliderClass).slider({
+        range: "max",
+        value:sliderValue,
+        min: sliderMin,
+        max: sliderMax,
+        step: sliderStep,
+        slide: function( event, ui ) {
+          $(inputClass).val( Currenty + ui.value );
+        }
+      });
+      $(inputClass).val( Currenty + $(sliderClass).slider( "value" ) );
+      $(inputClass).keyup(function() {
+        $(sliderClass).slider("value" , $(this).val().replace(Currenty, ''))
+      });
+    }
+  };
+})(jQuery); 
