@@ -23,7 +23,6 @@
           sInfoFiltered: "",
         },
         sDom: '<"top"<"left"i><"right"f>>rtlp',
-        target: '.narrow-td',
         bFilter: true,
         aoColumns: [
             null,
@@ -42,9 +41,9 @@
             if(oSettings.fnRecordsTotal() > 5) {
 
               // Create show all button
-              that.after('<div class="show-all-payments"></div>');
+              that.after('<div class="show-all"></div>');
 
-              var showAllBtn = that.parent().find('.show-all-payments');
+              var showAllBtn = that.parent().find('.show-all');
 
               showAllBtn.on('click', function(){ 
                 $(this).hasClass('changed') ? api.page.len(5).draw() : api.page.len(-1).draw();
