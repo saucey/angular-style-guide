@@ -114,38 +114,9 @@
           }
                     
         });
-      
-        $('table.lhfsPayments').each(function(i) {
-          var that = $(this);
-          var showAll = that.next('.payments-show-all');
-
-          i = $(this).DataTable({
-            "info": false,
-            "orderClasses": false,
-            "target": '.narrow-td',
-            "bFilter": false,
-            "aoColumns": [
-                null,
-                null,
-                { "sType": "date-eu" },
-                null  
-            ],
-            "ordering": false,
-            "responsive": false,
-            "pageLength": 5,
-            "order": [ 2, 'desc' ]
-          });
-
-          showAll.on('click', function(){ 
-            if($(this).hasClass('changed')) {
-              $(this).removeClass('changed');
-              i.page.len(5).draw();
-            } else {
-              $(this).toggleClass('changed');
-              i.page.len(-1).draw();
-            }
-          });
-        });
+        
+        // Used only for the lhfs payment table in our technical library
+        Drupal.behaviors.table.createTable('.lhfsPaymentDemo', {ordering: false, responsive: false, info: false});
     
       }
       this.attached = true;

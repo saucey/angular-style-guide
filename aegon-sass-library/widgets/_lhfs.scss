@@ -1,3 +1,4 @@
+
 // 
 // Reason to don't use id selectors instead of class selectors
 // http://csswizardry.com/2011/09/when-using-ids-can-be-a-pain-in-the-class/
@@ -162,45 +163,14 @@
       }
     }
   }
+  span.table-title {
+    margin-bottom: 10px;
+  }
   // fix responsive peculiarities
   .row-fluid [class*='span'] {
     display: inline;
     @media screen and(max-width: $rc-s-max-width) {
       min-height: 5px;
-    }
-  }
-  .payments-show-all {
-    display: block;
-    padding: 3px 5px 3px 5px;
-    margin: 0 auto 0 auto;
-    background: #EFEBE7;
-    text-align: center;
-    color: #3395d3;
-    width: 110px;
-    cursor: pointer;
-    border-bottom-right-radius: 0.1875rem;
-    border-bottom-left-radius: 0.1875rem;
-    &:before {
-      content: "Toon alles" !important;
-    }
-    &.changed:before {
-      content: "Verbergen" !important;
-    }
-    &.changed::after {
-      /* this selector is more specific, so it takes precedence over the other :after */
-      transform: rotate(-90deg) !important;
-    }
-    &:after {
-      display: block;
-      font-size: 0.625rem;
-      font-family: "aegon_icons";
-      content: "\e600";
-      -ms-transform: rotate(90deg);
-      /* IE 9 */
-      -webkit-transform: rotate(90deg);
-      /* Chrome, Safari, Opera */
-      transform: rotate(90deg);
-      margin: -6px 0 -4px 0;
     }
   }
 }
@@ -209,27 +179,26 @@
   $open_color: $red;
   $paid_color: $green;
   .status span {
-    &:before {
+    &.icon:before {
       font-family: $font_icons;
-      margin-right: 5px;
     }
-    &.open {
+    &.icon-open:before {
+      content: $font_icons_tip;
+    }
+    &.open,&.icon-open:before {
       color: $open_color;
-      &:before {
-        content: $font_icons_tip;
-      }
     }
-    &.paid {
+    &.icon-paid:before {
+      content: $font_icons_check;
+    }
+    &.paid,&.icon-paid:before {
       color: $paid_color;
-      &:before {
-        content: $font_icons_check;
-      }
     }
-    &.info {
+    &.icon-info:before {
+      content: $font_icons_info_black;
+    }
+    &.info,&.icon-info:before {
       color: $black;
-      &:before {
-        content: $font_icons_info_black;
-      }
     }
   }
   & > ul {
@@ -558,12 +527,33 @@ ul.horizontal {
     input[type=text] {
       width: 228px;
     }
-    table.dataTable {
+    .dataTables_info {
+      display: none;
+    }
+    table {
+      display: table;
+      thead {
+        display: none;
+        clear: both;
+      }
       tbody {
+        tr {
+          height: auto;
+          display: block;
+          border-top: 1px solid #e0e0e0;
+
+          &:first-child {
+            border-top: 0;
+          }
+        }
+        tr.even {
+          background: #fff;
+          
+        }
         td {
           width: auto;
           display: table-cell;
-          padding: 6px 0;
+          padding: 10px 0;
           li.status {
             height: 30px;
           }
@@ -579,9 +569,11 @@ ul.horizontal {
             text-align: center;
           }
           &:first-child {
+            margin-top: 15px;
             width: 100%;
             display: block;
             padding: 0;
+            height: auto;
             &:before {
               content: 'Datum: ';
               font-weight: bold;
@@ -590,10 +582,7 @@ ul.horizontal {
           .open,
           .paid,
           .info {
-            visibility: hidden;
-            &:before {
-              visibility: visible;
-            }
+            display: none;
           }
         }
       }
