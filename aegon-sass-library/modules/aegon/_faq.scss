@@ -37,14 +37,12 @@
     }
     ul {
       list-style: circle inside;
-      .rate-widget-thumbs_up_down & {
-        list-style: none !important;
-      }
       li {
         list-style: inherit;
-        .rate-widget-thumbs_up_down & {
+        .thumb-up, thumb-down {
+          list-style: none;
           a {
-            float: left !important;
+            float:left;
           }
         }
       }
