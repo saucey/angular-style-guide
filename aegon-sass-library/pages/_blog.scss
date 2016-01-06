@@ -2,7 +2,8 @@
 // BLOG OVERVIEW
 // --------------------------------------------------
 
-.blog{
+.blog {
+
   .blog-page{
     h3{
       font-weight: normal;
@@ -166,6 +167,20 @@
             color: $white;
           }
         }
+      }
+    }
+  }
+}
+
+@include breakpoint($brk-mobile) {
+  .blog {
+    .span1.gutter {
+      width: 0;
+      min-height: 0;
+
+      & + .span12 {
+        width: 100%;
+        margin-left: 0;
       }
     }
   }
