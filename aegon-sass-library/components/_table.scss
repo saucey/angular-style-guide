@@ -1,65 +1,235 @@
-table {
-  width: 100%;
-  border-top: 1px solid #d8d7d1;
-  border-bottom: 1px solid #d8d7d1;
-  th {
-    padding: 0 0 0 10px;
-    background-color: $lighter_grey;
+.dataTables_wrapper {
+  position: relative;
+  padding-bottom: 46px;
+
+  .dataTables_length,
+  .dataTables_paginate {
+    display: none;
+  }
+  .dataTables_info {
+    height: 50px;
+    @include breakpoint($brk-mobile) {
+     height: auto;
+    }
+    padding-top: 10px;
+
+    font-family: $font_normal;
+    @include rem('font-size',18);
     font-weight: bold;
+    color: #1d1d1b;
   }
-}
-
-
-
-.table-gradient {
-  background: #efebe7; /* Old browsers */
-  background:    -moz-linear-gradient(top,  #efebe7 0%, #efebe7 86%, #cccbc7 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#efebe7), color-stop(86%,#efebe7), color-stop(100%,#cccbc7)); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top,  #efebe7 0%,#efebe7 86%,#cccbc7 100%); /* Chrome10+,Safari5.1+ */
-  background:      -o-linear-gradient(top,  #efebe7 0%,#efebe7 86%,#cccbc7 100%); /* Opera 11.10+ */
-  background:     -ms-linear-gradient(top,  #efebe7 0%,#efebe7 86%,#cccbc7 100%); /* IE10+ */
-  background:         linear-gradient(to bottom,  #efebe7 0%,#efebe7 86%,#cccbc7 100%); /* W3C */
-
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#efebe7', endColorstr='#CCCBC7',GradientType=0 ); /* IE6-8 */
-}
-
-tr {
-  background: none;
-  line-height: 38px !important;
-  td {
-    padding: 0 0 0 10px;
+  .top {
+    height: 50px;
   }
-  tr:first-child a:before {
-    content: none;
+  .left, .right {
+    width: 50%;
   }
-  tr {
-    background: none;
-    line-height: 48px !important;
-    td {
-      padding: 0 0 0 10px;
+  .left {
+    float: left;
+  }
+  .right {
+    float: right;
+  }
+  .dataTables_filter {
+    @include breakpoint($brk-mobile) {
+      display: none;
+    }
+    input {
+      margin: 0 0 10px 8px;
+      width: 110px;
+      background: url("../images/icons/icon-search-header.png") no-repeat right center;
+      background-size: 30px 30px;
+      border: 2px solid #EFEBE7;
+      padding: 0 20px 0 10px;
+      height: 36px;
+      float: right;
+      -webkit-transition: all 0.5s;
+      -moz-transition: all 0.5s;
+      transition: all 0.5s;
+      &:focus {
+        width: 35%;
+      }
+    }
+  }
+
+  table {
+    width: 100% !important;
+    border-top: 1px solid #d8d7d1;
+    border-bottom: 1px solid #d8d7d1;
+    tr {
+      height: 60px;
+      &.odd {
+        background: #fff;
+      }
+      &.even {
+        background: #EFEBE7;
+      }
+      td {
+        padding: 0 0 0 10px;
+      }
+      td,
+      th {
+        vertical-align: middle;
+        border-right: 1px solid white;
+
+        button { 
+          margin: 0;
+        }
+      }
+      th {
+        width: auto !important;
+        position: relative;
+        outline: none;
+        padding: 0 0 0 10px;
+        background-color: $lighter_grey;
+        font-weight: bold;
+        &:last-child:after {
+          display: none;
+        }
+        &.narrow-td {
+          width: 60px !important;
+        }
+        &.sorting, &.sorting_desc, &.sorting_asc {
+          cursor: pointer;
+        }
+      }
+      .narrow-td {
+        text-align: center;
+        .icon {
+          @include rem('font-size',28);
+        }
+      }
+      .sorting:after {
+        color: #D8D7D1;
+      }
+      .sorting_desc:after {
+        color: #000000;
+      }
+      .sorting_asc:after {
+        color: #000000;
+        -ms-transform: rotate(180deg);
+        /* IE 9 */
+        -webkit-transform: rotate(180deg);
+        /* Chrome, Safari, Opera */
+        transform: rotate(180deg);
+      }
+      .sorting:after,
+      .sorting_desc:after,
+      .sorting_asc:after {
+        font-family: 'aegon_icons';
+        @include rem('font-size',12);
+        -webkit-font-smoothing: antialiased;
+        content: '\e630';
+        position: absolute;
+        right: 20px;
+      }
+    }
+    /* Collapsed*/
+    &.dtr-inline.collapsed {
+      border-top: 0;
+      thead {
+        display: none;
+      }
+      tr {
+        cursor: pointer;
+        background: #fff;
+        height: 40px;
+        border-top: 1px solid #e0e0e0;
+        &:before {
+          left: 5px;
+          margin-top: 7px;
+          position: absolute;
+          font-family: "aegon_icons";
+          font-size: 12px;
+          color: #3395d3;
+          content: "\e901";
+        }
+        &:first-child {
+          border: 0;
+        }
+        &.child {
+          border: 0;
+          &:before {
+            visibility: hidden;
+          }
+        }
+        td {
+          padding-left: 25px;
+          position: relative;
+          ul {
+            padding: 0;
+            margin: 0;
+            li {
+              margin-bottom: 10px;
+              &:first-child {
+                display: none;
+              }
+              span:first-child {
+                font-weight: bold;
+                display: block;
+              }
+            }
+          }
+        }
+        .icon {
+          position: absolute;
+          right: 0;
+          top: -30px;
+          @include rem('font-size', 28);
+        }
+      }
     }
   }
 }
-
-.alt {
-  tr:nth-child(even) {
-    background-color: $lighter_grey;
-  }
-  tr:nth-child(odd) {
-    background-color: #fff;
-  }
-  th {
-    padding: 0 0 0 10px;
-    background-color: $lighter_grey;
-    font-weight: bold;
-  }
+.table-title {
+  font-family: $font_light;
+  @include rem('font-size', 30);
+  color: $blue;
+  display: block;
+  @include rem('line-height', 32);
+}
+.table-desc {
+  display:block;
+  position:absolute;
+  margin-top: 10px;
+  color: #1d1d1b;
+  font-family: $font_normal;
+  @include rem('font-size',18);
+  font-weight: bold;
 }
 
-.table_title {
-  display: block;
-  margin-bottom: 8px;
-  color: #1d1d1b;
-  font-family: "senticosansdtregular", Arial, Verdana, sans-serif;
-  font-size: 18px;
-  font-weight: bold;
+.show-all {
+  position: absolute;
+  padding: 3px 5px;
+  left: 50%;
+  margin-left: -55px;
+  background: #EFEBE7;
+  text-align: center;
+  color: #3395d3;
+  width: 110px;
+  cursor: pointer;
+  border-bottom-right-radius: 0.1875rem;
+  border-bottom-left-radius: 0.1875rem;
+  &:before {
+    content: "Toon alles" !important;
+  }
+  &:after {
+    display: block;
+    @include rem('font-size',10);
+    font-family: "aegon_icons";
+    content: "\e600";
+    -ms-transform: rotate(90deg);
+    /* IE 9 */
+    -webkit-transform: rotate(90deg);
+    /* Chrome, Safari, Opera */
+    transform: rotate(90deg);
+    margin: -6px 0 -4px 0;
+  }
+  &.changed:before {
+    content: "Verbergen" !important;
+  }
+  &.changed::after {
+    /* this selector is more specific, so it takes precedence over the other :after */
+    transform: rotate(-90deg) !important;
+  }
 }

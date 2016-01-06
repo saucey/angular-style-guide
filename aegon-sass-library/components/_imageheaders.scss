@@ -1,21 +1,6 @@
 //
 // Header component
 // --------------------------------------------------
-$line-height-jumbo: $jumbo * 1.5;
-$line-height-xxxx-large: $xxxx-large * 1.5;
-$line-height-xxx-large: $xxx-large * 1.5;
-$line-height-xx-large: $xx-large * 1.5;
-$line-height-large: $large * 1.5;
-$line-height-x-large: $x-large * 1.5;
-
-@include breakpoint($brk-tablet) {
-  .image-header {
-    > h1 {
-      @include rem("line-height", $line-height-xxx-large);
-      @include rem("font-size", $xxx-large);
-    }
-  }
-}
 
 .image-header {
   position: relative;
@@ -29,79 +14,96 @@ $line-height-x-large: $x-large * 1.5;
     margin-left: 5%;
     color: $white;
 
-    @include rem("line-height", $line-height-xxx-large);
-    @include rem("font-size", $xxxx-large);
+    @include rem("line-height", $line-height-xx-large);
+    @include rem("font-size", $xx-large);
+    font-family: $font_thin;
   }
-  h4 {
+  h2, h3, h4 {
     margin: 0;
-
+    color: $black;
     @include rem("line-height", $line-height-large);
     @include rem("font-size", $large);
   }
   .header-element {
-    position: absolute;
     bottom: 0;
     margin: 5%;
+    position: relative;
+    margin-top: -75px;
     h1 {
-      position: relative;
       margin: 0;
       color: $white;
-
-      @include rem("line-height", $line-height-xxx-large);
-      @include rem("font-size", $xxx-large);
+      position: absolute;
+      top: -40px;
+      @include rem("line-height", 35);
+      @include rem("font-size", 30);
+      font-family: $font_thin;
     }
     .header-element-wrapper {
       position: relative;
-      width: 80%;
       padding: 20px;
+      top: 0;
+      display: block;
+      width: 100%;
+      border-radius: $elements_border_radius;
       background-color: rgba(255, 255, 255, 0.8);
     }
   }
 }
 
-@include breakpoint($brk-mobile and "only screen" (max-width 1024px)) {
+@include breakpoint($brk-tablet) {
   .image-header {
     > h1 {
       @include rem("line-height", $line-height-xx-large);
       @include rem("font-size", $xx-large);
     }
     .header-element {
-      position: relative;
-      margin-top: -100px;
-      .header-element-wrapper {
-        top: 0;
-        display: block;
-        width: 100%;
-        border-radius: 4px;
-        background-color: rgba(255, 255, 255, 0.8);
-      }
       h1 {
-        position: absolute;
         top: -60px;
-        margin-bottom: 0;
-        color: $white;
-
         @include rem("line-height", $line-height-xx-large);
         @include rem("font-size", $xx-large);
       }
-      h4 {
-        margin: 0;
+    }
+  }
+}
+
+@include breakpoint($brk-ipad-portrait) {
+  .image-header {
+    > h1 {
+      @include rem("line-height", $line-height-xxxx-large);
+      @include rem("font-size", $xxxx-large);
+    }
+    .header-element h1 {
+      @include rem("line-height", $line-height-xxx-large);
+      @include rem("font-size", $xxx-large);
+    }
+  }
+}
+
+@include breakpoint($brk-ipad-landscape) {
+  .image-header {
+    > h1 {
+      @include rem("line-height", $line-height-jumbo);
+      @include rem("font-size", $jumbo);
+    }
+    .header-element {
+      position: absolute;
+      bottom: 0;
+      margin: 5%;
+
+      h1 {
+        position: relative;
+        top: -10px;
+      }
+      .header-element-wrapper {
+        width: 80%;
       }
     }
   }
 }
 
 @include breakpoint($brk-large-desktop) {
-  .image-header {
-    h1 {
-      @include rem("line-height", $line-height-jumbo);
-      @include rem("font-size", $jumbo);
-    }
-    .header-element {
-      h1 {
-        @include rem("line-height", $line-height-xxxx-large);
-        @include rem("font-size", $xxxx-large);
-      }
-    }
+  .image-header .header-element h1 {
+    @include rem("line-height", $line-height-jumbo);
+    @include rem("font-size", $jumbo);
   }
 }
