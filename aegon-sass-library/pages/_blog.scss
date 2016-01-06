@@ -126,8 +126,11 @@
         overflow: hidden;
         padding: 10px;
 
-        h3, p.date, h4, p.text{
+        h3, p.date, h4, .text{
           color:$white;
+          a{
+            color:$white;
+          }
         }
 
         .counter{
@@ -184,6 +187,9 @@
 
       h3{
         color: $blue;
+        a{
+          color: $white;
+        }
       } 
 
       h4{
