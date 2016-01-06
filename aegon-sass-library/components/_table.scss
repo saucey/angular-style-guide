@@ -1,22 +1,41 @@
 .dataTables_wrapper {
   position: relative;
-  margin-top: 50px;
-  @include breakpoint($brk-mobile) {
-      margin-top: 35px;
-    }
+  padding-bottom: 46px;
+
   .dataTables_length,
   .dataTables_paginate {
     display: none;
   }
+  .dataTables_info {
+    height: 50px;
+    @include breakpoint($brk-mobile) {
+     height: auto;
+    }
+    padding-top: 10px;
+
+    font-family: $font_normal;
+    @include rem('font-size',18);
+    font-weight: bold;
+    color: #1d1d1b;
+  }
+  .top {
+    height: 50px;
+  }
+  .left, .right {
+    width: 50%;
+  }
+  .left {
+    float: left;
+  }
+  .right {
+    float: right;
+  }
   .dataTables_filter {
-    width: 100%;
-    position: absolute;
-    top: -50px;
     @include breakpoint($brk-mobile) {
       display: none;
     }
     input {
-      margin: 0 0 20px 8px;
+      margin: 0 0 10px 8px;
       width: 110px;
       background: url("../images/icons/icon-search-header.png") no-repeat right center;
       background-size: 30px 30px;
@@ -32,13 +51,7 @@
       }
     }
   }
-  .dataTables_info {
-    position: absolute;
-    top: -40px;
-    @include breakpoint($brk-mobile) {
-      top: -27px;
-    }
-  }
+
   table {
     width: 100% !important;
     border-top: 1px solid #d8d7d1;
@@ -64,7 +77,7 @@
         }
       }
       th {
-        cursor: pointer;
+        width: auto !important;
         position: relative;
         outline: none;
         padding: 0 0 0 10px;
@@ -72,6 +85,12 @@
         font-weight: bold;
         &:last-child:after {
           display: none;
+        }
+        &.narrow-td {
+          width: 60px !important;
+        }
+        &.sorting, &.sorting_desc, &.sorting_asc {
+          cursor: pointer;
         }
       }
       .narrow-td {
@@ -166,6 +185,8 @@
   font-family: $font_light;
   @include rem('font-size', 30);
   color: $blue;
+  display: block;
+  @include rem('line-height', 32);
 }
 .table-desc {
   display:block;
@@ -178,9 +199,10 @@
 }
 
 .show-all-payments {
-  display: block;
+  position: absolute;
   padding: 3px 5px;
-  margin: 0 auto;
+  left: 50%;
+  margin-left: -55px;
   background: #EFEBE7;
   text-align: center;
   color: #3395d3;
