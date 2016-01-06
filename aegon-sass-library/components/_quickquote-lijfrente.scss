@@ -34,32 +34,34 @@
     .input-header {
       width: 100%;
       overflow: auto;
-      min-height: 44px;
-      line-height: 44px;
       @include rem('margin', 0, 100, 20, 0);
+      display: table;
       label {
         color: $light_blue;
         display: inline-block;
         font-weight: normal;
         vertical-align: middle;
+        display: table-cell;
+        width: 60%;
       }
       .input-container {
         float:right;
         position: relative;
-        margin-right: 24px;
+        @include rem('margin-right', 24);
         input {
           display: inline-block;
           background: $white;  
         }
         .year {
           display: inline-block;
-          margin: 0 4px 0 14px;
+          @include rem('margin', 0, 4, 0, 14);
         }
       }
       .help {
         position: absolute;
+        @include rem('margin', 11, 0, 0, 0);
         right: 40px;
-        margin: 0;
+
       }
     }
     .slider-container {
@@ -94,71 +96,33 @@
       border-width: 20px 30px 0 30px;
       left: 30px;
     }
-     h3 {
-      color: $slightly_darker_blue;
-      @include rem('margin', 0, 0, 30, 10);
-      font-family: $font_normal;
-      font-weight: bold;
-      &:before {
-        font-family: $font_icons;
-        content: $font_icons_calculator;
-        left: -10px;
-        position: relative;
-      }
-    }  
     .calculation {
-      position: relative;
-      width: 80%;
-      @include rem('padding', 30);
       .input-header {
         overflow: auto;
         @include rem('margin', 0, 100, 20, 0);
-        label {
-          color: $light_blue;
-          display: inline-block;
-          font-weight: normal;
-        }
-        .input-container {
-          float:right;
-          position: relative;
-          margin-right: 40px;
-          input {
-            display: inline-block;
-            background: $white;  
-          }
-          .year {
-            display: inline-block;
-            margin: 0 4px 0 14px;
-          }
-        }
         .help {
-          position: absolute;
           right: 45px;
         }
-      }
-      .slider-container {
-        @include rem('margin', 0, 0, 32, 0);
-      }
-      .amount.slider {
-        input {
-          width: 100px;
-        }
-      } 
-      .time.slider {
-        input {
-          width: 50px;
-        }
-      }
-    }
-    .result {
-      background: $slightly_darker_blue;
-      border-radius: 0 0 6px 6px;
-      color: $white;
-      @include rem('padding', 30);
-      .uitkering-result, .rente-result {
-        @include rem("font-size", $large);
-        @include rem('margin', 0, 0, 20, 0);
-      }
+      }    
     }
   }
+}
+
+@include breakpoint($brk-large-desktop) { 
+  .quickquote.lijfrente {
+    .calculation {
+      width: 80%;
+      .input-header {
+        overflow: auto;
+        @include rem('margin', 0, 100, 20, 0);
+        .input-container {
+          @include rem('margin-right', 100);
+        }
+        .help {
+          right: 45px;
+        }
+      }    
+    }
+  }
+
 }
