@@ -6,7 +6,7 @@
 
   // Add new item to public Drupal object
   Drupal.behaviors.slider = {
-    activate: function(sliderClass,inputClass,sliderValue,sliderMin,sliderMax,sliderStep, Currenty) {
+    activate: function(sliderClass,inputClass,sliderValue,sliderMin,sliderMax,sliderStep,Currenty) {
       Drupal.behaviors.tooltip.activate(".quickquote");
       $(sliderClass).slider({
         range: "max",
@@ -20,7 +20,7 @@
       });
       $(inputClass).val( Currenty + $(sliderClass).slider( "value" ) );
       $(inputClass).keyup(function() {
-        $(sliderClass).slider("value" , $(this).val().replace(/\u20ac/g, ''))
+        $(sliderClass).slider("value" , $(this).val().replace(Currenty, ''))
       });
     }
   };
