@@ -39,10 +39,10 @@
       list-style: circle inside;
       li {
         list-style: inherit;
-        .thumb-up, thumb-down {
+        .thumb-up, .thumb-down {
           list-style: none;
           a {
-            float:left;
+            float: left;
           }
         }
       }
