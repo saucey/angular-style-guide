@@ -1,300 +1,277 @@
 //
-// BLOG
+// BLOG OVERVIEW
 // --------------------------------------------------
 
 .blog{
 
-		h3{
-			font-weight: normal;
-			@include rem('font-size', $large);
-		}
-		
-		.continue{
-			@include rem('font-size', $medium); 
-		}
+  h3{
+    font-weight: normal;
+    @include rem('font-size', $large);
+  }
+  
+  .continue{
+    @include rem('font-size', $medium); 
+  }
 
-		h4{
-			margin: 0 0 15px 0;
-		}
+  h4{
+    @include rem('margin', 0, 0, 15, 0);
+  }
 
-		p.date{
-			color:$darker_grey;
-		}
+  p.date{
+    color:$darker_grey;
+  }
+  .blog-heading{
+    h1.blog-page-title{
+      padding: 0 20px;
+    }
+    .cat-select{
+      float: right;
+      @include rem('margin-top', 20);
+      width: 180px;
+      select{
+        width:100% !important;
+      }
+    }
+    .span6{
+      width: 49%;
+    }
+  }
 
-		.blog-heading{
+  ul.pagination{
+    text-align: center;
+    @include rem('margin', 0, 0, 30, 30);
+    li{
+      display: inline;
+      @include rem('margin-top', 20);
+    }
 
-			h1.blog-page-title{
-				padding: 0 20px;
-			}
+    .current{
+      color:$white;
+      border-radius: 50%;
+      background-color: $blue;
+      padding: 5px 10px;
+    }
+  }
 
-			.cat-select{
-				float: right;
-				@include rem('margin-top', 20px); 
-				width: 180px;
+  .blog-image{
+    position: relative;
+    .blog-category{
+      background-color: $orange;
+      color:$white;
+      padding: 5px 15px;
+      height: 30px;
+      position: absolute;
+      top:0;
+      left: 0;
 
-				select{
-					width:100% !important;
-				}
-			}
+      p{
+        line-height: normal;
+        color: $white;
+      }
+    }
+  }
 
-			.span6{
-				width: 49%;
-			}
-		}
+  .blog-content{
+    position: relative;
 
-		ul.pagination{
-			text-align: center;
-			margin-top: 25px;
+    .counter{
+      position: absolute;
+      right: 15px;
+      top: 10px;
+      width: 50px;
+      text-align: center;
 
-			li{
-				display: inline;
-				margin-right: 20px;
-			}
+      &:after{
+        content: "";
+        display: block;
+        width: 0; 
+        height: 0; 
+        border-top: 12px solid transparent;
+        border-bottom: 12px solid transparent;
+        border-right: 12px solid $blue; 
+        position: absolute;
+        top: 10px;
+        right: 0;
+      }
+    }
 
-			.current{
-				color:$white;
-    		border-radius: 50%;
-    		background-color: $blue;
-    		padding: 5px 10px;
-			}
-		}
+    .text{
+      @include rem('margin-bottom', 20);
+    }
+  }
 
-		.blog-image{
-			position: relative;
-			.blog-category{
-				background-color: $orange;
-				color:$white;
-				padding: 5px 15px;
-				height: 30px;
-				position: absolute;
-				top:0;
-				left: 0;
+  .nomb{
+    @include rem('margin-bottom', 0);
+  }
 
-				p{
-					line-height: normal;
-					color: $white;
-				}
-			}
-		}
+  .blog-featured{  
+    .blog-image{
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      @include rem('margin-bottom', 0);
 
-		.blog-content{
-			position: relative;
+      img{
+        width:auto;
+        height: auto;
+        max-width: 100%;
+        max-height: 100%;
+        display: block;
+      }
 
-			.counter{
-				position: absolute;
-				right: 15px;
-				top: 10px;
-				width: 50px;
-				text-align: center;
+    }
 
-				&:after{
-			    content: "";
-			    display: block;
-			    width: 0; 
-			    height: 0; 
-			    border-top: 12px solid transparent;
-			    border-bottom: 12px solid transparent;
-			    border-right: 12px solid $blue; 
-			    position: absolute;
-			    top: 10px;
-			    right: 0;
-				}
-			}
+    .blog-content{
+      background-color: $blue;
+      overflow: hidden;
+      padding: 10px;
 
-			.text{
-				margin-bottom: 20px;
-			}
-		}
+      h3, p.date, h4, p.text{
+        color:$white;
+      }
 
-		.nomb{
-			margin-bottom: 0;
-		}
+      .counter{
+        background-color: $white;
+        color: $blue;
 
-		.blog-featured{
-			
+        &:after{
+          border-right: 12px solid $white; 
+        }
+      }
+    }
+  }
 
-				.blog-image{
-					width: 100%;
-					height: 100%;
-					overflow: hidden;
-					margin-bottom: 0;
+  .blog-articles{
+    .blog-article{
+      background-color:$white;
 
-					img{
-						width:auto;
-						height: auto;
-						max-width: 100%;
-						max-height: 100%;
-						display: block;
-					}
+      img{
+        width: 100%;
+        height: auto;
+      }
 
-				}
+      .blog-image{
+        height: 220px;
+        overflow: hidden;
+      }
 
-				.blog-content{
-					background-color: $blue;
-					overflow: hidden;
-					padding: 10px;
+      .blog-content{
+        padding: 10px;
 
-					h3, p.date, h4, p.text{
-						color:$white;
-					}
-
-					.counter{
-						background-color: $white;
-						color: $blue;
-
-						&:after{
-			    		border-right: 12px solid $white; 
-						}
-					}
-				}
-
-		}
-
-		.blog-articles{
-			.blog-article{
-				background-color:$white;
-
-				img{
-					width: 100%;
-					height: auto;
-				}
-
-				.blog-image{
-					height: 220px;
-					overflow: hidden;
-				}
-
-				.blog-content{
-					padding: 10px;
-
-					.counter{
-						background-color: $blue;
-						color: $white;
-					}
-				}
-			}
-		}
+        .counter{
+          background-color: $blue;
+          color: $white;
+        }
+      }
+    }
+  }
 }
 
 @include breakpoint($brk-tablet){
-	.blog{
+  .blog{
 
     .container_12 .row-fluid .span4:last-child {
-      margin-top: 0;
+      @include rem('margin-top', 0);
+    }
+    .blog-heading{
+      h1.blog-page-title{
+        padding: 0;
+      }
     }
 
-			.blog-heading{
-				h1.blog-page-title{
-					padding: 0;
-				}
-			}
+    h3{
+      color: $blue;
+    } 
 
-			h3{
-				color: $blue;
-			}	
+    h4{
+      @include rem('margin', 0);
+    }
 
-			h4{
-				margin: 0;
-			}
-
-			.text{
-				@include rem('height', $line-height-medium * 3);
-				overflow: hidden;
-			}
+    .text{
+      @include rem('height', $line-height-medium * 3);
+      overflow: hidden;
+    }
 
 
-			.blog-content{
+    .blog-content{
+      .counter{
+        &:after{
+          border-right: 12px solid $white; 
+        }
+      }
+    }
 
-				.counter{
-					&:after{
-				    border-right: 12px solid $white; 
-					}
-				}
-			}
+    .blog-featured{
+      .blog-article{
+        max-height: none;
+      }
+    }
 
-			.blog-featured{
+    .blog-articles{
+      .blog-article{
+        background-color:$grey;
+        @include rem('margin-top', 20);
 
-				.blog-article{
-					max-height: none;
-				}
-			}
+        .blog-image{
+          height: 160px;
+        }
 
-			.blog-articles{
-				.blog-article{
-					background-color:$grey;
-					margin-top: 20px;
+        .blog-content{
+          padding: 10px;
 
-					.blog-image{
-						height: 160px;
-					}
-
-					.blog-content{
-						padding: 10px;
-
-						.counter{
-							background-color: $white;
-							color: $blue;
-						}
-					}
-				}
-			}
-	}
+          .counter{
+            background-color: $white;
+            color: $blue;
+          }
+        }
+      }
+    }
+  }
 }
 
 @include breakpoint($brk-ipad-portrait) {
-	.blog{
-
-			@include rem('margin-bottom', 50px); 
-
-			.noml{
-				margin-left: 0;
-			}
-
-			h3.continue{
-				display: none;
-			}
-			.blog-featured{
-				h3.continue{
-					display: block;
-				}
-			}
-
-	}
+  .blog{
+    @include rem('margin-bottom', 50px); 
+    .noml{
+      margin-left: 0;
+    }
+    h3.continue{
+      display: none;
+    }
+    .blog-featured{
+      h3.continue{
+        display: block;
+      }
+    }
+  }
 }
 
 @include breakpoint($brk-ipad-landscape) {
-	.blog{
-
-			.text{
-				@include rem('height', $line-height-medium * 4);
-			}
-
-			.blog-articles{
-				.blog-article{
-
-					.blog-image{
-						height: 235px;
-					}
-				}
-			}
-	}
+  .blog{
+    .text{
+      @include rem('height', $line-height-medium * 4);
+    }
+    .blog-articles{
+      .blog-article{
+        .blog-image{
+          height: 235px;
+        }
+      }
+    }
+  }
 }
 
 @include breakpoint($brk-large-desktop) {
-	.blog{
-
-
-			.text{
-				height: auto;
-			}
-
-			.blog-articles{
-				.blog-article{
-
-					.blog-image{
-						height: 270px;
-					}
-				}
-			}
-	}
+  .blog{
+    .text{
+      height: auto;
+    }
+    .blog-articles{
+      .blog-article{
+        .blog-image{
+          height: 270px;
+        }
+      }
+    }
+  }
 }
