@@ -3,7 +3,6 @@
 // --------------------------------------------------
 
 .blog {
-
   .blog-page{
     h3{
       font-weight: normal;
@@ -231,6 +230,11 @@
           @include rem('height', $line-height-medium * 2);
           overflow: hidden;
         }
+        .span4 {
+          &.noml {
+            @include rem('margin-left', 0);
+          }
+        }
       }
 
       .blog-articles{
@@ -263,26 +267,37 @@
 @include breakpoint($brk-ipad-portrait) {
   .blog{
     @include rem('margin-bottom', 50px); 
-
-    .blog-page{
-      .noml{
-        margin-left: 0;
-      }
-      h3.continue{
-        display: none;
-      }
-      .blog-featured{
-        .text{
-          @include rem('height', $line-height-medium * 2);
-          overflow: hidden;
-        }
-        h3.continue{
-          display: block;
+    .container_12 { 
+      .blog-page{
+        .row-fluid {
+          &.same-height {
+            &.blog-featured {
+              .span8{
+                flex-basis: 100% * (8/12);
+              }
+              .span4{
+                flex-basis: 100% * (4/12);
+                margin-left: 0;
+                h3.continue{
+                  display: block;
+                }
+              }
+              .text{
+                @include rem('height', $line-height-medium * 2);
+                overflow: hidden;
+              }
+            }
+            &.blog-articles {
+              h3.continue{
+                display: none;
+              }
+            }
+          }
         }
       }
     }
   }
-}
+}    
 
 @include breakpoint($brk-ipad-landscape) {
   .blog{
