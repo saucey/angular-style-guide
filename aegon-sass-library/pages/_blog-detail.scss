@@ -31,6 +31,9 @@
         text-align: center;
         background-color: $blue;
         color:$white;
+        a{
+          color:$white;
+        }
         &:after{
           content: "";
           display: block;
@@ -50,6 +53,9 @@
       }
       span.blog-detail-user{
         font-family: $font_bold;
+        a{
+          color: $black;
+        }
       }
     }
   }
