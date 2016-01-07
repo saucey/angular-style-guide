@@ -2,7 +2,8 @@
 // BLOG OVERVIEW
 // --------------------------------------------------
 
-.blog{
+.blog {
+
   .blog-page{
     h3{
       font-weight: normal;
@@ -126,8 +127,11 @@
         overflow: hidden;
         padding: 10px;
 
-        h3, p.date, h4, p.text{
+        h3, p.date, h4, .text{
           color:$white;
+          a{
+            color:$white;
+          }
         }
 
         .counter{
@@ -168,6 +172,20 @@
   }
 }
 
+@include breakpoint($brk-mobile) {
+  .blog {
+    .span1.gutter {
+      width: 0;
+      min-height: 0;
+
+      & + .span12 {
+        width: 100%;
+        margin-left: 0;
+      }
+    }
+  }
+}
+
 @include breakpoint($brk-tablet){
   .blog{
 
@@ -184,6 +202,9 @@
 
       h3{
         color: $blue;
+        a{
+          color: $white;
+        }
       } 
 
       h4{
@@ -274,9 +295,6 @@
 @include breakpoint($brk-large-desktop) {
   .blog{
     .blog-page{
-      .text{
-        height: auto;
-      }
       .blog-articles{
         .blog-article{
           .blog-image{

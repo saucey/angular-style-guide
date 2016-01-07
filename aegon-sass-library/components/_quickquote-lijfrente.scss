@@ -8,52 +8,60 @@
     width: 0;
     height: 0;
     border-style: solid;
-    border-width: 20px 30px 0 30px;
+    border-width: 10px 10px 0 10px;
     border-color: #ffffff transparent transparent transparent;
     -webkit-transform: rotate(360deg);
     top: 0;
-    left: 30px;
+    left: 54px;
     position: absolute;
   }
    h3 {
     color: $slightly_darker_blue;
-    @include rem('margin', 0, 0, 30, 10);
+    @include rem('margin', 0, 0, 30, 30);
     font-family: $font_normal;
     font-weight: bold;
     &:before {
       font-family: $font_icons;
       content: $font_icons_calculator;
-      left: -10px;
-      position: relative;
+      left: 30px;
+      position: absolute;
     }
   }  
   .calculation {
     position: relative;
-    width: 80%;
+    width: 100%;
     @include rem('padding', 30);
     .input-header {
+      width: 100%;
       overflow: auto;
       @include rem('margin', 0, 100, 20, 0);
+      display: table;
       label {
         color: $light_blue;
         display: inline-block;
         font-weight: normal;
+        vertical-align: middle;
+        display: table-cell;
+        width: 60%;
       }
       .input-container {
         float:right;
         position: relative;
+        @include rem('margin-right', 24);
         input {
           display: inline-block;
           background: $white;  
         }
         .year {
           display: inline-block;
-          margin: 0 4px 0 14px;
+          @include rem('margin', 0, 4, 0, 14);
         }
       }
       .help {
         position: absolute;
-        right: 0;
+        @include rem('margin', 11, 0, 0, 0);
+        right: 40px;
+
       }
     }
     .slider-container {
@@ -85,80 +93,35 @@
 @include breakpoint($brk-tablet) { 
   .quickquote.lijfrente {
     .triangle {
-      width: 0;
-      height: 0;
-      border-style: solid;
       border-width: 20px 30px 0 30px;
-      border-color: #ffffff transparent transparent transparent;
-      -webkit-transform: rotate(360deg);
-      top: 0;
       left: 30px;
-      position: absolute;
     }
-     h3 {
-      color: $slightly_darker_blue;
-      @include rem('margin', 0, 0, 30, 10);
-      font-family: $font_normal;
-      font-weight: bold;
-      &:before {
-        font-family: $font_icons;
-        content: $font_icons_calculator;
-        left: -10px;
-        position: relative;
-      }
-    }  
     .calculation {
-      position: relative;
-      width: 80%;
-      @include rem('padding', 30);
       .input-header {
         overflow: auto;
         @include rem('margin', 0, 100, 20, 0);
-        label {
-          color: $light_blue;
-          display: inline-block;
-          font-weight: normal;
+        .help {
+          right: 45px;
         }
+      }    
+    }
+  }
+}
+
+@include breakpoint($brk-large-desktop) { 
+  .quickquote.lijfrente {
+    .calculation {
+      width: 80%;
+      .input-header {
+        overflow: auto;
+        @include rem('margin', 0, 100, 20, 0);
         .input-container {
-          float:right;
-          position: relative;
-          input {
-            display: inline-block;
-            background: $white;  
-          }
-          .year {
-            display: inline-block;
-            margin: 0 4px 0 14px;
-          }
+          @include rem('margin-right', 100);
         }
         .help {
-          position: absolute;
-          right: 0;
+          right: 45px;
         }
-      }
-      .slider-container {
-        @include rem('margin', 0, 0, 32, 0);
-      }
-      .amount.slider {
-        input {
-          width: 100px;
-        }
-      } 
-      .time.slider {
-        input {
-          width: 50px;
-        }
-      }
-    }
-    .result {
-      background: $slightly_darker_blue;
-      border-radius: 0 0 6px 6px;
-      color: $white;
-      @include rem('padding', 30);
-      .uitkering-result, .rente-result {
-        @include rem("font-size", $large);
-        @include rem('margin', 0, 0, 20, 0);
-      }
+      }    
     }
   }
 }
