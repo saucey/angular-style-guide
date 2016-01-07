@@ -174,9 +174,6 @@
   flex-wrap: wrap;
   align-content: stretch;
   div[class*='span'] {
-    margin-left: 2%;
-    *margin-left: 1.9375%;
-    min-height: 10px;
     min-width: 0;
     
     display: flex;
