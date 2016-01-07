@@ -112,7 +112,6 @@
           width:auto;
           height: auto;
           max-width: 100%;
-          min-height: 280px;
           max-height: 100%;
           display: block;
         }
@@ -215,11 +214,6 @@
         @include rem('margin', 0);
       }
 
-      .text{
-        @include rem('height', $line-height-medium * 3);
-        overflow: hidden;
-      }
-
 
       .blog-content{
         .counter{
@@ -232,6 +226,10 @@
       .blog-featured{
         .blog-article{
           max-height: none;
+        }
+        .text{
+          @include rem('height', $line-height-medium * 2);
+          overflow: hidden;
         }
       }
 
@@ -274,6 +272,10 @@
         display: none;
       }
       .blog-featured{
+        .text{
+          @include rem('height', $line-height-medium * 2);
+          overflow: hidden;
+        }
         h3.continue{
           display: block;
         }
@@ -284,11 +286,14 @@
 
 @include breakpoint($brk-ipad-landscape) {
   .blog{
-    .text{
-      @include rem('height', $line-height-medium * 4);
-    }
 
     .blog-page{
+      .blog-featured{
+        .text{
+          @include rem('height', $line-height-medium * 3);
+          overflow: hidden;
+        }
+      }
       .blog-articles{
         .blog-article{
           .blog-image{
@@ -303,6 +308,12 @@
 @include breakpoint($brk-large-desktop) {
   .blog{
     .blog-page{
+      .blog-featured{
+        .text{
+          @include rem('height', $line-height-medium * 5);
+          overflow: hidden;
+        }
+      }
       .blog-articles{
         .blog-article{
           .blog-image{
