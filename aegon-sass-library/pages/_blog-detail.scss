@@ -4,7 +4,7 @@
 
 
 .blog-detail{
-  section.blog-detail-page{
+  .blog-detail-page{
     .blog-detail-header {
       .blog-detail-image img{
         width: 100%;
@@ -63,7 +63,7 @@
 
 @include breakpoint($brk-tablet){
   .blog-detail{
-    section.blog-detail-page{
+    .blog-detail-page{
       .blog-detail-header {
         .blog-detail-image img{
           border-radius: 5px;
