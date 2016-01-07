@@ -9,7 +9,7 @@
   Drupal.behaviors.table = {
 
     attach: function () {
-      this.createTable('#tableDemos', {ordering: false, info: false, bFilter: false});
+      this.createTable('.tableDemo');
     },
 
     createTable: function(table_class, options) {
@@ -22,7 +22,7 @@
           sInfoEmpty: "Geen resultaten gevonden",
           sInfoFiltered: "",
         },
-        sDom: '<"top"<"left"i><"right"f>>rtlp',
+        sDom: 'ifrtlp',
         bFilter: true,
         aoColumns: [
             null,
