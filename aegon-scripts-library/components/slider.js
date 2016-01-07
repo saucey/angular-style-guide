@@ -20,7 +20,7 @@
       });
       $(inputClass).val( Currenty + $(sliderClass).slider( "value" ) );
       $(inputClass).keyup(function() {
-        $(sliderClass).slider("value" , $(this).val().replace(Currenty, ''))
+        $(sliderClass).slider("value" , $(this).val().replace(Currenty, ''));
       });
     }
   };
