@@ -40,37 +40,18 @@
 
   h2 {
     position: relative;
-    @include rem('font-size', 25);
-    @include rem('margin-top', 25);
-    //@include rem('padding', 20, 0, 20, 15);
-    @include rem('line-height', 25);
-    font-weight: bold;
-    cursor: pointer;
-    user-select: none;
-    margin-bottom: 35px;
+    margin: 0;
 
     &:before {
-      display: inline-block;
+      position: absolute;
+      left: 0;
+      margin-left: -40px;
+
       @include rem('font-size', 25);
-      //@include rem('margin', 0, 20, 0, 0);
       font-weight: normal;
       -webkit-font-smoothing: antialiased;
     }
 
-    /*&:after {
-      display: inline-block;
-      @include rem('font-size', 15);
-      position: absolute;
-      // top: 0;
-      right: 0;
-      @include rem('margin-right', 30);
-      font-family: $font_icons;
-      content: '\e600';
-      font-weight: normal;
-      -webkit-font-smoothing: antialiased;
-      transition: transform .2s ease;
-      transform: rotate(90deg);
-    }*/
   }
 
   dl.row-fluid {
@@ -124,28 +105,6 @@
         display: block;
         max-height: inherit;
         @include rem('padding', 10, 0);
-      }
-    }
-
-    h2 {
-      @include rem('font-size', 25);
-      @include rem('padding', 0, 0);
-      @include rem('margin', 5, 0, 20, 0);
-      @include rem('line-height', 25);
-      font-weight: normal;
-      cursor: default;
-      margin-bottom: 35px;
-
-      &:before {
-        position: absolute;
-        top: 50%;
-        left: 0;
-        transform: translateY(-50%);
-        @include rem('margin', 0, 0, 0, -40);
-      }
-
-      &:after {
-        display: none;
       }
     }
 
