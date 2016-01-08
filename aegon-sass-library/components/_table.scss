@@ -48,6 +48,7 @@
     width: 100% !important;
     border-top: 1px solid #d8d7d1;
     border-bottom: 1px solid #d8d7d1;
+    clear: both; /* FF Fix */
     tr {
       height: 60px;
       &.odd {
