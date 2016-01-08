@@ -3,7 +3,6 @@
 // --------------------------------------------------
 
 .blog {
-
   .blog-page{
     h3{
       font-weight: normal;
@@ -21,6 +20,7 @@
     p.date{
       color:$darker_grey;
     }
+
     .blog-heading{
       h1.blog-page-title{
         padding: 0 20px;
@@ -74,14 +74,12 @@
 
     .blog-content{
       position: relative;
-
       .counter{
         position: absolute;
         right: 15px;
         top: 10px;
         width: 50px;
         text-align: center;
-
         &:after{
           content: "";
           display: block;
@@ -95,12 +93,10 @@
           right: 0;
         }
       }
-
       .text{
         @include rem('margin-bottom', 20);
       }
     }
-
     .nomb{
       @include rem('margin-bottom', 0);
     }
@@ -111,7 +107,6 @@
         height: 100%;
         overflow: hidden;
         @include rem('margin-bottom', 0);
-
         img{
           width:auto;
           height: auto;
@@ -119,24 +114,21 @@
           max-height: 100%;
           display: block;
         }
-
       }
 
       .blog-content{
         background-color: $blue;
         overflow: hidden;
         padding: 10px;
-
         h3, p.date, h4, .text{
           color:$white;
           a{
             color:$white;
           }
         }
-
         .counter{
           background-color: $white;
-          color: $blue;
+          color: $white;
 
           &:after{
             border-right: 12px solid $white; 
@@ -162,9 +154,19 @@
         .blog-content{
           padding: 10px;
 
+          h3, p.date, h4, .text{
+            a{
+              color:$blue;
+            }
+          }
+
           .counter{
             background-color: $blue;
             color: $white;
+
+            a{
+              color: $white;
+            }
           }
         }
       }
@@ -211,11 +213,6 @@
         @include rem('margin', 0);
       }
 
-      .text{
-        @include rem('height', $line-height-medium * 3);
-        overflow: hidden;
-      }
-
 
       .blog-content{
         .counter{
@@ -228,6 +225,15 @@
       .blog-featured{
         .blog-article{
           max-height: none;
+        }
+        .text{
+          @include rem('height', $line-height-medium * 2);
+          overflow: hidden;
+        }
+        .span4 {
+          &.noml {
+            @include rem('margin-left', 0);
+          }
         }
       }
 
@@ -246,6 +252,10 @@
             .counter{
               background-color: $white;
               color: $blue;
+
+              a{
+                color: $blue;
+              }
             }
           }
         }
@@ -257,30 +267,48 @@
 @include breakpoint($brk-ipad-portrait) {
   .blog{
     @include rem('margin-bottom', 50px); 
-
-    .blog-page{
-      .noml{
-        margin-left: 0;
-      }
-      h3.continue{
-        display: none;
-      }
-      .blog-featured{
-        h3.continue{
-          display: block;
+    .container_12 { 
+      .blog-page{
+        .row-fluid {
+          &.same-height {
+            &.blog-featured {
+              .span8{
+                flex-basis: 100% * (8/12);
+              }
+              .span4{
+                flex-basis: 100% * (4/12);
+                margin-left: 0;
+                h3.continue{
+                  display: block;
+                }
+              }
+              .text{
+                @include rem('height', $line-height-medium * 2);
+                overflow: hidden;
+              }
+            }
+            &.blog-articles {
+              h3.continue{
+                display: none;
+              }
+            }
+          }
         }
       }
     }
   }
-}
+}    
 
 @include breakpoint($brk-ipad-landscape) {
   .blog{
-    .text{
-      @include rem('height', $line-height-medium * 4);
-    }
 
     .blog-page{
+      .blog-featured{
+        .text{
+          @include rem('height', $line-height-medium * 3);
+          overflow: hidden;
+        }
+      }
       .blog-articles{
         .blog-article{
           .blog-image{
@@ -295,6 +323,12 @@
 @include breakpoint($brk-large-desktop) {
   .blog{
     .blog-page{
+      .blog-featured{
+        .text{
+          @include rem('height', $line-height-medium * 5);
+          overflow: hidden;
+        }
+      }
       .blog-articles{
         .blog-article{
           .blog-image{

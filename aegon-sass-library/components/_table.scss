@@ -8,6 +8,7 @@
   }
   .dataTables_info {
     height: 50px;
+    float: left;
     @include breakpoint($brk-mobile) {
      height: auto;
     }
@@ -20,15 +21,6 @@
   }
   .top {
     height: 50px;
-  }
-  .left, .right {
-    width: 50%;
-  }
-  .left {
-    float: left;
-  }
-  .right {
-    float: right;
   }
   .dataTables_filter {
     @include breakpoint($brk-mobile) {
@@ -81,8 +73,9 @@
         position: relative;
         outline: none;
         padding: 0 0 0 10px;
-        background-color: $lighter_grey;
         font-weight: bold;
+        background-color: $lighter_grey;
+        background-clip: padding-box;
         &:last-child:after {
           display: none;
         }

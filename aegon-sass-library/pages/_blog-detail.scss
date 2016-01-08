@@ -4,7 +4,7 @@
 
 
 .blog-detail{
-  section.blog-detail-page{
+  .blog-detail-page{
     .blog-detail-header {
       .blog-detail-image img{
         width: 100%;
@@ -31,6 +31,9 @@
         text-align: center;
         background-color: $blue;
         color:$white;
+        a{
+          color:$white;
+        }
         &:after{
           content: "";
           display: block;
@@ -50,6 +53,9 @@
       }
       span.blog-detail-user{
         font-family: $font_bold;
+        a{
+          color: $black;
+        }
       }
     }
   }
@@ -57,7 +63,7 @@
 
 @include breakpoint($brk-tablet){
   .blog-detail{
-    section.blog-detail-page{
+    .blog-detail-page{
       .blog-detail-header {
         .blog-detail-image img{
           border-radius: 5px;
