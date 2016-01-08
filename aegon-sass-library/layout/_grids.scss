@@ -163,7 +163,7 @@
 
 // Flex-box implementation:
 //
-// Make sure all columns in this row have the same height. This is now only used for rows with this specific class,
+// Makes sure all columns in this row have the same height. This is now only used for rows with this specific class,
 // but we might make it available to all fluid rows.
 //
 // For examples, take a look at the call/execution elements in the flexible campaign pages.
@@ -173,65 +173,55 @@
   flex-direction: row;
   flex-wrap: wrap;
   align-content: stretch;
-  
-
   div[class*='span'] {
+    min-width: 0;
+    
     display: flex;
     align-content: stretch;
 
+    &:first-child {
+      margin-left: 0;
+    }
     > div {
       width: 100%;
       min-height: 100%;
     }
   }
-
   .span12 {
     flex-basis: 100%;
-    flex: 12;
   }
   .span11 {
     flex-basis: 91.5%;
-    flex: 11;
   }
   .span10 {
     flex-basis: 83%;
-    flex: 10;
   }
   .span9 {
     flex-basis: 74.5%;
-    flex: 9;
   }
   .span8 {
-    flex-basis: 66%;
-    flex: 8;
+    flex-basis: 66%;  
   }
   .span7 {
     flex-basis: 57.5%;
-    flex: 7;
   }
   .span6 {
     flex-basis: 49%;
-    flex: 6;
   }
   .span5 {
     flex-basis: 40.5%;
-    flex: 5;
   }
   .span4 {
     flex-basis: 32%;
-    flex: 4;
   }
   .span3 {
     flex-basis: 23.5%;
-    flex: 3;
   }
   .span2 {
     flex-basis: 15%;
-    flex: 2;
   }
   .span1 {
     flex-basis: 6.5%;
-    flex: 1;
   }
 }
 

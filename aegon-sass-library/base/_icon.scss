@@ -133,8 +133,15 @@ a.menu-5662:before {
   @extend .icon-uniE608;
 }
 .icon-verzekeren,
-.icon-4495:before {
+.icon-4495:before,
+.icon-inkomensverzekeringen:before {
   @extend .icon-uniE609;
+}
+.icon-schadeverzekeringen:before {
+  @extend .icon-uniE61B;
+}
+.icon-vermogensbeheer:before {
+  @extend .icon-uniE60F;
 }
 .icon-hypotheek,
 .icon-4496:before,
