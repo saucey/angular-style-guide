@@ -83,7 +83,7 @@
     border-radius: 0 0 6px 6px;
     color: $white;
     @include rem('padding', 30);
-    .uitkering-result, .rente-result {
+    .payment-result, .interest-result {
       @include rem("font-size", $large);
       @include rem('margin', 0, 0, 20, 0);
     }
@@ -135,6 +135,33 @@
           right: 45px;
         }
       }    
+    }
+    .result {
+      width: 100%;
+      .payment-result{
+        width: 80%;
+        * {
+          display: inline-block;        
+        }
+        &:first-child {
+          float: left;
+        }
+        &:last-child {
+          float: right;
+        }
+      } 
+      .interest-result {
+        width: 80%;
+        * {
+          display: inline-block;        
+        }
+        &:first-child {
+          float: left;
+        }
+        &:last-child {
+          float: right;
+        }
+      }
     }
   }
 }
