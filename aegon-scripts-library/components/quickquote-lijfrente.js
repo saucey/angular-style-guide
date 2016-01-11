@@ -30,13 +30,13 @@
     },
     lijfrenteCalculation: function(interest,paymentClass,interestClass,Currenty) {
       var roundingDecimals = function(input, decimals) {
-        return Math.round(input * Math.pow(10, decimals)) / Math.pow(10, decimals)
+        return Math.round(input * Math.pow(10, decimals)) / Math.pow(10, decimals);
       };
       var money = $("#amount-slider").slider("value"),
           time = $("#time-slider").slider("value"),
           months = time * 12;   
       if (isNaN(money) || months === 0 || isNaN(months)) {
-          return 0
+          return 0;
       }
       var interestPerMonth = roundingDecimals(Math.pow(1 + (interest / 100), 1 / 12) - 1, 6),
           formulaPart1 = roundingDecimals(1 / Math.pow(1 + interestPerMonth, months), 6),

@@ -81,11 +81,47 @@
   .result {
     background: $slightly_darker_blue;
     border-radius: 0 0 6px 6px;
-    color: $white;
     @include rem('padding', 30);
+    width: 100%;
     .payment-result, .interest-result {
       @include rem("font-size", $large);
       @include rem('margin', 0, 0, 20, 0);
+      color: $white;
+    }
+    .payment-result{
+      width: 100%;
+      * {
+        display: inline-block;     
+      }
+    } 
+    .interest-result {
+      width: 100%;
+      * {
+        display: inline-block;        
+      }
+    }
+    .calculated {
+      position: absolute;
+      @include rem('left', 230);
+    }
+    .footer-result {
+      width: 100%;
+      position: relative;
+      * {
+        display: inline-block; 
+      } 
+      .disclaimer {
+        color: $dark_grey;
+        @include rem("font-size", $small);
+        @include rem('margin-bottom', 20);
+        position: relative;
+      }
+      span.help {
+       position: absolute;
+      }
+      button {
+        display: block;
+      }
     }
   }
 }
@@ -138,28 +174,25 @@
     }
     .result {
       width: 100%;
-      .payment-result{
+      .payment-result, .interest-result, .footer-result{
         width: 80%;
-        * {
-          display: inline-block;        
-        }
-        &:first-child {
-          float: left;
-        }
-        &:last-child {
-          float: right;
-        }
       } 
-      .interest-result {
-        width: 80%;
+      .footer-result {
+        display: table;
+        span.help {
+
+        }
+        .disclaimer { 
+          vertical-align: middle;
+          display: table-cell;  
+        }
         * {
-          display: inline-block;        
+          display: inline-block;      
         }
-        &:first-child {
-          float: left;
-        }
-        &:last-child {
+        button {
           float: right;
+          vertical-align: middle;
+          display: table-cell; 
         }
       }
     }
