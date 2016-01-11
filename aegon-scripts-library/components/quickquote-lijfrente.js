@@ -41,10 +41,11 @@
       var interestPerMonth = roundingDecimals(Math.pow(1 + (interest / 100), 1 / 12) - 1, 6),
           formulaPart1 = roundingDecimals(1 / Math.pow(1 + interestPerMonth, months), 6),
           formulaComplete = roundingDecimals((1 - formulaPart1) / interestPerMonth, 3),  
-          montlyPayment = roundingDecimals(money / formulaComplete, 2),
-          totalInterest = roundingDecimals(((montlyPayment * months) - money), 2); 
+          montlyPayment = roundingDecimals(money / formulaComplete, 2);
+      if (money == 0 || time == 0){
+        montlyPayment = 0;
+      }
       $(paymentClass).text( Currenty + montlyPayment);
-      $(interestClass).text( Currenty + totalInterest);
     },
   };
 })(jQuery); 
