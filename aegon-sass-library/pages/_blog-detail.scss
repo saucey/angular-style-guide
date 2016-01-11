@@ -2,90 +2,81 @@
 // BLOG DETAIL
 // --------------------------------------------------
 
+.blog-detail {
+  .blog-detail-header img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .blog-article {
+    padding: 10px;
+    position: relative;
+    .date {
+      color: $darker_grey;
+    }
+    .title {
+      @include rem('margin-bottom', 10);
+    }
 
-.blog-detail{
-  .blog-detail-page{
-    .blog-detail-header {
-      .blog-detail-image img{
-        width: 100%;
-        height: auto;
+    .counter {
+      position: absolute;
+      right: 10px;
+      top: 25px;
+      width: 50px;
+      text-align: center;
+      background-color: $blue;
+      color: $white;
+
+      a {
+        color: inherit;
+      }
+      &:after {
+        content: "";
+        display: block;
+        width: 0;
+        height: 0;
+        border-top: 12px solid transparent;
+        border-bottom: 12px solid transparent;
+        border-right: 12px solid $blue;
+        position: absolute;
+        top: 10px;
+        right: 0;
       }
     }
-    article.blog-article{
-      padding: 10px;
-      position: relative;
-      p.date{
-        color:$darker_grey;
-      }
-      p.title{
-        @include rem('margin-bottom', 10);
-      }
-      .inner-article{
-        position:static;
-      }
-      .counter{
-        position: absolute;
-        right: 10px;
-        top: 25px;
-        width: 50px;
-        text-align: center;
-        background-color: $blue;
-        color:$white;
-        a{
-          color:$white;
-        }
-        &:after{
-          content: "";
-          display: block;
-          width: 0; 
-          height: 0; 
-          border-top: 12px solid transparent;
-          border-bottom: 12px solid transparent;
-          border-right: 12px solid $blue; 
-          position: absolute;
-          top: 10px;
-          right: 0;
-        }
-      }
-      h2{
-        font-family: $font_light;
-        @include rem('margin', 15, 0, 15, 0);
-      }
-      span.blog-detail-user{
-        font-family: $font_bold;
-        a{
-          color: $black;
-        }
+    h2 {
+      font-family: $font_light;
+      @include rem('margin', 15, 0, 15, 0);
+    }
+    .blog-detail-user {
+      font-family: $font_bold;
+      a {
+        color: $black;
       }
     }
   }
 }
 
-@include breakpoint($brk-tablet){
-  .blog-detail{
-    .blog-detail-page{
-      .blog-detail-header {
-        .blog-detail-image img{
-          border-radius: 5px;
-        }
+@include breakpoint($brk-tablet) {
+  .blog-detail {
+    .blog-detail-header img {
+      border-radius: $elements_border_radius;
+    }
+    .blog-article {
+      padding: 0;
+      @include rem('margin-bottom', 25);
+
+      .inner-article {
+        position: relative;
       }
-      article.blog-article{
-        padding: 0;
-        @include rem('margin-bottom', 25);
 
-        .inner-article{
-          position:relative;
-        }
+      .date {
+        display: block;
+        @include rem('margin-bottom', 5);
+      }
 
-        p.date{
-          display: block;
-          @include rem('margin-bottom', 5);
-        }
-
-        .counter{
-          top:0;
-          right:0;
-        }
+      .counter {
+        top: 0;
+        right: 0;
       }
     }
   }
