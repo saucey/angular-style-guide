@@ -37,6 +37,7 @@ button,
   @include rem("border-radius", $elements_border_radius);
   a {
     color: inherit;
+    background: inherit;
   }
   &:hover {
     opacity: 0.8;
