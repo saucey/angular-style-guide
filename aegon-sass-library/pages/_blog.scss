@@ -228,11 +228,6 @@
         @include rem('height', $line-height-medium * 2);
         overflow: hidden;
       }
-      .span4 {
-        &.noml {
-          @include rem('margin-left', 0);
-        }
-      }
     }
 
     .blog-articles{
@@ -272,7 +267,6 @@
       }
       .span4{
         flex-basis: 31.9375%;
-        margin-left: 0;
         min-height: 280px;
         h3.continue{
           display: block;
