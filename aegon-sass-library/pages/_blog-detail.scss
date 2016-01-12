@@ -46,7 +46,6 @@
     h2 {
       font-family: $font_light;
       @include rem('margin', 15, 0, 15, 0);
-      color: $white;
     }
     .blog-detail-user {
       font-family: $font_bold;
@@ -76,6 +75,7 @@
     input[type=submit]{
       @extend .button;
       @extend .button.orange;
+      color: $white;
     }
 
     .grippie{
