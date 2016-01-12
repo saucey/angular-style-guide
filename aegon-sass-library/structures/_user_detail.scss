@@ -229,6 +229,10 @@
 // Hide login button by default
 .login-link-wrapper {
   display: none;
+
+  .button {
+    padding: 10px;
+  }
 }
 
 // Hide the banner with a request to the user to provide a mobile number by default.
