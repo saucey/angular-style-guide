@@ -42,7 +42,7 @@
           formulaPart1 = roundingDecimals(1 / Math.pow(1 + interestPerMonth, months), 6),
           formulaComplete = roundingDecimals((1 - formulaPart1) / interestPerMonth, 3),  
           monthlyPayment = roundingDecimals(money / formulaComplete, 2);
-      if (money == 0 || time == 0){
+      if (money === 0 || time === 0){
         monthlyPayment = 0;
       }
       $(paymentClass).text(Currency + monthlyPayment);
