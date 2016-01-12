@@ -108,12 +108,9 @@
       overflow: hidden;
       @include rem('margin-bottom', 0);
       img{
-        width:auto;
-        height: auto;
-        max-width: 100%;
-        max-height: 100%;
         display: block;
-        overflow: hidden;
+        width: 100%;
+        height: auto;
       }
     }
 
@@ -263,11 +260,9 @@
       .span8{
         flex-basis: 65.9375%;
         overflow: hidden;
-        min-height: 280px;
       }
       .span4{
         flex-basis: 31.9375%;
-        min-height: 280px;
         h3.continue{
           display: block;
         }
@@ -275,15 +270,13 @@
     }
     .blog-featured{
       .blog-image{
+        height: 350px;
         img{
-          height:350px;
-          width:auto;
-          max-width:none;
+          height: 100%;
+          width: auto;
         }
       }
       .text{
-      //@include rem('height', $line-height-medium * 2);
-
         @include rem('height', $line-height-medium * 5);
         overflow: hidden;
       }
@@ -299,8 +292,8 @@
     .text{
       overflow: hidden;
     }
-    .blog-articles .blog-article .blog-image{
-      height: 235px;
+    .blog-featured .blog-image img {
+      min-width: 100%;
     }
   }
 }
@@ -308,18 +301,10 @@
 @include breakpoint($brk-large-desktop) {
   .blog{
     .container_12 .row-fluid.same-height.blog-featured {
-      .span8 .blog-image img{
-        width:100%;
-        height:auto;
-      }
-
       .text{
         @include rem('height', $line-height-medium * 5);
         overflow: hidden;
       }
-    }
-    .blog-articles .blog-article .blog-image{
-      height: 270px;
     }
   }
 }
