@@ -54,6 +54,50 @@
       }
     }
   }
+
+  .comment-form{
+    background-color: $grey;
+    padding: 25px;
+
+    .form-item-name, .form-item-mail{
+      width: 100%;
+    }
+
+    .form-textarea-wrapper textarea, input[type=text], input[type=email]{
+      background-color: $white;
+      border:none;
+    }
+
+    input[type=text], input[type=email]{
+      width:100%;
+    }
+
+    input[type=submit]{
+      position: relative;
+      display: inline-block;
+      height: auto;
+      margin: 0 0 10px;
+      padding: 10px;
+      cursor: pointer;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      white-space: normal;
+      color: #ffffff;
+      border: 0;
+      outline: 0;
+      background-color: $orange;
+      font-size: 18px;
+      line-height: 23px;
+      border-radius: 3px;
+      border-radius: 0.1875rem;
+    }
+
+    .grippie{
+      display: none;
+    }
+  }
 }
 
 @include breakpoint($brk-tablet) {
@@ -78,6 +122,19 @@
         top: 0;
         right: 0;
       }
+    }
+
+    .comment-form{
+
+      .form-item-name, .form-item-mail{
+        width: 49.1452991453%;
+        float: left;
+      }
+
+      .form-item-mail{
+        margin-left: 1.7%;
+      }
+
     }
   }
 }
