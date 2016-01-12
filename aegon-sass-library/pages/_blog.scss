@@ -3,170 +3,170 @@
 // --------------------------------------------------
 
 .blog {
-  .blog-page{
-    h3{
-      font-weight: normal;
-      @include rem('font-size', $large);
-    }
-    
-    .continue{
-      @include rem('font-size', $medium); 
-    }
+  h3{
+    font-weight: normal;
+    @include rem('font-size', $large);
+  }
+  
+  .continue{
+    @include rem('font-size', $medium); 
+  }
 
-    h4{
-      @include rem('margin', 0, 0, 15, 0);
-    }
+  h4{
+    @include rem('margin', 0, 0, 15, 0);
+  }
 
-    p.date{
-      color:$darker_grey;
-    }
+  p.date{
+    color:$darker_grey;
+  }
 
-    .blog-heading{
-      h1.blog-page-title{
-        padding: 0 20px;
-      }
-      .cat-select{
-        float: right;
-        @include rem('margin-top', 20);
-        width: 180px;
-        select{
-          width:100% !important;
-        }
-      }
-      .span6{
-        width: 49%;
+  .blog-heading{
+    h1.blog-page-title{
+      padding: 0 20px;
+    }
+    .cat-select{
+      float: right;
+      @include rem('margin-top', 20);
+      width: 180px;
+      select{
+        width:100% !important;
       }
     }
+    .span6{
+      width: 49%;
+    }
+  }
 
-    ul.pagination{
+  ul.pagination{
+    text-align: center;
+    @include rem('margin', 30, 0, 30, 0);
+    li{
+      display: inline;
+      @include rem('margin-top', 20);
+    }
+
+    .current{
+      color:$white;
+      border-radius: 50%;
+      background-color: $blue;
+      padding: 5px 10px;
+    }
+  }
+
+  .blog-image{
+    position: relative;
+    .blog-category{
+      background-color: $orange;
+      color:$white;
+      padding: 5px 15px;
+      height: 30px;
+      position: absolute;
+      top:0;
+      left: 0;
+
+      p{
+        line-height: normal;
+        color: $white;
+      }
+    }
+  }
+
+  .blog-content{
+    position: relative;
+    .counter{
+      position: absolute;
+      right: 15px;
+      top: 10px;
+      width: 50px;
       text-align: center;
-      @include rem('margin', 30, 0, 30, 0);
-      li{
-        display: inline;
-        @include rem('margin-top', 20);
-      }
-
-      .current{
-        color:$white;
-        border-radius: 50%;
-        background-color: $blue;
-        padding: 5px 10px;
+      &:after{
+        content: "";
+        display: block;
+        width: 0; 
+        height: 0; 
+        border-top: 12px solid transparent;
+        border-bottom: 12px solid transparent;
+        border-right: 12px solid $blue; 
+        position: absolute;
+        top: 10px;
+        right: 0;
       }
     }
+    .text{
+      @include rem('margin-bottom', 20);
+    }
+  }
+  .nomb{
+    @include rem('margin-bottom', 0);
+  }
 
+  .blog-featured{  
+    background-color: $blue;
     .blog-image{
-      position: relative;
-      .blog-category{
-        background-color: $orange;
-        color:$white;
-        padding: 5px 15px;
-        height: 30px;
-        position: absolute;
-        top:0;
-        left: 0;
-
-        p{
-          line-height: normal;
-          color: $white;
-        }
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      @include rem('margin-bottom', 0);
+      img{
+        width:auto;
+        height: auto;
+        max-width: 100%;
+        max-height: 100%;
+        display: block;
+        overflow: hidden;
       }
     }
 
     .blog-content{
-      position: relative;
+      background-color: $blue;
+      overflow: hidden;
+      padding: 10px;
+      h3, p.date, h4, .text{
+        color:$white;
+        a{
+          color:$white;
+        }
+      }
       .counter{
-        position: absolute;
-        right: 15px;
-        top: 10px;
-        width: 50px;
-        text-align: center;
-        &:after{
-          content: "";
-          display: block;
-          width: 0; 
-          height: 0; 
-          border-top: 12px solid transparent;
-          border-bottom: 12px solid transparent;
-          border-right: 12px solid $blue; 
-          position: absolute;
-          top: 10px;
-          right: 0;
-        }
-      }
-      .text{
-        @include rem('margin-bottom', 20);
-      }
-    }
-    .nomb{
-      @include rem('margin-bottom', 0);
-    }
+        background-color: $white;
+        color: $white;
 
-    .blog-featured{  
-      .blog-image{
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-        @include rem('margin-bottom', 0);
-        img{
-          width:auto;
-          height: auto;
-          max-width: 100%;
-          max-height: 100%;
-          display: block;
+        &:after{
+          border-right: 12px solid $white; 
         }
+      }
+    }
+  }
+
+  .blog-articles{
+    .blog-article{
+      background-color:$white;
+
+      img{
+        width: 100%;
+        height: auto;
+      }
+
+      .blog-image{
+        height: 220px;
+        overflow: hidden;
       }
 
       .blog-content{
-        background-color: $blue;
-        overflow: hidden;
         padding: 10px;
+
         h3, p.date, h4, .text{
-          color:$white;
           a{
-            color:$white;
+            color:$blue;
           }
         }
+
         .counter{
-          background-color: $white;
+          background-color: $blue;
           color: $white;
 
-          &:after{
-            border-right: 12px solid $white; 
-          }
-        }
-      }
-    }
-
-    .blog-articles{
-      .blog-article{
-        background-color:$white;
-
-        img{
-          width: 100%;
-          height: auto;
-        }
-
-        .blog-image{
-          height: 220px;
-          overflow: hidden;
-        }
-
-        .blog-content{
-          padding: 10px;
-
-          h3, p.date, h4, .text{
-            a{
-              color:$blue;
-            }
-          }
-
-          .counter{
-            background-color: $blue;
+          a{
             color: $white;
-
-            a{
-              color: $white;
-            }
           }
         }
       }
@@ -194,68 +194,65 @@
     .container_12 .row-fluid .span4:last-child {
       @include rem('margin-top', 0);
     }
+    .blog-heading{
+      h1.blog-page-title{
+        padding: 0;
+      }
+    }
 
-    .blog-page{
-      .blog-heading{
-        h1.blog-page-title{
-          padding: 0;
+    h3{
+      color: $blue;
+      a{
+        color: $white;
+      }
+    } 
+
+    h4{
+      @include rem('margin', 0);
+    }
+
+
+    .blog-content{
+      .counter{
+        &:after{
+          border-right: 12px solid $white; 
         }
       }
+    }
 
-      h3{
-        color: $blue;
-        a{
-          color: $white;
-        }
-      } 
-
-      h4{
-        @include rem('margin', 0);
+    .blog-featured{
+      .blog-article{
+        max-height: none;
       }
-
-
-      .blog-content{
-        .counter{
-          &:after{
-            border-right: 12px solid $white; 
-          }
+      .text{
+        @include rem('height', $line-height-medium * 2);
+        overflow: hidden;
+      }
+      .span4 {
+        &.noml {
+          @include rem('margin-left', 0);
         }
       }
+    }
 
-      .blog-featured{
-        .blog-article{
-          max-height: none;
+    .blog-articles{
+      .blog-article{
+        background-color:$grey;
+        @include rem('margin-top', 20);
+
+        .blog-image{
+          height: 160px;
         }
-        .text{
-          @include rem('height', $line-height-medium * 2);
-          overflow: hidden;
-        }
-        .span4 {
-          &.noml {
-            @include rem('margin-left', 0);
-          }
-        }
-      }
 
-      .blog-articles{
-        .blog-article{
-          background-color:$grey;
-          @include rem('margin-top', 20);
+        .blog-content{
+          padding: 10px;
 
-          .blog-image{
-            height: 160px;
-          }
+          .counter{
+            background-color: $white;
+            color: $blue;
 
-          .blog-content{
-            padding: 10px;
-
-            .counter{
-              background-color: $white;
+            a{
               color: $blue;
-
-              a{
-                color: $blue;
-              }
             }
           }
         }
@@ -267,75 +264,68 @@
 @include breakpoint($brk-ipad-portrait) {
   .blog{
     @include rem('margin-bottom', 50px); 
-    .container_12 { 
-      .blog-page{
-        .row-fluid {
-          &.same-height {
-            &.blog-featured {
-              .span8{
-                flex-basis: 65.9375%;
-              }
-              .span4{
-                flex-basis: 31.9375%;
-                margin-left: 0;
-                h3.continue{
-                  display: block;
-                }
-              }
-              .text{
-                @include rem('height', $line-height-medium * 2);
-                overflow: hidden;
-              }
-            }
-            &.blog-articles {
-              h3.continue{
-                display: none;
-              }
-            }
-          }
+    .container_12 .row-fluid.same-height.blog-featured {
+      .span8{
+        flex-basis: 65.9375%;
+        overflow: hidden;
+        min-height: 280px;
+      }
+      .span4{
+        flex-basis: 31.9375%;
+        margin-left: 0;
+        min-height: 280px;
+        h3.continue{
+          display: block;
         }
       }
+    }
+    .blog-featured{
+      .blog-image{
+        img{
+          height:350px;
+          width:auto;
+          max-width:none;
+        }
+      }
+      .text{
+      //@include rem('height', $line-height-medium * 2);
+
+        @include rem('height', $line-height-medium * 5);
+        overflow: hidden;
+      }
+    }
+    .blog-articles h3.continue{
+      display: none;
     }
   }
 }    
 
 @include breakpoint($brk-ipad-landscape) {
-  .blog{
-
-    .blog-page{
-      .blog-featured{
-        .text{
-          @include rem('height', $line-height-medium * 3);
-          overflow: hidden;
-        }
-      }
-      .blog-articles{
-        .blog-article{
-          .blog-image{
-            height: 235px;
-          }
-        }
-      }
+  .blog {
+    .text{
+      overflow: hidden;
+    }
+    .blog-articles .blog-article .blog-image{
+      height: 235px;
     }
   }
 }
 
 @include breakpoint($brk-large-desktop) {
   .blog{
-    .blog-page{
-      .blog-featured{
-        .text{
-          @include rem('height', $line-height-medium * 5);
-          overflow: hidden;
-        }
+    .container_12 .row-fluid.same-height.blog-featured {
+      .span8 .blog-image img{
+        width:100%;
+        height:auto;
       }
-      .blog-articles{
-        .blog-article{
-          .blog-image{
-            height: 270px;
-          }
-        }
+
+      .text{
+        @include rem('height', $line-height-medium * 5);
+        overflow: hidden;
       }
+    }
+    .blog-articles .blog-article .blog-image{
+      height: 270px;
     }
   }
 }
