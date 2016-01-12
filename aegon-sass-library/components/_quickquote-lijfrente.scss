@@ -81,11 +81,53 @@
   .result {
     background: $slightly_darker_blue;
     border-radius: 0 0 6px 6px;
-    color: $white;
     @include rem('padding', 30);
-    .uitkering-result, .rente-result {
+    width: 100%;
+    .payment-result{
       @include rem("font-size", $large);
-      @include rem('margin', 0, 0, 20, 0);
+      color: $white;
+      width: 100%;
+      * {
+        display: inline-block;     
+      }
+    } 
+    .calculated {
+      position: absolute;
+      @include rem('left', 230);
+    }
+    .footer-result {
+      width: 100%;
+      position: relative;
+      * {
+        display: inline-block; 
+      } 
+      .disclaimer {
+        color: $dark_grey;
+        @include rem("font-size", $small);
+        @include rem('margin-bottom', 20);
+        position: relative;
+      }
+      span.help {
+        position: absolute;
+        @include rem('left', 200);
+        @include rem('margin-top', 3);
+      }
+      button {
+        display: block;
+      }
+    }
+  }
+}
+@include breakpoint($brk-mobile) {
+  .quickquote.lijfrente {
+    .span1.gutter {
+      width: 0;
+      min-height: 0;
+
+      & + .span12 {
+        width: 100%;
+        margin-left: 0;
+      }
     }
   }
 }
@@ -123,6 +165,31 @@
         }
       }    
     }
-  }
+    .result {
+      width: 100%;
+      .payment-result, .footer-result{
+        width: 80%;
+      } 
+      .footer-result {
+        display: table;
+        .disclaimer { 
+          vertical-align: middle;
+          display: table-cell;  
+        }
+        * {
+          display: inline-block;      
+        }
+        span.help {
+          @include rem('margin-top', 10);
+        }
 
+        button {
+          float: right;
+          vertical-align: middle;
+          display: table-cell;
+          @include rem('margin-bottom', 0);
+        }
+      }
+    }
+  }
 }
