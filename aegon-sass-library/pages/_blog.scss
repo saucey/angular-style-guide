@@ -257,7 +257,7 @@
   .blog{
     @include rem('margin-bottom', 50px); 
     .container_12 .row-fluid.same-height.blog-featured {
-      flex-wrap:0;
+      flex-wrap:nowrap;
       .span8{
         flex-basis: 66%;
         overflow: hidden;
