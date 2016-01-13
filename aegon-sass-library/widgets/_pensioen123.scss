@@ -1,4 +1,4 @@
-// 
+//
 // Reason to don't use id selectors instead of class selectors
 // http://csswizardry.com/2011/09/when-using-ids-can-be-a-pain-in-the-class/
 // http://screwlewse.com/2010/07/dont-use-id-selectors-in-css/
@@ -18,7 +18,7 @@
       background: #3E97CF;
       color: #fff;
       text-align: center;
-      display: table; 
+      display: table;
       height: 200px;
       overflow: hidden;
 
@@ -54,7 +54,7 @@
       }
 
       .innerbox {
-        display: table-cell; 
+        display: table-cell;
         vertical-align: middle;
       }
     }
@@ -135,7 +135,7 @@
 
           .table {
             display: table;
-            position: relative; 
+            position: relative;
 
               tr:nth-child(even) {
                 background-color: #fff;
@@ -153,7 +153,7 @@
           }
 
           .image {
-            width: 95px; 
+            width: 95px;
             display: table-cell;
             vertical-align: top;
 
@@ -167,7 +167,7 @@
 
           .description {
             width: 100%;
-            display: table-cell; 
+            display: table-cell;
             float: left;
             vertical-align: top;
             padding-top: 4px;
@@ -195,8 +195,9 @@
             }
           }
 
-        
+
           table {
+            width: 100%;
             margin-bottom: 10px;
           }
 
@@ -232,6 +233,7 @@
 
           .close {
             margin-right: 25px;
+            float: left;
 
             &:after {
               -webkit-transform: rotate(270deg);
@@ -268,7 +270,7 @@
   }
 }
 
-// 
+//
 // Media queries
 // --------------------------------------------------
 
@@ -290,7 +292,7 @@
         width: 100% !important;
         margin-left: 0 !important;
         margin-bottom: 0.3125rem;
-        
+
         h2 {
           color: #fff;
           margin: 5px 0;
@@ -314,7 +316,7 @@
         }
 
         .innerbox {
-          display: table-cell; 
+          display: table-cell;
           vertical-align: middle;
 
           div {
@@ -332,7 +334,7 @@
   .pensioen123_widget {
 
     .product-overview {
-      
+
       .row-fluid {
         .span12 {
           margin-bottom: 0;
@@ -360,7 +362,7 @@
                 display: block;
                 float: left;
                 margin: 0;
-        
+
                 img {
                   width: 100%;
                   max-height: initial;
@@ -373,7 +375,7 @@
             color: $blue;
             font-size: 1.5625rem;
             cursor: pointer;
-            
+
             &:after {
               display: inline-block;
               font-size: 15px;
@@ -426,14 +428,14 @@
                 right: 0;
               }
             }
-            
+
             .more {
               display: none;
             }
           }
         }
       }
-      
+
       .span4 {
         display: block; /* Fix for tech library */
       }
