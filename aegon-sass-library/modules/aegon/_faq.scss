@@ -139,3 +139,17 @@
     margin: 12px;
   }
 }
+
+.field--name-faq-link-more {
+  margin-top: -25px;
+}
+
+//
+// Media queries
+// --------------------------------------------------
+
+@include breakpoint($brk-large-desktop) {
+  .field--name-faq-link-more {
+    margin-top: -60px;
+  }
+}
