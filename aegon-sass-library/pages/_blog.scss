@@ -230,9 +230,9 @@
     }
 
     .blog-articles{
+      @include rem('margin-bottom', 20);
       .blog-article{
         background-color:$grey;
-        @include rem('margin-bottom', 20);
 
         .blog-image{
           height: 160px;
