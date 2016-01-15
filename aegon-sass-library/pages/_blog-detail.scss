@@ -55,31 +55,54 @@
     }
   }
 
-  .comment-form{
-    background-color: $grey;
-    padding: 25px;
+  .social{
+      border-radius: $elements_border_radius;
+      background-color:$grey;
+      @include rem('padding', 15);
+      @include rem('margin-bottom', 20);
 
-    .form-item-name, .form-item-mail{
-      width: 100%;
+      h4{
+        @include rem('margin', 0, 0, 10, 0);
+      }
+
+      .share-buttons button{
+        width: 30%;
+      }
+  }
+
+  #comments{
+
+    h3{
+      font-family: $font-light;
+      color:$blue;
     }
 
-    .form-textarea-wrapper textarea, input[type=text], input[type=email]{
-      background-color: $white;
-      border:none;
-    }
+    .comment-form{
+      background-color: $grey;
+      padding: 25px;
 
-    input[type=text], input[type=email]{
-      width:100%;
-    }
+      .form-item-name, .form-item-mail{
+        width: 100%;
+      }
 
-    input[type=submit]{
-      @extend .button;
-      @extend .button.orange;
-      color: $white;
-    }
+      .form-textarea-wrapper textarea, input[type=text], input[type=email]{
+        background-color: $white;
+        border:none;
+      }
 
-    .grippie{
-      display: none;
+      input[type=text], input[type=email]{
+        width:100%;
+      }
+
+      input[type=submit]{
+        @extend .button;
+        @extend .button.orange;
+        color: $white;
+      }
+
+      .grippie{
+        display: none;
+      }
     }
   }
 }
@@ -119,6 +142,35 @@
         margin-left: 1.7%;
       }
 
+    }
+  }
+}
+
+@include breakpoint($brk-ipad-portrait) {
+
+  .blog-detail{
+    .social{
+      display: table;
+      height: 80px;
+      width: 100%;
+      h4{
+        @include rem('margin', 0, 0, 0, 0);
+      }
+      .share{
+        width: 20%;
+        display: table-cell;
+        height:100%;
+        vertical-align: middle;
+      }
+      .share-buttons {
+        display: table-cell;
+        width: 78%;
+        margin-left: 2%;
+        button{
+          width: auto;
+          @include rem('margin-bottom', 0);
+        }
+      }
     }
   }
 }
