@@ -38,7 +38,7 @@
 
   // User widget JSON endpoint (hostname is declared in
   // Drupal.settings.onlineAegonNl.hostname object's item).
-  var realEndpoint = '/mijnservices/US_RestGatewayWeb/rest/requestResponse/BS_PARTIJ_03/retrieve';
+  var realEndpoint = '/file/example/user_detail_bs.json';
 
   // ID string where the user widget will be appended
   // var appendUserWidgetTo = '#shw-user-details';
@@ -85,6 +85,11 @@
       // Register a public method for getAkos
       win.shwGlobal.getAkos = (function() {
         return this.getAkos();
+      }).bind(this);
+
+      // Register a public method for getAkos
+      win.shwGlobal.userData = (function() {
+        return this.getUserData();
       }).bind(this);
 
       this.attached = true;
@@ -205,8 +210,10 @@
         win.utag_data = win.utag_data || {};
         win.utag_data.customer_akos = that.getRelNumByType('akos');
 
+        console.log(data);
         // Activate the widget
         that.initialize(data);
+
       };
 
       // Load AJAX request
@@ -304,27 +311,27 @@
 
       // Show/hide logged's items
       $('body').addClass('shw-widgets-logged-in');
-      
+
       // show the element nicely
       //$(".inplace").show(1000);
-      
+
       // Shows and hides the dropdown menu and grey overlay on mobile (< 641px) when logging in (only once)
       if(!this.hasBeenShown() && $(window).width() < 641) {
-        $('section.content').prepend('<div class="greyoverlay"></div>').promise().done(function() { 
+        $('section.content').prepend('<div class="greyoverlay"></div>').promise().done(function() {
           // Hide .text when collapsing menu for the first time
-          $('.dropdown > .text').css('display', 'none'); 
-          // Show dropdown and greyoverlay 
-          $('.dropdown, .greyoverlay').css('display', 'block'); 
+          $('.dropdown > .text').css('display', 'none');
+          // Show dropdown and greyoverlay
+          $('.dropdown, .greyoverlay').css('display', 'block');
         });
-        $('.dropdown').delay(3000).slideUp(500).promise().done(function(){ 
+        $('.dropdown').delay(3000).slideUp(500).promise().done(function(){
           // Remove display block from .dropdown
-          $('.dropdown').css('display', ''); 
+          $('.dropdown').css('display', '');
           // Fadeout greyoverlay
-          $('.greyoverlay').fadeOut(100); 
+          $('.greyoverlay').fadeOut(100);
           // Hide hightlight mobile
-          $('.highlight.mobile').css('display', 'none'); 
+          $('.highlight.mobile').css('display', 'none');
           // Set .text back to display block
-          $('.dropdown > .text').css('display', 'block');  
+          $('.dropdown > .text').css('display', 'block');
         });
       }
 
@@ -556,7 +563,7 @@
       $.removeCookie(mijnAegonCookieLoggedInName);
 
       // On logout or if user is not logged in show login button
-      $('.login-link-wrapper').css('display', 'block'); 
+      $('.login-link-wrapper').css('display', 'block');
 
       // Then throw an error in console
       //if (response) { throw response.responseText; }
@@ -575,7 +582,7 @@
 
       // Remove mijn_last_login's cookie
       this.clearLastLogin();
-      
+
       // remove the cookie that determines if the green bar is shown
       this.hasBeenShown(false);
 
@@ -653,7 +660,13 @@
       return akos.sort(function (x, y){
         return parseInt(y) - parseInt(x);
       });
+    },
+
+    getUserData: function () {  //if just the highest number is required, use .getAkos()[0]
+      var data = this.getData();
+      return data;
     }
+
   };
 
 })(this.document, this, this.jQuery, this.Drupal);
