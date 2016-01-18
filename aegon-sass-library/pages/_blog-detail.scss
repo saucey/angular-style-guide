@@ -9,7 +9,7 @@
     height: auto;
   }
   .blog-article {
-    padding: 10px;
+    @include rem('padding', 10);
     position: relative;
     .date {
       color: $darker_grey;
@@ -56,52 +56,108 @@
   }
 
   .social{
-      border-radius: $elements_border_radius;
-      background-color:$grey;
-      @include rem('padding', 15);
-      @include rem('margin-bottom', 20);
+    border-radius: $elements_border_radius;
+    background-color:$grey;
+    @include rem('padding', 15);
+    @include rem('margin', 20, 0, 20, 0);
 
-      h4{
-        @include rem('margin', 0, 0, 10, 0);
-      }
+    h4{
+      @include rem('margin', 0, 0, 10, 0);
+    }
 
-      .share-buttons button{
-        width: 30%;
-      }
+    .share-buttons button{
+      width: 30%;
+    }
   }
 
   #comments{
 
-    h3{
-      font-family: $font-light;
-      color:$blue;
+    @include rem('padding', 10);
+
+    .span10 {
+      width: 83%;
+      h3 {
+        color: $black;
+      }
     }
 
-    .comment-form{
+    .span2 {
+      width: 15%;
+      margin-left: 2%;
+      .comment-button {
+        text-align: right;
+      }
+    }
+
+    .comment-header{
+      @include rem('margin-bottom', 10);
+    }
+
+    .comment{
+      @include rem('margin-bottom', 10);
+
+      h4{
+        @include rem('margin',0);
+      }
+
+      .submitted p{
+        color: $darker_grey;
+      }
+
+      ul.links.links--inline{
+        @include rem('padding', 0);
+        @include rem('margin-bottom', 15);
+      }
+
+      &.subcomment{
+        @include rem('padding-left', 20);
+      }
+    }
+
+    form.comment-form{
       background-color: $grey;
-      padding: 25px;
+      @include rem('padding', 25);
+      @include rem('margin-bottom', 25);
 
       .form-item-name, .form-item-mail{
         width: 100%;
       }
 
-      .form-textarea-wrapper textarea, input[type=text], input[type=email]{
+      textarea, input[type=text], input[type=email]{
         background-color: $white;
         border:none;
+      }
+
+      textarea{
+        @include rem('padding', 10);
+        resize: none;
       }
 
       input[type=text], input[type=email]{
         width:100%;
       }
 
-      input[type=submit]{
-        @extend .button;
-        @extend .button.orange;
-        color: $white;
+      #edit-actions{
+        text-align: right;
+        input[type=submit]{
+          @extend .button;
+          @extend .button.orange;
+          color: $white;
+        }
       }
+    }
+  }
+}
 
-      .grippie{
-        display: none;
+@include breakpoint($brk-mobile) {
+  .blog-detail-page {
+    .span1.gutter {
+      width: 0;
+      min-height: 0;
+
+      & + .span12 {
+        width: 100%;
+        margin-left: 0;
       }
     }
   }
@@ -113,7 +169,7 @@
       border-radius: $elements_border_radius;
     }
     .blog-article {
-      padding: 0;
+      @include rem('padding', 0);
       @include rem('margin-bottom', 25);
 
       .inner-article {
@@ -131,17 +187,31 @@
       }
     }
 
-    .comment-form{
-
-      .form-item-name, .form-item-mail{
-        width: 49.1452991453%;
-        float: left;
+    #comments {
+      @include rem('padding', 0);
+      .comment {
+        h4, .submitted, .submitted p {
+          display: inline;
+        }
+        h4 {
+          @include rem('margin-right', 10);
+        }
       }
 
-      .form-item-mail{
-        margin-left: 1.7%;
-      }
+      form.comment-form{
+        .title {
+          @include rem('margin', 0, 0, 10, 0);
+        }
+        .form-item-name, .form-item-mail{
+          width: 49.1452991453%;
+          float: left;
+        }
 
+        .form-item-mail{
+          margin-left: 1.7%;
+        }
+
+      }
     }
   }
 }
@@ -169,6 +239,44 @@
         button{
           width: auto;
           @include rem('margin-bottom', 0);
+        }
+      }
+    }
+    #comments {
+      .comment-header h3{
+        color:$blue;
+        font-family: $font_light;
+        font-size: $x-large;
+        font-weight: lighter;
+      }
+
+      .span2{
+        text-align: right;
+        .comment-button{    
+          // position: relative;
+          // display: inline-block;
+          // height: auto;
+          // margin: 0 0 10px;
+          // padding: 13px;
+          // cursor: pointer;
+          // -webkit-user-select: none;
+          // -moz-user-select: none;
+          // -ms-user-select: none;
+          // user-select: none;
+          // white-space: normal;
+          // color: #ffffff;
+          // border: 0;
+          // outline: 0;
+          // background-color: #3395d3;
+          // font-size: 18px;
+          // line-height: 23px;
+          // border-radius: 3px;
+          // border-radius: 0.1875rem;
+          // cursor: pointer;
+          // text-align: right;
+          a{
+            color:$white;
+          }
         }
       }
     }
