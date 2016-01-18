@@ -74,16 +74,19 @@
 
     @include rem('padding', 10);
 
-    .span10 {
-      width: 83%;
+    .span8 {
+      width: 66%;
       h3 {
         color: $black;
       }
     }
 
-    .span2 {
-      width: 15%;
+    .span4 {
+      width: 32%;
       margin-left: 2%;
+      &:last-child{
+        clear:none;
+      }
       .comment-button {
         text-align: right;
       }
