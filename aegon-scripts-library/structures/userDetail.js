@@ -88,9 +88,9 @@
       }).bind(this);
 
       // Register a public method for getAkos
-      win.shwGlobal.userData = (function() {
-        return this.getUserData();
-      }).bind(this);
+        win.shwGlobal.userData = (function() {
+          return this.getUserData();
+        }).bind(this);
 
       this.attached = true;
     },
@@ -187,6 +187,10 @@
         // Boolean to declare and check is user is logged in
         isLogged = (userObj.PROCES.STATUS === '00000');
 
+        var address = userObj._AE_ADRES[0],
+          person = userObj._AE_PERSOON,
+          dutchDate = formatToDutchDate(person.GEBDAT),
+          wholeAddress = formatToWholeAddress(address.STRAAT, address.HUISNR, address.TOEVOEG);
         // Data ready to be passed to initialize() below
         data = {
 
@@ -194,11 +198,23 @@
           'loggedIn': isLogged,
 
           // Get user's name from json object
-          'userName': userObj.PARTIJ._AE_PERSOON._AE_SAMNAAM || "n.a.", //this is actually not the username but the fullname, but since it has already available under this name, keep this designation
-          'name': userObj.PARTIJ._AE_PERSOON._AE_SAMNAAM || "n.a.",
+          'userName': person._AE_SAMNAAM || "n.a.", //this is actually not the username but the fullname, but since it has already available under this name, keep this designation
+          'name': person._AE_SAMNAAM || "n.a.",
           'firstName': userObj.PARTIJ._AE_PERSOON.VOORL || "",
           'nameAddition': userObj.PARTIJ._AE_PERSOON.VOORV || "",
           'lastName': userObj.PARTIJ.ANAAM || "",
+          'gender': person.GESLACH || '',
+          'initials': person.VOORL || '',
+          'connection': person.VOORV || '',
+          'tel': userObj.TELNUM || '',
+          'postal': address.PCODE || '',
+          'street': address.STRAAT || '',
+          'houseNumber': address.HUISNR || '',
+          'addition': address.TOEVOEG || '',
+          'city': address.PLAATS || '',
+          'email': data.EMAIL || '',
+          'birthDate': dutchDate || '',
+          'address': wholeAddress || ''
 
           // Get user's mobile from json object
           'userMobile': userObj.PARTIJ.MOBIEL || "", //we need this later to verify if a mobile number is available
@@ -210,7 +226,6 @@
         win.utag_data = win.utag_data || {};
         win.utag_data.customer_akos = that.getRelNumByType('akos');
 
-        console.log(data);
         // Activate the widget
         that.initialize(data);
 
@@ -663,8 +678,8 @@
     },
 
     getUserData: function () {  //if just the highest number is required, use .getAkos()[0]
-      var data = this.getData();
-      return data;
+      var allData = this.shwData;
+      return allData;
     }
 
   };
