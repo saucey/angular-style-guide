@@ -140,6 +140,10 @@
         width:100%;
       }
 
+      .grippie{
+        background-image: url('../images/grippie.png');
+      }
+
       #edit-actions{
         text-align: right;
         input[type=submit]{
@@ -256,27 +260,6 @@
       .span2 {
         text-align: right;
         .comment-button{    
-          // position: relative;
-          // display: inline-block;
-          // height: auto;
-          // margin: 0 0 10px;
-          // padding: 13px;
-          // cursor: pointer;
-          // -webkit-user-select: none;
-          // -moz-user-select: none;
-          // -ms-user-select: none;
-          // user-select: none;
-          // white-space: normal;
-          // color: #ffffff;
-          // border: 0;
-          // outline: 0;
-          // background-color: #3395d3;
-          // font-size: 18px;
-          // line-height: 23px;
-          // border-radius: 3px;
-          // border-radius: 0.1875rem;
-          // cursor: pointer;
-          // text-align: right;
           a{
             color:$white;
           }

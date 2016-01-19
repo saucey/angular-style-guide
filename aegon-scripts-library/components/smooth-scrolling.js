@@ -11,9 +11,7 @@
 		    $('html, body').animate({
 		        scrollTop: target.offset().top - 20 
 		    }, 500);
-
-
-			})
+			});
 		}
 	};
 })(this.jQuery, this.Drupal);
