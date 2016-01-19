@@ -63,17 +63,7 @@ input.blurred {
       display: block;
     }
     & ~ span.checkbox {
-      // styles for check boxes could go here 
-      //border-color: $red;
-    }
-  }
-  &:invalid {
-    border-color: $red;
-    & ~ .errorText {
-      display: block;
-    }
-    & ~ span.checkbox {
-      // styles for check boxes could go here 
+      // styles for check boxes could go here
       //border-color: $red;
     }
   }
@@ -97,7 +87,7 @@ input, select {
     top: - ($elements_checkbox_top + $elements_checkbox_height + $errorText_line-height);
   }
 }
-  
+
 select ~ .errorText {
   top: -$errorText_line-height;
 }

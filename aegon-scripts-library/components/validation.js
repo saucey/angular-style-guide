@@ -19,7 +19,7 @@
         // get the predefined validator from the json-object defined in data-validate
         var v = (this.attributes['data-validate'] || this.attributes['data-validate-restrained']).value;
         var restrained = this.attributes['data-validate-restrained'] !== undefined;
-        // var iban = this.attributes['data-validate'].value === 'iban.nl';  
+        // var iban = this.attributes['data-validate'].value === 'iban.nl';
         var validator;
 
         // IBAN field logic
@@ -52,7 +52,7 @@
                   this.value = '';
                 }
             },
-            // Remove all spaces that we add on blur 
+            // Remove all spaces that we add on blur
             focus: function() {
               this.value = this.value.replace(/\s+/g, '');
             }
@@ -75,7 +75,7 @@
           $(this).on("keyup", that.restrain)
             .click(function () {this.oldPos = $(this).caret(); });
         }
-        
+
         // makes the element where the last error occurred accessible as a static object
         that.lastErrorObj = this;
         // react to different formats of validator
@@ -170,10 +170,10 @@
       // add blurred, so that validation takes place on all visible elements
         .addClass("blurred");
       try {
-        return $(form_selector).find("input.invalid.blurred, select.invalid.blurred, textarea.invalid.blurred, input:invalid.blurred, select:invalid.blurred, textarea:invalid.blurred").length;
+        return $(form_selector).find("input.invalid.blurred, select.invalid.blurred, textarea.invalid.blurred, select:invalid.blurred, textarea:invalid.blurred").length;
       }
       catch (e) {
-        return $(form_selector).find("input.invalid.blurred, select.invalid.blurred, textarea.invalid.blurred").length;        
+        return $(form_selector).find("input.invalid.blurred, select.invalid.blurred, textarea.invalid.blurred").length;
       }
     },
 
@@ -228,7 +228,7 @@
           var country = val.replace(/^(..).*/, "$1").toLowerCase();  // get the country to relate to rxs
           return Drupal.behaviors.validation.validators.iban.fix(val, country);
         },
-        fix: function (val, country) { 
+        fix: function (val, country) {
           var numberize = function (letter) { // turns a letter into a number, with a = 10, b = 11...
               return "" + (letter.toLowerCase().charCodeAt(0) - 87);
           };
@@ -239,14 +239,14 @@
 
               while (divident.length > partLength) {
                   var part = divident.substring(0, partLength);
-                  divident = (part % divisor) +  divident.substring(partLength);          
+                  divident = (part % divisor) +  divident.substring(partLength);
               }
 
               return divident % divisor;
           };
           var check = function (val) { // defines the general sanity check for iban, aka modified(iban) % 97 == 1
             var iban = val.replace(/^(..)(..)(.*)/, "$3$1$2"); // Move the four initial characters to the end of the string
-            iban = iban.replace(/([a-z])/ig, numberize); // replace all letters by numbers, such that A = 10, B = 11... 
+            iban = iban.replace(/([a-z])/ig, numberize); // replace all letters by numbers, such that A = 10, B = 11...
             return bigMod(iban, 97) === 1;
           };
 
@@ -285,18 +285,18 @@
               validation: function (val, keyup) {
                 if (val.match(/^\d+$/i)) {  //just use any error condition here
                   console.dir(this);  //any kind of code here
-                  
+
                   return true;  //does not trigger the error behaviour
                 }
                 else {
-                  
+
                   if (keyup) {
                     console.log("error was triggered on keyup, not on blur");
                     //the error was triggered on keyup, not on blur
                   }
                   console.log(val); //any kind of error treatment code here
                   this.errorText("bluuuuub");  // convenience function, writes an error message different from the one predefined in the .errorText DOM object on the template
-                  
+
                   return false; //triggers the error behaviour
                 }
               },

@@ -48,6 +48,7 @@
     width: 100% !important;
     border-top: 1px solid #d8d7d1;
     border-bottom: 1px solid #d8d7d1;
+    clear: both; /* FF Fix */
     tr {
       height: 60px;
       &.odd {
@@ -129,7 +130,6 @@
         height: 40px;
         border-top: 1px solid #e0e0e0;
         &:before {
-          left: 5px;
           margin-top: 7px;
           position: absolute;
           font-family: "aegon_icons";
@@ -147,7 +147,7 @@
           }
         }
         td {
-          padding-left: 25px;
+          padding-left: 20px;
           position: relative;
           ul {
             padding: 0;
@@ -184,7 +184,7 @@
 .table-desc {
   display:block;
   position:absolute;
-  margin-top: 10px;
+  margin: 10px 0;
   color: #1d1d1b;
   font-family: $font_normal;
   @include rem('font-size',18);

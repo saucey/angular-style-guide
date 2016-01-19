@@ -51,7 +51,7 @@
     position: absolute;
     top: auto;
     right: 0;
-    min-width: 250px;
+    min-width: 260px;
     @include rem('margin-top', -3);
     @include rem('padding', 0, 18);
     @include rem('border-radius', 2);
@@ -229,6 +229,10 @@
 // Hide login button by default
 .login-link-wrapper {
   display: none;
+
+  .button {
+    padding: 10px;
+  }
 }
 
 // Hide the banner with a request to the user to provide a mobile number by default.
