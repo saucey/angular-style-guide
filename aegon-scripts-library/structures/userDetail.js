@@ -131,9 +131,9 @@
 
       // Local variables
       var that = this,
-          jsonPayload,
-          retreiveBSPartij,
-          checkSanityOfJson;
+        jsonPayload,
+        retreiveBSPartij,
+        checkSanityOfJson;
 
       // Payload for JSONP
       jsonPayload = {
@@ -304,27 +304,27 @@
 
       // Show/hide logged's items
       $('body').addClass('shw-widgets-logged-in');
-      
+
       // show the element nicely
       //$(".inplace").show(1000);
-      
+
       // Shows and hides the dropdown menu and grey overlay on mobile (< 641px) when logging in (only once)
       if(!this.hasBeenShown() && $(window).width() < 641) {
-        $('section.content').prepend('<div class="greyoverlay"></div>').promise().done(function() { 
+        $('section.content').prepend('<div class="greyoverlay"></div>').promise().done(function() {
           // Hide .text when collapsing menu for the first time
-          $('.dropdown > .text').css('display', 'none'); 
-          // Show dropdown and greyoverlay 
-          $('.dropdown, .greyoverlay').css('display', 'block'); 
+          $('.dropdown > .text').css('display', 'none');
+          // Show dropdown and greyoverlay
+          $('.dropdown, .greyoverlay').css('display', 'block');
         });
-        $('.dropdown').delay(3000).slideUp(500).promise().done(function(){ 
+        $('.dropdown').delay(3000).slideUp(500).promise().done(function(){
           // Remove display block from .dropdown
-          $('.dropdown').css('display', ''); 
+          $('.dropdown').css('display', '');
           // Fadeout greyoverlay
-          $('.greyoverlay').fadeOut(100); 
+          $('.greyoverlay').fadeOut(100);
           // Hide hightlight mobile
-          $('.highlight.mobile').css('display', 'none'); 
+          $('.highlight.mobile').css('display', 'none');
           // Set .text back to display block
-          $('.dropdown > .text').css('display', 'block');  
+          $('.dropdown > .text').css('display', 'block');
         });
       }
 
@@ -370,7 +370,7 @@
       // If is not the first time after login, don't show the animation by
       // adding the .processed class.
       var futureTMS = this.formatDatetime(timeCookie, true) +
-                      (secondsForProcessedStatus * 1000);
+        (secondsForProcessedStatus * 1000);
       return ($.now() > futureTMS) && true;
     },
 
@@ -386,9 +386,9 @@
 
       // Append the DOM for the link just created and remove old login link
       $('li[data-id="shw-user-details-inmenu"]').empty().append(linkDesktop);
-        //.find('.login-link-inv').remove();
+      //.find('.login-link-inv').remove();
       $('li[data-id="shw-mob-user-details-inmenu"]').empty().append(linkMobile);
-        //.find('.login-link-inv').remove();
+      //.find('.login-link-inv').remove();
     },
 
     events: function (switchOff) {
@@ -488,7 +488,7 @@
       // widget's container to hide itself
       this.widget.find('.highlight').one('webkitAnimationEnd oanimationend \
         msAnimationEnd animationend', function() {
-          $(this).parents('.user_detail_widget').addClass('processed');
+        $(this).parents('.user_detail_widget').addClass('processed');
       });
     },
 
@@ -556,7 +556,7 @@
       $.removeCookie(mijnAegonCookieLoggedInName);
 
       // On logout or if user is not logged in show login button
-      $('.login-link-wrapper').css('display', 'block'); 
+      $('.login-link-wrapper').css('display', 'block');
 
       // Then throw an error in console
       //if (response) { throw response.responseText; }
@@ -575,7 +575,7 @@
 
       // Remove mijn_last_login's cookie
       this.clearLastLogin();
-      
+
       // remove the cookie that determines if the green bar is shown
       this.hasBeenShown(false);
 
