@@ -137,8 +137,6 @@
     },
 
     getData: function () {
-
-      // Local variables
       var that = this,
 
       // Payload for JSONP
@@ -398,7 +396,7 @@
       // If is not the first time after login, don't show the animation by
       // adding the .processed class.
       var futureTMS = this.formatDatetime(timeCookie, true) +
-                      (secondsForProcessedStatus * 1000);
+        (secondsForProcessedStatus * 1000);
       return ($.now() > futureTMS) && true;
     },
 
@@ -414,9 +412,9 @@
 
       // Append the DOM for the link just created and remove old login link
       $('li[data-id="shw-user-details-inmenu"]').empty().append(linkDesktop);
-        //.find('.login-link-inv').remove();
+      //.find('.login-link-inv').remove();
       $('li[data-id="shw-mob-user-details-inmenu"]').empty().append(linkMobile);
-        //.find('.login-link-inv').remove();
+      //.find('.login-link-inv').remove();
     },
 
     events: function (switchOff) {
@@ -516,7 +514,7 @@
       // widget's container to hide itself
       this.widget.find('.highlight').one('webkitAnimationEnd oanimationend \
         msAnimationEnd animationend', function() {
-          $(this).parents('.user_detail_widget').addClass('processed');
+        $(this).parents('.user_detail_widget').addClass('processed');
       });
     },
 
