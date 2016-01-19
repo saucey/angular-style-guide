@@ -63,6 +63,9 @@
     // Initial container for entire raw json object
     shwRawData: null,
 
+    // Create a deferred object, which will be resolved when the data is retrieved
+    deferredData: $.Deferred(),
+
     attach: function (context, settings) {
       // Run before real initialization
       this.setup(settings);
@@ -87,9 +90,9 @@
         return this.getAkos();
       }).bind(this);
 
-      // Register a public method for getAkos
+      // Register a public method for deferred userData (promise)
       win.shwGlobal.userData = (function() {
-        return this.shwData;
+        return this.deferredData.promise();
       }).bind(this);
 
       this.attached = true;
@@ -225,6 +228,9 @@
         // Boolean to declare and check if user is logged in
         isLoggedIn = (rawData.PROCES.STATUS === '00000');
         that.shwData = populateUserData(rawData.PARTIJ, isLoggedIn);
+
+        // Resolve the promise so that external sources can also use the retrieved data
+        that.deferredData.resolve(that.shwData);
 
         // append akos number to utag_data, if it exists, if not, at least create it (and hope tealium appends, instead of re-creating)
         win.utag_data = win.utag_data || {};
@@ -673,7 +679,7 @@
       return akos.sort(function (x, y){
         return parseInt(y) - parseInt(x);
       });
-    },
+    }
   };
 
 })(this.document, this, this.jQuery, this.Drupal);
