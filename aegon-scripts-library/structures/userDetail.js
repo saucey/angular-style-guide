@@ -38,7 +38,7 @@
 
   // User widget JSON endpoint (hostname is declared in
   // Drupal.settings.onlineAegonNl.hostname object's item).
-  var realEndpoint = '/file/example/user_detail_bs.json';
+  var realEndpoint = '/mijnservices/US_RestGatewayWeb/rest/requestResponse/BS_PARTIJ_03/retrieve';
 
   // ID string where the user widget will be appended
   // var appendUserWidgetTo = '#shw-user-details';
@@ -87,11 +87,6 @@
         return this.getAkos();
       }).bind(this);
 
-      // Register a public method for getAkos
-      win.shwGlobal.userData = (function() {
-        return this.getUserData();
-      }).bind(this);
-
       this.attached = true;
     },
     attached: false,
@@ -136,9 +131,9 @@
 
       // Local variables
       var that = this,
-          jsonPayload,
-          retreiveBSPartij,
-          checkSanityOfJson;
+        jsonPayload,
+        retreiveBSPartij,
+        checkSanityOfJson;
 
       // Payload for JSONP
       jsonPayload = {
@@ -210,10 +205,8 @@
         win.utag_data = win.utag_data || {};
         win.utag_data.customer_akos = that.getRelNumByType('akos');
 
-        console.log(data);
         // Activate the widget
         that.initialize(data);
-
       };
 
       // Load AJAX request
@@ -377,7 +370,7 @@
       // If is not the first time after login, don't show the animation by
       // adding the .processed class.
       var futureTMS = this.formatDatetime(timeCookie, true) +
-                      (secondsForProcessedStatus * 1000);
+        (secondsForProcessedStatus * 1000);
       return ($.now() > futureTMS) && true;
     },
 
@@ -393,9 +386,9 @@
 
       // Append the DOM for the link just created and remove old login link
       $('li[data-id="shw-user-details-inmenu"]').empty().append(linkDesktop);
-        //.find('.login-link-inv').remove();
+      //.find('.login-link-inv').remove();
       $('li[data-id="shw-mob-user-details-inmenu"]').empty().append(linkMobile);
-        //.find('.login-link-inv').remove();
+      //.find('.login-link-inv').remove();
     },
 
     events: function (switchOff) {
@@ -495,7 +488,7 @@
       // widget's container to hide itself
       this.widget.find('.highlight').one('webkitAnimationEnd oanimationend \
         msAnimationEnd animationend', function() {
-          $(this).parents('.user_detail_widget').addClass('processed');
+        $(this).parents('.user_detail_widget').addClass('processed');
       });
     },
 
@@ -660,13 +653,7 @@
       return akos.sort(function (x, y){
         return parseInt(y) - parseInt(x);
       });
-    },
-
-    getUserData: function () {  //if just the highest number is required, use .getAkos()[0]
-      var data = this.getData();
-      return data;
     }
-
   };
 
 })(this.document, this, this.jQuery, this.Drupal);
