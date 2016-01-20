@@ -2,48 +2,130 @@
   & * {
     font-family: $font_light;  //has 2B redefined, since all text here is held within labels, and those are usually defined bolder (ie. regular)
   }
-  .question[class*=span] {
-    margin-left: 0; //overrides the setting for a left margin of 2% for all spans starting at the second one in a list, which creates an indent in faq design in the .product ul
-  	border-bottom: 1px solid $lighter_grey;
-  	padding: 10px 0 10px 0;
+  .questions{
+    .field-item{
+      margin-left: 0; //overrides the setting for a left margin of 2% for all spans starting at the second one in a list, which creates an indent in faq design in the .product ul
+      padding: 10px 0 10px 0;
+      border-bottom: 1px solid $lighter_grey;
+      .question {
+        > input[name="show"]{
+          display: none;
+        }
+      }
+    }
   }
   .title {
     width: 100%;
-    font-size: $medium;
     color: $black;
+    font-size: $medium;
 
     &:after {
-      color: $blue;
-      font-size: 12px;
-      font-family: $font_icons;
-      content: $font_icons_arrow_down;
       float: right;
+      content: $font_icons_arrow_down;
+      color: $blue;
+      font-family: $font_icons;
+      font-size: 12px;
     }
   }
   div.line {
-    border-bottom: 1px solid $lighter_grey;
     height: 1px;
     margin: 10px 0 0 0;
     padding: 0;
+    border-bottom: 1px solid $lighter_grey;
   }
+  /*
+   * Answer
+   */
   .answer {
     display: none;
     margin: 12px 0 0 12px;
     padding: 5px 0 5px 12px;
-    border-left: 2px solid $blue;
     cursor: default;
+    border-left: 2px solid $blue;
     textarea.feedback {
       display: initial;
       margin: 0;
     }
+    .question-vote {
+      margin: 15px 0 0;
+      padding: 10px 0;
+      border-top: 1px solid #ccc;
+      .contact-text {
+        margin: 12px;
+      }
+      .feedback-combine{
+        .feedback-title,
+        .feedback-on {
+          float: left;
+        }
+
+        .feedback-on{
+          margin-left: 20px;
+          .percent, .rate-info {
+            display: none;
+          }
+          .rate-thumbs-up-down-btn-up, .rate-thumbs-up-down-btn-down{
+            position:relative;
+            overflow: hidden;
+            width:26px;
+            text-indent: -9999px;
+            background: none;
+            &:after {
+              position:absolute;
+              top: 0;
+              left: 0;
+              display: inline-block;  //has to be block or inline-block for transform 2 work on :before
+              width: 24px;
+              margin: 0 3px 0 2px;
+              text-indent: 0;
+              content: $font_icons_fistfull;
+              font-family: $font_icons;
+            }
+          }
+          .rate-thumbs-up-down-btn-up:after {
+            transform: rotateX(180deg);
+          }
+          .thumb-down{
+            padding-left:10px;
+          }
+        }
+      }
+      .feedback-data-form{
+        .form-item{
+          label{
+            text-align: left;
+            margin: 10px 0;
+          }
+        }
+        .form-textarea-wrapper{
+          textarea{
+            resize: none;
+          }
+          .grippie{
+            display: none;
+          }
+        }
+        .form-item-mail {
+          input {
+            display: initial;
+          }
+        }
+        .submit_feedback a{
+          padding:13px 46px 13px 13px;
+          color: #FFFFFF;
+        }
+      }
+    }
+
     & > p {
-    	margin-bottom: 0;
+      margin-bottom: 0;
     }
     ul {
       list-style: circle inside;
       li {
         list-style: inherit;
-        &.thumb-up, &.thumb-down {
+        &.thumb-up,
+        &.thumb-down {
           list-style: none;
           a {
             float: left;
@@ -60,7 +142,6 @@
     display: none;
   }
   input {
-    display: none;
     ~ [class^=thumbs_] {
       color: $darker_grey;
     }
@@ -69,23 +150,22 @@
     }
     &:checked {
       ~ [class^=thumbs_] {
-  	    color: $blue;
-  	  }
-  	  + .title {
-  	    &:after {
-  	      @include transform(rotate(180deg));
-  	    }
-  	  }
-  	  ~ .answer, ~ .feedback, ~ div.line {
-  	    display: block;
-  	  }
+        color: $blue;
+      }
+      + .title {
+        &:after {
+          @include transform(rotate(180deg));
+        }
+      }
+      ~ .answer,
+      ~ .feedback,
+      ~ div.line {
+        display: block;
+      }
       ~ .response {
         display: block;
       }
     }
-  }
-  .form-item-mail input {
-    display: initial;
   }
   .feedback {
     display: none;
@@ -107,36 +187,18 @@
     }
     [class^=thumbs_]:after {
       display: inline-block;  //has to be block or inline-block for transform 2 work on :before
+      margin: 0 3px 0 2px;
+      content: $font_icons_fistfull;
       font-family: $font_icons;
-  	  content: $font_icons_fistfull;
-  	  margin: 0 3px 0 2px;
     }
-  	.thumbs_up:after {
+    .thumbs_up:after {
       transform: rotateX(180deg);
       //transform: rotateY(180deg);
     }
-  	.thumbs_down:after {
-  	  position: relative;
-  	  top: 8px;
-  	}
-  }
-  .feedback-on {
-    margin-left: 20px;
-    .percent {
-       display: none;
+    .thumbs_down:after {
+      position: relative;
+      top: 8px;
     }
-  }
-  .feedback-title, .feedback-on {
-     float: left;
-  }
-  .question-vote {
-    border-top: 1px solid #CCC;
-    margin: 15px 0 0;
-    padding: 10px 0;
-    float: left;
-  }
-  .question-vote .contact-text {
-    margin: 12px;
   }
 }
 
