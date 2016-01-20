@@ -23,18 +23,25 @@
   .blog-heading{
     h1.blog-page-title{
       padding: 0 20px;
-      @include rem('margin-top', 0);
+      @include rem('margin-top', 10);
 
     }
     .cat-select{
+      width: 100%;
+      max-width: 200px;
       float: right;
-      width: 180px;
-      select{
+      .ddcommon{
         width:100% !important;
+        float: right;
       }
     }
-    .span6{
-      width: 49%;
+    .span8{
+      width: 66%;
+    }
+    .span4:last-child{
+      width: 32%;
+      clear: none;
+      float: left;
     }
   }
 
@@ -219,6 +226,7 @@
     .blog-heading{
       h1.blog-page-title{
         padding: 0;
+        @include rem('margin-top', 0);
       }
     }
 
