@@ -63,6 +63,9 @@
     // Initial container for entire raw json object
     shwRawData: null,
 
+    // Create a deferred object, which will be resolved when the data is retrieved
+    deferredData: $.Deferred(),
+
     attach: function (context, settings) {
       // Run before real initialization
       this.setup(settings);
@@ -87,6 +90,11 @@
         return this.getAkos();
       }).bind(this);
 
+      // Register a public method for deferred userData (promise)
+      win.shwGlobal.userData = (function() {
+        return this.deferredData.promise();
+      }).bind(this);
+
       this.attached = true;
     },
     attached: false,
@@ -104,7 +112,8 @@
       // Check if current website is local or DEV environment
       var localOrDev = (
         settings.onlineAegonNl.hostname === 'local' ||
-        win.location.hostname.search('www.dev.') !== -1
+        win.location.hostname.search('www.dev.') !== -1 ||
+        win.location.hostname.search('.local') !== -1
       );
 
       // If LOCAL or DEV env use sample json file for user details
@@ -128,12 +137,7 @@
     },
 
     getData: function () {
-
-      // Local variables
       var that = this,
-        jsonPayload,
-        retreiveBSPartij,
-        checkSanityOfJson;
 
       // Payload for JSONP
       jsonPayload = {
@@ -145,69 +149,94 @@
         }
       };
 
-      checkSanityOfJson = function (jsonObject) {
+      function parseResponse(json) {
+        // Check is json is string that need to be parsed
+        var isString = typeof json === 'string',
+          // Parse the JSON if needed
+          parsedJSON = isString ? $.parseJSON(json) : json;
 
         // Check for retrieveResponse in the passed object
-        if ('retrieveResponse' in jsonObject) {
-          return true;
-        }
-
-        // Return false by default
-        return false;
-      };
-
-      // AJAX Success function
-      retreiveBSPartij = function (json) {
-
-        // Local variables
-        var isString, parseJSON, data, isLogged;
-
-        // Check is json is string that need to be parsed
-        isString = typeof json === 'string';
-
-        // Parse the JSON if needed
-        parseJSON = isString ? $.parseJSON(json) : json;
-        var userObj = parseJSON.retrieveResponse;
-        // Check if container and output of JSON is properly setup
-        if (!checkSanityOfJson(parseJSON)) {
-
+        if (!('retrieveResponse' in parsedJSON)) {
           return;
-
-        } else {
-
-          // Register raw json data if OK
-          that.shwRawData = userObj;
         }
 
-        // Boolean to declare and check is user is logged in
-        isLogged = (userObj.PROCES.STATUS === '00000');
+        // Register raw json data if OK
+        return that.shwRawData = parsedJSON.retrieveResponse;
+      }
+
+      function formatToDutchDate(date) {
+        date = new Date(date)
+
+        function pad(n) {
+          return n < 10 ? '0' + n : n;
+        }
+
+        return pad(date.getUTCDate()) + '-'
+            + pad(date.getUTCMonth() + 1) + '-'
+            + date.getUTCFullYear();
+      }
+
+      function populateUserData(userData, isLoggedIn) {
+        var person = userData._AE_PERSOON,
+            address = userData._AE_ADRES[0],
+            dutchDate = formatToDutchDate(person.GEBDAT),
+            completeAddress = address.STRAAT + " " + address.HUISNR + (address.TOEVOEG ? (" " + address.TOEVOEG) : "");
 
         // Data ready to be passed to initialize() below
-        data = {
-
+        return {
           // Set flag for user logged in
-          'loggedIn': isLogged,
+          'loggedIn': isLoggedIn,
 
           // Get user's name from json object
-          'userName': userObj.PARTIJ._AE_PERSOON._AE_SAMNAAM || "n.a.", //this is actually not the username but the fullname, but since it has already available under this name, keep this designation
-          'name': userObj.PARTIJ._AE_PERSOON._AE_SAMNAAM || "n.a.",
-          'firstName': userObj.PARTIJ._AE_PERSOON.VOORL || "",
-          'nameAddition': userObj.PARTIJ._AE_PERSOON.VOORV || "",
-          'lastName': userObj.PARTIJ.ANAAM || "",
+          'userName': person._AE_SAMNAAM || "n.a.", //this is actually not the username but the fullname, but since it has already available under this name, keep this designation
+          'name': person._AE_SAMNAAM || "n.a.",
+          'firstName': userData._AE_PERSOON.VOORL || "",
+          'nameAddition': userData._AE_PERSOON.VOORV || "",
+          'lastName': userData.ANAAM || "",
+          'gender': person.GESLACH || '',
+          'initials': person.VOORL || '',
+          'connection': person.VOORV || '',
+          'tel': userData.TELNUM || '',
+          'postal': address.PCODE || '',
+          'street': address.STRAAT || '',
+          'houseNumber': address.HUISNR || '',
+          'addition': address.TOEVOEG || '',
+          'city': address.PLAATS || '',
+          'email': userData.EMAIL || '',
+          'birthDate': dutchDate || '',
+          'address': completeAddress || '',
 
           // Get user's mobile from json object
-          'userMobile': userObj.PARTIJ.MOBIEL || "", //we need this later to verify if a mobile number is available
+          'userMobile': userData.MOBIEL || "", //we need this later to verify if a mobile number is available
 
           // Get last login time from cookie or give false
           'lastAccess': that.lastLogin()
         };
+      }
+
+      // AJAX Success function
+      function retrieveBSPartij(json) {
+        var isLoggedIn,
+            rawData = parseResponse(json);
+
+        if (typeof rawData === 'undefined') {
+          return;
+        }
+
+        // Boolean to declare and check if user is logged in
+        isLoggedIn = (rawData.PROCES.STATUS === '00000');
+        that.shwData = populateUserData(rawData.PARTIJ, isLoggedIn);
+
+        // Resolve the promise so that external sources can also use the retrieved data
+        that.deferredData.resolve(that.shwData);
+
         // append akos number to utag_data, if it exists, if not, at least create it (and hope tealium appends, instead of re-creating)
         win.utag_data = win.utag_data || {};
         win.utag_data.customer_akos = that.getRelNumByType('akos');
 
         // Activate the widget
-        that.initialize(data);
-      };
+        that.initialize(that.shwData);
+      }
 
       // Load AJAX request
       $.ajax({
@@ -218,7 +247,7 @@
         url: this.apiUrl,
         data: jsonPayload,
         dataType: 'json',
-        success: retreiveBSPartij,
+        success: retrieveBSPartij,
         error: this.clearLastLogin
       });
     },
@@ -227,9 +256,6 @@
 
       // Local variables
       var that = this;
-
-      // Update the global shwData
-      this.shwData = data;
 
       // Callback to prevent appendTo before correct end of parseWidget()
       var callback = function (domWidget) {
@@ -569,9 +595,7 @@
      */
     deinitialize: function (onlyLocal) {
       // Remove classes to hide logged's items
-      $('body').removeClass('shw-widgets-logged-in mobile-tap');
-      $('body').removeClass('sliding-popup-processed');
-      $('body').removeClass('section-particulier');
+      $('body').removeClass('shw-widgets-logged-in mobile-tap sliding-popup-processed section-particulier');
 
       // Remove mijn_last_login's cookie
       this.clearLastLogin();
@@ -629,7 +653,7 @@
 
       // Filter the array based on type param passed
       var arrFiltered = arrIdentifications.filter(function(obj){
-        return obj._AE_RELNUM_TYPE === type ? true : false;
+        return obj._AE_RELNUM_TYPE === type;
       });
 
       // Create empty values array
