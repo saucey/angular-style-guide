@@ -1,12 +1,14 @@
 .communication_preferences {
+
   dl.table.row-fluid {
+
     > dt {
       position: relative;
       display: block;
       min-width: 100%;
-      font-family: $font_normal;
 
-      @include rem("padding-right", 22);
+      font-family: $font_normal;
+      @include rem('padding-right', 22);
     }
 
     > dd {
@@ -16,66 +18,73 @@
   }
 
   span.icon-questionmark {
-    cursor: default;
     user-select: none;
-    color: $dark_blue;
+    cursor: default;
     font-family: $font_icons;
-
-    @include rem("font-size", 16);
+    @include rem('font-size', 16);
+    color: $dark_blue;
   }
 
   span[tooltip] {
+    display: block;
     position: absolute;
     top: 0;
     right: 0;
-    display: block;
+
+    @include rem('width', 20);
     text-align: center;
 
-    @include rem("width", 20);
-
     &:before {
-      position: absolute;
-      left: 0;
-      display: block;
       visibility: hidden;
+      opacity: 0;
+
+      position: absolute;
+      @include rem('top', 15);
+      left: 0%;
+
+      display: block;
       width: 0;
       height: 0;
-      content: "";
-      transition: 0.1s all 0.3s;
-      opacity: 0;
+
+      content: '';
       border-style: solid;
+      @include rem('border-width', 10);
       border-color: transparent transparent $slightly_lighter_blue transparent;
 
-      @include rem("border-width", 10);
-      @include rem("top", 15);
+      transition: .1s all .3s;
     }
 
     &:after {
-      position: absolute;
-      z-index: 5;
-      display: block;
       visibility: hidden;
-      width: 300px;
-      content: attr(tooltip);
-      transition: 0.1s all 0.3s;
-      text-align: left;
       opacity: 0;
-      color: $black;
-      background-color: $slightly_lighter_blue;
-      font-family: $font_light;
-      font-size: $small;
 
-      @include rem("border-radius", $frame_border_radius);
-      @include rem("top", 15+18px);
-      @include rem("right", -10);
-      @include rem("padding", 12);
+      position: absolute;
+      @include rem('top', 15+18px);
+      @include rem('right', -10);
+
+      font-family: $font_light;
+      content: attr(tooltip);
+
+      font-size: $small;
+      color: $black;
+      text-align: left;
+      @include rem('padding', 12);
+
+      display: block;
+      width: 300px;
+
+      z-index: 5;
+      background-color: $slightly_lighter_blue;
+      @include rem('border-radius', $frame_border_radius);
+
+      transition: .1s all .3s;
     }
 
     &:hover:before,
     &:hover:after {
       visibility: visible;
-      transition: 0.1s all 0s;
       opacity: 1;
+      transition: .1s all 0s;
     }
   }
 
@@ -139,10 +148,12 @@
 // --------------------------------------------------
 
 @include breakpoint($brk-tablet) {
+
   .communication_preferences {
+
     dl.table.row-fluid {
-      > dt,
-      > dd {
+
+      > dt, > dd {
         display: table-cell;
         min-width: inherit;
 
@@ -153,23 +164,22 @@
       }
 
       > dd {
-        @include rem("padding-left", 16);
+        @include rem('padding-left', 16);
       }
     }
 
     span[tooltip] {
       top: 50%;
-
-      @include rem("margin-top", -12.5px);
+      @include rem('margin-top', -12.5px);
 
       &:before {
         top: 15px;
-        left: 0;
+        left: 0%;
       }
 
       &:after {
-        top: 15+18px;
         left: -150px;
+        top: 15+18px;
       }
     }
   }
