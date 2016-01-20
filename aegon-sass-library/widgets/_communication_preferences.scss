@@ -1,14 +1,12 @@
 .communication_preferences {
-
   dl.table.row-fluid {
-
     > dt {
       position: relative;
       display: block;
       min-width: 100%;
-
       font-family: $font_normal;
-      @include rem('padding-right', 22);
+
+      @include rem("padding-right", 22);
     }
 
     > dd {
@@ -18,80 +16,78 @@
   }
 
   span.icon-questionmark {
-    user-select: none;
     cursor: default;
-    font-family: $font_icons;
-    @include rem('font-size', 16);
+    user-select: none;
     color: $dark_blue;
+    font-family: $font_icons;
+
+    @include rem("font-size", 16);
   }
 
   span[tooltip] {
-    display: block;
     position: absolute;
     top: 0;
     right: 0;
-
-    @include rem('width', 20);
+    display: block;
     text-align: center;
 
+    @include rem("width", 20);
+
     &:before {
-      visibility: hidden;
-      opacity: 0;
-
       position: absolute;
-      @include rem('top', 15);
-      left: 0%;
-
+      left: 0;
       display: block;
+      visibility: hidden;
       width: 0;
       height: 0;
-
-      content: '';
+      content: "";
+      transition: 0.1s all 0.3s;
+      opacity: 0;
       border-style: solid;
-      @include rem('border-width', 10);
       border-color: transparent transparent $slightly_lighter_blue transparent;
 
-      transition: .1s all .3s;
+      @include rem("border-width", 10);
+      @include rem("top", 15);
     }
 
     &:after {
-      visibility: hidden;
-      opacity: 0;
-
       position: absolute;
-      @include rem('top', 15+18px);
-      @include rem('right', -10);
-
-      font-family: $font_light;
-      content: attr(tooltip);
-
-      font-size: $small;
-      color: $black;
-      text-align: left;
-      @include rem('padding', 12);
-
-      display: block;
-      width: 300px;
-
       z-index: 5;
+      display: block;
+      visibility: hidden;
+      width: 300px;
+      content: attr(tooltip);
+      transition: 0.1s all 0.3s;
+      text-align: left;
+      opacity: 0;
+      color: $black;
       background-color: $slightly_lighter_blue;
-      @include rem('border-radius', $frame_border_radius);
+      font-family: $font_light;
+      font-size: $small;
 
-      transition: .1s all .3s;
+      @include rem("border-radius", $frame_border_radius);
+      @include rem("top", 15+18px);
+      @include rem("right", -10);
+      @include rem("padding", 12);
     }
 
     &:hover:before,
     &:hover:after {
       visibility: visible;
+      transition: 0.1s all 0s;
       opacity: 1;
-      transition: .1s all 0s;
     }
   }
 
-  label.checkbox {
-    display: block;
-    @include rem('margin-bottom', 10);
-/*
+  label {
+    &.checkbox{
+      display: block;
+    }
+
+    &.radio, &.checkbox{
+      @include rem("margin-bottom", 10);      
+    }
+    /*
     // Another bullshit fixer
     > input[type='checkbox'] + span.checkbox {
       top: 0;
@@ -103,6 +99,38 @@
   button.edit.right {
     line-height: inherit;
   }
+  ul.horizontal.visible{
+    li{
+      > ul.horizontal > li.span12{
+         margin-left: 0;
+        @include rem(padding-left, 40); 
+      }
+    }
+  }
+  // the following should be global. Placing it here for now.
+  input.checkbox, label.radio{
+    &.disabled{
+        color: #D9D9D9;
+        span.radio{
+          cursor: not-allowed;
+          opacity: 0.6;
+        }
+    }
+  }
+  input{
+    &:disabled, &[disabled]{
+      &[type=checkbox]{
+        ~ .checkbox{
+          cursor: not-allowed;
+        }
+      }
+      &[type=radio]{
+        ~ .radio{
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
 }
 
 
@@ -111,12 +139,10 @@
 // --------------------------------------------------
 
 @include breakpoint($brk-tablet) {
-
   .communication_preferences {
-
     dl.table.row-fluid {
-
-      > dt, > dd {
+      > dt,
+      > dd {
         display: table-cell;
         min-width: inherit;
 
@@ -127,22 +153,23 @@
       }
 
       > dd {
-        @include rem('padding-left', 16);
+        @include rem("padding-left", 16);
       }
     }
 
     span[tooltip] {
       top: 50%;
-      @include rem('margin-top', -12.5px);
+
+      @include rem("margin-top", -12.5px);
 
       &:before {
         top: 15px;
-        left: 0%;
+        left: 0;
       }
 
       &:after {
-        left: -150px;
         top: 15+18px;
+        left: -150px;
       }
     }
   }
