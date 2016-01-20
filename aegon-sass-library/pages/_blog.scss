@@ -23,7 +23,7 @@
   .blog-heading{
     h1.blog-page-title{
       padding: 0 20px;
-      @include rem('margin-top', 0);
+      @include rem('margin-top', 10);
 
     }
     .cat-select{
@@ -226,6 +226,7 @@
     .blog-heading{
       h1.blog-page-title{
         padding: 0;
+        @include rem('margin-top', 0);
       }
     }
 
