@@ -27,14 +27,21 @@
 
     }
     .cat-select{
+      width: 100%;
+      max-width: 200px;
       float: right;
-      width: 180px;
-      select{
+      .ddcommon{
         width:100% !important;
+        float: right;
       }
     }
-    .span6{
-      width: 49%;
+    .span8{
+      width: 66%;
+    }
+    .span4:last-child{
+      width: 32%;
+      clear: none;
+      float: left;
     }
   }
 
