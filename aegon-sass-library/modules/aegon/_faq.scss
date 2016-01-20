@@ -142,7 +142,6 @@
     display: none;
   }
   input {
-    //display: none;
     ~ [class^=thumbs_] {
       color: $darker_grey;
     }
