@@ -281,9 +281,37 @@ body.shw-widgets-logged-in {
 @include breakpoint($brk-tablet) {
 
   .user_detail_widget {
-
+     width: 99%;
     > .text {
-      @include rem('line-height', 44);
+      display: block;
+      padding-right:114px;
+      width: 100%;
+      p.name{
+        width: 100%;
+        margin:0;
+        @include rem('line-height', 25);
+        .user_detail_widget_name {
+          position: relative;
+          overflow: hidden;
+          width: 100%;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          @include rem('padding', 0, 48, 0, 13);
+
+          &:after { 
+            /* absolute for better handling */
+            position: absolute;
+            top: 0;
+            right: 12px;
+            bottom:0;
+            display: inline-block;
+            content: $font_icons_man;
+            font-family: $font_icons;
+
+            @include rem('font-size', 23);
+          }
+        }
+      }
     }
 
     .text {
@@ -334,7 +362,7 @@ body.shw-widgets-logged-in {
       display: none;
     } // end highlight mobile
 
-     .user_detail_widget_name {
+    .user_detail_widget_name {
       display: inline-block;
       @include rem('padding', 0, 13, 2, 13);
       @include rem('line-height', 36);
@@ -376,8 +404,7 @@ body.shw-widgets-logged-in {
   .user_detail_widget {
 
     > .text {
-      float: left;
-      display: inline-block;
+      display: block;
 
       // Default status
       opacity: 1;
