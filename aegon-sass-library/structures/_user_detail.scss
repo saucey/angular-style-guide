@@ -281,7 +281,7 @@ body.shw-widgets-logged-in {
 @include breakpoint($brk-tablet) {
 
   .user_detail_widget {
-     width: 99%;
+     width: 100%; 
     > .text {
       display: block;
       padding-right:114px;
