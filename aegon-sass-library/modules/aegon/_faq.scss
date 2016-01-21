@@ -2,22 +2,22 @@
   & * {
     font-family: $font_light;  //has 2B redefined, since all text here is held within labels, and those are usually defined bolder (ie. regular)
   }
-  .questions{
-    .field-item{
-      margin-left: 0; //overrides the setting for a left margin of 2% for all spans starting at the second one in a list, which creates an indent in faq design in the .product ul
-      padding: 10px 0 10px 0;
-      border-bottom: 1px solid $lighter_grey;
-      .question {
-        > input[name="show"]{
-          display: none;
-        }
+  .field-item{
+    margin-left: 0 !important; //overrides the setting for a left margin of 2% for all spans starting at the second one in a list, which creates an indent in faq design in the .product ul
+    padding: 10px 0 10px 0;
+    border-bottom: 1px solid $lighter_grey;
+    .question {
+      > input[name="show"]{
+        display: none;
       }
     }
   }
   .title {
+    margin:10px 0;
     width: 100%;
     color: $black;
     font-size: $medium;
+    font-weight: bold; /* fix for elements that are not h3 */
 
     &:after {
       float: right;
@@ -36,7 +36,7 @@
   /*
    * Answer
    */
-  .answer {
+  .answer, .faq-answer-inner-search {
     display: none;
     margin: 12px 0 0 12px;
     padding: 5px 0 5px 12px;
@@ -51,7 +51,7 @@
       padding: 10px 0;
       border-top: 1px solid #ccc;
       .contact-text {
-        margin: 12px;
+        margin: 12px 0;
       }
       .feedback-combine{
         .feedback-title,
@@ -65,11 +65,13 @@
             display: none;
           }
           .rate-thumbs-up-down-btn-up, .rate-thumbs-up-down-btn-down{
+            color: $darker_grey;
             position:relative;
             overflow: hidden;
-            width:26px;
-            text-indent: -9999px;
+            width:auto;
+            //text-indent: -9999px;
             background: none;
+            padding-left:26px;
             &:after {
               position:absolute;
               top: 0;
@@ -81,12 +83,16 @@
               content: $font_icons_fistfull;
               font-family: $font_icons;
             }
+            &.rate-voted, &:active{
+              color: $blue;
+            }
           }
           .rate-thumbs-up-down-btn-up:after {
             transform: rotateX(180deg);
           }
           .thumb-down{
             padding-left:10px;
+            width: auto;
           }
         }
       }
@@ -110,7 +116,7 @@
             display: initial;
           }
         }
-        .submit_feedback a{
+        .submit_feedback .button{
           padding:13px 46px 13px 13px;
           color: #FFFFFF;
         }
@@ -168,7 +174,7 @@
     }
   }
   .feedback {
-    display: none;
+    //display: none;
     margin: 0 15px 0 15px;
     cursor: default;
     .intro {
@@ -202,17 +208,19 @@
   }
 }
 
-.node-type-mijnaegon-page .field.field--name-field-link-product-service,
 .field--name-faq-link-more {
   margin-top: -25px;
 }
-
+// fix for button in aegon.nl
+.view-faq-search-block .view-content .field-content .submit_feedback .button{
+  padding:13px 46px 13px 13px;
+  color: #FFFFFF;
+}
 //
 // Media queries
 // --------------------------------------------------
 
 @include breakpoint($brk-large-desktop) {
-  .node-type-mijnaegon-page .field.field--name-field-link-product-service,
   .field--name-faq-link-more {
     margin-top: -60px;
   }
