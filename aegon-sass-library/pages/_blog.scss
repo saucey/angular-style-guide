@@ -57,7 +57,7 @@
       color:$white;
       border-radius: 50%;
       background-color: $blue;
-      @include rem('padding', 5, 6, 5, 10);
+      @include rem('padding', 5, 10);
       @include rem('margin-right', 3);
     }
   }
