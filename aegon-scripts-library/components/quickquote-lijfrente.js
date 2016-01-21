@@ -27,23 +27,23 @@
       });
     },
 
-    lijfrenteCalculation: function(interest,paymentClass,interestClass,Currenty) {
+    lijfrenteCalculation: function(interest,paymentClass,interestClass,Currency) {
       var roundingDecimals = function(input, decimals) {
         return Math.round(input * Math.pow(10, decimals)) / Math.pow(10, decimals);
       };
       var money = $("#amount-slider").slider("value"),
-        time = $("#time-slider").slider("value"),
-        months = time * 12;
+        duration = $("#time-slider").slider("value"),
+        months = duration * 12;
       if (isNaN(money) || months === 0 || isNaN(months)) {
         return 0;
       }
-      var interestPerMonth = roundingDecimals(Math.pow(1 + (interest[time] / 100), 1 / 12) - 1, 6),
+      var interestPerMonth = roundingDecimals(Math.pow(1 + (interest[duration] / 100), 1 / 12) - 1, 6),
         formulaPart1 = roundingDecimals(1 / Math.pow(1 + interestPerMonth, months), 6),
         formulaComplete = roundingDecimals((1 - formulaPart1) / interestPerMonth, 3),
-        montlyPayment = roundingDecimals(money / formulaComplete, 2),
-        totalInterest = roundingDecimals(((montlyPayment * months) - money), 2);
-      $(paymentClass).text( Currenty + montlyPayment);
-      $(interestClass).text( Currenty + totalInterest);
+        monthlyPayment = roundingDecimals(money / formulaComplete, 2),
+        totalInterest = roundingDecimals(((monthlyPayment * months) - money), 2);
+      $(paymentClass).text( Currency + monthlyPayment);
+      $(interestClass).text( Currency + totalInterest);
     },
   };
 })(jQuery);
