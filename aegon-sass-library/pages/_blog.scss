@@ -45,7 +45,7 @@
     }
   }
 
-  ul.pagination{
+  ul.pager{
     text-align: center;
     @include rem('margin', 30, 0, 30, 0);
     li{
@@ -53,11 +53,13 @@
       @include rem('margin-top', 20);
     }
 
-    .current{
-      color:$white;
-      border-radius: 50%;
-      background-color: $blue;
-      padding: 5px 10px;
+    .pager-current{
+      a{
+        color:$white;
+        border-radius: 50%;
+        background-color: $blue;
+        padding: 5px 10px;
+      }
     }
   }
 
