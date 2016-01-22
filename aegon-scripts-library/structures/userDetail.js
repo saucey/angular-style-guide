@@ -178,9 +178,13 @@
 
       function populateUserData(userData, isLoggedIn) {
         var person = userData._AE_PERSOON,
-            address = userData._AE_ADRES[0],
-            dutchDate = formatToDutchDate(person.GEBDAT),
-            completeAddress = address.STRAAT + " " + address.HUISNR + (address.TOEVOEG ? (" " + address.TOEVOEG) : "");
+          dutchDate = formatToDutchDate(person.GEBDAT),
+          address = userData._AE_ADRES;
+
+        // Some the address variable is an array, when there are multiple address lines available, if this is the case we want the first item
+        if (address.constructor === Array) address = address[0];
+
+        var completeAddress = address.STRAAT + " " + address.HUISNR + (address.TOEVOEG ? (" " + address.TOEVOEG) : "");
 
         // Data ready to be passed to initialize() below
         return {
