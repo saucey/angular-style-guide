@@ -144,7 +144,7 @@
         'retrieveRequest': {
           'AILHEADER': {
             'CLIENTID': 'MijnAegonUserWidget',
-            'CORRELATIONID': '## MijnAegon_UserWidget ## ' + now.getDate() + ' ##'
+            'CORRELATIONID': '## MijnAegon_UserWidget ## ' + now.getTime() + ' ##'
           }
         }
       };
