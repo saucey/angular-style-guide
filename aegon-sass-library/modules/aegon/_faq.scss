@@ -3,7 +3,9 @@
     font-family: $font_light;  //has 2B redefined, since all text here is held within labels, and those are usually defined bolder (ie. regular)
   }
   .field-item {
-    margin-left: 0 !important; //overrides the setting for a left margin of 2% for all spans starting at the second one in a list, which creates an indent in faq design in the .product ul
+    display: block;
+
+    width: 100%; // in some structures it's a div and not a li
     padding: 10px 0 10px 0;
 
     border-bottom: 1px solid $lighter_grey;
