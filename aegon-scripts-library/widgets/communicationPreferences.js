@@ -16,6 +16,21 @@
       Drupal.behaviors.tooltip.activate("#communication_preferences");
 
       Drupal.behaviors.validation.IEFix("form[name=communication_preferences_form]", false);
+
+      // activate the panel for alert options
+      var cp_alerts = $(document).find("input[name=alerts]"),
+          cp_alertOpt = $(document).find(".communication_preferences form .alerts-opt");
+      $(document).ready(function(){
+        if(cp_alerts.is(":checked")){
+          cp_alertOpt.addClass('visible');
+        }else{
+          cp_alertOpt.removeClass('visible');
+        }
+      });
+      cp_alerts.on('click', function () {
+        var enabled = $(this).is(":checked");
+        cp_alertOpt.toggleClass("visible", enabled);
+      });
     },
   };
 

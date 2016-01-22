@@ -138,13 +138,13 @@
 
     getData: function () {
       var that = this,
-
+      now = new Date(),
       // Payload for JSONP
       jsonPayload = {
         'retrieveRequest': {
           'AILHEADER': {
             'CLIENTID': 'MijnAegonUserWidget',
-            'CORRELATIONID': '##UAT##'
+            'CORRELATIONID': '## MijnAegon_UserWidget ## ' + now.getTime() + ' ##'
           }
         }
       };
@@ -165,15 +165,15 @@
       }
 
       function formatToDutchDate(date) {
-        date = new Date(date)
+        date = new Date(date);
 
         function pad(n) {
           return n < 10 ? '0' + n : n;
         }
 
-        return pad(date.getUTCDate()) + '-'
-            + pad(date.getUTCMonth() + 1) + '-'
-            + date.getUTCFullYear();
+        return pad(date.getUTCDate()) + '-' +
+            pad(date.getUTCMonth() + 1) + '-' +
+            date.getUTCFullYear();
       }
 
       function populateUserData(userData, isLoggedIn) {

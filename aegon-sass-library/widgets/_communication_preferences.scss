@@ -88,10 +88,15 @@
     }
   }
 
-  label.checkbox {
-    display: block;
-    @include rem('margin-bottom', 10);
-/*
+  label {
+    &.checkbox{
+      display: block;
+    }
+
+    &.radio, &.checkbox{
+      @include rem("margin-bottom", 10);      
+    }
+    /*
     // Another bullshit fixer
     > input[type='checkbox'] + span.checkbox {
       top: 0;
@@ -102,6 +107,38 @@
 
   button.edit.right {
     line-height: inherit;
+  }
+  ul.horizontal.visible{
+    li{
+      > ul.horizontal > li.span12{
+         margin-left: 0;
+        @include rem(padding-left, 40); 
+      }
+    }
+  }
+  // the following should be global. Placing it here for now.
+  input.checkbox, label.radio{
+    &.disabled{
+        color: #D9D9D9;
+        span.radio{
+          cursor: not-allowed;
+          opacity: 0.6;
+        }
+    }
+  }
+  input{
+    &:disabled, &[disabled]{
+      &[type=checkbox]{
+        ~ .checkbox{
+          cursor: not-allowed;
+        }
+      }
+      &[type=radio]{
+        ~ .radio{
+          cursor: not-allowed;
+        }
+      }
+    }
   }
 }
 

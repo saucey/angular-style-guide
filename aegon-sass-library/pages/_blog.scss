@@ -23,22 +23,29 @@
   .blog-heading{
     h1.blog-page-title{
       padding: 0 20px;
-      @include rem('margin-top', 0);
+      @include rem('margin-top', 10);
 
     }
     .cat-select{
+      width: 100%;
+      max-width: 200px;
       float: right;
-      width: 180px;
-      select{
+      .ddcommon{
         width:100% !important;
+        float: right;
       }
     }
-    .span6{
-      width: 49%;
+    .span8{
+      width: 66%;
+    }
+    .span4:last-child{
+      width: 32%;
+      clear: none;
+      float: left;
     }
   }
 
-  ul.pagination{
+  ul.pager{
     text-align: center;
     @include rem('margin', 30, 0, 30, 0);
     li{
@@ -46,11 +53,12 @@
       @include rem('margin-top', 20);
     }
 
-    .current{
+    .pager-current{
       color:$white;
       border-radius: 50%;
       background-color: $blue;
-      padding: 5px 10px;
+      @include rem('padding', 5, 10);
+      @include rem('margin-right', 3);
     }
   }
 
@@ -219,6 +227,7 @@
     .blog-heading{
       h1.blog-page-title{
         padding: 0;
+        @include rem('margin-top', 0);
       }
     }
 
