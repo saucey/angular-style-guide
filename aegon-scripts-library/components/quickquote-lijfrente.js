@@ -15,19 +15,19 @@
       Drupal.behaviors.slider.activate("#amount-slider","#amount-input",10000,1000,100000,100,"€",{
         change: function( event, ui ) {
           $("#amount-slider").val( "euro" + ui.value );
-          Drupal.behaviors.quickquote.lijfrenteCalculation(interest, "#payment-calculated", "#interest-calculated", "€");
+          Drupal.behaviors.quickquote.lijfrenteCalculation(interest, "#payment-calculated", "€");
         }
       });
 
       Drupal.behaviors.slider.activate("#time-slider","#time-input",10,5,30,1,"", {
         change: function( event, ui ) {
           $("#time-slider").val( "euro" + ui.value );
-          Drupal.behaviors.quickquote.lijfrenteCalculation(interest, "#payment-calculated", "#interest-calculated", "€");
+          Drupal.behaviors.quickquote.lijfrenteCalculation(interest, "#payment-calculated", "€");
         }
       });
     },
 
-    lijfrenteCalculation: function(interest,paymentClass,interestClass,Currency) {
+    lijfrenteCalculation: function(interest,paymentClass,Currency) {
       var round = function(input, decimals) {
         return Math.round(input * Math.pow(10, decimals)) / Math.pow(10, decimals);
       };
