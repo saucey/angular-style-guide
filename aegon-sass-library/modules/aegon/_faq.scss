@@ -2,106 +2,130 @@
   & * {
     font-family: $font_light;  //has 2B redefined, since all text here is held within labels, and those are usually defined bolder (ie. regular)
   }
-  .questions{
-    .field-item{
-      margin-left: 0; //overrides the setting for a left margin of 2% for all spans starting at the second one in a list, which creates an indent in faq design in the .product ul
-      padding: 10px 0 10px 0;
-      border-bottom: 1px solid $lighter_grey;
-      .question {
-        > input[name="show"]{
-          display: none;
-        }
+  .field-item {
+    display: block;
+
+    width: 100%; // in some structures it's a div and not a li
+    padding: 10px 0 10px 0;
+
+    border-bottom: 1px solid $lighter_grey;
+    .question {
+      > input[name='show'] {
+        display: none;
       }
     }
   }
   .title {
-    width: 100%;
-    color: $black;
     font-size: $medium;
+    font-weight: bold; /* fix for elements that are not h3 */
 
+    width: 100%;
+    margin: 10px 0;
+
+    color: $black;
     &:after {
-      float: right;
-      content: $font_icons_arrow_down;
-      color: $blue;
       font-family: $font_icons;
       font-size: 12px;
+
+      float: right;
+
+      content: $font_icons_arrow_down;
+
+      color: $blue;
     }
   }
   div.line {
     height: 1px;
     margin: 10px 0 0 0;
     padding: 0;
+
     border-bottom: 1px solid $lighter_grey;
   }
   /*
    * Answer
    */
-  .answer {
+  .answer, .faq-answer-inner-search {
     display: none;
+
     margin: 12px 0 0 12px;
     padding: 5px 0 5px 12px;
+
     cursor: default;
+
     border-left: 2px solid $blue;
     textarea.feedback {
       display: initial;
+
       margin: 0;
     }
     .question-vote {
       margin: 15px 0 0;
       padding: 10px 0;
+
       border-top: 1px solid #ccc;
       .contact-text {
-        margin: 12px;
+        margin: 12px 0;
       }
-      .feedback-combine{
-        .feedback-title,
-        .feedback-on {
+      .feedback-combine {
+        .feedback-title, .feedback-on {
           float: left;
         }
-
-        .feedback-on{
+        .feedback-on {
           margin-left: 20px;
           .percent, .rate-info {
             display: none;
           }
-          .rate-thumbs-up-down-btn-up, .rate-thumbs-up-down-btn-down{
-            position:relative;
+          .rate-thumbs-up-down-btn-up, .rate-thumbs-up-down-btn-down {
+            position: relative;
+
             overflow: hidden;
-            width:26px;
-            text-indent: -9999px;
+
+            width: auto;
+            padding-left: 26px;
+
+            color: $darker_grey;
             background: none;
             &:after {
-              position:absolute;
+              font-family: $font_icons;
+
+              position: absolute;
               top: 0;
               left: 0;
+
               display: inline-block;  //has to be block or inline-block for transform 2 work on :before
+
               width: 24px;
               margin: 0 3px 0 2px;
-              text-indent: 0;
+
               content: $font_icons_fistfull;
-              font-family: $font_icons;
+              text-indent: 0;
+            }
+            &.rate-voted, &:active {
+              color: $blue;
             }
           }
           .rate-thumbs-up-down-btn-up:after {
             transform: rotateX(180deg);
           }
-          .thumb-down{
-            padding-left:10px;
+          .thumb-down {
+            width: auto;
+            padding-left: 10px;
           }
         }
       }
-      .feedback-data-form{
-        .form-item{
-          label{
-            text-align: left;
+      .feedback-data-form {
+        .form-item {
+          label {
             margin: 10px 0;
+
+            text-align: left;
           }
         }
-        .form-textarea-wrapper{
-          textarea{
+        .form-textarea-wrapper {
+          textarea {
             resize: none;
           }
-          .grippie{
+          .grippie {
             display: none;
           }
         }
@@ -110,13 +134,13 @@
             display: initial;
           }
         }
-        .submit_feedback a{
-          padding:13px 46px 13px 13px;
-          color: #FFFFFF;
+        .submit_feedback .button {
+          padding: 13px 46px 13px 13px;
+
+          color: #fff;
         }
       }
     }
-
     & > p {
       margin-bottom: 0;
     }
@@ -124,8 +148,7 @@
       list-style: circle inside;
       li {
         list-style: inherit;
-        &.thumb-up,
-        &.thumb-down {
+        &.thumb-up, &.thumb-down {
           list-style: none;
           a {
             float: left;
@@ -135,8 +158,9 @@
     }
   }
   label {
-    cursor: pointer;
     font-weight: normal;  //needs to be defined here 2 override the Drupal standard definition of bold for labels
+
+    cursor: pointer;
   }
   .response {
     display: none;
@@ -157,9 +181,7 @@
           @include transform(rotate(180deg));
         }
       }
-      ~ .answer,
-      ~ .feedback,
-      ~ div.line {
+      ~ .answer, ~ .feedback, ~ div.line {
         display: block;
       }
       ~ .response {
@@ -168,12 +190,12 @@
     }
   }
   .feedback {
-    display: none;
     margin: 0 15px 0 15px;
+
     cursor: default;
     .intro {
       &:after {
-        content: "\00A0\00A0";  //non-breaking space in unicode
+        content: '\00A0\00A0';  //non-breaking space in unicode
       }
     }
     .content {
@@ -186,10 +208,13 @@
       display: inline;
     }
     [class^=thumbs_]:after {
-      display: inline-block;  //has to be block or inline-block for transform 2 work on :before
-      margin: 0 3px 0 2px;
-      content: $font_icons_fistfull;
       font-family: $font_icons;
+
+      display: inline-block;  //has to be block or inline-block for transform 2 work on :before
+
+      margin: 0 3px 0 2px;
+
+      content: $font_icons_fistfull;
     }
     .thumbs_up:after {
       transform: rotateX(180deg);
@@ -202,17 +227,20 @@
   }
 }
 
-.node-type-mijnaegon-page .field.field--name-field-link-product-service,
 .field--name-faq-link-more {
   margin-top: -25px;
 }
+// fix for button in aegon.nl
+.view-faq-search-block .view-content .field-content .submit_feedback .button {
+  padding: 13px 46px 13px 13px;
 
+  color: #fff;
+}
 //
 // Media queries
 // --------------------------------------------------
 
 @include breakpoint($brk-large-desktop) {
-  .node-type-mijnaegon-page .field.field--name-field-link-product-service,
   .field--name-faq-link-more {
     margin-top: -60px;
   }
