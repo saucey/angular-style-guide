@@ -1,227 +1,245 @@
 .faq {
-  & * {
-    font-family: $font_light;  //has 2B redefined, since all text here is held within labels, and those are usually defined bolder (ie. regular)
-  }
-  .field-item{
-    margin-left: 0 !important; //overrides the setting for a left margin of 2% for all spans starting at the second one in a list, which creates an indent in faq design in the .product ul
-    padding: 10px 0 10px 0;
-    border-bottom: 1px solid $lighter_grey;
-    .question {
-      > input[name="show"]{
-        display: none;
-      }
+    & * {
+        font-family: $font_light;  //has 2B redefined, since all text here is held within labels, and those are usually defined bolder (ie. regular)
     }
-  }
-  .title {
-    margin:10px 0;
-    width: 100%;
-    color: $black;
-    font-size: $medium;
-    font-weight: bold; /* fix for elements that are not h3 */
+    .field-item {
+        margin-left: 0 !important; //overrides the setting for a left margin of 2% for all spans starting at the second one in a list, which creates an indent in faq design in the .product ul
+        padding: 10px 0 10px 0;
 
-    &:after {
-      float: right;
-      content: $font_icons_arrow_down;
-      color: $blue;
-      font-family: $font_icons;
-      font-size: 12px;
+        border-bottom: 1px solid $lighter_grey;
+        .question {
+            > input[name='show'] {
+                display: none;
+            }
+        }
     }
-  }
-  div.line {
-    height: 1px;
-    margin: 10px 0 0 0;
-    padding: 0;
-    border-bottom: 1px solid $lighter_grey;
-  }
-  /*
+    .title {
+        font-size: $medium;
+        font-weight: bold; /* fix for elements that are not h3 */
+
+        width: 100%;
+        margin: 10px 0;
+
+        color: $black;
+        &:after {
+            font-family: $font_icons;
+            font-size: 12px;
+
+            float: right;
+
+            content: $font_icons_arrow_down;
+
+            color: $blue;
+        }
+    }
+    div.line {
+        height: 1px;
+        margin: 10px 0 0 0;
+        padding: 0;
+
+        border-bottom: 1px solid $lighter_grey;
+    }
+    /*
    * Answer
    */
-  .answer, .faq-answer-inner-search {
-    display: none;
-    margin: 12px 0 0 12px;
-    padding: 5px 0 5px 12px;
-    cursor: default;
-    border-left: 2px solid $blue;
-    textarea.feedback {
-      display: initial;
-      margin: 0;
-    }
-    .question-vote {
-      margin: 15px 0 0;
-      padding: 10px 0;
-      border-top: 1px solid #ccc;
-      .contact-text {
-        margin: 12px 0;
-      }
-      .feedback-combine{
-        .feedback-title,
-        .feedback-on {
-          float: left;
-        }
+    .answer, .faq-answer-inner-search {
+        display: none;
 
-        .feedback-on{
-          margin-left: 20px;
-          .percent, .rate-info {
-            display: none;
-          }
-          .rate-thumbs-up-down-btn-up, .rate-thumbs-up-down-btn-down{
-            color: $darker_grey;
-            position:relative;
-            overflow: hidden;
-            width:auto;
-            //text-indent: -9999px;
-            background: none;
-            padding-left:26px;
-            &:after {
-              position:absolute;
-              top: 0;
-              left: 0;
-              display: inline-block;  //has to be block or inline-block for transform 2 work on :before
-              width: 24px;
-              margin: 0 3px 0 2px;
-              text-indent: 0;
-              content: $font_icons_fistfull;
-              font-family: $font_icons;
-            }
-            &.rate-voted, &:active{
-              color: $blue;
-            }
-          }
-          .rate-thumbs-up-down-btn-up:after {
-            transform: rotateX(180deg);
-          }
-          .thumb-down{
-            padding-left:10px;
-            width: auto;
-          }
-        }
-      }
-      .feedback-data-form{
-        .form-item{
-          label{
-            text-align: left;
-            margin: 10px 0;
-          }
-        }
-        .form-textarea-wrapper{
-          textarea{
-            resize: none;
-          }
-          .grippie{
-            display: none;
-          }
-        }
-        .form-item-mail {
-          input {
+        margin: 12px 0 0 12px;
+        padding: 5px 0 5px 12px;
+
+        cursor: default;
+
+        border-left: 2px solid $blue;
+        textarea.feedback {
             display: initial;
-          }
-        }
-        .submit_feedback .button{
-          padding:13px 46px 13px 13px;
-          color: #FFFFFF;
-        }
-      }
-    }
 
-    & > p {
-      margin-bottom: 0;
-    }
-    ul {
-      list-style: circle inside;
-      li {
-        list-style: inherit;
-        &.thumb-up,
-        &.thumb-down {
-          list-style: none;
-          a {
-            float: left;
-          }
+            margin: 0;
         }
-      }
-    }
-  }
-  label {
-    cursor: pointer;
-    font-weight: normal;  //needs to be defined here 2 override the Drupal standard definition of bold for labels
-  }
-  .response {
-    display: none;
-  }
-  input {
-    ~ [class^=thumbs_] {
-      color: $darker_grey;
-    }
-    ~ div.line {
-      display: none;
-    }
-    &:checked {
-      ~ [class^=thumbs_] {
-        color: $blue;
-      }
-      + .title {
-        &:after {
-          @include transform(rotate(180deg));
+        .question-vote {
+            margin: 15px 0 0;
+            padding: 10px 0;
+
+            border-top: 1px solid #ccc;
+            .contact-text {
+                margin: 12px 0;
+            }
+            .feedback-combine {
+                .feedback-title, .feedback-on {
+                    float: left;
+                }
+                .feedback-on {
+                    margin-left: 20px;
+                    .percent, .rate-info {
+                        display: none;
+                    }
+                    .rate-thumbs-up-down-btn-up, .rate-thumbs-up-down-btn-down {
+                        position: relative;
+
+                        overflow: hidden;
+
+                        width: auto;
+                        padding-left: 26px;
+
+                        color: $darker_grey;
+                        background: none;
+                        &:after {
+                            font-family: $font_icons;
+
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+
+                            display: inline-block;  //has to be block or inline-block for transform 2 work on :before
+
+                            width: 24px;
+                            margin: 0 3px 0 2px;
+
+                            content: $font_icons_fistfull;
+                            text-indent: 0;
+                        }
+                        &.rate-voted, &:active {
+                            color: $blue;
+                        }
+                    }
+                    .rate-thumbs-up-down-btn-up:after {
+                        transform: rotateX(180deg);
+                    }
+                    .thumb-down {
+                        width: auto;
+                        padding-left: 10px;
+                    }
+                }
+            }
+            .feedback-data-form {
+                .form-item {
+                    label {
+                        margin: 10px 0;
+
+                        text-align: left;
+                    }
+                }
+                .form-textarea-wrapper {
+                    textarea {
+                        resize: none;
+                    }
+                    .grippie {
+                        display: none;
+                    }
+                }
+                .form-item-mail {
+                    input {
+                        display: initial;
+                    }
+                }
+                .submit_feedback .button {
+                    padding: 13px 46px 13px 13px;
+
+                    color: #fff;
+                }
+            }
         }
-      }
-      ~ .answer,
-      ~ .feedback,
-      ~ div.line {
-        display: block;
-      }
-      ~ .response {
-        display: block;
-      }
-    }
-  }
-  .feedback {
-    //display: none;
-    margin: 0 15px 0 15px;
-    cursor: default;
-    .intro {
-      &:after {
-        content: "\00A0\00A0";  //non-breaking space in unicode
-      }
-    }
-    .content {
-      margin-left: 10px;
-    }
-    .line {
-      margin-bottom: 10px;
+        & > p {
+            margin-bottom: 0;
+        }
+        ul {
+            list-style: circle inside;
+            li {
+                list-style: inherit;
+                &.thumb-up, &.thumb-down {
+                    list-style: none;
+                    a {
+                        float: left;
+                    }
+                }
+            }
+        }
     }
     label {
-      display: inline;
+        font-weight: normal;  //needs to be defined here 2 override the Drupal standard definition of bold for labels
+
+        cursor: pointer;
     }
-    [class^=thumbs_]:after {
-      display: inline-block;  //has to be block or inline-block for transform 2 work on :before
-      margin: 0 3px 0 2px;
-      content: $font_icons_fistfull;
-      font-family: $font_icons;
+    .response {
+        display: none;
     }
-    .thumbs_up:after {
-      transform: rotateX(180deg);
-      //transform: rotateY(180deg);
+    input {
+        ~ [class^=thumbs_] {
+            color: $darker_grey;
+        }
+        ~ div.line {
+            display: none;
+        }
+        &:checked {
+            ~ [class^=thumbs_] {
+                color: $blue;
+            }
+            + .title {
+                &:after {
+                    @include transform(rotate(180deg));
+                }
+            }
+            ~ .answer, ~ .feedback, ~ div.line {
+                display: block;
+            }
+            ~ .response {
+                display: block;
+            }
+        }
     }
-    .thumbs_down:after {
-      position: relative;
-      top: 8px;
+    .feedback {
+        margin: 0 15px 0 15px;
+
+        cursor: default;
+        .intro {
+            &:after {
+                content: '\00A0\00A0';  //non-breaking space in unicode
+            }
+        }
+        .content {
+            margin-left: 10px;
+        }
+        .line {
+            margin-bottom: 10px;
+        }
+        label {
+            display: inline;
+        }
+        [class^=thumbs_]:after {
+            font-family: $font_icons;
+
+            display: inline-block;  //has to be block or inline-block for transform 2 work on :before
+
+            margin: 0 3px 0 2px;
+
+            content: $font_icons_fistfull;
+        }
+        .thumbs_up:after {
+            transform: rotateX(180deg);
+            //transform: rotateY(180deg);
+        }
+        .thumbs_down:after {
+            position: relative;
+            top: 8px;
+        }
     }
-  }
 }
 
 .field--name-faq-link-more {
-  margin-top: -25px;
+    margin-top: -25px;
 }
 // fix for button in aegon.nl
-.view-faq-search-block .view-content .field-content .submit_feedback .button{
-  padding:13px 46px 13px 13px;
-  color: #FFFFFF;
+.view-faq-search-block .view-content .field-content .submit_feedback .button {
+    padding: 13px 46px 13px 13px;
+
+    color: #fff;
 }
 //
 // Media queries
 // --------------------------------------------------
 
 @include breakpoint($brk-large-desktop) {
-  .field--name-faq-link-more {
-    margin-top: -60px;
-  }
+    .field--name-faq-link-more {
+        margin-top: -60px;
+    }
 }
