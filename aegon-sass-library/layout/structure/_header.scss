@@ -4,125 +4,131 @@
 // --------------------------------------------------
 
 header.header {
-  position: relative;
-  margin: 0 auto;
-  padding: 0 7.3%;
-  @include rem('height', 63);
-  @include rem('min-height', 63);
-  display: table;
-  width: 100%;
+    position: relative;
 
-  .left,
-  .middle,
-  .right {
-    display: table-cell;
-    vertical-align: middle;
-  }
+    display: table;
 
-  .left {
-    width: 30%;
-    text-align: left;
-    padding-left: 0;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 7.3%;
+
+    @include rem('height', 63);
     @include rem('min-height', 63);
-  }
+    .left, .middle, .right {
+        display: table-cell;
 
-  .middle {
-    width: 40%;
-    text-align: center;
-  }
-
-  .right {
-    width: 30%;
-    text-align: right;
-    padding-right: 0;
-  }
-
-  // Mobile elements
-  .tap-menu {
-
-    a {
-      position: relative;
-      width: 20px;
-      height: 17px;
-      // overflow: hidden;
-      display: inline-block;
-      vertical-align: middle;
-      text-indent: -9999px;
-      @include rem('line-height', 60);
-
-      &:before {
-        content: '';
-        display: block;
-        position: absolute;
-        top: 50%;
-        left: 0;
-        @include rem('width', 19);
-        @include rem('height', 15);
-        @include rem('margin-top', -7.5);
-
-        border-top: 0.22em solid $fun_blue_approx;
-        border-bottom: 0.22em solid $fun_blue_approx;
-      }
-
-      &:after {
-        content: '';
-        display: block;
-        position: absolute;
-        top: 50%;
-        left: 0;
-        @include rem('width', 19);
-        @include rem('height', 15);
-        @include rem('margin-top', -2);
-        border-top: 0.22em solid $fun_blue_approx;
-      }
+        vertical-align: middle;
     }
-  }
+    .left {
+        width: 30%;
+        padding-left: 0;
 
-  .mobile-logo {
+        text-align: left;
 
-    a {
-      display: inline-block;
-      vertical-align: middle;
-      text-indent: -9999px;
-      width: 100%;
-      // height: 100%;
-      @include rem('min-height', 32);
-      @include rem('min-width', 50);
-      @include rem('max-width', 170);
-
-      // @include rem('max-width', 90);
-      // @include rem('padding-top', 6);
-
-      background-image: url('../images/logo_aegon.png');
-      background-position: center center;
-      background-repeat: no-repeat;
-      background-size: auto 100%;
-      background-color: $white;
+        @include rem('min-height', 63);
     }
-  }
+    .middle {
+        width: 40%;
 
-  .right {
-
-    a {
-      vertical-align: middle;
+        text-align: center;
     }
-  }
+    .right {
+        width: 30%;
+        padding-right: 0;
 
-  // Desktop elements
-  .region-header-left {
-    display: none;
-  }
-
-  .region-header {
-    display: none;
-
-    .block {
-      display: none;
-      float: left;
-      width: auto;
-      position: relative;
+        text-align: right;
     }
-  }
+    // Mobile elements
+    .tap-menu {
+        a {
+            position: relative;
+            // overflow: hidden;
+
+            display: inline-block;
+
+            width: 20px;
+            height: 17px;
+
+            vertical-align: middle;
+            text-indent: -9999px;
+
+            @include rem('line-height', 60);
+            &:before {
+                position: absolute;
+                top: 50%;
+                left: 0;
+
+                display: block;
+
+                content: '';
+
+                border-top: .22em solid $fun_blue_approx;
+                border-bottom: .22em solid $fun_blue_approx;
+
+                @include rem('width', 19);
+                @include rem('height', 15);
+                @include rem('margin-top', -7.5);
+            }
+            &:after {
+                position: absolute;
+                top: 50%;
+                left: 0;
+
+                display: block;
+
+                content: '';
+
+                border-top: .22em solid $fun_blue_approx;
+
+                @include rem('width', 19);
+                @include rem('height', 15);
+                @include rem('margin-top', -2);
+            }
+        }
+    }
+    .mobile-logo {
+        a {
+            display: inline-block;
+
+            width: 100%;
+
+            vertical-align: middle;
+            text-indent: -9999px;
+
+            background-color: $white;
+            // @include rem('max-width', 90);
+            // @include rem('padding-top', 6);
+            background-image: url('../images/logo_aegon.png');
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: auto 100%;
+            // height: 100%;
+
+            @include rem('min-height', 32);
+            @include rem('min-width', 50);
+            @include rem('max-width', 170);
+        }
+    }
+    .right {
+        a {
+            vertical-align: middle;
+        }
+    }
+    // Desktop elements
+    .region-header-left {
+        display: none;
+    }
+    .region-header {
+        display: none;
+        .block {
+            position: relative;
+
+            display: none;
+            float: left;
+
+            width: auto;
+        }
+    }
 }
 
 
@@ -131,32 +137,30 @@ header.header {
 // --------------------------------------------------
 
 @include breakpoint($brk-tablet) {
+    header.header {
+        table-layout: fixed;
 
-  header.header {
-    table-layout: fixed;
-    @include rem('min-height', 90);
+        @include rem('min-height', 90);
+        .right {
+            float: none;
 
-    .right {
-      float: none;
-      width: 50%;
-      padding: 0;
+            width: 50%;
+            padding: 0;
+        }
+        // Mobile elements
+        .tap-menu, .mobile-logo {
+            display: none;
+        }
+        // Desktop elements
+        .region-header-left, .region-header {
+            display: table-cell;
+
+            width: 50%;
+
+            vertical-align: middle;
+            .block {
+                display: block;
+            }
+        }
     }
-
-    // Mobile elements
-    .tap-menu,
-    .mobile-logo {
-      display: none;
-    }
-
-    // Desktop elements
-    .region-header-left,
-    .region-header {
-      display: table-cell;
-      vertical-align: middle;
-      width: 50%;
-      .block {
-        display: block;
-      }
-    }
-  }
 }
