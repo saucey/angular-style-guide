@@ -182,7 +182,9 @@
           address = userData._AE_ADRES;
 
         // Some the address variable is an array, when there are multiple address lines available, if this is the case we want the first item
-        if (address.constructor === Array) address = address[0];
+        if (address.constructor === Array) {
+          address = address[0];
+        }
 
         var completeAddress = address.STRAAT + " " + address.HUISNR + (address.TOEVOEG ? (" " + address.TOEVOEG) : "");
 
