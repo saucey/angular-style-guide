@@ -1,244 +1,244 @@
 .user_detail_widget {
-    z-index: 0;
-    // Default display. In section logic below there is the switch for display
+  z-index: 0;
+  // Default display. In section logic below there is the switch for display
+
+  display: none;
+  float: right;
+  .inplace {
+    position: relative;
+
+    display: inline-block;
+    float: right;
+
+    height: 36px;
+    margin: 0;
+    .btn-login-loggedin {
+      position: relative;
+      z-index: 2;
+      top: 0;
+      right: 0;
+
+      white-space: nowrap;
+    }
+  }
+  > .text {
+    display: none;
+  }
+  label {
+    font-weight: normal;
+  }
+  input#UDW_dd_show {
+    display: none;
+    &:checked {
+      ~ .dropdown {
+        display: block;
+      }
+      ~ .btn-login-loggedin {
+        z-index: 9;
+
+        border-bottom-color: $white;
+        &:after {
+          -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+              -ms-transform: rotate(180deg); /* IE 9 */
+                  transform: rotate(180deg);
+        }
+      }
+    }
+  }
+  .dropdown {
+    position: absolute;
+    z-index: 2;
+    top: auto;
+    right: 0;
 
     display: none;
-    float: right;
-    .inplace {
-        position: relative;
 
-        display: inline-block;
-        float: right;
+    min-width: 260px;
 
-        height: 36px;
-        margin: 0;
-        .btn-login-loggedin {
-            position: relative;
-            z-index: 2;
-            top: 0;
-            right: 0;
+    border: 1px solid $slightly_darker_grey;
+    background-color: $white;
+    box-shadow: 0 1px 0 rgba(0,0,0,.3);
 
-            white-space: nowrap;
-        }
-    }
-    > .text {
-        display: none;
-    }
-    label {
-        font-weight: normal;
-    }
-    input#UDW_dd_show {
-        display: none;
-        &:checked {
-            ~ .dropdown {
-                display: block;
-            }
-            ~ .btn-login-loggedin {
-                z-index: 9;
+    @include rem('margin-top', -3);
+    @include rem('padding', 0, 18);
+    @include rem('border-radius', 2);
+    .text {
+      overflow: initial;
 
-                border-bottom-color: $white;
-                &:after {
-                    -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
-                        -ms-transform: rotate(180deg); /* IE 9 */
-                            transform: rotate(180deg);
-                }
-            }
-        }
-    }
-    .dropdown {
-        position: absolute;
-        z-index: 2;
-        top: auto;
-        right: 0;
-
-        display: none;
-
-        min-width: 260px;
-
-        border: 1px solid $slightly_darker_grey;
-        background-color: $white;
-        box-shadow: 0 1px 0 rgba(0,0,0,.3);
-
-        @include rem('margin-top', -3);
-        @include rem('padding', 0, 18);
-        @include rem('border-radius', 2);
-        .text {
-            overflow: initial;
-
-            text-align: left;
-            white-space: normal;
-            text-overflow: initial;
-            p {
-                display: block;
-
-                @include rem('margin', 18, 0);
-            }
-            p.name {
-                color: $green;
-                &:before {
-                    font-family: $font_icons;
-
-                    display: inline-block;
-
-                    content: $font_icons_man;
-                    transform: translateY(3px);
-
-                    @include rem('font-size', 23);
-                    @include rem('margin-right', 12);
-                }
-            }
-            .action {
-                white-space: nowrap;
-            }
-        }
-    }
-    .highlight {
+      text-align: left;
+      white-space: normal;
+      text-overflow: initial;
+      p {
         display: block;
 
-        color: #fff !important;
-        background-color: $green;
-        &.has-been-shown {
-            //if user has already seen the highlight, we don't want to show this again
-            &.desktop, &.mobile {
-                display: none;
-            }
-        }
-        &.desktop {
-            position: absolute;
-            z-index: 2;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-
-            display: none;
-
-            height: 90px !important;
-            max-height: 90px !important;
-
-            animation: slidingHighlightOnTop 1s 1 5s forwards;
-
-            @include rem('padding', 23, 0);
-        }
-        &.mobile {
-            overflow: hidden;
-
-            margin-bottom: 10px;
-
-            animation: slidingHighlightOnTopMobile 1s 3s 5 forwards;
-
-            background-color: transparent;
-
-            @include rem('font-size', 16);
-            .text {
-                padding: 0;
-
-                background-color: $green;
-                p {
-                    margin-bottom: 0;
-
-                    color: $white;
-                }
-            }
-        }
-        strong {
-            font-family: $font_normal;
-            font-weight: 300;
-        }
-    } // end highlight
-    .btn-login-loggedin {
-        font-family: $font_normal;
-
-        z-index: 2;
-
-        height: auto;
-        margin-bottom: 2px;
-
-        cursor: pointer;
-        user-select: none;
-
+        @include rem('margin', 18, 0);
+      }
+      p.name {
         color: $green;
-        border-width: 1px;
-        border-style: solid;
-        // Properties for animation
-        border-color: $slightly_darker_grey;
-        border-bottom-color: $slightly_darker_grey;
-        outline: 0;
-        background-color: $white;
+        &:before {
+          font-family: $font_icons;
 
-        @include rem('padding', 0, 10, 1, 10);
-        @include rem('line-height', 36);
-        @include rem('border-radius', 2);
-        &:after {
-            font-family: $font_icons;
+          display: inline-block;
 
-            display: inline-block;
+          content: $font_icons_man;
+          transform: translateY(3px);
 
-            content: $font_icons_arrow_down;
-            animation: buttonAfterLoginToDefault 2s normal 0s forwards;
-
-            @include rem('font-size', 12);
-            @include rem('margin-left', 6);
+          @include rem('font-size', 23);
+          @include rem('margin-right', 12);
         }
-        &.tap {
-            padding-bottom: 0;
-
-            border-bottom-color: $slightly_darker_grey;
-            & ~ .dropdown {
-                display: none;
-            }
-        }
-        &.off, &.off:after {
-            animation: none;
-
-            background-color: $white;
-        }
-        &:hover {
-            opacity: initial;
-        }
+      }
+      .action {
+        white-space: nowrap;
+      }
     }
-    /**
+  }
+  .highlight {
+    display: block;
+
+    color: #fff !important;
+    background-color: $green;
+    &.has-been-shown {
+      //if user has already seen the highlight, we don't want to show this again
+      &.desktop, &.mobile {
+        display: none;
+      }
+    }
+    &.desktop {
+      position: absolute;
+      z-index: 2;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+
+      display: none;
+
+      height: 90px !important;
+      max-height: 90px !important;
+
+      animation: slidingHighlightOnTop 1s 1 5s forwards;
+
+      @include rem('padding', 23, 0);
+    }
+    &.mobile {
+      overflow: hidden;
+
+      margin-bottom: 10px;
+
+      animation: slidingHighlightOnTopMobile 1s 3s 5 forwards;
+
+      background-color: transparent;
+
+      @include rem('font-size', 16);
+      .text {
+        padding: 0;
+
+        background-color: $green;
+        p {
+          margin-bottom: 0;
+
+          color: $white;
+        }
+      }
+    }
+    strong {
+      font-family: $font_normal;
+      font-weight: 300;
+    }
+  } // end highlight
+  .btn-login-loggedin {
+    font-family: $font_normal;
+
+    z-index: 2;
+
+    height: auto;
+    margin-bottom: 2px;
+
+    cursor: pointer;
+    user-select: none;
+
+    color: $green;
+    border-width: 1px;
+    border-style: solid;
+    // Properties for animation
+    border-color: $slightly_darker_grey;
+    border-bottom-color: $slightly_darker_grey;
+    outline: 0;
+    background-color: $white;
+
+    @include rem('padding', 0, 10, 1, 10);
+    @include rem('line-height', 36);
+    @include rem('border-radius', 2);
+    &:after {
+      font-family: $font_icons;
+
+      display: inline-block;
+
+      content: $font_icons_arrow_down;
+      animation: buttonAfterLoginToDefault 2s normal 0s forwards;
+
+      @include rem('font-size', 12);
+      @include rem('margin-left', 6);
+    }
+    &.tap {
+      padding-bottom: 0;
+
+      border-bottom-color: $slightly_darker_grey;
+      & ~ .dropdown {
+        display: none;
+      }
+    }
+    &.off, &.off:after {
+      animation: none;
+
+      background-color: $white;
+    }
+    &:hover {
+      opacity: initial;
+    }
+  }
+  /**
    * End animation with jQuery support
    */
-    &.processed {
-        .highlight.desktop {
-            display: none;
-        }
-        .highlight.mobile {
-            display: none;
-        }
-        > .text {
-            opacity: 1;
-        }
-        .btn-login-loggedin, .btn-login-loggedin:after {
-            animation: none;
-        }
+  &.processed {
+    .highlight.desktop {
+      display: none;
     }
-    a.user_detail_widget_mijnaegon_link.button.white.myaegon {
-        padding: 0;
+    .highlight.mobile {
+      display: none;
     }
-    .user_detail_widget_logout_link.button.arrow {
-        margin: 0;
+    > .text {
+      opacity: 1;
     }
-    span.user_detail_widget_last_access {
-        white-space: nowrap;
+    .btn-login-loggedin, .btn-login-loggedin:after {
+      animation: none;
     }
-    .btndiv {
-        text-align: center;
-    }
+  }
+  a.user_detail_widget_mijnaegon_link.button.white.myaegon {
+    padding: 0;
+  }
+  .user_detail_widget_logout_link.button.arrow {
+    margin: 0;
+  }
+  span.user_detail_widget_last_access {
+    white-space: nowrap;
+  }
+  .btndiv {
+    text-align: center;
+  }
 }
 
 // Hide login button by default
 .login-link-wrapper {
-    display: none;
-    .button {
-        padding: 10px;
-    }
+  display: none;
+  .button {
+    padding: 10px;
+  }
 }
 
 // Hide the banner with a request to the user to provide a mobile number by default.
 .messages.messages--attention.request_mobile_number {
-    display: none;
+  display: none;
 }
 
 //
@@ -246,7 +246,7 @@
 // --------------------------------------------------
 
 html.lt-ie9 .user_detail_widget > .text {
-    opacity: 1 !important;
+  opacity: 1 !important;
 }
 
 
@@ -255,20 +255,20 @@ html.lt-ie9 .user_detail_widget > .text {
 // --------------------------------------------------
 
 body.section-mijnaegon .myaegon {
-    display: none;
+  display: none;
 }
 
 body.shw-widgets-logged-in {
-    .link-logged-in a {
-        display: none;
-    }
-    .user_detail_widget, .link-logged-in .link-alternative a {
-        display: block;
-    }
+  .link-logged-in a {
+    display: none;
+  }
+  .user_detail_widget, .link-logged-in .link-alternative a {
+    display: block;
+  }
 }
 
 .link-alternative a {
-    display: none;
+  display: none;
 }
 
 //
@@ -276,140 +276,140 @@ body.shw-widgets-logged-in {
 // --------------------------------------------------
 
 @include breakpoint($brk-tablet) {
-    .user_detail_widget {
+  .user_detail_widget {
+    width: 100%;
+    > .text {
+      display: block;
+
+      width: 100%;
+      padding-right: 114px;
+      p.name {
         width: 100%;
-        > .text {
-            display: block;
+        margin: 0;
 
-            width: 100%;
-            padding-right: 114px;
-            p.name {
-                width: 100%;
-                margin: 0;
-
-                @include rem('line-height', 25);
-                .user_detail_widget_name {
-                    position: relative;
-
-                    overflow: hidden;
-
-                    width: 100%;
-
-                    white-space: nowrap;
-                    text-overflow: ellipsis;
-
-                    @include rem('padding', 0, 48, 0, 13);
-                    &:after {
-                        font-family: $font_icons;
-                        /* absolute for better handling */
-
-                        position: absolute;
-                        top: 0;
-                        right: 12px;
-                        bottom: 0;
-
-                        display: inline-block;
-
-                        content: $font_icons_man;
-
-                        @include rem('font-size', 23);
-                    }
-                }
-            }
-        }
-        .text {
-            p.name {
-                display: inline-block;
-
-                color: $green;
-
-                @include rem('padding', 0, 10, 0, 0);
-            }
-        }
-        .dropdown {
-            display: none;
-            .text p.name {
-                display: none;
-            }
-        }
-        .highlight.desktop {
-            display: block;
-            .text {
-                overflow: hidden;
-
-                margin: 0;
-                margin-right: 7.3%;
-                margin-left: 7.3%;
-
-                text-align: left;
-                white-space: nowrap;
-                text-overflow: ellipsis;
-
-                color: $white;
-
-                @include rem('line-height', 44);
-                @include rem('padding-right', 170);
-                .welcome {
-                    font-family: $font_normal;
-                }
-                p {
-                    display: inline;
-                }
-            }
-        } // end highlight desktop
-        .highlight.mobile {
-            display: none;
-        } // end highlight mobile
+        @include rem('line-height', 25);
         .user_detail_widget_name {
-            font-size: inherit;
+          position: relative;
+
+          overflow: hidden;
+
+          width: 100%;
+
+          white-space: nowrap;
+          text-overflow: ellipsis;
+
+          @include rem('padding', 0, 48, 0, 13);
+          &:after {
+            font-family: $font_icons;
+            /* absolute for better handling */
+
+            position: absolute;
+            top: 0;
+            right: 12px;
+            bottom: 0;
 
             display: inline-block;
 
-            animation: buttonLoginToDefault 2s normal 0s forwards;
+            content: $font_icons_man;
 
-            @include rem('padding', 0, 13, 2, 13);
-            @include rem('line-height', 36);
-            &:after {
-                font-family: $font_icons;
-
-                display: inline-block;
-
-                content: $font_icons_man;
-                transform: translateY(3px);
-
-                @include rem('font-size', 23);
-                @include rem('margin-left', 12);
-            }
-            &.tap {
-                padding-bottom: 0;
-
-                border-bottom-color: transparent;
-                background-color: $white;
-                ~ .dropdown {
-                    display: block;
-                }
-            }
-            &.ieChangeColors {
-                color: $white;
-                &:after {
-                    border-color: $white;
-                }
-            }
+            @include rem('font-size', 23);
+          }
         }
+      }
     }
+    .text {
+      p.name {
+        display: inline-block;
+
+        color: $green;
+
+        @include rem('padding', 0, 10, 0, 0);
+      }
+    }
+    .dropdown {
+      display: none;
+      .text p.name {
+        display: none;
+      }
+    }
+    .highlight.desktop {
+      display: block;
+      .text {
+        overflow: hidden;
+
+        margin: 0;
+        margin-right: 7.3%;
+        margin-left: 7.3%;
+
+        text-align: left;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+
+        color: $white;
+
+        @include rem('line-height', 44);
+        @include rem('padding-right', 170);
+        .welcome {
+          font-family: $font_normal;
+        }
+        p {
+          display: inline;
+        }
+      }
+    } // end highlight desktop
+    .highlight.mobile {
+      display: none;
+    } // end highlight mobile
+    .user_detail_widget_name {
+      font-size: inherit;
+
+      display: inline-block;
+
+      animation: buttonLoginToDefault 2s normal 0s forwards;
+
+      @include rem('padding', 0, 13, 2, 13);
+      @include rem('line-height', 36);
+      &:after {
+        font-family: $font_icons;
+
+        display: inline-block;
+
+        content: $font_icons_man;
+        transform: translateY(3px);
+
+        @include rem('font-size', 23);
+        @include rem('margin-left', 12);
+      }
+      &.tap {
+        padding-bottom: 0;
+
+        border-bottom-color: transparent;
+        background-color: $white;
+        ~ .dropdown {
+          display: block;
+        }
+      }
+      &.ieChangeColors {
+        color: $white;
+        &:after {
+          border-color: $white;
+        }
+      }
+    }
+  }
 }
 
 @include breakpoint($brk-ipad-portrait) {
-    .user_detail_widget {
-        > .text {
-            display: block;
+  .user_detail_widget {
+    > .text {
+      display: block;
 
-            transition: opacity .15s;
-            // Default status
+      transition: opacity .15s;
+      // Default status
 
-            opacity: 1;
-        }
+      opacity: 1;
     }
+  }
 }
 
 //
@@ -417,43 +417,43 @@ body.shw-widgets-logged-in {
 // --------------------------------------------------
 
 @keyframes buttonLoginToDefault {
-    0%, 75% {
-        color: $white;
-        border-color: $white;
-    }
+  0%, 75% {
+    color: $white;
+    border-color: $white;
+  }
 
-    100% {
-        color: $green;
-        border-color: $slightly_darker_grey;
-    }
+  100% {
+    color: $green;
+    border-color: $slightly_darker_grey;
+  }
 }
 
 @keyframes buttonAfterLoginToDefault {
-    0%, 75% {
-        border-color: $white;
-    }
+  0%, 75% {
+    border-color: $white;
+  }
 
-    100% {
-        border-color: $green;
-    }
+  100% {
+    border-color: $green;
+  }
 }
 
 @keyframes slidingHighlightOnTop {
-    from {
-        transform: translateY(0%);
-    }
+  from {
+    transform: translateY(0%);
+  }
 
-    to {
-        transform: translateY(-120%);
-    }
+  to {
+    transform: translateY(-120%);
+  }
 }
 
 @keyframes slidingHighlightOnTopMobile {
-    from {
-        max-height: 500px;
-    }
+  from {
+    max-height: 500px;
+  }
 
-    to {
-        max-height: 0;
-    }
+  to {
+    max-height: 0;
+  }
 }
