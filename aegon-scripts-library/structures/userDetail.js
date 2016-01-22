@@ -138,13 +138,13 @@
 
     getData: function () {
       var that = this,
-
+      now = new Date(),
       // Payload for JSONP
       jsonPayload = {
         'retrieveRequest': {
           'AILHEADER': {
             'CLIENTID': 'MijnAegonUserWidget',
-            'CORRELATIONID': '##UAT##'
+            'CORRELATIONID': '## MijnAegon_UserWidget ## ' + now.getDate() + ' ##'
           }
         }
       };
