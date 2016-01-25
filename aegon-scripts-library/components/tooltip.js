@@ -11,27 +11,56 @@
       this.attached = true;  //used to determine if this function has already run
     },
     attached: false,
-    activate: function (selector) {
-      $(selector + " .help").mouseover(function () {
-        if (this.title !== " " && this.title.length > 0) { //the temporary content has 2B " ", since "" will set display to "none" according to stylesheet definition, 
+    activate: function (selector, pos) {
+      $(selector + " .help").on('mouseenter', function () {
+        var $this = $(this),
+            $title = $this.attr('title');
+            
+        if ($title !== " " && $title.length > 0) { //the temporary content has 2B " ", since "" will set display to "none" according to stylesheet definition, 
           $(".help.dialog").remove();
+          // if pos is not set or it's not a valid position, defaults to bottom
+          if(typeof pos === 'undefined' || ! /^(top|bottom|left|right)$/.test(pos)){
+            pos = 'bottom';
+          }
+
           var dialog = document.createElement("DIV");
-          dialog.className = "help dialog";
-          dialog.innerHTML = this.title;
-          this.title = " ";
+          dialog.className = "help dialog " + pos;
+          dialog.innerHTML = $title;
+
+          $this.attr('title', ' ');
+
           $(selector).append(dialog); //this has 2 happen b4 measurements of dialog are taken, otherwise they won't be initialized
-          var offset = $(this).offset();
-          offset.top = offset.top + $(this).height() + 20;
-          offset.left = offset.left - $(dialog).width() / 2 - 18;
-          $(dialog).offset(offset);
-          var that = this;
+          var $dialog = $(dialog),
+              offset = $(this).offset();
+
+          switch(pos){
+            case 'top':
+              offset.top = offset.top - $dialog.outerHeight() - 10;
+              offset.left = offset.left - $dialog.outerWidth() / 2;            
+            break;
+            case 'left':
+              offset.top = offset.top - $dialog.outerHeight() / 2;
+              offset.left = offset.left - $dialog.outerWidth() - 5;            
+            break;
+            case 'right':
+              offset.top = offset.top - $dialog.outerHeight() / 2;
+              offset.left = offset.left + 25;            
+            break;
+            default:
+              offset.top = offset.top + $this.outerHeight() + 10;
+              offset.left = offset.left - $dialog.outerWidth() / 2;            
+          }
+          
+          $dialog.offset(offset);
+
           $(document).click(function () {
+            $this.attr('title', dialog.innerHTML);
             $(".dialog").remove();
-             that.title = dialog.innerHTML;
           });
-          $(dialog).mouseout(function(){
-            $(dialog).remove();
-            that.title = dialog.innerHTML;
+
+          $this.on('mouseleave', function(){
+            $this.attr('title', dialog.innerHTML);
+            $dialog.remove();
           });
         }
       });

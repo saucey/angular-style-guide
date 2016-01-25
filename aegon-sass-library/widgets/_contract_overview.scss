@@ -52,6 +52,19 @@
         &:first-child {
           width: 100%;
         }
+        
+        span.help.advisor {
+          margin: 0;
+          padding:26px 10px 0;
+          margin-top: -30px;
+          &:before {
+            content: $font_icons_man_in_tie;
+            color: $lochmara_approx;
+            bottom: 0px;
+            top: auto;
+            @include rem('font-size', 26);
+          }
+        }      
       }
 
       &.type {
@@ -121,9 +134,12 @@
         li {
           display: inline-block;
           @include rem('padding', 8, 19);
-
+          width: 29%;
           &:first-child {
-            width: 60%;
+            width: 40%;
+          }
+          span.help.advisor {
+            margin-top: 0;
           }
         }
       }
@@ -149,13 +165,7 @@
       }
     }
 
-    .product.title {
-      display: block;
-      padding: 10px 0;
-      font-weight: normal;
-    }
-
-    .value.title {
+    .product.title, .value.title, .advisor.title {
       display: block;
       padding: 10px 0;
       font-weight: normal;
