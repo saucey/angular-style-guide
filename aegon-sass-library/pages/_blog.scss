@@ -134,6 +134,10 @@
   .blog-featured{  
     background-color: $blue;
 
+    .continue{
+      color: $white;
+    }
+
     .span4{
 
       .counter{
@@ -304,7 +308,7 @@
       }
       .span4{
         flex-basis: 31.9375%;
-        h3.continue{
+        .continue{
           display: none;
         }
       }
@@ -326,10 +330,9 @@
         }
       }
       .text{
-        @include rem('height', $line-height-medium * 5);
       }
     }
-    .blog-articles h3.continue{
+    .blog-articles .continue{
       display: none;
     }
   }
@@ -350,7 +353,7 @@
   .blog{
     .container_12 .row-fluid.same-height.blog-featured {
       .text{
-        @include rem('height', $line-height-medium * 5);
+        @include rem('height', $line-height-medium * 8);
       }
     }
   }
