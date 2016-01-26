@@ -3,64 +3,64 @@
 // --------------------------------------------------
 
 .blog {
-  h3{
+  h3 {
     font-weight: normal;
     @include rem('font-size', $large);
   }
 
-  .continue{
+  .continue {
     @include rem('font-size', $medium);
   }
 
-  h4{
+  h4 {
     @include rem('margin', 0, 0, 15, 0);
   }
 
-  p.date{
-    color:$darker_grey;
+  p.date {
+    color: $darker_grey;
   }
 
-  .blog-heading{
-    h1.blog-page-title{
+  .blog-heading {
+    h1.blog-page-title {
       padding: 0 20px;
       @include rem('margin-top', 10);
 
     }
-    .cat-select{
+    .cat-select {
       width: 100%;
       max-width: 200px;
       float: right;
 
-      .views-exposed-widget{
+      .views-exposed-widget {
         float: none;
         padding: 0;
       }
 
-      .ddcommon{
-        width:100% !important;
+      .ddcommon {
+        width: 100% !important;
         float: right;
       }
     }
-    .span8{
+    .span8 {
       width: 66%;
     }
-    .span4:last-child{
+    .span4:last-child {
       width: 32%;
       clear: none;
       float: left;
     }
   }
 
-  ul.pager{
+  ul.pager {
     text-align: center;
     @include rem('margin', 30, 0, 30, 0);
-    li{
+    li {
       display: inline;
       @include rem('margin-top', 20);
     }
 
-    .pager-current{
-      color:$white;
+    .pager-current {
+      color: $white;
       border-radius: 50%;
       background-color: $blue;
       @include rem('padding', 5, 10);
@@ -68,55 +68,55 @@
     }
   }
 
-  .blog-image{
+  .blog-image {
     position: relative;
-    h1{
+    h1 {
       position: absolute;
       bottom: 20px;
       left: 20px;
       @include rem('margin', 0, 0, 0, 0);
-      color:$white;
+      color: $white;
       font-family: $font-light;
 
-      a{
+      a {
         color: $white;
       }
     }
-    .blog-category{
+    .blog-category {
       background-color: $orange;
-      color:$white;
+      color: $white;
       padding: 5px 15px;
       height: 30px;
       position: absolute;
-      top:0;
+      top: 0;
       left: 0;
 
-      p{
+      p {
         line-height: normal;
         color: $white;
       }
     }
   }
 
-  .blog-content{
+  .blog-content {
     position: relative;
-    .text{
+    .text {
       @include rem('margin-bottom', 20);
     }
   }
-  .nomb{
+  .nomb {
     @include rem('margin-bottom', 0);
   }
 
-  .span4, .span6{
+  .span4, .span6 {
     position: relative;
-    .counter{
+    .counter {
       position: absolute;
       right: 15px;
       top: 10px;
       width: 50px;
       text-align: center;
-      &:after{
+      &:after {
         content: "";
         display: block;
         width: 0;
@@ -131,86 +131,86 @@
     }
   }
 
-  .blog-featured{
+  .blog-featured {
     background-color: $blue;
 
-    .continue{
+    .continue {
       color: $white;
     }
 
-    .span4{
+    .span4 {
 
-      .counter{
+      .counter {
         background-color: $white;
         color: $blue;
 
-        &:after{
+        &:after {
           border-right: 12px solid $white;
         }
       }
     }
 
-    .blog-image{
+    .blog-image {
       width: 100%;
       height: 100%;
       overflow: hidden;
       @include rem('margin-bottom', 0);
-      img{
+      img {
         display: block;
         width: 100%;
         height: auto;
       }
     }
 
-    .blog-content{
+    .blog-content {
       background-color: $blue;
       overflow: hidden;
       padding: 10px;
-      h3, p.date, h4, .text{
-        color:$white;
-        a{
-          color:$white;
+      h3, p.date, h4, .text {
+        color: $white;
+        a {
+          color: $white;
         }
       }
     }
   }
 
-  .blog-articles{
+  .blog-articles {
 
-    .span6{
-      .counter{
+    .span6 {
+      .counter {
         background-color: $blue;
         color: $white;
 
-        a{
+        a {
           color: $white;
         }
       }
     }
 
-    .blog-article{
-      background-color:$white;
+    .blog-article {
+      background-color: $white;
 
-      img{
+      img {
         width: 100%;
         height: auto;
       }
 
-      .blog-image{
+      .blog-image {
         overflow: hidden;
       }
 
-      .blog-content{
+      .blog-content {
         padding: 10px;
 
-        h3, p.date{
-          a{
-            color:$blue;
+        h3, p.date {
+          a {
+            color: $blue;
           }
         }
 
-        h4, .text{
-          color:$black;
+        h4, .text {
+          color: $black;
         }
       }
     }
@@ -231,63 +231,62 @@
   }
 }
 
-@include breakpoint($brk-tablet){
-  .blog{
+@include breakpoint($brk-tablet) {
+  .blog {
 
     .container_12 .row-fluid .span4:last-child {
       @include rem('margin-top', 0);
     }
-    .blog-heading{
-      h1.blog-page-title{
+    .blog-heading {
+      h1.blog-page-title {
         padding: 0;
         @include rem('margin-top', 0);
       }
     }
 
-    h3{
+    h3 {
       color: $blue;
-      a{
+      a {
         color: $white;
       }
     }
 
-    h4{
+    h4 {
       @include rem('margin', 0);
     }
 
-
-    .blog-content{
-      .counter{
-        &:after{
+    .blog-content {
+      .counter {
+        &:after {
           border-right: 12px solid $white;
         }
       }
     }
 
-    .blog-featured{
+    .blog-featured {
       @include rem('margin-bottom', 20);
-      .blog-article{
+      .blog-article {
         max-height: none;
       }
-      .text{
+      .text {
         @include rem('height', $line-height-medium * 5);
         overflow: hidden;
       }
     }
 
-    .blog-articles{
+    .blog-articles {
       @include rem('margin-bottom', 20);
-      .blog-article{
-        background-color:$grey;
+      .blog-article {
+        background-color: $grey;
 
-        .blog-content{
+        .blog-content {
           padding: 10px;
 
-          .counter{
+          .counter {
             background-color: $white;
             color: $blue;
 
-            a{
+            a {
               color: $blue;
             }
           }
@@ -298,38 +297,34 @@
 }
 
 @include breakpoint($brk-ipad-portrait) {
-  .blog{
+  .blog {
     @include rem('margin-bottom', 50px);
     .container_12 .row-fluid.same-height.blog-featured {
-      .span8{
-        flex-basis: (8/12) * 98%;
+      .span8 {
         overflow: hidden;
       }
-      .span4{
-        flex-basis: (4/12) * 98%;
-        .continue{
-          display: none;
-        }
+      .continue {
+        display: none;
       }
     }
     .blog-featured {
       .span4 {
-          .counter {
-          top:auto;
+        .counter {
+          top: auto;
           right: 15px;
           bottom: 30px;
           left: auto;
         }
       }
-      .blog-image{
+      .blog-image {
         height: 350px;
-        img{
+        img {
           height: 100%;
           width: auto;
         }
       }
     }
-    .blog-articles .continue{
+    .blog-articles .continue {
       display: none;
     }
   }
@@ -344,9 +339,9 @@
 }
 
 @include breakpoint($brk-large-desktop) {
-  .blog{
+  .blog {
     .container_12 .row-fluid.same-height.blog-featured {
-      .text{
+      .text {
         @include rem('height', $line-height-medium * 8);
       }
     }
