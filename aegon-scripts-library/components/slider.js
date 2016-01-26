@@ -8,6 +8,13 @@
   Drupal.behaviors.slider = {
     activate: function(sliderClass,inputClass,sliderValue,sliderMin,sliderMax,sliderStep,currency, options) {
 
+      // Creates dot between thousands
+      function readableNumber(number) {
+        var newNumber = number.toLocaleString();
+        newNumber = newNumber.replace(/,/g, '.');
+        return newNumber;
+      }
+
       // Default options
       var defaults = {
         range: "max",
@@ -16,7 +23,7 @@
         max: sliderMax,
         step: sliderStep,
         slide: function( event, ui ) {
-          $(inputClass).val( currency + ui.value );
+          $(inputClass).val( currency + readableNumber(ui.value) );
         }
       };
 

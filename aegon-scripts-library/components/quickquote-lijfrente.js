@@ -41,7 +41,7 @@
           formulaPart1 = round(1 / Math.pow(1 + interestPerMonth, months), 6),
           formulaComplete = round((1 - formulaPart1) / interestPerMonth, 3),
           monthlyPayment = round(money / formulaComplete, 2).toFixed(2);
-      $(paymentClass).text( Currency + monthlyPayment);
+      $(paymentClass).text( Currency + monthlyPayment.replace('.', ','));
     },
   };
 })(jQuery);
