@@ -13,7 +13,7 @@
    */
   Drupal.behaviors.contractOverview = {
     attach: function () {
-      Drupal.behaviors.tooltip.activate(".contract_overview_widget", "top");
+      Drupal.behaviors.tooltip.activate(".contract_overview_widget");
     }
   };
 
