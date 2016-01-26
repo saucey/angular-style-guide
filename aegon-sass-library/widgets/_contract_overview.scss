@@ -105,6 +105,14 @@
       -webkit-font-smoothing: antialiased;
     }
   }
+  > .help.dialog{
+    width: 80%;
+    > *{
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
 }
 
 // 
@@ -162,13 +170,7 @@
   .contract_overview_widget {
     .dialog.help {
       right: 10%;
-      left: 10% !important; // to overwrite inline style added by script
-
-      > *{
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-      }
+      left: auto !important; // to overwrite inline style added by script
     }
   }
 }
