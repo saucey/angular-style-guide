@@ -7,9 +7,9 @@
     font-weight: normal;
     @include rem('font-size', $large);
   }
-  
+
   .continue{
-    @include rem('font-size', $medium); 
+    @include rem('font-size', $medium);
   }
 
   h4{
@@ -119,11 +119,11 @@
       &:after{
         content: "";
         display: block;
-        width: 0; 
-        height: 0; 
+        width: 0;
+        height: 0;
         border-top: 12px solid transparent;
         border-bottom: 12px solid transparent;
-        border-right: 12px solid $blue; 
+        border-right: 12px solid $blue;
         position: absolute;
         top: 10px;
         right: 0;
@@ -131,7 +131,7 @@
     }
   }
 
-  .blog-featured{  
+  .blog-featured{
     background-color: $blue;
 
     .continue{
@@ -145,7 +145,7 @@
         color: $blue;
 
         &:after{
-          border-right: 12px solid $white; 
+          border-right: 12px solid $white;
         }
       }
     }
@@ -249,7 +249,7 @@
       a{
         color: $white;
       }
-    } 
+    }
 
     h4{
       @include rem('margin', 0);
@@ -259,7 +259,7 @@
     .blog-content{
       .counter{
         &:after{
-          border-right: 12px solid $white; 
+          border-right: 12px solid $white;
         }
       }
     }
@@ -299,14 +299,14 @@
 
 @include breakpoint($brk-ipad-portrait) {
   .blog{
-    @include rem('margin-bottom', 50px); 
+    @include rem('margin-bottom', 50px);
     .container_12 .row-fluid.same-height.blog-featured {
       .span8{
-        flex-basis: 65.9375%;
+        flex-basis: (8/12) * 98%;
         overflow: hidden;
       }
       .span4{
-        flex-basis: 31.9375%;
+        flex-basis: (4/12) * 98%;
         .continue{
           display: none;
         }
@@ -333,7 +333,7 @@
       display: none;
     }
   }
-}    
+}
 
 @include breakpoint($brk-ipad-landscape) {
   .blog {

@@ -92,7 +92,7 @@
 
 .container_12 .row-fluid {
   [class*='span'] {
-    // currently both following lines are superseded by margin-left: 0 further 
+    // currently both following lines are superseded by margin-left: 0 further
     // below; check if that creates errors
     margin-left: 2%;
     *margin-left: 1.9375%;
@@ -101,9 +101,9 @@
     // Aded by Jorg: this was causing a problem in lhfs form, so it is
     // deactivated, but if anything is strange in deployment of grid at a later
     // point, this might be a point to start debugging
-    // 
+    //
     // Added by Rocco: When you have conflict in your style's widget, please
-    // provide that changes in your specific widget's file wrapped by your 
+    // provide that changes in your specific widget's file wrapped by your
     // specific widget's class. I'll do it for you in widgets/_lhfs.scss file.
     // Please check relative commit and explanation.
     &:first-child {
@@ -171,11 +171,11 @@
 
   display:flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-content: stretch;
   div[class*='span'] {
     min-width: 0;
-    
+
     display: flex;
     align-content: stretch;
 
@@ -200,13 +200,13 @@
     flex-basis: 74.5%;
   }
   .span8 {
-    flex-basis: 66%;  
+    flex-basis: 66%;
   }
   .span7 {
     flex-basis: 57.5%;
   }
   .span6 {
-    flex-basis: 48.8%;
+    flex-basis: 49%;
   }
   .span5 {
     flex-basis: 40.5%;
@@ -267,8 +267,8 @@ section.content.fullwidth {
 }
 
 // Grid system variant for empowered DL>DT with table/row behaviour.
-// Explanation: to simulate a better vertical-align, as row-fluid showed in 
-// widget Communication Preferences, according to functional design. 
+// Explanation: to simulate a better vertical-align, as row-fluid showed in
+// widget Communication Preferences, according to functional design.
 dl.table.row-fluid {
   display: table;
   width: 100%;
@@ -298,7 +298,7 @@ dl.table.row-fluid {
   }
 }
 
-// 
+//
 // Media queries
 // --------------------------------------------------
 
@@ -322,11 +322,15 @@ dl.table.row-fluid {
   }
 
   .container_12  {
-    .row-fluid.same-height div[class*="span"]{
-      margin-left: 0;
-      flex-basis: 100%;
+    .row-fluid.same-height{
+      flex-wrap:wrap;
+      div[class*="span"] {
+        margin-left: 0;
+        flex-basis: 100%;
+      }
     }
   }
+
 }
 
 @media screen and(min-width: $rc-m-min-width) and(max-width: $rc-m-max-width) {
@@ -365,6 +369,7 @@ dl.table.row-fluid {
   }
 
   .container_12 .row-fluid.same-height {
+    flex-wrap:wrap;
     .span4 {
       flex-basis: 46%;
     }
