@@ -271,7 +271,6 @@
       }
       .text{
         @include rem('height', $line-height-medium * 5);
-        
         overflow: hidden;
       }
     }
@@ -338,9 +337,6 @@
 
 @include breakpoint($brk-ipad-landscape) {
   .blog {
-    .text{
-      overflow: hidden;
-    }
     .blog-featured .blog-image img {
       min-width: 100%;
     }
