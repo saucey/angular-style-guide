@@ -17,7 +17,7 @@ html {
 body {
   font-family: $font_light, $font_fallback;
   font-size: $medium;
-  line-height: 25px;
+  line-height: $line-height-medium;
 
   overflow-x: hidden;
   position: relative;

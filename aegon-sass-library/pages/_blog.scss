@@ -30,6 +30,12 @@
       width: 100%;
       max-width: 200px;
       float: right;
+
+      .views-exposed-widget{
+        float: none;
+        padding: 0;
+      }
+
       .ddcommon{
         width:100% !important;
         float: right;
@@ -71,6 +77,10 @@
       @include rem('margin', 0, 0, 0, 0);
       color:$white;
       font-family: $font-light;
+
+      a{
+        color: $white;
+      }
     }
     .blog-category{
       background-color: $orange;
@@ -123,6 +133,10 @@
 
   .blog-featured{  
     background-color: $blue;
+
+    .continue{
+      color: $white;
+    }
 
     .span4{
 
@@ -183,7 +197,6 @@
       }
 
       .blog-image{
-        height: 220px;
         overflow: hidden;
       }
 
@@ -257,7 +270,7 @@
         max-height: none;
       }
       .text{
-        @include rem('height', $line-height-medium * 2);
+        @include rem('height', $line-height-medium * 5);
         overflow: hidden;
       }
     }
@@ -266,10 +279,6 @@
       @include rem('margin-bottom', 20);
       .blog-article{
         background-color:$grey;
-
-        .blog-image{
-          height: 160px;
-        }
 
         .blog-content{
           padding: 10px;
@@ -298,7 +307,7 @@
       }
       .span4{
         flex-basis: 31.9375%;
-        h3.continue{
+        .continue{
           display: none;
         }
       }
@@ -307,9 +316,9 @@
       .span4 {
           .counter {
           top:auto;
-          right: auto;
+          right: 15px;
           bottom: 30px;
-          left: 10px;
+          left: auto;
         }
       }
       .blog-image{
@@ -319,12 +328,8 @@
           width: auto;
         }
       }
-      .text{
-        @include rem('height', $line-height-medium * 5);
-        overflow: hidden;
-      }
     }
-    .blog-articles h3.continue{
+    .blog-articles .continue{
       display: none;
     }
   }
@@ -332,9 +337,6 @@
 
 @include breakpoint($brk-ipad-landscape) {
   .blog {
-    .text{
-      overflow: hidden;
-    }
     .blog-featured .blog-image img {
       min-width: 100%;
     }
@@ -345,8 +347,7 @@
   .blog{
     .container_12 .row-fluid.same-height.blog-featured {
       .text{
-        @include rem('height', $line-height-medium * 5);
-        overflow: hidden;
+        @include rem('height', $line-height-medium * 8);
       }
     }
   }
