@@ -1,117 +1,107 @@
 .contract_overview_widget {
-
   ul {
     padding: 0;
-
     li {
       padding: 2px 0;
-
       &.category {
         border-bottom: 1px solid #aaa;
+
         @include rem('padding', 30, 10);
         @include rem('margin', 10, 10);
-
         &:first-child {
-          border-top: 1px solid #aaa;          
+          border-top: 1px solid #aaa;
         }
-
         &:last-child {
           border-bottom: none;
         }
       }
-
       &.arrow {
         margin: 0;
-        background-repeat: no-repeat;
-        background-color: transparent;
-        background-position: 2px center;
         padding-left: 18px;
 
+        background-color: transparent;
+        background-repeat: no-repeat;
+        background-position: 2px center;
         &:before {
           //display: none;
         }
       }
     }
-
     &.horizontal {
       display: block;
+
       width: 100%;
       margin-bottom: 0;
       padding: 6px 0;
-
       &.inactive {
-        color: #999999;
+        color: #999;
       }
-
       li {
-        float: none;
         display: block;
-        vertical-align: top;
-        @include rem('padding', 2, 19);
+        float: none;
 
+        vertical-align: top;
+
+        @include rem('padding', 2, 19);
         &:first-child {
           width: 100%;
         }
-        
         span.help.advisor {
           margin: 0;
-          padding:26px 10px 0;
-          margin-top: -30px;
+          padding: 26px 10px 0;
+          float: right;
           &:before {
-            content: $font_icons_man_in_tie;
-            color: $lochmara_approx;
-            bottom: 0px;
             top: auto;
+            bottom: 0;
+
+            content: $font_icons_man_in_tie;
+
+            color: $lochmara_approx;
+
             @include rem('font-size', 26);
           }
-        }      
+        }
       }
-
       &.type {
         margin-bottom: 30px;
       }
     }
-
     &.horizontal.header {
       display: none;
     }
   }
-
   .label {
-    color: $blue;
     font-weight: bold;
-  }
 
+    color: $blue;
+  }
   .value:not(.title) {
     font-family: $font_normal;
   }
-
   .product.title {
     display: none;
   }
-
   .value.title {
     display: none;
   }
-
   .messages {
     @include rem('margin', 10, 10, 35);
   }
-
   h2 {
     position: relative;
+    &[class*='icon-']:before {
+      font-size: 25px;
+      font-weight: normal;
 
-    &[class*="icon-"]:before {
       position: absolute;
       top: 50%;
       left: 0;
 
       margin-left: -40px;
       // margin-top: -13px;
+
       transform: translateY(-50%);
 
-      font-size: 25px;
-      font-weight: normal;
       -webkit-font-smoothing: antialiased;
     }
   }
@@ -122,53 +112,63 @@
 // --------------------------------------------------
 
 @include breakpoint($brk-tablet) {
-
   .contract_overview_widget {
-
     ul {
-
       &.horizontal {
         width: 100%;
         padding: 0;
-
         li {
           display: inline-block;
+
           @include rem('padding', 8, 19);
-          width: 29%;
           &:first-child {
-            width: 40%;
+            width: 60%;
           }
-          span.help.advisor {
-            margin-top: 0;
+          span.value:not(.title) {
+            margin-right: 20px;
+          }
+          span.help.advisor{
+            margin-top: -5px;
           }
         }
       }
-
       &.horizontal.header {
         display: block;
-
         li {
           @include rem('padding', 2, 19);
-
           &:first-child {
             padding-left: 0;
           }
         }
       }
-
       li {
         @include rem('padding', 8, 0);
-
         span.value {
           padding: 0;
         }
       }
     }
-
     .product.title, .value.title, .advisor.title {
-      display: block;
-      padding: 10px 0;
       font-weight: normal;
+
+      display: block;
+
+      padding: 10px 0;
+    }
+  }
+}
+
+@include breakpoint($brk-mobile) {
+  .contract_overview_widget {
+    .dialog.help {
+      right: 10%;
+      left: 10% !important; // to overwrite inline style added by script
+
+      > *{
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
     }
   }
 }
