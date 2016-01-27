@@ -43,9 +43,7 @@
         vertical-align: top;
 
         @include rem('padding', 2, 19);
-        &:first-child {
-          width: 100%;
-        }
+
         span.help.advisor {
           margin: 0;
           padding: 26px 10px 0;
@@ -112,6 +110,9 @@
       white-space: nowrap;
       text-overflow: ellipsis;
     }
+    p{
+      margin-bottom: 0;
+    }
   }
 }
 
@@ -129,14 +130,11 @@
           display: inline-block;
 
           @include rem('padding', 8, 19);
-          &:first-child {
-            width: 60%;
-          }
-          span.value:not(.title) {
-            margin-right: 20px;
-          }
           span.help.advisor{
             margin-top: -5px;
+          }
+          &.span4{
+            width: 31%;
           }
         }
       }
@@ -163,6 +161,9 @@
 
       padding: 10px 0;
     }
+    > .help.dialog{
+      max-width: 340px;
+    }
   }
 }
 
@@ -171,6 +172,26 @@
     .dialog.help {
       right: 10%;
       left: auto !important; // to overwrite inline style added by script
+    }
+  }
+}
+
+@media screen and(min-width: $rc-m-min-width) and(max-width: $rc-m-max-width) {
+  .contract_overview_widget {
+    .container_12 ul.horizontal.row-fluid{
+      li.span5{
+        width: 55%;
+      }
+      li.span3{
+        width: 30%;
+      }
+      li.span4{
+        margin:0;
+        width: 100%;
+      }
+    }
+    > .help.dialog{
+      max-width: 300px;
     }
   }
 }
