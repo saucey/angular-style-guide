@@ -74,27 +74,33 @@
     @include rem('padding', 10);
   }
 
-  .row-fluid.same-height.author {
+  .author {
     @include rem('padding', 10);
-
-    img{
-      max-width:100%;
-      height: auto;
-      border-radius: 10%;
+    overflow: hidden;
+    .author-avatar {
+      float: left;
+      width: 100px;
+      margin-right: 2%;
+      img {
+        max-width: 100%;
+        border-radius: 10px;
+      }
     }
 
-    .span2 {
-      flex-basis: 15%;
-    }
+    .author-name {
+      overflow: hidden;
 
-    .span10 {
-      flex-basis: 83%;
-      margin-left: 2%;
-      @include rem('padding-top', 20);   
+      h4 {
+        @include rem('margin', 0, 0, 10, 0);
+      }
 
       p {
-        font-weight: bold;
+        @include rem('margin', 0, 0, 20, 0);
       }
+    }
+
+    .author-description {
+      clear: both;
     }
   }
 
@@ -226,8 +232,15 @@
       }
     }
 
-    .row-fluid.same-height.author {
+    .author {
       @include rem('padding', 0);
+      .author-avatar {
+        width: 150px;
+      }
+
+      .author-description {
+        clear: none;
+      }
     }
 
     #comments {
