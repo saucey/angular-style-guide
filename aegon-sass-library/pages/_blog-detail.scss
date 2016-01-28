@@ -70,6 +70,40 @@
     }
   }
 
+  .seperator {
+    @include rem('padding', 10);
+  }
+
+  .author {
+    @include rem('padding', 10);
+    overflow: hidden;
+    .author-avatar {
+      float: left;
+      width: 100px;
+      margin-right: 2%;
+      img {
+        max-width: 100%;
+        border-radius: 10px;
+      }
+    }
+
+    .author-name {
+      overflow: hidden;
+
+      h4 {
+        @include rem('margin', 0, 0, 10, 0);
+      }
+
+      p {
+        @include rem('margin', 0, 0, 20, 0);
+      }
+    }
+
+    .author-description {
+      clear: both;
+    }
+  }
+
   #comments{
 
     @include rem('padding', 10);
@@ -187,6 +221,25 @@
       .counter {
         top: 0;
         right: 0;
+      }
+    }
+
+    .seperator {
+      @include rem('padding', 0);
+
+      hr {
+        @include rem('margin-bottom', 30);
+      }
+    }
+
+    .author {
+      @include rem('padding', 0);
+      .author-avatar {
+        width: 150px;
+      }
+
+      .author-description {
+        clear: none;
       }
     }
 
