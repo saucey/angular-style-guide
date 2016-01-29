@@ -8,12 +8,6 @@
   Drupal.behaviors.slider = {
     activate: function(sliderClass,inputClass,sliderValue,sliderMin,sliderMax,sliderStep,currency, options) {
 
-      // Creates dot between thousands
-      function readableNumber(number) {
-        var newNumber = number.toLocaleString();
-        newNumber = newNumber.replace(/,/g, '.');
-        return newNumber;
-      }
 
       // Default options
       var defaults = {
@@ -23,7 +17,7 @@
         max: sliderMax,
         step: sliderStep,
         slide: function( event, ui ) {
-          $(inputClass).val( currency + readableNumber(ui.value) );
+          $(inputClass).val(ui.value);
         }
       };
 
@@ -33,9 +27,10 @@
       // Init slider
       $(sliderClass).slider(settings);
 
-      $(inputClass).val( currency + $(sliderClass).slider("value"));
-      $(inputClass).keyup(function() {
-        $(sliderClass).slider("value" , $(this).val().replace(currency, ''));
+      //$(inputClass).val( currency + $(sliderClass).slider("value"));
+      $(inputClass).change(function() {
+        var inputValue =  $(this).val().replace('.', '');
+        $(sliderClass).slider("value" , inputValue);
       });
     }
   };

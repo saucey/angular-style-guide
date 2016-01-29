@@ -121,9 +121,10 @@
         @include rem('left', 200);
         @include rem('margin-top', 3);
       }
-      button {
+      p {
         display: block;
       }
+
     }
   }
 }
@@ -193,10 +194,10 @@
         }
 
         p {
+          float: right;
+          vertical-align: middle;
+          display: table-cell;
           button {
-            float: right;
-            vertical-align: middle;
-            display: table-cell;
             @include rem('margin-bottom', 0);
           }
         }
