@@ -19,6 +19,14 @@
           return false; //prevents, together with .stopPropagation, bubbling, which could keep the radio button checked, instead of having it set to false here
         }
       });
+      // the plugin on load adds the class that changes the color.
+      // we need to add the class to the clicked button for UX purposes.
+      $(".rate-button").on("click", function(){
+        var $this = $(this),
+            parent = $this.parent().parent();
+        parent.find(".rate-voted").removeClass("rate-voted");
+        $this.addClass("rate-voted");
+      });
     }
   };
 
