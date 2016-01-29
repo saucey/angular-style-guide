@@ -1,5 +1,5 @@
 // /**
-//  * jQuery UI Slider. This function is being commented out because the slider should be made generic from /components/quickquote-lijfrente.js
+//  * jQuery UI Slider.
 //  */
 (function($) {
   'use strict';
