@@ -6,7 +6,7 @@
 
   // Parse the data attribute to object
   var dataInterest = $('.quickquote');
-  var interest = JSON.parse("[" + dataInterest.attr("data-interests") + "]");
+  var interest = (dataInterest.attr("data-interests") !== undefined) ? JSON.parse("[" + dataInterest.attr("data-interests") + "]") : [1.8,1.9,2,2.1,2.1,2.2,2.25,2.3,2.4,2.5,2.6,2.65,2.7,2.8,2.9,2.9,2.9,2.9,2.9,2.9,3,3.2,3.2,3.2,3.2,3.2];
 
   // Creates dot between thousands
   function readableNumber(number) {
