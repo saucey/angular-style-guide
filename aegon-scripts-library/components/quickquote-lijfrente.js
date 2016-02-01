@@ -8,23 +8,30 @@
   var dataInterest = $('.quickquote');
   var interest = JSON.parse("[" + dataInterest.attr("data-interests") + "]");
 
+  // Creates dot between thousands
+  function readableNumber(number) {
+    var newNumber = number.toLocaleString();
+    newNumber = newNumber.replace(/,/g, '.');
+    return newNumber;
+  }
+
   // Add new item to public Drupal object
   Drupal.behaviors.quickquote = {
     attach: function() {
       Drupal.behaviors.tooltip.activate(".quickquote");
 
       // Extend default behaviour of the slider plugin
-      Drupal.behaviors.slider.activate("#amount-slider","#amount-input",10000,1000,100000,100,"€",{
+      Drupal.behaviors.slider.activate("#amount-slider","#amount-input",25000,4000,1000000,1000,"€",{
         change: function( event, ui ) {
-          $("#amount-slider").val( "euro" + ui.value );
           Drupal.behaviors.quickquote.lijfrenteUitkerenCalculation(interest, "#payment-calculated", "€");
+          $("#amount-input").val(readableNumber(ui.value));
         }
       });
 
-      Drupal.behaviors.slider.activate("#time-slider","#time-input",10,5,30,1,"", {
+      Drupal.behaviors.slider.activate("#time-slider","#time-input",6,5,30,1,"", {
         change: function( event, ui ) {
-          $("#time-slider").val( "euro" + ui.value );
           Drupal.behaviors.quickquote.lijfrenteUitkerenCalculation(interest, "#payment-calculated", "€");
+          $("#time-input").val(readableNumber(ui.value));
         }
       });
     },
