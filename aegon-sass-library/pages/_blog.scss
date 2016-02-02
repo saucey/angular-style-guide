@@ -211,6 +211,9 @@
         h4, .text {
           color: $black;
         }
+        h4 a {
+          color: inherit;
+        }
       }
     }
   }
