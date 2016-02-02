@@ -349,7 +349,7 @@
   &[title=''] {
     display: none;
   }
-  padding: 15px 10px;
+  padding: 10px 10px;
   display: inline-block;
   float: left;
   position: relative;
@@ -375,6 +375,11 @@
     &.right{
       @include bubble($width: 10px, $left: $help_dialog_width / 2, $quadrant: 1, $background-color: $slightly_lighter_blue);
     }
+    &.top, &.bottom, &.right, &.left{
+      &:before{
+        content: none;
+      }
+    }
   }
   &:before {
     font-family: $font_icons;
@@ -383,7 +388,10 @@
     position: absolute;
     left: 0;
     bottom: 0;
-    width: 18px;
+    top:0;
+    right: 0;
+    z-index: 2;
+    //width: 18px;
   }
   &:after {
     left: 50% !important;
