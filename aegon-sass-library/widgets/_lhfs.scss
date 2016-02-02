@@ -375,6 +375,11 @@
     &.right{
       @include bubble($width: 10px, $left: $help_dialog_width / 2, $quadrant: 1, $background-color: $slightly_lighter_blue);
     }
+    &.top, &.bottom, &.right, &.left{
+      &:before{
+        content: none;
+      }
+    }
   }
   &:before {
     font-family: $font_icons;

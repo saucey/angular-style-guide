@@ -44,7 +44,7 @@
 
           switch(pos){
             case 'top':
-              offset.top = offset.top - $dialog.outerHeight() - 10;
+              offset.top = offset.top - $dialog.outerHeight() - 20;
               offset.left = offset.left - $dialog.outerWidth() / 2;            
             break;
             case 'left':
@@ -57,7 +57,7 @@
             break;
             default:
               // default is bottom 
-              offset.top = offset.top + $this.outerHeight() + 10;
+              offset.top = offset.top + $this.outerHeight() + 20;
               offset.left = offset.left - $dialog.outerWidth() / 2;            
           }
           
@@ -82,6 +82,7 @@
           }        
         }
       };
+
       $(selector + " .help").on('mouseenter', function () {
         openTooltip($(this), pos);
       });
