@@ -349,7 +349,7 @@
   &[title=''] {
     display: none;
   }
-  padding: 10px 10px;
+  padding: 15px 10px;
   display: inline-block;
   float: left;
   position: relative;
@@ -388,10 +388,7 @@
     position: absolute;
     left: 0;
     bottom: 0;
-    top:0;
-    right: 0;
-    z-index: 2;
-    //width: 18px;
+    width: 18px;
   }
   &:after {
     left: 50% !important;

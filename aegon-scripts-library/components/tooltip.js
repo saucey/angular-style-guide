@@ -68,7 +68,7 @@
             $(".dialog").remove();
           });
 
-          $this.on('mouseleave', function(e){
+          $this.on('mouseleave', function(){
             $this.attr('title', dialog.innerHTML);
             $dialog.remove();
           });
