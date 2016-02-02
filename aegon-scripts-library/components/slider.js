@@ -6,18 +6,25 @@
 
   // Add new item to public Drupal object
   Drupal.behaviors.slider = {
-    activate: function(sliderClass,inputClass,sliderValue,sliderMin,sliderMax,sliderStep,currency, options) {
-
-
+    activate: function(sliderClass,inputClass,sliderValue,sliderMin,sliderMax,sliderStep,linearArray,currency, options) {
+      if (linearArray !== "") {
+        sliderMax = linearArray.length - 1;
+      }
+      var inputValue =  $(inputClass).val().replace('.', '');
       // Default options
       var defaults = {
         range: "max",
-        value:sliderValue,
-        min: sliderMin,
+        value: 0,
+        //min: sliderMin,
         max: sliderMax,
-        step: sliderStep,
+        //step: sliderStep,
         slide: function( event, ui ) {
-          $(inputClass).val(ui.value);
+          if (linearArray !== "") {
+            $(inputClass).val(linearArray[ui.value]);
+          }
+          else {
+            $(inputClass).val(ui.value);
+          }
         }
       };
 
@@ -27,9 +34,7 @@
       // Init slider
       $(sliderClass).slider(settings);
 
-      //$(inputClass).val( currency + $(sliderClass).slider("value"));
       $(inputClass).change(function() {
-        var inputValue =  $(this).val().replace('.', '');
         $(sliderClass).slider("value" , inputValue);
       });
     }
