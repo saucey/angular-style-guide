@@ -4,9 +4,7 @@
 (function($) {
   'use strict';
 
-  // Parse the data attribute to object
-  var dataInterest = $('.quickquote');
-  var interest = (dataInterest.attr("data-interests") !== undefined) ? JSON.parse("[" + dataInterest.attr("data-interests") + "]") : [1.8,1.9,2,2.1,2.1,2.2,2.25,2.3,2.4,2.5,2.6,2.65,2.7,2.8,2.9,2.9,2.9,2.9,2.9,2.9,3,3.2,3.2,3.2,3.2,3.2];
+  var dataInterest, interest;
 
   // Creates dot between thousands
   function readableNumber(number) {
@@ -16,21 +14,29 @@
   }
 
   // Add new item to public Drupal object
-  Drupal.behaviors.quickquote = {
+  Drupal.behaviors.quickquoteLijfrente = {
     attach: function() {
+      if ($('.quickquote.lijfrente').length === 0) {
+        return;
+      }
+
+      // Parse the data attribute to object
+      dataInterest = $('.quickquote');
+      interest = (dataInterest.attr("data-interests") !== undefined) ? JSON.parse("[" + dataInterest.attr("data-interests") + "]") : [1.8,1.9,2,2.1,2.1,2.2,2.25,2.3,2.4,2.5,2.6,2.65,2.7,2.8,2.9,2.9,2.9,2.9,2.9,2.9,3,3.2,3.2,3.2,3.2,3.2];
+
       Drupal.behaviors.tooltip.activate(".quickquote");
 
       // Extend default behaviour of the slider plugin
       Drupal.behaviors.slider.activate("#amount-slider","#amount-input",25000,4000,1000000,1000,"#amount-error","Het bedrag voor Lijfrente Uitkeren is  minimaal€ 4000,- en maximaal 1.000.000,-","€",{
         change: function( event, ui ) {
-          Drupal.behaviors.quickquote.lijfrenteUitkerenCalculation(interest, "#payment-calculated","", "€");
+          Drupal.behaviors.quickquoteLijfrente.lijfrenteUitkerenCalculation(interest, "#payment-calculated","", "€");
           $("#amount-input").val(readableNumber(ui.value));
         }
       });
 
       Drupal.behaviors.slider.activate("#time-slider","#time-input",6,5,30,1,"#time-error","De looptijd is minimaal 5 en maximaal 30 jaar","", {
         change: function( event, ui ) {
-          Drupal.behaviors.quickquote.lijfrenteUitkerenCalculation(interest, "#payment-calculated","#interest-amount", "€");
+          Drupal.behaviors.quickquoteLijfrente.lijfrenteUitkerenCalculation(interest, "#payment-calculated","#interest-amount", "€");
           $("#time-input").val(readableNumber(ui.value));
         }
       });
