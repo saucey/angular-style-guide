@@ -86,7 +86,6 @@
       background-color: $orange;
       color: $white;
       padding: 5px 15px;
-      height: 30px;
       position: absolute;
       top: 0;
       left: 0;
@@ -211,6 +210,9 @@
 
         h4, .text {
           color: $black;
+        }
+        h4 a {
+          color: inherit;
         }
       }
     }
