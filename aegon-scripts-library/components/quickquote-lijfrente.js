@@ -21,22 +21,22 @@
       Drupal.behaviors.tooltip.activate(".quickquote");
 
       // Extend default behaviour of the slider plugin
-      Drupal.behaviors.slider.activate("#amount-slider","#amount-input",25000,4000,1000000,1000,"€",{
+      Drupal.behaviors.slider.activate("#amount-slider","#amount-input",25000,4000,1000000,1000,"#amount-error","Het bedrag voor Lijfrente Uitkeren is  minimaal€ 4000,- en maximaal 1.000.000,-","€",{
         change: function( event, ui ) {
-          Drupal.behaviors.quickquote.lijfrenteUitkerenCalculation(interest, "#payment-calculated", "€");
+          Drupal.behaviors.quickquote.lijfrenteUitkerenCalculation(interest, "#payment-calculated","", "€");
           $("#amount-input").val(readableNumber(ui.value));
         }
       });
 
-      Drupal.behaviors.slider.activate("#time-slider","#time-input",6,5,30,1,"", {
+      Drupal.behaviors.slider.activate("#time-slider","#time-input",6,5,30,1,"#time-error","De looptijd is minimaal 5 en maximaal 30 jaar","", {
         change: function( event, ui ) {
-          Drupal.behaviors.quickquote.lijfrenteUitkerenCalculation(interest, "#payment-calculated", "€");
+          Drupal.behaviors.quickquote.lijfrenteUitkerenCalculation(interest, "#payment-calculated","#interest-amount", "€");
           $("#time-input").val(readableNumber(ui.value));
         }
       });
     },
 
-    lijfrenteUitkerenCalculation: function(interest,paymentClass,Currency) {
+    lijfrenteUitkerenCalculation: function(interest,paymentClass,interestClass, Currency) {
 
       // Callculation for Lijfrente Uitkeren
       var round = function(input, decimals) {
@@ -53,6 +53,7 @@
           formulaComplete = round((1 - formulaPart1) / interestPerMonth, 3),
           monthlyPayment = round(money / formulaComplete, 2).toFixed(2);
       $(paymentClass).text( Currency + monthlyPayment.replace('.', ','));
-    },
+      $(interestClass).text(interest[duration - 5]);
+    }
   };
 })(jQuery);

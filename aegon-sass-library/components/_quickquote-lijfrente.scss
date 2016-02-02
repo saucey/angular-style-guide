@@ -47,7 +47,7 @@
       .input-container {
         float:right;
         position: relative;
-        @include rem('margin-right', 24);
+        @include rem('margin-right', 50);
         input {
           display: inline-block;
           background: $white;
@@ -59,7 +59,7 @@
       }
       .help {
         position: absolute;
-        @include rem('margin', 11, 0, 0, 0);
+        @include rem('margin', 7, 0, 0, 0);
         right: 40px;
 
       }
@@ -110,11 +110,12 @@
       * {
         display: inline-block;
       }
-      .disclaimer {
-        color: $dark_grey;
-        @include rem("font-size", $small);
-        @include rem('margin-bottom', 20);
-        position: relative;
+      .interest {
+        @include rem("font-size", $large);
+        color: $white;
+        display: table-cell;
+        vertical-align: middle;
+
       }
       span.help {
         position: absolute;
@@ -124,7 +125,12 @@
       p {
         display: block;
       }
-
+    }
+    .disclaimer {
+      color: $dark_grey;
+      @include rem("font-size", $small);
+      @include rem('margin-bottom', 20);
+      position: relative;
     }
   }
 }
@@ -138,6 +144,12 @@
         width: 100%;
         margin-left: 0;
       }
+    }
+    .payment-result{
+      @include rem('margin-bottom', 10);
+    }
+    .interest {
+      @include rem('margin-bottom', 10);
     }
   }
 }
@@ -197,9 +209,8 @@
           float: right;
           vertical-align: middle;
           display: table-cell;
-          button {
-            @include rem('margin-bottom', 0);
-          }
+          @include rem('margin-bottom', 0);
+
         }
       }
     }
