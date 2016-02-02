@@ -70,13 +70,11 @@
     }
   }
 
-  .seperator {
-    @include rem('padding', 10);
-  }
-
   .author {
-    @include rem('padding', 10);
+    @include rem('padding', 20, 10, 0);
+    border-top: 1px solid $grey;
     overflow: hidden;
+
     .author-avatar {
       float: left;
       width: 100px;
@@ -224,16 +222,9 @@
       }
     }
 
-    .seperator {
-      @include rem('padding', 0);
-
-      hr {
-        @include rem('margin-bottom', 30);
-      }
-    }
-
     .author {
-      @include rem('padding', 0);
+      @include rem('padding', 20, 0, 0);
+
       .author-avatar {
         width: 150px;
       }
