@@ -206,7 +206,6 @@
   }
   .span6 {
     flex-basis: 49%;
-    -webkit-flex-basis: 48.5%;
   }
   .span5 {
     flex-basis: 40.5%;
@@ -372,6 +371,10 @@ dl.table.row-fluid {
     flex-wrap:wrap;
     .span4 {
       flex-basis: 46%;
+    }
+    .span6 {
+      // Webkit (Safari) rendering issues causes the columns too fall off (rounding mistake)
+      -webkit-flex-basis: 48.8%;
     }
     .span8, .span8 + .span4 {
       flex-basis:100%;
