@@ -175,7 +175,6 @@
   align-content: stretch;
   div[class*='span'] {
     min-width: 0;
-
     display: flex;
     align-content: stretch;
 
@@ -207,6 +206,7 @@
   }
   .span6 {
     flex-basis: 49%;
+    -webkit-flex-basis: 48.5%;
   }
   .span5 {
     flex-basis: 40.5%;
