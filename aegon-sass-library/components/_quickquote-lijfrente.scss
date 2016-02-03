@@ -96,6 +96,7 @@
       @include rem("font-size", $large);
       color: $white;
       width: 100%;
+      @include rem('margin-bottom', 10);
       * {
         display: inline-block;
       }
@@ -115,6 +116,7 @@
         color: $white;
         display: table-cell;
         vertical-align: middle;
+        @include rem('padding-bottom', 10);
 
       }
       span.help {
@@ -144,12 +146,6 @@
         width: 100%;
         margin-left: 0;
       }
-    }
-    .payment-result{
-      @include rem('margin-bottom', 10);
-    }
-    .interest {
-      @include rem('margin-bottom', 10);
     }
   }
 }
@@ -191,6 +187,7 @@
       width: 100%;
       .payment-result, .footer-result{
         width: 80%;
+        @include rem('margin-bottom', 0);
       }
       .footer-result {
         display: table;
@@ -204,7 +201,9 @@
         span.help {
           @include rem('margin-top', 10);
         }
-
+        .interest {
+          @include rem('padding-bottom', 0);
+        }
         p {
           float: right;
           vertical-align: middle;
