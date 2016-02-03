@@ -279,7 +279,6 @@ body.shw-widgets-logged-in {
   .user_detail_widget {
     width: 100%;
     > .text {
-      display: block;
 
       width: 100%;
       padding-right: 114px;
@@ -297,6 +296,11 @@ body.shw-widgets-logged-in {
 
           white-space: nowrap;
           text-overflow: ellipsis;
+          display: inline-block;
+
+          animation: buttonLoginToDefault 2s normal 0s forwards;
+
+          @include rem('line-height', 36);
 
           @include rem('padding', 0, 48, 0, 13);
           &:after {
@@ -328,9 +332,6 @@ body.shw-widgets-logged-in {
     }
     .dropdown {
       display: none;
-      .text p.name {
-        display: none;
-      }
     }
     .highlight.desktop {
       display: block;
@@ -363,23 +364,6 @@ body.shw-widgets-logged-in {
     .user_detail_widget_name {
       font-size: inherit;
 
-      display: inline-block;
-
-      animation: buttonLoginToDefault 2s normal 0s forwards;
-
-      @include rem('padding', 0, 13, 2, 13);
-      @include rem('line-height', 36);
-      &:after {
-        font-family: $font_icons;
-
-        display: inline-block;
-
-        content: $font_icons_man;
-        transform: translateY(3px);
-
-        @include rem('font-size', 23);
-        @include rem('margin-left', 12);
-      }
       &.tap {
         padding-bottom: 0;
 
@@ -408,6 +392,15 @@ body.shw-widgets-logged-in {
       // Default status
 
       opacity: 1;
+    }
+    .inplace{
+      .dropdown{
+        .text{
+          p.name{
+            display: none;
+          }
+        }
+      }
     }
   }
 }

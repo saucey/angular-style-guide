@@ -131,17 +131,3 @@ body.mobile-tap {
     display: none;
   }
 }
-
-@include breakpoint($brk-ipad-portrait) {
-
-  .block-search input.form-text:focus {
-    width: 400px;
-  }
-}
-
-@include breakpoint($brk-ipad-landscape) {
-
-  .block-search input.form-text:focus {
-    width: 500px;
-  }
-}
