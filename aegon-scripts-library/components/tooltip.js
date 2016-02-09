@@ -82,9 +82,6 @@
             });      
           }        
         }
-        if($title === '' || $title === undefined){
-          $this.hide();
-        }
       };
       // initial scan for help items to hide them 
       // if they don't have either data-title or title
