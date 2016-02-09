@@ -20,7 +20,7 @@
             $pos = $this.attr('data-pos'),
             posRE = new RegExp(/^(top|bottom|left|right)$/);
 
-        if ($title) {
+        if ($title && $title !== " ") {
 
           $(".help.dialog").remove();
           // if the element has the attr data-pos
