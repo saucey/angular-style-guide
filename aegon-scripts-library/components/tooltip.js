@@ -19,16 +19,16 @@
             $touch = $this.attr('data-touch') === "true" ? true : false,
             $pos = $this.attr('data-pos'),
             posRE = new RegExp(/^(top|bottom|left|right)$/);
-        
-        if ($title && $title !== "" && $title.length > 0) {
+
+        if ($title) {
 
           $(".help.dialog").remove();
           // if the element has the attr data-pos
-          if($pos !== 'undefined' && posRE.test($pos)){
+          if($pos !== undefined && posRE.test($pos)){
             pos = $pos;
           }else
           // if pos is not set or it's not a valid position, defaults to bottom
-          if(typeof pos === 'undefined' || ! posRE.test(pos)){
+          if(typeof pos === undefined || ! posRE.test(pos)){
             pos = 'bottom';
           }
 
@@ -37,7 +37,6 @@
           dialog.innerHTML = $title;
 
           $this.attr('title', '');
-          $this.attr('data-title', '');
 
           $(selector).append(dialog); //this has 2 happen b4 measurements of dialog are taken, otherwise they won't be initialized
           var $dialog = $(dialog),
