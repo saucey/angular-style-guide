@@ -60,7 +60,11 @@
             } 
 
           // Set placeholder for searchbox 
-          that.parent().find('.dataTables_filter input').attr("placeholder", "Zoeken").attr('id', 'search_'+that.attr('id'));
+          that.parent().find('.dataTables_filter input').attr("placeholder", "Zoeken");
+
+          if(typeof that.attr('id') === 'string'){
+            that.parent().find('.dataTables_filter input').attr('id', 'search_'+that.attr('id'));
+          }
         }
       };
 
