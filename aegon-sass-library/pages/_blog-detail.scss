@@ -75,10 +75,18 @@
     background-color: #edebe5;
     padding: 0.9375rem;
 
+    .share {
+      h4 {
+        margin: 0rem 0rem 0.625rem 0rem;
+      }    
+    }
     .easy_social_box {
       display: table-cell;
       height: 100%;
       vertical-align: middle;
+      display: table-cell;
+      width: 78%;
+      margin-left: 2%;
     }
 
     .easy_social_box div.easy_social-widget {
@@ -311,7 +319,9 @@
         display: table-cell;
         height:100%;
         vertical-align: middle;
-      }
+        h4 {
+          margin: 0rem 0rem 0.625rem 0rem;
+        }    
       .share-buttons {
         display: table-cell;
         width: 78%;
@@ -321,7 +331,21 @@
           @include rem('margin-bottom', 0);
         }
       }
+      .social {
+        .share {
+          width: 20%;
+          display: table-cell;
+          height: 100%;
+          vertical-align: middle;
+          height:50px;
+          h4 {
+            margin:0;
+          }    
+        }
+      }
     }
+
+
     #comments {
       .comment-header h3{
         color:$blue;
