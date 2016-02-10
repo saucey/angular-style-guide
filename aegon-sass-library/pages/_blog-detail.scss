@@ -69,6 +69,14 @@
       width: 30%;
     }
   }
+  .social-links {
+    .easy_social_box div.easy_social-widget {
+      margin: 0 4px 0 0;
+      padding: 0;
+      overflow: hidden;
+      float: left;
+    }
+  }
 
   .author {
     @include rem('padding', 20, 10, 0);
@@ -306,7 +314,7 @@
 
       .span2 {
         text-align: right;
-        .comment-button{    
+        .comment-button{
           a{
             color:$white;
           }
