@@ -194,7 +194,7 @@ a.menu-5662:before {
 .icon-mijn-documenten:before {
   content: $font_icons_document_n_check;
 }
-.icon-mijn-producten:before {
+.icon-mijn-producten:before, .icon-themas:before {
   content: $font_icons_producten;
 }
 .icon-call:before {
@@ -220,7 +220,10 @@ a.menu-5662:before {
 .icon-skinnyarrow:before {
   content: $font_icons_arrow_right_skinny;
 }
-.icon-bewerken:before {
+.icon-blog:before {
+  content: $font_icons_edit;
+}
+.icon-blog:before {
   content: $font_icons_edit;
 }
 
