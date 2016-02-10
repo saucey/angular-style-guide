@@ -71,13 +71,29 @@
   }
 
   .social-links {
-    //Drupal Style, Needs to be deleted before deploy.  
-    .easy_social_box div.easy_social-widget {
-      margin: 0 4px 0 0;
-      padding: 0;
-      overflow: hidden;
-      float: left;
+    border-radius: 3px;
+    background-color: #edebe5;
+    padding: 0.9375rem;
+
+    .easy_social_box {
+      display: table-cell;
+      height: 100%;
+      vertical-align: middle;
     }
+
+    .easy_social_box div.easy_social-widget {
+      line-height:18px;
+      float:left;
+      margin: 0 4px 0 0;
+    }
+
+    //Drupal Style, Needs to be deleted before deploy.  
+    //.easy_social_box div.easy_social-widget {
+      //margin: 0 4px 0 0;
+      //padding: 0;
+      //overflow: hidden;
+      //float: left;
+    //}
   }
 
   .author {
