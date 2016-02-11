@@ -1,5 +1,6 @@
 .responsive-table {
   width: 100%;
+
   @include rem('padding', 10, 0);
   .table-menu-wrapper {
     position: relative;
@@ -57,18 +58,20 @@
         }
       }
     }
-    @media screen and (min-width: 1023px){
+    @media screen and (min-width: 1023px) {
       display: none;
     }
   }
   .table-container {
     position: relative;
     z-index: 0;
-    width: 100%;
 
     overflow-x: auto;
+
+    width: 100%;
     table {
       width: 100%;
+
       table-layout: fixed;
       border-spacing: 1px;
       border-collapse: collapse;
@@ -86,10 +89,16 @@
           border-left: none;
         }
       }
-      tr th{
-        background: #EDEBE5;
-        border-top: 1px solid #D8D7D1;
+      tr th {
         font-weight: bold;
+
+        overflow: hidden;
+
+        white-space: nowrap;
+        text-overflow: ellipsis;
+
+        border-top: 1px solid #d8d7d1;
+        background: #edebe5;
       }
     }
   }
