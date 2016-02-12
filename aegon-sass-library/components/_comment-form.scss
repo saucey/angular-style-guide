@@ -11,7 +11,7 @@ form.comment-form{
     background-color: $white;
     border:none;
     &.invalid {
-      border: $light_red;
+      border: solid 3px $light_red;
     }
   }
 
