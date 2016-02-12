@@ -13,6 +13,7 @@
       display: inline;
       float: none;
       color: $dark_blue;
+      background-image: none;
 
       @include rem("margin-right", 6);
       @include rem("padding-left", 0);

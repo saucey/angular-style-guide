@@ -16,6 +16,7 @@
 @import "helpers/all";
 
 /* All library widgets and specific modules */
+@import "layout/structure/header";
 @import "structures/extra_features";
 @import "structures/user_detail";
 
@@ -23,4 +24,6 @@
 @import "base/colors";
 
 @import "components/button";
+@import "components/breadcrumbs";
+@import "components/login-link";
 @import "base/icon";	//provides the icon styles, aka the webfont icons
