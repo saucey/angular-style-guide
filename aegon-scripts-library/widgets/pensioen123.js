@@ -17,7 +17,7 @@
 
       // Set all divs with class span4 inside .user-details same height
       $('.user-details .span4').setAllToMaxHeight();
-
+      Drupal.behaviors.responsiveTable.activate('.pensioen123_widget');
       var openDetails = function() {
         var that = $(this),
             icon = that.data('icon'),

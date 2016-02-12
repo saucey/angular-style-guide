@@ -1,0 +1,105 @@
+.responsive-table {
+  width: 100%;
+
+  @include rem('padding', 10, 0);
+  .table-menu-wrapper {
+    position: relative;
+
+    width: 100%;
+
+    text-align: right;
+    .table-menu-btn {
+      margin-bottom: 5px;
+      padding: 5px 10px;
+    }
+    ul.table-menu {
+      position: absolute;
+      z-index: 10;
+      top: auto;
+      right: 0;
+
+      margin: 0;
+
+      list-style: none;
+
+      border: 1px solid #c7d7db;
+      -webkit-border-radius: 3px;
+         -moz-border-radius: 3px;
+              border-radius: 3px;
+      background: #fff;
+      -webkit-box-shadow: -3px 3px 5px 0 rgba(0,0,0,.3);
+         -moz-box-shadow: -3px 3px 5px 0 rgba(0,0,0,.3);
+              box-shadow: -3px 3px 5px 0 rgba(0,0,0,.3);
+      li {
+        padding: 0;
+
+        text-align: left;
+
+        border-bottom: 1px solid #ccc;
+        background: none;
+        label {
+          position: relative;
+
+          display: block;
+
+          min-width: 150px;
+
+          text-align: left;
+
+          @include rem('padding', 12, 12, 12, 40);
+          &.checkbox {
+            font-weight: normal;
+            > input[type='checkbox'] + span.checkbox {
+              position: absolute;
+              top: 9px;
+              left: 10px;
+            }
+          }
+        }
+      }
+    }
+    @media screen and (min-width: 1023px) {
+      display: none;
+    }
+  }
+  .table-container {
+    position: relative;
+    z-index: 0;
+
+    overflow-x: auto;
+
+    width: 100%;
+    table {
+      width: 100%;
+
+      table-layout: fixed;
+      border-spacing: 1px;
+      border-collapse: collapse;
+
+      word-wrap: break-word;
+
+      border: none;
+      border-top: 1px solid $dark_grey;
+      tr td,
+      tr th {
+        border-left: 1px solid $white;
+
+        @include rem('padding', 10);
+        &:first-child {
+          border-left: none;
+        }
+      }
+      tr th {
+        font-weight: bold;
+
+        overflow: hidden;
+
+        white-space: nowrap;
+        text-overflow: ellipsis;
+
+        border-top: 1px solid #d8d7d1;
+        background: #edebe5;
+      }
+    }
+  }
+}
