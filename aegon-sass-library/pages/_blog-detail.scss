@@ -156,38 +156,6 @@
       }
     }
 
-    form.comment-form{
-      background-color: $grey;
-      @include rem('padding', 25);
-      @include rem('margin-bottom', 25);
-
-      .form-item-name, .form-item-mail{
-        width: 100%;
-      }
-
-      textarea, input[type=text], input[type=email]{
-        background-color: $white;
-        border:none;
-      }
-
-      textarea{
-        @include rem('padding', 10);
-        resize: none;
-      }
-
-      input[type=text], input[type=email]{
-        width:100%;
-      }
-
-      #edit-actions{
-        text-align: right;
-        input[type=submit]{
-          @extend .button;
-          @extend .button.orange;
-          color: $white;
-        }
-      }
-    }
   }
 }
 
@@ -251,21 +219,6 @@
           @include rem('margin-right', 10);
         }
       }
-
-      form.comment-form{
-        .title {
-          @include rem('margin', 0, 0, 10, 0);
-        }
-        .form-item-name, .form-item-mail{
-          width: 49.1452991453%;
-          float: left;
-        }
-
-        .form-item-mail{
-          margin-left: 1.7%;
-        }
-
-      }
     }
   }
 }
@@ -306,7 +259,7 @@
 
       .span2 {
         text-align: right;
-        .comment-button{    
+        .comment-button{
           a{
             color:$white;
           }
