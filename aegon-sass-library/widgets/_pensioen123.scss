@@ -405,7 +405,17 @@
             .image {
               display: none;
             }
-
+            .table{
+              .title{
+                color: #000;
+                cursor: auto;
+                padding-right: 0;
+                @include rem('font-size',18);
+                &:after{
+                  content: none;
+                }
+              }
+            }
             .more-details {
               display: none !important;
             }
