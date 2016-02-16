@@ -1,51 +1,171 @@
-form.comment-form{
-  background-color: $grey;
-  @include rem('padding', 25);
-  @include rem('margin-bottom', 25);
+.comment-wrapper{
 
-  .form-item-name, .form-item-mail{
-    width: 100%;
-  }
+  @include rem('padding', 10);
 
-  textarea, input[type=text], input[type=email]{
-    background-color: $white;
-    border:none;
-    &.invalid {
-      border: solid 3px $light_red;
+  .span8 {
+    width: 66%;
+    h3 {
+      color: $black;
     }
   }
 
-  textarea{
-    @include rem('padding', 10);
-    resize: none;
+  .span4 {
+    width: 32%;
+    margin-left: 2%;
+    &:last-child{
+      clear:none;
+    }
+    .comment-button {
+      text-align: right;
+    }
   }
 
-  input[type=text], input[type=email]{
-    width:100%;
+  .comment-header{
+    @include rem('margin-bottom', 10);
   }
 
-  #edit-actions{
-    text-align: right;
-    input[type=submit]{
-      @extend .button;
-      @extend .button.orange;
-      color: $white;
+  .top {
+    overflow:hidden;
+    display:block;
+    .button {
+      float:right;
+    }
+  }
+
+  .comment{
+    @include rem('margin-bottom', 20);
+
+    .submitted {
+      color:$darker_grey;
+      font-family:$font_thin;
+      @include rem('font-size', 16);
+      .username {
+        color: $black;
+        display:block;
+        font-family: $font_medium;
+        @include rem('font-size', 18);
+      }
+    }
+    ul.links.links--inline {
+      padding:0;
+    }
+
+    h3, h4{
+      @include rem('margin',0);
+
+      a {
+        @include rem('font-size', 16);
+        color: $black;
+        font-family: $font_bold;
+      }
+    }
+
+    .submitted p{
+      color: $darker_grey;
+    }
+
+    ul.links.links--inline{
+      margin:0;
+    }
+
+    &.subcomment{
+      @include rem('padding-left', 20);
+    }
+  }
+  .indented {
+    @include rem('margin', 0, 0, 20, 25);
+  }
+
+  form.comment-form{
+    background-color: $grey;
+    @include rem('padding', 25);
+    @include rem('margin-bottom', 25);
+
+    .form-item-name, .form-item-mail{
+      width: 100%;
+    }
+
+    textarea, input[type=text], input[type=email]{
+      background-color: $white;
+      border:none;
+      &.invalid {
+        border: solid 3px $light_red;
+      }
+    }
+
+    textarea{
+      @include rem('padding', 10);
+      resize: none;
+    }
+
+    input[type=text], input[type=email]{
+      width:100%;
+    }
+
+    #edit-actions{
+      text-align: right;
+      input[type=submit]{
+        @extend .button;
+        @extend .button.orange;
+        color: $white;
+      }
     }
   }
 }
 
 @include breakpoint($brk-tablet) {
-  form.comment-form {
-    .title {
-      @include rem('margin', 0, 0, 10, 0);
-    }
-    .form-item-name, .form-item-mail {
-      width: 49.1452991453%;
-      float: left;
+
+  .comment-wrapper {
+    @include rem('padding', 15, 0, 0);
+
+    .comment {
+      .submitted {
+        .username {
+          display:inline-block;
+          @include rem('margin-right', 20);
+        }
+      }
+      h4, .submitted, .submitted p {
+        display: inline;
+      }
+      h4 {
+        @include rem('margin-right', 10);
+      }
     }
 
-    .form-item-mail {
-      margin-left: 1.7%;
+    form.comment-form {
+      .title {
+        @include rem('margin', 0, 0, 10, 0);
+      }
+      .form-item-name, .form-item-mail {
+        width: 49.1452991453%;
+        float: left;
+      }
+
+      .form-item-mail {
+        margin-left: 1.7%;
+      }
+    }
+  }
+}
+
+@include breakpoint($brk-ipad-portrait) {
+
+  .comment-wrapper {
+    .comment-header h3{
+      color:$blue;
+      font-family: $font_light;
+      font-size: $x-large;
+      font-weight: lighter;
+    }
+
+    .span2 {
+      text-align: right;
+      .comment-button{
+        a{
+          color:$white;
+        }
+      }
     }
   }
 }
