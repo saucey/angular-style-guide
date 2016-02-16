@@ -1,57 +1,48 @@
-.comment-wrapper{
+.comment-wrapper {
 
   @include rem('padding', 10);
 
-  .span8 {
-    width: 66%;
-    h3 {
-      color: $black;
-    }
-  }
-
-  .span4 {
-    width: 32%;
-    margin-left: 2%;
-    &:last-child{
-      clear:none;
-    }
-    .comment-button {
-      text-align: right;
-    }
-  }
-
-  .comment-header{
-    @include rem('margin-bottom', 10);
+  h3 {
+    color: $black;
   }
 
   .top {
-    overflow:hidden;
-    display:block;
+    overflow: hidden;
     .button {
-      float:right;
+      float: right;
     }
   }
 
-  .comment{
-    @include rem('margin-bottom', 20);
+  .comment {
+    @include rem('margin-bottom', 10);
 
     .submitted {
-      color:$darker_grey;
-      font-family:$font_thin;
+      color: $darker_grey;
+      font-family: $font_thin;
       @include rem('font-size', 16);
+
       .username {
         color: $black;
-        display:block;
+        display: block;
         font-family: $font_medium;
         @include rem('font-size', 18);
       }
     }
-    ul.links.links--inline {
-      padding:0;
+
+    ul.links--inline {
+      padding: 0;
+      li {
+        @extend .button;
+        @extend .button.transparent;
+        @extend .button.arrow;
+
+        padding-top: 0;
+        margin-bottom: 0;
+      }
     }
 
-    h3, h4{
-      @include rem('margin',0);
+    h3, h4 {
+      @include rem('margin', 0);
 
       a {
         @include rem('font-size', 16);
@@ -59,76 +50,64 @@
         font-family: $font_bold;
       }
     }
-
-    .submitted p{
-      color: $darker_grey;
-    }
-
-    ul.links.links--inline{
-      margin:0;
-    }
-
-    &.subcomment{
-      @include rem('padding-left', 20);
-    }
   }
+
   .indented {
     @include rem('margin', 0, 0, 20, 25);
   }
 
-  form.comment-form{
+  form.comment-form {
     background-color: $grey;
     @include rem('padding', 25);
     @include rem('margin-bottom', 25);
 
-    .form-item-name, .form-item-mail{
+    .form-item-name, .form-item-mail {
       width: 100%;
     }
 
-    textarea, input[type=text], input[type=email]{
+    textarea, input[type=text], input[type=email] {
       background-color: $white;
-      border:none;
+      border: none;
       &.invalid {
         border: solid 3px $light_red;
       }
     }
 
-    textarea{
+    textarea {
       @include rem('padding', 10);
       resize: none;
     }
 
-    input[type=text], input[type=email]{
-      width:100%;
+    input[type=text], input[type=email] {
+      width: 100%;
     }
 
-    #edit-actions{
+    #edit-actions {
       text-align: right;
-      input[type=submit]{
+      input[type=submit] {
         @extend .button;
         @extend .button.orange;
-        color: $white;
       }
     }
   }
 }
 
 @include breakpoint($brk-tablet) {
-
   .comment-wrapper {
     @include rem('padding', 15, 0, 0);
 
     .comment {
       .submitted {
+        display: inline;
+
         .username {
-          display:inline-block;
+          display: inline-block;
           @include rem('margin-right', 20);
         }
       }
-      h4, .submitted, .submitted p {
-        display: inline;
-      }
+
       h4 {
+        display: inline;
         @include rem('margin-right', 10);
       }
     }
@@ -144,27 +123,6 @@
 
       .form-item-mail {
         margin-left: 1.7%;
-      }
-    }
-  }
-}
-
-@include breakpoint($brk-ipad-portrait) {
-
-  .comment-wrapper {
-    .comment-header h3{
-      color:$blue;
-      font-family: $font_light;
-      font-size: $x-large;
-      font-weight: lighter;
-    }
-
-    .span2 {
-      text-align: right;
-      .comment-button{
-        a{
-          color:$white;
-        }
       }
     }
   }
