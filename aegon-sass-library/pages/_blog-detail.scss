@@ -148,7 +148,7 @@
         .username {
           color: $black;
           display:block;
-          font-family: $font_bold;
+          font-family: $font_medium;
           @include rem('font-size', 18);
         }
       }
