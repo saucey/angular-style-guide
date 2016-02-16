@@ -53,6 +53,7 @@
         color: $black;
       }
     }
+
   }
 
   .social{
@@ -163,8 +164,31 @@
       @include rem('margin-bottom', 10);
     }
 
+    .top {
+      overflow:hidden;
+      display:block;
+      .button {
+        float:right;
+      }
+    }
+
     .comment{
-      @include rem('margin-bottom', 10);
+      @include rem('margin-bottom', 20);
+
+      .submitted {
+        color:$darker_grey;
+        font-family:$font_thin;
+        @include rem('font-size', 16);
+        .username {
+          color: $black;
+          display:block;
+          font-family: $font_medium;
+          @include rem('font-size', 18);
+        }
+      }
+      ul.links.links--inline {
+        padding:0;
+      }
 
       h3, h4{
         @include rem('margin',0);
@@ -181,15 +205,16 @@
       }
 
       ul.links.links--inline{
-        @include rem('padding', 0);
-        @include rem('margin-bottom', 15);
+        margin:0;
       }
 
       &.subcomment{
         @include rem('padding-left', 20);
       }
     }
-
+    .indented {
+      @include rem('margin', 0, 0, 20, 25);
+    }
   }
 }
 
@@ -228,6 +253,17 @@
       .counter {
         top: 0;
         right: 0;
+      }
+    }
+
+    #comments {
+      .comment {
+        .submitted {
+          .username {
+            display:inline-block;
+            @include rem('margin-right', 20);
+          }
+        }
       }
     }
 
