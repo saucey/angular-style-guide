@@ -103,9 +103,7 @@
       clear: both;
     }
   }
-  #comments {
 
-  }
   #comments{
 
     @include rem('padding', 10);
@@ -132,24 +130,26 @@
       @include rem('margin-bottom', 10);
     }
 
+    .top {
+      overflow:hidden;
+      display:block;
+      .button {
+        float:right;
+      }
+    }
+
     .comment{
       @include rem('margin-bottom', 20);
-
-      .top {
-        overflow:hidden;
-        display:block;
-        .button {
-          float:right;
-        }
-      }
 
       .submitted {
         color:$darker_grey;
         font-family:$font_thin;
+        @include rem('font-size', 16);
         .username {
           color: $black;
           display:block;
-          font-family:$font_normal;
+          font-family: $font_bold;
+          @include rem('font-size', 18);
         }
       }
       ul.links.links--inline {
@@ -177,6 +177,9 @@
       &.subcomment{
         @include rem('padding-left', 20);
       }
+    }
+    .indented {
+      @include rem('margin', 0, 0, 20, 25);
     }
   }
 }
