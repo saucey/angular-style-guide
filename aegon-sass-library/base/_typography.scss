@@ -39,7 +39,7 @@ h3 {
   font-family: $font_normal;
   @include rem('font-size', $large);
   @include rem('line-height', $line-height-large);
-  color: $black;
+  color: $blue;
   margin: 10px auto;
 }
 
@@ -85,27 +85,6 @@ p {
 // Media queries
 //
 // --------------------------------------------------
-
-@include breakpoint($brk-tablet) {
-
-  h1, h2, h3 {
-    word-wrap: break-word;
-  }
-
-  h1 {
-    @include rem('font-size', $xxx-large);
-    @include rem('line-height', $line-height-xxx-large);
-  }
-  
-  h1, h2, h3 {
-	  @include word-wrap();
-  }
-
-  p {
-    @include rem('margin', 0, 0, 15);
-  }
-}
-
 @include breakpoint($brk-mobile) {
 
   h1 {
@@ -121,6 +100,26 @@ p {
   h3 {
     @include rem('font-size', $medium);
     @include rem('line-height', $line-height-medium);
-    color: $blue;
+
+  }
+}
+
+@include breakpoint($brk-tablet) {
+
+  h1, h2, h3 {
+    @include word-wrap();
+  }
+
+  h1 {
+    @include rem('font-size', $xxx-large);
+    @include rem('line-height', $line-height-xxx-large);
+  }
+
+  h3 {
+    color: $black;
+  }
+
+  p {
+    @include rem('margin', 0, 0, 15);
   }
 }
