@@ -53,7 +53,6 @@
         color: $black;
       }
     }
-
   }
 
   .social-links {
@@ -66,11 +65,6 @@
       @include rem('margin', 8, 0, 15);
     }
 
-    .share {
-      h4 {
-        margin: 0rem 0rem 0.625rem 0rem;
-      }    
-    }
     .easy_social_box {
       padding-top: 3px;
       display: table-cell;
@@ -88,6 +82,9 @@
 
       &.easy_social-widget-facebook {
         margin-right: 8px;
+      }
+      &.easy_social-widget-linkedin {
+        margin-right: -14px;
       }
     }
   }
@@ -166,29 +163,14 @@
         display: table-cell;
         height:100%;
         vertical-align: middle;
-        h4 {
-          margin: 0rem 0rem 0.625rem 0rem;
-        }
       }
       .easy_social_box {
         display: table-cell;
-
+        width: auto;
         margin-left: 2%;
         button{
           width: auto;
           @include rem('margin-bottom', 0);
-        }
-      }
-      .social {
-        .share {
-          width: 20%;
-          display: table-cell;
-          height: 100%;
-          vertical-align: middle;
-          height:50px;
-          h4 {
-            margin:0;
-          }    
         }
       }
     }
