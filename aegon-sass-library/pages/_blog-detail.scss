@@ -161,7 +161,7 @@
       h4{
         @include rem('margin', 0, 0, 0, 0);
       }
-      .share {
+      .social-label {
         @include rem('width', 132);
         display: table-cell;
         height:100%;
@@ -170,7 +170,7 @@
           margin: 0rem 0rem 0.625rem 0rem;
         }
       }
-      .share-buttons , .easy_social_box {
+      .easy_social_box {
         display: table-cell;
 
         margin-left: 2%;
