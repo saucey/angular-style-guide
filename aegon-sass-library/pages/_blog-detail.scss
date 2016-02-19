@@ -139,6 +139,35 @@
   }
 }
 
+form.comment-form {
+  overflow:hidden;
+  #edit-actions {
+    @include rem('margin', 0);
+    position:relative;
+    float:right;
+    &:after{
+      @include btn-right-icon();
+      content: "";
+      display:block;
+      position:absolute;
+      right:0;
+      color:$white;
+      pointer-events:none;
+    }
+    &:hover {
+      opacity:.8;
+    }
+    #edit-submit {
+      @extend .button;
+      @extend .arrow;
+      @include rem('margin-bottom', 0);
+      &:hover {
+        opacity:1;
+      }
+    }
+  }
+} 
+
 @include breakpoint($brk-tablet) {
   .blog-detail {
     .blog-detail-header img {

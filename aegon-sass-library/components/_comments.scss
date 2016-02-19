@@ -72,7 +72,8 @@ form.comment-form {
     background-color: $white;
     border: none;
     &.invalid {
-      border: solid 3px $red;
+      border: solid 1px $red;
+      background: $lighter_red;
     }
   }
 
