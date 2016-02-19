@@ -166,7 +166,15 @@ form.comment-form {
       }
     }
   }
-} 
+}
+
+form.comment-form {
+  .error {
+    @extend .error--messages;
+    border:1px solid $red;
+    color: $red;
+  }
+}
 
 @include breakpoint($brk-tablet) {
   .blog-detail {
