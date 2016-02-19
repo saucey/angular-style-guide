@@ -53,20 +53,35 @@
         color: $black;
       }
     }
+
   }
 
-  .social-links {
+  .social{
     border-radius: $elements_border_radius;
     background-color:$grey;
     @include rem('padding', 15);
     @include rem('margin', 20, 0, 20, 0);
 
-    h4 {
-      @include rem('margin', 8, 0, 15);
+    h4{
+      @include rem('margin', 0, 0, 10, 0);
     }
 
+    .share-buttons button{
+      width: 30%;
+    }
+  }
+
+  .social-links {
+    border-radius: 3px;
+    background-color: #edebe5;
+    padding: 0.9375rem;
+
+    .share {
+      h4 {
+        margin: 0rem 0rem 0.625rem 0rem;
+      }
+    }
     .easy_social_box {
-      padding-top: 3px;
       display: table-cell;
       height: 100%;
       vertical-align: middle;
@@ -78,15 +93,16 @@
     .easy_social_box div.easy_social-widget {
       line-height:18px;
       float:left;
-      margin: 0 20px 0 0;
-
-      &.easy_social-widget-facebook {
-        margin-right: 8px;
-      }
-      &.easy_social-widget-googleplus {
-        margin-right: -14px;
-      }
+      margin: 0 12px 0 0;
     }
+
+    //Drupal Style, Needs to be deleted before deploy.
+    //.easy_social_box div.easy_social-widget {
+      //margin: 0 4px 0 0;
+      //padding: 0;
+      //overflow: hidden;
+      //float: left;
+    //}
   }
 
   .author {
@@ -123,6 +139,43 @@
   }
 }
 
+form.comment-form {
+  overflow:hidden;
+  #edit-actions {
+    @include rem('margin', 0);
+    position:relative;
+    float:right;
+    &:after{
+      @include btn-right-icon();
+      content: "";
+      display:block;
+      position:absolute;
+      right:0;
+      color:$white;
+      pointer-events:none;
+    }
+    &:hover {
+      opacity:.8;
+    }
+    #edit-submit {
+      @extend .button;
+      @extend .arrow;
+      @include rem('margin-bottom', 0);
+      &:hover {
+        opacity:1;
+      }
+    }
+  }
+}
+
+form.comment-form {
+  .error {
+    @extend .error--messages;
+    border:1px solid $red;
+    color: $red;
+  }
+}
+
 @include breakpoint($brk-tablet) {
   .blog-detail {
     .blog-detail-header img {
@@ -152,25 +205,41 @@
 @include breakpoint($brk-ipad-portrait) {
 
   .blog-detail{
-    .social-links {
+    .social{
       display: table;
+      height: 80px;
       width: 100%;
       h4{
         @include rem('margin', 0, 0, 0, 0);
       }
-      .social-label {
-        @include rem('width', 132);
+      .share{
+        width: 20%;
         display: table-cell;
         height:100%;
         vertical-align: middle;
+        h4 {
+          margin: 0rem 0rem 0.625rem 0rem;
+        }
       }
-      .easy_social_box {
+      .share-buttons {
         display: table-cell;
-        width: auto;
+        width: 78%;
         margin-left: 2%;
         button{
           width: auto;
           @include rem('margin-bottom', 0);
+        }
+      }
+      .social {
+        .share {
+          width: 20%;
+          display: table-cell;
+          height: 100%;
+          vertical-align: middle;
+          height:50px;
+          h4 {
+            margin:0;
+          }
         }
       }
     }

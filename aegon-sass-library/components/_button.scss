@@ -93,6 +93,9 @@ button,
     &.icon-chat:after {
       content: $font_icons_chat;
     }
+    &.icon-comment:after {
+      content: $font_icons_comment;
+    }
     &.icon-search:after {
       content: $font_icons_search;
     }
