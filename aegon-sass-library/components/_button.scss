@@ -37,7 +37,7 @@ button,
   @include rem("border-radius", $elements_border_radius);
   a {
     color: inherit;
-    background: inherit;
+    background: none;
   }
   &:hover {
     opacity: 0.8;
@@ -176,6 +176,43 @@ button,
       content: "Wijzig  ";
       font-family: $font_light;
     }
+  }
+}
+
+/** Backwards compatible with old style button classes: **/
+.btn {
+  @extend .button;
+  &[class$="square-chat"] {
+    @extend .icon-chat;
+    @extend .icon-right;
+  }
+  &[class$="square-call"] {
+    @extend .icon-call;
+    @extend .icon-right;
+  }
+  [class*="btn-orange"] {
+    @extend .orange;
+  }
+  [class*="btn-orange-gradient"] {
+    @extend .orange-gradient;
+  }
+  [class*="btn-blue"] {
+    @extend .blue;
+  }
+  [class*="btn-green"] {
+    @extend .green;
+  }
+  [class*="btn-red"] {
+    @extend .red;
+  }
+
+  [class*="arrow-right"] {
+    @extend .arrow;
+    @extend .icon-right;
+  }
+  [class*="arrow-left"] {
+    @extend .arrow;
+    @extend .icon-left;
   }
 }
 
