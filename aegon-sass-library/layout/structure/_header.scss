@@ -139,7 +139,6 @@ header.header {
       width: auto;
     }
   }
-}
 
 .page-home header.header {
   margin: 0 7.3%;
@@ -167,11 +166,12 @@ header.header {
       .region-header-left, {
         width: 60%;
         .logo {
+          display: inline;
           float: left;
           padding: 0;
           height: auto;
           background: none;
-          margin-right: 20px;
+          margin-right: 20px
         }
       }
       .right {
