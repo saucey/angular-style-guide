@@ -93,7 +93,11 @@
     .easy_social_box div.easy_social-widget {
       line-height:18px;
       float:left;
-      margin: 0 12px 0 0;
+      @include rem('margin', 0, 42, 0, 0);
+    }
+
+    .blog-detail .social-links .easy_social_box div.easy_social-widget-googleplus {
+      @include rem('margin', 0, 12, 10, 0);
     }
 
     //Drupal Style, Needs to be deleted before deploy.
@@ -138,6 +142,19 @@
     }
   }
 }
+@include breakpoint($brk-mobile) {
+  .blog-detail .social-links .easy_social_box {
+    -webkit-columns:2;
+    -moz-columns:2;
+    columns:2;
+  }
+  .blog-detail .social-links .easy_social_box div.easy_social-widget {
+    @include rem('margin', 0, 5, 5, 0);
+    height: 28px;
+    float:none;
+  }
+}
+
 
 form.comment-form {
   overflow:hidden;

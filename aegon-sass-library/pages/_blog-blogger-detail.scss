@@ -1,0 +1,123 @@
+//.view-bloggers {
+//  .container_12 {
+//    margin:0;
+//    width:100%;
+//  }
+//  .blogger-container {
+//    overflow:hidden;
+//    img {
+//      display:block;
+//      max-width:100%;
+//      float: left;
+//      @include rem('margin', 0, 18, 9 ,0);
+//      overflow:hidden;
+//    }
+//    .blogger-content {
+//      @include rem('padding', 0);
+//      @include rem('margin-bottom', 30);
+//      border-bottom:1px solid $grey;
+//
+//      #blogger-name {
+//        @include rem('margin-bottom', 0);
+//      }
+//      .blogger-function {
+//        font-family:$font_normal;
+//      }
+//      .blogger-function-description {
+//        p {
+//          @include rem('margin-bottom', 15);
+//        }
+//      }
+//    }
+//
+//  }
+//}
+
+.view-bloggers {
+  .blogger-container {
+    overflow:hidden;
+  }
+}
+
+.content {
+  >.row-fluid {
+    .span12 + .gutter {
+      display:none;
+    }
+  }
+}
+
+.view-bloggers {
+  .span12 > .gutter:first-child {
+    display:none;
+  }
+  .container_12 {
+    margin:0;
+    width:100%;
+  }
+  .blogger-container {
+    overflow:hidden;
+    width:100%;
+    @include rem('padding', 0);
+    @include rem('margin-bottom', 30);
+    border-bottom:1px solid $grey;
+
+    img {
+      display:block;
+      width:100%;
+      max-width:530px;
+      margin:0 auto 9px;
+    }
+    img + .gutter {
+      clear:left;
+    }
+    .blogger-content {
+      display:inline-block;
+      width:86%;
+      max-width:470px;
+
+      #blogger-name {
+        @include rem('margin-bottom', 0);
+      }
+      .blogger-function {
+        font-family:$font_normal;
+      }
+      .blogger-function-description {
+        p {
+          @include rem('margin-bottom', 15);
+        }
+      }
+    }
+
+  }
+}
+
+
+@include breakpoint($brk-mobile) {}
+
+@include breakpoint($brk-tablet) {
+  .view-bloggers {
+    .span12 > .gutter:first-child {
+      display:block;
+    }
+    .blogger-container {
+      width:86%;
+
+      img {
+        float:left;
+        width:auto;
+        @include rem('margin',0 , 18,09 ,0);
+      }
+      img + .gutter {
+        display:none;
+      }
+      .blogger-content {
+        display:inline;
+        max-width:100%;
+      }
+    }
+  }
+
+}
+@include breakpoint($brk-ipad-portrait) {}
+@include breakpoint($brk-large-desktop) {}
