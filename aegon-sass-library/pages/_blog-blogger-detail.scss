@@ -58,11 +58,15 @@
   .blogger-container {
     overflow:hidden;
     width:100%;
+    @include rem('padding', 0);
+    @include rem('margin-bottom', 30);
+    border-bottom:1px solid $grey;
+
     img {
       display:block;
       width:100%;
       max-width:530px;
-      @include rem('margin', 0, 0, 9, 0);
+      margin:0 auto 9px;
     }
     img + .gutter {
       clear:left;
@@ -98,14 +102,11 @@
     }
     .blogger-container {
       width:86%;
-      @include rem('padding', 0);
-      @include rem('margin-bottom', 30);
-      border-bottom:1px solid $grey;
 
       img {
         float:left;
         width:auto;
-        @include rem('margin', 0, 18, 9 ,0);
+        @include rem('margin',0 , 18,09 ,0);
       }
       img + .gutter {
         display:none;
