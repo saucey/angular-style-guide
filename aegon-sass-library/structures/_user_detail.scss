@@ -390,6 +390,9 @@ body.shw-widgets-logged-in {
       opacity: 1;
     }
     .inplace{
+      .btn-login-loggedin {
+        @include rem('line-height', 36);
+      }
       .dropdown{
         .text{
           p.name{
