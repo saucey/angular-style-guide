@@ -79,7 +79,7 @@
     .share {
       h4 {
         margin: 0rem 0rem 0.625rem 0rem;
-      }    
+      }
     }
     .easy_social_box {
       display: table-cell;
@@ -93,14 +93,14 @@
     .easy_social_box div.easy_social-widget {
       line-height:18px;
       float:left;
-      margin: 0 42px 0 0;
+      @include rem('margin', 0, 42, 0, 0);
     }
 
     .blog-detail .social-links .easy_social_box div.easy_social-widget-googleplus {
-      margin-right:12px;
+      @include rem('margin', 0, 12, 10, 0);
     }
 
-    //Drupal Style, Needs to be deleted before deploy.  
+    //Drupal Style, Needs to be deleted before deploy.
     //.easy_social_box div.easy_social-widget {
       //margin: 0 4px 0 0;
       //padding: 0;
@@ -155,6 +155,43 @@
   }
 }
 
+
+form.comment-form {
+  overflow:hidden;
+  #edit-actions {
+    @include rem('margin', 0);
+    position:relative;
+    float:right;
+    &:after{
+      @include btn-right-icon();
+      content: "";
+      display:block;
+      position:absolute;
+      right:0;
+      color:$white;
+      pointer-events:none;
+    }
+    &:hover {
+      opacity:.8;
+    }
+    #edit-submit {
+      @extend .button;
+      @extend .arrow;
+      @include rem('margin-bottom', 0);
+      &:hover {
+        opacity:1;
+      }
+    }
+  }
+}
+
+form.comment-form {
+  .error {
+    @extend .error--messages;
+    border:1px solid $red;
+    color: $red;
+  }
+}
 
 @include breakpoint($brk-tablet) {
   .blog-detail {
@@ -219,7 +256,7 @@
           height:50px;
           h4 {
             margin:0;
-          }    
+          }
         }
       }
     }

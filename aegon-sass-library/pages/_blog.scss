@@ -51,23 +51,6 @@
     }
   }
 
-  ul.pager {
-    text-align: center;
-    @include rem('margin', 30, 0, 30, 0);
-    li {
-      display: inline;
-      @include rem('margin-top', 20);
-    }
-
-    .pager-current {
-      color: $white;
-      border-radius: 50%;
-      background-color: $blue;
-      @include rem('padding', 5, 10);
-      @include rem('margin-right', 3);
-    }
-  }
-
   .blog-image {
     position: relative;
     h1 {

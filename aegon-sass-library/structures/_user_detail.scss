@@ -4,13 +4,14 @@
 
   display: none;
   float: right;
+  height: 31px;
   .inplace {
     position: relative;
 
     display: inline-block;
     float: right;
 
-    height: 36px;
+    height: 100%;
     margin: 0;
     .btn-login-loggedin {
       position: relative;
@@ -26,6 +27,7 @@
   }
   label {
     font-weight: normal;
+    height:100%;
   }
   input#UDW_dd_show {
     display: none;
@@ -148,15 +150,10 @@
   } // end highlight
   .btn-login-loggedin {
     font-family: $font_normal;
-
     z-index: 2;
-
-    height: auto;
-    margin-bottom: 2px;
-
+    height: 100%;
     cursor: pointer;
     user-select: none;
-
     color: $green;
     border-width: 1px;
     border-style: solid;
@@ -166,17 +163,14 @@
     outline: 0;
     background-color: $white;
 
-    @include rem('padding', 0, 10, 1, 10);
-    @include rem('line-height', 36);
+    @include rem('padding', 0, 7, 1, 7);
+    @include rem('line-height', 29);
     @include rem('border-radius', 2);
     &:after {
       font-family: $font_icons;
-
       display: inline-block;
-
       content: $font_icons_arrow_down;
       animation: buttonAfterLoginToDefault 2s normal 0s forwards;
-
       @include rem('font-size', 12);
       @include rem('margin-left', 6);
     }
@@ -277,7 +271,8 @@ body.shw-widgets-logged-in {
 
 @include breakpoint($brk-tablet) {
   .user_detail_widget {
-    width: 100%;
+    width: 50%;
+    height: 38px;
     > .text {
 
       width: 100%;
