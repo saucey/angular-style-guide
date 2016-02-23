@@ -25,6 +25,7 @@
   > .text {
     display: none;
   }
+
   label {
     font-weight: normal;
     height:100%;
@@ -222,13 +223,7 @@
   }
 }
 
-// Hide login button by default
-.login-link-wrapper {
-  display: none;
-  .button {
-    padding: 10px;
-  }
-}
+
 
 // Hide the banner with a request to the user to provide a mobile number by default.
 .messages.messages--attention.request_mobile_number {
@@ -375,6 +370,11 @@ body.shw-widgets-logged-in {
           border-color: $white;
         }
       }
+    }
+  }
+  .section-mijnaegon {
+    .user_detail_widget {
+      width: 100%;
     }
   }
 }

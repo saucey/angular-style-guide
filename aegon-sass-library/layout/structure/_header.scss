@@ -10,8 +10,6 @@ header.header {
   margin: 0 auto;
   padding: 0 7.3%;
   background: $white;
-  border-radius: 0 0 4px 4px;
-  box-shadow: 0 1px 0 0 rgba(29, 29, 27, 0.2);
   @include rem('height', 63);
   @include rem('min-height', 63);
 
@@ -22,14 +20,11 @@ header.header {
   .left {
     width: 30%;
     padding-left: 0;
-
     text-align: left;
-
     @include rem('min-height', 63);
   }
   .middle {
     width: 40%;
-
     text-align: center;
   }
   .right {
@@ -41,36 +36,34 @@ header.header {
       display: none;
     }
     .login-link-wrapper {
+      display: none;
+      // Hide login button by default
       height: 31px;
+      .button {
+        @include rem('padding', 0, 7, 1, 7);
+        @include rem('line-height', 29);
+        height: 100%;
+      }
     }
   }
   // Mobile elements
   .tap-menu {
     a {
       position: relative;
-      // overflow: hidden;
-
       display: inline-block;
-
       width: 20px;
       height: 17px;
-
       vertical-align: middle;
       text-indent: -9999px;
-
       @include rem('line-height', 60);
       &:before {
         position: absolute;
         top: 50%;
         left: 0;
-
         display: block;
-
         content: '';
-
         border-top: .22em solid $fun_blue_approx;
         border-bottom: .22em solid $fun_blue_approx;
-
         @include rem('width', 19);
         @include rem('height', 15);
         @include rem('margin-top', -8.5);
@@ -79,13 +72,9 @@ header.header {
         position: absolute;
         top: 50%;
         left: 0;
-
         display: block;
-
         content: '';
-
         border-top: .22em solid $fun_blue_approx;
-
         @include rem('width', 19);
         @include rem('height', 15);
         @include rem('margin-top', -3);
@@ -98,21 +87,14 @@ header.header {
   .mobile-logo {
     a {
       display: inline-block;
-
       width: 100%;
-
       vertical-align: middle;
       text-indent: -9999px;
-
       background-color: $white;
-      // @include rem('max-width', 90);
-      // @include rem('padding-top', 6);
       background-image: url('../images/logo_aegon.png');
       background-repeat: no-repeat;
       background-position: center center;
       background-size: auto 31px;
-      // height: 100%;
-
       @include rem('min-height', 32);
       @include rem('min-width', 50);
       @include rem('max-width', 170);
@@ -125,7 +107,7 @@ header.header {
       margin: 0;
     }
   }
-  // Desktop elements
+  // Hide desktop header elements
   .region-header-left {
     display: none;
   }
@@ -133,10 +115,8 @@ header.header {
     display: none;
     .block {
       position: relative;
-
       display: none;
       float: left;
-
       width: auto;
     }
   }
@@ -149,7 +129,7 @@ header.header {
 @include breakpoint($brk-tablet) {
   header.header {
     table-layout: fixed;
-    // Mobile elements
+    // Hide mobile header elements
     .tap-menu, .mobile-logo {
       display: none;
     }
@@ -161,42 +141,133 @@ header.header {
         display:none;
       }
       .block {
-        display: inline;
+        display: inline-block;
         vertical-align: middle;
       }
+    }
+    .right {
+      float: none;
+      width: 50%;
+      padding: 0;
+      #search-block-form {
+        width: 50%;
+        position: relative;
+        display: inline-block;
+        height: 38px;
+        .container-inline {
+          position:relative;
+          .form-item {
+            margin: 0;
+            float: right;
+            width: 100%;
+            height: 100%;
+            label {
+              display: none;
+            }
+            input[type=text] {
+              background: #fff;
+              border: solid 1px #C5D6DD;
+              padding: 5px 25px 5px 10px;
+              margin: 0;
+              width: 50%;
+              height: 38px;
+              -webkit-border-radius: 3px;
+              -moz-border-radius: 3px;
+              border-radius: 3px;
+              -webkit-box-shadow: inset 0 1px 0 0 rgba(0, 48, 76, 0.4);
+              -moz-box-shadow: inset 0 1px 0 0 rgba(0, 48, 76, 0.4);
+              box-shadow: inset 0 1px 0 0 rgba(0, 48, 76, 0.4);
+              -webkit-transition: all .5s;
+              -moz-transition: all .5s;
+              transition: all .5s;
+              &:focus {
+                width: 100%;
+                -webkit-box-shadow: 0 0 5px rgba(109,207,246,.5);
+                -moz-box-shadow: 0 0 5px rgba(109,207,246,.5);
+                box-shadow: 0 0 5px rgba(109,207,246,.5);
+              }
+            }
+          }
+          .form-actions {
+            position:absolute;
+            top:0;
+            right:0;
+            .form-submit {
+              background: url('../images/icons/icon-search-header.png') 100% center no-repeat;
+              width:36px;
+              height: 38px;
+              text-indent:-9999px;
+              border:none;
+              padding:0;
+            }
+          }
+        }
+      }
+      .login-link-wrapper {
+        float:right;
+        height: 38px;
+        width: 83px;
+        margin-left: 15px;
+        .button {
+          @include rem('line-height', 36);
+        }
+      }
+    }
+  }
+  .page-home header.header {
+    // Desktop Home elements
+    margin: 0 7.3%;
+    padding: 0 2%;
+    width: 85.4%;
+    border-radius: 0 0 4px 4px;
+    box-shadow: 0 1px 0 0 rgba(29, 29, 27, 0.2);
+    .region-header-left {
+      width: 56%;
+      .logo {
+        display: inline;
+        float: left;
+        padding: 0;
+        height: auto;
+        background: none;
+        margin-right: 20px
+      }
+      // Homepage menu styling
       #block-menu-menu-home-main-menu {
-        ul.menu li {
-          border-right: 1px solid #BABABA;
+        ul.menu {
           float: left;
-          list-style: none;
-          line-height: 20px;
-          margin-right: 15px;
-          padding-right: 15px;
-          &.last {
-            border-right: none;
-            margin-right: 0;
-            padding-right: 0;
-          }
-          a {
-            color: #BABABA;
+          li {
+            border-right: 1px solid #BABABA;
             float: left;
-            font: 18px/18px 'senticosansdtregular', Arial, Verdana, sans-serif;
-          }
-          &.active-trail a {
-            color: #00334E;
+            list-style: none;
+            line-height: 20px;
+            margin-right: 15px;
+            padding-right: 15px;
+            &.last {
+              border-right: none;
+              margin-right: 0;
+              padding-right: 0;
+            }
+            a {
+              color: #BABABA;
+              float: left;
+              font: 18px/20px $font_normal, Arial, Verdana, sans-serif;
+            }
+            &.active-trail a {
+              color: #00334E;
+            }
           }
         }
         .custom-menu-dropdown {
-          /*background: url(../images/icons/select-grey.png) 100% center no-repeat;
-          font: 18px/20px 'senticosansdtregular', Arial, Verdana, sans-serif;
+          float: left;
+          background: url('../images/icons/select-grey.png')100% center no-repeat;
+          font: 18px/20px $font_normal, Arial, Verdana, sans-serif;
           color: #BABABA;
           text-indent: 0;
           cursor: default;
           position: relative;
           width: auto;
           display: inline-block;
-          padding-right: 20px;*/
-          display:none;
+          padding-right: 20px;
           ul {
             position: absolute;
             border: 1px solid #E0E0E0;
@@ -260,99 +331,21 @@ header.header {
               &:hover {
                 font-family: 'senticosansdtregular', Arial, Verdana, sans-serif;
               }
-              &.selected { background: url(../images/icons/icon-tick.png) 117px center no-repeat rgba(0, 0, 0, 0); }
+              &.selected { background: url('../images/icons/icon-tick.png') 117px center no-repeat rgba(0, 0, 0, 0); }
             }
           }
         }
       }
     }
     .right {
-      float: none;
-      width: 50%;
-      padding: 0;
-      .search-block-form {
-        width: 50%;
-        float: left;
-        position: relative;
-        display: inline;
-        height: 38px;
-        .container-inline {
-          position:relative;
-          .form-item {
-            margin: 0;
-            float: right;
-            width: 100%;
-            height: 100%;
-            label {
-              display: none;
-            }
-            input[type=text] {
-              background: #fff;
-              border: solid 1px #C5D6DD;
-              padding: 5px 25px 5px 10px;
-              margin: 0;
-              width: 50%;
-              height: 38px;
-              -webkit-border-radius: 3px;
-              -moz-border-radius: 3px;
-              border-radius: 3px;
-              -webkit-box-shadow: inset 0 1px 0 0 rgba(0, 48, 76, 0.4);
-              -moz-box-shadow: inset 0 1px 0 0 rgba(0, 48, 76, 0.4);
-              box-shadow: inset 0 1px 0 0 rgba(0, 48, 76, 0.4);
-              -webkit-transition: all .5s;
-              -moz-transition: all .5s;
-              transition: all .5s;
-              &:focus {
-                width: 100%;
-                -webkit-box-shadow: 0 0 5px rgba(109,207,246,.5);
-                -moz-box-shadow: 0 0 5px rgba(109,207,246,.5);
-                box-shadow: 0 0 5px rgba(109,207,246,.5);
-              }
-            }
-          }
-          .form-actions {
-            position:absolute;
-            top:0;
-            right:0;
-            .form-submit {
-              background: url("/images/icons/icon-search-header.png") 100% center no-repeat;
-              width:36px;
-              height: 38px;
-              text-indent:-9999px;
-              border:none;
-              padding:0;
-            }
-          }
-        }
-      }
-
-      .login-link-wrapper {
-        height: 38px;
-        width: 38%;
-        display: inline;
-      }
-
+      width: 44%;
     }
   }
-  .page-home header.header {
-    // Desktop Home elements
-    margin: 0 7.3%;
-    border-radius: 4px;
-    padding: 0 2%;
-    width: 85.4%;
-    .region-header-left {
-      width: 73%;
-      .logo {
-        display: inline;
-        float: left;
-        padding: 0;
-        height: auto;
-        background: none;
-        margin-right: 20px
-      }
-    }
-    .right {
-      width: 27%;
-    }
+}
+
+@media only screen and (max-width : 1224px) {
+  // This hack is used for the homepage. When screens become to small to show the many many things that are in the header.
+  .page-home header.header .user_detail_widget .text .name .user_detail_widget_name {
+    display:none;
   }
 }
