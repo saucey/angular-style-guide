@@ -174,6 +174,23 @@
   }
 }
 
+.author {
+  .author-avatar {
+    float:left;
+    @include rem('margin', 0, 18, 0, 0);
+    img {
+      max-width:129px;
+      @include border-radius($elements_border_radius)
+    }
+  }
+  .author-name {
+    h4 {
+      font-family: $font_medium;
+    }
+  }
+}
+
+
 @include breakpoint($brk-mobile) {
   .blog {
     .span1.gutter {
@@ -183,6 +200,20 @@
       & + .span12 {
         width: 100%;
         margin-left: 0;
+      }
+    }
+  }
+
+  .author {
+    .author-name {
+      h4 {
+        font-size:$breakpoint-base-font-size;
+      }
+    }
+    .author-description {
+      clear:left;
+      p {
+        font-size:$breakpoint-base-font-size;
       }
     }
   }
