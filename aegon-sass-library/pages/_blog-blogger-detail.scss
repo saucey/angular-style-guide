@@ -1,5 +1,5 @@
 .view-bloggers {
-  .blogger-container {
+  .author-container {
     overflow:hidden;
   }
 }
@@ -20,7 +20,7 @@
     margin:0;
     width:100%;
   }
-  .blogger-container {
+  .author-container {
     overflow:hidden;
     width:100%;
     @include rem('padding', 0);
@@ -36,18 +36,18 @@
     img + .gutter {
       clear:left;
     }
-    .blogger-content {
+    .author {
       display:inline-block;
       width:86%;
       max-width:470px;
 
-      #blogger-name {
+      .author-name {
         @include rem('margin-bottom', 0);
       }
-      .blogger-function {
+      .author-function {
         font-family:$font_normal;
       }
-      .blogger-function-description {
+      .author-function-description {
         p {
           @include rem('margin-bottom', 15);
         }
@@ -65,7 +65,7 @@
     .span12 > .gutter:first-child {
       display:block;
     }
-    .blogger-container {
+    .author-container {
       width:86%;
 
       img {
@@ -81,7 +81,7 @@
       img + .gutter {
         display:none;
       }
-      .blogger-content {
+      .author {
         display:inline;
         max-width:100%;
       }
