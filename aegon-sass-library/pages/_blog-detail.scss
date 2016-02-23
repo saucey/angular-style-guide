@@ -93,6 +93,7 @@
     .easy_social_box div.easy_social-widget {
       line-height:18px;
       float:left;
+      overflow:visible;
       @include rem('margin', 0, 42, 0, 0);
     }
 
