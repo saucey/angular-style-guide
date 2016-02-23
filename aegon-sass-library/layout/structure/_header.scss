@@ -140,15 +140,7 @@ header.header {
       width: auto;
     }
   }
-
-  //.page-home header.header {
-  //  margin: 0 7.3%;
-  //  border-radius: 4px;
-  //  padding: 0 2%;
-  //  width: 85.4%;
-  //}
 }
-
 
 //
 // Media queries
@@ -169,8 +161,109 @@ header.header {
         display:none;
       }
       .block {
-        display: inline-block;
+        display: inline;
         vertical-align: middle;
+      }
+      #block-menu-menu-home-main-menu {
+        ul.menu li {
+          border-right: 1px solid #BABABA;
+          float: left;
+          list-style: none;
+          line-height: 20px;
+          margin-right: 15px;
+          padding-right: 15px;
+          &.last {
+            border-right: none;
+            margin-right: 0;
+            padding-right: 0;
+          }
+          a {
+            color: #BABABA;
+            float: left;
+            font: 18px/18px 'senticosansdtregular', Arial, Verdana, sans-serif;
+          }
+          &.active-trail a {
+            color: #00334E;
+          }
+        }
+        .custom-menu-dropdown {
+          /*background: url(../images/icons/select-grey.png) 100% center no-repeat;
+          font: 18px/20px 'senticosansdtregular', Arial, Verdana, sans-serif;
+          color: #BABABA;
+          text-indent: 0;
+          cursor: default;
+          position: relative;
+          width: auto;
+          display: inline-block;
+          padding-right: 20px;*/
+          display:none;
+          ul {
+            position: absolute;
+            border: 1px solid #E0E0E0;
+            display: none;
+            margin: 20px 0 0 -6px;
+            width: auto;
+            background-color: #ffffff;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+            scrollbar-face-color: #eee;
+            scrollbar-shadow-color: #AFAFAF;
+            scrollbar-highlight-color: #DBDBDB;
+            scrollbar-3dlight-color: #AFAFAF;
+            scrollbar-darkshadow-color: #DBDBDB;
+            scrollbar-track-color: #EEEEEE;
+            scrollbar-arrow-color: #333;
+            overflow: visible !important;
+            &:before {
+              border-color: rgba(224, 224, 224, 1) transparent;
+              border-style: solid;
+              border-width: 0 8px 8px;
+              top: -8px;
+              content: "";
+              height: 0;
+              position: absolute;
+              left: 20px;
+              width: 0;
+              z-index: 10000;
+            }
+            &:after {
+              border-color: #FFFFFF transparent;
+              border-style: solid;
+              border-width: 0 6px 6px;
+              top: -6px;
+              content: "";
+              height: 0;
+              position: absolute;
+              left: 22px;
+              width: 0;
+              z-index: 10000;
+            }
+            li {
+              background: none;
+              overflow: hidden;
+              white-space: nowrap;
+              cursor: pointer;
+              border-bottom: 1px solid #CCC;
+              width: 140px;
+              padding: 0;
+              a {
+                display: block;
+                text-decoration: none;
+                font: 18px/44px 'senticosansdtlight', Arial, Verdana, sans-serif;
+                color: #1D1D19;
+                padding: 0 15px;
+              }
+              &:last-child {
+                border: none;
+              }
+              &:hover {
+                font-family: 'senticosansdtregular', Arial, Verdana, sans-serif;
+              }
+              &.selected { background: url(../images/icons/icon-tick.png) 117px center no-repeat rgba(0, 0, 0, 0); }
+            }
+          }
+        }
       }
     }
     .right {
@@ -181,7 +274,7 @@ header.header {
         width: 50%;
         float: left;
         position: relative;
-        display: inline-block;
+        display: inline;
         height: 38px;
         .container-inline {
           position:relative;
@@ -236,15 +329,19 @@ header.header {
       .login-link-wrapper {
         height: 38px;
         width: 38%;
-        display: inline-block;
+        display: inline;
       }
 
     }
   }
   .page-home header.header {
     // Desktop Home elements
-    .region-header-left, {
-      width: 60%;
+    margin: 0 7.3%;
+    border-radius: 4px;
+    padding: 0 2%;
+    width: 85.4%;
+    .region-header-left {
+      width: 73%;
       .logo {
         display: inline;
         float: left;
@@ -255,7 +352,7 @@ header.header {
       }
     }
     .right {
-      width: 40%;
+      width: 27%;
     }
   }
 }
