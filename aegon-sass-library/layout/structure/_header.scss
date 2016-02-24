@@ -129,6 +129,8 @@ header.header {
 @include breakpoint($brk-tablet) {
   header.header {
     table-layout: fixed;
+    @include rem('height', 90);
+    @include rem('min-height', 90);
     // Hide mobile header elements
     .tap-menu, .mobile-logo {
       display: none;
@@ -221,6 +223,8 @@ header.header {
     width: 85.4%;
     border-radius: 0 0 4px 4px;
     box-shadow: 0 1px 0 0 rgba(29, 29, 27, 0.2);
+    @include rem('height', 63);
+    @include rem('min-height', 63);
     .region-header-left {
       width: 56%;
       .logo {
