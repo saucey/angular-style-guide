@@ -2,6 +2,41 @@
 // BLOG DETAIL
 // --------------------------------------------------
 
+
+// THE FOLLOWING IS COMING FROM THE EASY SOCIAL MODULE AND SHOULD BE OVERRIDDEN, DON'T CHANGE IT, BUT OVERRIDE IT! //
+
+/*div.easy_social_box {
+  height: 28px;
+}*/
+
+div.easy_social_box.vertical {
+  height: 68px;
+}
+.easy_social_box div.easy_social-widget {
+  margin: 0 4px 0 0;
+  padding: 0;
+  overflow: hidden;
+  float: left;
+}
+
+.easy_social_box div.easy_social-widget.last {
+  margin-right: 0;
+}
+
+.easy_social_box.vertical div.easy_social-widget {
+  width: 58px;
+  height: 62px;
+}
+
+.easy_social_box.vertical div.easy_social-widget.easy_social-widget-googleplus {
+  width: 52px;
+}
+
+.easy_social_box.vertical div.easy_social-widget.easy_social-widget-facebook {
+  width: 50px;
+}
+// END OF DRUPAL CONTRIB MODULE STYLING //
+
 .blog-detail {
   .blog-detail-header img {
     display: block;
@@ -53,39 +88,23 @@
         color: $black;
       }
     }
-
   }
 
-  .social{
+  .social-links {
     border-radius: $elements_border_radius;
     background-color:$grey;
     @include rem('padding', 15);
     @include rem('margin', 20, 0, 20, 0);
 
-    h4{
-      @include rem('margin', 0, 0, 10, 0);
+    h4 {
+      @include rem('margin', 8, 0, 15);
     }
 
-    .share-buttons button{
-      width: 30%;
-    }
-  }
-
-  .social-links {
-    border-radius: 3px;
-    background-color: #edebe5;
-    padding: 0.9375rem;
-
-    .share {
-      h4 {
-        margin: 0rem 0rem 0.625rem 0rem;
-      }
-    }
     .easy_social_box {
+      padding-top: 3px;
       display: table-cell;
       height: 100%;
       vertical-align: middle;
-      display: table-cell;
       width: 78%;
       margin-left: 2%;
     }
@@ -93,20 +112,15 @@
     .easy_social_box div.easy_social-widget {
       line-height:18px;
       float:left;
-      @include rem('margin', 0, 42, 0, 0);
-    }
+      margin: 0 20px 0 0;
 
-    .blog-detail .social-links .easy_social_box div.easy_social-widget-googleplus {
-      @include rem('margin', 0, 12, 10, 0);
+      &.easy_social-widget-facebook {
+        margin-right: 8px;
+      }
+      &.easy_social-widget-googleplus {
+        margin-right: -14px;
+      }
     }
-
-    //Drupal Style, Needs to be deleted before deploy.
-    //.easy_social_box div.easy_social-widget {
-      //margin: 0 4px 0 0;
-      //padding: 0;
-      //overflow: hidden;
-      //float: left;
-    //}
   }
 
   .author {
@@ -142,54 +156,26 @@
     }
   }
 }
+
 @include breakpoint($brk-mobile) {
-  .blog-detail .social-links .easy_social_box {
-    -webkit-columns:2;
-    -moz-columns:2;
-    columns:2;
-  }
-  .blog-detail .social-links .easy_social_box div.easy_social-widget {
-    @include rem('margin', 0, 5, 5, 0);
-    height: 28px;
-    float:none;
-  }
-}
+  .blog-detail .social-links {
 
+    .easy_social_box {
+      div.easy_social-widget {
+        width:49%;
+        @include rem('margin', 0, 1%, 10px, 0);
+        margin-right:1%;
+        margin-bottom:10px;
 
-form.comment-form {
-  overflow:hidden;
-  #edit-actions {
-    @include rem('margin', 0);
-    position:relative;
-    float:right;
-    &:after{
-      @include btn-right-icon();
-      content: "";
-      display:block;
-      position:absolute;
-      right:0;
-      color:$white;
-      pointer-events:none;
-    }
-    &:hover {
-      opacity:.8;
-    }
-    #edit-submit {
-      @extend .button;
-      @extend .arrow;
-      @include rem('margin-bottom', 0);
-      &:hover {
-        opacity:1;
+        &.easy_social-widget-googleplus {
+          margin-right:1%;
+        }
+        &.easy_social-widget-facebook {
+          margin-right:1%;
+        }
       }
-    }
-  }
-}
 
-form.comment-form {
-  .error {
-    @extend .error--messages;
-    border:1px solid $red;
-    color: $red;
+    }
   }
 }
 
@@ -222,41 +208,25 @@ form.comment-form {
 @include breakpoint($brk-ipad-portrait) {
 
   .blog-detail{
-    .social{
+    .social-links {
       display: table;
-      height: 80px;
       width: 100%;
       h4{
         @include rem('margin', 0, 0, 0, 0);
       }
-      .share{
-        width: 20%;
+      .social-label {
+        @include rem('width', 132);
         display: table-cell;
         height:100%;
         vertical-align: middle;
-        h4 {
-          margin: 0rem 0rem 0.625rem 0rem;
-        }
       }
-      .share-buttons {
+      .easy_social_box {
         display: table-cell;
-        width: 78%;
+        width: auto;
         margin-left: 2%;
         button{
           width: auto;
           @include rem('margin-bottom', 0);
-        }
-      }
-      .social {
-        .share {
-          width: 20%;
-          display: table-cell;
-          height: 100%;
-          vertical-align: middle;
-          height:50px;
-          h4 {
-            margin:0;
-          }
         }
       }
     }

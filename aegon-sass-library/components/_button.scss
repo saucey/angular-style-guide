@@ -179,42 +179,43 @@ button,
   }
 }
 
-/** Backwards compatible with old style button classes: **/
-.btn {
-  @extend .button;
-  &[class$="square-chat"] {
-    @extend .icon-chat;
-    @extend .icon-right;
-  }
-  &[class$="square-call"] {
-    @extend .icon-call;
-    @extend .icon-right;
-  }
-  [class*="btn-orange"] {
-    @extend .orange;
-  }
-  [class*="btn-orange-gradient"] {
-    @extend .orange-gradient;
-  }
-  [class*="btn-blue"] {
-    @extend .blue;
-  }
-  [class*="btn-green"] {
-    @extend .green;
-  }
-  [class*="btn-red"] {
-    @extend .red;
-  }
-
-  [class*="arrow-right"] {
-    @extend .arrow;
-    @extend .icon-right;
-  }
-  [class*="arrow-left"] {
-    @extend .arrow;
-    @extend .icon-left;
-  }
-}
+///** Backwards compatible with old style button classes: **/
+// BREAKS OLD THEME BUTTONS, DON'T USE IT YET
+//.btn {
+//  @extend .button;
+//  &[class$="square-chat"] {
+//    @extend .icon-chat;
+//    @extend .icon-right;
+//  }
+//  &[class$="square-call"] {
+//    @extend .icon-call;
+//    @extend .icon-right;
+//  }
+//  [class*="btn-orange"] {
+//    @extend .orange;
+//  }
+//  [class*="btn-orange-gradient"] {
+//    @extend .orange-gradient;
+//  }
+//  [class*="btn-blue"] {
+//    @extend .blue;
+//  }
+//  [class*="btn-green"] {
+//    @extend .green;
+//  }
+//  [class*="btn-red"] {
+//    @extend .red;
+//  }
+//
+//  [class*="arrow-right"] {
+//    @extend .arrow;
+//    @extend .icon-right;
+//  }
+//  [class*="arrow-left"] {
+//    @extend .arrow;
+//    @extend .icon-left;
+//  }
+//}
 
 //
 // Media queries
