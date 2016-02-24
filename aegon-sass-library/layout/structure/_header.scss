@@ -151,60 +151,6 @@ header.header {
       float: none;
       width: 50%;
       padding: 0;
-      #search-block-form {
-        width: 50%;
-        position: relative;
-        display: inline-block;
-        height: 38px;
-        .container-inline {
-          position:relative;
-          .form-item {
-            margin: 0;
-            float: right;
-            width: 100%;
-            height: 100%;
-            label {
-              display: none;
-            }
-            input[type=text] {
-              background: #fff;
-              border: solid 1px #C5D6DD;
-              padding: 5px 25px 5px 10px;
-              margin: 0;
-              width: 50%;
-              height: 38px;
-              -webkit-border-radius: 3px;
-              -moz-border-radius: 3px;
-              border-radius: 3px;
-              -webkit-box-shadow: inset 0 1px 0 0 rgba(0, 48, 76, 0.4);
-              -moz-box-shadow: inset 0 1px 0 0 rgba(0, 48, 76, 0.4);
-              box-shadow: inset 0 1px 0 0 rgba(0, 48, 76, 0.4);
-              -webkit-transition: all .5s;
-              -moz-transition: all .5s;
-              transition: all .5s;
-              &:focus {
-                width: 100%;
-                -webkit-box-shadow: 0 0 5px rgba(109,207,246,.5);
-                -moz-box-shadow: 0 0 5px rgba(109,207,246,.5);
-                box-shadow: 0 0 5px rgba(109,207,246,.5);
-              }
-            }
-          }
-          .form-actions {
-            position:absolute;
-            top:0;
-            right:0;
-            .form-submit {
-              background: url('../images/icons/icon-search-header.png') 100% center no-repeat;
-              width:36px;
-              height: 38px;
-              text-indent:-9999px;
-              border:none;
-              padding:0;
-            }
-          }
-        }
-      }
       .login-link-wrapper {
         float:right;
         height: 38px;
@@ -347,9 +293,69 @@ header.header {
   }
 }
 
-@media only screen and (max-width : 1224px) {
+@include breakpoint($brk-ipad-portrait) {
+  header.header .right #search-block-form {
+    width: 50%;
+    position: relative;
+    display: inline-block;
+    height: 38px;
+    .container-inline {
+      position:relative;
+      .form-item {
+        margin: 0;
+        float: right;
+        width: 100%;
+        height: 100%;
+        label {
+          display: none;
+        }
+        input[type=text] {
+          background: #fff;
+          border: solid 1px #C5D6DD;
+          padding: 5px 25px 5px 10px;
+          margin: 0;
+          width: 50%;
+          height: 38px;
+          -webkit-border-radius: 3px;
+          -moz-border-radius: 3px;
+          border-radius: 3px;
+          -webkit-box-shadow: inset 0 1px 0 0 rgba(0, 48, 76, 0.4);
+          -moz-box-shadow: inset 0 1px 0 0 rgba(0, 48, 76, 0.4);
+          box-shadow: inset 0 1px 0 0 rgba(0, 48, 76, 0.4);
+          -webkit-transition: all .5s;
+          -moz-transition: all .5s;
+          transition: all .5s;
+          &:focus {
+            width: 100%;
+            -webkit-box-shadow: 0 0 5px rgba(109,207,246,.5);
+            -moz-box-shadow: 0 0 5px rgba(109,207,246,.5);
+            box-shadow: 0 0 5px rgba(109,207,246,.5);
+          }
+        }
+      }
+      .form-actions {
+        position:absolute;
+        top:0;
+        right:0;
+        .form-submit {
+          background: url('../images/icons/icon-search-header.png') 100% center no-repeat;
+          width:36px;
+          height: 38px;
+          text-indent:-9999px;
+          border:none;
+          padding:0;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width : 1124px) {
   // This hack is used for the homepage. When screens become to small to show the many many things that are in the header.
-  .page-home header.header .user_detail_widget .text .name .user_detail_widget_name {
+  .header.header .user_detail_widget .text .name .user_detail_widget_name {
     display:none;
+  }
+  .section-mijnaegon header.header .user_detail_widget .text .name .user_detail_widget_name {
+    display:inline-block;
   }
 }
