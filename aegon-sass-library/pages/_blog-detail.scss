@@ -157,6 +157,28 @@ div.easy_social_box.vertical {
   }
 }
 
+@include breakpoint($brk-mobile) {
+  .blog-detail .social-links {
+
+    .easy_social_box {
+      div.easy_social-widget {
+        width:49%;
+        @include rem('margin', 0, 1%, 10px, 0);
+        margin-right:1%;
+        margin-bottom:10px;
+
+        &.easy_social-widget-googleplus {
+          margin-right:1%;
+        }
+        &.easy_social-widget-facebook {
+          margin-right:1%;
+        }
+      }
+
+    }
+  }
+}
+
 @include breakpoint($brk-tablet) {
   .blog-detail {
     .blog-detail-header img {
