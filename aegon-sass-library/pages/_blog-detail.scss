@@ -124,17 +124,16 @@ div.easy_social_box.vertical {
   }
 
   .author {
-    @include rem('padding', 20, 10, 0);
+    @include rem('padding', 20, 10, 0, 0);
     border-top: 1px solid $grey;
     overflow: hidden;
 
     .author-avatar {
       float: left;
-      width: 100px;
-      margin-right: 2%;
+      @include rem('margin', 0, 18, 0, 0);
       img {
-        max-width: 100%;
-        border-radius: 10px;
+        max-width:129px;
+        @include border-radius($elements_border_radius)
       }
     }
 
@@ -143,6 +142,7 @@ div.easy_social_box.vertical {
       font-family: $font_bold;
 
       h4 {
+        font-family: $font_medium;
         @include rem('margin', 0, 0, 10, 0);
       }
 
@@ -150,15 +150,25 @@ div.easy_social_box.vertical {
         @include rem('margin', 0, 0, 20, 0);
       }
     }
-
-    .author-description {
-      clear: both;
-    }
   }
 }
 
 @include breakpoint($brk-mobile) {
   .blog-detail .social-links {
+
+    .author {
+      .author-name {
+        h4 {
+          font-size:$breakpoint-base-font-size;
+        }
+      }
+      .author-description {
+        clear:left;
+        p {
+          font-size:$breakpoint-base-font-size;
+        }
+      }
+    }
 
     .easy_social_box {
       div.easy_social-widget {
