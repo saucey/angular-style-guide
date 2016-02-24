@@ -268,6 +268,9 @@ body.shw-widgets-logged-in {
   .user_detail_widget {
     width: 50%;
     height: 38px;
+    .btn-login-loggedin {
+      @include rem('line-height', 36);
+    }
     > .text {
 
       width: 100%;
@@ -390,9 +393,7 @@ body.shw-widgets-logged-in {
       opacity: 1;
     }
     .inplace{
-      .btn-login-loggedin {
-        @include rem('line-height', 36);
-      }
+
       .dropdown{
         .text{
           p.name{

@@ -142,45 +142,6 @@ header.header {
       .logo {
         display:none;
       }
-      .block {
-        display: inline-block;
-        vertical-align: middle;
-      }
-    }
-    .right {
-      float: none;
-      width: 50%;
-      padding: 0;
-      .login-link-wrapper {
-        float:right;
-        height: 38px;
-        width: 83px;
-        margin-left: 15px;
-        .button {
-          @include rem('line-height', 36);
-        }
-      }
-    }
-  }
-  .page-home header.header {
-    // Desktop Home elements
-    margin: 0 7.3%;
-    padding: 0 2%;
-    width: 85.4%;
-    border-radius: 0 0 4px 4px;
-    box-shadow: 0 1px 0 0 rgba(29, 29, 27, 0.2);
-    @include rem('height', 63);
-    @include rem('min-height', 63);
-    .region-header-left {
-      width: 56%;
-      .logo {
-        display: inline;
-        float: left;
-        padding: 0;
-        height: auto;
-        background: none;
-        margin-right: 20px
-      }
       // Homepage menu styling
       #block-menu-menu-home-main-menu {
         ul.menu {
@@ -286,6 +247,45 @@ header.header {
           }
         }
       }
+      .block {
+        display: inline-block;
+        vertical-align: middle;
+      }
+    }
+    .right {
+      float: none;
+      width: 50%;
+      padding: 0;
+      .login-link-wrapper {
+        float:right;
+        height: 38px;
+        width: 83px;
+        margin-left: 15px;
+        .button {
+          @include rem('line-height', 36);
+        }
+      }
+    }
+  }
+  .page-home header.header {
+    // Desktop Home elements
+    margin: 0 7.3%;
+    padding: 0 2%;
+    width: 85.4%;
+    border-radius: 0 0 4px 4px;
+    box-shadow: 0 1px 0 0 rgba(29, 29, 27, 0.2);
+    @include rem('height', 63);
+    @include rem('min-height', 63);
+    .region-header-left {
+      width: 56%;
+      .logo {
+        display: inline;
+        float: left;
+        padding: 0;
+        height: auto;
+        background: none;
+        margin-right: 20px
+      }
     }
     .right {
       width: 44%;
@@ -299,6 +299,7 @@ header.header {
     position: relative;
     display: inline-block;
     height: 38px;
+    float: right;
     .container-inline {
       position:relative;
       .form-item {
