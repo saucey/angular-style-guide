@@ -59,6 +59,14 @@
             @include rem('font-size', 26);
           }
         }
+        &.adv {
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;        
+        }
+        &.message {
+          color: #7A7A7A;
+        }
       }
       &.type {
         margin-bottom: 30px;
@@ -133,9 +141,6 @@
           span.help.advisor{
             margin-top: -5px;
           }
-          &.span4{
-            width: 31%;
-          }
         }
       }
       &.horizontal.header {
@@ -176,22 +181,21 @@
   }
 }
 
-@media screen and(min-width: $rc-m-min-width) and(max-width: $rc-m-max-width) {
+@media screen and(min-width: $rc-m-min-width) and (max-width: $rc-m-max-width) {
   .contract_overview_widget {
-    .container_12 ul.horizontal.row-fluid{
-      li.span5{
-        width: 55%;
-      }
-      li.span3{
-        width: 30%;
-      }
-      li.span4{
-        margin:0;
-        width: 100%;
-      }
-    }
     > .help.dialog{
       max-width: 300px;
+    }
+  }
+}
+
+@media screen and (max-width: $rc-m-max-width) {
+  .contract_overview_widget {
+    .container_12 .row-fluid {
+      [class*='span'] {
+        width: 100%;
+        margin-left: 0;
+      }
     }
   }
 }
