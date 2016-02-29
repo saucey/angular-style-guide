@@ -31,7 +31,7 @@
       display: block;
 
       width: 100%;
-      margin-bottom: 0;
+      margin-bottom: 30px;
       padding: 6px 0;
       &.inactive {
         color: #999;
@@ -59,6 +59,9 @@
             @include rem('font-size', 26);
           }
         }
+        &.arrow:before {
+          left: -20px;
+        }
         &.adv {
           overflow: hidden;
           white-space: nowrap;
@@ -70,6 +73,13 @@
       }
       &.type {
         margin-bottom: 30px;
+      }
+      ul.horizontal {
+        margin-bottom: 0;
+        @include rem('padding-bottom', 7);
+        &:last-child {
+          padding-bottom: 0;
+        }
       }
     }
     &.horizontal.header {
@@ -137,7 +147,7 @@
         li {
           display: inline-block;
 
-          @include rem('padding', 8, 19);
+          @include rem('padding', 7, 19);
           span.help.advisor{
             margin-top: -5px;
           }
@@ -174,6 +184,27 @@
 
 @include breakpoint($brk-mobile) {
   .contract_overview_widget {
+    ul li.category{
+      h2[class*='icon-']{
+        font-weight: bold;
+        padding-left:10px;
+        &:before {
+          margin-left: -25px;
+        }
+      }
+    }
+    ul.horizontal.row-fluid {
+      margin-bottom: 25px;
+      li {
+        @include rem('padding', 2, 0, 2, 12);
+        &.arrow:before {
+          left: -18px;
+        }
+        .label {
+          font-weight: normal;
+        }
+      }
+    }
     .dialog.help {
       right: 10%;
       left: auto !important; // to overwrite inline style added by script
