@@ -74,18 +74,22 @@
         &.span12 {
           margin-left: 0;
         }
-        ul.horizontal {
-          margin-bottom: 0;
-
-          @include rem('padding', 6, 0);
-          &:first-child {
-            padding-top: 0;
-          }
-          &:last-child {
-            padding-bottom: 0;
-          }
+      }
+      &.pakket {
+        margin-bottom: 0;
+        @include rem('padding', 6, 0);
+        &:first-child {
+          padding-top: 0;
+        }
+        &:last-child {
+          margin-bottom: 35px;
+          padding-bottom: 0;
+        }
+        .arrow {
+          @include rem('padding-left', 40);
         }
       }
+
       &.type {
         margin-bottom: 30px;
       }
