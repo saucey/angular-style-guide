@@ -16,7 +16,7 @@
   // Add new item to public Drupal object
   Drupal.behaviors.quickquoteLijfrente = {
     attach: function() {
-      if ($('.quickquote.lijfrente').length === 0) {
+      if ($('.quickquote.lijfrente.uitkeren').length === 0) {
         return;
       }
 
