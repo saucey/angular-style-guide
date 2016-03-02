@@ -18,7 +18,7 @@
     attach: function () {
 
       // TEMP: stop everything in case we are under vps-rhino-1 (cx-dev)
-      if (typeof Drupal.settings.eu_cookie_compliance === 'undefined' || 
+      if (typeof Drupal.settings.eu_cookie_compliance === 'undefined' ||
         doc.domain === '10.120.32.22') {
         return;
       }
@@ -213,7 +213,7 @@
         // Save in the backend if is not the first visit
         if (selVal !== 'visit') {
           req = $.ajax({
-            type: 'GET',
+            type: 'POST',
             dataType: 'text',
             global: false,
             url: '/lpa/CookieVoorkeur',
@@ -367,7 +367,7 @@
         var StickyML = $('aside.stickleft'),
             StickySL = $('#cbp-spmenu-s1'),
             StickyIR = $('#scroll .inpage-navigation'),
-            SIRTopPosOrig = (StickyIR.length > 0) && 
+            SIRTopPosOrig = (StickyIR.length > 0) &&
               Number(StickyIR.css('top').replace('px', ''));
 
         // Add .wrapper class to div wrapper
@@ -378,7 +378,7 @@
 
           // Make some calculation for proper top position of side menu
           var spH = SlidingPopup.height(),
-              scrollYval = win.navigator.userAgent.indexOf('MSIE') !== -1 ? 
+              scrollYval = win.navigator.userAgent.indexOf('MSIE') !== -1 ?
                 doc.documentElement.scrollTop : win.scrollY;
               // checkPos = scrollYval + spH;
 
@@ -391,7 +391,7 @@
 
             // Update the position of inpage navigation
             StickyIR.css({
-              'top': scrollYval >= spH ? 
+              'top': scrollYval >= spH ?
                 SIRTopPosOrig : SIRTopPosOrig + (spH - scrollYval)
             });
           }
