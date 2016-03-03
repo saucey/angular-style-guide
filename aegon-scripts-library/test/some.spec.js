@@ -15,6 +15,10 @@
       });
     });
   });
+
+  //var Drupal = require('../vendor/drupal_misc/drupal.js');
+  var qq = require('../components/quickquote-lijfrente.js');
+
   describe('quickquote lijfrente uitkeren', function () {
     var qq = Drupal.behaviors.quickquoteLijfrente;
 
