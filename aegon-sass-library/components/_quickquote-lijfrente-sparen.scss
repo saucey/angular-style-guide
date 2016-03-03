@@ -1,16 +1,31 @@
 .quickquote.lijfrente.sparen {
   .calculation {
+    .one-off.slider {
+      input {
+        text-align:right;
+      }
+    }
     .periodic.slider {
       .input-container {
+        input {
+          padding-right: 40px;
+        }
         &:after {
           content:'Jaar';
+          right:10px;
+          left:auto;
         }
       }
     }
     .duration.slider {
       .input-container {
+        input {
+          padding-right: 40px;
+        }
         &:after {
           content:'Jaar';
+          right:10px;
+          left:auto;
         }
       }
     }
@@ -23,9 +38,11 @@
         &:after {
           line-height:44px;
           position:absolute;
-          right:0;
           top:0;
           content:'€';
+          left:5px;
+          pointer-events:none;
+          color:$darker_grey;
         }
         span.year {
           display:none;
@@ -43,8 +60,19 @@
         }
       }
     }
+    .one-off-deposit {
+      .input-header {
+        input {
+          text-align:right;
+        }
+      }
+      .input-header + .input-header {
+
+      }
+    }
 
   }
+
   .calculation + .calculation {
     .input-header {
       label.checkbox {
