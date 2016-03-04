@@ -31,7 +31,7 @@
       display: block;
 
       width: 100%;
-      margin-bottom: 0;
+      margin-bottom: 30px;
       padding: 6px 0;
       &.inactive {
         color: #999;
@@ -43,11 +43,11 @@
         vertical-align: top;
 
         @include rem('padding', 2, 19);
-
         span.help.advisor {
+          float: right;
+
           margin: 0;
           padding: 26px 10px 0;
-          float: right;
           &:before {
             top: auto;
             bottom: 0;
@@ -59,7 +59,37 @@
             @include rem('font-size', 26);
           }
         }
+        &.arrow:before {
+          left: -20px;
+        }
+        &.adv {
+          overflow: hidden;
+
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+        &.message {
+          color: #7a7a7a;
+        }
+        &.span12 {
+          margin-left: 0;
+        }
       }
+      &.pakket {
+        margin-bottom: 0;
+        @include rem('padding', 6, 0);
+        &:first-child {
+          padding-top: 0;
+        }
+        &:last-child {
+          margin-bottom: 35px;
+          padding-bottom: 0;
+        }
+        .arrow {
+          @include rem('padding-left', 40);
+        }
+      }
+
       &.type {
         margin-bottom: 30px;
       }
@@ -103,14 +133,15 @@
       -webkit-font-smoothing: antialiased;
     }
   }
-  > .help.dialog{
+  > .help.dialog {
     width: 80%;
-    > *{
+    > * {
       overflow: hidden;
+
       white-space: nowrap;
       text-overflow: ellipsis;
     }
-    p{
+    p {
       margin-bottom: 0;
     }
   }
@@ -129,12 +160,9 @@
         li {
           display: inline-block;
 
-          @include rem('padding', 8, 19);
-          span.help.advisor{
+          @include rem('padding', 6, 19);
+          span.help.advisor {
             margin-top: -5px;
-          }
-          &.span4{
-            width: 31%;
           }
         }
       }
@@ -152,16 +180,21 @@
         span.value {
           padding: 0;
         }
+        h2[class^='icon-'] {
+          margin-bottom: 35px;
+        }
       }
     }
-    .product.title, .value.title, .advisor.title {
+    .product.title,
+    .value.title,
+    .advisor.title {
       font-weight: normal;
 
       display: block;
 
       padding: 10px 0;
     }
-    > .help.dialog{
+    > .help.dialog {
       max-width: 340px;
     }
   }
@@ -169,6 +202,31 @@
 
 @include breakpoint($brk-mobile) {
   .contract_overview_widget {
+    ul li.category {
+      h2[class*='icon-'] {
+        font-weight: bold;
+
+        padding-left: 10px;
+        &:before {
+          margin-left: -25px;
+        }
+      }
+    }
+    ul.horizontal.row-fluid {
+      margin-bottom: 25px;
+      li {
+        @include rem('padding', 2, 0, 2, 12);
+        &.arrow {
+          @include rem('padding-left', 18);
+          &:before {
+            left: -18px;
+          }
+        }
+        .label {
+          font-weight: normal;
+        }
+      }
+    }
     .dialog.help {
       right: 10%;
       left: auto !important; // to overwrite inline style added by script
@@ -176,22 +234,21 @@
   }
 }
 
-@media screen and(min-width: $rc-m-min-width) and(max-width: $rc-m-max-width) {
+@media screen and(min-width: $rc-m-min-width) and (max-width: $rc-m-max-width) {
   .contract_overview_widget {
-    .container_12 ul.horizontal.row-fluid{
-      li.span5{
-        width: 55%;
-      }
-      li.span3{
-        width: 30%;
-      }
-      li.span4{
-        margin:0;
-        width: 100%;
-      }
-    }
-    > .help.dialog{
+    > .help.dialog {
       max-width: 300px;
+    }
+  }
+}
+
+@media screen and (max-width: $rc-m-max-width) {
+  .contract_overview_widget {
+    .container_12 .row-fluid {
+      [class*='span'] {
+        width: 100%;
+        margin-left: 0;
+      }
     }
   }
 }

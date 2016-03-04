@@ -48,3 +48,40 @@ a, button {
     background-color: $white;
   }
 }
+
+// mobile ( < 641px )
+@include breakpoint($brk-mobile) {
+  .visible-tablet,
+  .hidden-mobile {
+    display: none !important;
+  }
+}
+
+// not mobile (> 640px)
+@media screen and (min-width: $rc-m-min-width) {
+  .visible-mobile {
+    display: none !important;
+  }
+}
+
+// tablet ( > 640px && < 901px )
+@media screen and (min-width: $rc-m-min-width) and (max-width: $rc-m-max-width) {
+  .hidden-tablet {
+    display: none !important;
+  }
+}
+
+// not desktop ( < 901px )
+@media screen and (max-width: $rc-m-max-width) {
+  .visible-desktop {
+    display: none !important;
+  }
+}
+
+// desktop ( > 900px )
+@include breakpoint($brk-ipad-portrait) {
+  .visible-tablet,
+  .hidden-desktop {
+    display: none !important;
+  }
+}
