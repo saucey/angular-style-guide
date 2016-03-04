@@ -15,9 +15,10 @@
       }
       .input-container {
         input {
-          padding-right: 40px;
+          padding-right: 10px;
           width:50%;
           float:right;
+          text-align:right;
         }
         div.dd.ddcommon {
           width:160px !important;
@@ -27,12 +28,15 @@
           float:left;
           .ddTitle {
             background:$white;
+            .ddArrow {
+              color:$blue;
+            }
+
           }
         }
         &:after {
-          content:'Jaar';
-          right:10px;
           left:auto;
+          margin-left: 10px;
         }
       }
     }
@@ -75,7 +79,16 @@
         }
       }
       .input-header + .input-header {
-
+        .input-container {
+          input {
+            text-align:left;
+          }
+          &:after {
+            content: 'Jaar';
+            right: 10px;
+            left: auto;
+          }
+        }
       }
     }
   }
@@ -141,15 +154,12 @@
       padding: 30px 10px 30px 30px;
       .input-header {
         .input-container {
-          margin-right: 2.125rem;
           margin-right: 1.125rem;
           input {
             width:94px;
           }
         }
         .help {
-          right:15px;
-          right:10px;
           right:5px;
         }
       }
