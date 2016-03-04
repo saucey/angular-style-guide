@@ -6,9 +6,27 @@
       }
     }
     .periodic.slider {
+      .input-header {
+        label {
+          display: block;
+          width: 100%;
+        }
+      }
       .input-container {
         input {
           padding-right: 40px;
+          width:50%;
+          float:right;
+        }
+        div.dd.ddcommon {
+          width:160px !important;
+          width:50% !important;
+          margin-left:0;
+          background:$white;
+          float:left;
+          .ddTitle {
+            background:$white;
+          }
         }
         &:after {
           content:'Jaar';
@@ -30,9 +48,8 @@
       }
     }
     .input-header  {
-
       label {
-        width:48%;
+        width:30%;
       }
       .input-container {
         &:after {
@@ -44,20 +61,10 @@
           pointer-events:none;
           color:$darker_grey;
         }
-        span.year {
-          display:none;
-        }
         input {
           width:120px;
         }
-        div.dd.ddcommon {
-          width:160px !important;
-          margin-left:0;
-          background:$white;
-          .ddTitle {
-            background:$white;
-          }
-        }
+
       }
     }
     .one-off-deposit {
@@ -70,15 +77,182 @@
 
       }
     }
-
   }
-
   .calculation + .calculation {
     .input-header {
+      label {
+        width:48%;
+      }
       label.checkbox {
         width:80%;
       }
 
+    }
+  }
+  .result {
+    .payment-result {
+
+      width:64%;
+      float:left;
+      .result1 , .result2 {
+        width:45%;
+        min-width:202px;
+        float:left;
+        margin-right:5%;
+        .title {
+          font-family: $font_thin;
+          display:block;
+          margin-bottom: .25em;
+        }
+        .calculated {
+          position:relative;
+          left:auto;
+          margin-bottom:1em;
+        }
+      }
+    }
+    .footer-result {
+      float:left;
+      width:64%;
+      min-width:300px;
+      .interest {
+        width: 50%;
+        display: inline-block;
+        float: left;
+        font-family:$font_thin;
+      }
+    }
+    .result-button {
+      text-align:left;
+
+    }
+    .disclaimer {
+      clear:both;
+    }
+  }
+}
+
+@include breakpoint($brk-mobile) {
+  .quickquote.lijfrente.sparen {
+    .calculation {
+      padding: 30px 10px 30px 30px;
+      .input-header {
+        .input-container {
+          margin-right: 2.125rem;
+          margin-right: 1.125rem;
+        }
+        .help {
+          right:15px;
+          right:10px;
+          right:5px;
+        }
+      }
+      .periodic.slider {
+        .input-header {
+          .input-container {
+            div.dd.ddcommon {
+              display:block;
+              width:215px !important;
+              float:right;
+              clear:both;
+            }
+            input {
+              display:block;
+              width:215px;
+              float:right;
+              clear:both;
+            }
+            &:after {
+              top:2.5em;
+            }
+          }
+        }
+      }
+    }
+    .result {
+      //padding: 30px 10px 30px 30px;
+      .payment-result {
+        overflow: hidden;
+        width:300px;
+      }
+      .result-button {
+
+      }
+    }
+  }
+}
+@include breakpoint($brk-tablet) {
+  .quickquote.lijfrente.sparen {
+    .calculation {
+
+    }
+    .result {
+      .payment-result {
+        .result1 , .result2 {
+          .title {}
+          .calculated {}
+        }
+      }
+      .footer-result {
+        .interest {}
+      }
+      .result-button {
+
+      }
+      .disclaimer {}
+    }
+  }
+}
+@include breakpoint($brk-ipad-portrait) {
+  .quickquote.lijfrente.sparen {
+    .calculation {
+      .periodic.slider {
+        .input-header {
+          label {
+            display:inline-block;
+            width:26%;
+          }
+        }
+      }
+    }
+    .result {
+      .payment-result {
+        .result1 , .result2 {
+          .title {}
+          .calculated {}
+        }
+      }
+      .footer-result {
+        .interest {}
+      }
+      .result-button {
+        text-align:right;
+        margin-right:9px;
+      }
+      .disclaimer {}
+    }
+  }
+}
+
+@include breakpoint($brk-large-desktop) {
+  .quickquote.lijfrente.sparen {
+    .result {
+      .payment-result {
+          overflow: hidden;
+          min-width: 300px;
+          width: 60%;
+          float: left;
+        .result1 , .result2 {
+          .title {}
+          .calculated {}
+        }
+      }
+      .footer-result {
+        width:60%;
+        .interest {}
+      }
+      .result-button {text-align:left;}
+      .disclaimer {}
     }
   }
 }
