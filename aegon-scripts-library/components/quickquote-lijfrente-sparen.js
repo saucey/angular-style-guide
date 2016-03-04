@@ -21,6 +21,15 @@
         return;
       }
 
+      // Toggle container with extra sliders for deposit and duration
+      // Hide on click span.checkbox , cause no proper checkbox to be found ( weird behaviour for a checkbox )
+      var toggleContainer = $("#toggle-container");
+      var toggleCheckBox = $('span.checkbox');
+
+      if ($(toggleCheckBox).click(function(){
+        $(toggleContainer).slideToggle(300);
+      }));
+
       // Parse the data attribute to object
       var dataInterest = $('.quickquote');
       if (dataInterest.attr("data-interests") !== undefined) {
