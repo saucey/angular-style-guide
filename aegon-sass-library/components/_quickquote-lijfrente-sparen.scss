@@ -1,4 +1,5 @@
 .quickquote.lijfrente.sparen {
+  label.checkbox > input[type="checkbox"]  {display:none;}
   .calculation {
     .one-off.slider {
       input {
@@ -79,6 +80,7 @@
     }
   }
   .calculation + .calculation {
+    border-top:1px solid $white;
     .input-header {
       label {
         width:48%;
@@ -133,6 +135,7 @@
 }
 
 @include breakpoint($brk-mobile) {
+
   .quickquote.lijfrente.sparen {
     .calculation {
       padding: 30px 10px 30px 30px;
@@ -140,6 +143,9 @@
         .input-container {
           margin-right: 2.125rem;
           margin-right: 1.125rem;
+          input {
+            width:94px;
+          }
         }
         .help {
           right:15px;
@@ -152,13 +158,15 @@
           .input-container {
             div.dd.ddcommon {
               display:block;
-              width:215px !important;
+              width:100% !important;
+              max-width:215px;
               float:right;
               clear:both;
             }
             input {
               display:block;
-              width:215px;
+              width:100%;
+              max-width:215px;
               float:right;
               clear:both;
             }
@@ -169,11 +177,25 @@
         }
       }
     }
+    .calculation + .calculation  {
+      .input-header {
+        label.checkbox {
+          width:93%;
+        }
+      }
+    }
     .result {
-      //padding: 30px 10px 30px 30px;
       .payment-result {
         overflow: hidden;
         width:300px;
+      }
+      .footer-result {
+        width:100%;
+        min-width:0;
+        .interest {
+          width:45%;
+          margin-right:5%;
+        }
       }
       .result-button {
 
@@ -183,23 +205,12 @@
 }
 @include breakpoint($brk-tablet) {
   .quickquote.lijfrente.sparen {
-    .calculation {
-
-    }
-    .result {
-      .payment-result {
-        .result1 , .result2 {
-          .title {}
-          .calculated {}
+    .one-off-deposit-check {
+      .input-header {
+        .help {
+          margin-top: 0;
         }
       }
-      .footer-result {
-        .interest {}
-      }
-      .result-button {
-
-      }
-      .disclaimer {}
     }
   }
 }
