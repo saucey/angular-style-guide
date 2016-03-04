@@ -50,6 +50,18 @@
           $("#duration-input").val(readableNumber(ui.value));
         }
       });
+      Drupal.behaviors.slider.activate("#amount-one-off-slider","#amount-one-off-input",6,5,30,1,"#amount-one-off-error","De looptijd is minimaal 5 en maximaal 30 jaar","", {
+        change: function( event, ui ) {
+          Drupal.behaviors.quickquoteLijfrente.onChange("#payment-calculated","#interest-amount", "€");
+          $("#amount-one-off-input").val(readableNumber(ui.value));
+        }
+      });
+      Drupal.behaviors.slider.activate("#deposit-duration-slider","#deposit-duration-input",6,5,30,1,"#deposit-duration-error","De looptijd is minimaal 5 en maximaal 30 jaar","", {
+        change: function( event, ui ) {
+          Drupal.behaviors.quickquoteLijfrente.onChange("#payment-calculated","#interest-amount", "€");
+          $("#deposit-duration-input").val(readableNumber(ui.value));
+        }
+      });
     },
 
     onChange: function(paymentClass, interestClass, Currency) {
