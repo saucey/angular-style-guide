@@ -74,6 +74,7 @@
     }
     .one-off-deposit {
       display:none;
+      overflow:hidden;
       .input-header {
         input {
           text-align:right;
@@ -106,6 +107,8 @@
     }
   }
   .result {
+    position:relative;
+    z-index:10;
     .payment-result {
 
       width:64%;
