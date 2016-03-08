@@ -112,7 +112,7 @@
   }
   .result {
     position:relative;
-    z-index:10;
+    z-index:3;
     .payment-result {
 
       width:64%;
@@ -153,8 +153,14 @@
       clear:both;
     }
   }
+  .slider-container {
+    >div + span {
+      display: inline-block;
+      padding-top: 5px;
+    }
+  }
   .help.dialog.bottom {
-    z-index:11;
+    z-index:4;
   }
 }
 
@@ -167,6 +173,7 @@
           margin-right: 1.125rem;
           input {
             width:94px;
+            padding-right:0;
           }
         }
         .help {
