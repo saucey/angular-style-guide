@@ -6,11 +6,10 @@
 
   // Add new item to public Drupal object
   Drupal.behaviors.nouislider = {
-    activate: function(sliderClass,inputClass,sliderValue,sliderMin,sliderMax,sliderStep,errorClass,errorText,currency, options) {
+    activate: function(sliderClass,inputClass,sliderValue,sliderMin,sliderMax,sliderStep,errorClass,errorText) {
       var newSlider = document.getElementById(sliderClass);
       var inputSlider = document.getElementById(inputClass);
-
-      var defaults = {
+      var settings = {
         start: [ sliderValue ],
         range: {
           'min': [  sliderMin ],
@@ -24,8 +23,6 @@
         })
       };
 
-      var settings = $.extend({}, defaults, options);
-
       noUiSlider.create(newSlider, settings);
 
       newSlider.noUiSlider.on('update', function ( values, handle) {
@@ -33,6 +30,7 @@
           inputSlider.value = values[handle];
         }
         $(errorClass).hide();
+        Drupal.behaviors.quickquoteLijfrente.onChange("#payment-calculated","#interest-amount", "€");
       });
 
       inputSlider.addEventListener('change', function ( ) {
@@ -42,6 +40,7 @@
         }
         newSlider.noUiSlider.set(this.value);
       });
+
     }
   };
 })(jQuery);

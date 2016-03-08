@@ -20,7 +20,6 @@
       if ($('.quickquote.lijfrente.uitkeren').length === 0) {
         return;
       }
-
       // Parse the data attribute to object
       var dataInterest = $('.quickquote');
       if (dataInterest.attr("data-interests") !== undefined) {
@@ -28,24 +27,13 @@
       }
 
       Drupal.behaviors.tooltip.activate(".quickquote");
-
-      // Extend default behaviour of the slider plugin
-      Drupal.behaviors.nouislider.activate("amount-slider","amount-input",25000,4000,1000000,1000,"#amount-error","Het bedrag voor Lijfrente Uitkeren is  minimaal€ 4000,- en maximaal 1.000.000,-","€",{
-        change: function() {
-          Drupal.behaviors.quickquoteLijfrente.onChange("#payment-calculated","", "€");
-        }
-      });
-
-      Drupal.behaviors.nouislider.activate("time-slider","time-input",6,5,30,1,"#time-error","De looptijd is minimaal 5 en maximaal 30 jaar","", {
-        change: function() {
-          Drupal.behaviors.quickquoteLijfrente.onChange("#payment-calculated","#interest-amount", "€");
-        }
-      });
+      Drupal.behaviors.nouislider.activate("amount-slider","amount-input",25000,4000,1000000,1000,"#amount-error","Het bedrag voor Lijfrente Uitkeren is  minimaal€ 4000,- en maximaal 1.000.000,-");
+      Drupal.behaviors.nouislider.activate("time-slider","time-input",6,5,30,1,"#time-error","De looptijd is minimaal 5 en maximaal 30 jaar");
     },
 
     onChange: function(paymentClass, interestClass, Currency) {
-      var money = $("#amount-slider").nouislider("value"),
-        duration = $("#time-slider").nouislider("value");
+      var money = $("#amount-input").val().replace('.', ''),
+        duration = $("#time-input").val().replace('.', '');
 
       if (isNaN(money) || duration === 0 || isNaN(duration)) {
         return 0;
