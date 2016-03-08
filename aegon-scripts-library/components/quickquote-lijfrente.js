@@ -27,8 +27,8 @@
       }
 
       Drupal.behaviors.tooltip.activate(".quickquote");
-      Drupal.behaviors.nouislider.activate("amount-slider","amount-input",25000,4000,1000000,1000,"#amount-error","Het bedrag voor Lijfrente Uitkeren is  minimaal€ 4000,- en maximaal 1.000.000,-");
-      Drupal.behaviors.nouislider.activate("time-slider","time-input",6,5,30,1,"#time-error","De looptijd is minimaal 5 en maximaal 30 jaar");
+      Drupal.behaviors.nouislider.activate("amount-slider","amount-input",25000,4000,1000000,10000,25000, 100000,"#amount-error","Het bedrag voor Lijfrente Uitkeren is  minimaal€ 4000,- en maximaal 1.000.000,-");
+      Drupal.behaviors.nouislider.activate("time-slider","time-input",6,5,30,7,10,15, "#time-error","De looptijd is minimaal 5 en maximaal 30 jaar");
     },
 
     onChange: function(paymentClass, interestClass, Currency) {

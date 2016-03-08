@@ -6,15 +6,16 @@
 
   // Add new item to public Drupal object
   Drupal.behaviors.nouislider = {
-    activate: function(sliderClass,inputClass,sliderValue,sliderMin,sliderMax,sliderStep,errorClass,errorText) {
+    activate: function(sliderClass,inputClass,sliderValue,sliderMin,sliderMax,quarterValue,halfValue,threeQuarterValue,errorClass,errorText) {
       var newSlider = document.getElementById(sliderClass);
       var inputSlider = document.getElementById(inputClass);
       var settings = {
         start: [ sliderValue ],
         range: {
           'min': [  sliderMin ],
-          '30%': [  sliderMin + 1000 ],
-          '70%': [  sliderMax - 1000 ],
+          '25%': [  quarterValue ],
+          '50%': [  halfValue ],
+          '75%': [  threeQuarterValue ],
           'max': [ sliderMax ]
         },
         format: wNumb({
