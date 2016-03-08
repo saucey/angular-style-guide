@@ -36,12 +36,13 @@
         order: [ 2, 'desc' ],
         fnInitComplete: function(oSettings) {
           var that = $(this),
-              api = this.api();
+              api = this.api(),
+              thatID = that.attr('id');
 
             if(oSettings.fnRecordsTotal() > 5) {
 
               // Create show all button
-              that.after('<div class="show-all"></div>');
+              that.after('<div class="show-all" id="showAll_'+ thatID +'"></div>');
 
               var showAllBtn = that.parent().find('.show-all');
 
@@ -60,7 +61,7 @@
             } 
 
           // Set placeholder and id for searchbox 
-          that.parent().find('.dataTables_filter input').attr("placeholder", "Zoeken").attr('id', 'search_'+that.attr('id'));
+          that.parent().find('.dataTables_filter input').attr("placeholder", "Zoeken").attr('id', 'search_'+ thatID);
         }
       };
 
