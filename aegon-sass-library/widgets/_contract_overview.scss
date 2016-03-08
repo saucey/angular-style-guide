@@ -220,7 +220,6 @@
       li {
         @include rem('padding', 2, 0, 2, 12);
         &.arrow {
-          //@include rem('padding-left', 18);
           &:before {
             left: -18px;
           }
