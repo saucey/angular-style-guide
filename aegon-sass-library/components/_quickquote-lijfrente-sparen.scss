@@ -1,9 +1,11 @@
 .quickquote.lijfrente.sparen {
-  label.checkbox > input[type="checkbox"]  {display:none;}
+  label.checkbox > input[type="checkbox"] {
+    display: none;
+  }
   .calculation {
     .one-off.slider {
       input {
-        text-align:right;
+        text-align: right;
       }
     }
     .periodic.slider {
@@ -16,30 +18,30 @@
       .input-container {
         input {
           padding-right: 10px;
-          width:50%;
-          float:right;
-          text-align:right;
+          width: 50%;
+          float: right;
+          float: right;
+          text-align: right;
         }
         div.dd.ddcommon {
-          width:160px !important;
-          width:50% !important;
-          margin-left:0;
-          background:$white;
-          float:left;
-          border:0;
+          width: 50% !important;
+          margin-left: 0;
+          background: $white;
+          float: left;
+          border: 0;
           .ddTitle {
-            background:$white;
+            background: $white;
             span.ddTitleText {
-              width:150px;
+              width: 150px;
             }
             .ddArrow {
-              color:$blue;
+              color: $blue;
             }
 
           }
         }
         &:after {
-          left:auto;
+          left: auto;
           margin-left: 10px;
         }
       }
@@ -50,44 +52,45 @@
           padding-right: 40px;
         }
         &:after {
-          content:'Jaar';
-          right:10px;
-          left:auto;
+          content: 'Jaar';
+          right: 10px;
+          left: auto;
         }
       }
     }
-    .input-header  {
+    .input-header {
       label {
-        width:30%;
+        width: 30%;
       }
       .input-container {
         &:after {
-          line-height:44px;
-          position:absolute;
-          top:0;
-          content:'€';
-          left:5px;
-          pointer-events:none;
-          color:$darker_grey;
+          line-height: 44px;
+          position: absolute;
+          top: 0;
+          content: '€';
+          left: 5px;
+          pointer-events: none;
+          color: $darker_grey;
         }
         input {
-          width:120px;
+          width: 120px;
         }
 
       }
     }
     .one-off-deposit {
-      display:none;
-      overflow:hidden;
+      display: none;
+      overflow: hidden;
+      //padding: 0 1.875rem;
       .input-header {
         input {
-          text-align:right;
+          text-align: right;
         }
       }
       .input-header + .input-header {
         .input-container {
           input {
-            text-align:left;
+            text-align: left;
           }
           &:after {
             content: 'Jaar';
@@ -99,68 +102,74 @@
     }
   }
   .calculation + .calculation {
-    border-top:1px solid $white;
+    border-top: 1px solid $white;
+    padding: 1.875rem;
+    > .input-header {
+      //&:before {
+      //  display:block;
+      //  content:'';
+      //  width:100%;
+      //  border-top:1px solid $white;
+      //  position:absolute;
+      //  top:0;
+      //  left:0;
+      //}
+    }
     .input-header {
       label {
-        width:48%;
+        width: 48%;
       }
       label.checkbox {
-        width:80%;
+        width: 80%;
       }
 
     }
   }
   .result {
-    position:relative;
-    z-index:3;
+    position: relative;
+    z-index: 3;
     .payment-result {
 
-      width:64%;
-      float:left;
-      .result1 , .result2 {
-        width:45%;
-        min-width:202px;
-        float:left;
-        margin-right:5%;
+      width: 64%;
+      float: left;
+      .result1, .result2 {
+        width: 45%;
+        min-width: 202px;
+        float: left;
+        margin-right: 5%;
         .title {
           font-family: $font_thin;
-          display:block;
+          display: block;
           margin-bottom: .25em;
         }
         .calculated {
-          position:relative;
-          left:auto;
-          margin-bottom:1em;
+          position: relative;
+          left: auto;
+          margin-bottom: 1em;
         }
       }
     }
     .footer-result {
-      float:left;
-      width:64%;
-      min-width:300px;
+      float: left;
+      width: 64%;
+      min-width: 300px;
       .interest {
         width: 50%;
         display: inline-block;
         float: left;
-        font-family:$font_thin;
+        font-family: $font_thin;
       }
     }
     .result-button {
-      text-align:left;
+      text-align: left;
 
     }
     .disclaimer {
-      clear:both;
-    }
-  }
-  .slider-container {
-    >div + span {
-      display: inline-block;
-      padding-top: 5px;
+      clear: both;
     }
   }
   .help.dialog.bottom {
-    z-index:4;
+    z-index: 4;
   }
 }
 
@@ -172,69 +181,77 @@
         .input-container {
           margin-right: 1.125rem;
           input {
-            width:94px;
-            padding-right:0;
+            width: 94px;
+            padding-right: 0;
           }
         }
         .help {
-          right:5px;
+          right: 5px;
         }
       }
       .periodic.slider {
         .input-header {
           .input-container {
             div.dd.ddcommon {
-              display:block;
-              width:100% !important;
-              max-width:215px;
-              float:right;
-              clear:both;
+              display: block;
+              width: 100% !important;
+              max-width: 215px;
+              float: right;
+              clear: both;
             }
             input {
-              display:block;
-              width:100%;
-              max-width:215px;
-              float:right;
-              clear:both;
+              display: block;
+              width: 100%;
+              max-width: 215px;
+              float: right;
+              clear: both;
             }
             &:after {
-              top:2.5em;
+              top: 2.5em;
             }
           }
         }
       }
     }
 
-    .calculation + .calculation  {
-      .input-header {
-        label.checkbox {
-          width:93%;
-          padding-right:5px;
-        }
+    .calculation + .calculation {
+      padding:1.875rem 0 ;
+      >.input-header {
+        padding: 0 1.875rem;
         .help {
           margin-top:0;
+        }
+      }
+      .one-off-deposit {
+        padding: 0 1.875rem;
+      }
+      .input-header {
+        label.checkbox {
+          width: 93%;
+          padding-right: 5px;
+        }
+        .help {
+          //margin-top: 0;
         }
       }
     }
     .result {
       .payment-result {
         overflow: hidden;
-        width:300px;
+        width: 300px;
       }
       .footer-result {
-        width:100%;
-        min-width:0;
+        width: 100%;
+        min-width: 0;
         .interest {
-          width:45%;
-          margin-right:5%;
+          width: 45%;
+          margin-right: 5%;
         }
-      }
-      .result-button {
-
       }
     }
   }
 }
+
 @include breakpoint($brk-tablet) {
   .quickquote.lijfrente.sparen {
     .one-off-deposit-check {
@@ -246,33 +263,24 @@
     }
   }
 }
+
 @include breakpoint($brk-ipad-portrait) {
   .quickquote.lijfrente.sparen {
     .calculation {
       .periodic.slider {
         .input-header {
           label {
-            display:inline-block;
-            width:26%;
+            display: inline-block;
+            width: 26%;
           }
         }
       }
     }
     .result {
-      .payment-result {
-        .result1 , .result2 {
-          .title {}
-          .calculated {}
-        }
-      }
-      .footer-result {
-        .interest {}
-      }
       .result-button {
-        text-align:right;
-        margin-right:9px;
+        text-align: right;
+        margin-right: 9px;
       }
-      .disclaimer {}
     }
   }
 }
@@ -281,21 +289,17 @@
   .quickquote.lijfrente.sparen {
     .result {
       .payment-result {
-          overflow: hidden;
-          min-width: 300px;
-          width: 60%;
-          float: left;
-        .result1 , .result2 {
-          .title {}
-          .calculated {}
-        }
+        overflow: hidden;
+        min-width: 300px;
+        width: 60%;
+        float: left;
       }
       .footer-result {
-        width:60%;
-        .interest {}
+        width: 60%;
       }
-      .result-button {text-align:left;}
-      .disclaimer {}
+      .result-button {
+        text-align: left;
+      }
     }
   }
 }

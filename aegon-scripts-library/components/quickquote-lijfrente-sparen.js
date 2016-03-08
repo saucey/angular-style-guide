@@ -26,6 +26,7 @@
       var toggleCheckBox = $('label.checkbox > input');
       $(toggleCheckBox).click(function() {
         $(toggleContainer).slideToggle(this.checked);
+        //$(toggleContainer).slideToggle(this.checked, function() { toggleContainer.css("overflow","visible"); });
       });
 
       // Parse the data attribute to object
