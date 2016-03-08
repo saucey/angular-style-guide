@@ -1,0 +1,36 @@
+.quickquote.lijfrente.uitkeren {
+  .calculation {
+    .slider-container {
+      .noUi-horizontal {
+        height: 7px;
+        background:$slightly_darker_blue;
+        border:0;
+        box-shadow:none;
+        .noUi-handle {
+          position: absolute;
+          top: -7px;
+          width: 20px;
+          height: 20px;
+          border: 1px solid #e0e0e0;
+          border-radius: 50%;
+          outline: 0;
+          background: #ffffff;
+          box-shadow: 1px 1px 1px #8E8E8C;
+          -webkit-appearance: none;
+          &:before, &:after {
+            content:'';
+            display:none;
+          }
+          &:hover {
+            top: -12px;
+            width: 30px;
+            height: 30px;
+          }
+        }
+      }
+      .noUi-origin {
+        background:$white;
+      }
+    }
+  }
+}
