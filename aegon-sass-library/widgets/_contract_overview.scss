@@ -77,6 +77,7 @@
       }
       &.pakket {
         margin-bottom: 0;
+
         @include rem('padding', 6, 0);
         &:first-child {
           padding-top: 0;
@@ -89,7 +90,6 @@
           @include rem('padding-left', 40);
         }
       }
-
       &.type {
         margin-bottom: 30px;
       }
@@ -102,9 +102,6 @@
     font-weight: bold;
 
     color: $blue;
-  }
-  .value:not(.title) {
-    font-family: $font_normal;
   }
   .product.title {
     display: none;
@@ -214,10 +211,16 @@
     }
     ul.horizontal.row-fluid {
       margin-bottom: 25px;
+      &.pakket {
+        margin-bottom: 0;
+        .arrow {
+          @include rem('padding-left', 32);
+        }
+      }
       li {
         @include rem('padding', 2, 0, 2, 12);
         &.arrow {
-          @include rem('padding-left', 18);
+          //@include rem('padding-left', 18);
           &:before {
             left: -18px;
           }
