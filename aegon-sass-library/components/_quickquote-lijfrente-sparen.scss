@@ -29,6 +29,9 @@
           border:0;
           .ddTitle {
             background:$white;
+            span.ddTitleText {
+              width:150px;
+            }
             .ddArrow {
               color:$blue;
             }
@@ -150,10 +153,12 @@
       clear:both;
     }
   }
+  .help.dialog.bottom {
+    z-index:11;
+  }
 }
 
 @include breakpoint($brk-mobile) {
-
   .quickquote.lijfrente.sparen {
     .calculation {
       padding: 30px 10px 30px 30px;
@@ -192,10 +197,15 @@
         }
       }
     }
+
     .calculation + .calculation  {
       .input-header {
         label.checkbox {
           width:93%;
+          padding-right:5px;
+        }
+        .help {
+          margin-top:0;
         }
       }
     }
