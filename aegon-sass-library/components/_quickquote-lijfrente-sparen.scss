@@ -3,6 +3,22 @@
     display: none;
   }
   .calculation {
+    .slider {
+      .slider-container {
+        > div + span {
+          background-color: #edd5d9;
+          display: block !important;
+          border-radius: 5px;
+          margin-top: 15px;
+          padding: 1em;
+          color: #C41F2C;
+        }
+        > div + span:empty {
+          background:none;
+          display:none !important;
+        }
+      }
+    }
     .one-off.slider {
       input {
         text-align: right;
@@ -16,19 +32,21 @@
         }
       }
       .input-container {
+        max-width: 300px;
         input {
-          padding-right: 10px;
+          @include rem('padding-right', 10);
           width: 50%;
-          float: right;
+          max-width: 120px;
           float: right;
           text-align: right;
         }
         div.dd.ddcommon {
-          width: 50% !important;
+          width: 152px !important;
           margin-left: 0;
           background: $white;
           float: left;
           border: 0;
+          @include rem('margin-right', 20);
           .ddTitle {
             background: $white;
             span.ddTitleText {
@@ -37,23 +55,22 @@
             .ddArrow {
               color: $blue;
             }
-
           }
         }
         &:after {
           left: auto;
-          margin-left: 10px;
+          @include rem('margin-left', 10);
         }
       }
     }
     .duration.slider {
       .input-container {
         input {
-          padding-right: 40px;
+          @include rem('padding-right', 40);
         }
         &:after {
           content: 'Jaar';
-          right: 10px;
+          @include rem('right', 10);
           left: auto;
         }
       }
@@ -69,6 +86,7 @@
           top: 0;
           content: '€';
           left: 5px;
+          @include rem('left', 10);
           pointer-events: none;
           color: $darker_grey;
         }
@@ -81,7 +99,6 @@
     .one-off-deposit {
       display: none;
       overflow: hidden;
-      //padding: 0 1.875rem;
       .input-header {
         input {
           text-align: right;
@@ -94,7 +111,7 @@
           }
           &:after {
             content: 'Jaar';
-            right: 10px;
+            @include rem('right', 10);
             left: auto;
           }
         }
@@ -104,17 +121,7 @@
   .calculation + .calculation {
     border-top: 1px solid $white;
     padding: 1.875rem;
-    > .input-header {
-      //&:before {
-      //  display:block;
-      //  content:'';
-      //  width:100%;
-      //  border-top:1px solid $white;
-      //  position:absolute;
-      //  top:0;
-      //  left:0;
-      //}
-    }
+    @include rem('padding', 30);
     .input-header {
       label {
         width: 48%;
@@ -140,12 +147,12 @@
         .title {
           font-family: $font_thin;
           display: block;
-          margin-bottom: .25em;
+          @include rem('margin-bottom', 5.5);
         }
         .calculated {
           position: relative;
           left: auto;
-          margin-bottom: 1em;
+          @include rem('margin-bottom', 22);
         }
       }
     }
@@ -176,38 +183,66 @@
 @include breakpoint($brk-mobile) {
   .quickquote.lijfrente.sparen {
     .calculation {
-      padding: 30px 10px 30px 30px;
+      @include rem('padding', 30, 10, 30, 30);
       .input-header {
+        position:relative;
+        display:block;
+        overflow:hidden;
+        label {
+          display:block;
+          width:100%;
+        }
         .input-container {
-          margin-right: 1.125rem;
+          float:none;
+          max-width:220px;
+          @include rem('margin-right', 0);
           input {
-            width: 94px;
+            width:100%;
+            max-width: 220px;
             padding-right: 0;
+            padding-right: 0.625rem;
           }
         }
         .help {
           right: 5px;
+          top:0;
+          margin-top:-2px;
+        }
+      }
+      .duration.slider {
+        .input-container {
+          &:after {
+            right:30px;
+            left:auto;
+          }
+          input {
+            padding-right: 0.625rem;
+          }
         }
       }
       .periodic.slider {
         .input-header {
           .input-container {
+            float:none;
+            max-width:220px;
             div.dd.ddcommon {
               display: block;
               width: 100% !important;
-              max-width: 215px;
+              max-width: 220px;
               float: right;
               clear: both;
+              margin-right: 0;
+              margin-bottom: 10px;
             }
             input {
               display: block;
               width: 100%;
-              max-width: 215px;
+              max-width: 220px;
               float: right;
               clear: both;
             }
             &:after {
-              top: 2.5em;
+              top: 3em;
             }
           }
         }
@@ -215,23 +250,27 @@
     }
 
     .calculation + .calculation {
-      padding:1.875rem 0 ;
-      >.input-header {
-        padding: 0 1.875rem;
+      @include rem('padding', 30, 0);
+      > .input-header {
+        @include rem('padding', 0, 30);
         .help {
-          margin-top:0;
+          margin-top: 0;
         }
       }
       .one-off-deposit {
-        padding: 0 1.875rem;
+        @include rem('padding', 0, 10, 0, 30);
+        .input-header {
+          label {
+            width: 100%;
+            display: block;
+            @include rem('padding-right', 30);
+          }
+        }
       }
       .input-header {
         label.checkbox {
           width: 93%;
-          padding-right: 5px;
-        }
-        .help {
-          //margin-top: 0;
+          @include rem('padding-right', 5);
         }
       }
     }
@@ -279,7 +318,7 @@
     .result {
       .result-button {
         text-align: right;
-        margin-right: 9px;
+        @include rem('margin-right', 9);
       }
     }
   }
