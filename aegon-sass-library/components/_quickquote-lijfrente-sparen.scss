@@ -25,7 +25,7 @@
           text-align: right;
         }
         div.dd.ddcommon {
-          width: 140px !important;
+          width: 152px !important;
           margin-left: 0;
           background: $white;
           float: left;
@@ -170,6 +170,8 @@
       @include rem('padding', 30, 10, 30, 30);
       .input-header {
         position:relative;
+        display:block;
+        overflow:hidden;
         label {
           display:block;
           width:100%;
