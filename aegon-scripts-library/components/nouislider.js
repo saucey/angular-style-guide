@@ -5,9 +5,9 @@
   'use strict';
 
   // Add new item to public Drupal object
-  Drupal.behaviors.nouislider = {
+  Drupal.behaviors.newSlider = {
     activate: function(sliderClass,inputClass,sliderValue,sliderMin,sliderMax,quarterValue,halfValue,threeQuarterValue,errorClass,errorText) {
-      var newSlider = document.getElementById(sliderClass);
+      var sliderElement = document.getElementById(sliderClass);
       var inputSlider = document.getElementById(inputClass);
       var settings = {
         start: [ sliderValue ],
@@ -23,15 +23,16 @@
           thousand: '.'
         })
       };
+      noUiSlider.create(sliderElement, settings);
 
-      noUiSlider.create(newSlider, settings);
-
-      newSlider.noUiSlider.on('update', function ( values, handle) {
+      sliderElement.noUiSlider.on('update', function ( values, handle) {
         if ( handle === 0 ) {
           inputSlider.value = values[handle];
+          if ($('.quickquote.lijfrente.uitkeren').length) {
+            Drupal.behaviors.quickquoteLijfrente.onChange("#payment-calculated","#interest-amount", "€");
+          }
         }
         $(errorClass).hide();
-        Drupal.behaviors.quickquoteLijfrente.onChange("#payment-calculated","#interest-amount", "€");
       });
 
       inputSlider.addEventListener('change', function ( ) {
@@ -39,7 +40,7 @@
         if (inputValue < sliderMin || inputValue > sliderMax) {
           $(errorClass).show().text(errorText);
         }
-        newSlider.noUiSlider.set(this.value);
+        sliderElement.noUiSlider.set(this.value);
       });
 
     }

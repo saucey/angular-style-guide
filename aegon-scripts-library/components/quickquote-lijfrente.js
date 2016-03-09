@@ -6,13 +6,6 @@
 
   var interestRates = [1.8,1.9,2,2.1,2.1,2.2,2.25,2.3,2.4,2.5,2.6,2.65,2.7,2.8,2.9,2.9,2.9,2.9,2.9,2.9,3,3.2,3.2,3.2,3.2,3.2];
 
-  // Creates dot between thousands
-  function readableNumber(number) {
-    var newNumber = number.toLocaleString();
-    newNumber = newNumber.replace(/,/g, '.');
-    return newNumber;
-  }
-
   // Add new item to public Drupal object
   Drupal.behaviors.quickquoteLijfrente = {
 
@@ -25,15 +18,14 @@
       if (dataInterest.attr("data-interests") !== undefined) {
         interestRates = JSON.parse("[" + dataInterest.attr("data-interests") + "]");
       }
-
       Drupal.behaviors.tooltip.activate(".quickquote");
-      Drupal.behaviors.nouislider.activate("amount-slider","amount-input",25000,4000,1000000,10000,25000, 100000,"#amount-error","Het bedrag voor Lijfrente Uitkeren is  minimaal€ 4000,- en maximaal 1.000.000,-");
-      Drupal.behaviors.nouislider.activate("time-slider","time-input",6,5,30,7,10,15, "#time-error","De looptijd is minimaal 5 en maximaal 30 jaar");
+      Drupal.behaviors.newSlider.activate("amount-slider","amount-input",25000,4000,1000000,10000,25000, 100000,"#amount-error","Het bedrag voor Lijfrente Uitkeren is  minimaal€ 4000,- en maximaal 1.000.000,-");
+      Drupal.behaviors.newSlider.activate("time-slider","time-input",6,5,30,7,10,15, "#time-error","De looptijd is minimaal 5 en maximaal 30 jaar");
     },
 
     onChange: function(paymentClass, interestClass, Currency) {
-      var money = $("#amount-input").val().replace('.', ''),
-        duration = $("#time-input").val().replace('.', '');
+      var money = $("#amount-input").val().replace(/\./g , ''),
+        duration = $("#time-input").val().replace(/\./g , '');
 
       if (isNaN(money) || duration === 0 || isNaN(duration)) {
         return 0;
