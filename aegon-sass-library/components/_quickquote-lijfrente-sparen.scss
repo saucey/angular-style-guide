@@ -190,6 +190,7 @@
               float: right;
               clear: both;
               margin-right: 0;
+              margin-bottom: 10px;
             }
             input {
               display: block;
@@ -199,7 +200,7 @@
               clear: both;
             }
             &:after {
-              top: 2.5em;
+              top: 3em;
             }
           }
         }
