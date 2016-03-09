@@ -3,21 +3,22 @@
     display: none;
   }
   .calculation {
-    .slider {
+
       .slider-container {
         > div + span {
-          background-color: #edd5d9;
+          background-color: $pink;
           display: block !important;
           border-radius: 5px;
           margin-top: 15px;
           padding: 1em;
-          color: #C41F2C;
+          color: $dark_pink;
+          border: 1px solid $dark_pink;
         }
         > div + span:empty {
           background:none;
           display:none !important;
         }
-      }
+
     }
     .one-off.slider {
       input {
@@ -46,7 +47,7 @@
           background: $white;
           float: left;
           border: 0;
-          @include rem('margin-right', 20);
+          @include rem('margin-right', 8);
           .ddTitle {
             background: $white;
             span.ddTitleText {
@@ -183,7 +184,7 @@
 @include breakpoint($brk-mobile) {
   .quickquote.lijfrente.sparen {
     .calculation {
-      @include rem('padding', 30, 10, 30, 30);
+      //@include rem('padding', 30, 10, 30, 30);
       .input-header {
         position:relative;
         display:block;
@@ -258,7 +259,7 @@
         }
       }
       .one-off-deposit {
-        @include rem('padding', 0, 10, 0, 30);
+        @include rem('padding', 0, 30, 0, 30);
         .input-header {
           label {
             width: 100%;
