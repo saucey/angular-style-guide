@@ -41,6 +41,15 @@
       }
     }
     .slider-container {
+      .noUi-horizontal.noUi-extended {
+        padding-right: 20px;
+      }
+      .noUi-horizontal.noUi-extended .noUi-handle {
+        left: -1px;
+      }
+      .noUi-horizontal.noUi-extended .noUi-origin  {
+        right: -20px;
+      }
       .noUi-horizontal {
         height: 7px;
         background:$slightly_darker_blue;
@@ -49,6 +58,7 @@
         .noUi-handle {
           position: absolute;
           top: -7px;
+          left:0;
           width: 20px;
           height: 20px;
           border: 1px solid #e0e0e0;
