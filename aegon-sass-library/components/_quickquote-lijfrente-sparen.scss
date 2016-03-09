@@ -184,7 +184,11 @@
 @include breakpoint($brk-mobile) {
   .quickquote.lijfrente.sparen {
     .calculation {
-      //@include rem('padding', 30, 10, 30, 30);
+      .slider-container {
+        >div + span {
+          max-width:220px;
+        }
+      }
       .input-header {
         position:relative;
         display:block;
