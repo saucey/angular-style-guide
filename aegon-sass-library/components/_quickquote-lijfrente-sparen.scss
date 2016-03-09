@@ -3,6 +3,22 @@
     display: none;
   }
   .calculation {
+    .slider {
+      .slider-container {
+        > div + span {
+          background-color: #edd5d9;
+          display: block !important;
+          border-radius: 5px;
+          margin-top: 15px;
+          padding: 1em;
+          color: #C41F2C;
+        }
+        > div + span:empty {
+          background:none;
+          display:none !important;
+        }
+      }
+    }
     .one-off.slider {
       input {
         text-align: right;
@@ -178,11 +194,13 @@
         }
         .input-container {
           float:none;
+          max-width:220px;
           @include rem('margin-right', 0);
           input {
             width:100%;
             max-width: 220px;
             padding-right: 0;
+            padding-right: 0.625rem;
           }
         }
         .help {
@@ -194,8 +212,11 @@
       .duration.slider {
         .input-container {
           &:after {
-            left:55px;
-            right:auto;
+            right:30px;
+            left:auto;
+          }
+          input {
+            padding-right: 0.625rem;
           }
         }
       }
