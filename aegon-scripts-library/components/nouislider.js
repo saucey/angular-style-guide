@@ -32,7 +32,7 @@
             Drupal.behaviors.quickquoteLijfrente.onChange("#payment-calculated","#interest-amount", "€");
           }
           if ($('.quickquote.lijfrente.sparen').length) {
-            Drupal.behaviors.quickquoteLijfrenteSparen.onChange();
+            Drupal.behaviors.quickquoteLijfrenteSparen.onChange("#pension-calculated","#interest-amount", "€");
           }
         }
         $(errorClass).hide();

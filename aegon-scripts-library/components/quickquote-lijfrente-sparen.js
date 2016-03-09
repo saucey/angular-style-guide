@@ -32,50 +32,73 @@
       Drupal.behaviors.newSlider.activate("deposit-duration-slider","deposit-duration-input",0,0,5,1,2,3,"#deposit-duration-error","De looptijd is minimaal 5 en maximaal 30 jaar");
     },
 
-    onChange: function() {
+    onChange: function(paymentClass, interestClass, Currency) {
       var jaarruimte = 1,
-          singleInlay = $("#one-off-input").val(),
+          singleInlay = $("#one-off-input").val().replace(/\./g , ''),
           periodicInlay = $("#periodic-input").val(),
-          depositoInlay = $("#amount-one-off-input").val(),
-          depositoDuration = $("#deposito-duration-input").val(),
+          depositoInlay = $("#amount-one-off-input").val().replace(/\./g , ''),
+          depositoDuration = $("#deposit-duration-input").val(),
           duration = $("#duration-input").val(),
-          interest = 1.5;
-
-      console.log(jaarruimte,
-        singleInlay,
-        periodicInlay,
-        depositoInlay,
-        depositoDuration,
-        duration,
-        interest);
+          interestOpbouw = 1.5;
 
       //if (isNaN(money) || duration === 0 || isNaN(duration)) {
       //  return 0;
       //}
       //
-      //var monthlyPayment = this.calculateMonthlyPayment(money, duration);
+      var monthlyPayment = this.calculateMonthlyPayment(jaarruimte, singleInlay, periodicInlay, depositoInlay, depositoDuration, duration, interestOpbouw);
       //
-      //$(paymentClass).text( Currency + monthlyPayment);
-      //$(interestClass).text(interestRates[duration - 5]);
+      $(paymentClass).text( Currency + monthlyPayment);
+      $(interestClass).text(interestRates[duration - 5]);
     },
 
     round: function(input, decimals) {
       return Math.round(input * Math.pow(10, decimals)) / Math.pow(10, decimals);
     },
 
+    calculateDepositoOpbouw: function(p, i, l, o) {
+      console.log("deposito variabelen" + p, i, l, o);
+      var interestUitstel = 2,
+          scalesUitstel = 2;
+
+      var n = scalesUitstel;
+      var q = 1 + (interestUitstel / 100),
+        m = 1 + (n / 100),
+        f = 1 + (interestUitstel / 100);
+      var g = Math.pow(q, l),
+        h = Math.pow(m, o),
+        j = Math.pow(f, (l - o));
+      var k = (p - i) * g,
+        i = i * h;
+      var p = k + (i * j);
+      console.log("p = " + p);
+      return p
+    },
+
     // Calculation for Lijfrente Uitkeren
-    calculateMonthlyPayment: function (money, duration) {
-      if (isNaN(money) || duration === 0 || isNaN(duration)) {
+    calculateMonthlyPayment: function (jaarruimte, singleInlay, periodicInlay, depositoInlay, depositoDuration, duration, interestOpbouw) {
+      if (isNaN(singleInlay) || duration === 0 || isNaN(duration)) {
         return 0;
       }
 
-      var interestPerMonth = this.round(Math.pow(1 + (interestRates[duration - 5] / 100), 1 / 12) - 1, 6),
-        months = duration * 12,
-        formulaPart1 = this.round(1 / Math.pow(1 + interestPerMonth, months), 6),
-        formulaComplete = this.round((1 - formulaPart1) / interestPerMonth, 3),
-        monthlyPayment = this.round(money / formulaComplete, 2).toFixed(2);
+      console.log("calculatie variabelen" + jaarruimte,
+        singleInlay,
+        periodicInlay,
+        depositoInlay,
+        depositoDuration,
+        duration,
+        interestOpbouw);
 
-      return monthlyPayment.replace('.', ',');
+      var newInterest = 1 + (interestOpbouw / 100),
+        formulaPart1 = Math.pow(newInterest, 1 / 12) - 1,
+        formulaPart1 = this.round(formulaPart1, 8),
+        formulaPart2 = Math.pow(1 + formulaPart1, duration * 12) - 1,
+        formulaComplete = (periodicInlay* (formulaPart2 / formulaPart1)) * (1 + formulaPart1);
+      if (singleInlay) {
+        formulaComplete = formulaComplete + this.calculateDepositoOpbouw(singleInlay, depositoInlay, duration, depositoDuration)
+      }
+      var formulaRounded = formulaComplete.toFixed(2);
+      console.log("FORMULE = " + formulaRounded);
+      return formulaRounded.replace('.', ',');
     }
   };
 })(jQuery);
