@@ -3,17 +3,21 @@
     display: none;
     &+span.checkbox {
       background:$white;
+      &+span {
+        line-height:26px;
+      }
     }
   }
   .calculation {
-
       .slider-container {
         > div + span {
           background-color: $pink;
           display: block !important;
-          border-radius: 5px;
-          margin-top: 15px;
-          padding: 1em;
+          -webkit-border-radius: $default-border-radius;
+          -moz-border-radius: $default-border-radius;
+          border-radius: $default-border-radius;
+          @include rem('margin-top', 15);
+          @include rem('padding', 18);
           color: $dark_pink;
           border: 1px solid $dark_pink;
         }
@@ -89,7 +93,6 @@
           position: absolute;
           top: 0;
           content: '€';
-          left: 5px;
           @include rem('left', 10);
           pointer-events: none;
           color: $darker_grey;
@@ -206,24 +209,20 @@
           input {
             width:100%;
             max-width: 220px;
-            padding-right: 0;
             padding-right: 0.625rem;
           }
         }
         .help {
-          right: 5px;
-          top:0;
-          margin-top:-2px;
+          @include rem('right', 5);
+          @include rem('top', 0);
+          @include rem('margin-top', -2);
         }
       }
       .duration.slider {
         .input-container {
           &:after {
-            right:30px;
+            @include rem('right', 30);
             left:auto;
-          }
-          input {
-            padding-right: 0.625rem;
           }
         }
       }
@@ -250,6 +249,7 @@
             }
             &:after {
               top: 3em;
+              @include rem('top', 54);
             }
           }
         }
@@ -262,6 +262,8 @@
         @include rem('padding', 0, 30);
         .help {
           margin-top: 0;
+          @include rem('right', 36);
+          @include rem('margin-top', 0);
         }
       }
       .one-off-deposit {
@@ -276,8 +278,8 @@
       }
       .input-header {
         label.checkbox {
-          width: 93%;
-          @include rem('padding-right', 5);
+          width: 100%;
+          @include rem('padding-right', 50);
         }
       }
     }

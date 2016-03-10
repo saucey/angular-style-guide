@@ -32,11 +32,12 @@
         interestRates = JSON.parse("[" + dataInterest.attr("data-interests") + "]");
       }
       Drupal.behaviors.tooltip.activate(".quickquote");
+      //activate: function(sliderClass,inputClass,     sliderValue,    sliderMin,sliderMax,        quarterValue,halfValue,threeQuarterValue,errorClass,errorText) {
       Drupal.behaviors.newSlider.activate("one-off-slider","one-off-input",25000,4000,1000000,10000,25000, 100000,"#one-off-error","Het bedrag voor Lijfrente Uitkeren is  minimaal€ 4000,- en maximaal 1.000.000,-");
-      Drupal.behaviors.newSlider.activate("periodic-slider","periodic-input",200,0,5000,100,200,2500,"#periodic-error","De looptijd is minimaal 5 en maximaal 30 jaar");
-      Drupal.behaviors.newSlider.activate("duration-slider","duration-input",1,1,30,7,10,15,"#duration-error","De looptijd is minimaal 5 en maximaal 30 jaar");
+      Drupal.behaviors.newSlider.activate("periodic-slider","periodic-input",0,0,1000000,10000,25000,100000,"#periodic-error","De looptijd is minimaal 5 en maximaal 30 jaar");
+      Drupal.behaviors.newSlider.activate("duration-slider","duration-input",10,1,40,10,20,30,"#duration-error","De looptijd is minimaal 5 en maximaal 30 jaar");
       Drupal.behaviors.newSlider.activate("amount-one-off-slider","amount-one-off-input",0,0,1000000,10000,25000, 100000,"#amount-one-off-error","De looptijd is minimaal 5 en maximaal 30 jaar");
-      Drupal.behaviors.newSlider.activate("deposit-duration-slider","deposit-duration-input",0,0,5,1,2,3,"#deposit-duration-error","De looptijd is minimaal 5 en maximaal 30 jaar");
+      Drupal.behaviors.newSlider.activate("deposit-duration-slider","deposit-duration-input",10,0,30,8,16,24,"#deposit-duration-error","De looptijd is minimaal 5 en maximaal 30 jaar");
     },
 
     onChange: function(paymentClass, interestClass, Currency) {
