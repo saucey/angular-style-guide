@@ -4,13 +4,13 @@
 
 	Drupal.behaviors.smoothScrolling = {
 		attach: function(){
-			$('a.smooth-scroll').on('click',function (e) {
+			$(document).on('click', 'a.smooth-scroll', function (e) {
 				e.preventDefault();
 
 				var target = $('' + $(this).attr('href'));
-		    $('html, body').animate({
-		        scrollTop: target.offset().top - 20 
-		    }, 500);
+			    $('html, body').animate({
+			        scrollTop: target.offset().top - 20 
+			    }, 500);
 			});
 		}
 	};

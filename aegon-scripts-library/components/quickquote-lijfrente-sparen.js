@@ -19,7 +19,6 @@
       $(toggleCheckBox).click(function() {
         $(toggleContainer).slideToggle(this.checked);
       });
-
       // Parse the data attribute to object
       var dataInterest = $('.quickquote');
       if (dataInterest.attr("data-interests") !== undefined) {
@@ -27,72 +26,63 @@
       }
       Drupal.behaviors.tooltip.activate(".quickquote");
       Drupal.behaviors.newSlider.activate("one-off-slider","one-off-input",25000,4000,1000000,10000,25000, 100000,"#one-off-error","Het bedrag voor Lijfrente Uitkeren is  minimaal€ 4000,- en maximaal 1.000.000,-");
-      Drupal.behaviors.newSlider.activate("periodic-slider","periodic-input",6,5,30,7,10,15,"#periodic-error","De looptijd is minimaal 5 en maximaal 30 jaar");
-      Drupal.behaviors.newSlider.activate("duration-slider","duration-input",6,5,30,7,10,15,"#duration-error","De looptijd is minimaal 5 en maximaal 30 jaar");
-
-      //Function for updating the input value of the whole deposit > this value should be the max possible value for SOLE deposit
-      //function updateInput() {
-      var oneOffValue = $("#one-off-input").val().replace(/\./g , '');
-      var maxValOneOffInput = (oneOffValue);
-      var inputQuarter = (maxValOneOffInput) / 4 ;
-      var inputHalf = maxValOneOffInput / 2 ;
-      var inputThreeQuarter = (maxValOneOffInput / 4) * 3 ;
-      var inputMax = Number(oneOffValue);
-
-
-      Drupal.behaviors.newSlider.activate("amount-one-off-slider", "amount-one-off-input", 25000, 4000, this.synchronizingSlider(), inputQuarter, inputHalf, inputThreeQuarter, "#amount-one-off-error", "De looptijd is minimaal 5 en maximaal 30 jaar");
-
-      Drupal.behaviors.newSlider.activate("deposit-duration-slider","deposit-duration-input",6,5,30,7,10,15,"#deposit-duration-error","De looptijd is minimaal 5 en maximaal 30 jaar");
-
-
+      Drupal.behaviors.newSlider.activate("periodic-slider","periodic-input",200,0,5000,100,200,2500,"#periodic-error","De looptijd is minimaal 5 en maximaal 30 jaar");
+      Drupal.behaviors.newSlider.activate("duration-slider","duration-input",1,1,30,7,10,15,"#duration-error","De looptijd is minimaal 5 en maximaal 30 jaar");
+      Drupal.behaviors.newSlider.activate("amount-one-off-slider","amount-one-off-input",0,0,1000000,10000,25000, 100000,"#amount-one-off-error","De looptijd is minimaal 5 en maximaal 30 jaar");
+      Drupal.behaviors.newSlider.activate("deposit-duration-slider","deposit-duration-input",0,0,5,1,2,3,"#deposit-duration-error","De looptijd is minimaal 5 en maximaal 30 jaar");
     },
-
-    synchronizingSlider: function() {
-      //Function for updating the input value of the whole deposit > this value should be the max possible value for SOLE deposit
-      var oneOffValue = $("#one-off-input").val().replace(/\./g , '');
-      var maxValOneOffInput = (oneOffValue);
-
-      var inputQuarter = (maxValOneOffInput) / 4 ;
-      var inputHalf = maxValOneOffInput / 2 ;
-      var inputThreeQuarter = (maxValOneOffInput / 4) * 3 ;
-      var inputMax = Number(oneOffValue);
-
-      return parseInt(Number(oneOffValue)), inputQuarter, inputHalf, inputThreeQuarter;
-    },
-
-
 
     onChange: function(paymentClass, interestClass, Currency) {
-      var money = $("#amount-input").val().replace(/\./g , ''),
-        duration = $("#time-input").val().replace(/\./g , '');
+      var jaarruimte = 1,
+          singleInlay = $("#one-off-input").val().replace(/\./g , ''),
+          periodicInlay = $("#periodic-input").val(),
+          depositoInlay = $("#amount-one-off-input").val().replace(/\./g , ''),
+          depositoDuration = $("#deposit-duration-input").val(),
+          duration = $("#duration-input").val(),
+          interestOpbouw = 1.5;
 
-      if (isNaN(money) || duration === 0 || isNaN(duration)) {
-        return 0;
-      }
-
-      var monthlyPayment = this.calculateMonthlyPayment(money, duration);
-
-      $(paymentClass).text( Currency + monthlyPayment);
-      $(interestClass).text(interestRates[duration - 5]);
+      var monthlyPayment = this.calculateMonthlyPayment(jaarruimte, singleInlay, periodicInlay, depositoInlay, depositoDuration, duration, interestOpbouw);
+      $(paymentClass).text( Currency + "Working on it" + monthlyPayment);
+      $(interestClass).text("Working on it");
     },
 
     round: function(input, decimals) {
       return Math.round(input * Math.pow(10, decimals)) / Math.pow(10, decimals);
     },
 
+    calculateDepositoOpbouw: function(p, i, l, o) {
+      var interestUitstel = 2,
+          scalesUitstel = 2;
+
+      var n = scalesUitstel;
+      var q = 1 + (interestUitstel / 100),
+        m = 1 + (n / 100),
+        f = 1 + (interestUitstel / 100);
+      var g = Math.pow(q, l),
+        h = Math.pow(m, o),
+        j = Math.pow(f, (l - o));
+      var k = (p - i) * g,
+        newi = i * h;
+      p = k + (newi * j);
+      return p;
+    },
+
     // Calculation for Lijfrente Uitkeren
-    calculateMonthlyPayment: function (money, duration) {
-      if (isNaN(money) || duration === 0 || isNaN(duration)) {
+    calculateMonthlyPayment: function (jaarruimte, singleInlay, periodicInlay, depositoInlay, depositoDuration, duration, interestOpbouw) {
+      if (isNaN(singleInlay) || duration === 0 || isNaN(duration)) {
         return 0;
       }
 
-      var interestPerMonth = this.round(Math.pow(1 + (interestRates[duration - 5] / 100), 1 / 12) - 1, 6),
-        months = duration * 12,
-        formulaPart1 = this.round(1 / Math.pow(1 + interestPerMonth, months), 6),
-        formulaComplete = this.round((1 - formulaPart1) / interestPerMonth, 3),
-        monthlyPayment = this.round(money / formulaComplete, 2).toFixed(2);
-
-      return monthlyPayment.replace('.', ',');
+      var newInterest = 1 + (interestOpbouw / 100),
+        formulaPart0 = Math.pow(newInterest, 1 / 12) - 1,
+        formulaPart1 = this.round(formulaPart0, 8),
+        formulaPart2 = Math.pow(1 + formulaPart1, duration * 12) - 1,
+        formulaComplete = (periodicInlay* (formulaPart2 / formulaPart1)) * (1 + formulaPart1);
+      if (singleInlay) {
+        formulaComplete = formulaComplete + this.calculateDepositoOpbouw(singleInlay, depositoInlay, duration, depositoDuration);
+      }
+      var formulaRounded = formulaComplete.toFixed(2);
+      return formulaRounded.replace('.', ',');
     }
   };
 })(jQuery);
