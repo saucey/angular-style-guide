@@ -19,6 +19,7 @@
       $(toggleCheckBox).click(function() {
         $(toggleContainer).slideToggle(this.checked);
       });
+
       // Parse the data attribute to object
       var dataInterest = $('.quickquote');
       if (dataInterest.attr("data-interests") !== undefined) {
@@ -28,9 +29,38 @@
       Drupal.behaviors.newSlider.activate("one-off-slider","one-off-input",25000,4000,1000000,10000,25000, 100000,"#one-off-error","Het bedrag voor Lijfrente Uitkeren is  minimaal€ 4000,- en maximaal 1.000.000,-");
       Drupal.behaviors.newSlider.activate("periodic-slider","periodic-input",6,5,30,7,10,15,"#periodic-error","De looptijd is minimaal 5 en maximaal 30 jaar");
       Drupal.behaviors.newSlider.activate("duration-slider","duration-input",6,5,30,7,10,15,"#duration-error","De looptijd is minimaal 5 en maximaal 30 jaar");
-      Drupal.behaviors.newSlider.activate("amount-one-off-slider","amount-one-off-input",6,5,30,7,10,15,"#amount-one-off-error","De looptijd is minimaal 5 en maximaal 30 jaar");
+
+      //Function for updating the input value of the whole deposit > this value should be the max possible value for SOLE deposit
+      //function updateInput() {
+      var oneOffValue = $("#one-off-input").val().replace(/\./g , '');
+      var maxValOneOffInput = (oneOffValue);
+      var inputQuarter = (maxValOneOffInput) / 4 ;
+      var inputHalf = maxValOneOffInput / 2 ;
+      var inputThreeQuarter = (maxValOneOffInput / 4) * 3 ;
+      var inputMax = Number(oneOffValue);
+
+
+      Drupal.behaviors.newSlider.activate("amount-one-off-slider", "amount-one-off-input", 25000, 4000, this.synchronizingSlider(), inputQuarter, inputHalf, inputThreeQuarter, "#amount-one-off-error", "De looptijd is minimaal 5 en maximaal 30 jaar");
+
       Drupal.behaviors.newSlider.activate("deposit-duration-slider","deposit-duration-input",6,5,30,7,10,15,"#deposit-duration-error","De looptijd is minimaal 5 en maximaal 30 jaar");
+
+
     },
+
+    synchronizingSlider: function() {
+      //Function for updating the input value of the whole deposit > this value should be the max possible value for SOLE deposit
+      var oneOffValue = $("#one-off-input").val().replace(/\./g , '');
+      var maxValOneOffInput = (oneOffValue);
+
+      var inputQuarter = (maxValOneOffInput) / 4 ;
+      var inputHalf = maxValOneOffInput / 2 ;
+      var inputThreeQuarter = (maxValOneOffInput / 4) * 3 ;
+      var inputMax = Number(oneOffValue);
+
+      return parseInt(Number(oneOffValue)), inputQuarter, inputHalf, inputThreeQuarter;
+    },
+
+
 
     onChange: function(paymentClass, interestClass, Currency) {
       var money = $("#amount-input").val().replace(/\./g , ''),
