@@ -41,14 +41,9 @@
           duration = $("#duration-input").val(),
           interestOpbouw = 1.5;
 
-      //if (isNaN(money) || duration === 0 || isNaN(duration)) {
-      //  return 0;
-      //}
-      //
       var monthlyPayment = this.calculateMonthlyPayment(jaarruimte, singleInlay, periodicInlay, depositoInlay, depositoDuration, duration, interestOpbouw);
-      //
-      $(paymentClass).text( Currency + monthlyPayment);
-      $(interestClass).text(interestRates[duration - 5]);
+      $(paymentClass).text( Currency + "Working on it" + monthlyPayment);
+      $(interestClass).text("Working on it");
     },
 
     round: function(input, decimals) {
@@ -56,7 +51,6 @@
     },
 
     calculateDepositoOpbouw: function(p, i, l, o) {
-      console.log("deposito variabelen" + p, i, l, o);
       var interestUitstel = 2,
           scalesUitstel = 2;
 
@@ -68,10 +62,9 @@
         h = Math.pow(m, o),
         j = Math.pow(f, (l - o));
       var k = (p - i) * g,
-        i = i * h;
-      var p = k + (i * j);
-      console.log("p = " + p);
-      return p
+        newi = i * h;
+      p = k + (newi * j);
+      return p;
     },
 
     // Calculation for Lijfrente Uitkeren
@@ -80,24 +73,15 @@
         return 0;
       }
 
-      console.log("calculatie variabelen" + jaarruimte,
-        singleInlay,
-        periodicInlay,
-        depositoInlay,
-        depositoDuration,
-        duration,
-        interestOpbouw);
-
       var newInterest = 1 + (interestOpbouw / 100),
-        formulaPart1 = Math.pow(newInterest, 1 / 12) - 1,
-        formulaPart1 = this.round(formulaPart1, 8),
+        formulaPart0 = Math.pow(newInterest, 1 / 12) - 1,
+        formulaPart1 = this.round(formulaPart0, 8),
         formulaPart2 = Math.pow(1 + formulaPart1, duration * 12) - 1,
         formulaComplete = (periodicInlay* (formulaPart2 / formulaPart1)) * (1 + formulaPart1);
       if (singleInlay) {
-        formulaComplete = formulaComplete + this.calculateDepositoOpbouw(singleInlay, depositoInlay, duration, depositoDuration)
+        formulaComplete = formulaComplete + this.calculateDepositoOpbouw(singleInlay, depositoInlay, duration, depositoDuration);
       }
       var formulaRounded = formulaComplete.toFixed(2);
-      console.log("FORMULE = " + formulaRounded);
       return formulaRounded.replace('.', ',');
     }
   };
