@@ -1,6 +1,9 @@
 .quickquote.lijfrente.sparen {
   label.checkbox > input[type="checkbox"] {
     display: none;
+    &+span.checkbox {
+      background:$white;
+    }
   }
   .calculation {
 

@@ -15,10 +15,17 @@
       }
       // Toggle container with extra sliders for deposit and duration when checkbox is checked
       var toggleContainer = $("#toggle-container");
-      var toggleCheckBox = $('label.checkbox > input');
-      $(toggleCheckBox).click(function() {
-        $(toggleContainer).slideToggle(this.checked);
+      var toggleCheckBox = $('label.checkbox input[type="checkbox"]');
+
+      $(toggleCheckBox).click(function(){
+        if($(toggleCheckBox).prop("checked") === true){
+          $(toggleContainer).slideDown(300);
+        }
+        else if($(this).prop("checked") === false){
+          $(toggleContainer).slideUp(300);
+        }
       });
+
       // Parse the data attribute to object
       var dataInterest = $('.quickquote');
       if (dataInterest.attr("data-interests") !== undefined) {
