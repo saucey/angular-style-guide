@@ -40,7 +40,7 @@
       Drupal.behaviors.newSlider.activate("deposit-duration-slider","deposit-duration-input",10,0,30,8,16,24,"#deposit-duration-error","De looptijd is minimaal 5 en maximaal 30 jaar");
     },
 
-    onChange: function(paymentClass, interestClass, Currency) {
+    onChange: function(paymentClass, interestClass, Currency, amountClass, percentageClass) {
       var jaarruimte = 1,
           singleInlay = $("#one-off-input").val().replace(/\./g , ''),
           periodicInlay = $("#periodic-input").val(),
@@ -50,8 +50,13 @@
           interestOpbouw = 1.5;
 
       var monthlyPayment = this.calculateMonthlyPayment(jaarruimte, singleInlay, periodicInlay, depositoInlay, depositoDuration, duration, interestOpbouw);
-      $(paymentClass).text( Currency + "Working on it" + monthlyPayment);
+      var interestAmount = this.calculateInterest(singleInlay, periodicInlay, duration , monthlyPayment);
+
+      $(paymentClass).text( Currency + " Working on it " + monthlyPayment);
       $(interestClass).text("Working on it");
+
+      $(amountClass).text( Currency + " " + interestAmount );
+      $(percentageClass).text("Under construction");
     },
 
     round: function(input, decimals) {
@@ -91,6 +96,21 @@
       }
       var formulaRounded = formulaComplete.toFixed(2);
       return formulaRounded.replace('.', ',');
+    },
+
+    calculateInterest: function (singleInlay, periodicInlay, duration , monthlyPayment) {
+      var periodicTotal = (periodicInlay * 12);
+      var durationTotal = (periodicTotal * duration);
+      var totalInlay = (singleInlay + (durationTotal));
+      var monthlyPaymentInt = parseInt(monthlyPayment);
+      var calculatedAmount = monthlyPaymentInt - totalInlay;
+
+      console.log((monthlyPayment));
+      console.log((totalInlay));
+      console.log(calculatedAmount);
+      return (calculatedAmount);
+
     }
+
   };
 })(jQuery);
