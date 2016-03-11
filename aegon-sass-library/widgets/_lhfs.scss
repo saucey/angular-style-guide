@@ -296,7 +296,7 @@
   }
   ul.payments {
     margin: 20px -15px 0 -15px;
-    button.white {
+    .button.white {
       background-color: transparent;
       margin: 0 5% 0 0;
       &:before {
@@ -325,9 +325,6 @@
           }
           span.debit {
             font-family: $font_medium;
-            &:before {
-              content: "€";
-            }
           }
           a.contact {
             margin-right: 50px;
