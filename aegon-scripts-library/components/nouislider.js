@@ -29,14 +29,12 @@
         if ( handle === 0 ) {
           inputSlider.value = values[handle];
           if ($('.quickquote.lijfrente.uitkeren').length) {
-            Drupal.behaviors.quickquoteLijfrente.onChange("#payment-calculated","#interest-amount", "€");
+            Drupal.behaviors.quickquoteLijfrente.onChange("#payment-calculated","#interest-amount");
           }
           if ($('.quickquote.lijfrente.sparen').length) {
-            Drupal.behaviors.quickquoteLijfrenteSparen.onChange("#pension-calculated","#interest-amount","#interest-calculated", "#interest-amount-deposito","€");
-
+            Drupal.behaviors.quickquoteLijfrenteSparen.onChange("#pension-calculated","#interest-amount","#interest-calculated", "#interest-amount-deposito");
           }
         }
-        $(errorClass).hide();
       });
 
       inputSlider.addEventListener('change', function ( ) {

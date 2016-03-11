@@ -7,6 +7,12 @@
   var interestLijfrenteSparen = [1.1,1.2,1.3,1.35,1.45,1.6,1.7,1.8,1.8,1.25,1.95,1.95,1.95,1.95,1.95,2.05,2.05,2.05,2.05,2.05,2.20,2.20,2.20,2.20,2.45,2.20,2.20,2.20,2.20,2.20],
       interestDeposito = [0,1.1,1.2,1.3,1.35,1.45,1.6,1.7,1.8,1.8,1.8,1.95,1.95,1.95,1.95,1.95,2.05,2.05,2.05,2.05,2.05,2.20,2.20,2.20,2.20,2.45,2.20,2.20,2.20,2.20,2.20];
 
+  var format = wNumb({
+    mark: ',',
+    thousand: '.',
+    prefix: '€ '
+  });
+
   // Add new item to public Drupal object
   Drupal.behaviors.quickquoteLijfrenteSparen = {
 
@@ -38,11 +44,17 @@
       // Toggle container with extra sliders for deposit and duration when checkbox is checked
       $(toggleCheckBox).click(function() {
         $(toggleContainer).slideToggle(this.checked);
+        if (!this.checked) {
+          var inputs = $(toggleContainer).find("input");
+          inputs.each(function(){
+            this.value = 0;
+          });
+        }
       });
     },
 
 
-    onChange: function(paymentClass, interestClass,amountClass,interestDepositoClass,Currency) {
+    onChange: function(paymentClass, interestClass,amountClass,interestDepositoClass) {
       // Get the values from the sliders
       var singleInlay = $("#one-off-input").val().replace(/\./g , ''),
           periodicInlay = $("#periodic-input").val(),
@@ -50,13 +62,13 @@
           depositoDuration = $("#deposit-duration-input").val(),
           duration = $("#duration-input").val();
       // Do the calculation
-      var monthlyPayment = this.calculateMonthlyPayment(singleInlay, periodicInlay, depositoInlay, depositoDuration, duration);
+      var monthlyPayment = this.calculateMonthlyPayment(singleInlay, periodicInlay, depositoInlay, duration, depositoDuration);
       var interestAmount = this.calculateInterest(singleInlay, periodicInlay, duration , monthlyPayment);
 
             // Print the outcomes of the calculation
-      $(paymentClass).text( Currency + monthlyPayment);
+      $(paymentClass).text(format.to(monthlyPayment));
       $(interestClass).text(interestLijfrenteSparen[duration - 1]);
-      $(amountClass).text( Currency + " " + interestAmount );
+      $(amountClass).text(format.to(interestAmount));
       $(interestDepositoClass).text(interestDeposito[depositoDuration]);
     },
 
@@ -67,8 +79,8 @@
     calculateOneTimeInlay: function(singleInlay, depositoInlay, duration, depositoDuration, newinterestLijfrenteSparen) {
       // Calculate the On-off-Inlay with our wihout the deposito added
       var newinterestDeposito = 1 + (interestDeposito[depositoDuration] / 100),
-          formulaPart1 = Math.pow(newinterestDeposito, duration),
-          formulaPart2 = Math.pow(newinterestLijfrenteSparen, depositoDuration),
+          formulaPart1 = Math.pow(newinterestLijfrenteSparen, duration),
+          formulaPart2 = Math.pow(newinterestDeposito, depositoDuration),
           formulaPart3 = Math.pow(newinterestDeposito, (duration - depositoDuration)),
           formulaPart4 = (singleInlay - depositoInlay) * formulaPart1,
           formulaPart5 = depositoInlay * formulaPart2,
@@ -76,7 +88,7 @@
       return depositoOpbouw;
     },
 
-    calculateMonthlyPayment: function (singleInlay, periodicInlay, depositoInlay, depositoDuration, duration) {
+    calculateMonthlyPayment: function (singleInlay, periodicInlay, depositoInlay, duration, depositoDuration) {
       // Calculation for Lijfrente Sparen
       if (isNaN(singleInlay) || duration === 0 || isNaN(duration)) {
         return 0;
@@ -91,17 +103,16 @@
       if (singleInlay) {
         formulaComplete = formulaComplete + this.calculateOneTimeInlay(singleInlay, depositoInlay, duration, depositoDuration, newinterestLijfrenteSparen);
       }
-      var formulaRounded = formulaComplete.toFixed(2);
-      return formulaRounded.replace('.', ',');
+      var formulaRounded = this.round(formulaComplete,2);
+      return formulaRounded;
     },
 
     calculateInterest: function (singleInlay, periodicInlay, duration , monthlyPayment) {
-      var periodicTotal = (periodicInlay * 12);
-      var durationTotal = (periodicTotal * duration);
-      var totalInlay = (singleInlay + (durationTotal));
-      var monthlyPaymentInt = parseInt(monthlyPayment);
-      var calculatedAmount = monthlyPaymentInt - totalInlay;
-      return (calculatedAmount);
+      var periodicTotal = (periodicInlay * 12),
+          durationTotal = (periodicTotal * duration),
+          totalInlay = parseInt(singleInlay) + durationTotal,
+          calculatedAmount = this.round(monthlyPayment - totalInlay, 2);
+      return calculatedAmount;
 
     }
 
