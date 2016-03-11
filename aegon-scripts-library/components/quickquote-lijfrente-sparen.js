@@ -39,7 +39,7 @@
           depositoInlay = $("#amount-one-off-input").val().replace(/\./g , ''),
           depositoDuration = $("#deposit-duration-input").val(),
           duration = $("#duration-input").val(),
-          interestOpbouw = 3.25;
+          interestOpbouw = 1.5;
 
       var monthlyPayment = this.calculateMonthlyPayment(jaarruimte, singleInlay, periodicInlay, depositoInlay, depositoDuration, duration, interestOpbouw);
       $(paymentClass).text( Currency + monthlyPayment);
@@ -50,14 +50,14 @@
       return Math.round(input * Math.pow(10, decimals)) / Math.pow(10, decimals);
     },
 
-    calculateDepositoOpbouw: function(singleInlay, depositoInlay, duration, depositoDuration, newInterestOpbouw) {
-      //console.log("deposito variabelen" +
-      // singleInlay,
-      // depositoInlay,
-      // duration,
-      // depositoDuration,
-      // newInterestOpbouw);
-      var interestUitstel = 4.10,
+    calculateOneTimeInlay: function(singleInlay, depositoInlay, duration, depositoDuration, newInterestOpbouw) {
+      console.log("deposito variabelen" +
+       singleInlay,
+       depositoInlay,
+       duration,
+       depositoDuration,
+       newInterestOpbouw);
+      var interestUitstel = 1.5,
           newinterestUitstel = 1 + (interestUitstel / 100),
           formulaPart1 = Math.pow(newinterestUitstel, duration),
           formulaPart2 = Math.pow(newInterestOpbouw, depositoDuration),
@@ -66,14 +66,15 @@
           formulaPart5 = depositoInlay * formulaPart2;
       var depositoOpbouw = formulaPart4 + (formulaPart5 * formulaPart3);
 
-      //console.log("Berekening = " +
-      //  formulaPart1,
-      //  formulaPart2,
-      //  formulaPart3,
-      //  formulaPart4,
-      //  formulaPart5,
-      //  depositoOpbouw
-      //  );
+      console.log("Berekening Deposito = " +
+        "newinterestUitstel = " + newinterestUitstel,
+        "Part1 = " + formulaPart1,
+        "Part2 = " +  formulaPart2,
+        "Part3 = " + formulaPart3,
+        "Part4 = " + formulaPart4,
+        "Part5 = " + formulaPart5,
+        "depositoOpbouw = " + depositoOpbouw
+        );
 
       return depositoOpbouw;
     },
@@ -83,31 +84,31 @@
       if (isNaN(singleInlay) || duration === 0 || isNaN(duration)) {
         return 0;
       }
-      console.log("calculatie variabelen" + jaarruimte,
-        singleInlay,
-        periodicInlay,
-        depositoInlay,
-        depositoDuration,
-        duration,
-        interestOpbouw);
+      //console.log("calculatie variabelen" + jaarruimte,
+      //  singleInlay,
+      //  periodicInlay,
+      //  depositoInlay,
+      //  depositoDuration,
+      //  duration,
+      //  interestOpbouw);
 
       var newInterestOpbouw = 1 + (interestOpbouw / 100),
         formulaPart0 = Math.pow(newInterestOpbouw, 1 / 12) - 1,
         formulaPart1 = this.round(formulaPart0, 8),
         formulaPart2 = Math.pow(1 + formulaPart1, duration * 12) - 1,
         formulaComplete = (periodicInlay* (formulaPart2 / formulaPart1)) * (1 + formulaPart1);
-      console.log("Berekening Zonder deposito= " +
-        formulaPart0,
-        formulaPart1,
-        formulaPart2,
-        formulaComplete
-        );
+      //console.log("Berekening Zonder deposito= " +
+      //  "Part0 = " + formulaPart0,
+      //  "Part1 = " + formulaPart1,
+      //  "Part2 = " + formulaPart2,
+      //  "Complete = " + formulaComplete
+      //  );
       if (singleInlay) {
-        formulaComplete = formulaComplete + this.calculateDepositoOpbouw(singleInlay, depositoInlay, duration, depositoDuration, newInterestOpbouw);
+        formulaComplete = formulaComplete + this.calculateOneTimeInlay(singleInlay, depositoInlay, duration, depositoDuration, newInterestOpbouw);
         console.log("Berekening + deposito= " + formulaComplete);
       }
       var formulaRounded = formulaComplete.toFixed(2);
-      console.log("Formule afgerond = " + formulaRounded);3
+      console.log("Formule afgerond = " + formulaRounded);
       return formulaRounded.replace('.', ',');
     }
   };
