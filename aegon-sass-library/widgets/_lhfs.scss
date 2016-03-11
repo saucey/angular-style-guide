@@ -325,6 +325,7 @@
           }
           span.debit {
             font-family: $font_medium;
+            white-space: nowrap;
           }
           a.contact {
             margin-right: 50px;
@@ -538,6 +539,16 @@ ul.horizontal {
   .lhfs_widget {
     input[type=text] {
       width: 228px;
+    }
+    .inline_alert {
+      ul.payments {
+        > li > ul {
+          > li:nth-of-type(3) {
+            width: 35%;
+            text-align: right;
+          }
+        }
+      }
     }
     .dataTables_info {
       display: none;
