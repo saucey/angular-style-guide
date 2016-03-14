@@ -1,3 +1,17 @@
+@keyframes hide-empty-errors {
+  0% {
+    display: block;
+    opacity: 1;
+  }
+  99% {
+    display: block;
+  }
+  100% {
+    display: none;
+    opacity: 0;
+  }
+}
+
 .quickquote.lijfrente.sparen {
   label.checkbox > input[type="checkbox"] {
     display: none;
@@ -12,7 +26,7 @@
       .slider-container {
         > div + span {
           background-color: $pink;
-          display: block !important;
+          display:block !important;
           -webkit-border-radius: $default-border-radius;
           -moz-border-radius: $default-border-radius;
           border-radius: $default-border-radius;
@@ -20,10 +34,14 @@
           @include rem('padding', 18);
           color: $dark_pink;
           border: 1px solid $dark_pink;
+          animation: hide-empty-errors 5s linear;
+          animation-fill-mode: forwards;
         }
         > div + span:empty {
           background:none;
           display:none !important;
+          animation: hide-empty-errors 5s linear;
+          animation-fill-mode: forwards;
         }
 
     }

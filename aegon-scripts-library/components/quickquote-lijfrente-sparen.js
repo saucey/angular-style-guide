@@ -30,6 +30,7 @@
       }
 
       this.toggle("#toggle-container","label.checkbox > input");
+      //this.toggleError("#one-off-error","#periodic-error","#duration-error","#deposit-duration-error");
       // Initiate the Tooltip
       Drupal.behaviors.tooltip.activate(".quickquote");
 
@@ -53,6 +54,11 @@
       });
     },
 
+      removeErrorText: function(element, duration) {
+          setTimeout(function () {
+              element.empty();
+          }, duration);
+      },
 
     onChange: function(paymentClass, interestClass,amountClass,interestDepositoClass) {
       // Get the values from the sliders
@@ -119,3 +125,4 @@
 
   };
 })(jQuery);
+
