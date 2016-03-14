@@ -45,7 +45,7 @@
     onChange: function(paymentClass, interestClass,amountClass,interestDepositoClass,Currency) {
       // Get the values from the sliders
       var singleInlay = $("#one-off-input").val().replace(/\./g , ''),
-          periodicInlay = $("#periodic-input").val(),
+          periodicInlay = $("#periodic-input").val().replace(/\./g , ''),
           depositoInlay = $("#amount-one-off-input").val().replace(/\./g , ''),
           depositoDuration = $("#deposit-duration-input").val(),
           duration = $("#duration-input").val();
@@ -96,11 +96,17 @@
     },
 
     calculateInterest: function (singleInlay, periodicInlay, duration , monthlyPayment) {
-      var periodicTotal = (periodicInlay * 12);
+
+      var periodicTotal = (parseInt(periodicInlay) * 12);
       var durationTotal = (periodicTotal * duration);
-      var totalInlay = (singleInlay + (durationTotal));
+      var totalInlay = (parseInt(singleInlay) + parseInt(durationTotal));
       var monthlyPaymentInt = parseInt(monthlyPayment);
       var calculatedAmount = monthlyPaymentInt - totalInlay;
+
+
+        console.log(periodicInlay);
+        console.log(+singleInlay+ '\n' +durationTotal+ '\n' +totalInlay+'');
+        console.log(+calculatedAmount+ '\n' +monthlyPaymentInt+ '\n' );
       return (calculatedAmount);
 
     }
