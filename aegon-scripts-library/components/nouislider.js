@@ -25,18 +25,38 @@
       };
       noUiSlider.create(sliderElement, settings);
 
+
       sliderElement.noUiSlider.on('update', function ( values, handle) {
         if ( handle === 0 ) {
           inputSlider.value = values[handle];
           if ($('.quickquote.lijfrente.uitkeren').length) {
-            Drupal.behaviors.quickquoteLijfrente.onChange("#payment-calculated","#interest-amount", "€");
+            Drupal.behaviors.quickquoteLijfrente.onChange("#payment-calculated","#interest-amount");
           }
           if ($('.quickquote.lijfrente.sparen').length) {
-            Drupal.behaviors.quickquoteLijfrenteSparen.onChange("#pension-calculated","#interest-amount", "€");
+            Drupal.behaviors.quickquoteLijfrenteSparen.onChange("#pension-calculated","#interest-amount","#interest-calculated", "#interest-amount-deposito");
+
+
           }
         }
-        $(errorClass).hide();
       });
+
+
+
+        sliderElement.noUiSlider.on('slide', function(){
+            // Remove text from errors ( with css :empty remove with keyframes animation - this code should be optimized later : DRY method )
+            var oneOffError = $("#one-off-error");
+            var periodicError = $("#periodic-error");
+            var durationError = $("#duration-error");
+            var amountOneOffError = $("#amount-one-off-error");
+            var depositDurationError = $("#deposit-duration-error");
+
+            Drupal.behaviors.quickquoteLijfrenteSparen.removeErrorText(oneOffError, 5000);
+            Drupal.behaviors.quickquoteLijfrenteSparen.removeErrorText(periodicError, 5000);
+            Drupal.behaviors.quickquoteLijfrenteSparen.removeErrorText(durationError, 5000);
+            Drupal.behaviors.quickquoteLijfrenteSparen.removeErrorText(amountOneOffError, 5000);
+            Drupal.behaviors.quickquoteLijfrenteSparen.removeErrorText(depositDurationError, 5000);
+        });
+
 
       inputSlider.addEventListener('change', function ( ) {
         var inputValue =  $(this).val().replace('.', '');
