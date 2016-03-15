@@ -26,7 +26,7 @@
       .slider-container {
         > div + span {
           background-color: $pink;
-          display:block !important;
+          display:none;
           -webkit-border-radius: $default-border-radius;
           -moz-border-radius: $default-border-radius;
           border-radius: $default-border-radius;
@@ -34,12 +34,9 @@
           @include rem('padding', 18);
           color: $dark_pink;
           border: 1px solid $dark_pink;
-          animation: hide-empty-errors 5s linear;
-          animation-fill-mode: forwards;
         }
         > div + span:empty {
           background:none;
-          display:none !important;
           animation: hide-empty-errors 5s linear;
           animation-fill-mode: forwards;
         }
