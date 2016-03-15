@@ -29,17 +29,18 @@
         interestDeposito = JSON.parse("[" + dataInterest.attr("data-interestDeposito") + "]");
       }
 
+      //Toggle deposit container on checked checkbox
       this.toggle("#toggle-container","label.checkbox > input");
-      //this.toggleError("#one-off-error","#periodic-error","#duration-error","#deposit-duration-error");
+
       // Initiate the Tooltip
       Drupal.behaviors.tooltip.activate(".quickquote");
 
       // Initiate the Sliders
-      Drupal.behaviors.newSlider.activate("one-off-slider","one-off-input",25000,4000,1000000,10000,25000, 100000,"#one-off-error","Het bedrag voor Lijfrente Uitkeren is  minimaal€ 4000,- en maximaal 1.000.000,-");
-      Drupal.behaviors.newSlider.activate("periodic-slider","periodic-input",200,0,5000,100,200,2500,"#periodic-error","De looptijd is minimaal 5 en maximaal 30 jaar");
-      Drupal.behaviors.newSlider.activate("duration-slider","duration-input",1,1,30,7,10,15,"#duration-error","De looptijd is minimaal 5 en maximaal 30 jaar");
-      Drupal.behaviors.newSlider.activate("amount-one-off-slider","amount-one-off-input",0,0,1000000,10000,25000, 100000,"#amount-one-off-error","De looptijd is minimaal 5 en maximaal 30 jaar");
-      Drupal.behaviors.newSlider.activate("deposit-duration-slider","deposit-duration-input",0,0,30,7,10,15,"#deposit-duration-error","De looptijd is minimaal 5 en maximaal 30 jaar");
+      Drupal.behaviors.newSlider.activate("one-off-slider","one-off-input",25000,4000,1000000,10000,25000, 100000,"#one-off-error");
+      Drupal.behaviors.newSlider.activate("periodic-slider","periodic-input",200,0,5000,100,200,2500,"#periodic-error");
+      Drupal.behaviors.newSlider.activate("duration-slider","duration-input",1,1,30,7,10,15,"#duration-error");
+      Drupal.behaviors.newSlider.activate("amount-one-off-slider","amount-one-off-input",0,0,1000000,10000,25000, 100000,"#amount-one-off-error");
+      Drupal.behaviors.newSlider.activate("deposit-duration-slider","deposit-duration-input",0,0,30,7,10,15,"#deposit-duration-error");
     },
     toggle: function(toggleContainer,toggleCheckBox) {
       // Toggle container with extra sliders for deposit and duration when checkbox is checked
@@ -54,12 +55,6 @@
       });
     },
 
-      removeErrorText: function(element, duration) {
-          setTimeout(function () {
-              element.empty();
-          }, duration);
-      },
-
     onChange: function(paymentClass, interestClass,amountClass,interestDepositoClass) {
       // Get the values from the sliders
       var singleInlay = $("#one-off-input").val().replace(/\./g , ''),
@@ -71,7 +66,7 @@
       var monthlyPayment = this.calculateMonthlyPayment(singleInlay, periodicInlay, depositoInlay, duration, depositoDuration);
       var interestAmount = this.calculateInterest(singleInlay, periodicInlay, duration , monthlyPayment);
 
-            // Print the outcomes of the calculation
+      // Print the outcomes of the calculation
       $(paymentClass).text(format.to(monthlyPayment));
       $(interestClass).text(interestLijfrenteSparen[duration - 1]);
       $(amountClass).text(format.to(interestAmount));
