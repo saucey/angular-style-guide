@@ -125,7 +125,6 @@ div.easy_social_box.vertical {
 
   .author {
     @include rem('padding', 20, 10, 0, 0);
-    border-top: 1px solid $grey;
     overflow: hidden;
 
     .author-avatar {
@@ -148,6 +147,12 @@ div.easy_social_box.vertical {
 
       p {
         @include rem('margin', 0, 0, 20, 0);
+      }
+    }
+    .author-description {
+      font-family:$font_normal;
+      p , div {
+        font-size:$breakpoint-base-font-size;
       }
     }
   }
