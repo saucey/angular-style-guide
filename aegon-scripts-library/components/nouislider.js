@@ -6,7 +6,7 @@
 
   // Add new item to public Drupal object
   Drupal.behaviors.newSlider = {
-    activate: function(sliderClass,inputClass,sliderValue,sliderMin,sliderMax,quarterValue,halfValue,threeQuarterValue,errorClass,errorText) {
+    activate: function(sliderClass,inputClass,sliderValue,sliderMin,sliderMax,quarterValue,halfValue,threeQuarterValue,errorClass) {
       var sliderElement = document.getElementById(sliderClass);
       var inputSlider = document.getElementById(inputClass);
       var settings = {
@@ -42,7 +42,7 @@
       inputSlider.addEventListener('change', function ( ) {
         var inputValue =  $(this).val().replace('.', '');
         if (inputValue < sliderMin || inputValue > sliderMax) {
-          $(errorClass).css("display","block").text(errorText);
+          $(errorClass).css("display","block");
             setTimeout(function () {
                 $(errorClass).fadeOut(1500);
             }, 1500);
