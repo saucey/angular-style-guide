@@ -1,5 +1,5 @@
 /**
- * Quickquite Lijfrente Uitkeren
+ * Quickquite Lijfrente Sparen
  */
 (function($) {
   'use strict';
