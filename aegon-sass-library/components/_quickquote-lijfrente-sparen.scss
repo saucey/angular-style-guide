@@ -54,6 +54,9 @@
           float: left;
           border: 0;
           @include rem('margin-right', 8);
+          .ddChild {
+            overflow:visible!important;
+          }
           .ddTitle {
             background: $white;
             span.ddTitleText {
@@ -204,7 +207,7 @@
       .input-header {
         position:relative;
         display:block;
-        overflow:hidden;
+        overflow:visible;
         label {
           display:block;
           width:100%;
@@ -242,7 +245,7 @@
               display: block;
               width: 100% !important;
               max-width: 220px;
-              float: right;
+              float: none;
               clear: both;
               margin-right: 0;
               margin-bottom: 10px;
@@ -251,7 +254,7 @@
               display: block;
               width: 100%;
               max-width: 220px;
-              float: right;
+              float: none;
               clear: both;
             }
             &:after {

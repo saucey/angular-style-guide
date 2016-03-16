@@ -34,10 +34,10 @@
           }
           if ($('.quickquote.lijfrente.sparen').length) {
             Drupal.behaviors.quickquoteLijfrenteSparen.onChange("#pension-calculated","#interest-amount","#interest-calculated", "#interest-amount-deposito");
-
           }
         }
       });
+
 
       inputSlider.addEventListener('change', function ( ) {
         var inputValue =  $(this).val().replace('.', '');

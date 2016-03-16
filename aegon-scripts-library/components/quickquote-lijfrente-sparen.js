@@ -58,10 +58,13 @@
     onChange: function(paymentClass, interestClass,amountClass,interestDepositoClass) {
       // Get the values from the sliders
       var singleInlay = $("#one-off-input").val().replace(/\./g , ''),
-          periodicInlay = $("#periodic-input").val().replace(/\./g , ''),
           depositoInlay = $("#amount-one-off-input").val().replace(/\./g , ''),
           depositoDuration = $("#deposit-duration-input").val(),
-          duration = $("#duration-input").val();
+          duration = $("#duration-input").val(),
+          //after selectperiod changes the period variable-value to calculate back to months - periodicinlay is calculated and set.
+          period = this.selectperiod(),
+          periodicInlay = period;
+
       // Do the calculation
       var monthlyPayment = this.calculateMonthlyPayment(singleInlay, periodicInlay, depositoInlay, duration, depositoDuration);
       var interestAmount = this.calculateInterest(singleInlay, periodicInlay, duration , monthlyPayment);
@@ -114,6 +117,31 @@
           totalInlay = parseInt(singleInlay) + durationTotal,
           calculatedAmount = this.round(monthlyPayment - totalInlay, 2);
       return calculatedAmount;
+    },
+
+    selectperiod: function(){
+        var selectedPeriod = $("#periodic-selector_child").find(".selected"),
+            selectedPeriodText = selectedPeriod.text(),
+            periodicInlay = $("#periodic-input").val().replace(/\./g , ''),
+            division = 1;
+
+        switch (selectedPeriodText) {
+          case 'Maand':
+            division = 1;
+            break;
+          case 'Kwartaal':
+            division = 3;
+            break;
+          case 'Half jaar':
+            division = 6;
+            break;
+          case 'Jaar':
+            division = 12;
+            break;
+          default:
+            division = 1;
+        }
+        return periodicInlay / division;
     }
   };
 })(jQuery);
