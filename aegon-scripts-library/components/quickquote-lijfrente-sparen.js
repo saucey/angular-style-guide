@@ -7,13 +7,6 @@
   var interestLijfrenteSparen = [1.1,1.2,1.3,1.35,1.45,1.6,1.7,1.8,1.8,1.25,1.95,1.95,1.95,1.95,1.95,2.05,2.05,2.05,2.05,2.05,2.20,2.20,2.20,2.20,2.45,2.20,2.20,2.20,2.20,2.20],
       interestDeposito = [0,1.1,1.2,1.3,1.35,1.45,1.6,1.7,1.8,1.8,1.8,1.95,1.95,1.95,1.95,1.95,2.05,2.05,2.05,2.05,2.05,2.20,2.20,2.20,2.20,2.45,2.20,2.20,2.20,2.20,2.20];
 
-  var monthly = $("#periodic-selector_child ul").index(0),
-      quarterly = $("#periodic-selector_child ul").index(1),
-      halfYear = $("#periodic-selector_child ul").index(2),
-      yearly = $("#periodic-selector_child ul").index(3);
-
-  console.log(monthly)
-
   var format = wNumb({
     mark: ',',
     thousand: '.',
@@ -65,10 +58,14 @@
     onChange: function(paymentClass, interestClass,amountClass,interestDepositoClass) {
       // Get the values from the sliders
       var singleInlay = $("#one-off-input").val().replace(/\./g , ''),
-          periodicInlay = $("#periodic-input").val().replace(/\./g , ''),
           depositoInlay = $("#amount-one-off-input").val().replace(/\./g , ''),
           depositoDuration = $("#deposit-duration-input").val(),
-          duration = $("#duration-input").val();
+          duration = $("#duration-input").val(),
+          period = this.selectperiod(),
+          periodicInlay = period;
+          //after selectperiod changes the period variable-value to calculate back to months - periodicinlay is calculated and set.
+
+
       // Do the calculation
       var monthlyPayment = this.calculateMonthlyPayment(singleInlay, periodicInlay, depositoInlay, duration, depositoDuration);
       var interestAmount = this.calculateInterest(singleInlay, periodicInlay, duration , monthlyPayment);
@@ -123,6 +120,35 @@
           calculatedAmount = this.round(monthlyPayment - totalInlay, 2);
       return calculatedAmount;
 
+    },
+
+    selectperiod: function(){
+        var selectedPeriod = $("#periodic-selector_child").find(".selected"),
+            selectedPeriodText = selectedPeriod.text(),
+            periodicInlay = $("#periodic-input").val().replace(/\./g , ''),
+            division = 1;
+
+        switch (selectedPeriodText) {
+          case 'Maand':
+            //alert('Maand Wins!');
+            division = 1;
+            break;
+          case 'Kwartaal':
+            //alert('prototype Wins!');
+            division = 3;
+            break;
+          case 'Half jaar':
+            //alert('mootools Wins!');
+            division = 6;
+            break;
+          case 'Jaar':
+            //alert('dojo Wins!');
+            division = 12;
+            break;
+          default:
+            division = 1;
+        }
+        return periodicInlay / division;
     }
 
   };

@@ -54,6 +54,9 @@
           float: left;
           border: 0;
           @include rem('margin-right', 8);
+          .ddChild {
+            overflow:visible!important;
+          }
           .ddTitle {
             background: $white;
             span.ddTitleText {
