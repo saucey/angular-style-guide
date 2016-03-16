@@ -138,10 +138,8 @@ div.easy_social_box.vertical {
 
     .author-name {
       overflow: hidden;
-      font-family: $font_bold;
-
       h4 {
-        font-family: $font_medium;
+        font-family: $font_normal;
         @include rem('margin', 0, 0, 10, 0);
       }
 
@@ -150,9 +148,9 @@ div.easy_social_box.vertical {
       }
     }
     .author-description {
-      font-family:$font_normal;
       p , div {
-        font-size:$breakpoint-base-font-size;
+        font-family:$font_light;
+        font-size:18px;
       }
     }
   }
