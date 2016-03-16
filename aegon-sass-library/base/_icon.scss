@@ -1,15 +1,19 @@
 .icon:before,
-[class*="icon-"]:before {
+[class*='icon-']:before {
   font-family: $font_icons;
+
+  display: inline-block;
+
+  min-width: 1.5em;
+  padding-right: 8px;
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  padding-right: 8px;
-  display: inline-block;
-  min-width: 1.5em;
 }
 
 a.icon-user-link:before {
   display: inline-block;
+
   min-width: 1.5em;
 }
 
@@ -120,120 +124,185 @@ a.icon-user-link:before {
 .icon-5659:before {
   @extend .icon-uniE605;
 }
+
 .icon-inloggen,
 .icon-4610:before,
 .icon-5694:before {
   @extend .icon-uniE610;
 }
+
 .icon-sparen,
 .icon-5074:before {
   @extend .icon-uniE607;
 }
+
 .icon-actueel,
 a.menu-5662:before {
   @extend .icon-uniE608;
 }
+
 .icon-uitgelicht,
 .icon-4547:before,
 .icon-5657:before {
   @extend .icon-uniE611;
 }
+
 .icon-beleggen,
 .icon-4494:before {
   @extend .icon-uniE608;
 }
+
 .icon-verzekeren,
 .icon-4495:before,
 .icon-inkomensverzekeringen:before {
   @extend .icon-uniE609;
 }
+
 .icon-schadeverzekeringen:before {
   @extend .icon-uniE61B;
 }
+
 .icon-vermogensbeheer:before {
   @extend .icon-uniE60F;
 }
+
 .icon-hypotheek,
 .icon-4496:before,
 .icon-4537:before {
   @extend .icon-uniE60B;
 }
+
 .icon-4546:before {
   @extend .icon-uniE629;
 }
+
 .icon-pensioen,
 .icon-pensioen-en-lijfrente,
 .icon-4497:before {
   @extend .icon-uniE60A;
 }
+
 .icon-user-link:before {
   @extend .icon-uniE636:before;
 }
+
 .icon-home:before,
 .icon-5653:before {
   @extend .icon-uniE647:before;
 }
+
 .icon-lock:before {
   @extend .icon-uniE648:before;
 }
+
 .icon-6861:before {
   @extend .icon-uniE646;
 }
+
 .icon-6863:before {
   @extend .icon-uniE62C;
 }
+
 .icon-6860:before {
   @extend .icon-uniE604;
 }
+
 .icon-mijn-aegon:before {
   content: $font_icons_man;
 }
+
 .icon-mijn-gegevens:before {
   content: $font_icons_document_n_pen;
 }
+
 .icon-mijn-documenten:before {
   content: $font_icons_document_n_check;
 }
-.icon-mijn-producten:before, .icon-themas:before {
+
+.icon-mijn-producten:before,
+.icon-themas:before {
   content: $font_icons_producten;
 }
+
 .icon-call:before {
   content: $font_icons_call;
 }
+
 .icon-chat:before {
   content: $font_icons_chat;
 }
+
 .icon-comment:before {
   content: $font_icons_comment;
 }
+
 .icon-search:before {
   content: $font_icons_search;
 }
+
 .icon-info:before {
   content: $font_icons_info;
+}
+
+.icon-advisor:before {
+  content: $font_icons_man_in_tie;
 }
 
 .icon-mijn-betalingen:before {
   content: $font_icons_betalingen;
 }
 
+.icon-plus:before {
+  content: $font_icons_plus;
+}
+
 .icon-plus-light:before {
   content: $font_icons_plus_light;
 }
+
 .icon-skinnyarrow:before {
   content: $font_icons_arrow_right_skinny;
 }
-.icon-blog:before {
-  content: $font_icons_edit;
-}
+
 .icon-blog:before {
   content: $font_icons_edit;
 }
 
+.icon-calculator:before {
+  content: $font_icons_calculator;
+}
 
+.icon-check:before {
+  content: $font_icons_check;
+}
+
+.icon-radio:before {
+  content: $font_icons_radio;
+}
+
+.icon-fist-full:before {
+  content: $font_icons_fistfull;
+}
+
+.icon-error:before {
+  content: $font_icons_error;
+}
+
+.icon-arrow-down:before {
+  content: $font_icons_arrow_down;
+}
+
+.icon-tip:before {
+  content: $font_icons_tip;
+}
+
+.icon-help:before {
+  content: $font_icons_help;
+}
 // Do not apply icons to old aegon menu.
 // TODO: Refactor menu's in Drupal module 'aegon_menu' to adapt to ATDL.
-.submenu [class*="menu-"][class*="icon-"]:before {
-  content: '';
+.submenu [class*='menu-'][class*='icon-']:before {
   display: none;
+
+  content: '';
 }
