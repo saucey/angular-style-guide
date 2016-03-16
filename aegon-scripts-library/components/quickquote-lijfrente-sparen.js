@@ -1,10 +1,10 @@
 /**
- * Quickquite Lijfrente Uitkeren
+ * Quickquite Lijfrente Sparen
  */
 (function($) {
   'use strict';
 
-  var interestLijfrenteSparen = [1.1,1.2,1.3,1.35,1.45,1.6,1.7,1.8,1.8,1.25,1.95,1.95,1.95,1.95,1.95,2.05,2.05,2.05,2.05,2.05,2.20,2.20,2.20,2.20,2.45,2.20,2.20,2.20,2.20,2.20],
+  var interestLijfrenteSparen = 1.8,
       interestDeposito = [0,1.1,1.2,1.3,1.35,1.45,1.6,1.7,1.8,1.8,1.8,1.95,1.95,1.95,1.95,1.95,2.05,2.05,2.05,2.05,2.05,2.20,2.20,2.20,2.20,2.45,2.20,2.20,2.20,2.20,2.20];
 
   var format = wNumb({
@@ -23,7 +23,7 @@
       // Parse the data attribute to object
       var dataInterest = $('.quickquote');
       if (dataInterest.attr("data-interestLijfrenteSparen") !== undefined) {
-        interestLijfrenteSparen = JSON.parse("[" + dataInterest.attr("data-interestLijfrenteSparen") + "]");
+        interestLijfrenteSparen = JSON.parse(dataInterest.attr("data-interestLijfrenteSparen"));
       }
       if (dataInterest.attr("data-interestDeposito") !== undefined) {
         interestDeposito = JSON.parse("[" + dataInterest.attr("data-interestDeposito") + "]");
@@ -36,7 +36,7 @@
       Drupal.behaviors.tooltip.activate(".quickquote");
 
       // Initiate the Sliders
-      Drupal.behaviors.newSlider.activate("one-off-slider","one-off-input",25000,4000,1000000,10000,25000,100000,"#one-off-error");
+      Drupal.behaviors.newSlider.activate("one-off-slider","one-off-input",25000,0,1000000,10000,25000,100000,"#one-off-error");
       Drupal.behaviors.newSlider.activate("periodic-slider","periodic-input",0,0,1000000,250,500,1000,"#periodic-error");
       Drupal.behaviors.newSlider.activate("duration-slider","duration-input",1,1,40,5,10,20,"#duration-error");
       Drupal.behaviors.newSlider.activate("amount-one-off-slider","amount-one-off-input",0,0,1000000,10000,25000,100000,"#amount-one-off-error");
@@ -61,10 +61,9 @@
           depositoInlay = $("#amount-one-off-input").val().replace(/\./g , ''),
           depositoDuration = $("#deposit-duration-input").val(),
           duration = $("#duration-input").val(),
+          //after selectperiod changes the period variable-value to calculate back to months - periodicinlay is calculated and set.
           period = this.selectperiod(),
           periodicInlay = period;
-          //after selectperiod changes the period variable-value to calculate back to months - periodicinlay is calculated and set.
-
 
       // Do the calculation
       var monthlyPayment = this.calculateMonthlyPayment(singleInlay, periodicInlay, depositoInlay, duration, depositoDuration);
@@ -72,7 +71,7 @@
 
       // Print the outcomes of the calculation
       $(paymentClass).text(format.to(monthlyPayment));
-      $(interestClass).text(interestLijfrenteSparen[duration - 1]);
+      $(interestClass).text(interestLijfrenteSparen);
       $(amountClass).text(format.to(interestAmount));
       $(interestDepositoClass).text(interestDeposito[depositoDuration]);
     },
@@ -100,7 +99,7 @@
       }
 
       // Caltulate the Periodic (Monthly) inlay
-      var newinterestLijfrenteSparen = 1 + (interestLijfrenteSparen[duration - 1] / 100),
+      var newinterestLijfrenteSparen = 1 + (interestLijfrenteSparen / 100),
         formulaPart0 = Math.pow(newinterestLijfrenteSparen, 1 / 12) - 1,
         formulaPart1 = this.round(formulaPart0, 8),
         formulaPart2 = Math.pow(1 + formulaPart1, duration * 12) - 1,
@@ -111,7 +110,6 @@
       var formulaRounded = this.round(formulaComplete,2);
       return formulaRounded;
     },
-
     calculateInterest: function (singleInlay, periodicInlay, duration , monthlyPayment) {
       //calculation for the amount of interest expressed in Euro's
       var periodicTotal = (periodicInlay * 12),
@@ -119,7 +117,6 @@
           totalInlay = parseInt(singleInlay) + durationTotal,
           calculatedAmount = this.round(monthlyPayment - totalInlay, 2);
       return calculatedAmount;
-
     },
 
     selectperiod: function(){
@@ -130,19 +127,15 @@
 
         switch (selectedPeriodText) {
           case 'Maand':
-            //alert('Maand Wins!');
             division = 1;
             break;
           case 'Kwartaal':
-            //alert('prototype Wins!');
             division = 3;
             break;
           case 'Half jaar':
-            //alert('mootools Wins!');
             division = 6;
             break;
           case 'Jaar':
-            //alert('dojo Wins!');
             division = 12;
             break;
           default:
@@ -150,7 +143,6 @@
         }
         return periodicInlay / division;
     }
-
   };
 })(jQuery);
 
