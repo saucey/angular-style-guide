@@ -43,10 +43,10 @@
       Drupal.behaviors.tooltip.activate(".quickquote");
 
       // Initiate the Sliders
-      Drupal.behaviors.newSlider.activate("one-off-slider","one-off-input",25000,4000,1000000,10000,25000, 100000,"#one-off-error");
-      Drupal.behaviors.newSlider.activate("periodic-slider","periodic-input",200,0,5000,100,200,2500,"#periodic-error");
-      Drupal.behaviors.newSlider.activate("duration-slider","duration-input",1,1,30,7,10,15,"#duration-error");
-      Drupal.behaviors.newSlider.activate("amount-one-off-slider","amount-one-off-input",0,0,1000000,10000,25000, 100000,"#amount-one-off-error");
+      Drupal.behaviors.newSlider.activate("one-off-slider","one-off-input",25000,4000,1000000,10000,25000,100000,"#one-off-error");
+      Drupal.behaviors.newSlider.activate("periodic-slider","periodic-input",0,0,1000000,250,500,1000,"#periodic-error");
+      Drupal.behaviors.newSlider.activate("duration-slider","duration-input",1,1,40,5,10,20,"#duration-error");
+      Drupal.behaviors.newSlider.activate("amount-one-off-slider","amount-one-off-input",0,0,1000000,10000,25000,100000,"#amount-one-off-error");
       Drupal.behaviors.newSlider.activate("deposit-duration-slider","deposit-duration-input",0,0,30,7,10,15,"#deposit-duration-error");
     },
     toggle: function(toggleContainer,toggleCheckBox) {
