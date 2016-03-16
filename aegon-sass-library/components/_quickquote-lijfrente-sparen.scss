@@ -10,7 +10,7 @@
   }
   .calculation {
       .slider-container {
-        > .errorMessage {
+          .errorMessage {
           background-color: $pink;
           display:none;
           -webkit-border-radius: $default-border-radius;
@@ -21,7 +21,7 @@
           color: $dark_pink;
           border: 1px solid $dark_pink;
         }
-        > .errorMessage:empty {
+          .errorMessage:empty {
           background:none;
         }
 
