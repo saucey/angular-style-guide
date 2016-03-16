@@ -26,6 +26,30 @@
       noUiSlider.create(sliderElement, settings);
 
 
+
+      //Synchronizing slider ranges on change of first slider.
+      //TODO: remove from slider.js
+      var oneOffSlider = document.getElementById('one-off-slider');
+      var oneOffSliderInput = document.getElementById('one-off-input');
+      var depositSlider = document.getElementById('amount-one-off-slider');
+      function updateDepositRange (min, max ) {
+        depositSlider.noUiSlider.updateOptions({
+          range: {
+            'min': min,
+            'max': max
+          }
+        });
+      }
+      oneOffSlider.noUiSlider.on('change', function ( values, handle) {
+        if ( handle === 0 ) {
+          oneOffSliderInput.value = values[handle];
+          if ($('.quickquote.lijfrente.sparen').length) {
+            var sliderValue = oneOffSlider.noUiSlider.get().replace(/\./g , '');
+            updateDepositRange(0, parseInt(sliderValue));
+          }
+        }
+      });
+
       sliderElement.noUiSlider.on('update', function ( values, handle) {
         if ( handle === 0 ) {
           inputSlider.value = values[handle];
@@ -34,6 +58,7 @@
           }
           if ($('.quickquote.lijfrente.sparen').length) {
             Drupal.behaviors.quickquoteLijfrenteSparen.onChange("#pension-calculated","#interest-amount","#interest-calculated", "#interest-amount-deposito");
+
           }
         }
       });
