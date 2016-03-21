@@ -27,12 +27,14 @@
 
 
 
-      //Synchronizing slider ranges on change of first slider.
+      //Synchronizing slider ranges on change of first deposit slider.
       //TODO: remove from slider.js
-      var oneOffSlider = document.getElementById('one-off-slider');
-      var oneOffSliderInput = document.getElementById('one-off-input');
-      var depositSlider = document.getElementById('amount-one-off-slider');
-      function updateDepositRange (min, max ) {
+      var oneOffSlider = document.getElementById('one-off-slider'),
+          oneOffSliderInput = document.getElementById('one-off-input'),
+          depositSlider = document.getElementById('amount-one-off-slider');
+
+
+      function updateDepositAmountRange (min, max ) {
         depositSlider.noUiSlider.updateOptions({
           range: {
             'min': min,
@@ -45,7 +47,7 @@
           oneOffSliderInput.value = values[handle];
           if ($('.quickquote.lijfrente.sparen').length) {
             var sliderValue = oneOffSlider.noUiSlider.get().replace(/\./g , '');
-            updateDepositRange(0, parseInt(sliderValue));
+            updateDepositAmountRange(0, parseInt(sliderValue));
           }
         }
       });
