@@ -56,9 +56,11 @@
           if ($('.quickquote.lijfrente.uitkeren').length) {
             Drupal.behaviors.quickquoteLijfrente.onChange("#payment-calculated","#interest-amount");
           }
-          if ($('.quickquote.lijfrente.sparen').length) {
-            Drupal.behaviors.quickquoteLijfrenteSparen.onChange("#pension-calculated","#interest-amount","#interest-calculated", "#interest-amount-deposito");
-
+          //if ($('.quickquote.lijfrente.sparen').length) {
+          //  Drupal.behaviors.quickquoteLijfrenteSparen.onChange("#pension-calculated","#interest-amount","#interest-calculated", "#interest-amount-deposito");
+          //}
+          if ($('#quickquote-beleggen').length) {
+            Drupal.behaviors.quickquoteBeleggen.onChange("#pension-calculated","#interest-amount","#interest-calculated", "#investment-calculated");
           }
         }
       });
