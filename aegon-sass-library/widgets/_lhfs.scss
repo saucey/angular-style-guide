@@ -614,11 +614,14 @@ ul.horizontal {
   .help {
     float: right;
     &.dialog {
+      max-width: 95%;
+      left: auto !important; // important to overwrite the inline style added by the script
       right: 2%;
     }
     &:before {}
     &:after {
-      left: 88% !important;
+      left: auto !important;
+      right: 0;
     }
   }
 }
