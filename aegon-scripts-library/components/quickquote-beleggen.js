@@ -51,7 +51,7 @@
             var monthlyPayment = Drupal.behaviors.quickquoteLijfrenteSparen.calculateMonthlyPayment(singleInlay, periodicInlay, 0, duration, 0, interestSavings),
                 investPayment = Drupal.behaviors.quickquoteLijfrenteSparen.calculateMonthlyPayment(singleInlay, periodicInlay, 0, duration, 0, interestInvest),
                 interestAmount = Drupal.behaviors.quickquoteLijfrenteSparen.calculateInterest(singleInlay, periodicInlay, duration , monthlyPayment),
-                totalInlay = monthlyPayment - interestAmount;
+                totalInlay = parseInt(monthlyPayment) - parseInt(interestAmount);
 
             // Print the outcomes of the calculation
             $(paymentClass).text(format.to(monthlyPayment));

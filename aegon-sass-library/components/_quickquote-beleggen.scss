@@ -1,40 +1,52 @@
-.quickquote.lijfrente.sparen.beleggen .result .payment-result .result1,
-.quickquote.lijfrente.sparen.beleggen .result .payment-result .result1 .title,
-.quickquote.lijfrente.sparen.beleggen .result .payment-result .result1 .calculated,
-.quickquote.lijfrente.sparen.beleggen .result .payment-result .result2,
-.quickquote.lijfrente.sparen.beleggen .result .payment-result .result2 .title,
-.quickquote.lijfrente.sparen.beleggen .result .payment-result .result2 .calculated{
-  @include rem('font-size', 18);
-  font-family: $font_thin;
-}
-.quickquote.lijfrente.sparen.beleggen .result .payment-result .result3,
-.quickquote.lijfrente.sparen.beleggen .result .payment-result .result3 .title,
-.quickquote.lijfrente.sparen.beleggen .result .payment-result .result3 .calculated{
-  @include rem('font-size', 18);
-  font-family: $font_light;
-}
-
-
-.quickquote.lijfrente.sparen.beleggen .result .payment-result .result1 .calculated,
-.quickquote.lijfrente.sparen.beleggen .result .payment-result .result2 .calculated,
-.quickquote.lijfrente.sparen.beleggen .result .payment-result .result3 .calculated{
-  @include rem('font-size', 26);
-}
-
-.quickquote.lijfrente.sparen .result .footer-result, .quickquote.lijfrente.sparen.beleggen .result .footer-result a {
-  color:$white;
-  font-family: $font_thin;
+.quickquote.lijfrente.sparen.beleggen {
+  .calculation {
+    .periodic.slider .input-container input {
+      width:100%;
+    }
+  }
+  .result {
+    .footer-result a {
+      color: $white;
+      font-family: $font_thin;
+      @include rem('line-height', 49);
+    }
+    .payment-result {
+      .result1, .result1 .title {
+        @include rem('font-size', 18);
+        font-family: $font_thin;
+        .calculated {
+          @include rem('font-size', 26);
+        }
+      }
+      .result2, .result2 .title {
+        @include rem('font-size', 18);
+        font-family: $font_thin;
+        .calculated {
+          @include rem('font-size', 26);
+        }
+      }
+      .result3, .result3 .title {
+        @include rem('font-size', 18);
+        font-family: $font_light;
+        .calculated {
+          @include rem('font-size', 26);
+        }
+      }
+    }
+  }
 }
 
 @include breakpoint($brk-mobile) {
-  .quickquote.lijfrente.sparen.beleggen .result .payment-result {
-    width:100%;
-  }
-  .quickquote.lijfrente.sparen.beleggen .result .payment-result .result1,
-  .quickquote.lijfrente.sparen.beleggen .result .payment-result .result2,
-  .quickquote.lijfrente.sparen.beleggen .result .payment-result .result3 {
-    width:100%;
-    float:none;
+  .quickquote.lijfrente.sparen.beleggen {
+    .result  {
+      .payment-result {
+        width:100%;
+        .result1,.result2,.result3 {
+          width:100%;
+          float:none;
+        }
+      }
+    }
   }
 }
 
@@ -60,8 +72,12 @@
 }
 
 @include breakpoint($brk-ipad-portrait) {
-  .quickquote.lijfrente.sparen.beleggen .result .payment-result {
-    width: 77%;
+  .quickquote.lijfrente.sparen.beleggen {
+    .result {
+      .payment-result {
+        width: 63%;
+      }
+    }
   }
 }
 
