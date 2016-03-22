@@ -36,7 +36,7 @@
       Drupal.behaviors.tooltip.activate(".quickquote");
 
       // Initiate the Sliders
-      Drupal.behaviors.newSlider.activate("one-off-slider","one-off-input",25000,1,1000000,10000,25000,100000,"#one-off-error");
+      Drupal.behaviors.newSlider.activate("one-off-slider","one-off-input",25000,0,1000000,10000,25000,100000,"#one-off-error");
       Drupal.behaviors.newSlider.activate("periodic-slider","periodic-input",0,0,1000000,250,500,1000,"#periodic-error");
       Drupal.behaviors.newSlider.activate("duration-slider","duration-input",1,1,40,5,10,20,"#duration-error");
       Drupal.behaviors.newSlider.activate("amount-one-off-slider","amount-one-off-input",0,0,1000000,10000,25000,100000,"#amount-one-off-error");
@@ -64,6 +64,7 @@
           //after selectperiod changes the period variable-value to calculate back to months - periodicinlay is calculated and set.
           period = this.selectperiod(),
           periodicInlay = period;
+
 
       // Do the calculation
       var monthlyPayment = this.calculateMonthlyPayment(singleInlay, periodicInlay, depositoInlay, duration, depositoDuration);
@@ -142,7 +143,18 @@
             division = 1;
         }
         return periodicInlay / division;
+    },
+
+    updateSliderRange: function(min, max) {
+
+      this.noUiSlider.updateOptions({
+        range: {
+          'min': min,
+          'max': max
+        }
+      });
     }
+
   };
 })(jQuery);
 

@@ -14,10 +14,10 @@
     });
 
     // Add new item to public Drupal object
-    Drupal.behaviors.quickquoteBeleggen = {
+    Drupal.behaviors.quickquoteLijfrenteSparen = {
 
         attach: function() {
-            if ($('.quickquote.beleggen').length === 0) {
+            if ($('.quickquote.lijfrente.sparen').length === 0) {
                 return;
             }
             // Parse the data attribute to object
@@ -58,7 +58,7 @@
         onChange: function(paymentClass, interestClass,amountClass,interestDepositoClass) {
             // Get the values from the sliders
             var singleInlay = $("#one-off-input").val().replace(/\./g , ''),
-                //depositoInlay = $("#amount-one-off-input").val().replace(/\./g , ''),
+                depositoInlay = $("#amount-one-off-input").val().replace(/\./g , ''),
                 depositoDuration = $("#deposit-duration-input").val(),
                 duration = $("#duration-input").val(),
             //after selectperiod changes the period variable-value to calculate back to months - periodicinlay is calculated and set.
@@ -66,7 +66,7 @@
                 periodicInlay = period;
 
             // Do the calculation
-            var monthlyPayment = this.calculateMonthlyPayment(singleInlay, periodicInlay, duration, depositoDuration);
+            var monthlyPayment = this.calculateMonthlyPayment(singleInlay, periodicInlay, depositoInlay, duration, depositoDuration);
             var interestAmount = this.calculateInterest(singleInlay, periodicInlay, duration , monthlyPayment);
 
             // Print the outcomes of the calculation
