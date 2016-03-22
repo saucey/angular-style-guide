@@ -58,7 +58,9 @@
           }
           if ($('.quickquote.lijfrente.sparen').length) {
             Drupal.behaviors.quickquoteLijfrenteSparen.onChange("#pension-calculated","#interest-amount","#interest-calculated", "#interest-amount-deposito");
-
+          }
+          if ($('.quickquote.beleggen').length) {
+            Drupal.behaviors.quickquoteBeleggen.onChange("#pension-calculated","#interest-amount","#interest-calculated", "#investment-calculated");
           }
         }
       });
