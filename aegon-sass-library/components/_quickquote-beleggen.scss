@@ -1,0 +1,70 @@
+.quickquote.lijfrente.sparen.beleggen .result .payment-result .result1,
+.quickquote.lijfrente.sparen.beleggen .result .payment-result .result1 .title,
+.quickquote.lijfrente.sparen.beleggen .result .payment-result .result1 .calculated,
+.quickquote.lijfrente.sparen.beleggen .result .payment-result .result2,
+.quickquote.lijfrente.sparen.beleggen .result .payment-result .result2 .title,
+.quickquote.lijfrente.sparen.beleggen .result .payment-result .result2 .calculated{
+  @include rem('font-size', 18);
+  font-family: $font_thin;
+}
+.quickquote.lijfrente.sparen.beleggen .result .payment-result .result3,
+.quickquote.lijfrente.sparen.beleggen .result .payment-result .result3 .title,
+.quickquote.lijfrente.sparen.beleggen .result .payment-result .result3 .calculated{
+  @include rem('font-size', 18);
+  font-family: $font_light;
+}
+
+
+.quickquote.lijfrente.sparen.beleggen .result .payment-result .result1 .calculated,
+.quickquote.lijfrente.sparen.beleggen .result .payment-result .result2 .calculated,
+.quickquote.lijfrente.sparen.beleggen .result .payment-result .result3 .calculated{
+  @include rem('font-size', 26);
+}
+
+.quickquote.lijfrente.sparen .result .footer-result, .quickquote.lijfrente.sparen.beleggen .result .footer-result a {
+  color:$white;
+  font-family: $font_thin;
+}
+
+@include breakpoint($brk-mobile) {
+  .quickquote.lijfrente.sparen.beleggen .result .payment-result {
+    width:100%;
+  }
+  .quickquote.lijfrente.sparen.beleggen .result .payment-result .result1,
+  .quickquote.lijfrente.sparen.beleggen .result .payment-result .result2,
+  .quickquote.lijfrente.sparen.beleggen .result .payment-result .result3 {
+    width:100%;
+    float:none;
+  }
+}
+
+@include breakpoint($brk-tablet) {
+  .quickquote.lijfrente.sparen.beleggen {
+    .result {
+      .payment-result  {
+        width:100%;
+        .result1,
+        .result2,
+        .result3 {
+          width: 32%;
+          min-width: 150px;
+          float: left;
+          margin-right: 1%;
+        }
+        .result3 {
+          float:right;
+        }
+      }
+    }
+  }
+}
+
+@include breakpoint($brk-ipad-portrait) {
+  .quickquote.lijfrente.sparen.beleggen .result .payment-result {
+    width: 77%;
+  }
+}
+
+@include breakpoint($brk-large-desktop) {
+
+}
