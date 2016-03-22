@@ -5,7 +5,7 @@
     'use strict';
 
     var interestSavings = 1.8,
-        interestInvest = [0,1.1,1.2,1.3,1.35,1.45,1.6,1.7,1.8,1.8,1.8,1.95,1.95,1.95,1.95,1.95,2.05,2.05,2.05,2.05,2.05,2.20,2.20,2.20,2.20,2.45,2.20,2.20,2.20,2.20,2.20];
+        interestInvest = 4;
 
     var format = wNumb({
         mark: ',',
@@ -17,7 +17,7 @@
     Drupal.behaviors.quickquoteBeleggen = {
 
         attach: function() {
-            if ($('#quickquote-beleggen').length === 0) {
+            if ($('#qqBeleggen').length === 0) {
                 return;
             }
             // Parse the data attribute to object
@@ -26,7 +26,7 @@
               interestSavings = JSON.parse(dataInterest.attr("data-interestSavings"));
             }
             if (dataInterest.attr("data-interestInvest") !== undefined) {
-              interestInvest = JSON.parse("[" + dataInterest.attr("data-interestInvest") + "]");
+              interestInvest = JSON.parse(dataInterest.attr("data-interestInvest"));
             }
 
 
@@ -39,7 +39,7 @@
             Drupal.behaviors.newSlider.activate("duration-slider","duration-input",1,1,40,5,10,20,"#duration-error");
         },
 
-        onChange: function(paymentClass, interestClass,amountClass,interestInvestClass) {
+        onChange: function(paymentClass,interestClass,amountClass,investClass, interestInvestClass) {
             // Get the values from the sliders
             var singleInlay = $("#one-off-input").val().replace(/\./g , ''),
                 duration = $("#duration-input").val(),
@@ -48,17 +48,18 @@
                 periodicInlay = period;
 
             // Do the calculation
-            var monthlyPayment = Drupal.behaviors.quickquoteLijfrenteSparen.calculateMonthlyPayment(singleInlay, periodicInlay,0, duration, 0);
-            var interestAmount = Drupal.behaviors.quickquoteLijfrenteSparen.calculateInterest(singleInlay, periodicInlay, duration , monthlyPayment);
+            var monthlyPayment = Drupal.behaviors.quickquoteLijfrenteSparen.calculateMonthlyPayment(singleInlay, periodicInlay, 0, duration, 0, interestSavings),
+                investPayment = Drupal.behaviors.quickquoteLijfrenteSparen.calculateMonthlyPayment(singleInlay, periodicInlay, 0, duration, 0, interestInvest),
+                interestAmount = Drupal.behaviors.quickquoteLijfrenteSparen.calculateInterest(singleInlay, periodicInlay, duration , monthlyPayment),
+                totalInlay = monthlyPayment - interestAmount;
 
             // Print the outcomes of the calculation
             $(paymentClass).text(format.to(monthlyPayment));
             $(interestClass).text(interestSavings);
-            $(amountClass).text(format.to(interestAmount));
+            $(amountClass).text(format.to(totalInlay));
+            $(investClass).text(format.to(investPayment));
             $(interestInvestClass).text(interestInvest);
         }
-
-
     };
 })(jQuery);
 

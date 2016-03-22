@@ -17,7 +17,7 @@
   Drupal.behaviors.quickquoteLijfrenteSparen = {
 
     attach: function() {
-      if ($('.quickquote.lijfrente.sparen').length === 0) {
+      if ($('#qqSparen').length === 0) {
         return;
       }
       // Parse the data attribute to object
@@ -66,8 +66,9 @@
           periodicInlay = period;
 
 
+
       // Do the calculation
-      var monthlyPayment = this.calculateMonthlyPayment(singleInlay, periodicInlay, depositoInlay, duration, depositoDuration);
+      var monthlyPayment = this.calculateMonthlyPayment(singleInlay, periodicInlay, depositoInlay, duration, depositoDuration,interestLijfrenteSparen);
       var interestAmount = this.calculateInterest(singleInlay, periodicInlay, duration , monthlyPayment);
 
       // Print the outcomes of the calculation
@@ -93,14 +94,14 @@
       return depositoOpbouw;
     },
 
-    calculateMonthlyPayment: function (singleInlay, periodicInlay, depositoInlay, duration, depositoDuration) {
+    calculateMonthlyPayment: function (singleInlay, periodicInlay, depositoInlay, duration, depositoDuration, interest) {
       // Calculation for Lijfrente Sparen
       if (isNaN(singleInlay) || duration === 0 || isNaN(duration)) {
         return 0;
       }
 
       // Caltulate the Periodic (Monthly) inlay
-      var newinterestLijfrenteSparen = 1 + (interestLijfrenteSparen / 100),
+      var newinterestLijfrenteSparen = 1 + (interest / 100),
         formulaPart0 = Math.pow(newinterestLijfrenteSparen, 1 / 12) - 1,
         formulaPart1 = this.round(formulaPart0, 8),
         formulaPart2 = Math.pow(1 + formulaPart1, duration * 12) - 1,
@@ -154,7 +155,6 @@
         }
       });
     }
-
   };
 })(jQuery);
 
