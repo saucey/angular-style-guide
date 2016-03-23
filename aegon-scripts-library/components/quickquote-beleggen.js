@@ -10,6 +10,7 @@
     var format = wNumb({
         mark: ',',
         thousand: '.',
+        decimals: 2,
         prefix: '€ '
     });
 
@@ -34,9 +35,9 @@
             Drupal.behaviors.tooltip.activate(".quickquote");
 
             // Initiate the Sliders
-            Drupal.behaviors.newSlider.activate("one-off-slider","one-off-input",25000,1,1000000,10000,25000,100000,"#one-off-error");
-            Drupal.behaviors.newSlider.activate("periodic-slider","periodic-input",0,0,1000000,250,500,1000,"#periodic-error");
-            Drupal.behaviors.newSlider.activate("duration-slider","duration-input",1,1,40,5,10,20,"#duration-error");
+            Drupal.behaviors.newSlider.activate("one-off-slider","one-off-input",0,0,5000,1250,2500,3750,"#one-off-error");
+            Drupal.behaviors.newSlider.activate("periodic-slider","periodic-input",50,10,250,37,75,125,"#periodic-error");
+            Drupal.behaviors.newSlider.activate("duration-slider","duration-input",10,5,30,7,15,22,"#duration-error");
         },
 
         onChange: function(paymentClass,interestClass,amountClass,investClass, interestInvestClass) {
@@ -51,7 +52,7 @@
             var monthlyPayment = Drupal.behaviors.quickquoteLijfrenteSparen.calculateMonthlyPayment(singleInlay, periodicInlay, 0, duration, 0, interestSavings),
                 investPayment = Drupal.behaviors.quickquoteLijfrenteSparen.calculateMonthlyPayment(singleInlay, periodicInlay, 0, duration, 0, interestInvest),
                 interestAmount = Drupal.behaviors.quickquoteLijfrenteSparen.calculateInterest(singleInlay, periodicInlay, duration , monthlyPayment),
-                totalInlay = parseInt(monthlyPayment) - parseInt(interestAmount);
+                totalInlay = monthlyPayment - interestAmount;
 
             // Print the outcomes of the calculation
             $(paymentClass).text(format.to(monthlyPayment));
