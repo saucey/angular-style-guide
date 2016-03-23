@@ -10,6 +10,7 @@
   var format = wNumb({
     mark: ',',
     thousand: '.',
+    decimals: 2,
     prefix: '€ '
   });
 
