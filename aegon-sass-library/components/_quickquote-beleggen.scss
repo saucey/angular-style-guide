@@ -8,9 +8,25 @@
     .footer-result a {
       color: $white;
       font-family: $font_thin;
+      position:relative;
       @include rem('line-height', 49);
+      @include rem('padding-left', 15);
+      &:after {
+        content:'>';
+        display:block;
+        height:100%;
+        position:absolute;
+        left:0;
+        top:0;
+      }
     }
     .payment-result {
+      .result1, .result2, .result3 {
+        width:auto ;
+        min-width:0 ;
+        margin-right:0;
+        padding-right:2em;
+      }
       .result1, .result1 .title {
         @include rem('font-size', 18);
         font-family: $font_thin;
@@ -32,22 +48,48 @@
           @include rem('font-size', 26);
         }
       }
+      .result3 {
+        padding-right: 20px;
+      }
     }
   }
 }
 
 @include breakpoint($brk-mobile) {
   .quickquote.lijfrente.sparen.beleggen {
+    .calculation {
+      .periodic.slider {
+        .input-header {
+          .input-container:after {
+            top:0;
+          }
+        }
+      }
+    }
     .result  {
       .payment-result {
         width:100%;
+        @include rem('margin-bottom',0 );
         .result1,.result2,.result3 {
-          width:100%;
-          float:none;
+          width:auto;
+          @include rem('margin-bottom',9 );
+          .title , .calculated {
+            font-size:18px;
+            margin-bottom:0;
+          }
+        }
+      }
+      .footer-result {
+        a {
+          font-size:18px;
+          line-height:1em;
+          margin-bottom:1em;
+          @include rem('margin-bottom',18 );
         }
       }
     }
   }
+
 }
 
 @include breakpoint($brk-tablet) {
@@ -58,29 +100,35 @@
         .result1,
         .result2,
         .result3 {
-          width: 32%;
-          min-width: 150px;
+          width: auto;
+          min-width: 0;
           float: left;
-          margin-right: 1%;
+          margin-right: 0;
         }
         .result3 {
-          float:right;
+          float:left;
         }
       }
     }
   }
+
 }
 
 @include breakpoint($brk-ipad-portrait) {
   .quickquote.lijfrente.sparen.beleggen {
     .result {
       .payment-result {
-        width: 63%;
+        width: 100%;
+        .result3 {float:right;}
       }
     }
   }
+
 }
 
 @include breakpoint($brk-large-desktop) {
-
+  .quickquote.lijfrente.sparen.beleggen .result .payment-result {
+    width: 80%;
+    margin-right: 100px;
+  }
 }
