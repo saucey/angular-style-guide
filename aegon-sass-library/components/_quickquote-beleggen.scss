@@ -1,9 +1,26 @@
 .quickquote.lijfrente.sparen.beleggen {
   .calculation {
-    .periodic.slider .input-container input {
-      width:100%;
+      .one-off.slider, .duration.slider, .periodic.slider {
+        .input-header {
+          label {
+          width: 48%;
+          padding-right: 20px;
+          display: inline-block;
+        }
+      }
+    }
+    .periodic.slider {
+      .input-header {
+        .input-container {
+          input {
+            width: 100%;
+          }
+        }
+      }
     }
   }
+
+
   .result {
     .footer-result a {
       color: $white;
@@ -58,6 +75,28 @@
 @include breakpoint($brk-mobile) {
   .quickquote.lijfrente.sparen.beleggen {
     .calculation {
+      .one-off.slider, .duration.slider, .periodic.slider {
+        .input-header {
+          label {
+            width: 48%;
+            padding-right: 20px;
+            display: inline-block;
+          }
+        }
+      }
+    }
+  }
+
+  .quickquote.lijfrente.sparen.beleggen {
+    .calculation {
+      .one-off.slider, .duration.slider, .periodic.slider {
+        .input-header {
+          label {
+            width: 100%;
+            padding-right:35px;
+          }
+        }
+      }
       .periodic.slider {
         .input-header {
           .input-container:after {
@@ -82,9 +121,13 @@
       .footer-result {
         a {
           padding:.5em 0;
+          padding-left: 0.9375rem;
           font-size:18px;
           line-height:1em;
           @include rem('margin-bottom',0 );
+          &:after {
+            top: .5em;
+          }
         }
       }
     }
