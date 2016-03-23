@@ -26,6 +26,7 @@
       noUiSlider.create(sliderElement, settings);
 
 
+
       //Synchronizing slider ranges on change of first slider.
       //TODO: remove from slider.js
       var oneOffSlider = document.getElementById('one-off-slider');
@@ -42,7 +43,7 @@
       oneOffSlider.noUiSlider.on('change', function ( values, handle) {
         if ( handle === 0 ) {
           oneOffSliderInput.value = values[handle];
-          if ($('.quickquote.lijfrente.sparen').length) {
+          if ($('#qqSparen').length) {
             var sliderValue = oneOffSlider.noUiSlider.get().replace(/\./g , '');
             updateDepositRange(0, parseInt(sliderValue));
           }
