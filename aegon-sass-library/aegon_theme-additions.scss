@@ -26,4 +26,14 @@
 @import "components/button";
 @import "components/breadcrumbs";
 @import "components/login-link";
+
+/* QuickQuote Dependencies */
+@import "layout/grids";
+@import "vendors/_nouislider.min.css";
+@import "components/no-ui-slider";
+@import "components/text-input";
+@import "components/quickquote-lijfrente";
+@import "components/quickquote-lijfrente-sparen";
+@import "components/quickquote-beleggen";
+
 @import "base/icon";	//provides the icon styles, aka the webfont icons
