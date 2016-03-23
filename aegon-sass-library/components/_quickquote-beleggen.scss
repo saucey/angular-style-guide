@@ -72,7 +72,7 @@
         @include rem('margin-bottom',0 );
         .result1,.result2,.result3 {
           width:auto;
-          @include rem('margin-bottom',9 );
+          @include rem('margin-bottom',18 );
           .title , .calculated {
             font-size:18px;
             margin-bottom:0;
@@ -81,10 +81,10 @@
       }
       .footer-result {
         a {
+          padding:.5em 0;
           font-size:18px;
           line-height:1em;
-          margin-bottom:1em;
-          @include rem('margin-bottom',18 );
+          @include rem('margin-bottom',0 );
         }
       }
     }
@@ -107,6 +107,8 @@
         }
         .result3 {
           float:left;
+          margin-top: -2px;
+          margin-bottom: 2px;
         }
       }
     }
@@ -121,14 +123,37 @@
         width: 100%;
         .result3 {float:right;}
       }
+      .result-button {
+          float:right;
+      }
+    }
+  }
+  .quickquote.lijfrente.sparen.beleggen {
+    .result {
+      .footer-result {
+        width:50%;
+      }
+      .payment-result {
+        margin-right: 0px;
+      }
     }
   }
 
 }
 
 @include breakpoint($brk-large-desktop) {
-  .quickquote.lijfrente.sparen.beleggen .result .payment-result {
-    width: 80%;
-    margin-right: 100px;
+  .quickquote.lijfrente.sparen.beleggen {
+    .result {
+      .footer-result {
+        width:50%;
+      }
+      .payment-result {
+        width: 80%;
+        margin-right: 100px;
+      }
+      .result-button {
+        margin-right:200px;
+      }
+    }
   }
 }
