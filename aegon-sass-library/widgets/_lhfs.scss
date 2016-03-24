@@ -343,53 +343,6 @@
   }
 }
 
-.help {
-  padding: 15px 10px;
-  display: inline-block;
-  float: left;
-  position: relative;
-  &.dialog {
-    z-index: 5;
-    $help_dialog_width: 400px;
-    background-color: $slightly_lighter_blue;
-    display: block;
-    position: absolute;
-    padding: 18px;
-    margin:0;
-    max-width: $help_dialog_width;
-    border-radius: $frame_border_radius;
-    &.top{
-      @include bubble($width: 10px, $left: $help_dialog_width / 2, $quadrant: 2, $background-color: $slightly_lighter_blue);
-    }
-    &.bottom{
-      @include bubble($width: 10px, $left: $help_dialog_width / 2, $quadrant: 0, $background-color: $slightly_lighter_blue);
-    }
-    &.left{
-      @include bubble($width: 10px, $left: $help_dialog_width / 2, $quadrant: 3, $background-color: $slightly_lighter_blue);
-    }
-    &.right{
-      @include bubble($width: 10px, $left: $help_dialog_width / 2, $quadrant: 1, $background-color: $slightly_lighter_blue);
-    }
-    &.top, &.bottom, &.right, &.left{
-      &:before{
-        content: none;
-      }
-    }
-  }
-  &:before {
-    font-family: $font_icons;
-    font-size: 16px;
-    content: $font_icons_help;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 18px;
-  }
-  &:after {
-    left: 50% !important;
-  }
-}
-
 ul.actions {
   text-align: left;
   li {
@@ -609,19 +562,6 @@ ul.horizontal {
           }
         }
       }
-    }
-  }
-  .help {
-    float: right;
-    &.dialog {
-      max-width: 95%;
-      left: auto !important; // important to overwrite the inline style added by the script
-      right: 2%;
-    }
-    &:before {}
-    &:after {
-      left: auto !important;
-      right: 0;
     }
   }
 }

@@ -108,6 +108,14 @@
   .personal_details_widget {
     &.container_12 {
       .horizontal.row-fluid {
+        li {
+          input.invalid.blurred {
+            margin-top: 10px;
+            ~ .errorText {
+              top: -63px;
+            }
+          }
+        }
         .label.span3 {
           width: 85%;
         }
