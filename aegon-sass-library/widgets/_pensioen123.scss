@@ -5,102 +5,100 @@
 // http://oli.jp/2011/ids/
 
 .pensioen123_widget {
-
-  button, .button, .top p {
+  button,
+  .button,
+  .top p {
     @include rem('margin', 0, 0, 30);
   }
-
   .user-details {
     display: table;
-
     .span4 {
-      padding: 0 20px;
-      background: #3E97CF;
-      color: #fff;
-      text-align: center;
       display: table;
-      height: 200px;
       overflow: hidden;
 
+      height: 200px;
+      padding: 0 20px;
+
+      text-align: center;
+
+      color: #fff;
+      background: #3e97cf;
       @media screen and(min-width: $rc-m-min-width) and(max-width: $rc-m-max-width) {
         // overwrite grids.scss
         &:last-child {
           clear: none;
+
           margin: 0;
           margin-left: 2%;
         }
       }
-
       h2 {
-        color: #fff;
         margin: 5px 0;
 
+        color: #fff;
         &.teaser {
+          font-weight: bolder;
+
           @include rem('font-size', 28);
           @include rem('line-height', 36);
-          font-weight: bolder;
         }
       }
-
       &.video {
-        padding: 0;
-        display:table-cell;
-        vertical-align: middle;
+        display: table-cell;
 
+        padding: 0;
+
+        vertical-align: middle;
         iframe {
           width: 100%;
           height: 100%;
         }
       }
-
       .innerbox {
         display: table-cell;
+
         vertical-align: middle;
       }
     }
   }
-
   .product-overview {
     margin: 30px 0;
-
     .row-fluid {
       border-bottom: 1px solid #ccc;
-
       .logo {
-        max-height: 35px;
-        margin-bottom: 15px;
         float: right;
+
         width: auto;
         max-width: 100%;
+        max-height: 35px;
+        margin-bottom: 15px;
       }
-
       .span12 {
-
         .tab {
           @media screen and(min-width: 640px) {
             display: block !important;
           }
         }
-
         .span6 {
           display: table;
-          height: 70px;
 
+          height: 70px;
           div {
             display: table-cell;
-            vertical-align: middle;
 
+            vertical-align: middle;
             .icon {
-              cursor: pointer;
-              height: auto;
-              margin-top: 5px;
-              display: inline-block;
               position: relative;
 
+              display: inline-block;
+
+              height: auto;
+              margin-top: 5px;
+
+              cursor: pointer;
               img {
                 width: auto;
                 max-height: 43px;
-
                 &.selected {
                   position: absolute;
                   top: 0;
@@ -108,118 +106,120 @@
                 }
               }
             }
-
             p {
               margin: 0;
             }
           }
         }
-
-        &.details, .more-details {
+        &.details,
+        .more-details {
           width: 100%;
-          background: #F2F2F2;
           margin-left: 0;
 
+          background: #f2f2f2;
           span {
             display: block;
           }
-
           .title {
             font-weight: bold;
           }
         }
-
         &.details {
-          padding: 15px;
           display: none;
 
+          padding: 15px;
           .table {
-            display: table;
             position: relative;
 
-              tr:nth-child(even) {
-                background-color: #fff;
-              }
+            display: table;
+            tr:nth-child(even) {
+              background-color: #fff;
+            }
+            tr:nth-child(odd) {
+              background-color: $lighter_grey;
+            }
+            th {
+              font-weight: bold;
 
-              tr:nth-child(odd) {
-                 background-color:$lighter_grey;
-              }
-
-              th  {
-                background-color: $lighter_grey;
-                font-weight: bold;
-              }
+              background-color: $lighter_grey;
+            }
           }
-
           .image {
-            width: 95px;
             display: table-cell;
-            vertical-align: top;
 
+            width: 95px;
+
+            vertical-align: top;
             .icon {
               &.big {
                 float: left;
+
                 width: 80px;
               }
             }
           }
-
           .description {
-            width: 100%;
             display: table-cell;
             float: left;
-            vertical-align: top;
+
+            width: 100%;
             padding-top: 4px;
 
+            vertical-align: top;
             img {
-              max-width: 100%;
               display: block;
+
+              max-width: 100%;
               margin: 0 auto;
             }
           }
-
           .more-details {
             display: none;
           }
-
           .highlighted {
-            background-color: #3395d3;
+            float: left;
+
+            margin: 0 0 .9375rem 0;
             padding: 15px;
-            border-radius: 5px;
-            border-radius: 0.3125rem;
+
             color: $white;
-            margin: 0 0 0.9375rem 0;
+            border-radius: 5px;
+            border-radius: .3125rem;
+            background-color: #3395d3;
             p {
               margin: 0;
             }
           }
-
           table {
             width: 100%;
             margin-bottom: 10px;
           }
-
-          table, p, div {
+          table,
+          p,
+          div {
             .title {
               font-weight: bolder;
             }
             .footer {
               font-size: 14px;
+
               padding-right: 3em;
             }
             &.full-width {
-              width: 100%;
               float: left;
+
+              width: 100%;
             }
             &.half-width {
-              @media screen and(min-width: $rc-m-min-width) and(max-width: $rc-m-max-width) {
-                width: 100%;
-                float: none;
-              }
-              width: 48%;
               float: left;
-              margin-right: 1%;
 
+              width: 48%;
+              margin-right: 1%;
+              @media screen and(min-width: $rc-m-min-width) and(max-width: $rc-m-max-width) {
+                float: none;
+
+                width: 100%;
+              }
               .right {
                 float: right;
               }
@@ -228,43 +228,44 @@
               }
             }
           }
-
           .close {
-            margin-right: 25px;
             float: left;
 
+            margin-right: 25px;
             &:after {
               -webkit-transform: rotate(270deg);
-              -ms-transform: rotate(270deg);
-              transform: rotate(270deg);
+                  -ms-transform: rotate(270deg);
+                      transform: rotate(270deg);
             }
           }
-
           .more {
             &:after {
               -webkit-transform: rotate(90deg);
-              -ms-transform: rotate(90deg);
-              transform: rotate(90deg);
+                  -ms-transform: rotate(90deg);
+                      transform: rotate(90deg);
             }
           }
-
-          .close:after, .more:after {
-            display: inline-block;
-            font-size: 15px;
-            font-size: 0.9375rem;
-            margin-left: 5px;
+          .close:after,
+          .more:after {
             font-family: 'aegon_icons';
-            content: '\e600';
-            vertical-align: bottom;
+            font-size: 15px;
+            font-size: .9375rem;
             font-weight: normal;
-            -webkit-font-smoothing: antialiased;
+
+            display: inline-block;
+
+            margin-left: 5px;
+
+            content: '\e600';
             transition: -webkit-transform .2s ease;
-            transition: transform .2s ease;
+            transition:         transform .2s ease;
+            vertical-align: bottom;
+
+            -webkit-font-smoothing: antialiased;
           }
         }
       }
     }
-
   }
 }
 
@@ -273,54 +274,51 @@
 // --------------------------------------------------
 
 @media screen and(max-width: $rc-m-max-width) {
-
   .pensioen123_widget {
     .product-overview {
       .row-fluid .span12 .span4 {
-        width: 32% ;
         clear: none;
+
+        width: 32% ;
       }
     }
-
     .user-details {
-
       .span4 {
-        height:100px !important; // !important needed due javascript calculating height on load
         // overwrite grids.scss
         width: 100% !important;
+        height: 100px !important; // !important needed due javascript calculating height on load
+        margin-bottom: .3125rem;
         margin-left: 0 !important;
-        margin-bottom: 0.3125rem;
-
         h2 {
-          color: #fff;
           margin: 5px 0;
 
+          color: #fff;
           &.teaser {
+            font-weight: normal;
+
             @include rem('font-size', 22);
             @include rem('line-height', 22);
-            font-weight: normal;
           }
         }
-
         &.video {
-          padding: 0;
           min-height: 200px;
-
+          padding: 0;
           iframe {
             width: 100%;
             height: 100%;
             min-height: 200px;
           }
         }
-
         .innerbox {
           display: table-cell;
-          vertical-align: middle;
 
+          vertical-align: middle;
           div {
-            vertical-align: middle;
-            width: 300px;
             display: table-cell;
+
+            width: 300px;
+
+            vertical-align: middle;
           }
         }
       }
@@ -328,39 +326,33 @@
   }
 }
 @include breakpoint($brk-mobile) {
-
   .pensioen123_widget {
-
     .product-overview {
-
       .row-fluid {
         .span12 {
           margin-bottom: 0;
-
           .tab {
             display: none;
             float: left;
-
             &.open {
-              display:block;
+              display: block;
             }
           }
-
           .span4 {
             width: 100%;
           }
-
           .span6 {
             margin-bottom: 0;
             div {
-              overflow:hidden;
-              position:relative;
+              position: relative;
+
+              overflow: hidden;
               .icon {
-                width: 25%;
                 display: block;
                 float: left;
-                margin: 0;
 
+                width: 25%;
+                margin: 0;
                 img {
                   width: 100%;
                   max-height: initial;
@@ -368,50 +360,56 @@
               }
             }
           }
-
           .title {
-            color: $blue;
             font-size: 1.5625rem;
+
             cursor: pointer;
 
+            color: $blue;
             &:after {
-              display: inline-block;
+              font-family: 'aegon_icons';
               font-size: 15px;
-              font-size: 0.9375rem;
+              font-size: .9375rem;
+              font-weight: normal;
+
               position: absolute;
               right: 0;
-              margin-right: 5px;
-              font-family: 'aegon_icons';
-              content: '\e600';
-              font-weight: normal;
-              -webkit-font-smoothing: antialiased;
-              transition: -webkit-transform .2s ease;
-              transition: transform .2s ease;
-              -webkit-transform: rotate(90deg);
-              -ms-transform: rotate(90deg);
-              transform: rotate(90deg);
-            }
 
+              display: inline-block;
+
+              margin-right: 5px;
+
+              content: '\e600';
+              transition: -webkit-transform .2s ease;
+              transition:         transform .2s ease;
+              -webkit-transform: rotate(90deg);
+                  -ms-transform: rotate(90deg);
+                      transform: rotate(90deg);
+
+              -webkit-font-smoothing: antialiased;
+            }
             &.arrowup:after {
               -webkit-transform: rotate(270deg);
-              -ms-transform: rotate(270deg);
-              transform: rotate(270deg);
+                  -ms-transform: rotate(270deg);
+                      transform: rotate(270deg);
             }
           }
-
           &.details {
             margin-top: -6px;
             padding: 15px 15px 0 15px;
             .image {
               display: none;
             }
-            .table{
-              .title{
-                color: #000;
-                cursor: auto;
+            .table {
+              .title {
                 padding-right: 0;
+
+                cursor: auto;
+
+                color: #000;
+
                 @include rem('font-size',18);
-                &:after{
+                &:after {
                   content: none;
                 }
               }
@@ -419,22 +417,18 @@
             .more-details {
               display: none !important;
             }
-
             .close {
               display: none;
             }
-
             .more {
               display: none;
             }
           }
         }
       }
-
       .span4 {
         display: block; /* Fix for tech library */
       }
     }
   }
 }
-

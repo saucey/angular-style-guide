@@ -103,3 +103,52 @@
     font-family: $font_normal;
   }
 }
+// mobile
+@include breakpoint($brk-mobile) {
+  .personal_details_widget {
+    &.container_12 {
+      .horizontal.row-fluid {
+        li {
+          input.invalid.blurred {
+            margin-top: 10px;
+            ~ .errorText {
+              top: -63px;
+            }
+          }
+        }
+        .label.span3 {
+          width: 85%;
+        }
+
+        .span1 {
+          width: 15%;
+        }
+
+        .value.span8 {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+// tablet
+@media screen and (min-width: $rc-m-min-width) and (max-width: $rc-m-max-width) {
+  .personal_details_widget {
+    &.container_12 {
+      .horizontal.row-fluid {
+        .label.span3 {
+          width: 43%;
+        }
+
+        .span1 {
+          width: 5%;
+        }
+
+        .value.span8 {
+          width: 48%;
+        }
+      }
+    }
+  }
+}

@@ -43,7 +43,7 @@
       oneOffSlider.noUiSlider.on('change', function ( values, handle) {
         if ( handle === 0 ) {
           oneOffSliderInput.value = values[handle];
-          if ($('.quickquote.lijfrente.sparen').length) {
+          if ($('#qqSparen').length) {
             var sliderValue = oneOffSlider.noUiSlider.get().replace(/\./g , '');
             updateDepositRange(0, parseInt(sliderValue));
           }
@@ -53,12 +53,14 @@
       sliderElement.noUiSlider.on('update', function ( values, handle) {
         if ( handle === 0 ) {
           inputSlider.value = values[handle];
-          if ($('.quickquote.lijfrente.uitkeren').length) {
+          if ($('#qqUitkeren').length) {
             Drupal.behaviors.quickquoteLijfrente.onChange("#payment-calculated","#interest-amount");
           }
-          if ($('.quickquote.lijfrente.sparen').length) {
+          if ($('#qqSparen').length) {
             Drupal.behaviors.quickquoteLijfrenteSparen.onChange("#pension-calculated","#interest-amount","#interest-calculated", "#interest-amount-deposito");
-
+          }
+          if ($('#qqBeleggen').length) {
+            Drupal.behaviors.quickquoteBeleggen.onChange("#savings-calculated","#interestSavings","#inlay-calculated","#investment-calculated", "#interestInvest");
           }
         }
       });

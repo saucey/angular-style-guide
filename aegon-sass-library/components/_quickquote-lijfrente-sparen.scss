@@ -148,7 +148,7 @@
 
       width: 64%;
       float: left;
-      .result1, .result2 {
+      .result1, .result2 , .result3{
         width: 45%;
         min-width: 202px;
         float: left;
@@ -192,9 +192,11 @@
   @include rem('padding', 30);
   @include rem('line-height', 22);
   @include rem('font-size', 18);
-
-
 }
+
+
+
+
 
 @include breakpoint($brk-mobile) {
   .quickquote.lijfrente.sparen {
@@ -308,6 +310,15 @@
       }
     }
   }
+  .quickquote.lijfrente.sparen.beleggen .result .payment-result {
+    width:100%;
+  }
+  .quickquote.lijfrente.sparen.beleggen .result .payment-result .result1,
+  .quickquote.lijfrente.sparen.beleggen .result .payment-result .result2,
+  .quickquote.lijfrente.sparen.beleggen .result .payment-result .result3 {
+    width:100%;
+    float:none;
+  }
 }
 
 @include breakpoint($brk-tablet) {
@@ -316,6 +327,24 @@
       .input-header {
         .help {
           margin-top: 0;
+        }
+      }
+    }
+  }
+  .quickquote.lijfrente.sparen.beleggen {
+    .result {
+      .payment-result  {
+        width:100%;
+        .result1,
+        .result2,
+        .result3 {
+          width: 32%;
+          min-width: 150px;
+          float: left;
+          margin-right: 1%;
+        }
+        .result3 {
+          float:right;
         }
       }
     }
@@ -341,6 +370,9 @@
       }
     }
   }
+  .quickquote.lijfrente.sparen.beleggen .result .payment-result {
+    width: 77%;
+  }
 }
 
 @include breakpoint($brk-large-desktop) {
@@ -360,4 +392,5 @@
       }
     }
   }
+
 }
