@@ -79,7 +79,7 @@
           @include rem('padding-right', 40);
         }
         &:after {
-          content: 'Jaar';
+          content: 'jaar';
           @include rem('right', 10);
           left: auto;
         }
