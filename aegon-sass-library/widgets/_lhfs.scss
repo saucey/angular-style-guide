@@ -10,55 +10,72 @@
 
 .lhfs_widget {
   .tip {
-    background-color: $sky;
-    @include inlineFrame();
     padding-left: 40px;
+
+    background-color: $sky;
+
+    @include inlineFrame();
     //margin-bottom: 18px;
     .intro {
+      font-family: $font_normal;
+      font-size: $large;
+
+      margin-bottom: 20px;
+
+      color: $white;
       &:before {
         font-family: $font_icons;
-        content: $font_icons_tip;
-        margin-left: -20px; //this is faking it, compensating for the space requirement of :before, display: inline does not seem to work
-        margin-right: -5px;
-        left: -10px;
+
         position: relative;
+        left: -10px;
+
+        margin-right: -5px;
+        margin-left: -20px; //this is faking it, compensating for the space requirement of :before, display: inline does not seem to work
+
+        content: $font_icons_tip;
       }
-      color: $white;
-      font-size: $large;
-      font-family: $font_normal;
-      margin-bottom: 20px;
     }
   }
-  form>ul,
+  form > ul,
   & ul.products {
-    margin: 0;
     width: 100%;
+    margin: 0;
     &.edit {
       margin-top: 10px;
       @media screen and(max-width: $rc-s-max-width) {
-        margin-top: 0px;
+        margin-top: 0;
         .span6:first-child {
-          line-height: 0px;
-          min-height: 0px;
+          line-height: 0;
+
+          min-height: 0;
         }
       }
     }
     li.product {
       margin: 25px 0 15px 0;
       .description {
+        margin-bottom: 20px;
+        padding-left: 40px;
         &:before {
           font-family: $font_icons;
-          color: $blue;
-          content: $font_icons_headhphones;
-          margin-left: -20px; //this is faking it, compensating for the space requirement of :before, display: inline does not seem to work
-          left: -10px;
+
           position: relative;
+          left: -10px;
+
+          margin-left: -20px; //this is faking it, compensating for the space requirement of :before, display: inline does not seem to work
+
+          content: $font_icons_headhphones;
+
+          color: $blue;
         }
-        padding-left: 40px;
-        margin-bottom: 20px;
       }
       div.title {
         margin-bottom: 18px;
+        button.edit.transparent {
+          float: none;
+          margin: 0;
+          padding: 0;
+        }
       }
       div.title,
       span.police-number {
@@ -73,11 +90,24 @@
     span {
       &.content,
       &.help {
-        display: inline;
+        display: inline-block;
+        float: none;
+      }
+      &.content {
+        width: 228px;
       }
       &.help {
+        margin-left: 10px;
+        padding: 0;
         @media screen and(max-width: $rc-s-max-width) {
           display: none;
+        }
+        &:before {
+          line-height: $elements_height;
+
+          position: static;
+
+          display: inline-block;
         }
       }
     }
@@ -88,7 +118,15 @@
       height: inherit; //$elements_height;
     }
     &:after {
-      content: ":";
+      content: ':';
+    }
+  }
+  li.invalid {
+    position: relative;
+    input ~ .errorText, select ~ .errorText {
+      position: absolute;
+      top: auto;
+      bottom: 100%;
     }
   }
   label.left {
@@ -102,49 +140,54 @@
     display: none;
   }
   .dd {
-    width: 100% !important;
-    max-width: 224px;
+    max-width: 228px;
   }
   .edit {
     ul.error {
       display: block;
-      opacity: 0;
+
       height: 24px;
       min-height: 0;
+
+      opacity: 0;
       [class*='span'] {
-        min-height: 0; //overwriting min-height from row-fluid
         line-height: 18px; //overwriting line-height from *body
+
+        min-height: 0; //overwriting min-height from row-fluid
       }
-      &> li {
-        color: $red;
+      & > li {
         font-size: $small;
+
         margin-left: 0;
+
+        color: $red;
       }
       &.visible {
         opacity: 1;
       }
     }
-    li.label {}
     li.label,
     label {
       font-family: $font_normal;
-      text-align: right;
       line-height: 44px;
       @media screen and(max-width: $rc-s-max-width) {
         text-align: left;
       }
       &:after {
-        content: "";
+        content: '';
       }
     }
     label.checkbox {
-      text-align: left;
       line-height: 32px;
+
+      text-align: left;
     }
     li.label.required:after,
     label.checkbox.required span.label:after {
       margin-left: 5px;
-      content: "*";
+
+      content: '*';
+
       color: $red;
     }
     input[type=text],
@@ -152,13 +195,12 @@
     input[type=number],
     select,
     .ddTitle {
-      display: block;
+      display: inline-block;
     }
     li.value {
       span {
-        &.content,
-        &.help {
-          display: none;
+        &.content {
+          //display: none;
         }
       }
     }
@@ -185,19 +227,22 @@
     &.icon-open:before {
       content: $font_icons_tip;
     }
-    &.open,&.icon-open:before {
+    &.open,
+    &.icon-open:before {
       color: $open_color;
     }
     &.icon-paid:before {
       content: $font_icons_check;
     }
-    &.paid,&.icon-paid:before {
+    &.paid,
+    &.icon-paid:before {
       color: $paid_color;
     }
     &.icon-info:before {
       content: $font_icons_info_black;
     }
-    &.info,&.icon-info:before {
+    &.info,
+    &.icon-info:before {
       color: $black;
     }
   }
@@ -207,14 +252,16 @@
       & > ul,
       & > ul.visible {
         display: table;
+
         width: 100%;
+        padding: 10px 15px;
+
         border-top: none;
         border-bottom: 1px solid $slightly_darker_grey;
-        padding: 10px 15px;
         &.header {
-          background-color: $beige;
           border-top: 1px solid $slightly_darker_grey;
           border-bottom: none;
+          background-color: $beige;
           & > li {
             font-family: $font_medium;
           }
@@ -244,14 +291,16 @@
     background-color: transparent;
     &:before {
       font-family: $font_icons;
+
       content: $font_icons_plus;
+
       color: $grey;
       background-color: transparent;
     }
   }
   .amount {
     &:before {
-      content: "€";
+      content: '€';
     }
   }
   .date {
@@ -260,58 +309,72 @@
 }
 
 .inline_alert {
-  @include inlineFrame();
-  padding: 20px 15px 0 15px;
   display: block;
+
+  padding: 20px 15px 0 15px;
+
   border: 1px solid $light_red;
   background-color: $lighter_red;
+
+  @include inlineFrame();
   hr {
-    height: 1px;
-    color: $light_red;
     width: 100%;
+    height: 1px;
+
+    color: $light_red;
   }
   .top {
-    display: table;
     position: relative;
+
+    display: table;
   }
   .euro {
     font-size: 30px;
-    min-width: 25px;
-    float: left;
-    color: $red;
+
     display: table-cell;
+    float: left;
+
+    min-width: 25px;
+
+    color: $red;
     div {
+      font-weight: bold;
+
       position: absolute;
-      margin-top: 10px;
       top: 0;
       left: 0;
-      font-weight: bold;
+
+      margin-top: 10px;
     }
   }
   .message {
     display: table-cell;
     span {
-      color: #8E8E8C;
+      color: #8e8e8c;
     }
   }
   ul.payments {
     margin: 20px -15px 0 -15px;
     .button.white {
-      background-color: transparent;
       margin: 0 5% 0 0;
+
+      background-color: transparent;
       &:before {
         background-color: transparent;
       }
     }
     & > li {
       & > ul {
+        display: table;
+
+        width: 100%;
         padding: 10px 15px;
+
         border: 1px solid $light_red;
         border-width: 1px 0 0 0;
-        width: 100%;
-        display: table;
         & > li {
           float: none;
+
           width: 21%;
           &:first-child {
             width: 40%;
@@ -325,11 +388,13 @@
           }
           span.debit {
             font-family: $font_medium;
+
             white-space: nowrap;
           }
           a.contact {
             margin-right: 50px;
             margin-left: 20px;
+
             color: #3395d3;
           }
         }
@@ -337,17 +402,19 @@
     }
   }
   h3 {
-    color: $red;
     font-weight: bold;
+
     display: inline-block;
+
+    color: $red;
   }
 }
 
 ul.actions {
   text-align: left;
   li {
-    float: none;
     display: block;
+    float: none;
     &.edit {
       display: none;
     }
@@ -357,19 +424,23 @@ ul.actions {
     li {
       text-align: left;
       &.edit {
-        padding-left: 0;
         display: block;
+
+        padding-left: 0;
         div.disabler {
+          position: relative;
           //required element for disabling of submit elements depending on validity
           z-index: $elements_button_disabled_z-index;
-          position: relative;
-          left: 0;
           top: -$elements_button_height;
-          background-color: white;
-          opacity: 0.5;
+          left: 0;
+
+          display: block; //always-on, state is indicated by z-index of the buttons; see if the always-on creates problems with backgrounds other than white
+
           width: 100%;
           height: $elements_button_height;
-          display: block; //always-on, state is indicated by z-index of the buttons; see if the always-on creates problems with backgrounds other than white
+
+          opacity: .5;
+          background-color: white;
         }
       }
       &.view {
@@ -396,31 +467,34 @@ ul.interval {
 }
 
 ul.horizontal {
-  display: table;
+  //display: table;
+  //width: 100%;
+  display: none; //together with the .data class for li.product toggles on and off the visibility of the data elements
+
+  padding: 1px 0;
   &.row-fluid {
     //height: 50px;
   }
-  padding: 1px 0;
-  //width: 100%;
-  display: none; //together with the .data class for li.product toggles on and off the visibility of the data elements
   &.clear {
+    clear: both;
+
     width: 100%;
     height: 1px;
     margin: 0 0 -1px;
-    clear: both;
   }
   &.visible {
     display: block;
   }
   li {
+    //display: table-cell;
+
+    vertical-align: middle;
     &.label {
       font-family: $font_normal;
     }
     &.value {
       font-family: $font_light;
     }
-    display: table-cell;
-    vertical-align: middle;
   }
 }
 
@@ -433,7 +507,7 @@ ul.horizontal {
 
 .lhfs_widget {
   .product.data.span12,
-  .row-fluid li.value[class*='span'] {
+  .row-fluid [class*='span'] {
     margin-left: 0; //overrides the setting for a left margin of 2% for all spans starting at the second one in a list, which creates an indent in lhfs widget design in the .product ul
   }
 }
@@ -457,6 +531,7 @@ ul.horizontal {
             }
             a.contact {
               display: block;
+
               margin: 0;
             }
             &:first-child {
@@ -471,6 +546,7 @@ ul.horizontal {
             }
             &:nth-of-type(3) {
               float: right;
+
               margin-top: -28px;
             }
           }
@@ -498,6 +574,7 @@ ul.horizontal {
         > li > ul {
           > li:nth-of-type(3) {
             width: 35%;
+
             text-align: right;
           }
         }
@@ -514,21 +591,22 @@ ul.horizontal {
       }
       tbody {
         tr {
-          height: auto;
           display: block;
-          border-top: 1px solid #e0e0e0;
 
+          height: auto;
+
+          border-top: 1px solid #e0e0e0;
           &:first-child {
             border-top: 0;
           }
         }
         tr.even {
           background: #fff;
-          
         }
         td {
-          width: auto;
           display: table-cell;
+
+          width: auto;
           padding: 10px 0;
           li.status {
             height: 30px;
@@ -542,17 +620,20 @@ ul.horizontal {
           }
           &:nth-child(4) {
             width: 100%;
+
             text-align: center;
           }
           &:first-child {
-            margin-top: 15px;
-            width: 100%;
             display: block;
-            padding: 0;
+
+            width: 100%;
             height: auto;
+            margin-top: 15px;
+            padding: 0;
             &:before {
-              content: 'Datum: ';
               font-weight: bold;
+
+              content: 'Datum: ';
             }
           }
           .open,

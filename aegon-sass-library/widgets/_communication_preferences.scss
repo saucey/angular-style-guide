@@ -104,9 +104,11 @@
     }
 */
   }
-
-  button.edit.right {
+  button.edit.transparent {
     line-height: inherit;
+    float: none;
+    margin: 0;
+    padding: 0;
   }
   ul.horizontal.visible{
     li{
