@@ -9,6 +9,14 @@
 }
 
 .lhfs_widget {
+  h3 {
+    button.edit.transparent {
+      float: none;
+
+      margin: 0;
+      padding: 0;
+    }
+  }
   .tip {
     padding-left: 40px;
 
@@ -39,7 +47,6 @@
   form > ul,
   & ul.products {
     width: 100%;
-    margin: 0;
     &.edit {
       margin-top: 10px;
       @media screen and(max-width: $rc-s-max-width) {
@@ -71,11 +78,6 @@
       }
       div.title {
         margin-bottom: 18px;
-        button.edit.transparent {
-          float: none;
-          margin: 0;
-          padding: 0;
-        }
       }
       div.title,
       span.police-number {
@@ -123,7 +125,8 @@
   }
   li.invalid {
     position: relative;
-    input ~ .errorText, select ~ .errorText {
+    input ~ .errorText,
+    select ~ .errorText {
       position: absolute;
       top: auto;
       bottom: 100%;
@@ -467,8 +470,7 @@ ul.interval {
 }
 
 ul.horizontal {
-  //display: table;
-  //width: 100%;
+  width: 100%;
   display: none; //together with the .data class for li.product toggles on and off the visibility of the data elements
 
   padding: 1px 0;
@@ -486,11 +488,9 @@ ul.horizontal {
     display: block;
   }
   li {
-    //display: table-cell;
-
     vertical-align: middle;
     &.label {
-      font-family: $font_normal;
+      font-family: $font_medium;
     }
     &.value {
       font-family: $font_light;
@@ -506,8 +506,7 @@ ul.horizontal {
  */
 
 .lhfs_widget {
-  .product.data.span12,
-  .row-fluid [class*='span'] {
+  .product.data.span12 {
     margin-left: 0; //overrides the setting for a left margin of 2% for all spans starting at the second one in a list, which creates an indent in lhfs widget design in the .product ul
   }
 }
@@ -566,6 +565,10 @@ ul.horizontal {
 
 @include breakpoint($brk-mobile) {
   .lhfs_widget {
+    h3 {
+      color: #000;
+      @include rem('font-size', 20);
+    }
     input[type=text] {
       width: 228px;
     }

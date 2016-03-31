@@ -32,7 +32,7 @@
         margin-left: 10px;
         padding: 0;
         @media screen and(max-width: $rc-s-max-width) {
-          display: none;
+          //display: none;
         }
         &:before {
           line-height: $elements_height;
@@ -124,8 +124,25 @@
 }
 // mobile
 @include breakpoint($brk-mobile) {
+  .personal_details_widget, .communication_preferences, .lhfs_widget {
+    .help.dialog.bottom:after {
+      right: 20%;
+    }
+    label.checkbox {
+      > input[type="checkbox"] {
+        & + span.checkbox,
+        & + a.checkbox {
+          left: 0; // fix for alignment in mobile view
+        }
+      }
+    }
+  }
   .personal_details_widget {
     &.container_12 {
+      h3 {
+        color: #000000;
+        @include rem('font-size', 20);
+      }
       .horizontal.row-fluid {
         li {
           input.invalid.blurred {
@@ -153,19 +170,23 @@
 
 // tablet
 @media screen and (min-width: $rc-m-min-width) and (max-width: $rc-m-max-width) {
-  .personal_details_widget {
+  .personal_details_widget, .lhfs_widget, .communication_preferences {
     &.container_12 {
-      .horizontal.row-fluid {
-        .label.span3 {
-          width: 43%;
-        }
-
+      .row-fluid {
         .span1 {
           width: 5%;
         }
-
-        .value.span8 {
-          width: 48%;
+        .span3 {
+          width: 40%;
+        }
+        .span4 {
+          width: 47%;
+        }
+        .span8 {
+          width: 50%;
+          input[type=text], input[type=email], input[type=number], select, div.dd, .content {
+            width: 220px;
+          }
         }
       }
     }

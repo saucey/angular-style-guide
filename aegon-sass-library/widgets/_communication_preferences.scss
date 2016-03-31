@@ -191,6 +191,10 @@
 @include breakpoint($brk-mobile) {
   .communication_preferences {
     &.container_12 {
+      h3 {
+        color: #000000;
+        @include rem('font-size', 20);
+      }      
       .horizontal.row-fluid {
         .label.span3 {
           width: 85%;
@@ -202,27 +206,6 @@
 
         .value.span8 {
           width: 100%;
-        }
-      }
-    }
-  }
-}
-
-// tablet
-@media screen and (min-width: $rc-m-min-width) and (max-width: $rc-m-max-width) {
-  .communication_preferences {
-    &.container_12 {
-      .horizontal.row-fluid {
-        .label.span3 {
-          width: 43%;
-        }
-
-        .span1 {
-          width: 5%;
-        }
-
-        .value.span8 {
-          width: 48%;
         }
       }
     }
