@@ -86,7 +86,7 @@
   //and 1 or 3 with EITHER top or bottom
   //if the nose is supposed to be solid, background-color can be set to transparent
 
-  &:before, &:after {
+  &:before, &:after, .caret {
     content: '';
     display: block;
     position: absolute;
@@ -117,7 +117,7 @@
     border-width: $width;
     border-radius: inherit;
   }
-  &:after {
+  &:after, .caret {
     $pos: (-2 * $width) + $border;
     @if $quadrant == 0 {
       top: $pos;

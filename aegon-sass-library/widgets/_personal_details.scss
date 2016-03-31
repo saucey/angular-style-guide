@@ -8,6 +8,12 @@
   ul.horizontal { //overwriting the default "none" setting, but this might be an obsolete approach anyway, so the "none" setting could be eliminated in general setup
     display: block;
   }
+  button.edit.transparent {
+    float: none;
+    margin: 0;
+    padding: 0;
+  }
+
   li.value {
     @media screen and(min-width: $rc-m-min-width) and(max-width: $rc-l-max-width) {
       line-height: 100%;
@@ -15,12 +21,25 @@
     }
     span {
       &.content, &.help {
-        display: inline;
+        display: inline-block;
         line-height: 150%;
       }
+      &.content {
+        width: 228px;
+      }
       &.help {
+        float:none;
+        margin-left: 10px;
+        padding: 0;
         @media screen and(max-width: $rc-s-max-width) {
-          display: none;
+          //display: none;
+        }
+        &:before {
+          line-height: $elements_height;
+
+          position: static;
+
+          display: inline-block;
         }
       }
     }
@@ -33,6 +52,14 @@
   }
   label.left {
     float:left;
+  }
+  li.invalid {
+    position: relative;
+    input ~ .errorText, select ~ .errorText {
+      position: absolute;
+      top: auto;
+      bottom: 100%;
+    }
   }
 
   .edit {
@@ -54,13 +81,6 @@
         opacity: 1;
       }
     }
-    li.label {
-      //padding-right: 55px;
-      //text-align: right;
-      //@media screen and(max-width: $rc-s-max-width) {
-      //  text-align: left;
-      //}
-    }
     li.label, label {
       font-family: $font_normal;
       &:after {
@@ -72,7 +92,6 @@
       content: "*";
       color: $red;
     }
-
   }
 
   ul.horizontal.row-fluid {  //trying to fix the height set by the grid of 50px; there might be a necessity to adapt the margin-bottom in responsiveness and hopefully this change can be adapted in the future over all widgets and / or implemented in grid.scss
@@ -105,8 +124,25 @@
 }
 // mobile
 @include breakpoint($brk-mobile) {
+  .personal_details_widget, .communication_preferences, .lhfs_widget {
+    .help.dialog.bottom:after {
+      right: 20%;
+    }
+    label.checkbox {
+      > input[type="checkbox"] {
+        & + span.checkbox,
+        & + a.checkbox {
+          left: 0; // fix for alignment in mobile view
+        }
+      }
+    }
+  }
   .personal_details_widget {
     &.container_12 {
+      h3 {
+        color: #000000;
+        @include rem('font-size', 20);
+      }
       .horizontal.row-fluid {
         li {
           input.invalid.blurred {
@@ -134,19 +170,23 @@
 
 // tablet
 @media screen and (min-width: $rc-m-min-width) and (max-width: $rc-m-max-width) {
-  .personal_details_widget {
+  .personal_details_widget, .lhfs_widget, .communication_preferences {
     &.container_12 {
-      .horizontal.row-fluid {
-        .label.span3 {
-          width: 43%;
-        }
-
+      .row-fluid {
         .span1 {
           width: 5%;
         }
-
-        .value.span8 {
-          width: 48%;
+        .span3 {
+          width: 40%;
+        }
+        .span4 {
+          width: 47%;
+        }
+        .span8 {
+          width: 50%;
+          input[type=text], input[type=email], input[type=number], select, div.dd, .content {
+            width: 220px;
+          }
         }
       }
     }
