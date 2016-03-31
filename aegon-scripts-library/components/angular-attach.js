@@ -3,14 +3,13 @@
 (function () {
   // Currently available Angular 2 based components.
   var angularComponents = [
-    'angulartest',
     'quickquote-dip'
   ],
   i;
-  
+
   // Generic configuration for all Angular 2 based components.
   /*System.config({
-    packages: {        
+    packages: {
       'components': {
         format: 'register',
         defaultExtension: 'js'
@@ -20,11 +19,11 @@
       "components": "/scripts/components"
     }
   });*/
-  
+
   for (i = 0; i < angularComponents.length; i++) {
     addDrupalBehavior(angularComponents[i]);
   }
-  
+
   function addDrupalBehavior(componentName) {
     Drupal.behaviors[componentName] = {
       attach: function () {

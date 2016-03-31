@@ -99,6 +99,9 @@ button,
     &.icon-search:after {
       content: $font_icons_search;
     }
+    &.icon-calculator:after {
+      content: $font_icons_calculator;
+    }
     &.arrow:after {
       content: $font_icons_arrow_right;
     }
