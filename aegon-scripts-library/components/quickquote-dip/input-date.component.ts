@@ -5,17 +5,16 @@ import {CONST_EXPR} from "angular2/src/facade/lang";
 @Component({
   selector: 'aegon-input-date',
   template: `
-    <span>
-      <input placeholder="dd" type="text" [required]="required" [ngModel]="day"
-             (ngModelChange)="changeDay($event) && monthEl.focus()" (blur)="day = format(day, 2)">
-    </span>
-    <span>
-      <input #monthEl placeholder="mm" type="text" [required]="required" [ngModel]="month"
-             (ngModelChange)="changeMonth($event) && yearEl.focus()" (blur)="month = format(month, 2)">
-    </span>
-    <span>
-      <input #yearEl placeholder="jjjj" type="text" [required]="required" [ngModel]="year"
-             (ngModelChange)="changeYear($event)" (blur)="year = format(year, 4)">
+    <span class="input date">
+      <input #dayEl class="day" placeholder="dd" type="text" [required]="required" [ngModel]="day"
+             (ngModelChange)="changeDay($event) && focus(monthEl)"
+             (focus)="dayEl.select()" (blur)="day = format(day, 2)">
+      <input #monthEl class="month" placeholder="mm" type="text" [required]="required" [ngModel]="month"
+             (ngModelChange)="changeMonth($event) && focus(yearEl)"
+             (focus)="monthEl.select()" (blur)="month = format(month, 2)">
+      <input #yearEl class="year" placeholder="jjjj" type="text" [required]="required" [ngModel]="year"
+             (ngModelChange)="changeYear($event)"
+             (focus)="yearEl.select()" (blur)="year = format(year, 4)">
     </span>
   `
 })
@@ -27,8 +26,57 @@ export class InputDateComponent {
 
   @Output() modelChange: any = new EventEmitter();
 
-  sanitize(value: string, maxLength: number): string {
-    return value.replace(/\D/g, '').substr(0, maxLength);
+  focus(elem: HTMLElement): void {
+    // Delay focus, so modelChange event has time to finish formatting properly.
+    setTimeout(() => {
+      elem.focus();
+    }, 0);
+  }
+
+  sanitizeDay(value: string): string {
+    let num = parseInt(value, 10);
+    if (!num) {
+      return '';
+    }
+    return String(num > 31 ? 31 : num);
+  }
+
+  sanitizeMonth(value: string): string {
+    let num = parseInt(value, 10);
+    if (!num) {
+      return '';
+    }
+    return String(num > 12 ? 12 : num);
+  }
+
+  sanitizeYear(value: string): string {
+    return value.replace(/\D/g, '').substr(0, 4);
+  }
+
+  changeDay(value: string): boolean {
+    this.day = value;
+    value = this.sanitizeDay(value);
+    // Use timeout to let change detector pick up the change and correct the input field value.
+    setTimeout(() => {this.day = value;}, 0);
+    this.emitChange({day: value});
+    return value.length === 2;
+  }
+
+  changeMonth(value: string): boolean {
+    this.month = value;
+    value = this.sanitizeMonth(value);
+    // Use timeout to let change detector pick up the change and correct the input field value.
+    setTimeout(() => {this.month = value;}, 0);
+    this.emitChange({month: value});
+    return value.length === 2;
+  }
+
+  changeYear(value: string): void {
+    this.year = value;
+    value = this.sanitizeYear(value);
+    // Use timeout to let change detector pick up the change and correct the input field value.
+    setTimeout(() => {this.year = value;}, 0);
+    this.emitChange({year: value});
   }
 
   format(value: any, length): string {
@@ -40,32 +88,6 @@ export class InputDateComponent {
     return value.length >= length ?
       value.substr(0, length) :
       new Array(length - value.length + 1).join('0') + value;
-  }
-
-  changeDay(value: string): boolean {
-    this.day = value;
-    value = this.sanitize(value, 2);
-    // Use timeout to let change detector pick up the change.
-    setTimeout(() => {this.day = value;}, 0);
-    this.emitChange({day: value});
-    return value.length === 2;
-  }
-
-  changeMonth(value: string): boolean {
-    this.month = value;
-    value = this.sanitize(value, 2);
-    // Use timeout to let change detector pick up the change.
-    setTimeout(() => {this.month = value;}, 0);
-    this.emitChange({month: value});
-    return value.length === 2;
-  }
-
-  changeYear(value: string): void {
-    this.year = value;
-    value = this.sanitize(value, 4);
-    // Use timeout to let change detector pick up the change.
-    setTimeout(() => {this.year = value;}, 0);
-    this.emitChange({year: value});
   }
 
   emitChange(params: any): void {
