@@ -1,0 +1,44 @@
+.quickquote.dip {
+  label {
+    font-weight: normal;
+  }
+
+  .field {
+    &:after {
+      content: ' ';
+      clear: both;
+      display: block;
+      height: 0;
+      visibility: hidden;
+    }
+    .label {
+      float: left;
+      width: 300px;
+      padding-top: 9px;
+    }
+
+    .help {
+      float: left;
+
+    }
+  }
+
+  .input.money {
+    float: left;
+    border: $elements_border;
+    border-radius: $elements_border_radius;
+    background: $white;
+
+    .currency {
+      padding: 9px 0 9px 10px;
+    }
+    input {
+      border: none;
+      border-radius: 0;
+      padding-left: 4px;
+      width: 120px;
+      background: none;
+      text-align: right;
+    }
+  }
+}
