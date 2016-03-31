@@ -122,6 +122,17 @@
     font-family: $font_normal;
   }
 }
+
+.personal_details_widget, .lhfs_widget, .communication_preferences {
+  .tip, .error, .alert {
+    &.visible {
+      padding: 20px 15px 20px 40px;
+      .header:before {
+        margin-right: 0;
+      }
+    }
+  }
+}
 // mobile
 @include breakpoint($brk-mobile) {
   .personal_details_widget, .communication_preferences, .lhfs_widget {
