@@ -427,6 +427,7 @@ ul.actions {
   }
   &.edit {
     text-align: right;
+    margin-bottom: 0;
     li {
       text-align: left;
       &.edit {
@@ -455,6 +456,7 @@ ul.actions {
       button {
         position: relative;
         z-index: $elements_button_enabled_z-index;
+        margin-bottom: 0;
       }
     }
   }
