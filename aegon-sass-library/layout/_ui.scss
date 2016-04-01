@@ -17,7 +17,7 @@
 }
 
 .bubbleTopRight {
-  @include bubble(10px, 2px, $quadrant: 0, $right: 20px, $border-color: $grey, $background-color: $white);  
+  @include bubble(10px, 2px, $quadrant: 0, $right: 20px, $border-color: $grey, $background-color: $white);
 }
 
 .help {
@@ -148,7 +148,7 @@ body.mobile-tap {
 }
 
 
-// 
+//
 // Media queries
 // --------------------------------------------------
 

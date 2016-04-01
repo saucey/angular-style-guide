@@ -19,6 +19,7 @@ label.checkbox {
       background-color: $beige;
       &:before {
         position: relative;
+        top: 1px;
         left: -5px;
         list-style-type: disc;
         content: $font_icons_check;
@@ -50,7 +51,7 @@ label.checkbox {
         display: none;
       }
       & + span.label {
-        // float: left;  
+        // float: left;
       }
     }
   }

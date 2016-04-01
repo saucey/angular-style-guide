@@ -5,10 +5,11 @@ import {CONST_EXPR} from "angular2/src/facade/lang";
 @Component({
   selector: 'aegon-checkbox',
   template: `
-    <a href="" (click)="toggle($event)">
-      <span class="checkbox">{{model ? 'V' : 'O'}}</span>
-      <span class="text"><ng-content></ng-content></span>
-    </a>
+    <label class="checkbox">
+      <input type="checkbox" [checked]="model" (click)="toggle()">
+      <span class="checkbox"></span>
+      <ng-content></ng-content>
+    </label>
   `
 })
 export class CheckboxComponent {
@@ -16,8 +17,7 @@ export class CheckboxComponent {
 
   model: boolean;
 
-  toggle(event) {
-    event.preventDefault();
+  toggle() {
     this.model = !this.model;
     this.modelChange.emit(this.model);
   }
