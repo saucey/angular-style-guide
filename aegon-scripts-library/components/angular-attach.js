@@ -26,9 +26,14 @@
 
   function addDrupalBehavior(componentName) {
     Drupal.behaviors[componentName] = {
-      attach: function () {
-        require(['/scripts/angular2-deps.js'], function () {
-          require(['/scripts/ts-compiled.js'], function () {
+      attach: function (context, settings) {
+        if (settings.onlineAegonNl.hostname === 'local') {
+          var pathToJS = '/scripts/';
+        } else {
+          var pathToJS = '/' + Drupal.settings.pathToTheme + '/dist/js/';
+        }
+        require([pathToJS + 'angular2-deps.js'], function () {
+          require([pathToJS + 'ts-compiled.js'], function () {
             System.import('components/' + componentName + '/main')
                   .then(null, console.error.bind(console));
           });
