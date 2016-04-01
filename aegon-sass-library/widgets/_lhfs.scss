@@ -60,6 +60,9 @@
     }
     li.product {
       margin: 25px 0 15px 0;
+      &:last-child {
+        margin-bottom: 0;
+      }
       .description {
         margin-bottom: 20px;
         padding-left: 40px;
