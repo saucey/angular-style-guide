@@ -1,6 +1,6 @@
 .personal_details_widget, .communication_preferences, .lhfs_widget {
   border-top: 1px solid #aaa;
-  @include rem('padding', 30, 0);
+  @include rem('padding', 30, 0, 40, 0);
   .tip, .error, .alert {
     &.visible {
       padding: 20px 15px 20px 40px;
@@ -8,6 +8,15 @@
         margin-right: 0;
       }
     }
+  }
+  ul.actions {
+    margin-bottom: 0;
+  }
+}
+// fix for mijn betalingen
+#aegon_mijnViewClaims_webapp_container {
+  .lhfs_widget {
+    border-top: none;
   }
 }
 // mobile
