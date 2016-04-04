@@ -34,19 +34,13 @@ export class InputDateComponent {
   }
 
   sanitizeDay(value: string): string {
-    let num = parseInt(value, 10);
-    if (!num) {
-      return '';
-    }
-    return String(num > 31 ? 31 : num);
+    let replaced: string = value.replace(/\D/g, '').substr(0, 2);
+    return parseInt(replaced, 10) > 31 ? '31' : replaced;
   }
 
   sanitizeMonth(value: string): string {
-    let num = parseInt(value, 10);
-    if (!num) {
-      return '';
-    }
-    return String(num > 12 ? 12 : num);
+    let replaced: string = value.replace(/\D/g, '').substr(0, 2);
+    return parseInt(replaced, 10) > 12 ? '12' : replaced;
   }
 
   sanitizeYear(value: string): string {
