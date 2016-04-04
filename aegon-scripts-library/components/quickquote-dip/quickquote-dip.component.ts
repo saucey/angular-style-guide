@@ -1,4 +1,6 @@
-import {Component, OnInit} from 'angular2/core';
+import {Component, OnInit, Input} from 'angular2/core';
+import {HTTP_PROVIDERS, Http, Headers, RequestOptions, Response} from "angular2/http";
+import {Observable} from 'rxjs/Observable';
 import {HelpComponent} from './help.component'
 import {InputMoneyComponent, InputMoneyValueAccessor} from './input-money.component';
 import {InputDateComponent, InputDateValueAccessor} from './input-date.component';
@@ -15,19 +17,31 @@ const monthLabels: string[] = [
     HelpComponent, InputMoneyComponent, InputMoneyValueAccessor, InputDateComponent, InputDateValueAccessor,
     CheckboxComponent, CheckboxValueAccessor
   ],
-  template: (<HTMLTextAreaElement>document.querySelector('#quickQuoteDipTemplate')).value
+  template: (<HTMLTextAreaElement>document.querySelector('#quickQuoteDipTemplate')).value,
+  providers: [HTTP_PROVIDERS]
 })
 export class QuickQuoteDipComponent implements OnInit {
+  @Input() serviceUrl: string;
+
   step: number = 1;
   pensionAmount: number = 25000;
   amountTooSmall: boolean;
   storedInAegon: boolean;
   storedElsewhere: boolean;
+  storedError: boolean;
   birthDate: string;
+  birthDateError: boolean;
   deathBenefit: boolean;
   partnerBirthDate: string;
+  partnerBirthDateError: boolean;
   startingDate: string;
+  startingDateError: boolean;
   startingDateChoices: any[] = [];
+  serviceError: boolean;
+
+  constructor(
+    private http:Http
+  ) {}
 
   ngOnInit() {
     let date: Date = new Date(),
@@ -57,12 +71,98 @@ export class QuickQuoteDipComponent implements OnInit {
     }
   }
 
-  readyForSubmit(): boolean {
-    //TODO: validate form and display any error messages.
-    return false;
+  validate(): boolean {
+    let hasErrors: boolean = false;
+    this.storedError = null;
+    //TODO: call service and process result.
+    if (!this.storedInAegon && !this.storedElsewhere) {
+      this.storedError = true;
+      hasErrors = true;
+    }
+    if (!this.birthDate) {
+      this.birthDateError = true;
+      hasErrors = true;
+    }
+    if (this.deathBenefit && !this.partnerBirthDate) {
+      this.partnerBirthDateError = true;
+      hasErrors = true;
+    }
+    if (!this.startingDate) {
+      this.startingDateError = true;
+      hasErrors = true;
+    }
+    return !hasErrors;
   }
 
   submit(): void {
-    //TODO: call service and process result.
+    this.storedError = false;
+    this.birthDateError = false;
+    this.partnerBirthDateError = false;
+    this.startingDateError = false;
+    this.serviceError = false;
+
+    if (this.validate()) {
+      let body: any = {
+        "BScalculateRequest": {
+          "AILHEADER": {
+            "CLIENTID": "TC--P1",
+            "CORRELATIONID": "##DIP SS##"
+          },
+          "DOSSIER": {
+            "REKENFACTOREN": {
+              "OVERGANG_OP_PP": "0.70",
+              "VERHOUDING_HOOG_LAAG": "8.0"
+            },
+            "PENSIOENOVEREENKOMST": {
+              "STORTING_INLEG": {
+                "KOOPSOM": String(this.pensionAmount),
+                "IND_VREEMDGELD": String(this.storedElsewhere),
+                "IND_HERKOMST_OVL": "true"
+              },
+              "PENSIOENAANSPRAAK": {
+                "IND_OUDERDOMSPENSIOEN": "true",
+                "IND_NABESTAANDENPENSIOEN": "true",
+                "IND_HOOG_LAAGPENSIOEN": "false",
+                "IND_PREPENSIOEN": "false",
+                "BEGIN_DATUM_UITKERING": this.startingDate,
+                "DUUR_UITKERING_JAREN": "5",
+                "STIJGING_PERC": "0.0",
+                "TERMIJN_UITKERING": "3",
+                "EIND_DATUM_UITKERING": "2020-10-28"
+              }
+            },
+            "PARTIJ": [
+              {
+                "_AE_PERSOON": {
+                  "VOLGNUM": "1",
+                  "GESLACH": "M",
+                  "GEBDAT": this.birthDate
+                }
+              },
+              {
+                "_AE_PERSOON": {
+                  "VOLGNUM": "2",
+                  "GESLACH": "V",
+                  "GEBDAT": this.partnerBirthDate
+                }
+              }
+            ]
+          }
+        }
+      };
+      let headers = new Headers({'Content-Type': 'application/json'});
+      let options = new RequestOptions({headers: headers});
+      this.http.post(this.serviceUrl, JSON.stringify(body), options)
+        .map(res => res.json())
+        .catch(this.handleError)
+        .subscribe(data => {
+          console.log('RESULT', data);
+        });
+    }
+  }
+
+  handleError(error: Response) {
+    this.serviceError = true;
+    return Observable.throw('Server error');
   }
 }
