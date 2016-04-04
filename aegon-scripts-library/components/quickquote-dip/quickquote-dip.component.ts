@@ -1,6 +1,7 @@
 import {Component, OnInit, Input} from 'angular2/core';
 import {HTTP_PROVIDERS, Http, Headers, RequestOptions, Response} from "angular2/http";
 import {Observable} from 'rxjs/Observable';
+import 'rxjs/Rx';
 import {HelpComponent} from './help.component'
 import {InputMoneyComponent, InputMoneyValueAccessor} from './input-money.component';
 import {InputDateComponent, InputDateValueAccessor} from './input-date.component';
@@ -21,8 +22,6 @@ const monthLabels: string[] = [
   providers: [HTTP_PROVIDERS]
 })
 export class QuickQuoteDipComponent implements OnInit {
-  @Input() serviceUrl: string;
-
   step: number = 1;
   pensionAmount: number = 25000;
   amountTooSmall: boolean;
@@ -94,7 +93,7 @@ export class QuickQuoteDipComponent implements OnInit {
     return !hasErrors;
   }
 
-  submit(): void {
+  submit(serviceUrl: string): void {
     this.storedError = false;
     this.birthDateError = false;
     this.partnerBirthDateError = false;
@@ -152,17 +151,18 @@ export class QuickQuoteDipComponent implements OnInit {
       };
       let headers = new Headers({'Content-Type': 'application/json'});
       let options = new RequestOptions({headers: headers});
-      this.http.post(this.serviceUrl, JSON.stringify(body), options)
+      this.http.post(serviceUrl, JSON.stringify(body), options)
         .map(res => res.json())
         .catch(this.handleError)
         .subscribe(data => {
           console.log('RESULT', data);
-        });
+        }, error => console.log(error));
     }
   }
 
   handleError(error: Response) {
     this.serviceError = true;
+    console.log('Server error', error);
     return Observable.throw('Server error');
   }
 }
