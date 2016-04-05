@@ -199,7 +199,7 @@ export class QuickQuoteDipComponent implements OnInit {
         }
       }
     };
-    let headers = new Headers({'Content-Type': 'application/json'});
+    let headers = new Headers({'Content-Type': 'application/json', "Authorization" : "Basic YXBwRHV4REVWOnFnV2FieEI3c1gwTFU1UHNlV1Fr"});
     let options = new RequestOptions({headers: headers});
     this.http.post(serviceUrl, JSON.stringify(body), options)
       .map(res => res.json())
