@@ -1,92 +1,92 @@
 .my_documents_widget {
-  position:relative;
-
+  position: relative;
   article {
     @include rem('margin', 0, 0);
-
     &:first-of-type {
-      @include rem('margin-top', 30);
       border-top-style: solid;
       border-top-color: $slightly_darker_grey;
+
+      @include rem('margin-top', 30);
       @include rem('border-top-width', 1);
     }
-
     &:last-of-type {
       border-bottom-style: none;
     }
-
     > dl {
       display: block;
-      @include rem('padding', 0, 20);
       overflow: hidden;
-      transition: max-height .2s ease;
-      margin: 0;
-      max-height: 0;
-    }
 
+      max-height: 0;
+      margin: 0;
+
+      transition: max-height .2s ease;
+
+      @include rem('padding', 0, 20);
+    }
     &.open {
-          
       > dl {
         height: 100%;
         max-height: 1000em;
+
         transition: max-height 2s ease-in;
       }
-
       h2:after {
         transform: rotate(-90deg);
       }
     }
   }
-
   h2 {
     position: relative;
-    margin: 20px 0 0 0;
 
+    margin: 20px 0 0 0;
     &:before {
+      font-weight: normal;
+
       position: absolute;
       left: 0;
+
       margin-left: -40px;
 
       @include rem('font-size', 25);
-      font-weight: normal;
       -webkit-font-smoothing: antialiased;
-
       @include breakpoint($brk-mobile) {
-        @include rem('font-size', 16);
         margin-left: -20px;
+
+        @include rem('font-size', 16);
       }
     }
-
   }
-
   dl.row-fluid {
-
     > dt {
       display: none;
     }
-
     dd:first-child {
-
       a {
         font-family: $font_normal;
         &:before {
-          display: inline;
-          @include rem('font-size', 10);
           line-height: inherit;
+
+          display: inline;
+
           vertical-align: middle;
+
+          @include rem('font-size', 10);
         }
       }
     }
   }
-
   .icon-skinnyarrow:before {
     @include rem('font-size', 20);
   }
-
   .pensioen123logo {
     position: absolute;
     right: 20px;
+
     width: 200px;
+  }
+  .table-title {
+    font-family: $font_medium;
+    @include rem('font-size',22);
   }
 }
 
@@ -95,33 +95,29 @@
 // --------------------------------------------------
 
 @include breakpoint($brk-tablet) {
-
   .my_documents_widget {
-
     article {
       @include rem('margin', 30, 0);
-
       &:first-of-type {
         margin-top: 0;
+
         border-top: none;
       }
-
       > dl {
         display: block;
+
         max-height: inherit;
+
         @include rem('padding', 10, 0);
       }
     }
-
     dl.row-fluid {
-
       > dt {
         display: block;
+
         @include rem('font-size', 17);
       }
-
       dd:first-child {
-
         a:before {
           @include rem('padding-right', 10);
         }
@@ -129,5 +125,3 @@
     }
   }
 }
-
-

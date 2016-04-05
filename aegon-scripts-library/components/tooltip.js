@@ -40,37 +40,57 @@
 
           var dialog = document.createElement("DIV");
           dialog.className = "help dialog " + pos;
-          dialog.innerHTML = $title;
+          var caret = document.createElement("DIV");
+          caret.className = "caret";
+          var content = document.createTextNode($title);
+          dialog.appendChild(caret);
+          dialog.appendChild(content);
 
           $this.attr('data-title', '');
 
           $(selector).append(dialog); //this has 2 happen b4 measurements of dialog are taken, otherwise they won't be initialized
           var $dialog = $(dialog),
-              offset = $this.offset();
+              offset = $this.offset(),
+              elOffset = {},
+              caretPos = {};
 
           switch(pos){
             case 'top':
-              offset.top = offset.top - $dialog.outerHeight() - 20;
-              offset.left = offset.left - $dialog.outerWidth() / 2;            
+              elOffset.top = offset.top - $dialog.outerHeight() - 20;
+              elOffset.left = offset.left - $dialog.outerWidth() / 2;
             break;
             case 'left':
-              offset.top = offset.top - $dialog.outerHeight() / 2;
-              offset.left = offset.left - $dialog.outerWidth() - 5;            
+              elOffset.top = offset.top - $dialog.outerHeight() / 2;
+              elOffset.left = offset.left - $dialog.outerWidth() - 5;            
             break;
             case 'right':
-              offset.top = offset.top - $dialog.outerHeight() / 2;
-              offset.left = offset.left + 25;            
+              elOffset.top = offset.top - $dialog.outerHeight() / 2;
+              elOffset.left = offset.left + 25;            
             break;
             default:
               // default is bottom 
-              offset.top = offset.top + $this.outerHeight() + 20;
-              offset.left = offset.left - $dialog.outerWidth() / 2;            
+              elOffset.top = offset.top + $this.outerHeight() + 20;
+              elOffset.left = offset.left - $dialog.outerWidth() / 2;
           }
           
-          $dialog.offset(offset);
+          $dialog.offset(elOffset);
+
+          // for the position of the caret 
+          switch(pos){
+            case 'left':
+            case 'right':
+              caretPos.top = offset.top - $dialog.offset().top;            
+            break;
+            default:
+              // default is bottom and top
+              caretPos.left = offset.left - $dialog.offset().left;
+          } 
+
+          $dialog.find('.caret').css(caretPos);
 
           // removes the dialog on mouseleave only
           $this.on('mouseleave', function(){
+            $dialog.find('.caret').remove();
             $this.attr('data-title', dialog.innerHTML);
             $dialog.remove();
           });
@@ -79,6 +99,7 @@
           if (isTouch){
             $(document).on('click', function (e) {
               e.stopPropagation();
+              $dialog.find('.caret').remove();
               $this.attr('data-title', dialog.innerHTML);
               $(".dialog").remove();
             });

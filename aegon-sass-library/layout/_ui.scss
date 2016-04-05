@@ -35,6 +35,10 @@
     margin:0;
     max-width: $help_dialog_width;
     border-radius: $frame_border_radius;
+    .caret {
+      position: absolute;
+      left: 50%;
+    }    
     &.top{
       @include bubble($width: 10px, $left: $help_dialog_width / 2, $quadrant: 2, $background-color: $slightly_lighter_blue);
     }
@@ -48,7 +52,7 @@
       @include bubble($width: 10px, $left: $help_dialog_width / 2, $quadrant: 1, $background-color: $slightly_lighter_blue);
     }
     &.top, &.bottom, &.right, &.left{
-      &:before{
+      &:before, &:after{
         content: none;
       }
     }
@@ -63,7 +67,7 @@
     width: 18px;
   }
   &:after {
-    left: 50% !important;
+    left: 50%;
   }
 }
 
@@ -174,13 +178,14 @@ body.mobile-tap {
     float: right;
     &.dialog {
       max-width: 95%;
-      left: auto !important; // important to overwrite the inline style added by the script
-      right: 2%;
-    }
-    &:before {}
-    &:after {
       left: auto !important;
-      right: 0;
+      right: 2%;
+      &.bottom, &.top, &.left, &.right {
+        &:before {}
+        &:after {
+          left: auto;
+        }
+      }
     }
   }
 }
