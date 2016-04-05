@@ -32,10 +32,11 @@
           containerElem = document.querySelector(component.selector);
         if (containerElem) {
           // Found the element to bootstrap Angular on.
-          if (settings.onlineAegonNl.hostname === 'local') {
-            pathToJS = '/scripts/';
-          } else {
+          if (window.location.hostname.lastIndexOf('aegon.nl') === window.location.hostname.length - 'aegon.nl'.length) {
             pathToJS = '/' + Drupal.settings.pathToTheme + '/dist/js/';
+          }
+          else {
+            pathToJS = '/scripts/';
           }
           require([pathToJS + 'angular2-deps.js'], function () {
             require([pathToJS + 'ts-compiled.js'], function () {
