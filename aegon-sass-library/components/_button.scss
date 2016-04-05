@@ -101,6 +101,7 @@ button,
     }
     &.icon-calculator:after {
       content: $font_icons_calculator;
+      @include rem("font-size", 20);
     }
     &.arrow:after {
       content: $font_icons_arrow_right;

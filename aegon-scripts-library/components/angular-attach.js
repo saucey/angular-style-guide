@@ -3,7 +3,7 @@
 (function () {
   // Currently available Angular 2 based components.
   var angularComponents = [
-    'quickquote-dip'
+    {dirName: 'quickquote-dip', selector: '#aegon-quickquote-dip'}
   ],
   i;
 
@@ -24,20 +24,26 @@
     addDrupalBehavior(angularComponents[i]);
   }
 
-  function addDrupalBehavior(componentName) {
+  function addDrupalBehavior(component) {
+    var componentName = component.dirName;
     Drupal.behaviors[componentName] = {
       attach: function (context, settings) {
-        if (settings.onlineAegonNl.hostname === 'local') {
-          var pathToJS = '/scripts/';
-        } else {
-          var pathToJS = '/' + Drupal.settings.pathToTheme + '/dist/js/';
-        }
-        require([pathToJS + 'angular2-deps.js'], function () {
-          require([pathToJS + 'ts-compiled.js'], function () {
-            System.import('components/' + componentName + '/main')
-                  .then(null, console.error.bind(console));
+        var pathToJS,
+          containerElem = document.querySelector(component.selector);
+        if (containerElem) {
+          // Found the element to bootstrap Angular on.
+          if (settings.onlineAegonNl.hostname === 'local') {
+            pathToJS = '/scripts/';
+          } else {
+            pathToJS = '/' + Drupal.settings.pathToTheme + '/dist/js/';
+          }
+          require([pathToJS + 'angular2-deps.js'], function () {
+            require([pathToJS + 'ts-compiled.js'], function () {
+              System.import('components/' + componentName + '/main')
+                .then(null, console.error.bind(console));
+            });
           });
-        });
+        }
       }
     };
   }

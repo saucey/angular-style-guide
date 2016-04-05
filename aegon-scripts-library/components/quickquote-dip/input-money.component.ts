@@ -4,7 +4,7 @@ import {
 import {NG_VALUE_ACCESSOR, ControlValueAccessor} from "angular2/common";
 import {CONST_EXPR} from "angular2/src/facade/lang";
 
-function formatNumber(value: any, fractional: boolean = true): string {
+export function formatNumber(value: any, fractional: boolean = true): string {
   let regExp = /(\d+)(\d{3})/;
   // Round to 2 fraction digits. We don't use toFixed(), because we won't enforce the fractional part on round numbers.
   value = Math.round(parseFloat(value) * 100) / 100;
@@ -26,7 +26,7 @@ function formatNumber(value: any, fractional: boolean = true): string {
   }
 }
 
-function parseNumber(value: any): number {
+export function parseNumber(value: any): number {
   if (typeof value === 'number') {
     // Nothing to do.
     return value;
