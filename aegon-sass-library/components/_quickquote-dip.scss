@@ -1,0 +1,154 @@
+.quickquote.dip {
+  color: $slightly_darker_blue;
+
+  label {
+    font-weight: normal;
+  }
+
+  .error {
+    color: $dark_red;
+  }
+
+  input[type=text],
+  select {
+    width: 180px;
+    background: $white;
+    color: $black;
+  }
+
+  label.checkbox {
+    padding-left: 45px;
+
+    .checkbox {
+      left: 0;
+      background: $white;
+    }
+
+    input[type=checkbox] {
+      position: absolute;
+    }
+
+    :checked + .checkbox {
+      background: $white;
+    }
+  }
+
+  .field {
+    margin-bottom: 10px;
+
+    &:after {
+      content: ' ';
+      clear: both;
+      display: block;
+      height: 0;
+      visibility: hidden;
+    }
+
+    .label {
+      box-sizing: border-box;
+      float: left;
+      width: 360px;
+      max-width: 100%;
+      padding-top: 9px;
+      padding-right: 60px;
+    }
+
+    .help {
+      position: absolute;
+      margin-left: -40px;
+      padding-top: 20px;
+      color: $black;
+    }
+
+    .help.dialog {
+      display: none;
+      margin-left: 0;
+    }
+
+    label.checkbox {
+      display: inline-block;
+      margin: 9px 0 16px;
+      line-height: 26px;
+    }
+
+    .inputs {
+      float: left;
+      max-width: 100%;
+      width: 400px;
+
+      label.checkbox {
+        display: block;
+      }
+    }
+  }
+
+  .input.money {
+    float: left;
+
+    .currency {
+      position: absolute;
+      z-index: 1;
+      padding: 9px 0 9px 10px;
+      color: $darker_grey;
+    }
+
+    input {
+      padding-left: 30px;
+      text-align: right;
+    }
+  }
+
+  .input.date {
+    &:after {
+      content: ' ';
+      clear: both;
+      display: block;
+      height: 0;
+      visibility: hidden;
+    }
+
+    input {
+      float: left;
+      margin-right: 5px;
+      width: 50px;
+    }
+
+    .year {
+      width: 70px;
+    }
+  }
+
+  button.pending:after {
+    background-image: url(../images/spinner.gif);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 70%;
+    color: transparent;
+  }
+
+  .result {
+    color: $white;
+
+    &:after {
+      content: ' ';
+      clear: both;
+      display: block;
+      height: 0;
+      visibility: hidden;
+    }
+
+    .label {
+      clear: left;
+      box-sizing: border-box;
+      float: left;
+      width: 360px;
+      max-width: 100%;
+    }
+
+    .value {
+      float: left;
+      max-width: 100%;
+      width: 400px;
+    }
+  }
+}
