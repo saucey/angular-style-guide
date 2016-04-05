@@ -27,7 +27,7 @@
   function addDrupalBehavior(component) {
     var componentName = component.dirName;
     Drupal.behaviors[componentName] = {
-      attach: function (context, settings) {
+      attach: function (context, settings) {// jshint ignore:line
         var pathToJS,
           containerElem = document.querySelector(component.selector);
         if (containerElem) {
@@ -40,8 +40,10 @@
           }
           require([pathToJS + 'angular2-deps.js'], function () {
             require([pathToJS + 'ts-compiled.js'], function () {
+              /* jshint ignore:start */
               System.import('components/' + componentName + '/main')
                 .then(null, console.error.bind(console));
+              /* jshint ignore:end */
             });
           });
         }

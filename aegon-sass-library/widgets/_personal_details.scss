@@ -53,14 +53,6 @@
   label.left {
     float:left;
   }
-  li.invalid {
-    position: relative;
-    input ~ .errorText, select ~ .errorText {
-      position: absolute;
-      top: auto;
-      bottom: 100%;
-    }
-  }
 
   .edit {
     ul.error {

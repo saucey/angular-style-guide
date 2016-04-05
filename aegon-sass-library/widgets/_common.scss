@@ -12,6 +12,15 @@
   ul.actions {
     margin-bottom: 0;
   }
+  li.invalid, label.invalid {
+    position: relative;
+    input ~ .errorText, select ~ .errorText {
+      left: 0;
+      position: absolute;
+      top: auto;
+      bottom: 100%;
+    }
+  }
 }
 // fix for mijn betalingen
 #aegon_mijnViewClaims_webapp_container {
@@ -30,6 +39,19 @@
         & + span.checkbox,
         & + a.checkbox {
           left: 0; // fix for alignment in mobile view
+        }
+      }
+    }
+    li.invalid, label.invalid {
+      input ~ .errorText, select ~ .errorText {
+        top: 0;
+        bottom: auto;
+      }
+      &.checkbox {
+        padding-top:18px;
+        margin-top: 0;
+        > input[type="checkbox"] + span.checkbox {
+          top: 18px;
         }
       }
     }
