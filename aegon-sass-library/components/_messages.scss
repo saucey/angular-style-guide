@@ -228,9 +228,8 @@ div.error {
 div.error,
 div.success,
 div.alert {
-  padding-left: 40px;
-
   @include inlineFrame();
+  padding: 20px 15px 20px 40px;
   .header {
     margin-bottom: 10px;
     font-family: $font_medium;
