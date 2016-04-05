@@ -23,7 +23,6 @@
 
 
   .result {
-    line-height:26px;
     .footer-result a {
       color: $white;
       font-family: $font_thin;
@@ -73,6 +72,28 @@
     }
   }
 }
+
+//QuickQuote Beleggen --- ProductPage
+.node-type-product .quickquote.lijfrente.sparen.beleggen {
+  .calculation {
+    width:100%;
+  }
+
+
+  .result {
+    line-height:26px;
+    .payment-result {
+      width:100%;
+      margin-right:0;
+    }
+    .footer-result {
+      min-width:270px;
+    }
+  }
+}
+
+
+
 
 @include breakpoint($brk-mobile) {
   .quickquote.lijfrente.sparen.beleggen {
@@ -183,6 +204,17 @@
       }
     }
   }
+  //QuickQuote Beleggen --- ProductPage
+  .node-type-product .quickquote.lijfrente.sparen.beleggen {
+    .result {
+      .footer-result {
+        width:auto;
+      }
+      .result-button {
+
+      }
+    }
+  }
 
 }
 
@@ -201,4 +233,16 @@
       }
     }
   }
+  //QuickQuote Beleggen --- ProductPage
+  .node-type-product .quickquote.lijfrente.sparen.beleggen {
+    .result {
+      .result-button {
+        width:auto;
+        margin-right:42px;
+      }
+    }
+
+  }
+
+
 }
