@@ -134,9 +134,9 @@
       .horizontal.row-fluid {
         li {
           input.invalid.blurred {
-            margin-top: 10px;
+            margin-top: 18px;
             ~ .errorText {
-              top: -63px;
+              top: 0;
             }
           }
         }
