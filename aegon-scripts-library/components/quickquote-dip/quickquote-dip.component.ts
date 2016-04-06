@@ -99,7 +99,7 @@ export class QuickQuoteDipComponent implements OnInit {
     return !hasErrors;
   }
 
-  submit(serviceUrl: string): void {
+  submit(serviceUrl: string, authToken: string): void {
     this.storedError = false;
     this.birthDateError = false;
     this.partnerBirthDateError = false;
@@ -113,12 +113,12 @@ export class QuickQuoteDipComponent implements OnInit {
 
     if (this.validate()) {
       this.pendingCount = 2;
-      this.calculate(serviceUrl, true);
-      this.calculate(serviceUrl, false);
+      this.calculate(serviceUrl, authToken, true);
+      this.calculate(serviceUrl, authToken, false);
     }
   }
 
-  calculate(serviceUrl: string, highLow: boolean): void {
+  calculate(serviceUrl: string, authToken: string, highLow: boolean): void {
     if (serviceUrl === 'MockURL') {
       let mockData = {
         "BScalculateResponse": {
@@ -140,7 +140,7 @@ export class QuickQuoteDipComponent implements OnInit {
               }, {
                 "EIND_DATUM_UITKERING": "2134-12-20",
                 "PENSIOENVORM": "PPLL",
-                "BEDRAG": "901.32"
+                "BEDRAG": "1201.32"
               }, {
                 "EIND_DATUM_UITKERING": "2134-12-20",
                 "PENSIOENVORM": "OPT",
@@ -199,7 +199,7 @@ export class QuickQuoteDipComponent implements OnInit {
         }
       }
     };
-    let headers = new Headers({'Content-Type': 'application/json', "Authorization" : "Basic YXBwRHV4REVWOnFnV2FieEI3c1gwTFU1UHNlV1Fr"});
+    let headers = new Headers({'Content-Type': 'application/json', "Authorization" : `Basic ${authToken}`});
     let options = new RequestOptions({headers: headers});
     this.http.post(serviceUrl, JSON.stringify(body), options)
       .map(res => res.json())
@@ -212,11 +212,11 @@ export class QuickQuoteDipComponent implements OnInit {
   handleError(error: Response) {
     this.serviceError = true;
     console.log('Server error', error);
+    this.pendingCount -= 1;
     return Observable.throw('Server error');
   }
 
   processResult(highLow, data) {
-    console.log('processResult', highLow, data);
     let items: any[] = data['BScalculateResponse']['PENSIOENOVEREENKOMST']['PENSIOENAANSPRAAK'],
       hlAmount = 0;
     items.forEach(item => {

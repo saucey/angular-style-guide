@@ -129,26 +129,54 @@
   .result {
     color: $white;
 
-    &:after {
-      content: ' ';
-      clear: both;
-      display: block;
-      height: 0;
-      visibility: hidden;
+    .high-low {
+      margin: 20px 0;
+      border-style: solid;
+      border-width: 1px 0;
+      border-color: $light_blue;
+      padding: 20px 0;
     }
 
-    .label {
-      clear: left;
+    .row {
+      margin: 10px 0;
+    }
+
+    .label,
+    ul.arrow {
+      display: inline-block;
       box-sizing: border-box;
-      float: left;
       width: 360px;
       max-width: 100%;
     }
 
+    .label,
+    .currency,
+    .amount {
+      @include rem('font-size', $large);
+    }
+
     .value {
-      float: left;
+      display: inline-block;
       max-width: 100%;
       width: 400px;
+      vertical-align: top;
+    }
+
+    .amount {
+      display: inline-block;
+      margin-right: 10px;
+      min-width: 85px;
+      text-align: right;
+      vertical-align: top;
+    }
+
+    a,
+    .arrow :before {
+      color: $white;
+    }
+
+    .footer {
+      clear: both;
     }
   }
 }
