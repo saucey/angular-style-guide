@@ -155,6 +155,17 @@
       }
     }
   }
+  .node-type-product .quickquote.lijfrente,
+  .node-type-product .quickquote.lijfrente.sparen,
+  .node-type-product .quickquote.lijfrente.beleggen {
+    .calculation {
+      .input-header {
+        .help {
+          margin-top:-.333rem;
+        }
+      }
+    }
+  }
 }
 
 @include breakpoint($brk-tablet) {
