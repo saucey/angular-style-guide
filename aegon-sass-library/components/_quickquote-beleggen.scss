@@ -77,9 +77,14 @@
 .node-type-product .quickquote.lijfrente.sparen.beleggen {
   .calculation {
     width:100%;
+    .periodic.slider , .duration.slider , .one-off.slider   {
+      .input-header {
+        label {
+          line-height:44px;
+        }
+      }
+    }
   }
-
-
   .result {
     line-height:26px;
     .payment-result {
@@ -156,6 +161,43 @@
     }
   }
 
+  //QuickQuote Beleggen --- ProductPage
+  .node-type-product .quickquote.lijfrente.sparen.beleggen {
+    .calculation {
+      .one-off.slider, .duration.slider, .periodic.slider {
+        .input-header {
+          label {
+            line-height: 1.333em;
+          }
+          .help {
+            top: 0;
+            margin-top: -.25em;
+          }
+        }
+      }
+      .duration.slider {
+        .input-header {
+          .help {
+            top: 0;
+            margin-top: -.333em;
+          }
+        }
+      }
+      .periodic.slider {
+        .input-header {
+          .input-container:after {
+            top: 0;
+          }
+        }
+      }
+      .result {
+        .footer-result {
+          min-width:0;
+        }
+      }
+    }
+  }
+
 }
 
 @include breakpoint($brk-tablet) {
@@ -179,7 +221,6 @@
       }
     }
   }
-
 }
 
 @include breakpoint($brk-ipad-portrait) {
@@ -210,8 +251,10 @@
       .footer-result {
         width:auto;
       }
-      .result-button {
-
+      .payment-result {
+        .result3 {
+          padding-right:0;
+        }
       }
     }
   }
