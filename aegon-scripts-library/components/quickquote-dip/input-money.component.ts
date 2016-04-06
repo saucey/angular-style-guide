@@ -55,6 +55,7 @@ export function parseNumber(value: any): number {
 export class InputMoneyComponent {
   @Input() currency: string;
   @Input() required: boolean;
+  @Input() max: number;
 
   @Output() modelChange: any = new EventEmitter();
   @Output() focus: any = new EventEmitter();
@@ -76,9 +77,13 @@ export class InputMoneyComponent {
 
   changeValue(value) {
     let num = parseNumber(value),
-      commaIndex = value.lastIndexOf(','),
-      fractionalPart = commaIndex > -1 ? ',' + value.substr(commaIndex + 1).replace(/\D/g, '') : '',
-      formatted = num ? formatNumber(num, false) + fractionalPart : '';
+      commaIndex, fractionalPart, formatted;
+    if (this.max) {
+      num = Math.min(num, this.max);
+    }
+    commaIndex = value.lastIndexOf(',');
+    fractionalPart = commaIndex > -1 ? ',' + value.substr(commaIndex + 1).replace(/\D/g, '') : '';
+    formatted = num ? formatNumber(num, false) + fractionalPart : '';
     this.model = value;
     this.modelChange.emit(num);
     // We're using a timeout, so the change detector detects a change in the model.
