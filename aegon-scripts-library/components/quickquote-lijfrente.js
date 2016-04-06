@@ -17,7 +17,7 @@
   Drupal.behaviors.quickquoteLijfrente = {
 
     attach: function() {
-      if ($('.quickquote.lijfrente').length === 0) {
+      if ($('#qqUitkeren').length === 0) {
         return;
       }
 

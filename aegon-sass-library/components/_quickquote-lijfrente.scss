@@ -1,4 +1,4 @@
-.quickquote.lijfrente {
+.quickquote {
   width: 100%;
   height: auto;
   position: relative;
@@ -51,6 +51,10 @@
         input {
           display: inline-block;
           background: $white;
+          font-family: $font_light, $font_fallback;
+          font-size: $medium;
+          line-height: $line-height-medium;
+
         }
         .year {
           display: inline-block;
@@ -133,6 +137,9 @@
       @include rem("font-size", $small);
       @include rem('margin-bottom', 20);
       position: relative;
+    }
+    span {
+      @include rem("font-size", $medium);
     }
   }
 }

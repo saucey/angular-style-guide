@@ -16,13 +16,19 @@
       openTooltip = function(ele, pos){
         var $this = ele,
             $title = $this.attr('data-title') !== undefined ? $this.attr('data-title') : $this.attr('title'),
-            $touch = $this.attr('data-touch') === "true" ? true : false,
             $pos = $this.attr('data-pos'),
             posRE = new RegExp(/^(top|bottom|left|right)$/);
 
         if ($title && $title !== " ") {
+          // add the right attribute if it doesn't have it
+          if($this.attr('data-title') === undefined) {
+            $this.attr('title', '');
+            $this.attr('data-title', $title);
+          }
 
+          // remove the dialog if it's open
           $(".help.dialog").remove();
+
           // if the element has the attr data-pos
           if($pos !== undefined && posRE.test($pos)){
             pos = $pos;
@@ -34,51 +40,69 @@
 
           var dialog = document.createElement("DIV");
           dialog.className = "help dialog " + pos;
-          dialog.innerHTML = $title;
+          var caret = document.createElement("DIV");
+          caret.className = "caret";
+          var content = document.createTextNode($title);
+          dialog.appendChild(caret);
+          dialog.appendChild(content);
 
-          $this.attr('title', '');
+          $this.attr('data-title', '');
 
           $(selector).append(dialog); //this has 2 happen b4 measurements of dialog are taken, otherwise they won't be initialized
           var $dialog = $(dialog),
-              offset = $this.offset();
+              offset = $this.offset(),
+              elOffset = {},
+              caretPos = {};
 
           switch(pos){
             case 'top':
-              offset.top = offset.top - $dialog.outerHeight() - 20;
-              offset.left = offset.left - $dialog.outerWidth() / 2;            
+              elOffset.top = offset.top - $dialog.outerHeight() - 20;
+              elOffset.left = offset.left - $dialog.outerWidth() / 2;
             break;
             case 'left':
-              offset.top = offset.top - $dialog.outerHeight() / 2;
-              offset.left = offset.left - $dialog.outerWidth() - 5;            
+              elOffset.top = offset.top - $dialog.outerHeight() / 2;
+              elOffset.left = offset.left - $dialog.outerWidth() - 5;            
             break;
             case 'right':
-              offset.top = offset.top - $dialog.outerHeight() / 2;
-              offset.left = offset.left + 25;            
+              elOffset.top = offset.top - $dialog.outerHeight() / 2;
+              elOffset.left = offset.left + 25;            
             break;
             default:
               // default is bottom 
-              offset.top = offset.top + $this.outerHeight() + 20;
-              offset.left = offset.left - $dialog.outerWidth() / 2;            
+              elOffset.top = offset.top + $this.outerHeight() + 20;
+              elOffset.left = offset.left - $dialog.outerWidth() / 2;
           }
           
-          $dialog.offset(offset);
+          $dialog.offset(elOffset);
 
-          $(document).click(function () {
-            $this.attr('data-title', dialog.innerHTML);
-            $(".dialog").remove();
-          });
+          // for the position of the caret 
+          switch(pos){
+            case 'left':
+            case 'right':
+              caretPos.top = offset.top - $dialog.offset().top;            
+            break;
+            default:
+              // default is bottom and top
+              caretPos.left = offset.left - $dialog.offset().left;
+          } 
 
+          $dialog.find('.caret').css(caretPos);
+
+          // removes the dialog on mouseleave only
           $this.on('mouseleave', function(){
+            $dialog.find('.caret').remove();
             $this.attr('data-title', dialog.innerHTML);
             $dialog.remove();
           });
 
-          if (isTouch && $touch){
-            $this.on('click', function (e) {
+          // if it's touch removes the dialog on document click only
+          if (isTouch){
+            $(document).on('click', function (e) {
               e.stopPropagation();
+              $dialog.find('.caret').remove();
               $this.attr('data-title', dialog.innerHTML);
-              $dialog.remove();
-            });      
+              $(".dialog").remove();
+            });
           }        
         }
       };
@@ -100,10 +124,11 @@
         openTooltip($(this), pos);
       });
 
-      // touch event
+      // touch event if it's touch screen
       if (isTouch){
-        $(selector + ' .help[data-touch="true"]').on('click', function () {
-            openTooltip($(this), pos);
+        $(selector + ' .help').on('click', function (e) {
+          e.stopPropagation();
+          openTooltip($(this), pos);
         });      
       }
     },
