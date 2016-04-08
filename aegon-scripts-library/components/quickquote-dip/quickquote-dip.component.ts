@@ -6,6 +6,7 @@ import {HelpComponent} from './help.component'
 import {InputMoneyComponent, InputMoneyValueAccessor, formatNumber} from './input-money.component';
 import {InputDateComponent, InputDateValueAccessor} from './input-date.component';
 import {CheckboxComponent, CheckboxValueAccessor} from './checkbox.component';
+import {MoneyPipe} from "./money.pipe";
 
 const monthLabels: string[] = [
   'januari', 'februari', 'maart', 'april', 'mei', 'juni',
@@ -19,7 +20,8 @@ const monthLabels: string[] = [
     CheckboxComponent, CheckboxValueAccessor
   ],
   template: (<HTMLTextAreaElement>document.querySelector('#quickQuoteDipTemplate')).value,
-  providers: [HTTP_PROVIDERS]
+  providers: [HTTP_PROVIDERS],
+  pipes: [MoneyPipe]
 })
 export class QuickQuoteDipComponent implements OnInit {
   step: number = 1;
@@ -240,7 +242,7 @@ export class QuickQuoteDipComponent implements OnInit {
       }
     });
     if (highLow) {
-      this.highLowFirstAmount = formatNumber(hlAmount);
+      this.highLowFirstAmount = String(hlAmount);
     }
     this.pendingCount -= 1;
   }
