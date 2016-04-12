@@ -31,6 +31,22 @@
     position: relative;
     width: 100%;
     @include rem('padding', 30);
+    .periodic.slider {
+      .input-container {
+        div.dd.ddcommon {
+          .ddChild {
+            ul {
+              background: #ffffff;
+              list-style:none;
+              li {
+                list-style:none;
+                background: #ffffff;
+              }
+            }
+          }
+        }
+      }
+    }
     .input-header {
       width: 100%;
       overflow: auto;
