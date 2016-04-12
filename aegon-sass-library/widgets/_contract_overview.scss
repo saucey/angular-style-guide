@@ -64,6 +64,9 @@
 
           white-space: nowrap;
           text-overflow: ellipsis;
+          .icon-call {
+            padding-left: 15px;
+          }
         }
         &.message {
           color: #7a7a7a;

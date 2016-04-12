@@ -205,7 +205,6 @@ div.success {
   $width: 400px;
   width: $width;
   margin-left: -($width / 2);
-  background-color: $white;
 
   .header {
     color: $black;
@@ -257,5 +256,42 @@ div.alert {
         display: block;
       }
     }
+  }
+}
+
+.aegon-modal {
+  width: 400px;
+  max-width: 80%;
+  position: fixed;
+  z-index: 6;
+  padding: 60px;
+  border-radius: $frame_border_radius;
+  background-color: $white;
+  left: 50%;
+  .close-modal {
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: $blue;
+    position: absolute;
+    top: 28px;
+    right: 28px;
+    line-height: 32px;
+    &:before {
+      position: absolute;
+      top:-1px;
+      left: -1px;
+      font-size: 34px;
+      color: $white;
+    }
+  }
+  .modal-loader {
+    height: 70px;
+    width: 100%;
+    background: url('../images/spinner.gif') center center no-repeat;
+  }
+  .ajax-text {
+    text-align: center;
   }
 }
