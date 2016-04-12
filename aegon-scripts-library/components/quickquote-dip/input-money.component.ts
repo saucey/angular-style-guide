@@ -5,19 +5,19 @@ import {NG_VALUE_ACCESSOR, ControlValueAccessor} from "angular2/common";
 import {CONST_EXPR} from "angular2/src/facade/lang";
 
 export function formatNumber(value: any, fractional: boolean = true): string {
-  let regExp = /(\d+)(\d{3})/;
   // Round to 2 fraction digits. We don't use toFixed(), because we won't enforce the fractional part on round numbers.
   value = Math.round(parseFloat(value) * 100) / 100;
   if (isNaN(value)) {
     return '';
   }
-  let tokens = String(value).split('.');
-  let thousandsSeparated = tokens[0].replace(/^\d+/, (w) => {
-    while (regExp.test(w)) {
-      w = w.replace(regExp, '$1.$2');
-    }
-    return w;
-  });
+  let regExp = /(\d+)(\d{3})/,
+    tokens = String(value).split('.'),
+    thousandsSeparated = tokens[0].replace(/^\d+/, (w) => {
+      while (regExp.test(w)) {
+        w = w.replace(regExp, '$1.$2');
+      }
+      return w;
+    });
   if (tokens[1] && fractional) {
     let zero = tokens[1].length === 1 ? '0' : '';
     return thousandsSeparated + ',' + tokens[1] + zero;

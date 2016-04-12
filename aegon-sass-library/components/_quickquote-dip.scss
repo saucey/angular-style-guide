@@ -10,6 +10,7 @@
   }
 
   input[type=text],
+  input[type=number],
   select {
     width: 180px;
     background: $white;
@@ -46,16 +47,26 @@
 
     .label {
       box-sizing: border-box;
+      position: relative;
       float: left;
-      width: 360px;
+      width: 340px;
       max-width: 100%;
       padding-top: 9px;
       padding-right: 60px;
+
+      .help {
+        position: absolute;
+        top: 0;
+        right: 20px;
+
+        &.dialog {
+          right: auto;
+          width: 400px;
+        }
+      }
     }
 
     .help {
-      position: absolute;
-      margin-left: -40px;
       padding-top: 20px;
       color: $black;
     }
@@ -74,7 +85,7 @@
     .inputs {
       float: left;
       max-width: 100%;
-      width: 400px;
+      width: 370px;
 
       label.checkbox {
         display: block;
