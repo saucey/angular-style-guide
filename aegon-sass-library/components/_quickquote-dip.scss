@@ -1,3 +1,6 @@
+$left_width: 350px;
+$right_width: 370px;
+
 .quickquote.dip {
   color: $slightly_darker_blue;
 
@@ -49,10 +52,10 @@
       box-sizing: border-box;
       position: relative;
       float: left;
-      width: 340px;
+      width: $left_width;
       max-width: 100%;
       padding-top: 9px;
-      padding-right: 60px;
+      padding-right: 50px;
 
       .help {
         position: absolute;
@@ -85,17 +88,23 @@
     .inputs {
       float: left;
       max-width: 100%;
-      width: 370px;
+      width: $right_width;
 
       label.checkbox {
         display: block;
+      }
+
+      button {
+        clear: both;
+        display: block;
+        margin-top: 10px;
+        width: 180px;
+        text-align: left;
       }
     }
   }
 
   .input.money {
-    float: left;
-
     .currency {
       position: absolute;
       z-index: 1;
@@ -150,26 +159,26 @@
 
     .row {
       margin: 10px 0;
+
+      .label,
+      .currency,
+      .amount {
+        @include rem('font-size', $large);
+      }
     }
 
     .label,
     ul.arrow {
       display: inline-block;
       box-sizing: border-box;
-      width: 360px;
+      width: $left_width;
       max-width: 100%;
-    }
-
-    .label,
-    .currency,
-    .amount {
-      @include rem('font-size', $large);
     }
 
     .value {
       display: inline-block;
       max-width: 100%;
-      width: 400px;
+      width: $right_width;
       vertical-align: top;
     }
 
