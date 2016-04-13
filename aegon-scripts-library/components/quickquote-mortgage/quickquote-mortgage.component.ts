@@ -13,8 +13,7 @@ const monthLabels: string[] = [
   'juli', 'augustus', 'september', 'oktober', 'november', 'december'
 ];
 
-var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMortgageTemplate'));
-
+var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMortgageTemplate'));  
 @Component({
   selector: 'aegon-quickquote-mortgage',
   directives: [
@@ -171,7 +170,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
   providers: [HTTP_PROVIDERS],
   pipes: [MoneyPipe]
 })
-export class QuickQuoteDipComponent implements OnInit {
+export class QuickQuoteMortgageComponent implements OnInit {
   step: number = 1;
   pensionAmount: number;
   amountTooSmall: boolean;

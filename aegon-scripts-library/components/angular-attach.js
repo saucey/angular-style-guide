@@ -3,7 +3,8 @@
 (function () {
   // Currently available Angular 2 based components.
   var angularComponents = [
-    {dirName: 'quickquote-dip', selector: '#aegon-quickquote-dip'}
+    {dirName: 'quickquote-dip', selector: '#aegon-quickquote-dip'},
+    {dirName: 'quickquote-mortgage', selector: '#aegon-quickquote-mortgage'}
   ],
   i;
 
