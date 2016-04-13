@@ -2,11 +2,11 @@ import {Component, OnInit, Input} from 'angular2/core';
 import {HTTP_PROVIDERS, Http, Headers, RequestOptions, Response} from "angular2/http";
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
-import {HelpComponent} from './help.component'
-import {InputMoneyComponent, InputMoneyValueAccessor, formatNumber} from './input-money.component';
-import {InputDateComponent, InputDateValueAccessor} from './input-date.component';
-import {CheckboxComponent, CheckboxValueAccessor} from './checkbox.component';
-import {MoneyPipe} from "./money.pipe";
+import {HelpComponent} from '../angular-components/help.component'
+import {InputMoneyComponent, InputMoneyValueAccessor, formatNumber} from '../angular-components/input-money.component';
+import {InputDateComponent, InputDateValueAccessor} from '../angular-components/input-date.component';
+import {CheckboxComponent, CheckboxValueAccessor} from '../angular-components/checkbox.component';
+import {MoneyPipe} from "../angular-components/money.pipe";
 
 const monthLabels: string[] = [
   'januari', 'februari', 'maart', 'april', 'mei', 'juni',
