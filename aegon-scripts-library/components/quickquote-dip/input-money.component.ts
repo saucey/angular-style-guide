@@ -47,7 +47,7 @@ export function parseNumber(value: any): number {
   template: `
     <span class="input money">
       <span class="currency">{{currency}}</span>
-      <input #inputEl type="text" [required]="required" [ngModel]="model" (ngModelChange)="changeValue($event)"
+      <input #inputEl type="text" [placeholder]="placeholder" [required]="required" [ngModel]="model" (ngModelChange)="changeValue($event)"
              (focus)="focus.emit()" (blur)="formatAndBlur()" (keydown.enter)="enter.emit()">
     </span>
   `
@@ -56,6 +56,7 @@ export class InputMoneyComponent {
   @Input() currency: string;
   @Input() required: boolean;
   @Input() max: number;
+  @Input() placeholder: string;
 
   @Output() modelChange: any = new EventEmitter();
   @Output() focus: any = new EventEmitter();

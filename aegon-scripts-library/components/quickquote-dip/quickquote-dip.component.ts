@@ -28,37 +28,35 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteDipT
         <h3>Bereken direct uw pensioenuitkering:</h3>
         <div class="field">
           <div class="label">
-            Beschikbaar pensioenkapitaal
+            Hoogte van uw pensioenkapitaal
             <aegon-help>
-              Vul het totale bedrag in waarmee u wilt rekenen. Het gaat hierbij alleen om pensioenkapitaal uit een
-              beschikbare premieregeling. Wij helpen u bij het herkennen van deze regeling <strong style="color:red;">(link naar situatiepagina)</strong>.
-              Heeft u meerdere pensioenbedragen uit verschillende beschikbare premieregelingen? Dan kunt u die bij elkaar
-              optellen.
+              Vul hier de hoogte van uw pensioenkapitaal in. Heeft u bij meer pensioenverzekeraars een pensioenkapitaal?
+              Tel dan alle bedragen bij elkaar op en vul het totaalbedrag hier in.
             </aegon-help>
           </div>
           <div class="inputs">
             <aegon-input-money #amountInput currency="€" [(ngModel)]="pensionAmount" [max]="99999999"
                                (focus)="amountTooSmall = false; amountInput.select()" (blur)="isValidAmount()"
-                               (enter)="submitAmount()">
+                               (enter)="submitAmount()" [placeholder]="'minimaal 25.000'">
             </aegon-input-money>
+            <button class="button arrow" *ngIf="step === 1" [disabled]="!pensionAmount" (click)="submitAmount()">
+              Volgende
+            </button>
           </div>
         </div>
         <p class="error" *ngIf="amountTooSmall">
-          U moet minimaal €25.000 inleggen. Deze rekentool is vooral bedoeld voor klanten die hun pensioen buiten Aegon
+          Wilt u minimaal €25.000 inleggen? Deze rekentool is vooral bedoeld voor klanten die hun pensioen buiten Aegon
           hebben opgebouwd. Heeft u uw pensioen opgebouwd bij Aegon? Dan krijgt u van ons automatisch een offerte
           toegestuurd. Hierbij hanteren we een lager minimum bedrag.
         </p>
-        <button class="button arrow" *ngIf="step === 1" [disabled]="!pensionAmount" (click)="submitAmount()">
-          Volgende
-        </button>
 
         <div *ngIf="step > 1">
           <div class="field">
             <div class="label">
-              Pensioenkapitaal is opgebouwd bij
+              Uw pensioenkapitaal is opgebouwd bij
               <aegon-help>
                 Heeft u pensioen opgebouwd bij verschillende verzekeraars/pensioenfondsen en wilt u deze samenvoegen?
-                Kies dan voor ‘Een andere verzekeraar of pensioenfonds.’
+                Kies dan voor ‘Een andere verzekeraar of pensioenfonds’
               </aegon-help>
             </div>
             <div class="inputs">
@@ -67,7 +65,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteDipT
             </div>
           </div>
           <p class="error" *ngIf="storedError">
-            U moet kiezen waar uw pensioenkapitaal is opgebouwd.
+            Wilt u kiezen waar uw pensioenkapitaal is opgebouwd?
           </p>
           <div class="field">
             <div class="label">Uw geboortedatum</div>
@@ -76,10 +74,16 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteDipT
             </div>
           </div>
           <p class="error" *ngIf="birthDateError">
-            Voer een geldige geboortedatum in.
+            Wilt u een geldige geboortedatum invoeren?
           </p>
           <div class="field">
-            <div class="label">Uitkering bij overlijden</div>
+            <div class="label">
+              Wilt u een partnerpensioen voor uw partner verzekeren?
+              <aegon-help>
+                Heeft u een partner? En wilt u dat uw partner een pensioenuitkering krijgt na uw overlijden?
+                Dan kunt u een partnerpensioen verzekeren. De uitkering is 70% van het pensioen dat u ontvangt.
+              </aegon-help>
+            </div>
             <span class="inputs">
               <aegon-checkbox [(ngModel)]="deathBenefit">
                 Ja, ik wil een partneruitkering bij overlijden (70% van de oorspronkelijke pensioenuitkering)
@@ -87,30 +91,31 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteDipT
             </span>
           </div>
           <div class="field" *ngIf="deathBenefit">
-            <div class="label">Geboortedatum partner</div>
+            <div class="label">Geboortedatum van uw partner</div>
             <div class="inputs">
               <aegon-input-date [(ngModel)]="partnerBirthDate"></aegon-input-date>
             </div>
           </div>
           <p class="error" *ngIf="partnerBirthDateError">
-            U heeft gekozen voor een partneruitkering bij overlijden. Voer een geldige geboortedatum in voor uw partner.
+            U heeft gekozen voor een partneruitkering bij overlijden. Wilt u een geldige geboortedatum invoeren voor uw
+            partner?
           </p>
           <div class="field">
             <div class="label">
-              Ingangsdatum pensioenuitkering
+              Ingangsdatum van de pensioenuitkering
               <aegon-help>
                 U ontvangt de pensoenuitkering altijd achteraf, aan het einde van de maand.
               </aegon-help>
             </div>
             <div class="inputs">
-              <select [ngModel]="startingDate" (change)="startingDate = $event.target.value">
+              <select [ngModel]="startingDate" (change)="changeStartingDate($event.target.value)">
                 <option value="" disabled selected>Maak uw keuze</option>
                 <option *ngFor="#date of startingDateChoices" [value]="date.value">{{date.label}}</option>
               </select>
             </div>
           </div>
           <p class="error" *ngIf="startingDateError">
-            U moet een ingangsdatum kiezen.
+            Wilt u een ingangsdatum kiezen?
           </p>
 
           <button class="button icon-right icon-calculator" [disabled]="pendingCount > 0" [ngClass]="{pending: pendingCount > 0}" (click)="submit('MockURL', '')">
@@ -122,11 +127,11 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteDipT
         <div class="linear">
           <div class="row">
             <span class="label">Pensioenuitkering</span>
-            <span class="value"><span class="currency">€</span> <span class="amount">{{linearAmount | money}}</span> bruto p/mnd</span>
+            <span class="value"><span class="currency">€</span> <span class="amount">{{linearAmount | money}}</span></span>
           </div>
           <div *ngIf="deathBenefitAmount" class="row">
             <span class="label">Uitkering bij overlijden</span>
-            <span class="value"><span class="currency">€</span> <span class="amount">{{deathBenefitAmount | money}}</span> bruto p/mnd</span>
+            <span class="value"><span class="currency">€</span> <span class="amount">{{deathBenefitAmount | money}}</span></span>
           </div>
         </div>
         <div class="high-low">
@@ -140,19 +145,25 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteDipT
           <div *ngIf="deathBenefitAmount" class="row">
             <span class="label">Hoog-laag-uitkering bij overlijden*</span>
             <span class="value">
-              <span class="currency">€</span> <span class="amount">{{highLowDeathBenefitAmount | money}}</span> eerste 5 jaar<!--TODO shouldn't this be bruto p/mnd?-->
+              <span class="currency">€</span> <span class="amount">{{highLowDeathBenefitAmount | money}}</span>
             </span>
           </div>
         </div>
         <div *ngIf="storedInAegon" class="footer">
           Uw pensioen komt vrij <strong>bij Aegon</strong>.<br>
-          U krijgt binnen [periode]<!-- TODO --> automatisch per brief van ons een offerte.
+          U krijgt binnen 3 maanden voorafgaand aan uw pensioen automatisch per brief van ons een offerte.
         </div>
-        <div *ngIf="!storedInAegon" class="footer">
-            <ul class="arrow">
-                <li><a href="#TODO">Vraag een adviesgesprek aan</a></li>
-            </ul>
-            <button class="button orange icon-right arrow">Vrijblijvende offerte</button>
+        <div *ngIf="!startingDateTooFar && !storedInAegon" class="footer">
+          <ul class="arrow">
+            <li><a href="#TODO">Vraag een adviesgesprek aan</a></li>
+          </ul>
+          <button class="button orange icon-right arrow">Vrijblijvende offerte</button>
+        </div>
+        <div *ngIf="startingDateTooFar && !storedInAegon">
+          U kunt pas binnen 3 maanden voorafgaand aan uw pensioen een offerte ontvangen.
+          <ul class="arrow">
+            <li><a href="#TODO">Vraag een adviesgesprek aan</a></li>
+          </ul>
         </div>
       </div>
     </div>
@@ -162,19 +173,20 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteDipT
 })
 export class QuickQuoteDipComponent implements OnInit {
   step: number = 1;
-  pensionAmount: number = 25000;
+  pensionAmount: number;
   amountTooSmall: boolean;
-  storedInAegon: boolean;
-  storedElsewhere: boolean;
+  storedInAegon: boolean = false;
+  storedElsewhere: boolean = false;
   storedError: boolean;
   birthDate: string;
   birthDateError: boolean;
-  deathBenefit: boolean;
+  deathBenefit: boolean = false;
   partnerBirthDate: string;
   partnerBirthDateError: boolean;
   startingDate: string;
   startingDateError: boolean;
   startingDateChoices: any[] = [];
+  startingDateTooFar: boolean = false;
   serviceError: boolean;
   pendingCount: number = 0;
   linearAmount: string;
@@ -204,6 +216,17 @@ export class QuickQuoteDipComponent implements OnInit {
     }
   }
 
+  changeStartingDate(value: string): void {
+    this.startingDate = value;
+    this.startingDateTooFar = false;
+    this.startingDateChoices.some((date, index) => {
+      if (date.value === value && index >= 3) {
+        this.startingDateTooFar = true;
+        return true;
+      }
+    });
+  }
+
   isValidAmount(): boolean {
     this.amountTooSmall = this.pensionAmount < 25000;
     return !this.amountTooSmall;
@@ -218,7 +241,6 @@ export class QuickQuoteDipComponent implements OnInit {
   validate(): boolean {
     let hasErrors: boolean = false;
     this.storedError = null;
-    //TODO: call service and process result.
     if (!this.storedInAegon && !this.storedElsewhere) {
       this.storedError = true;
       hasErrors = true;
@@ -267,23 +289,23 @@ export class QuickQuoteDipComponent implements OnInit {
             "STATUST": "Success"
           },
           "AILHEADER": {
-            "CLIENTID": "???",
-            "CORRELATIONID": "##BS_PENSIOENOVEREENKOMST_ROA##Wed Mar 23 14:03:12 CET 2016##"
+            "CLIENTID": "BS_PENSIOENOVEREENKOMST_ROA_Rest",
+            "CORRELATIONID": "##DIP SS##"
           },
           "PENSIOENOVEREENKOMST": {
             "PENSIOENAANSPRAAK": [
               {
                 "EIND_DATUM_UITKERING": "2134-12-20",
                 "PENSIOENVORM": "OPLL",
-                "BEDRAG": "15.02"
+                "BEDRAG": "5631.4"
               }, {
                 "EIND_DATUM_UITKERING": "2134-12-20",
                 "PENSIOENVORM": "PPLL",
-                "BEDRAG": "1201.32"
+                "BEDRAG": "1877.13"
               }, {
                 "EIND_DATUM_UITKERING": "2134-12-20",
                 "PENSIOENVORM": "OPT",
-                "BEDRAG": "100.00"
+                "BEDRAG": "4111.45"
               }
           ]}
       }};
@@ -293,51 +315,49 @@ export class QuickQuoteDipComponent implements OnInit {
     let body:any = {
       "BScalculateRequest": {
         "AILHEADER": {
-          "CLIENTID": "???", // TODO
+          "CLIENTID": "BS_PENSIOENOVEREENKOMST_ROA_Rest",
           "CORRELATIONID": "##DIP SS##"
         },
         "DOSSIER": {
-          //"REKENFACTOREN": {
-          //  "OVERGANG_OP_PP": "0.70",
-          //  "VERHOUDING_HOOG_LAAG": "8.0"
-          //},
           "PENSIOENOVEREENKOMST": {
             "STORTING_INLEG": {
-              "KOOPSOM": String(this.pensionAmount),
-              "IND_VREEMDGELD": String(this.storedElsewhere),
-              "IND_HERKOMST_OVL": "false"
+              "KOOPSOM": this.pensionAmount,
+              "IND_VREEMDGELD": this.storedElsewhere,
+              "IND_HERKOMST_OVL": false
             },
             "PENSIOENAANSPRAAK": {
-              "IND_OUDERDOMSPENSIOEN": "true",
-              "IND_NABESTAANDENPENSIOEN": String(this.deathBenefit),
+              "IND_OUDERDOMSPENSIOEN": true,
+              "IND_NABESTAANDENPENSIOEN": this.deathBenefit,
               "IND_HOOG_LAAGPENSIOEN": highLow,
-              "IND_PREPENSIOEN": "false",
+              "IND_PREPENSIOEN": false,
               "BEGIN_DATUM_UITKERING": this.startingDate,
-              "DUUR_UITKERING_JAREN": "5",
-              //"STIJGING_PERC": "0.0",
-              "TERMIJN_UITKERING": "1"
-              //"EIND_DATUM_UITKERING": "2020-10-28"
+              "DUUR_UITKERING_JAREN": 5,
+              "TERMIJN_UITKERING": 1
             }
           },
           "PARTIJ": [
             {
               "_AE_PERSOON": {
-                "VOLGNUM": "1",
+                "VOLGNUM": 1,
                 "GESLACH": "M",
                 "GEBDAT": this.birthDate
-              }
-            },
-            {
-              "_AE_PERSOON": {
-                "VOLGNUM": "2",
-                "GESLACH": "V",
-                "GEBDAT": this.partnerBirthDate
               }
             }
           ]
         }
       }
     };
+    if (this.deathBenefit) {
+      body['BScalculateRequest']['DOSSIER']['PARTIJ'].push(
+        {
+          "_AE_PERSOON": {
+            "VOLGNUM": 2,
+            "GESLACH": "V",
+            "GEBDAT": this.partnerBirthDate
+          }
+        }
+      );
+    }
     let headers = new Headers({'Content-Type': 'application/json', "Authorization" : `Basic ${authToken}`});
     let options = new RequestOptions({headers: headers});
     this.http.post(serviceUrl, JSON.stringify(body), options)
