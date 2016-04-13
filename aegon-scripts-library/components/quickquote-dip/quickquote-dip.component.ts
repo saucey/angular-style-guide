@@ -117,35 +117,49 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteDipT
           <p class="error" *ngIf="startingDateError">
             Wilt u een ingangsdatum kiezen?
           </p>
-
-          <button class="button icon-right icon-calculator" [disabled]="pendingCount > 0" [ngClass]="{pending: pendingCount > 0}" (click)="submit('MockURL', '')">
-            Bereken
-          </button>
+          <div class="field">
+            <div class="label"></div>
+            <div class="inputs">
+              <button class="button icon-right icon-calculator" [disabled]="pendingCount > 0" [ngClass]="{pending: pendingCount > 0}" (click)="submit('MockURL', '')">
+                Bereken
+              </button>
+            </div>
+          </div>
         </div>
       </div>
       <div class="result" *ngIf="linearAmount && highLowFirstAmount">
         <div class="linear">
           <div class="row">
             <span class="label">Pensioenuitkering</span>
-            <span class="value"><span class="currency">€</span> <span class="amount">{{linearAmount | money}}</span></span>
+            <span class="value"><span class="currency">€</span> <span class="amount">{{linearAmount | money}}</span> bruto p/mnd</span>
           </div>
           <div *ngIf="deathBenefitAmount" class="row">
-            <span class="label">Uitkering bij overlijden</span>
-            <span class="value"><span class="currency">€</span> <span class="amount">{{deathBenefitAmount | money}}</span></span>
+            <span class="label">Partneruitkering bij overlijden</span>
+            <span class="value"><span class="currency">€</span> <span class="amount">{{deathBenefitAmount | money}}</span> bruto p/mnd</span>
           </div>
         </div>
         <div class="high-low">
+          <div class="heading">Hoog-laag-uitkering</div>
+          <p>
+            Hierbij ontvangt u de eerste 5 jaar een hogere en daarna een iets lagere uitkering dan normaal. U krijgt
+            voor beide mogelijkheden een offerte. <a href="#TODO">Meer informatie</a>
+          </p>
           <div class="row">
-            <span class="label">Hoog-laag-uitkering*</span>
+            <span class="label">Eerste 5 jaar</span>
             <span class="value">
-              <span class="currency">€</span> <span class="amount">{{highLowFirstAmount | money}}</span> eerste 5 jaar<br>
-              <span class="currency">€</span> <span class="amount">{{highLowSecondAmount | money}}</span> na 5 jaar
+              <span class="currency">€</span> <span class="amount">{{highLowFirstAmount | money}}</span> bruto p/mnd
+            </span>
+          </div>
+          <div class="row">
+            <span class="label">Na 5 jaar</span>
+            <span class="value">
+              <span class="currency">€</span> <span class="amount">{{highLowSecondAmount | money}}</span> bruto p/mnd
             </span>
           </div>
           <div *ngIf="deathBenefitAmount" class="row">
-            <span class="label">Hoog-laag-uitkering bij overlijden*</span>
+            <span class="label">Partneruitkering bij overlijden</span>
             <span class="value">
-              <span class="currency">€</span> <span class="amount">{{highLowDeathBenefitAmount | money}}</span>
+              <span class="currency">€</span> <span class="amount">{{highLowDeathBenefitAmount | money}}</span> bruto p/mnd
             </span>
           </div>
         </div>
