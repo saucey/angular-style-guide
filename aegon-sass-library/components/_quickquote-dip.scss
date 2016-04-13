@@ -1,4 +1,7 @@
 .quickquote.dip {
+  $left_width: 350px;
+  $right_width: 370px;
+
   color: $slightly_darker_blue;
 
   label {
@@ -10,6 +13,7 @@
   }
 
   input[type=text],
+  input[type=number],
   select {
     width: 180px;
     background: $white;
@@ -46,16 +50,26 @@
 
     .label {
       box-sizing: border-box;
+      position: relative;
       float: left;
-      width: 360px;
+      width: $left_width;
       max-width: 100%;
       padding-top: 9px;
-      padding-right: 60px;
+      padding-right: 50px;
+
+      .help {
+        position: absolute;
+        top: 0;
+        right: 20px;
+
+        &.dialog {
+          right: auto;
+          width: 400px;
+        }
+      }
     }
 
     .help {
-      position: absolute;
-      margin-left: -40px;
       padding-top: 20px;
       color: $black;
     }
@@ -74,17 +88,23 @@
     .inputs {
       float: left;
       max-width: 100%;
-      width: 400px;
+      width: $right_width;
 
       label.checkbox {
         display: block;
+      }
+
+      button {
+        clear: both;
+        display: block;
+        margin-top: 10px;
+        width: 180px;
+        text-align: left;
       }
     }
   }
 
   .input.money {
-    float: left;
-
     .currency {
       position: absolute;
       z-index: 1;
@@ -129,36 +149,49 @@
   .result {
     color: $white;
 
+    p a {
+      text-decoration: underline;
+    }
+
+    .heading {
+      margin-bottom: 5px;
+      @include rem('font-size', $large);
+    }
+
+    .row {
+      margin: 5px 0;
+
+      .label,
+      .currency,
+      .amount {
+        @include rem('font-size', $large);
+      }
+    }
+
     .high-low {
       margin: 20px 0;
       border-style: solid;
       border-width: 1px 0;
       border-color: $light_blue;
       padding: 20px 0;
-    }
 
-    .row {
-      margin: 10px 0;
+      .label {
+        @include rem('font-size', $medium);
+      }
     }
 
     .label,
     ul.arrow {
       display: inline-block;
       box-sizing: border-box;
-      width: 360px;
+      width: $left_width;
       max-width: 100%;
-    }
-
-    .label,
-    .currency,
-    .amount {
-      @include rem('font-size', $large);
     }
 
     .value {
       display: inline-block;
       max-width: 100%;
-      width: 400px;
+      width: $right_width;
       vertical-align: top;
     }
 
@@ -168,6 +201,10 @@
       min-width: 85px;
       text-align: right;
       vertical-align: top;
+    }
+
+    .arrow a {
+      font-weight: bold;
     }
 
     a,

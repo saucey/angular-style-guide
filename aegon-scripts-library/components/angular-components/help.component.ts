@@ -4,7 +4,7 @@ import {Component, Input, ViewChild, ElementRef} from "angular2/core";
   selector: 'aegon-help',
   template: `
     <span #trigger class="help" (mouseover)="show()" (mouseout)="hide()" (click)="toggle($event)"></span>
-    <span #dialog class="help dialog bottom"><ng-content></ng-content></span>
+    <span #dialog class="help dialog bottom"><div class="caret"></div><ng-content></ng-content></span>
   `
 })
 export class HelpComponent {

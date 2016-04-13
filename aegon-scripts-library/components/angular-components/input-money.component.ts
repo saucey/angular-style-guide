@@ -5,19 +5,19 @@ import {NG_VALUE_ACCESSOR, ControlValueAccessor} from "angular2/common";
 import {CONST_EXPR} from "angular2/src/facade/lang";
 
 export function formatNumber(value: any, fractional: boolean = true): string {
-  let regExp = /(\d+)(\d{3})/;
   // Round to 2 fraction digits. We don't use toFixed(), because we won't enforce the fractional part on round numbers.
   value = Math.round(parseFloat(value) * 100) / 100;
   if (isNaN(value)) {
     return '';
   }
-  let tokens = String(value).split('.');
-  let thousandsSeparated = tokens[0].replace(/^\d+/, (w) => {
-    while (regExp.test(w)) {
-      w = w.replace(regExp, '$1.$2');
-    }
-    return w;
-  });
+  let regExp = /(\d+)(\d{3})/,
+    tokens = String(value).split('.'),
+    thousandsSeparated = tokens[0].replace(/^\d+/, (w) => {
+      while (regExp.test(w)) {
+        w = w.replace(regExp, '$1.$2');
+      }
+      return w;
+    });
   if (tokens[1] && fractional) {
     let zero = tokens[1].length === 1 ? '0' : '';
     return thousandsSeparated + ',' + tokens[1] + zero;
@@ -47,7 +47,7 @@ export function parseNumber(value: any): number {
   template: `
     <span class="input money">
       <span class="currency">{{currency}}</span>
-      <input #inputEl type="text" [required]="required" [ngModel]="model" (ngModelChange)="changeValue($event)"
+      <input #inputEl type="text" [placeholder]="placeholder" [required]="required" [ngModel]="model" (ngModelChange)="changeValue($event)"
              (focus)="focus.emit()" (blur)="formatAndBlur()" (keydown.enter)="enter.emit()">
     </span>
   `
@@ -56,6 +56,7 @@ export class InputMoneyComponent {
   @Input() currency: string;
   @Input() required: boolean;
   @Input() max: number;
+  @Input() placeholder: string;
 
   @Output() modelChange: any = new EventEmitter();
   @Output() focus: any = new EventEmitter();
