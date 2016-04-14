@@ -54,6 +54,7 @@
       }else{
         if(window.aegonModalTimeout !== 'undefined') {
           clearTimeout(window.aegonModalTimeout);
+          delete window.aegonModalTimeout;
         }
       }
       // Layout setting.
