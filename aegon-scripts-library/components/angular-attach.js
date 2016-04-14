@@ -41,7 +41,7 @@
           else {
             pathToJS = '/scripts/';
           }
-          require([pathToJS + 'aegon-angular2.js'], function () {
+          require([pathToJS + 'aegon-angular2.js?CHANGETHISSOON'], function () {
             /* jshint ignore:start */
             System.import('components/' + componentName + '/main')
               .then(null, console.error.bind(console));
