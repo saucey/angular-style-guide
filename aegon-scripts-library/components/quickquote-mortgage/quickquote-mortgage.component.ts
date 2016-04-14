@@ -13,7 +13,7 @@ const monthLabels: string[] = [
   'juli', 'augustus', 'september', 'oktober', 'november', 'december'
 ];
 
-var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMortgageTemplate'));  
+var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMortgageTemplate'));
 @Component({
   selector: 'aegon-quickquote-mortgage',
   directives: [
@@ -24,7 +24,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
     <div class="quickquote lijfrente dip">
       <div class="triangle"></div>
       <div class="calculation">
-        <h3>Bereken direct uw pensioenuitkering:</h3>
+        <h3>Bereken direct uw pensioenuitkering: Ofzoooo</h3>
         <div class="field">
           <div class="label">
             Hoogte van uw pensioenkapitaal
