@@ -4,18 +4,19 @@
 
 .image-header {
   position: relative;
-  min-height: 170px;
   img {
     max-width: 100%;
     height: auto;
     display:block;
   }
-  > h1 {
+  h1 {
+    margin-left: 5%;
+  }
+  picture + h1 {
     position: absolute;
     bottom: 0;
-    margin-left: 5%;
+    text-shadow:1px 1px rgba(0,0,0,.27);
     color: $white;
-
     @include rem("line-height", $line-height-xx-large);
     @include rem("font-size", $xx-large);
     font-family: $font_thin;
@@ -32,10 +33,12 @@
     position: relative;
     margin-top: -75px;
     h1 {
+      text-shadow:1px 1px rgba(0,0,0,.27);
       @include rem("line-height", 35);
       @include rem("font-size", 30);
       font-family: $font_thin;
       margin: 0;
+      color:$white;
     }
     .header-element-wrapper {
       position: relative;
@@ -48,18 +51,10 @@
     }
   }
 }
-//has-image class by JS file : banner-title.js
-.image-header.has-image {
-  h1 {
-    position: absolute;
-    top: -40px;
-    color: $white;
-  }
-}
 
 @include breakpoint($brk-tablet) {
   .image-header {
-    > h1 {
+    picture + h1 {
       @include rem("line-height", $line-height-xx-large);
       @include rem("font-size", $xx-large);
     }
@@ -75,7 +70,7 @@
 
 @include breakpoint($brk-ipad-portrait) {
   .image-header {
-    > h1 {
+    picture + h1 {
       @include rem("line-height", $line-height-xxxx-large);
       @include rem("font-size", $xxxx-large);
     }
@@ -88,7 +83,7 @@
 
 @include breakpoint($brk-ipad-landscape) {
   .image-header {
-    > h1 {
+    picture + h1 {
       @include rem("line-height", $line-height-jumbo);
       @include rem("font-size", $jumbo);
     }
