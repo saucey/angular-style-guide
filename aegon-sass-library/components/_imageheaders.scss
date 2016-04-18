@@ -8,6 +8,7 @@
   img {
     max-width: 100%;
     height: auto;
+    display:block;
   }
   > h1 {
     position: absolute;
@@ -31,13 +32,10 @@
     position: relative;
     margin-top: -75px;
     h1 {
-      margin: 0;
-      color: $white;
-      position: absolute;
-      top: -40px;
       @include rem("line-height", 35);
       @include rem("font-size", 30);
       font-family: $font_thin;
+      margin: 0;
     }
     .header-element-wrapper {
       position: relative;
@@ -48,6 +46,14 @@
       border-radius: $elements_border_radius;
       background-color: rgba(255, 255, 255, 0.8);
     }
+  }
+}
+//has-image class by JS file : banner-title.js
+.image-header.has-image {
+  h1 {
+    position: absolute;
+    top: -40px;
+    color: $white;
   }
 }
 
