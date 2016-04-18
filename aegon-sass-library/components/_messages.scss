@@ -116,6 +116,12 @@
   &.messages--alert {
     background: $lighter_red;
   }
+  div.success {
+    &.visible {
+      width: 300px;
+      margin: -25% 0 0 -150px;
+    }
+  }
 }
 
 @include breakpoint($brk-tablet) {
@@ -201,9 +207,10 @@ div.success {
   $width: 400px;
   position: fixed;
   z-index: 6;
-  top: 200px;
+  top: 40%;
   left: 50%;
   width: $width;
+  background-color: $white;
   margin-left: -($width / 2);
   .header {
     color: $black;
