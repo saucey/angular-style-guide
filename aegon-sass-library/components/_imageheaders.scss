@@ -52,6 +52,14 @@
   }
 }
 
+@include breakpoint($brk-mobile) {
+  .image-header {
+    picture + h1 {
+      @include rem("font-size",30);
+    }
+  }
+}
+
 @include breakpoint($brk-tablet) {
   .image-header {
     picture + h1 {
@@ -73,10 +81,12 @@
     picture + h1 {
       @include rem("line-height", $line-height-xxxx-large);
       @include rem("font-size", $xxxx-large);
+      @include rem("font-size",46);
     }
     .header-element h1 {
       @include rem("line-height", $line-height-xxx-large);
       @include rem("font-size", $xxx-large);
+      @include rem("font-size",46);
     }
   }
 }
@@ -86,6 +96,7 @@
     picture + h1 {
       @include rem("line-height", $line-height-jumbo);
       @include rem("font-size", $jumbo);
+      @include rem("font-size",46);
     }
     .header-element {
       position: absolute;
@@ -104,7 +115,8 @@
 }
 
 @include breakpoint($brk-large-desktop) {
-  .image-header .header-element h1 {
+  .image-header .header-element h1 ,
+  .image-header picture + h1 {
     @include rem("line-height", $line-height-jumbo);
     @include rem("font-size", $jumbo);
   }
