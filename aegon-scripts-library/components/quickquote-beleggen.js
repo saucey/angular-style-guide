@@ -21,6 +21,7 @@
             if ($('#qqBeleggen').length === 0) {
                 return;
             }
+          console.log('Bondjornoooo');
             // Parse the data attribute to object
             var dataInterest = $('.quickquote');
             if (dataInterest.attr("data-interestSavings") !== undefined) {

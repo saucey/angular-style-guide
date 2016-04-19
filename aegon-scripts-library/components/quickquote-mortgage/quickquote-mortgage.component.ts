@@ -3,7 +3,7 @@ import {HTTP_PROVIDERS, Http, Headers, RequestOptions, Response} from "angular2/
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
 import {HelpComponent} from '../angular-components/help.component'
-import {InputMoneyComponent, InputMoneyValueAccessor, formatNumber} from '../angular-components/input-money.component';
+import {SliderComponent} from '../angular-components/slider.component';
 import {InputDateComponent, InputDateValueAccessor} from '../angular-components/input-date.component';
 import {CheckboxComponent, CheckboxValueAccessor} from '../angular-components/checkbox.component';
 import {MoneyPipe} from "../angular-components/money.pipe";
@@ -17,28 +17,19 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
 @Component({
   selector: 'aegon-quickquote-mortgage',
   directives: [
-    HelpComponent, InputMoneyComponent, InputMoneyValueAccessor, InputDateComponent, InputDateValueAccessor,
+    HelpComponent, SliderComponent, InputDateComponent, InputDateValueAccessor,
     CheckboxComponent, CheckboxValueAccessor
   ],
   template: templateElem ? templateElem.value : `
-    <div class="quickquote lijfrente dip">
+    <div class="quickquote lijfrente dip" id="qqBeleggen">
       <div class="triangle"></div>
       <div class="calculation">
-        <h3>Bereken direct uw pensioenuitkering: Ofzoooo</h3>
+        <h3>Bereken uw maximale hypotheek</h3>
         <div class="field">
-          <div class="label">
-            Hoogte van uw pensioenkapitaal
-            <aegon-help>
-              Vul hier de hoogte van uw pensioenkapitaal in. Heeft u bij meer pensioenverzekeraars een pensioenkapitaal?
-              Tel dan alle bedragen bij elkaar op en vul het totaalbedrag hier in.
-            </aegon-help>
-          </div>
           <div class="inputs">
-            <aegon-input-money #amountInput currency="€" [(ngModel)]="pensionAmount" [max]="99999999"
-                               (focus)="amountTooSmall = false; amountInput.select()" (blur)="isValidAmount()"
-                               (enter)="submitAmount()" [placeholder]="'minimaal 25.000'">
-            </aegon-input-money>
-            <button class="button arrow" *ngIf="step === 1" [disabled]="!pensionAmount" (click)="submitAmount()">
+            <aegon-slider>
+            </aegon-slider>
+            <button class="button arrow" *ngIf="step === 1" (click)="submitAmount()">
               Volgende
             </button>
           </div>
