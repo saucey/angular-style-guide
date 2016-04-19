@@ -267,7 +267,12 @@
       },
       mobile: {
         nl: function (val) {
-          return val.match(/^(|(06)[1-9][0-9]{7})$/);
+          // for international numbers
+          if(val.indexOf('00') === 0) {
+            return val.match(/^(|(?:00)[1-9][0-9]{7,12})$/);
+          }else {
+            return val.match(/^(|(?:06)[1-9][0-9]{7})$/);
+          }
         },
       },
       'house-nr': function (val) {
