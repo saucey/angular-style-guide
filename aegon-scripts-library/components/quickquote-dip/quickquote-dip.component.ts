@@ -392,6 +392,9 @@ export class QuickQuoteDipComponent implements OnInit {
   processResult(highLow, data) {
     let items: any[] = data['BScalculateResponse']['PENSIOENOVEREENKOMST']['PENSIOENAANSPRAAK'],
       hlAmount = 0;
+    if (!Array.isArray(items)) {
+      items = [items];
+    }
     items.forEach(item => {
       let s = item['PENSIOENVORM'],
         value = item['BEDRAG'];
