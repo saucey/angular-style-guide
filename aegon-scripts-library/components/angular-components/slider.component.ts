@@ -5,6 +5,9 @@ import {NG_VALUE_ACCESSOR, ControlValueAccessor} from "angular2/common";
 import {CONST_EXPR} from "angular2/src/facade/lang";
 import {InputMoneyComponent, InputMoneyValueAccessor} from './input-money.component';
 import {HelpComponent} from './help.component'
+import {AfterViewInit} from "angular2/core";
+import {NgZone} from "angular2/core";
+declare var noUiSlider: any;
 @Component({
   selector: 'aegon-slider',
   directives: [
@@ -14,11 +17,10 @@ import {HelpComponent} from './help.component'
     <div class="one-off slider">
       <div class="input-header">
         <label for="one-off-input">Eerste eenmalige inleg</label>
-
         <div class="input-container">
-          <aegon-input-money id="one-off-input" #amountInput currency="€" [(ngModel)]="pensionAmount" [max]="99999999"
-                               (focus)="amountTooSmall = false; amountInput.select()" (blur)="isValidAmount()"
-                               (enter)="submitAmount()" [placeholder]="'minimaal 25.000'">
+          <aegon-input-money #amountInput [currency]="currency" [(ngModel)]="value" [max]="range.max"
+                               (blur)="slider.noUiSlider.set(value)"
+                               (enter)="slider.noUiSlider.set(value)" [placeholder]="placeholder">
             </aegon-input-money>
         </div>
         <aegon-help>
@@ -26,52 +28,66 @@ import {HelpComponent} from './help.component'
         </aegon-help>
       </div>
       <div class="slider-container">
-        <div id="one-off-slider" class="noUi-extended"></div>
-        <span id="one-off-error" class="errorMessage">Vul een bedrag in tussen de &euro;0,- en &euro;5000,-</span>
+        <div #slider></div>
+        <!--<span id="one-off-error" class="errorMessage">Vul een bedrag in tussen de &euro;0,- en &euro;5000,-</span>-->
       </div>
     </div>
   `
 })
-export class SliderComponent {
+export class SliderComponent implements AfterViewInit {
   @Input() currency: string;
-  @Input() required: boolean;
-  @Input() max: number;
   @Input() placeholder: string;
-
+  @Input() range: any;
+  @Input() initial: number;
   @Output() modelChange: any = new EventEmitter();
   @Output() focus: any = new EventEmitter();
+  @Output() change: any = new EventEmitter();
   @Output() blur: any = new EventEmitter();
   @Output() enter: any = new EventEmitter();
+  @ViewChild('slider') sliderEl:ElementRef;
 
-  @ViewChild('inputEl') inputEl:ElementRef;
+  value: number;
 
-  model: string;
 
-  //select(): void {
-  //  this.inputEl.nativeElement.select();
-  //}
-  //
-  //formatAndBlur(): void {
-  //  this.model = formatNumber(parseNumber(this.model));
-  //  this.blur.emit();
-  //}
-  //
-  //changeValue(value) {
-  //  let num = parseNumber(value),
-  //    commaIndex, fractionalPart, formatted;
-  //  if (this.max) {
-  //    num = Math.min(num, this.max);
-  //  }
-  //  commaIndex = value.lastIndexOf(',');
-  //  fractionalPart = commaIndex > -1 ? ',' + value.substr(commaIndex + 1).replace(/\D/g, '') : '';
-  //  formatted = num ? formatNumber(num, false) + fractionalPart : '';
-  //  this.model = value;
-  //  this.modelChange.emit(num);
-  //  // We're using a timeout, so the change detector detects a change in the model.
-  //  setTimeout(() => {this.model = formatted;}, 0);
-  //}
-  //
-  //setValue(value) {
-  //  this.model = value && formatNumber(value) || '';
-  //}
+  constructor(private zone:NgZone){}
+
+  ngAfterViewInit(): void {
+    var sliderElement = this.sliderEl.nativeElement;
+    var settings = {
+      start: [ this.value === void 0 ? this.initial : this.value ],
+      range: this.range
+    };
+    noUiSlider.create(sliderElement, settings);
+    sliderElement.noUiSlider.on('update',  (values) => {
+      this.zone.run(() => {
+        this.value = parseFloat(values[0]);
+        this.modelChange.emit(this.value);
+      });
+    });
+  }
+
+  setValue(value) {
+    this.value = value;
+  }
+}
+const CUSTOM_VALUE_ACCESSOR = CONST_EXPR(new Provider(
+  NG_VALUE_ACCESSOR, {useExisting: forwardRef(() => SliderValueAccessor), multi: true}));
+
+@Directive({
+  selector: 'aegon-slider',
+  host: {'(modelChange)': 'onChange($event)'},
+  providers: [CUSTOM_VALUE_ACCESSOR]
+})
+export class SliderValueAccessor implements ControlValueAccessor {
+  onChange = (_) => {};
+  onTouched = () => {};
+
+  constructor(private host: SliderComponent) {}
+
+  writeValue(value: any): void {
+    this.host.setValue(value);
+  }
+
+  registerOnChange(fn: (_: any) => void): void { this.onChange = fn; }
+  registerOnTouched(fn: () => void): void { this.onTouched = fn; }
 }

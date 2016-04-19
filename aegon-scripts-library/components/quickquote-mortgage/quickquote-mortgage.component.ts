@@ -3,7 +3,7 @@ import {HTTP_PROVIDERS, Http, Headers, RequestOptions, Response} from "angular2/
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
 import {HelpComponent} from '../angular-components/help.component'
-import {SliderComponent} from '../angular-components/slider.component';
+import {SliderComponent, SliderValueAccessor} from '../angular-components/slider.component';
 import {InputDateComponent, InputDateValueAccessor} from '../angular-components/input-date.component';
 import {CheckboxComponent, CheckboxValueAccessor} from '../angular-components/checkbox.component';
 import {MoneyPipe} from "../angular-components/money.pipe";
@@ -18,20 +18,24 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
   selector: 'aegon-quickquote-mortgage',
   directives: [
     HelpComponent, SliderComponent, InputDateComponent, InputDateValueAccessor,
-    CheckboxComponent, CheckboxValueAccessor
+    CheckboxComponent, CheckboxValueAccessor, SliderValueAccessor
   ],
   template: templateElem ? templateElem.value : `
-    <div class="quickquote lijfrente dip" id="qqBeleggen">
+    <div class="quickquote lijfrente mortgage" id="qqBeleggen">
       <div class="triangle"></div>
       <div class="calculation">
         <h3>Bereken uw maximale hypotheek</h3>
         <div class="field">
           <div class="inputs">
-            <aegon-slider>
+            <aegon-slider (click)="submitAmount()" [range]="{
+              'min': [  200 ],
+              '25%': [  1000 ],
+              '50%': [ 2000 ],
+              '75%': [  3000 ],
+              'max': [ 7500 ]
+            }" [initial]="200" [(ngModel)]="sliderValue" >
             </aegon-slider>
-            <button class="button arrow" *ngIf="step === 1" (click)="submitAmount()">
-              Volgende
-            </button>
+            {{sliderValue}}
           </div>
         </div>
         <p class="error" *ngIf="amountTooSmall">
@@ -41,7 +45,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
         </p>
 
         <div *ngIf="step > 1">
-          <div class="field">
+          <div class="field right">
             <div class="label">
               Uw pensioenkapitaal is opgebouwd bij
               <aegon-help>
@@ -162,6 +166,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
   pipes: [MoneyPipe]
 })
 export class QuickQuoteMortgageComponent implements OnInit {
+  sliderValue:  number;
   step: number = 1;
   pensionAmount: number;
   amountTooSmall: boolean;
@@ -217,15 +222,8 @@ export class QuickQuoteMortgageComponent implements OnInit {
     });
   }
 
-  isValidAmount(): boolean {
-    this.amountTooSmall = this.pensionAmount < 25000;
-    return !this.amountTooSmall;
-  }
-
   submitAmount(): void {
-    if (this.isValidAmount()) {
       this.step += 1;
-    }
   }
 
   validate(): boolean {
