@@ -39,6 +39,8 @@
       font-family: $font_thin;
       margin: 0;
       color:$white;
+      position: absolute;
+      top: -40px;
     }
     .header-element-wrapper {
       position: relative;
@@ -81,12 +83,10 @@
     picture + h1 {
       @include rem("line-height", $line-height-xxxx-large);
       @include rem("font-size", $xxxx-large);
-      @include rem("font-size",46);
     }
     .header-element h1 {
       @include rem("line-height", $line-height-xxx-large);
       @include rem("font-size", $xxx-large);
-      @include rem("font-size",46);
     }
   }
 }
@@ -96,7 +96,6 @@
     picture + h1 {
       @include rem("line-height", $line-height-jumbo);
       @include rem("font-size", $jumbo);
-      @include rem("font-size",46);
     }
     .header-element {
       position: absolute;
