@@ -54,14 +54,6 @@
   }
 }
 
-@include breakpoint($brk-mobile) {
-  .image-header {
-    picture + h1 {
-      @include rem("font-size",30);
-    }
-  }
-}
-
 @include breakpoint($brk-tablet) {
   .image-header {
     picture + h1 {
