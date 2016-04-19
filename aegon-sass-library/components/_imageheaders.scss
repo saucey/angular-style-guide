@@ -106,8 +106,7 @@
 }
 
 @include breakpoint($brk-large-desktop) {
-  .image-header .header-element h1 ,
-  .image-header picture + h1 {
+  .image-header .header-element h1 {
     @include rem("line-height", $line-height-jumbo);
     @include rem("font-size", $jumbo);
   }
