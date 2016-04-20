@@ -8,6 +8,7 @@ import {HelpComponent} from './help.component'
 import {AfterViewInit} from "angular2/core";
 import {NgZone} from "angular2/core";
 declare var noUiSlider: any;
+declare var wNumb: any;
 @Component({
   selector: 'aegon-slider',
   directives: [
@@ -55,7 +56,10 @@ export class SliderComponent implements AfterViewInit {
     var sliderElement = this.sliderEl.nativeElement;
     var settings = {
       start: [ this.value === void 0 ? this.initial : this.value ],
-      range: this.range
+      range: this.range,
+      format: wNumb({
+        decimals: 0
+      })
     };
     noUiSlider.create(sliderElement, settings);
     sliderElement.noUiSlider.on('update',  (values) => {

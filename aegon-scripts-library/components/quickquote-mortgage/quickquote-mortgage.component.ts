@@ -8,10 +8,6 @@ import {InputDateComponent, InputDateValueAccessor} from '../angular-components/
 import {CheckboxComponent, CheckboxValueAccessor} from '../angular-components/checkbox.component';
 import {MoneyPipe} from "../angular-components/money.pipe";
 
-const monthLabels: string[] = [
-  'januari', 'februari', 'maart', 'april', 'mei', 'juni',
-  'juli', 'augustus', 'september', 'oktober', 'november', 'december'
-];
 
 var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMortgageTemplate'));
 @Component({
@@ -25,17 +21,19 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
       <div class="triangle"></div>
       <div class="calculation">
         <h3>Bereken uw maximale hypotheek</h3>
+        {{incomeValue}}
+        {{incomePartnerValue}}
+        {{interestYears}}
         <div class="field">
-          <div class="inputs">
+          <div class="inputs slider">
             <aegon-slider (click)="submitAmount()" [range]="{
               'min': [  200 ],
               '25%': [  1000 ],
               '50%': [ 2000 ],
               '75%': [  3000 ],
               'max': [ 7500 ]
-            }" [initial]="200" [(ngModel)]="sliderValue" >
+            }" [initial]="200" [(ngModel)]="incomeValue" >
             </aegon-slider>
-            {{sliderValue}}
           </div>
         </div>
         <p class="error" *ngIf="amountTooSmall">
@@ -43,75 +41,43 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
           hebben opgebouwd. Heeft u uw pensioen opgebouwd bij Aegon? Dan krijgt u van ons automatisch een offerte
           toegestuurd. Hierbij hanteren we een lager minimum bedrag.
         </p>
-
         <div *ngIf="step > 1">
-          <div class="field right">
-            <div class="label">
-              Uw pensioenkapitaal is opgebouwd bij
-              <aegon-help>
-                Heeft u pensioen opgebouwd bij verschillende verzekeraars/pensioenfondsen en wilt u deze samenvoegen?
-                Kies dan voor ‘Een andere verzekeraar of pensioenfonds’
-              </aegon-help>
-            </div>
-            <div class="inputs">
-              <aegon-checkbox [(ngModel)]="storedInAegon">Aegon</aegon-checkbox>
-              <aegon-checkbox [(ngModel)]="storedElsewhere">Andere verzekeraar/pensioenfonds</aegon-checkbox>
-            </div>
-          </div>
-          <p class="error" *ngIf="storedError">
-            Wilt u kiezen waar uw pensioenkapitaal is opgebouwd?
-          </p>
           <div class="field">
-            <div class="label">Uw geboortedatum</div>
-            <div class="inputs">
-              <aegon-input-date [(ngModel)]="birthDate"></aegon-input-date>
+            <div class="inputs right">
+              <aegon-checkbox [(ngModel)]="extraMonth">Vaste 13e maand</aegon-checkbox>
+              <aegon-checkbox [(ngModel)]="vacationMoney">Vakantiegeld</aegon-checkbox>
             </div>
           </div>
-          <p class="error" *ngIf="birthDateError">
-            Wilt u een geldige geboortedatum invoeren?
-          </p>
           <div class="field">
-            <div class="label">
-              Wilt u een partnerpensioen voor uw partner verzekeren?
-              <aegon-help>
-                Heeft u een partner? En wilt u dat uw partner een pensioenuitkering krijgt na uw overlijden?
-                Dan kunt u een partnerpensioen verzekeren. De uitkering is 70% van het pensioen dat u ontvangt.
-              </aegon-help>
-            </div>
-            <span class="inputs">
-              <aegon-checkbox [(ngModel)]="deathBenefit">
-                Ja, ik wil een partneruitkering bij overlijden (70% van de oorspronkelijke pensioenuitkering)
-              </aegon-checkbox>
-            </span>
-          </div>
-          <div class="field" *ngIf="deathBenefit">
-            <div class="label">Geboortedatum van uw partner</div>
-            <div class="inputs">
-              <aegon-input-date [(ngModel)]="partnerBirthDate"></aegon-input-date>
+            <div class="inputs slider">
+              <aegon-slider [range]="{
+                'min': [  200 ],
+                '25%': [  1000 ],
+                '50%': [ 2000 ],
+                '75%': [  3000 ],
+                'max': [ 7500 ]
+              }" [initial]="200" [(ngModel)]="incomePartnerValue" >
+              </aegon-slider>
             </div>
           </div>
-          <p class="error" *ngIf="partnerBirthDateError">
-            U heeft gekozen voor een partneruitkering bij overlijden. Wilt u een geldige geboortedatum invoeren voor uw
-            partner?
-          </p>
           <div class="field">
-            <div class="label">
-              Ingangsdatum van de pensioenuitkering
-              <aegon-help>
-                U ontvangt de pensoenuitkering altijd achteraf, aan het einde van de maand.
-              </aegon-help>
-            </div>
-            <div class="inputs">
-              <select [ngModel]="startingDate" (change)="changeStartingDate($event.target.value)">
-                <option value="" disabled selected>Maak uw keuze</option>
-                <option *ngFor="#date of startingDateChoices" [value]="date.value">{{date.label}}</option>
-              </select>
+            <div class="inputs right">
+              <aegon-checkbox [(ngModel)]="extraMonthPartner">Vaste 13e maand</aegon-checkbox>
+              <aegon-checkbox [(ngModel)]="vacationMoneyPartner">Vakantiegeld</aegon-checkbox>
             </div>
           </div>
-          <p class="error" *ngIf="startingDateError">
-            Wilt u een ingangsdatum kiezen?
-          </p>
-
+          <div class="field">
+          <div class="inputs slider">
+            <aegon-slider [range]="{
+              'min': [  2 ],
+              '25%': [  5 ],
+              '50%': [ 10 ],
+              '75%': [  15 ],
+              'max': [ 28 ]
+            }" [initial]="2" [(ngModel)]="interestYears" >
+            </aegon-slider>
+          </div>
+        </div>
           <button class="button icon-right icon-calculator" [disabled]="pendingCount > 0" [ngClass]="{pending: pendingCount > 0}" (click)="submit('MockURL', '')">
             Bereken
           </button>
@@ -166,7 +132,9 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
   pipes: [MoneyPipe]
 })
 export class QuickQuoteMortgageComponent implements OnInit {
-  sliderValue:  number;
+  incomeValue:  number;
+  incomePartnerValue: number;
+  interestYears: number;
   step: number = 1;
   pensionAmount: number;
   amountTooSmall: boolean;
@@ -195,31 +163,6 @@ export class QuickQuoteMortgageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    let date: Date = new Date(),
-      year: number = date.getFullYear(),
-      month: number = date.getMonth() + 1;
-    for (let i: number = 0; i < 12; i++) {
-      if (month === 12) {
-        month = 1;
-        year += 1;
-      } else {
-        month += 1;
-      }
-      let value = year + '-' + (month < 10 ? '0': '') + month + '-01',
-        label = '1 ' + monthLabels[month - 1] + ' ' + year;
-      this.startingDateChoices.push({value: value, label: label});
-    }
-  }
-
-  changeStartingDate(value: string): void {
-    this.startingDate = value;
-    this.startingDateTooFar = false;
-    this.startingDateChoices.some((date, index) => {
-      if (date.value === value && index >= 3) {
-        this.startingDateTooFar = true;
-        return true;
-      }
-    });
   }
 
   submitAmount(): void {

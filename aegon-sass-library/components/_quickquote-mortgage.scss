@@ -79,6 +79,12 @@ $right_width: 370px;
       float: left;
       max-width: 100%;
       position: relative;
+      &.right {
+        float: right;
+      }
+      &.slider {
+        width: 100%;
+      }
 
       label.checkbox {
         display: block;
@@ -92,6 +98,7 @@ $right_width: 370px;
         text-align: left;
       }
     }
+
   }
 
   //.input.money {
