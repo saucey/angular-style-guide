@@ -17,7 +17,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
     CheckboxComponent, CheckboxValueAccessor, SliderValueAccessor
   ],
   template: templateElem ? templateElem.value : `
-    <div class="quickquote lijfrente mortgage" id="qqBeleggen">
+    <div class="quickquote lijfrente sparen mortgage" id="qqBeleggen">
       <div class="triangle"></div>
       <div class="calculation">
         <h3>Bereken uw maximale hypotheek</h3>
@@ -67,64 +67,52 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
             </div>
           </div>
           <div class="field">
-          <div class="inputs slider">
-            <aegon-slider [range]="{
-              'min': [  2 ],
-              '25%': [  5 ],
-              '50%': [ 10 ],
-              '75%': [  15 ],
-              'max': [ 28 ]
-            }" [initial]="2" [(ngModel)]="interestYears" >
-            </aegon-slider>
+            <div class="inputs slider">
+              <aegon-slider [range]="{
+                'min': [  2 ],
+                '25%': [  5 ],
+                '50%': [ 10 ],
+                '75%': [  15 ],
+                'max': [ 28 ]
+              }" [initial]="2" [(ngModel)]="interestYears" >
+              </aegon-slider>
+            </div>
           </div>
-        </div>
-          <button class="button icon-right icon-calculator" [disabled]="pendingCount > 0" [ngClass]="{pending: pendingCount > 0}" (click)="submit('MockURL', '')">
-            Bereken
-          </button>
+          <div class="field">
+            <span class="inputs">
+              <aegon-checkbox [(ngModel)]="playWithMorgage">
+               Bereken wat uw huis per maand kost
+              </aegon-checkbox>
+            </span>
+          </div>
+          <div *ngIf="playWithMorgage" class="field">
+            <div class="inputs slider">
+              <aegon-slider [range]="{
+                'min': [  0 ],
+                '25%': [  5 ],
+                '50%': [ 10 ],
+                '75%': [  15 ],
+                'max': [ incomeValue ]
+              }" [initial]="incomeValue" [(ngModel)]="playWithMorgageValue" >
+              </aegon-slider>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="result" *ngIf="linearAmount && highLowFirstAmount">
-        <div class="linear">
-          <div class="row">
-            <span class="label">Pensioenuitkering</span>
-            <span class="value"><span class="currency">€</span> <span class="amount">{{linearAmount | money}}</span></span>
+      <div *ngIf="step > 1" class="result" >
+        <div class="payment-result">
+          <div class="result1">
+            <div class="title">Hypotheekbedrag</div>
+            <div id="pension-calculated" class="calculated"> &euro; 95.500,-<span>*</span></div>
           </div>
-          <div *ngIf="deathBenefitAmount" class="row">
-            <span class="label">Uitkering bij overlijden</span>
-            <span class="value"><span class="currency">€</span> <span class="amount">{{deathBenefitAmount | money}}</span></span>
-          </div>
-        </div>
-        <div class="high-low">
-          <div class="row">
-            <span class="label">Hoog-laag-uitkering*</span>
-            <span class="value">
-              <span class="currency">€</span> <span class="amount">{{highLowFirstAmount | money}}</span> eerste 5 jaar<br>
-              <span class="currency">€</span> <span class="amount">{{highLowSecondAmount | money}}</span> na 5 jaar
-            </span>
-          </div>
-          <div *ngIf="deathBenefitAmount" class="row">
-            <span class="label">Hoog-laag-uitkering bij overlijden*</span>
-            <span class="value">
-              <span class="currency">€</span> <span class="amount">{{highLowDeathBenefitAmount | money}}</span>
-            </span>
+          <div class="result2">
+            <div class="title">Bruto maandlasten</div>
+            <div id="interest-calculated" class="calculated"> &euro; 5.850,-<span>*</span></div>
           </div>
         </div>
-        <div *ngIf="storedInAegon" class="footer">
-          Uw pensioen komt vrij <strong>bij Aegon</strong>.<br>
-          U krijgt binnen 3 maanden voorafgaand aan uw pensioen automatisch per brief van ons een offerte.
-        </div>
-        <div *ngIf="!startingDateTooFar && !storedInAegon" class="footer">
-          <ul class="arrow">
-            <li><a href="#TODO">Vraag een adviesgesprek aan</a></li>
-          </ul>
-          <button class="button orange icon-right arrow">Vrijblijvende offerte</button>
-        </div>
-        <div *ngIf="startingDateTooFar && !storedInAegon">
-          U kunt pas binnen 3 maanden voorafgaand aan uw pensioen een offerte ontvangen.
-          <ul class="arrow">
-            <li><a href="#TODO">Vraag een adviesgesprek aan</a></li>
-          </ul>
-        </div>
+        <p class="result-button">
+          <button class="button orange-gradient icon-right arrow">Direct regelen</button>
+        </p>
       </div>
     </div>
   `,
@@ -135,203 +123,23 @@ export class QuickQuoteMortgageComponent implements OnInit {
   incomeValue:  number;
   incomePartnerValue: number;
   interestYears: number;
+  playWithMorgageValue: number;
   step: number = 1;
-  pensionAmount: number;
   amountTooSmall: boolean;
-  storedInAegon: boolean = false;
-  storedElsewhere: boolean = false;
-  storedError: boolean;
-  birthDate: string;
-  birthDateError: boolean;
-  deathBenefit: boolean = false;
-  partnerBirthDate: string;
-  partnerBirthDateError: boolean;
-  startingDate: string;
-  startingDateError: boolean;
-  startingDateChoices: any[] = [];
-  startingDateTooFar: boolean = false;
-  serviceError: boolean;
-  pendingCount: number = 0;
-  linearAmount: string;
-  deathBenefitAmount: string;
-  highLowFirstAmount: string;
-  highLowSecondAmount: string;
-  highLowDeathBenefitAmount: string;
+  extraMonth: boolean = false;
+  vacationMoney: boolean = false;
+  extraMonthPartner: boolean = false;
+  vacationMoneyPartner: boolean = false;
+  playWithMorgage: boolean = false;
 
   constructor(
     private http:Http
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
   submitAmount(): void {
       this.step += 1;
-  }
-
-  validate(): boolean {
-    let hasErrors: boolean = false;
-    this.storedError = null;
-    if (!this.storedInAegon && !this.storedElsewhere) {
-      this.storedError = true;
-      hasErrors = true;
-    }
-    if (!this.birthDate) {
-      this.birthDateError = true;
-      hasErrors = true;
-    }
-    if (this.deathBenefit && !this.partnerBirthDate) {
-      this.partnerBirthDateError = true;
-      hasErrors = true;
-    }
-    if (!this.startingDate) {
-      this.startingDateError = true;
-      hasErrors = true;
-    }
-    return !hasErrors;
-  }
-
-  submit(serviceUrl: string, authToken: string): void {
-    this.storedError = false;
-    this.birthDateError = false;
-    this.partnerBirthDateError = false;
-    this.startingDateError = false;
-    this.serviceError = false;
-    this.linearAmount = null;
-    this.deathBenefitAmount = null;
-    this.highLowFirstAmount = null;
-    this.highLowSecondAmount = null;
-    this.highLowDeathBenefitAmount = null;
-
-    if (this.validate()) {
-      this.pendingCount = 2;
-      this.calculate(serviceUrl, authToken, true);
-      this.calculate(serviceUrl, authToken, false);
-    }
-  }
-
-  calculate(serviceUrl: string, authToken: string, highLow: boolean): void {
-    if (serviceUrl === 'MockURL') {
-      let mockData = {
-        "BScalculateResponse": {
-          "PROCES": {
-            "STATUS": "00000",
-            "VOLGNUM": "1",
-            "STATUST": "Success"
-          },
-          "AILHEADER": {
-            "CLIENTID": "BS_PENSIOENOVEREENKOMST_ROA_Rest",
-            "CORRELATIONID": "##DIP SS##"
-          },
-          "PENSIOENOVEREENKOMST": {
-            "PENSIOENAANSPRAAK": [
-              {
-                "EIND_DATUM_UITKERING": "2134-12-20",
-                "PENSIOENVORM": "OPLL",
-                "BEDRAG": "5631.4"
-              }, {
-                "EIND_DATUM_UITKERING": "2134-12-20",
-                "PENSIOENVORM": "PPLL",
-                "BEDRAG": "1877.13"
-              }, {
-                "EIND_DATUM_UITKERING": "2134-12-20",
-                "PENSIOENVORM": "OPT",
-                "BEDRAG": "4111.45"
-              }
-            ]}
-        }};
-      setTimeout(() => this.processResult(highLow, mockData), 2000);
-      return;
-    }
-    let body:any = {
-      "BScalculateRequest": {
-        "AILHEADER": {
-          "CLIENTID": "BS_PENSIOENOVEREENKOMST_ROA_Rest",
-          "CORRELATIONID": "##DIP SS##"
-        },
-        "DOSSIER": {
-          "PENSIOENOVEREENKOMST": {
-            "STORTING_INLEG": {
-              "KOOPSOM": this.pensionAmount,
-              "IND_VREEMDGELD": this.storedElsewhere,
-              "IND_HERKOMST_OVL": false
-            },
-            "PENSIOENAANSPRAAK": {
-              "IND_OUDERDOMSPENSIOEN": true,
-              "IND_NABESTAANDENPENSIOEN": this.deathBenefit,
-              "IND_HOOG_LAAGPENSIOEN": highLow,
-              "IND_PREPENSIOEN": false,
-              "BEGIN_DATUM_UITKERING": this.startingDate,
-              "DUUR_UITKERING_JAREN": 5,
-              "TERMIJN_UITKERING": 1
-            }
-          },
-          "PARTIJ": [
-            {
-              "_AE_PERSOON": {
-                "VOLGNUM": 1,
-                "GESLACH": "M",
-                "GEBDAT": this.birthDate
-              }
-            }
-          ]
-        }
-      }
-    };
-    if (this.deathBenefit) {
-      body['BScalculateRequest']['DOSSIER']['PARTIJ'].push(
-        {
-          "_AE_PERSOON": {
-            "VOLGNUM": 2,
-            "GESLACH": "V",
-            "GEBDAT": this.partnerBirthDate
-          }
-        }
-      );
-    }
-    let headers = new Headers({'Content-Type': 'application/json', "Authorization" : `Basic ${authToken}`});
-    let options = new RequestOptions({headers: headers});
-    this.http.post(serviceUrl, JSON.stringify(body), options)
-      .map(res => res.json())
-      .catch(this.handleError)
-      .subscribe(data => {
-        this.processResult(highLow, data);
-      }, error => console.log(error));
-  }
-
-  handleError(error: Response) {
-    this.serviceError = true;
-    console.log('Server error', error);
-    this.pendingCount -= 1;
-    return Observable.throw('Server error');
-  }
-
-  processResult(highLow, data) {
-    let items: any[] = data['BScalculateResponse']['PENSIOENOVEREENKOMST']['PENSIOENAANSPRAAK'],
-      hlAmount = 0;
-    items.forEach(item => {
-      let s = item['PENSIOENVORM'],
-        value = item['BEDRAG'];
-      if (highLow) {
-        if (s === 'OPLL') {
-          hlAmount += parseFloat(value);
-          this.highLowSecondAmount = value;
-        } else if (s === 'OPT') {
-          hlAmount += parseFloat(value);
-        } else if (s === 'PPLL') {
-          this.highLowDeathBenefitAmount = value;
-        }
-      } else {
-        if (s === 'OPLL') {
-          this.linearAmount = value;
-        } else if (s === 'PPLL') {
-          this.deathBenefitAmount = value;
-        }
-      }
-    });
-    if (highLow) {
-      this.highLowFirstAmount = String(hlAmount);
-    }
-    this.pendingCount -= 1;
   }
 }
