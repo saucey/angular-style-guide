@@ -93,6 +93,25 @@
 // 
 // Media queries
 // --------------------------------------------------
+@include breakpoint($brk-mobile) {
+  .my_documents_widget {
+    .table-title {
+      line-height: 1;
+      margin-bottom: 15px;
+      @include rem('font-size', 18)
+    }
+    .table-desc {
+      display: none;
+    }
+    .pensioen123logo {
+      width: 114px;
+      right: auto;
+    }
+    .dataTables_wrapper .top {
+      height: 30px;
+    }
+  }
+}
 
 @include breakpoint($brk-tablet) {
   .my_documents_widget {
