@@ -109,7 +109,7 @@
 
           $modal = $(modalEle);
           // Add click event to close modal
-          $(document).on('click', '.aegon-modal .close-modal', function() {
+          $(document).on('click', '.aegon-modal .close-modal, .aegon-modal-overlay.close-modal', function() {
             Drupal.aegonModal('close');
           });        
         }else{
@@ -121,7 +121,12 @@
         // overlay layout
         if(settings.overlay) {
           if(! $(document).find('.aegon-modal-overlay').length) {
-            $('body').append('<div class="aegon-modal-overlay lightbox"></div>');
+            if(! settings.close) {
+              // if the close button is not desire, attache click event to overlay
+              $('body').append('<div class="aegon-modal-overlay close-modal lightbox"></div>');
+            } else {
+              $('body').append('<div class="aegon-modal-overlay lightbox"></div>');
+            }
           }
         } else {
           if($(document).find('.aegon-modal-overlay').length) {
