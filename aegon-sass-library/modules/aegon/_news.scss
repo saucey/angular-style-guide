@@ -19,4 +19,24 @@
       color: $darker_grey;
     }
   }
+  .node-nba {
+    .content {
+      padding: 17px;
+    }
+    h2 {
+      font-family: $font_medium;
+      color: $black;
+      font-size: $x-large;
+    }
+    p {
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+    // classes available only for NBA
+    .big-text {
+      font-size: $xxx-large;
+      line-height: $xxxx-large;
+    }
+  }
 }
