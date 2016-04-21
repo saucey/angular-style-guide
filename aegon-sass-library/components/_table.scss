@@ -137,6 +137,11 @@
           color: #3395d3;
           content: "\e903";
         }
+        &.parent {
+          &:before {
+            content: "\e63c";
+          }
+        }
         &:first-child {
           border: 0;
         }
