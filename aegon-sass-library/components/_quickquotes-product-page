@@ -1,0 +1,43 @@
+
+
+
+
+
+
+
+
+
+
+
+
+//$brk-mobile
+@include breakpoint($brk-mobile) {
+
+
+  //QUICKQUOTE HELP ELEMENT
+  .node-type-product .quickquote.lijfrente,
+  .node-type-product .quickquote.lijfrente.sparen,
+  .node-type-product .quickquote.lijfrente.beleggen {
+    .calculation {
+      .input-header {
+        .help {
+          margin-top:-.333rem;
+        }
+      }
+    }
+  }
+
+}
+
+//$brk-tablet
+@include breakpoint($brk-tablet) {
+
+
+}
+
+
+//$brk-large-desktop
+@include breakpoint($brk-large-desktop) {
+
+
+}

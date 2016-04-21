@@ -1,0 +1,692 @@
+//QQ-SPAREN
+//QQ-LIJFRENTE
+//QQ-BELEGGEN
+
+
+// DISCLAIMER ELEMENT  ( caption under QuickQuote )
+.quickquote + .disclaimer {
+  clear: both;
+  color:$blue;
+  display:block;
+  @include rem('padding', 30);
+  @include rem('padding-left', 0);
+  @include rem('line-height', 22);
+  @include rem('font-size', 18);
+}
+
+
+//QQ-GENERIC STYLE
+.quickquote {
+  width: 100%;
+  height: auto;
+  position: relative;
+  background: $pastel_light_blue;
+  border-radius: 6px;
+// GENERIC STYLE FOR LABEL.CHECKBOX
+  label.checkbox > input[type="checkbox"] {
+    display: none;
+    &+span.checkbox {
+      background:$white;
+      &+span {
+        line-height:26px;
+      }
+    }
+  }
+//GENERIC HEADER ELEMENT
+  h3 {
+    color: $slightly_darker_blue;
+    @include rem('margin', 0, 0, 30, 30);
+    font-family: $font_normal;
+    font-weight: bold;
+    &:before {
+      font-family: $font_icons;
+      content: $font_icons_calculator;
+      left: 30px;
+      position: absolute;
+    }
+  }
+
+// GENERIC STYLE FOR TRIANGLE ELEMENT
+  .triangle {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px 10px 0 10px;
+    border-color: #ffffff transparent transparent transparent;
+    -webkit-transform: rotate(360deg);
+    top: 0;
+    left: 54px;
+    position: absolute;
+  }
+
+// GENERIC STYLE FOR CALCULATION ELEMENT
+  .calculation {
+    position: relative;
+    width: 100%;
+    @include rem('padding', 30);
+    .slider-container {
+    // GENERIC STYLING FOR ERRORMESSAGE ELEMENT
+      .errorMessage {
+        background-color: $pink;
+        display:none;
+        -webkit-border-radius: $default-border-radius;
+        -moz-border-radius: $default-border-radius;
+        border-radius: $default-border-radius;
+        @include rem('margin-top', 15);
+        @include rem('padding', 18);
+        color: $dark_pink;
+        border: 1px solid $dark_pink;
+      }
+      .errorMessage:empty {
+        background:none;
+      }
+
+    }
+    //GENERIC STYLE FOR AMOUNT-SLIDER  and TIME-SLIDER ( QQ lijfrente )
+    .amount.slider {
+      input {
+        width: 100px;
+        &:before {
+          content:'€';
+          left: 0;
+        }
+      }
+    }
+    .time.slider {
+      input {
+        width: 50px;
+        &:before {
+          content:'€';
+          left: 0;
+          width: 10px;
+        }
+      }
+    }
+    // GENERIC STYLE FOR ONE-OFF SLIDER ( QQ sparen/beleggen )
+    .one-off.slider {
+      input {
+        text-align: right;
+      }
+    }
+    // GENERIC STYLE FOR PERIODIC SLIDER ( QQ sparen/beleggen )
+    .periodic.slider {
+      .input-header {
+        label {
+          display: block;
+          width: 100%;
+        }
+      }
+      .input-container {
+        max-width: 300px;
+      }
+      .input-container {
+        div.dd.ddcommon {
+          .ddChild {
+            ul {
+              background: #ffffff;
+              list-style:none;
+              li {
+                list-style:none;
+                background: #ffffff;
+              }
+            }
+          }
+        }
+      }
+    }
+    .duration.slider {
+      .input-container {
+        input {
+          @include rem('padding-right', 40);
+        }
+        &:after {
+          content: 'jaar';
+          @include rem('right', 10);
+          left: auto;
+        }
+      }
+    }
+    .input-header {
+      width: 100%;
+      overflow: auto;
+      @include rem('margin', 0, 100, 20, 0);
+      display: table;
+      label {
+        color: $light_blue;
+        display: inline-block;
+        font-weight: normal;
+        vertical-align: middle;
+        display: table-cell;
+        width: 60%;
+      }
+      .input-container {
+        float:right;
+        position: relative;
+        @include rem('margin-right', 50);
+        input {
+          display: inline-block;
+          background: $white;
+          font-family: $font_light, $font_fallback;
+          font-size: $medium;
+          line-height: $line-height-medium;
+
+        }
+        .year {
+          display: inline-block;
+          @include rem('margin', 0, 4, 0, 14);
+        }
+      }
+      .help {
+        position: absolute;
+        @include rem('margin', 7, 0, 0, 0);
+        right: 40px;
+
+      }
+    }
+    .slider-container {
+      @include rem('margin', 0, 0, 32, 0);
+    }
+  }
+// GENERIC STYLE FOR RESULT
+  .result {
+    background: $slightly_darker_blue;
+    border-radius: 0 0 6px 6px;
+    @include rem('padding', 30);
+    width: 100%;
+    .payment-result{
+      @include rem("font-size", $large);
+      color: $white;
+      width: 100%;
+      @include rem('margin-bottom', 10);
+      * {
+        display: inline-block;
+      }
+    }
+    .calculated {
+      position: absolute;
+      @include rem('left', 230);
+    }
+    .footer-result {
+      width: 100%;
+      position: relative;
+      * {
+        display: inline-block;
+      }
+      .interest {
+        @include rem("font-size", $large);
+        color: $white;
+        display: table-cell;
+        vertical-align: middle;
+        @include rem('padding-bottom', 10);
+
+      }
+      span.help {
+        position: absolute;
+        @include rem('left', 200);
+        @include rem('margin-top', 3);
+      }
+      p {
+        display: block;
+      }
+    }
+    .disclaimer {
+      color: $dark_grey;
+      @include rem("font-size", $small);
+      @include rem('margin-bottom', 20);
+      position: relative;
+      clear:both;
+    }
+    span {
+      @include rem("font-size", $medium);
+    }
+  }
+}
+// END OF GENERIC STYLE FOR QUICKQUOTES -->
+
+// STYLE FOR QUICKQUOTE SPAREN
+  .quickquote {
+    .calculation {
+      .slider-container {
+        .errorMessage {
+          background-color: $pink;
+          display:none;
+          -webkit-border-radius: $default-border-radius;
+          -moz-border-radius: $default-border-radius;
+          border-radius: $default-border-radius;
+          @include rem('margin-top', 15);
+          @include rem('padding', 18);
+          color: $dark_pink;
+          border: 1px solid $dark_pink;
+        }
+        .errorMessage:empty {
+          background:none;
+        }
+
+      }
+      .periodic.slider {
+        .input-container {
+          input {
+            @include rem('padding-right', 10);
+            width: 50%;
+            max-width: 120px;
+            float: right;
+            text-align: right;
+          }
+          div.dd.ddcommon {
+            width: 152px !important;
+            margin-left: 0;
+            background: $white;
+            float: left;
+            border: 0;
+            @include rem('margin-right', 8);
+            .ddChild {
+              overflow:visible!important;
+            }
+            .ddTitle {
+              background: $white;
+              span.ddTitleText {
+                width: 150px;
+              }
+              .ddArrow {
+                color: $blue;
+              }
+            }
+          }
+          &:after {
+            left: auto;
+            @include rem('margin-left', 10);
+          }
+        }
+      }
+
+      .input-header {
+        label {
+          width: 30%;
+        }
+        .input-container {
+          &:after {
+            line-height: 44px;
+            position: absolute;
+            top: 0;
+            content: '€';
+            @include rem('left', 10);
+            pointer-events: none;
+            color: $darker_grey;
+            text-align:right;
+          }
+          input {
+            width: 120px;
+          }
+
+        }
+      }
+      .one-off-deposit {
+        display: none;
+        .input-header {
+          input {
+            text-align: right;
+          }
+        }
+        .slider-container + .input-header {
+          .input-container {
+            input {
+              text-align: left;
+            }
+            &:after {
+              content: 'Jaar';
+              @include rem('right', 10);
+              left: auto;
+            }
+          }
+        }
+      }
+    }
+    .calculation + .calculation {
+      border-top: 1px solid $white;
+      padding: 1.875rem;
+      @include rem('padding', 30);
+      .input-header {
+        label {
+          width: 48%;
+        }
+        label.checkbox {
+          width: 80%;
+        }
+
+      }
+    }
+    .result {
+      position: relative;
+      z-index: 3;
+      overflow:hidden;
+      .payment-result {
+
+        width: 64%;
+        float: left;
+        .result1, .result2 , .result3{
+          width: 45%;
+          min-width: 202px;
+          float: left;
+          margin-right: 5%;
+          .title {
+            font-family: $font_thin;
+            display: block;
+            @include rem('margin-bottom', 5.5);
+          }
+          .calculated {
+            position: relative;
+            left: auto;
+            @include rem('margin-bottom', 22);
+          }
+        }
+      }
+      .footer-result {
+        float: left;
+        width: 64%;
+        min-width: 300px;
+        .interest {
+          width: 50%;
+          display: inline-block;
+          float: left;
+          font-family: $font_thin;
+        }
+      }
+      .result-button {
+        text-align: left;
+
+      }
+    }
+    .help.dialog.bottom {
+      z-index: 4;
+    }
+  }
+// END STYLE FOR QQ SPAREN
+
+
+@include breakpoint($brk-mobile) {
+// GENERIC STYLE QQ - MOBILE
+  .quickquote {
+    .span1.gutter {
+      width: 0;
+      min-height: 0;
+
+      & + .span12 {
+        width: 100%;
+        margin-left: 0;
+      }
+    }
+  }
+// END GENERIC STYLE QQ ----
+
+// STYLE FOR QQ SPAREN MOBILE
+  .quickquote.lijfrente.sparen {
+    .calculation {
+      .slider-container {
+        >div + span {
+          max-width:220px;
+        }
+      }
+      .input-header {
+        position:relative;
+        display:block;
+        overflow:visible;
+        label {
+          display:block;
+          width:100%;
+        }
+        .input-container {
+          float:none;
+          max-width:220px;
+          @include rem('margin-right', 0);
+          input {
+            width:100%;
+            max-width: 220px;
+            padding-right: 0.625rem;
+          }
+        }
+        .help {
+          @include rem('right', 5);
+          @include rem('top', 0);
+          @include rem('margin-top', -2);
+        }
+      }
+      .duration.slider {
+        .input-container {
+          &:after {
+            @include rem('right', 30);
+            left:auto;
+          }
+        }
+      }
+      .periodic.slider {
+        .input-header {
+          .input-container {
+            float:none;
+            max-width:220px;
+            div.dd.ddcommon {
+              display: block;
+              width: 100% !important;
+              max-width: 220px;
+              float: none;
+              clear: both;
+              margin-right: 0;
+              margin-bottom: 10px;
+            }
+            input {
+              display: block;
+              width: 100%;
+              max-width: 220px;
+              float: none;
+              clear: both;
+            }
+            &:after {
+              top: 3em;
+              @include rem('top', 54);
+            }
+          }
+        }
+      }
+    }
+
+    .calculation + .calculation {
+      @include rem('padding', 30, 0);
+      > .input-header {
+        @include rem('padding', 0, 30);
+        .help {
+          margin-top: 0;
+          @include rem('right', 36);
+          @include rem('margin-top', 0);
+        }
+      }
+      .one-off-deposit {
+        @include rem('padding', 0, 30, 0, 30);
+        .input-header {
+          label {
+            width: 100%;
+            display: block;
+            @include rem('padding-right', 30);
+          }
+        }
+      }
+      .input-header {
+        label.checkbox {
+          width: 100%;
+          @include rem('padding-right', 50);
+        }
+      }
+    }
+    .result {
+      .payment-result {
+        overflow: hidden;
+        width: 300px;
+      }
+      .footer-result {
+        width: 100%;
+        min-width: 0;
+        .interest {
+          width: 45%;
+          margin-right: 5%;
+        }
+      }
+    }
+  }
+  .quickquote.lijfrente.sparen.beleggen .result .payment-result {
+    width:100%;
+  }
+  .quickquote.lijfrente.sparen.beleggen .result .payment-result .result1,
+  .quickquote.lijfrente.sparen.beleggen .result .payment-result .result2,
+  .quickquote.lijfrente.sparen.beleggen .result .payment-result .result3 {
+    width:100%;
+    float:none;
+  }
+// END STYLE FOR QQ SPAREN MOBILE ----
+
+
+
+}
+
+@include breakpoint($brk-tablet) {
+// GENERIC STYLE QQ - TABLET
+  .quickquote {
+    .triangle {
+      border-width: 20px 30px 0 30px;
+      left: 30px;
+    }
+    .calculation {
+      .input-header {
+        overflow: auto;
+        @include rem('margin', 0, 100, 20, 0);
+        .help {
+          right: 45px;
+        }
+      }
+    }
+  }
+// END GENERIC STYLE QQ - TABLET ----
+
+// STYLE FOR QQ SPAREN TABLET
+  .quickquote.lijfrente.sparen {
+    .one-off-deposit-check {
+      .input-header {
+        .help {
+          margin-top: 0;
+        }
+      }
+    }
+  }
+  .quickquote.lijfrente.sparen.beleggen {
+    .result {
+      .payment-result  {
+        width:100%;
+        .result1,
+        .result2,
+        .result3 {
+          width: 32%;
+          min-width: 150px;
+          float: left;
+          margin-right: 1%;
+        }
+        .result3 {
+          float:right;
+        }
+      }
+    }
+  }
+// END STYLE FOR QQ SPAREN TABLET ----
+}
+
+@include breakpoint($brk-ipad-portrait) {
+// GENERIC STYLE QQ - IPAD PORTRAIT
+  .quickquote.lijfrente.sparen {
+    .calculation {
+      .periodic.slider {
+        .input-header {
+          label {
+            display: inline-block;
+            width: 26%;
+          }
+        }
+      }
+    }
+    .result {
+      .result-button {
+        text-align: right;
+        @include rem('margin-right', 9);
+      }
+    }
+  }
+  .quickquote.lijfrente.sparen.beleggen .result .payment-result {
+    width: 77%;
+  }
+// END GENERIC STYLE QQ - IPAD PORTRAIT ----
+
+}
+
+@include breakpoint($brk-large-desktop) {
+// GENERIC STYLE QQ - LARGE DESKTOP
+  .quickquote {
+    .calculation {
+      width: 80%;
+      .input-header {
+        overflow: auto;
+        @include rem('margin', 0, 100, 20, 0);
+        .input-container {
+          @include rem('margin-right', 100);
+        }
+        .help {
+          right: 45px;
+        }
+      }
+    }
+    .result {
+      width: 100%;
+      .payment-result, .footer-result{
+        width: 80%;
+        @include rem('margin-bottom', 0);
+      }
+      .footer-result {
+        display: table;
+        .disclaimer {
+          vertical-align: middle;
+          display: table-cell;
+        }
+        * {
+          display: inline-block;
+        }
+        span.help {
+          @include rem('margin-top', 10);
+        }
+        .interest {
+          @include rem('padding-bottom', 0);
+        }
+        p {
+          float: right;
+          vertical-align: middle;
+          display: table-cell;
+          @include rem('margin-bottom', 0);
+
+        }
+      }
+    }
+  }
+// END GENERIC STYLE QQ - LARGE DESKTOP ----
+
+// STYLE FOR QQ SPAREN - LARGE DESKTOP
+  .quickquote {
+    .result {
+      .payment-result {
+        overflow: hidden;
+        min-width: 300px;
+        width: 60%;
+        float: left;
+      }
+      .footer-result {
+        width: 60%;
+      }
+      .result-button {
+        text-align: left;
+      }
+    }
+  }
+// END STYLE FOR QQ SPAREN TABLET ----
+}
