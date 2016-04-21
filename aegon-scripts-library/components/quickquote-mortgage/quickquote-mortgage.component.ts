@@ -7,6 +7,8 @@ import {SliderComponent, SliderValueAccessor} from '../angular-components/slider
 import {InputDateComponent, InputDateValueAccessor} from '../angular-components/input-date.component';
 import {CheckboxComponent, CheckboxValueAccessor} from '../angular-components/checkbox.component';
 import {MoneyPipe} from "../angular-components/money.pipe";
+import {AfterViewInit} from "angular2/core";
+import {DoCheck} from "angular2/core";
 
 
 var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMortgageTemplate'));
@@ -24,6 +26,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
         {{incomeValue}}
         {{incomePartnerValue}}
         {{interestYears}}
+        {{calculatedValue}}
         <div class="field">
           <div class="inputs slider">
             <aegon-slider (click)="submitAmount()" [range]="{
@@ -103,7 +106,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
         <div class="payment-result">
           <div class="result1">
             <div class="title">Hypotheekbedrag</div>
-            <div id="pension-calculated" class="calculated"> &euro; 95.500,-<span>*</span></div>
+            <div id="pension-calculated" class="calculated">{{calculatedValue}}<span>,- *</span></div>
           </div>
           <div class="result2">
             <div class="title">Bruto maandlasten</div>
@@ -119,7 +122,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
   providers: [HTTP_PROVIDERS],
   pipes: [MoneyPipe]
 })
-export class QuickQuoteMortgageComponent implements OnInit {
+export class QuickQuoteMortgageComponent implements OnInit, DoCheck {
   incomeValue:  number;
   incomePartnerValue: number;
   interestYears: number;
@@ -131,12 +134,25 @@ export class QuickQuoteMortgageComponent implements OnInit {
   extraMonthPartner: boolean = false;
   vacationMoneyPartner: boolean = false;
   playWithMorgage: boolean = false;
+  calculatedValue: number = 100000;
 
   constructor(
     private http:Http
   ) {}
 
   ngOnInit(): void {
+  }
+
+  ngDoCheck(): void {
+    this.calculate();
+  }
+
+  calculate(): void {
+    if (this.incomeValue && this.incomePartnerValue) {
+      console.log(this.incomeValue);
+      console.log(this.incomePartnerValue);
+      this.calculatedValue =  this.incomeValue + this.incomePartnerValue;
+    }
   }
 
   submitAmount(): void {
