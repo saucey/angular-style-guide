@@ -20,6 +20,11 @@
     color: $black;
   }
 
+  input[type=text]::placeholder,
+  input[type=number]::placeholder {
+    color: $slightly_darker_grey;
+  }
+
   label.checkbox {
     padding-left: 45px;
 

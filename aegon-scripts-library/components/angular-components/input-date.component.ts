@@ -95,9 +95,9 @@ export class InputDateComponent {
   setValue(value: any): void {
     if (value) {
       let tokens: string[] = value.split('-');
-      this.day = tokens[0];
+      this.year = tokens[0];
       this.month = tokens[1];
-      this.year = tokens[2];
+      this.day = tokens[2];
     } else {
       this.day = this.month = this.year = null;
     }

@@ -35,7 +35,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteDipT
             </aegon-help>
           </div>
           <div class="inputs">
-            <aegon-input-money #amountInput currency="€" [(ngModel)]="pensionAmount" [max]="99999999"
+            <aegon-input-money #amountInput currency="€" [(ngModel)]="pensionAmount" [positive]="true" [max]="99999999"
                                (focus)="amountTooSmall = false; amountInput.select()" (blur)="isValidAmount()"
                                (enter)="submitAmount()" [placeholder]="'minimaal 25.000'">
             </aegon-input-money>
@@ -120,7 +120,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteDipT
           <div class="field">
             <div class="label"></div>
             <div class="inputs">
-              <button class="button icon-right icon-calculator" [disabled]="pendingCount > 0" [ngClass]="{pending: pendingCount > 0}" (click)="submit('MockURL', '')">
+              <button class="button icon-right icon-calculator" [disabled]="amountTooSmall || pendingCount > 0" [ngClass]="{pending: pendingCount > 0}" (click)="submit('MockURL', '')">
                 Bereken
               </button>
             </div>

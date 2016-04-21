@@ -10,6 +10,11 @@ export function formatNumber(value: any, fractional: boolean = true): string {
   if (isNaN(value)) {
     return '';
   }
+  let posOrNeg = '';
+  if (value < 0) {
+    value = Math.abs(value);
+    posOrNeg = '-';
+  }
   let regExp = /(\d+)(\d{3})/,
     tokens = String(value).split('.'),
     thousandsSeparated = tokens[0].replace(/^\d+/, (w) => {
@@ -20,9 +25,9 @@ export function formatNumber(value: any, fractional: boolean = true): string {
     });
   if (tokens[1] && fractional) {
     let zero = tokens[1].length === 1 ? '0' : '';
-    return thousandsSeparated + ',' + tokens[1] + zero;
+    return posOrNeg + thousandsSeparated + ',' + tokens[1] + zero;
   } else {
-    return thousandsSeparated;
+    return posOrNeg + thousandsSeparated;
   }
 }
 
@@ -47,7 +52,8 @@ export function parseNumber(value: any): number {
   template: `
     <span class="input money">
       <span class="currency">{{currency}}</span>
-      <input #inputEl type="text" [placeholder]="placeholder" [required]="required" [ngModel]="model" (ngModelChange)="changeValue($event)"
+      <input #inputEl type="text" [placeholder]="placeholder" [required]="required"
+             [ngModel]="model" (ngModelChange)="changeValue($event)"
              (focus)="focus.emit()" (blur)="formatAndBlur()" (keydown.enter)="enter.emit()">
     </span>
   `
@@ -55,6 +61,7 @@ export function parseNumber(value: any): number {
 export class InputMoneyComponent {
   @Input() currency: string;
   @Input() required: boolean;
+  @Input() positive: boolean;
   @Input() max: number;
   @Input() placeholder: string;
 
@@ -77,9 +84,17 @@ export class InputMoneyComponent {
   }
 
   changeValue(value) {
-    let num = parseNumber(value),
+    if (!this.positive && value === '-') {
+      // Minus as first typed char indicates a negative number will be typed, so do no processing, yet.
+      return;
+    }
+    // Remove invalid characters and parse as a number.
+    let num = parseNumber(value.replace(/[^0-9,.\-]*/g, '')),
       commaIndex, fractionalPart, formatted;
-    if (this.max) {
+    if (this.positive) {
+      num = Math.abs(num);
+    }
+    if (this.max !== void 0) {
       num = Math.min(num, this.max);
     }
     commaIndex = value.lastIndexOf(',');
@@ -92,7 +107,7 @@ export class InputMoneyComponent {
   }
 
   setValue(value) {
-    this.model = value && formatNumber(value) || '';
+    this.model = value !== void 0 && formatNumber(value) || '';
   }
 }
 
