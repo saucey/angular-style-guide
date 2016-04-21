@@ -1,0 +1,157 @@
+$left_width: 350px;
+$right_width: 370px;
+
+.quickquote.mortgage {
+  color: $slightly_darker_blue;
+
+  label {
+    font-weight: normal;
+  }
+
+  .error {
+    color: $dark_red;
+  }
+
+  input[type=text],
+  input[type=number],
+  select {
+    width: 180px;
+    background: $white;
+    color: $black;
+  }
+
+  label.checkbox {
+    padding-left: 45px;
+
+    .checkbox {
+      left: 0;
+      background: $white;
+    }
+
+    input[type=checkbox] {
+      position: absolute;
+    }
+
+    :checked + .checkbox {
+      background: $white;
+    }
+  }
+
+  .field {
+    margin-bottom: 10px;
+
+    &:after {
+      content: ' ';
+      clear: both;
+      display: block;
+      height: 0;
+      visibility: hidden;
+    }
+
+
+    .help {
+      position: absolute;
+      top: 0;
+      right: 20px;
+
+      &.dialog {
+        right: auto;
+        width: 400px;
+      }
+    }
+
+    .help {
+      color: $black;
+    }
+
+    .help.dialog {
+      display: none;
+      margin-left: 0;
+    }
+
+    label.checkbox {
+      display: inline-block;
+      margin: 9px 0 16px;
+      line-height: 26px;
+    }
+
+    .inputs {
+      float: left;
+      max-width: 100%;
+      position: relative;
+      &.right {
+        float: right;
+      }
+      &.slider {
+        width: 100%;
+      }
+
+      label.checkbox {
+        display: block;
+      }
+
+      button {
+        clear: both;
+        display: block;
+        margin-top: 10px;
+        width: 180px;
+        text-align: left;
+      }
+    }
+
+  }
+
+  button.pending:after {
+    background-image: url(../images/spinner.gif);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 70%;
+    color: transparent;
+  }
+
+  .result {
+    color: $white;
+
+    .row {
+      margin: 10px 0;
+
+      .label,
+      .currency,
+      .amount {
+        @include rem('font-size', $large);
+      }
+    }
+
+    .label,
+    ul.arrow {
+      display: inline-block;
+      box-sizing: border-box;
+      width: $left_width;
+      max-width: 100%;
+    }
+
+    .value {
+      display: inline-block;
+      max-width: 100%;
+      width: $right_width;
+      vertical-align: top;
+    }
+
+    .amount {
+      display: inline-block;
+      margin-right: 10px;
+      min-width: 85px;
+      text-align: right;
+      vertical-align: top;
+    }
+
+    a,
+    .arrow :before {
+      color: $white;
+    }
+
+    .footer {
+      clear: both;
+    }
+  }
+}

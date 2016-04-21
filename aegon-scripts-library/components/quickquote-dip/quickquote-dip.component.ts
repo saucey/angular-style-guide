@@ -28,7 +28,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteDipT
         <h3>Bereken direct uw pensioenuitkering:</h3>
         <div class="field">
           <div class="label">
-            Hoogte van uw pensioenkapitaal
+            Hoogte van uw pensioenkapitaal e
             <aegon-help>
               Vul hier de hoogte van uw pensioenkapitaal in. Heeft u bij meer pensioenverzekeraars een pensioenkapitaal?
               Tel dan alle bedragen bij elkaar op en vul het totaalbedrag hier in.
