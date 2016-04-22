@@ -191,7 +191,6 @@
       display: table;
       label {
         color: $light_blue;
-        display: inline-block;
         font-weight: normal;
         vertical-align: middle;
         display: table-cell;

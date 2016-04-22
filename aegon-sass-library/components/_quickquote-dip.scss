@@ -58,8 +58,10 @@
       box-sizing: border-box;
       position: relative;
       float: left;
-      width: $left_width;
-      max-width: 100%;
+      //width: $left_width;
+      //max-width: 100%;
+      max-width: $left_width;
+      width: 50%;
       padding-top: 9px;
       padding-right: 50px;
 
@@ -93,8 +95,10 @@
 
     .inputs {
       float: left;
-      max-width: 100%;
-      width: $right_width;
+      //max-width: 100%;
+      //width: $right_width;
+      width: 50%;
+      max-width: $right_width;
 
       label.checkbox {
         display: block;
@@ -221,5 +225,25 @@
     .footer {
       clear: both;
     }
+  }
+}
+
+@media only screen and (max-width: 640px) {
+  .quickquote.dip .field {
+    margin-bottom:20px;
+  }
+  .quickquote.dip .field .label {
+    font-size:18px;
+    font-weight:bold;
+    width: 100%;
+    padding-bottom: 8px;
+    padding-right:30px;
+    max-width:100%;
+  }
+  .quickquote.dip .field .inputs {
+    width: 100%;
+  }
+  .quickquote.dip .field .label .help {
+    right:0;
   }
 }

@@ -1,396 +1,396 @@
-//.quickquote.lijfrente.sparen {
-//  label.checkbox > input[type="checkbox"] {
-//    display: none;
-//    &+span.checkbox {
-//      background:$white;
-//      &+span {
-//        line-height:26px;
-//      }
-//    }
-//  }
-//  .calculation {
-//      .slider-container {
-//          .errorMessage {
-//          background-color: $pink;
-//          display:none;
-//          -webkit-border-radius: $default-border-radius;
-//          -moz-border-radius: $default-border-radius;
-//          border-radius: $default-border-radius;
-//          @include rem('margin-top', 15);
-//          @include rem('padding', 18);
-//          color: $dark_pink;
-//          border: 1px solid $dark_pink;
-//        }
-//          .errorMessage:empty {
-//          background:none;
-//        }
-//
-//    }
-//    .one-off.slider {
-//      input {
-//        text-align: right;
-//      }
-//    }
-//    .periodic.slider {
-//      .input-header {
-//        label {
-//          display: block;
-//          width: 100%;
-//        }
-//      }
-//      .input-container {
-//        max-width: 300px;
-//        input {
-//          @include rem('padding-right', 10);
-//          width: 50%;
-//          max-width: 120px;
-//          float: right;
-//          text-align: right;
-//        }
-//        div.dd.ddcommon {
-//          width: 152px !important;
-//          margin-left: 0;
-//          background: $white;
-//          float: left;
-//          border: 0;
-//          @include rem('margin-right', 8);
-//          .ddChild {
-//            overflow:visible!important;
-//          }
-//          .ddTitle {
-//            background: $white;
-//            span.ddTitleText {
-//              width: 150px;
-//            }
-//            .ddArrow {
-//              color: $blue;
-//            }
-//          }
-//        }
-//        &:after {
-//          left: auto;
-//          @include rem('margin-left', 10);
-//        }
-//      }
-//    }
-//    .duration.slider {
-//      .input-container {
-//        input {
-//          @include rem('padding-right', 40);
-//        }
-//        &:after {
-//          content: 'jaar';
-//          @include rem('right', 10);
-//          left: auto;
-//        }
-//      }
-//    }
-//    .input-header {
-//      label {
-//        width: 30%;
-//      }
-//      .input-container {
-//        &:after {
-//          line-height: 44px;
-//          position: absolute;
-//          top: 0;
-//          content: '€';
-//          @include rem('left', 10);
-//          pointer-events: none;
-//          color: $darker_grey;
-//        }
-//        input {
-//          width: 120px;
-//        }
-//
-//      }
-//    }
-//    .one-off-deposit {
-//      display: none;
-//      .input-header {
-//        input {
-//          text-align: right;
-//        }
-//      }
-//      .slider-container + .input-header {
-//        .input-container {
-//          input {
-//            text-align: left;
-//          }
-//          &:after {
-//            content: 'Jaar';
-//            @include rem('right', 10);
-//            left: auto;
-//          }
-//        }
-//      }
-//    }
-//  }
-//  .calculation + .calculation {
-//    border-top: 1px solid $white;
-//    padding: 1.875rem;
-//    @include rem('padding', 30);
-//    .input-header {
-//      label {
-//        width: 48%;
-//      }
-//      label.checkbox {
-//        width: 80%;
-//      }
-//
-//    }
-//  }
-//  .result {
-//    position: relative;
-//    z-index: 3;
-//    overflow:hidden;
-//    .payment-result {
-//
-//      width: 64%;
-//      float: left;
-//      .result1, .result2 , .result3{
-//        width: 45%;
-//        min-width: 202px;
-//        float: left;
-//        margin-right: 5%;
-//        .title {
-//          font-family: $font_thin;
-//          display: block;
-//          @include rem('margin-bottom', 5.5);
-//        }
-//        .calculated {
-//          position: relative;
-//          left: auto;
-//          @include rem('margin-bottom', 22);
-//        }
-//      }
-//    }
-//    .footer-result {
-//      float: left;
-//      width: 64%;
-//      min-width: 300px;
-//      .interest {
-//        width: 50%;
-//        display: inline-block;
-//        float: left;
-//        font-family: $font_thin;
-//      }
-//    }
-//    .result-button {
-//      text-align: left;
-//
-//    }
-//  }
-//  .help.dialog.bottom {
-//    z-index: 4;
-//  }
-//}
-//.quickquote + .disclaimer {
-//  clear: both;
-//  color:$blue;
-//  display:block;
-//  @include rem('padding', 30);
-//  @include rem('line-height', 22);
-//  @include rem('font-size', 18);
-//}
-//
-//
-//
-//
-//
-//@include breakpoint($brk-mobile) {
-//  .quickquote.lijfrente.sparen {
-//    .calculation {
-//      .slider-container {
-//        >div + span {
-//          max-width:220px;
-//        }
-//      }
-//      .input-header {
-//        position:relative;
-//        display:block;
-//        overflow:visible;
-//        label {
-//          display:block;
-//          width:100%;
-//        }
-//        .input-container {
-//          float:none;
-//          max-width:220px;
-//          @include rem('margin-right', 0);
-//          input {
-//            width:100%;
-//            max-width: 220px;
-//            padding-right: 0.625rem;
-//          }
-//        }
-//        .help {
-//          @include rem('right', 5);
-//          @include rem('top', 0);
-//          @include rem('margin-top', -2);
-//        }
-//      }
-//      .duration.slider {
-//        .input-container {
-//          &:after {
-//            @include rem('right', 30);
-//            left:auto;
-//          }
-//        }
-//      }
-//      .periodic.slider {
-//        .input-header {
-//          .input-container {
-//            float:none;
-//            max-width:220px;
-//            div.dd.ddcommon {
-//              display: block;
-//              width: 100% !important;
-//              max-width: 220px;
-//              float: none;
-//              clear: both;
-//              margin-right: 0;
-//              margin-bottom: 10px;
-//            }
-//            input {
-//              display: block;
-//              width: 100%;
-//              max-width: 220px;
-//              float: none;
-//              clear: both;
-//            }
-//            &:after {
-//              top: 3em;
-//              @include rem('top', 54);
-//            }
-//          }
-//        }
-//      }
-//    }
-//
-//    .calculation + .calculation {
-//      @include rem('padding', 30, 0);
-//      > .input-header {
-//        @include rem('padding', 0, 30);
-//        .help {
-//          margin-top: 0;
-//          @include rem('right', 36);
-//          @include rem('margin-top', 0);
-//        }
-//      }
-//      .one-off-deposit {
-//        @include rem('padding', 0, 30, 0, 30);
-//        .input-header {
-//          label {
-//            width: 100%;
-//            display: block;
-//            @include rem('padding-right', 30);
-//          }
-//        }
-//      }
-//      .input-header {
-//        label.checkbox {
-//          width: 100%;
-//          @include rem('padding-right', 50);
-//        }
-//      }
-//    }
-//    .result {
-//      .payment-result {
-//        overflow: hidden;
-//        width: 300px;
-//      }
-//      .footer-result {
-//        width: 100%;
-//        min-width: 0;
-//        .interest {
-//          width: 45%;
-//          margin-right: 5%;
-//        }
-//      }
-//    }
-//  }
-//  .quickquote.lijfrente.sparen.beleggen .result .payment-result {
-//    width:100%;
-//  }
-//  .quickquote.lijfrente.sparen.beleggen .result .payment-result .result1,
-//  .quickquote.lijfrente.sparen.beleggen .result .payment-result .result2,
-//  .quickquote.lijfrente.sparen.beleggen .result .payment-result .result3 {
-//    width:100%;
-//    float:none;
-//  }
-//}
-//
-//@include breakpoint($brk-tablet) {
-//  .quickquote.lijfrente.sparen {
-//    .one-off-deposit-check {
-//      .input-header {
-//        .help {
-//          margin-top: 0;
-//        }
-//      }
-//    }
-//  }
-//  .quickquote.lijfrente.sparen.beleggen {
-//    .result {
-//      .payment-result  {
-//        width:100%;
-//        .result1,
-//        .result2,
-//        .result3 {
-//          width: 32%;
-//          min-width: 150px;
-//          float: left;
-//          margin-right: 1%;
-//        }
-//        .result3 {
-//          float:right;
-//        }
-//      }
-//    }
-//  }
-//}
-//
-//@include breakpoint($brk-ipad-portrait) {
-//  .quickquote.lijfrente.sparen {
-//    .calculation {
-//      .periodic.slider {
-//        .input-header {
-//          label {
-//            display: inline-block;
-//            width: 26%;
-//          }
-//        }
-//      }
-//    }
-//    .result {
-//      .result-button {
-//        text-align: right;
-//        @include rem('margin-right', 9);
-//      }
-//    }
-//  }
-//  .quickquote.lijfrente.sparen.beleggen .result .payment-result {
-//    width: 77%;
-//  }
-//}
-//
-//@include breakpoint($brk-large-desktop) {
-//  .quickquote.lijfrente.sparen {
-//    .result {
-//      .payment-result {
-//        overflow: hidden;
-//        min-width: 300px;
-//        width: 60%;
-//        float: left;
-//      }
-//      .footer-result {
-//        width: 60%;
-//      }
-//      .result-button {
-//        text-align: left;
-//      }
-//    }
-//  }
-//
-//}
+.quickquote.lijfrente.sparen {
+  label.checkbox > input[type="checkbox"] {
+    display: none;
+    &+span.checkbox {
+      background:$white;
+      &+span {
+        line-height:26px;
+      }
+    }
+  }
+  .calculation {
+      .slider-container {
+          .errorMessage {
+          background-color: $pink;
+          display:none;
+          -webkit-border-radius: $default-border-radius;
+          -moz-border-radius: $default-border-radius;
+          border-radius: $default-border-radius;
+          @include rem('margin-top', 15);
+          @include rem('padding', 18);
+          color: $dark_pink;
+          border: 1px solid $dark_pink;
+        }
+          .errorMessage:empty {
+          background:none;
+        }
+
+    }
+    .one-off.slider {
+      input {
+        text-align: right;
+      }
+    }
+    .periodic.slider {
+      .input-header {
+        label {
+          display: block;
+          width: 100%;
+        }
+      }
+      .input-container {
+        max-width: 300px;
+        input {
+          @include rem('padding-right', 10);
+          width: 50%;
+          max-width: 120px;
+          float: right;
+          text-align: right;
+        }
+        div.dd.ddcommon {
+          width: 152px !important;
+          margin-left: 0;
+          background: $white;
+          float: left;
+          border: 0;
+          @include rem('margin-right', 8);
+          .ddChild {
+            overflow:visible!important;
+          }
+          .ddTitle {
+            background: $white;
+            span.ddTitleText {
+              width: 150px;
+            }
+            .ddArrow {
+              color: $blue;
+            }
+          }
+        }
+        &:after {
+          left: auto;
+          @include rem('margin-left', 10);
+        }
+      }
+    }
+    .duration.slider {
+      .input-container {
+        input {
+          @include rem('padding-right', 40);
+        }
+        &:after {
+          content: 'jaar';
+          @include rem('right', 10);
+          left: auto;
+        }
+      }
+    }
+    .input-header {
+      label {
+        width: 30%;
+      }
+      .input-container {
+        &:after {
+          line-height: 44px;
+          position: absolute;
+          top: 0;
+          content: '€';
+          @include rem('left', 10);
+          pointer-events: none;
+          color: $darker_grey;
+        }
+        input {
+          width: 120px;
+        }
+
+      }
+    }
+    .one-off-deposit {
+      display: none;
+      .input-header {
+        input {
+          text-align: right;
+        }
+      }
+      .slider-container + .input-header {
+        .input-container {
+          input {
+            text-align: left;
+          }
+          &:after {
+            content: 'Jaar';
+            @include rem('right', 10);
+            left: auto;
+          }
+        }
+      }
+    }
+  }
+  .calculation + .calculation {
+    border-top: 1px solid $white;
+    padding: 1.875rem;
+    @include rem('padding', 30);
+    .input-header {
+      label {
+        width: 48%;
+      }
+      label.checkbox {
+        width: 80%;
+      }
+
+    }
+  }
+  .result {
+    position: relative;
+    z-index: 3;
+    overflow:hidden;
+    .payment-result {
+
+      width: 64%;
+      float: left;
+      .result1, .result2 , .result3{
+        width: 45%;
+        min-width: 202px;
+        float: left;
+        margin-right: 5%;
+        .title {
+          font-family: $font_thin;
+          display: block;
+          @include rem('margin-bottom', 5.5);
+        }
+        .calculated {
+          position: relative;
+          left: auto;
+          @include rem('margin-bottom', 22);
+        }
+      }
+    }
+    .footer-result {
+      float: left;
+      width: 64%;
+      min-width: 300px;
+      .interest {
+        width: 50%;
+        display: inline-block;
+        float: left;
+        font-family: $font_thin;
+      }
+    }
+    .result-button {
+      text-align: left;
+
+    }
+  }
+  .help.dialog.bottom {
+    z-index: 4;
+  }
+}
+.quickquote + .disclaimer {
+  clear: both;
+  color:$blue;
+  display:block;
+  @include rem('padding', 30);
+  @include rem('line-height', 22);
+  @include rem('font-size', 18);
+}
+
+
+
+
+
+@include breakpoint($brk-mobile) {
+  .quickquote.lijfrente.sparen {
+    .calculation {
+      .slider-container {
+        >div + span {
+          max-width:220px;
+        }
+      }
+      .input-header {
+        position:relative;
+        display:block;
+        overflow:visible;
+        label {
+          display:block;
+          width:100%;
+        }
+        .input-container {
+          float:none;
+          max-width:220px;
+          @include rem('margin-right', 0);
+          input {
+            width:100%;
+            max-width: 220px;
+            padding-right: 0.625rem;
+          }
+        }
+        .help {
+          @include rem('right', 5);
+          @include rem('top', 0);
+          @include rem('margin-top', -2);
+        }
+      }
+      .duration.slider {
+        .input-container {
+          &:after {
+            @include rem('right', 30);
+            left:auto;
+          }
+        }
+      }
+      .periodic.slider {
+        .input-header {
+          .input-container {
+            float:none;
+            max-width:220px;
+            div.dd.ddcommon {
+              display: block;
+              width: 100% !important;
+              max-width: 220px;
+              float: none;
+              clear: both;
+              margin-right: 0;
+              margin-bottom: 10px;
+            }
+            input {
+              display: block;
+              width: 100%;
+              max-width: 220px;
+              float: none;
+              clear: both;
+            }
+            &:after {
+              top: 3em;
+              @include rem('top', 54);
+            }
+          }
+        }
+      }
+    }
+
+    .calculation + .calculation {
+      @include rem('padding', 30, 0);
+      > .input-header {
+        @include rem('padding', 0, 30);
+        .help {
+          margin-top: 0;
+          @include rem('right', 36);
+          @include rem('margin-top', 0);
+        }
+      }
+      .one-off-deposit {
+        @include rem('padding', 0, 30, 0, 30);
+        .input-header {
+          label {
+            width: 100%;
+            display: block;
+            @include rem('padding-right', 30);
+          }
+        }
+      }
+      .input-header {
+        label.checkbox {
+          width: 100%;
+          @include rem('padding-right', 50);
+        }
+      }
+    }
+    .result {
+      .payment-result {
+        overflow: hidden;
+        width: 300px;
+      }
+      .footer-result {
+        width: 100%;
+        min-width: 0;
+        .interest {
+          width: 45%;
+          margin-right: 5%;
+        }
+      }
+    }
+  }
+  .quickquote.lijfrente.sparen.beleggen .result .payment-result {
+    width:100%;
+  }
+  .quickquote.lijfrente.sparen.beleggen .result .payment-result .result1,
+  .quickquote.lijfrente.sparen.beleggen .result .payment-result .result2,
+  .quickquote.lijfrente.sparen.beleggen .result .payment-result .result3 {
+    width:100%;
+    float:none;
+  }
+}
+
+@include breakpoint($brk-tablet) {
+  .quickquote.lijfrente.sparen {
+    .one-off-deposit-check {
+      .input-header {
+        .help {
+          margin-top: 0;
+        }
+      }
+    }
+  }
+  .quickquote.lijfrente.sparen.beleggen {
+    .result {
+      .payment-result  {
+        width:100%;
+        .result1,
+        .result2,
+        .result3 {
+          width: 32%;
+          min-width: 150px;
+          float: left;
+          margin-right: 1%;
+        }
+        .result3 {
+          float:right;
+        }
+      }
+    }
+  }
+}
+
+@include breakpoint($brk-ipad-portrait) {
+  .quickquote.lijfrente.sparen {
+    .calculation {
+      .periodic.slider {
+        .input-header {
+          label {
+            display: inline-block;
+            width: 26%;
+          }
+        }
+      }
+    }
+    .result {
+      .result-button {
+        text-align: right;
+        @include rem('margin-right', 9);
+      }
+    }
+  }
+  .quickquote.lijfrente.sparen.beleggen .result .payment-result {
+    width: 77%;
+  }
+}
+
+@include breakpoint($brk-large-desktop) {
+  .quickquote.lijfrente.sparen {
+    .result {
+      .payment-result {
+        overflow: hidden;
+        min-width: 300px;
+        width: 60%;
+        float: left;
+      }
+      .footer-result {
+        width: 60%;
+      }
+      .result-button {
+        text-align: left;
+      }
+    }
+  }
+
+}
