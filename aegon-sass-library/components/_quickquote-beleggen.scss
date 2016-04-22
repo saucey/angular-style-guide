@@ -1,291 +1,269 @@
-.quickquote.lijfrente.sparen.beleggen {
-  max-width:1008px;
-  .calculation {
-      .one-off.slider, .duration.slider, .periodic.slider {
-        .input-header {
-          label {
-          width: 48%;
-          padding-right: 20px;
-          display: inline-block;
-        }
-      }
-    }
-    .periodic.slider {
-      .input-header {
-        .input-container {
-          input {
-            width: 100%;
-          }
-        }
-      }
-    }
-  }
+//.quickquote.lijfrente.sparen.beleggen {
+//  max-width:1008px;
+//  .calculation {
+//      .one-off.slider, .duration.slider, .periodic.slider {
+//        .input-header {
+//          label {
+//          width: 48%;
+//          padding-right: 20px;
+//          display: inline-block;
+//        }
+//      }
+//    }
+//    .periodic.slider {
+//      .input-header {
+//        .input-container {
+//          input {
+//            width: 100%;
+//          }
+//        }
+//      }
+//    }
+//  }
+//
+//
+//  .result {
+//    .footer-result a {
+//      color: $white;
+//      font-family: $font_thin;
+//      position:relative;
+//      @include rem('line-height', 49);
+//      @include rem('padding-left', 15);
+//      &:after {
+//        content:'>';
+//        display:block;
+//        height:100%;
+//        position:absolute;
+//        left:0;
+//        top:0;
+//      }
+//    }
+//    .payment-result {
+//      .result1, .result2, .result3 {
+//        width:auto ;
+//        min-width:0 ;
+//        margin-right:0;
+//        padding-right:2em;
+//      }
+//      .result1, .result1 .title {
+//        @include rem('font-size', 18);
+//        font-family: $font_thin;
+//        .calculated {
+//          @include rem('font-size', 26);
+//        }
+//      }
+//      .result2, .result2 .title {
+//        @include rem('font-size', 18);
+//        font-family: $font_thin;
+//        .calculated {
+//          @include rem('font-size', 26);
+//        }
+//      }
+//      .result3, .result3 .title {
+//        @include rem('font-size', 18);
+//        font-family: $font_light;
+//        .calculated {
+//          @include rem('font-size', 26);
+//        }
+//      }
+//      .result3 {
+//        padding-right: 20px;
+//      }
+//    }
+//  }
+//}
 
 
-  .result {
-    .footer-result a {
-      color: $white;
-      font-family: $font_thin;
-      position:relative;
-      @include rem('line-height', 49);
-      @include rem('padding-left', 15);
-      &:after {
-        content:'>';
-        display:block;
-        height:100%;
-        position:absolute;
-        left:0;
-        top:0;
-      }
-    }
-    .payment-result {
-      .result1, .result2, .result3 {
-        width:auto ;
-        min-width:0 ;
-        margin-right:0;
-        padding-right:2em;
-      }
-      .result1, .result1 .title {
-        @include rem('font-size', 18);
-        font-family: $font_thin;
-        .calculated {
-          @include rem('font-size', 26);
-        }
-      }
-      .result2, .result2 .title {
-        @include rem('font-size', 18);
-        font-family: $font_thin;
-        .calculated {
-          @include rem('font-size', 26);
-        }
-      }
-      .result3, .result3 .title {
-        @include rem('font-size', 18);
-        font-family: $font_light;
-        .calculated {
-          @include rem('font-size', 26);
-        }
-      }
-      .result3 {
-        padding-right: 20px;
-      }
-    }
-  }
-}
-
-//QuickQuote Beleggen --- ProductPage
-.node-type-product .quickquote.lijfrente.sparen.beleggen {
-  .calculation {
-    width:100%;
-    .periodic.slider , .duration.slider , .one-off.slider   {
-      .input-header {
-        label {
-          line-height:44px;
-        }
-      }
-    }
-  }
-  .result {
-    line-height:26px;
-    .payment-result {
-      width:100%;
-      margin-right:0;
-    }
-    .footer-result {
-      min-width:270px;
-    }
-  }
-}
 
 
 
 
 @include breakpoint($brk-mobile) {
-  .quickquote.lijfrente.sparen.beleggen {
-    .calculation {
-      .one-off.slider, .duration.slider, .periodic.slider {
-        .input-header {
-          label {
-            width: 48%;
-            padding-right: 20px;
-            display: inline-block;
-          }
-        }
-      }
-    }
-  }
-
-  .quickquote.lijfrente.sparen.beleggen {
-    .calculation {
-      .one-off.slider, .duration.slider, .periodic.slider {
-        .input-header {
-          label {
-            width: 100%;
-            padding-right:35px;
-          }
-        }
-      }
-      .periodic.slider {
-        .input-header {
-          .input-container:after {
-            top:0;
-          }
-        }
-      }
-    }
-    .result  {
-      .payment-result {
-        width:100%;
-        @include rem('margin-bottom',0 );
-        .result1,.result2,.result3 {
-          width:auto;
-          @include rem('margin-bottom',18 );
-          .title , .calculated {
-            font-size:18px;
-            margin-bottom:0;
-          }
-        }
-      }
-      .footer-result {
-        a {
-          padding:.5em 0;
-          padding-left: 0.9375rem;
-          font-size:18px;
-          line-height:1em;
-          @include rem('margin-bottom',0 );
-          &:after {
-            top: .5em;
-          }
-        }
-      }
-    }
-  }
-
-  //QuickQuote Beleggen --- ProductPage
-  .node-type-product .quickquote.lijfrente.sparen.beleggen {
-    .calculation {
-      .one-off.slider, .duration.slider, .periodic.slider {
-        .input-header {
-          label {
-            line-height: 1.333em;
-          }
-          .help {
-            top: 0;
-            margin-top: -.25em;
-          }
-        }
-      }
-      .duration.slider {
-        .input-header {
-          .help {
-            top: 0;
-            margin-top: -.333em;
-          }
-        }
-      }
-      .periodic.slider {
-        .input-header {
-          .input-container:after {
-            top: 0;
-          }
-        }
-      }
-      .result {
-        .footer-result {
-          min-width:0;
-        }
-      }
-    }
-  }
+  //.quickquote.lijfrente.sparen.beleggen {
+  //  .calculation {
+  //    .one-off.slider, .duration.slider, .periodic.slider {
+  //      .input-header {
+  //        label {
+  //          width: 48%;
+  //          padding-right: 20px;
+  //          display: inline-block;
+  //        }
+  //      }
+  //    }
+  //  }
+  //}
+  //
+  //.quickquote.lijfrente.sparen.beleggen {
+  //  .calculation {
+  //    .one-off.slider, .duration.slider, .periodic.slider {
+  //      .input-header {
+  //        label {
+  //          width: 100%;
+  //          padding-right:35px;
+  //        }
+  //      }
+  //    }
+  //    .periodic.slider {
+  //      .input-header {
+  //        .input-container:after {
+  //          top:0;
+  //        }
+  //      }
+  //    }
+  //  }
+  //  .result  {
+  //    .payment-result {
+  //      width:100%;
+  //      @include rem('margin-bottom',0 );
+  //      .result1,.result2,.result3 {
+  //        width:auto;
+  //        @include rem('margin-bottom',18 );
+  //        .title , .calculated {
+  //          font-size:18px;
+  //          margin-bottom:0;
+  //        }
+  //      }
+  //    }
+  //    .footer-result {
+  //      a {
+  //        padding:.5em 0;
+  //        padding-left: 0.9375rem;
+  //        font-size:18px;
+  //        line-height:1em;
+  //        @include rem('margin-bottom',0 );
+  //        &:after {
+  //          top: .5em;
+  //        }
+  //      }
+  //    }
+  //  }
+  //}
+  //
+  ////QuickQuote Beleggen --- ProductPage
+  //.node-type-product .quickquote.lijfrente.sparen.beleggen {
+  //  .calculation {
+  //    .one-off.slider, .duration.slider, .periodic.slider {
+  //      .input-header {
+  //        label {
+  //          line-height: 1.333em;
+  //        }
+  //        .help {
+  //          top: 0;
+  //          margin-top: -.25em;
+  //        }
+  //      }
+  //    }
+  //    .duration.slider {
+  //      .input-header {
+  //        .help {
+  //          top: 0;
+  //          margin-top: -.333em;
+  //        }
+  //      }
+  //    }
+  //    .periodic.slider {
+  //      .input-header {
+  //        .input-container:after {
+  //          top: 0;
+  //        }
+  //      }
+  //    }
+  //    .result {
+  //      .footer-result {
+  //        min-width:0;
+  //      }
+  //    }
+  //  }
+  //}
 
 }
 
 @include breakpoint($brk-tablet) {
-  .quickquote.lijfrente.sparen.beleggen {
-    .result {
-      .payment-result  {
-        width:100%;
-        .result1,
-        .result2,
-        .result3 {
-          width: auto;
-          min-width: 0;
-          float: left;
-          margin-right: 0;
-        }
-        .result3 {
-          float:left;
-          margin-top: -2px;
-          margin-bottom: 2px;
-        }
-      }
-    }
-  }
+  //.quickquote.lijfrente.sparen.beleggen {
+  //  .result {
+  //    .payment-result  {
+  //      width:100%;
+  //      .result1,
+  //      .result2,
+  //      .result3 {
+  //        width: auto;
+  //        min-width: 0;
+  //        float: left;
+  //        margin-right: 0;
+  //      }
+  //      .result3 {
+  //        float:left;
+  //        margin-top: -2px;
+  //        margin-bottom: 2px;
+  //      }
+  //    }
+  //  }
+  //}
 }
 
 @include breakpoint($brk-ipad-portrait) {
-  .quickquote.lijfrente.sparen.beleggen {
-    .result {
-      .payment-result {
-        width: 100%;
-        .result3 {float:right;padding-right:12px;}
-      }
-      .result-button {
-          float:right;
-      }
-    }
-  }
-  .quickquote.lijfrente.sparen.beleggen {
-    .result {
-      .footer-result {
-        width:50%;
-      }
-      .payment-result {
-        margin-right: 0px;
-      }
-    }
-  }
-  //QuickQuote Beleggen --- ProductPage
-  .node-type-product .quickquote.lijfrente.sparen.beleggen {
-    .result {
-      .footer-result {
-        width:auto;
-      }
-      .payment-result {
-        .result3 {
-          padding-right:0;
-        }
-      }
-    }
-  }
+  //.quickquote.lijfrente.sparen.beleggen {
+  //  .result {
+  //    .payment-result {
+  //      width: 100%;
+  //      .result3 {float:right;padding-right:12px;}
+  //    }
+  //    .result-button {
+  //        float:right;
+  //    }
+  //  }
+  //}
+  //.quickquote.lijfrente.sparen.beleggen {
+  //  .result {
+  //    .footer-result {
+  //      width:50%;
+  //    }
+  //    .payment-result {
+  //      margin-right: 0px;
+  //    }
+  //  }
+  //}
+  ////QuickQuote Beleggen --- ProductPage
+  //.node-type-product .quickquote.lijfrente.sparen.beleggen {
+  //  .result {
+  //    .footer-result {
+  //      width:auto;
+  //    }
+  //    .payment-result {
+  //      .result3 {
+  //        padding-right:0;
+  //      }
+  //    }
+  //  }
+  //}
 
 }
 
 @include breakpoint($brk-large-desktop) {
-  .quickquote.lijfrente.sparen.beleggen {
-    .result {
-      .footer-result {
-        width:50%;
-      }
-      .payment-result {
-        width: 80%;
-        margin-right: 100px;
-      }
-      .result-button {
-        margin-right:260px;
-      }
-    }
-  }
-  //QuickQuote Beleggen --- ProductPage
-  .node-type-product .quickquote.lijfrente.sparen.beleggen {
-    .result {
-      .result-button {
-        width:auto;
-        margin-right:42px;
-      }
-    }
-
-  }
+  //.quickquote.lijfrente.sparen.beleggen {
+  //  .result {
+  //    .footer-result {
+  //      width:50%;
+  //    }
+  //    .payment-result {
+  //      width: 80%;
+  //      margin-right: 100px;
+  //    }
+  //    .result-button {
+  //      margin-right:260px;
+  //    }
+  //  }
+  //}
+  ////QuickQuote Beleggen --- ProductPage
+  //.node-type-product .quickquote.lijfrente.sparen.beleggen {
+  //  .result {
+  //    .result-button {
+  //      width:auto;
+  //      margin-right:42px;
+  //    }
+  //  }
+  //
+  //}
 
 
 }

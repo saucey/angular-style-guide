@@ -1,45 +1,45 @@
 .quickquote {
   .calculation {
-    .amount.slider {
-      .input-header {
-        .input-container {
-          position:relative;
-          &:before {
-            content:'€';
-            display:block;
-            position:absolute;
-            left:10px;
-            top:0;
-            line-height:44px;
-            color: $darker_grey;
-          }
-          input {
-            padding-left:20px;
-            text-align:right;
-          }
-        }
-      }
-    }
-    .time.slider {
-      .input-header {
-        .input-container {
-          position:relative;
-          &:after {
-            content:'Jaar';
-            display:block;
-            position:absolute;
-            right:12px;
-            top:0;
-            line-height:44px;
-            color: $darker_grey;
-          }
-          input {
-            width:100px;
-          }
-          .year {display:none;}
-        }
-      }
-    }
+    //.amount.slider {
+    //  .input-header {
+    //    .input-container {
+    //      position:relative;
+    //      &:before {
+    //        content:'€';
+    //        display:block;
+    //        position:absolute;
+    //        left:10px;
+    //        top:0;
+    //        line-height:44px;
+    //        color: $darker_grey;
+    //      }
+    //      input {
+    //        padding-left:20px;
+    //        text-align:right;
+    //      }
+    //    }
+    //  }
+    //}
+    //.time.slider {
+    //  .input-header {
+    //    .input-container {
+    //      position:relative;
+    //      &:after {
+    //        content:'Jaar';
+    //        display:block;
+    //        position:absolute;
+    //        right:12px;
+    //        top:0;
+    //        line-height:44px;
+    //        color: $darker_grey;
+    //      }
+    //      input {
+    //        width:100px;
+    //      }
+    //      .year {display:none;}
+    //    }
+    //  }
+    //}
     .slider-container {
       .noUi-horizontal.noUi-extended {
         padding-right: 20px;
@@ -86,25 +86,25 @@
 }
 
 @include breakpoint($brk-mobile) {
-  .quickquote.lijfrente.uitkeren {
-    .calculation {
-      .time.slider , .amount.slider {
-        .input-header {
-          label {
-            display:block;
-            width:100%;
-          }
-          .input-container {
-            float:left;
-          }
-        }
-      }
-    }
-    .result {
-      .calculated {
-        position:relative;
-        left:auto;
-      }
-    }
-  }
+  //.quickquote.lijfrente.uitkeren {
+  //  .calculation {
+  //    .time.slider , .amount.slider {
+  //      .input-header {
+  //        label {
+  //          display:block;
+  //          width:100%;
+  //        }
+  //        .input-container {
+  //          float:left;
+  //        }
+  //      }
+  //    }
+  //  }
+  //  .result {
+  //    .calculated {
+  //      position:relative;
+  //      left:auto;
+  //    }
+  //  }
+  //}
 }

@@ -82,23 +82,59 @@
       }
 
     }
-    //GENERIC STYLE FOR AMOUNT-SLIDER  and TIME-SLIDER ( QQ lijfrente )
+    //GENERIC STYLE FOR AMOUNT-SLIDER ( QQ lijfrente )
     .amount.slider {
-      input {
-        width: 100px;
-        &:before {
-          content:'€';
-          left: 0;
+      .input-header {
+        .input-container {
+          position:relative;
+          &:before {
+            content:'€';
+            display:block;
+            position:absolute;
+            left:10px;
+            top:0;
+            line-height:44px;
+            color: $darker_grey;
+          }
+          input {
+            width: 100px;
+            padding-left:20px;
+            text-align:right;
+            &:before {
+              content:'€';
+              left: 0;
+            }
+          }
         }
       }
     }
+    //GENERIC STYLE FOR TIME-SLIDER ( QQ lijfrente )
     .time.slider {
-      input {
-        width: 50px;
-        &:before {
-          content:'€';
-          left: 0;
-          width: 10px;
+      .input-header {
+        .input-container {
+          position:relative;
+          &:after {
+            content:'Jaar';
+            display:block;
+            position:absolute;
+            right:12px;
+            top:0;
+            line-height:44px;
+            color: $darker_grey;
+          }
+          input {
+            width: 50px; //have to choose 1 width
+            width:100px; //have to choose 1 width
+            &:before {
+              content:'€';
+              left: 0;
+              width: 10px;
+            }
+          }
+          input {
+
+          }
+          .year {display:none;}
         }
       }
     }
@@ -134,6 +170,7 @@
         }
       }
     }
+    // GENERIC STYLE FOR DURATION SLIDER ( QQ sparen/beleggen )
     .duration.slider {
       .input-container {
         input {
@@ -146,6 +183,7 @@
         }
       }
     }
+    // GENERIC STYLE FOR INPUT-HEADER ELEMENT
     .input-header {
       width: 100%;
       overflow: auto;
@@ -159,6 +197,7 @@
         display: table-cell;
         width: 60%;
       }
+      // GENERIC STYLE FOR INPUT-CONTAINER ELEMENT
       .input-container {
         float:right;
         position: relative;
@@ -176,6 +215,7 @@
           @include rem('margin', 0, 4, 0, 14);
         }
       }
+      // GENERIC STYLE FOR HELP ELEMENT ( question mark with caption )
       .help {
         position: absolute;
         @include rem('margin', 7, 0, 0, 0);
@@ -402,10 +442,106 @@
   }
 // END STYLE FOR QQ SPAREN
 
+// STYLE FOR QQ BELEGGEN
+.quickquote.lijfrente.sparen.beleggen {
+  max-width:1008px;
+  .calculation {
+    .one-off.slider, .duration.slider, .periodic.slider {
+      .input-header {
+        label {
+          width: 48%;
+          padding-right: 20px;
+          display: inline-block;
+        }
+      }
+    }
+    .periodic.slider {
+      .input-header {
+        .input-container {
+          input {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+
+
+  .result {
+    .footer-result a {
+      color: $white;
+      font-family: $font_thin;
+      position:relative;
+      @include rem('line-height', 49);
+      @include rem('padding-left', 15);
+      &:after {
+        content:'>';
+        display:block;
+        height:100%;
+        position:absolute;
+        left:0;
+        top:0;
+      }
+    }
+    .payment-result {
+      .result1, .result2, .result3 {
+        width:auto ;
+        min-width:0 ;
+        margin-right:0;
+        padding-right:2em;
+      }
+      .result1, .result1 .title {
+        @include rem('font-size', 18);
+        font-family: $font_thin;
+        .calculated {
+          @include rem('font-size', 26);
+        }
+      }
+      .result2, .result2 .title {
+        @include rem('font-size', 18);
+        font-family: $font_thin;
+        .calculated {
+          @include rem('font-size', 26);
+        }
+      }
+      .result3, .result3 .title {
+        @include rem('font-size', 18);
+        font-family: $font_light;
+        .calculated {
+          @include rem('font-size', 26);
+        }
+      }
+      .result3 {
+        padding-right: 20px;
+      }
+    }
+  }
+}
+// END STYLE FOR QQ BELEGGEN
+
 
 @include breakpoint($brk-mobile) {
 // GENERIC STYLE QQ - MOBILE
   .quickquote {
+    .calculation {
+      .time.slider , .amount.slider {
+        .input-header {
+          label {
+            display:block;
+            width:100%;
+          }
+          .input-container {
+            float:left;
+          }
+        }
+      }
+    }
+    .result {
+      .calculated {
+        position:relative;
+        left:auto;
+      }
+    }
     .span1.gutter {
       width: 0;
       min-height: 0;
@@ -542,6 +678,106 @@
 // END STYLE FOR QQ SPAREN MOBILE ----
 
 
+// STYLE FOR QQ BELEGGEN MOBILE
+  .quickquote.lijfrente.sparen.beleggen {
+    .calculation {
+      .one-off.slider, .duration.slider, .periodic.slider {
+        .input-header {
+          label {
+            width: 48%;
+            padding-right: 20px;
+            display: inline-block;
+          }
+        }
+      }
+    }
+  }
+
+  .quickquote.lijfrente.sparen.beleggen {
+    .calculation {
+      .one-off.slider, .duration.slider, .periodic.slider {
+        .input-header {
+          label {
+            width: 100%;
+            padding-right:35px;
+          }
+        }
+      }
+      .periodic.slider {
+        .input-header {
+          .input-container:after {
+            top:0;
+          }
+        }
+      }
+    }
+    .result  {
+      .payment-result {
+        width:100%;
+        @include rem('margin-bottom',0 );
+        .result1,.result2,.result3 {
+          width:auto;
+          @include rem('margin-bottom',18 );
+          .title , .calculated {
+            font-size:18px;
+            margin-bottom:0;
+          }
+        }
+      }
+      .footer-result {
+        a {
+          padding:.5em 0;
+          padding-left: 0.9375rem;
+          font-size:18px;
+          line-height:1em;
+          @include rem('margin-bottom',0 );
+          &:after {
+            top: .5em;
+          }
+        }
+      }
+    }
+  }
+
+  //QuickQuote Beleggen --- ProductPage
+  .node-type-product .quickquote.lijfrente.sparen.beleggen {
+    .calculation {
+      .one-off.slider, .duration.slider, .periodic.slider {
+        .input-header {
+          label {
+            line-height: 1.333em;
+          }
+          .help {
+            top: 0;
+            margin-top: -.25em;
+          }
+        }
+      }
+      .duration.slider {
+        .input-header {
+          .help {
+            top: 0;
+            margin-top: -.333em;
+          }
+        }
+      }
+      .periodic.slider {
+        .input-header {
+          .input-container:after {
+            top: 0;
+          }
+        }
+      }
+      .result {
+        .footer-result {
+          min-width:0;
+        }
+      }
+    }
+  }
+// END STYLE FOR QQ BELEGGEN MOBILE ----
+
+
 
 }
 
@@ -593,6 +829,29 @@
     }
   }
 // END STYLE FOR QQ SPAREN TABLET ----
+
+// STYLE FOR QQ BELEGGEN TABLET ----
+  .quickquote.lijfrente.sparen.beleggen {
+    .result {
+      .payment-result  {
+        width:100%;
+        .result1,
+        .result2,
+        .result3 {
+          width: auto;
+          min-width: 0;
+          float: left;
+          margin-right: 0;
+        }
+        .result3 {
+          float:left;
+          margin-top: -2px;
+          margin-bottom: 2px;
+        }
+      }
+    }
+  }
+// END STYLE FOR QQ BELEGGEN TABLET ----
 }
 
 @include breakpoint($brk-ipad-portrait) {
@@ -619,6 +878,43 @@
     width: 77%;
   }
 // END GENERIC STYLE QQ - IPAD PORTRAIT ----
+
+// GENERIC STYLE QQ BELEGGEN - IPAD PORTRAIT
+  .quickquote.lijfrente.sparen.beleggen {
+    .result {
+      .payment-result {
+        width: 100%;
+        .result3 {float:right;padding-right:12px;}
+      }
+      .result-button {
+        float:right;
+      }
+    }
+  }
+  .quickquote.lijfrente.sparen.beleggen {
+    .result {
+      .footer-result {
+        width:50%;
+      }
+      .payment-result {
+        margin-right: 0px;
+      }
+    }
+  }
+  //QuickQuote Beleggen --- ProductPage
+  .node-type-product .quickquote.lijfrente.sparen.beleggen {
+    .result {
+      .footer-result {
+        width:auto;
+      }
+      .payment-result {
+        .result3 {
+          padding-right:0;
+        }
+      }
+    }
+  }
+// END GENERIC STYLE QQ BELEGGEN - IPAD PORTRAIT ----
 
 }
 
@@ -688,5 +984,33 @@
       }
     }
   }
-// END STYLE FOR QQ SPAREN TABLET ----
+// END STYLE FOR QQ SPAREN LARGE DESKTOP ----
+
+
+// END STYLE FOR QQ BELEGGEN LARGE DESKTOP
+  .quickquote.lijfrente.sparen.beleggen {
+    .result {
+      .footer-result {
+        width:50%;
+      }
+      .payment-result {
+        width: 80%;
+        margin-right: 100px;
+      }
+      .result-button {
+        margin-right:260px;
+      }
+    }
+  }
+  //QuickQuote Beleggen --- ProductPage
+  .node-type-product .quickquote.lijfrente.sparen.beleggen {
+    .result {
+      .result-button {
+        width:auto;
+        margin-right:42px;
+      }
+    }
+
+  }
+// END STYLE FOR QQ BELEGGEN LARGE DESKTOP ----
 }

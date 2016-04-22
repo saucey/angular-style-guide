@@ -1,13 +1,26 @@
-
-
-
-
-
-
-
-
-
-
+//QuickQuote Beleggen --- ProductPage
+.node-type-product .quickquote.lijfrente.sparen.beleggen {
+  .calculation {
+    width:100%;
+    .periodic.slider , .duration.slider , .one-off.slider   {
+      .input-header {
+        label {
+          line-height:44px;
+        }
+      }
+    }
+  }
+  .result {
+    line-height:26px;
+    .payment-result {
+      width:100%;
+      margin-right:0;
+    }
+    .footer-result {
+      min-width:270px;
+    }
+  }
+}
 
 
 //$brk-mobile
