@@ -19,7 +19,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
     CheckboxComponent, CheckboxValueAccessor, SliderValueAccessor
   ],
   template: templateElem ? templateElem.value : `
-    <div class="quickquote lijfrente sparen mortgage" id="qqBeleggen">
+    <div class="quickquote lijfrente sparen mortgage" #bla id="qqMortgage" data-interest="5">
       <div class="triangle"></div>
       <div class="calculation">
         <h3>Bereken uw maximale hypotheek</h3>
@@ -35,7 +35,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
               '50%': [ 2000 ],
               '75%': [  3000 ],
               'max': [ 7500 ]
-            }" [initial]="200" [(ngModel)]="incomeValue" >
+            }" [initial]="200" [label]="'Inkomen'" [(ngModel)]="incomeValue" >
             </aegon-slider>
           </div>
         </div>
@@ -59,7 +59,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
                 '50%': [ 2000 ],
                 '75%': [  3000 ],
                 'max': [ 7500 ]
-              }" [initial]="200" [(ngModel)]="incomePartnerValue" >
+              }" [initial]="200" [label]="'Inkomen Partner'" [(ngModel)]="incomePartnerValue" >
               </aegon-slider>
             </div>
           </div>
@@ -77,7 +77,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
                 '50%': [ 10 ],
                 '75%': [  15 ],
                 'max': [ 28 ]
-              }" [initial]="2" [(ngModel)]="interestYears" >
+              }" [initial]="2" [label]="'Rentevaste periode'" [(ngModel)]="interestYears" >
               </aegon-slider>
             </div>
           </div>
@@ -92,11 +92,8 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
             <div class="inputs slider">
               <aegon-slider [range]="{
                 'min': [  0 ],
-                '25%': [  5 ],
-                '50%': [ 10 ],
-                '75%': [  15 ],
-                'max': [ incomeValue ]
-              }" [initial]="incomeValue" [(ngModel)]="playWithMorgageValue" >
+                'max': [ calculatedValue ]
+              }" [initial]="calculatedValue" [label]="'Maximale hypotheek'" [(ngModel)]="playWithMorgageValue" >
               </aegon-slider>
             </div>
           </div>
@@ -149,12 +146,65 @@ export class QuickQuoteMortgageComponent implements OnInit, DoCheck {
 
   calculate(): void {
     if (this.incomeValue && this.incomePartnerValue) {
-      console.log(this.incomeValue);
-      console.log(this.incomePartnerValue);
-      this.calculatedValue =  this.incomeValue + this.incomePartnerValue;
+      var yearSalary = this.yearSalaryCalculation(this.incomeValue, this.extraMonth, this.vacationMoney);
+      var yearSalaryPartner = this.yearSalaryCalculation(this.incomePartnerValue, this.extraMonthPartner, this.vacationMoneyPartner)
+      var togetherIncome = yearSalary + yearSalaryPartner;
+      console.log("Calculated Value =  " + this.calculatedValue);
+      var highestSalaryVar = this.highestSalary(yearSalary,yearSalaryPartner),
+          annuitiesFactorVar = this.annuitiesFactor(),
+          keyIncomeVar = this.keyIncome(highestSalaryVar, togetherIncome, yearSalary),
+          woonquoteBox1Var = this.woonquoteBox1();
+      console.log("Highest Salary = " + highestSalaryVar);
+      console.log("AnnuitiesFactor = " + annuitiesFactorVar);
+      console.log("keyIcome = " + keyIncomeVar);
+
+      this.calculatedValue = Math.round((togetherIncome*woonquoteBox1Var/12)*annuitiesFactorVar);
     }
   }
 
+  yearSalaryCalculation(salary, extraMonth, vacationMoney): number {
+    var yearSalary = salary * 12;
+    if (extraMonth) {
+      yearSalary = salary * 13;
+    }
+    if (vacationMoney) {
+      yearSalary = yearSalary * 1.08;
+    }
+    return yearSalary;
+  }
+
+  highestSalary(salary1, salary2): number {
+    if (salary1 => salary2) {
+      return salary1
+    }
+    else {
+      return salary2
+    }
+  }
+
+  keyIncome(incomeHigher, togetherIcome, yearSalary) {
+    if (this.incomePartnerValue !== 0) {
+      let keyIncome = incomeHigher +((togetherIcome-incomeHigher)/2);
+      return keyIncome;
+    }
+    return yearSalary
+  }
+
+  annuitiesFactor(): number {
+    let interest = 0.05,
+    // interest = this.interest;
+        duration = 30,
+        monthlyInterest = interest / 12,
+        durationCalculation = duration * 12,
+        pow = Math.pow((1/(1 + monthlyInterest)),durationCalculation);
+    var annuity = (1-pow) / monthlyInterest;
+
+    return annuity;
+  }
+
+  woonquoteBox1() {
+    return 0.3050;
+  }
   submitAmount(): void {
       this.step += 1;
   }
