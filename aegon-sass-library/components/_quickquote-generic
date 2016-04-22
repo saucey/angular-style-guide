@@ -442,15 +442,15 @@
 // END STYLE FOR QQ SPAREN
 
 // STYLE FOR QQ BELEGGEN
-.quickquote.lijfrente.sparen.beleggen {
+.quickquote.beleggen {
   max-width:1008px;
   .calculation {
     .one-off.slider, .duration.slider, .periodic.slider {
       .input-header {
         label {
-          width: 48%;
-          padding-right: 20px;
-          display: inline-block;
+          //width: 48%;
+          //padding-right: 20px;
+          //display: inline-block;
         }
       }
     }
@@ -764,24 +764,24 @@
       }
     }
   }
-  //.quickquote.beleggen {
-  //  .result {
-  //    .payment-result  {
-  //      width:100%;
-  //      .result1,
-  //      .result2,
-  //      .result3 {
-  //        width: 32%;
-  //        min-width: 150px;
-  //        float: left;
-  //        margin-right: 1%;
-  //      }
-  //      .result3 {
-  //        float:right;
-  //      }
-  //    }
-  //  }
-  //}
+  .quickquote.beleggen {
+    .result {
+      .payment-result  {
+        width:100%;
+        .result1,
+        .result2,
+        .result3 {
+          width: 32%;
+          min-width: 150px;
+          float: left;
+          margin-right: 1%;
+        }
+        .result3 {
+          float:right;
+        }
+      }
+    }
+  }
 // END STYLE FOR QQ SPAREN TABLET ----
 
 // STYLE FOR QQ BELEGGEN TABLET ----
