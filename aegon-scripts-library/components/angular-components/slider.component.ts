@@ -17,7 +17,7 @@ declare var wNumb: any;
   template: `
     <div class="one-off slider">
       <div class="input-header">
-        <label for="one-off-input">Eerste eenmalige inleg</label>
+        <label for="one-off-input">{{label}}</label>
         <div class="input-container">
           <aegon-input-money #amountInput [currency]="currency" [(ngModel)]="value" [max]="range.max"
                                (blur)="slider.noUiSlider.set(value)"
@@ -40,6 +40,7 @@ export class SliderComponent implements AfterViewInit {
   @Input() placeholder: string;
   @Input() range: any;
   @Input() initial: number;
+  @Input() label: string;
   @Output() modelChange: any = new EventEmitter();
   @Output() focus: any = new EventEmitter();
   @Output() change: any = new EventEmitter();

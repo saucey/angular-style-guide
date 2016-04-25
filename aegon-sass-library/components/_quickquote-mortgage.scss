@@ -1,8 +1,9 @@
-$left_width: 350px;
-$right_width: 370px;
-
 .quickquote.mortgage {
   color: $slightly_darker_blue;
+
+  .calculation .slider-container {
+    margin-bottom: 0;
+  }
 
   label {
     font-weight: normal;
@@ -49,10 +50,10 @@ $right_width: 370px;
     }
 
 
-    .help {
+    .input-header .help {
       position: absolute;
       top: 0;
-      right: 20px;
+      right: 0;
 
       &.dialog {
         right: auto;
@@ -126,14 +127,12 @@ $right_width: 370px;
     ul.arrow {
       display: inline-block;
       box-sizing: border-box;
-      width: $left_width;
       max-width: 100%;
     }
 
     .value {
       display: inline-block;
       max-width: 100%;
-      width: $right_width;
       vertical-align: top;
     }
 
