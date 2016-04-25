@@ -31,14 +31,19 @@
 /* QuickQuote Dependencies */
 @import "vendors/_nouislider.min.css";
 @import "components/no-ui-slider";
-@import "components/text-input";
-@import "components/select";
-@import "components/checkbox";
 @import "components/quickquote-lijfrente";
 @import "components/quickquote-lijfrente-sparen";
 @import "components/quickquote-beleggen";
 @import "components/quickquote-dip";
 
+/* QuickQuote Elements */
+.quickquote {
+  @import "components/checkbox";
+  @import "components/radio";
+  @import "components/select";
+  @import "components/text-input";
+  @import "components/textarea";
+}
+
 @import "base/icon";	//provides the icon styles, aka the webfont icons
-@import "modules/msDropDown/dd";	// Added module dd for now, later we might want to add all
 @import "widgets/lhfs";	// Added for style in quickquotes

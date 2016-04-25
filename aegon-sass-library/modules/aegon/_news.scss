@@ -1,22 +1,41 @@
-.news {
-  .news_element {
-    background-color: $white;
+.news .news_element,
+.node-nba {
+  margin-bottom: 20px;
+  background-color: $white;
+  div.title {
+    margin-top: 10px;
     margin-bottom: 20px;
-    div.title {
-      font-family: $font_medium;
-      font-size: $large;
-      margin-bottom: 20px;
-      margin-top: 10px;
+    font-family: $font_medium;
+    font-size: $large;
+  }
+  img {
+    width: 100%;
+    min-height: 100px;
+  }
+  .content {
+    padding: 17px 10px;
+  }
+  div.date {
+    color: $darker_grey;
+  }
+}
+.node-nba {
+  .content {
+    padding: 17px;
+  }
+  h2 {
+    color: $black;
+    font-family: $font_medium;
+    font-size: $x-large;
+  }
+  p {
+    &:last-child {
+      margin-bottom: 0;
     }
-    img {
-      width: 100%;
-      min-height: 100px;
-    }
-    .content {
-      padding: 17px 10px;
-    }
-    div.date {
-      color: $darker_grey;
-    }
+  }
+  // classes available only for NBA
+  .big-text {
+    font-size: $xxx-large;
+    line-height: $xxxx-large;
   }
 }

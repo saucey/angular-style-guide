@@ -1,7 +1,7 @@
-$left_width: 350px;
-$right_width: 370px;
-
 .quickquote.dip {
+  $left_width: 350px;
+  $right_width: 370px;
+
   color: $slightly_darker_blue;
 
   label {
@@ -149,21 +149,34 @@ $right_width: 370px;
   .result {
     color: $white;
 
+    p a {
+      text-decoration: underline;
+    }
+
+    .heading {
+      margin-bottom: 5px;
+      @include rem('font-size', $large);
+    }
+
+    .row {
+      margin: 5px 0;
+
+      .label,
+      .currency,
+      .amount {
+        @include rem('font-size', $large);
+      }
+    }
+
     .high-low {
       margin: 20px 0;
       border-style: solid;
       border-width: 1px 0;
       border-color: $light_blue;
       padding: 20px 0;
-    }
 
-    .row {
-      margin: 10px 0;
-
-      .label,
-      .currency,
-      .amount {
-        @include rem('font-size', $large);
+      .label {
+        @include rem('font-size', $medium);
       }
     }
 
@@ -188,6 +201,10 @@ $right_width: 370px;
       min-width: 85px;
       text-align: right;
       vertical-align: top;
+    }
+
+    .arrow a {
+      font-weight: bold;
     }
 
     a,

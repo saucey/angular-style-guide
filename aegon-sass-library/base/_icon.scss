@@ -299,6 +299,13 @@ a.menu-5662:before {
 .icon-help:before {
   content: $font_icons_help;
 }
+
+.icon-claim-indienen:before {
+  content: $font_icons_claim_indienen;
+}
+.icon-offreren:before {
+  content: $font_icons_offreren;
+}
 // Do not apply icons to old aegon menu.
 // TODO: Refactor menu's in Drupal module 'aegon_menu' to adapt to ATDL.
 .submenu [class*='menu-'][class*='icon-']:before {
