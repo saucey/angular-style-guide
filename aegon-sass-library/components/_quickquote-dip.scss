@@ -1,6 +1,7 @@
 .quickquote.dip {
   $left_width: 350px;
   $right_width: 370px;
+  $right_width_compact: 270px;
 
   color: $slightly_darker_blue;
 
@@ -94,6 +95,10 @@
       float: left;
       max-width: 100%;
       width: $right_width;
+
+      @media (max-width: 1100px) {
+        width: $right_width_compact;
+      }
 
       label.checkbox {
         display: block;
@@ -198,6 +203,10 @@
       max-width: 100%;
       width: $right_width;
       vertical-align: top;
+
+      @media (max-width: 1100px) {
+        width: $right_width_compact;
+      }
     }
 
     .amount {

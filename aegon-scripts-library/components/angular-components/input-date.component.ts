@@ -19,18 +19,7 @@ import {CONST_EXPR} from "angular2/src/facade/lang";
              (keydown)="keydown($event)" (keyup)="keyup('year', $event)"
              (focus)="yearEl.select()" (blur)="year = format(year, 4)">
     </span>
-  `,
-  styles: [`
-    input[type=number]::-webkit-outer-spin-button,
-    input[type=number]::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
-
-    input[type=number] {
-        -moz-appearance:textfield;
-    }
-  `]
+  `
 })
 export class InputDateComponent {
   @Input() required: boolean;
@@ -55,7 +44,8 @@ export class InputDateComponent {
       change: any = {};
     this[part] = change[part] = value;
     this.emitChange(change);
-    if (value.length === 2 && event.keyCode >= 48 && event.keyCode <= 57) {
+    if (value.length === 2 &&
+      (event.keyCode >= 48 && event.keyCode <= 57 || event.keyCode >= 96 && event.keyCode <= 105)) {
       // Only when number is entered.
       if (part === 'day') {
         this.monthEl.nativeElement.focus();
