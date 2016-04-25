@@ -127,14 +127,12 @@
     ul.arrow {
       display: inline-block;
       box-sizing: border-box;
-      width: $left_width;
       max-width: 100%;
     }
 
     .value {
       display: inline-block;
       max-width: 100%;
-      width: $right_width;
       vertical-align: top;
     }
 
