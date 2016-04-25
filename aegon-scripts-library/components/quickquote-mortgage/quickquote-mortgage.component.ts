@@ -20,7 +20,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
     CheckboxComponent, CheckboxValueAccessor, SliderValueAccessor
   ],
   template: templateElem ? templateElem.value : `
-    <div class="quickquote lijfrente sparen mortgage" #interest data-interest="1,2,3">
+    <div class="quickquote lijfrente sparen mortgage" #interest data-interest="2.95,3.25,3.25,3.25,3.25,3.25,3.35,3.35,3.35,3.35,3.35,3.70,3.70,3.70,3.70,3.70,3.70,3.70,3.70,3.70,3.70">
       <div class="triangle"></div>
       <div class="calculation">
         <h3>Bereken uw maximale hypotheek</h3>
@@ -69,7 +69,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
                 '50%': [ 10 ],
                 '75%': [  15 ],
                 'max': [ 28 ]
-              }" [initial]="2" (change)="calculate()" [label]="'Rentevaste periode'" [helpText]="'Dit is de helptekst voor de derde slider'" [(ngModel)]="interestYears" >
+              }" [initial]="2" (change)="calculate()" [label]="'Rentevaste periode'" [helpText]="'Dit is de helptekst voor de derde slider'" [(ngModel)]="interestYears">
               </aegon-slider>
             </div>
           </div>
@@ -116,6 +116,8 @@ export class QuickQuoteMortgageComponent   {
   incomePartnerValue: number;
   interestYears: number;
   playWithMorgageValue: number;
+  keyIncome: number;
+  interest: number;
   step: number = 1;
   amountTooSmall: boolean;
   extraMonth: boolean = false;
@@ -138,12 +140,12 @@ export class QuickQuoteMortgageComponent   {
       var togetherIncome = yearSalary + yearSalaryPartner;
       var highestSalaryVar = this.highestSalary(yearSalary,yearSalaryPartner),
           annuitiesFactorVar = this.annuitiesFactor(),
-          keyIncomeVar = this.keyIncome(highestSalaryVar, togetherIncome, yearSalary),
+          keyIncomeVar = this.getKeyIncome(highestSalaryVar, togetherIncome, yearSalary),
           woonquoteBox1Var = this.woonquoteBox1();
-      console.log("Highest Salary = " + highestSalaryVar);
-      console.log("AnnuitiesFactor = " + annuitiesFactorVar);
-      console.log("keyIcome = " + keyIncomeVar);
-      console.log("Calculated Value =  " + this.calculatedValue);
+      //console.log("Highest Salary = " + highestSalaryVar);
+      //console.log("AnnuitiesFactor = " + annuitiesFactorVar);
+      //console.log("keyIcome = " + keyIncomeVar);
+      //console.log("Calculated Value =  " + this.calculatedValue);
 
       this.calculatedValue = Math.round((togetherIncome*woonquoteBox1Var/12)*annuitiesFactorVar);
     }
@@ -169,27 +171,35 @@ export class QuickQuoteMortgageComponent   {
     }
   }
 
-  keyIncome(incomeHigher, togetherIcome, yearSalary) {
+  getKeyIncome(incomeHigher, togetherIcome, yearSalary) {
     if (this.incomePartnerValue !== 0) {
-      let keyIncome = incomeHigher +((togetherIcome-incomeHigher)/2);
-      return keyIncome;
+      this.keyIncome = incomeHigher +((togetherIcome-incomeHigher)/2);
+      return this.keyIncome;
     }
     return yearSalary
   }
 
   annuitiesFactor(): number {
-    let interest = this.interestRef.nativeElement.getAttribute('data-interest'),
-        duration = 30,
-        monthlyInterest = interest / 12,
+    var interestElement = this.interestRef.nativeElement.getAttribute('data-interest');
+    this.interest = 5;
+    if (this.interestYears >= 10 && interestElement !== undefined) {
+      let interestRaw = JSON.parse("[" + interestElement + "]");
+      this.interest = interestRaw[this.interestYears -10];
+    }
+    let decimalInterest =
+    console.log("Interestyear " + this.interestYears);
+    console.log("Interest " + this.interest);
+    let duration = 30,
+        monthlyInterest = this.interest / 12,
         durationCalculation = duration * 12,
         pow = Math.pow((1/(1 + monthlyInterest)),durationCalculation);
-        console.log(interest[0]);
     var annuity = (1-pow) / monthlyInterest;
 
     return annuity;
   }
 
   woonquoteBox1() {
+    var bla = this.keyIncome + this.interest;
     return 0.3050;
   }
   submitAmount(): void {
