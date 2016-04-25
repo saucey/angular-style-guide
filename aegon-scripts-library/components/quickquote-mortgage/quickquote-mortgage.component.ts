@@ -8,7 +8,8 @@ import {InputDateComponent, InputDateValueAccessor} from '../angular-components/
 import {CheckboxComponent, CheckboxValueAccessor} from '../angular-components/checkbox.component';
 import {MoneyPipe} from "../angular-components/money.pipe";
 import {AfterViewInit} from "angular2/core";
-import {DoCheck} from "angular2/core";
+import {ViewChild} from "angular2/core";
+import {ElementRef} from "angular2/core";
 
 
 var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMortgageTemplate'));
@@ -19,32 +20,27 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
     CheckboxComponent, CheckboxValueAccessor, SliderValueAccessor
   ],
   template: templateElem ? templateElem.value : `
-    <div class="quickquote lijfrente sparen mortgage" #bla id="qqMortgage" data-interest="5">
+    <div class="quickquote lijfrente sparen mortgage" #interest data-interest="1,2,3">
       <div class="triangle"></div>
       <div class="calculation">
         <h3>Bereken uw maximale hypotheek</h3>
         <div class="field">
           <div class="inputs slider">
-            <aegon-slider (click)="submitAmount()" [range]="{
+            <aegon-slider (click)="submitAmount()" (change)="calculate()" [range]="{
               'min': [  200 ],
               '25%': [  1000 ],
               '50%': [ 2000 ],
               '75%': [  3000 ],
               'max': [ 7500 ]
-            }" [initial]="200" [label]="'Inkomen'" [(ngModel)]="incomeValue" >
+            }" [initial]="200" [label]="'Inkomen'" [helpText]="'Dit is de helptekst voor de eerste slider'" [(ngModel)]="incomeValue" >
             </aegon-slider>
           </div>
         </div>
-        <p class="error" *ngIf="amountTooSmall">
-          Wilt u minimaal €25.000 inleggen? Deze rekentool is vooral bedoeld voor klanten die hun pensioen buiten Aegon
-          hebben opgebouwd. Heeft u uw pensioen opgebouwd bij Aegon? Dan krijgt u van ons automatisch een offerte
-          toegestuurd. Hierbij hanteren we een lager minimum bedrag.
-        </p>
         <div *ngIf="step > 1">
           <div class="field">
             <div class="inputs right">
-              <aegon-checkbox [(ngModel)]="extraMonth">Vaste 13e maand</aegon-checkbox>
-              <aegon-checkbox [(ngModel)]="vacationMoney">Vakantiegeld</aegon-checkbox>
+              <aegon-checkbox (change)="calculate()" [(ngModel)]="extraMonth">Vaste 13e maand</aegon-checkbox>
+              <aegon-checkbox (change)="calculate()" [(ngModel)]="vacationMoney">Vakantiegeld</aegon-checkbox>
             </div>
           </div>
           <div class="field">
@@ -55,14 +51,14 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
                 '50%': [ 2000 ],
                 '75%': [  3000 ],
                 'max': [ 7500 ]
-              }" [initial]="200" [label]="'Inkomen Partner'" [(ngModel)]="incomePartnerValue" >
+              }" [initial]="200" [label]="'Inkomen Partner'" [helpText]="'Dit is de helptekst voor de tweede slider'" (change)="calculate()" [(ngModel)]="incomePartnerValue" >
               </aegon-slider>
             </div>
           </div>
           <div class="field">
             <div class="inputs right">
-              <aegon-checkbox [(ngModel)]="extraMonthPartner">Vaste 13e maand</aegon-checkbox>
-              <aegon-checkbox [(ngModel)]="vacationMoneyPartner">Vakantiegeld</aegon-checkbox>
+              <aegon-checkbox (change)="calculate()" [(ngModel)]="extraMonthPartner">Vaste 13e maand</aegon-checkbox>
+              <aegon-checkbox (change)="calculate()" [(ngModel)]="vacationMoneyPartner">Vakantiegeld</aegon-checkbox>
             </div>
           </div>
           <div class="field">
@@ -73,7 +69,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
                 '50%': [ 10 ],
                 '75%': [  15 ],
                 'max': [ 28 ]
-              }" [initial]="2" [label]="'Rentevaste periode'" [(ngModel)]="interestYears" >
+              }" [initial]="2" (change)="calculate()" [label]="'Rentevaste periode'" [helpText]="'Dit is de helptekst voor de derde slider'" [(ngModel)]="interestYears" >
               </aegon-slider>
             </div>
           </div>
@@ -89,7 +85,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
               <aegon-slider [range]="{
                 'min': [  0 ],
                 'max': [ calculatedValue ]
-              }" [initial]="calculatedValue" [label]="'Maximale hypotheek'" [(ngModel)]="playWithMorgageValue" >
+              }" [initial]="calculatedValue" [label]="'Maximale hypotheek'" [helpText]="'Dit is de helptekst voor de vierde slider'" [(ngModel)]="playWithMorgageValue" >
               </aegon-slider>
             </div>
           </div>
@@ -115,7 +111,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
   providers: [HTTP_PROVIDERS],
   pipes: [MoneyPipe]
 })
-export class QuickQuoteMortgageComponent implements OnInit, DoCheck {
+export class QuickQuoteMortgageComponent   {
   incomeValue:  number;
   incomePartnerValue: number;
   interestYears: number;
@@ -128,17 +124,12 @@ export class QuickQuoteMortgageComponent implements OnInit, DoCheck {
   vacationMoneyPartner: boolean = false;
   playWithMorgage: boolean = false;
   calculatedValue: number = 100000;
+  @ViewChild('interest') interestRef: ElementRef;
 
   constructor(
     private http:Http
   ) {}
 
-  ngOnInit(): void {
-  }
-
-  ngDoCheck(): void {
-    this.calculate();
-  }
 
   calculate(): void {
     if (this.incomeValue && this.incomePartnerValue) {
@@ -187,12 +178,12 @@ export class QuickQuoteMortgageComponent implements OnInit, DoCheck {
   }
 
   annuitiesFactor(): number {
-    let interest = 0.05,
-    // interest = this.interest;
+    let interest = this.interestRef.nativeElement.getAttribute('data-interest'),
         duration = 30,
         monthlyInterest = interest / 12,
         durationCalculation = duration * 12,
         pow = Math.pow((1/(1 + monthlyInterest)),durationCalculation);
+        console.log(interest[0]);
     var annuity = (1-pow) / monthlyInterest;
 
     return annuity;

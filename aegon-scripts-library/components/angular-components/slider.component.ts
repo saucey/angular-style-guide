@@ -25,7 +25,7 @@ declare var wNumb: any;
             </aegon-input-money>
         </div>
         <aegon-help>
-          Dit is de tekst die in het vraagtekentje komt te staan.
+          {{helpText}}
         </aegon-help>
       </div>
       <div class="slider-container">
@@ -41,6 +41,7 @@ export class SliderComponent implements AfterViewInit {
   @Input() range: any;
   @Input() initial: number;
   @Input() label: string;
+  @Input() helpText: string;
   @Output() modelChange: any = new EventEmitter();
   @Output() focus: any = new EventEmitter();
   @Output() change: any = new EventEmitter();
@@ -67,6 +68,7 @@ export class SliderComponent implements AfterViewInit {
       this.zone.run(() => {
         this.value = parseFloat(values[0]);
         this.modelChange.emit(this.value);
+        this.change.emit(this.value);
       });
     });
   }
