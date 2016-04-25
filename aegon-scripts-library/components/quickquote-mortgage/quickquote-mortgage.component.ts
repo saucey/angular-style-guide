@@ -23,10 +23,6 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
       <div class="triangle"></div>
       <div class="calculation">
         <h3>Bereken uw maximale hypotheek</h3>
-        {{incomeValue}}
-        {{incomePartnerValue}}
-        {{interestYears}}
-        {{calculatedValue}}
         <div class="field">
           <div class="inputs slider">
             <aegon-slider (click)="submitAmount()" [range]="{
@@ -147,9 +143,8 @@ export class QuickQuoteMortgageComponent implements OnInit, DoCheck {
   calculate(): void {
     if (this.incomeValue && this.incomePartnerValue) {
       var yearSalary = this.yearSalaryCalculation(this.incomeValue, this.extraMonth, this.vacationMoney);
-      var yearSalaryPartner = this.yearSalaryCalculation(this.incomePartnerValue, this.extraMonthPartner, this.vacationMoneyPartner)
+      var yearSalaryPartner = this.yearSalaryCalculation(this.incomePartnerValue, this.extraMonthPartner, this.vacationMoneyPartner);
       var togetherIncome = yearSalary + yearSalaryPartner;
-      console.log("Calculated Value =  " + this.calculatedValue);
       var highestSalaryVar = this.highestSalary(yearSalary,yearSalaryPartner),
           annuitiesFactorVar = this.annuitiesFactor(),
           keyIncomeVar = this.keyIncome(highestSalaryVar, togetherIncome, yearSalary),
@@ -157,6 +152,7 @@ export class QuickQuoteMortgageComponent implements OnInit, DoCheck {
       console.log("Highest Salary = " + highestSalaryVar);
       console.log("AnnuitiesFactor = " + annuitiesFactorVar);
       console.log("keyIcome = " + keyIncomeVar);
+      console.log("Calculated Value =  " + this.calculatedValue);
 
       this.calculatedValue = Math.round((togetherIncome*woonquoteBox1Var/12)*annuitiesFactorVar);
     }
