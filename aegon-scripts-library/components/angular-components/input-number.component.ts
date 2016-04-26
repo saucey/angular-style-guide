@@ -10,11 +10,6 @@ export function formatNumber(value: any, fractional: boolean = true): string {
   if (isNaN(value)) {
     return '';
   }
-  let posOrNeg = '';
-  if (value < 0) {
-    value = Math.abs(value);
-    posOrNeg = '-';
-  }
   let regExp = /(\d+)(\d{3})/,
     tokens = String(value).split('.'),
     thousandsSeparated = tokens[0].replace(/^\d+/, (w) => {
@@ -25,9 +20,9 @@ export function formatNumber(value: any, fractional: boolean = true): string {
     });
   if (tokens[1] && fractional) {
     let zero = tokens[1].length === 1 ? '0' : '';
-    return posOrNeg + thousandsSeparated + ',' + tokens[1] + zero;
+    return thousandsSeparated + ',' + tokens[1] + zero;
   } else {
-    return posOrNeg + thousandsSeparated;
+    return thousandsSeparated;
   }
 }
 
@@ -48,20 +43,21 @@ export function parseNumber(value: any): number {
 }
 
 @Component({
-  selector: 'aegon-input-money',
+  selector: 'aegon-input-number',
   template: `
-    <span class="input money">
-      <span class="currency">{{currency}}</span>
-      <input #inputEl type="text" [placeholder]="placeholder" [required]="required"
+    <span class="input number" [class.prefixed]="prefix" [class.suffixed]="suffix">
+      <span class="prefix">{{prefix}}</span>
+      <span class="suffix">{{suffix}}</span>
+      <input #inputEl type="text" [attr.placeholder]="placeholder" [required]="required"
              [ngModel]="model" (ngModelChange)="changeValue($event)"
              (focus)="focus.emit()" (blur)="formatAndBlur()" (keydown.enter)="enter.emit()">
     </span>
   `
 })
-export class InputMoneyComponent {
-  @Input() currency: string;
+export class InputNumberComponent {
+  @Input() prefix: string;
+  @Input() suffix: string;
   @Input() required: boolean;
-  @Input() positive: boolean;
   @Input() max: number;
   @Input() placeholder: string;
 
@@ -70,7 +66,7 @@ export class InputMoneyComponent {
   @Output() blur: any = new EventEmitter();
   @Output() enter: any = new EventEmitter();
 
-  @ViewChild('inputEl') inputEl:ElementRef;
+  @ViewChild('inputEl') inputEl: ElementRef;
 
   model: string;
 
@@ -84,17 +80,9 @@ export class InputMoneyComponent {
   }
 
   changeValue(value) {
-    if (!this.positive && value === '-') {
-      // Minus as first typed char indicates a negative number will be typed, so do no processing, yet.
-      return;
-    }
-    // Remove invalid characters and parse as a number.
-    let num = parseNumber(value.replace(/[^0-9,.\-]*/g, '')),
+    let num = parseNumber(value),
       commaIndex, fractionalPart, formatted;
-    if (this.positive) {
-      num = Math.abs(num);
-    }
-    if (this.max !== void 0) {
+    if (this.max) {
       num = Math.min(num, this.max);
     }
     commaIndex = value.lastIndexOf(',');
@@ -107,23 +95,23 @@ export class InputMoneyComponent {
   }
 
   setValue(value) {
-    this.model = value !== void 0 && formatNumber(value) || '';
+    this.model = value && formatNumber(value) || '';
   }
 }
 
 const CUSTOM_VALUE_ACCESSOR = CONST_EXPR(new Provider(
-  NG_VALUE_ACCESSOR, {useExisting: forwardRef(() => InputMoneyValueAccessor), multi: true}));
+  NG_VALUE_ACCESSOR, {useExisting: forwardRef(() => InputNumberValueAccessor), multi: true}));
 
 @Directive({
-  selector: 'aegon-input-money',
+  selector: 'aegon-input-number',
   host: {'(modelChange)': 'onChange($event)'},
   providers: [CUSTOM_VALUE_ACCESSOR]
 })
-export class InputMoneyValueAccessor implements ControlValueAccessor {
+export class InputNumberValueAccessor implements ControlValueAccessor {
   onChange = (_) => {};
   onTouched = () => {};
 
-  constructor(private host: InputMoneyComponent) {}
+  constructor(private host: InputNumberComponent) {}
 
   writeValue(value: any): void {
     this.host.setValue(value);

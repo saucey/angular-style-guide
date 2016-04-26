@@ -3,7 +3,7 @@ import {HTTP_PROVIDERS, Http, Headers, RequestOptions, Response} from "angular2/
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
 import {HelpComponent} from '../angular-components/help.component'
-import {InputMoneyComponent, InputMoneyValueAccessor, formatNumber} from '../angular-components/input-money.component';
+import {InputNumberComponent, InputNumberValueAccessor, formatNumber} from '../angular-components/input-number.component';
 import {InputDateComponent, InputDateValueAccessor} from '../angular-components/input-date.component';
 import {CheckboxComponent, CheckboxValueAccessor} from '../angular-components/checkbox.component';
 import {MoneyPipe} from "../angular-components/money.pipe";
@@ -18,7 +18,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteDipT
 @Component({
   selector: 'aegon-quickquote-dip',
   directives: [
-    HelpComponent, InputMoneyComponent, InputMoneyValueAccessor, InputDateComponent, InputDateValueAccessor,
+    HelpComponent, InputNumberComponent, InputNumberValueAccessor, InputDateComponent, InputDateValueAccessor,
     CheckboxComponent, CheckboxValueAccessor
   ],
   template: templateElem ? templateElem.value : `
@@ -28,17 +28,17 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteDipT
         <h3>Bereken direct uw pensioenuitkering:</h3>
         <div class="field">
           <div class="label">
-            Hoogte van uw pensioenkapitaal e
+            Hoogte van uw pensioenkapitaal
             <aegon-help>
               Vul hier de hoogte van uw pensioenkapitaal in. Heeft u bij meer pensioenverzekeraars een pensioenkapitaal?
               Tel dan alle bedragen bij elkaar op en vul het totaalbedrag hier in.
             </aegon-help>
           </div>
           <div class="inputs">
-            <aegon-input-money #amountInput currency="€" [(ngModel)]="pensionAmount" [positive]="true" [max]="99999999"
+            <aegon-input-number #amountInput prefix="€" [(ngModel)]="pensionAmount" [max]="99999999"
                                (focus)="amountTooSmall = false; amountInput.select()" (blur)="isValidAmount()"
                                (enter)="submitAmount()" [placeholder]="'minimaal 25.000'">
-            </aegon-input-money>
+            </aegon-input-number>
             <button class="button arrow" *ngIf="step === 1" [disabled]="!pensionAmount" (click)="submitAmount()">
               Volgende
             </button>
@@ -120,7 +120,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteDipT
           <div class="field">
             <div class="label"></div>
             <div class="inputs">
-              <button class="button icon-right icon-calculator" [disabled]="amountTooSmall || pendingCount > 0" [ngClass]="{pending: pendingCount > 0}" (click)="submit('MockURL', '')">
+              <button class="button icon-right icon-calculator" [disabled]="pendingCount > 0" [ngClass]="{pending: pendingCount > 0}" (click)="submit('MockURL', '')">
                 Bereken
               </button>
             </div>
