@@ -45,7 +45,7 @@ export function parseNumber(value: any): number {
 @Component({
   selector: 'aegon-input-money',
   template: `
-    <span class="input money">
+    <span class="input {{inputTypes}}">
       <span class="currency">{{currency}}</span>
       <input #inputEl type="text" [placeholder]="placeholder" [required]="required" [ngModel]="model" (ngModelChange)="changeValue($event)"
              (focus)="focus.emit()" (blur)="formatAndBlur()" (keydown.enter)="enter.emit()">
@@ -54,6 +54,7 @@ export function parseNumber(value: any): number {
 })
 export class InputMoneyComponent {
   @Input() currency: string;
+  @Input() inputType: string;
   @Input() required: boolean;
   @Input() max: number;
   @Input() placeholder: string;
@@ -66,6 +67,10 @@ export class InputMoneyComponent {
   @ViewChild('inputEl') inputEl:ElementRef;
 
   model: string;
+  inputTypes: string = "money";
+
+  on
+
 
   select(): void {
     this.inputEl.nativeElement.select();
