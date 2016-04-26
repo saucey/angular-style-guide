@@ -15,6 +15,7 @@ ul.check li,
 ul.green-check li,
 ul.ul-arrows li,
 ul.arrow li,
+ul.arrow-list li.arrow,
 ul li.check,
 ul li.green-check,
 ul li.arrow {
@@ -51,6 +52,7 @@ ul.bullet li:before {
 //
 ul.arrow li,
 ul.ul-arrows li,
+ul.arrow-list li.arrow,
 ul li.arrow {
   &:before {
     content: $font_icons_arrow_right;
