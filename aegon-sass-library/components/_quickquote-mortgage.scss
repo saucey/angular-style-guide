@@ -155,3 +155,21 @@ $right_width: 370px;
     }
   }
 }
+@media only screen and (max-width: 640px) {
+  .quickquote.mortgage {
+    .field {
+      .inputs.right {
+        float:none;
+      }
+      .inputs .input-header label {
+        font-size: 18px;
+        font-weight: bold;
+        width: 100%;
+        padding-bottom: 8px;
+        padding-right: 30px;
+        max-width: 100%;
+        color: #007bc8;
+      }
+    }
+  }
+}

@@ -168,6 +168,58 @@
         max-width: 220px;
       }
     }
+    /*QUICKQUOTE BELEGGEN*/
+    .quickquote.beleggen {
+      .calculation {
+        .one-off.slider, .duration.slider, .periodic.slider {
+          .input-header {
+            label {
+              line-height: 1.333em;
+            }
+            .help {
+              top: 0;
+              margin-top: -.25em;
+            }
+          }
+        }
+        .duration.slider {
+          .input-header {
+            .help {
+              top: 0;
+              margin-top: -.333em;
+            }
+          }
+        }
+        .periodic.slider {
+          .input-header {
+            .input-container:after {
+              top: 0;
+            }
+          }
+        }
+        .result {
+          .footer-result {
+            min-width:0;
+          }
+        }
+      }
+    }
+  }
+}
+
+@include breakpoint($brk-ipad-portrait) {
+  //QuickQuote Beleggen --- ProductPage
+  .node-type-product .quickquote.lijfrente.sparen.beleggen {
+    .result {
+      .footer-result {
+        width: auto;
+      }
+      .payment-result {
+        .result3 {
+          padding-right: 0;
+        }
+      }
+    }
   }
   //QUICKQUOTE BELEGGEN
   .quickquote.beleggen .result .payment-result .result1 .title {line-height: 1em;}
@@ -262,9 +314,11 @@
         }
       }
       .result-button {
-        width:auto;
-        margin-right:42px;
+        width: auto;
+        margin-right: 42px;
       }
     }
   }
 }
+@include breakpoint($brk-large-desktop) {}
+
