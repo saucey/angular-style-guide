@@ -199,7 +199,7 @@
 
 @include breakpoint($brk-ipad-portrait) {
   //QuickQuote Beleggen --- ProductPage
-  .node-type-product .quickquote.lijfrente.sparen.beleggen {
+  .node-type-product .quickquote.beleggen {
     .result {
       .footer-result {
         width: auto;
@@ -234,6 +234,9 @@
       select {width:100%;}
     }
   }
+  .node-type-product .quickquote.sparen .result .payment-result {
+    background:red;
+  }
 }
 
 @include breakpoint($brk-tablet) {
@@ -256,7 +259,7 @@
 
 @include breakpoint($brk-large-desktop) {
   //QuickQuote Beleggen --- ProductPage
-  .node-type-product .quickquote.lijfrente.sparen.beleggen {
+  .node-type-product .quickquote.beleggen {
     .result {
       .result-button {
         width: auto;

@@ -97,7 +97,7 @@
             color: $darker_grey;
           }
           input {
-            width: 100px;
+            width: 109px;
             padding-left:20px;
             text-align:right;
             &:before {
