@@ -1,59 +1,61 @@
 
 //
 // Fonts
-// It would be great if we could use just one font name for all different font 
+// It would be great if we could use just one font name for all different font
 // weights, but, alas, all browsers have a very different take on that
+// $fonts_path can be found in /helpers/_variables.scss. This way we can overwrite the location of the fonts in various applications.
+// Make sure you import your own variables after(!) this file!
 // --------------------------------------------------
 
 @font-face {
   font-family:'senticosansdtlight';
-  src: url('../fonts/senticosansdt-light-webfont.eot');
-  src: url('../fonts/senticosansdt-light-webfont.eot?#iefix') format('embedded-opentype'),
-       url('../fonts/senticosansdt-light-webfont.woff') format('woff'),
-       url('../fonts/senticosansdt-light-webfont.ttf') format('truetype'),
-       url('../fonts/senticosansdt-light-webfont.svg#senticosansdtlight') format('svg');
+  src: url($fonts_path + 'senticosansdt-light-webfont.eot');
+  src: url($fonts_path + 'senticosansdt-light-webfont.eot?#iefix') format('embedded-opentype'),
+  url($fonts_path + 'senticosansdt-light-webfont.woff') format('woff'),
+  url($fonts_path + 'senticosansdt-light-webfont.ttf') format('truetype'),
+  url($fonts_path + 'senticosansdt-light-webfont.svg#senticosansdtlight') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family:'senticosansdtregular';
-  src: url('../fonts/senticosansdt-regular-webfont.eot');
-  src: url('../fonts/senticosansdt-regular-webfont.eot?#iefix') format('embedded-opentype'),
-       url('../fonts/senticosansdt-regular-webfont.woff') format('woff'),
-       url('../fonts/senticosansdt-regular-webfont.ttf') format('truetype'),
-       url('../fonts/senticosansdt-regular-webfont.svg#senticosansdtregular') format('svg');
+  src: url($fonts_path + 'senticosansdt-regular-webfont.eot');
+  src: url($fonts_path + 'senticosansdt-regular-webfont.eot?#iefix') format('embedded-opentype'),
+  url($fonts_path + 'senticosansdt-regular-webfont.woff') format('woff'),
+  url($fonts_path + 'senticosansdt-regular-webfont.ttf') format('truetype'),
+  url($fonts_path + 'senticosansdt-regular-webfont.svg#senticosansdtregular') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family:'senticosansdtthin';
-  src: url('../fonts/senticosansdt-thin-webfont.eot');
-  src: url('../fonts/senticosansdt-thin-webfont.eot?#iefix') format('embedded-opentype'),
-       url('../fonts/senticosansdt-thin-webfont.woff') format('woff'),
-       url('../fonts/senticosansdt-thin-webfont.ttf') format('truetype');
+  src: url($fonts_path + 'senticosansdt-thin-webfont.eot');
+  src: url($fonts_path + 'senticosansdt-thin-webfont.eot?#iefix') format('embedded-opentype'),
+  url($fonts_path + 'senticosansdt-thin-webfont.woff') format('woff'),
+  url($fonts_path + 'senticosansdt-thin-webfont.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family:'senticosansdtmedium';
-  src: url('../fonts/senticosansdt-medium-webfont.eot');
-  src: url('../fonts/senticosansdt-medium-webfont.eot?#iefix') format('embedded-opentype'),
-       url('../fonts/senticosansdt-medium-webfont.woff') format('woff'),
-       url('../fonts/senticosansdt-medium-webfont.ttf') format('truetype');
+  src: url($fonts_path + 'senticosansdt-medium-webfont.eot');
+  src: url($fonts_path + 'senticosansdt-medium-webfont.eot?#iefix') format('embedded-opentype'),
+  url($fonts_path + 'senticosansdt-medium-webfont.woff') format('woff'),
+  url($fonts_path + 'senticosansdt-medium-webfont.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-    font-family:'aegon_icons';
-    src: url('../fonts/aegon_icons.eot');
-    src: url('../fonts/aegon_icons.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/aegon_icons.woff') format('woff'),
-         url('../fonts/aegon_icons.ttf') format('truetype'),
-         url('../fonts/aegon_icons.svg#aegon_icons') format('svg');
-    font-weight: normal;
-    font-style: normal;
+  font-family:'aegon_icons';
+  src: url($fonts_path + 'aegon_icons.eot');
+  src: url($fonts_path + 'aegon_icons.eot?#iefix') format('embedded-opentype'),
+  url($fonts_path + 'aegon_icons.woff') format('woff'),
+  url($fonts_path + 'aegon_icons.ttf') format('truetype'),
+  url($fonts_path + 'aegon_icons.svg#aegon_icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
 }
