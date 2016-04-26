@@ -3,6 +3,7 @@ import {
 } from 'angular2/core';
 import {NG_VALUE_ACCESSOR, ControlValueAccessor} from "angular2/common";
 import {CONST_EXPR} from "angular2/src/facade/lang";
+import {OnInit} from "angular2/core";
 
 export function formatNumber(value: any, fractional: boolean = true): string {
   // Round to 2 fraction digits. We don't use toFixed(), because we won't enforce the fractional part on round numbers.
@@ -45,14 +46,14 @@ export function parseNumber(value: any): number {
 @Component({
   selector: 'aegon-input-money',
   template: `
-    <span class="input {{inputTypes}}">
+    <span class="input {{inputType}}">
       <span class="currency">{{currency}}</span>
       <input #inputEl type="text" [placeholder]="placeholder" [required]="required" [ngModel]="model" (ngModelChange)="changeValue($event)"
              (focus)="focus.emit()" (blur)="formatAndBlur()" (keydown.enter)="enter.emit()">
     </span>
   `
 })
-export class InputMoneyComponent {
+export class InputMoneyComponent implements OnInit {
   @Input() currency: string;
   @Input() inputType: string;
   @Input() required: boolean;
@@ -64,12 +65,14 @@ export class InputMoneyComponent {
   @Output() blur: any = new EventEmitter();
   @Output() enter: any = new EventEmitter();
 
-  @ViewChild('inputEl') inputEl:ElementRef;
-
   model: string;
   inputTypes: string = "money";
 
-  on
+  ngOnInit() {
+    if (this.inputType !== "period") {
+      this.inputType = "money";
+    }
+  }
 
 
   select(): void {
