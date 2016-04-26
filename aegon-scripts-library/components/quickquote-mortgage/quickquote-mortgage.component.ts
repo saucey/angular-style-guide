@@ -103,7 +103,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
           </div>
         </div>
         <p class="result-button">
-          <button class="button orange-gradient icon-right arrow">Direct regelen</button>
+          <button class="button orange-gradient icon-right arrow"><a href="/particulier/hypotheek/hypotheekadvies">Direct regelen</a></button>
         </p>
       </div>
     </div>
