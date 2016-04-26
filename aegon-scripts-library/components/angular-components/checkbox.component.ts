@@ -21,7 +21,9 @@ export class CheckboxComponent {
   toggle() {
     this.model = !this.model;
     this.modelChange.emit(this.model);
-    this.change.emit(this.model);
+    setTimeout(() => {
+      this.change.emit(this.model);
+    });
   }
 
   setValue(value) {
