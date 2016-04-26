@@ -232,6 +232,7 @@
     border-radius: 0 0 6px 6px;
     @include rem('padding', 30);
     width: 100%;
+    display:block;
     .payment-result{
       @include rem("font-size", $large);
       color: $white;
@@ -257,6 +258,7 @@
         display: table-cell;
         vertical-align: middle;
         @include rem('padding-bottom', 10);
+        line-height: 1em;
 
       }
       span.help {
@@ -442,7 +444,7 @@
 // END STYLE FOR QQ SPAREN
 
 // STYLE FOR QQ BELEGGEN
-.quickquote.lijfrente.sparen.beleggen {
+.quickquote.beleggen {
   max-width:1008px;
   .calculation {
     .one-off.slider, .duration.slider, .periodic.slider {
@@ -554,7 +556,7 @@
 // END GENERIC STYLE QQ ----
 
 // STYLE FOR QQ SPAREN MOBILE
-  .quickquote.lijfrente.sparen {
+  .quickquote.sparen {
     .calculation {
       .slider-container {
         >div + span {
@@ -665,12 +667,12 @@
       }
     }
   }
-  .quickquote.lijfrente.sparen.beleggen .result .payment-result {
+  .quickquote.beleggen .result .payment-result {
     width:100%;
   }
-  .quickquote.lijfrente.sparen.beleggen .result .payment-result .result1,
-  .quickquote.lijfrente.sparen.beleggen .result .payment-result .result2,
-  .quickquote.lijfrente.sparen.beleggen .result .payment-result .result3 {
+  .quickquote.beleggen .result .payment-result .result1,
+  .quickquote.beleggen .result .payment-result .result2,
+  .quickquote.beleggen .result .payment-result .result3 {
     width:100%;
     float:none;
   }
@@ -800,7 +802,7 @@
 // END GENERIC STYLE QQ - TABLET ----
 
 // STYLE FOR QQ SPAREN TABLET
-  .quickquote.lijfrente.sparen {
+  .quickquote.sparen {
     .one-off-deposit-check {
       .input-header {
         .help {
@@ -809,7 +811,7 @@
       }
     }
   }
-  .quickquote.lijfrente.sparen.beleggen {
+  .quickquote.beleggen {
     .result {
       .payment-result  {
         width:100%;
@@ -830,7 +832,7 @@
 // END STYLE FOR QQ SPAREN TABLET ----
 
 // STYLE FOR QQ BELEGGEN TABLET ----
-  .quickquote.lijfrente.sparen.beleggen {
+  .quickquote.beleggen {
     .result {
       .payment-result  {
         width:100%;
@@ -855,7 +857,7 @@
 
 @include breakpoint($brk-ipad-portrait) {
 // GENERIC STYLE QQ - IPAD PORTRAIT
-  .quickquote.lijfrente.sparen {
+  .quickquote.sparen {
     .calculation {
       .periodic.slider {
         .input-header {
@@ -873,13 +875,13 @@
       }
     }
   }
-  .quickquote.lijfrente.sparen.beleggen .result .payment-result {
+  .quickquote.beleggen .result .payment-result {
     width: 77%;
   }
 // END GENERIC STYLE QQ - IPAD PORTRAIT ----
 
 // GENERIC STYLE QQ BELEGGEN - IPAD PORTRAIT
-  .quickquote.lijfrente.sparen.beleggen {
+  .quickquote.beleggen {
     .result {
       .payment-result {
         width: 100%;
@@ -890,26 +892,13 @@
       }
     }
   }
-  .quickquote.lijfrente.sparen.beleggen {
+  .quickquote.beleggen {
     .result {
       .footer-result {
         width:50%;
       }
       .payment-result {
         margin-right: 0px;
-      }
-    }
-  }
-  //QuickQuote Beleggen --- ProductPage
-  .node-type-product .quickquote.lijfrente.sparen.beleggen {
-    .result {
-      .footer-result {
-        width:auto;
-      }
-      .payment-result {
-        .result3 {
-          padding-right:0;
-        }
       }
     }
   }
@@ -987,7 +976,7 @@
 
 
 // END STYLE FOR QQ BELEGGEN LARGE DESKTOP
-  .quickquote.lijfrente.sparen.beleggen {
+  .quickquote.beleggen {
     .result {
       .footer-result {
         width:50%;
@@ -1000,16 +989,6 @@
         margin-right:260px;
       }
     }
-  }
-  //QuickQuote Beleggen --- ProductPage
-  .node-type-product .quickquote.lijfrente.sparen.beleggen {
-    .result {
-      .result-button {
-        width:auto;
-        margin-right:42px;
-      }
-    }
-
   }
 // END STYLE FOR QQ BELEGGEN LARGE DESKTOP ----
 }
