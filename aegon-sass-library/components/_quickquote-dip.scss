@@ -58,8 +58,6 @@
       box-sizing: border-box;
       position: relative;
       float: left;
-      //width: $left_width;
-      //max-width: 100%;
       max-width: $left_width;
       width: 50%;
       padding-top: 9px;
@@ -95,8 +93,6 @@
     .input.date input + input + input {width:64px;}
     .inputs {
       float: left;
-      //max-width: 100%;
-      //width: $right_width;
       width: 50%;
       max-width: $right_width;
 

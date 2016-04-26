@@ -22,7 +22,7 @@
   position: relative;
   background: $pastel_light_blue;
   border-radius: 6px;
-// GENERIC STYLE FOR LABEL.CHECKBOX
+  // GENERIC STYLE FOR LABEL.CHECKBOX
   label.checkbox > input[type="checkbox"] {
     display: none;
     &+span.checkbox {
@@ -32,7 +32,7 @@
       }
     }
   }
-//GENERIC HEADER ELEMENT
+  //GENERIC HEADER ELEMENT
   h3 {
     color: $slightly_darker_blue;
     @include rem('margin', 0, 0, 30, 30);
@@ -46,7 +46,7 @@
     }
   }
 
-// GENERIC STYLE FOR TRIANGLE ELEMENT
+  // GENERIC STYLE FOR TRIANGLE ELEMENT
   .triangle {
     width: 0;
     height: 0;
@@ -59,13 +59,13 @@
     position: absolute;
   }
 
-// GENERIC STYLE FOR CALCULATION ELEMENT
+  // GENERIC STYLE FOR CALCULATION ELEMENT
   .calculation {
     position: relative;
     width: 100%;
     @include rem('padding', 30);
     .slider-container {
-    // GENERIC STYLING FOR ERRORMESSAGE ELEMENT
+      // GENERIC STYLING FOR ERRORMESSAGE ELEMENT
       .errorMessage {
         background-color: $pink;
         display:none;
@@ -226,7 +226,7 @@
       @include rem('margin', 0, 0, 32, 0);
     }
   }
-// GENERIC STYLE FOR RESULT
+  // GENERIC STYLE FOR RESULT
   .result {
     background: $slightly_darker_blue;
     border-radius: 0 0 6px 6px;
@@ -285,7 +285,7 @@
 // END OF GENERIC STYLE FOR QUICKQUOTE  -->
 
 // STYLE FOR QUICKQUOTE SPAREN
-  .quickquote {
+  .quickquote.sparen {
     .calculation {
       .slider-container {
         .errorMessage {
@@ -919,7 +919,7 @@
 // END GENERIC STYLE QQ - LARGE DESKTOP ----
 
 // STYLE FOR QQ SPAREN - LARGE DESKTOP
-  .quickquote {
+  .quickquote.sparen {
     .result {
       .payment-result {
         overflow: hidden;
@@ -938,7 +938,7 @@
 // END STYLE FOR QQ SPAREN LARGE DESKTOP ----
 
 
-// END STYLE FOR QQ BELEGGEN LARGE DESKTOP
+// STYLE FOR QQ BELEGGEN LARGE DESKTOP
   .quickquote.beleggen {
     .result {
       .footer-result {
