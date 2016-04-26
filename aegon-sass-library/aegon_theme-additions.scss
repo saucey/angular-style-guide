@@ -31,11 +31,12 @@
 /* QuickQuote Dependencies */
 @import "vendors/_nouislider.min.css";
 @import "components/no-ui-slider";
-@import "components/quickquote-lijfrente";
-@import "components/quickquote-lijfrente-sparen";
+@import "components/quickquote-generic";
 @import "components/quickquote-beleggen";
+@import "components/quickquote-sparen";
 @import "components/quickquote-dip";
 @import "components/quickquote-mortgage";
+@import "components/quickquotes-product-page";
 
 /* QuickQuote Elements */
 .quickquote {
