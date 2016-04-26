@@ -1,110 +1,41 @@
-.quickquote {
-  .calculation {
-    //.amount.slider {
-    //  .input-header {
-    //    .input-container {
-    //      position:relative;
-    //      &:before {
-    //        content:'€';
-    //        display:block;
-    //        position:absolute;
-    //        left:10px;
-    //        top:0;
-    //        line-height:44px;
-    //        color: $darker_grey;
-    //      }
-    //      input {
-    //        padding-left:20px;
-    //        text-align:right;
-    //      }
-    //    }
-    //  }
-    //}
-    //.time.slider {
-    //  .input-header {
-    //    .input-container {
-    //      position:relative;
-    //      &:after {
-    //        content:'Jaar';
-    //        display:block;
-    //        position:absolute;
-    //        right:12px;
-    //        top:0;
-    //        line-height:44px;
-    //        color: $darker_grey;
-    //      }
-    //      input {
-    //        width:100px;
-    //      }
-    //      .year {display:none;}
-    //    }
-    //  }
-    //}
-    .slider-container {
-      .noUi-horizontal.noUi-extended {
-        padding-right: 20px;
-      }
-      .noUi-horizontal.noUi-extended .noUi-handle {
-        left: -1px;
-      }
-      .noUi-horizontal.noUi-extended .noUi-origin  {
-        right: -20px;
-      }
-      .noUi-horizontal {
-        height: 7px;
-        background:$slightly_darker_blue;
-        border:0;
-        box-shadow:none;
-        .noUi-handle {
-          position: absolute;
-          top: -7px;
-          left:0;
-          width: 20px;
-          height: 20px;
-          border: 1px solid #e0e0e0;
-          border-radius: 50%;
-          outline: 0;
-          background: #ffffff;
-          box-shadow: 1px 1px 1px #8E8E8C;
-          -webkit-appearance: none;
-          &:before, &:after {
-            content:'';
-            display:none;
-          }
-          &:hover {
-            top: -12px;
-            width: 30px;
-            height: 30px;
-          }
-        }
-      }
-      .noUi-origin {
-        background:$white;
-      }
+.noUi-horizontal.noUi-extended {
+  padding-right: 20px;
+}
+.noUi-horizontal.noUi-extended .noUi-handle {
+  left: -1px;
+}
+.noUi-horizontal.noUi-extended .noUi-origin  {
+  right: -20px;
+}
+.noUi-horizontal {
+  height: 7px;
+  background: $slightly_darker_blue;
+  border:0;
+  box-shadow:none;
+  .noUi-handle {
+    position: absolute;
+    top: -7px;
+    left:0;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 50%;
+    outline: 0;
+    background: #ffffff;
+    box-shadow: 1px 1px 1px #8E8E8C;
+    -webkit-appearance: none;
+    &:before, &:after {
+      content:'';
+      display:none;
+    }
+    &:hover {
+      top: -12px;
+      width: 30px;
+      height: 30px;
     }
   }
 }
-
-@include breakpoint($brk-mobile) {
-  //.quickquote.lijfrente.uitkeren {
-  //  .calculation {
-  //    .time.slider , .amount.slider {
-  //      .input-header {
-  //        label {
-  //          display:block;
-  //          width:100%;
-  //        }
-  //        .input-container {
-  //          float:left;
-  //        }
-  //      }
-  //    }
-  //  }
-  //  .result {
-  //    .calculated {
-  //      position:relative;
-  //      left:auto;
-  //    }
-  //  }
-  //}
+.noUi-origin {
+  background:$white;
 }
+
