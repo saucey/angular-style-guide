@@ -104,40 +104,6 @@ $right_width: 370px;
     }
   }
 
-  .input.money {
-    .currency {
-      position: absolute;
-      z-index: 1;
-      padding: 9px 0 9px 10px;
-      color: $darker_grey;
-    }
-
-    input {
-      padding-left: 30px;
-      text-align: right;
-    }
-  }
-
-  .input.date {
-    &:after {
-      content: ' ';
-      clear: both;
-      display: block;
-      height: 0;
-      visibility: hidden;
-    }
-
-    input {
-      float: left;
-      margin-right: 5px;
-      width: 50px;
-    }
-
-    .year {
-      width: 70px;
-    }
-  }
-
   button.pending:after {
     background-image: url(../images/spinner.gif);
     background-repeat: no-repeat;

@@ -21,6 +21,10 @@
     color: $black;
   }
 
+  &.lijfrente.sparen .calculation .input-header .input-container:after {
+    content: none;
+  }
+
   label.checkbox {
     padding-left: 45px;
 

@@ -3,26 +3,28 @@ import {
 } from 'angular2/core';
 import {NG_VALUE_ACCESSOR, ControlValueAccessor} from "angular2/common";
 import {CONST_EXPR} from "angular2/src/facade/lang";
-import {InputMoneyComponent, InputMoneyValueAccessor} from './input-money.component';
+import {InputNumberComponent, InputNumberValueAccessor} from './input-number.component';
 import {HelpComponent} from './help.component'
 import {AfterViewInit} from "angular2/core";
 import {NgZone} from "angular2/core";
+
 declare var noUiSlider: any;
 declare var wNumb: any;
+
 @Component({
   selector: 'aegon-slider',
   directives: [
-    HelpComponent, InputMoneyComponent,InputMoneyValueAccessor
+    HelpComponent, InputNumberComponent, InputNumberValueAccessor
   ],
   template: `
     <div class="one-off slider">
       <div class="input-header">
         <label for="one-off-input">{{label}}</label>
         <div class="input-container">
-          <aegon-input-money #amountInput [currency]="currency" [(ngModel)]="value" [max]="range.max"
+          <aegon-input-number #amountInput [prefix]="prefix" [suffix]="suffix" [(ngModel)]="value" [max]="range.max"
                                (blur)="slider.noUiSlider.set(value)"
                                (enter)="slider.noUiSlider.set(value)" [placeholder]="placeholder">
-            </aegon-input-money>
+          </aegon-input-number>
         </div>
         <aegon-help>
           {{helpText}}
@@ -36,7 +38,8 @@ declare var wNumb: any;
   `
 })
 export class SliderComponent implements AfterViewInit {
-  @Input() currency: string;
+  @Input() prefix: string;
+  @Input() suffix: string;
   @Input() placeholder: string;
   @Input() range: any;
   @Input() initial: number;
@@ -47,10 +50,9 @@ export class SliderComponent implements AfterViewInit {
   @Output() change: any = new EventEmitter();
   @Output() blur: any = new EventEmitter();
   @Output() enter: any = new EventEmitter();
-  @ViewChild('slider') sliderEl:ElementRef;
+  @ViewChild('slider') sliderEl: ElementRef;
 
   value: number;
-
 
   constructor(private zone:NgZone){}
 
@@ -64,11 +66,13 @@ export class SliderComponent implements AfterViewInit {
       })
     };
     noUiSlider.create(sliderElement, settings);
-    sliderElement.noUiSlider.on('update',  (values) => {
+    sliderElement.noUiSlider.on('update', values => {
       this.zone.run(() => {
         this.value = parseFloat(values[0]);
         this.modelChange.emit(this.value);
-        this.change.emit(this.value);
+        setTimeout(() => {
+          this.change.emit(this.value);
+        });
       });
     });
   }

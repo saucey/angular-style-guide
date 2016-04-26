@@ -3,7 +3,6 @@ import {
 } from 'angular2/core';
 import {NG_VALUE_ACCESSOR, ControlValueAccessor} from "angular2/common";
 import {CONST_EXPR} from "angular2/src/facade/lang";
-import {OnInit} from "angular2/core";
 
 export function formatNumber(value: any, fractional: boolean = true): string {
   // Round to 2 fraction digits. We don't use toFixed(), because we won't enforce the fractional part on round numbers.
@@ -44,18 +43,20 @@ export function parseNumber(value: any): number {
 }
 
 @Component({
-  selector: 'aegon-input-money',
+  selector: 'aegon-input-number',
   template: `
-    <span class="input {{inputType}}">
-      <span class="currency">{{currency}}</span>
-      <input #inputEl type="text" [placeholder]="placeholder" [required]="required" [ngModel]="model" (ngModelChange)="changeValue($event)"
+    <span class="input number" [class.prefixed]="prefix" [class.suffixed]="suffix">
+      <span class="prefix">{{prefix}}</span>
+      <span class="suffix">{{suffix}}</span>
+      <input #inputEl type="text" [attr.placeholder]="placeholder" [required]="required"
+             [ngModel]="model" (ngModelChange)="changeValue($event)"
              (focus)="focus.emit()" (blur)="formatAndBlur()" (keydown.enter)="enter.emit()">
     </span>
   `
 })
-export class InputMoneyComponent implements OnInit {
-  @Input() currency: string;
-  @Input() inputType: string;
+export class InputNumberComponent {
+  @Input() prefix: string;
+  @Input() suffix: string;
   @Input() required: boolean;
   @Input() max: number;
   @Input() placeholder: string;
@@ -65,15 +66,9 @@ export class InputMoneyComponent implements OnInit {
   @Output() blur: any = new EventEmitter();
   @Output() enter: any = new EventEmitter();
 
+  @ViewChild('inputEl') inputEl: ElementRef;
+
   model: string;
-  inputTypes: string = "money";
-
-  ngOnInit() {
-    if (this.inputType !== "period") {
-      this.inputType = "money";
-    }
-  }
-
 
   select(): void {
     this.inputEl.nativeElement.select();
@@ -105,18 +100,18 @@ export class InputMoneyComponent implements OnInit {
 }
 
 const CUSTOM_VALUE_ACCESSOR = CONST_EXPR(new Provider(
-  NG_VALUE_ACCESSOR, {useExisting: forwardRef(() => InputMoneyValueAccessor), multi: true}));
+  NG_VALUE_ACCESSOR, {useExisting: forwardRef(() => InputNumberValueAccessor), multi: true}));
 
 @Directive({
-  selector: 'aegon-input-money',
+  selector: 'aegon-input-number',
   host: {'(modelChange)': 'onChange($event)'},
   providers: [CUSTOM_VALUE_ACCESSOR]
 })
-export class InputMoneyValueAccessor implements ControlValueAccessor {
+export class InputNumberValueAccessor implements ControlValueAccessor {
   onChange = (_) => {};
   onTouched = () => {};
 
-  constructor(private host: InputMoneyComponent) {}
+  constructor(private host: InputNumberComponent) {}
 
   writeValue(value: any): void {
     this.host.setValue(value);
