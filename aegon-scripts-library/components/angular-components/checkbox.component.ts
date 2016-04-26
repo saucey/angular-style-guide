@@ -14,12 +14,14 @@ import {CONST_EXPR} from "angular2/src/facade/lang";
 })
 export class CheckboxComponent {
   @Output() modelChange: any = new EventEmitter();
+  @Output() change: any = new EventEmitter();
 
   model: boolean;
 
   toggle() {
     this.model = !this.model;
     this.modelChange.emit(this.model);
+    this.change.emit(this.model);
   }
 
   setValue(value) {
