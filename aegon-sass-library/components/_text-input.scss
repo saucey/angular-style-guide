@@ -76,3 +76,53 @@ input[type=radio] {
     padding: 0 10px 0 10px;
   }
 }
+
+.input.number {
+  .prefix, .suffix {
+    position: absolute;
+    z-index: 1;
+    color: $darker_grey;
+    pointer-events: none;
+  }
+
+  .prefix {
+    padding: 9px 0 9px 10px;
+  }
+
+  .suffix {
+    right: 8px;
+    padding-top: 9px;
+  }
+
+  input {
+    text-align: right;
+  }
+
+  &.prefixed input {
+    padding-left: 30px;
+  }
+
+  &.suffixed input {
+    padding-right: 40px;
+  }
+}
+
+.input.date {
+  &:after {
+    content: ' ';
+    clear: both;
+    display: block;
+    height: 0;
+    visibility: hidden;
+  }
+
+  input {
+    float: left;
+    margin-right: 5px;
+    width: 50px;
+  }
+
+  .year {
+    width: 70px;
+  }
+}

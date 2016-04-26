@@ -1,6 +1,7 @@
 .quickquote.dip {
   $left_width: 350px;
   $right_width: 370px;
+  $right_width_compact: 270px;
 
   color: $slightly_darker_blue;
 
@@ -24,6 +25,11 @@
     width: 180px;
     background: $white;
     color: $black;
+  }
+
+  input[type=text]::placeholder,
+  input[type=number]::placeholder {
+    color: $slightly_darker_grey;
   }
 
   label.checkbox {
@@ -96,6 +102,10 @@
       width: 50%;
       max-width: $right_width;
 
+      @media (max-width: 1100px) {
+        width: $right_width_compact;
+      }
+
       label.checkbox {
         display: block;
       }
@@ -107,40 +117,6 @@
         width: 180px;
         text-align: left;
       }
-    }
-  }
-
-  .input.money {
-    .currency {
-      position: absolute;
-      z-index: 1;
-      padding: 9px 0 9px 10px;
-      color: $darker_grey;
-    }
-
-    input {
-      padding-left: 30px;
-      text-align: right;
-    }
-  }
-
-  .input.date {
-    &:after {
-      content: ' ';
-      clear: both;
-      display: block;
-      height: 0;
-      visibility: hidden;
-    }
-
-    input {
-      float: left;
-      margin-right: 5px;
-      width: 50px;
-    }
-
-    .year {
-      width: 70px;
     }
   }
 
@@ -199,6 +175,10 @@
       max-width: 100%;
       width: $right_width;
       vertical-align: top;
+
+      @media (max-width: 1100px) {
+        width: $right_width_compact;
+      }
     }
 
     .amount {
