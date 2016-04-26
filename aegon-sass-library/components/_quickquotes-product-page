@@ -22,7 +22,8 @@
       font-family: senticosansdtlight,Arial,Verdana,sans-serif,Arial,Verdana,sans-serif;
     }
     .result {
-      .footer-result {width:100%;}
+      .payment-result {min-width:450px;}
+      .footer-result {width:60%;min-width:450px;}
       .payment-result .result1 ,
       .payment-result .result2 ,
       .payment-result .result3 {
@@ -68,7 +69,7 @@
         font-size: 18px;
         color:black;
         left: 10px;
-        top: 8px;
+        top: 9px;
       }
     }
     .input.date {
@@ -89,6 +90,7 @@
         input {
           color:black;
           font-size:18px;
+          font-family:$font_light;
         }
         /*Maybe needs fallback for other browsers didnt test yet*/
         /*input:-moz-placeholder,*/
@@ -96,7 +98,7 @@
         /*input:-ms-input-placeholder,*/
         input::-webkit-input-placeholder {
           color:black;
-          font-family: 'senticosansdtlight', Arial, Verdana, sans-serif;
+          font-family:$font_light;
         }
       }
     }
@@ -151,6 +153,14 @@
               left:0;
             }
           }
+        }
+      }
+      .result {
+        .payment-result , .footer-result {
+          min-width:100%;
+        }
+        .footer-result .interest {
+          width:118px;
         }
       }
       select {
@@ -211,6 +221,20 @@
       }
     }
   }
+  //QUICKQUOTE BELEGGEN
+  .quickquote.beleggen .result .payment-result .result1 .title {line-height: 1em;}
+  .quickquote.beleggen .result .payment-result .result2 .title {line-height: 1em;}
+  .quickquote.beleggen .result .payment-result .result3 .title {line-height: 1em;}
+
+  //QUICKQUOTE DIP
+  .node-type-product {
+    .quickquote.dip {
+      .field {
+        .inputs {width:100%;margin-right:0;}
+        .label {width:100%;}
+      }
+    }
+  }
 }
 
 @media screen and (min-width: $rc-m-min-width) and (max-width: $rc-m-max-width) {
@@ -230,12 +254,32 @@
             }
           }
         }
+        .result {
+          .payment-result {
+            min-width: 100%;
+            width:100%;
+          }
+          .footer-result {
+            width: 100%;
+            min-width: 100%;
+          }
+        }
       }
       select {width:100%;}
     }
-  }
-  .node-type-product .quickquote.sparen .result .payment-result {
-    background:red;
+    .quickquote .result .payment-result .result1, .quickquote .result .payment-result .result2, .quickquote .result .payment-result .result3 {
+      width: 170px;
+      min-width: 0;
+      float: left;
+      margin-right: 20px;
+    }
+    .quickquote.sparen .result .payment-result {min-width:100%;}
+    .quickquote.sparen .result .footer-result {min-width:100%;}
+    .quickquote .result .footer-result .interest {width:140px;margin-right: 50px;}
+    .node-type-product .quickquote.sparen .result .footer-result {
+      width: 60%;
+      min-width: 450px;
+    }
   }
 }
 
@@ -257,15 +301,27 @@
   }
 }
 
-@include breakpoint($brk-large-desktop) {
-  //QuickQuote Beleggen --- ProductPage
-  .node-type-product .quickquote.beleggen {
-    .result {
-      .result-button {
-        width: auto;
-        margin-right: 42px;
+@include breakpoint($brk-ipad-portrait) {
+  //QuickQuote Beleggen
+  .node-type-product {
+    .quickquote.beleggen {
+      .result {
+        .footer-result {
+          width: auto;
+        }
+        .payment-result {
+          .result3 {
+            padding-right: 0;
+          }
+        }
+        .result-button {
+          width: auto;
+          margin-right: 42px;
+        }
       }
     }
   }
 }
+
+@include breakpoint($brk-large-desktop) {}
 

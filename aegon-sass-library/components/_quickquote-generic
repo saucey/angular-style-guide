@@ -232,6 +232,7 @@
     border-radius: 0 0 6px 6px;
     @include rem('padding', 30);
     width: 100%;
+    display:block;
     .payment-result{
       @include rem("font-size", $large);
       color: $white;
@@ -257,6 +258,7 @@
         display: table-cell;
         vertical-align: middle;
         @include rem('padding-bottom', 10);
+        line-height: 1em;
 
       }
       span.help {
@@ -557,24 +559,24 @@
   .quickquote.sparen {
     .calculation {
       .slider-container {
-        >div + span {
-          max-width:220px;
+        > div + span {
+          max-width: 220px;
         }
       }
       .input-header {
-        position:relative;
-        display:block;
-        overflow:visible;
+        position: relative;
+        display: block;
+        overflow: visible;
         label {
-          display:block;
-          width:100%;
+          display: block;
+          width: 100%;
         }
         .input-container {
-          float:none;
-          max-width:220px;
+          float: none;
+          max-width: 220px;
           @include rem('margin-right', 0);
           input {
-            width:100%;
+            width: 100%;
             max-width: 220px;
             padding-right: 0.625rem;
           }
@@ -589,15 +591,15 @@
         .input-container {
           &:after {
             @include rem('right', 30);
-            left:auto;
+            left: auto;
           }
         }
       }
       .periodic.slider {
         .input-header {
           .input-container {
-            float:none;
-            max-width:220px;
+            float: none;
+            max-width: 220px;
             div.dd.ddcommon {
               display: block;
               width: 100% !important;
@@ -654,6 +656,7 @@
       .payment-result {
         overflow: hidden;
         width: 300px;
+        width: 100%;
       }
       .footer-result {
         width: 100%;
@@ -664,75 +667,79 @@
         }
       }
     }
-  }
-// END STYLE FOR QQ SPAREN MOBILE ----
 
+    //QUICKQUOTE BELEGGEN
+    .quickquote.beleggen .result .payment-result .result1,
+    .quickquote.beleggen .result .payment-result .result2,
+    .quickquote.beleggen .result .payment-result .result3 {
+      width: 100%;
+      float: none;
+    }
+    // END STYLE FOR QQ SPAREN MOBILE ----
 
-// STYLE FOR QQ BELEGGEN MOBILE
-  .quickquote.beleggen {
-    .calculation {
-      .one-off.slider, .duration.slider, .periodic.slider {
-        .input-header {
-          label {
-            width: 48%;
-            padding-right: 20px;
-            display: inline-block;
+    // STYLE FOR QQ BELEGGEN MOBILE
+    .quickquote.beleggen {
+      .calculation {
+        .one-off.slider, .duration.slider, .periodic.slider {
+          .input-header {
+            label {
+              width: 48%;
+              padding-right: 20px;
+              display: inline-block;
+            }
           }
         }
       }
     }
-  }
 
-  .quickquote.beleggen {
-    .calculation {
-      .one-off.slider, .duration.slider, .periodic.slider {
-        .input-header {
-          label {
-            width: 100%;
-            padding-right:35px;
+    .quickquote.beleggen {
+      .calculation {
+        .one-off.slider, .duration.slider, .periodic.slider {
+          .input-header {
+            label {
+              width: 100%;
+              padding-right: 35px;
+            }
+          }
+        }
+        .periodic.slider {
+          .input-header {
+            .input-container:after {
+              top: 0;
+            }
           }
         }
       }
-      .periodic.slider {
-        .input-header {
-          .input-container:after {
-            top:0;
+      .result {
+        .payment-result {
+          width: 100%;
+          @include rem('margin-bottom', 0);
+          .result1, .result2, .result3 {
+            width: auto;
+            @include rem('margin-bottom', 18);
+            float: none;
+            .title, .calculated {
+              font-size: 18px;
+              margin-bottom: 0;
+            }
+          }
+        }
+        .footer-result {
+          a {
+            padding: .5em 0;
+            padding-left: 0.9375rem;
+            font-size: 18px;
+            line-height: 1em;
+            @include rem('margin-bottom', 0);
+            &:after {
+              top: .5em;
+            }
           }
         }
       }
     }
-    .result  {
-      .payment-result {
-        width:100%;
-        @include rem('margin-bottom',0 );
-        .result1,.result2,.result3 {
-          width:auto;
-          @include rem('margin-bottom',18 );
-          float:none;
-          .title , .calculated {
-            font-size:18px;
-            margin-bottom:0;
-          }
-        }
-      }
-      .footer-result {
-        a {
-          padding:.5em 0;
-          padding-left: 0.9375rem;
-          font-size:18px;
-          line-height:1em;
-          @include rem('margin-bottom',0 );
-          &:after {
-            top: .5em;
-          }
-        }
-      }
-    }
+    // END STYLE FOR QQ BELEGGEN MOBILE ----
   }
-// END STYLE FOR QQ BELEGGEN MOBILE ----
-
-
-
 }
 
 @include breakpoint($brk-tablet) {
@@ -785,7 +792,7 @@
 // END STYLE FOR QQ SPAREN TABLET ----
 
 // STYLE FOR QQ BELEGGEN TABLET ----
-  .quickquote.lijfrente.sparen.beleggen {
+  .quickquote.beleggen {
     .result {
       .payment-result  {
         width:100%;
@@ -841,6 +848,17 @@
       }
       .result-button {
         float:right;
+      }
+    }
+  }
+  .quickquote.beleggen {
+    .result {
+      .footer-result {
+        width:50%;
+      }
+      .payment-result {
+        margin-right: 0;
+        width: 77%;
       }
       .footer-result {
         width:50%;
@@ -937,3 +955,4 @@
   }
 // END STYLE FOR QQ BELEGGEN LARGE DESKTOP ----
 }
+
