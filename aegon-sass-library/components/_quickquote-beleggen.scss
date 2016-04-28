@@ -2,18 +2,40 @@
 .quickquote.beleggen {
   max-width:1008px;
   .calculation {
+    .duration.slider {
+      .input-header {
+        .input-container:after {
+          content:"jaar";
+          position:absolute;
+          top:0;
+        }
+      }
+    }
+    .input-header {
+      .input-container {
+        input {
+          width:120px;
+        }
+      }
+    }
     .periodic.slider {
       .input-header {
-        .input-container {
-          input {
-            width: 100%;
-          }
+        label {
+          display: table-cell;
+          width: 60%;
+        }
+      }
+      .input-container {
+        max-width:120px;
+        input {width:100%;text-align:right;}
+        label {
+          width:30%;
         }
       }
     }
   }
-
   .result {
+    .footer-result {clear:left;float:left;width:50%;min-width: 280px;}
     .footer-result a {
       color: $white;
       font-family: $font_thin;
@@ -30,6 +52,8 @@
       }
     }
     .payment-result {
+      margin-bottom: 10px;
+      overflow:hidden;
       .result1, .result2, .result3 {
         width:auto ;
         min-width:0 ;
@@ -41,6 +65,8 @@
         font-family: $font_thin;
         .calculated {
           @include rem('font-size', 26);
+          position:relative;
+          left:auto;
         }
       }
       .result2, .result2 .title {
@@ -48,6 +74,8 @@
         font-family: $font_thin;
         .calculated {
           @include rem('font-size', 26);
+          position:relative;
+          left:auto;
         }
       }
       .result3, .result3 .title {
@@ -55,6 +83,8 @@
         font-family: $font_light;
         .calculated {
           @include rem('font-size', 26);
+          position:relative;
+          left:auto;
         }
       }
       .result3 {
@@ -80,10 +110,16 @@
     .calculation {
       .one-off.slider, .duration.slider, .periodic.slider {
         .input-header {
+          max-width:220px;
+          float:none;
+          .input-container {max-width:220px;}
           label {
             width: 48%;
             padding-right: 20px;
             display: inline-block;
+          }
+          input {
+            width:100%;
           }
         }
       }
@@ -107,10 +143,12 @@
           }
         }
       }
+
     }
     .result {
       .payment-result {
         width: 100%;
+        overflow:hidden;
         @include rem('margin-bottom', 0);
         .result1, .result2, .result3 {
           width: auto;
@@ -186,9 +224,8 @@
   .quickquote.beleggen {
     .result {
       .payment-result {
-        width: 100%;
         margin-right: 0;
-        width: 77%;
+        width: auto;
         .result3 {float:right;padding-right:12px;}
       }
       .result-button {
@@ -208,6 +245,7 @@
     .result {
       .footer-result {
         width:50%;
+        float:left;
       }
       .payment-result {
         width: 80%;

@@ -96,7 +96,13 @@
       margin: 9px 0 16px;
       line-height: 26px;
     }
-    .input.date input + input + input {width:64px;}
+    .input.date  {
+      input {
+        width:52px;
+        padding-right:0;
+      }
+      input + input + input {width:64px;}
+    }
     .inputs {
       float: left;
       width: 50%;
@@ -223,3 +229,7 @@
     right:0;
   }
 }
+@media only screen and (max-width: 870px) {
+  .quickquote.dip .field .label {width:100%;}
+}
+//@media (max-width: 1100px){}

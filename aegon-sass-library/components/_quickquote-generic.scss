@@ -78,6 +78,48 @@
       }
 
     }
+    // GENERIC STYLE FOR INPUTS EURO SIGN AND JAAR ::after
+    .input-header {
+      label {
+        width: 30%;
+      }
+      .input-container {
+        &:after {
+          line-height: 44px;
+          position: absolute;
+          top: 0;
+          content: '€';
+          @include rem('left', 10);
+          pointer-events: none;
+          color: $darker_grey;
+          text-align:right;
+        }
+        input {
+          width: 120px;
+        }
+
+      }
+    }
+    .one-off-deposit {
+      display: none;
+      .input-header {
+        input {
+          text-align: right;
+        }
+      }
+      .slider-container + .input-header {
+        .input-container {
+          input {
+            text-align: left;
+          }
+          &:after {
+            content: 'jaar';
+            @include rem('right', 10);
+            left: auto;
+          }
+        }
+      }
+    }
     //GENERIC STYLE FOR AMOUNT-SLIDER ( QQ lijfrente )
     .amount.slider {
       .input-header {
@@ -110,7 +152,7 @@
         .input-container {
           position:relative;
           &:after {
-            content:'Jaar';
+            content:'jaar';
             display:block;
             position:absolute;
             right:12px;
@@ -144,8 +186,8 @@
     .periodic.slider {
       .input-header {
         label {
-          display: block;
-          width: 100%;
+          display: inline-block;
+          width: 38%;
         }
       }
       .input-container {
@@ -229,6 +271,7 @@
     @include rem('padding', 30);
     width: 100%;
     display:block;
+    overflow:hidden;
     .payment-result{
       @include rem("font-size", $large);
       color: $white;
@@ -236,6 +279,9 @@
       @include rem('margin-bottom', 10);
       * {
         display: inline-block;
+      }
+      .result1 , .result2 , .result3 {
+        .title {display:block;}
       }
     }
     .calculated {
@@ -285,19 +331,30 @@
 // GENERIC STYLE QQ - MOBILE
   .quickquote {
     .calculation {
-      .time.slider , .amount.slider {
-        .input-header {
-          label {
-            display:block;
-            width:100%;
-          }
-          .input-container {
-            float:left;
-          }
+      .input-header {
+        label {
+          display:block;
+          width:100%;
+        }
+        .input-container {
+          float:left;
         }
       }
     }
     .result {
+      .payment-result {
+        overflow: hidden;
+        width: 300px;
+        width: 100%;
+      }
+      .footer-result {
+        width: 100%;
+        min-width: 0;
+        .interest {
+          width: 45%;
+          margin-right: 5%;
+        }
+      }
       .calculated {
         position:relative;
         left:auto;

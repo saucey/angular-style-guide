@@ -19,7 +19,14 @@
 
     }
     .periodic.slider {
+      .input-header {
+        label {
+          display: table-cell;
+          vertical-align: middle;
+        }
+      }
       .input-container {
+        width: 230px;
         input {
           @include rem('padding-right', 10);
           width: 50%;
@@ -53,48 +60,6 @@
         }
       }
     }
-
-    .input-header {
-      label {
-        width: 30%;
-      }
-      .input-container {
-        &:after {
-          line-height: 44px;
-          position: absolute;
-          top: 0;
-          content: '€';
-          @include rem('left', 10);
-          pointer-events: none;
-          color: $darker_grey;
-          text-align:right;
-        }
-        input {
-          width: 120px;
-        }
-
-      }
-    }
-    .one-off-deposit {
-      display: none;
-      .input-header {
-        input {
-          text-align: right;
-        }
-      }
-      .slider-container + .input-header {
-        .input-container {
-          input {
-            text-align: left;
-          }
-          &:after {
-            content: 'Jaar';
-            @include rem('right', 10);
-            left: auto;
-          }
-        }
-      }
-    }
   }
   .calculation + .calculation {
     border-top: 1px solid $white;
@@ -125,7 +90,6 @@
         margin-right: 5%;
         .title {
           font-family: $font_thin;
-          display: block;
           @include rem('margin-bottom', 5.5);
         }
         .calculated {
@@ -203,8 +167,6 @@
       .periodic.slider {
         .input-header {
           .input-container {
-            float: none;
-            max-width: 220px;
             div.dd.ddcommon {
               display: block;
               width: 100% !important;
@@ -278,6 +240,8 @@
 @include breakpoint($brk-tablet) {
   // STYLE FOR QQ SPAREN TABLET
   .quickquote.sparen {
+    .calculation .periodic.slider .input-container div.dd.ddcommon {width:50% !important;margin:0;}
+    .calculation .periodic.slider .input-container input {width:50%;}
     .one-off-deposit-check {
       .input-header {
         .help {
