@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter, Provider, Directive, forwardRef} from 'angular2/core';
+import {Component, Input, Output, EventEmitter, Provider, Directive, forwardRef, ViewChild, ElementRef} from 'angular2/core';
 import {NG_VALUE_ACCESSOR, ControlValueAccessor} from "angular2/common";
 import {CONST_EXPR} from "angular2/src/facade/lang";
 
@@ -6,71 +6,54 @@ import {CONST_EXPR} from "angular2/src/facade/lang";
   selector: 'aegon-input-date',
   template: `
     <span class="input date">
-      <input #dayEl class="day" placeholder="dd" type="text" [required]="required" [ngModel]="day"
-             (ngModelChange)="changeDay($event) && focus(monthEl)"
+      <input #dayEl class="day" placeholder="dd" [required]="required" [ngModel]="day"
+             type="number" min="0" inputmode="numeric" pattern="[0-9]*"
+             (keydown)="keydown($event)" (keyup)="keyup('day', $event)"
              (focus)="dayEl.select()" (blur)="day = format(day, 2)">
-      <input #monthEl class="month" placeholder="mm" type="text" [required]="required" [ngModel]="month"
-             (ngModelChange)="changeMonth($event) && focus(yearEl)"
+      <input #monthEl class="month" placeholder="mm" [required]="required" [ngModel]="month"
+             type="number" min="0" inputmode="numeric" pattern="[0-9]*"
+             (keydown)="keydown($event)" (keyup)="keyup('month', $event)"
              (focus)="monthEl.select()" (blur)="month = format(month, 2)">
-      <input #yearEl class="year" placeholder="jjjj" type="text" [required]="required" [ngModel]="year"
-             (ngModelChange)="changeYear($event)"
+      <input #yearEl class="year" placeholder="jjjj" [required]="required" [ngModel]="year"
+             type="number" min="0" inputmode="numeric" pattern="[0-9]*"
+             (keydown)="keydown($event)" (keyup)="keyup('year', $event)"
              (focus)="yearEl.select()" (blur)="year = format(year, 4)">
     </span>
   `
 })
 export class InputDateComponent {
   @Input() required: boolean;
+  @ViewChild('monthEl') monthEl: ElementRef;
+  @ViewChild('yearEl') yearEl: ElementRef;
   day: string;
   month: string;
   year: string;
 
   @Output() modelChange: any = new EventEmitter();
 
-  focus(elem: HTMLElement): void {
-    // Delay focus, so modelChange event has time to finish formatting properly.
-    setTimeout(() => {
-      elem.focus();
-    }, 0);
+  keydown(event: KeyboardEvent): void {
+    if (event.keyCode > 57) {
+      // No numeric char, so cancel.
+      event.preventDefault();
+      return;
+    }
   }
 
-  sanitizeDay(value: string): string {
-    let replaced: string = value.replace(/\D/g, '').substr(0, 2);
-    return parseInt(replaced, 10) > 31 ? '31' : replaced;
-  }
-
-  sanitizeMonth(value: string): string {
-    let replaced: string = value.replace(/\D/g, '').substr(0, 2);
-    return parseInt(replaced, 10) > 12 ? '12' : replaced;
-  }
-
-  sanitizeYear(value: string): string {
-    return value.replace(/\D/g, '').substr(0, 4);
-  }
-
-  changeDay(value: string): boolean {
-    this.day = value;
-    value = this.sanitizeDay(value);
-    // Use timeout to let change detector pick up the change and correct the input field value.
-    setTimeout(() => {this.day = value;}, 0);
-    this.emitChange({day: value});
-    return value.length === 2;
-  }
-
-  changeMonth(value: string): boolean {
-    this.month = value;
-    value = this.sanitizeMonth(value);
-    // Use timeout to let change detector pick up the change and correct the input field value.
-    setTimeout(() => {this.month = value;}, 0);
-    this.emitChange({month: value});
-    return value.length === 2;
-  }
-
-  changeYear(value: string): void {
-    this.year = value;
-    value = this.sanitizeYear(value);
-    // Use timeout to let change detector pick up the change and correct the input field value.
-    setTimeout(() => {this.year = value;}, 0);
-    this.emitChange({year: value});
+  keyup(part: string, event: KeyboardEvent): void {
+    let value: string = (<HTMLInputElement>event.target).value,
+      change: any = {};
+    this[part] = change[part] = value;
+    this.emitChange(change);
+    if (value.length === 2 &&
+      (event.keyCode >= 48 && event.keyCode <= 57 || event.keyCode >= 96 && event.keyCode <= 105)) {
+      // Only when number is entered.
+      if (part === 'day') {
+        this.monthEl.nativeElement.focus();
+      }
+      else if (part === 'month') {
+        this.yearEl.nativeElement.focus();
+      }
+    }
   }
 
   format(value: any, length): string {
@@ -102,9 +85,9 @@ export class InputDateComponent {
   setValue(value: any): void {
     if (value) {
       let tokens: string[] = value.split('-');
-      this.day = tokens[0];
+      this.year = tokens[0];
       this.month = tokens[1];
-      this.year = tokens[2];
+      this.day = tokens[2];
     } else {
       this.day = this.month = this.year = null;
     }

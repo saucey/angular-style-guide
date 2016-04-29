@@ -1,9 +1,9 @@
-.quickquote.dip {
-  $left_width: 350px;
-  $right_width: 370px;
-  $right_width_compact: 270px;
-
+.quickquote.mortgage {
   color: $slightly_darker_blue;
+
+  .calculation .slider-container {
+    margin-bottom: 0;
+  }
 
   label {
     font-weight: normal;
@@ -21,9 +21,8 @@
     color: $black;
   }
 
-  input[type=text]::placeholder,
-  input[type=number]::placeholder {
-    color: $slightly_darker_grey;
+  &.lijfrente.sparen .calculation .input-header .input-container:after {
+    content: none;
   }
 
   label.checkbox {
@@ -44,7 +43,7 @@
   }
 
   .field {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 
     &:after {
       content: ' ';
@@ -54,29 +53,19 @@
       visibility: hidden;
     }
 
-    .label {
-      box-sizing: border-box;
-      position: relative;
-      float: left;
-      width: $left_width;
-      max-width: 100%;
-      padding-top: 9px;
-      padding-right: 50px;
 
-      .help {
-        position: absolute;
-        top: 0;
-        right: 20px;
+    .input-header .help {
+      position: absolute;
+      top: 0;
+      right: 0;
 
-        &.dialog {
-          right: auto;
-          width: 400px;
-        }
+      &.dialog {
+        right: auto;
+        width: 400px;
       }
     }
 
     .help {
-      padding-top: 20px;
       color: $black;
     }
 
@@ -94,10 +83,12 @@
     .inputs {
       float: left;
       max-width: 100%;
-      width: $right_width;
-
-      @media (max-width: 1100px) {
-        width: $right_width_compact;
+      position: relative;
+      &.right {
+        float: right;
+      }
+      &.slider {
+        width: 100%;
       }
 
       label.checkbox {
@@ -112,6 +103,7 @@
         text-align: left;
       }
     }
+
   }
 
   button.pending:after {
@@ -125,17 +117,8 @@
   .result {
     color: $white;
 
-    p a {
-      text-decoration: underline;
-    }
-
-    .heading {
-      margin-bottom: 5px;
-      @include rem('font-size', $large);
-    }
-
     .row {
-      margin: 5px 0;
+      margin: 10px 0;
 
       .label,
       .currency,
@@ -144,35 +127,17 @@
       }
     }
 
-    .high-low {
-      margin: 20px 0;
-      border-style: solid;
-      border-width: 1px 0;
-      border-color: $light_blue;
-      padding: 20px 0;
-
-      .label {
-        @include rem('font-size', $medium);
-      }
-    }
-
     .label,
     ul.arrow {
       display: inline-block;
       box-sizing: border-box;
-      width: $left_width;
       max-width: 100%;
     }
 
     .value {
       display: inline-block;
       max-width: 100%;
-      width: $right_width;
       vertical-align: top;
-
-      @media (max-width: 1100px) {
-        width: $right_width_compact;
-      }
     }
 
     .amount {
@@ -183,10 +148,6 @@
       vertical-align: top;
     }
 
-    .arrow a {
-      font-weight: bold;
-    }
-
     a,
     .arrow :before {
       color: $white;
@@ -195,5 +156,21 @@
     .footer {
       clear: both;
     }
+  }
+}
+
+@media only screen and (max-width: 640px) {
+  .quickquote.mortgage .field .inputs.right {
+    float: left;
+  }
+  .quickquote.lijfrente.sparen.mortgage .calculation .input-header .input-container .suffixed input {
+    padding-right: 40px;
+  }
+}
+
+@media only screen and (min-width: 1350px) {
+  .quickquote.mortgage .calculation .input-header .input-container {
+    margin-right: 50px;
+    margin-right: 3.125rem;
   }
 }

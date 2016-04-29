@@ -5,19 +5,19 @@ import {NG_VALUE_ACCESSOR, ControlValueAccessor} from "angular2/common";
 import {CONST_EXPR} from "angular2/src/facade/lang";
 
 export function formatNumber(value: any, fractional: boolean = true): string {
-  let regExp = /(\d+)(\d{3})/;
   // Round to 2 fraction digits. We don't use toFixed(), because we won't enforce the fractional part on round numbers.
   value = Math.round(parseFloat(value) * 100) / 100;
   if (isNaN(value)) {
     return '';
   }
-  let tokens = String(value).split('.');
-  let thousandsSeparated = tokens[0].replace(/^\d+/, (w) => {
-    while (regExp.test(w)) {
-      w = w.replace(regExp, '$1.$2');
-    }
-    return w;
-  });
+  let regExp = /(\d+)(\d{3})/,
+    tokens = String(value).split('.'),
+    thousandsSeparated = tokens[0].replace(/^\d+/, (w) => {
+      while (regExp.test(w)) {
+        w = w.replace(regExp, '$1.$2');
+      }
+      return w;
+    });
   if (tokens[1] && fractional) {
     let zero = tokens[1].length === 1 ? '0' : '';
     return thousandsSeparated + ',' + tokens[1] + zero;
@@ -43,26 +43,30 @@ export function parseNumber(value: any): number {
 }
 
 @Component({
-  selector: 'aegon-input-money',
+  selector: 'aegon-input-number',
   template: `
-    <span class="input money">
-      <span class="currency">{{currency}}</span>
-      <input #inputEl type="text" [required]="required" [ngModel]="model" (ngModelChange)="changeValue($event)"
+    <span class="input number" [class.prefixed]="prefix" [class.suffixed]="suffix">
+      <span class="prefix">{{prefix}}</span>
+      <span class="suffix">{{suffix}}</span>
+      <input #inputEl type="text" [attr.placeholder]="placeholder" [required]="required"
+             [ngModel]="model" (ngModelChange)="changeValue($event)"
              (focus)="focus.emit()" (blur)="formatAndBlur()" (keydown.enter)="enter.emit()">
     </span>
   `
 })
-export class InputMoneyComponent {
-  @Input() currency: string;
+export class InputNumberComponent {
+  @Input() prefix: string;
+  @Input() suffix: string;
   @Input() required: boolean;
   @Input() max: number;
+  @Input() placeholder: string;
 
   @Output() modelChange: any = new EventEmitter();
   @Output() focus: any = new EventEmitter();
   @Output() blur: any = new EventEmitter();
   @Output() enter: any = new EventEmitter();
 
-  @ViewChild('inputEl') inputEl:ElementRef;
+  @ViewChild('inputEl') inputEl: ElementRef;
 
   model: string;
 
@@ -96,18 +100,18 @@ export class InputMoneyComponent {
 }
 
 const CUSTOM_VALUE_ACCESSOR = CONST_EXPR(new Provider(
-  NG_VALUE_ACCESSOR, {useExisting: forwardRef(() => InputMoneyValueAccessor), multi: true}));
+  NG_VALUE_ACCESSOR, {useExisting: forwardRef(() => InputNumberValueAccessor), multi: true}));
 
 @Directive({
-  selector: 'aegon-input-money',
+  selector: 'aegon-input-number',
   host: {'(modelChange)': 'onChange($event)'},
   providers: [CUSTOM_VALUE_ACCESSOR]
 })
-export class InputMoneyValueAccessor implements ControlValueAccessor {
+export class InputNumberValueAccessor implements ControlValueAccessor {
   onChange = (_) => {};
   onTouched = () => {};
 
-  constructor(private host: InputMoneyComponent) {}
+  constructor(private host: InputNumberComponent) {}
 
   writeValue(value: any): void {
     this.host.setValue(value);
