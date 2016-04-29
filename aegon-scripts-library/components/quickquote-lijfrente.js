@@ -31,15 +31,12 @@
       Drupal.behaviors.tooltip.activate(".quickquote");
 
       // Initiate the Sliders
-      console.log('Bondjornoo');
-
       Drupal.behaviors.newSlider.activate("amount-slider","amount-input",25000,0,1000000,10000,25000,100000,"#amount-error");
       Drupal.behaviors.newSlider.activate("time-slider","time-input",6,5,30,7,10,20,"#time-error");
 
     },
 
     onChange: function(paymentClass, interestClass) {
-      console.log("In de functie");
       var money = $("#amount-input").val(),
         duration = $("#time-input").val();
 
@@ -62,13 +59,13 @@
       if (isNaN(money) || duration === 0 || isNaN(duration)) {
         return 0;
       }
-
+      var formattedMoney = format.from(money);
       console.log(money,duration);
       var interestPerMonth = this.round(Math.pow(1 + (interestRates[duration - 5] / 100), 1 / 12) - 1, 6),
         months = duration * 12,
         formulaPart1 = this.round(1 / Math.pow(1 + interestPerMonth, months), 6),
         formulaComplete = this.round((1 - formulaPart1) / interestPerMonth, 3),
-        monthlyPayment = this.round(money / formulaComplete, 2);
+        monthlyPayment = this.round(formattedMoney / formulaComplete, 2);
         console.log(monthlyPayment);
 
       return monthlyPayment;
