@@ -158,11 +158,12 @@
     }
   }
 }
+
 @media only screen and (max-width: 640px) {
   .quickquote.mortgage {
     .field {
       .inputs.right {
-        float:none;
+        float: left;
       }
       .inputs .input-header label {
         font-size: 18px;
@@ -174,5 +175,14 @@
         color: #007bc8;
       }
     }
+  }
+  .quickquote.lijfrente.sparen.mortgage .calculation .input-header .input-container .suffixed input {
+    padding-right: 40px;
+  }
+}
+
+@media only screen and (min-width: 1350px) {
+  .quickquote.mortgage .calculation .input-header .input-container {
+    @include rem('margin-right', 50);
   }
 }

@@ -53,6 +53,8 @@ export class SliderComponent implements AfterViewInit {
   @ViewChild('slider') sliderEl: ElementRef;
 
   value: number;
+  manualSlide: boolean = false;
+  slideTimer: any;
 
   constructor(private zone:NgZone){}
 
@@ -66,6 +68,15 @@ export class SliderComponent implements AfterViewInit {
       })
     };
     noUiSlider.create(sliderElement, settings);
+    sliderElement.noUiSlider.on('start', () => {
+      clearTimeout(this.slideTimer);
+      this.manualSlide = true;
+    });
+    sliderElement.noUiSlider.on('end', () => {
+      this.slideTimer = setTimeout(() => {
+        this.manualSlide = false;
+      }, 100);
+    });
     sliderElement.noUiSlider.on('update', values => {
       this.zone.run(() => {
         this.value = parseFloat(values[0]);
@@ -79,8 +90,14 @@ export class SliderComponent implements AfterViewInit {
 
   setValue(value) {
     this.value = value;
+    if (this.sliderEl && !this.manualSlide) {
+      // Only set the slider when the value comes from outside this component.
+      this.sliderEl.nativeElement.noUiSlider.updateOptions({range: this.range});
+      this.sliderEl.nativeElement.noUiSlider.set(this.value);
+    }
   }
 }
+
 const CUSTOM_VALUE_ACCESSOR = CONST_EXPR(new Provider(
   NG_VALUE_ACCESSOR, {useExisting: forwardRef(() => SliderValueAccessor), multi: true}));
 
