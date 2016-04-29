@@ -46,10 +46,10 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
           <div class="field">
             <div class="inputs slider">
               <aegon-slider prefix="€" placeholder="0" [range]="{
-                'min': [  0 ],
-                '25%': [  1000 ],
+                'min': [    0 ],
+                '25%': [ 1000 ],
                 '50%': [ 2000 ],
-                '75%': [  3000 ],
+                '75%': [ 3000 ],
                 'max': [ 7500 ]
               }" [initial]="0" label="Inkomen Partner" helpText="Dit is de helptekst voor de tweede slider" (change)="calculate()" [(ngModel)]="incomePartnerValue" >
               </aegon-slider>
@@ -67,7 +67,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
                 'min': [  2 ],
                 '25%': [  5 ],
                 '50%': [ 10 ],
-                '75%': [  15 ],
+                '75%': [ 15 ],
                 'max': [ 28 ]
               }" [initial]="2" (change)="calculate()" label="Rentevaste periode" helpText="Dit is de helptekst voor de derde slider" [(ngModel)]="interestYears">
               </aegon-slider>
@@ -75,17 +75,17 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
           </div>
           <div class="field">
             <span class="inputs">
-              <aegon-checkbox [(ngModel)]="playWithMorgage">
+              <aegon-checkbox [(ngModel)]="playWithMortgage">
                Bereken wat uw huis per maand kost
               </aegon-checkbox>
             </span>
           </div>
-          <div *ngIf="playWithMorgage" class="field">
+          <div *ngIf="playWithMortgage" class="field">
             <div class="inputs slider">
               <aegon-slider prefix="€" [range]="{
-                'min': [  0 ],
+                'min': [ 0 ],
                 'max': [ calculatedValue ]
-              }" [initial]="calculatedValue" label="Maximale hypotheek" helpText="Dit is de helptekst voor de vierde slider" [(ngModel)]="playWithMorgageValue" >
+              }" [initial]="calculatedValue" (change)="monthlyPayment = getMonthlyPayment()" label="Maximale hypotheek" helpText="Dit is de helptekst voor de vierde slider" [(ngModel)]="playValue" >
               </aegon-slider>
             </div>
           </div>
@@ -95,7 +95,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
         <div class="payment-result">
           <div class="result1">
             <div class="title">Hypotheekbedrag</div>
-            <div id="pension-calculated" class="calculated">&euro; {{calculatedValue | money}}<span>,- *</span></div>
+            <div id="pension-calculated" class="calculated">&euro; {{playValue | money}}<span>,- *</span></div>
           </div>
           <div class="result2">
             <div class="title">Bruto maandlasten</div>
@@ -122,7 +122,8 @@ export class QuickQuoteMortgageComponent   {
   vacationMoney: boolean = false;
   extraMonthPartner: boolean = false;
   vacationMoneyPartner: boolean = false;
-  playWithMorgage: boolean = false;
+  playWithMortgage: boolean = false;
+  playValue: number;
   calculatedValue: number = 0;
   monthlyPayment: number = 0;
 
@@ -141,15 +142,16 @@ export class QuickQuoteMortgageComponent   {
           annuitiesFactorVar = this.annuitiesFactor();
           this.keyIncome = this.getKeyIncome(highestSalaryVar, togetherIncome, yearSalary);
       var woonquoteBox1Var = this.woonquoteBox1();
-      this.calculatedValue = Math.round((togetherIncome * woonquoteBox1Var / 12) * annuitiesFactorVar);
-      this.monthlyPayment = Math.round(this.getMonthlyPayment());
+      this.playWithMortgage = false;
+      this.playValue = this.calculatedValue = Math.round((togetherIncome * woonquoteBox1Var / 12) * annuitiesFactorVar);
+      this.monthlyPayment = this.getMonthlyPayment();
     }
   }
 
   getMonthlyPayment(): number {
     let monthlyInterest = this.interest / 12;
     let pow = Math.pow((1 + monthlyInterest), -360);
-    return (monthlyInterest / (1 - pow)) * this.calculatedValue;
+    return Math.round((monthlyInterest / (1 - pow)) * this.playValue);
   }
 
   yearSalaryCalculation(salary: number = 0, extraMonth: boolean, vacationMoney: boolean): number {
