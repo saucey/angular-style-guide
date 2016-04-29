@@ -23,10 +23,12 @@
         label {
           display: table-cell;
           vertical-align: middle;
+          min-width:85px;
+          width:25%;
         }
       }
       .input-container {
-        width: 230px;
+        max-width: 230px;
         input {
           @include rem('padding-right', 10);
           width: 50%;

@@ -112,12 +112,8 @@
         .input-header {
           max-width:220px;
           float:none;
-          .input-container {max-width:220px;}
-          label {
-            width: 48%;
-            padding-right: 20px;
-            display: inline-block;
-          }
+          .help {margin-top:0;right:27px;}
+          .input-container {max-width:220px;width:100%;}
           input {
             width:100%;
           }
@@ -132,7 +128,8 @@
         .input-header {
           label {
             width: 100%;
-            padding-right: 35px;
+            display: inline-block;
+            padding-right:35px;
           }
         }
       }
@@ -179,6 +176,15 @@
 
 @include breakpoint($brk-tablet) {
   .quickquote.beleggen {
+    .calculation {
+      .one-off.slider, .duration.slider, .periodic.slider {
+        .input-header {
+          label {
+            padding-right: 20px;
+          }
+        }
+      }
+    }
     .result {
       .payment-result  {
         width:100%;
