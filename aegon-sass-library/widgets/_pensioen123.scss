@@ -12,10 +12,16 @@
   }
   .user-details {
     display: table;
+    table-layout: auto;
     .span4 {
-      display: table;
+      // reset the grid
+      float: none;
+      margin-left: 0;
+      display: table-cell;
       overflow: hidden;
-
+      max-width: 50%;
+      min-width: 33%;
+      width: auto;
       height: 200px;
       padding: 0 20px;
 
@@ -310,13 +316,13 @@
           }
         }
         .innerbox {
-          display: table-cell;
+          display: table-row;
 
           vertical-align: middle;
           div {
             display: table-cell;
 
-            width: 300px;
+            width: 50%;
 
             vertical-align: middle;
           }
