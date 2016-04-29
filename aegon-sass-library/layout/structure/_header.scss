@@ -91,7 +91,7 @@ header.header {
       vertical-align: middle;
       text-indent: -9999px;
       background-color: $white;
-      background-image: url('../images/logo_aegon.png');
+      background-image: url($image_path + 'logo_aegon.png');
       background-repeat: no-repeat;
       background-position: center center;
       background-size: auto 31px;
@@ -170,7 +170,7 @@ header.header {
         }
         .custom-menu-dropdown {
           float: left;
-          background: url('../images/icons/select-grey.png')100% center no-repeat;
+          background: url($image_path + 'icons/select-grey.png')100% center no-repeat;
           font: 18px/20px $font_normal, Arial, Verdana, sans-serif;
           color: #BABABA;
           text-indent: 0;
@@ -242,7 +242,7 @@ header.header {
               &:hover {
                 font-family: 'senticosansdtregular', Arial, Verdana, sans-serif;
               }
-              &.selected { background: url('../images/icons/icon-tick.png') 117px center no-repeat rgba(0, 0, 0, 0); }
+              &.selected { background: url($image_path + 'icons/icon-tick.png') 117px center no-repeat rgba(0, 0, 0, 0); }
             }
           }
         }
@@ -339,7 +339,7 @@ header.header {
         top:0;
         right:0;
         .form-submit {
-          background: url('../images/icons/icon-search-header.png') 100% center no-repeat;
+          background: url($image_path + 'icons/icon-search-header.png') 100% center no-repeat;
           width:36px;
           height: 38px;
           text-indent:-9999px;

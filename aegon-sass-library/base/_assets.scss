@@ -13,7 +13,7 @@
   height: 6px;
   width: 6px;
   border: 2px solid #888;
-  
+
   &:after {
     content: '';
     height: 2px;
@@ -37,7 +37,7 @@
 }
 
 .loading {
-  background: url('../images/spinner.gif') no-repeat 50% 0%;
+  background: url($image_path + 'spinner.gif') no-repeat 50% 0%;
   // removed background-position-x: center; because of FF bug
   width: 300px;
   height: 50px;

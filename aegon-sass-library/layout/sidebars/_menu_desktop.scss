@@ -44,7 +44,7 @@ aside.desktop {
     width: 170px;
     height: 90px;
     text-indent: -9999px;
-    background-image: url('../images/logo_aegon.png');
+    background-image: url($image_path + 'logo_aegon.png');
     background-position: center center;
     background-repeat: no-repeat;
     background-color: $white;
