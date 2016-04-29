@@ -56,7 +56,6 @@
     },
     syncSliders: function() {
       if ($('#qqUitkeren').length) {
-        console.log("In in de functie");
         return;
       }
       //Synchronizing slider ranges on change of first deposit slider.
@@ -66,7 +65,7 @@
         depositSlider = document.getElementById('amount-one-off-slider');
 
 
-      function updateDepositAmountRange (min, max ) {
+      function updateDepositAmountRange(min, max) {
         depositSlider.noUiSlider.updateOptions({
           range: {
             'min': min,
