@@ -5,6 +5,10 @@
     margin-bottom: 0;
   }
 
+  .calculation .input-header .input-container {
+    @include rem('margin-right', 53);
+  }
+
   label {
     font-weight: normal;
   }
@@ -183,6 +187,6 @@
 
 @media only screen and (min-width: 1350px) {
   .quickquote.mortgage .calculation .input-header .input-container {
-    @include rem('margin-right', 50);
+    @include rem('margin-right', 54);
   }
 }
