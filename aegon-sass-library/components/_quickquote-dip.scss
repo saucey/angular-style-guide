@@ -10,6 +10,12 @@
   }
 
   .error {
+    background-color: #edd5d9;
+    background-image: none;
+    border-radius: 5px;
+    margin-top: .9375rem;
+    padding: 1.125rem;
+    border: 1px solid #C41F2C;
     color: $dark_red;
   }
 
@@ -58,8 +64,8 @@
       box-sizing: border-box;
       position: relative;
       float: left;
-      width: $left_width;
-      max-width: 100%;
+      max-width: $left_width;
+      width: 50%;
       padding-top: 9px;
       padding-right: 50px;
 
@@ -90,11 +96,17 @@
       margin: 9px 0 16px;
       line-height: 26px;
     }
-
+    .input.date  {
+      input {
+        width:52px;
+        padding-right:0;
+      }
+      input + input + input {width:64px;}
+    }
     .inputs {
       float: left;
-      max-width: 100%;
-      width: $right_width;
+      width: 50%;
+      max-width: $right_width;
 
       @media (max-width: 1100px) {
         width: $right_width_compact;
@@ -135,7 +147,7 @@
     }
 
     .row {
-      margin: 5px 0;
+      margin: .5em 0;
 
       .label,
       .currency,
@@ -197,3 +209,27 @@
     }
   }
 }
+
+@media only screen and (max-width: 640px) {
+  .quickquote.dip .field {
+    margin-bottom:20px;
+  }
+  .quickquote.dip .field .label {
+    font-size:18px;
+    font-weight:bold;
+    width: 100%;
+    padding-bottom: 8px;
+    padding-right:30px;
+    max-width:100%;
+  }
+  .quickquote.dip .field .inputs {
+    width: 100%;
+  }
+  .quickquote.dip .field .label .help {
+    right:0;
+  }
+}
+@media only screen and (max-width: 870px) {
+  .quickquote.dip .field .label {width:100%;}
+}
+//@media (max-width: 1100px){}

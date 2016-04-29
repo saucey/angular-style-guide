@@ -1,45 +1,34 @@
-.quickquote.lijfrente.sparen {
-  label.checkbox > input[type="checkbox"] {
-    display: none;
-    &+span.checkbox {
-      background:$white;
-      &+span {
-        line-height:26px;
-      }
-    }
-  }
+// STYLE FOR QUICKQUOTE SPAREN
+.quickquote.sparen {
   .calculation {
-      .slider-container {
-          .errorMessage {
-          background-color: $pink;
-          display:none;
-          -webkit-border-radius: $default-border-radius;
-          -moz-border-radius: $default-border-radius;
-          border-radius: $default-border-radius;
-          @include rem('margin-top', 15);
-          @include rem('padding', 18);
-          color: $dark_pink;
-          border: 1px solid $dark_pink;
-        }
-          .errorMessage:empty {
-          background:none;
-        }
-
-    }
-    .one-off.slider {
-      input {
-        text-align: right;
+    .slider-container {
+      .errorMessage {
+        background-color: $pink;
+        display:none;
+        -webkit-border-radius: $default-border-radius;
+        -moz-border-radius: $default-border-radius;
+        border-radius: $default-border-radius;
+        @include rem('margin-top', 15);
+        @include rem('padding', 18);
+        color: $dark_pink;
+        border: 1px solid $dark_pink;
       }
+      .errorMessage:empty {
+        background:none;
+      }
+
     }
     .periodic.slider {
       .input-header {
         label {
-          display: block;
-          width: 100%;
+          display: table-cell;
+          vertical-align: middle;
+          min-width:85px;
+          width:25%;
         }
       }
       .input-container {
-        max-width: 300px;
+        max-width: 230px;
         input {
           @include rem('padding-right', 10);
           width: 50%;
@@ -73,58 +62,6 @@
         }
       }
     }
-    .duration.slider {
-      .input-container {
-        input {
-          @include rem('padding-right', 40);
-        }
-        &:after {
-          content: 'jaar';
-          @include rem('right', 10);
-          left: auto;
-        }
-      }
-    }
-    .input-header {
-      label {
-        width: 30%;
-      }
-      .input-container {
-        &:after {
-          line-height: 44px;
-          position: absolute;
-          top: 0;
-          content: '€';
-          @include rem('left', 10);
-          pointer-events: none;
-          color: $darker_grey;
-        }
-        input {
-          width: 120px;
-        }
-
-      }
-    }
-    .one-off-deposit {
-      display: none;
-      .input-header {
-        input {
-          text-align: right;
-        }
-      }
-      .slider-container + .input-header {
-        .input-container {
-          input {
-            text-align: left;
-          }
-          &:after {
-            content: 'Jaar';
-            @include rem('right', 10);
-            left: auto;
-          }
-        }
-      }
-    }
   }
   .calculation + .calculation {
     border-top: 1px solid $white;
@@ -155,7 +92,6 @@
         margin-right: 5%;
         .title {
           font-family: $font_thin;
-          display: block;
           @include rem('margin-bottom', 5.5);
         }
         .calculated {
@@ -185,41 +121,33 @@
     z-index: 4;
   }
 }
-.quickquote + .disclaimer {
-  clear: both;
-  color:$blue;
-  display:block;
-  @include rem('padding', 30);
-  @include rem('line-height', 22);
-  @include rem('font-size', 18);
-}
-
-
+// END STYLE FOR QQ SPAREN
 
 
 
 @include breakpoint($brk-mobile) {
-  .quickquote.lijfrente.sparen {
+  // STYLE FOR QQ SPAREN MOBILE
+  .quickquote.sparen {
     .calculation {
       .slider-container {
-        >div + span {
-          max-width:220px;
+        > div + span {
+          max-width: 220px;
         }
       }
       .input-header {
-        position:relative;
-        display:block;
-        overflow:visible;
+        position: relative;
+        display: block;
+        overflow: visible;
         label {
-          display:block;
-          width:100%;
+          display: block;
+          width: 100%;
         }
         .input-container {
-          float:none;
-          max-width:220px;
+          float: none;
+          max-width: 220px;
           @include rem('margin-right', 0);
           input {
-            width:100%;
+            width: 100%;
             max-width: 220px;
             padding-right: 0.625rem;
           }
@@ -234,15 +162,13 @@
         .input-container {
           &:after {
             @include rem('right', 30);
-            left:auto;
+            left: auto;
           }
         }
       }
       .periodic.slider {
         .input-header {
           .input-container {
-            float:none;
-            max-width:220px;
             div.dd.ddcommon {
               display: block;
               width: 100% !important;
@@ -299,6 +225,7 @@
       .payment-result {
         overflow: hidden;
         width: 300px;
+        width: 100%;
       }
       .footer-result {
         width: 100%;
@@ -310,19 +237,13 @@
       }
     }
   }
-  .quickquote.lijfrente.sparen.beleggen .result .payment-result {
-    width:100%;
-  }
-  .quickquote.lijfrente.sparen.beleggen .result .payment-result .result1,
-  .quickquote.lijfrente.sparen.beleggen .result .payment-result .result2,
-  .quickquote.lijfrente.sparen.beleggen .result .payment-result .result3 {
-    width:100%;
-    float:none;
-  }
 }
 
 @include breakpoint($brk-tablet) {
-  .quickquote.lijfrente.sparen {
+  // STYLE FOR QQ SPAREN TABLET
+  .quickquote.sparen {
+    .calculation .periodic.slider .input-container div.dd.ddcommon {width:50% !important;margin:0;}
+    .calculation .periodic.slider .input-container input {width:50%;}
     .one-off-deposit-check {
       .input-header {
         .help {
@@ -331,52 +252,11 @@
       }
     }
   }
-  .quickquote.lijfrente.sparen.beleggen {
-    .result {
-      .payment-result  {
-        width:100%;
-        .result1,
-        .result2,
-        .result3 {
-          width: 32%;
-          min-width: 150px;
-          float: left;
-          margin-right: 1%;
-        }
-        .result3 {
-          float:right;
-        }
-      }
-    }
-  }
-}
-
-@include breakpoint($brk-ipad-portrait) {
-  .quickquote.lijfrente.sparen {
-    .calculation {
-      .periodic.slider {
-        .input-header {
-          label {
-            display: inline-block;
-            width: 26%;
-          }
-        }
-      }
-    }
-    .result {
-      .result-button {
-        text-align: right;
-        @include rem('margin-right', 9);
-      }
-    }
-  }
-  .quickquote.lijfrente.sparen.beleggen .result .payment-result {
-    width: 77%;
-  }
 }
 
 @include breakpoint($brk-large-desktop) {
-  .quickquote.lijfrente.sparen {
+  // STYLE FOR QQ SPAREN - LARGE DESKTOP
+  .quickquote.sparen {
     .result {
       .payment-result {
         overflow: hidden;
@@ -392,5 +272,5 @@
       }
     }
   }
-
+  // END STYLE FOR QQ SPAREN LARGE DESKTOP ----
 }

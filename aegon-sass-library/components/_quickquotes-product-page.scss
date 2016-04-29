@@ -1,0 +1,327 @@
+.node-type-product {
+/*QUICKQUOTE SPAREN*/
+  .quickquote.sparen {
+    .calculation {
+      .periodic.slider {
+        .input-container:after {
+          left:50%;
+        }
+        .input-header label {
+          vertical-align: middle;
+          display: table-cell;
+        }
+        .input-container {
+          width: 230px;
+        }
+      }
+    }
+    select {
+      width:50%;
+      background:white;
+      font-size:1em;
+      font-family: senticosansdtlight,Arial,Verdana,sans-serif,Arial,Verdana,sans-serif;
+    }
+    .result {
+      .payment-result {min-width:450px;margin-bottom: 10px;}
+      .footer-result {width:60%;min-width:450px;}
+      .payment-result .result1 ,
+      .payment-result .result2 ,
+      .payment-result .result3 {
+        .title {
+          line-height:1em;
+        }
+        .calculated {
+          line-height: 1em;
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+/*QUICKQUOTE DIP*/
+  .quickquote.dip {
+    .calculation {
+      width:100%;
+    }
+    .result {
+      .high-low p {
+        color: $white;
+      }
+    }
+    .error {
+      background-color: #edd5d9;
+      background-image: none;
+      border-radius: 5px;
+      margin-top: .9375rem;
+      padding: 1.125rem;
+      color: #C41F2C;
+      border: 1px solid #C41F2C;
+    }
+    .currency {
+      position:relative;
+      left:auto;
+      top:1px;
+      color:#fff;
+    }
+    .input.money {
+      .currency {
+        padding: 0;
+        padding-top: 2px;
+        font-size: 18px;
+        color:black;
+        left: 10px;
+        top: 9px;
+      }
+    }
+    .input.date {
+      input {
+        width:58px;
+      }
+    }
+    .field {
+      .label {
+        width: 50%;
+        max-width: 350px;
+      }
+      .inputs {
+        width: 50%;
+        max-width: 370px;
+        position:relative;
+        font-size:18px;
+        input {
+          color:black;
+          font-size:18px;
+          font-family:$font_light;
+        }
+        /*Maybe needs fallback for other browsers didnt test yet*/
+        /*input:-moz-placeholder,*/
+        /*input::-moz-placeholder,*/
+        /*input:-ms-input-placeholder,*/
+        input::-webkit-input-placeholder {
+          color:black;
+          font-family:$font_light;
+        }
+      }
+    }
+  }
+  //QuickQuote Beleggen --- ProductPage
+  .quickquote.beleggen {
+    .calculation {
+      width: 100%;
+      .periodic.slider, .duration.slider, .one-off.slider {
+        .input-header {
+          label {
+            line-height: 44px;
+          }
+        }
+      }
+    }
+    .result {
+      line-height:26px;
+      .payment-result {
+        width:100%;
+        margin-right:0;
+      }
+      .footer-result {
+        min-width:270px;
+      }
+    }
+  }
+}
+
+@include breakpoint($brk-mobile) {
+  .node-type-product {
+    //QUICKQUOTE HELP ELEMENT ( for non-angular quickquotes only )
+    .quickquote,
+    .quickquote.sparen,
+    .quickquote.beleggen {
+      .calculation {
+        .input-header {
+          .help {
+            margin-top:-.333rem;
+          }
+        }
+      }
+    }
+    /*QUICKQUOTE SPAREN*/
+    .quickquote.sparen {
+      .calculation {
+        .periodic.slider {
+          .input-container {
+            max-width:100%;
+            &:after {
+              top: 2.444em;
+              left:0;
+            }
+          }
+        }
+      }
+      .result {
+        .payment-result , .footer-result {
+          min-width:100%;
+        }
+        .footer-result .interest {
+          width:118px;
+        }
+      }
+      select {
+        width:100%;
+        max-width: 220px;
+      }
+    }
+    /*QUICKQUOTE BELEGGEN*/
+    .quickquote.beleggen {
+      .calculation {
+        .one-off.slider, .duration.slider, .periodic.slider {
+          .input-header {
+            label {
+              line-height: 1.333em;
+            }
+            .help {
+              top: 0;
+              margin-top: -.25em;
+            }
+          }
+        }
+        .duration.slider {
+          .input-header {
+            .help {
+              top: 0;
+              margin-top: -.333em;
+            }
+          }
+        }
+        .periodic.slider {
+          .input-header {
+            .input-container:after {
+              top: 0;
+            }
+          }
+        }
+        .result {
+          .footer-result {
+            min-width:0;
+          }
+        }
+      }
+    }
+  }
+}
+
+@include breakpoint($brk-ipad-portrait) {
+  //QuickQuote Beleggen --- ProductPage
+  .node-type-product .quickquote.beleggen {
+    .result {
+      .footer-result {
+        width: auto;
+      }
+      .payment-result {
+        .result3 {
+          padding-right: 0;
+        }
+      }
+    }
+  }
+  //QUICKQUOTE BELEGGEN
+  .quickquote.beleggen .result .payment-result .result1 .title {line-height: 1em;}
+  .quickquote.beleggen .result .payment-result .result2 .title {line-height: 1em;}
+  .quickquote.beleggen .result .payment-result .result3 .title {line-height: 1em;}
+
+  //QUICKQUOTE DIP
+  .node-type-product {
+    .quickquote.dip {
+      .field {
+        .inputs {width:100%;margin-right:0;}
+        .label {width:100%;}
+      }
+    }
+  }
+}
+
+@media screen and (min-width: $rc-m-min-width) and (max-width: $rc-m-max-width) {
+  /*QUICKQUOTE SPAREN*/
+  .node-type-product {
+    .quickquote.sparen {
+      .calculation {
+        .periodic.slider {
+          .input-container {
+            width:120px;
+            &:after {
+              top:2.44em;
+              left:0;
+            }
+            input {
+              width:100%;
+            }
+          }
+        }
+        .result {
+          .payment-result {
+            min-width: 100%;
+            width:100%;
+          }
+          .footer-result {
+            width: 100%;
+            min-width: 100%;
+          }
+        }
+      }
+      select {width:100%;}
+    }
+    .quickquote .result .payment-result .result1, .quickquote .result .payment-result .result2, .quickquote .result .payment-result .result3 {
+      width: 170px;
+      min-width: 0;
+      float: left;
+      margin-right: 20px;
+    }
+    .quickquote.sparen .result .payment-result {min-width:100%;}
+    .quickquote.sparen .result .footer-result {min-width:100%;}
+    .quickquote .result .footer-result .interest {width:140px;margin-right: 50px;}
+    .node-type-product .quickquote.sparen .result .footer-result {
+      width: 60%;
+      min-width: 450px;
+    }
+  }
+}
+
+@include breakpoint($brk-tablet) {
+  /*QUICKQUOTE DIP*/
+  .node-type-product {
+    .quickquote.dip {
+      .field {
+        .label {
+          width: 42%;
+          max-width: 350px;
+        }
+        .inputs {
+          width: 58%;
+          max-width: 370px;
+        }
+      }
+    }
+  }
+}
+
+@include breakpoint($brk-ipad-portrait) {
+  //QuickQuote Beleggen
+  .node-type-product {
+    .quickquote.beleggen {
+      .result {
+        .footer-result {
+          width: auto;
+        }
+        .payment-result {
+          .result3 {
+            padding-right: 0;
+          }
+        }
+        .result-button {
+          width: auto;
+          margin-right: 42px;
+        }
+      }
+    }
+  }
+}
+
+@include breakpoint($brk-large-desktop) {}
+
