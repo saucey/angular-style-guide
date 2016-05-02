@@ -18,13 +18,14 @@
     border: 1px solid #C41F2C;
     color: $dark_red;
   }
-
   input[type=text],
   input[type=number],
   select {
     width: 180px;
     background: $white;
     color: $black;
+    font-family:$font_light;
+    font-size:18px;
   }
 
   input[type=text]::placeholder,
@@ -122,6 +123,7 @@
         margin-top: 10px;
         width: 180px;
         text-align: left;
+        font-family:$font_light;
       }
     }
   }

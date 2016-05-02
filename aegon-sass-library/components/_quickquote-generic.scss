@@ -28,6 +28,7 @@
       }
     }
   }
+  label.checkbox>input[type=checkbox]:checked+span.checkbox {background-color:$white;}
   //GENERIC HEADER ELEMENT
   h3 {
     color: $slightly_darker_blue;
