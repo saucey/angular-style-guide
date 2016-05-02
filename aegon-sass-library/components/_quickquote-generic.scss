@@ -22,7 +22,7 @@
   label.checkbox > input[type="checkbox"] {
     display: none;
     &+span.checkbox {
-      background:$white;
+      background-color:$white;
       &+span {
         line-height:26px;
       }
@@ -285,8 +285,8 @@
       }
     }
     .calculated {
-      position: absolute;
-      @include rem('left', 230);
+      //position: absolute;not needed anymore
+      //@include rem('left', 230);not needed anymore
     }
     .footer-result {
       width: 100%;

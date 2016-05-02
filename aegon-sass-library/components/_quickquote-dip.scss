@@ -162,7 +162,7 @@
       border-width: 1px 0;
       border-color: $light_blue;
       padding: 20px 0;
-
+      p {color:$white;}
       .label {
         @include rem('font-size', $medium);
       }
