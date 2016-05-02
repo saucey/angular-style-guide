@@ -24,33 +24,7 @@
         })
       };
       noUiSlider.create(sliderElement, settings);
-
-
-
-      //Synchronizing slider ranges on change of first deposit slider.
-      //TODO: remove from slider.js
-      var oneOffSlider = document.getElementById('one-off-slider'),
-          oneOffSliderInput = document.getElementById('one-off-input'),
-          depositSlider = document.getElementById('amount-one-off-slider');
-
-
-      function updateDepositAmountRange (min, max ) {
-        depositSlider.noUiSlider.updateOptions({
-          range: {
-            'min': min,
-            'max': max
-          }
-        });
-      }
-      oneOffSlider.noUiSlider.on('change', function ( values, handle) {
-        if ( handle === 0 ) {
-          oneOffSliderInput.value = values[handle];
-          if ($('#qqSparen').length) {
-            var sliderValue = oneOffSlider.noUiSlider.get().replace(/\./g , '');
-            updateDepositAmountRange(0, parseInt(sliderValue));
-          }
-        }
-      });
+      this.syncSliders();
 
       sliderElement.noUiSlider.on('update', function ( values, handle) {
         if ( handle === 0 ) {
@@ -79,6 +53,35 @@
         sliderElement.noUiSlider.set(this.value);
       });
 
+    },
+    syncSliders: function() {
+      if ($('#qqUitkeren').length) {
+        return;
+      }
+      //Synchronizing slider ranges on change of first deposit slider.
+      //TODO: remove from slider.js
+      var oneOffSlider = document.getElementById('one-off-slider'),
+        oneOffSliderInput = document.getElementById('one-off-input'),
+        depositSlider = document.getElementById('amount-one-off-slider');
+
+
+      function updateDepositAmountRange(min, max) {
+        depositSlider.noUiSlider.updateOptions({
+          range: {
+            'min': min,
+            'max': max
+          }
+        });
+      }
+      oneOffSlider.noUiSlider.on('change', function ( values, handle) {
+        if ( handle === 0 ) {
+          oneOffSliderInput.value = values[handle];
+          if ($('#qqSparen').length) {
+            var sliderValue = oneOffSlider.noUiSlider.get().replace(/\./g , '');
+            updateDepositAmountRange(0, parseInt(sliderValue));
+          }
+        }
+      });
     }
   };
 })(jQuery);
