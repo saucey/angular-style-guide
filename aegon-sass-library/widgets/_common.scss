@@ -1,30 +1,40 @@
-.personal_details_widget, .communication_preferences, .lhfs_widget {
+.personal_details_widget,
+.communication_preferences,
+.lhfs_widget {
   border-top: 1px solid #aaa;
-  @include rem('padding', 30, 0, 40, 0);
-  .tip, .error, .alert, .success {
+
+  @include rem("padding", 30, 0, 40, 0);
+  .tip,
+  .error,
+  .alert,
+  .success {
     &.visible {
       padding: 20px 15px 20px 40px;
       .header:before {
         margin-right: 0;
       }
-      h2, h3 {
-        overflow-wrap: normal; 
-        word-wrap: normal; 
-        -ms-word-break: normal; 
-        word-break: normal; 
+      h2,
+      h3 {
+        word-wrap: normal;
+            word-break: normal;
+        -ms-word-break: normal;
+
+        overflow-wrap: normal;
       }
     }
   }
   ul.actions {
     margin-bottom: 0;
   }
-  li.invalid, label.invalid {
+  li.invalid,
+  label.invalid {
     position: relative;
-    input ~ .errorText, select ~ .errorText {
-      left: 0;
+    input ~ .errorText,
+    select ~ .errorText {
       position: absolute;
       top: auto;
       bottom: 100%;
+      left: 0;
     }
   }
 }
@@ -36,7 +46,25 @@
 }
 // mobile
 @include breakpoint($brk-mobile) {
-  .personal_details_widget, .communication_preferences, .lhfs_widget {
+  .personal_details_widget,
+  .communication_preferences,
+  .lhfs_widget {
+    &.container_12 {
+      .horizontal.row-fluid {
+        li {
+          input[type="text"],
+          input[type="email"],
+          input[type="tel"],
+          input[type="number"],
+          input[type="date"] {
+            margin-top: 18px;
+            ~ .errorText {
+              top: 0;
+            }
+          }
+        }
+      }
+    }
     .help.dialog.bottom:after {
       right: 20%;
     }
@@ -48,14 +76,16 @@
         }
       }
     }
-    li.invalid, label.invalid {
-      input ~ .errorText, select ~ .errorText {
+    li.invalid,
+    label.invalid {
+      input ~ .errorText,
+      select ~ .errorText {
         top: 0;
         bottom: auto;
       }
       &.checkbox {
-        padding-top:18px;
         margin-top: 0;
+        padding-top: 18px;
         > input[type="checkbox"] + span.checkbox {
           top: 18px;
         }
@@ -66,7 +96,9 @@
 
 // tablet
 @media screen and (min-width: $rc-m-min-width) and (max-width: $rc-m-max-width) {
-  .personal_details_widget, .lhfs_widget, .communication_preferences {
+  .personal_details_widget,
+  .lhfs_widget,
+  .communication_preferences {
     &.container_12 {
       .row-fluid {
         .span1 {
@@ -80,7 +112,12 @@
         }
         .span8 {
           width: 50%;
-          input[type=text], input[type=email], input[type=number], select, div.dd, .content {
+          input[type=text],
+          input[type=email],
+          input[type=number],
+          select,
+          div.dd,
+          .content {
             width: 220px;
           }
         }

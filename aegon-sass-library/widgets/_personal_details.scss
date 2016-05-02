@@ -5,7 +5,8 @@
 // http://oli.jp/2011/ids/
 
 .personal_details_widget {
-  ul.horizontal { //overwriting the default "none" setting, but this might be an obsolete approach anyway, so the "none" setting could be eliminated in general setup
+  ul.horizontal {
+    //overwriting the default "none" setting, but this might be an obsolete approach anyway, so the "none" setting could be eliminated in general setup
     display: block;
   }
   button.edit.transparent {
@@ -13,14 +14,14 @@
     margin: 0;
     padding: 0;
   }
-
   li.value {
     @media screen and(min-width: $rc-m-min-width) and(max-width: $rc-l-max-width) {
-      line-height: 100%;
       min-height: $elements_height;
+      line-height: 100%;
     }
     span {
-      &.content, &.help {
+      &.content,
+      &.help {
         display: inline-block;
         line-height: 150%;
       }
@@ -28,18 +29,16 @@
         width: 228px;
       }
       &.help {
-        float:none;
+        float: none;
         margin-left: 10px;
         padding: 0;
         @media screen and(max-width: $rc-s-max-width) {
           //display: none;
         }
         &:before {
-          line-height: $elements_height;
-
           position: static;
-
           display: inline-block;
+          line-height: $elements_height;
         }
       }
     }
@@ -51,65 +50,63 @@
     }
   }
   label.left {
-    float:left;
+    float: left;
   }
-
   .edit {
     ul.error {
       display: block;
-      opacity: 0;
       height: 24px;
       min-height: 0;
-      [class*='span'] {
+      opacity: 0;
+      [class*="span"] {
         min-height: 0;  //overwriting min-height from row-fluid
         line-height: 18px;  //overwriting line-height from *body
       }
-      &> li {
+      & > li {
+        margin-left: 0;
         color: $red;
         font-size: $small;
-        margin-left: 0;
       }
       &.visible {
         opacity: 1;
       }
     }
-    li.label, label {
+    li.label,
+    label {
       font-family: $font_normal;
       &:after {
         content: "";
       }
     }
-    li.label.required:after, label.checkbox.required span.label:after {
+    li.label.required:after,
+    label.checkbox.required span.label:after {
       margin-left: 5px;
       content: "*";
       color: $red;
     }
   }
-
-  ul.horizontal.row-fluid {  //trying to fix the height set by the grid of 50px; there might be a necessity to adapt the margin-bottom in responsiveness and hopefully this change can be adapted in the future over all widgets and / or implemented in grid.scss
+  ul.horizontal.row-fluid {
+    //trying to fix the height set by the grid of 50px; there might be a necessity to adapt the margin-bottom in responsiveness and hopefully this change can be adapted in the future over all widgets and / or implemented in grid.scss
     height: auto;
     margin-bottom: 20px;
   }
-
   // fix responsive peculiarities
-  .row-fluid [class*='span'] {
+  .row-fluid [class*="span"] {
     display: inline;
     @media screen and(max-width: $rc-s-max-width) {
       min-height: 5px;
     }
   }
-
-  .NL, .world {
+  .NL,
+  .world {
     display: none;
     &.visible {
       display: block;
     }
   }
-
   .residential_address {
     bottom-margin: 40px;
   }
-
   .email-info {
     font-family: $font_normal;
   }
@@ -120,26 +117,17 @@
   .personal_details_widget {
     &.container_12 {
       h3 {
-        color: #000000;
-        @include rem('font-size', 20);
+        color: #000;
+
+        @include rem("font-size", 20);
       }
       .horizontal.row-fluid {
-        li {
-          input.invalid.blurred {
-            margin-top: 18px;
-            ~ .errorText {
-              top: 0;
-            }
-          }
-        }
         .label.span3 {
           width: 85%;
         }
-
         .span1 {
           width: 15%;
         }
-
         .value.span8 {
           width: 100%;
         }
