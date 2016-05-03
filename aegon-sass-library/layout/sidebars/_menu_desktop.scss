@@ -413,7 +413,6 @@ aside.desktop {
    */
   .login-link-inv:before {
     @extend a[class*="menu-"]:before;
-    @extend .menu-lock:before;
     color: $blue;
   }
 
