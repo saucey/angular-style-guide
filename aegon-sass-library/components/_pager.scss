@@ -6,8 +6,8 @@
     display: inline;
 
     @include rem("margin-top", 20);
-    @include rem("margin-left", 6);
-    @include rem("margin-right", 6);
+    @include rem("margin-left", 10);
+    @include rem("margin-right", 10);
 
     &.pager-current {
       margin-right: 0;
