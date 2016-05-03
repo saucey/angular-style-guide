@@ -22,12 +22,13 @@
   label.checkbox > input[type="checkbox"] {
     display: none;
     &+span.checkbox {
-      background:$white;
+      background-color:$white;
       &+span {
         line-height:26px;
       }
     }
   }
+  label.checkbox>input[type=checkbox]:checked+span.checkbox {background-color:$white;}
   //GENERIC HEADER ELEMENT
   h3 {
     color: $slightly_darker_blue;
@@ -161,8 +162,7 @@
             color: $darker_grey;
           }
           input {
-            width: 50px; //have to choose 1 width
-            width:100px; //have to choose 1 width
+            width:100px;
             &:before {
               content:'€';
               left: 0;
@@ -284,10 +284,6 @@
         .title {display:block;}
       }
     }
-    .calculated {
-      position: absolute;
-      @include rem('left', 230);
-    }
     .footer-result {
       width: 100%;
       position: relative;
@@ -344,7 +340,6 @@
     .result {
       .payment-result {
         overflow: hidden;
-        width: 300px;
         width: 100%;
       }
       .footer-result {
