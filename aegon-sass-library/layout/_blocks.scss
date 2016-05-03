@@ -35,7 +35,7 @@
     right: 0;
 
     .form-submit {
-      background: url(../images/ui/icon-search-header.png) 100% center no-repeat;
+      background: url($image_path + 'ui/icon-search-header.png') 100% center no-repeat;
       width: 36px;
       height: 38px;
       text-indent: -9999px;

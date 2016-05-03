@@ -35,7 +35,7 @@
          -moz-transition: all .5s;
               transition: all .5s;
       border: 2px solid #efebe7;
-      background: url('../images/icons/icon-search-header.png') no-repeat right center;
+      background: url($image_path + 'icons/icon-search-header.png') no-repeat right center;
       background-size: 30px 30px;
       &:focus {
         width: 35%;

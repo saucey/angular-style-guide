@@ -309,7 +309,7 @@ div.alert {
   .modal-loader {
     width: 100%;
     height: 70px;
-    background: url("../images/spinner.gif") center center no-repeat;
+    background: url($image_path + "spinner.gif") center center no-repeat;
   }
   .ajax-text,
   .ajax-timeout {

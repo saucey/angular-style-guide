@@ -60,27 +60,27 @@
 
             &.youtube {
               width: 25px;
-              background-image: url(../images/ui/icon-social-youtube.png);
+              background-image: url($image_path + 'ui/icon-social-youtube.png');
             }
 
             &.twitter {
               width: 27px;
-              background-image: url(../images/ui/icon-social-twitter.png);
+              background-image: url($image_path + 'ui/icon-social-twitter.png');
             }
 
             &.rss {
               width: 26px;
-              background-image: url(../images/ui/icon-social-rss.png);
+              background-image: url($image_path + 'ui/icon-social-rss.png');
             }
 
             &.googleplus {
               width: 32px;
-              background-image: url(../images/ui/icon-social-googleplus.png);
+              background-image: url($image_path + 'ui/icon-social-googleplus.png');
             }
 
             &.facebook {
               width: 16px;
-              background-image: url(../images/ui/icon-social-facebook.png);
+              background-image: url($image_path + 'ui/icon-social-facebook.png');
             }
           }
         }
