@@ -333,6 +333,10 @@ export class QuickQuoteDipComponent implements OnInit {
           "CORRELATIONID": "##DIP SS##"
         },
         "DOSSIER": {
+          "REKENFACTOREN": {
+            "OVERGANG_OP_PP": 0.70,
+            "VERHOUDING_HOOG_LAAG": 0.75
+          },
           "PENSIOENOVEREENKOMST": {
             "STORTING_INLEG": {
               "KOOPSOM": this.pensionAmount,
@@ -398,6 +402,7 @@ export class QuickQuoteDipComponent implements OnInit {
     items.forEach(item => {
       let s = item['PENSIOENVORM'],
         value = item['BEDRAG'];
+        value = value/12;
       if (highLow) {
         if (s === 'OPLL') {
           hlAmount += parseFloat(value);
