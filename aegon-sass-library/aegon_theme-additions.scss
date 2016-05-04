@@ -28,6 +28,15 @@
 @import "components/breadcrumbs";
 @import "components/login-link";
 
+/* QuickQuote Elements */
+.quickquote {
+  @import "components/checkbox";
+  @import "components/radio";
+  @import "components/select";
+  @import "components/text-input";
+  @import "components/textarea";
+}
+
 /* QuickQuote Dependencies */
 @import "vendors/_nouislider.min.css";
 @import "components/no-ui-slider";
@@ -38,14 +47,6 @@
 @import "components/quickquote-mortgage";
 @import "components/quickquotes-product-page";
 
-/* QuickQuote Elements */
-.quickquote {
-  @import "components/checkbox";
-  @import "components/radio";
-  @import "components/select";
-  @import "components/text-input";
-  @import "components/textarea";
-}
 
 @import "base/icon";	//provides the icon styles, aka the webfont icons
 @import "widgets/lhfs";	// Added for style in quickquotes
