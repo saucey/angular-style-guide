@@ -43,7 +43,7 @@
         return 0;
       }
 
-      var monthlyPayment = this.calculateMonthlyPayment(money, duration);
+      var monthlyPayment = this.calculateMonthlyPayment(format.from(money), duration);
 
       $(paymentClass).text(format.to(monthlyPayment));
       $(interestClass).text(interestRates[duration - 5]);
