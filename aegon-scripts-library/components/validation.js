@@ -292,8 +292,19 @@
       email: /^[A-Z0-9]([\w\.\-]*[A-Z0-9])*@([A-Z0-9]([\w\.\-]*[A-Z0-9]|[A-Z0-9])*\.)[A-Z]{2,}$/i,
       phone: function (val) {
         // This needs to be implemented as a function, since validVal has a problem with the following regex
-        // this assumes that there cannot be phone numbers in an international format with less than 3 characters, which should be reasonable...
-        return val.match(/^(|(\+|0{1,2})[1-9][.\- \d]*\d+)$/);
+        // This regex accepts nothing or a number that starts with 1 or 2 ceros plus numbers followed by space, dot or hyphen one or more times, and ends with number. 
+        var re = /^(|(?:\+|0{1,2})(?:\d+[\- ]?)*[1-9]+)$/;
+        if(val.match(re)) {
+          if(val !== '') {
+            // Validates the length.
+            if(val.length < 10 || val.length > 25) {
+              return false;
+            }
+          }
+          return true;
+        } else {
+          return false;
+        }
       },
       address: {
         global: /^[A-Za-z0-9 '.\-]*$/i,
