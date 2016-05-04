@@ -109,7 +109,6 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteDipT
             </div>
             <div class="inputs">
               <select [ngModel]="startingDate" (change)="changeStartingDate($event.target.value)">
-                <option value="" disabled selected>Maak uw keuze</option>
                 <option *ngFor="#date of startingDateChoices" [value]="date.value">{{date.label}}</option>
               </select>
             </div>
