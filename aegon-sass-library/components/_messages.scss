@@ -13,6 +13,15 @@
   /**
    * Colors below follow the current aegon's messages theme
    */
+  &.messages--generic {
+    background-color: $pastel_light_blue;
+    .header {
+      color: $slightly_darker_blue;
+    }
+    .content {
+      margin-bottom: 20px;
+    }
+  }
   &.messages--status {
     background-color: $light_green;
     .header {
@@ -142,6 +151,50 @@
       font-family: "aegon_icons";
 
       @include rem("font-size", 30);
+    }
+    &.messages--generic {
+      .icon:before {
+        color: $slightly_darker_blue;
+      }
+      &.pension123 {
+        .icon:before {
+          content: $font_icons_old_man;
+        }
+      }
+      &.pension {
+        .icon:before {
+          content: $font_icons_chart;
+        }
+      }
+      &.big {
+        padding-left:118px;
+        .icon{
+          left: 0;
+          top:0;
+          height: 100%;
+          width: 118px;
+          &:after {
+            content:'';
+            display: inline-block;
+            height: 100%;
+            width: 1px;
+            vertical-align: middle;
+          }
+          &:before {
+            text-align: center;
+            padding:0;
+            width: 96%;
+            display: inline-block;
+            font-size: 50px;
+            vertical-align: middle;
+          }
+        }
+        &.pension123 {
+          .icon:before {
+            font-size: 70px;
+          }
+        }
+      }
     }
     &.messages--warning {
       .icon:before {
