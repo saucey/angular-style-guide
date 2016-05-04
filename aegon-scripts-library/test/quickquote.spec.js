@@ -20,27 +20,27 @@
 
     describe('lijfrente berekenen', function () {
       it('should return 0 for invalid input values', function() {
-        expect(qqLijfrenteSparen.calculateMonthlyPayment(20,0,0,0,0,0)).toEqual(0);
-        expect(qqLijfrenteSparen.calculateMonthlyPayment('')).toEqual(0);
+        expect(qqLijfrenteSparen.calculateBuiltUpPension(20,0,0,0,0,0)).toEqual(0);
+        expect(qqLijfrenteSparen.calculateBuiltUpPension('')).toEqual(0);
       });
       it('should return the proper values after calculation', function() {
-        expect(qqLijfrenteSparen.calculateMonthlyPayment(3333, 150, 1000, 10, 10, 1.25)).toEqual(23012.61);
-        expect(qqLijfrenteSparen.calculateMonthlyPayment(10000,100, 0, 10, 10, 1.25)).toEqual(24106.53);
-        expect(qqLijfrenteSparen.calculateMonthlyPayment(40000,1000, 5000, 10, 10, 1.25)).toEqual(173444.15);
-        expect(qqLijfrenteSparen.calculateMonthlyPayment(80000,0, 60000, 10, 10, 1.25)).toEqual(94363.56);
+        expect(qqLijfrenteSparen.calculateBuiltUpPension(3333, 150, 1000, 10, 10, 1.25)).toEqual(23012.61);
+        expect(qqLijfrenteSparen.calculateBuiltUpPension(10000,100, 0, 10, 10, 1.25)).toEqual(24106.53);
+        expect(qqLijfrenteSparen.calculateBuiltUpPension(40000,1000, 5000, 10, 10, 1.25)).toEqual(173444.15);
+        expect(qqLijfrenteSparen.calculateBuiltUpPension(80000,0, 60000, 10, 10, 1.25)).toEqual(94363.56);
       });
       it('Calculate the One-off-Inlay with the deposito added', function() {
-        expect(qqLijfrenteSparen.calculateOneTimeInlay(3333, 1000, 10, 10, 1.3)).toEqual(33357.69);
-        expect(qqLijfrenteSparen.calculateOneTimeInlay(40000, 5000, 10, 10, 1.3)).toEqual(488481.23);
+        expect(qqLijfrenteSparen.calculateSingleInlayPension(3333, 1000, 10, 10, 1.013)).toEqual(3849.96);
+        expect(qqLijfrenteSparen.calculateSingleInlayPension(40000, 5000, 10, 10, 1.013)).toEqual(45802.13);
       });
 
       it('Calculate the One-off-Inlay without the deposito added', function() {
-        expect(qqLijfrenteSparen.calculateOneTimeInlay(3333, 0, 10, 10, 1.8)).toEqual(1190036.73);
-        expect(qqLijfrenteSparen.calculateOneTimeInlay(40000, 0, 10, 10, 1.8)).toEqual(14281868.91);
+        expect(qqLijfrenteSparen.calculateSingleInlayPension(3333, 0, 10, 10, 1.013)).toEqual(3792.54);
+        expect(qqLijfrenteSparen.calculateSingleInlayPension(40000, 0, 10, 10, 1.013)).toEqual(45514.99);
       });
 
       it('should calculate the amount of interest expressed in Euros', function() {
-          expect(qqLijfrenteSparen.calculateInterest(3333, 1000, 10, 1000)).toEqual(-122333);
+          expect(qqLijfrenteSparen.calculateInterest(3000, 100, 10, 15800)).toEqual(800);
       });
     });
   });

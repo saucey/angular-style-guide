@@ -41,7 +41,6 @@
         }
       });
 
-
       inputSlider.addEventListener('change', function ( ) {
         var inputValue =  $(this).val().replace('.', '');
         if (inputValue < sliderMin || inputValue > sliderMax) {
@@ -52,7 +51,6 @@
         }
         sliderElement.noUiSlider.set(this.value);
       });
-
     },
     syncSliders: function() {
       if ($('#qqUitkeren').length) {
@@ -63,7 +61,6 @@
       var oneOffSlider = document.getElementById('one-off-slider'),
         oneOffSliderInput = document.getElementById('one-off-input'),
         depositSlider = document.getElementById('amount-one-off-slider');
-
 
       function updateDepositAmountRange(min, max) {
         depositSlider.noUiSlider.updateOptions({

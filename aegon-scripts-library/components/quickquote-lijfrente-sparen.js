@@ -67,7 +67,7 @@
           periodicInlay = period;
 
       // Do the calculation
-      var monthlyPayment = this.calculateMonthlyPayment(singleInlay, periodicInlay, depositoInlay, duration, depositoDuration, interestLijfrenteSparen);
+      var monthlyPayment = this.calculateBuiltUpPension(singleInlay, periodicInlay, depositoInlay, duration, depositoDuration, interestLijfrenteSparen);
       var interestAmount = this.calculateInterest(singleInlay, periodicInlay, duration , monthlyPayment);
 
       // Print the outcomes of the calculation
@@ -81,7 +81,7 @@
       return Math.round(input * Math.pow(10, decimals)) / Math.pow(10, decimals);
     },
 
-    calculateOneTimeInlay: function(singleInlay, depositoInlay, duration, depositoDuration, newinterestLijfrenteSparen) {
+    calculateSingleInlayPension: function(singleInlay, depositoInlay, duration, depositoDuration, newinterestLijfrenteSparen) {
       // Calculate the One-off-Inlay with or without the deposito added
       var newinterestDeposito = 1 + (interestDeposito[depositoDuration] / 100),
           formulaPart1 = Math.pow(newinterestLijfrenteSparen, duration),
@@ -93,7 +93,7 @@
       return this.round(formulaPart4 + (formulaPart5 * formulaPart3), 2);
     },
 
-    calculateMonthlyPayment: function (singleInlay, periodicInlay, depositoInlay, duration, depositoDuration, interest) {
+    calculateBuiltUpPension: function (singleInlay, periodicInlay, depositoInlay, duration, depositoDuration, interest) {
       // Calculation for Lijfrente Sparen
       if (isNaN(singleInlay) || duration === 0 || isNaN(duration)) {
         return 0;
@@ -106,19 +106,19 @@
         formulaPart2 = Math.pow(1 + formulaPart1, duration * 12) - 1,
         formulaComplete = (periodicInlay* (formulaPart2 / formulaPart1)) * (1 + formulaPart1);
       if (singleInlay) {
-        formulaComplete = formulaComplete + this.calculateOneTimeInlay(singleInlay, depositoInlay, duration, depositoDuration, newinterestLijfrenteSparen);
+        formulaComplete = formulaComplete + this.calculateSingleInlayPension(singleInlay, depositoInlay, duration, depositoDuration, newinterestLijfrenteSparen);
       }
       
       return this.round(formulaComplete,2);
     },
 
-    calculateInterest: function (singleInlay, periodicInlay, duration, monthlyPayment) {
+    calculateInterest: function (singleInlay, periodicInlay, duration, totalPension) {
       //calculation for the amount of interest expressed in Euro's
       var periodicTotal = (periodicInlay * 12),
           durationTotal = (periodicTotal * duration),
           totalInlay = parseInt(singleInlay) + durationTotal;
 
-      return this.round(monthlyPayment - totalInlay, 2);
+      return this.round(totalPension - totalInlay, 2);
     },
 
     selectperiod: function() {
