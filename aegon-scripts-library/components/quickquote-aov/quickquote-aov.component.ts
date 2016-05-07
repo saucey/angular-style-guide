@@ -5,7 +5,7 @@ import 'rxjs/Rx';
 import {HelpComponent} from '../angular-components/help.component'
 import {InputNumberComponent, InputNumberValueAccessor, formatNumber} from '../angular-components/input-number.component';
 import {InputDateComponent, InputDateValueAccessor} from '../angular-components/input-date.component';
-import {CheckboxComponent, CheckboxValueAccessor} from '../angular-components/checkbox.component';
+import {InputRadioComponent, InputRadioValueAccessor} from '../angular-components/input-radio.component';
 import {MoneyPipe} from "../angular-components/money.pipe";
 
 const monthLabels: string[] = [
@@ -13,55 +13,41 @@ const monthLabels: string[] = [
   'juli', 'augustus', 'september', 'oktober', 'november', 'december'
 ];
 
-var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteDipTemplate'));
+var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovTemplate'));
 
 @Component({
-  selector: 'aegon-quickquote-dip',
+  selector: 'aegon-quickquote-aov',
   directives: [
     HelpComponent, InputNumberComponent, InputNumberValueAccessor, InputDateComponent, InputDateValueAccessor,
-    CheckboxComponent, CheckboxValueAccessor
+    InputRadioComponent, InputRadioValueAccessor
   ],
   template: templateElem ? templateElem.value : `
-    <div class="quickquote angular">
+    <div class="quickquote angular aov">
       <div class="triangle"></div>
       <div class="calculation">
-        <h3>Bereken direct uw pensioenuitkering:</h3>
+        <h3>Wat kost het om uw maandelijkse uitgaven te verzekeren?</h3>
         <div class="field">
           <div class="label">
-            Hoogte van uw pensioenkapitaal
-            <aegon-help>
-              Vul hier de hoogte van uw pensioenkapitaal in. Heeft u bij meer pensioenverzekeraars een pensioenkapitaal?
-              Tel dan alle bedragen bij elkaar op en vul het totaalbedrag hier in.
-            </aegon-help>
+            Wat geeft u maandelijks uit?
           </div>
           <div class="inputs">
-            <aegon-input-number #amountInput prefix="€" [(ngModel)]="pensionAmount" [max]="99999999"
-                               (focus)="amountTooSmall = false; amountInput.select()" (blur)="isValidAmount()"
-                               (enter)="submitAmount()" [placeholder]="'minimaal 25.000'">
-            </aegon-input-number>
-            <button class="button arrow" *ngIf="step === 1" [disabled]="!pensionAmount" (click)="submitAmount()">
-              Volgende
+            <button class="button icon-right icon-calculator" (click)="submitAmount()">
+              Bereken mijn maandelijkse uitgaven
             </button>
+            <a href="/bla" class="monthly-spendings">Ik weet mijn maandelijkse uitgeven</a>
           </div>
         </div>
-        <p class="error" *ngIf="amountTooSmall">
-          Wilt u minimaal €25.000 inleggen? Deze rekentool is vooral bedoeld voor klanten die hun pensioen buiten Aegon
-          hebben opgebouwd. Heeft u uw pensioen opgebouwd bij Aegon? Dan krijgt u van ons automatisch een offerte
-          toegestuurd. Hierbij hanteren we een lager minimum bedrag.
-        </p>
-
         <div *ngIf="step > 1">
           <div class="field">
             <div class="label">
-              Uw pensioenkapitaal is opgebouwd bij
+              Woont u samen met een partner?
               <aegon-help>
-                Heeft u pensioen opgebouwd bij verschillende verzekeraars/pensioenfondsen en wilt u deze samenvoegen?
-                Kies dan voor ‘Een andere verzekeraar of pensioenfonds’
+                Dit is de eerste helptekst
               </aegon-help>
             </div>
-            <div class="inputs">
-              <aegon-checkbox [(ngModel)]="storedInAegon">Aegon</aegon-checkbox>
-              <aegon-checkbox [(ngModel)]="storedElsewhere">Andere verzekeraar/pensioenfonds</aegon-checkbox>
+            <div class="inputs">  
+              <aegon-input-radio [(ngModel)]="storedInAegon">Ja</aegon-input-radio>
+              <aegon-input-radio [(ngModel)]="storedElsewhere">Andere verzekeraar/pensioenfonds</aegon-input-radio>
             </div>
           </div>
           <p class="error" *ngIf="storedError">
@@ -185,7 +171,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteDipT
   providers: [HTTP_PROVIDERS],
   pipes: [MoneyPipe]
 })
-export class QuickQuoteDipComponent implements OnInit {
+export class QuickQuoteAovComponent implements OnInit {
   step: number = 1;
   pensionAmount: number;
   amountTooSmall: boolean;
@@ -247,9 +233,7 @@ export class QuickQuoteDipComponent implements OnInit {
   }
 
   submitAmount(): void {
-    if (this.isValidAmount()) {
       this.step += 1;
-    }
   }
 
   validate(): boolean {
@@ -321,8 +305,8 @@ export class QuickQuoteDipComponent implements OnInit {
                 "PENSIOENVORM": "OPT",
                 "BEDRAG": "4111.45"
               }
-          ]}
-      }};
+            ]}
+        }};
       setTimeout(() => this.processResult(highLow, mockData), 2000);
       return;
     }
