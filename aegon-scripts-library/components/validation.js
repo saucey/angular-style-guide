@@ -293,7 +293,7 @@
       phone: function (val) {
         // This needs to be implemented as a function, since validVal has a problem with the following regex
         // Empty|Local numbers|International numbers.
-        return val.match(/^(|(?:00)[1-9][0-9]{7,15}|(?:0)[1-7][0-9]{8})$/);
+        return val.match(/^(|(?:00)[1-9][0-9]{7,12}|(?:0)[1-7][0-9]{8})$/);
       },
       address: {
         global: /^[A-Za-z0-9 '.\-]*$/i,
