@@ -10,6 +10,10 @@
     font-family: $font_normal;
     font-weight: bold;
   }
+  .button {
+    text-align: left;
+    margin-bottom: 0;
+  }
   /**
    * Colors below follow the current aegon's messages theme
    */
@@ -72,6 +76,13 @@
     }
     .header {
       color: $black;
+    }
+  }
+  &.pension123 {
+    .logo {
+      width: 152px;
+      max-width: 100%;
+      margin-top: 10px;
     }
   }
 }
@@ -159,6 +170,9 @@
       &.pension123 {
         .icon:before {
           content: $font_icons_old_man;
+        }
+        .logo {
+          float: right;
         }
       }
       &.pension {
@@ -363,6 +377,9 @@ div.alert {
     width: 100%;
     height: 70px;
     background: url($image_path + "spinner.gif") center center no-repeat;
+  }
+  img {
+    max-width: 100%;
   }
   .ajax-text,
   .ajax-timeout {

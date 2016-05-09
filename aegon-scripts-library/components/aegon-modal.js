@@ -1,7 +1,7 @@
 /**
  * AegonModal function declaration
  *
- * @param action (string)(optional): 'open' (default) || 'close'
+ * @param action (string)(optional): 'open' (default) || 'position' || 'update' || 'close'
  * @param options (object): options for the modal
  * @param callback (function)(optional): what to do after the modal is open
  */
@@ -19,7 +19,8 @@
       ajaxText: '', // @string: Text to show while waiting for ajax if ajax === true
       overlay: true, // @boolean: dark overlay behind the modal
       timeOut: 0, // @number (miliseconds): the amount of time of wait till show the message if ajax === true
-      timeOutMessage: '' // @string: message to show after time out if ajax === true
+      timeOutMessage: '', // @string: message to show after time out if ajax === true
+      width: '' // @int: the width of the modal (it has a max-width of 100% so there won't be scroll).
     };
 
     // if the second param is the callback
@@ -103,6 +104,10 @@
           var modalEle = document.createElement('DIV');
           modalEle.className = 'aegon-modal visible';
           modalEle.innerHTML = modalInner;
+          // add inline width css
+          if(! isNaN(settings.width) && parseInt(settings.width) > 0) {
+            modalEle.style.width = settings.width + 'px';
+          }
 
           // Insert the modal
           $('body').append(modalEle);
