@@ -292,32 +292,16 @@
       email: /^[A-Z0-9]([\w\.\-]*[A-Z0-9])*@([A-Z0-9]([\w\.\-]*[A-Z0-9]|[A-Z0-9])*\.)[A-Z]{2,}$/i,
       phone: function (val) {
         // This needs to be implemented as a function, since validVal has a problem with the following regex
-        // This regex accepts nothing or a number that starts with 1 or 2 ceros plus numbers followed by space, dot or hyphen one or more times, and ends with number. 
-        var re = /^(|(?:\+|0{1,2})(?:\d+[\- ]?)*[1-9]+)$/;
-        if(val.match(re)) {
-          if(val !== '') {
-            // Validates the length.
-            if(val.length < 10 || val.length > 25) {
-              return false;
-            }
-          }
-          return true;
-        } else {
-          return false;
-        }
+        // Empty|Local numbers|International numbers.
+        return val.match(/^(|(?:00)[1-9][0-9]{7,15}|(?:0)[1-7][0-9]{8})$/);
       },
       address: {
         global: /^[A-Za-z0-9 '.\-]*$/i,
       },
       mobile: {
         nl: function (val) {
-          // For international numbers.
-          if (val.indexOf('00') === 0) {
-            return val.match(/^(|(?:00)[1-9][0-9]{7,12})$/);
-          }
-          else {
-            return val.match(/^(|(?:06)[1-9][0-9]{7})$/);
-          }
+          // Empty|Local numbers|International numbers.
+          return val.match(/^(|(?:06)[1-9][0-9]{7}|(?:00)[1-9][0-9]{7,12})$/);
         },
       },
       'house-nr': function (val) {
