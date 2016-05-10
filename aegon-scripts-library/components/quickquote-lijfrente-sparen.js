@@ -49,7 +49,7 @@
         $(toggleContainer).slideToggle(this.checked);
         if (!this.checked) {
           var inputs = $(toggleContainer).find("input");
-          inputs.each(function(){
+          inputs.each(function() {
             this.value = 0;
           });
         }
@@ -66,10 +66,8 @@
           period = this.selectperiod(),
           periodicInlay = period;
 
-
-
       // Do the calculation
-      var monthlyPayment = this.calculateMonthlyPayment(singleInlay, periodicInlay, depositoInlay, duration, depositoDuration,interestLijfrenteSparen);
+      var monthlyPayment = this.calculateBuiltUpPension(singleInlay, periodicInlay, depositoInlay, duration, depositoDuration, interestLijfrenteSparen);
       var interestAmount = this.calculateInterest(singleInlay, periodicInlay, duration , monthlyPayment);
 
       // Print the outcomes of the calculation
@@ -83,19 +81,19 @@
       return Math.round(input * Math.pow(10, decimals)) / Math.pow(10, decimals);
     },
 
-    calculateOneTimeInlay: function(singleInlay, depositoInlay, duration, depositoDuration, newinterestLijfrenteSparen) {
-      // Calculate the On-off-Inlay with our wihout the deposito added
+    calculateSingleInlayPension: function(singleInlay, depositoInlay, duration, depositoDuration, newinterestLijfrenteSparen) {
+      // Calculate the One-off-Inlay with or without the deposito added
       var newinterestDeposito = 1 + (interestDeposito[depositoDuration] / 100),
           formulaPart1 = Math.pow(newinterestLijfrenteSparen, duration),
           formulaPart2 = Math.pow(newinterestDeposito, depositoDuration),
           formulaPart3 = Math.pow(newinterestDeposito, (duration - depositoDuration)),
           formulaPart4 = (singleInlay - depositoInlay) * formulaPart1,
-          formulaPart5 = depositoInlay * formulaPart2,
-          depositoOpbouw = formulaPart4 + (formulaPart5 * formulaPart3);
-      return depositoOpbouw;
+          formulaPart5 = depositoInlay * formulaPart2;
+
+      return this.round(formulaPart4 + (formulaPart5 * formulaPart3), 2);
     },
 
-    calculateMonthlyPayment: function (singleInlay, periodicInlay, depositoInlay, duration, depositoDuration, interest) {
+    calculateBuiltUpPension: function (singleInlay, periodicInlay, depositoInlay, duration, depositoDuration, interest) {
       // Calculation for Lijfrente Sparen
       if (isNaN(singleInlay) || duration === 0 || isNaN(duration)) {
         return 0;
@@ -108,21 +106,22 @@
         formulaPart2 = Math.pow(1 + formulaPart1, duration * 12) - 1,
         formulaComplete = (periodicInlay* (formulaPart2 / formulaPart1)) * (1 + formulaPart1);
       if (singleInlay) {
-        formulaComplete = formulaComplete + this.calculateOneTimeInlay(singleInlay, depositoInlay, duration, depositoDuration, newinterestLijfrenteSparen);
+        formulaComplete = formulaComplete + this.calculateSingleInlayPension(singleInlay, depositoInlay, duration, depositoDuration, newinterestLijfrenteSparen);
       }
-      var formulaRounded = this.round(formulaComplete,2);
-      return formulaRounded;
+      
+      return this.round(formulaComplete,2);
     },
-    calculateInterest: function (singleInlay, periodicInlay, duration , monthlyPayment) {
+
+    calculateInterest: function (singleInlay, periodicInlay, duration, totalPension) {
       //calculation for the amount of interest expressed in Euro's
       var periodicTotal = (periodicInlay * 12),
           durationTotal = (periodicTotal * duration),
-          totalInlay = parseInt(singleInlay) + durationTotal,
-          calculatedAmount = this.round(monthlyPayment - totalInlay, 2);
-      return calculatedAmount;
+          totalInlay = parseInt(singleInlay) + durationTotal;
+
+      return this.round(totalPension - totalInlay, 2);
     },
 
-    selectperiod: function(){
+    selectperiod: function() {
         var selectedPeriod = $("#periodic-selector_child").find(".selected"),
             selectedPeriodText = selectedPeriod.text(),
             periodicInlay = $("#periodic-input").val().replace(/\./g , ''),
@@ -148,7 +147,6 @@
     },
 
     updateSliderRange: function(min, max) {
-
       this.noUiSlider.updateOptions({
         range: {
           'min': min,
