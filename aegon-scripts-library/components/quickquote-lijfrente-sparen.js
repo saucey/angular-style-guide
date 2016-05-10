@@ -105,6 +105,7 @@
         formulaPart1 = this.round(formulaPart0, 8),
         formulaPart2 = Math.pow(1 + formulaPart1, duration * 12) - 1,
         formulaComplete = (periodicInlay* (formulaPart2 / formulaPart1)) * (1 + formulaPart1);
+
       if (singleInlay) {
         formulaComplete = formulaComplete + this.calculateSingleInlayPension(singleInlay, depositoInlay, duration, depositoDuration, newinterestLijfrenteSparen);
       }
