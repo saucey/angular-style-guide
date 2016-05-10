@@ -1,7 +1,15 @@
 .quickquote.aov {
   .field {
-    .inputs button {
+    &.first .inputs button {
       width: 100%;
+    }
+    label.radio {
+      display: block;
+      margin-bottom: 25px;
+      > input[type="radio"] + span.radio {
+        background: $white;
+        top: -10px;
+      }
     }
     a.monthly-spendings {
       color: $slightly_darker_blue;

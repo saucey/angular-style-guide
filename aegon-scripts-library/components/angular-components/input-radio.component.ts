@@ -5,9 +5,9 @@ import {CONST_EXPR} from "angular2/src/facade/lang";
 @Component({
   selector: 'aegon-input-radio',
   template: `
-    <label class="checkbox">
-      <input type="radio" [checked]="model" (click)="toggle()">
-      <span class="checkbox"></span>
+    <label class="radio">
+      <input type="radio" [name]="name" (click)="setValue(value)">
+      <span class="radio"></span>
       <ng-content></ng-content>
     </label>
   `
@@ -15,29 +15,23 @@ import {CONST_EXPR} from "angular2/src/facade/lang";
 export class InputRadioComponent {
   @Output() modelChange: any = new EventEmitter();
   @Output() change: any = new EventEmitter();
-
+  @Input() value: any;
+  @Input() name: any;
   model: boolean;
-
-  toggle() {
-    this.model = !this.model;
-    this.modelChange.emit(this.model);
-    setTimeout(() => {
-      this.change.emit(this.model);
-    });
-  }
 
   setValue(value) {
     this.model = value;
   }
 }
 
-const CUSTOM_VALUE_ACCESSOR = CONST_EXPR(new Provider(
-  NG_VALUE_ACCESSOR, {useExisting: forwardRef(() => InputRadioValueAccessor), multi: true}));
+const RADIO_VALUE_ACCESSOR = CONST_EXPR(new Provider(
+  NG_VALUE_ACCESSOR, {useExisting: forwardRef(() => InputRadioValueAccessor), multi: true}
+));
 
 @Directive({
   selector: 'aegon-input-radio',
-  host: {'(modelChange)': 'onChange($event)'},
-  providers: [CUSTOM_VALUE_ACCESSOR]
+  host: {'(change)': 'onChange($event.target.value)', '(blur)': 'onTouched()'},
+  bindings: [RADIO_VALUE_ACCESSOR]
 })
 export class InputRadioValueAccessor implements ControlValueAccessor {
   onChange = (_) => {};
@@ -48,7 +42,6 @@ export class InputRadioValueAccessor implements ControlValueAccessor {
   writeValue(value: any): void {
     this.host.setValue(value);
   }
-
-  registerOnChange(fn: (_: any) => void): void { this.onChange = fn; }
-  registerOnTouched(fn: () => void): void { this.onTouched = fn; }
+  registerOnChange(fn: (_: any) => {}): void { this.onChange = fn; }
+  registerOnTouched(fn: () => {}): void { this.onTouched = fn; }
 }

@@ -26,15 +26,17 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
       <div class="triangle"></div>
       <div class="calculation">
         <h3>Wat kost het om uw maandelijkse uitgaven te verzekeren?</h3>
-        <div class="field">
-          <div class="label">
-            Wat geeft u maandelijks uit?
-          </div>
-          <div class="inputs">
-            <button class="button icon-right icon-calculator" (click)="submitAmount()">
-              Bereken mijn maandelijkse uitgaven
-            </button>
-            <a href="/bla" class="monthly-spendings">Ik weet mijn maandelijkse uitgeven</a>
+        <div *ngIf="step == 1">
+          <div class="field first">
+            <div class="label">
+              Wat geeft u maandelijks uit?
+            </div>
+            <div class="inputs">
+              <button class="button icon-right icon-calculator" (click)="submitAmount()">
+                Bereken mijn maandelijkse uitgaven
+              </button>
+              <a href="/bla" class="monthly-spendings">Ik weet mijn maandelijkse uitgeven</a>
+            </div>
           </div>
         </div>
         <div *ngIf="step > 1">
@@ -45,68 +47,94 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
                 Dit is de eerste helptekst
               </aegon-help>
             </div>
-            <div class="inputs">  
-              <aegon-input-radio [(ngModel)]="storedInAegon">Ja</aegon-input-radio>
-              <aegon-input-radio [(ngModel)]="storedElsewhere">Andere verzekeraar/pensioenfonds</aegon-input-radio>
-            </div>
-          </div>
-          <p class="error" *ngIf="storedError">
-            Wilt u kiezen waar uw pensioenkapitaal is opgebouwd?
-          </p>
-          <div class="field">
-            <div class="label">Uw geboortedatum</div>
             <div class="inputs">
-              <aegon-input-date [(ngModel)]="birthDate"></aegon-input-date>
+              <aegon-input-radio [(ngModel)]="livingWithPartner1" [name]="'livingWithPartner'" [value]="true">Ja</aegon-input-radio>
+              <aegon-input-radio [(ngModel)]="livingWithPartner1" [name]="'livingWithPartner'" [value]="false">Nee</aegon-input-radio>
             </div>
           </div>
-          <p class="error" *ngIf="birthDateError">
-            Wilt u een geldige geboortedatum invoeren?
-          </p>
           <div class="field">
             <div class="label">
-              Wilt u een partnerpensioen voor uw partner verzekeren?
+              Heeft u thuiswonende kinderen
               <aegon-help>
-                Heeft u een partner? En wilt u dat uw partner een pensioenuitkering krijgt na uw overlijden?
-                Dan kunt u een partnerpensioen verzekeren. De uitkering is 70% van het pensioen dat u ontvangt.
-              </aegon-help>
-            </div>
-            <span class="inputs">
-              <aegon-checkbox [(ngModel)]="deathBenefit">
-                Ja, ik wil een partneruitkering bij overlijden (70% van de oorspronkelijke pensioenuitkering)
-              </aegon-checkbox>
-            </span>
-          </div>
-          <div class="field" *ngIf="deathBenefit">
-            <div class="label">Geboortedatum van uw partner</div>
-            <div class="inputs">
-              <aegon-input-date [(ngModel)]="partnerBirthDate"></aegon-input-date>
-            </div>
-          </div>
-          <p class="error" *ngIf="partnerBirthDateError">
-            U heeft gekozen voor een partneruitkering bij overlijden. Wilt u een geldige geboortedatum invoeren voor uw
-            partner?
-          </p>
-          <div class="field">
-            <div class="label">
-              Ingangsdatum van de pensioenuitkering
-              <aegon-help>
-                U ontvangt de pensoenuitkering altijd achteraf, aan het einde van de maand.
+                Dit is de tweede helptekst
               </aegon-help>
             </div>
             <div class="inputs">
-              <select [ngModel]="startingDate" (change)="changeStartingDate($event.target.value)">
-                <option value="" disabled selected>Maak uw keuze</option>
-                <option *ngFor="#date of startingDateChoices" [value]="date.value">{{date.label}}</option>
+              <select [ngModel]="children">
+                <option value="" selected>Maak uw keuze</option>
+                <option value="nee">Nee</option>
+                <option value="1">Ja 1 kind</option>
+                <option value="2">Ja 2 kinderen</option>
+                <option value="3">Ja 3 kinderen</option>
+                <option value="4">Ja 4 kinderen</option>
               </select>
             </div>
           </div>
-          <p class="error" *ngIf="startingDateError">
-            Wilt u een ingangsdatum kiezen?
-          </p>
+          <div class="field">
+            <div class="label">
+              Type woning
+              <aegon-help>
+                Dit is de derde helptekst
+              </aegon-help>
+            </div>
+            <div class="inputs">
+              <select [ngModel]="typeOfResidence">
+               <option value="" selected>Maak uw keuze</option>
+                <option value="Galerij">appartement</option>
+                <option value="RijtjeswoningTussen">tussenwoning</option>
+                <option value="TweeOnderEenKap">hoekwoning</option>
+                <option value="VrijstaandGroot">vrijstaand</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <div class="label">
+              Heeft u een koop- of huurwoning?
+              <aegon-help>
+                Dit is de vierde helptekst
+              </aegon-help>
+            </div>
+            <div class="inputs">
+              <aegon-input-radio [(ngModel)]="residenceType1" [name]="'residenceType'" [value]="'koop'">Koopwoning</aegon-input-radio>
+              <aegon-input-radio [(ngModel)]="residenceType1" [name]="'residenceType'" [value]="'huur'">Huurwoning</aegon-input-radio>
+            </div>
+          </div>
+           <div class="field">
+          <div class="label">
+            Netto maandlasten hypotheek of huur
+            <aegon-help>
+              Dit is de vijfde helptekst
+            </aegon-help>
+          </div>
+          <div class="inputs">
+            <aegon-input-number  prefix="€" [(ngModel)]="costResidence" [max]="99999999"
+                                [placeholder]="'0'">
+            </aegon-input-number>
+            <button class="button arrow" *ngIf="step === 1" [disabled]="!pensionAmount" (click)="submitAmount()">
+              Volgende
+            </button>
+          </div>
+        </div>
+         <div class="field">
+          <div class="label">
+            Netto gezinsinkomen
+            <aegon-help>
+              Dit is de zesde helptekst.
+            </aegon-help>
+          </div>
+          <div class="inputs">
+            <aegon-input-number #amountInput prefix="€" [(ngModel)]="pensionAmount" [max]="99999999"
+                               [placeholder]="'0'">
+            </aegon-input-number>
+            <button class="button arrow" *ngIf="step === 1"  (click)="submitAmount()">
+              Volgende
+            </button>
+          </div>
+        </div>
           <div class="field">
             <div class="label"></div>
             <div class="inputs">
-              <button class="button icon-right icon-calculator" [disabled]="pendingCount > 0" [ngClass]="{pending: pendingCount > 0}" (click)="submit('MockURL', '')">
+              <button class="button icon-right icon-calculator">
                 Bereken
               </button>
             </div>
