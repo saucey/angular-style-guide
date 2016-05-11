@@ -63,10 +63,10 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
               <select [ngModel]="children">
                 <option value="" selected>Maak uw keuze</option>
                 <option value="nee">Nee</option>
-                <option value="1">Ja 1 kind</option>
-                <option value="2">Ja 2 kinderen</option>
-                <option value="3">Ja 3 kinderen</option>
-                <option value="4">Ja 4 kinderen</option>
+                <option value="1">Ja, 1 kind</option>
+                <option value="2">Ja, 2 kinderen</option>
+                <option value="3">Ja, 3 kinderen</option>
+                <option value="4">Ja, 4 kinderen</option>
               </select>
             </div>
           </div>
@@ -126,15 +126,12 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
             <aegon-input-number #amountInput prefix="€" [(ngModel)]="pensionAmount" [max]="99999999"
                                [placeholder]="'0'">
             </aegon-input-number>
-            <button class="button arrow" *ngIf="step === 1"  (click)="submitAmount()">
-              Volgende
-            </button>
           </div>
         </div>
           <div class="field">
             <div class="label"></div>
             <div class="inputs">
-              <button class="button icon-right icon-calculator">
+              <button class="button icon-right icon-calculator" (click)="submit('MockURL', '')">
                 Bereken
               </button>
             </div>
@@ -144,54 +141,51 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
       <div class="result" *ngIf="linearAmount && highLowFirstAmount">
         <div class="linear">
           <div class="row">
-            <span class="label">Pensioenuitkering</span>
-            <span class="value"><span class="currency">€</span> <span class="amount">{{linearAmount | money}}</span> bruto p/mnd</span>
-          </div>
-          <div *ngIf="deathBenefitAmount" class="row">
-            <span class="label">Partneruitkering bij overlijden</span>
-            <span class="value"><span class="currency">€</span> <span class="amount">{{deathBenefitAmount | money}}</span> bruto p/mnd</span>
-          </div>
-        </div>
-        <div class="high-low">
-          <div class="heading">Hoog-laag-uitkering</div>
-          <p>
-            Hierbij ontvangt u de eerste 5 jaar een hogere en daarna een iets lagere uitkering dan normaal. U krijgt
-            voor beide mogelijkheden een offerte. <a href="#TODO">Meer informatie</a>
-          </p>
-          <div class="row">
-            <span class="label">Eerste 5 jaar</span>
+            <span class="label">Uitgave woning en energie</span>
             <span class="value">
-              <span class="currency">€</span> <span class="amount">{{highLowFirstAmount | money}}</span> bruto p/mnd
+              <span class="currency">€</span>
+              <span class="amount">{{linearAmount | money}}</span>
+              <span class="edit">> Wijzig</span>
             </span>
           </div>
           <div class="row">
-            <span class="label">Na 5 jaar</span>
+            <span class="label">Uitgave verzekeringen en onderwijs</span>
             <span class="value">
-              <span class="currency">€</span> <span class="amount">{{highLowSecondAmount | money}}</span> bruto p/mnd
+              <span class="currency">€</span>
+              <span class="amount">{{deathBenefitAmount | money}}</span>
+              <span class="edit">> Wijzig</span>
             </span>
           </div>
-          <div *ngIf="deathBenefitAmount" class="row">
-            <span class="label">Partneruitkering bij overlijden</span>
+          <div class="row">
+            <span class="label">Uitgaven boodschappen</span>
             <span class="value">
-              <span class="currency">€</span> <span class="amount">{{highLowDeathBenefitAmount | money}}</span> bruto p/mnd
+              <span class="currency">€</span>
+              <span class="amount">{{deathBenefitAmount | money}}</span>
+              <span class="edit">> Wijzig</span>
+            </span>
+          </div>
+          <div class="row">
+            <span class="label">Uitgaven vervoer</span>
+            <span class="value">
+              <span class="currency">€</span>
+              <span class="amount">{{deathBenefitAmount | money}}</span>
+              <span class="arrow">Wijzig</span>
+            </span>
+          </div>
+          <div class="row">
+            <span class="label">Overig (kleding, huis, vrije tijd)</span>
+            <span class="value">
+              <span class="currency">€</span>
+              <span class="amount">{{deathBenefitAmount | money}}</span>
+              <span class="arrow"><a href="">Wijzig</a></span>
             </span>
           </div>
         </div>
-        <div *ngIf="storedInAegon" class="footer">
-          Uw pensioen komt vrij <strong>bij Aegon</strong>.<br>
-          U krijgt binnen 3 maanden voorafgaand aan uw pensioen automatisch per brief van ons een offerte.
-        </div>
-        <div *ngIf="!startingDateTooFar && !storedInAegon" class="footer">
+        <div class="footer">
           <ul class="arrow">
             <li><a href="#TODO">Vraag een adviesgesprek aan</a></li>
           </ul>
           <button class="button orange icon-right arrow">Vrijblijvende offerte</button>
-        </div>
-        <div *ngIf="startingDateTooFar && !storedInAegon">
-          U kunt pas binnen 3 maanden voorafgaand aan uw pensioen een offerte ontvangen.
-          <ul class="arrow">
-            <li><a href="#TODO">Vraag een adviesgesprek aan</a></li>
-          </ul>
         </div>
       </div>
     </div>
@@ -298,11 +292,9 @@ export class QuickQuoteAovComponent implements OnInit {
     this.highLowSecondAmount = null;
     this.highLowDeathBenefitAmount = null;
 
-    if (this.validate()) {
-      this.pendingCount = 2;
-      this.calculate(serviceUrl, authToken, true);
-      this.calculate(serviceUrl, authToken, false);
-    }
+    this.pendingCount = 2;
+    this.calculate(serviceUrl, authToken, true);
+    this.calculate(serviceUrl, authToken, false);
   }
 
   calculate(serviceUrl: string, authToken: string, highLow: boolean): void {
@@ -335,7 +327,7 @@ export class QuickQuoteAovComponent implements OnInit {
               }
             ]}
         }};
-      setTimeout(() => this.processResult(highLow, mockData), 2000);
+     this.processResult(highLow, mockData);
       return;
     }
     let body:any = {
