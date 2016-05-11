@@ -22,7 +22,7 @@
       .input-header {
         label {
           display: table-cell;
-          width: 60%;
+          width: 50%;
         }
       }
       .input-container {
@@ -110,7 +110,7 @@
     .calculation {
       .one-off.slider, .duration.slider, .periodic.slider {
         .input-header {
-          max-width:220px;
+          max-width:100%;
           float:none;
           .help {margin-top:0;right:27px;}
           .input-container {max-width:220px;width:100%;}
