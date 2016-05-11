@@ -1,6 +1,14 @@
 .quickquote.mortgage {
   color: $blue;
 
+  .result {
+    .payment-result {
+      width:72%;
+    }
+    .result-button a {
+      color: $black;
+    }
+  }
   .calculation .slider-container {
     margin-bottom: 0;
   }
@@ -11,6 +19,10 @@
 
   .calculation .input-header .input-container {
     @include rem('margin-right', 53);
+  }
+
+  .calculation .input-header .input-container input {
+    text-align:left;
   }
 
   label {
@@ -52,12 +64,12 @@
   }
 
   .result .payment-result .result1,
-  .result .payment-result .result2,
-  .result .payment-result .result3 {
+  .result .payment-result .result2 {
     width: 45%;
     min-width: 202px;
     float: left;
     margin-right: 5%;
+    margin-bottom: 10px;
   }
 
   .field {
@@ -180,6 +192,10 @@
 @media only screen and (max-width: 640px) {
   .quickquote.mortgage {
     .field {
+      .input-header .help {
+        margin-top: 0;
+        padding-top: 12px;
+      }
       .inputs.right {
         float: left;
       }
@@ -209,7 +225,19 @@
 }
 
 @media only screen and (min-width: 1350px) {
-  .quickquote.mortgage .calculation .input-header .input-container {
-    @include rem('margin-right', 54);
+  .quickquote.mortgage {
+    .calculation .input-header .input-container {
+      @include rem('margin-right', 54);
+    }
+    .result .payment-result {
+      overflow: hidden;
+      min-width: 300px;
+      width: 60%;
+      float: left;
+    }
+    .result .result-button {
+      text-align: left;
+    }
   }
+
 }
