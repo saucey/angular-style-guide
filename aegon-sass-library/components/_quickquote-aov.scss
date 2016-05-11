@@ -2,6 +2,7 @@
   .calculation {
     .field {
       &.first .inputs button {
+        margin-top: 0;
         width: 100%;
       }
       label.radio {
@@ -12,20 +13,15 @@
           top: -10px;
         }
       }
-      a.monthly-spendings {
-        color: $slightly_darker_blue;
-        font-family: $font_thin;
-        position: relative;
-        @include rem('padding-left', 15);
-        &:after {
-          content: '>';
-          display: block;
-          height: 100%;
-          position: absolute;
-          left: 0;
-          top: -5px;
-        }
-      }
+    }
+
+    .monthly-spendings .inputs ul.arrow {
+      margin-bottom: -10px;
+    }
+
+    .monthly-spendings .field,
+    .field.first {
+      margin-bottom: 0;
     }
   }
   .result {
@@ -47,6 +43,7 @@
     }
     .edit {
       margin-left: 5px;
+      cursor: pointer;
       &:before {
         position: relative;
         max-width: 0;
@@ -58,6 +55,14 @@
         left: -5px;
         top: -1px;
       }
+    }
+
+    .save {
+      margin-left: 5px;
+    }
+
+    input {
+      width: 100px;
     }
   }
 }

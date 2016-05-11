@@ -26,20 +26,39 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
       <div class="triangle"></div>
       <div class="calculation">
         <h3>Wat kost het om uw maandelijkse uitgaven te verzekeren?</h3>
-        <div *ngIf="step == 1">
+        <div *ngIf="step === 'start'">
           <div class="field first">
             <div class="label">
               Wat geeft u maandelijks uit?
             </div>
             <div class="inputs">
-              <button class="button icon-right icon-calculator" (click)="submitAmount()">
+              <button class="button icon-right icon-calculator" (click)="step = 'calculation'">
                 Bereken mijn maandelijkse uitgaven
               </button>
-              <a href="/bla" class="monthly-spendings">Ik weet mijn maandelijkse uitgeven</a>
+              <div>
+                <ul class="arrow">
+                  <li><a href="#" (click)="step = 'noCalculation'; $event.preventDefault()">Ik weet mijn maandelijkse uitgaven</a></li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
-        <div *ngIf="step > 1">
+        <div *ngIf="step === 'noCalculation'" class="monthly-spendings">
+          <div class="field">
+            <div class="label">
+              Uw vaste uitgaven per maand
+            </div>
+            <div class="inputs">
+              <aegon-input-number prefix="€" [(ngModel)]="monthlySpendings" [max]="99999999"></aegon-input-number>
+              <div>
+                <ul class="arrow">
+                  <li><a href="#" (click)="step = 'calculation'; $event.preventDefault()">Gebruik de uitgaven rekenhulp</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="step === 'calculation'">
           <div class="field">
             <div class="label">
               Woont u samen met een partner?
@@ -55,18 +74,20 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
           <div class="field">
             <div class="label">
               Heeft u thuiswonende kinderen
-              <aegon-help>
-                Dit is de tweede helptekst
-              </aegon-help>
             </div>
             <div class="inputs">
               <select [ngModel]="children">
                 <option value="" selected>Maak uw keuze</option>
-                <option value="nee">Nee</option>
+                <option value="0">Nee</option>
                 <option value="1">Ja, 1 kind</option>
                 <option value="2">Ja, 2 kinderen</option>
                 <option value="3">Ja, 3 kinderen</option>
                 <option value="4">Ja, 4 kinderen</option>
+                <option value="5">Ja, 5 kinderen</option>
+                <option value="6">Ja, 6 kinderen</option>
+                <option value="7">Ja, 7 kinderen</option>
+                <option value="8">Ja, 8 kinderen</option>
+                <option value="9">Ja, 9 of meer kinderen</option>
               </select>
             </div>
           </div>
@@ -74,7 +95,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
             <div class="label">
               Type woning
               <aegon-help>
-                Dit is de derde helptekst
+                Dit is de helptekst
               </aegon-help>
             </div>
             <div class="inputs">
@@ -90,44 +111,38 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
           <div class="field">
             <div class="label">
               Heeft u een koop- of huurwoning?
-              <aegon-help>
-                Dit is de vierde helptekst
-              </aegon-help>
             </div>
             <div class="inputs">
               <aegon-input-radio [(ngModel)]="residenceType1" [name]="'residenceType'" [value]="'koop'">Koopwoning</aegon-input-radio>
               <aegon-input-radio [(ngModel)]="residenceType1" [name]="'residenceType'" [value]="'huur'">Huurwoning</aegon-input-radio>
             </div>
           </div>
-           <div class="field">
-          <div class="label">
-            Netto maandlasten hypotheek of huur
-            <aegon-help>
-              Dit is de vijfde helptekst
-            </aegon-help>
+          <div class="field">
+            <div class="label">
+              Netto maandlasten hypotheek of huur
+              <aegon-help>
+                Dit is de vijfde helptekst
+              </aegon-help>
+            </div>
+            <div class="inputs">
+              <aegon-input-number prefix="€" [(ngModel)]="costResidence" [max]="99999999"
+                                  placeholder="0">
+              </aegon-input-number>
+            </div>
           </div>
-          <div class="inputs">
-            <aegon-input-number  prefix="€" [(ngModel)]="costResidence" [max]="99999999"
-                                [placeholder]="'0'">
-            </aegon-input-number>
-            <button class="button arrow" *ngIf="step === 1" [disabled]="!pensionAmount" (click)="submitAmount()">
-              Volgende
-            </button>
+          <div class="field">
+            <div class="label">
+              Netto gezinsinkomen
+              <aegon-help>
+                Dit is de zesde helptekst.
+              </aegon-help>
+            </div>
+            <div class="inputs">
+              <aegon-input-number #amountInput prefix="€" [(ngModel)]="netFamilyIncome" [max]="99999999"
+                                  placeholder="0">
+              </aegon-input-number>
+            </div>
           </div>
-        </div>
-         <div class="field">
-          <div class="label">
-            Netto gezinsinkomen
-            <aegon-help>
-              Dit is de zesde helptekst.
-            </aegon-help>
-          </div>
-          <div class="inputs">
-            <aegon-input-number #amountInput prefix="€" [(ngModel)]="pensionAmount" [max]="99999999"
-                               [placeholder]="'0'">
-            </aegon-input-number>
-          </div>
-        </div>
           <div class="field">
             <div class="label"></div>
             <div class="inputs">
@@ -138,14 +153,26 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
           </div>
         </div>
       </div>
+      <div class="result tiny" *ngIf="step === 'noCalculation' && monthlySpendings > 0">
+        <div class="row">
+          <span class="label"></span>
+          <a class="button orange icon-right arrow" [attr.href]="'#TODO?spendings=' + monthlySpendings">Bereken uw premie</a>
+        </div>
+      </div>
       <div class="result" *ngIf="linearAmount && highLowFirstAmount">
         <div class="linear">
           <div class="row">
             <span class="label">Uitgave woning en energie</span>
             <span class="value">
-              <span class="currency">€</span>
-              <span class="amount">{{linearAmount | money}}</span>
-              <span class="edit"><a href="">Wijzig</a></span>
+              <span class="currency" *ngIf="!editingHouse">€</span>
+              <span class="amount" *ngIf="!editingHouse">{{linearAmount | money}}</span>
+              <span class="amount" *ngIf="editingHouse">
+                <aegon-input-number prefix="€" [(ngModel)]="linearAmount" [max]="99999999"
+                                    placeholder="0">
+                </aegon-input-number>
+              </span>
+              <span class="edit" *ngIf="!editingHouse" tabindex="0" (click)="editingHouse = !editingHouse">Wijzig</span>
+              <button class="save" *ngIf="editingHouse" (click)="editingHouse = !editingHouse">Bewaar</button>
             </span>
           </div>
           <div class="row">
@@ -153,7 +180,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
             <span class="value">
               <span class="currency">€</span>
               <span class="amount">{{deathBenefitAmount | money}}</span>
-              <span class="edit"><a href="">Wijzig</a></span>
+              <span class="edit" tabindex="0">Wijzig</span>
             </span>
           </div>
           <div class="row">
@@ -161,7 +188,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
             <span class="value">
               <span class="currency">€</span>
               <span class="amount">{{deathBenefitAmount | money}}</span>
-              <span class="edit"><a href="">Wijzig</a></span>
+              <span class="edit" tabindex="0">Wijzig</span>
             </span>
           </div>
           <div class="row">
@@ -169,7 +196,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
             <span class="value">
               <span class="currency">€</span>
               <span class="amount">{{deathBenefitAmount | money}}</span>
-              <span class="edit"><a href="">Wijzig</a></span>
+              <span class="edit" tabindex="0">Wijzig</span>
             </span>
           </div>
           <div class="row">
@@ -177,7 +204,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
             <span class="value">
               <span class="currency">€</span>
               <span class="amount">{{deathBenefitAmount | money}}</span>
-              <span class="edit"><a href="">Wijzig</a></span>
+              <span class="edit" tabindex="0">Wijzig</span>
             </span>
           </div>
         </div>
@@ -208,8 +235,8 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
   pipes: [MoneyPipe]
 })
 export class QuickQuoteAovComponent implements OnInit {
-  step: number = 1;
-  pensionAmount: number;
+  step: string = 'start';
+  netFamilyIncome: number;
   amountTooSmall: boolean;
   storedInAegon: boolean = false;
   storedElsewhere: boolean = false;
@@ -264,12 +291,8 @@ export class QuickQuoteAovComponent implements OnInit {
   }
 
   isValidAmount(): boolean {
-    this.amountTooSmall = this.pensionAmount < 25000;
+    this.amountTooSmall = this.netFamilyIncome < 25000;
     return !this.amountTooSmall;
-  }
-
-  submitAmount(): void {
-      this.step += 1;
   }
 
   validate(): boolean {
@@ -357,7 +380,7 @@ export class QuickQuoteAovComponent implements OnInit {
           },
           "PENSIOENOVEREENKOMST": {
             "STORTING_INLEG": {
-              "KOOPSOM": this.pensionAmount,
+              "KOOPSOM": this.netFamilyIncome,
               "IND_VREEMDGELD": this.storedElsewhere,
               "IND_HERKOMST_OVL": false
             },
