@@ -292,21 +292,16 @@
       email: /^[A-Z0-9]([\w\.\-]*[A-Z0-9])*@([A-Z0-9]([\w\.\-]*[A-Z0-9]|[A-Z0-9])*\.)[A-Z]{2,}$/i,
       phone: function (val) {
         // This needs to be implemented as a function, since validVal has a problem with the following regex
-        // this assumes that there cannot be phone numbers in an international format with less than 3 characters, which should be reasonable...
-        return val.match(/^(|(\+|0{1,2})[1-9][.\- \d]*\d+)$/);
+        // Empty|Local numbers|International numbers.
+        return val.match(/^(|(?:00)[1-9][0-9]{7,12}|(?:0)[1-7][0-9]{8})$/);
       },
       address: {
         global: /^[A-Za-z0-9 '.\-]*$/i,
       },
       mobile: {
         nl: function (val) {
-          // For international numbers.
-          if (val.indexOf('00') === 0) {
-            return val.match(/^(|(?:00)[1-9][0-9]{7,12})$/);
-          }
-          else {
-            return val.match(/^(|(?:06)[1-9][0-9]{7})$/);
-          }
+          // Empty|Local numbers|International numbers.
+          return val.match(/^(|(?:06)[1-9][0-9]{7}|(?:00)[1-9][0-9]{7,12})$/);
         },
       },
       'house-nr': function (val) {

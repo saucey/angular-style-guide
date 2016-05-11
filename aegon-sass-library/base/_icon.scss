@@ -78,7 +78,7 @@ a.icon-user-link:before {
 }
 
 .icon-uniE60A:before {
-  content: '\e60a';
+  content: $font_icons_old_man;
 }
 
 .icon-uniE60D:before {
@@ -322,6 +322,10 @@ a.menu-5662:before {
 
 .icon-zakelijk:before {
   content: $font_icons_zakelijk;
+}
+
+.icon-chart:before {
+  content: $font_icons_chart;
 }
 
 // Do not apply icons to old aegon menu.

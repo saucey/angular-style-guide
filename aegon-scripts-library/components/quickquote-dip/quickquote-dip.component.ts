@@ -109,7 +109,6 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteDipT
             </div>
             <div class="inputs">
               <select [ngModel]="startingDate" (change)="changeStartingDate($event.target.value)">
-                <option value="" disabled selected>Maak uw keuze</option>
                 <option *ngFor="#date of startingDateChoices" [value]="date.value">{{date.label}}</option>
               </select>
             </div>
@@ -402,6 +401,7 @@ export class QuickQuoteDipComponent implements OnInit {
     items.forEach(item => {
       let s = item['PENSIOENVORM'],
         value = item['BEDRAG'];
+        value = value/12;
       if (highLow) {
         if (s === 'OPLL') {
           hlAmount += parseFloat(value);

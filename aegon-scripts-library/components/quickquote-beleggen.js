@@ -30,7 +30,6 @@
               interestInvest = JSON.parse(dataInterest.attr("data-interestInvest"));
             }
 
-
             // Initiate the Tooltip
             Drupal.behaviors.tooltip.activate(".quickquote");
 
@@ -49,16 +48,16 @@
                 periodicInlay = period;
 
             // Do the calculation
-            var monthlyPayment = Drupal.behaviors.quickquoteLijfrenteSparen.calculateMonthlyPayment(singleInlay, periodicInlay, 0, duration, 0, interestSavings),
-                investPayment = Drupal.behaviors.quickquoteLijfrenteSparen.calculateMonthlyPayment(singleInlay, periodicInlay, 0, duration, 0, interestInvest),
-                interestAmount = Drupal.behaviors.quickquoteLijfrenteSparen.calculateInterest(singleInlay, periodicInlay, duration , monthlyPayment),
-                totalInlay = monthlyPayment - interestAmount;
+            var totalPension = Drupal.behaviors.quickquoteLijfrenteSparen.calculateBuiltUpPension(singleInlay, periodicInlay, 0, duration, 0, interestSavings),
+                totalPensionInvest = Drupal.behaviors.quickquoteLijfrenteSparen.calculateBuiltUpPension(singleInlay, periodicInlay, 0, duration, 0, interestInvest),
+                interestAmount = Drupal.behaviors.quickquoteLijfrenteSparen.calculateInterest(singleInlay, periodicInlay, duration , totalPension),
+                totalInlay = totalPension - interestAmount;
 
             // Print the outcomes of the calculation
-            $(paymentClass).text(format.to(monthlyPayment));
+            $(paymentClass).text(format.to(totalPension));
             $(interestClass).text(interestSavings);
             $(amountClass).text(format.to(totalInlay));
-            $(investClass).text(format.to(investPayment));
+            $(investClass).text(format.to(totalPensionInvest));
             $(interestInvestClass).text(interestInvest);
         }
     };
