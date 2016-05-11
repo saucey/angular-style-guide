@@ -37,7 +37,6 @@
   .result {
     .footer-result {clear:left;float:left;width:50%;min-width: 280px;}
     .footer-result a {
-      color: $white;
       font-family: $font_thin;
       position:relative;
       @include rem('line-height', 49);

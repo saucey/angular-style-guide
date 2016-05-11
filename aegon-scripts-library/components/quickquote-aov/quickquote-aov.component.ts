@@ -5,7 +5,7 @@ import 'rxjs/Rx';
 import {HelpComponent} from '../angular-components/help.component'
 import {InputNumberComponent, InputNumberValueAccessor, formatNumber} from '../angular-components/input-number.component';
 import {InputDateComponent, InputDateValueAccessor} from '../angular-components/input-date.component';
-import {CheckboxComponent, CheckboxValueAccessor} from '../angular-components/checkbox.component';
+import {InputRadioComponent, InputRadioValueAccessor} from '../angular-components/input-radio.component';
 import {MoneyPipe} from "../angular-components/money.pipe";
 
 const monthLabels: string[] = [
@@ -13,113 +13,125 @@ const monthLabels: string[] = [
   'juli', 'augustus', 'september', 'oktober', 'november', 'december'
 ];
 
-var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteDipTemplate'));
+var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovTemplate'));
 
 @Component({
-  selector: 'aegon-quickquote-dip',
+  selector: 'aegon-quickquote-aov',
   directives: [
     HelpComponent, InputNumberComponent, InputNumberValueAccessor, InputDateComponent, InputDateValueAccessor,
-    CheckboxComponent, CheckboxValueAccessor
+    InputRadioComponent, InputRadioValueAccessor
   ],
   template: templateElem ? templateElem.value : `
-    <div class="quickquote angular">
+    <div class="quickquote angular aov">
       <div class="triangle"></div>
       <div class="calculation">
-        <h3>Bereken direct uw pensioenuitkering:</h3>
-        <div class="field">
+        <h3>Wat kost het om uw maandelijkse uitgaven te verzekeren?</h3>
+        <div *ngIf="step == 1">
+          <div class="field first">
+            <div class="label">
+              Wat geeft u maandelijks uit?
+            </div>
+            <div class="inputs">
+              <button class="button icon-right icon-calculator" (click)="submitAmount()">
+                Bereken mijn maandelijkse uitgaven
+              </button>
+              <a href="/bla" class="monthly-spendings">Ik weet mijn maandelijkse uitgeven</a>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="step > 1">
+          <div class="field">
+            <div class="label">
+              Woont u samen met een partner?
+              <aegon-help>
+                Dit is de eerste helptekst
+              </aegon-help>
+            </div>
+            <div class="inputs">
+              <aegon-input-radio [(ngModel)]="livingWithPartner1" [name]="'livingWithPartner'" [value]="true">Ja</aegon-input-radio>
+              <aegon-input-radio [(ngModel)]="livingWithPartner1" [name]="'livingWithPartner'" [value]="false">Nee</aegon-input-radio>
+            </div>
+          </div>
+          <div class="field">
+            <div class="label">
+              Heeft u thuiswonende kinderen
+              <aegon-help>
+                Dit is de tweede helptekst
+              </aegon-help>
+            </div>
+            <div class="inputs">
+              <select [ngModel]="children">
+                <option value="" selected>Maak uw keuze</option>
+                <option value="nee">Nee</option>
+                <option value="1">Ja, 1 kind</option>
+                <option value="2">Ja, 2 kinderen</option>
+                <option value="3">Ja, 3 kinderen</option>
+                <option value="4">Ja, 4 kinderen</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <div class="label">
+              Type woning
+              <aegon-help>
+                Dit is de derde helptekst
+              </aegon-help>
+            </div>
+            <div class="inputs">
+              <select [ngModel]="typeOfResidence">
+               <option value="" selected>Maak uw keuze</option>
+                <option value="Galerij">appartement</option>
+                <option value="RijtjeswoningTussen">tussenwoning</option>
+                <option value="TweeOnderEenKap">hoekwoning</option>
+                <option value="VrijstaandGroot">vrijstaand</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <div class="label">
+              Heeft u een koop- of huurwoning?
+              <aegon-help>
+                Dit is de vierde helptekst
+              </aegon-help>
+            </div>
+            <div class="inputs">
+              <aegon-input-radio [(ngModel)]="residenceType1" [name]="'residenceType'" [value]="'koop'">Koopwoning</aegon-input-radio>
+              <aegon-input-radio [(ngModel)]="residenceType1" [name]="'residenceType'" [value]="'huur'">Huurwoning</aegon-input-radio>
+            </div>
+          </div>
+           <div class="field">
           <div class="label">
-            Hoogte van uw pensioenkapitaal
+            Netto maandlasten hypotheek of huur
             <aegon-help>
-              Vul hier de hoogte van uw pensioenkapitaal in. Heeft u bij meer pensioenverzekeraars een pensioenkapitaal?
-              Tel dan alle bedragen bij elkaar op en vul het totaalbedrag hier in.
+              Dit is de vijfde helptekst
             </aegon-help>
           </div>
           <div class="inputs">
-            <aegon-input-number #amountInput prefix="€" [(ngModel)]="pensionAmount" [max]="99999999"
-                               (focus)="amountTooSmall = false; amountInput.select()" (blur)="isValidAmount()"
-                               (enter)="submitAmount()" [placeholder]="'minimaal 25.000'">
+            <aegon-input-number  prefix="€" [(ngModel)]="costResidence" [max]="99999999"
+                                [placeholder]="'0'">
             </aegon-input-number>
             <button class="button arrow" *ngIf="step === 1" [disabled]="!pensionAmount" (click)="submitAmount()">
               Volgende
             </button>
           </div>
         </div>
-        <p class="error" *ngIf="amountTooSmall">
-          Wilt u minimaal €25.000 inleggen? Deze rekentool is vooral bedoeld voor klanten die hun pensioen buiten Aegon
-          hebben opgebouwd. Heeft u uw pensioen opgebouwd bij Aegon? Dan krijgt u van ons automatisch een offerte
-          toegestuurd. Hierbij hanteren we een lager minimum bedrag.
-        </p>
-
-        <div *ngIf="step > 1">
-          <div class="field">
-            <div class="label">
-              Uw pensioenkapitaal is opgebouwd bij
-              <aegon-help>
-                Heeft u pensioen opgebouwd bij verschillende verzekeraars/pensioenfondsen en wilt u deze samenvoegen?
-                Kies dan voor ‘Een andere verzekeraar of pensioenfonds’
-              </aegon-help>
-            </div>
-            <div class="inputs">
-              <aegon-checkbox [(ngModel)]="storedInAegon">Aegon</aegon-checkbox>
-              <aegon-checkbox [(ngModel)]="storedElsewhere">Andere verzekeraar/pensioenfonds</aegon-checkbox>
-            </div>
+         <div class="field">
+          <div class="label">
+            Netto gezinsinkomen
+            <aegon-help>
+              Dit is de zesde helptekst.
+            </aegon-help>
           </div>
-          <p class="error" *ngIf="storedError">
-            Wilt u kiezen waar uw pensioenkapitaal is opgebouwd?
-          </p>
-          <div class="field">
-            <div class="label">Uw geboortedatum</div>
-            <div class="inputs">
-              <aegon-input-date [(ngModel)]="birthDate"></aegon-input-date>
-            </div>
+          <div class="inputs">
+            <aegon-input-number #amountInput prefix="€" [(ngModel)]="pensionAmount" [max]="99999999"
+                               [placeholder]="'0'">
+            </aegon-input-number>
           </div>
-          <p class="error" *ngIf="birthDateError">
-            Wilt u een geldige geboortedatum invoeren?
-          </p>
-          <div class="field">
-            <div class="label">
-              Wilt u een partnerpensioen voor uw partner verzekeren?
-              <aegon-help>
-                Heeft u een partner? En wilt u dat uw partner een pensioenuitkering krijgt na uw overlijden?
-                Dan kunt u een partnerpensioen verzekeren. De uitkering is 70% van het pensioen dat u ontvangt.
-              </aegon-help>
-            </div>
-            <span class="inputs">
-              <aegon-checkbox [(ngModel)]="deathBenefit">
-                Ja, ik wil een partneruitkering bij overlijden (70% van de oorspronkelijke pensioenuitkering)
-              </aegon-checkbox>
-            </span>
-          </div>
-          <div class="field" *ngIf="deathBenefit">
-            <div class="label">Geboortedatum van uw partner</div>
-            <div class="inputs">
-              <aegon-input-date [(ngModel)]="partnerBirthDate"></aegon-input-date>
-            </div>
-          </div>
-          <p class="error" *ngIf="partnerBirthDateError">
-            U heeft gekozen voor een partneruitkering bij overlijden. Wilt u een geldige geboortedatum invoeren voor uw
-            partner?
-          </p>
-          <div class="field">
-            <div class="label">
-              Ingangsdatum van de pensioenuitkering
-              <aegon-help>
-                U ontvangt de pensoenuitkering altijd achteraf, aan het einde van de maand.
-              </aegon-help>
-            </div>
-            <div class="inputs">
-              <select [ngModel]="startingDate" (change)="changeStartingDate($event.target.value)">
-                <option *ngFor="#date of startingDateChoices" [value]="date.value">{{date.label}}</option>
-              </select>
-            </div>
-          </div>
-          <p class="error" *ngIf="startingDateError">
-            Wilt u een ingangsdatum kiezen?
-          </p>
+        </div>
           <div class="field">
             <div class="label"></div>
             <div class="inputs">
-              <button class="button icon-right icon-calculator" [disabled]="pendingCount > 0" [ngClass]="{pending: pendingCount > 0}" (click)="submit('MockURL', '')">
+              <button class="button icon-right icon-calculator" (click)="submit('MockURL', '')">
                 Bereken
               </button>
             </div>
@@ -129,54 +141,65 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteDipT
       <div class="result" *ngIf="linearAmount && highLowFirstAmount">
         <div class="linear">
           <div class="row">
-            <span class="label">Pensioenuitkering</span>
-            <span class="value"><span class="currency">€</span> <span class="amount">{{linearAmount | money}}</span> bruto p/mnd</span>
-          </div>
-          <div *ngIf="deathBenefitAmount" class="row">
-            <span class="label">Partneruitkering bij overlijden</span>
-            <span class="value"><span class="currency">€</span> <span class="amount">{{deathBenefitAmount | money}}</span> bruto p/mnd</span>
-          </div>
-        </div>
-        <div class="high-low">
-          <div class="heading">Hoog-laag-uitkering</div>
-          <p>
-            Hierbij ontvangt u de eerste 5 jaar een hogere en daarna een iets lagere uitkering dan normaal. U krijgt
-            voor beide mogelijkheden een offerte. <a href="#TODO">Meer informatie</a>
-          </p>
-          <div class="row">
-            <span class="label">Eerste 5 jaar</span>
+            <span class="label">Uitgave woning en energie</span>
             <span class="value">
-              <span class="currency">€</span> <span class="amount">{{highLowFirstAmount | money}}</span> bruto p/mnd
+              <span class="currency">€</span>
+              <span class="amount">{{linearAmount | money}}</span>
+              <span class="edit"><a href="">Wijzig</a></span>
             </span>
           </div>
           <div class="row">
-            <span class="label">Na 5 jaar</span>
+            <span class="label">Uitgave verzekeringen en onderwijs</span>
             <span class="value">
-              <span class="currency">€</span> <span class="amount">{{highLowSecondAmount | money}}</span> bruto p/mnd
+              <span class="currency">€</span>
+              <span class="amount">{{deathBenefitAmount | money}}</span>
+              <span class="edit"><a href="">Wijzig</a></span>
             </span>
           </div>
-          <div *ngIf="deathBenefitAmount" class="row">
-            <span class="label">Partneruitkering bij overlijden</span>
+          <div class="row">
+            <span class="label">Uitgaven boodschappen</span>
             <span class="value">
-              <span class="currency">€</span> <span class="amount">{{highLowDeathBenefitAmount | money}}</span> bruto p/mnd
+              <span class="currency">€</span>
+              <span class="amount">{{deathBenefitAmount | money}}</span>
+              <span class="edit"><a href="">Wijzig</a></span>
+            </span>
+          </div>
+          <div class="row">
+            <span class="label">Uitgaven vervoer</span>
+            <span class="value">
+              <span class="currency">€</span>
+              <span class="amount">{{deathBenefitAmount | money}}</span>
+              <span class="edit"><a href="">Wijzig</a></span>
+            </span>
+          </div>
+          <div class="row">
+            <span class="label">Overig (kleding, huis, vrije tijd)</span>
+            <span class="value">
+              <span class="currency">€</span>
+              <span class="amount">{{deathBenefitAmount | money}}</span>
+              <span class="edit"><a href="">Wijzig</a></span>
             </span>
           </div>
         </div>
-        <div *ngIf="storedInAegon" class="footer">
-          Uw pensioen komt vrij <strong>bij Aegon</strong>.<br>
-          U krijgt binnen 3 maanden voorafgaand aan uw pensioen automatisch per brief van ons een offerte.
+        <div class="bigger">
+          <div class="row">
+            <span class="label">Netto uitgaven per maand*</span>
+            <span class="value">
+              <span class="currency">€</span>
+              <span class="amount">{{linearAmount | money}}</span>
+            </span>
+          </div>
+          <div class="row">
+            <span class="label">Dit is bruto per jaar</span>
+            <span class="value">
+              <span class="currency">€</span>
+              <span class="amount">{{linearAmount | money}}</span>
+            </span>
+          </div>
         </div>
-        <div *ngIf="!startingDateTooFar && !storedInAegon" class="footer">
-          <ul class="arrow">
-            <li><a href="#TODO">Vraag een adviesgesprek aan</a></li>
-          </ul>
+        <div class="footer">
+          <div class="label"></div>
           <button class="button orange icon-right arrow">Vrijblijvende offerte</button>
-        </div>
-        <div *ngIf="startingDateTooFar && !storedInAegon">
-          U kunt pas binnen 3 maanden voorafgaand aan uw pensioen een offerte ontvangen.
-          <ul class="arrow">
-            <li><a href="#TODO">Vraag een adviesgesprek aan</a></li>
-          </ul>
         </div>
       </div>
     </div>
@@ -184,7 +207,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteDipT
   providers: [HTTP_PROVIDERS],
   pipes: [MoneyPipe]
 })
-export class QuickQuoteDipComponent implements OnInit {
+export class QuickQuoteAovComponent implements OnInit {
   step: number = 1;
   pensionAmount: number;
   amountTooSmall: boolean;
@@ -246,9 +269,7 @@ export class QuickQuoteDipComponent implements OnInit {
   }
 
   submitAmount(): void {
-    if (this.isValidAmount()) {
       this.step += 1;
-    }
   }
 
   validate(): boolean {
@@ -285,11 +306,9 @@ export class QuickQuoteDipComponent implements OnInit {
     this.highLowSecondAmount = null;
     this.highLowDeathBenefitAmount = null;
 
-    if (this.validate()) {
-      this.pendingCount = 2;
-      this.calculate(serviceUrl, authToken, true);
-      this.calculate(serviceUrl, authToken, false);
-    }
+    this.pendingCount = 2;
+    this.calculate(serviceUrl, authToken, true);
+    this.calculate(serviceUrl, authToken, false);
   }
 
   calculate(serviceUrl: string, authToken: string, highLow: boolean): void {
@@ -320,9 +339,9 @@ export class QuickQuoteDipComponent implements OnInit {
                 "PENSIOENVORM": "OPT",
                 "BEDRAG": "4111.45"
               }
-          ]}
-      }};
-      setTimeout(() => this.processResult(highLow, mockData), 2000);
+            ]}
+        }};
+     this.processResult(highLow, mockData);
       return;
     }
     let body:any = {
@@ -401,7 +420,6 @@ export class QuickQuoteDipComponent implements OnInit {
     items.forEach(item => {
       let s = item['PENSIOENVORM'],
         value = item['BEDRAG'];
-        value = value/12;
       if (highLow) {
         if (s === 'OPLL') {
           hlAmount += parseFloat(value);
