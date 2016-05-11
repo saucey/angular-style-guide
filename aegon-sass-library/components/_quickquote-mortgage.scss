@@ -29,6 +29,7 @@
     color: $black;
   }
 
+  .calculation .input-header .input-container:after,
   &.lijfrente.sparen .calculation .input-header .input-container:after {
     content: none;
   }
@@ -48,6 +49,15 @@
     :checked + .checkbox {
       background: $white;
     }
+  }
+
+  .result .payment-result .result1,
+  .result .payment-result .result2,
+  .result .payment-result .result3 {
+    width: 45%;
+    min-width: 202px;
+    float: left;
+    margin-right: 5%;
   }
 
   .field {
@@ -184,9 +194,18 @@
       }
     }
   }
-  .quickquote.lijfrente.sparen.mortgage .calculation .input-header .input-container .suffixed input {
+  .quickquote.mortgage .calculation .input-header .input-container .suffixed input {
     padding-right: 40px;
   }
+  .quickquote.mortgage .calculation .input-header .input-container input {
+    width: 100%;
+    max-width: 220px;
+    padding-right: 0.625rem;
+  }
+  .quickquote.mortgage .calculation .input-header .input-container {
+    margin-right:0;
+  }
+
 }
 
 @media only screen and (min-width: 1350px) {
