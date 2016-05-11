@@ -1,28 +1,62 @@
 .quickquote.aov {
-  .field {
-    &.first .inputs button {
-      width: 100%;
-    }
-    label.radio {
-      display: block;
-      margin-bottom: 25px;
-      > input[type="radio"] + span.radio {
-        background: $white;
-        top: -10px;
+  .calculation {
+    .field {
+      &.first .inputs button {
+        width: 100%;
+      }
+      label.radio {
+        display: block;
+        margin-bottom: 25px;
+        > input[type="radio"] + span.radio {
+          background: $white;
+          top: -10px;
+        }
+      }
+      a.monthly-spendings {
+        color: $slightly_darker_blue;
+        font-family: $font_thin;
+        position: relative;
+        @include rem('padding-left', 15);
+        &:after {
+          content: '>';
+          display: block;
+          height: 100%;
+          position: absolute;
+          left: 0;
+          top: -5px;
+        }
       }
     }
-    a.monthly-spendings {
-      color: $slightly_darker_blue;
-      font-family: $font_thin;
-      position: relative;
-      @include rem('padding-left', 15);
-      &:after {
-        content: '>';
-        display: block;
-        height: 100%;
-        position: absolute;
-        left: 0;
-        top: -5px;
+  }
+  .result {
+    .row {
+      .label, .currency, .amount {
+        @include rem("font-size", $medium);
+      }
+      .amount {
+        text-align: left;
+      }
+    }
+    .bigger {
+      margin-top: 10px;
+      .row {
+        .label, .currency, .amount {
+          @include rem("font-size", $x-large);
+        }
+      }
+    }
+    .edit {
+      margin-left: 5px;
+      &:before {
+        position: relative;
+        max-width: 0;
+        max-height: 0;
+        color: $white;
+        font-family: $font_icons;
+        content: $font_icons_arrow_right;
+        @include rem("font-size", 10);
+        left: -5px;
+        top: -1px;
       }
     }
   }

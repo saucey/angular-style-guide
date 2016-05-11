@@ -145,7 +145,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
             <span class="value">
               <span class="currency">€</span>
               <span class="amount">{{linearAmount | money}}</span>
-              <span class="edit">> Wijzig</span>
+              <span class="edit"><a href="">Wijzig</a></span>
             </span>
           </div>
           <div class="row">
@@ -153,7 +153,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
             <span class="value">
               <span class="currency">€</span>
               <span class="amount">{{deathBenefitAmount | money}}</span>
-              <span class="edit">> Wijzig</span>
+              <span class="edit"><a href="">Wijzig</a></span>
             </span>
           </div>
           <div class="row">
@@ -161,7 +161,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
             <span class="value">
               <span class="currency">€</span>
               <span class="amount">{{deathBenefitAmount | money}}</span>
-              <span class="edit">> Wijzig</span>
+              <span class="edit"><a href="">Wijzig</a></span>
             </span>
           </div>
           <div class="row">
@@ -169,7 +169,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
             <span class="value">
               <span class="currency">€</span>
               <span class="amount">{{deathBenefitAmount | money}}</span>
-              <span class="arrow">Wijzig</span>
+              <span class="edit"><a href="">Wijzig</a></span>
             </span>
           </div>
           <div class="row">
@@ -177,14 +177,27 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
             <span class="value">
               <span class="currency">€</span>
               <span class="amount">{{deathBenefitAmount | money}}</span>
-              <span class="arrow"><a href="">Wijzig</a></span>
+              <span class="edit"><a href="">Wijzig</a></span>
+            </span>
+          </div>
+        </div>
+        <div class="bigger">
+          <div class="row">
+            <span class="label">Netto uitgaven per maand*</span>
+            <span class="value">
+              <span class="currency">€</span>
+              <span class="amount">{{linearAmount | money}}</span>
+            </span>
+          </div>
+          <div class="row">
+            <span class="label">Dit is bruto per jaar</span>
+            <span class="value">
+              <span class="currency">€</span>
+              <span class="amount">{{linearAmount | money}}</span>
             </span>
           </div>
         </div>
         <div class="footer">
-          <ul class="arrow">
-            <li><a href="#TODO">Vraag een adviesgesprek aan</a></li>
-          </ul>
           <button class="button orange icon-right arrow">Vrijblijvende offerte</button>
         </div>
       </div>
