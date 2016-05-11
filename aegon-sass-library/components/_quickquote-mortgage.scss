@@ -1,8 +1,12 @@
 .quickquote.mortgage {
-  color: $slightly_darker_blue;
+  color: $blue;
 
   .calculation .slider-container {
     margin-bottom: 0;
+  }
+
+  .calculation .input-header label {
+    color: $blue;
   }
 
   .calculation .input-header .input-container {
