@@ -198,6 +198,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
           </div>
         </div>
         <div class="footer">
+          <div class="label"></div>
           <button class="button orange icon-right arrow">Vrijblijvende offerte</button>
         </div>
       </div>
