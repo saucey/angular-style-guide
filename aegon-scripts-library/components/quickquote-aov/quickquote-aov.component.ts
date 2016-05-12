@@ -131,7 +131,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
           <div class="field">
             <div class="label"></div>
             <div class="inputs">
-              <button class="button icon-right icon-calculator" (click)="submit('MockURL', '')">
+              <button class="button icon-right icon-calculator" (click)="submit('https://service.nibud.nl/api/uitgaven/v1-0/aegon/referentiebedragen/', '')">
                 Bereken
               </button>
             </div>
@@ -210,9 +210,6 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
 export class QuickQuoteAovComponent implements OnInit {
   step: number = 1;
   pensionAmount: number;
-  amountTooSmall: boolean;
-  storedInAegon: boolean = false;
-  storedElsewhere: boolean = false;
   storedError: boolean;
   birthDate: string;
   birthDateError: boolean;
@@ -252,46 +249,14 @@ export class QuickQuoteAovComponent implements OnInit {
     }
   }
 
-  changeStartingDate(value: string): void {
-    this.startingDate = value;
-    this.startingDateTooFar = false;
-    this.startingDateChoices.some((date, index) => {
-      if (date.value === value && index >= 3) {
-        this.startingDateTooFar = true;
-        return true;
-      }
-    });
-  }
 
-  isValidAmount(): boolean {
-    this.amountTooSmall = this.pensionAmount < 25000;
-    return !this.amountTooSmall;
-  }
+  //isValidAmount(): boolean {
+  //  this.amountTooSmall = this.pensionAmount < 25000;
+  //  return !this.amountTooSmall;
+  //}
 
   submitAmount(): void {
       this.step += 1;
-  }
-
-  validate(): boolean {
-    let hasErrors: boolean = false;
-    this.storedError = null;
-    if (!this.storedInAegon && !this.storedElsewhere) {
-      this.storedError = true;
-      hasErrors = true;
-    }
-    if (!this.birthDate) {
-      this.birthDateError = true;
-      hasErrors = true;
-    }
-    if (this.deathBenefit && !this.partnerBirthDate) {
-      this.partnerBirthDateError = true;
-      hasErrors = true;
-    }
-    if (!this.startingDate) {
-      this.startingDateError = true;
-      hasErrors = true;
-    }
-    return !hasErrors;
   }
 
   submit(serviceUrl: string, authToken: string): void {
@@ -307,100 +272,70 @@ export class QuickQuoteAovComponent implements OnInit {
     this.highLowDeathBenefitAmount = null;
 
     this.pendingCount = 2;
-    this.calculate(serviceUrl, authToken, true);
-    this.calculate(serviceUrl, authToken, false);
+    this.calculate(serviceUrl);
+    this.calculate(serviceUrl);
   }
 
-  calculate(serviceUrl: string, authToken: string, highLow: boolean): void {
-    if (serviceUrl === 'MockURL') {
-      let mockData = {
-        "BScalculateResponse": {
-          "PROCES": {
-            "STATUS": "00000",
-            "VOLGNUM": "1",
-            "STATUST": "Success"
-          },
-          "AILHEADER": {
-            "CLIENTID": "BS_PENSIOENOVEREENKOMST_ROA_Rest",
-            "CORRELATIONID": "##DIP SS##"
-          },
-          "PENSIOENOVEREENKOMST": {
-            "PENSIOENAANSPRAAK": [
-              {
-                "EIND_DATUM_UITKERING": "2134-12-20",
-                "PENSIOENVORM": "OPLL",
-                "BEDRAG": "5631.4"
-              }, {
-                "EIND_DATUM_UITKERING": "2134-12-20",
-                "PENSIOENVORM": "PPLL",
-                "BEDRAG": "1877.13"
-              }, {
-                "EIND_DATUM_UITKERING": "2134-12-20",
-                "PENSIOENVORM": "OPT",
-                "BEDRAG": "4111.45"
-              }
-            ]}
-        }};
-     this.processResult(highLow, mockData);
-      return;
-    }
+  calculate(serviceUrl: string): void {
+    //if (serviceUrl === 'MockURL') {
+    //  let mockData = {
+    //    "BScalculateResponse": {
+    //      "PROCES": {
+    //        "STATUS": "00000",
+    //        "VOLGNUM": "1",
+    //        "STATUST": "Success"
+    //      },
+    //      "AILHEADER": {
+    //        "CLIENTID": "BS_PENSIOENOVEREENKOMST_ROA_Rest",
+    //        "CORRELATIONID": "##DIP SS##"
+    //      },
+    //      "PENSIOENOVEREENKOMST": {
+    //        "PENSIOENAANSPRAAK": [
+    //          {
+    //            "EIND_DATUM_UITKERING": "2134-12-20",
+    //            "PENSIOENVORM": "OPLL",
+    //            "BEDRAG": "5631.4"
+    //          }, {
+    //            "EIND_DATUM_UITKERING": "2134-12-20",
+    //            "PENSIOENVORM": "PPLL",
+    //            "BEDRAG": "1877.13"
+    //          }, {
+    //            "EIND_DATUM_UITKERING": "2134-12-20",
+    //            "PENSIOENVORM": "OPT",
+    //            "BEDRAG": "4111.45"
+    //          }
+    //        ]}
+    //    }};
+    // this.processResult(highLow, mockData);
+    //  return;
+    //}
     let body:any = {
-      "BScalculateRequest": {
-        "AILHEADER": {
-          "CLIENTID": "BS_PENSIOENOVEREENKOMST_ROA_Rest",
-          "CORRELATIONID": "##DIP SS##"
-        },
-        "DOSSIER": {
-          "REKENFACTOREN": {
-            "OVERGANG_OP_PP": 0.70,
-            "VERHOUDING_HOOG_LAAG": 0.75
-          },
-          "PENSIOENOVEREENKOMST": {
-            "STORTING_INLEG": {
-              "KOOPSOM": this.pensionAmount,
-              "IND_VREEMDGELD": this.storedElsewhere,
-              "IND_HERKOMST_OVL": false
-            },
-            "PENSIOENAANSPRAAK": {
-              "IND_OUDERDOMSPENSIOEN": true,
-              "IND_NABESTAANDENPENSIOEN": this.deathBenefit,
-              "IND_HOOG_LAAGPENSIOEN": highLow,
-              "IND_PREPENSIOEN": false,
-              "BEGIN_DATUM_UITKERING": this.startingDate,
-              "DUUR_UITKERING_JAREN": 5,
-              "TERMIJN_UITKERING": 1
-            }
-          },
-          "PARTIJ": [
-            {
-              "_AE_PERSOON": {
-                "VOLGNUM": 1,
-                "GESLACH": "M",
-                "GEBDAT": this.birthDate
-              }
-            }
-          ]
-        }
+      "hoofdpersonen": [
+        {"geboortedatum": "1980-1-1"},
+        {"geboortedatum": "1980-1-1"}
+      ],
+      "kinderen": [{
+        "geboortedatum": "2010-1-1"
+      }],
+      "autos": [{
+        "nieuwwaarde": 10000,
+        "kilometersPerJaar": 5000
+      }],
+      "nettoBesteedbaarInkomenPerMaand": 2500,
+      "woning": {
+        "soort": "Koopwoning",
+        "typeWoning": "Galerij",
+        "bouwjaar": "Van1976TotEnMet1979",
+        "wozWaarde": 200000
       }
     };
-    if (this.deathBenefit) {
-      body['BScalculateRequest']['DOSSIER']['PARTIJ'].push(
-        {
-          "_AE_PERSOON": {
-            "VOLGNUM": 2,
-            "GESLACH": "V",
-            "GEBDAT": this.partnerBirthDate
-          }
-        }
-      );
-    }
-    let headers = new Headers({'Content-Type': 'application/json', "Authorization" : `Basic ${authToken}`});
+    let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
     this.http.post(serviceUrl, JSON.stringify(body), options)
       .map(res => res.json())
       .catch(this.handleError)
       .subscribe(data => {
-        this.processResult(highLow, data);
+        this.processResult(data);
       }, error => console.log(error));
   }
 
@@ -411,35 +346,16 @@ export class QuickQuoteAovComponent implements OnInit {
     return Observable.throw('Server error');
   }
 
-  processResult(highLow, data) {
-    let items: any[] = data['BScalculateResponse']['PENSIOENOVEREENKOMST']['PENSIOENAANSPRAAK'],
-      hlAmount = 0;
-    if (!Array.isArray(items)) {
-      items = [items];
-    }
-    items.forEach(item => {
-      let s = item['PENSIOENVORM'],
-        value = item['BEDRAG'];
-      if (highLow) {
-        if (s === 'OPLL') {
-          hlAmount += parseFloat(value);
-          this.highLowSecondAmount = value;
-        } else if (s === 'OPT') {
-          hlAmount += parseFloat(value);
-        } else if (s === 'PPLL') {
-          this.highLowDeathBenefitAmount = value;
-        }
-      } else {
-        if (s === 'OPLL') {
-          this.linearAmount = value;
-        } else if (s === 'PPLL') {
-          this.deathBenefitAmount = value;
-        }
-      }
-    });
-    if (highLow) {
-      this.highLowFirstAmount = String(hlAmount);
-    }
-    this.pendingCount -= 1;
+  processResult(data) {
+    console.log(data);
+    //let items: any[] = data['BScalculateResponse']['PENSIOENOVEREENKOMST']['PENSIOENAANSPRAAK'],
+    //  hlAmount = 0;
+    //if (!Array.isArray(items)) {
+    //  items = [items];
+    //}
+    //items.forEach(item => {
+    //  let s = item['PENSIOENVORM'],
+    //    value = item['BEDRAG'];
+    //this.pendingCount -= 1;
   }
 }
