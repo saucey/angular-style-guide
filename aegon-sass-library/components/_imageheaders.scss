@@ -30,15 +30,23 @@
     }
   }
   picture + .header-element {
-    margin: 20px 7.2649572649%;
-    position:absolute;
+    //margin: 20px 7.2649572649%;
+    //position:absolute;
+    position: relative;
+    margin: 0 7.2649572649%;
     h1 {
       text-shadow:1px 1px rgba(0,0,0,.27);
       color: $white;
       font-family: $font_thin;
-      position:relative;
-      top:-10px;
-      margin: .5em 0;
+      //position:relative;
+      //top:-10px;
+      //margin: .5em 0;
+      //margin:0;
+      margin-top: -75px;
+      position: relative;
+      top: -10px;
+      @include rem("line-height", $line-height-medium);
+      @include rem("font-size", $line-height-medium);
     }
   }
   h2, h3, h4 {
@@ -50,15 +58,9 @@
 
   .image-header {
     picture + .header-element {
-      position: relative;
-      margin: 0 7.2649572649%;
+
       h1 {
-        margin:0;
-        margin-top: -75px;
-        position: relative;
-        top: -10px;
-        @include rem("line-height", $line-height-medium);
-        @include rem("font-size", $line-height-medium);
+
       }
       .header-element-wrapper {
         padding: 20px 7.2649572649%;
