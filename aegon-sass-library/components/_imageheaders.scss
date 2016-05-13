@@ -10,7 +10,6 @@
     display:block;
   }
   h1 {
-    margin-left: 7.2649572649%;
     font: 46px/46px 'senticosansdtlight', Arial, Verdana, sans-serif;
     color:$slightly_darker_blue;
     margin: 25px 0;
@@ -30,23 +29,21 @@
     }
   }
   picture + .header-element {
-    //margin: 20px 7.2649572649%;
-    //position:absolute;
     position: relative;
     margin: 0 7.2649572649%;
     h1 {
       text-shadow:1px 1px rgba(0,0,0,.27);
       color: $white;
       font-family: $font_thin;
-      //position:relative;
-      //top:-10px;
-      //margin: .5em 0;
-      //margin:0;
+
       margin-top: -75px;
       position: relative;
       top: -10px;
       @include rem("line-height", $line-height-medium);
       @include rem("font-size", $line-height-medium);
+    }
+    .header-element-wrapper {
+      padding: 20px 7.2649572649%;
     }
   }
   h2, h3, h4 {
@@ -55,26 +52,12 @@
   }
 }
 
-
-  .image-header {
-    picture + .header-element {
-
-      h1 {
-
-      }
-      .header-element-wrapper {
-        padding: 20px 7.2649572649%;
-      }
-    }
-  }
-
 @include breakpoint($brk-tablet) {
   .image-header {
     picture + .header-element {
       margin: 20px 7.2649572649%;
       position: relative;
       margin-top: -92px;
-      top: -10px;
       top:auto;
       bottom:20px;
       h1 {
