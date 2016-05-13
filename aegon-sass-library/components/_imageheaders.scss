@@ -47,7 +47,7 @@
   }
 }
 
-@include breakpoint($brk-mobile) {
+
   .image-header {
     picture + .header-element {
       position: relative;
@@ -65,7 +65,7 @@
       }
     }
   }
-}
+
 @include breakpoint($brk-tablet) {
   .image-header {
     picture + .header-element {
@@ -79,6 +79,10 @@
         margin: 0 ;
       }
     }
+  }
+  .image-header picture + .header-element h1 {
+    @include rem("line-height", 46);
+    @include rem("font-size", 46);
   }
 }
 
@@ -109,7 +113,6 @@
 }
 
 @include breakpoint($brk-large-desktop) {
-  //.image-header .header-element h1 ,
   .image-header picture + .header-element h1 {
     @include rem("line-height", 100);
     @include rem("font-size", 100);
