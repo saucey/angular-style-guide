@@ -33,44 +33,51 @@
     margin: 20px 7.2649572649%;
     position:absolute;
     h1 {
-      bottom: 0;
       text-shadow:1px 1px rgba(0,0,0,.27);
       color: $white;
-      @include rem("line-height", $line-height-xx-large);
-      @include rem("font-size", $xx-large);
-      @include rem("line-height", 35);
       font-family: $font_thin;
+      position:relative;
+      top:-10px;
       margin: .5em 0;
     }
   }
   h2, h3, h4 {
     margin: 0;
     color: $black;
-    @include rem("line-height", $line-height-large);
-    @include rem("font-size", $large);
   }
 }
 
 @include breakpoint($brk-mobile) {
   .image-header {
     picture + .header-element {
-      margin: 20px 7.2649572649%;
       position: relative;
-      margin-top: -75px;
+      margin: 0 7.2649572649%;
+      h1 {
+        margin:0;
+        margin-top: -75px;
+        position: relative;
+        top: -10px;
+        @include rem("line-height", $line-height-medium);
+        @include rem("font-size", $line-height-medium);
+      }
+      .header-element-wrapper {
+        padding: 20px 7.2649572649%;
+      }
     }
   }
 }
 @include breakpoint($brk-tablet) {
   .image-header {
-    .header-element {
-      h1 {
-        @include rem("line-height", $line-height-xx-large);
-        @include rem("font-size", $xx-large);
-      }
-    }
     picture + .header-element {
+      margin: 20px 7.2649572649%;
       position: relative;
-      margin-top: -75px;
+      margin-top: -92px;
+      top: -10px;
+      top:auto;
+      bottom:20px;
+      h1 {
+        margin: 0 ;
+      }
     }
   }
 }
@@ -78,37 +85,33 @@
 @include breakpoint($brk-ipad-portrait) {
   .image-header {
     picture + .header-element {
+      position: absolute;
+      bottom: 0;
+      top:auto;
       margin: 20px 7.2649572649%;
-      position: relative;
-      margin-top: -75px;
     }
   }
 }
 
 @include breakpoint($brk-ipad-landscape) {
   .image-header {
-    picture + .header-element {
-      position: absolute;
-      bottom: 0;
-      h1 {
-        @include rem("line-height", $line-height-xxxx-large);
-        @include rem("font-size", $xxxx-large);
-      }
-    }
     .header-element {
       position: relative;
       .header-element-wrapper {
         width: 80%;
       }
     }
+    picture + .header-element {
+      position: absolute;
+      bottom: 0;
+    }
   }
 }
 
 @include breakpoint($brk-large-desktop) {
-  .image-header .header-element h1 ,
+  //.image-header .header-element h1 ,
   .image-header picture + .header-element h1 {
-    @include rem("line-height", 100px );
-    @include rem("font-size", $jumbo);
-    @include rem("margin", 10 , 0);
+    @include rem("line-height", 100);
+    @include rem("font-size", 100);
   }
 }
