@@ -10,38 +10,15 @@
     display:block;
   }
   h1 {
-    margin-left: 5%;
-  }
-  picture + h1 {
-    position: absolute;
-    bottom: 0;
-    text-shadow:1px 1px rgba(0,0,0,.27);
-    color: $white;
-    @include rem("line-height", $line-height-xx-large);
-    @include rem("font-size", $xx-large);
-    font-family: $font_thin;
-  }
-  h2, h3, h4 {
-    margin: 0;
-    color: $black;
-    @include rem("line-height", $line-height-large);
-    @include rem("font-size", $large);
+    margin-left: 7.2649572649%;
+    font: 46px/46px 'senticosansdtlight', Arial, Verdana, sans-serif;
+    color:$slightly_darker_blue;
+    margin: 25px 0;
   }
   .header-element {
     bottom: 0;
-    margin: 5%;
+    margin: 0 7.2649572649%;
     position: relative;
-    margin-top: -75px;
-    h1 {
-      text-shadow:1px 1px rgba(0,0,0,.27);
-      @include rem("line-height", 35);
-      @include rem("font-size", 30);
-      font-family: $font_thin;
-      margin: 0;
-      color:$white;
-      position: absolute;
-      top: -40px;
-    }
     .header-element-wrapper {
       position: relative;
       padding: 20px;
@@ -52,52 +29,74 @@
       background-color: rgba(255, 255, 255, 0.8);
     }
   }
-}
-
-@include breakpoint($brk-tablet) {
-  .image-header {
-    picture + h1 {
+  picture + .header-element {
+    margin: 20px 7.2649572649%;
+    position:absolute;
+    h1 {
+      bottom: 0;
+      text-shadow:1px 1px rgba(0,0,0,.27);
+      color: $white;
       @include rem("line-height", $line-height-xx-large);
       @include rem("font-size", $xx-large);
+      @include rem("line-height", 35);
+      font-family: $font_thin;
+      margin: .5em 0;
     }
+  }
+  h2, h3, h4 {
+    margin: 0;
+    color: $black;
+    @include rem("line-height", $line-height-large);
+    @include rem("font-size", $large);
+  }
+}
+
+@include breakpoint($brk-mobile) {
+  .image-header {
+    picture + .header-element {
+      margin: 20px 7.2649572649%;
+      position: relative;
+      margin-top: -75px;
+    }
+  }
+}
+@include breakpoint($brk-tablet) {
+  .image-header {
     .header-element {
       h1 {
-        top: -60px;
         @include rem("line-height", $line-height-xx-large);
         @include rem("font-size", $xx-large);
       }
+    }
+    picture + .header-element {
+      position: relative;
+      margin-top: -75px;
     }
   }
 }
 
 @include breakpoint($brk-ipad-portrait) {
   .image-header {
-    picture + h1 {
-      @include rem("line-height", $line-height-xxxx-large);
-      @include rem("font-size", $xxxx-large);
-    }
-    .header-element h1 {
-      @include rem("line-height", $line-height-xxx-large);
-      @include rem("font-size", $xxx-large);
+    picture + .header-element {
+      margin: 20px 7.2649572649%;
+      position: relative;
+      margin-top: -75px;
     }
   }
 }
 
 @include breakpoint($brk-ipad-landscape) {
   .image-header {
-    picture + h1 {
-      @include rem("line-height", $line-height-jumbo);
-      @include rem("font-size", $jumbo);
-    }
-    .header-element {
+    picture + .header-element {
       position: absolute;
       bottom: 0;
-      margin: 5%;
-
       h1 {
-        position: relative;
-        top: -10px;
+        @include rem("line-height", $line-height-xxxx-large);
+        @include rem("font-size", $xxxx-large);
       }
+    }
+    .header-element {
+      position: relative;
       .header-element-wrapper {
         width: 80%;
       }
@@ -106,8 +105,10 @@
 }
 
 @include breakpoint($brk-large-desktop) {
-  .image-header .header-element h1 {
-    @include rem("line-height", $line-height-jumbo);
+  .image-header .header-element h1 ,
+  .image-header picture + .header-element h1 {
+    @include rem("line-height", 100px );
     @include rem("font-size", $jumbo);
+    @include rem("margin", 10 , 0);
   }
 }
