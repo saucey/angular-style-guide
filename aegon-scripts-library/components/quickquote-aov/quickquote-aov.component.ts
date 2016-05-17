@@ -317,6 +317,7 @@ export class QuickQuoteAovComponent implements OnInit {
     this.mortgageAmountError = false;
     this.costResidenceError = false;
     this.familyIncomeError = false;
+    this.hasPartnerError = false;
     this.housingCosts = 0;
 
     if (this.validate()) {
@@ -353,6 +354,7 @@ export class QuickQuoteAovComponent implements OnInit {
         "soort": this.mortgageKind,
         "typeWoning": this.typeOfResidence,
         "bouwjaar": "Van1989TotEnMet2000",
+        "energielabel": "Onbekend",
         "wozWaarde": 225000
       }
     };
