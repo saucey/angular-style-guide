@@ -317,6 +317,7 @@ export class QuickQuoteAovComponent implements OnInit {
     this.mortgageAmountError = false;
     this.costResidenceError = false;
     this.familyIncomeError = false;
+    this.hasPartnerError = false;
     this.housingCosts = 0;
 
     if (this.validate()) {
