@@ -198,34 +198,58 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
           </div>
           <div class="row">
             <span class="label">Uitgave verzekeringen en onderwijs</span>
-            <span class="value">
-              <span class="currency">€</span>
-              <span class="amount">{{otherFixedCharges | money}}</span>
-              <span class="edit" tabindex="0">Wijzig</span>
+             <span class="value">
+              <span class="currency" *ngIf="!editingFixed">€</span>
+              <span class="amount" *ngIf="!editingFixed">{{otherFixedCharges | money}}</span>
+              <span class="amount" *ngIf="editingFixed">
+                <aegon-input-number prefix="€" [(ngModel)]="otherFixedCharges" [max]="99999999"
+                                    placeholder="0">
+                </aegon-input-number>
+              </span>
+              <span class="edit" *ngIf="!editingFixed" tabindex="0" (click)="editingFixed = !editingFixed">Wijzig</span>
+              <button class="save" *ngIf="editingFixed" (click)="editingFixed = !editingFixed">Bewaar</button>
             </span>
           </div>
           <div class="row">
             <span class="label">Uitgaven boodschappen</span>
-            <span class="value">
-              <span class="currency">€</span>
-              <span class="amount">{{groceries | money}}</span>
-              <span class="edit" tabindex="0">Wijzig</span>
+             <span class="value">
+              <span class="currency" *ngIf="!editingGroceries">€</span>
+              <span class="amount" *ngIf="!editingGroceries">{{groceries | money}}</span>
+              <span class="amount" *ngIf="editingGroceries">
+                <aegon-input-number prefix="€" [(ngModel)]="groceries" [max]="99999999"
+                                    placeholder="0">
+                </aegon-input-number>
+              </span>
+              <span class="edit" *ngIf="!editingGroceries" tabindex="0" (click)="editingGroceries = !editingGroceries">Wijzig</span>
+              <button class="save" *ngIf="editingGroceries" (click)="editingGroceries = !editingGroceries">Bewaar</button>
             </span>
           </div>
           <div class="row">
             <span class="label">Uitgaven vervoer</span>
             <span class="value">
-              <span class="currency">€</span>
-              <span class="amount">{{transport | money}}</span>
-              <span class="edit" tabindex="0">Wijzig</span>
+              <span class="currency" *ngIf="!editingTransport">€</span>
+              <span class="amount" *ngIf="!editingTransport">{{transport | money}}</span>
+              <span class="amount" *ngIf="editingTransport">
+                <aegon-input-number prefix="€" [(ngModel)]="transport" [max]="99999999"
+                                    placeholder="0">
+                </aegon-input-number>
+              </span>
+              <span class="edit" *ngIf="!editingTransport" tabindex="0" (click)="editingTransport = !editingTransport">Wijzig</span>
+              <button class="save" *ngIf="editingTransport" (click)="editingTransport = !editingTransport">Bewaar</button>
             </span>
           </div>
           <div class="row">
             <span class="label">Overig (kleding, huis, vrije tijd)</span>
             <span class="value">
-              <span class="currency">€</span>
-              <span class="amount">{{irregularExpenses | money}}</span>
-              <span class="edit" tabindex="0">Wijzig</span>
+              <span class="currency" *ngIf="!editingIrregular">€</span>
+              <span class="amount" *ngIf="!editingIrregular">{{irregularExpenses | money}}</span>
+              <span class="amount" *ngIf="editingIrregular">
+                <aegon-input-number prefix="€" [(ngModel)]="irregularExpenses" [max]="99999999"
+                                    placeholder="0">
+                </aegon-input-number>
+              </span>
+              <span class="edit" *ngIf="!editingIrregular" tabindex="0" (click)="editingIrregular = !editingIrregular">Wijzig</span>
+              <button class="save" *ngIf="editingIrregular" (click)="editingIrregular = !editingIrregular">Bewaar</button>
             </span>
           </div>
         </div>
@@ -357,6 +381,7 @@ export class QuickQuoteAovComponent implements OnInit {
     if (this.validate()) {
       this.pendingCount = 2;
       this.calculate();
+      console.log(this.housingCosts);
     }
     this.calculate();
   }
