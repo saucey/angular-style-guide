@@ -69,8 +69,8 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
               </aegon-help>
             </div>
             <div class="inputs">
-              <aegon-input-radio [(ngModel)]="livingWithPartner1" [name]="'livingWithPartner'" (change)="hasPartner = true" [value]="true">Ja</aegon-input-radio>
-              <aegon-input-radio [(ngModel)]="livingWithPartner1" [name]="'livingWithPartner'" (change)="hasPartner = false" [value]="false">Nee</aegon-input-radio>
+              <aegon-input-radio [(ngModel)]="livingWithPartner1" [name]="'livingWithPartner'" (change)="hasPartner = true; triggerValueChanged();" [value]="true">Ja</aegon-input-radio>
+              <aegon-input-radio [(ngModel)]="livingWithPartner1" [name]="'livingWithPartner'" (change)="hasPartner = false; triggerValueChanged();" [value]="false">Nee</aegon-input-radio>
             </div>
           </div>
           <p class="error" *ngIf="hasPartnerError">
@@ -78,10 +78,10 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
            </p>
           <div class="field">
             <div class="label">
-              Heeft u thuiswonende kinderen
+              Heeft u thuiswonende kinderen?
             </div>
             <div class="inputs">
-              <select [ngModel]="children" (change)="children = $event.target.value">
+              <select [ngModel]="children" (change)="children = $event.target.value; triggerValueChanged();">
                 <option value="" selected>Maak uw keuze</option>
                 <option value="0">Nee</option>
                 <option value="1">Ja, 1 kind</option>
@@ -108,7 +108,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
               </aegon-help>
             </div>
             <div class="inputs">
-              <select [ngModel]="typeOfResidence" (change)="typeOfResidence = $event.target.value">
+              <select [ngModel]="typeOfResidence" (change)="typeOfResidence = $event.target.value; triggerValueChanged();">
                <option value="" selected>Maak uw keuze</option>
                 <option value="Galerij">appartement</option>
                 <option value="RijtjeswoningTussen">tussenwoning</option>
@@ -125,12 +125,12 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
               Heeft u een koop- of huurwoning?
             </div>
             <div class="inputs">
-              <aegon-input-radio [(ngModel)]="residenceType1" [name]="'residenceType'" (change)="mortgageKind = 'Koopwoning'" [value]="'koop'">Koopwoning</aegon-input-radio>
-              <aegon-input-radio [(ngModel)]="residenceType1" [name]="'residenceType'" (change)="mortgageKind = 'Huurwoning'" [value]="'huur'">Huurwoning</aegon-input-radio>
+              <aegon-input-radio [(ngModel)]="residenceType1" [name]="'residenceType'" (change)="mortgageKind = 'Koopwoning'; triggerValueChanged();" [value]="'koop'">Koopwoning</aegon-input-radio>
+              <aegon-input-radio [(ngModel)]="residenceType1" [name]="'residenceType'" (change)="mortgageKind = 'Huurwoning'; triggerValueChanged();" [value]="'huur'">Huurwoning</aegon-input-radio>
             </div>
           </div>
           <p class="error" *ngIf="mortgageKindError">
-            Kies of u een koop of wuurwoning heeft.
+            Kies of u een koop of huurwoning heeft.
           </p>
          <div class="field">
           <div class="label">
@@ -141,12 +141,12 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
           </div>
           <div class="inputs">
             <aegon-input-number  prefix="€" [(ngModel)]="costResidence" [max]="99999999"
-                                [placeholder]="'0'">
+                                [placeholder]="'0'" (modelChange)="triggerValueChanged();">
             </aegon-input-number>
           </div>
         </div>
         <p class="error" *ngIf="costResidenceError">
-            Vul uw netto maandlaen hypotheek of huur in.
+            Vul uw netto maandlasten hypotheek of huur in.
           </p>
          <div class="field">
           <div class="label">
@@ -157,7 +157,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
           </div>
           <div class="inputs">
             <aegon-input-number #amountInput prefix="€" [(ngModel)]="familyIncome" [max]="99999999"
-                               [placeholder]="'0'">
+                               [placeholder]="'0'" (modelChange)="triggerValueChanged();">
             </aegon-input-number>
           </div>
         </div>
@@ -167,7 +167,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
           <div class="field">
             <div class="label"></div>
             <div class="inputs">
-              <button class="button icon-right icon-calculator"  [disabled]="pendingCount > 0" [ngClass]="{pending: pendingCount > 0}" (click)="submit()">
+              <button class="button icon-right icon-calculator" [disabled]="pendingCount > 0" [ngClass]="{pending: pendingCount > 0}" (click)="submit()">
                 Bereken
               </button>
             </div>
@@ -193,7 +193,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
                 </aegon-input-number>
               </span>
               <span class="edit" *ngIf="!editingHouse" tabindex="0" (click)="editingHouse = !editingHouse">Wijzig</span>
-              <button class="save" *ngIf="editingHouse" (click)="editingHouse = !editingHouse">Bewaar</button>
+              <button class="save" *ngIf="editingHouse" (click)="editingHouse = !editingHouse; calculateTotals()">Bewaar</button>
             </span>
           </div>
           <div class="row">
@@ -207,7 +207,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
                 </aegon-input-number>
               </span>
               <span class="edit" *ngIf="!editingFixed" tabindex="0" (click)="editingFixed = !editingFixed">Wijzig</span>
-              <button class="save" *ngIf="editingFixed" (click)="editingFixed = !editingFixed">Bewaar</button>
+              <button class="save" *ngIf="editingFixed" (click)="editingFixed = !editingFixed; calculateTotals()">Bewaar</button>
             </span>
           </div>
           <div class="row">
@@ -221,7 +221,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
                 </aegon-input-number>
               </span>
               <span class="edit" *ngIf="!editingGroceries" tabindex="0" (click)="editingGroceries = !editingGroceries">Wijzig</span>
-              <button class="save" *ngIf="editingGroceries" (click)="editingGroceries = !editingGroceries">Bewaar</button>
+              <button class="save" *ngIf="editingGroceries" (click)="editingGroceries = !editingGroceries; calculateTotals()">Bewaar</button>
             </span>
           </div>
           <div class="row">
@@ -235,7 +235,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
                 </aegon-input-number>
               </span>
               <span class="edit" *ngIf="!editingTransport" tabindex="0" (click)="editingTransport = !editingTransport">Wijzig</span>
-              <button class="save" *ngIf="editingTransport" (click)="editingTransport = !editingTransport">Bewaar</button>
+              <button class="save" *ngIf="editingTransport" (click)="editingTransport = !editingTransport; calculateTotals()">Bewaar</button>
             </span>
           </div>
           <div class="row">
@@ -249,7 +249,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
                 </aegon-input-number>
               </span>
               <span class="edit" *ngIf="!editingIrregular" tabindex="0" (click)="editingIrregular = !editingIrregular">Wijzig</span>
-              <button class="save" *ngIf="editingIrregular" (click)="editingIrregular = !editingIrregular">Bewaar</button>
+              <button class="save" *ngIf="editingIrregular" (click)="editingIrregular = !editingIrregular; calculateTotals()">Bewaar</button>
             </span>
           </div>
         </div>
@@ -294,8 +294,6 @@ export class QuickQuoteAovComponent implements OnInit {
   typeOfResidenceError: boolean;
   mortgageKind: any;
   mortgageKindError: boolean;
-  mortgageAmount: any;
-  mortgageAmountError: boolean;
   familyIncome: number;
   familyIncomeError: boolean;
   costResidence: number;
@@ -303,6 +301,11 @@ export class QuickQuoteAovComponent implements OnInit {
   isValidated: boolean;
   serviceError: boolean;
   pendingCount: number = 0;
+  mapping: any;
+
+  /**
+   * grouped costs from nibud service call result:
+   */
   housingCosts: number;
   transport: number;
   otherFixedCharges: number;
@@ -311,19 +314,25 @@ export class QuickQuoteAovComponent implements OnInit {
   totalCosts: number;
   grossTotalCosts: number;
 
+
   constructor(
     private nibudService: NibudService
-  ) {}
-
-  ngOnInit() {
+  ) {
+    this.mapping = {
+      'housingCosts': [0, 1, 2, 10, 11, 12, 13, 14, 15],
+      'transport': [60,61,62,63,64,65,66,70],
+      'otherFixedCharges': [20,21,22,23,33,34,35,36,37,38,40,50,51,52],
+      'groceries': [130,132,133,134],
+      'irregularExpenses': [80,90,100,110,111,113,120]
+    };
   }
 
+  ngOnInit() {}
 
   isValidAmount(): boolean {
     this.amountTooSmall = this.netFamilyIncome < 25000;
     return !this.amountTooSmall;
   }
-
 
   submitAmount(): void {
     this.step += 1;
@@ -348,8 +357,8 @@ export class QuickQuoteAovComponent implements OnInit {
       this.mortgageKindError = true;
       hasErrors = true;
     }
-    if (!this.mortgageAmount) {
-      this.mortgageAmountError = true;
+    if (!this.costResidence) {
+      this.costResidenceError = true;
       hasErrors = true;
     }
     if (!this.costResidence) {
@@ -361,9 +370,7 @@ export class QuickQuoteAovComponent implements OnInit {
       hasErrors = true;
     }
 
-    else {
-      this.isValidated = true;
-    }
+    this.isValidated = !hasErrors;
 
     return !hasErrors;
   }
@@ -373,17 +380,14 @@ export class QuickQuoteAovComponent implements OnInit {
     this.childrenError = false;
     this.typeOfResidenceError = false;
     this.mortgageKindError = false;
-    this.mortgageAmountError = false;
     this.costResidenceError = false;
     this.familyIncomeError = false;
     this.hasPartnerError = false;
 
     if (this.validate()) {
-      this.pendingCount = 2;
+      this.pendingCount = 1;
       this.calculate();
-      console.log(this.housingCosts);
     }
-    this.calculate();
   }
 
   calculate(): void {
@@ -395,6 +399,10 @@ export class QuickQuoteAovComponent implements OnInit {
       },
       error => console.log(error)
     );
+  }
+
+  triggerValueChanged(): void {
+    this.isValidated = false;
   }
 
   private getPostData() {
@@ -462,8 +470,7 @@ export class QuickQuoteAovComponent implements OnInit {
   }
 
   processResult(response) {
-    let items: any[] = response,
-      groupedCosts;
+    let items: any[] = response;
 
     var flattenedArray = [];
     items.forEach(item => {
@@ -476,20 +483,25 @@ export class QuickQuoteAovComponent implements OnInit {
   }
 
   private mapCosts(flattenedArray) {
-    var mapping = {
-      'housingCosts': [0, 1, 2, 10, 11, 12, 13, 14, 15],
-      'transport': [60,61,62,63,64,65,66,70],
-      'otherFixedCharges': [20,21,22,23,33,34,35,36,37,38,40,50,51,52],
-      'groceries': [130,132,133,134],
-      'irregularExpenses': [80,90,100,110,111,113,120]
-    };
+    var mapping = this.mapping;
+
+    for (var costGroup in mapping) {
+      if (!mapping.hasOwnProperty(costGroup)) {
+        continue;
+      }
+      this[costGroup] = this.getAmountForGroupedCosts(mapping[costGroup], flattenedArray);
+    }
+    this.calculateTotals();
+  }
+
+  private calculateTotals() {
+    var mapping = this.mapping;
 
     this.totalCosts = 0;
     for (var costGroup in mapping) {
       if (!mapping.hasOwnProperty(costGroup)) {
         continue;
       }
-      this[costGroup] = this.getAmountForGroupedCosts(mapping[costGroup], flattenedArray);
       this.totalCosts += this[costGroup];
     }
 
