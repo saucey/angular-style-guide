@@ -125,6 +125,12 @@
         text-align: left;
         font-family:$font_light;
       }
+
+      > div,
+      ul.arrow {
+        margin-bottom: 0;
+        clear: both;
+      }
     }
   }
 
@@ -138,6 +144,11 @@
 
   .result {
     color: $white;
+
+    &.tiny {
+      padding-top: 10px;
+      padding-bottom: 0;
+    }
 
     p a {
       text-decoration: underline;
