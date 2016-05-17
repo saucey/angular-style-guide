@@ -5,7 +5,7 @@ import {Observable} from 'rxjs/Rx';
 
 @Injectable()
 export class NibudService {
-  mock: boolean = true;
+  useMock: boolean = false;
   serviceUrl: string = 'https://service.nibud.nl/api/uitgaven/v1-0/aegon/referentiebedragen/';
   accessToken: string = '';
 
@@ -15,7 +15,12 @@ export class NibudService {
 
   public referencePrices(data): Promise<Object> {
 
-    if (this.mock === true) {
+    // Temporary dev hack, should be replaced with some proper settings
+    if (window.mockNibudService === true) {
+      this.useMock = true;
+    }
+
+    if (this.useMock === true) {
       return new Promise((resolve) => {
         resolve(this.getMockData(data));
       });
