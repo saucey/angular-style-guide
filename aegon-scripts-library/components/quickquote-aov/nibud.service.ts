@@ -1,12 +1,11 @@
-import { Injectable } from 'angular2/core';
+import {Injectable} from 'angular2/core';
 import {HTTP_PROVIDERS, Http, Headers, RequestOptions, Response} from "angular2/http";
-import {Observable} from 'rxjs/Observable';
+//import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs/Rx';
 
-@Injectable({
-  providers: [HTTP_PROVIDERS]
-})
+@Injectable()
 export class NibudService {
-  mock: boolean = true;
+  mock: boolean = false;
   serviceUrl: string = 'https://service.nibud.nl/api/uitgaven/v1-0/aegon/referentiebedragen/';
   accessToken: string = '';
 
@@ -14,29 +13,54 @@ export class NibudService {
     private http:Http
   ) {}
 
-  public referencePrices(data): Promise {
+  public referencePrices(data): Observable<Object> {
 
     if (this.mock === true) {
       //return new Promise().resolve(this.getMockData());
+      // console.log('mocking is enabled');
+      // return Observable.create((observer) => {
+      //   var result = setTimeout(() => {
+      //     observer.onNext(this.getMockData(data));
+      //     observer.onCompleted();
+      //   }, 500);
+      //
+      //   return () => {
+      //     console.log('disposed');
+      //     clearTimeout(result);
+      //   };
+      // });
     }
 
     return this.handleRequest(data);
   }
 
-  private handleRequest(data): Observable {
+  private handleRequest(data): Observable<Object> {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
-    let result = new Observable();
+
+    // return this.http.post(this.serviceUrl, JSON.stringify(data), options)
+    //   .toPromise()
+    //   .then(response => response.map(res => res.json())
+    // );
+
+    // this.http.post(serviceUrl, JSON.stringify(body), options)
+    //     .map(res => res.json())
+    //     .catch(this.handleError)
+    //     .subscribe(data => {
+    //       this.processResult(highLow, data);
+    //     }, error => console.log(error));
 
     return this.http.post(this.serviceUrl, JSON.stringify(data), options)
-      .toPromise()
-      .then(response => response.map(res => res.json())
-    );
-
-    return result;
+        .map(res => res.json())
+        .catch(this.handleError);
   }
 
-  private getMockData(): Object [] {
+  handleError(error: Response) {
+    console.log('Server error', error);
+    return Observable.throw('Server error');
+  }
+
+  private getMockData(data): Object [] {
     console.log('called NibudService.getMockData');
     return [
       {"id": 0, "basis": 59, "voorbeeld": 71},

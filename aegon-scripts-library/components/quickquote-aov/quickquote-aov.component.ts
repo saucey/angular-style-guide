@@ -327,22 +327,15 @@ export class QuickQuoteAovComponent implements OnInit {
   }
 
   calculate(): void {
-
-
-    //if (true) {
-    //  let mockData = this.nibudService.getMockData();
-    //
-    //  this.processResult(mockData);
-    //  return;
-    //}
-
     let body = this.getPostData();
 
-    console.log(this.nibudService.referencePrices(body));
-    this.nibudService.referencePrices(body).then(function(data) {
-      this.processResult(data);
-    });
-
+    //console.log(this.nibudService.referencePrices(body));
+    this.nibudService.referencePrices(body).subscribe(
+      data => {
+        this.processResult(data);
+      },
+      error => console.log(error)
+    );
   }
 
   private getPostData() {
@@ -383,7 +376,7 @@ export class QuickQuoteAovComponent implements OnInit {
         {
           "geboortedatum": this.generateBirthdate(40),
           "geslacht": "Vrouw"
-        },
+        }
       );
     }
     return body;
