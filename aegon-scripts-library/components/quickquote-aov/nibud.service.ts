@@ -1,6 +1,5 @@
 import {Injectable} from 'angular2/core';
 import {HTTP_PROVIDERS, Http, Headers, RequestOptions, Response} from "angular2/http";
-//import {Observable} from 'rxjs/Observable';
 import {Observable} from 'rxjs/Rx';
 
 @Injectable()
@@ -13,11 +12,11 @@ export class NibudService {
     private http:Http
   ) {}
 
-  public referencePrices(data): Promise<Object> {
+  public getReferenceCosts(data): Promise<Object> {
 
     // Temporary dev hack, should be replaced with some proper settings
-    if (window.mockNibudService === true) {
-      this.useMock = true;
+    if (window['mockNibudService'] === true) {
+       this.useMock = true;
     }
 
     if (this.useMock === true) {
@@ -30,20 +29,8 @@ export class NibudService {
   }
 
   private handleRequest(data): Promise<Object> {
-    let headers = new Headers({'Content-Type': 'application/json'});
+    let headers = new Headers({'Content-Type': 'application/json', 'Accept': 'application/json'});
     let options = new RequestOptions({headers: headers});
-
-    // return this.http.post(this.serviceUrl, JSON.stringify(data), options)
-    //   .toPromise()
-    //   .then(response => response.map(res => res.json())
-    // );
-
-    // this.http.post(serviceUrl, JSON.stringify(body), options)
-    //     .map(res => res.json())
-    //     .catch(this.handleError)
-    //     .subscribe(data => {
-    //       this.processResult(highLow, data);
-    //     }, error => console.log(error));
 
     return this.http.post(this.serviceUrl, JSON.stringify(data), options)
         .map(res => res.json())

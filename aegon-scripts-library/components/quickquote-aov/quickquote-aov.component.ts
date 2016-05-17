@@ -330,8 +330,7 @@ export class QuickQuoteAovComponent implements OnInit {
   calculate(): void {
     let body = this.getPostData();
 
-    //console.log(this.nibudService.referencePrices(body));
-    this.nibudService.referencePrices(body).then(
+    this.nibudService.getReferenceCosts(body).then(
       data => {
         this.processResult(data);
       },
