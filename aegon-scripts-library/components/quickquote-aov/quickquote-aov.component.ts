@@ -271,7 +271,7 @@ export class QuickQuoteAovComponent implements OnInit {
   //}
 
   submitAmount(): void {
-      this.step += 1;
+    this.step += 1;
   }
 
   validate(): boolean {
@@ -317,17 +317,16 @@ export class QuickQuoteAovComponent implements OnInit {
     this.mortgageAmountError = false;
     this.costResidenceError = false;
     this.familyIncomeError = false;
-    this.hasPartnerError = false;
     this.housingCosts = 0;
 
     if (this.validate()) {
       this.pendingCount = 2;
-      this.calculate(this.serviceUrl);
+      this.calculate();
     }
-    this.calculate(this.serviceUrl);
+    this.calculate();
   }
 
-  calculate(serviceUrl: string): void {
+  calculate(): void {
 
 
     //if (true) {
@@ -339,6 +338,7 @@ export class QuickQuoteAovComponent implements OnInit {
 
     let body = this.getPostData();
 
+    console.log(this.nibudService.referencePrices(body));
     this.nibudService.referencePrices(body).then(function(data) {
       this.processResult(data);
     });
@@ -391,11 +391,11 @@ export class QuickQuoteAovComponent implements OnInit {
 
   generateBirthdate(age: number): any {
     let date : Date = new Date(),
-        dd : any = date.getDate(),
-        mm : any = date.getMonth() +1,
-        yyyy : any = date.getFullYear();
+      dd : any = date.getDate(),
+      mm : any = date.getMonth() +1,
+      yyyy : any = date.getFullYear();
 
-   yyyy = yyyy - age;
+    yyyy = yyyy - age;
 
     if(dd<10) {
       dd="0"+dd
@@ -453,7 +453,7 @@ export class QuickQuoteAovComponent implements OnInit {
   private getAmountForGroupedCosts(costMapping, flattenedArray) {
     var groupCosts = 0;
     costMapping.forEach(costId => {
-        groupCosts = groupCosts + flattenedArray[costId];
+      groupCosts = groupCosts + flattenedArray[costId];
     });
 
     return groupCosts;

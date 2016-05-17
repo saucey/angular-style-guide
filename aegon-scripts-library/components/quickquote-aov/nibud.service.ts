@@ -29,8 +29,8 @@ export class NibudService {
     let result = new Observable();
 
     return this.http.post(this.serviceUrl, JSON.stringify(data), options)
-      .map(res => res.json()
       .toPromise()
+      .then(response => response.map(res => res.json())
     );
 
     return result;
