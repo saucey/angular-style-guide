@@ -301,9 +301,9 @@ export class QuickQuoteAovComponent implements OnInit {
   }
 
 
-  //submitAmount(): void {
-  //  this.step += 1;
-  //}
+  submitAmount(): void {
+    this.step += 1;
+  }
 
   validate(): boolean {
     let hasErrors: boolean = false;
