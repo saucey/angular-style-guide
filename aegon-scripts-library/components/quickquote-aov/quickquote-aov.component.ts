@@ -1,12 +1,14 @@
 import {Component, OnInit, Input} from 'angular2/core';
-import {HTTP_PROVIDERS, Http, Headers, RequestOptions, Response} from "angular2/http";
 import {Observable} from 'rxjs/Observable';
+import {HTTP_PROVIDERS, Http, Headers, RequestOptions, Response} from "angular2/http";
 import 'rxjs/Rx';
 import {HelpComponent} from '../angular-components/help.component'
 import {InputNumberComponent, InputNumberValueAccessor, formatNumber} from '../angular-components/input-number.component';
 import {InputDateComponent, InputDateValueAccessor} from '../angular-components/input-date.component';
 import {InputRadioComponent, InputRadioValueAccessor} from '../angular-components/input-radio.component';
 import {MoneyPipe} from "../angular-components/money.pipe";
+import {NibudService} from "./nibud.service";
+
 
 const monthLabels: string[] = [
   'januari', 'februari', 'maart', 'april', 'mei', 'juni',
@@ -49,7 +51,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
               Uw vaste uitgaven per maand
             </div>
             <div class="inputs">
-              <aegon-input-number prefix="€" [(ngModel)]="monthlySpendings" [max]="99999999"></aegon-input-number>
+              <aegon-input-number prefix="€" [(ngModel)]="familyIncome" [max]="99999999"></aegon-input-number>
               <div>
                 <ul class="arrow">
                   <li><a href="#" (click)="step = 'calculation'; $event.preventDefault()">Gebruik de uitgaven rekenhulp</a></li>
@@ -67,16 +69,19 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
               </aegon-help>
             </div>
             <div class="inputs">
-              <aegon-input-radio [(ngModel)]="livingWithPartner1" [name]="'livingWithPartner'" [value]="true">Ja</aegon-input-radio>
-              <aegon-input-radio [(ngModel)]="livingWithPartner1" [name]="'livingWithPartner'" [value]="false">Nee</aegon-input-radio>
+              <aegon-input-radio [(ngModel)]="livingWithPartner1" [name]="'livingWithPartner'" (change)="hasPartner = true" [value]="true">Ja</aegon-input-radio>
+              <aegon-input-radio [(ngModel)]="livingWithPartner1" [name]="'livingWithPartner'" (change)="hasPartner = false" [value]="false">Nee</aegon-input-radio>
             </div>
           </div>
+          <p class="error" *ngIf="hasPartnerError">
+             Kies of u een partner heeft of niet.
+           </p>
           <div class="field">
             <div class="label">
               Heeft u thuiswonende kinderen
             </div>
             <div class="inputs">
-              <select [ngModel]="children">
+              <select [ngModel]="children" (change)="children = $event.target.value">
                 <option value="" selected>Maak uw keuze</option>
                 <option value="0">Nee</option>
                 <option value="1">Ja, 1 kind</option>
@@ -87,10 +92,14 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
                 <option value="6">Ja, 6 kinderen</option>
                 <option value="7">Ja, 7 kinderen</option>
                 <option value="8">Ja, 8 kinderen</option>
-                <option value="9">Ja, 9 of meer kinderen</option>
+                <option value="9">Ja, 9 kinderen</option>
+                <option value="10">Ja, 10 of meer kinderen</option>
               </select>
             </div>
           </div>
+           <p class="error" *ngIf="childrenError">
+              Kies of u een kinderen heeft of niet.
+            </p>
           <div class="field">
             <div class="label">
               Type woning
@@ -99,7 +108,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
               </aegon-help>
             </div>
             <div class="inputs">
-              <select [ngModel]="typeOfResidence">
+              <select [ngModel]="typeOfResidence" (change)="typeOfResidence = $event.target.value">
                <option value="" selected>Maak uw keuze</option>
                 <option value="Galerij">appartement</option>
                 <option value="RijtjeswoningTussen">tussenwoning</option>
@@ -108,66 +117,78 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
               </select>
             </div>
           </div>
+          <p class="error" *ngIf="typeOfResidenceError">
+             Kies uw woning type
+          </p>
           <div class="field">
             <div class="label">
               Heeft u een koop- of huurwoning?
             </div>
             <div class="inputs">
-              <aegon-input-radio [(ngModel)]="residenceType1" [name]="'residenceType'" [value]="'koop'">Koopwoning</aegon-input-radio>
-              <aegon-input-radio [(ngModel)]="residenceType1" [name]="'residenceType'" [value]="'huur'">Huurwoning</aegon-input-radio>
+              <aegon-input-radio [(ngModel)]="residenceType1" [name]="'residenceType'" (change)="mortgageKind = 'Koopwoning'" [value]="'koop'">Koopwoning</aegon-input-radio>
+              <aegon-input-radio [(ngModel)]="residenceType1" [name]="'residenceType'" (change)="mortgageKind = 'Huurwoning'" [value]="'huur'">Huurwoning</aegon-input-radio>
             </div>
           </div>
-          <div class="field">
-            <div class="label">
-              Netto maandlasten hypotheek of huur
-              <aegon-help>
-                Dit is de vijfde helptekst
-              </aegon-help>
-            </div>
-            <div class="inputs">
-              <aegon-input-number prefix="€" [(ngModel)]="costResidence" [max]="99999999"
-                                  placeholder="0">
-              </aegon-input-number>
-            </div>
+          <p class="error" *ngIf="mortgageKindError">
+            Kies of u een koop of wuurwoning heeft.
+          </p>
+         <div class="field">
+          <div class="label">
+            Netto maandlasten hypotheek of huur
+            <aegon-help>
+              Dit is de vijfde helptekst
+            </aegon-help>
           </div>
-          <div class="field">
-            <div class="label">
-              Netto gezinsinkomen
-              <aegon-help>
-                Dit is de zesde helptekst.
-              </aegon-help>
-            </div>
-            <div class="inputs">
-              <aegon-input-number #amountInput prefix="€" [(ngModel)]="netFamilyIncome" [max]="99999999"
-                                  placeholder="0">
-              </aegon-input-number>
-            </div>
+          <div class="inputs">
+            <aegon-input-number  prefix="€" [(ngModel)]="costResidence" [max]="99999999"
+                                [placeholder]="'0'">
+            </aegon-input-number>
           </div>
+        </div>
+        <p class="error" *ngIf="costResidenceError">
+            Vul uw netto maandlaen hypotheek of huur in.
+          </p>
+         <div class="field">
+          <div class="label">
+            Netto gezinsinkomen
+            <aegon-help>
+              Dit is de zesde helptekst.
+            </aegon-help>
+          </div>
+          <div class="inputs">
+            <aegon-input-number #amountInput prefix="€" [(ngModel)]="familyIncome" [max]="99999999"
+                               [placeholder]="'0'">
+            </aegon-input-number>
+          </div>
+        </div>
+        <p class="error" *ngIf="familyIncomeError">
+            Vul uw netto gezinsinkomen in.
+          </p>
           <div class="field">
             <div class="label"></div>
             <div class="inputs">
-              <button class="button icon-right icon-calculator" (click)="submit('MockURL', '')">
+              <button class="button icon-right icon-calculator"  [disabled]="pendingCount > 0" [ngClass]="{pending: pendingCount > 0}" (click)="submit()">
                 Bereken
               </button>
             </div>
           </div>
         </div>
       </div>
-      <div class="result tiny" *ngIf="step === 'noCalculation' && monthlySpendings > 0">
+      <div class="result tiny" *ngIf="step === 'noCalculation' && familyIncome > 0">
         <div class="row">
           <span class="label"></span>
-          <a class="button orange icon-right arrow" [attr.href]="'#TODO?spendings=' + monthlySpendings">Bereken uw premie</a>
+          <a class="button orange icon-right arrow" [attr.href]="'#TODO?spendings=' + familyIncome">Bereken uw premie</a>
         </div>
       </div>
-      <div class="result" *ngIf="linearAmount && highLowFirstAmount">
+      <div class="result" *ngIf="isValidated">
         <div class="linear">
           <div class="row">
             <span class="label">Uitgave woning en energie</span>
             <span class="value">
               <span class="currency" *ngIf="!editingHouse">€</span>
-              <span class="amount" *ngIf="!editingHouse">{{linearAmount | money}}</span>
+              <span class="amount" *ngIf="!editingHouse">{{housingCosts | money}}</span>
               <span class="amount" *ngIf="editingHouse">
-                <aegon-input-number prefix="€" [(ngModel)]="linearAmount" [max]="99999999"
+                <aegon-input-number prefix="€" [(ngModel)]="housingCosts" [max]="99999999"
                                     placeholder="0">
                 </aegon-input-number>
               </span>
@@ -179,7 +200,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
             <span class="label">Uitgave verzekeringen en onderwijs</span>
             <span class="value">
               <span class="currency">€</span>
-              <span class="amount">{{deathBenefitAmount | money}}</span>
+              <span class="amount">{{otherFixedCharges | money}}</span>
               <span class="edit" tabindex="0">Wijzig</span>
             </span>
           </div>
@@ -187,7 +208,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
             <span class="label">Uitgaven boodschappen</span>
             <span class="value">
               <span class="currency">€</span>
-              <span class="amount">{{deathBenefitAmount | money}}</span>
+              <span class="amount">{{groceries | money}}</span>
               <span class="edit" tabindex="0">Wijzig</span>
             </span>
           </div>
@@ -195,7 +216,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
             <span class="label">Uitgaven vervoer</span>
             <span class="value">
               <span class="currency">€</span>
-              <span class="amount">{{deathBenefitAmount | money}}</span>
+              <span class="amount">{{transport | money}}</span>
               <span class="edit" tabindex="0">Wijzig</span>
             </span>
           </div>
@@ -203,7 +224,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
             <span class="label">Overig (kleding, huis, vrije tijd)</span>
             <span class="value">
               <span class="currency">€</span>
-              <span class="amount">{{deathBenefitAmount | money}}</span>
+              <span class="amount">{{irregularExpenses | money}}</span>
               <span class="edit" tabindex="0">Wijzig</span>
             </span>
           </div>
@@ -213,14 +234,14 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
             <span class="label">Netto uitgaven per maand*</span>
             <span class="value">
               <span class="currency">€</span>
-              <span class="amount">{{linearAmount | money}}</span>
+              <span class="amount">{{totalCosts | money}}</span>
             </span>
           </div>
           <div class="row">
             <span class="label">Dit is bruto per jaar</span>
             <span class="value">
               <span class="currency">€</span>
-              <span class="amount">{{linearAmount | money}}</span>
+              <span class="amount">{{grossTotalCosts | money}}</span>
             </span>
           </div>
         </div>
@@ -231,7 +252,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
       </div>
     </div>
   `,
-  providers: [HTTP_PROVIDERS],
+  providers: [NibudService, HTTP_PROVIDERS],
   pipes: [MoneyPipe]
 })
 export class QuickQuoteAovComponent implements OnInit {
@@ -241,190 +262,172 @@ export class QuickQuoteAovComponent implements OnInit {
   storedInAegon: boolean = false;
   storedElsewhere: boolean = false;
   storedError: boolean;
-  birthDate: string;
-  birthDateError: boolean;
-  deathBenefit: boolean = false;
-  partnerBirthDate: string;
-  partnerBirthDateError: boolean;
-  startingDate: string;
-  startingDateError: boolean;
-  startingDateChoices: any[] = [];
-  startingDateTooFar: boolean = false;
+  hasPartner: boolean;
+  hasPartnerError: boolean;
+  children: number;
+  childrenError: boolean;
+  typeOfResidence: any;
+  typeOfResidenceError: boolean;
+  mortgageKind: any;
+  mortgageKindError: boolean;
+  mortgageAmount: any;
+  mortgageAmountError: boolean;
+  familyIncome: number;
+  familyIncomeError: boolean;
+  costResidence: number;
+  costResidenceError: boolean;
+  isValidated: boolean;
   serviceError: boolean;
   pendingCount: number = 0;
-  linearAmount: string;
-  deathBenefitAmount: string;
-  highLowFirstAmount: string;
-  highLowSecondAmount: string;
-  highLowDeathBenefitAmount: string;
+  housingCosts: number;
+  transport: number;
+  otherFixedCharges: number;
+  groceries: number;
+  irregularExpenses: number;
+  totalCosts: number;
+  grossTotalCosts: number;
 
   constructor(
-    private http:Http
+    private nibudService: NibudService
   ) {}
 
   ngOnInit() {
-    let date: Date = new Date(),
-      year: number = date.getFullYear(),
-      month: number = date.getMonth() + 1;
-    for (let i: number = 0; i < 12; i++) {
-      if (month === 12) {
-        month = 1;
-        year += 1;
-      } else {
-        month += 1;
-      }
-      let value = year + '-' + (month < 10 ? '0': '') + month + '-01',
-        label = '1 ' + monthLabels[month - 1] + ' ' + year;
-      this.startingDateChoices.push({value: value, label: label});
-    }
   }
 
-  changeStartingDate(value: string): void {
-    this.startingDate = value;
-    this.startingDateTooFar = false;
-    this.startingDateChoices.some((date, index) => {
-      if (date.value === value && index >= 3) {
-        this.startingDateTooFar = true;
-        return true;
-      }
-    });
-  }
 
   isValidAmount(): boolean {
     this.amountTooSmall = this.netFamilyIncome < 25000;
     return !this.amountTooSmall;
   }
 
+
+  //submitAmount(): void {
+  //  this.step += 1;
+  //}
+
   validate(): boolean {
     let hasErrors: boolean = false;
     this.storedError = null;
-    if (!this.storedInAegon && !this.storedElsewhere) {
-      this.storedError = true;
+    if (typeof this.hasPartner === "undefined") {
+      this.hasPartnerError = true;
       hasErrors = true;
     }
-    if (!this.birthDate) {
-      this.birthDateError = true;
+    if (!this.children) {
+      this.childrenError = true;
       hasErrors = true;
     }
-    if (this.deathBenefit && !this.partnerBirthDate) {
-      this.partnerBirthDateError = true;
+    if (!this.typeOfResidence) {
+      this.typeOfResidenceError = true;
       hasErrors = true;
     }
-    if (!this.startingDate) {
-      this.startingDateError = true;
+    if (!this.mortgageKind) {
+      this.mortgageKindError = true;
       hasErrors = true;
     }
+    if (!this.mortgageAmount) {
+      this.mortgageAmountError = true;
+      hasErrors = true;
+    }
+    if (!this.costResidence) {
+      this.costResidenceError = true;
+      hasErrors = true;
+    }
+    if (!this.familyIncome) {
+      this.familyIncomeError = true;
+      hasErrors = true;
+    }
+
+    else {
+      this.isValidated = true;
+    }
+
     return !hasErrors;
   }
-
-  submit(serviceUrl: string, authToken: string): void {
+  submit(): void {
     this.storedError = false;
-    this.birthDateError = false;
-    this.partnerBirthDateError = false;
-    this.startingDateError = false;
     this.serviceError = false;
-    this.linearAmount = null;
-    this.deathBenefitAmount = null;
-    this.highLowFirstAmount = null;
-    this.highLowSecondAmount = null;
-    this.highLowDeathBenefitAmount = null;
+    this.childrenError = false;
+    this.typeOfResidenceError = false;
+    this.mortgageKindError = false;
+    this.mortgageAmountError = false;
+    this.costResidenceError = false;
+    this.familyIncomeError = false;
+    this.hasPartnerError = false;
 
-    this.pendingCount = 2;
-    this.calculate(serviceUrl, authToken, true);
-    this.calculate(serviceUrl, authToken, false);
+    if (this.validate()) {
+      this.pendingCount = 2;
+      this.calculate();
+    }
+    this.calculate();
   }
 
-  calculate(serviceUrl: string, authToken: string, highLow: boolean): void {
-    if (serviceUrl === 'MockURL') {
-      let mockData = {
-        "BScalculateResponse": {
-          "PROCES": {
-            "STATUS": "00000",
-            "VOLGNUM": "1",
-            "STATUST": "Success"
-          },
-          "AILHEADER": {
-            "CLIENTID": "BS_PENSIOENOVEREENKOMST_ROA_Rest",
-            "CORRELATIONID": "##DIP SS##"
-          },
-          "PENSIOENOVEREENKOMST": {
-            "PENSIOENAANSPRAAK": [
-              {
-                "EIND_DATUM_UITKERING": "2134-12-20",
-                "PENSIOENVORM": "OPLL",
-                "BEDRAG": "5631.4"
-              }, {
-                "EIND_DATUM_UITKERING": "2134-12-20",
-                "PENSIOENVORM": "PPLL",
-                "BEDRAG": "1877.13"
-              }, {
-                "EIND_DATUM_UITKERING": "2134-12-20",
-                "PENSIOENVORM": "OPT",
-                "BEDRAG": "4111.45"
-              }
-            ]}
-        }};
-     this.processResult(highLow, mockData);
-      return;
-    }
+  calculate(): void {
+    let body = this.getPostData();
+
+    //console.log(this.nibudService.referencePrices(body));
+    this.nibudService.referencePrices(body).then(
+      data => {
+        this.processResult(data);
+      },
+      error => console.log(error)
+    );
+  }
+
+  private getPostData() {
     let body:any = {
-      "BScalculateRequest": {
-        "AILHEADER": {
-          "CLIENTID": "BS_PENSIOENOVEREENKOMST_ROA_Rest",
-          "CORRELATIONID": "##DIP SS##"
-        },
-        "DOSSIER": {
-          "REKENFACTOREN": {
-            "OVERGANG_OP_PP": 0.70,
-            "VERHOUDING_HOOG_LAAG": 0.75
-          },
-          "PENSIOENOVEREENKOMST": {
-            "STORTING_INLEG": {
-              "KOOPSOM": this.netFamilyIncome,
-              "IND_VREEMDGELD": this.storedElsewhere,
-              "IND_HERKOMST_OVL": false
-            },
-            "PENSIOENAANSPRAAK": {
-              "IND_OUDERDOMSPENSIOEN": true,
-              "IND_NABESTAANDENPENSIOEN": this.deathBenefit,
-              "IND_HOOG_LAAGPENSIOEN": highLow,
-              "IND_PREPENSIOEN": false,
-              "BEGIN_DATUM_UITKERING": this.startingDate,
-              "DUUR_UITKERING_JAREN": 5,
-              "TERMIJN_UITKERING": 1
-            }
-          },
-          "PARTIJ": [
-            {
-              "_AE_PERSOON": {
-                "VOLGNUM": 1,
-                "GESLACH": "M",
-                "GEBDAT": this.birthDate
-              }
-            }
-          ]
-        }
+      "hoofdpersonen": [
+        {"geboortedatum": this.generateBirthdate(40)}
+      ],
+      "kinderen": [],
+      "autos": [{
+        "nieuwwaarde": 10000,
+        "kilometersPerJaar": 5000
+      }],
+      "nettoBesteedbaarInkomenPerMaand": this.familyIncome,
+      "woning": {
+        "soort": this.mortgageKind,
+        "typeWoning": this.typeOfResidence,
+        "bouwjaar": "Van1989TotEnMet2000",
+        "energielabel": "Onbekend",
+        "wozWaarde": 225000
       }
     };
-    if (this.deathBenefit) {
-      body['BScalculateRequest']['DOSSIER']['PARTIJ'].push(
+
+    for (var count = 0; count < this.children; count++) {
+      body['kinderen'].push(
         {
-          "_AE_PERSOON": {
-            "VOLGNUM": 2,
-            "GESLACH": "V",
-            "GEBDAT": this.partnerBirthDate
-          }
+          "geboortedatum": this.generateBirthdate(10),
+          "woonsituatie": "Thuiswonend",
+          "schooltype": "Basis"
         }
       );
     }
-    let headers = new Headers({'Content-Type': 'application/json', "Authorization" : `Basic ${authToken}`});
-    let options = new RequestOptions({headers: headers});
-    this.http.post(serviceUrl, JSON.stringify(body), options)
-      .map(res => res.json())
-      .catch(this.handleError)
-      .subscribe(data => {
-        this.processResult(highLow, data);
-      }, error => console.log(error));
+
+    if (this.hasPartner) {
+      body['hoofdpersonen'].push(
+        {
+          "geboortedatum": this.generateBirthdate(40),
+          "geslacht": "Man"
+        },
+        {
+          "geboortedatum": this.generateBirthdate(40),
+          "geslacht": "Vrouw"
+        }
+      );
+    }
+    return body;
+  }
+
+  generateBirthdate(age: number): any {
+    let date : Date = new Date(),
+      dd : any = date.getDate(),
+      mm : any = date.getMonth() +1,
+      yyyy : any = date.getFullYear();
+
+    yyyy = yyyy - age;
+
+
+    return yyyy+'-'+mm+'-'+dd;
   }
 
   handleError(error: Response) {
@@ -434,35 +437,47 @@ export class QuickQuoteAovComponent implements OnInit {
     return Observable.throw('Server error');
   }
 
-  processResult(highLow, data) {
-    let items: any[] = data['BScalculateResponse']['PENSIOENOVEREENKOMST']['PENSIOENAANSPRAAK'],
-      hlAmount = 0;
-    if (!Array.isArray(items)) {
-      items = [items];
-    }
+  processResult(response) {
+    let items: any[] = response,
+      groupedCosts;
+
+    var flattenedArray = [];
     items.forEach(item => {
-      let s = item['PENSIOENVORM'],
-        value = item['BEDRAG'];
-      if (highLow) {
-        if (s === 'OPLL') {
-          hlAmount += parseFloat(value);
-          this.highLowSecondAmount = value;
-        } else if (s === 'OPT') {
-          hlAmount += parseFloat(value);
-        } else if (s === 'PPLL') {
-          this.highLowDeathBenefitAmount = value;
-        }
-      } else {
-        if (s === 'OPLL') {
-          this.linearAmount = value;
-        } else if (s === 'PPLL') {
-          this.deathBenefitAmount = value;
-        }
-      }
+      flattenedArray['' + item['id']]= item['basis'];
     });
-    if (highLow) {
-      this.highLowFirstAmount = String(hlAmount);
-    }
+
+    this.mapCosts(flattenedArray);
+
     this.pendingCount -= 1;
+  }
+
+  private mapCosts(flattenedArray) {
+    var mapping = {
+      'housingCosts': [0, 1, 2, 10, 11, 12, 13, 14, 15],
+      'transport': [60,61,62,63,64,65,66,70],
+      'otherFixedCharges': [20,21,22,23,33,34,35,36,37,38,40,50,51,52],
+      'groceries': [130,132,133,134],
+      'irregularExpenses': [80,90,100,110,111,113,120]
+    };
+
+    this.totalCosts = 0;
+    for (var costGroup in mapping) {
+      if (!mapping.hasOwnProperty(costGroup)) {
+        continue;
+      }
+      this[costGroup] = this.getAmountForGroupedCosts(mapping[costGroup], flattenedArray);
+      this.totalCosts += this[costGroup];
+    }
+
+    this.grossTotalCosts = Math.round((this.totalCosts / .65) * 12);
+  }
+
+  private getAmountForGroupedCosts(costMapping, flattenedArray) {
+    var groupCosts = 0;
+    costMapping.forEach(costId => {
+      groupCosts = groupCosts + flattenedArray[costId];
+    });
+
+    return groupCosts;
   }
 }
