@@ -4,7 +4,7 @@ import {Observable} from 'rxjs/Rx';
 
 @Injectable()
 export class NibudService {
-  useMock: boolean = true;
+  useMock: boolean = false;
   serviceUrl: string = 'https://service.nibud.nl/api/uitgaven/v1-0/aegon/referentiebedragen/';
   accessToken: string = '';
 

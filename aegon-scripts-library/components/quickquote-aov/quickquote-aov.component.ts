@@ -314,7 +314,6 @@ export class QuickQuoteAovComponent implements OnInit {
   totalCosts: number;
   grossTotalCosts: number;
 
-
   constructor(
     private nibudService: NibudService
   ) {
