@@ -1,5 +1,5 @@
 import {Injectable} from 'angular2/core';
-import {HTTP_PROVIDERS, Http, Headers, RequestOptions, Response} from "angular2/http";
+import {Http, Headers, RequestOptions, Response} from "angular2/http";
 import {Observable} from 'rxjs/Rx';
 
 @Injectable()
@@ -13,19 +13,12 @@ export class NibudService {
   ) {}
 
   public getReferenceCosts(data): Promise<Object> {
-
     // Temporary dev hack, should be replaced with some proper settings
     if (window['mockNibudService'] === true) {
        this.useMock = true;
     }
 
-    if (this.useMock === true) {
-      return new Promise((resolve) => {
-        resolve(this.getMockData(data));
-      });
-    }
-
-    return this.handleRequest(data);
+    return this.useMock ? this.getMockData(data) : this.handleRequest(data);
   }
 
   private handleRequest(data): Promise<Object> {
@@ -38,14 +31,13 @@ export class NibudService {
         .toPromise();
   }
 
-  handleError(error: Response) {
+  private handleError(error: Response) {
     console.log('Server error', error);
     return Observable.throw('Server error');
   }
 
-  private getMockData(data): Object [] {
-    console.log('called NibudService.getMockData');
-    return [
+  private getMockData(data): Promise<Object> {
+    var result = [
       {"id": 0, "basis": 59, "voorbeeld": 71},
       {"id": 1, "basis": 47, "voorbeeld": 52},
       {"id": 2, "basis": 16, "voorbeeld": 18},
@@ -92,5 +84,9 @@ export class NibudService {
       {"id": 136, "basis": 0, "voorbeeld": 0},
       {"id": 135, "basis": 232, "voorbeeld": 684}
     ];
+
+    return new Promise((resolve) => {
+      resolve(result);
+    });
   }
 }
