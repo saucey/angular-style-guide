@@ -5,7 +5,7 @@ import {Observable} from 'rxjs/Rx';
 
 @Injectable()
 export class NibudService {
-  mock: boolean = false;
+  mock: boolean = true;
   serviceUrl: string = 'https://service.nibud.nl/api/uitgaven/v1-0/aegon/referentiebedragen/';
   accessToken: string = '';
 
@@ -13,28 +13,18 @@ export class NibudService {
     private http:Http
   ) {}
 
-  public referencePrices(data): Observable<Object> {
+  public referencePrices(data): Promise<Object> {
 
     if (this.mock === true) {
-      //return new Promise().resolve(this.getMockData());
-      // console.log('mocking is enabled');
-      // return Observable.create((observer) => {
-      //   var result = setTimeout(() => {
-      //     observer.onNext(this.getMockData(data));
-      //     observer.onCompleted();
-      //   }, 500);
-      //
-      //   return () => {
-      //     console.log('disposed');
-      //     clearTimeout(result);
-      //   };
-      // });
+      return new Promise((resolve) => {
+        resolve(this.getMockData(data));
+      });
     }
 
     return this.handleRequest(data);
   }
 
-  private handleRequest(data): Observable<Object> {
+  private handleRequest(data): Promise<Object> {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
 
@@ -52,7 +42,8 @@ export class NibudService {
 
     return this.http.post(this.serviceUrl, JSON.stringify(data), options)
         .map(res => res.json())
-        .catch(this.handleError);
+        .catch(this.handleError)
+        .toPromise();
   }
 
   handleError(error: Response) {
