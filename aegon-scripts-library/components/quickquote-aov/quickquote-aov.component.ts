@@ -112,8 +112,8 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
               </aegon-help>
             </div>
             <div class="inputs">
-              <aegon-input-radio [(ngModel)]="residenceType1" [name]="'residenceType'" (change)="mortgageKind = 'koop'" [value]="'koop'">Koopwoning</aegon-input-radio>
-              <aegon-input-radio [(ngModel)]="residenceType1" [name]="'residenceType'" (change)="mortgageKind = 'huur'" [value]="'huur'">Huurwoning</aegon-input-radio>
+              <aegon-input-radio [(ngModel)]="residenceType1" [name]="'residenceType'" (change)="mortgageKind = 'Koopwoning'" [value]="'koop'">Koopwoning</aegon-input-radio>
+              <aegon-input-radio [(ngModel)]="residenceType1" [name]="'residenceType'" (change)="mortgageKind = 'Huurwoning'" [value]="'huur'">Huurwoning</aegon-input-radio>
             </div>
           </div>
           <p class="error" *ngIf="mortgageKindError">
@@ -392,15 +392,8 @@ export class QuickQuoteAovComponent implements OnInit {
 
     yyyy = yyyy - age;
 
-    if(dd<10) {
-      dd="0"+dd
-    }
 
-    if(mm<10) {
-      mm="0"+mm
-    }
-
-    return dd+'-'+mm+'-'+yyyy;
+    return yyyy+'-'+mm+'-'+dd;
   }
 
   handleError(error: Response) {
