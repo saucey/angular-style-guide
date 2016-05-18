@@ -177,7 +177,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
       <div class="result tiny" *ngIf="step === 'noCalculation' && familyIncome > 0">
         <div class="row">
           <span class="label"></span>
-          <a class="button orange icon-right arrow" [attr.href]="'#TODO?spendings=' + familyIncome">Bereken uw premie</a>
+          <a class="button orange icon-right arrow" [attr.href]="'/zakelijk/inkomensverzekeringen/arbeidsongeschiktheidsverzekering/arbeidsongeschiktheidsverzekering-berekenen?AO1_VERZSOM=' + netToGross(familyIncome)">Bereken uw premie</a>
         </div>
       </div>
       <div class="result" *ngIf="isValidated">
@@ -271,7 +271,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
         </div>
         <div class="footer">
           <div class="label"></div>
-          <button class="button orange icon-right arrow">Vrijblijvende offerte</button>
+          <a class="button orange icon-right arrow" [attr.href]="'/zakelijk/inkomensverzekeringen/arbeidsongeschiktheidsverzekering/arbeidsongeschiktheidsverzekering-berekenen?AO1_VERZSOM=' + grossTotalCosts">Bereken uw premie</a>
         </div>
       </div>
     </div>
@@ -504,8 +504,12 @@ export class QuickQuoteAovComponent implements OnInit {
       this.totalCosts += this[costGroup];
     }
 
-    this.grossTotalCosts = Math.round((this.totalCosts / .65) * 12);
+    this.grossTotalCosts = this.netToGross(this.totalCosts);
   }
+
+  private netToGross(netAmount){
+    return Math.round((netAmount / .65) * 12);
+  };
 
   private getAmountForGroupedCosts(costMapping, flattenedArray) {
     var groupCosts = 0;
