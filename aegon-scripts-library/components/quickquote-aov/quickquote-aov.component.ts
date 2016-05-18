@@ -1,6 +1,6 @@
 import {Component, OnInit, Input} from 'angular2/core';
 import {Observable} from 'rxjs/Observable';
-import {HTTP_PROVIDERS, Http, Headers, RequestOptions, Response} from "angular2/http";
+import {HTTP_PROVIDERS, JSONP_PROVIDERS, Jsonp, Http, Headers, RequestOptions, Response} from "angular2/http";
 import 'rxjs/Rx';
 import {HelpComponent} from '../angular-components/help.component'
 import {InputNumberComponent, InputNumberValueAccessor, formatNumber} from '../angular-components/input-number.component';
@@ -276,7 +276,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
       </div>
     </div>
   `,
-  providers: [NibudService, HTTP_PROVIDERS],
+  providers: [NibudService, HTTP_PROVIDERS, JSONP_PROVIDERS],
   pipes: [MoneyPipe]
 })
 export class QuickQuoteAovComponent implements OnInit {
