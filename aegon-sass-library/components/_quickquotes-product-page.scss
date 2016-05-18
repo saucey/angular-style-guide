@@ -129,6 +129,23 @@
       }
     }
   }
+  //Quickquote Mortgage --- Productpage 
+  .quickquote.mortgage {
+     .result {
+      .payment-result {
+        .result1,.result2 {
+          .title {line-height: 1.333em;}
+          .calculated {
+            line-height: 1.333em;
+          }
+
+        }
+      }
+    }
+    .input.number .prefix {
+      padding: 11px 0 9px 10px;
+    }
+  }
 }
 
 @include breakpoint($brk-mobile) {
