@@ -300,6 +300,15 @@
       width: 60%;
       min-width: 450px;
     }
+    // Quickquote Beleggen -- productpage
+    .node-type-product {
+      .quickquote.beleggen .result .payment-result .result1, .quickquote.beleggen .result .payment-result .result2, .quickquote.beleggen .result .payment-result .result3 {
+        width: auto;
+        min-width: 0;
+        float: left;
+        margin-right: 0;
+      }
+    }
   }
 }
 
