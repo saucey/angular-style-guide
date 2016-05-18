@@ -313,6 +313,13 @@
       });
       $template.find('a.user_detail_widget_mijnaegon_link').attr(
         'href', mijnaegonPathLink);
+      $template.find('#UDW_dd_show').on('change', function() {
+        if ($(this).prop('checked') === true) {
+          $template.addClass('open');
+        } else {
+          $template.removeClass('open');
+        }
+      });
       // Exception in case data.lastAccess is empty
       if (data.lastAccess === false) {
 
