@@ -1,6 +1,6 @@
 import {Component, OnInit, Input} from 'angular2/core';
 import {Observable} from 'rxjs/Observable';
-import {HTTP_PROVIDERS, Http, Headers, RequestOptions, Response} from "angular2/http";
+import {HTTP_PROVIDERS, JSONP_PROVIDERS, Jsonp, Http, Headers, RequestOptions, Response} from "angular2/http";
 import 'rxjs/Rx';
 import {HelpComponent} from '../angular-components/help.component'
 import {InputNumberComponent, InputNumberValueAccessor, formatNumber} from '../angular-components/input-number.component';
@@ -276,7 +276,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
       </div>
     </div>
   `,
-  providers: [NibudService, HTTP_PROVIDERS],
+  providers: [NibudService, HTTP_PROVIDERS, JSONP_PROVIDERS],
   pipes: [MoneyPipe]
 })
 export class QuickQuoteAovComponent implements OnInit {
@@ -328,16 +328,16 @@ export class QuickQuoteAovComponent implements OnInit {
 
   ngOnInit() {}
 
-  isValidAmount(): boolean {
+  private isValidAmount(): boolean {
     this.amountTooSmall = this.netFamilyIncome < 25000;
     return !this.amountTooSmall;
   }
 
-  submitAmount(): void {
+  private submitAmount(): void {
     this.step += 1;
   }
 
-  validate(): boolean {
+  private validate(): boolean {
     let hasErrors: boolean = false;
     this.storedError = null;
     if (typeof this.hasPartner === "undefined") {
@@ -373,7 +373,7 @@ export class QuickQuoteAovComponent implements OnInit {
 
     return !hasErrors;
   }
-  submit(): void {
+  private submit(): void {
     this.storedError = false;
     this.serviceError = false;
     this.childrenError = false;
@@ -389,7 +389,7 @@ export class QuickQuoteAovComponent implements OnInit {
     }
   }
 
-  calculate(): void {
+  private calculate(): void {
     let body = this.getPostData();
 
     this.nibudService.getReferenceCosts(body).then(
@@ -400,7 +400,7 @@ export class QuickQuoteAovComponent implements OnInit {
     );
   }
 
-  triggerValueChanged(): void {
+  private triggerValueChanged(): void {
     this.isValidated = false;
   }
 
@@ -449,7 +449,7 @@ export class QuickQuoteAovComponent implements OnInit {
     return body;
   }
 
-  generateBirthdate(age: number): any {
+  private generateBirthdate(age: number): any {
     let date : Date = new Date(),
       dd : any = date.getDate(),
       mm : any = date.getMonth() +1,
@@ -461,19 +461,19 @@ export class QuickQuoteAovComponent implements OnInit {
     return yyyy+'-'+mm+'-'+dd;
   }
 
-  handleError(error: Response) {
+  private handleError(error: Response) {
     this.serviceError = true;
     console.log('Server error', error);
     this.pendingCount -= 1;
     return Observable.throw('Server error');
   }
 
-  processResult(response) {
+  private processResult(response) {
     let items: any[] = response;
 
     var flattenedArray = [];
     items.forEach(item => {
-      flattenedArray['' + item['id']]= item['basis'];
+      flattenedArray['' + item['id']]= item['voorbeeld'];
     });
 
     this.mapCosts(flattenedArray);

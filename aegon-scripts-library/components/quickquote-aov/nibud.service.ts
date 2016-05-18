@@ -1,5 +1,5 @@
 import {Injectable} from 'angular2/core';
-import {Http, Headers, RequestOptions, Response} from "angular2/http";
+import {Http, Headers, JSONP_PROVIDERS, Jsonp, RequestOptions, Response, URLSearchParams} from "angular2/http";
 import {Observable} from 'rxjs/Rx';
 
 @Injectable()
@@ -9,7 +9,8 @@ export class NibudService {
   accessToken: string = '';
 
   constructor(
-    private http:Http
+    private http:Http,
+    private jsonp:Jsonp
   ) {}
 
   public getReferenceCosts(data): Promise<Object> {
@@ -23,12 +24,24 @@ export class NibudService {
 
   private handleRequest(data): Promise<Object> {
     let headers = new Headers({'Content-Type': 'application/json', 'Accept': 'application/json'});
-    let options = new RequestOptions({headers: headers});
+    let dataString = "callback=JSONP_CALLBACK&gezin=" + JSON.stringify(data);
+    let options = new RequestOptions({headers: headers, search: new URLSearchParams(dataString)});
 
-    return this.http.post(this.serviceUrl, JSON.stringify(data), options)
+    // NIBUD service does not implement real rest service (missing OPTIONS request support and CORS headers)
+    // so we did this filthy jsonp hack
+    return this.jsonp.request(this.serviceUrl, options)
         .map(res => res.json())
         .catch(this.handleError)
         .toPromise();
+
+    // This can be uncommented when nibud supports CORS requests
+    //
+    // let headers = new Headers({'Content-Type': 'application/json', 'Accept': 'application/json'});
+    // let options = new RequestOptions({headers: headers, search: new URLSearchParams(dataString)});
+    // return this.http.post(this.serviceUrl, JSON.stringify(data), options)
+    //     .map(res => res.json())
+    //     .catch(this.handleError)
+    //     .toPromise();
   }
 
   private handleError(error: Response) {
