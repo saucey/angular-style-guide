@@ -3,7 +3,7 @@ import {HTTP_PROVIDERS, Http, Headers, RequestOptions, Response} from "angular2/
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
 import {HelpComponent} from '../angular-components/help.component'
-import {InputMoneyComponent, InputMoneyValueAccessor, formatNumber} from '../angular-components/input-money.component';
+import {InputNumberComponent, InputNumberValueAccessor, formatNumber} from '../angular-components/input-number.component';
 import {InputDateComponent, InputDateValueAccessor} from '../angular-components/input-date.component';
 import {CheckboxComponent, CheckboxValueAccessor} from '../angular-components/checkbox.component';
 import {MoneyPipe} from "../angular-components/money.pipe";
@@ -18,11 +18,11 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteDipT
 @Component({
   selector: 'aegon-quickquote-dip',
   directives: [
-    HelpComponent, InputMoneyComponent, InputMoneyValueAccessor, InputDateComponent, InputDateValueAccessor,
+    HelpComponent, InputNumberComponent, InputNumberValueAccessor, InputDateComponent, InputDateValueAccessor,
     CheckboxComponent, CheckboxValueAccessor
   ],
   template: templateElem ? templateElem.value : `
-    <div class="quickquote lijfrente dip">
+    <div class="quickquote angular">
       <div class="triangle"></div>
       <div class="calculation">
         <h3>Bereken direct uw pensioenuitkering:</h3>
@@ -35,10 +35,10 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteDipT
             </aegon-help>
           </div>
           <div class="inputs">
-            <aegon-input-money #amountInput currency="€" [(ngModel)]="pensionAmount" [max]="99999999"
+            <aegon-input-number #amountInput prefix="€" [(ngModel)]="pensionAmount" [max]="99999999"
                                (focus)="amountTooSmall = false; amountInput.select()" (blur)="isValidAmount()"
                                (enter)="submitAmount()" [placeholder]="'minimaal 25.000'">
-            </aegon-input-money>
+            </aegon-input-number>
             <button class="button arrow" *ngIf="step === 1" [disabled]="!pensionAmount" (click)="submitAmount()">
               Volgende
             </button>
@@ -109,7 +109,6 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteDipT
             </div>
             <div class="inputs">
               <select [ngModel]="startingDate" (change)="changeStartingDate($event.target.value)">
-                <option value="" disabled selected>Maak uw keuze</option>
                 <option *ngFor="#date of startingDateChoices" [value]="date.value">{{date.label}}</option>
               </select>
             </div>
@@ -333,6 +332,10 @@ export class QuickQuoteDipComponent implements OnInit {
           "CORRELATIONID": "##DIP SS##"
         },
         "DOSSIER": {
+          "REKENFACTOREN": {
+            "OVERGANG_OP_PP": 0.70,
+            "VERHOUDING_HOOG_LAAG": 0.75
+          },
           "PENSIOENOVEREENKOMST": {
             "STORTING_INLEG": {
               "KOOPSOM": this.pensionAmount,
@@ -392,9 +395,13 @@ export class QuickQuoteDipComponent implements OnInit {
   processResult(highLow, data) {
     let items: any[] = data['BScalculateResponse']['PENSIOENOVEREENKOMST']['PENSIOENAANSPRAAK'],
       hlAmount = 0;
+    if (!Array.isArray(items)) {
+      items = [items];
+    }
     items.forEach(item => {
       let s = item['PENSIOENVORM'],
         value = item['BEDRAG'];
+        value = value/12;
       if (highLow) {
         if (s === 'OPLL') {
           hlAmount += parseFloat(value);

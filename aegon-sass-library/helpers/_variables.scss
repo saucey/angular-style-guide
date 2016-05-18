@@ -3,6 +3,8 @@
 // Variables
 // --------------------------------------------------
 
+$image_path: '../images/';
+
 // BLUE hues
 $black: #1d1d1b; //actually, this is a very dark blue, so that is why it is here
 $dark_blue: #00304c; //
@@ -49,9 +51,11 @@ $beige: $grey; //
 $pink: #edd5d9;
 $dark_pink: #C41F2C;
 
+$fonts_path: '../fonts/';
+
 $font_fallback: Arial, Verdana, sans-serif;
 $font_light: 'senticosansdtlight', $font_fallback;
-  $font_normal: 'senticosansdtregular', $font_fallback;
+$font_normal: 'senticosansdtregular', $font_fallback;
 $font_medium: 'senticosansdtmedium', $font_fallback;
 $font_bold: 'senticosansdtcondbold', $font_fallback;
 $font_thin: 'senticosansdtthin', $font_fallback;
@@ -76,17 +80,23 @@ $font_icons_tip: "\e631";
 $font_icons_check: "\e632";
 $font_icons_radio: "\e633";	//leave it here, maybe at some point radio and circle will diverge, and in that case it would only be a variable change
 $font_icons_circle: "\e633";
+$font_icons_chart: "\e619";
 $font_icons_man: "\e636";
+$font_icons_old_man: "\e60a";
 $font_icons_arrow_right_skinny: "\e63b";
 $font_icons_search: "\e800";
 $font_icons_info: "\e801";
 $font_icons_info_black: "\e800";
 $font_icons_betalingen: "\e602";
-$font_icons_plus_light: "\e901";
+$font_icons_plus_light: "\e904";
 $font_icons_calculator: "\e612";
 $font_icons_man_in_tie: "\e62a";
 $font_icons_claim_indienen: "\e900";
 $font_icons_offreren: "\e901";
+$font_icons_contract_details: "\e907";
+$font_icons_inzien: "\e906";
+$font_icons_muteren: "\e905";
+$font_icons_zakelijk: "\e908";
 
 // FONT SIZES
 $small: 14px;

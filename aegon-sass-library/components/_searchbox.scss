@@ -8,14 +8,14 @@
     padding: 0 20px 0 10px;
     border: 2px solid $lighter_grey;
     background-color: white;
-    background-image: url("/images/icons/icon-search-header.png");
+    background-image: url($image_path + 'icons/icon-search-header.png');
     background-repeat: no-repeat;
     background-position: right center;
     background-size: 30px 30px;
   }
   .search:focus {
     width: 350px !important;
-    background-image: url("/images/ui/btn-close.png");
+    background-image: url($image_path + 'ui/btn-close.png');
     background-repeat: no-repeat;
     background-position: 325px center;
     background-size: 16px 16px;

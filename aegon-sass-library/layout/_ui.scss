@@ -38,7 +38,7 @@
     .caret {
       position: absolute;
       left: 50%;
-    }    
+    }
     &.top{
       @include bubble($width: 10px, $left: $help_dialog_width / 2, $quadrant: 2, $background-color: $slightly_lighter_blue);
     }
@@ -117,7 +117,7 @@ div.greyoverlay {
     width: 40px;
     height: 40px;
     text-indent: -9999px;
-    background: #3395D3 url(../images/ui/icon-arrow-up.png) center center no-repeat;
+    background: #3395D3 url($image_path + 'ui/icon-arrow-up.png') center center no-repeat;
     border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px;
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.3);
@@ -135,7 +135,7 @@ div.greyoverlay {
 /*----- throbber -----*/
 .throbber {
   display: block;
-  background-image: url('../images/ui/loader-blue.gif');
+  background-image: url($image_path + 'ui/loader-blue.gif');
   width: 32px;
   height: 32px;
 }

@@ -28,15 +28,6 @@
 @import "components/breadcrumbs";
 @import "components/login-link";
 
-/* QuickQuote Dependencies */
-@import "vendors/_nouislider.min.css";
-@import "components/no-ui-slider";
-@import "components/quickquote-lijfrente";
-@import "components/quickquote-lijfrente-sparen";
-@import "components/quickquote-beleggen";
-@import "components/quickquote-dip";
-@import "components/quickquote-productpage";
-
 /* QuickQuote Elements */
 .quickquote {
   @import "components/checkbox";
@@ -45,6 +36,18 @@
   @import "components/text-input";
   @import "components/textarea";
 }
+
+/* QuickQuote Dependencies */
+@import "vendors/_nouislider.min.css";
+@import "components/no-ui-slider";
+@import "components/quickquote-generic";
+@import "components/quickquote-beleggen";
+@import "components/quickquote-sparen";
+@import "components/quickquote-angular";
+@import "components/quickquote-mortgage";
+@import "components/quickquote-aov";
+@import "components/quickquotes-product-page";
+
 
 @import "base/icon";	//provides the icon styles, aka the webfont icons
 @import "widgets/lhfs";	// Added for style in quickquotes

@@ -1,0 +1,243 @@
+.quickquote.mortgage {
+  color: $blue;
+
+  .result {
+    .payment-result {
+      width:72%;
+    }
+    .result-button a {
+      color: $black;
+    }
+  }
+  .calculation .slider-container {
+    margin-bottom: 0;
+  }
+
+  .calculation .input-header label {
+    color: $blue;
+  }
+
+  .calculation .input-header .input-container {
+    @include rem('margin-right', 53);
+  }
+
+  .calculation .input-header .input-container input {
+    text-align:left;
+  }
+
+  label {
+    font-weight: normal;
+  }
+
+  .error {
+    color: $dark_red;
+  }
+
+  input[type=text],
+  input[type=number],
+  select {
+    width: 180px;
+    background: $white;
+    color: $black;
+  }
+
+  .calculation .input-header .input-container:after,
+  &.lijfrente.sparen .calculation .input-header .input-container:after {
+    content: none;
+  }
+
+  label.checkbox {
+    padding-left: 45px;
+
+    .checkbox {
+      left: 0;
+      background: $white;
+    }
+
+    input[type=checkbox] {
+      position: absolute;
+    }
+
+    :checked + .checkbox {
+      background: $white;
+    }
+  }
+
+  .result .payment-result .result1,
+  .result .payment-result .result2 {
+    width: 45%;
+    min-width: 202px;
+    float: left;
+    margin-right: 5%;
+    margin-bottom: 10px;
+  }
+
+  .field {
+    margin-bottom: 20px;
+
+    &:after {
+      content: ' ';
+      clear: both;
+      display: block;
+      height: 0;
+      visibility: hidden;
+    }
+
+
+    .input-header .help {
+      position: absolute;
+      top: 0;
+      right: 0;
+
+      &.dialog {
+        right: auto;
+        width: 400px;
+      }
+    }
+
+    .help {
+      color: $black;
+    }
+
+    .help.dialog {
+      display: none;
+      margin-left: 0;
+    }
+
+    label.checkbox {
+      display: inline-block;
+      margin: 9px 0 16px;
+      line-height: 26px;
+    }
+
+    .inputs {
+      float: left;
+      max-width: 100%;
+      position: relative;
+      &.right {
+        float: right;
+      }
+      &.slider {
+        width: 100%;
+      }
+
+      label.checkbox {
+        display: block;
+      }
+
+      button {
+        clear: both;
+        display: block;
+        margin-top: 10px;
+        width: 180px;
+        text-align: left;
+      }
+    }
+
+  }
+
+  button.pending:after {
+    background-image: url($image_path + 'spinner.gif');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 70%;
+    color: transparent;
+  }
+
+  .result {
+    color: $white;
+
+    .row {
+      margin: 10px 0;
+
+      .label,
+      .currency,
+      .amount {
+        @include rem('font-size', $large);
+      }
+    }
+
+    .label,
+    ul.arrow {
+      display: inline-block;
+      box-sizing: border-box;
+      max-width: 100%;
+    }
+
+    .value {
+      display: inline-block;
+      max-width: 100%;
+      vertical-align: top;
+    }
+
+    .amount {
+      display: inline-block;
+      margin-right: 10px;
+      min-width: 85px;
+      text-align: right;
+      vertical-align: top;
+    }
+
+    a,
+    .arrow :before {
+      color: $white;
+    }
+
+    .footer {
+      clear: both;
+    }
+  }
+}
+
+@media only screen and (max-width: 640px) {
+  .quickquote.mortgage {
+    .field {
+      .input-header .help {
+        margin-top: 0;
+        padding-top: 12px;
+      }
+      .inputs.right {
+        float: left;
+      }
+      .inputs .input-header label {
+        font-size: 18px;
+        font-weight: bold;
+        width: 100%;
+        padding-bottom: 8px;
+        padding-right: 30px;
+        max-width: 100%;
+        color: #007bc8;
+      }
+    }
+  }
+  .quickquote.mortgage .calculation .input-header .input-container .suffixed input {
+    padding-right: 40px;
+  }
+  .quickquote.mortgage .calculation .input-header .input-container input {
+    width: 100%;
+    max-width: 220px;
+    padding-right: 0.625rem;
+  }
+  .quickquote.mortgage .calculation .input-header .input-container {
+    margin-right:0;
+  }
+
+}
+
+@media only screen and (min-width: 1350px) {
+  .quickquote.mortgage {
+    .calculation .input-header .input-container {
+      @include rem('margin-right', 54);
+    }
+    .result .payment-result {
+      overflow: hidden;
+      min-width: 300px;
+      width: 60%;
+      float: left;
+    }
+    .result .result-button {
+      text-align: left;
+    }
+  }
+
+}

@@ -1,0 +1,68 @@
+.quickquote.aov {
+  .calculation {
+    .field {
+      &.first .inputs button {
+        margin-top: 0;
+        width: 100%;
+      }
+      label.radio {
+        display: block;
+        margin-bottom: 25px;
+        > input[type="radio"] + span.radio {
+          background: $white;
+          top: -10px;
+        }
+      }
+    }
+
+    .monthly-spendings .inputs ul.arrow {
+      margin-bottom: -10px;
+    }
+
+    .monthly-spendings .field,
+    .field.first {
+      margin-bottom: 0;
+    }
+  }
+  .result {
+    .row {
+      .label, .currency, .amount {
+        @include rem("font-size", $medium);
+      }
+      .amount {
+        text-align: left;
+      }
+    }
+    .bigger {
+      margin-top: 10px;
+      .row {
+        .label, .currency, .amount {
+          @include rem("font-size", $x-large);
+        }
+      }
+    }
+    .edit {
+      margin-left: 5px;
+      cursor: pointer;
+      &:before {
+        position: relative;
+        max-width: 0;
+        max-height: 0;
+        color: $white;
+        font-family: $font_icons;
+        content: $font_icons_arrow_right;
+        @include rem("font-size", 10);
+        left: -5px;
+        top: -1px;
+      }
+    }
+
+    .save {
+      margin-left: 5px;
+    }
+
+    input {
+      width: 100px;
+    }
+  }
+}

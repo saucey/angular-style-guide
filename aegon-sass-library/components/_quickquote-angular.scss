@@ -1,6 +1,7 @@
-.quickquote.dip {
+.quickquote.angular {
   $left_width: 350px;
   $right_width: 370px;
+  $right_width_compact: 270px;
 
   color: $slightly_darker_blue;
 
@@ -9,15 +10,27 @@
   }
 
   .error {
+    background-color: #edd5d9;
+    background-image: none;
+    border-radius: 5px;
+    margin-top: .9375rem;
+    padding: 1.125rem;
+    border: 1px solid #C41F2C;
     color: $dark_red;
   }
-
   input[type=text],
   input[type=number],
   select {
     width: 180px;
     background: $white;
     color: $black;
+    font-family:$font_light;
+    font-size:18px;
+  }
+
+  input[type=text]::placeholder,
+  input[type=number]::placeholder {
+    color: $slightly_darker_grey;
   }
 
   label.checkbox {
@@ -52,8 +65,8 @@
       box-sizing: border-box;
       position: relative;
       float: left;
-      width: $left_width;
-      max-width: 100%;
+      max-width: $left_width;
+      width: 50%;
       padding-top: 9px;
       padding-right: 50px;
 
@@ -84,11 +97,21 @@
       margin: 9px 0 16px;
       line-height: 26px;
     }
-
+    .input.date  {
+      input {
+        width:52px;
+        padding-right:0;
+      }
+      input + input + input {width:64px;}
+    }
     .inputs {
       float: left;
-      max-width: 100%;
-      width: $right_width;
+      width: 50%;
+      max-width: $right_width;
+
+      @media (max-width: 1100px) {
+        width: $right_width_compact;
+      }
 
       label.checkbox {
         display: block;
@@ -100,46 +123,19 @@
         margin-top: 10px;
         width: 180px;
         text-align: left;
+        font-family:$font_light;
+      }
+
+      > div,
+      ul.arrow {
+        margin-bottom: 0;
+        clear: both;
       }
     }
   }
 
-  .input.money {
-    .currency {
-      position: absolute;
-      z-index: 1;
-      padding: 9px 0 9px 10px;
-      color: $darker_grey;
-    }
-
-    input {
-      padding-left: 30px;
-      text-align: right;
-    }
-  }
-
-  .input.date {
-    &:after {
-      content: ' ';
-      clear: both;
-      display: block;
-      height: 0;
-      visibility: hidden;
-    }
-
-    input {
-      float: left;
-      margin-right: 5px;
-      width: 50px;
-    }
-
-    .year {
-      width: 70px;
-    }
-  }
-
   button.pending:after {
-    background-image: url(../images/spinner.gif);
+    background-image: url($image_path + 'spinner.gif');
     background-repeat: no-repeat;
     background-position: center;
     background-size: 70%;
@@ -148,6 +144,11 @@
 
   .result {
     color: $white;
+
+    &.tiny {
+      padding-top: 10px;
+      padding-bottom: 0;
+    }
 
     p a {
       text-decoration: underline;
@@ -159,7 +160,7 @@
     }
 
     .row {
-      margin: 5px 0;
+      margin: .5em 0;
 
       .label,
       .currency,
@@ -174,7 +175,7 @@
       border-width: 1px 0;
       border-color: $light_blue;
       padding: 20px 0;
-
+      p {color:$white;}
       .label {
         @include rem('font-size', $medium);
       }
@@ -193,6 +194,10 @@
       max-width: 100%;
       width: $right_width;
       vertical-align: top;
+
+      @media (max-width: 1100px) {
+        width: $right_width_compact;
+      }
     }
 
     .amount {
@@ -217,3 +222,27 @@
     }
   }
 }
+
+@media only screen and (max-width: 640px) {
+  .quickquote.dip .field {
+    margin-bottom:20px;
+  }
+  .quickquote.dip .field .label {
+    font-size:18px;
+    font-weight:bold;
+    width: 100%;
+    padding-bottom: 8px;
+    padding-right:30px;
+    max-width:100%;
+  }
+  .quickquote.dip .field .inputs {
+    width: 100%;
+  }
+  .quickquote.dip .field .label .help {
+    right:0;
+  }
+}
+@media only screen and (max-width: 870px) {
+  .quickquote.dip .field .label {width:100%;}
+}
+//@media (max-width: 1100px){}

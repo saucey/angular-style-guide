@@ -3,16 +3,29 @@
   border: none;
   background-image: none;
 
-  @include rem('padding', 20, 30);
-  @include rem('border-radius', 5);
+  @include rem("padding", 20, 30);
+  @include rem("border-radius", 5);
   .header {
-    margin-bottom: .2em;
+    margin-bottom: 0.2em;
     font-family: $font_normal;
     font-weight: bold;
+  }
+  .button {
+    text-align: left;
+    margin-bottom: 0;
   }
   /**
    * Colors below follow the current aegon's messages theme
    */
+  &.messages--generic {
+    background-color: $pastel_light_blue;
+    .header {
+      color: $slightly_darker_blue;
+    }
+    .content {
+      margin-bottom: 20px;
+    }
+  }
   &.messages--status {
     background-color: $light_green;
     .header {
@@ -48,7 +61,7 @@
         display: block;
         padding: 0 0 15px 0;
 
-        @include rem('font-size',  18px);
+        @include rem("font-size",  18px);
       }
       button {
         display: block;
@@ -63,6 +76,13 @@
     }
     .header {
       color: $black;
+    }
+  }
+  &.pension123 {
+    .logo {
+      width: 152px;
+      max-width: 100%;
+      margin-top: 10px;
     }
   }
 }
@@ -108,7 +128,7 @@
       top: 4px;
       right: 0;
       left: 7px;
-      content: '\e60d';
+      content: "\e60d";
       color: $white;
       font-size: 16px;
     }
@@ -122,17 +142,73 @@
       margin: -25% 0 0 -150px;
     }
   }
+  .aegon-modal.visible {
+    padding: 50px;
+    h2 {
+      @include rem("font-size", 28);
+    }
+    h3 {
+      color: $black;
+    }
+  }
 }
 
 @include breakpoint($brk-tablet) {
   .messages {
-    @include rem('padding-left', 70);
+    @include rem("padding-left", 70);
     .icon {
       position: absolute;
       left: 20px;
-      font-family: 'aegon_icons';
+      font-family: "aegon_icons";
 
-      @include rem('font-size', 30);
+      @include rem("font-size", 30);
+    }
+    &.messages--generic {
+      .icon:before {
+        color: $slightly_darker_blue;
+      }
+      &.pension123 {
+        .icon:before {
+          content: $font_icons_old_man;
+        }
+        .logo {
+          float: right;
+        }
+      }
+      &.pension {
+        .icon:before {
+          content: $font_icons_chart;
+        }
+      }
+      &.big {
+        padding-left:118px;
+        .icon{
+          left: 0;
+          top:0;
+          height: 100%;
+          width: 118px;
+          &:after {
+            content:'';
+            display: inline-block;
+            height: 100%;
+            width: 1px;
+            vertical-align: middle;
+          }
+          &:before {
+            text-align: center;
+            padding:0;
+            width: 96%;
+            display: inline-block;
+            font-size: 50px;
+            vertical-align: middle;
+          }
+        }
+        &.pension123 {
+          .icon:before {
+            font-size: 70px;
+          }
+        }
+      }
     }
     &.messages--warning {
       .icon:before {
@@ -145,24 +221,24 @@
     }
     &.messages--status {
       .icon:before {
-        content: '\e632';
+        content: "\e632";
         color: $green;
       }
     }
     &.messages--error {
       .icon {
         .path1:before {
-          content: '\e62e';
+          content: "\e62e";
           color: $white;
         }
         .path2:before {
           margin-left: -1.1826171875em;
-          content: '\e634';
+          content: "\e634";
           color: $red;
         }
         .path3:before {
           margin-left: -1.185em;
-          content: '\e635';
+          content: "\e635";
           color: $red;
         }
       }
@@ -172,20 +248,20 @@
       background: $lighter_red;
       .icon {
         .pathA:before {
-          content: '\e631';
+          content: "\e631";
           color: $dark_red;
         }
       }
     }
     &.messages--mobileStatus {
       .icon:before {
-        content: '\e60d';
+        content: "\e60d";
         color: $white;
       }
     }
     &.messages--attention {
       .icon:before {
-        content: '\e636';
+        content: "\e636";
         color: $white;
       }
       .content {
@@ -210,8 +286,8 @@ div.success {
   top: 40%;
   left: 50%;
   width: $width;
-  background-color: $white;
   margin-left: -($width / 2);
+  background-color: $white;
   .header {
     color: $black;
   }
@@ -271,12 +347,12 @@ div.alert {
   z-index: 6;
   left: 50%;
   width: 500px;
-  max-width: 80%;
+  max-width: 90%;
   padding: 60px;
   border-radius: $frame_border_radius;
   background-color: $white;
   h2 {
-    @include rem('font-size', 36);
+    @include rem("font-size", 36);
   }
   .close-modal {
     position: absolute;
@@ -294,12 +370,16 @@ div.alert {
       left: -1px;
       color: $white;
       font-size: 34px;
+      line-height: 1;
     }
   }
   .modal-loader {
     width: 100%;
     height: 70px;
-    background: url('../images/spinner.gif') center center no-repeat;
+    background: url($image_path + "spinner.gif") center center no-repeat;
+  }
+  img {
+    max-width: 100%;
   }
   .ajax-text,
   .ajax-timeout {

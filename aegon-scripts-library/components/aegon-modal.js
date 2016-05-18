@@ -1,7 +1,7 @@
 /**
  * AegonModal function declaration
  *
- * @param action (string)(optional): 'open' (default) || 'close'
+ * @param action (string)(optional): 'open' (default) || 'position' || 'update' || 'close'
  * @param options (object): options for the modal
  * @param callback (function)(optional): what to do after the modal is open
  */
@@ -19,7 +19,8 @@
       ajaxText: '', // @string: Text to show while waiting for ajax if ajax === true
       overlay: true, // @boolean: dark overlay behind the modal
       timeOut: 0, // @number (miliseconds): the amount of time of wait till show the message if ajax === true
-      timeOutMessage: '' // @string: message to show after time out if ajax === true
+      timeOutMessage: '', // @string: message to show after time out if ajax === true
+      width: '' // @int: the width of the modal (it has a max-width of 100% so there won't be scroll).
     };
 
     // if the second param is the callback
@@ -103,13 +104,17 @@
           var modalEle = document.createElement('DIV');
           modalEle.className = 'aegon-modal visible';
           modalEle.innerHTML = modalInner;
+          // add inline width css
+          if(! isNaN(settings.width) && parseInt(settings.width) > 0) {
+            modalEle.style.width = settings.width + 'px';
+          }
 
           // Insert the modal
           $('body').append(modalEle);
 
           $modal = $(modalEle);
           // Add click event to close modal
-          $(document).on('click', '.aegon-modal .close-modal', function() {
+          $(document).on('click', '.aegon-modal .close-modal, .aegon-modal-overlay.close-modal', function() {
             Drupal.aegonModal('close');
           });        
         }else{
@@ -121,7 +126,12 @@
         // overlay layout
         if(settings.overlay) {
           if(! $(document).find('.aegon-modal-overlay').length) {
-            $('body').append('<div class="aegon-modal-overlay lightbox"></div>');
+            if(! settings.close) {
+              // if the close button is not desire, attache click event to overlay
+              $('body').append('<div class="aegon-modal-overlay close-modal lightbox"></div>');
+            } else {
+              $('body').append('<div class="aegon-modal-overlay lightbox"></div>');
+            }
           }
         } else {
           if($(document).find('.aegon-modal-overlay').length) {

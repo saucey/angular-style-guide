@@ -30,12 +30,14 @@
     font-weight: normal;
     height:100%;
   }
+  &.open {
+    .dropdown {
+      display: block;
+    }
+  }
   input#UDW_dd_show {
     display: none;
     &:checked {
-      ~ .dropdown {
-        display: block;
-      }
       ~ .btn-login-loggedin {
         z-index: 9;
 

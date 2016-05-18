@@ -309,7 +309,7 @@ aside.mobile {
       background-image: none;
 
       &.form-autocomplete {
-        background-image: none;        
+        background-image: none;
       }
     }
 
@@ -349,7 +349,6 @@ aside.mobile {
   .login-link-inv:before {
     // @extend a[class*="menu-"]:before;
     font-family: $font_icons;
-    @extend .menu-lock:before;
     color: $white;
     font-weight: normal;
     -webkit-font-smoothing: antialiased;
@@ -368,9 +367,21 @@ aside.mobile {
 // --------------------------------------------------
 
 @include breakpoint($brk-mobile) {
-
+  // @TODO: Check if this class is actually being used
   .pushmenu-to-right {
-    @extend body.mobile-tap;
+    section.content {
+      position: relative;
+      overflow: hidden;
+
+      &:after {
+        display: block;
+      }
+    }
+    &:not(.pushmenu-to-right) {
+      section.content {
+        overflow: visible;
+      }
+    }
 
     .wrapper.ui-panel-animate {
       position: fixed;
