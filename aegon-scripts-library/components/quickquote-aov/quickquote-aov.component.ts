@@ -473,7 +473,7 @@ export class QuickQuoteAovComponent implements OnInit {
 
     var flattenedArray = [];
     items.forEach(item => {
-      flattenedArray['' + item['id']]= item['basis'];
+      flattenedArray['' + item['id']]= item['voorbeeld'];
     });
 
     this.mapCosts(flattenedArray);
