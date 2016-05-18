@@ -435,8 +435,9 @@ export class QuickQuoteAovComponent implements OnInit {
     }
 
     if (this.hasPartner) {
-      body['hoofdpersonen'].push(
-        {
+      body['hoofdpersonen'] =
+        [
+          {
           "geboortedatum": this.generateBirthdate(40),
           "geslacht": "Man"
         },
@@ -444,7 +445,7 @@ export class QuickQuoteAovComponent implements OnInit {
           "geboortedatum": this.generateBirthdate(40),
           "geslacht": "Vrouw"
         }
-      );
+        ];
     }
     return body;
   }
