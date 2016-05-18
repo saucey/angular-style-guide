@@ -4,9 +4,11 @@
   .result {
     .payment-result {
       width:72%;
+      margin-bottom:0;
     }
     .result-button a {
       color: $black;
+      text-decoration: none;
     }
   }
   .calculation .slider-container {
@@ -88,6 +90,7 @@
       position: absolute;
       top: 0;
       right: 0;
+      margin-top: 0;
 
       &.dialog {
         right: auto;
@@ -102,6 +105,14 @@
     .help.dialog {
       display: none;
       margin-left: 0;
+      left: auto !important;
+      right: -20px !important;
+    }
+    .help.dialog.bottom {
+      .caret {
+        left:auto;
+        right: 20px !important;
+      }
     }
 
     label.checkbox {
@@ -113,6 +124,7 @@
     .inputs {
       float: left;
       max-width: 100%;
+      width:auto;
       position: relative;
       &.right {
         float: right;
@@ -134,6 +146,10 @@
       }
     }
 
+  }
+  .field:nth-child(5) {
+    padding-top: 20px;
+    margin-bottom: 0;
   }
 
   button.pending:after {
