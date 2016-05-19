@@ -38,7 +38,7 @@
     }
   }
 /*QUICKQUOTE DIP*/
-  .quickquote.dip {
+  .quickquote.angular {
     .calculation {
       width:100%;
     }
@@ -248,7 +248,7 @@
 
   //QUICKQUOTE DIP
   .node-type-product {
-    .quickquote.dip {
+    .quickquote.angular {
       .field {
         .inputs {width:100%;margin-right:0;}
         .label {width:100%;}
@@ -315,7 +315,7 @@
 @include breakpoint($brk-tablet) {
   /*QUICKQUOTE DIP*/
   .node-type-product {
-    .quickquote.dip {
+    .quickquote.angular {
       .field {
         .label {
           width: 42%;
