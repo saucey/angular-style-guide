@@ -353,10 +353,11 @@ header.header {
 
 @media only screen and (max-width : 1124px) {
   // This hack is used for the homepage. When screens become to small to show the many many things that are in the header.
-  .header.header .user_detail_widget .text .name .user_detail_widget_name {
-    display:none;
+  .header.header .user_detail_widget > .text .name .user_detail_widget_name,
+  .section-mijnaegon header.header .user_detail_widget .inplace .dropdown .text p.name {
+    display: none;
   }
-  .section-mijnaegon header.header .user_detail_widget .text .name .user_detail_widget_name {
-    display:inline-block;
+  header.header .user_detail_widget .inplace .dropdown .text p.name {
+    display: inline-block;
   }
 }
