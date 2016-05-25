@@ -149,12 +149,22 @@
           .calculated {
             line-height: 1.333em;
           }
-
         }
       }
     }
     .input.number .prefix {
       padding: 11px 0 9px 10px;
+    }
+  }
+  .quickquote.angular.mortgage {
+    .field {
+      .inputs.slider {
+        width: 100%;
+        max-width: 100%;
+      }
+      .inputs.right {
+        width:auto;
+      }
     }
   }
 }
