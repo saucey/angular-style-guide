@@ -20,7 +20,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
     HelpComponent, InputDateComponent, InputDateValueAccessor, InputNumberComponent, InputNumberValueAccessor, CheckboxComponent, CheckboxValueAccessor, InputRadioComponent, InputRadioValueAccessor
   ],
   template: templateElem ? templateElem.value : `
-    <div class="quickquote angular aov boeterente">
+    <div class="quickquote angular boeterente">
       <div class="triangle"></div>
       <div class="calculation">
         <h3>Bereken indicatie omzettingskosten</h3>
@@ -32,14 +32,22 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
             </aegon-help>
           </div>
           <div class="inputs">
-            <select [ngModel]="mortgageType" class="no-dd" (change)="console.log(mortgageType)">
-              <option value="0" selected>Maak uw keuze</option>
-              <option value="1">Aflossingsvrij</option>
-              <option value="2">Annuitair</option>
-              <option value="3">(Bank)Spaar</option>
-              <option value="4">Lineair</option>
-              <option value="5">Overig</option>
+            <select [(ngModel)]="mortgageType" class="no-dd">
+              <option [value]="0" selected>Maak uw keuze</option>
+              <option [value]="1">Aflossingsvrij</option>
+              <option [value]="2">Annuitair</option>
+              <option [value]="3">(Bank)Spaar</option>
+              <option [value]="4">Lineair</option>
+              <option [value]="5">Overig</option>
             </select>
+          </div>
+        </div>
+        <div *ngIf="mortgageType == 2 || mortgageType == 4">
+          <div class="messages messages--alert visible">
+            <span class="icon"><span class="pathA"></span><span class="pathB"></span><span class="pathC"></span></span>
+            <div class="content">
+              <b>Let op!</b> Voor een lineaire of annuitaïre hypotheek zullen de werkelijke omzettingskosten lager uitvallen dan in deze indicatieberekening.
+            </div>
           </div>
         </div>
         <div *ngIf="mortgageType > 0">
@@ -55,11 +63,11 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
             </aegon-input-number>
             </div>
           </div>
-          <div class="field first">
+          <div class="field">
             <div class="label">
               Heeft u al extra afgelost op dit bedrag?
               <aegon-help>
-                Sample text
+                Als u een annuitaïre of lineaire hypotheek heeft en u naast de reguliere aflossing niet extra heeft afgelost kiest u 'Nee'
               </aegon-help>
             </div>
             <div class="inputs">
@@ -98,64 +106,16 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
           <p class="error" *ngIf="hasPartnerError">
              Kies of u een partner heeft of niet.
            </p>
-          <div class="field">
-            <div class="label">
-              Type woning
-              <aegon-help>
-                Dit is de helptekst
-              </aegon-help>
-            </div>
-            <div class="inputs">
-              <select [ngModel]="typeOfResidence" (change)="typeOfResidence = $event.target.value; triggerValueChanged();">
-               <option value="" selected>Maak uw keuze</option>
-                <option value="Galerij">appartement</option>
-                <option value="RijtjeswoningTussen">tussenwoning</option>
-                <option value="TweeOnderEenKap">hoekwoning</option>
-                <option value="VrijstaandGroot">vrijstaand</option>
-              </select>
-            </div>
-          </div>
-          <p class="error" *ngIf="typeOfResidenceError">
-             Kies uw woning type
-          </p>
-          <div class="field">
-            <div class="label">
-              Heeft u een koop- of huurwoning?
-            </div>
-            <div class="inputs">
-              <aegon-input-radio [(ngModel)]="residenceType1" [name]="'residenceType'" (change)="mortgageKind = 'Koopwoning'; triggerValueChanged();" [value]="'koop'">Koopwoning</aegon-input-radio>
-              <aegon-input-radio [(ngModel)]="residenceType1" [name]="'residenceType'" (change)="mortgageKind = 'Huurwoning'; triggerValueChanged();" [value]="'huur'">Huurwoning</aegon-input-radio>
-            </div>
-          </div>
-          <p class="error" *ngIf="mortgageKindError">
-            Kies of u een koop of huurwoning heeft.
-          </p>
          <div class="field">
           <div class="label">
-            Netto maandlasten hypotheek of huur
+            Huidig rentepercentage
             <aegon-help>
-              Dit is de vijfde helptekst
+              Het rentepercentage dat is vastgelegd in uw huidige hypotheekcontract. 
             </aegon-help>
           </div>
           <div class="inputs">
-            <aegon-input-number  prefix="€" [(ngModel)]="costResidence" [max]="99999999"
-                                [placeholder]="'0'" (modelChange)="triggerValueChanged();">
-            </aegon-input-number>
-          </div>
-        </div>
-        <p class="error" *ngIf="costResidenceError">
-            Vul uw netto maandlasten hypotheek of huur in.
-          </p>
-         <div class="field">
-          <div class="label">
-            Netto gezinsinkomen
-            <aegon-help>
-              Dit is de zesde helptekst.
-            </aegon-help>
-          </div>
-          <div class="inputs">
-            <aegon-input-number #amountInput prefix="€" [(ngModel)]="familyIncome" [max]="99999999"
-                               [placeholder]="'0'" (modelChange)="triggerValueChanged();">
+            <aegon-input-number #amountInput [(ngModel)]="currIntRate" [max]="100"
+                               [placeholder]="'4,0%'">
             </aegon-input-number>
           </div>
         </div>
@@ -163,113 +123,40 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
             Vul uw netto gezinsinkomen in.
           </p>
           <div class="field">
+            <div class="label">
+              NHG van toepassing
+              <aegon-help>
+                Geef hier aan of op uw hypotheek de Nationale Hypotheek Garantie (NHG) van toepassing is. 
+              </aegon-help>
+            </div>
+            <div class="inputs">
+              <aegon-input-radio [name]="'nhg'" [value]="0" (change)="nhg = false;">Nee</aegon-input-radio>
+              <aegon-input-radio [name]="'nhg'" [value]="1" (change)="nhg = true;">Ja</aegon-input-radio>
+            </div>
+          </div>
+          <div class="field">
             <div class="label"></div>
             <div class="inputs">
               <button class="button icon-right icon-calculator" [disabled]="pendingCount > 0" [ngClass]="{pending: pendingCount > 0}" (click)="submit()">
-                Bereken
+                Calculate
               </button>
             </div>
           </div>
         </div>
       </div>
-      <div class="result tiny" *ngIf="step === 'noCalculation' && familyIncome > 0">
-        <div class="row">
-          <span class="label"></span>
-          <a class="button orange icon-right arrow" [attr.href]="'/zakelijk/inkomensverzekeringen/arbeidsongeschiktheidsverzekering/arbeidsongeschiktheidsverzekering-berekenen?AO1_VERZSOM=' + netToGross(familyIncome)">Bereken uw premie</a>
-        </div>
-      </div>
-      <div class="result" *ngIf="isValidated">
-        <div class="linear">
-          <div class="row">
-            <span class="label">Uitgave woning en energie</span>
-            <span class="value">
-              <span class="currency" *ngIf="!editingHouse">€</span>
-              <span class="amount" *ngIf="!editingHouse">{{housingCosts | money}}</span>
-              <span class="amount" *ngIf="editingHouse">
-                <aegon-input-number prefix="€" [(ngModel)]="housingCosts" [max]="99999999"
-                                    placeholder="0">
-                </aegon-input-number>
-              </span>
-              <span class="edit" *ngIf="!editingHouse" tabindex="0" (click)="editingHouse = !editingHouse">Wijzig</span>
-              <button class="save" *ngIf="editingHouse" (click)="editingHouse = !editingHouse; calculateTotals()">Bewaar</button>
-            </span>
-          </div>
-          <div class="row">
-            <span class="label">Uitgave verzekeringen en onderwijs</span>
-             <span class="value">
-              <span class="currency" *ngIf="!editingFixed">€</span>
-              <span class="amount" *ngIf="!editingFixed">{{otherFixedCharges | money}}</span>
-              <span class="amount" *ngIf="editingFixed">
-                <aegon-input-number prefix="€" [(ngModel)]="otherFixedCharges" [max]="99999999"
-                                    placeholder="0">
-                </aegon-input-number>
-              </span>
-              <span class="edit" *ngIf="!editingFixed" tabindex="0" (click)="editingFixed = !editingFixed">Wijzig</span>
-              <button class="save" *ngIf="editingFixed" (click)="editingFixed = !editingFixed; calculateTotals()">Bewaar</button>
-            </span>
-          </div>
-          <div class="row">
-            <span class="label">Uitgaven boodschappen</span>
-             <span class="value">
-              <span class="currency" *ngIf="!editingGroceries">€</span>
-              <span class="amount" *ngIf="!editingGroceries">{{groceries | money}}</span>
-              <span class="amount" *ngIf="editingGroceries">
-                <aegon-input-number prefix="€" [(ngModel)]="groceries" [max]="99999999"
-                                    placeholder="0">
-                </aegon-input-number>
-              </span>
-              <span class="edit" *ngIf="!editingGroceries" tabindex="0" (click)="editingGroceries = !editingGroceries">Wijzig</span>
-              <button class="save" *ngIf="editingGroceries" (click)="editingGroceries = !editingGroceries; calculateTotals()">Bewaar</button>
-            </span>
-          </div>
-          <div class="row">
-            <span class="label">Uitgaven vervoer</span>
-            <span class="value">
-              <span class="currency" *ngIf="!editingTransport">€</span>
-              <span class="amount" *ngIf="!editingTransport">{{transport | money}}</span>
-              <span class="amount" *ngIf="editingTransport">
-                <aegon-input-number prefix="€" [(ngModel)]="transport" [max]="99999999"
-                                    placeholder="0">
-                </aegon-input-number>
-              </span>
-              <span class="edit" *ngIf="!editingTransport" tabindex="0" (click)="editingTransport = !editingTransport">Wijzig</span>
-              <button class="save" *ngIf="editingTransport" (click)="editingTransport = !editingTransport; calculateTotals()">Bewaar</button>
-            </span>
-          </div>
-          <div class="row">
-            <span class="label">Overig (kleding, huis, vrije tijd)</span>
-            <span class="value">
-              <span class="currency" *ngIf="!editingIrregular">€</span>
-              <span class="amount" *ngIf="!editingIrregular">{{irregularExpenses | money}}</span>
-              <span class="amount" *ngIf="editingIrregular">
-                <aegon-input-number prefix="€" [(ngModel)]="irregularExpenses" [max]="99999999"
-                                    placeholder="0">
-                </aegon-input-number>
-              </span>
-              <span class="edit" *ngIf="!editingIrregular" tabindex="0" (click)="editingIrregular = !editingIrregular">Wijzig</span>
-              <button class="save" *ngIf="editingIrregular" (click)="editingIrregular = !editingIrregular; calculateTotals()">Bewaar</button>
-            </span>
-          </div>
-        </div>
+      <div class="result" >
         <div class="bigger">
           <div class="row">
-            <span class="label">Netto uitgaven per maand*</span>
+            <span class="label">Indicatie omzettingskosten</span>
             <span class="value">
               <span class="currency">€</span>
-              <span class="amount">{{totalCosts | money}}</span>
-            </span>
-          </div>
-          <div class="row">
-            <span class="label">Dit is bruto per jaar</span>
-            <span class="value">
-              <span class="currency">€</span>
-              <span class="amount">{{grossTotalCosts | money}}</span>
+              <span class="amount">{{totalCosts | money}}*</span>
             </span>
           </div>
         </div>
         <div class="footer">
           <div class="label"></div>
-          <a class="button orange icon-right arrow" [attr.href]="'/zakelijk/inkomensverzekeringen/arbeidsongeschiktheidsverzekering/arbeidsongeschiktheidsverzekering-berekenen?AO1_VERZSOM=' + grossTotalCosts">Bereken uw premie</a>
+          <a class="button orange icon-right arrow" [attr.href]="'/zakelijk/inkomensverzekeringen/arbeidsongeschiktheidsverzekering/arbeidsongeschiktheidsverzekering-berekenen?AO1_VERZSOM=' + grossTotalCosts">Bekijk de adviesmogelijkheden</a>
         </div>
       </div>
     </div>
@@ -279,12 +166,14 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
 })
 export class QuickQuoteBoeterenteComponent   {
   step: number = 1;
+  mortgageType: number = 0;
   initialAmount: number;
   extraPymnt: boolean = false;
   extraPymntThisYear: number;
   extraPymntPrevYears: number;
   interestPeriodEnd: string;
-  incomePartnerValue: number;
+  currIntRate: number;
+  nhg: boolean = false;
   interestYears: number;
   keyIncome: number;
   interest: number;
@@ -296,13 +185,16 @@ export class QuickQuoteBoeterenteComponent   {
   playValue: number;
   calculatedValue: number = 0;
   monthlyPayment: number = 0;
-  mortgageType: number = 0;
 
   @ViewChild('interest') interestRef: ElementRef;
 
   constructor(
     private http: Http
   ) {}
+
+  public log(logMsg: string) {
+    console.log(logMsg);
+  }
 
   calculate(): void {
     // if (this.incomeValue) {
