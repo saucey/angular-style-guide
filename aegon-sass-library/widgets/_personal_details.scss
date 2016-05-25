@@ -89,6 +89,9 @@
     //trying to fix the height set by the grid of 50px; there might be a necessity to adapt the margin-bottom in responsiveness and hopefully this change can be adapted in the future over all widgets and / or implemented in grid.scss
     height: auto;
     margin-bottom: 20px;
+    &.residential_address {
+      margin-bottom: 40px;
+    }
   }
   // fix responsive peculiarities
   .row-fluid [class*="span"] {
@@ -103,9 +106,6 @@
     &.visible {
       display: block;
     }
-  }
-  .residential_address {
-    bottom-margin: 40px;
   }
   .email-info {
     font-family: $font_normal;
