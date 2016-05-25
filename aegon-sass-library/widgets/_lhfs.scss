@@ -313,7 +313,6 @@
 }
 
 .inline_alert {
-  display: block;
 
   padding: 20px 15px 0 15px;
 
@@ -321,6 +320,7 @@
   background-color: $lighter_red;
 
   @include inlineFrame();
+  display: block;
   hr {
     width: 100%;
     height: 1px;
@@ -473,6 +473,7 @@ ul.interval {
 }
 
 ul.horizontal {
+  display: table;
   width: 100%;
   display: none; //together with the .data class for li.product toggles on and off the visibility of the data elements
 
@@ -491,6 +492,7 @@ ul.horizontal {
     display: block;
   }
   li {
+    display: table-cell;
     vertical-align: middle;
     &.label {
       font-family: $font_medium;
