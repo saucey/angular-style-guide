@@ -20,19 +20,19 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
     HelpComponent, InputDateComponent, InputDateValueAccessor, InputNumberComponent, InputNumberValueAccessor, CheckboxComponent, CheckboxValueAccessor, InputRadioComponent, InputRadioValueAccessor
   ],
   template: templateElem ? templateElem.value : `
-    <div class="quickquote angular boeterente">
+    <div class="quickquote angular aov boeterente">
       <div class="triangle"></div>
       <div class="calculation">
         <h3>Bereken indicatie omzettingskosten</h3>
-        <div class="field first">
+        <div class="field">
           <div class="label">
-            Heeft u thuiswonende kinderen?
+            Hypotheekvorm van het leningdeel
             <aegon-help>
-              Sample text
+              Voer hier de hypotheekvorm in van het leningdeel waarvan u de omzettingskosten wilt berekenen.
             </aegon-help>
           </div>
           <div class="inputs">
-            <select [ngModel]="mortgageType" (change)="calculate();">
+            <select [ngModel]="mortgageType" class="no-dd" (change)="console.log(mortgageType)">
               <option value="0" selected>Maak uw keuze</option>
               <option value="1">Aflossingsvrij</option>
               <option value="2">Annuitair</option>
@@ -42,12 +42,12 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
             </select>
           </div>
         </div>
-        <div *ngIf="step === 1">
+        <div *ngIf="mortgageType > 0">
           <div class="field first">
             <div class="label">
               Oorspronkelijke bedrag
               <aegon-help>
-                Sample text
+                Het totale bedrag van het leningdeel op het moment dat u de hypotheek afsloot.
               </aegon-help>
             </div>
             <div class="inputs">
@@ -68,7 +68,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
             </div>
           </div>
         </div>
-        <div *ngIf="extraPymnt == true" class="monthly-spendings">
+        <div *ngIf="extraPymnt == true && mortgageType > 0" class="monthly-spendings">
           <div class="field">
             <div class="label">
               Dit jaar
@@ -305,18 +305,18 @@ export class QuickQuoteBoeterenteComponent   {
   ) {}
 
   calculate(): void {
-    if (this.incomeValue) {
-      var yearSalary = this.yearSalaryCalculation(this.incomeValue, this.extraMonth, this.vacationMoney),
-          yearSalaryPartner = this.yearSalaryCalculation(this.incomePartnerValue, this.extraMonthPartner, this.vacationMoneyPartner),
-          togetherIncome = yearSalary + yearSalaryPartner,
-          highestSalaryVar = this.highestSalary(yearSalary,yearSalaryPartner),
-          annuitiesFactorVar = this.annuitiesFactor();
-          this.keyIncome = this.getKeyIncome(highestSalaryVar, togetherIncome, yearSalary);
-      var woonquoteBox1Var = this.woonquoteBox1();
-      this.playWithMortgage = false;
-      this.playValue = this.calculatedValue = Math.round((togetherIncome * woonquoteBox1Var / 12) * annuitiesFactorVar);
-      this.monthlyPayment = this.getMonthlyPayment();
-    }
+    // if (this.incomeValue) {
+    //   var yearSalary = this.yearSalaryCalculation(this.incomeValue, this.extraMonth, this.vacationMoney),
+    //       yearSalaryPartner = this.yearSalaryCalculation(this.incomePartnerValue, this.extraMonthPartner, this.vacationMoneyPartner),
+    //       togetherIncome = yearSalary + yearSalaryPartner,
+    //       highestSalaryVar = this.highestSalary(yearSalary,yearSalaryPartner),
+    //       annuitiesFactorVar = this.annuitiesFactor();
+    //       this.keyIncome = this.getKeyIncome(highestSalaryVar, togetherIncome, yearSalary);
+    //   var woonquoteBox1Var = this.woonquoteBox1();
+    //   this.playWithMortgage = false;
+    //   this.playValue = this.calculatedValue = Math.round((togetherIncome * woonquoteBox1Var / 12) * annuitiesFactorVar);
+    //   this.monthlyPayment = this.getMonthlyPayment();
+    // }
   }
 
   getMonthlyPayment(): number {
