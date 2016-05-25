@@ -156,17 +156,6 @@
       padding: 11px 0 9px 10px;
     }
   }
-  .quickquote.angular.mortgage {
-    .field {
-      .inputs.slider {
-        width: 100%;
-        max-width: 100%;
-      }
-      .inputs.right {
-        width:auto;
-      }
-    }
-  }
 }
 
 @include breakpoint($brk-mobile) {
