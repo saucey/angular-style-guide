@@ -1,4 +1,15 @@
 .node-type-product {
+//QUICKQUOTE GENERIC
+  .quickquote {
+    .result .result-button {
+      font-family:$font_light;
+      button {
+        font-family:$font_light;
+      }
+    }
+  }
+
+
 /*QUICKQUOTE SPAREN*/
   .quickquote.sparen {
     .calculation {
@@ -19,7 +30,7 @@
       width:50%;
       background:white;
       font-size:1em;
-      font-family: senticosansdtlight,Arial,Verdana,sans-serif,Arial,Verdana,sans-serif;
+      font-family:$font_light;
     }
     .result {
       .payment-result {min-width:450px;margin-bottom: 10px;}
@@ -161,6 +172,12 @@
           }
         }
       }
+      .result .result-button {
+        font-family:$font_light;
+        button {
+          font-family:$font_light;
+        }
+      }
     }
     /*QUICKQUOTE SPAREN*/
     .quickquote.sparen {
@@ -287,7 +304,9 @@
       }
       select {width:100%;}
     }
-    .quickquote .result .payment-result .result1, .quickquote .result .payment-result .result2, .quickquote .result .payment-result .result3 {
+    .quickquote .result .payment-result .result1,
+    .quickquote .result .payment-result .result2,
+    .quickquote .result .payment-result .result3 {
       width: 170px;
       min-width: 0;
       float: left;
@@ -300,15 +319,24 @@
       width: 60%;
       min-width: 450px;
     }
-    // Quickquote Beleggen -- productpage
-    .node-type-product {
-      .quickquote.beleggen .result .payment-result .result1, .quickquote.beleggen .result .payment-result .result2, .quickquote.beleggen .result .payment-result .result3 {
-        width: auto;
-        min-width: 0;
-        float: left;
-        margin-right: 0;
-      }
+    // Quickquote Mortgage -- productpage
+    .quickquote.mortgage .result .payment-result .result1,.quickquote.mortgage .result .payment-result .result2 {
+      width: 45%;
+      min-width:202px;
+      float: left;
+      margin-right:5%;
+      margin-bottom:10px;
     }
+    // Quickquote Beleggen -- productpage
+    .quickquote.beleggen .result .payment-result .result1,
+    .quickquote.beleggen .result .payment-result .result2,
+    .quickquote.beleggen .result .payment-result .result3 {
+      width: auto;
+      min-width: 0;
+      float: left;
+      margin-right: 0;
+    }
+
   }
 }
 
@@ -351,6 +379,4 @@
     }
   }
 }
-
-@include breakpoint($brk-large-desktop) {}
 
