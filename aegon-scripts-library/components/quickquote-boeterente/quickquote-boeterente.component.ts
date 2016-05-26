@@ -6,7 +6,6 @@ import {HelpComponent} from '../angular-components/help.component'
 import {InputDateComponent, InputDateValueAccessor} from '../angular-components/input-date.component';
 import {InputNumberComponent, InputNumberValueAccessor} from '../angular-components/input-number.component';
 import {InputRadioComponent, InputRadioValueAccessor} from '../angular-components/input-radio.component';
-import {CheckboxComponent, CheckboxValueAccessor} from '../angular-components/checkbox.component';
 import {MoneyPipe} from "../angular-components/money.pipe";
 import {AfterViewInit} from "angular2/core";
 import {ViewChild} from "angular2/core";
@@ -17,7 +16,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
 @Component({
   selector: 'aegon-quickquote-boeterente',
   directives: [
-    HelpComponent, InputDateComponent, InputDateValueAccessor, InputNumberComponent, InputNumberValueAccessor, CheckboxComponent, CheckboxValueAccessor, InputRadioComponent, InputRadioValueAccessor
+    HelpComponent, InputDateComponent, InputDateValueAccessor, InputNumberComponent, InputNumberValueAccessor, InputRadioComponent, InputRadioValueAccessor
   ],
   template: templateElem ? templateElem.value : `
     <div class="quickquote angular boeterente">
@@ -32,7 +31,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
             </aegon-help>
           </div>
           <div class="inputs">
-            <select [(ngModel)]="mortgageType" class="no-dd">
+            <select [(ngModel)]="mortgageType" class="no-dd" (change)="validate()">
               <option [value]="0" selected>Maak uw keuze</option>
               <option [value]="1">Aflossingsvrij</option>
               <option [value]="2">Annuitair</option>
@@ -59,8 +58,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
               </aegon-help>
             </div>
             <div class="inputs">
-            <aegon-input-number #amountInput prefix="€" [(ngModel)]="initialAmount" [placeholder]="'0'">
-            </aegon-input-number>
+              <aegon-input-number #amountInput [(ngModel)]="initialAmount" prefix="€" [placeholder]="'0'" (blur)="validate()"></aegon-input-number>
             </div>
           </div>
           <div class="field">
@@ -71,57 +69,52 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
               </aegon-help>
             </div>
             <div class="inputs">
-              <aegon-input-radio [name]="'extraPymnt'" [value]="0" (change)="extraPymnt = false;">Nee</aegon-input-radio>
-              <aegon-input-radio [name]="'extraPymnt'" [value]="1" (change)="extraPymnt = true;">Ja</aegon-input-radio>
+              <aegon-input-radio [name]="'extraPymnt'" (change)="extraPymnt = false; validate()">Nee</aegon-input-radio>
+              <aegon-input-radio [name]="'extraPymnt'" (change)="extraPymnt = true; validate()">Ja</aegon-input-radio>
             </div>
           </div>
-        </div>
-        <div *ngIf="extraPymnt == true && mortgageType > 0" class="monthly-spendings">
-          <div class="field">
-            <div class="label">
-              Dit jaar
+          <div *ngIf="extraPymnt == true">
+            <div class="field">
+              <div class="label">
+                Dit jaar
+              </div>
+              <div class="inputs">
+                <aegon-input-number prefix="€" [(ngModel)]="pymntThisYear"></aegon-input-number>
+              </div>
             </div>
-            <div class="inputs">
-              <aegon-input-number prefix="€" [(ngModel)]="extraPymntThisYear"></aegon-input-number>
+            <div class="field">
+              <div class="label">
+                Voorgaande jaren
+              </div>
+              <div class="inputs">
+                <aegon-input-number prefix="€" [(ngModel)]="pymntPrevYears"></aegon-input-number>
+              </div>
             </div>
           </div>
-          <div class="field">
-            <div class="label">
-              Voorgaande jaren
-            </div>
-            <div class="inputs">
-              <aegon-input-number prefix="€" [(ngModel)]="extraPymntPrevYears"></aegon-input-number>
-            </div>
-          </div>
-        </div>
-        <div *ngIf="mortgageType > 0">
           <div class="field">
             <div class="label">
               Einddatum rentevastperiode
             </div>
             <div class="inputs">
-              <aegon-input-date [(ngModel)]="interestPeriodEnd"></aegon-input-date>
+              <aegon-input-date [(ngModel)]="interestPeriodEnd" (change)="validate()"></aegon-input-date>
             </div>
           </div>
           <p class="error" *ngIf="hasPartnerError">
              Kies of u een partner heeft of niet.
-           </p>
-         <div class="field">
-          <div class="label">
-            Huidig rentepercentage
-            <aegon-help>
-              Het rentepercentage dat is vastgelegd in uw huidige hypotheekcontract. 
-            </aegon-help>
-          </div>
-          <div class="inputs">
-            <aegon-input-number #amountInput [(ngModel)]="currIntRate" [max]="100"
-                               [placeholder]="'4,0%'">
-            </aegon-input-number>
-          </div>
-        </div>
-        <p class="error" *ngIf="familyIncomeError">
-            Vul uw netto gezinsinkomen in.
           </p>
+          <div class="field">
+            <div class="label">
+              Huidig rentepercentage
+              <aegon-help>
+                Het rentepercentage dat is vastgelegd in uw huidige hypotheekcontract. 
+              </aegon-help>
+            </div>
+            <div class="inputs">
+              <aegon-input-number #amountInput [(ngModel)]="oldIntRate" [max]="100"
+                                 [placeholder]="'4,0%'" (change)="validate()">
+              </aegon-input-number>
+            </div>
+          </div>
           <div class="field">
             <div class="label">
               NHG van toepassing
@@ -130,28 +123,34 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
               </aegon-help>
             </div>
             <div class="inputs">
-              <aegon-input-radio [name]="'nhg'" [value]="0" (change)="nhg = false;">Nee</aegon-input-radio>
-              <aegon-input-radio [name]="'nhg'" [value]="1" (change)="nhg = true;">Ja</aegon-input-radio>
+              <aegon-input-radio [name]="'nhg'" (change)="nhg = false; validate()">Nee</aegon-input-radio>
+              <aegon-input-radio [name]="'nhg'" (change)="nhg = true; validate()">Ja</aegon-input-radio>
             </div>
           </div>
           <div class="field">
             <div class="label"></div>
             <div class="inputs">
-              <button class="button icon-right icon-calculator" [disabled]="pendingCount > 0" [ngClass]="{pending: pendingCount > 0}" (click)="submit()">
-                Calculate
+              <button class="button icon-right icon-calculator" [disabled]="!isReady" [ngClass]="{pending: calculating}" (click)="calculate()">
+                Bereken
               </button>
             </div>
           </div>
         </div>
       </div>
-      <div class="result" >
+      <div class="result" *ngIf="calculated">
         <div class="bigger">
           <div class="row">
             <span class="label">Indicatie omzettingskosten</span>
             <span class="value">
               <span class="currency">€</span>
-              <span class="amount">{{totalCosts | money}}*</span>
+              <span class="amount">{{totalFee | money}}*</span>
             </span>
+          </div>
+        </div>
+        <div class="small">
+          <div class="row">
+            <p>Resterende rentevastperiode: {{periodTimeLeft}}<b></b></p>
+            <p>Vergelijkingsrente: <span> </span></p>
           </div>
         </div>
         <div class="footer">
@@ -164,27 +163,23 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
   providers: [HTTP_PROVIDERS],
   pipes: [MoneyPipe]
 })
-export class QuickQuoteBoeterenteComponent   {
+export class QuickQuoteBoeterenteComponent {
   step: number = 1;
   mortgageType: number = 0;
   initialAmount: number;
-  extraPymnt: boolean = false;
-  extraPymntThisYear: number;
-  extraPymntPrevYears: number;
+  extraPymnt: boolean;
+  pymntThisYear: number = 0;
+  pymntPrevYears: number = 0;
   interestPeriodEnd: string;
-  currIntRate: number;
-  nhg: boolean = false;
-  interestYears: number;
-  keyIncome: number;
+  oldIntRate: number;
+  nhg: boolean;
   interest: number;
-  extraMonth: boolean = false;
-  vacationMoney: boolean = false;
-  extraMonthPartner: boolean = false;
-  vacationMoneyPartner: boolean = false;
-  playWithMortgage: boolean = false;
-  playValue: number;
-  calculatedValue: number = 0;
-  monthlyPayment: number = 0;
+  isReady: boolean = false;
+  totalFee: number = 0;
+  periodTimeLeft: string;
+  newInterest: number;
+  calculating: boolean = false;
+  calculated: boolean = true;
 
   @ViewChild('interest') interestRef: ElementRef;
 
@@ -192,12 +187,31 @@ export class QuickQuoteBoeterenteComponent   {
     private http: Http
   ) {}
 
-  public log(logMsg: string) {
+  public log(logMsg: any) {
     console.log(logMsg);
+  }
+  /*
+   * Checks if the required fields
+   * have corresponding values and 
+   * Reset the calculation.
+   */
+  validate(): void {
+    this.calculated = false;
+    this.isReady = (this.mortgageType > 0 &&
+      this.initialAmount > 0  &&
+      this.interestPeriodEnd !== '' &&
+      this.oldIntRate > 0 &&
+      this.nhg !== undefined);
   }
 
   calculate(): void {
-    // if (this.incomeValue) {
+     this.calculating = true;
+
+     let feeFree = (0, 1 * this.initialAmount) - this.pymntThisYear;
+     let repymnt = this.initialAmount - this.pymntThisYear - this.pymntPrevYears;
+
+     let basisFee = repymnt - feeFree;
+         // if (this.incomeValue) {
     //   var yearSalary = this.yearSalaryCalculation(this.incomeValue, this.extraMonth, this.vacationMoney),
     //       yearSalaryPartner = this.yearSalaryCalculation(this.incomePartnerValue, this.extraMonthPartner, this.vacationMoneyPartner),
     //       togetherIncome = yearSalary + yearSalaryPartner,
@@ -210,87 +224,14 @@ export class QuickQuoteBoeterenteComponent   {
     //   this.monthlyPayment = this.getMonthlyPayment();
     // }
   }
+  submit() {
 
-  getMonthlyPayment(): number {
-    let monthlyInterest = this.interest / 12;
-    let pow = Math.pow((1 + monthlyInterest), -360);
-    return Math.round((monthlyInterest / (1 - pow)) * this.playValue);
-  }
-
-  yearSalaryCalculation(salary: number = 0, extraMonth: boolean, vacationMoney: boolean): number {
-    var yearSalary = salary * 12;
-    if (extraMonth) {
-      yearSalary = salary * 13;
-    }
-    if (vacationMoney) {
-      yearSalary = yearSalary * 1.08;
-    }
-    return yearSalary;
-  }
-
-  highestSalary(salary1: number, salary2: number): number {
-    return (salary1 => salary2) ? salary1 : salary2;
-  }
-
-  getKeyIncome(incomeHigher: number, togetherIncome: number, yearSalary: number) {
-    if (this.incomePartnerValue !== 0) {
-      this.keyIncome = incomeHigher + ((togetherIncome - incomeHigher) / 2);
-      return this.keyIncome;
-    }
-    return yearSalary;
-  }
-
-  annuitiesFactor(): number {
-    var interestElement = this.interestRef.nativeElement.getAttribute('data-interest');
-    this.interest = 0.05;
-    if (this.interestYears >= 10 && interestElement !== undefined) {
-      let interestRaw = JSON.parse("[" + interestElement + "]");
-      let interestPercentage = interestRaw[this.interestYears -10];
-      this.interest = interestPercentage / 100;
-    }
-    let duration = 30,
-        monthlyInterest = this.interest / 12,
-        durationCalculation = duration * 12,
-        pow = Math.pow((1 / (1 + monthlyInterest)),durationCalculation);
-    var annuity = (1 - pow) / monthlyInterest;
-    return annuity;
-  }
-
-  woonquoteBox1() {
-    var interestPercentage = this.interest *100;
-    var matrixCol: number = 0;
-    for (let i = interestCols.length - 1; i >= 0; i--) {
-      if (interestPercentage >= interestCols[i]) {
-        matrixCol = i + 1;
-        break;
-      }
-    }
-    var matrixRow: number = 0;
-    for (let i = keyIncomeRows.length - 1; i >= 0; i--) {
-      if (this.keyIncome >= keyIncomeRows[i]) {
-        matrixRow = i + 1;
-        break;
-      }
-    }
-    var result = percMatrix[matrixRow][matrixCol] / 100;
-    return result;
-  }
-
-  submitAmount(): void {
-    this.step += 1;
   }
 }
 
 
 const interestCols = [
   2.501, 3.001, 3.501, 4.001, 4.501, 5.001, 5.501, 6.001, 6.501, 7.001, 7.501
-];
-
-const keyIncomeRows = [
-  19500, 20000, 20500, 21000, 21500, 22000, 22500, 23000, 23500, 24000, 24500, 25000, 26000, 27000, 28000, 29000, 30000,
-  31000, 32000, 42000, 47000, 52000, 57000, 58000, 59000, 60000, 61000, 62000, 63000, 64000, 65000, 66000, 67000, 68000,
-  69000, 70000, 71000, 72000, 73000, 74000, 75000, 76000, 77000, 78000, 79000, 80000, 81000, 82000, 83000, 84000, 85000,
-  86000, 87000, 88000, 89000, 90000, 93000, 94000, 95000, 96000, 110000
 ];
 
 const percMatrix = [

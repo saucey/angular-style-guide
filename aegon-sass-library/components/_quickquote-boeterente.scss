@@ -1,0 +1,54 @@
+.quickquote.angular.boeterente {
+  .messages.messages--alert {
+    margin: 0 0 15px;
+    border: none;
+    background: $blue;
+
+    @include rem("padding", 12, 30, 12, 55);
+    .icon {
+      left: 10px;
+      .pathA:before {
+        color: $white;
+      }
+    }
+    .content {
+      color: $white;
+    }
+  }
+  .calculation {
+    @include rem("padding-bottom", 15);
+    .field {
+      margin-bottom: 15px;
+      label.radio > input[type="radio"] + span.radio {
+        background-color: $white;
+      }
+      .button[disabled],
+      .button[disabled]:hover {
+        opacity: 0.8;
+      }
+      .input.date {
+        display: block;
+        float: left;
+        border: 1px solid $slightly_darker_grey;
+        border-radius: 3px;
+        background-color: $white;
+        input {
+          border: none;
+          &:last-child {
+            margin-right: 0;
+          }
+        }
+      }
+    }
+  }
+  .result {
+    .small {
+    	p {
+    		margin-bottom: 5px;
+    	}
+    }
+    .footer {
+    	padding-top: 15px;
+    }
+  }
+}
