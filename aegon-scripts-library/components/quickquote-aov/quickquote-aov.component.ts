@@ -150,7 +150,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
           </p>
          <div class="field">
           <div class="label">
-            Netto gezinsinkomen
+            Netto maandelijks gezinsinkomen
             <aegon-help>
               Dit is de zesde helptekst.
             </aegon-help>
@@ -180,7 +180,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
           <a class="button orange icon-right arrow" [attr.href]="'/zakelijk/inkomensverzekeringen/arbeidsongeschiktheidsverzekering/arbeidsongeschiktheidsverzekering-berekenen?AO1_VERZSOM=' + netToGross(familyIncome)">Bereken uw premie</a>
         </div>
       </div>
-      <div class="result" *ngIf="isValidated">
+      <div *ngIf="isValidated" class="result">
         <div class="linear">
           <div class="row">
             <span class="label">Uitgave woning en energie</span>
@@ -275,6 +275,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
         </div>
       </div>
     </div>
+    <div *ngIf="isValidated">* Indicatie van vaste uitgaven per maand tot stand gekomen ism NIBUD. Voor een exacte berekening kunt u <a href="https://www.aegon.nl/zakelijk/inkomensverzekeringen/arbeidsongeschiktheidsverzekering/afspraak-arbeidsongeschiktheidsverzekering-advies">contact opnemen met een adviseur</a></div>
   `,
   providers: [NibudService, HTTP_PROVIDERS, JSONP_PROVIDERS],
   pipes: [MoneyPipe]
