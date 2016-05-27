@@ -25,6 +25,7 @@
       .button[disabled],
       .button[disabled]:hover {
         opacity: 0.8;
+        cursor: not-allowed;
       }
       .input.date {
         display: block;

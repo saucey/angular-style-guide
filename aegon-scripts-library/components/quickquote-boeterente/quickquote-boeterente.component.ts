@@ -164,7 +164,6 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
   pipes: [MoneyPipe]
 })
 export class QuickQuoteBoeterenteComponent {
-  step: number = 1;
   mortgageType: number = 0;
   initialAmount: number;
   extraPymnt: boolean;
@@ -174,12 +173,12 @@ export class QuickQuoteBoeterenteComponent {
   oldIntRate: number;
   nhg: boolean;
   interest: number;
-  isReady: boolean = false;
   totalFee: number = 0;
   periodTimeLeft: string;
   newInterest: number;
+  isReady: boolean = false;
   calculating: boolean = false;
-  calculated: boolean = true;
+  calculated: boolean = false;
 
   @ViewChild('interest') interestRef: ElementRef;
 
@@ -190,42 +189,98 @@ export class QuickQuoteBoeterenteComponent {
   public log(logMsg: any) {
     console.log(logMsg);
   }
+
   /*
-   * Checks if the required fields
-   * have corresponding values and 
-   * Reset the calculation.
+   * Checks if the required fields have corresponding
+   * values and reset the calculation.
    */
   validate(): void {
+    this.calculating = false;
     this.calculated = false;
+
     this.isReady = (this.mortgageType > 0 &&
-      this.initialAmount > 0  &&
+      this.initialAmount > -1  &&
       this.interestPeriodEnd !== '' &&
-      this.oldIntRate > 0 &&
+      this.oldIntRate > -1 &&
       this.nhg !== undefined);
   }
 
+  /*
+   * Calculates the penalty fee using
+   * the available fields.
+   */
   calculate(): void {
-     this.calculating = true;
+    // Adds the loader to the submit button.
+    this.calculating = true;
 
-     let feeFree = (0, 1 * this.initialAmount) - this.pymntThisYear;
-     let repymnt = this.initialAmount - this.pymntThisYear - this.pymntPrevYears;
+    // 1. Amount penalty-free repayment (Bedrag boetevrije aflossing).
+    let feeFree = +((0, 1 * this.initialAmount) - this.pymntThisYear).toFixed(2);
 
-     let basisFee = repymnt - feeFree;
-         // if (this.incomeValue) {
-    //   var yearSalary = this.yearSalaryCalculation(this.incomeValue, this.extraMonth, this.vacationMoney),
-    //       yearSalaryPartner = this.yearSalaryCalculation(this.incomePartnerValue, this.extraMonthPartner, this.vacationMoneyPartner),
-    //       togetherIncome = yearSalary + yearSalaryPartner,
-    //       highestSalaryVar = this.highestSalary(yearSalary,yearSalaryPartner),
-    //       annuitiesFactorVar = this.annuitiesFactor();
-    //       this.keyIncome = this.getKeyIncome(highestSalaryVar, togetherIncome, yearSalary);
-    //   var woonquoteBox1Var = this.woonquoteBox1();
-    //   this.playWithMortgage = false;
-    //   this.playValue = this.calculatedValue = Math.round((togetherIncome * woonquoteBox1Var / 12) * annuitiesFactorVar);
-    //   this.monthlyPayment = this.getMonthlyPayment();
-    // }
+    // 2. Repayment (Bedrag aflossing).
+    let repymnt = this.initialAmount - (this.extraPymnt !== false ? this.pymntThisYear : 0) - (this.extraPymnt !== false ? this.pymntPrevYears : 0);
+
+    // 3. Basis penalty-calculation (grondslag boeteberekening).
+    let basisFee = repymnt - feeFree;
+
+    /* 4. Total cash value (Totale contante waarde) */
+    // 4.1. Define Interest rate contract per month.
+    let monthlyIntRate = +(this.oldIntRate / 12).toFixed(4);
+    // 4.2. Define interest rate market per month
+    let d = new Date();
+    // Set current date to 1st of next month.
+    let currDate = d.getFullYear() + '-' + ((d.getMonth() + 2) < 10 ? '0' + (d.getMonth() + 2) : (d.getMonth() + 2)) + '-' + '01';
+    // Difference in dates rounded down to years.
+    let dateDiff = this.checkDateDiff(currDate, this.interestPeriodEnd, null);
+
+    this.log(dateDiff);
+
+    /**** ADD SERVICE FOR NHG ****/
+
+    // 4.3. Define interest for 1 period based on contract interest.
+    let periodIntst = (monthlyIntRate * basisFee).toFixed(2);
+
+    // 4.4. Define interest for 1 period based on market interest.
+    // 100 is temporary.
+    let periodMktIntst = (100 * basisFee).toFixed(2);
+
+    // 4.5. Define difference or missed interest for 1 period.
+    let periodIntstDiff = (+periodIntst) - (+periodMktIntst);
   }
-  submit() {
 
+  /*
+   * Calculate the difference between two dates
+   * and return the amount of years.
+   */
+  private checkDateDiff(date: string, latestDate: string, inType: string): number {
+    // Accepted date format RegExp (yyyy-mm-dd).
+    let rE = /^\d{4}\-\d{2}\-\d{2}$/;
+    /* Throw exeption if the parameter given do not
+     * have required format.
+     */
+    if (!rE.test(date) || !rE.test(latestDate)) {
+      throw new Error("Dates should be in format yyyy-mm-dd.");
+    }
+
+    let oDate = new Date(date),
+      d = oDate.getDate(), 
+      m = oDate.getMonth(), 
+      y = oDate.getFullYear();
+
+    let bigger = new Date(latestDate),
+      tY = bigger.getFullYear(),
+      tM = bigger.getMonth(),
+      tD = bigger.getDate(),
+      diff = tY - y;
+
+    if (m > tM) {
+      diff--;
+    }
+    else {
+      if (m == tM) {
+        if (d > tD) diff--;
+      }
+    }
+    return diff;
   }
 }
 
