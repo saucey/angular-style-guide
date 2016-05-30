@@ -200,9 +200,11 @@ export class QuickQuoteBoeterenteComponent {
 
     this.isReady = (this.mortgageType > 0 &&
       this.initialAmount > -1  &&
-      this.interestPeriodEnd !== '' &&
+      this.interestPeriodEnd !== undefined &&
       this.oldIntRate > -1 &&
       this.nhg !== undefined);
+
+    this.log(this.interestPeriodEnd);
   }
 
   /*
@@ -223,6 +225,7 @@ export class QuickQuoteBoeterenteComponent {
     let basisFee = repymnt - feeFree;
 
     /* 4. Total cash value (Totale contante waarde) */
+    let tcw;
     // 4.1. Define Interest rate contract per month.
     let monthlyIntRate = +(this.oldIntRate / 12).toFixed(4);
     // 4.2. Define interest rate market per month
@@ -230,9 +233,8 @@ export class QuickQuoteBoeterenteComponent {
     // Set current date to 1st of next month.
     let currDate = d.getFullYear() + '-' + ((d.getMonth() + 2) < 10 ? '0' + (d.getMonth() + 2) : (d.getMonth() + 2)) + '-' + '01';
     // Difference in dates rounded down to years.
-    let dateDiff = this.checkDateDiff(currDate, this.interestPeriodEnd, null);
-
-    this.log(dateDiff);
+    let dateDiff = this.dateDiff(currDate, this.interestPeriodEnd, 'years');
+    this.log('Difference in years: ' + dateDiff);
 
     /**** ADD SERVICE FOR NHG ****/
 
@@ -245,42 +247,87 @@ export class QuickQuoteBoeterenteComponent {
 
     // 4.5. Define difference or missed interest for 1 period.
     let periodIntstDiff = (+periodIntst) - (+periodMktIntst);
+    /* 4.6.Define periods to be calculated (!!Ingangsdatum leenlaag 
+     * is geen invoer )
+     */
+    let periods = this.dateDiff(currDate, this.interestPeriodEnd, 'months');
+    this.log('periods: ' + periods);
+
+    for (let i = 0; i < periods; i++){
+      
+    }
   }
 
   /*
    * Calculate the difference between two dates
    * and return the amount of years.
    */
-  private checkDateDiff(date: string, latestDate: string, inType: string): number {
-    // Accepted date format RegExp (yyyy-mm-dd).
-    let rE = /^\d{4}\-\d{2}\-\d{2}$/;
-    /* Throw exeption if the parameter given do not
+  private dateDiff(date: string, latestDate: string, inType: string = null): number {
+    /* 
+     * Throw exeption if the parameter given do not
      * have required format.
      */
-    if (!rE.test(date) || !rE.test(latestDate)) {
+    // Accepted date format RegExp (yyyy-mm-dd).
+    let dateFmt = /^\d{4}\-\d{2}\-\d{2}$/;
+
+    if (!dateFmt.test(date) || !dateFmt.test(latestDate)) {
       throw new Error("Dates should be in format yyyy-mm-dd.");
     }
+    /* 
+     * Throw exeption if the itType parameter do not
+     * match the available options.
+     */
+    // Types available.
+    let types = /^(years|months)$/;
 
-    let oDate = new Date(date),
-      d = oDate.getDate(), 
-      m = oDate.getMonth(), 
-      y = oDate.getFullYear();
+    if (typeof inType !== null && !types.test(inType)) {
+      throw new Error("The available types are 'years' and 'months'.");
+    }    
+    // Default result is in years.
+    if(typeof inType === null) {
+      inType = 'years';
+    }
+    let eDate = new Date(date);
+    let lDate = new Date(latestDate);
+    /*
+     * Correct order if first date is bigger
+     * than second.
+     */
+    if(eDate > lDate) {
+      let tmpEDate = eDate;
+      let tmpLDate = lDate;
+      eDate = tmpLDate;
+      lDate = tmpEDate;
+    }
 
-    let bigger = new Date(latestDate),
-      tY = bigger.getFullYear(),
-      tM = bigger.getMonth(),
-      tD = bigger.getDate(),
-      diff = tY - y;
+    // Earlier date vars.
+    let d = eDate.getDate(), 
+      m = eDate.getMonth(), 
+      y = eDate.getFullYear();
+    // Later date vars.
+    let lY = lDate.getFullYear(),
+      lM = lDate.getMonth(),
+      lD = lDate.getDate();
+    // Years difference.
+    let diff = lY - y;
 
-    if (m > tM) {
+    if (m > lM) {
       diff--;
     }
     else {
-      if (m == tM) {
-        if (d > tD) diff--;
+      if (m == lM) {
+        if (d > lD) {
+          diff--;
+        }
       }
     }
-    return diff;
+    if(inType === 'years') {
+      return diff;
+    }
+    else {
+      let monthsDiff = lM - m;
+      return (diff * 12) + monthsDiff;
+    }
   }
 }
 
