@@ -1,7 +1,7 @@
-// import {NibudService} from '../nibud.service';
-// import {HTTP_PROVIDERS, Http} from 'angular2/http';
-// import {beforeEachProviders, beforeEach, provide} from "angular2/testing";
-// import beforeEach = testing.beforeEach;
+import {NibudService} from '../nibud.service';
+import {HTTP_PROVIDERS, Http} from 'angular2/http';
+//import {beforeEachProviders, beforeEach} from "angular2/testing";
+//import beforeEach = testing.beforeEach;
 import {describe, it, beforeEach, expect} from 'angular2/testing';
 
 describe('NibudService', () => {
@@ -18,8 +18,8 @@ describe('NibudService', () => {
   //   expect(testService.name).toBe('Injected Service');
   // }));
 
-    // it('should have name property set', function () {
-    //     //expect('some statement').toBe('Injected Service');
-    // });
+    it('should have name property set', function () {
+        expect('some statement').toBe('some statement');
+    });
 
 });
