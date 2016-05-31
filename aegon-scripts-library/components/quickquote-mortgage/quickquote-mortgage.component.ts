@@ -133,6 +133,10 @@ export class QuickQuoteMortgageComponent   {
     private http: Http
   ) {}
 
+  roundHundreds(value): number {
+    return (100 * Math.round(value / 100));
+  }
+
   calculate(): void {
     if (this.incomeValue) {
       var yearSalary = this.yearSalaryCalculation(this.incomeValue, this.extraMonth, this.vacationMoney),
@@ -143,7 +147,8 @@ export class QuickQuoteMortgageComponent   {
           this.keyIncome = this.getKeyIncome(highestSalaryVar, togetherIncome, yearSalary);
       var woonquoteBox1Var = this.woonquoteBox1();
       this.playWithMortgage = false;
-      this.playValue = this.calculatedValue = Math.round((togetherIncome * woonquoteBox1Var / 12) * annuitiesFactorVar);
+      this.playValue = this.calculatedValue = this.roundHundreds((togetherIncome * woonquoteBox1Var / 12) * annuitiesFactorVar);
+
       this.monthlyPayment = this.getMonthlyPayment();
     }
   }
@@ -217,7 +222,6 @@ export class QuickQuoteMortgageComponent   {
     this.step += 1;
   }
 }
-
 
 const interestCols = [
   2.501, 3.001, 3.501, 4.001, 4.501, 5.001, 5.501, 6.001, 6.501, 7.001, 7.501
