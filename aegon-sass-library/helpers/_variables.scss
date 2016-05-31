@@ -63,12 +63,20 @@ $font_icons: 'aegon_icons'; // No fallback here >> !unnecessary
 
 // rearranged icon code definitions numerically; please adhere to that order for future definitions, it makes it way easier to determine which codes are already defined / used when comparing to icomoon
 $font_icons_arrow_right: "\e600";
+$font_icons_arrow_location: "\e601";
 $font_icons_document_n_check: "\e604";
 $font_icons_headhphones: "\e605";
+$font_icons_sparen: "\e607";
+$font_icons_beleggen: "\e608";
+$font_icons_verzekeren: "\e609";
+$font_icons_hypotheek: "\e60b";
+$font_icons_schade_melden: "\e60c";
 $font_icons_fistfull: "\e60e";
+$font_icons_moneybag: "\e60f";
 $font_icons_edit: "\e610";
 $font_icons_call: "\e617";
 $font_icons_chat: "\e618";
+$font_icons_chart: "\e619";
 $font_icons_comment: "\e900";
 $font_icons_producten: "\e629";
 $font_icons_document_n_pen: "\e62c";
@@ -80,7 +88,6 @@ $font_icons_tip: "\e631";
 $font_icons_check: "\e632";
 $font_icons_radio: "\e633";	//leave it here, maybe at some point radio and circle will diverge, and in that case it would only be a variable change
 $font_icons_circle: "\e633";
-$font_icons_chart: "\e619";
 $font_icons_man: "\e636";
 $font_icons_old_man: "\e60a";
 $font_icons_arrow_right_skinny: "\e63b";
