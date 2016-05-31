@@ -1,3 +1,4 @@
+import 'components/angular-bootstrap/main';
 import {bootstrap}    from 'angular2/platform/browser';
 import {QuickQuoteMortgageComponent} from './quickquote-mortgage.component';
 
