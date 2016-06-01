@@ -87,13 +87,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
                 <option value="1">Ja, 1 kind</option>
                 <option value="2">Ja, 2 kinderen</option>
                 <option value="3">Ja, 3 kinderen</option>
-                <option value="4">Ja, 4 kinderen</option>
-                <option value="5">Ja, 5 kinderen</option>
-                <option value="6">Ja, 6 kinderen</option>
-                <option value="7">Ja, 7 kinderen</option>
-                <option value="8">Ja, 8 kinderen</option>
-                <option value="9">Ja, 9 kinderen</option>
-                <option value="10">Ja, 10 of meer kinderen</option>
+                <option value="4">Ja, 4 of meer kinderen</option>
               </select>
             </div>
           </div>
@@ -140,7 +134,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
             </aegon-help>
           </div>
           <div class="inputs">
-            <aegon-input-number  prefix="€" [(ngModel)]="costResidence" [max]="99999999"
+            <aegon-input-number prefix="€" [(ngModel)]="costResidence" [max]="99999999"
                                 [placeholder]="'0'" (modelChange)="triggerValueChanged();">
             </aegon-input-number>
           </div>
@@ -183,7 +177,12 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
       <div *ngIf="isValidated" class="result">
         <div class="linear">
           <div class="row">
-            <span class="label">Uitgave woning en energie</span>
+            <span class="label">
+              Uitgave woning en energie
+              <aegon-help>
+                Dit is de helptekst.
+              </aegon-help>
+            </span>
             <span class="value">
               <span class="currency" *ngIf="!editingHouse">€</span>
               <span class="amount" *ngIf="!editingHouse">{{housingCosts | money}}</span>
@@ -197,8 +196,13 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
             </span>
           </div>
           <div class="row">
-            <span class="label">Uitgave verzekeringen en onderwijs</span>
-             <span class="value">
+            <span class="label">
+              Uitgave verzekeringen en onderwijs
+              <aegon-help>
+                Dit is de helptekst.
+              </aegon-help>
+            </span>
+            <span class="value">
               <span class="currency" *ngIf="!editingFixed">€</span>
               <span class="amount" *ngIf="!editingFixed">{{otherFixedCharges | money}}</span>
               <span class="amount" *ngIf="editingFixed">
@@ -479,7 +483,8 @@ export class QuickQuoteAovComponent implements OnInit {
     });
 
     this.mapCosts(flattenedArray);
-
+    this.housingCosts += this.costResidence || 0;
+    this.calculateTotals();
     this.pendingCount -= 1;
   }
 
@@ -492,7 +497,6 @@ export class QuickQuoteAovComponent implements OnInit {
       }
       this[costGroup] = this.getAmountForGroupedCosts(mapping[costGroup], flattenedArray);
     }
-    this.calculateTotals();
   }
 
   private calculateTotals() {
