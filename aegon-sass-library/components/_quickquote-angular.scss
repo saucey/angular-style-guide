@@ -70,26 +70,11 @@
       padding-top: 9px;
       padding-right: 50px;
 
-      .help {
-        position: absolute;
-        top: 0;
-        right: 20px;
 
-        &.dialog {
-          right: auto;
-          width: 400px;
-        }
-      }
     }
 
     .help {
       padding-top: 20px;
-      color: $black;
-    }
-
-    .help.dialog {
-      display: none;
-      margin-left: 0;
     }
 
     label.checkbox {
@@ -134,6 +119,23 @@
     }
   }
 
+  .label {
+    .help {
+      position: absolute;
+      top: 0;
+      right: 20px;
+      color: $black;
+
+      &.dialog {
+        display: none;
+        margin-left: 0;
+        right: auto;
+        width: 400px;
+        color: $black;
+      }
+    }
+  }
+
   button.pending:after {
     background-image: url($image_path + 'spinner.gif');
     background-repeat: no-repeat;
@@ -144,6 +146,11 @@
 
   .result {
     color: $white;
+
+    .help {
+      padding-top: 11px;
+      color: $white;
+    }
 
     &.tiny {
       padding-top: 10px;
@@ -179,6 +186,10 @@
       .label {
         @include rem('font-size', $medium);
       }
+    }
+
+    .label {
+      position: relative;
     }
 
     .label,

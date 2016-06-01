@@ -1,6 +1,5 @@
-import {enableProdMode} from 'angular2/core'
+import 'components/angular-bootstrap/main';
 import {bootstrap}    from 'angular2/platform/browser';
 import {QuickQuoteDipComponent} from './quickquote-dip.component';
 
-enableProdMode();
 bootstrap(QuickQuoteDipComponent);
