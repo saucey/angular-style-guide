@@ -225,7 +225,7 @@ export class QuickQuoteBoeterenteComponent {
     let basisFee = repymnt - feeFree;
 
     /* 4. Total cash value (Totale contante waarde) */
-    let tcw;
+    let tcw: number = 0, monthlyIntsts: number, annualInsts: number;
     // 4.1. Define Interest rate contract per month.
     let monthlyIntRate = +(this.oldIntRate / 12).toFixed(4);
     // 4.2. Define interest rate market per month
@@ -236,7 +236,14 @@ export class QuickQuoteBoeterenteComponent {
     let dateDiff = this.dateDiff(currDate, this.interestPeriodEnd, 'years');
     this.log('Difference in years: ' + dateDiff);
 
-    /**** ADD SERVICE FOR NHG ****/
+    /**** @todo ADD SERVICE FOR NHG ****/
+    if(this.nhg === true) {
+      annualInsts = 6;
+    }
+    else {
+      annualInsts = 8;
+    }
+    monthlyIntsts = (annualInsts / 12);
 
     // 4.3. Define interest for 1 period based on contract interest.
     let periodIntst = (monthlyIntRate * basisFee).toFixed(2);
@@ -254,7 +261,8 @@ export class QuickQuoteBoeterenteComponent {
     this.log('periods: ' + periods);
 
     for (let i = 0; i < periods; i++){
-      
+      let cw = periodIntstDiff / ( Math.pow((monthlyIntsts + 1), (periods - +(i) +1)) );
+      tcw = tcw + cw;
     }
   }
 
@@ -262,7 +270,7 @@ export class QuickQuoteBoeterenteComponent {
    * Calculate the difference between two dates
    * and return the amount of years.
    */
-  private dateDiff(date: string, latestDate: string, inType: string = null): number {
+  dateDiff(date: string, latestDate: string, inType: string = null): number {
     /* 
      * Throw exeption if the parameter given do not
      * have required format.
