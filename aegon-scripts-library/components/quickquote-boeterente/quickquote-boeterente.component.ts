@@ -149,8 +149,8 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
         </div>
         <div class="small">
           <div class="row">
-            <p>Resterende rentevastperiode: {{periodTimeLeft}}<b></b></p>
-            <p>Vergelijkingsrente: <span> </span></p>
+            <p>Resterende rentevastperiode: <b>{{ periodTimeLeft }}</b> {{ periodTimeLeft > 1 ? 'maanden' : 'maand' }}<b></b></p>
+            <p>Vergelijkingsrente: {{ newInterest }}% <span> </span></p>
           </div>
         </div>
         <div class="footer">
@@ -174,7 +174,7 @@ export class QuickQuoteBoeterenteComponent {
   nhg: boolean;
   interest: number;
   totalFee: number = 0;
-  periodTimeLeft: string;
+  periodTimeLeft: number;
   newInterest: number;
   isReady: boolean = false;
   calculating: boolean = false;
@@ -196,6 +196,7 @@ export class QuickQuoteBoeterenteComponent {
    */
   validate(): void {
     this.calculating = false;
+    // hides the value.
     this.calculated = false;
 
     this.isReady = (this.mortgageType > 0 &&
@@ -219,13 +220,17 @@ export class QuickQuoteBoeterenteComponent {
     let feeFree = +((0, 1 * this.initialAmount) - this.pymntThisYear).toFixed(2);
 
     // 2. Repayment (Bedrag aflossing).
-    let repymnt = this.initialAmount - (this.extraPymnt !== false ? this.pymntThisYear : 0) - (this.extraPymnt !== false ? this.pymntPrevYears : 0);
+    let repymnt = this.initialAmount;
+    if(this.extraPymnt === true) {
+       repymnt = this.initialAmount - this.pymntThisYear - this.pymntPrevYears;
+    }
+    
 
     // 3. Basis penalty-calculation (grondslag boeteberekening).
     let basisFee = repymnt - feeFree;
 
     /* 4. Total cash value (Totale contante waarde) */
-    let tcw: number = 0, monthlyIntsts: number, annualInsts: number;
+    let tcw: number = 0, monthlyIntsts: number;
     // 4.1. Define Interest rate contract per month.
     let monthlyIntRate = +(this.oldIntRate / 12).toFixed(4);
     // 4.2. Define interest rate market per month
@@ -234,16 +239,19 @@ export class QuickQuoteBoeterenteComponent {
     let currDate = d.getFullYear() + '-' + ((d.getMonth() + 2) < 10 ? '0' + (d.getMonth() + 2) : (d.getMonth() + 2)) + '-' + '01';
     // Difference in dates rounded down to years.
     let dateDiff = this.dateDiff(currDate, this.interestPeriodEnd, 'years');
+
+    this.periodTimeLeft = dateDiff;
     this.log('Difference in years: ' + dateDiff);
 
     /**** @todo ADD SERVICE FOR NHG ****/
     if(this.nhg === true) {
-      annualInsts = 6;
+      this.newInterest = 6;
     }
     else {
-      annualInsts = 8;
+      this.newInterest = 8;
     }
-    monthlyIntsts = (annualInsts / 12);
+
+    monthlyIntsts = (this.newInterest / 12);
 
     // 4.3. Define interest for 1 period based on contract interest.
     let periodIntst = (monthlyIntRate * basisFee).toFixed(2);
@@ -259,11 +267,18 @@ export class QuickQuoteBoeterenteComponent {
      */
     let periods = this.dateDiff(currDate, this.interestPeriodEnd, 'months');
     this.log('periods: ' + periods);
-
+    // Loop through periods.
     for (let i = 0; i < periods; i++){
       let cw = periodIntstDiff / ( Math.pow((monthlyIntsts + 1), (periods - +(i) +1)) );
       tcw = tcw + cw;
     }
+    // Set the value of total fee.
+    this.totalFee = ((repymnt - feeFree) / basisFee) * tcw;
+    this.log(this.totalFee);
+    // Removes the class pending in the button.
+    this.calculating = false;
+    // Shows the value.
+    this.calculated = true;
   }
 
   /*
@@ -338,73 +353,3 @@ export class QuickQuoteBoeterenteComponent {
     }
   }
 }
-
-
-const interestCols = [
-  2.501, 3.001, 3.501, 4.001, 4.501, 5.001, 5.501, 6.001, 6.501, 7.001, 7.501
-];
-
-const percMatrix = [
-  [9.0, 9.5, 9.5, 10.0, 10.5, 10.5, 11.0, 11.5, 11.5, 12.0, 12.0, 12.5],
-  [9.0, 9.5, 9.5, 10.0, 10.5, 10.5, 11.0, 11.5, 11.5, 12.0, 12.0, 12.5],
-  [10.5, 10.5, 11.0, 11.5, 12.0, 12.5, 12.5, 13.0, 13.5, 13.5, 14.0, 14.0],
-  [11.5, 12.0, 12.0, 12.5, 13.0, 13.5, 14.0, 14.0, 14.5, 15.0, 15.0, 15.5],
-  [12.0, 12.5, 13.0, 13.5, 14.0, 14.5, 15.0, 15.5, 16.0, 16.0, 16.5, 16.5],
-  [13.0, 13.5, 14.0, 14.5, 15.0, 15.5, 16.0, 16.5, 17.0, 17.5, 17.5, 18.0],
-  [13.5, 14.0, 14.5, 15.0, 15.5, 16.0, 16.5, 17.0, 17.5, 18.0, 18.5, 19.0],
-  [14.0, 15.0, 15.5, 16.0, 16.5, 17.0, 17.5, 18.0, 18.5, 19.0, 19.5, 20.0],
-  [14.5, 15.5, 16.5, 17.0, 18.0, 18.5, 19.0, 19.5, 20.0, 20.5, 21.0, 21.5],
-  [15.0, 15.5, 16.5, 17.5, 18.5, 19.0, 20.0, 20.5, 21.0, 21.5, 22.0, 22.5],
-  [15.0, 16.0, 17.0, 17.5, 18.5, 19.5, 20.5, 21.5, 22.0, 22.5, 23.0, 23.5],
-  [15.5, 16.5, 17.5, 18.0, 19.0, 20.0, 21.0, 22.0, 23.0, 23.5, 24.0, 24.5],
-  [15.5, 16.5, 17.5, 18.5, 19.5, 20.5, 21.5, 22.5, 23.0, 24.0, 25.0, 25.0],
-  [16.5, 17.5, 18.5, 19.5, 20.5, 21.5, 22.5, 23.5, 24.5, 25.0, 26.0, 26.5],
-  [17.5, 18.5, 19.5, 20.5, 21.5, 22.5, 23.5, 24.5, 25.5, 26.5, 27.0, 28.0],
-  [18.5, 19.5, 20.5, 21.5, 22.5, 23.5, 24.5, 25.5, 26.5, 27.5, 28.0, 29.0],
-  [19.0, 20.0, 21.0, 22.0, 23.0, 24.0, 25.0, 26.0, 27.0, 28.0, 29.0, 30.0],
-  [19.5, 20.5, 21.5, 22.5, 24.0, 25.0, 26.0, 27.0, 28.0, 29.0, 30.0, 31.0],
-  [20.0, 21.0, 22.0, 23.5, 25.0, 26.0, 27.0, 28.0, 29.0, 30.0, 31.0, 32.0],
-  [20.5, 21.5, 22.5, 24.0, 25.0, 26.0, 27.0, 28.0, 29.0, 30.0, 31.0, 32.0],
-  [20.5, 21.5, 22.5, 24.0, 25.0, 26.0, 27.0, 28.0, 29.5, 30.5, 31.5, 32.5],
-  [21.0, 22.0, 23.0, 24.0, 25.0, 26.5, 27.5, 28.5, 29.5, 30.5, 31.5, 32.5],
-  [21.5, 22.5, 23.5, 24.5, 25.5, 26.5, 27.5, 28.5, 29.5, 30.5, 31.5, 32.5],
-  [22.0, 23.0, 24.0, 25.0, 26.0, 27.0, 28.0, 28.5, 29.5, 30.5, 31.5, 32.5],
-  [22.0, 23.0, 24.0, 25.0, 26.0, 27.0, 28.0, 29.0, 30.0, 30.5, 31.5, 32.5],
-  [22.5, 23.5, 24.5, 25.5, 26.5, 27.5, 28.5, 29.0, 30.0, 31.0, 31.5, 32.5],
-  [22.5, 23.5, 24.5, 25.5, 26.5, 27.5, 28.5, 29.5, 30.0, 31.0, 31.5, 32.5],
-  [22.5, 23.5, 24.5, 26.0, 27.0, 28.0, 29.0, 29.5, 30.5, 31.0, 32.0, 32.5],
-  [22.5, 24.0, 25.0, 26.0, 27.0, 28.0, 29.0, 30.0, 30.5, 31.5, 32.0, 33.0],
-  [23.0, 24.0, 25.0, 26.0, 27.5, 28.0, 29.5, 30.0, 31.0, 32.0, 32.5, 33.0],
-  [23.0, 24.5, 25.5, 26.5, 27.5, 28.5, 29.5, 30.5, 31.0, 32.0, 33.0, 33.5],
-  [23.5, 24.5, 25.5, 26.5, 27.5, 28.5, 29.5, 30.5, 31.5, 32.5, 33.0, 33.5],
-  [23.5, 24.5, 26.0, 27.0, 28.0, 29.0, 30.0, 31.0, 31.5, 32.5, 33.5, 34.0],
-  [23.5, 25.0, 26.0, 27.0, 28.0, 29.0, 30.0, 31.0, 32.0, 32.5, 33.5, 34.0],
-  [23.5, 25.0, 26.0, 27.0, 28.5, 29.5, 30.5, 31.0, 32.0, 33.0, 33.5, 34.5],
-  [23.5, 25.0, 26.5, 27.5, 28.5, 29.5, 30.5, 31.5, 32.5, 33.0, 34.0, 34.5],
-  [23.5, 25.0, 26.5, 27.5, 28.5, 29.5, 30.5, 31.5, 32.5, 33.5, 34.0, 35.0],
-  [23.5, 25.0, 26.5, 28.0, 29.0, 30.0, 31.0, 32.0, 32.5, 33.5, 34.5, 35.0],
-  [23.5, 25.0, 26.5, 28.0, 29.0, 30.0, 31.0, 32.0, 33.0, 33.5, 34.5, 35.0],
-  [23.5, 25.0, 26.5, 28.0, 29.0, 30.5, 31.5, 32.0, 33.0, 34.0, 34.5, 35.5],
-  [23.5, 25.0, 26.5, 28.0, 29.0, 30.5, 31.5, 32.5, 33.5, 34.0, 35.0, 35.5],
-  [24.0, 25.0, 26.5, 28.0, 29.0, 30.5, 31.5, 32.5, 33.5, 34.5, 35.0, 36.0],
-  [24.0, 25.0, 26.5, 28.0, 29.0, 30.5, 32.0, 32.5, 33.5, 34.5, 35.5, 36.0],
-  [24.0, 25.5, 26.5, 28.0, 29.0, 30.5, 32.0, 33.0, 34.0, 34.5, 35.5, 36.0],
-  [24.0, 25.5, 26.5, 28.0, 29.5, 30.5, 32.0, 33.0, 34.0, 35.0, 35.5, 36.5],
-  [24.0, 25.5, 26.5, 28.0, 29.5, 30.5, 32.0, 33.0, 34.0, 35.0, 36.0, 36.5],
-  [24.0, 25.5, 27.0, 28.0, 29.5, 30.5, 32.0, 33.0, 34.5, 35.0, 36.0, 36.5],
-  [24.0, 25.5, 27.0, 28.0, 29.5, 30.5, 32.0, 33.0, 34.5, 35.5, 36.0, 37.0],
-  [24.0, 25.5, 27.0, 28.0, 29.5, 30.5, 32.0, 33.0, 34.5, 35.5, 36.5, 37.0],
-  [24.0, 25.5, 27.0, 28.5, 29.5, 31.0, 32.0, 33.0, 34.5, 35.5, 36.5, 37.0],
-  [24.0, 25.5, 27.0, 28.5, 29.5, 31.0, 32.0, 33.0, 34.5, 35.5, 36.5, 37.5],
-  [24.5, 25.5, 27.0, 28.5, 29.5, 31.0, 32.0, 33.0, 34.5, 35.5, 36.5, 37.5],
-  [24.5, 25.5, 27.0, 28.5, 29.5, 31.0, 32.0, 33.5, 34.5, 35.5, 36.5, 37.5],
-  [24.5, 26.0, 27.0, 28.5, 30.0, 31.0, 32.0, 33.5, 34.5, 35.5, 36.5, 37.5],
-  [24.5, 26.0, 27.0, 28.5, 30.0, 31.0, 32.0, 33.5, 34.5, 35.5, 36.5, 38.0],
-  [24.5, 26.0, 27.0, 28.5, 30.0, 31.0, 32.5, 33.5, 34.5, 35.5, 36.5, 38.0],
-  [24.5, 26.0, 27.5, 28.5, 30.0, 31.0, 32.5, 33.5, 34.5, 35.5, 36.5, 38.0],
-  [24.5, 26.0, 27.5, 28.5, 30.0, 31.5, 32.5, 33.5, 34.5, 36.0, 36.5, 38.0],
-  [24.5, 26.0, 27.5, 28.5, 30.0, 31.5, 32.5, 33.5, 35.0, 36.0, 37.0, 38.0],
-  [24.5, 26.0, 27.5, 29.0, 30.0, 31.5, 32.5, 33.5, 35.0, 36.0, 37.0, 38.0],
-  [24.5, 26.0, 27.5, 29.0, 30.0, 31.5, 32.5, 34.0, 35.0, 36.0, 37.0, 38.0],
-  [24.5, 26.0, 27.5, 29.0, 30.0, 31.5, 32.5, 34.0, 35.0, 36.0, 37.0, 38.0]
-];
