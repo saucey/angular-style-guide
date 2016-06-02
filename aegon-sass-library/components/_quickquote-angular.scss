@@ -26,6 +26,7 @@
     color: $black;
     font-family:$font_light;
     font-size:18px;
+    text-transform: capitalize;
   }
 
   input[type=text]::placeholder,
@@ -125,6 +126,8 @@
       top: 0;
       right: 20px;
       color: $black;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
 
       &.dialog {
         display: none;

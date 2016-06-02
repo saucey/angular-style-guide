@@ -34,7 +34,7 @@
       }
     }
     .bigger {
-      margin-top: 10px;
+      margin: 2em 0;
       .row {
         .label, .currency, .amount {
           @include rem("font-size", $x-large);
@@ -64,5 +64,11 @@
     input {
       width: 100px;
     }
+    .footer {
+      .label {
+        display:none;
+      }
+    }
   }
+
 }
