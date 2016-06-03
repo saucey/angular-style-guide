@@ -205,7 +205,7 @@ export class QuickQuoteBoeterenteComponent {
       this.oldIntRate > -1 &&
       this.nhg !== undefined);
 
-    this.log(this.interestPeriodEnd);
+    this.log(this);
   }
 
   /*
@@ -217,14 +217,17 @@ export class QuickQuoteBoeterenteComponent {
     this.calculating = true;
 
     // 1. Amount penalty-free repayment (Bedrag boetevrije aflossing).
-    let feeFree = +((0, 1 * this.initialAmount) - this.pymntThisYear).toFixed(2);
+    let feeFree = this.roundToDeg((0.1 * this.initialAmount), 2);
+    this.log('Amount penalty free: ' + feeFree);
 
     // 2. Repayment (Bedrag aflossing).
     let repymnt = this.initialAmount;
     if(this.extraPymnt === true) {
-       repymnt = this.initialAmount - this.pymntThisYear - this.pymntPrevYears;
+      feeFree = this.roundToDeg(((0, 1 * this.initialAmount) - this.pymntThisYear), 2);
+      repymnt = this.initialAmount - this.pymntThisYear - this.pymntPrevYears;
     }
     
+    this.log('Repayment: ' + repymnt);
 
     // 3. Basis penalty-calculation (grondslag boeteberekening).
     let basisFee = repymnt - feeFree;
@@ -232,7 +235,7 @@ export class QuickQuoteBoeterenteComponent {
     /* 4. Total cash value (Totale contante waarde) */
     let tcw: number = 0, monthlyIntsts: number;
     // 4.1. Define Interest rate contract per month.
-    let monthlyIntRate = +(this.oldIntRate / 12).toFixed(4);
+    let monthlyIntRate = this.roundToDeg(+ (this.oldIntRate / 12), 4);
     // 4.2. Define interest rate market per month
     let d = new Date();
     // Set current date to 1st of next month.
@@ -240,7 +243,6 @@ export class QuickQuoteBoeterenteComponent {
     // Difference in dates rounded down to years.
     let dateDiff = this.dateDiff(currDate, this.interestPeriodEnd, 'years');
 
-    this.periodTimeLeft = dateDiff;
     this.log('Difference in years: ' + dateDiff);
 
     /**** @todo ADD SERVICE FOR NHG ****/
@@ -254,27 +256,30 @@ export class QuickQuoteBoeterenteComponent {
     monthlyIntsts = (this.newInterest / 12);
 
     // 4.3. Define interest for 1 period based on contract interest.
-    let periodIntst = (monthlyIntRate * basisFee).toFixed(2);
+    let periodIntst = this.roundToDeg((monthlyIntRate * basisFee), 2);
 
     // 4.4. Define interest for 1 period based on market interest.
     // 100 is temporary.
-    let periodMktIntst = (100 * basisFee).toFixed(2);
-
+    let periodMktIntst = this.roundToDeg((100 * basisFee),2);
+    this.log(periodMktIntst);
     // 4.5. Define difference or missed interest for 1 period.
     let periodIntstDiff = (+periodIntst) - (+periodMktIntst);
     /* 4.6.Define periods to be calculated (!!Ingangsdatum leenlaag 
      * is geen invoer )
      */
     let periods = this.dateDiff(currDate, this.interestPeriodEnd, 'months');
+    this.periodTimeLeft = periods;
+
     this.log('periods: ' + periods);
     // Loop through periods.
     for (let i = 0; i < periods; i++){
       let cw = periodIntstDiff / ( Math.pow((monthlyIntsts + 1), (periods - +(i) +1)) );
       tcw = tcw + cw;
     }
+    this.log('tcw: '+tcw);
     // Set the value of total fee.
     this.totalFee = ((repymnt - feeFree) / basisFee) * tcw;
-    this.log(this.totalFee);
+    this.log(this);
     // Removes the class pending in the button.
     this.calculating = false;
     // Shows the value.
@@ -287,13 +292,10 @@ export class QuickQuoteBoeterenteComponent {
    */
   dateDiff(date: string, latestDate: string, inType: string = null): number {
     /* 
-     * Throw exeption if the parameter given do not
-     * have required format.
+     * Throw exeption if the dates given are not
+     * valid.
      */
-    // Accepted date format RegExp (yyyy-mm-dd).
-    let dateFmt = /^\d{4}\-\d{2}\-\d{2}$/;
-
-    if (!dateFmt.test(date) || !dateFmt.test(latestDate)) {
+    if (!this.validateDate(date) || !this.validateDate(latestDate)) {
       throw new Error("Dates should be in format yyyy-mm-dd.");
     }
     /* 
@@ -302,7 +304,6 @@ export class QuickQuoteBoeterenteComponent {
      */
     // Types available.
     let types = /^(years|months)$/;
-
     if (typeof inType !== null && !types.test(inType)) {
       throw new Error("The available types are 'years' and 'months'.");
     }    
@@ -333,12 +334,13 @@ export class QuickQuoteBoeterenteComponent {
       lD = lDate.getDate();
     // Years difference.
     let diff = lY - y;
-
+    // Rest 1 if later date month is higher.
     if (m > lM) {
       diff--;
     }
     else {
       if (m == lM) {
+        // Rest 1 if later date day is higher.
         if (d > lD) {
           diff--;
         }
@@ -351,5 +353,59 @@ export class QuickQuoteBoeterenteComponent {
       let monthsDiff = lM - m;
       return (diff * 12) + monthsDiff;
     }
+  }
+  /*
+   * Rounds the decimals to a certain
+   * amount of characters.
+   * @param num: the float number
+   * @param deg: the amount of decimal chars.
+   */
+  roundToDeg(num: number, deg: number): number {
+    let degs = Math.pow(10, deg);
+    return Math.round(num * degs) / degs;
+  }
+  /*
+   * Validates date strings
+   * @param date: date string in format yyyy-mm-dd
+   * @return boolean
+   */
+  validateDate(date: string): boolean {
+    // Accepted date format RegExp (yyyy-mm-dd).
+    let dateFmt = /^\d{4}\-\d{2}\-\d{2}$/;
+
+    if (!dateFmt.test(date)) {
+      return false;
+    }
+
+    let d, m, y;
+    // Divide year, month and day.
+    y = date.slice(0, 4);
+    m = date.slice(5, 7);
+    d = date.slice(-2);
+
+    // Month and day validation.
+    if (parseInt(m) > 12 || parseInt(d) > 31) {
+      return false;
+    } else {
+      // Checks if the day number is higher than the month has.
+      if ((m == '04' || m == '06' || m == '09' || m == '11') && d > 30) {
+        return false;
+      }
+      // February check.
+      if (m == '02') {
+        // Checks if the day is higher than 29.
+        if (parseInt(d) > 29) {
+          return false;
+        } 
+        else {
+          // Leap year day validation.
+          if (!(((y % 4 === 0) && (y % 100 !== 0)) || (y % 400 === 0)) && parseInt(d) > 28) {
+            return false;
+          }
+        }
+      }
+    }
+    // Passed all validations.
+    return true;
   }
 }
