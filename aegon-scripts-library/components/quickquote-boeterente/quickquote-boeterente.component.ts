@@ -149,8 +149,8 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
         </div>
         <div class="small">
           <div class="row">
-            <p>Resterende rentevastperiode: <b>{{ periodTimeLeft }}</b> {{ periodTimeLeft > 1 ? 'maanden' : 'maand' }}<b></b></p>
-            <p>Vergelijkingsrente: {{ newInterest }}% <span> </span></p>
+            <p>Resterende rentevastperiode: <b>{{ periodsLeft }}</b> {{ periodsLeft > 1 ? 'maanden' : 'maand' }}<b></b></p>
+            <p>Vergelijkingsrente: {{ newIntRate }}% <span> </span></p>
           </div>
         </div>
         <div class="footer">
@@ -172,15 +172,12 @@ export class QuickQuoteBoeterenteComponent {
   interestPeriodEnd: string;
   oldIntRate: number;
   nhg: boolean;
-  interest: number;
   totalFee: number = 0;
-  periodTimeLeft: number;
-  newInterest: number;
+  periodsLeft: number;
+  newIntRate: number;
   isReady: boolean = false;
   calculating: boolean = false;
   calculated: boolean = false;
-
-  @ViewChild('interest') interestRef: ElementRef;
 
   constructor(
     private http: Http
@@ -204,8 +201,6 @@ export class QuickQuoteBoeterenteComponent {
       this.interestPeriodEnd !== undefined &&
       this.oldIntRate > -1 &&
       this.nhg !== undefined);
-
-    this.log(this);
   }
 
   /*
@@ -217,75 +212,130 @@ export class QuickQuoteBoeterenteComponent {
     this.calculating = true;
 
     // 1. Amount penalty-free repayment (Bedrag boetevrije aflossing).
-    let feeFree = this.roundToDeg((0.1 * this.initialAmount), 2);
-    this.log('Amount penalty free: ' + feeFree);
+    // Default 10%.
+    let penaltyFree = this.roundToDeg((0.1 * this.initialAmount), 2);
 
     // 2. Repayment (Bedrag aflossing).
-    let repymnt = this.initialAmount;
+    let repymnt = 0;
     if(this.extraPymnt === true) {
-      feeFree = this.roundToDeg(((0, 1 * this.initialAmount) - this.pymntThisYear), 2);
-      repymnt = this.initialAmount - this.pymntThisYear - this.pymntPrevYears;
+      repymnt = this.pymntThisYear + this.pymntPrevYears;
     }
     
-    this.log('Repayment: ' + repymnt);
-
     // 3. Basis penalty-calculation (grondslag boeteberekening).
-    let basisFee = repymnt - feeFree;
+    let basisFee = (this.initialAmount - penaltyFree - repymnt);
 
     /* 4. Total cash value (Totale contante waarde) */
-    let tcw: number = 0, monthlyIntsts: number;
     // 4.1. Define Interest rate contract per month.
-    let monthlyIntRate = this.roundToDeg(+ (this.oldIntRate / 12), 4);
+    let oldMonthlyIntRate = this.roundToDeg((this.oldIntRate / 12), 4);
+
     // 4.2. Define interest rate market per month
     let d = new Date();
+    let currDate = d.getFullYear() + '-' + this.numberPadding((d.getMonth() + 1), 2) + '-' + this.numberPadding(d.getDate(), 2);
+    this.log('Current date: ' + currDate);
     // Set current date to 1st of next month.
-    let currDate = d.getFullYear() + '-' + ((d.getMonth() + 2) < 10 ? '0' + (d.getMonth() + 2) : (d.getMonth() + 2)) + '-' + '01';
+    let startDate = d.getFullYear() + '-' + this.numberPadding((d.getMonth() + 2), 2) + '-' + '01';
+    this.log('start date: ' + startDate);
     // Difference in dates rounded down to years.
-    let dateDiff = this.dateDiff(currDate, this.interestPeriodEnd, 'years');
-
-    this.log('Difference in years: ' + dateDiff);
+    //let dateDiff = this.dateDiff(currDate, this.interestPeriodEnd, 'years');
 
     /**** @todo ADD SERVICE FOR NHG ****/
     if(this.nhg === true) {
-      this.newInterest = 6;
+      this.newIntRate = 3.95;
     }
     else {
-      this.newInterest = 8;
+      this.newIntRate = 3.95;
     }
 
-    monthlyIntsts = (this.newInterest / 12);
+    let tcw: number = 0, 
+        newMonthlyIntRate: number;
+    // Market monthly interest rate.
+    newMonthlyIntRate = this.roundToDeg((this.newIntRate / 12), 4);
 
     // 4.3. Define interest for 1 period based on contract interest.
-    let periodIntst = this.roundToDeg((monthlyIntRate * basisFee), 2);
+    let oldPeriodIntst = this.roundToDeg(((oldMonthlyIntRate * basisFee) / 100), 2);
 
     // 4.4. Define interest for 1 period based on market interest.
-    // 100 is temporary.
-    let periodMktIntst = this.roundToDeg((100 * basisFee),2);
-    this.log(periodMktIntst);
+    let newPeriodIntst = this.roundToDeg(((newMonthlyIntRate * basisFee) / 100), 2);
     // 4.5. Define difference or missed interest for 1 period.
-    let periodIntstDiff = (+periodIntst) - (+periodMktIntst);
-    /* 4.6.Define periods to be calculated (!!Ingangsdatum leenlaag 
+    let periodIntstDiff = this.roundToDeg((oldPeriodIntst - newPeriodIntst), 2);
+
+    /* 4.6.Define periods to be calculated (!!Ingangsdatum leenlaag
      * is geen invoer )
      */
-    let periods = this.dateDiff(currDate, this.interestPeriodEnd, 'months');
-    this.periodTimeLeft = periods;
+    let periodStart = this.getTermsAmount(currDate, startDate, 'start');
 
-    this.log('periods: ' + periods);
+    this.periodsLeft = this.getTermsAmount(currDate, this.interestPeriodEnd, 'end');
+
     // Loop through periods.
-    for (let i = 0; i < periods; i++){
-      let cw = periodIntstDiff / ( Math.pow((monthlyIntsts + 1), (periods - +(i) +1)) );
+    // =F2/(POWER(1+$Invoer.$H$34,A2-$Invoer.$H$28+1))
+    for (let i = periodStart; i < this.periodsLeft + 1; i++) {
+      let cw = periodIntstDiff / (Math.pow((1 + newMonthlyIntRate), (+i - periodStart + 1)));
+      this.log('Period ' + i + ' amount: ' + cw);
       tcw = tcw + cw;
     }
     this.log('tcw: '+tcw);
     // Set the value of total fee.
-    this.totalFee = ((repymnt - feeFree) / basisFee) * tcw;
-    this.log(this);
+
+    if (((this.initialAmount - repymnt) > penaltyFree) && (this.newIntRate < this.oldIntRate)) {
+      this.totalFee = (((this.initialAmount - repymnt) - penaltyFree) * tcw) / basisFee;
+    }
+    else {
+      this.totalFee = 0;
+    }
     // Removes the class pending in the button.
     this.calculating = false;
     // Shows the value.
     this.calculated = true;
   }
 
+  getTermsAmount(date: string, latestDate: string, type: string = 'end'): number {
+    /* 
+     * Throw exeption if the dates given are not
+     * valid.
+     */
+    if (!this.validateDate(date) || !this.validateDate(latestDate)) {
+      throw new Error("Dates should be in format yyyy-mm-dd.");
+    }
+    /* 
+     * Throw exeption if the type parameter do not
+     * match the available options.
+     */
+    // Types available.
+    let types = /^(start|end)$/;
+    if (typeof type !== null && !types.test(type)) {
+    throw new Error("The available types are 'start' and 'end'.");
+    }
+    // Create date object for better manipulation.
+    let eDate = new Date(date);
+    let lDate = new Date(latestDate);
+
+    /*
+     * Correct order if first date is bigger
+     * than second.
+     */
+    if (eDate > lDate) {
+      let tmpEDate = eDate;
+      let tmpLDate = lDate;
+      eDate = tmpLDate;
+      lDate = tmpEDate;
+    }
+
+    // Earlier date vars.
+    let m = eDate.getMonth() + 1,
+    y = eDate.getFullYear();
+    // Later date vars.
+    let lM = lDate.getMonth() + 1,
+    lY = lDate.getFullYear();
+
+    if(type === 'end') {
+           // =(((YEAR(H14)-YEAR(H10))*12)-(MONTH(H10))+MONTH(H14))
+      return (((lY - y) * 12) - m + lM);
+    }
+    else {
+      // =(((YEAR(H18) - YEAR(H10)) * 12) - (MONTH(H10)) + MONTH(H18)) + 1
+      return (((lY - y) * 12) - m + lM) + 1;
+    }
+  }
   /*
    * Calculate the difference between two dates
    * and return the amount of years.
@@ -365,6 +415,21 @@ export class QuickQuoteBoeterenteComponent {
     return Math.round(num * degs) / degs;
   }
   /*
+   * Adds leading zeros to a number.
+   * @param num: the number to add padding.
+   * @param length: the length of the expected number
+   *   with leading zeros including the number itself.
+   */
+  numberPadding(num: any, length: number): string {
+    let str = num.toString().length, 
+        pad = '';
+
+    for (let i = 0; i < (length - str); i++) {
+      pad += '0';
+    }
+    return pad + num;
+  }
+  /*
    * Validates date strings
    * @param date: date string in format yyyy-mm-dd
    * @return boolean
@@ -386,7 +451,8 @@ export class QuickQuoteBoeterenteComponent {
     // Month and day validation.
     if (parseInt(m) > 12 || parseInt(d) > 31) {
       return false;
-    } else {
+    } 
+    else {
       // Checks if the day number is higher than the month has.
       if ((m == '04' || m == '06' || m == '09' || m == '11') && d > 30) {
         return false;
