@@ -88,6 +88,10 @@
     font-family: $font_medium;
     @include rem('font-size',22);
   }
+  .disclaimer-text {
+    margin-top: -15px;
+    margin-bottom: 40px;
+  }
 }
 
 // 
