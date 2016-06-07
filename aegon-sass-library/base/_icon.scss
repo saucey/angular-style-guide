@@ -354,8 +354,19 @@ a.menu-5662:before {
 .icon-pencil:before {
   content: $font_icons_edit;
 }
-.content [class*='icon-']:before {
+
+.block--menu-menu-particulier .content a,
+.block--menu-menu-particulier .content [class*='icon-']:before {
+  color:$white;
+}
+
+.content [class*='icon-'] {
   float:left;
+  color: #0077C8;
+}
+.content [class*='icon-'] + .field {
+  float:left;
+  width:76%
 }
 
 // Do not apply icons to old aegon menu.
