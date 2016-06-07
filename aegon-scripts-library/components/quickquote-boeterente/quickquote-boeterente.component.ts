@@ -164,6 +164,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
   pipes: [MoneyPipe]
 })
 export class QuickQuoteBoeterenteComponent {
+  // Scope variable initiation.
   mortgageType: number = 0;
   initialAmount: number;
   extraPymnt: boolean;
@@ -230,13 +231,11 @@ export class QuickQuoteBoeterenteComponent {
 
     // 4.2. Define interest rate market per month
     let d = new Date();
+    // Current date.
     let currDate = d.getFullYear() + '-' + this.numberPadding((d.getMonth() + 1), 2) + '-' + this.numberPadding(d.getDate(), 2);
-    this.log('Current date: ' + currDate);
+
     // Set current date to 1st of next month.
     let startDate = d.getFullYear() + '-' + this.numberPadding((d.getMonth() + 2), 2) + '-' + '01';
-    this.log('start date: ' + startDate);
-    // Difference in dates rounded down to years.
-    //let dateDiff = this.dateDiff(currDate, this.interestPeriodEnd, 'years');
 
     /**** @todo ADD SERVICE FOR NHG ****/
     if(this.nhg === true) {
@@ -270,10 +269,8 @@ export class QuickQuoteBoeterenteComponent {
     // =F2/(POWER(1+$Invoer.$H$34,A2-$Invoer.$H$28+1))
     for (let i = periodStart; i < this.periodsLeft + 1; i++) {
       let cw = periodIntstDiff / (Math.pow((1 + newMonthlyIntRate), (+i - periodStart + 1)));
-      this.log('Period ' + i + ' amount: ' + cw);
       tcw = tcw + cw;
     }
-    this.log('tcw: '+tcw);
     // Set the value of total fee.
 
     if (((this.initialAmount - repymnt) > penaltyFree) && (this.newIntRate < this.oldIntRate)) {
@@ -287,7 +284,13 @@ export class QuickQuoteBoeterenteComponent {
     // Shows the value.
     this.calculated = true;
   }
-
+  /*
+   * Special calculation between two dates to get
+   * penalty applicable periods
+   * 
+   * @param date: start date of the mortgage or applicable term.
+   * @param latestDate: end date of mortgage or 
+   */
   getTermsAmount(date: string, latestDate: string, type: string = 'end'): number {
     /* 
      * Throw exeption if the dates given are not
