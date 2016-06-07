@@ -10,6 +10,16 @@
 
     attach: function () {
       this.createTable('.tableDemo');
+      this.createTable('.simple-table', {
+        info: false,
+        paging: false,
+        fnInitComplete: null,
+        ordering: false,
+        searching: false,
+        aoColumns: null,
+        bFilter: false,
+        responsive: true
+      });
     },
 
     createTable: function(table_class, options) {
@@ -20,7 +30,7 @@
         oLanguage: {
           sInfo: "_END_ van _TOTAL_ documenten",
           sInfoEmpty: "Geen resultaten gevonden",
-          sInfoFiltered: "",
+          sInfoFiltered: ""
         },
         sDom: 'ifrtlp',
         bFilter: true,
@@ -28,7 +38,7 @@
             null,
             null,
             { sType: "date-eu" },
-            null  
+            null
         ],
         ordering: true,
         responsive: true,
@@ -46,7 +56,7 @@
 
               var showAllBtn = that.parent().find('.show-all');
 
-              showAllBtn.on('click', function(){ 
+              showAllBtn.on('click', function(){
                 $(this).hasClass('changed') ? api.page.len(5).draw() : api.page.len(-1).draw();
                 $(this).toggleClass('changed');
               });
@@ -58,9 +68,9 @@
                    showAllBtn.show();
                 }
               });
-            } 
+            }
 
-          // Set placeholder and id for searchbox 
+          // Set placeholder and id for searchbox
           that.parent().find('.dataTables_filter input').attr("placeholder", "Zoeken").attr('id', 'search_'+ thatID);
         }
       };
@@ -68,7 +78,7 @@
       var settings = $.extend({}, defaults, options);
 
       // Init table
-      $(table_class).DataTable(settings); 
+      $(table_class).DataTable(settings);
 
     }
 
