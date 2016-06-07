@@ -1,5 +1,5 @@
 /**
- * Quickquite Beleggen
+ * Quickquote Beleggen
  */
 (function($) {
     'use strict';
@@ -33,10 +33,29 @@
             // Initiate the Tooltip
             Drupal.behaviors.tooltip.activate(".quickquote");
 
-            // Initiate the Sliders
-            Drupal.behaviors.newSlider.activate("one-off-slider","one-off-input",0,0,5000,1250,2500,3750,"#one-off-error");
-            Drupal.behaviors.newSlider.activate("periodic-slider","periodic-input",50,10,250,37,75,125,"#periodic-error");
-            Drupal.behaviors.newSlider.activate("duration-slider","duration-input",10,5,30,7,15,22,"#duration-error");
+
+            var initializeSlider = function (name, bc) {
+                // bc is for backwards compatibility when the values are not available on the element.
+
+                var elm = $("#" + name + "-slider");
+
+                Drupal.behaviors.newSlider.activate(
+                    name + "-slider",
+                    name + "-input",
+                    elm.attr("data-value")         ? parseInt(elm.attr("data-value"))         : bc[0] || 0,
+                    elm.attr("data-min")           ? parseInt(elm.attr("data-min"))           : bc[1] || 0,
+                    elm.attr("data-max")           ? parseInt(elm.attr("data-max"))           : bc[2] || 0,
+                    elm.attr("data-quarter")       ? parseInt(elm.attr("data-quarter"))       : bc[3] || 0,
+                    elm.attr("data-half")          ? parseInt(elm.attr("data-half"))          : bc[4] || 0,
+                    elm.attr("data-three-quarter") ? parseInt(elm.attr("data-three-quarter")) : bc[5] || 0,
+                    "#" + name + "-error"
+                );
+            };
+
+            // Initiate the Sliders, backwards compatible
+            initializeSlider("one-off", [0,0,5000,1250,2500,3750]);
+            initializeSlider("periodic", [50,10,250,37,75,125]);
+            initializeSlider("duration", [10,10,30,7,15,22]);
         },
 
         onChange: function(paymentClass,interestClass,amountClass,investClass, interestInvestClass) {
