@@ -31,7 +31,8 @@
 
   input[type=text]::placeholder,
   input[type=number]::placeholder {
-    color: darkgrey;
+    color: $darker_grey;
+    opacity: 1 !important;
   }
 
   label.checkbox {
