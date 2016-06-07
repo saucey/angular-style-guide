@@ -360,11 +360,17 @@ a.menu-5662:before {
   color:$white;
 }
 
-.content [class*='icon-'] {
+// Style for subhome first menu-block ( has blue background so needs white color ).
+#bc-home-subhomes-1 .service-item [class*='icon-'] {
+    color:#fff;
+}
+
+.service-item [class*='icon-'] {
   float:left;
   color: #0077C8;
+  font-size:25px;
 }
-.content [class*='icon-'] + .field {
+.service-item [class*='icon-'] + .field {
   float:left;
   width:76%
 }
