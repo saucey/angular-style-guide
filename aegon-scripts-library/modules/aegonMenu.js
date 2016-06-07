@@ -158,7 +158,7 @@
     /**
      * Drupal's attach method
      */
-    attach: function(context, settings) {
+    attach: function(context) {
 
       // Register DOMs of aside menus
       var menuDesktopDOM = $('aside.desktop', context),

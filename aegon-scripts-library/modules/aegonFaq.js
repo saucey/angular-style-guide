@@ -8,7 +8,7 @@
 
   // Add new item to public Drupal object
   Drupal.behaviors.aegonFaq = {
-    attach: function (context, settings) {
+    attach: function (context) {
 
       // Little refactor for deprecated use of $('selector').click
       $(".faq .title", context).on('click', function (evt) {
