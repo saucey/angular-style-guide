@@ -8,7 +8,7 @@
   // Add new item to public Drupal object
   Drupal.behaviors.select = {
     attach: function () {
-      $("select").msDropDown(); //activate custom drop down functionalities
+      $("select:not(.no-dd)").msDropDown(); //activate custom drop down functionalities
 
       //transfer classes from select to root object of msDropDown (conserve .half, for example)
       $(".ddOutOfVision > select").each(function() {
