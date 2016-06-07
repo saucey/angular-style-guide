@@ -8,10 +8,10 @@
 
   // Add new item to public Drupal object
   Drupal.behaviors.aegonFaq = {
-    attach: function () {
+    attach: function (context) {
 
       // Little refactor for deprecated use of $('selector').click
-      $(".faq .title").on('click', function (evt) {
+      $(".faq .title", context).on('click', function (evt) {
         evt.stopPropagation();
         var radio = $("input[name=show]", this.parentNode)[0];
         if (radio.checked) {
@@ -21,7 +21,7 @@
       });
       // the plugin on load adds the class that changes the color.
       // we need to add the class to the clicked button for UX purposes.
-      $(".rate-button").on("click", function(){
+      $(".rate-button", context).on("click", function(){
         var $this = $(this),
             parent = $this.parent().parent();
         parent.find(".rate-voted").removeClass("rate-voted");

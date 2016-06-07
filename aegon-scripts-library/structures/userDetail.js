@@ -129,8 +129,8 @@
       }
 
       // Update path links
-      logoutPathLink = settings.basePath + logoutPathLink;
-      mijnaegonPathLink = settings.basePath + mijnaegonPathLink;
+      logoutPathLink = (logoutPathLink.indexOf(settings.basePath) !== 0) ? settings.basePath + logoutPathLink : logoutPathLink;
+      mijnaegonPathLink = (mijnaegonPathLink.indexOf(settings.basePath) !== 0) ? settings.basePath + mijnaegonPathLink : mijnaegonPathLink;
 
       // Start retrieving data
       this.getData();

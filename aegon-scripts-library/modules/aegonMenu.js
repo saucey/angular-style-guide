@@ -158,11 +158,11 @@
     /**
      * Drupal's attach method
      */
-    attach: function() {
+    attach: function(context) {
 
       // Register DOMs of aside menus
-      var menuDesktopDOM = $('aside.desktop'),
-          menuMobileDOM = $('aside.mobile');
+      var menuDesktopDOM = $('aside.desktop', context),
+          menuMobileDOM = $('aside.mobile', context);
 
       // Run all instructions for different breakpoints
       this.menuDesktop(menuDesktopDOM).menuMobile(menuMobileDOM);
