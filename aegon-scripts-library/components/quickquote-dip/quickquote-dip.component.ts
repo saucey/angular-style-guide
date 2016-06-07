@@ -339,7 +339,7 @@ export class QuickQuoteDipComponent implements OnInit {
           "PENSIOENOVEREENKOMST": {
             "STORTING_INLEG": {
               "KOOPSOM": this.pensionAmount,
-              "IND_VREEMDGELD": this.storedElsewhere,
+              "IND_VREEMDGELD": !this.storedInAegon && this.storedElsewhere,
               "IND_HERKOMST_OVL": false
             },
             "PENSIOENAANSPRAAK": {
