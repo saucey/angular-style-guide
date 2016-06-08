@@ -28,11 +28,11 @@
       appearance:         none;
       background: #fff url('../images/icons/select.png') no-repeat 95% center;
     }
+    > div > .field:last-child {
+      margin-bottom: 0;
+    }
     .field {
       margin-bottom: 15px;
-      &:last-child {
-        margin-bottom: 0;
-      }
       label.radio > input[type="radio"] + span.radio {
         top:-9px;
         background-color: $white;
