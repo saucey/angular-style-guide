@@ -16,10 +16,25 @@
     }
   }
   .calculation {
-    @include rem("padding-bottom", 15);
+    input[type=text],
+    input[type=number],
+    select {
+      text-transform: none;
+    }
+    select {
+      padding: 9px 20px 9px 10px;
+      -webkit-appearance: none;
+      -moz-appearance:    none;
+      appearance:         none;
+      background: #fff url('../images/icons/select.png') no-repeat 95% center;
+    }
     .field {
       margin-bottom: 15px;
+      &:last-child {
+        margin-bottom: 0;
+      }
       label.radio > input[type="radio"] + span.radio {
+        top:-9px;
         background-color: $white;
       }
       .button[disabled],
@@ -40,6 +55,11 @@
           }
         }
       }
+      .inputs {
+        button.icon-calculator {
+          margin-bottom: 0;
+        }
+      }
     }
   }
   .result {
@@ -50,6 +70,19 @@
     }
     .footer {
     	padding-top: 15px;
+    }
+  }
+}
+@include breakpoint($brk-tablet) {
+  .quickquote.angular.boeterente {
+    .calculation {
+      @include rem("padding", 30, 30, 18, 20);
+      h3:before {
+        left: 20px;
+      }
+      .field {
+        padding-left: 30px;
+      }
     }
   }
 }
