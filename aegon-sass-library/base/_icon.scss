@@ -61,6 +61,15 @@ a.icon-user-link:before {
 .icon-uniE611:before {
   content: '\e611';
 }
+.icon-uniE612:before {
+  content: '\e612';
+}
+.icon-uniE617:before {
+  content: '\e617';
+}
+.icon-uniE618:before {
+  content: '\e618';
+}
 .icon-uniE619:before {
   content: '\e619';
 }
@@ -76,7 +85,18 @@ a.icon-user-link:before {
 .icon-uniE629:before {
   content: '\e629';
 }
-
+.icon-uniE62A {
+  content: '\e62a';
+}
+.icon-uniE62d:before {
+  content: '\e62d';
+}
+.icon-unie62e:before {
+  content: '\e62e';
+}
+.icon-unie62f:before {
+  content: '\e62f';
+}
 .icon-uniE60B:before {
   content: '\e60b';
 }
@@ -88,6 +108,9 @@ a.icon-user-link:before {
 .icon-uniE60D:before {
   content: '\e60d';
 }
+.icon-uniE60E:before {
+  content: '\e60e';
+}
 
 .icon-uniE60F:before {
   content: '\e60f';
@@ -97,12 +120,29 @@ a.icon-user-link:before {
   content: '\e62b';
 }
 
+.icon-uniE630:before {
+  content: '\e630';
+}
+.icon-uniE631:before {
+  content: '\e631';
+}
+.icon-uniE632:before {
+  content:  '\e632';
+}
+.icon-uniE633:before {
+  content:  '\e633';
+}
 .icon-uniE636:before {
   content: '\e636';
 }
-
+/// THIS ISNT MAPPED RIGHT uni 646 is nothing , so i guess this class should be renamed to 636 wich i already this 2 lines up.
+/// Dont remove yet cause maybe its used somewhere
 .icon-uniE646:before {
   content: '\e636';
+}
+
+.icon-uniE63B:before {
+  content: '\e63b';
 }
 
 .icon-uniE647:before {
@@ -115,6 +155,30 @@ a.icon-user-link:before {
 
 .icon-uniE62C:before {
   content: '\e62c';
+}
+.icon-uniE800:before {
+  content:'\e800';
+}
+.icon-uniE801:before {
+  content: '\e801';
+}
+.icon-unie900:before {
+  content: '\e900';
+}
+.icon-unie904:before {
+  content: '\e904';
+}
+.icon-unie905:before {
+  content: '\e905';
+}
+.icon-unie906:before {
+  content: '\e906';
+}
+.icon-unie907:before {
+  content: '\e907';
+}
+.icon-unie908:before {
+  content:  '\e908';
 }
 
 .icon-pdf:before {
@@ -176,6 +240,7 @@ a.menu-5662:before {
   @extend .icon-uniE60B;
 }
 
+
 .icon-4546:before {
   @extend .icon-uniE629;
 }
@@ -186,6 +251,7 @@ a.menu-5662:before {
   @extend .icon-uniE60A;
 }
 
+.icon-person,
 .icon-user-link:before {
   @extend .icon-uniE636:before;
 }
@@ -207,6 +273,7 @@ a.menu-5662:before {
   @extend .icon-uniE62C;
 }
 
+.icon-documents-check,
 .icon-6860:before {
   @extend .icon-uniE604;
 }
@@ -292,6 +359,10 @@ a.menu-5662:before {
   content: $font_icons_error;
 }
 
+.icon-arrow-right:before {
+  content: $font_icons_arrow_right;
+}
+
 .icon-arrow-down:before {
   content: $font_icons_arrow_down;
 }
@@ -334,6 +405,7 @@ a.menu-5662:before {
 .icon-schade-melden:before {
   content: $font_icons_schade-melden;
 }
+.icon-document-pen:before,
 .icon-adres-wijzigen:before {
   content: $font_icons_document_n_pen;
 }
@@ -357,6 +429,18 @@ a.menu-5662:before {
 }
 .icon-clock:before {
   content: $font_icons_clock;
+}
+.icon-thumb-down {
+  content: $font_icons_fistfull;
+}
+.icon-phone:before {
+  content: $font_icons_call;
+}
+.icon-chat:before {
+  content: $font_icons_chat;
+}
+.icons-symbol-euro {
+  content: $font_icons_betalingen;
 }
 
 
