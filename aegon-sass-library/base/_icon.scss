@@ -65,6 +65,10 @@ a.icon-user-link:before {
   content: '\e619';
 }
 
+.icon-uniE61A:before {
+  content: '\e61a';
+}
+
 .icon-uniE61B:before {
   content: '\e61b';
 }
@@ -351,6 +355,10 @@ a.menu-5662:before {
 .icon-pencil:before {
   content: $font_icons_edit;
 }
+.icon-clock:before {
+  content: $font_icons_clock;
+}
+
 
 .block--menu-menu-particulier .content a,
 .block--menu-menu-particulier .content [class*='icon-']:before {
