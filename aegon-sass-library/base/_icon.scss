@@ -1,12 +1,9 @@
 .icon:before,
 [class*='icon-']:before {
   font-family: $font_icons;
-
   display: inline-block;
-
   min-width: 1.5em;
   padding-right: 8px;
-
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -363,8 +360,11 @@ a.menu-5662:before {
 // Style for subhome first menu-block ( has blue background so needs white color ).
 #bc-home-subhomes-1 .service-item [class*='icon-'] {
     color:#fff;
+    -webkit-font-smoothing: initial;
 }
-
+#bc-home-subhomes-1 .white-bg-link .service-item [class*='icon-'] {
+  color: #0560BB;
+}
 .service-item [class*='icon-'] {
   float:left;
   color: #0077C8;
