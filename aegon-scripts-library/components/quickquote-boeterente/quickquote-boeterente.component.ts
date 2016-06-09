@@ -248,16 +248,15 @@ export class QuickQuoteBoeterenteComponent {
     let tcw: number = 0, 
         newMonthlyIntRate: number;
     // Market monthly interest rate.
-    newMonthlyIntRate = this.roundToDeg((this.newIntRate / 12), 4);
+    newMonthlyIntRate = this.newIntRate / 12;
 
     // 4.3. Define interest for 1 period based on contract interest.
-    let oldPeriodIntst = this.roundToDeg(((oldMonthlyIntRate * basisFee) / 100), 2);
+    let oldPeriodIntst = (oldMonthlyIntRate * basisFee) / 100;
 
     // 4.4. Define interest for 1 period based on market interest.
-    let newPeriodIntst = this.roundToDeg(((newMonthlyIntRate * basisFee) / 100), 2);
+    let newPeriodIntst = (newMonthlyIntRate * basisFee) / 100;
     // 4.5. Define difference or missed interest for 1 period.
-    let periodIntstDiff = this.roundToDeg((oldPeriodIntst - newPeriodIntst), 2);
-
+    let periodIntstDiff = oldPeriodIntst - newPeriodIntst;
     /* 4.6.Define periods to be calculated (!!Ingangsdatum leenlaag
      * is geen invoer )
      */
@@ -268,11 +267,10 @@ export class QuickQuoteBoeterenteComponent {
     // Loop through periods.
     // =F2/(POWER(1+$Invoer.$H$34,A2-$Invoer.$H$28+1))
     for (let i = periodStart; i < this.periodsLeft + 1; i++) {
-      let cw = periodIntstDiff / (Math.pow((1 + newMonthlyIntRate), (+i - periodStart + 1)));
+      let cw = periodIntstDiff / (Math.pow((1 + (newMonthlyIntRate / 100)), (+i - periodStart + 1)));
       tcw = tcw + cw;
     }
     // Set the value of total fee.
-
     if (((this.initialAmount - repymnt) > penaltyFree) && (this.newIntRate < this.oldIntRate)) {
       this.totalFee = (((this.initialAmount - repymnt) - penaltyFree) * tcw) / basisFee;
     }
