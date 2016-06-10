@@ -445,6 +445,10 @@ a.menu-5662:before {
 
 
 .block--menu-menu-particulier .content a,
+.block--menu-menu-particulier .content [class*='icon-']:before,
+.home-top-banner .block--menu-menu-particulier .service-item [class*='icon-']{
+  color:$white;
+}
 .block--menu-menu-particulier .content [class*='icon-']:before {
   color:$white;
 }
@@ -457,6 +461,7 @@ a.menu-5662:before {
 #bc-home-subhomes-1 .white-bg-link .service-item [class*='icon-'] {
   color: #0560BB;
 }
+
 .service-item [class*='icon-'] {
   float:left;
   color: #0077C8;
@@ -471,6 +476,5 @@ a.menu-5662:before {
 // TODO: Refactor menu's in Drupal module 'aegon_menu' to adapt to ATDL.
 .submenu [class*='menu-'][class*='icon-']:before {
   display: none;
-
   content: '';
 }
