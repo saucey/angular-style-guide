@@ -31,7 +31,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
             </aegon-help>
           </div>
           <div class="inputs">
-            <select [(ngModel)]="mortgageType" class="no-dd" (change)="validate()">
+            <select [(ngModel)]="mortgageType" class="no-dd" (change)="mortgageType = $event.target.value;validate();">
               <option [value]="0" selected>Maak uw keuze</option>
               <option [value]="1">Aflossingsvrij</option>
               <option [value]="2">Annuitair</option>
@@ -251,12 +251,15 @@ export class QuickQuoteBoeterenteComponent {
     newMonthlyIntRate = this.newIntRate / 12;
 
     // 4.3. Define interest for 1 period based on contract interest.
-    let oldPeriodIntst = (oldMonthlyIntRate * basisFee) / 100;
+    let oldPeriodIntst = ((oldMonthlyIntRate * basisFee) / 100).toFixed(2);
 
     // 4.4. Define interest for 1 period based on market interest.
-    let newPeriodIntst = (newMonthlyIntRate * basisFee) / 100;
+    let newPeriodIntst = ((newMonthlyIntRate * basisFee) / 100).toFixed(2);
+
     // 4.5. Define difference or missed interest for 1 period.
-    let periodIntstDiff = oldPeriodIntst - newPeriodIntst;
+    let periodIntstDiff = +(oldPeriodIntst) - +(newPeriodIntst);
+    periodIntstDiff = +(periodIntstDiff.toFixed(2));
+
     /* 4.6.Define periods to be calculated (!!Ingangsdatum leenlaag
      * is geen invoer )
      */
@@ -268,6 +271,7 @@ export class QuickQuoteBoeterenteComponent {
     // =F2/(POWER(1+$Invoer.$H$34,A2-$Invoer.$H$28+1))
     for (let i = periodStart; i < this.periodsLeft + 1; i++) {
       let cw = periodIntstDiff / (Math.pow((1 + (newMonthlyIntRate / 100)), (+i - periodStart + 1)));
+      cw = +(cw.toFixed(2));
       tcw = tcw + cw;
     }
     // Set the value of total fee.
@@ -277,6 +281,7 @@ export class QuickQuoteBoeterenteComponent {
     else {
       this.totalFee = 0;
     }
+
     // Removes the class pending in the button.
     this.calculating = false;
     // Shows the value.
