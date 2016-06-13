@@ -31,7 +31,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
             </aegon-help>
           </div>
           <div class="inputs">
-            <select [(ngModel)]="mortgageType" class="no-dd" (change)="validate()">
+            <select [(ngModel)]="mortgageType" class="no-dd" (change)="mortgageType = $event.target.value;validate();">
               <option [value]="0" selected>Maak uw keuze</option>
               <option [value]="1">Aflossingsvrij</option>
               <option [value]="2">Annuitair</option>
@@ -248,15 +248,17 @@ export class QuickQuoteBoeterenteComponent {
     let tcw: number = 0, 
         newMonthlyIntRate: number;
     // Market monthly interest rate.
-    newMonthlyIntRate = this.roundToDeg((this.newIntRate / 12), 4);
+    newMonthlyIntRate = this.newIntRate / 12;
 
     // 4.3. Define interest for 1 period based on contract interest.
-    let oldPeriodIntst = this.roundToDeg(((oldMonthlyIntRate * basisFee) / 100), 2);
+    let oldPeriodIntst = ((oldMonthlyIntRate * basisFee) / 100).toFixed(2);
 
     // 4.4. Define interest for 1 period based on market interest.
-    let newPeriodIntst = this.roundToDeg(((newMonthlyIntRate * basisFee) / 100), 2);
+    let newPeriodIntst = ((newMonthlyIntRate * basisFee) / 100).toFixed(2);
+
     // 4.5. Define difference or missed interest for 1 period.
-    let periodIntstDiff = this.roundToDeg((oldPeriodIntst - newPeriodIntst), 2);
+    let periodIntstDiff = +(oldPeriodIntst) - +(newPeriodIntst);
+    periodIntstDiff = +(periodIntstDiff.toFixed(2));
 
     /* 4.6.Define periods to be calculated (!!Ingangsdatum leenlaag
      * is geen invoer )
@@ -268,17 +270,18 @@ export class QuickQuoteBoeterenteComponent {
     // Loop through periods.
     // =F2/(POWER(1+$Invoer.$H$34,A2-$Invoer.$H$28+1))
     for (let i = periodStart; i < this.periodsLeft + 1; i++) {
-      let cw = periodIntstDiff / (Math.pow((1 + newMonthlyIntRate), (+i - periodStart + 1)));
+      let cw = periodIntstDiff / (Math.pow((1 + (newMonthlyIntRate / 100)), (+i - periodStart + 1)));
+      cw = +(cw.toFixed(2));
       tcw = tcw + cw;
     }
     // Set the value of total fee.
-
     if (((this.initialAmount - repymnt) > penaltyFree) && (this.newIntRate < this.oldIntRate)) {
       this.totalFee = (((this.initialAmount - repymnt) - penaltyFree) * tcw) / basisFee;
     }
     else {
       this.totalFee = 0;
     }
+
     // Removes the class pending in the button.
     this.calculating = false;
     // Shows the value.
@@ -339,74 +342,7 @@ export class QuickQuoteBoeterenteComponent {
       return (((lY - y) * 12) - m + lM) + 1;
     }
   }
-  /*
-   * Calculate the difference between two dates
-   * and return the amount of years.
-   */
-  dateDiff(date: string, latestDate: string, inType: string = null): number {
-    /* 
-     * Throw exeption if the dates given are not
-     * valid.
-     */
-    if (!this.validateDate(date) || !this.validateDate(latestDate)) {
-      throw new Error("Dates should be in format yyyy-mm-dd.");
-    }
-    /* 
-     * Throw exeption if the itType parameter do not
-     * match the available options.
-     */
-    // Types available.
-    let types = /^(years|months)$/;
-    if (typeof inType !== null && !types.test(inType)) {
-      throw new Error("The available types are 'years' and 'months'.");
-    }    
-    // Default result is in years.
-    if(typeof inType === null) {
-      inType = 'years';
-    }
-    let eDate = new Date(date);
-    let lDate = new Date(latestDate);
-    /*
-     * Correct order if first date is bigger
-     * than second.
-     */
-    if(eDate > lDate) {
-      let tmpEDate = eDate;
-      let tmpLDate = lDate;
-      eDate = tmpLDate;
-      lDate = tmpEDate;
-    }
 
-    // Earlier date vars.
-    let d = eDate.getDate(), 
-      m = eDate.getMonth(), 
-      y = eDate.getFullYear();
-    // Later date vars.
-    let lY = lDate.getFullYear(),
-      lM = lDate.getMonth(),
-      lD = lDate.getDate();
-    // Years difference.
-    let diff = lY - y;
-    // Rest 1 if later date month is higher.
-    if (m > lM) {
-      diff--;
-    }
-    else {
-      if (m == lM) {
-        // Rest 1 if later date day is higher.
-        if (d > lD) {
-          diff--;
-        }
-      }
-    }
-    if(inType === 'years') {
-      return diff;
-    }
-    else {
-      let monthsDiff = lM - m;
-      return (diff * 12) + monthsDiff;
-    }
-  }
   /*
    * Rounds the decimals to a certain
    * amount of characters.
