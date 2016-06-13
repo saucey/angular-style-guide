@@ -36,18 +36,34 @@
 
             var initializeSlider = function (name, bc) {
                 // bc is for backwards compatibility when the values are not available on the element.
+                if (bc === void 0) { bc = []; }
 
+                // Find the slider element.
                 var elm = $("#" + name + "-slider");
+
+                // Set the values for the slider.
+                var _default = elm.attr("data-value") ? parseInt(elm.attr("data-value"), 10) : bc[0] || 0;
+                var min = elm.attr("data-min") ? parseInt(elm.attr("data-min"), 10) : bc[1] || 0;
+                var max = elm.attr("data-max") ? parseInt(elm.attr("data-max"), 10) : bc[2] || 0;
+                var quarter = elm.attr("data-quarter") ? parseInt(elm.attr("data-quarter"), 10) : bc[3] || 0;
+                var half = elm.attr("data-half") ? parseInt(elm.attr("data-half"), 10) : bc[4] || 0;
+                var threeQuarter = elm.attr("data-three-quarter") ? parseInt(elm.attr("data-three-quarter"), 10) : bc[5] || 0;
+
+                // Make sure that default, quarter, half and three-quarter settings are always within the min max range.
+                _default = Math.min(Math.max(_default, min), max);
+                quarter = Math.min(Math.max(quarter, min), max);
+                half = Math.min(Math.max(half, min), max);
+                threeQuarter = Math.min(Math.max(threeQuarter, min), max);
 
                 Drupal.behaviors.newSlider.activate(
                     name + "-slider",
                     name + "-input",
-                    elm.attr("data-value")         ? parseInt(elm.attr("data-value"))         : bc[0] || 0,
-                    elm.attr("data-min")           ? parseInt(elm.attr("data-min"))           : bc[1] || 0,
-                    elm.attr("data-max")           ? parseInt(elm.attr("data-max"))           : bc[2] || 0,
-                    elm.attr("data-quarter")       ? parseInt(elm.attr("data-quarter"))       : bc[3] || 0,
-                    elm.attr("data-half")          ? parseInt(elm.attr("data-half"))          : bc[4] || 0,
-                    elm.attr("data-three-quarter") ? parseInt(elm.attr("data-three-quarter")) : bc[5] || 0,
+                    _default,
+                    min,
+                    max,
+                    quarter,
+                    half,
+                    threeQuarter,
                     "#" + name + "-error"
                 );
             };
@@ -55,7 +71,7 @@
             // Initiate the Sliders, backwards compatible
             initializeSlider("one-off", [0,0,5000,1250,2500,3750]);
             initializeSlider("periodic", [50,10,250,37,75,125]);
-            initializeSlider("duration", [10,10,30,7,15,22]);
+            initializeSlider("duration", [10,10,30,15,20,25]);
         },
 
         onChange: function(paymentClass,interestClass,amountClass,investClass, interestInvestClass) {
