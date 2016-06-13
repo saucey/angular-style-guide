@@ -342,74 +342,7 @@ export class QuickQuoteBoeterenteComponent {
       return (((lY - y) * 12) - m + lM) + 1;
     }
   }
-  /*
-   * Calculate the difference between two dates
-   * and return the amount of years.
-   */
-  dateDiff(date: string, latestDate: string, inType: string = null): number {
-    /* 
-     * Throw exeption if the dates given are not
-     * valid.
-     */
-    if (!this.validateDate(date) || !this.validateDate(latestDate)) {
-      throw new Error("Dates should be in format yyyy-mm-dd.");
-    }
-    /* 
-     * Throw exeption if the itType parameter do not
-     * match the available options.
-     */
-    // Types available.
-    let types = /^(years|months)$/;
-    if (typeof inType !== null && !types.test(inType)) {
-      throw new Error("The available types are 'years' and 'months'.");
-    }    
-    // Default result is in years.
-    if(typeof inType === null) {
-      inType = 'years';
-    }
-    let eDate = new Date(date);
-    let lDate = new Date(latestDate);
-    /*
-     * Correct order if first date is bigger
-     * than second.
-     */
-    if(eDate > lDate) {
-      let tmpEDate = eDate;
-      let tmpLDate = lDate;
-      eDate = tmpLDate;
-      lDate = tmpEDate;
-    }
 
-    // Earlier date vars.
-    let d = eDate.getDate(), 
-      m = eDate.getMonth(), 
-      y = eDate.getFullYear();
-    // Later date vars.
-    let lY = lDate.getFullYear(),
-      lM = lDate.getMonth(),
-      lD = lDate.getDate();
-    // Years difference.
-    let diff = lY - y;
-    // Rest 1 if later date month is higher.
-    if (m > lM) {
-      diff--;
-    }
-    else {
-      if (m == lM) {
-        // Rest 1 if later date day is higher.
-        if (d > lD) {
-          diff--;
-        }
-      }
-    }
-    if(inType === 'years') {
-      return diff;
-    }
-    else {
-      let monthsDiff = lM - m;
-      return (diff * 12) + monthsDiff;
-    }
-  }
   /*
    * Rounds the decimals to a certain
    * amount of characters.
