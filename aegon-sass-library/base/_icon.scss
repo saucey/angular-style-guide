@@ -462,6 +462,12 @@ a.menu-5662:before {
   color: $white;
 }
 
+.home-top-banner .block--menu-menu-particulier .white-bg-link .service-item [class*='icon-'] {
+  color: $blue;
+  color: #0560BB;
+}
+
+
 .service-item [class*='icon-'] {
   float: left;
   color: #0077C8;
@@ -471,6 +477,11 @@ a.menu-5662:before {
   float: left;
   width: 76%
 }
+
+
+
+
+
 
 // Do not apply icons to old aegon menu.
 // TODO: Refactor menu's in Drupal module 'aegon_menu' to adapt to ATDL.
