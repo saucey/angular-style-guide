@@ -26,7 +26,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
         <div class="field">
           <div class="label">
             Hypotheekvorm van het leningdeel
-            <aegon-help>
+            <aegon-help position="top">
               Voer hier de hypotheekvorm in van het leningdeel waarvan u de omzettingskosten wilt berekenen.
             </aegon-help>
           </div>
@@ -53,7 +53,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
           <div class="field first">
             <div class="label">
               Oorspronkelijke bedrag
-              <aegon-help>
+              <aegon-help position="top">
                 Het totale bedrag van het leningdeel op het moment dat u de hypotheek afsloot.
               </aegon-help>
             </div>
@@ -64,7 +64,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
           <div class="field">
             <div class="label">
               Heeft u al extra afgelost op dit bedrag?
-              <aegon-help>
+              <aegon-help position="top">
                 Als u een annuitaïre of lineaire hypotheek heeft en u naast de reguliere aflossing niet extra heeft afgelost kiest u 'Nee'
               </aegon-help>
             </div>
@@ -105,7 +105,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
           <div class="field">
             <div class="label">
               Huidig rentepercentage
-              <aegon-help>
+              <aegon-help position="top">
                 Het rentepercentage dat is vastgelegd in uw huidige hypotheekcontract. 
               </aegon-help>
             </div>
@@ -118,7 +118,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
           <div class="field">
             <div class="label">
               NHG van toepassing
-              <aegon-help>
+              <aegon-help position="top">
                 Geef hier aan of op uw hypotheek de Nationale Hypotheek Garantie (NHG) van toepassing is. 
               </aegon-help>
             </div>
@@ -149,13 +149,13 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
         </div>
         <div class="small">
           <div class="row">
-            <p>Resterende rentevastperiode: <b>{{ periodsLeft }}</b> {{ periodsLeft > 1 ? 'maanden' : 'maand' }}<b></b></p>
-            <p>Vergelijkingsrente: {{ newIntRate }}% <span> </span></p>
+            <div class="label"><p>Resterende rentevastperiode: <b>{{ periodsLeft }}</b> {{ periodsLeft > 1 ? 'maanden' : 'maand' }}<b></b></p>
+            <p>Vergelijkingsrente: {{ newIntRate }}% <aegon-help position="top">Het actuele rentepercentage dat geldt voor de periode van uw resterende rentevastperiode. U vindt de geldende percentages op onze pagina met actuele rentepercentages. </aegon-help></p>
+            </div>
+            <div class="label">
+              <a class="button orange icon-right arrow" [attr.href]="'/zakelijk/inkomensverzekeringen/arbeidsongeschiktheidsverzekering/arbeidsongeschiktheidsverzekering-berekenen?AO1_VERZSOM=' + grossTotalCosts">Bekijk de adviesmogelijkheden</a>
+            </div>
           </div>
-        </div>
-        <div class="footer">
-          <div class="label"></div>
-          <a class="button orange icon-right arrow" [attr.href]="'/zakelijk/inkomensverzekeringen/arbeidsongeschiktheidsverzekering/arbeidsongeschiktheidsverzekering-berekenen?AO1_VERZSOM=' + grossTotalCosts">Bekijk de adviesmogelijkheden</a>
         </div>
       </div>
     </div>
