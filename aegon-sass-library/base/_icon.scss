@@ -449,25 +449,16 @@ a.menu-5662:before {
 .home-top-banner .block--menu-menu-particulier .service-item [class*='icon-']{
   color:$white;
 }
-
 // Style for subhome first menu-block ( has blue background so needs white color ).
-#bc-home-subhomes-1 .service-item [class*='icon-'] {
-    color:#fff;
+.home-top-banner .block--menu-menu-particulier .service-item [class*='icon-'],
+.block--menu-menu-particulier .service-item [class*='icon-'] {
+    color:$white;
     -webkit-font-smoothing: initial;
 }
-#bc-home-subhomes-1 .white-bg-link .service-item [class*='icon-'] {
-  color: #0560BB;
-}
-.home-top-banner .block--menu-menu-particulier .service-item [class*='icon-'] {
-  color: $white;
-}
-
+.block--menu-menu-particulier .white-bg-link .service-item [class*='icon-'],
 .home-top-banner .block--menu-menu-particulier .white-bg-link .service-item [class*='icon-'] {
-  color: $blue;
   color: #0560BB;
 }
-
-
 .service-item [class*='icon-'] {
   float: left;
   color: #0077C8;
