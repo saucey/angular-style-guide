@@ -198,9 +198,9 @@ export class QuickQuoteBoeterenteComponent {
     this.calculated = false;
 
     this.isReady = (this.mortgageType > 0 &&
-      this.initialAmount > -1  &&
-      this.interestPeriodEnd !== undefined &&
-      this.oldIntRate > -1 &&
+      this.initialAmount > 0  &&
+      this.validateDate(this.interestPeriodEnd) &&
+      this.oldIntRate > 0 &&
       this.nhg !== undefined);
   }
 

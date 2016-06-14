@@ -449,9 +449,6 @@ a.menu-5662:before {
 .home-top-banner .block--menu-menu-particulier .service-item [class*='icon-']{
   color:$white;
 }
-.block--menu-menu-particulier .content [class*='icon-']:before {
-  color:$white;
-}
 
 // Style for subhome first menu-block ( has blue background so needs white color ).
 #bc-home-subhomes-1 .service-item [class*='icon-'] {
@@ -461,15 +458,18 @@ a.menu-5662:before {
 #bc-home-subhomes-1 .white-bg-link .service-item [class*='icon-'] {
   color: #0560BB;
 }
+.home-top-banner .block--menu-menu-particulier .service-item [class*='icon-'] {
+  color: $white;
+}
 
 .service-item [class*='icon-'] {
-  float:left;
+  float: left;
   color: #0077C8;
-  font-size:25px;
+  font-size: 25px;
 }
 .service-item [class*='icon-'] + .field {
-  float:left;
-  width:76%
+  float: left;
+  width: 76%
 }
 
 // Do not apply icons to old aegon menu.
