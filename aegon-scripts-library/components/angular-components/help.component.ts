@@ -31,12 +31,12 @@ export class HelpComponent {
         left = trigger.offsetLeft - (dialog.offsetWidth / 2);
         break;
       case 'left':
-        top = trigger.offsetTop - dialog.offsetHeight / 2;
-        left = trigger.offsetLeft - dialog.offsetWidth - 5;
+        top = trigger.offsetTop - (dialog.offsetHeight / 2) + 10;
+        left = trigger.offsetLeft - dialog.offsetWidth - 15;
         break;
       case 'right':
-        top = trigger.offsetTop - dialog.offsetHeight / 2;
-        left = trigger.offsetLeft + 25;
+        top = trigger.offsetTop - (dialog.offsetHeight / 2) + 10;
+        left = trigger.offsetLeft + 35;
         break;
       default:
         // default is bottom 
@@ -53,7 +53,7 @@ export class HelpComponent {
     switch (this.position) {
       case 'left':
       case 'right':
-        caret.style.left = (trigger.offsetTop - dialog.offsetTop) + 'px';
+        caret.style.top = (trigger.offsetTop - dialog.offsetTop) + 'px';
         break;
       default:
         // default is bottom and top

@@ -36,22 +36,46 @@
     max-width: $help_dialog_width;
     border-radius: $frame_border_radius;
     .caret {
+      -moz-transform: rotate(45deg);
+      -o-transform: rotate(45deg);
+      -webkit-transform: rotate(45deg);
+      transform: rotate(45deg);
+      background-color: $slightly_lighter_blue;
       position: absolute;
       left: 50%;
     }
     &.top{
       @include bubble($width: 10px, $left: $help_dialog_width / 2, $quadrant: 2, $background-color: $slightly_lighter_blue);
+      .caret {
+        bottom: -7px;
+      }
     }
     &.bottom{
       @include bubble($width: 10px, $left: $help_dialog_width / 2, $quadrant: 0, $background-color: $slightly_lighter_blue);
+      .caret {
+        top: -7px;
+      }
     }
     &.left{
       @include bubble($width: 10px, $left: $help_dialog_width / 2, $quadrant: 3, $background-color: $slightly_lighter_blue);
+      .caret {
+        right: -7px;
+        left: auto;
+      }
     }
     &.right{
       @include bubble($width: 10px, $left: $help_dialog_width / 2, $quadrant: 1, $background-color: $slightly_lighter_blue);
+      .caret {
+        right: auto;
+        left: -7px;
+      }
     }
     &.top, &.bottom, &.right, &.left{
+      .caret {
+        width: 15px;
+        height: 15px;
+        border: none;
+      }
       &:before, &:after{
         content: none;
       }
