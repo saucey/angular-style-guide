@@ -27,15 +27,15 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
     <div class="quickquote angular aov">
       <div class="triangle"></div>
       <div class="calculation">
-        <h3>Wat kost het om uw maandelijkse uitgaven te verzekeren?</h3>
+        <h3>Inzicht in uw maandelijkse uitgaven</h3>
         <div *ngIf="step === 'start'">
           <div class="field first">
             <div class="label">
-              Wat geeft u maandelijks uit?
+              Wat geeft u maandelijks uit? *
             </div>
             <div class="inputs">
               <button class="button icon-right icon-calculator" (click)="step = 'calculation'">
-                Bereken mijn maandelijkse uitgaven
+                Bereken hier uw maandelijkse uitgaven
               </button>
               <div>
                 <ul class="arrow">
@@ -48,7 +48,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
         <div *ngIf="step === 'noCalculation'" class="monthly-spendings">
           <div class="field">
             <div class="label">
-              Uw vaste uitgaven per maand
+              Uw maandelijkse uitgaven
             </div>
             <div class="inputs">
               <aegon-input-number prefix="€" [(ngModel)]="familyIncome" [max]="99999999"></aegon-input-number>
@@ -65,7 +65,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
             <div class="label">
               Woont u samen met een partner?
               <aegon-help>
-                Dit is de eerste helptekst
+                Heeft u wel een partner, maar woont u niet samen? Vul dan 'nee' in.
               </aegon-help>
             </div>
             <div class="inputs">
@@ -74,45 +74,47 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
             </div>
           </div>
           <p class="error" *ngIf="hasPartnerError">
-             Kies of u een partner heeft of niet.
-           </p>
+            Kies of u een partner heeft of niet.
+          </p>
           <div class="field">
             <div class="label">
               Heeft u thuiswonende kinderen?
             </div>
             <div class="inputs">
-              <select [ngModel]="children" (change)="children = $event.target.value; triggerValueChanged();">
-                <option value="" selected>Maak uw keuze</option>
-                <option value="0">Nee</option>
-                <option value="1">Ja, 1 kind</option>
-                <option value="2">Ja, 2 kinderen</option>
-                <option value="3">Ja, 3 kinderen</option>
-                <option value="4">Ja, 4 of meer kinderen</option>
+              <select [ngModel]="children" (change)="children = $event.target.value; triggerValueChanged();" required>
+                <option value="" disabled>Maak uw keuze</option>
+                <option [value]="0">Nee</option>
+                <option [value]="1">Ja, 1 kind</option>
+                <option [value]="2">Ja, 2 kinderen</option>
+                <option [value]="3">Ja, 3 kinderen</option>
+                <option [value]="4">Ja, 4 of meer kinderen</option>
               </select>
             </div>
           </div>
-           <p class="error" *ngIf="childrenError">
-              Kies of u een kinderen heeft of niet.
-            </p>
+          <p class="error" *ngIf="childrenError">
+            Kies of u thuiswonende kinderen heeft of niet.
+          </p>
           <div class="field">
             <div class="label">
               Type woning
               <aegon-help>
-                Dit is de helptekst
+                Staat uw type woning er niet bij? Kies dan het woningtype dat het meest op uw woningtype lijkt.
+                Woont u bijvoorbeeld in een galerijflat, kies dan appartement. Woont u in een 2-onder-1-kapwoning,
+                kies dan een hoekwoning.
               </aegon-help>
             </div>
             <div class="inputs">
-              <select [ngModel]="typeOfResidence" (change)="typeOfResidence = $event.target.value; triggerValueChanged();">
-               <option value="" selected>Maak uw keuze</option>
-                <option value="Galerij">appartement</option>
-                <option value="RijtjeswoningTussen">tussenwoning</option>
-                <option value="TweeOnderEenKap">hoekwoning</option>
-                <option value="VrijstaandGroot">vrijstaand</option>
+              <select [ngModel]="typeOfResidence" (change)="typeOfResidence = $event.target.value; triggerValueChanged();" required>
+                <option value="" disabled>Maak uw keuze</option>
+                <option value="Galerij">Appartement</option>
+                <option value="RijtjeswoningTussen">Tussenwoning</option>
+                <option value="TweeOnderEenKap">Hoekwoning</option>
+                <option value="VrijstaandGroot">Vrijstaand</option>
               </select>
             </div>
           </div>
           <p class="error" *ngIf="typeOfResidenceError">
-             Kies uw woning type
+            Kies uw woning type.
           </p>
           <div class="field">
             <div class="label">
@@ -124,38 +126,40 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
             </div>
           </div>
           <p class="error" *ngIf="mortgageKindError">
-            Kies of u een koop of huurwoning heeft.
+            Kies of u een koop- of huurwoning heeft.
           </p>
-         <div class="field">
-          <div class="label">
-            Netto maandlasten hypotheek of huur
-            <aegon-help>
-              Dit is de vijfde helptekst
-            </aegon-help>
+          <div class="field">
+            <div class="label">
+              Netto maandlasten hypotheek of huur
+              <aegon-help>
+                Vul het bedrag in dat u maandelijks betaalt aan hypotheek of huur. Eventuele hypotheekrente&shy;aftrek
+                of huurtoeslag haalt u van dit bedrag af.
+              </aegon-help>
+            </div>
+            <div class="inputs">
+              <aegon-input-number prefix="€" [(ngModel)]="costResidence" [max]="99999999"
+                                  [placeholder]="'0'" (modelChange)="triggerValueChanged();">
+              </aegon-input-number>
+            </div>
           </div>
-          <div class="inputs">
-            <aegon-input-number prefix="€" [(ngModel)]="costResidence" [max]="99999999"
-                                [placeholder]="'0'" (modelChange)="triggerValueChanged();">
-            </aegon-input-number>
-          </div>
-        </div>
-        <p class="error" *ngIf="costResidenceError">
+          <p class="error" *ngIf="costResidenceError">
             Vul uw netto maandlasten hypotheek of huur in.
           </p>
-         <div class="field">
-          <div class="label">
-            Netto maandelijks gezinsinkomen
-            <aegon-help>
-              Dit is de zesde helptekst.
-            </aegon-help>
+          <div class="field">
+            <div class="label">
+              Netto maandelijks gezinsinkomen
+              <aegon-help>
+                Vul uw netto gezinsinkomen in. Woont u samen met een partner? Tel dan bij uw eigen inkomen als
+                zelfstandige netto inkomsten van uw partner op. Inclusief vakantiegeld en eventuele toeslagen.
+              </aegon-help>
+            </div>
+            <div class="inputs">
+              <aegon-input-number #amountInput prefix="€" [(ngModel)]="familyIncome" [max]="99999999"
+                                 [placeholder]="'0'" (modelChange)="triggerValueChanged();">
+              </aegon-input-number>
+            </div>
           </div>
-          <div class="inputs">
-            <aegon-input-number #amountInput prefix="€" [(ngModel)]="familyIncome" [max]="99999999"
-                               [placeholder]="'0'" (modelChange)="triggerValueChanged();">
-            </aegon-input-number>
-          </div>
-        </div>
-        <p class="error" *ngIf="familyIncomeError">
+          <p class="error" *ngIf="familyIncomeError">
             Vul uw netto gezinsinkomen in.
           </p>
           <div class="field">
@@ -171,16 +175,22 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
       <div class="result tiny" *ngIf="step === 'noCalculation' && familyIncome > 0">
         <div class="row">
           <span class="label"></span>
-          <a class="button orange icon-right arrow" [attr.href]="'/zakelijk/inkomensverzekeringen/arbeidsongeschiktheidsverzekering/arbeidsongeschiktheidsverzekering-berekenen?AO1_VERZSOM=' + netToGross(familyIncome)">Bereken uw premie</a>
+          <a class="button orange icon-right arrow" [attr.href]="'/zakelijk/inkomensverzekeringen/arbeidsongeschiktheidsverzekering/arbeidsongeschiktheidsverzekering-berekenen?verzekerdbedrag=' + netToGross(familyIncome)">
+            Bereken uw premie
+          </a>
         </div>
       </div>
-      <div *ngIf="isValidated" class="result">
+      <div *ngIf="isValidated && pendingCount === 0" class="result">
+        <div class="heading">
+          Gemiddelde netto uitgaven per maand per uitgavenpost *
+        </div>
         <div class="linear">
           <div class="row">
             <span class="label">
-              Uitgave woning en energie
+              Woning en energie
               <aegon-help>
-                Dit is de helptekst.
+                Hieronder vallen: huur/hypotheek, servicekosten/erfpacht, gas, elektriciteit, water, onroerende
+                zaakbelasting, reinigingsheffing, rioolheffing, waterschapslasten, bijdrage VvE.
               </aegon-help>
             </span>
             <span class="value">
@@ -197,9 +207,11 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
           </div>
           <div class="row">
             <span class="label">
-              Uitgave verzekeringen en onderwijs
+              Verzekeringen en onderwijs
               <aegon-help>
-                Dit is de helptekst.
+                Hieronder vallen: zorgverzekering, aansprake&shy;lijkheidsverzekering, inboedelverzekering,
+                opstalverzekering, uitvaartverzekering, vaste telefoon, televisie, internet, mobiele telefoon,
+                (sport-)verenigingen, kranten, tijdschriften, school- en studiekosten kinderen.
               </aegon-help>
             </span>
             <span class="value">
@@ -215,8 +227,13 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
             </span>
           </div>
           <div class="row">
-            <span class="label">Uitgaven boodschappen</span>
-             <span class="value">
+            <span class="label">
+              Boodschappen
+              <aegon-help>
+                Hieronder vallen onder meer: voeding, was- en schoonmaakmiddelen, persoonlijke verzorging.
+              </aegon-help>
+            </span>
+            <span class="value">
               <span class="currency" *ngIf="!editingGroceries">€</span>
               <span class="amount" *ngIf="!editingGroceries">{{groceries | money}}</span>
               <span class="amount" *ngIf="editingGroceries">
@@ -229,7 +246,12 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
             </span>
           </div>
           <div class="row">
-            <span class="label">Uitgaven vervoer</span>
+            <span class="label">
+              Vervoer
+              <aegon-help>
+                Hieronder vallen onder meer: fiets, openbaar vervoer.
+              </aegon-help>
+            </span>
             <span class="value">
               <span class="currency" *ngIf="!editingTransport">€</span>
               <span class="amount" *ngIf="!editingTransport">{{transport | money}}</span>
@@ -243,7 +265,12 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
             </span>
           </div>
           <div class="row">
-            <span class="label">Overig (kleding, huis, vrije tijd)</span>
+            <span class="label">
+              Overig (kleding, huis, vrije tijd)
+              <aegon-help>
+                Hieronder vallen: kleding, schoenen, inventaris, onderhoud huis en tuin, vakantie, vrije tijd.
+              </aegon-help>
+            </span>
             <span class="value">
               <span class="currency" *ngIf="!editingIrregular">€</span>
               <span class="amount" *ngIf="!editingIrregular">{{irregularExpenses | money}}</span>
@@ -257,45 +284,56 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
             </span>
           </div>
         </div>
-        <div class="bigger">
+        <div class="bigger" *ngIf="!showTotalAmount">
           <div class="row">
-            <span class="label">Netto uitgaven per maand*</span>
-            <span class="value">
-              <span class="currency">€</span>
-              <span class="amount">{{totalCosts | money}}</span>
-            </span>
-          </div>
-          <div class="row">
-            <span class="label">Dit is bruto per jaar</span>
-            <span class="value">
-              <span class="currency">€</span>
-              <span class="amount">{{grossTotalCosts | money}}</span>
-            </span>
+            <span class="label">Herkent u zich in deze bedragen?</span>
+            <button class="button icon-right icon-calculator" (click)="showTotalAmount = true">
+              Bereken totaal
+            </button>
           </div>
         </div>
-        <div class="footer">
-          <div class="label"></div>
-          <a class="button orange icon-right arrow" [attr.href]="'/zakelijk/inkomensverzekeringen/arbeidsongeschiktheidsverzekering/arbeidsongeschiktheidsverzekering-berekenen?AO1_VERZSOM=' + grossTotalCosts">Bereken uw premie</a>
+        <div class="total-amount" *ngIf="showTotalAmount">
+          <div class="bigger">
+            <div class="row">
+              <span class="label">Totaal uitgavenposten</span>
+              <span class="value">
+                <span class="currency">€</span>
+                <span class="amount">{{totalCosts | money}}</span>
+                p. mnd.
+              </span>
+            </div>
+          </div>
+          <div class="heading">Voor dit bedrag een AOV?</div>
+          <div class="footer">
+            <div class="label">
+              U kunt dit bedrag verzekeren via een AOV.<br>
+              Dit hoeft niet duur te zijn.
+            </div>
+            <a class="button orange icon-right arrow" [attr.href]="'/zakelijk/inkomensverzekeringen/arbeidsongeschiktheidsverzekering/arbeidsongeschiktheidsverzekering-berekenen?verzekerdbedrag=' + grossTotalCosts">
+              Bereken uw premie
+            </a>
+          </div>
         </div>
       </div>
     </div>
-    <div *ngIf="isValidated">* Indicatie van vaste uitgaven per maand tot stand gekomen ism NIBUD. Voor een exacte berekening kunt u <a href="https://www.aegon.nl/zakelijk/inkomensverzekeringen/arbeidsongeschiktheidsverzekering/afspraak-arbeidsongeschiktheidsverzekering-advies">contact opnemen met een adviseur</a></div>
+    <div class="notes">
+      <div class="note">
+        <span class="symbol">*</span>
+        Indicatie van gemiddelde uitgaven per maand is tot stand gekomen ism Nibud.<br>
+        Voor de berekening is gebruik gemaakt van een aantal aannames.
+      </div>
+    </div>
   `,
   providers: [NibudService, HTTP_PROVIDERS, JSONP_PROVIDERS],
   pipes: [MoneyPipe]
 })
 export class QuickQuoteAovComponent implements OnInit {
   step: string = 'start';
-  netFamilyIncome: number;
-  amountTooSmall: boolean;
-  storedInAegon: boolean = false;
-  storedElsewhere: boolean = false;
-  storedError: boolean;
   hasPartner: boolean;
   hasPartnerError: boolean;
-  children: number;
+  children: any = '';
   childrenError: boolean;
-  typeOfResidence: any;
+  typeOfResidence: string = '';
   typeOfResidenceError: boolean;
   mortgageKind: any;
   mortgageKindError: boolean;
@@ -324,7 +362,7 @@ export class QuickQuoteAovComponent implements OnInit {
   ) {
     this.mapping = {
       'housingCosts': [0, 1, 2, 10, 11, 12, 13, 14, 15],
-      'transport': [60,61,62,63,64,65,66,70],
+      'transport': [65,66,70],
       'otherFixedCharges': [20,21,22,23,33,34,35,36,37,38,40,50,51,52],
       'groceries': [130,132,133,134],
       'irregularExpenses': [80,90,100,110,111,113,120]
@@ -333,27 +371,17 @@ export class QuickQuoteAovComponent implements OnInit {
 
   ngOnInit() {}
 
-  private isValidAmount(): boolean {
-    this.amountTooSmall = this.netFamilyIncome < 25000;
-    return !this.amountTooSmall;
-  }
-
-  private submitAmount(): void {
-    this.step += 1;
-  }
-
   private validate(): boolean {
     let hasErrors: boolean = false;
-    this.storedError = null;
     if (typeof this.hasPartner === "undefined") {
       this.hasPartnerError = true;
       hasErrors = true;
     }
-    if (!this.children) {
+    if (this.children === '') {
       this.childrenError = true;
       hasErrors = true;
     }
-    if (!this.typeOfResidence) {
+    if (this.typeOfResidence === '') {
       this.typeOfResidenceError = true;
       hasErrors = true;
     }
@@ -379,7 +407,6 @@ export class QuickQuoteAovComponent implements OnInit {
     return !hasErrors;
   }
   private submit(): void {
-    this.storedError = false;
     this.serviceError = false;
     this.childrenError = false;
     this.typeOfResidenceError = false;
@@ -457,7 +484,7 @@ export class QuickQuoteAovComponent implements OnInit {
 
   private generateBirthdate(age: number): any {
     let date : Date = new Date(),
-      dd : any = date.getDate(),
+      dd : any = Math.max(1, date.getDate() - 1),
       mm : any = date.getMonth() +1,
       yyyy : any = date.getFullYear();
 

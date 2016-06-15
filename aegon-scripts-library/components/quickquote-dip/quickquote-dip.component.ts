@@ -108,7 +108,8 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteDipT
               </aegon-help>
             </div>
             <div class="inputs">
-              <select [ngModel]="startingDate" (change)="changeStartingDate($event.target.value)">
+              <select [ngModel]="startingDate" (change)="changeStartingDate($event.target.value)" required>
+                <option value="" disabled>Maak uw keuze</option>
                 <option *ngFor="#date of startingDateChoices" [value]="date.value">{{date.label}}</option>
               </select>
             </div>
@@ -196,7 +197,7 @@ export class QuickQuoteDipComponent implements OnInit {
   deathBenefit: boolean = false;
   partnerBirthDate: string;
   partnerBirthDateError: boolean;
-  startingDate: string;
+  startingDate: string = '';
   startingDateError: boolean;
   startingDateChoices: any[] = [];
   startingDateTooFar: boolean = false;
