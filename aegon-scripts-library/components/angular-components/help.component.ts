@@ -9,7 +9,7 @@ import {Component, Input, ViewChild, ElementRef} from "angular2/core";
 })
 export class HelpComponent {
   @Input() text: string;
-  @Input() position: string = "bottom";
+  @Input() position: string = 'bottom';
   @ViewChild('trigger') trigger: ElementRef;
   @ViewChild('dialog') dialog: ElementRef;
   @ViewChild('caret') caret: ElementRef;
