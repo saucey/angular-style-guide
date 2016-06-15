@@ -3,6 +3,7 @@
   $right_width: 370px;
   $right_width_compact: 270px;
 
+  margin-bottom: 12px;
   color: $slightly_darker_blue;
 
   label {
@@ -18,6 +19,7 @@
     border: 1px solid #C41F2C;
     color: $dark_red;
   }
+
   input[type=text],
   input[type=number],
   select {
@@ -26,7 +28,16 @@
     color: $black;
     font-family:$font_light;
     font-size:18px;
-    text-transform: capitalize;
+  }
+
+  select:required:invalid {
+    color: $darker_grey;
+  }
+  option[value=""][disabled] {
+    display: none;
+  }
+  option {
+    color: $black;
   }
 
   input[type=text]::placeholder,
@@ -71,8 +82,6 @@
       width: 50%;
       padding-top: 9px;
       padding-right: 50px;
-
-
     }
 
     .help {
@@ -234,6 +243,19 @@
 
     .footer {
       clear: both;
+    }
+  }
+
+  & + .notes {
+    margin-bottom: 12px;
+
+    .note {
+      padding-left: 0.8em;
+    }
+
+    .symbol {
+      position: absolute;
+      margin-left: -0.8em;
     }
   }
 }
