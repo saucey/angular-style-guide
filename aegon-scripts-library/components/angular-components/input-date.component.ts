@@ -9,15 +9,15 @@ import {CONST_EXPR} from "angular2/src/facade/lang";
       <input #dayEl class="day" placeholder="dd" [required]="required" [ngModel]="day"
              type="number" min="0" inputmode="numeric" pattern="[0-9]*"
              (keydown)="keydown($event)" (keyup)="keyup('day', $event)"
-             (focus)="dayEl.select()" (blur)="day = format(day, 2)">
+             (focus)="dayEl.select()" (input)="keyup('day', $event)" (blur)="day = format(day, 2)">
       <input #monthEl class="month" placeholder="mm" [required]="required" [ngModel]="month"
              type="number" min="0" inputmode="numeric" pattern="[0-9]*"
              (keydown)="keydown($event)" (keyup)="keyup('month', $event)"
-             (focus)="monthEl.select()" (blur)="month = format(month, 2)">
+             (focus)="monthEl.select()" (input)="keyup('month', $event)" (blur)="month = format(month, 2)">
       <input #yearEl class="year" placeholder="jjjj" [required]="required" [ngModel]="year"
-             type="number" min="0" inputmode="numeric" pattern="[0-9]*"
+             type="number" min="0" max="9999" maxLength="4" inputmode="numeric" pattern="[0-9]*"
              (keydown)="keydown($event)" (keyup)="keyup('year', $event)"
-             (focus)="yearEl.select()" (blur)="year = format(year, 4)">
+             (focus)="yearEl.select()" (input)="keyup('year', $event)" (blur)="year = format(year, 4)">
     </span>
   `
 })
@@ -42,6 +42,11 @@ export class InputDateComponent {
   keyup(part: string, event: KeyboardEvent): void {
     let value: string = (<HTMLInputElement>event.target).value,
       change: any = {};
+    // Avoid typing more numbers than allowed.
+    if (value.length > 4 && part === 'year') {
+      value = value.substring(0, 4);
+      this.yearEl.nativeElement.value = value;
+    }
     this[part] = change[part] = value;
     this.emitChange(change);
     if (value.length === 2 &&

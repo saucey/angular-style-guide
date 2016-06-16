@@ -2,7 +2,7 @@ import {Component, OnInit, Input} from 'angular2/core';
 import {HTTP_PROVIDERS, Http, Headers, RequestOptions, Response} from "angular2/http";
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
-import {HelpComponent} from '../angular-components/help.component'
+import {HelpComponent} from '../angular-components/help.component';
 import {InputDateComponent, InputDateValueAccessor} from '../angular-components/input-date.component';
 import {InputNumberComponent, InputNumberValueAccessor} from '../angular-components/input-number.component';
 import {InputRadioComponent, InputRadioValueAccessor} from '../angular-components/input-radio.component';
@@ -31,7 +31,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
             </aegon-help>
           </div>
           <div class="inputs">
-            <select [(ngModel)]="mortgageType" class="no-dd" (change)="mortgageType = $event.target.value;validate();">
+            <select [(ngModel)]="mortgageType" class="no-dd" [class.error]="mortgageTypeErr" (change)="mortgageType = $event.target.value;validate();">
               <option [value]="0" selected>Maak uw keuze</option>
               <option [value]="1">Aflossingsvrij</option>
               <option [value]="2">Annuitair</option>
@@ -58,7 +58,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
               </aegon-help>
             </div>
             <div class="inputs">
-              <aegon-input-number #amountInput [(ngModel)]="initialAmount" prefix="€" [placeholder]="'0'" (blur)="validate()"></aegon-input-number>
+              <aegon-input-number #amountInput [(ngModel)]="initialAmount" prefix="€" [placeholder]="'0'" [class.error]="initialAmountErr" (blur)="validate()"></aegon-input-number>
             </div>
           </div>
           <div class="field">
@@ -69,7 +69,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
               </aegon-help>
             </div>
             <div class="inputs">
-              <aegon-input-radio [name]="'extraPymnt'" (change)="extraPymnt = false; validate()">Nee</aegon-input-radio>
+              <aegon-input-radio [name]="'extraPymnt'" [checked] (change)="extraPymnt = false; validate()">Nee</aegon-input-radio>
               <aegon-input-radio [name]="'extraPymnt'" (change)="extraPymnt = true; validate()">Ja</aegon-input-radio>
             </div>
           </div>
@@ -96,12 +96,9 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
               Einddatum rentevastperiode
             </div>
             <div class="inputs">
-              <aegon-input-date [(ngModel)]="interestPeriodEnd" (change)="validate()"></aegon-input-date>
+              <aegon-input-date [(ngModel)]="interestPeriodEnd" [class.error]="interestPeriodEndErr" (change)="validate()"></aegon-input-date>
             </div>
           </div>
-          <p class="error" *ngIf="hasPartnerError">
-             Kies of u een partner heeft of niet.
-          </p>
           <div class="field">
             <div class="label">
               Huidig rentepercentage
@@ -110,7 +107,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
               </aegon-help>
             </div>
             <div class="inputs">
-              <aegon-input-number #amountInput [(ngModel)]="oldIntRate" [max]="100"
+              <aegon-input-number #amountInput [(ngModel)]="oldIntRate" [class.error]="oldIntRateErr" [max]="100"
                                  [placeholder]="'4,0%'" (change)="validate()">
               </aegon-input-number>
             </div>
@@ -123,14 +120,14 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
               </aegon-help>
             </div>
             <div class="inputs">
-              <aegon-input-radio [name]="'nhg'" (change)="nhg = false; validate()">Nee</aegon-input-radio>
-              <aegon-input-radio [name]="'nhg'" (change)="nhg = true; validate()">Ja</aegon-input-radio>
+              <aegon-input-radio [name]="'nhg'" [class.error]="nhgErr" (change)="nhg = false; validate()">Nee</aegon-input-radio>
+              <aegon-input-radio [name]="'nhg'" [class.error]="nhgErr" (change)="nhg = true; validate()">Ja</aegon-input-radio>
             </div>
           </div>
           <div class="field">
             <div class="label"></div>
             <div class="inputs">
-              <button class="button icon-right icon-calculator" [disabled]="!isReady" [ngClass]="{pending: calculating}" (click)="calculate()">
+              <button class="button icon-right icon-calculator" [class.disabled]="!isReady" [ngClass]="{pending: calculating}" (click)="calculate()">
                 Bereken
               </button>
             </div>
@@ -180,6 +177,13 @@ export class QuickQuoteBoeterenteComponent {
   calculating: boolean = false;
   calculated: boolean = false;
 
+  // Errors
+  mortgageTypeErr: boolean = false;
+  initialAmountErr: boolean = false;
+  interestPeriodEndErr: boolean = false;
+  oldIntRateErr: boolean = false;
+  nhgErr: boolean = false;
+
   constructor(
     private http: Http
   ) {}
@@ -204,88 +208,109 @@ export class QuickQuoteBoeterenteComponent {
       this.nhg !== undefined);
   }
 
+  highligthErrors(): void {
+    // Mortgage type error.
+    this.mortgageTypeErr = (this.mortgageType === 0) ? true : false;
+
+    // Initial amount error.
+    this.initialAmountErr = (this.initialAmount === 0) ? true : false;
+
+    // Interest period end.
+    this.interestPeriodEndErr = this.validateDate(this.interestPeriodEnd) ? false : true;
+    
+    // Old interest rate error.
+    this.oldIntRateErr = (this.oldIntRate < 1) ? true : false;
+
+    // NHG error.
+    this.nhgErr = (this.nhg === undefined) ? true : false;
+  }
   /*
    * Calculates the penalty fee using
    * the available fields.
    */
   calculate(): void {
-    // Adds the loader to the submit button.
-    this.calculating = true;
-
-    // 1. Amount penalty-free repayment (Bedrag boetevrije aflossing).
-    // Default 10%.
-    let penaltyFree = this.roundToDeg((0.1 * this.initialAmount), 2);
-
-    // 2. Repayment (Bedrag aflossing).
-    let repymnt = 0;
-    if(this.extraPymnt === true) {
-      repymnt = this.pymntThisYear + this.pymntPrevYears;
-    }
-    
-    // 3. Basis penalty-calculation (grondslag boeteberekening).
-    let basisFee = (this.initialAmount - penaltyFree - repymnt);
-
-    /* 4. Total cash value (Totale contante waarde) */
-    // 4.1. Define Interest rate contract per month.
-    let oldMonthlyIntRate = this.roundToDeg((this.oldIntRate / 12), 4);
-
-    // 4.2. Define interest rate market per month
-    let d = new Date();
-    // Current date.
-    let currDate = d.getFullYear() + '-' + this.numberPadding((d.getMonth() + 1), 2) + '-' + this.numberPadding(d.getDate(), 2);
-
-    // Set current date to 1st of next month.
-    let startDate = d.getFullYear() + '-' + this.numberPadding((d.getMonth() + 2), 2) + '-' + '01';
-
-    /**** @todo ADD SERVICE FOR NHG ****/
-    if(this.nhg === true) {
-      this.newIntRate = 3.95;
+    if(! this.isReady) {
+      this.highligthErrors();
     }
     else {
-      this.newIntRate = 3.95;
-    }
+      // Adds the loader to the submit button.
+      this.calculating = true;
 
-    let tcw: number = 0, 
+      // 1. Amount penalty-free repayment (Bedrag boetevrije aflossing).
+      // Default 10%.
+      let penaltyFree = this.roundToDeg((0.1 * this.initialAmount), 2);
+
+      // 2. Repayment (Bedrag aflossing).
+      let repymnt = 0;
+      if (this.extraPymnt === true) {
+        repymnt = this.pymntThisYear + this.pymntPrevYears;
+      }
+
+      // 3. Basis penalty-calculation (grondslag boeteberekening).
+      let basisFee = (this.initialAmount - penaltyFree - repymnt);
+
+      /* 4. Total cash value (Totale contante waarde) */
+      // 4.1. Define Interest rate contract per month.
+      let oldMonthlyIntRate = this.roundToDeg((this.oldIntRate / 12), 4);
+
+      // 4.2. Define interest rate market per month
+      let d = new Date();
+      // Current date.
+      let currDate = d.getFullYear() + '-' + this.numberPadding((d.getMonth() + 1), 2) + '-' + this.numberPadding(d.getDate(), 2);
+
+      // Set current date to 1st of next month.
+      let startDate = d.getFullYear() + '-' + this.numberPadding((d.getMonth() + 2), 2) + '-' + '01';
+
+      /**** @todo ADD SERVICE FOR NHG ****/
+      if (this.nhg === true) {
+        this.newIntRate = 3.95;
+      }
+      else {
+        this.newIntRate = 3.95;
+      }
+
+      let tcw: number = 0,
         newMonthlyIntRate: number;
-    // Market monthly interest rate.
-    newMonthlyIntRate = this.newIntRate / 12;
+      // Market monthly interest rate.
+      newMonthlyIntRate = this.newIntRate / 12;
 
-    // 4.3. Define interest for 1 period based on contract interest.
-    let oldPeriodIntst = ((oldMonthlyIntRate * basisFee) / 100).toFixed(2);
+      // 4.3. Define interest for 1 period based on contract interest.
+      let oldPeriodIntst = ((oldMonthlyIntRate * basisFee) / 100).toFixed(2);
 
-    // 4.4. Define interest for 1 period based on market interest.
-    let newPeriodIntst = ((newMonthlyIntRate * basisFee) / 100).toFixed(2);
+      // 4.4. Define interest for 1 period based on market interest.
+      let newPeriodIntst = ((newMonthlyIntRate * basisFee) / 100).toFixed(2);
 
-    // 4.5. Define difference or missed interest for 1 period.
-    let periodIntstDiff = +(oldPeriodIntst) - +(newPeriodIntst);
-    periodIntstDiff = +(periodIntstDiff.toFixed(2));
+      // 4.5. Define difference or missed interest for 1 period.
+      let periodIntstDiff = +(oldPeriodIntst) - +(newPeriodIntst);
+      periodIntstDiff = +(periodIntstDiff.toFixed(2));
 
-    /* 4.6.Define periods to be calculated (!!Ingangsdatum leenlaag
-     * is geen invoer )
-     */
-    let periodStart = this.getTermsAmount(currDate, startDate, 'start');
+      /* 4.6.Define periods to be calculated (!!Ingangsdatum leenlaag
+       * is geen invoer )
+       */
+      let periodStart = this.getTermsAmount(currDate, startDate, 'start');
 
-    this.periodsLeft = this.getTermsAmount(currDate, this.interestPeriodEnd, 'end');
+      this.periodsLeft = this.getTermsAmount(currDate, this.interestPeriodEnd, 'end');
 
-    // Loop through periods.
-    // =F2/(POWER(1+$Invoer.$H$34,A2-$Invoer.$H$28+1))
-    for (let i = periodStart; i < this.periodsLeft + 1; i++) {
-      let cw = periodIntstDiff / (Math.pow((1 + (newMonthlyIntRate / 100)), (+i - periodStart + 1)));
-      cw = +(cw.toFixed(2));
-      tcw = tcw + cw;
+      // Loop through periods.
+      // =F2/(POWER(1+$Invoer.$H$34,A2-$Invoer.$H$28+1))
+      for (let i = periodStart; i < this.periodsLeft + 1; i++) {
+        let cw = periodIntstDiff / (Math.pow((1 + (newMonthlyIntRate / 100)), (+i - periodStart + 1)));
+        cw = +(cw.toFixed(2));
+        tcw = tcw + cw;
+      }
+      // Set the value of total fee.
+      if (((this.initialAmount - repymnt) > penaltyFree) && (this.newIntRate < this.oldIntRate)) {
+        this.totalFee = (((this.initialAmount - repymnt) - penaltyFree) * tcw) / basisFee;
+      }
+      else {
+        this.totalFee = 0;
+      }
+
+      // Removes the class pending in the button.
+      this.calculating = false;
+      // Shows the value.
+      this.calculated = true;
     }
-    // Set the value of total fee.
-    if (((this.initialAmount - repymnt) > penaltyFree) && (this.newIntRate < this.oldIntRate)) {
-      this.totalFee = (((this.initialAmount - repymnt) - penaltyFree) * tcw) / basisFee;
-    }
-    else {
-      this.totalFee = 0;
-    }
-
-    // Removes the class pending in the button.
-    this.calculating = false;
-    // Shows the value.
-    this.calculated = true;
   }
   /*
    * Special calculation between two dates to get
