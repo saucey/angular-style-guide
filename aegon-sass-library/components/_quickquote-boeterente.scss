@@ -44,7 +44,7 @@
       .button[disabled],
       .button[disabled]:hover {
         opacity: 0.8;
-        cursor: not-allowed;
+        //cursor: not-allowed;
       }
       .input.date {
         display: block;
@@ -67,6 +67,7 @@
     }
   }
   .result {
+    overflow: visible;
     .bigger {
       .label {
         font-family: $font_normal;
@@ -88,6 +89,7 @@
           position: static;
           display: inline-block;
           float: none;
+          padding: 10px 1px;
           &:before {
             position: static;
           }
@@ -96,6 +98,9 @@
     	p {
         line-height: 1;
     		margin-bottom: 10px;
+        .help.dialog {
+          line-height: 26px;
+        }
     	}
     }
     .footer {
