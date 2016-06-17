@@ -36,15 +36,35 @@
       margin-bottom: 0;
     }
     .field {
+      aegon-input-number, aegon-input-date, aegon-input-radio {
+        display: inline-block;
+        &.error {
+          background: none;
+          border-radius: 0;
+          margin-top: 0;
+          padding: 0;
+          border: none;
+          input[type="text"], span.input.date, label.radio > input[type="radio"] + span.radio {
+            background-color: $pink;
+            border: 1px solid #C41F2C;
+            color: #ca4642;
+            input[type="number"] {
+              background-color: $pink;
+            }
+          }
+        }
+      }
       margin-bottom: 15px;
       label.radio > input[type="radio"] + span.radio {
         top:-9px;
         background-color: $white;
       }
       .button[disabled],
-      .button[disabled]:hover {
+      .button[disabled]:hover,
+      .button.disabled,
+      .button.disabled:hover {
         opacity: 0.8;
-        //cursor: not-allowed;
+        cursor: not-allowed;
       }
       .input.date {
         display: block;
@@ -63,6 +83,11 @@
         button.icon-calculator {
           margin-bottom: 0;
         }
+        &.short {
+          input[type="text"] {
+            width: 60px;
+          }
+        } 
       }
     }
   }
@@ -96,6 +121,7 @@
         }
       }
     	p {
+        color: $white;
         line-height: 1;
     		margin-bottom: 10px;
         .help.dialog {

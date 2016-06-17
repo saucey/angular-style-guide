@@ -12,7 +12,7 @@ import {ViewChild} from "angular2/core";
 import {ElementRef} from "angular2/core";
 
 
-var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMortgageTemplate'));
+var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteBoeterenteTemplate'));
 @Component({
   selector: 'aegon-quickquote-boeterente',
   directives: [
@@ -106,7 +106,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
                 Het rentepercentage dat is vastgelegd in uw huidige hypotheekcontract. 
               </aegon-help>
             </div>
-            <div class="inputs">
+            <div class="inputs short">
               <aegon-input-number #amountInput [(ngModel)]="oldIntRate" [class.error]="oldIntRateErr" [max]="100"
                                  [placeholder]="'4,0%'" (change)="validate()">
               </aegon-input-number>
@@ -139,7 +139,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
           <div class="row">
             <span class="label">Indicatie omzettingskosten</span>
             <span class="value">
-              <span class="currency">€</span>
+              <span class="curr">€</span>
               <span class="amount">{{totalFee | money}}*</span>
             </span>
           </div>
@@ -163,12 +163,12 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
 export class QuickQuoteBoeterenteComponent {
   // Scope variable initiation.
   mortgageType: number = 0;
-  initialAmount: number;
+  initialAmount: number = 0;
   extraPymnt: boolean;
   pymntThisYear: number = 0;
   pymntPrevYears: number = 0;
   interestPeriodEnd: string;
-  oldIntRate: number;
+  oldIntRate: number = 0;
   nhg: boolean;
   totalFee: number = 0;
   periodsLeft: number;
@@ -178,6 +178,7 @@ export class QuickQuoteBoeterenteComponent {
   calculated: boolean = false;
 
   // Errors
+  errorsHighlighted: boolean = false;
   mortgageTypeErr: boolean = false;
   initialAmountErr: boolean = false;
   interestPeriodEndErr: boolean = false;
@@ -206,6 +207,11 @@ export class QuickQuoteBoeterenteComponent {
       this.validateDate(this.interestPeriodEnd) &&
       this.oldIntRate > 0 &&
       this.nhg !== undefined);
+
+    if (this.errorsHighlighted) {
+      // Removes the highlight in errored elements.
+      this.highligthErrors();
+    }
   }
 
   highligthErrors(): void {
@@ -213,26 +219,28 @@ export class QuickQuoteBoeterenteComponent {
     this.mortgageTypeErr = (this.mortgageType === 0) ? true : false;
 
     // Initial amount error.
-    this.initialAmountErr = (this.initialAmount === 0) ? true : false;
+    this.initialAmountErr = (this.initialAmount === 0 || this.initialAmount === undefined) ? true : false;
 
     // Interest period end.
     this.interestPeriodEndErr = this.validateDate(this.interestPeriodEnd) ? false : true;
     
     // Old interest rate error.
-    this.oldIntRateErr = (this.oldIntRate < 1) ? true : false;
+    this.oldIntRateErr = (this.oldIntRate === 0 || this.oldIntRate === undefined) ? true : false;
 
     // NHG error.
     this.nhgErr = (this.nhg === undefined) ? true : false;
+
+    this.errorsHighlighted = true;
   }
   /*
    * Calculates the penalty fee using
    * the available fields.
    */
   calculate(): void {
-    if(! this.isReady) {
-      this.highligthErrors();
-    }
-    else {
+    // Highlights the fields with errors.
+    this.highligthErrors();
+    // If no errors.
+    if (this.isReady) {
       // Adds the loader to the submit button.
       this.calculating = true;
 
