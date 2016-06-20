@@ -189,10 +189,6 @@ export class QuickQuoteBoeterenteComponent {
     private http: Http
   ) {}
 
-  public log(logMsg: any) {
-    console.log(logMsg);
-  }
-
   /*
    * Checks if the required fields have corresponding
    * values and reset the calculation.
@@ -210,11 +206,11 @@ export class QuickQuoteBoeterenteComponent {
 
     if (this.errorsHighlighted) {
       // Removes the highlight in errored elements.
-      this.highligthErrors();
+      this.highlightErrors();
     }
   }
 
-  highligthErrors(): void {
+  highlightErrors(): void {
     // Mortgage type error.
     this.mortgageTypeErr = (this.mortgageType === 0) ? true : false;
 
@@ -238,7 +234,7 @@ export class QuickQuoteBoeterenteComponent {
    */
   calculate(): void {
     // Highlights the fields with errors.
-    this.highligthErrors();
+    this.highlightErrors();
     // If no errors.
     if (this.isReady) {
       // Adds the loader to the submit button.
@@ -267,7 +263,10 @@ export class QuickQuoteBoeterenteComponent {
       let currDate = d.getFullYear() + '-' + this.numberPadding((d.getMonth() + 1), 2) + '-' + this.numberPadding(d.getDate(), 2);
 
       // Set current date to 1st of next month.
-      let startDate = d.getFullYear() + '-' + this.numberPadding((d.getMonth() + 2), 2) + '-' + '01';
+      // Check month and year.
+      let nextMonth = d.getMonth() !== 11 ? this.numberPadding((d.getMonth() + 2), 2) : '01',
+        year = d.getMonth() !== 11 ? d.getFullYear() : d.getFullYear() + 1;
+      let startDate = year + '-' + nextMonth + '-' + '01';
 
       /**** @todo ADD SERVICE FOR NHG ****/
       if (this.nhg === true) {
@@ -342,7 +341,7 @@ export class QuickQuoteBoeterenteComponent {
     // Types available.
     let types = /^(start|end)$/;
     if (typeof type !== null && !types.test(type)) {
-    throw new Error("The available types are 'start' and 'end'.");
+      throw new Error("The available types are 'start' and 'end'.");
     }
     // Create date object for better manipulation.
     let eDate = new Date(date);
