@@ -43,7 +43,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteBoet
         </div>
         <div *ngIf="mortgageType == 2 || mortgageType == 4">
           <div class="messages messages--alert visible">
-            <span class="icon"><span class="pathA"></span><span class="pathB"></span><span class="pathC"></span></span>
+            <span class="icon"></span>
             <div class="content">
               <b>Let op!</b> Voor een lineaire of annuitaïre hypotheek zullen de werkelijke omzettingskosten lager uitvallen dan in deze indicatieberekening.
             </div>

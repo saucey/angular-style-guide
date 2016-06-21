@@ -3,14 +3,6 @@
     margin: 0 0 15px;
     border: none;
     background: $blue;
-
-    @include rem("padding", 12, 30, 12, 55);
-    .icon {
-      left: 10px;
-      .pathA:before {
-        color: $white;
-      }
-    }
     .content {
       color: $white;
     }
@@ -136,6 +128,21 @@
 }
 @include breakpoint($brk-tablet) {
   .quickquote.angular.boeterente {
+    .messages.messages--alert {
+      position: relative;
+      border-radius: 5px;
+      @include rem("padding", 12, 30, 12, 55);
+      .icon {
+        position: absolute;
+        left: 10px;
+        font-family: "aegon_icons";
+        @include rem('font-size', 30);
+        &:before {
+          content: "\e631";
+          color: $white;
+        }
+      }
+    }
     .calculation {
       @include rem("padding", 30, 30, 18, 20);
       h3:before {

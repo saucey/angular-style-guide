@@ -197,6 +197,7 @@ header.header {
             scrollbar-track-color: #EEEEEE;
             scrollbar-arrow-color: #333;
             overflow: visible !important;
+            z-index: 999;
             &:before {
               border-color: rgba(224, 224, 224, 1) transparent;
               border-style: solid;
