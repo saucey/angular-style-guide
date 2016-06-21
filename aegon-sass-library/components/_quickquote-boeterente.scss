@@ -47,10 +47,18 @@
         }
       }
       margin-bottom: 15px;
-      label.radio > input[type="radio"] + span.radio {
-        top:-9px;
-        background-color: $white;
-      }
+      label.radio {
+        padding-left: 35px;
+        > input[type="radio"] {
+          position: absolute;
+          top: 0;
+          left: 0;
+          + span.radio {
+            top:-9px;
+            background-color: $white;
+          }
+        }
+      } 
       .button[disabled],
       .button[disabled]:hover,
       .button.disabled,
