@@ -262,8 +262,10 @@ export class QuickQuoteBoeterenteComponent {
       // Current date.
       let currDate = d.getFullYear() + '-' + this.numberPadding((d.getMonth() + 1), 2) + '-' + this.numberPadding(d.getDate(), 2);
 
-      // Set current date to 1st of next month.
-      // Check month and year.
+      /* Set current date to 1st of next month.
+       * Check month and year. If current month is December
+       * sets next month to January and adds 1 to the year.
+       */
       let nextMonth = d.getMonth() !== 11 ? this.numberPadding((d.getMonth() + 2), 2) : '01',
         year = d.getMonth() !== 11 ? d.getFullYear() : d.getFullYear() + 1;
       let startDate = year + '-' + nextMonth + '-' + '01';
