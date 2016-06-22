@@ -4,7 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
 import {HelpComponent} from '../angular-components/help.component';
 import {InputDateComponent, InputDateValueAccessor} from '../angular-components/input-date.component';
-import {InputNumberComponent, InputNumberValueAccessor} from '../angular-components/input-number.component';
+import {InputNumberComponent, InputNumberValueAccessor, formatNumber} from '../angular-components/input-number.component';
 import {InputRadioComponent, InputRadioValueAccessor} from '../angular-components/input-radio.component';
 import {MoneyPipe} from "../angular-components/money.pipe";
 import {AfterViewInit} from "angular2/core";
@@ -108,7 +108,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteBoet
             </div>
             <div class="inputs short">
               <aegon-input-number #amountInput [(ngModel)]="oldIntRate" [class.error]="oldIntRateErr" [max]="100"
-                                 [placeholder]="'4,0%'" (change)="validate()">
+                                 [placeholder]="'4,0%'" (change)="validate()" forceDecimals="1">
               </aegon-input-number>
             </div>
           </div>
@@ -215,13 +215,13 @@ export class QuickQuoteBoeterenteComponent {
     this.mortgageTypeErr = (this.mortgageType === 0) ? true : false;
 
     // Initial amount error.
-    this.initialAmountErr = (this.initialAmount === 0 || this.initialAmount === undefined) ? true : false;
+    this.initialAmountErr = (this.initialAmount === 0 || this.initialAmount === null) ? true : false;
 
     // Interest period end.
     this.interestPeriodEndErr = this.validateDate(this.interestPeriodEnd) ? false : true;
     
     // Old interest rate error.
-    this.oldIntRateErr = (this.oldIntRate === 0 || this.oldIntRate === undefined) ? true : false;
+    this.oldIntRateErr = (this.oldIntRate === 0 || this.oldIntRate === null) ? true : false;
 
     // NHG error.
     this.nhgErr = (this.nhg === undefined) ? true : false;

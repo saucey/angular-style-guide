@@ -4,7 +4,7 @@ import {
 import {NG_VALUE_ACCESSOR, ControlValueAccessor} from "angular2/common";
 import {CONST_EXPR} from "angular2/src/facade/lang";
 
-export function formatNumber(value: any, fractional: boolean = true): string {
+export function formatNumber(value: any, fractional: boolean = true, forceDecimals: boolean = false): string {
   // Round to 2 fraction digits. We don't use toFixed(), because we won't enforce the fractional part on round numbers.
   value = Math.round(parseFloat(value) * 100) / 100;
   if (isNaN(value)) {
@@ -22,6 +22,9 @@ export function formatNumber(value: any, fractional: boolean = true): string {
     let zero = tokens[1].length === 1 ? '0' : '';
     return thousandsSeparated + ',' + tokens[1] + zero;
   } else {
+    if (forceDecimals) {
+      return thousandsSeparated + ',00';
+    }
     return thousandsSeparated;
   }
 }
@@ -57,6 +60,7 @@ export function parseNumber(value: any): number {
 export class InputNumberComponent {
   @Input() prefix: string;
   @Input() suffix: string;
+  @Input() forceDecimals: any;
   @Input() required: boolean;
   @Input() max: number;
   @Input() placeholder: string;
@@ -70,12 +74,21 @@ export class InputNumberComponent {
 
   model: string;
 
+  constructor() {
+    // Check if forceDecimals is set and transforme it 
+    // to boolean.
+    if (this.forceDecimals !== undefined) {
+      this.forceDecimals = Boolean(parseInt(this.forceDecimals));
+    } else {
+      this.forceDecimals = false;
+    }
+  }
   select(): void {
     this.inputEl.nativeElement.select();
   }
 
   formatAndBlur(): void {
-    this.model = formatNumber(parseNumber(this.model));
+    this.model = formatNumber(parseNumber(this.model), true, this.forceDecimals);
     this.blur.emit();
   }
 
