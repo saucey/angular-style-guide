@@ -4,7 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
 import {HelpComponent} from '../angular-components/help.component';
 import {InputDateComponent, InputDateValueAccessor} from '../angular-components/input-date.component';
-import {InputNumberComponent, InputNumberValueAccessor, formatNumber} from '../angular-components/input-number.component';
+import {InputNumberComponent, InputNumberValueAccessor} from '../angular-components/input-number.component';
 import {InputRadioComponent, InputRadioValueAccessor} from '../angular-components/input-radio.component';
 import {MoneyPipe} from "../angular-components/money.pipe";
 import {AfterViewInit} from "angular2/core";
