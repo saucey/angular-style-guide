@@ -8,13 +8,27 @@ var cookieWall = {};
   // When retrieving the cookie and it exist, store the value.
   var cookieValue;
   var whitelisted = true;
+
+  var path;
+  var domain;
+    
   /* Cookie helper functions */
   function setCookie(name, value, days) {
     var d = new Date();
     d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
     var expires = "expires=" + d.toUTCString();
-    document.cookie = name + "=" + value + "; " + expires;
+
+    var _path = path || '/';
+    var cookie = name + "=" + value + ";" + expires + ";path=" + _path;
+
+    if (domain && domain !== 'localhost') {
+        cookie += ';domain=' + domain;
+    }
+    cookie += '; ';
+
+    document.cookie = cookie;
   }
+
   function getCookie(name) {
     name = name + "=";
     var cookieArray = document.cookie.split(';');
@@ -32,6 +46,8 @@ var cookieWall = {};
     // No cookie found.
     return null;
   }
+
+
   function showCookieWall() {
     var cookieWallElm = $('.blocking-popup.cookie-wall');
     if (!cookieWallElm[0]) {
@@ -53,6 +69,7 @@ var cookieWall = {};
       })
     }
   }
+
   function showPopupContent(name) {
     // Name should be optimal or basic
     if (name !== 'advanced') {
@@ -89,11 +106,15 @@ var cookieWall = {};
     });
   }
   cookieWall.saveCookieChoice = saveCookieChoice;
+
   /*
    Run the initialize in the head prior to scripts that need to be included. Make sure Jquery is available.
    <script>cookieWall.initialize()<script>
    */
-  function initialize() {
+  function initialize(_path, _domain) {
+    path = _path;
+    domain = _domain;
+      
     whitelisted = false;
     cookieValue = getCookie('AEGON.Cookie.OptIn');
 
@@ -111,6 +132,7 @@ var cookieWall = {};
     $("head").append(styleElm);
   }
   cookieWall.initialize = initialize;
+
   function addScript(url, cookieOption, options) {
     /* Add the following line in the head to load a script in the page.
      <script>cookieWall.addScript('scripts/aegon-angular2.js', 'E', { async: false, attrs: {} })</script>
