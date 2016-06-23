@@ -49,6 +49,14 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteBoet
             </div>
           </div>
         </div>
+        <div *ngIf="mortgageType == 3">
+          <div class="messages messages--alert visible">
+            <span class="icon"></span>
+            <div class="content">
+              <b>Let op!</b> U krijgt over het spaarsaldo dezelfde rente als u betaalt over de hypotheek. Een lagere hypotheekrente leidt tot een hogere spaarpremie. Ga goed na of uw netto maandlasten bij een lagere rente wel omlaag gaan en of u uw doelkapitaal haalt.
+            </div>
+          </div>
+        </div>
         <div *ngIf="mortgageType > 0">
           <div class="field first">
             <div class="label">
@@ -134,25 +142,30 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteBoet
           </div>
         </div>
       </div>
-      <div class="result" *ngIf="calculated">
-        <div class="bigger">
-          <div class="row">
-            <span class="label">Indicatie omzettingskosten</span>
-            <span class="value">
-              <span class="curr">€</span>
-              <span class="amount">{{totalFee | money}}*</span>
-            </span>
+      <div *ngIf="calculated">
+        <div class="result">
+          <div class="bigger">
+            <div class="row">
+              <span class="label">Indicatie omzettingskosten</span>
+              <span class="value">
+                <span class="curr">€</span>
+                <span class="amount">{{totalFee | money}}*</span>
+              </span>
+            </div>
+          </div>
+          <div class="small">
+            <div class="row">
+              <div class="label"><p>Resterende rentevastperiode: <b>{{ periodsLeft }}</b> {{ periodsLeft > 1 ? 'maanden' : 'maand' }}<b></b></p>
+              <p>Vergelijkingsrente: {{ newIntRate }}% <aegon-help position="top">Het actuele rentepercentage dat geldt voor de periode van uw resterende rentevastperiode. U vindt de geldende percentages op onze pagina met actuele rentepercentages. </aegon-help></p>
+              </div>
+              <div class="label">
+                <a class="button orange icon-right arrow" [attr.href]="'/zakelijk/inkomensverzekeringen/arbeidsongeschiktheidsverzekering/arbeidsongeschiktheidsverzekering-berekenen?AO1_VERZSOM=' + grossTotalCosts">Bekijk de adviesmogelijkheden</a>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="small">
-          <div class="row">
-            <div class="label"><p>Resterende rentevastperiode: <b>{{ periodsLeft }}</b> {{ periodsLeft > 1 ? 'maanden' : 'maand' }}<b></b></p>
-            <p>Vergelijkingsrente: {{ newIntRate }}% <aegon-help position="top">Het actuele rentepercentage dat geldt voor de periode van uw resterende rentevastperiode. U vindt de geldende percentages op onze pagina met actuele rentepercentages. </aegon-help></p>
-            </div>
-            <div class="label">
-              <a class="button orange icon-right arrow" [attr.href]="'/zakelijk/inkomensverzekeringen/arbeidsongeschiktheidsverzekering/arbeidsongeschiktheidsverzekering-berekenen?AO1_VERZSOM=' + grossTotalCosts">Bekijk de adviesmogelijkheden</a>
-            </div>
-          </div>
+        <div class="disclaimer">
+        * De uitkomst van deze berekening is een indicatie en kan u helpen bij de overweging om uw hypotheekrente aan te passen. Aan de berekening kunnen geen rechten worden ontleend.
         </div>
       </div>
     </div>
