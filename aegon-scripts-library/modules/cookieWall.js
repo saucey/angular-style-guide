@@ -100,7 +100,7 @@ var cookieWall = {};
       url: '/lpa/CookieVoorkeur',
       data: 'ans=' + selectedOption,
       success: function () {
-        setCookie('AEGON.Cookie.OptIn', selectedOption, 100);
+        setCookie('AEGON.Cookie.OptIn', selectedOption, 100 * 365);
         location.reload();
       }
     });
