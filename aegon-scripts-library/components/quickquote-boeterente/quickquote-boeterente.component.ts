@@ -31,13 +31,8 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteBoet
             </aegon-help>
           </div>
           <div class="inputs">
-            <select [(ngModel)]="mortgageType" class="no-dd" [class.error]="mortgageTypeErr" (change)="mortgageType = $event.target.value;init();">
-              <option [value]="0" selected>Maak uw keuze</option>
-              <option [value]="1">Aflossingsvrij</option>
-              <option [value]="2">Annuitair</option>
-              <option [value]="3">(Bank)Spaar</option>
-              <option [value]="4">Lineair</option>
-              <option [value]="5">Overig</option>
+            <select [(ngModel)]="mortgageType" class="no-dd" [class.error]="mortgageTypeErr" (change)="init($event.target.value);">
+              <option *ngFor="#m of mortgageOps; #i = index" [value]="i">{{m}}</option>
             </select>
           </div>
         </div>
@@ -174,10 +169,14 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteBoet
   pipes: [MoneyPipe]
 })
 export class QuickQuoteBoeterenteComponent {
+  // Mortgage options:
+  mortgageOps: Object[] = ['Maak uw keuze', 'Aflossingsvrij', 'Annuitair', '(Bank)Spaar', 'Lineair', 'Overig'];
   // Scope variable initiation.
   initiated: boolean = false;
   finalized: boolean = false;
   mortgageType: number = 0;
+  // Used for tealium.
+  mortgageName: string;
   initialAmount: number = 0;
   extraPymnt: boolean;
   pymntThisYear: number = 0;
@@ -204,9 +203,19 @@ export class QuickQuoteBoeterenteComponent {
     private http: Http
   ) {}
 
-  init(): void {
-    if(! this.initiated) {
+  /*
+   * Initial tealium event 
+   */
+  init(index: number): void {
+    this.mortgageType = Number(index);
+    this.mortgageName = 'hypotheek-' + String(this.mortgageOps[index]);
+
+    if (!this.initiated && this.mortgageType > 0) {
       let formInit = {
+        page_cat_4_productgroup: 'hypotheek',
+        page_cat_5_product: this.mortgageName,
+        product_name: [this.mortgageName],
+        product_category: ['hypotheek'],
         form_name: 'qq-rente_wijzigen',
         step_name: 'qq-berekening - start',
         page_step:'02',
@@ -356,6 +365,10 @@ export class QuickQuoteBoeterenteComponent {
       // Check in case users calculate again.
       if (!this.finalized) {
         let formComplete = {
+          page_cat_4_productgroup: 'hypotheek',
+          page_cat_5_product: this.mortgageName,
+          product_name: [this.mortgageName],
+          product_category: ['hypotheek'],
           form_name: 'qq-rente_wijzigen',
           step_name: 'qq-bevestiging',
           page_step: '03',
@@ -501,6 +514,13 @@ export class QuickQuoteBoeterenteComponent {
   private tealium (data: Object): void {
     if(typeof utag_data !== 'undefined' && typeof utag !== 'undefined') {
       utag.view(data);
+    } else {
+      // Give some time to load.
+      setTimeout(() => { 
+        if (typeof utag_data !== 'undefined' && typeof utag !== 'undefined') {
+          utag.view(data);
+        }
+      }, 1600);
     }
   }
 }
