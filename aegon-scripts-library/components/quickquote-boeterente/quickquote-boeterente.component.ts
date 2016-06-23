@@ -31,7 +31,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteBoet
             </aegon-help>
           </div>
           <div class="inputs">
-            <select [(ngModel)]="mortgageType" class="no-dd" [class.error]="mortgageTypeErr" (change)="mortgageType = $event.target.value;validate();">
+            <select [(ngModel)]="mortgageType" class="no-dd" [class.error]="mortgageTypeErr" (change)="mortgageType = $event.target.value;init();">
               <option [value]="0" selected>Maak uw keuze</option>
               <option [value]="1">Aflossingsvrij</option>
               <option [value]="2">Annuitair</option>
@@ -175,6 +175,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteBoet
 })
 export class QuickQuoteBoeterenteComponent {
   // Scope variable initiation.
+  initiated: boolean = false;
   mortgageType: number = 0;
   initialAmount: number = 0;
   extraPymnt: boolean;
@@ -202,6 +203,19 @@ export class QuickQuoteBoeterenteComponent {
     private http: Http
   ) {}
 
+  init(): void {
+    if(! this.initiated) {
+      let formInit = {
+        step_name:'qq-berekening - start',
+        page_step:'02',
+        event: 'qq_started',
+        hypotheekvorm: 'hypotheekvorm'
+      };
+      this.tealium(formInit);
+      this.initiated = true;
+    }
+    this.validate();
+  }
   /*
    * Checks if the required fields have corresponding
    * values and reset the calculation.
@@ -463,5 +477,17 @@ export class QuickQuoteBoeterenteComponent {
     }
     // Passed all validations.
     return true;
+  }
+
+  /*
+   * Checks if the key utag_data exists
+   * in the window object and triggers
+   * tealium functions.
+   */
+  private tealium (data: Object) {
+    if(window.hasOwnProperty('utag_data') && typeof utag === 'funtion') {
+      console.log(window.utag_data);
+      
+    }
   }
 }
