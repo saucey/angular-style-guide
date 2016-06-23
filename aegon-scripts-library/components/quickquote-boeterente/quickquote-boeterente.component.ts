@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from 'angular2/core';
+import {Component, Input} from 'angular2/core';
 import {HTTP_PROVIDERS, Http, Headers, RequestOptions, Response} from "angular2/http";
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
@@ -495,11 +495,10 @@ export class QuickQuoteBoeterenteComponent {
   }
 
   /*
-   * Checks if the key utag_data exists
-   * in the window object and triggers
-   * tealium functions.
+   * Checks if utag and utag_data exist
+   * and triggers tealium functions.
    */
-  private tealium (data: Object) {
+  private tealium (data: Object): void {
     if(typeof utag_data !== 'undefined' && typeof utag !== 'undefined') {
       utag.view(data);
     }
