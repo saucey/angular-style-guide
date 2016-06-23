@@ -176,6 +176,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteBoet
 export class QuickQuoteBoeterenteComponent {
   // Scope variable initiation.
   initiated: boolean = false;
+  finalized: boolean = false;
   mortgageType: number = 0;
   initialAmount: number = 0;
   extraPymnt: boolean;
@@ -206,12 +207,14 @@ export class QuickQuoteBoeterenteComponent {
   init(): void {
     if(! this.initiated) {
       let formInit = {
-        step_name:'qq-berekening - start',
+        form_name: 'qq-rente_wijzigen',
+        step_name: 'qq-berekening - start',
         page_step:'02',
         event: 'qq_started',
         hypotheekvorm: 'hypotheekvorm'
       };
       this.tealium(formInit);
+
       this.initiated = true;
     }
     this.validate();
@@ -350,6 +353,18 @@ export class QuickQuoteBoeterenteComponent {
       this.calculating = false;
       // Shows the value.
       this.calculated = true;
+      // Check in case users calculate again.
+      if (!this.finalized) {
+        let formComplete = {
+          form_name: 'qq-rente_wijzigen',
+          step_name: 'qq-bevestiging',
+          page_step: '03',
+          event: 'qq_completed'
+        };
+        this.tealium(formComplete);
+
+        this.finalized = true;
+      }
     }
   }
   /*
@@ -485,9 +500,8 @@ export class QuickQuoteBoeterenteComponent {
    * tealium functions.
    */
   private tealium (data: Object) {
-    if(window.hasOwnProperty('utag_data') && typeof utag === 'funtion') {
-      console.log(window.utag_data);
-      
+    if(typeof utag_data !== 'undefined' && typeof utag !== 'undefined') {
+      utag.view(data);
     }
   }
 }
