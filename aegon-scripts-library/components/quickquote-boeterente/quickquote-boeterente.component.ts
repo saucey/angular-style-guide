@@ -210,6 +210,10 @@ export class QuickQuoteBoeterenteComponent {
     }
   }
 
+  /*
+   * Checks each of the class properties value
+   * and set error properties to true or false
+   */
   highlightErrors(): void {
     // Mortgage type error.
     this.mortgageTypeErr = (this.mortgageType === 0) ? true : false;
