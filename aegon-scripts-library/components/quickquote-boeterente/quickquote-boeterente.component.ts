@@ -220,7 +220,7 @@ export class QuickQuoteBoeterenteComponent {
         step_name: 'qq-berekening - start',
         page_step:'02',
         event: 'qq_started',
-        hypotheekvorm: 'hypotheekvorm'
+        hypotheekvorm: this.mortgageName
       };
       this.tealium(formInit);
 
