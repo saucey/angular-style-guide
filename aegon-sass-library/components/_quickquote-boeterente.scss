@@ -37,12 +37,8 @@
           padding: 0;
           border: none;
           input[type="text"], span.input.date, label.radio > input[type="radio"] + span.radio {
-            background-color: $pink;
             border: 1px solid #C41F2C;
             color: #ca4642;
-            input[type="number"] {
-              background-color: $pink;
-            }
           }
         }
       }
@@ -85,7 +81,7 @@
         }
         &.short {
           input[type="text"] {
-            width: 60px;
+            width: 90px;
           }
         } 
       }
@@ -132,6 +128,13 @@
     .footer {
     	padding-top: 15px;
     }
+  }
+  .disclaimer {
+    background-color: #ffffff;
+    padding: 10px 15px;
+    font-size: 16px;
+    line-height: 22px;
+    color: #000;
   }
 }
 @include breakpoint($brk-tablet) {

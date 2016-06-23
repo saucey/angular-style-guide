@@ -49,6 +49,14 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteBoet
             </div>
           </div>
         </div>
+        <div *ngIf="mortgageType == 3">
+          <div class="messages messages--alert visible">
+            <span class="icon"></span>
+            <div class="content">
+              <b>Let op!</b> U krijgt over het spaarsaldo dezelfde rente als u betaalt over de hypotheek. Een lagere hypotheekrente leidt tot een hogere spaarpremie. Ga goed na of uw netto maandlasten bij een lagere rente wel omlaag gaan en of u uw doelkapitaal haalt.
+            </div>
+          </div>
+        </div>
         <div *ngIf="mortgageType > 0">
           <div class="field first">
             <div class="label">
@@ -108,7 +116,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteBoet
             </div>
             <div class="inputs short">
               <aegon-input-number #amountInput [(ngModel)]="oldIntRate" [class.error]="oldIntRateErr" [max]="100"
-                                 [placeholder]="'4,0%'" (change)="validate()">
+                                 [placeholder]="'4,0%'" (change)="validate()" forceDecimals="1">
               </aegon-input-number>
             </div>
           </div>
@@ -134,25 +142,30 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteBoet
           </div>
         </div>
       </div>
-      <div class="result" *ngIf="calculated">
-        <div class="bigger">
-          <div class="row">
-            <span class="label">Indicatie omzettingskosten</span>
-            <span class="value">
-              <span class="curr">€</span>
-              <span class="amount">{{totalFee | money}}*</span>
-            </span>
+      <div *ngIf="calculated">
+        <div class="result">
+          <div class="bigger">
+            <div class="row">
+              <span class="label">Indicatie omzettingskosten</span>
+              <span class="value">
+                <span class="curr">€</span>
+                <span class="amount">{{totalFee | money}}*</span>
+              </span>
+            </div>
+          </div>
+          <div class="small">
+            <div class="row">
+              <div class="label"><p>Resterende rentevastperiode: <b>{{ periodsLeft }}</b> {{ periodsLeft > 1 ? 'maanden' : 'maand' }}<b></b></p>
+              <p>Vergelijkingsrente: {{ newIntRate }}% <aegon-help position="top">Het actuele rentepercentage dat geldt voor de periode van uw resterende rentevastperiode. U vindt de geldende percentages op onze pagina met actuele rentepercentages. </aegon-help></p>
+              </div>
+              <div class="label">
+                <a class="button orange icon-right arrow" [attr.href]="'/zakelijk/inkomensverzekeringen/arbeidsongeschiktheidsverzekering/arbeidsongeschiktheidsverzekering-berekenen?AO1_VERZSOM=' + grossTotalCosts">Bekijk de adviesmogelijkheden</a>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="small">
-          <div class="row">
-            <div class="label"><p>Resterende rentevastperiode: <b>{{ periodsLeft }}</b> {{ periodsLeft > 1 ? 'maanden' : 'maand' }}<b></b></p>
-            <p>Vergelijkingsrente: {{ newIntRate }}% <aegon-help position="top">Het actuele rentepercentage dat geldt voor de periode van uw resterende rentevastperiode. U vindt de geldende percentages op onze pagina met actuele rentepercentages. </aegon-help></p>
-            </div>
-            <div class="label">
-              <a class="button orange icon-right arrow" [attr.href]="'/zakelijk/inkomensverzekeringen/arbeidsongeschiktheidsverzekering/arbeidsongeschiktheidsverzekering-berekenen?AO1_VERZSOM=' + grossTotalCosts">Bekijk de adviesmogelijkheden</a>
-            </div>
-          </div>
+        <div class="disclaimer">
+        * De uitkomst van deze berekening is een indicatie en kan u helpen bij de overweging om uw hypotheekrente aan te passen. Aan de berekening kunnen geen rechten worden ontleend.
         </div>
       </div>
     </div>
@@ -210,18 +223,22 @@ export class QuickQuoteBoeterenteComponent {
     }
   }
 
+  /*
+   * Checks each of the class properties value
+   * and set error properties to true or false
+   */
   highlightErrors(): void {
     // Mortgage type error.
     this.mortgageTypeErr = (this.mortgageType === 0) ? true : false;
 
     // Initial amount error.
-    this.initialAmountErr = (this.initialAmount === 0 || this.initialAmount === undefined) ? true : false;
+    this.initialAmountErr = (this.initialAmount === 0 || this.initialAmount === null) ? true : false;
 
     // Interest period end.
     this.interestPeriodEndErr = this.validateDate(this.interestPeriodEnd) ? false : true;
     
     // Old interest rate error.
-    this.oldIntRateErr = (this.oldIntRate === 0 || this.oldIntRate === undefined) ? true : false;
+    this.oldIntRateErr = (this.oldIntRate === 0 || this.oldIntRate === null) ? true : false;
 
     // NHG error.
     this.nhgErr = (this.nhg === undefined) ? true : false;
