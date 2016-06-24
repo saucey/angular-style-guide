@@ -1,0 +1,186 @@
+
+//create global namespace.
+var cookieWall = {};
+
+(function ($) {
+
+  'use strict';
+  // When retrieving the cookie and it exist, store the value.
+  var cookieValue;
+  var whitelisted = true;
+
+  var path;
+  var domain;
+    
+  /* Cookie helper functions */
+  function setCookie(name, value, days) {
+    var d = new Date();
+    d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
+    var expires = "expires=" + d.toUTCString();
+
+    var _path = path || '/';
+    var cookie = name + "=" + value + ";" + expires + ";path=" + _path;
+
+    if (domain && domain !== 'localhost') {
+        cookie += ';domain=' + domain;
+    }
+    cookie += '; ';
+
+    document.cookie = cookie;
+  }
+
+  function getCookie(name) {
+    name = name + "=";
+    var cookieArray = document.cookie.split(';');
+    for (var i = 0; i < cookieArray.length; i++) {
+      var cookie = cookieArray[i];
+      // Remove space between cookies.
+      while (cookie.charAt(0) === ' ') {
+        cookie = cookie.substring(1);
+      }
+      // Cookie found? Return the cookie value.
+      if (cookie.indexOf(name) === 0) {
+        return cookie.substring(name.length, cookie.length);
+      }
+    }
+    // No cookie found.
+    return null;
+  }
+
+
+  function showCookieWall() {
+    var cookieWallElm = $('.blocking-popup.cookie-wall');
+    if (!cookieWallElm[0]) {
+      $.ajax({
+        type: 'GET',
+        dataType: 'text',
+        global: false,
+        url: '/lpa/cookie/cookie/cookietext.json',
+        success: function (response) {
+          response = JSON.parse(response);
+          if (response.cookietext) {
+            var styleElm = document.createElement("style");
+            styleElm.innerHTML = "body, html { overflow: hidden; }";
+            $("head").append(styleElm);
+            $("body").prepend(response.cookietext);
+            showPopupContent(cookieValue && cookieValue.toUpperCase() === 'E' ? 'advanced' : null);
+          }
+        }
+      })
+    }
+  }
+
+  function showPopupContent(name) {
+    // Name should be optimal or basic
+    if (name !== 'advanced') {
+      name = 'basic';
+    }
+    // Hide the visible popup content
+    var visibleContent = $(".blocking-popup.cookie-wall .popup-content.show");
+    var hiddenContent = $(".blocking-popup.cookie-wall .popup-content." + name);
+    if (visibleContent[0] && hiddenContent[0] && visibleContent[0] !== hiddenContent[0]) {
+      visibleContent.removeClass("show");
+      hiddenContent.addClass("show");
+    }
+  }
+  cookieWall.showPopupContent = showPopupContent;
+
+  function saveCookieChoice() {
+    // By default always set optimal as option.
+    var selectedOption = 'E';
+    var selectedRadioButton = $(".blocking-popup.cookie-wall .show input[type='radio']:checked");
+    if (selectedRadioButton[0] && selectedRadioButton[0].value === 'basic-choice') {
+      // Basic cookies are selected as option.
+      selectedOption = 'S';
+    }
+    $.ajax({
+      type: 'POST',
+      dataType: 'text',
+      global: false,
+      url: '/lpa/CookieVoorkeur',
+      data: 'ans=' + selectedOption,
+      success: function () {
+        setCookie('AEGON.Cookie.OptIn', selectedOption, 100 * 365);
+        location.reload();
+      }
+    });
+  }
+  cookieWall.saveCookieChoice = saveCookieChoice;
+
+  /*
+   Run the initialize in the head prior to scripts that need to be included. Make sure Jquery is available.
+   <script>cookieWall.initialize()<script>
+   */
+  function initialize(_path, _domain) {
+    path = _path;
+    domain = _domain;
+      
+    whitelisted = false;
+    cookieValue = getCookie('AEGON.Cookie.OptIn');
+
+    var styleElm = document.createElement("style");
+
+    if (cookieValue === null) {
+      styleElm.innerHTML = "[data-cookie-basic], [data-cookie-optimal] { display: none;} ";
+      showCookieWall();
+    } else {
+      cookieWall.cookieValue = cookieValue;
+      if (cookieValue === 'S') {
+        styleElm.innerHTML = "[data-cookie-optimal] { display: none;} ";
+      }
+    }
+    $("head").append(styleElm);
+  }
+  cookieWall.initialize = initialize;
+
+  function addScript(url, cookieOption, options) {
+    /* Add the following line in the head to load a script in the page.
+     <script>cookieWall.addScript('scripts/aegon-angular2.js', 'E', { async: false, attrs: {} })</script>
+     Scripts with async false will be loaded immediately before dom rendering.
+     Attrs will be added on the generated element if needed.
+     */
+    var append = false;
+    if (!cookieOption) {
+      cookieOption = 'S';
+    }
+    if (options === void 0) {
+      options = {};
+    }
+    if (options.async === void 0) {
+      options.async = true;
+    }
+    if (options.attrs === void 0) {
+      options.attrs = {};
+    }
+    if (cookieValue) {
+      if (cookieOption.toUpperCase() === 'S') {
+        if (whitelisted || cookieValue.toUpperCase() === 'S') {
+          // Only basic scripts are appended (also on whitelisted pages).
+          append = true;
+        }
+      } else if (cookieValue.toUpperCase() === 'E') {
+        // Optimal option, all script can be appended.
+        append = true;
+      }
+    } else if (whitelisted && cookieOption.toUpperCase() === 'S') {
+      // The page is whitelisted, append the basic scripts.
+      append = true;
+    }
+    if (append) {
+      var elm = document.createElement("script");
+      elm.src = url;
+      var attrKeys = Object.keys(options.attrs);
+      for (var i = 0; i < attrKeys.length; i++) {
+        elm[attrKeys[i]] = options.attrs[attrKeys[i]];
+      }
+      if (options.async) {
+        $('head').append(elm);
+      } else {
+        document.write(elm.outerHTML);
+      }
+    }
+  }
+  // Add to the namespace.
+  cookieWall.addScript = addScript;
+
+})(jQuery);

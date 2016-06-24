@@ -1,0 +1,514 @@
+@import "../helpers/all";
+@import "../vendors/breakpoint-sass/stylesheets/breakpoint";
+
+//
+// Cookiewall
+// Includes styles from the frontend library to let
+// it be independent.
+// --------------------------------------------------
+
+.blocking-popup {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10000;
+
+  &:before {
+    content: ' ';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: $black;
+    opacity: 0.4;
+  }
+
+  .popup-container {
+    width: 100%;
+    height: 100%;
+    padding: 100px;
+    overflow: auto;
+    box-sizing: border-box;
+  }
+
+  .popup-content {
+    display: none;
+    position: relative;
+    margin: auto;
+    padding: 30px;
+    background: $white;
+    overflow: visible;
+    max-width: 1200px;
+
+    @include rem("border-radius", 5);
+
+    &.show {
+      display: block;
+    }
+  }
+
+  .basic {
+    #accept-cookie-choice {
+      margin-right: 90px;
+    }
+  }
+
+  .advanced {
+    .cookie-option {
+      display: inline-block;
+      width: 44%;
+      vertical-align: top;
+
+      ul {
+        padding-left: 36px;
+      }
+
+      &:first-child {
+        margin-right: 10%;
+      }
+    }
+  }
+}
+
+// Media queries
+
+@include breakpoint($brk-mobile) {
+  .blocking-popup {
+    .popup-container {
+      padding: 10px;
+    }
+
+    .popup-content {
+      padding: 10px;
+    }
+
+    .button {
+      width: 100%;
+      max-width: 380px;
+    }
+
+    .basic {
+      #accept-cookie-choice {
+        margin-right: 0;
+      }
+    }
+
+    .advanced {
+      .cookie-option {
+        width: 100%;
+
+        &:first-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}
+
+@include breakpoint($brk-tablet) {
+  .blocking-popup {
+    .popup-container {
+      padding: 60px;
+    }
+
+    .popup-content {
+      padding: 40px;
+    }
+
+    .basic {
+      #accept-cookie-choice {
+        margin-right: 5%;
+      }
+    }
+
+    .advanced {
+      .cookie-option {
+        width: 100%;
+        max-width: 480px;
+
+        &:first-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}
+
+@include breakpoint($brk-ipad-portrait) {
+  .blocking-popup {
+    .basic {
+      #accept-cookie-choice {
+        margin-right: 90px;
+      }
+    }
+  }
+}
+
+@include breakpoint($brk-ipad-landscape) {
+  .blocking-popup {
+    .advanced {
+      .cookie-option {
+        width: 44%;
+
+        &:first-child {
+          margin-right: 10%;
+        }
+      }
+    }
+  }
+}
+
+@include breakpoint($brk-large-desktop) {
+  .blocking-popup {
+    .popup-container {
+      padding: 100px;
+    }
+
+    .popup-content {
+      padding: 40px;
+    }
+
+    .basic {
+      #accept-cookie-choice {
+        margin-right: 90px;
+      }
+    }
+  }
+}
+
+
+
+.blocking-popup {
+  //
+  // All upcoming styles have been copied from the Aegon styling to make the cookiewall as css independant as possible.
+
+  //
+  // Core
+  // --------------------------------------------------
+
+  a {
+    text-decoration: none;
+    color: $blue;
+  }
+
+  a, button {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  //
+  // Typography
+  // --------------------------------------------------
+
+  h1 {
+    @include rem('font-size', $xxx-large);
+    @include rem('line-height', $line-height-xxx-large);
+    @include rem('margin', 25, 0);
+    font-family: $font_light;
+    font-weight: normal;
+    color: $blue;
+  }
+
+  h4 {
+    font-family: $font_normal;
+    @include rem('font-size', $medium);
+    @include rem('line-height', $line-height-medium);
+    @include rem('margin', 15, 0, 15);
+  }
+
+  p, ul li, button {
+    font-family: $font_light;
+    @include rem('font-size', $medium);
+    @include rem('line-height', $line-height-medium);
+  }
+
+  ul {
+    @include rem('margin', 18, 0, 18);
+  }
+
+  p {
+    @include rem('margin', 0, 0, 15);
+  }
+
+  // font families
+  .font_normal {
+    font-family: $font_normal;
+  }
+
+  .font-light {
+    font-family: $font_light;
+  }
+
+  .font-medium {
+    font-family: $font_medium;
+  }
+
+  .font-bold {
+    font-family: $font_bold;
+  }
+
+  // Media queries
+  @include breakpoint($brk-mobile) {
+
+    h1 {
+      @include rem('font-size', $x-large);
+      @include rem('line-height', $x-large + 3);
+    }
+  }
+
+  @include breakpoint($brk-tablet) {
+
+    h1 {
+      @include word-wrap();
+    }
+
+    h1 {
+      @include rem('font-size', $xxx-large);
+      @include rem('line-height', $line-height-xxx-large);
+    }
+
+  }
+
+  //
+  // Buttons
+  // --------------------------------------------------
+
+  @mixin btn-right-icon() {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: inline-block;
+    float: none;
+    box-sizing: border-box;
+    height: 100%;
+    margin-top: 0;
+    padding: 4px 10px 0;
+    vertical-align: middle;
+    background-color: $light_blue;
+    font-family: $font_icons;
+    line-height: 44px;
+
+    @include rem("font-size", 11);
+    @include rem("border-radius", 0, $elements_border_radius, $elements_border_radius, 0);
+  }
+
+  button,
+  .button {
+    position: relative;
+    display: inline-block;
+    height: auto;
+    margin: 0 0 10px;
+    padding: 13px;
+    cursor: pointer;
+    user-select: none;
+    white-space: normal;
+    color: $white;
+    border: 0;
+    outline: 0;
+    background-color: $blue;
+    font-size: $medium;
+    line-height: 23px;
+
+    @include rem("border-radius", $elements_border_radius);
+    a {
+      color: inherit;
+      background: none;
+    }
+    &:hover {
+      opacity: 0.8;
+    }
+    &:active {
+      opacity: inherit;
+    }
+    &.orange {
+      background-color: $orange;
+    }
+    &[class*="icon-"]:before {
+      font-size: 16px;
+    }
+    &.icon-right,
+    &.arrow {
+      padding-right: 46px;
+      &:after {
+        @include btn-right-icon();
+      }
+      &[class*="icon-"] {
+        &:before {
+          display: none;
+          content: "";
+        }
+      }
+      &.arrow:after {
+        content: $font_icons_arrow_right;
+      }
+      &.orange:after {
+        margin-left: 10px;
+        background-color: $orange_highlight;
+      }
+    }
+    &.white,
+    &.transparent {
+      color: $blue;
+      background-color: $white;
+      &.arrow:before {
+        position: absolute;
+        margin-top: -10px;
+        margin-left: -25px;
+        padding: 11px;
+        content: $font_icons_arrow_right;
+        color: $blue;
+        //currently deactivated as the current design calls for something without arrow
+        background-color: transparent;
+        font-family: $font_icons;
+        font-size: 11px;
+
+        @include rem("font-size", 11);
+      }
+      &.arrow:after {
+        margin-right: 0;
+        margin-left: 0;
+        padding: 0;
+        content: "";
+        background-color: inherit;
+      }
+    }
+    &.transparent {
+      background-color: transparent;
+    }
+  }
+
+  //
+  // Radio
+  // --------------------------------------------------
+
+  label.radio {
+    position: relative;
+    display: inline-block;
+    width: auto;
+    margin-top: $elements_radio_top;
+    padding-right: 15px;
+    //background-color: red;
+    padding-left: 18px;
+    text-align: left;
+    line-height: $elements_radio_line-height;
+    > input[type="radio"] {
+      top: $elements_radio_top;
+      left: 5px;
+      opacity: 0;
+      &:checked + span.radio {
+        background-color: $beige;
+        &:before {
+          position: relative;
+          top: 12px;
+          left: -3px;
+          list-style-type: disc;
+          content: $font_icons_radio;
+          text-align: right;
+          color: $blue;
+        }
+      }
+      & + span.radio {
+        position: absolute;
+        top: -$elements_radio_top + 7px;
+        left: -3px;
+        display: inline-block;
+        width: $elements_radio_height - 2;
+        height: $elements_radio_height - 2;
+        cursor: pointer;
+        border: $elements_border;
+        border-radius: $elements_radio_height / 2;
+        background-color: $beige;
+        &:before {
+          display: block;
+          content: "";
+          font-family: $font_icons;
+          font-size: 30px;
+        }
+      }
+    }
+  }
+
+  //
+  // Unordered list
+  // --------------------------------------------------
+
+  ul {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  ul.links {
+    @include rem("padding", 20, 0);
+    &.links--inline {
+      @include rem("padding", 30, 0);
+    }
+  }
+
+  ul.check li,
+  ul.green-check li,
+  ul.cross li,
+  ul.red-cross li,
+  ul li.check,
+  ul li.green-check,
+  ul li.cross,
+  ul li.red-cross {
+    list-style: none;
+    padding: 0;
+    background: none;
+
+    $li_left: 25px;
+    @include rem("margin-left", $li_left);
+    &:before {
+      position: relative;
+      left: -$li_left;
+      display: block;
+      max-width: 0;
+      max-height: 0;
+      color: $blue;
+      font-family: $font_icons;
+
+      @include rem("font-size", $small);
+    }
+  }
+
+  ul.bullet li:before {
+    left: -22px;
+    font-family: $font_bold;
+    content: "\2022"; // dot
+
+    @include rem("font-size", $large);
+  }
+
+  ul.check li,
+  ul li.check,
+  ul.green-check li,
+  ul li.green-check {
+    &:before {
+      content: $font_icons_check;
+    }
+  }
+  ul.green-check li,
+  ul li.green-check {
+    &:before {
+      color: $green;
+    }
+  }
+
+  ul.cross li,
+  ul li.cross,
+  ul.red-cross li,
+  ul li.red-cross {
+    &:before {
+      content: $font_icons_cross;
+    }
+  }
+  ul.red-cross li,
+  ul li.red-cross {
+    &:before {
+      color: $red;
+    }
+  }
+}
