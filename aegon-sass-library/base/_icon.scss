@@ -294,11 +294,6 @@ a.menu-5662:before {
 .icon-themas:before {
   content: $font_icons_producten;
 }
-
-.icon-call:before {
-  content: $font_icons_call;
-}
-
 .icon-chat:before {
   content: $font_icons_chat;
 }
@@ -433,16 +428,22 @@ a.menu-5662:before {
 .icon-thumb-down {
   content: $font_icons_fistfull;
 }
+.icon-call:before,
 .icon-phone:before {
   content: $font_icons_call;
 }
 .icon-chat:before {
   content: $font_icons_chat;
 }
-.icons-symbol-euro {
+.icons-symbol-euro:before {
   content: $font_icons_betalingen;
 }
-
+.icons-arrow-roadmap:before {
+  content:$font_icons_arrow_roadmap;
+}
+.icons-envelope:before {
+  content:$font_icons_envelope;
+}
 
 .block--menu-menu-particulier .content a,
 .block--menu-menu-particulier .content [class*='icon-']:before,
