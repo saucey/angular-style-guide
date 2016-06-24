@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from 'angular2/core';
+import {Component, Input} from 'angular2/core';
 import {HTTP_PROVIDERS, Http, Headers, RequestOptions, Response} from "angular2/http";
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
@@ -31,13 +31,8 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteBoet
             </aegon-help>
           </div>
           <div class="inputs">
-            <select [(ngModel)]="mortgageType" class="no-dd" [class.error]="mortgageTypeErr" (change)="mortgageType = $event.target.value;validate();">
-              <option [value]="0" selected>Maak uw keuze</option>
-              <option [value]="1">Aflossingsvrij</option>
-              <option [value]="2">Annuitair</option>
-              <option [value]="3">(Bank)Spaar</option>
-              <option [value]="4">Lineair</option>
-              <option [value]="5">Overig</option>
+            <select [(ngModel)]="mortgageType" class="no-dd" [class.error]="mortgageTypeErr" (change)="init($event.target.value);">
+              <option *ngFor="#m of mortgageOps; #i = index" [value]="i">{{m}}</option>
             </select>
           </div>
         </div>
@@ -174,8 +169,14 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteBoet
   pipes: [MoneyPipe]
 })
 export class QuickQuoteBoeterenteComponent {
+  // Mortgage options:
+  mortgageOps: Object[] = ['Maak uw keuze', 'Aflossingsvrij', 'Annuitair', '(Bank)Spaar', 'Lineair', 'Overig'];
   // Scope variable initiation.
+  initiated: boolean = false;
+  finalized: boolean = false;
   mortgageType: number = 0;
+  // Used for tealium.
+  mortgageName: string;
   initialAmount: number = 0;
   extraPymnt: boolean;
   pymntThisYear: number = 0;
@@ -202,6 +203,31 @@ export class QuickQuoteBoeterenteComponent {
     private http: Http
   ) {}
 
+  /*
+   * Initial tealium event 
+   */
+  init(index: number): void {
+    this.mortgageType = Number(index);
+    this.mortgageName = 'hypotheek-' + String(this.mortgageOps[index]);
+
+    if (!this.initiated && this.mortgageType > 0) {
+      let formInit = {
+        page_cat_4_productgroup: 'hypotheek',
+        page_cat_5_product: this.mortgageName,
+        product_name: [this.mortgageName],
+        product_category: ['hypotheek'],
+        form_name: 'qq-rente_wijzigen',
+        step_name: 'qq-berekening - start',
+        page_step:'02',
+        event: 'qq_started',
+        hypotheekvorm: this.mortgageName
+      };
+      this.tealium(formInit);
+
+      this.initiated = true;
+    }
+    this.validate();
+  }
   /*
    * Checks if the required fields have corresponding
    * values and reset the calculation.
@@ -336,6 +362,22 @@ export class QuickQuoteBoeterenteComponent {
       this.calculating = false;
       // Shows the value.
       this.calculated = true;
+      // Check in case users calculate again.
+      if (!this.finalized) {
+        let formComplete = {
+          page_cat_4_productgroup: 'hypotheek',
+          page_cat_5_product: this.mortgageName,
+          product_name: [this.mortgageName],
+          product_category: ['hypotheek'],
+          form_name: 'qq-rente_wijzigen',
+          step_name: 'qq-bevestiging',
+          page_step: '03',
+          event: 'qq_completed'
+        };
+        this.tealium(formComplete);
+
+        this.finalized = true;
+      }
     }
   }
   /*
@@ -463,5 +505,22 @@ export class QuickQuoteBoeterenteComponent {
     }
     // Passed all validations.
     return true;
+  }
+
+  /*
+   * Checks if utag and utag_data exist
+   * and triggers tealium functions.
+   */
+  private tealium (data: Object): void {
+    if(typeof utag_data !== 'undefined' && typeof utag !== 'undefined') {
+      utag.view(data);
+    } else {
+      // Give some time to load.
+      setTimeout(() => { 
+        if (typeof utag_data !== 'undefined' && typeof utag !== 'undefined') {
+          utag.view(data);
+        }
+      }, 1600);
+    }
   }
 }
