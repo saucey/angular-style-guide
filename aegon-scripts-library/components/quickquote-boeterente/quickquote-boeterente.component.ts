@@ -1,18 +1,14 @@
-import {Component, OnInit, Input} from 'angular2/core';
+import {Component, Input, ElementRef, ViewChild, AfterViewInit} from 'angular2/core';
 import {HTTP_PROVIDERS, Http, Headers, RequestOptions, Response} from "angular2/http";
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
-import {HelpComponent} from '../angular-components/help.component'
+import {HelpComponent} from '../angular-components/help.component';
 import {InputDateComponent, InputDateValueAccessor} from '../angular-components/input-date.component';
 import {InputNumberComponent, InputNumberValueAccessor} from '../angular-components/input-number.component';
 import {InputRadioComponent, InputRadioValueAccessor} from '../angular-components/input-radio.component';
 import {MoneyPipe} from "../angular-components/money.pipe";
-import {AfterViewInit} from "angular2/core";
-import {ViewChild} from "angular2/core";
-import {ElementRef} from "angular2/core";
 
-
-var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMortgageTemplate'));
+var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteBoeterenteTemplate'));
 @Component({
   selector: 'aegon-quickquote-boeterente',
   directives: [
@@ -26,26 +22,29 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
         <div class="field">
           <div class="label">
             Hypotheekvorm van het leningdeel
-            <aegon-help>
+            <aegon-help position="top">
               Voer hier de hypotheekvorm in van het leningdeel waarvan u de omzettingskosten wilt berekenen.
             </aegon-help>
           </div>
           <div class="inputs">
-            <select [(ngModel)]="mortgageType" class="no-dd" (change)="mortgageType = $event.target.value;validate();">
-              <option [value]="0" selected>Maak uw keuze</option>
-              <option [value]="1">Aflossingsvrij</option>
-              <option [value]="2">Annuitair</option>
-              <option [value]="3">(Bank)Spaar</option>
-              <option [value]="4">Lineair</option>
-              <option [value]="5">Overig</option>
+            <select [(ngModel)]="mortgageType" class="no-dd" [class.error]="mortgageTypeErr" (change)="init($event.target.value);">
+              <option *ngFor="#m of mortgageOps; #i = index" [value]="i">{{m}}</option>
             </select>
           </div>
         </div>
         <div *ngIf="mortgageType == 2 || mortgageType == 4">
           <div class="messages messages--alert visible">
-            <span class="icon"><span class="pathA"></span><span class="pathB"></span><span class="pathC"></span></span>
+            <span class="icon"></span>
             <div class="content">
               <b>Let op!</b> Voor een lineaire of annuitaïre hypotheek zullen de werkelijke omzettingskosten lager uitvallen dan in deze indicatieberekening.
+            </div>
+          </div>
+        </div>
+        <div *ngIf="mortgageType == 3">
+          <div class="messages messages--alert visible">
+            <span class="icon"></span>
+            <div class="content">
+              <b>Let op!</b> U krijgt over het spaarsaldo dezelfde rente als u betaalt over de hypotheek. Een lagere hypotheekrente leidt tot een hogere spaarpremie. Ga goed na of uw netto maandlasten bij een lagere rente wel omlaag gaan en of u uw doelkapitaal haalt.
             </div>
           </div>
         </div>
@@ -53,23 +52,23 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
           <div class="field first">
             <div class="label">
               Oorspronkelijke bedrag
-              <aegon-help>
+              <aegon-help position="top">
                 Het totale bedrag van het leningdeel op het moment dat u de hypotheek afsloot.
               </aegon-help>
             </div>
             <div class="inputs">
-              <aegon-input-number #amountInput [(ngModel)]="initialAmount" prefix="€" [placeholder]="'0'" (blur)="validate()"></aegon-input-number>
+              <aegon-input-number #amountInput [(ngModel)]="initialAmount" prefix="€" [placeholder]="'0'" [class.error]="initialAmountErr" (blur)="validate()"></aegon-input-number>
             </div>
           </div>
           <div class="field">
             <div class="label">
               Heeft u al extra afgelost op dit bedrag?
-              <aegon-help>
+              <aegon-help position="top">
                 Als u een annuitaïre of lineaire hypotheek heeft en u naast de reguliere aflossing niet extra heeft afgelost kiest u 'Nee'
               </aegon-help>
             </div>
             <div class="inputs">
-              <aegon-input-radio [name]="'extraPymnt'" (change)="extraPymnt = false; validate()">Nee</aegon-input-radio>
+              <aegon-input-radio [name]="'extraPymnt'" [checked] (change)="extraPymnt = false; validate()">Nee</aegon-input-radio>
               <aegon-input-radio [name]="'extraPymnt'" (change)="extraPymnt = true; validate()">Ja</aegon-input-radio>
             </div>
           </div>
@@ -96,66 +95,68 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
               Einddatum rentevastperiode
             </div>
             <div class="inputs">
-              <aegon-input-date [(ngModel)]="interestPeriodEnd" (change)="validate()"></aegon-input-date>
+              <aegon-input-date [(ngModel)]="interestPeriodEnd" [class.error]="interestPeriodEndErr" (change)="validate()"></aegon-input-date>
             </div>
           </div>
-          <p class="error" *ngIf="hasPartnerError">
-             Kies of u een partner heeft of niet.
-          </p>
           <div class="field">
             <div class="label">
               Huidig rentepercentage
-              <aegon-help>
+              <aegon-help position="top">
                 Het rentepercentage dat is vastgelegd in uw huidige hypotheekcontract. 
               </aegon-help>
             </div>
-            <div class="inputs">
-              <aegon-input-number #amountInput [(ngModel)]="oldIntRate" [max]="100"
-                                 [placeholder]="'4,0%'" (change)="validate()">
+            <div class="inputs short">
+              <aegon-input-number #amountInput [(ngModel)]="oldIntRate" [class.error]="oldIntRateErr" [max]="100"
+                                 [placeholder]="'4,0%'" (change)="validate()" forceDecimals="1">
               </aegon-input-number>
             </div>
           </div>
           <div class="field">
             <div class="label">
               NHG van toepassing
-              <aegon-help>
+              <aegon-help position="top">
                 Geef hier aan of op uw hypotheek de Nationale Hypotheek Garantie (NHG) van toepassing is. 
               </aegon-help>
             </div>
             <div class="inputs">
-              <aegon-input-radio [name]="'nhg'" (change)="nhg = false; validate()">Nee</aegon-input-radio>
-              <aegon-input-radio [name]="'nhg'" (change)="nhg = true; validate()">Ja</aegon-input-radio>
+              <aegon-input-radio [name]="'nhg'" [class.error]="nhgErr" (change)="nhg = false; validate()">Nee</aegon-input-radio>
+              <aegon-input-radio [name]="'nhg'" [class.error]="nhgErr" (change)="nhg = true; validate()">Ja</aegon-input-radio>
             </div>
           </div>
           <div class="field">
             <div class="label"></div>
             <div class="inputs">
-              <button class="button icon-right icon-calculator" [disabled]="!isReady" [ngClass]="{pending: calculating}" (click)="calculate()">
+              <button class="button icon-right icon-calculator" [class.disabled]="!isReady" [ngClass]="{pending: calculating}" (click)="calculate()">
                 Bereken
               </button>
             </div>
           </div>
         </div>
       </div>
-      <div class="result" *ngIf="calculated">
-        <div class="bigger">
-          <div class="row">
-            <span class="label">Indicatie omzettingskosten</span>
-            <span class="value">
-              <span class="currency">€</span>
-              <span class="amount">{{totalFee | money}}*</span>
-            </span>
+      <div *ngIf="calculated">
+        <div class="result">
+          <div class="bigger">
+            <div class="row">
+              <span class="label">Indicatie omzettingskosten</span>
+              <span class="value">
+                <span class="curr">€</span>
+                <span class="amount">{{totalFee | money}}*</span>
+              </span>
+            </div>
+          </div>
+          <div class="small">
+            <div class="row">
+              <div class="label"><p>Resterende rentevastperiode: <b>{{ periodsLeft }}</b> {{ periodsLeft > 1 ? 'maanden' : 'maand' }}<b></b></p>
+              <p>Vergelijkingsrente: {{ newIntRate }}% <aegon-help position="top">Het actuele rentepercentage dat geldt voor de periode van uw resterende rentevastperiode. U vindt de geldende percentages op onze pagina met actuele rentepercentages. </aegon-help></p>
+              </div>
+              <div class="label">
+                <a class="button orange icon-right arrow" [attr.href]="'/zakelijk/inkomensverzekeringen/arbeidsongeschiktheidsverzekering/arbeidsongeschiktheidsverzekering-berekenen?AO1_VERZSOM=' + grossTotalCosts">Bekijk de adviesmogelijkheden</a>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="small">
-          <div class="row">
-            <p>Resterende rentevastperiode: <b>{{ periodsLeft }}</b> {{ periodsLeft > 1 ? 'maanden' : 'maand' }}<b></b></p>
-            <p>Vergelijkingsrente: {{ newIntRate }}% <span> </span></p>
-          </div>
-        </div>
-        <div class="footer">
-          <div class="label"></div>
-          <a class="button orange icon-right arrow" [attr.href]="'/zakelijk/inkomensverzekeringen/arbeidsongeschiktheidsverzekering/arbeidsongeschiktheidsverzekering-berekenen?AO1_VERZSOM=' + grossTotalCosts">Bekijk de adviesmogelijkheden</a>
+        <div class="disclaimer">
+        * De uitkomst van deze berekening is een indicatie en kan u helpen bij de overweging om uw hypotheekrente aan te passen. Aan de berekening kunnen geen rechten worden ontleend.
         </div>
       </div>
     </div>
@@ -164,14 +165,20 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
   pipes: [MoneyPipe]
 })
 export class QuickQuoteBoeterenteComponent {
+  // Mortgage options:
+  mortgageOps: Object[] = ['Maak uw keuze', 'Aflossingsvrij', 'Annuitair', '(Bank)Spaar', 'Lineair', 'Overig'];
   // Scope variable initiation.
+  initiated: boolean = false;
+  finalized: boolean = false;
   mortgageType: number = 0;
-  initialAmount: number;
+  // Used for tealium.
+  mortgageName: string;
+  initialAmount: number = 0;
   extraPymnt: boolean;
   pymntThisYear: number = 0;
   pymntPrevYears: number = 0;
   interestPeriodEnd: string;
-  oldIntRate: number;
+  oldIntRate: number = 0;
   nhg: boolean;
   totalFee: number = 0;
   periodsLeft: number;
@@ -180,14 +187,43 @@ export class QuickQuoteBoeterenteComponent {
   calculating: boolean = false;
   calculated: boolean = false;
 
+  // Errors
+  errorsHighlighted: boolean = false;
+  mortgageTypeErr: boolean = false;
+  initialAmountErr: boolean = false;
+  interestPeriodEndErr: boolean = false;
+  oldIntRateErr: boolean = false;
+  nhgErr: boolean = false;
+
   constructor(
     private http: Http
   ) {}
 
-  public log(logMsg: any) {
-    console.log(logMsg);
-  }
+  /*
+   * Initial tealium event 
+   */
+  init(index: number): void {
+    this.mortgageType = Number(index);
+    this.mortgageName = 'hypotheek-' + String(this.mortgageOps[index]);
 
+    if (!this.initiated && this.mortgageType > 0) {
+      let formInit = {
+        page_cat_4_productgroup: 'hypotheek',
+        page_cat_5_product: this.mortgageName,
+        product_name: [this.mortgageName],
+        product_category: ['hypotheek'],
+        form_name: 'qq-rente_wijzigen',
+        step_name: 'qq-berekening - start',
+        page_step:'02',
+        event: 'qq_started',
+        hypotheekvorm: this.mortgageName
+      };
+      this.tealium(formInit);
+
+      this.initiated = true;
+    }
+    this.validate();
+  }
   /*
    * Checks if the required fields have corresponding
    * values and reset the calculation.
@@ -202,90 +238,143 @@ export class QuickQuoteBoeterenteComponent {
       this.validateDate(this.interestPeriodEnd) &&
       this.oldIntRate > 0 &&
       this.nhg !== undefined);
+
+    if (this.errorsHighlighted) {
+      // Removes the highlight in errored elements.
+      this.highlightErrors();
+    }
   }
 
+  /*
+   * Checks each of the class properties value
+   * and set error properties to true or false
+   */
+  highlightErrors(): void {
+    // Mortgage type error.
+    this.mortgageTypeErr = (this.mortgageType === 0) ? true : false;
+
+    // Initial amount error.
+    this.initialAmountErr = (this.initialAmount === 0 || this.initialAmount === null) ? true : false;
+
+    // Interest period end.
+    this.interestPeriodEndErr = this.validateDate(this.interestPeriodEnd) ? false : true;
+    
+    // Old interest rate error.
+    this.oldIntRateErr = (this.oldIntRate === 0 || this.oldIntRate === null) ? true : false;
+
+    // NHG error.
+    this.nhgErr = (this.nhg === undefined) ? true : false;
+
+    this.errorsHighlighted = true;
+  }
   /*
    * Calculates the penalty fee using
    * the available fields.
    */
   calculate(): void {
-    // Adds the loader to the submit button.
-    this.calculating = true;
+    // Highlights the fields with errors.
+    this.highlightErrors();
+    // If no errors.
+    if (this.isReady) {
+      // Adds the loader to the submit button.
+      this.calculating = true;
 
-    // 1. Amount penalty-free repayment (Bedrag boetevrije aflossing).
-    // Default 10%.
-    let penaltyFree = this.roundToDeg((0.1 * this.initialAmount), 2);
+      // 1. Amount penalty-free repayment (Bedrag boetevrije aflossing).
+      // Default 10%.
+      let penaltyFree = this.roundToDeg((0.1 * this.initialAmount), 2);
 
-    // 2. Repayment (Bedrag aflossing).
-    let repymnt = 0;
-    if(this.extraPymnt === true) {
-      repymnt = this.pymntThisYear + this.pymntPrevYears;
-    }
-    
-    // 3. Basis penalty-calculation (grondslag boeteberekening).
-    let basisFee = (this.initialAmount - penaltyFree - repymnt);
+      // 2. Repayment (Bedrag aflossing).
+      let repymnt = 0;
+      if (this.extraPymnt === true) {
+        repymnt = this.pymntThisYear + this.pymntPrevYears;
+      }
 
-    /* 4. Total cash value (Totale contante waarde) */
-    // 4.1. Define Interest rate contract per month.
-    let oldMonthlyIntRate = this.roundToDeg((this.oldIntRate / 12), 4);
+      // 3. Basis penalty-calculation (grondslag boeteberekening).
+      let basisFee = (this.initialAmount - penaltyFree - repymnt);
 
-    // 4.2. Define interest rate market per month
-    let d = new Date();
-    // Current date.
-    let currDate = d.getFullYear() + '-' + this.numberPadding((d.getMonth() + 1), 2) + '-' + this.numberPadding(d.getDate(), 2);
+      /* 4. Total cash value (Totale contante waarde) */
+      // 4.1. Define Interest rate contract per month.
+      let oldMonthlyIntRate = this.roundToDeg((this.oldIntRate / 12), 4);
 
-    // Set current date to 1st of next month.
-    let startDate = d.getFullYear() + '-' + this.numberPadding((d.getMonth() + 2), 2) + '-' + '01';
+      // 4.2. Define interest rate market per month
+      let d = new Date();
+      // Current date.
+      let currDate = d.getFullYear() + '-' + this.numberPadding((d.getMonth() + 1), 2) + '-' + this.numberPadding(d.getDate(), 2);
 
-    /**** @todo ADD SERVICE FOR NHG ****/
-    if(this.nhg === true) {
-      this.newIntRate = 3.95;
-    }
-    else {
-      this.newIntRate = 3.95;
-    }
+      /* Set current date to 1st of next month.
+       * Check month and year. If current month is December
+       * sets next month to January and adds 1 to the year.
+       */
+      let nextMonth = d.getMonth() !== 11 ? this.numberPadding((d.getMonth() + 2), 2) : '01',
+        year = d.getMonth() !== 11 ? d.getFullYear() : d.getFullYear() + 1;
+      let startDate = year + '-' + nextMonth + '-' + '01';
 
-    let tcw: number = 0, 
+      /**** @todo ADD SERVICE FOR NHG ****/
+      if (this.nhg === true) {
+        this.newIntRate = 3.95;
+      }
+      else {
+        this.newIntRate = 3.95;
+      }
+
+      let tcw: number = 0,
         newMonthlyIntRate: number;
-    // Market monthly interest rate.
-    newMonthlyIntRate = this.newIntRate / 12;
+      // Market monthly interest rate.
+      newMonthlyIntRate = this.newIntRate / 12;
 
-    // 4.3. Define interest for 1 period based on contract interest.
-    let oldPeriodIntst = ((oldMonthlyIntRate * basisFee) / 100).toFixed(2);
+      // 4.3. Define interest for 1 period based on contract interest.
+      let oldPeriodIntst = ((oldMonthlyIntRate * basisFee) / 100).toFixed(2);
 
-    // 4.4. Define interest for 1 period based on market interest.
-    let newPeriodIntst = ((newMonthlyIntRate * basisFee) / 100).toFixed(2);
+      // 4.4. Define interest for 1 period based on market interest.
+      let newPeriodIntst = ((newMonthlyIntRate * basisFee) / 100).toFixed(2);
 
-    // 4.5. Define difference or missed interest for 1 period.
-    let periodIntstDiff = +(oldPeriodIntst) - +(newPeriodIntst);
-    periodIntstDiff = +(periodIntstDiff.toFixed(2));
+      // 4.5. Define difference or missed interest for 1 period.
+      let periodIntstDiff = +(oldPeriodIntst) - +(newPeriodIntst);
+      periodIntstDiff = +(periodIntstDiff.toFixed(2));
 
-    /* 4.6.Define periods to be calculated (!!Ingangsdatum leenlaag
-     * is geen invoer )
-     */
-    let periodStart = this.getTermsAmount(currDate, startDate, 'start');
+      /* 4.6.Define periods to be calculated (!!Ingangsdatum leenlaag
+       * is geen invoer )
+       */
+      let periodStart = this.getTermsAmount(currDate, startDate, 'start');
 
-    this.periodsLeft = this.getTermsAmount(currDate, this.interestPeriodEnd, 'end');
+      this.periodsLeft = this.getTermsAmount(currDate, this.interestPeriodEnd, 'end');
 
-    // Loop through periods.
-    // =F2/(POWER(1+$Invoer.$H$34,A2-$Invoer.$H$28+1))
-    for (let i = periodStart; i < this.periodsLeft + 1; i++) {
-      let cw = periodIntstDiff / (Math.pow((1 + (newMonthlyIntRate / 100)), (+i - periodStart + 1)));
-      cw = +(cw.toFixed(2));
-      tcw = tcw + cw;
+      // Loop through periods.
+      // =F2/(POWER(1+$Invoer.$H$34,A2-$Invoer.$H$28+1))
+      for (let i = periodStart; i < this.periodsLeft + 1; i++) {
+        let cw = periodIntstDiff / (Math.pow((1 + (newMonthlyIntRate / 100)), (+i - periodStart + 1)));
+        cw = +(cw.toFixed(2));
+        tcw = tcw + cw;
+      }
+      // Set the value of total fee.
+      if (((this.initialAmount - repymnt) > penaltyFree) && (this.newIntRate < this.oldIntRate)) {
+        this.totalFee = (((this.initialAmount - repymnt) - penaltyFree) * tcw) / basisFee;
+      }
+      else {
+        this.totalFee = 0;
+      }
+
+      // Removes the class pending in the button.
+      this.calculating = false;
+      // Shows the value.
+      this.calculated = true;
+      // Check in case users calculate again.
+      if (!this.finalized) {
+        let formComplete = {
+          page_cat_4_productgroup: 'hypotheek',
+          page_cat_5_product: this.mortgageName,
+          product_name: [this.mortgageName],
+          product_category: ['hypotheek'],
+          form_name: 'qq-rente_wijzigen',
+          step_name: 'qq-bevestiging',
+          page_step: '03',
+          event: 'qq_completed'
+        };
+        this.tealium(formComplete);
+
+        this.finalized = true;
+      }
     }
-    // Set the value of total fee.
-    if (((this.initialAmount - repymnt) > penaltyFree) && (this.newIntRate < this.oldIntRate)) {
-      this.totalFee = (((this.initialAmount - repymnt) - penaltyFree) * tcw) / basisFee;
-    }
-    else {
-      this.totalFee = 0;
-    }
-
-    // Removes the class pending in the button.
-    this.calculating = false;
-    // Shows the value.
-    this.calculated = true;
   }
   /*
    * Special calculation between two dates to get
@@ -309,7 +398,7 @@ export class QuickQuoteBoeterenteComponent {
     // Types available.
     let types = /^(start|end)$/;
     if (typeof type !== null && !types.test(type)) {
-    throw new Error("The available types are 'start' and 'end'.");
+      throw new Error("The available types are 'start' and 'end'.");
     }
     // Create date object for better manipulation.
     let eDate = new Date(date);
@@ -412,5 +501,22 @@ export class QuickQuoteBoeterenteComponent {
     }
     // Passed all validations.
     return true;
+  }
+
+  /*
+   * Checks if utag and utag_data exist
+   * and triggers tealium functions.
+   */
+  private tealium (data: Object): void {
+    if(typeof utag_data !== 'undefined' && typeof utag !== 'undefined') {
+      utag.view(data);
+    } else {
+      // Give some time to load.
+      setTimeout(() => { 
+        if (typeof utag_data !== 'undefined' && typeof utag !== 'undefined') {
+          utag.view(data);
+        }
+      }, 1600);
+    }
   }
 }

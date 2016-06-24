@@ -1,5 +1,5 @@
 
-// 
+//
 // Reason to don't use id selectors instead of class selectors
 // http://csswizardry.com/2011/09/when-using-ids-can-be-a-pain-in-the-class/
 // http://screwlewse.com/2010/07/dont-use-id-selectors-in-css/
@@ -243,7 +243,7 @@
       color: $paid_color;
     }
     &.icon-info:before {
-      content: $font_icons_info_black;
+      content: $font_icons_info;
     }
     &.info,
     &.icon-info:before {
@@ -505,8 +505,8 @@ ul.horizontal {
 
 
 /**
- * Added by Rocco: Please check the explanation wrote in layout/_grid.scss at 
- * line 100, related to this specific declaration below, that helps to visuaize 
+ * Added by Rocco: Please check the explanation wrote in layout/_grid.scss at
+ * line 100, related to this specific declaration below, that helps to visuaize
  * your widget in the right way.
  */
 

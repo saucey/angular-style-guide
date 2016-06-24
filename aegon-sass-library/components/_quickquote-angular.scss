@@ -85,6 +85,7 @@
     }
 
     .help {
+      max-width: 100%;
       padding-top: 20px;
     }
 
@@ -133,18 +134,21 @@
   .label {
     .help {
       position: absolute;
-      top: 0;
+      bottom: 0;
       right: 20px;
       color: $black;
+      padding: 13px 9px;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
 
       &.dialog {
+        bottom:auto;
         display: none;
         margin-left: 0;
         right: auto;
         width: 400px;
         color: $black;
+        padding: 18px;
       }
     }
   }
@@ -271,12 +275,16 @@
     padding-bottom: 8px;
     padding-right:30px;
     max-width:100%;
+    .help {
+      bottom: 8px;
+      right:0;
+      &.dialog {
+        bottom: auto;
+      }
+    }
   }
   .quickquote.angular .field .inputs {
     width: 100%;
-  }
-  .quickquote.angular .field .label .help {
-    right:0;
   }
 }
 @media only screen and (max-width: 870px) {

@@ -12,7 +12,7 @@
      * Istructions for Menu Global.
      * (Desktop and other devices, apart mobile with screen below < 640 pixels)
      */
-    menuDesktop: function (menu) {
+    menuDesktop: function (menu, context) {
 
       // Click on backdrop or a#close
       menu.find('.nav-backdrop').add('a.close').on('click', function () {
@@ -24,7 +24,7 @@
       // Push menu instructions
       menu.find("#showLeftPush").click(function () {
 
-        $('body').toggleClass('pushmenu-to-right');
+        $('body', context).toggleClass('pushmenu-to-right');
 
         if (menu.hasClass('open') && !$('body').hasClass('pushmenu-to-right')) {
 
@@ -46,7 +46,7 @@
         // Stop propagation if not .close
         if ($(e.target).hasClass('close') || isSubmenu) { return; }
 
-        $('body').removeClass('pushmenu-to-right');
+        $('body', context).removeClass('pushmenu-to-right');
 
         if ($(this).hasClass('item-open')) {
 
@@ -82,12 +82,12 @@
      * Istructions for Menu Mobile.
      * (All screens below < 640 pixels)
      */
-    menuMobile: function (menu) {
+    menuMobile: function (menu, context) {
 
       // Mobile navigation
-      $('#openmenu').on('click', function() {
+      $('#openmenu', context).on('click', function() {
 
-        $('body').toggleClass('pushmenu-to-right');
+        $('body', context).toggleClass('pushmenu-to-right');
 
         if (menu.hasClass('open') && !$('body').hasClass('pushmenu-to-right')) {
 
@@ -100,7 +100,7 @@
       });
 
       // All clicks on #scroll div
-      $('#scroll').on('mousedown touchmove', function (e) {
+      $('#scroll', context).on('mousedown touchmove', function (e) {
 
         if (e.target.id === 'openmenu') { return; }
 
@@ -165,7 +165,7 @@
           menuMobileDOM = $('aside.mobile', context);
 
       // Run all instructions for different breakpoints
-      this.menuDesktop(menuDesktopDOM).menuMobile(menuMobileDOM);
+      this.menuDesktop(menuDesktopDOM, context).menuMobile(menuMobileDOM, context);
     }
   };
 
