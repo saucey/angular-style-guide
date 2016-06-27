@@ -1,3 +1,28 @@
+/*
+  Cookiewall usage.
+
+  In the <head> of the pages right below where jquery is loaded add the cookiewall.js script import tag.
+
+  After that add the following below the cookiewall.js import.
+    * When a page needs to be excluded from the cookiewall, don't run the initialize function.
+
+  <script>
+    cookieWall.initialize();
+  </script>
+
+  The initialize will check if the cookie exists and if not will render the cookiewall. A choice then needs
+  to be made for basis ('S') or optimaal ('E').
+
+  Depending on what choice has been made scripts can be loaded or not. The cookiewall can
+  handle this. Instead of injecting the js file with a normal <script> tag. Use the following:
+
+  <script>cookieWall.addScript('scripts/aegon-somescript.js', 'E', { async: false, attrs: { some: 'thing'} })</script>
+
+  The addScript function needs the url and cookie value (E or S) and loads js files async or not. Attrs will be added
+  to the element being created.
+
+*/
+
 
 //create global namespace.
 var cookieWall = {};
@@ -11,7 +36,8 @@ var cookieWall = {};
 
   var path;
   var domain;
-    
+
+
   /* Cookie helper functions */
   function setCookie(name, value, days) {
     var d = new Date();
@@ -28,6 +54,7 @@ var cookieWall = {};
 
     document.cookie = cookie;
   }
+
 
   function getCookie(name) {
     name = name + "=";
@@ -48,7 +75,11 @@ var cookieWall = {};
   }
 
 
-  function showCookieWall() {
+  function showCookieWall(name) {
+    if (!name) {
+      name = (cookieValue && cookieValue.toUpperCase() === 'E') ? 'advanced' : null
+    }
+
     var cookieWallElm = $('.blocking-popup.cookie-wall');
     if (!cookieWallElm[0]) {
       $.ajax({
@@ -59,16 +90,20 @@ var cookieWall = {};
         success: function (response) {
           response = JSON.parse(response);
           if (response.cookietext) {
-            var styleElm = document.createElement("style");
-            styleElm.innerHTML = "body, html { overflow: hidden; }";
-            $("head").append(styleElm);
-            $("body").prepend(response.cookietext);
-            showPopupContent(cookieValue && cookieValue.toUpperCase() === 'E' ? 'advanced' : null);
+            $(document).ready(function () {
+              var styleElm = document.createElement("style");
+              styleElm.innerHTML = "body, html { overflow: hidden; position: fixed; }";
+              $("head").append(styleElm);
+              $("body").prepend(response.cookietext);
+              showPopupContent(name);
+            });
           }
         }
       })
     }
   }
+  cookieWall.showCookieWall = showCookieWall;
+
 
   function showPopupContent(name) {
     // Name should be optimal or basic
@@ -84,6 +119,7 @@ var cookieWall = {};
     }
   }
   cookieWall.showPopupContent = showPopupContent;
+
 
   function saveCookieChoice() {
     // By default always set optimal as option.
@@ -106,6 +142,7 @@ var cookieWall = {};
     });
   }
   cookieWall.saveCookieChoice = saveCookieChoice;
+
 
   /*
    Run the initialize in the head prior to scripts that need to be included. Make sure Jquery is available.
@@ -132,6 +169,7 @@ var cookieWall = {};
     $("head").append(styleElm);
   }
   cookieWall.initialize = initialize;
+
 
   function addScript(url, cookieOption, options) {
     /* Add the following line in the head to load a script in the page.
