@@ -8,8 +8,8 @@
 // --------------------------------------------------
 
 .blocking-popup {
-  position: fixed;
-  top: 0px;
+  position: absolute;
+  top: 0;
   right: 0;
   bottom: -50px; // to make sure ipad bouncing does not look ugly
   left: 0;
@@ -50,18 +50,18 @@
 
     @include rem("border-radius", 5);
 
-    &.show {
+    &.popup-show {
       display: block;
     }
   }
 
-  .basic {
+  .cookiewall-basic {
     #accept-cookie-choice {
       margin-right: 90px;
     }
   }
 
-  .advanced {
+  .cookiewall-advanced {
     .cookie-option {
       display: inline-block;
       width: 44%;
@@ -95,13 +95,13 @@
       max-width: 380px;
     }
 
-    .basic {
+    .cookiewall-basic {
       #accept-cookie-choice {
         margin-right: 0;
       }
     }
 
-    .advanced {
+    .cookiewall-advanced {
       .cookie-option {
         width: 100%;
 
@@ -123,13 +123,13 @@
       padding: 40px;
     }
 
-    .basic {
+    .cookiewall-basic {
       #accept-cookie-choice {
         margin-right: 5%;
       }
     }
 
-    .advanced {
+    .cookiewall-advanced {
       .cookie-option {
         width: 100%;
         max-width: 480px;
@@ -144,7 +144,7 @@
 
 @include breakpoint($brk-ipad-portrait) {
   .blocking-popup {
-    .basic {
+    .cookiewall-basic {
       #accept-cookie-choice {
         margin-right: 90px;
       }
@@ -154,7 +154,7 @@
 
 @include breakpoint($brk-ipad-landscape) {
   .blocking-popup {
-    .advanced {
+    .cookiewall-advanced {
       .cookie-option {
         width: 44%;
 
@@ -176,7 +176,7 @@
       padding: 40px;
     }
 
-    .basic {
+    .cookiewall-basic {
       #accept-cookie-choice {
         margin-right: 90px;
       }

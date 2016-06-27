@@ -77,7 +77,7 @@ var cookieWall = {};
 
   function showCookieWall(name) {
     if (!name) {
-      name = (cookieValue && cookieValue.toUpperCase() === 'E') ? 'advanced' : null
+      name = (cookieValue && cookieValue.toUpperCase() === 'E') ? 'advanced' : null;
     }
 
     var cookieWallElm = $('.blocking-popup.cookie-wall');
@@ -92,14 +92,14 @@ var cookieWall = {};
           if (response.cookietext) {
             $(document).ready(function () {
               var styleElm = document.createElement("style");
-              styleElm.innerHTML = "body, html { overflow: hidden; position: fixed; min-width: 100%; }";
+              styleElm.innerHTML = "body, html { overflow: hidden; max-height: 100%; }";
               $("head").append(styleElm);
               $("body").prepend(response.cookietext);
               showPopupContent(name);
             });
           }
         }
-      })
+      });
     }
   }
   cookieWall.showCookieWall = showCookieWall;
@@ -111,11 +111,11 @@ var cookieWall = {};
       name = 'basic';
     }
     // Hide the visible popup content
-    var visibleContent = $(".blocking-popup.cookie-wall .popup-content.show");
-    var hiddenContent = $(".blocking-popup.cookie-wall .popup-content." + name);
+    var visibleContent = $(".blocking-popup.cookie-wall .popup-content.popup-show");
+    var hiddenContent = $(".blocking-popup.cookie-wall .popup-content.cookiewall-" + name);
     if (visibleContent[0] && hiddenContent[0] && visibleContent[0] !== hiddenContent[0]) {
-      visibleContent.removeClass("show");
-      hiddenContent.addClass("show");
+      visibleContent.removeClass("popup-show");
+      hiddenContent.addClass("popup-show");
     }
   }
   cookieWall.showPopupContent = showPopupContent;
@@ -124,7 +124,7 @@ var cookieWall = {};
   function saveCookieChoice() {
     // By default always set optimal as option.
     var selectedOption = 'E';
-    var selectedRadioButton = $(".blocking-popup.cookie-wall .show input[type='radio']:checked");
+    var selectedRadioButton = $(".blocking-popup.cookie-wall .popup-show input[type='radio']:checked");
     if (selectedRadioButton[0] && selectedRadioButton[0].value === 'basic-choice') {
       // Basic cookies are selected as option.
       selectedOption = 'S';
