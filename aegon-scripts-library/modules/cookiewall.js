@@ -129,6 +129,7 @@ var cookieWall = {};
       // Basic cookies are selected as option.
       selectedOption = 'S';
     }
+    setCookie('AEGON.Cookie.OptIn', selectedOption, 100 * 365);
     $.ajax({
       type: 'POST',
       dataType: 'text',
@@ -136,7 +137,6 @@ var cookieWall = {};
       url: '/lpa/CookieVoorkeur',
       data: 'ans=' + selectedOption,
       success: function () {
-        setCookie('AEGON.Cookie.OptIn', selectedOption, 100 * 365);
         location.reload();
       }
     });
