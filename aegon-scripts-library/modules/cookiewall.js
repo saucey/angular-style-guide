@@ -92,7 +92,7 @@ var cookieWall = {};
           if (response.cookietext) {
             $(document).ready(function () {
               var styleElm = document.createElement("style");
-              styleElm.innerHTML = "body, html { overflow: hidden; max-height: 100%; }";
+              styleElm.innerHTML = "body, html { overflow: hidden; height: 100%; }";
               $("head").append(styleElm);
               $("body").prepend(response.cookietext);
               showPopupContent(name);
