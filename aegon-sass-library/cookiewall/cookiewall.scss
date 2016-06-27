@@ -13,7 +13,8 @@
   right: 0;
   bottom: -50px; // to make sure ipad bouncing does not look ugly
   left: 0;
-  z-index: 900000;
+  z-index: 200000;
+  -webkit-transform: translate3d(0,0,0);
 
   &:before {
     content: ' ';
@@ -24,7 +25,7 @@
     left: 0;
     background: $black;
     opacity: 0.4;
-    z-index: 900001;
+    z-index: 200001;
   }
 
   .popup-container {
@@ -34,7 +35,7 @@
     padding: 100px;
     overflow: auto;
     box-sizing: border-box;
-    z-index: 900002;
+    z-index: 200002;
   }
 
   .popup-content {
@@ -45,7 +46,7 @@
     background: $white;
     overflow: visible;
     max-width: 1200px;
-    z-index: 900003;
+    z-index: 200003;
 
     @include rem("border-radius", 5);
 
