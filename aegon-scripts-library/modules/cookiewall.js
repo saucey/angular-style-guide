@@ -158,12 +158,12 @@ var cookieWall = {};
     var styleElm = document.createElement("style");
 
     if (cookieValue === null) {
-      styleElm.innerHTML = "[data-cookie-basic], [data-cookie-optimal] { display: none;} ";
+      styleElm.innerHTML = "[data-cookie-basic], [data-cookie-optimal] { display: none !important;} ";
       showCookieWall();
     } else {
       cookieWall.cookieValue = cookieValue;
       if (cookieValue === 'S') {
-        styleElm.innerHTML = "[data-cookie-optimal] { display: none;} ";
+        styleElm.innerHTML = "[data-cookie-optimal] { display: none !important;} ";
       }
     }
     $("head").append(styleElm);
