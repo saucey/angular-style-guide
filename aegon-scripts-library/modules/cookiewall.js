@@ -121,8 +121,13 @@ var cookieWall = {};
   cookieWall.showPopupContent = showPopupContent;
 
 
+  var cookieOptionSaved = false;
   function saveCookieChoice() {
-    // By default always set optimal as option.
+    if (cookieOptionSaved) {
+      return;
+    }
+
+  // By default always set optimal as option.
     var selectedOption = 'E';
     var selectedRadioButton = $(".blocking-popup.cookie-wall .popup-show input[type='radio']:checked");
     if (selectedRadioButton[0] && selectedRadioButton[0].value === 'basic-choice') {
@@ -130,6 +135,8 @@ var cookieWall = {};
       selectedOption = 'S';
     }
     setCookie('AEGON.Cookie.OptIn', selectedOption, 100 * 365);
+    cookieOptionSaved = true;
+
     $.ajax({
       type: 'POST',
       dataType: 'text',
@@ -140,6 +147,11 @@ var cookieWall = {};
         location.reload();
       }
     });
+
+    // This time-out is a fallback to force the reload if the ajax call fails.
+    setTimeout(function () {
+      location.reload();
+    }, 2000);
   }
   cookieWall.saveCookieChoice = saveCookieChoice;
 
@@ -158,12 +170,12 @@ var cookieWall = {};
     var styleElm = document.createElement("style");
 
     if (cookieValue === null) {
-      styleElm.innerHTML = "[data-cookie-basic], [data-cookie-optimal] { display: none !important;} ";
+      styleElm.innerHTML = "[data-cookie-basic], [data-cookie-optimal] { display: none !important; } ";
       showCookieWall();
     } else {
       cookieWall.cookieValue = cookieValue;
       if (cookieValue === 'S') {
-        styleElm.innerHTML = "[data-cookie-optimal] { display: none !important;} ";
+        styleElm.innerHTML = "[data-cookie-optimal] { display: none !important; } ";
       }
     }
     $("head").append(styleElm);
