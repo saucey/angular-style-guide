@@ -77,45 +77,59 @@ var cookieWall = {};
 
   function showCookieWall(name) {
     if (!name) {
-      name = (cookieValue && cookieValue.toUpperCase() === 'E') ? 'advanced' : null;
+      name = (cookieValue && cookieValue.toUpperCase() === 'E') ? 'advanced' : null
     }
 
     var cookieWallElm = $('.blocking-popup.cookie-wall');
-    if (!cookieWallElm[0]) {
-      $.ajax({
-        type: 'GET',
-        dataType: 'text',
-        global: false,
-        url: '/lpa/cookie/cookie/cookietext.json',
-        success: function (response) {
-          response = JSON.parse(response);
-          if (response.cookietext) {
-            $(document).ready(function () {
-              var styleElm = document.createElement("style");
-              styleElm.innerHTML = "body, html { overflow: hidden; height: 100%; }";
-              $("head").append(styleElm);
-              $("body").prepend(response.cookietext);
-              showPopupContent(name);
-            });
-          }
-        }
-      });
+    if (cookieWallElm[0]) {
+      return;
     }
+
+    var rootElm = $('<div class="cookie-wall blocking-popup"></div>');
+    var containerElm = $('<div class="popup-container"></div>').appendTo(rootElm);
+    $("body").prepend(rootElm);
+
+    var styleElm = document.createElement("style");
+    styleElm.innerHTML = "body, html { overflow: hidden; height: 100%; }";
+    $("head").append(styleElm);
+
+    $.ajax({
+      type: 'GET',
+      dataType: 'text',
+      global: false,
+      url: '/lpa/cookie/cookie/cookietext.json',
+      success: function (response) {
+        response = JSON.parse(response);
+        if (response.cookietext) {
+          containerElm.html(response.cookietext);
+          showPopupContent(name);
+        }
+      }
+    })
   }
+
   cookieWall.showCookieWall = showCookieWall;
-
-
   function showPopupContent(name) {
     // Name should be optimal or basic
     if (name !== 'advanced') {
       name = 'basic';
     }
+
+    var elmToShow = $(".blocking-popup.cookie-wall .popup-content.cookiewall-" + name);
+    var elmToHide = $(".blocking-popup.cookie-wall .popup-content.popup-show");
+
+    if (elmToShow[0] === elmToHide[0]) {
+      // The element to show is already visible. Do nothing.
+      return;
+    }
+
     // Hide the visible popup content
-    var visibleContent = $(".blocking-popup.cookie-wall .popup-content.popup-show");
-    var hiddenContent = $(".blocking-popup.cookie-wall .popup-content.cookiewall-" + name);
-    if (visibleContent[0] && hiddenContent[0] && visibleContent[0] !== hiddenContent[0]) {
-      visibleContent.removeClass("popup-show");
-      hiddenContent.addClass("popup-show");
+    if (elmToHide[0]) {
+      elmToHide.removeClass("popup-show");
+    }
+
+    if (elmToShow[0]) {
+      elmToShow.addClass("popup-show");
     }
   }
   cookieWall.showPopupContent = showPopupContent;
