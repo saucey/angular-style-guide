@@ -8,12 +8,13 @@
 // --------------------------------------------------
 
 .blocking-popup {
-  position: fixed;
+  position: absolute;
   top: 0;
   right: 0;
-  bottom: 0;
+  bottom: -50px; // to make sure ipad bouncing does not look ugly
   left: 0;
-  z-index: 10000;
+  z-index: 200000;
+  -webkit-transform: translate3d(0,0,0);
 
   &:before {
     content: ' ';
@@ -24,14 +25,17 @@
     left: 0;
     background: $black;
     opacity: 0.4;
+    z-index: 200001;
   }
 
   .popup-container {
+    position: relative;
     width: 100%;
     height: 100%;
     padding: 100px;
     overflow: auto;
     box-sizing: border-box;
+    z-index: 200002;
   }
 
   .popup-content {
@@ -42,21 +46,22 @@
     background: $white;
     overflow: visible;
     max-width: 1200px;
+    z-index: 200003;
 
     @include rem("border-radius", 5);
 
-    &.show {
+    &.popup-show {
       display: block;
     }
   }
 
-  .basic {
+  .cookiewall-basic {
     #accept-cookie-choice {
       margin-right: 90px;
     }
   }
 
-  .advanced {
+  .cookiewall-advanced {
     .cookie-option {
       display: inline-block;
       width: 44%;
@@ -90,13 +95,13 @@
       max-width: 380px;
     }
 
-    .basic {
+    .cookiewall-basic {
       #accept-cookie-choice {
         margin-right: 0;
       }
     }
 
-    .advanced {
+    .cookiewall-advanced {
       .cookie-option {
         width: 100%;
 
@@ -118,13 +123,13 @@
       padding: 40px;
     }
 
-    .basic {
+    .cookiewall-basic {
       #accept-cookie-choice {
         margin-right: 5%;
       }
     }
 
-    .advanced {
+    .cookiewall-advanced {
       .cookie-option {
         width: 100%;
         max-width: 480px;
@@ -139,7 +144,7 @@
 
 @include breakpoint($brk-ipad-portrait) {
   .blocking-popup {
-    .basic {
+    .cookiewall-basic {
       #accept-cookie-choice {
         margin-right: 90px;
       }
@@ -149,7 +154,7 @@
 
 @include breakpoint($brk-ipad-landscape) {
   .blocking-popup {
-    .advanced {
+    .cookiewall-advanced {
       .cookie-option {
         width: 44%;
 
@@ -171,7 +176,7 @@
       padding: 40px;
     }
 
-    .basic {
+    .cookiewall-basic {
       #accept-cookie-choice {
         margin-right: 90px;
       }
