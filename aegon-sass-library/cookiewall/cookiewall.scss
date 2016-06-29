@@ -50,19 +50,6 @@
 
     @include rem("border-radius", 5);
 
-    animation-duration: 300ms;
-    animation-name: fadein;
-
-    @keyframes fadein {
-      from {
-        opacity: 0;
-      }
-
-      to {
-        opacity: 1;
-      }
-    }
-
     &.popup-show {
       display: block;
     }
@@ -71,6 +58,23 @@
   .cookiewall-basic {
     #accept-cookie-choice {
       margin-right: 90px;
+    }
+
+    animation-duration: 600ms;
+    animation-name: fadein;
+
+    @keyframes fadein {
+      from {
+        opacity: 0;
+      }
+
+      80% {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
     }
   }
 

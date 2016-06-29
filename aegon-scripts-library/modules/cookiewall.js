@@ -75,24 +75,28 @@ var cookieWall = {};
   }
 
 
-  function showCookieWall(name) {
-    if (!name) {
-      name = (cookieValue && cookieValue.toUpperCase() === 'E') ? 'advanced' : null
+  function showCookieWall(pageToShow) {
+    if (pageToShow === void 0) {
+      pageToShow = (cookieValue && cookieValue.toUpperCase() === 'E') ? 'advanced' : null
     }
 
     var cookieWallElm = $('.blocking-popup.cookie-wall');
     if (cookieWallElm[0]) {
+      // The cookiewall is already visible.
       return;
     }
 
+    // Create and add container elements for the cookiewall content.
     var rootElm = $('<div class="cookie-wall blocking-popup"></div>');
     var containerElm = $('<div class="popup-container"></div>').appendTo(rootElm);
     $("body").prepend(rootElm);
 
+    // The cookiewall is going to be presented. Make sure the page cannot scroll.
     var styleElm = document.createElement("style");
     styleElm.innerHTML = "body, html { overflow: hidden; height: 100%; }";
     $("head").append(styleElm);
 
+    // Fetch cookiewall content.
     $.ajax({
       type: 'GET',
       dataType: 'text',
@@ -102,20 +106,21 @@ var cookieWall = {};
         response = JSON.parse(response);
         if (response.cookietext) {
           containerElm.html(response.cookietext);
-          showPopupContent(name);
+          showPopupContent(pageToShow);
         }
       }
     })
   }
-
   cookieWall.showCookieWall = showCookieWall;
-  function showPopupContent(name) {
+
+
+  function showPopupContent(pageToShow) {
     // Name should be optimal or basic
-    if (name !== 'advanced') {
-      name = 'basic';
+    if (pageToShow !== 'advanced') {
+      pageToShow = 'basic';
     }
 
-    var elmToShow = $(".blocking-popup.cookie-wall .popup-content.cookiewall-" + name);
+    var elmToShow = $(".blocking-popup.cookie-wall .popup-content.cookiewall-" + pageToShow);
     var elmToHide = $(".blocking-popup.cookie-wall .popup-content.popup-show");
 
     if (elmToShow[0] === elmToHide[0]) {
@@ -130,6 +135,10 @@ var cookieWall = {};
 
     if (elmToShow[0]) {
       elmToShow.addClass("popup-show");
+    }
+
+    if (cookieValue && cookieValue.toUpperCase() === 'S') {
+      $(".blocking-popup.cookie-wall #cookie-choice-basic input[type='radio']").click();
     }
   }
   cookieWall.showPopupContent = showPopupContent;
@@ -174,10 +183,10 @@ var cookieWall = {};
    Run the initialize in the head prior to scripts that need to be included. Make sure Jquery is available.
    <script>cookieWall.initialize()<script>
    */
-  function initialize(_path, _domain) {
+  function initialize(_path, _domain, elmToShow) {
     path = _path;
     domain = _domain;
-      
+
     whitelisted = false;
     cookieValue = getCookie('AEGON.Cookie.OptIn');
 
@@ -188,11 +197,15 @@ var cookieWall = {};
       showCookieWall();
     } else {
       cookieWall.cookieValue = cookieValue;
-      if (cookieValue === 'S') {
+      if (cookieValue.toUpperCase() === 'S') {
         styleElm.innerHTML = "[data-cookie-optimal] { display: none !important; } ";
       }
     }
     $("head").append(styleElm);
+
+    if (elmToShow && cookieValue) {
+      showCookieWall(name);
+    }
   }
   cookieWall.initialize = initialize;
 
@@ -204,7 +217,7 @@ var cookieWall = {};
      Attrs will be added on the generated element if needed.
      */
     var append = false;
-    if (!cookieOption) {
+    if (cookieOption === void 0) {
       cookieOption = 'S';
     }
     if (options === void 0) {
