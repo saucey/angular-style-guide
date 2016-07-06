@@ -2,12 +2,12 @@
  * Popup that contains an iframe functionality.
  */
 // Closure with jQuery support
-(function($) {
+(function($, Drupal) {
   'use strict';
 
-  // Add new item to public Drupal object
+  // Add Drupal behavior that is triggered on document.ready.
   Drupal.behaviors.iframePopup = {
-    attach: function () {
+    attach: function (context, settings) {
       var styleElm = document.createElement("style");
       styleElm.innerHTML = "html, body { overflow: hidden; height: 100%; }";
 
@@ -52,8 +52,6 @@
       $('.show-iframe-popup').on('click', function () {
         showIframePopup();
       });
-
-    },
-    attached: false
+    }
   };
-})(jQuery);
+})(jQuery, Drupal);
