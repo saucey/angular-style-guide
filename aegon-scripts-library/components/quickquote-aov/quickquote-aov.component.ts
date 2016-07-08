@@ -442,10 +442,7 @@ export class QuickQuoteAovComponent implements OnInit {
         {"geboortedatum": this.generateBirthdate(40)}
       ],
       "kinderen": [],
-      "autos": [{
-        "nieuwwaarde": 10000,
-        "kilometersPerJaar": 5000
-      }],
+      "autos": [],
       "nettoBesteedbaarInkomenPerMaand": this.familyIncome,
       "woning": {
         "soort": this.mortgageKind,
