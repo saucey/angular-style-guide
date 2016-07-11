@@ -204,13 +204,13 @@ export class QuickQuoteBoeterenteComponent {
    */
   init(index: number): void {
     this.mortgageType = Number(index);
-    this.mortgageName = 'hypotheek-' + String(this.mortgageOps[index]);
+    this.mortgageName = String(this.mortgageOps[index]);
 
     if (!this.initiated && this.mortgageType > 0) {
       let formInit = {
         page_cat_4_productgroup: 'hypotheek',
-        page_cat_5_product: this.mortgageName,
-        product_name: [this.mortgageName],
+        page_cat_5_product: 'hypotheek-' + this.mortgageName,
+        product_name: ['hypotheek-' + this.mortgageName],
         product_category: ['hypotheek'],
         form_name: 'qq-rente_wijzigen',
         step_name: 'qq-berekening - start',
@@ -362,8 +362,8 @@ export class QuickQuoteBoeterenteComponent {
       if (!this.finalized) {
         let formComplete = {
           page_cat_4_productgroup: 'hypotheek',
-          page_cat_5_product: this.mortgageName,
-          product_name: [this.mortgageName],
+          page_cat_5_product: 'hypotheek-' + this.mortgageName,
+          product_name: ['hypotheek-' + this.mortgageName],
           product_category: ['hypotheek'],
           form_name: 'qq-rente_wijzigen',
           step_name: 'qq-bevestiging',
