@@ -37,6 +37,10 @@ var cookieWall = {};
   var path;
   var domain;
 
+  var COOKIE_NAME = 'AEGON.Cookie.OptIn',
+    COOKIE_VALUE_STANDARD = 'S',
+    COOKIE_VALUE_EXTENDED = 'E';
+
 
   /* Cookie helper functions */
   function setCookie(name, value, days) {
@@ -77,7 +81,7 @@ var cookieWall = {};
 
   function showCookieWall(pageToShow) {
     if (pageToShow === void 0) {
-      pageToShow = (cookieValue && cookieValue.toUpperCase() === 'E') ? 'advanced' : null
+      pageToShow = (cookieValue && cookieValue.toUpperCase() === COOKIE_VALUE_EXTENDED) ? 'advanced' : null
     }
 
     var cookieWallElm = $('.blocking-popup.cookie-wall');
@@ -137,7 +141,7 @@ var cookieWall = {};
       elmToShow.addClass("popup-show");
     }
 
-    if (cookieValue && cookieValue.toUpperCase() === 'S') {
+    if (cookieValue && cookieValue.toUpperCase() === COOKIE_VALUE_STANDARD) {
       $(".blocking-popup.cookie-wall #cookie-choice-basic input[type='radio']").click();
     }
   }
@@ -151,13 +155,13 @@ var cookieWall = {};
     }
 
   // By default always set optimal as option.
-    var selectedOption = 'E';
+    var selectedOption = COOKIE_VALUE_EXTENDED;
     var selectedRadioButton = $(".blocking-popup.cookie-wall .popup-show input[type='radio']:checked");
     if (selectedRadioButton[0] && selectedRadioButton[0].value === 'basic-choice') {
       // Basic cookies are selected as option.
-      selectedOption = 'S';
+      selectedOption = COOKIE_VALUE_STANDARD;
     }
-    setCookie('AEGON.Cookie.OptIn', selectedOption, 100 * 365);
+    setCookie(COOKIE_NAME, selectedOption, 100 * 365);
     cookieOptionSaved = true;
 
     $.ajax({
@@ -180,15 +184,15 @@ var cookieWall = {};
 
 
   /*
-   Run the initialize in the head prior to scripts that need to be included. Make sure Jquery is available.
-   <script>cookieWall.initialize()<script>
+   Run the initialize function prior to scripts that need to be included conditionally. Make sure Jquery is available.
+   <script>cookieWall.initialize('/', 'aegon.nl')<script>
    */
   function initialize(_path, _domain, elmToShow) {
     path = _path;
     domain = _domain;
 
     whitelisted = false;
-    cookieValue = getCookie('AEGON.Cookie.OptIn');
+    cookieValue = getCookie(COOKIE_NAME);
 
     var styleElm = document.createElement("style");
 
@@ -197,7 +201,7 @@ var cookieWall = {};
       showCookieWall();
     } else {
       cookieWall.cookieValue = cookieValue;
-      if (cookieValue.toUpperCase() === 'S') {
+      if (cookieValue.toUpperCase() === COOKIE_VALUE_STANDARD) {
         styleElm.innerHTML = "[data-cookie-optimal] { display: none !important; } ";
       }
     }
@@ -218,7 +222,7 @@ var cookieWall = {};
      */
     var append = false;
     if (cookieOption === void 0) {
-      cookieOption = 'S';
+      cookieOption = COOKIE_VALUE_STANDARD;
     }
     if (options === void 0) {
       options = {};
@@ -229,18 +233,21 @@ var cookieWall = {};
     if (options.attrs === void 0) {
       options.attrs = {};
     }
+    if (!cookieValue) {
+      cookieValue = getCookie(COOKIE_NAME);
+    }
     if (cookieValue) {
-      if (cookieOption.toUpperCase() === 'S') {
-        if (whitelisted || cookieValue.toUpperCase() === 'S') {
-          // Only basic scripts are appended (also on whitelisted pages).
-          append = true;
-        }
-      } else if (cookieValue.toUpperCase() === 'E') {
-        // Optimal option, all script can be appended.
+      // The cookie choice was already made. Compare the cookie value with the desired cookie option.
+      if (cookieValue.toUpperCase() === COOKIE_VALUE_EXTENDED) {
+        // Optimal value; every script can be appended.
+        append = true;
+      } else if (cookieOption.toUpperCase() === COOKIE_VALUE_STANDARD) {
+        // Desired option is standard, and so is the cookie value.
         append = true;
       }
-    } else if (whitelisted && cookieOption.toUpperCase() === 'S') {
-      // The page is whitelisted, append the basic scripts.
+    } else if (whitelisted && cookieOption.toUpperCase() === COOKIE_VALUE_STANDARD) {
+      // No cookie was set, but because the page is whitelisted (the initialize function hasn't been called yet)
+      // and the desired cookie option is standard, we can append the script.
       append = true;
     }
     if (append) {
