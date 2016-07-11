@@ -41,6 +41,9 @@
     margin-top: -15px;
     margin-bottom: 40px;
   }
+  :-ms-input-placeholder {
+    color: $darker_grey;
+  }
 }
 // fix for mijn betalingen
 #aegon_mijnViewClaims_webapp_container {
