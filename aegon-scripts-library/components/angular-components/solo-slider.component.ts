@@ -1,43 +1,21 @@
 import {
-  Component, Input, Output, EventEmitter, Provider, Directive, forwardRef, ViewChild, ElementRef
+  Component, Input, Output, EventEmitter, Provider, Directive, forwardRef, ViewChild, ElementRef, AfterViewInit, NgZone
 } from 'angular2/core';
 import {NG_VALUE_ACCESSOR, ControlValueAccessor} from "angular2/common";
 import {CONST_EXPR} from "angular2/src/facade/lang";
-import {InputNumberComponent, InputNumberValueAccessor} from './input-number.component';
-import {HelpComponent} from './help.component'
-import {AfterViewInit} from "angular2/core";
-import {NgZone} from "angular2/core";
 
 declare var noUiSlider: any;
 declare var wNumb: any;
 
 @Component({
-  selector: 'aegon-slider',
-  directives: [
-    HelpComponent, InputNumberComponent, InputNumberValueAccessor
-  ],
+  selector: 'aegon-solo-slider',
   template: `
-    <div class="one-off slider">
-      <div class="input-header">
-        <label for="one-off-input">{{label}}</label>
-        <div class="input-container">
-          <aegon-input-number [prefix]="prefix" [suffix]="suffix" [(ngModel)]="value" [max]="range.max"
-                               (blur)="slider.noUiSlider.set(value)"
-                               (enter)="slider.noUiSlider.set(value)" [placeholder]="placeholder">
-          </aegon-input-number>
-        </div>
-        <aegon-help>
-          {{helpText}}
-        </aegon-help>
-      </div>
-      <div class="slider-container">
-        <div #slider></div>
-        <!--<span id="one-off-error" class="errorMessage">Vul een bedrag in tussen de &euro;0,- en &euro;5000,-</span>-->
-      </div>
+    <div class="slider-container">
+      <div #slider></div>
     </div>
   `
 })
-export class SliderComponent implements AfterViewInit {
+export class SoloSliderComponent implements AfterViewInit {
   @Input() prefix: string;
   @Input() suffix: string;
   @Input() placeholder: string;
@@ -99,18 +77,18 @@ export class SliderComponent implements AfterViewInit {
 }
 
 const CUSTOM_VALUE_ACCESSOR = CONST_EXPR(new Provider(
-  NG_VALUE_ACCESSOR, {useExisting: forwardRef(() => SliderValueAccessor), multi: true}));
+  NG_VALUE_ACCESSOR, {useExisting: forwardRef(() => SoloSliderValueAccessor), multi: true}));
 
 @Directive({
-  selector: 'aegon-slider',
+  selector: 'aegon-solo-slider',
   host: {'(modelChange)': 'onChange($event)'},
   providers: [CUSTOM_VALUE_ACCESSOR]
 })
-export class SliderValueAccessor implements ControlValueAccessor {
+export class SoloSliderValueAccessor implements ControlValueAccessor {
   onChange = (_) => {};
   onTouched = () => {};
 
-  constructor(private host: SliderComponent) {}
+  constructor(private host: SoloSliderComponent) {}
 
   writeValue(value: any): void {
     this.host.setValue(value);

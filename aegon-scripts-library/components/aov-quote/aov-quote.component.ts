@@ -7,7 +7,7 @@ import {InputNumberComponent, InputNumberValueAccessor, formatNumber} from '../a
 import {InputDateComponent, InputDateValueAccessor} from '../angular-components/input-date.component';
 import {CheckboxComponent, CheckboxValueAccessor} from '../angular-components/checkbox.component';
 import {MoneyPipe} from "../angular-components/money.pipe";
-import {SliderComponent} from "../angular-components/slider.component";
+import {SoloSliderComponent, SoloSliderValueAccessor} from "../angular-components/solo-slider.component";
 
 var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTemplate'));
 
@@ -15,49 +15,72 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
   selector: 'aegon-aov-quote',
   directives: [
     HelpComponent, InputNumberComponent, InputNumberValueAccessor, InputDateComponent, InputDateValueAccessor,
-    CheckboxComponent, CheckboxValueAccessor, SliderComponent
+    CheckboxComponent, CheckboxValueAccessor, SoloSliderComponent, SoloSliderValueAccessor
   ],
   template: templateElem ? templateElem.value : `
-  <div class="angular aov-quote">
-    <div class="calculation">
+  <div class="quickquote angular aov-quote">
+    <h3 prefix="/">Uw gegevens</h3>
+    <div class="field">
+      <div class="label">
+        Wat is uw geboortedatum?
+        <aegon-help>
+          Kies uw geboortedatum
+        </aegon-help>          
+      </div>
+      <div class="inputs">
+        <aegon-input-date></aegon-input-date>
+      </div>
+    </div>
+    <div class="field">
+      <div class="label">
+        Wat is uw beroep?
+        <aegon-help>
+          Maak uw beroepskeuze
+        </aegon-help>          
+      </div>
+      <div class="inputs">
+        <select class="no-dd" required>
+          <option value="" disabled>Maak uw keuze</option>
+          <option [value]="0">1 maand</option>
+          <option [value]="1">2 maanden</option>
+          <option [value]="2">3 maanden</option>
+          <option [value]="3">4 maanden</option>
+          <option [value]="4">5 maanden</option>
+        </select>
+      </div>      
+    </div>
+    <div class="field">
+      <div class="label">
+        Wat is uw bruto jaarinkomen?
+        <aegon-help>
+          Maak uw beroepskeuze
+        </aegon-help>          
+      </div>
+      <div class="inputs">
+        <aegon-input-number prefix="€" [max]="99999999"></aegon-input-number>
+      </div>
+    </div>
+    <div class="field">
+      <div class="label">        
+      </div>
+      <div class="inputs">
+        <button class="button icon-right icon-calculator" (click)="step = 'calculation'">
+          Bereken premie
+        </button>      
+      </div>
+    </div>
+  
+    <div class="calculation indication" *ngIf="step === 'calculation'">
       <h3 prefix="/">Uw gegevens</h3>
       <div class="field">
         <div class="label">
-          Wat is uw geboortedatum?
-        </div>
-        <aegon-input-date></aegon-input-date>
-      </div>
-      <div class="field">
-        <div class="label">
-          Wat is uw beroep?
+          Welke eigen risicoperiode kiest u?
+          <aegon-help>
+            Maak uw beroepskeuze
+          </aegon-help>
         </div>
         <div class="inputs">
-          <select required>
-            <option value="" disabled>Maak uw keuze</option>
-            <option [value]="0">Nee</option>
-            <option [value]="1">Zeepzieder</option>
-            <option [value]="2">Porder</option>
-            <option [value]="3">Onderwaterlasser</option>
-            <option [value]="4">Boomchirurg</option>
-          </select>
-        </div>      
-      </div>
-      <div class="field">
-        <div class="label">
-          Wat is uw bruto jaarinkomen?
-        </div>
-        <aegon-input-number prefix="€" [max]="99999999"></aegon-input-number>
-      </div>    
-      <button class="button icon-right icon-calculator">
-        Bereken premie
-      </button>
-    </div>
-  
-    <div class="calculation indication">
-      <div class="field">
-        <div class="label">Welke eigen risicoperiode kiest u?</div>
-        <div class="inputs">
-          <select required>
+          <select class="no-dd" required>
             <option value="" disabled>Maak uw keuze</option>
             <option [value]="0">1 maand</option>
             <option [value]="1">2 maanden</option>
@@ -68,35 +91,56 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
         </div>   
       </div>
       <div class="field">
-        <div class="inputs slider">
-          <aegon-slider prefix="€" [range]="{
-            'min': [  200 ],
-            '25%': [  1000 ],
-            '50%': [ 2000 ],
-            '75%': [  3000 ],
-            'max': [ 7500 ]
-          }" [initial]="2500" label="Welk bruto jaarbedrag wilt u verzekeren?" helpText="Dit is de helptekst voor de eerste slider">
-          </aegon-slider>
+        <div class="label">
+          Welk bruto jaarbedrag wilt u verzekeren?
+          <aegon-help>Help !</aegon-help>
         </div>
+        <div class="inputs">
+          <aegon-input-number prefix="€" [(ngModel)]="grossYearAmount" [max]="99999999"></aegon-input-number>
+        </div>
+        <aegon-solo-slider prefix="€" [(ngModel)]="grossYearAmount" [range]="{
+          'min': [  minGrossYearAmount ],
+          '25%': [  1000 ],
+          '50%': [ 2000 ],
+          '75%': [  3000 ],
+          'max': [ 7500 ]
+        }">
+        </aegon-solo-slider>
+        <div class="min">&euro; {{minGrossYearAmount}}</div>
+        <div class="max">&euro; {{maxGrossYearAmount}}</div>
       </div>
       <div class="result">
-        <div class="row">
-          <div class="result1">
-            <div class="title">Bruto premie per maand</div>
-            <div id="pension-calculated" class="calculated">&euro; 300<span>,- *</span></div>
+        <div class="linear">
+          <div class="row">
+            <div class="label">
+              Bruto premie per maand
+              <aegon-help>
+                Help!
+              </aegon-help>
+            </div>
+            <div class="value">&euro; 300<span>,- *</span></div>
           </div>
-          <div class="result2">
-            <div class="title">Netto premie per maand</div>
-            <div id="interest-calculated" class="calculated">&euro; 300<span>,- *</span></div>
+          <div class="row">
+            <div class="label">
+              Netto premie per maand
+              <aegon-help>
+                Help!
+              </aegon-help>              
+            </div>
+            <div class="value">&euro; 300<span>,- *</span></div>
           </div>
         </div>
       </div>
-        <a href="#">
-          Bekijk en mail overzicht
-        </a>
+      <div class="field">
+        <div class="label">
+          <a href="#" class="icon-skinnyarrow">
+            Bekijk en mail overzicht
+          </a>
+        </div>
         <a class="button orange icon-right arrow">
           Adviesgesprek aanvragen
         </a>
+      </div>
     </div>
   </div>
   `,
@@ -104,13 +148,16 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
   pipes: [MoneyPipe]
 })
 export class AovQuoteComponent implements OnInit {
-
+  grossYearAmount: number = 17500;
+  minGrossYearAmount: number = 700;
+  maxGrossYearAmount: number = 35000;
 
   constructor(
     private http:Http
   ) {}
 
   ngOnInit() {
+
 
   }
 

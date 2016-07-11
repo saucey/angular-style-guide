@@ -1,0 +1,62 @@
+.quickquote.aov-quote {
+  background:none;
+  color:#000;
+  max-width:620px;
+  .calculation {
+    padding:20px 0;
+  }
+  h3 {
+    margin-left:0;
+    color:#000;
+  }
+  h3:before {
+    display:none;
+  }
+
+  .input.date input {
+    margin-right:4px;
+  }
+  .field {
+    .icon-skinnyarrow:before {
+      font-size: 0.75rem;
+    }
+    .label {width:60%;}
+      .label + * {float:right;text-align:right;}
+    .inputs {width:40%;max-width:180px;}
+    .button.icon-calculator {width:180px;}
+  }
+  .slider-container {
+    clear:both;
+    margin:2em 0 .5em;
+    float:left;
+  }
+  .min, .max {
+    width:50%;
+    float:left;
+  }
+  .max {
+    text-align:right;
+  }
+  input[type=text], input[type=number], select {
+    width:100%;
+    background:rgba(236, 237, 231, 1);
+  }
+  .result {
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    border-radius:5px;
+    margin:26px 0;
+    overflow:visible;
+    .row {
+      .label {
+        max-width:320px;
+        padding-right: 50px;
+      }
+      .value {
+        max-width:220px;
+        width:auto;
+        float:right;
+      }
+    }
+  }
+}
