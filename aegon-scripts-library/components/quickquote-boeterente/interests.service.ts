@@ -4,7 +4,11 @@ import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class InterestsService {
-	data: any;
+	/*
+	 * Data format
+	 */
+	data: Object = {months:null, nhg: null};
+	
 	constructor (private http: Http) {}
 
 	// API url
