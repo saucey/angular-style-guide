@@ -2,39 +2,68 @@ import {Injectable} from 'angular2/core';
 import {Http, Response} from "angular2/http";
 import {Observable} from 'rxjs/Observable';
 
+interface DataFormat {
+	months: number;
+	nhg: boolean;
+}
+
 @Injectable()
 export class InterestsService {
 	/*
 	 * Data format
 	 */
-	data: Object = {months:null, nhg: null};
+	data: DataFormat = {months:0, nhg: false};
 	
 	constructor (private http: Http) {}
 
 	// API url
 	private intstUrl = '/particulier/feed/json/table';
 	
-	public getMarketInterestRate(data) {
+	public getMarketInterestRate(data: DataFormat) {
 		this.data = data;
+		// Checks if it's local environment
+		if(window.location.href.indexOf('localhost') > -1) {
+			// Gets the mockdata.
+			this.getMockData();
+		} 
+		else {
+			// Gets the real data.
+			this.getAPIdata();
+		}
 	}
 
 	/*
 	 * If corresponds, get the data from
 	 * the API.
 	 */
-	private getAPIdata(): Promise<Object> {
+	private getAPIdata(): Promise<any> {
 		return this.http.get(this.intstUrl)
 			.map(this.processData)
-			.catch(this.handleError);
+			.catch(this.handleError)
+			.toPromise();
 	}
 
+	/*
+	 * Process the data retrieved from back-end
+	 */
 	private processData(res: Response) {
 		let response = res.json();
+		let table: Array<any> = [];
 
-		for(let i in response) {
-			
+		if(this.data.nhg) {
+			response.forEach(i => {
+				if(response[i].title == 'Hypotheek zonder NHG') {
+					table = response[i].Table;
+				}
+			});
+		} 
+		else {
+			response.forEach(i => {
+				if(response[i].title == 'Actuele Hypotheekrente') {
+					table = response[i].Table;
+				}
+			});
 		}
-
 	}
 	/*
 	 * Error handling function
@@ -46,7 +75,7 @@ export class InterestsService {
 	/*
 	 * Returns a mock of the API structure
 	 */
-	private getMockData(data): Promise<Object> {
+	private getMockData(): Promise<any> {
 		let result = [
 			{
 				"Title": "Actuele Hypotheekrente",
@@ -196,8 +225,9 @@ export class InterestsService {
 				"Table footer": null
 			}
 		];
+
 	    return new Promise((resolve) => {
 	    	resolve(result);
-	    });
+	    }).then(this.processData, this.handleError);
 	}
 }

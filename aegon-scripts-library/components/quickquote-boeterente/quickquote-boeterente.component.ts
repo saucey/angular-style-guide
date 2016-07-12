@@ -7,6 +7,7 @@ import {InputDateComponent, InputDateValueAccessor} from '../angular-components/
 import {InputNumberComponent, InputNumberValueAccessor} from '../angular-components/input-number.component';
 import {InputRadioComponent, InputRadioValueAccessor} from '../angular-components/input-radio.component';
 import {MoneyPipe} from "../angular-components/money.pipe";
+import {InterestsService} from "./interests.service";
 
 var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteBoeterenteTemplate'));
 @Component({
@@ -161,7 +162,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteBoet
       </div>
     </div>
   `,
-  providers: [HTTP_PROVIDERS],
+  providers: [HTTP_PROVIDERS, InterestsService],
   pipes: [MoneyPipe]
 })
 export class QuickQuoteBoeterenteComponent {
