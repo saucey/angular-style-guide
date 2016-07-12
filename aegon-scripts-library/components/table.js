@@ -9,17 +9,20 @@
   Drupal.behaviors.table = {
 
     attach: function () {
-      this.createTable('.tableDemo');
-      this.createTable('.resp_cust_tables', {
-        info: false,
-        paging: false,
-        fnInitComplete: null,
-        ordering: false,
-        order: [],
-        searching: false,
-        aoColumns: null,
-        bFilter: false,
-      });
+      // Only in the new theme! Things will break in the old theme.
+      if (Drupal.settings.current_theme === 'aegon_theme') {
+        this.createTable('.tableDemo');
+        this.createTable('.resp_cust_tables', {
+          info: false,
+          paging: false,
+          fnInitComplete: null,
+          ordering: false,
+          order: [],
+          searching: false,
+          aoColumns: null,
+          bFilter: false
+        });
+      }
     },
 
     createTable: function(table_class, options) {
