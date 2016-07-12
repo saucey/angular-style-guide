@@ -19,16 +19,17 @@ export class InterestsService {
 	// API url
 	private intstUrl = '/particulier/feed/json/table';
 	
-	public getMarketInterestRate(data: DataFormat) {
+	public getMarketInterestRate(data: DataFormat): any {
+		console.log(data);
 		this.data = data;
 		// Checks if it's local environment
 		if(window.location.href.indexOf('localhost') > -1) {
 			// Gets the mockdata.
-			this.getMockData();
+			return this.getMockData();
 		} 
 		else {
 			// Gets the real data.
-			this.getAPIdata();
+			return this.getAPIdata();
 		}
 	}
 
@@ -47,7 +48,8 @@ export class InterestsService {
 	 * Process the data retrieved from back-end
 	 */
 	private processData(res: Response) {
-		let response = res.json();
+		console.log(this.data);
+		let response = res;
 		let table: Array<any> = [];
 
 		if(this.data.nhg) {
@@ -64,6 +66,7 @@ export class InterestsService {
 				}
 			});
 		}
+		console.log(table);
 	}
 	/*
 	 * Error handling function

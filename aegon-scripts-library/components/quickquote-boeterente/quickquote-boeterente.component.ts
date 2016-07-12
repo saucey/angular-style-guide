@@ -197,7 +197,8 @@ export class QuickQuoteBoeterenteComponent {
   nhgErr: boolean = false;
 
   constructor(
-    private http: Http
+    private http: Http,
+    private intstService: InterestsService
   ) {}
 
   /*
@@ -309,14 +310,22 @@ export class QuickQuoteBoeterenteComponent {
       let nextMonth = d.getMonth() !== 11 ? this.numberPadding((d.getMonth() + 2), 2) : '01',
         year = d.getMonth() !== 11 ? d.getFullYear() : d.getFullYear() + 1;
       let startDate = year + '-' + nextMonth + '-' + '01';
+      /* 4.6.Define periods to be calculated (!!Ingangsdatum leenlaag
+       * is geen invoer )
+       */
+      let periodStart = this.getTermsAmount(currDate, startDate, 'start');
+
+      this.periodsLeft = this.getTermsAmount(currDate, this.interestPeriodEnd, 'end');
 
       /**** @todo ADD SERVICE FOR NHG ****/
-      if (this.nhg === true) {
-        this.newIntRate = 3.95;
-      }
-      else {
-        this.newIntRate = 3.95;
-      }
+
+      this.newIntRate = this.intstService.getMarketInterestRate({months: this.periodsLeft, nhg: this.nhg});
+      // if (this.nhg === true) {
+      //   this.newIntRate = 3.95;
+      // }
+      // else {
+      //   this.newIntRate = 3.95;
+      // }
 
       let tcw: number = 0,
         newMonthlyIntRate: number;
@@ -333,12 +342,6 @@ export class QuickQuoteBoeterenteComponent {
       let periodIntstDiff = +(oldPeriodIntst) - +(newPeriodIntst);
       periodIntstDiff = +(periodIntstDiff.toFixed(2));
 
-      /* 4.6.Define periods to be calculated (!!Ingangsdatum leenlaag
-       * is geen invoer )
-       */
-      let periodStart = this.getTermsAmount(currDate, startDate, 'start');
-
-      this.periodsLeft = this.getTermsAmount(currDate, this.interestPeriodEnd, 'end');
 
       // Loop through periods.
       // =F2/(POWER(1+$Invoer.$H$34,A2-$Invoer.$H$28+1))
