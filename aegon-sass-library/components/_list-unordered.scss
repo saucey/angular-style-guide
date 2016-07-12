@@ -13,12 +13,24 @@ ul.links {
 ul.bullet li,
 ul.check li,
 ul.green-check li,
+ul.cross li,
+ul.red-cross li,
 ul.ul-arrows li,
 ul.arrow li,
 ul.arrow-list li.arrow,
+ul.green-plus li,
+ul.plus li,
+ul.red-minus li,
+ul.minus li,
 ul li.check,
 ul li.green-check,
-ul li.arrow {
+ul li.arrow,
+ul li.cross,
+ul li.red-cross,
+ul li.green-plus,
+ul li.plus,
+ul li.red-minus,
+ul li.minus {
   list-style: none;
 
   $li_left: 25px;
@@ -35,6 +47,7 @@ ul li.arrow {
     @include rem("font-size", $small);
   }
 }
+
 
 ul.bullet li:before {
   left: -22px;
@@ -67,9 +80,46 @@ ul li.green-check {
     content: $font_icons_check;
   }
 }
+
+ul.plus li,
+ul li.plus,
+ul.green-plus li,
+ul li.green-plus {
+  &:before {
+    content: $font_icons_plus_regular;
+  }
+}
+ul.minus li,
+ul li.minus,
+ul.red-minus li,
+ul li.red-minus {
+  &:before {
+    content: $font_icons_minus;
+  }
+}
 ul.green-check li,
-ul li.green-check {
+ul li.green-check,
+ul.green-plus li,
+ul li.green-plus {
   &:before {
     color: $green;
+  }
+}
+
+ul.cross li,
+ul li.cross,
+ul.red-cross li,
+ul li.red-cross {
+  &:before {
+    content: $font_icons_cross;
+  }
+}
+
+ul.red-cross li,
+ul li.red-cross,
+ul.red-minus li,
+ul li.red-minus {
+  &:before {
+    color: $red;
   }
 }
