@@ -60,3 +60,27 @@
     }
   }
 }
+@include breakpoint($brk-mobile) {
+  .quickquote.aov-quote {
+    .field {
+      .inputs {
+        float:left;
+        clear:both;
+        width:100%;
+      }
+      .label {
+        width: 50%;
+        min-width: 250px;
+      }
+    }
+    .result .row .value {
+      max-width: 220px;
+      width: auto;
+      float: left;
+    }
+    .result .row .label {
+      max-width:100%;
+      width:100%;
+    }
+  }
+}
