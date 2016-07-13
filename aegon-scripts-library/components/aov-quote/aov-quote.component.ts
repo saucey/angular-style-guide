@@ -22,10 +22,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
     <h3 prefix="/">Uw gegevens</h3>
     <div class="field">
       <div class="label">
-        Wat is uw geboortedatum?
-        <aegon-help>
-          Kies uw geboortedatum
-        </aegon-help>          
+        Wat is uw geboortedatum?     
       </div>
       <div class="inputs">
         <aegon-input-date></aegon-input-date>
@@ -40,12 +37,12 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
       </div>
       <div class="inputs">
         <select class="no-dd" required>
-          <option value="" disabled>Maak uw keuze</option>
-          <option [value]="0">1 maand</option>
-          <option [value]="1">2 maanden</option>
+          <option value="" disabled>1 maand</option>
+          <option [value]="0">2 weken</option>
+          <option [value]="0">2 weken</option>
+          <option [value]="1">1 maand</option>
           <option [value]="2">3 maanden</option>
-          <option [value]="3">4 maanden</option>
-          <option [value]="4">5 maanden</option>
+          <option [value]="3">1 jaar</option>
         </select>
       </div>      
     </div>
@@ -71,22 +68,21 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
     </div>
   
     <div class="calculation indication" *ngIf="step === 'calculation'">
-      <h3 prefix="/">Uw gegevens</h3>
+      <h3 prefix="/">Uw keuzes</h3>
       <div class="field">
         <div class="label">
-          Welke eigen risicoperiode kiest u?
+          Na welk termijn wilt u dat u uitkering start?
           <aegon-help>
             Maak uw beroepskeuze
           </aegon-help>
         </div>
         <div class="inputs">
           <select class="no-dd" required>
-            <option value="" disabled>Maak uw keuze</option>
-            <option [value]="0">1 maand</option>
-            <option [value]="1">2 maanden</option>
+            <option value="" disabled>1 maand</option>
+            <option [value]="0">2 weken</option>
+            <option [value]="1">1 maand</option>
             <option [value]="2">3 maanden</option>
-            <option [value]="3">4 maanden</option>
-            <option [value]="4">5 maanden</option>
+            <option [value]="3">1 jaar</option>
           </select>
         </div>   
       </div>
@@ -114,20 +110,23 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
           <div class="row">
             <div class="label">
               Bruto premie per maand
-              <aegon-help>
-                Help!
-              </aegon-help>
             </div>
-            <div class="value">&euro; 300<span>,- *</span></div>
+            <div class="value">&euro; 300<span>,-</span></div>
+            <span class="helptext">
+              Dit is het bedrag dat u maandelijks betaalt, inclusief 5% doorlopende korting. 
+              Uw premie is fiscaal aftrekbaar. Als u een uitkering krijgt dan betaalt u daar belasting over.
+            </span>
           </div>
           <div class="row">
             <div class="label">
-              Netto premie per maand
-              <aegon-help>
-                Help!
-              </aegon-help>              
+              Netto premie per maand        
             </div>
-            <div class="value">&euro; 300<span>,- *</span></div>
+            <div class="value">&euro; 300<span>,-</span></div>
+            <span class="helptext"> 
+              Dit is het bedrag na aftrek van belastingvoordeel. 
+              Wij rekenen met gemiddeld belastingvoordeel van 35%. 
+              Voor uw situatie kan dit meer of minder zijn.
+            </span> 
           </div>
         </div>
       </div>
