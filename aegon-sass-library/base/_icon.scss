@@ -322,6 +322,10 @@ a.menu-5662:before {
   content: $font_icons_plus;
 }
 
+.icon-plus-regular:before {
+  content: $font_icons_plus_regular;
+}
+
 .icon-plus-light:before {
   content: $font_icons_plus_light;
 }
@@ -435,13 +439,13 @@ a.menu-5662:before {
 .icon-chat:before {
   content: $font_icons_chat;
 }
-.icons-symbol-euro:before {
+.icon-symbol-euro:before {
   content: $font_icons_betalingen;
 }
-.icons-arrow-roadmap:before {
+.icon-arrow-roadmap:before {
   content:$font_icons_arrow_roadmap;
 }
-.icons-envelope:before {
+.icon-envelope:before {
   content:$font_icons_envelope;
 }
 
@@ -470,6 +474,9 @@ a.menu-5662:before {
   width: 76%
 }
 
+.icon-minus:before {
+  content: $font_icons_minus;
+}
 
 
 

@@ -354,7 +354,7 @@ div.alert {
   h2 {
     @include rem("font-size", 36);
   }
-  .close-modal {
+  > .close-modal {
     position: absolute;
     top: 28px;
     right: 28px;
