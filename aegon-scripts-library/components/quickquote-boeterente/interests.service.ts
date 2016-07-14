@@ -1,7 +1,7 @@
 import {Injectable} from 'angular2/core';
 import {Http, Response} from "angular2/http";
 import {Observable} from 'rxjs/Observable';
-
+import {parseNumber} from '../angular-components/input-number.component';
 interface DataFormat {
 	months: number;
 	nhg: boolean;
@@ -12,7 +12,7 @@ export class InterestsService {
 	/*
 	 * Data format
 	 */
-	data: DataFormat = {months:0, nhg: false};
+	private inputData: DataFormat = {months:0, nhg: false};
 	
 	constructor (private http: Http) {}
 
@@ -21,7 +21,7 @@ export class InterestsService {
 	
 	public getMarketInterestRate(data: DataFormat): any {
 		console.log(data);
-		this.data = data;
+		this.inputData = data;
 		// Checks if it's local environment
 		if(window.location.href.indexOf('localhost') > -1) {
 			// Gets the mockdata.
@@ -37,36 +37,97 @@ export class InterestsService {
 	 * If corresponds, get the data from
 	 * the API.
 	 */
-	private getAPIdata(): Promise<any> {
+	private getAPIdata(): Observable<any> {
+		let $this = this;
 		return this.http.get(this.intstUrl)
-			.map(this.processData)
-			.catch(this.handleError)
-			.toPromise();
+			.map((res: Response) => {
+				let response = res.json();
+				let table: Array<any> = [];
+
+				if(this.inputData.nhg) {
+					response.forEach(i => {
+						if(response[i].title == 'Hypotheek zonder NHG') {
+							table = response[i].Table;
+						}
+					});
+				} 
+				else {
+					response.forEach(i => {
+						if(response[i].title == 'Actuele Hypotheekrente') {
+							table = response[i].Table;
+						}
+					});
+				}
+			})
+			.catch(this.handleError);
 	}
 
 	/*
 	 * Process the data retrieved from back-end
 	 */
-	private processData(res: Response) {
-		console.log(this.data);
-		let response = res;
-		let table: Array<any> = [];
-
-		if(this.data.nhg) {
-			response.forEach(i => {
-				if(response[i].title == 'Hypotheek zonder NHG') {
-					table = response[i].Table;
+	private processData(res: Object): Observable<any> {
+		let table: Array<any> = [],
+			intsTable: Object = {},
+			months: number = this.inputData.months,
+			years: number = months / 12;
+		console.log(res);
+		// Choose the interest table depending on NHG.
+		for(let i in res) {
+			if(this.inputData.nhg) {
+				if(res[i].Title == 'Actuele Hypotheekrente') {
+					table = res[i].Table;
 				}
-			});
-		} 
-		else {
-			response.forEach(i => {
-				if(response[i].title == 'Actuele Hypotheekrente') {
-					table = response[i].Table;
+			} 
+			else {
+				if(res[i].Title == 'Hypotheek zonder NHG') {
+					table = res[i].Table;
 				}
-			});
+			}
 		}
-		console.log(table);
+
+		console.log(JSON.stringify(table));
+		// Format the data
+		for(let i in table) {
+			let intPer: Object,
+				tempPerc: Array<any> = [],
+				key: string;
+			// Loop through the keys
+			for(let p in table[i]) {
+				let percRegExp = /^[0-9]+\,[0-9]+%$/;
+
+				if(table[i][p].match(percRegExp)) {
+					let frmtNum = parseNumber(table[i][p].replace('%', ''));
+					console.log(frmtNum);
+					tempPerc.push(frmtNum);
+				} else {
+					if(/\d/.test(table[i][p])) {
+						key = table[i][p].replace(/[^0-9 ]/g, '');
+						key = key.trim();
+						key = key.replace('  ', '-');
+					} else {
+						key = table[i][p];
+					}
+					console.log('"' + key + '"');
+				}
+			}
+
+			if(tempPerc.length > 0) {
+				tempPerc.sort(function(a, b) {
+					return a - b;
+				});
+
+				intsTable[key] = tempPerc[0];
+			}
+		}
+		console.log(intsTable);
+		/*
+		 * Special calculation for periods
+		 * from 2 up to 5 years.
+		 */
+		if( years >= 2 && years <= 5) {
+			
+		}
+
 	}
 	/*
 	 * Error handling function
@@ -78,7 +139,7 @@ export class InterestsService {
 	/*
 	 * Returns a mock of the API structure
 	 */
-	private getMockData(): Promise<any> {
+	private getMockData(): Observable<any> {
 		let result = [
 			{
 				"Title": "Actuele Hypotheekrente",
@@ -229,8 +290,6 @@ export class InterestsService {
 			}
 		];
 
-	    return new Promise((resolve) => {
-	    	resolve(result);
-	    }).then(this.processData, this.handleError);
+	    return this.processData(result);
 	}
 }

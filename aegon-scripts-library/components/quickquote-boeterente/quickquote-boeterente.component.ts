@@ -209,6 +209,7 @@ export class QuickQuoteBoeterenteComponent {
     this.mortgageName = String(this.mortgageOps[index]);
 
     if (!this.initiated && this.mortgageType > 0) {
+      console.log(this.intstService.getMarketInterestRate({months: 28, nhg: true}));
       let formInit = {
         page_cat_4_productgroup: 'hypotheek',
         page_cat_5_product: 'hypotheek-' + this.mortgageName,
