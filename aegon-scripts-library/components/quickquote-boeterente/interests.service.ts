@@ -59,18 +59,19 @@ export class InterestsService {
 					});
 				}
 			})
-			.catch(this.handleError);
+			.catch(this.handleError)
+			.toPromise();
 	}
 
 	/*
 	 * Process the data retrieved from back-end
 	 */
-	private processData(res: Object): Promise<number> {
+	private processData(res: Object): number {
 		let table: Array<any> = [],
 			intsTable: Object = {},
 			months: number = this.inputData.months,
 			years: number = months / 12,
-			interest: Number;
+			interest: number;
 
 		// Choose the interest table depending on NHG.
 		for(let i in res) {
@@ -112,7 +113,6 @@ export class InterestsService {
 						// If it's only text, we'll leave it as is.
 						key = table[i][p];
 					}
-					console.log('"' + key + '"');
 				}
 			}
 
@@ -124,7 +124,7 @@ export class InterestsService {
 				intsTable[key] = tempPerc[0];
 			}
 		}
-		console.log(intsTable);
+
 		/*
 		 * Special calculation for periods
 		 * from 2 up to 5 years.
@@ -134,13 +134,34 @@ export class InterestsService {
 				fiveYearsInts = intsTable.hasOwnProperty('5') ? (intsTable['5'] / 100) : 0,
 				period = months - 24;
 
-			console.log(twoYearsInts);
-			console.log(fiveYearsInts);
-
 			interest = +((twoYearsInts + ((period / 36) * (fiveYearsInts - twoYearsInts))).toFixed(2));
 
 		}
+		else if(years < 2) {
+			interest = intsTable.hasOwnProperty('2') ? (intsTable['2'] / 100) : 0;
+		}
+		else if(years > 5) {
+			// Round the years value up.
+			years =  Math.ceil(years);
+			// The highest a person can pay a mortgage
+			// period in years.
+			let highest: number = 30; 
+			if(years > highest) {
+				// If it's more than 30 years
+				years =  highest;
+			}
+			for(let p in intsTable) {
+				// It's more than 5 years so the key will have -
+				if(p.indexOf('-') > -1) {
+					let fromTo = p.split('-');
 
+					if(years >= parseInt(fromTo[0]) && years <= parseInt(fromTo[1])) {
+						interest = intsTable[p];
+					} 
+				}
+			}
+		}
+		console.log(interest);
 		return interest;
 	}
 	/*
@@ -304,6 +325,8 @@ export class InterestsService {
 			}
 		];
 
-	    return this.processData(result).toPromise();
+	    return new Promise((resolve) => {
+	      resolve(this.processData(result));
+	    });
 	}
 }
