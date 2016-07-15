@@ -5,8 +5,14 @@
 (function($, Drupal) {
   'use strict';
 
+  var alreadyCalledURL = '';
+
   // Add Drupal behavior that is triggered on document.ready.
   Drupal.behaviors.iframePopup = {
+    showIframePopup: function (url) {
+      // In case attach function isn't called yet, we catch the call now and wait for attach to actually do it.
+      alreadyCalledURL = url;
+    },
     attach: function (context, settings) {
       var styleElm = document.createElement("style");
       styleElm.innerHTML = "html, body { overflow: hidden; height: 100%; }";
@@ -45,7 +51,14 @@
           removeIframePopup();
         });
       };
-      // Expose this function to call it from Drupal.behaviors.
+
+      // If Drupal.behaviors.iframePopup.showIframePopup was called *before* attach, then run the actual function now.
+      if (alreadyCalledURL !== '') {
+        showIframePopup(alreadyCalledURL);
+        alreadyCalledURL = '';
+      }
+
+      // Overwrite this function to call it from Drupal.behaviors.
       Drupal.behaviors.iframePopup.showIframePopup = showIframePopup;
 
       // Find buttons or links that need to open the iframe popup.

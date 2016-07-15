@@ -292,8 +292,13 @@
       email: /^[A-Z0-9]([\w\.\-]*[A-Z0-9])*@([A-Z0-9]([\w\.\-]*[A-Z0-9]|[A-Z0-9])*\.)[A-Z]{2,}$/i,
       phone: function (val) {
         // This needs to be implemented as a function, since validVal has a problem with the following regex
-        // Empty|Local numbers|International numbers.
-        return val.match(/^(|(?:00)[1-9][0-9]{7,12}|(?:0)[1-7][0-9]{8})$/);
+        /* Empty|International numbers|Local numbers.
+         * The local numbers can be:
+         *   0[1-7] + 8 digits.
+         *   085 + 7 digits. CXDEVIII-1643
+         *   087 + 7 digits. CXDEVIII-1643
+         */
+        return val.match(/^(|(?:00)[1-9][0-9]{7,12}|(?:0)(?:[1-7][0-9]{8}|(?:85)[0-9]{7}|(?:87)[0-9]{7}))$/);
       },
       address: {
         global: /^[A-Za-z0-9 '.\-]*$/i,
