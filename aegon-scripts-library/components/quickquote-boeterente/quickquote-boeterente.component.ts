@@ -319,66 +319,66 @@ export class QuickQuoteBoeterenteComponent {
       this.periodsLeft = this.getTermsAmount(currDate, this.interestPeriodEnd, 'end');
 
       /**** @todo ADD SERVICE FOR NHG ****/
-
-      this.newIntRate = this.intstService.getMarketInterestRate({months: this.periodsLeft, nhg: this.nhg});
-      // if (this.nhg === true) {
-      //   this.newIntRate = 3.95;
-      // }
-      // else {
-      //   this.newIntRate = 3.95;
-      // }
-
       let tcw: number = 0,
         newMonthlyIntRate: number;
-      // Market monthly interest rate.
-      newMonthlyIntRate = this.newIntRate / 12;
 
       // 4.3. Define interest for 1 period based on contract interest.
       let oldPeriodIntst = ((oldMonthlyIntRate * basisFee) / 100).toFixed(2);
+      /* Service that retrieves the interest rate
+       * corresponding to the amount of this.periodsLeft
+       */
+      this.intstService.getMarketInterestRate({months: this.periodsLeft, nhg: this.nhg}).then((interests) => {
+        this.newIntRate = interests;
 
-      // 4.4. Define interest for 1 period based on market interest.
-      let newPeriodIntst = ((newMonthlyIntRate * basisFee) / 100).toFixed(2);
+        if(this.newIntRate < this.oldIntRate) {
+          
+        }
+        // Market monthly interest rate.
+        newMonthlyIntRate = this.newIntRate / 12;
 
-      // 4.5. Define difference or missed interest for 1 period.
-      let periodIntstDiff = +(oldPeriodIntst) - +(newPeriodIntst);
-      periodIntstDiff = +(periodIntstDiff.toFixed(2));
+        // 4.4. Define interest for 1 period based on market interest.
+        let newPeriodIntst = ((newMonthlyIntRate * basisFee) / 100).toFixed(2);
+
+        // 4.5. Define difference or missed interest for 1 period.
+        let periodIntstDiff = +(oldPeriodIntst) - +(newPeriodIntst);
+        periodIntstDiff = +(periodIntstDiff.toFixed(2));
 
 
-      // Loop through periods.
-      // =F2/(POWER(1+$Invoer.$H$34,A2-$Invoer.$H$28+1))
-      for (let i = periodStart; i < this.periodsLeft + 1; i++) {
-        let cw = periodIntstDiff / (Math.pow((1 + (newMonthlyIntRate / 100)), (+i - periodStart + 1)));
-        cw = +(cw.toFixed(2));
-        tcw = tcw + cw;
-      }
-      // Set the value of total fee.
-      if (((this.initialAmount - repymnt) > penaltyFree) && (this.newIntRate < this.oldIntRate)) {
-        this.totalFee = (((this.initialAmount - repymnt) - penaltyFree) * tcw) / basisFee;
-      }
-      else {
-        this.totalFee = 0;
-      }
+        // Loop through periods.
+        for (let i = periodStart; i < this.periodsLeft + 1; i++) {
+          let cw = periodIntstDiff / (Math.pow((1 + (newMonthlyIntRate / 100)), (+i - periodStart + 1)));
+          cw = +(cw.toFixed(2));
+          tcw = tcw + cw;
+        }
+        // Set the value of total fee.
+        if (((this.initialAmount - repymnt) > penaltyFree) && (this.newIntRate < this.oldIntRate)) {
+          this.totalFee = (((this.initialAmount - repymnt) - penaltyFree) * tcw) / basisFee;
+        }
+        else {
+          this.totalFee = 0;
+        }
 
-      // Removes the class pending in the button.
-      this.calculating = false;
-      // Shows the value.
-      this.calculated = true;
-      // Check in case users calculate again.
-      if (!this.finalized) {
-        let formComplete = {
-          page_cat_4_productgroup: 'hypotheek',
-          page_cat_5_product: 'hypotheek-' + this.mortgageName,
-          product_name: ['hypotheek-' + this.mortgageName],
-          product_category: ['hypotheek'],
-          form_name: 'qq-rente_wijzigen',
-          step_name: 'qq-bevestiging',
-          page_step: '03',
-          event: 'qq_completed'
-        };
-        this.tealium(formComplete);
+        // Removes the class pending in the button.
+        this.calculating = false;
+        // Shows the value.
+        this.calculated = true;
+        // Check in case users calculate again.
+        if (!this.finalized) {
+          let formComplete = {
+            page_cat_4_productgroup: 'hypotheek',
+            page_cat_5_product: 'hypotheek-' + this.mortgageName,
+            product_name: ['hypotheek-' + this.mortgageName],
+            product_category: ['hypotheek'],
+            form_name: 'qq-rente_wijzigen',
+            step_name: 'qq-bevestiging',
+            page_step: '03',
+            event: 'qq_completed'
+          };
+          this.tealium(formComplete);
 
-        this.finalized = true;
-      }
+          this.finalized = true;
+        }
+      });
     }
   }
   /*

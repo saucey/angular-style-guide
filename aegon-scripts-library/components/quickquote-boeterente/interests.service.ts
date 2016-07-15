@@ -37,7 +37,7 @@ export class InterestsService {
 	 * If corresponds, get the data from
 	 * the API.
 	 */
-	private getAPIdata(): Observable<any> {
+	private getAPIdata(): Promise<any> {
 		let $this = this;
 		return this.http.get(this.intstUrl)
 			.map((res: Response) => {
@@ -65,12 +65,13 @@ export class InterestsService {
 	/*
 	 * Process the data retrieved from back-end
 	 */
-	private processData(res: Object): Observable<any> {
+	private processData(res: Object): Promise<number> {
 		let table: Array<any> = [],
 			intsTable: Object = {},
 			months: number = this.inputData.months,
-			years: number = months / 12;
-		console.log(res);
+			years: number = months / 12,
+			interest: Number;
+
 		// Choose the interest table depending on NHG.
 		for(let i in res) {
 			if(this.inputData.nhg) {
@@ -85,7 +86,6 @@ export class InterestsService {
 			}
 		}
 
-		console.log(JSON.stringify(table));
 		// Format the data
 		for(let i in table) {
 			let intPer: Object,
@@ -97,14 +97,19 @@ export class InterestsService {
 
 				if(table[i][p].match(percRegExp)) {
 					let frmtNum = parseNumber(table[i][p].replace('%', ''));
-					console.log(frmtNum);
+					// Push the number to the array of interests.
 					tempPerc.push(frmtNum);
 				} else {
+					// If the key contains numbers.
 					if(/\d/.test(table[i][p])) {
+						// Strip all text in key.
 						key = table[i][p].replace(/[^0-9 ]/g, '');
+						// Strip extra spaces.
 						key = key.trim();
+						// Replace spaces with hyphen.
 						key = key.replace('  ', '-');
 					} else {
+						// If it's only text, we'll leave it as is.
 						key = table[i][p];
 					}
 					console.log('"' + key + '"');
@@ -125,9 +130,18 @@ export class InterestsService {
 		 * from 2 up to 5 years.
 		 */
 		if( years >= 2 && years <= 5) {
-			
+			let twoYearsInts = intsTable.hasOwnProperty('2') ? (intsTable['2'] / 100) : 0,
+				fiveYearsInts = intsTable.hasOwnProperty('5') ? (intsTable['5'] / 100) : 0,
+				period = months - 24;
+
+			console.log(twoYearsInts);
+			console.log(fiveYearsInts);
+
+			interest = +((twoYearsInts + ((period / 36) * (fiveYearsInts - twoYearsInts))).toFixed(2));
+
 		}
 
+		return interest;
 	}
 	/*
 	 * Error handling function
@@ -139,7 +153,7 @@ export class InterestsService {
 	/*
 	 * Returns a mock of the API structure
 	 */
-	private getMockData(): Observable<any> {
+	private getMockData(): Promise<any> {
 		let result = [
 			{
 				"Title": "Actuele Hypotheekrente",
@@ -290,6 +304,6 @@ export class InterestsService {
 			}
 		];
 
-	    return this.processData(result);
+	    return this.processData(result).toPromise();
 	}
 }
