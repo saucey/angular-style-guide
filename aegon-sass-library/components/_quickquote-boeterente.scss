@@ -128,6 +128,14 @@
     .footer {
     	padding-top: 15px;
     }
+    .not-possible {
+      @include rem('padding', 0, 20);
+      h4 {
+        font-family: $font_normal;        
+        font-size: 24px;
+        margin: 0 0 20px;
+      }
+    }
   }
   .disclaimer {
     background-color: #ffffff;
