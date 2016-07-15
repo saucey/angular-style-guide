@@ -261,7 +261,7 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
 
     this.isReady = (this.mortgageType > 0 &&
       this.initialAmount > 0  &&
-      this.validateDate(this.interestPeriodEnd) &&
+      this.validateDate(this.interestPeriodEnd, true) &&
       this.oldIntRate > 0 &&
       this.nhg !== undefined);
 
@@ -283,7 +283,7 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
     this.initialAmountErr = (this.initialAmount === 0 || this.initialAmount === null) ? true : false;
 
     // Interest period end.
-    this.interestPeriodEndErr = this.validateDate(this.interestPeriodEnd) ? false : true;
+    this.interestPeriodEndErr = this.validateDate(this.interestPeriodEnd, true) ? false : true;
     
     // Old interest rate error.
     this.oldIntRateErr = (this.oldIntRate === 0 || this.oldIntRate === null) ? true : false;
@@ -504,7 +504,7 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
    * @param date: date string in format yyyy-mm-dd
    * @return boolean
    */
-  validateDate(date: string): boolean {
+  validateDate(date: string, future: boolean = false): boolean {
     // Accepted date format RegExp (yyyy-mm-dd).
     let dateFmt = /^\d{4}\-\d{2}\-\d{2}$/;
 
@@ -541,6 +541,18 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
         }
       }
     }
+    /* If passed, checks the given date
+     * to be a future date.
+     */
+    if(future) {
+      let fDate = new Date(date);
+      let today = new Date();
+
+      if(fDate <= today) {
+        return false;
+      }
+    }
+
     // Passed all validations.
     return true;
   }
