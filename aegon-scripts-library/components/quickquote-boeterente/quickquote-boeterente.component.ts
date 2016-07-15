@@ -378,7 +378,10 @@ export class QuickQuoteBoeterenteComponent {
           else {
             this.totalFee = 0;
           }
-
+          // Removes the class pending in the button.
+          this.calculating = false;
+          // Shows the value.
+          this.calculated = true;
         }
         else {
           /* If the current market value is bigger
@@ -386,12 +389,12 @@ export class QuickQuoteBoeterenteComponent {
            * The calculation is not done.
            */
           this.validIntst = false;
+          // Removes the class pending in the button.
+          this.calculating = false;
+          // Shows the value.
+          this.calculated = true;        
         }
 
-        // Removes the class pending in the button.
-        this.calculating = false;
-        // Shows the value.
-        this.calculated = true;
         // Check in case users calculate again.
         if (!this.finalized) {
           let formComplete = {

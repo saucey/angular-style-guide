@@ -42,22 +42,8 @@ export class InterestsService {
 		return this.http.get(this.intstUrl)
 			.map((res: Response) => {
 				let response = res.json();
-				let table: Array<any> = [];
-
-				if(this.inputData.nhg) {
-					response.forEach(i => {
-						if(response[i].title == 'Hypotheek zonder NHG') {
-							table = response[i].Table;
-						}
-					});
-				} 
-				else {
-					response.forEach(i => {
-						if(response[i].title == 'Actuele Hypotheekrente') {
-							table = response[i].Table;
-						}
-					});
-				}
+				
+				return this.processData(response);
 			})
 			.catch(this.handleError)
 			.toPromise();
@@ -124,7 +110,6 @@ export class InterestsService {
 				intsTable[key] = tempPerc[0];
 			}
 		}
-		console.log(intsTable);
 		/*
 		 * Special calculation for periods
 		 * from 2 up to 5 years.
@@ -161,7 +146,7 @@ export class InterestsService {
 				}
 			}
 		}
-		console.log(interest);
+
 		return interest;
 	}
 	/*
