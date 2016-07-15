@@ -1,4 +1,4 @@
-import {Component, Input, ElementRef, ViewChild, AfterViewInit} from 'angular2/core';
+import {Component, Input, ElementRef, ViewChild, AfterViewInit, OnInit} from 'angular2/core';
 import {HTTP_PROVIDERS, Http, Headers, RequestOptions, Response} from "angular2/http";
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
@@ -171,7 +171,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteBoet
   providers: [HTTP_PROVIDERS, InterestsService],
   pipes: [MoneyPipe]
 })
-export class QuickQuoteBoeterenteComponent {
+export class QuickQuoteBoeterenteComponent implements OnInit {
   // Mortgage options:
   mortgageOps: Object[] = ['Maak uw keuze', 'Aflossingsvrij', 'Annuitair', '(Bank)Spaar', 'Lineair', 'Overig'];
   // Scope variable initiation.
@@ -207,6 +207,10 @@ export class QuickQuoteBoeterenteComponent {
     private intstService: InterestsService
   ) {}
 
+  /*
+   * Function that runs first and sends
+   * the view form tealium variable
+   */
   ngOnInit():void {
     let formView = {
       page_cat_4_productgroup: 'hypotheek',
