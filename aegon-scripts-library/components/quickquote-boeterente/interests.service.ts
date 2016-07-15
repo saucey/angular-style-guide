@@ -20,7 +20,6 @@ export class InterestsService {
 	private intstUrl = '/particulier/feed/json/table';
 	
 	public getMarketInterestRate(data: DataFormat): any {
-		console.log(data);
 		this.inputData = data;
 		// Checks if it's local environment
 		if(window.location.href.indexOf('localhost') > -1) {
