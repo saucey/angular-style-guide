@@ -56,97 +56,100 @@ export class InterestsService {
 			intsTable: Object = {},
 			months: number = this.inputData.months,
 			years: number = months / 12,
-			interest: number;
+			interest: number = 0;
 
 		// Choose the interest table depending on NHG.
 		for(let i in res) {
 			if(this.inputData.nhg) {
-				if(res[i].Title == 'Actuele Hypotheekrente') {
+				if(res[i]['Table ID'] == 'hypotheek-met-nhg') {
 					table = res[i].Table;
 				}
 			} 
 			else {
-				if(res[i].Title == 'Hypotheek zonder NHG') {
+				if(res[i]['Table ID'] == 'hypotheek-zonder-nhg') {
 					table = res[i].Table;
 				}
 			}
 		}
 
-		// Data formatting.
-		for(let i in table) {
-			let intPer: Object,
-				tempPerc: Array<any> = [],
-				key: string;
-			// Loop through the keys
-			for(let p in table[i]) {
-				let percRegExp = /^[0-9]+\,[0-9]+%$/;
+		if(table.length > 0) {
+			// Data formatting.
+			for(let i in table) {
+				let intPer: Object,
+					tempPerc: Array<any> = [],
+					key: string;
+				// Loop through the keys
+				for(let p in table[i]) {
+					let percRegExp = /^[0-9]+\,[0-9]+%$/;
 
-				if(table[i][p].match(percRegExp)) {
-					let frmtNum = parseNumber(table[i][p].replace('%', ''));
-					// Push the number to the array of interests.
-					tempPerc.push(frmtNum);
-				} else {
-					// If the key contains numbers.
-					if(/\d/.test(table[i][p])) {
-						// Strip all text in key.
-						key = table[i][p].replace(/[^0-9 ]/g, '');
-						// Strip extra spaces.
-						key = key.trim();
-						// Replace spaces with hyphen.
-						key = key.replace('  ', '-');
+					if(table[i][p].match(percRegExp)) {
+						let frmtNum = parseNumber(table[i][p].replace('%', ''));
+						// Push the number to the array of interests.
+						tempPerc.push(frmtNum);
 					} else {
-						// If it's only text, we'll leave it as is.
-						key = table[i][p];
+						// If the key contains numbers.
+						if(/\d/.test(table[i][p])) {
+							// Strip all text in key.
+							key = table[i][p].replace(/[^0-9 ]/g, '');
+							// Strip extra spaces.
+							key = key.trim();
+							// Replace spaces with hyphen.
+							key = key.replace('  ', '-');
+						} else {
+							// If it's only text, we'll leave it as is.
+							key = table[i][p];
+						}
 					}
 				}
+
+				if(tempPerc.length > 0) {
+					tempPerc.sort(function(a, b) {
+						return a - b;
+					});
+
+					intsTable[key] = tempPerc[0];
+				}
 			}
+			/*
+			 * Special calculation for periods
+			 * from 2 up to 5 years.
+			 */
+			if( years >= 2 && years <= 5) {
+				let twoYearsInts = intsTable.hasOwnProperty('2') ? (intsTable['2'] / 100) : 0,
+					fiveYearsInts = intsTable.hasOwnProperty('5') ? (intsTable['5'] / 100) : 0,
+					period = months - 24;
 
-			if(tempPerc.length > 0) {
-				tempPerc.sort(function(a, b) {
-					return a - b;
-				});
+				interest = +((twoYearsInts + ((period / 36) * (fiveYearsInts - twoYearsInts))).toFixed(2));
 
-				intsTable[key] = tempPerc[0];
 			}
-		}
-		/*
-		 * Special calculation for periods
-		 * from 2 up to 5 years.
-		 */
-		if( years >= 2 && years <= 5) {
-			let twoYearsInts = intsTable.hasOwnProperty('2') ? (intsTable['2'] / 100) : 0,
-				fiveYearsInts = intsTable.hasOwnProperty('5') ? (intsTable['5'] / 100) : 0,
-				period = months - 24;
-
-			interest = +((twoYearsInts + ((period / 36) * (fiveYearsInts - twoYearsInts))).toFixed(2));
-
-		}
-		else if(years < 2) {
-			interest = intsTable.hasOwnProperty('2') ? (intsTable['2'] / 100) : 0;
-		}
-		else if(years > 5) {
-			// Round the years value up.
-			years =  Math.ceil(years);
-			// The highest a person can pay a mortgage
-			// period in years.
-			let highest: number = 30; 
-			if(years > highest) {
-				// If it's more than 30 years
-				years =  highest;
+			else if(years < 2) {
+				interest = intsTable.hasOwnProperty('2') ? (intsTable['2'] / 100) : 0;
 			}
-			for(let p in intsTable) {
-				// It's more than 5 years so the key will have -
-				if(p.indexOf('-') > -1) {
-					let fromTo = p.split('-');
+			else if(years > 5) {
+				// Round the years value up.
+				years =  Math.ceil(years);
+				// The highest a person can pay a mortgage
+				// period in years.
+				let highest: number = 30; 
+				if(years > highest) {
+					// If it's more than 30 years
+					years =  highest;
+				}
+				for(let p in intsTable) {
+					// It's more than 5 years so the key will have -
+					if(p.indexOf('-') > -1) {
+						let fromTo = p.split('-');
 
-					if(years >= parseInt(fromTo[0]) && years <= parseInt(fromTo[1])) {
-						interest = intsTable[p];
-					} 
+						if(years >= parseInt(fromTo[0]) && years <= parseInt(fromTo[1])) {
+							interest = intsTable[p];
+						} 
+					}
 				}
 			}
 		}
 
 		return interest;
+
 	}
 	/*
 	 * Error handling function
