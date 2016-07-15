@@ -136,24 +136,30 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteBoet
       </div>
       <div *ngIf="calculated">
         <div class="result">
-          <div class="bigger">
-            <div class="row">
-              <span class="label">Indicatie omzettingskosten</span>
-              <span class="value">
-                <span class="curr">€</span>
-                <span class="amount">{{totalFee | money}}*</span>
-              </span>
+          <div *ngIf="validIntst">
+            <div class="bigger">
+              <div class="row">
+                <span class="label">Indicatie omzettingskosten</span>
+                <span class="value">
+                  <span class="curr">€</span>
+                  <span class="amount">{{totalFee | money}}*</span>
+                </span>
+              </div>
+            </div>
+            <div class="small">
+              <div class="row">
+                <div class="label"><p>Resterende rentevastperiode: <b>{{ periodsLeft }}</b> {{ periodsLeft > 1 ? 'maanden' : 'maand' }}<b></b></p>
+                <p>Vergelijkingsrente: {{ newIntRate }}% <aegon-help position="top">Het actuele rentepercentage dat geldt voor de periode van uw resterende rentevastperiode. U vindt de geldende percentages op onze pagina met actuele rentepercentages. </aegon-help></p>
+                </div>
+                <div class="label">
+                  <a class="button orange icon-right arrow" [attr.href]="'/zakelijk/inkomensverzekeringen/arbeidsongeschiktheidsverzekering/arbeidsongeschiktheidsverzekering-berekenen?AO1_VERZSOM=' + grossTotalCosts">Bekijk de adviesmogelijkheden</a>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="small">
-            <div class="row">
-              <div class="label"><p>Resterende rentevastperiode: <b>{{ periodsLeft }}</b> {{ periodsLeft > 1 ? 'maanden' : 'maand' }}<b></b></p>
-              <p>Vergelijkingsrente: {{ newIntRate }}% <aegon-help position="top">Het actuele rentepercentage dat geldt voor de periode van uw resterende rentevastperiode. U vindt de geldende percentages op onze pagina met actuele rentepercentages. </aegon-help></p>
-              </div>
-              <div class="label">
-                <a class="button orange icon-right arrow" [attr.href]="'/zakelijk/inkomensverzekeringen/arbeidsongeschiktheidsverzekering/arbeidsongeschiktheidsverzekering-berekenen?AO1_VERZSOM=' + grossTotalCosts">Bekijk de adviesmogelijkheden</a>
-              </div>
-            </div>
+          <div *ngIf="!validIntst" class="not-possible">
+            <h4>Berekening niet mogelijk</h4>
+            <p>Het ingevoerde rentepercentage is lager dan de nu geldende marktrente. Het is daarom niet mogelijk om de omzettingskosten te berekenen. Controleer of u het juiste rentepercentage heeft ingevoerd.</p>
           </div>
         </div>
         <div class="disclaimer">
@@ -187,7 +193,7 @@ export class QuickQuoteBoeterenteComponent {
   isReady: boolean = false;
   calculating: boolean = false;
   calculated: boolean = false;
-
+  validIntst: boolean = true;
   // Errors
   errorsHighlighted: boolean = false;
   mortgageTypeErr: boolean = false;
@@ -201,6 +207,20 @@ export class QuickQuoteBoeterenteComponent {
     private intstService: InterestsService
   ) {}
 
+  ngOnInit():void {
+    let formView = {
+      page_cat_4_productgroup: 'hypotheek',
+      page_cat_5_product: 'hypotheek-rente',
+      product_name: ['hypotheek-rente'],
+      product_category: ['hypotheek'],
+      form_name: 'qq-rente_wijzigen',
+      step_name: 'qq-berekening-view',
+      page_step:'01',
+      event: 'qq_view'
+    };
+    this.tealium(formView);
+  }
+
   /*
    * Initial tealium event 
    */
@@ -209,7 +229,6 @@ export class QuickQuoteBoeterenteComponent {
     this.mortgageName = String(this.mortgageOps[index]);
 
     if (!this.initiated && this.mortgageType > 0) {
-      console.log(this.intstService.getMarketInterestRate({months: 28, nhg: true}));
       let formInit = {
         page_cat_4_productgroup: 'hypotheek',
         page_cat_5_product: 'hypotheek-' + this.mortgageName,
@@ -331,31 +350,42 @@ export class QuickQuoteBoeterenteComponent {
         this.newIntRate = interests;
 
         if(this.newIntRate < this.oldIntRate) {
-          
-        }
-        // Market monthly interest rate.
-        newMonthlyIntRate = this.newIntRate / 12;
+          /* If valid if the new interest is lower than
+           * the interest entered by the user.
+           */
+          this.validIntst = true;
+          // Market monthly interest rate.
+          newMonthlyIntRate = this.newIntRate / 12;
 
-        // 4.4. Define interest for 1 period based on market interest.
-        let newPeriodIntst = ((newMonthlyIntRate * basisFee) / 100).toFixed(2);
+          // 4.4. Define interest for 1 period based on market interest.
+          let newPeriodIntst = ((newMonthlyIntRate * basisFee) / 100).toFixed(2);
 
-        // 4.5. Define difference or missed interest for 1 period.
-        let periodIntstDiff = +(oldPeriodIntst) - +(newPeriodIntst);
-        periodIntstDiff = +(periodIntstDiff.toFixed(2));
+          // 4.5. Define difference or missed interest for 1 period.
+          let periodIntstDiff = +(oldPeriodIntst) - +(newPeriodIntst);
+          periodIntstDiff = +(periodIntstDiff.toFixed(2));
 
 
-        // Loop through periods.
-        for (let i = periodStart; i < this.periodsLeft + 1; i++) {
-          let cw = periodIntstDiff / (Math.pow((1 + (newMonthlyIntRate / 100)), (+i - periodStart + 1)));
-          cw = +(cw.toFixed(2));
-          tcw = tcw + cw;
-        }
-        // Set the value of total fee.
-        if (((this.initialAmount - repymnt) > penaltyFree) && (this.newIntRate < this.oldIntRate)) {
-          this.totalFee = (((this.initialAmount - repymnt) - penaltyFree) * tcw) / basisFee;
+          // Loop through periods.
+          for (let i = periodStart; i < this.periodsLeft + 1; i++) {
+            let cw = periodIntstDiff / (Math.pow((1 + (newMonthlyIntRate / 100)), (+i - periodStart + 1)));
+            cw = +(cw.toFixed(2));
+            tcw = tcw + cw;
+          }
+          // Set the value of total fee.
+          if (((this.initialAmount - repymnt) > penaltyFree)) {
+            this.totalFee = (((this.initialAmount - repymnt) - penaltyFree) * tcw) / basisFee;
+          }
+          else {
+            this.totalFee = 0;
+          }
+
         }
         else {
-          this.totalFee = 0;
+          /* If the current market value is bigger
+           * than the interest enter by user
+           * The calculation is not done.
+           */
+          this.validIntst = false;
         }
 
         // Removes the class pending in the button.
@@ -513,12 +543,32 @@ export class QuickQuoteBoeterenteComponent {
    * and triggers tealium functions.
    */
   private tealium (data: Object): void {
-    if(typeof utag_data !== 'undefined' && typeof utag !== 'undefined') {
+    // Merge properties with global utag_data object when available.
+    var opt = [
+        "page_cat_1_type",
+        "page_cat_2_name",
+        "page_cat_3_section",
+        "page_cat_4_productgroup",
+        "page_cat_5_product",
+        "page_cat_6_businessline"
+    ];
+
+    if (typeof utag_data == 'object') {
+        for(let i=0;i<opt.length;i++) {
+            if (!data.hasOwnProperty(opt[i])) {
+                if (utag_data.hasOwnProperty(opt[i]) && utag_data[opt[i]] != "" ) {
+                    data[opt[i]] = utag_data[opt[i]];
+                }
+            }
+        }
+    }    
+    // Check if utag can be used.
+    if(typeof utag == 'object' && typeof utag.view == 'function') {
       utag.view(data);
     } else {
       // Give some time to load.
       setTimeout(() => { 
-        if (typeof utag_data !== 'undefined' && typeof utag !== 'undefined') {
+        if (typeof utag == 'object' && typeof utag.view == 'function') {
           utag.view(data);
         }
       }, 1600);

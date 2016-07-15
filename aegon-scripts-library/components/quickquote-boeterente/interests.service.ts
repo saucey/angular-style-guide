@@ -87,7 +87,7 @@ export class InterestsService {
 			}
 		}
 
-		// Format the data
+		// Data formatting.
 		for(let i in table) {
 			let intPer: Object,
 				tempPerc: Array<any> = [],
@@ -124,7 +124,7 @@ export class InterestsService {
 				intsTable[key] = tempPerc[0];
 			}
 		}
-
+		console.log(intsTable);
 		/*
 		 * Special calculation for periods
 		 * from 2 up to 5 years.
