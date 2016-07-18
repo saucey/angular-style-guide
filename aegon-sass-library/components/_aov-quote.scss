@@ -21,7 +21,7 @@
     .icon-skinnyarrow:before {
       font-size: 0.75rem;
     }
-    .label {width:60%;}
+    .label {width:60%;max-width:368px;}
       .label + * {float:right;text-align:right;}
     .inputs {width:40%;max-width:180px;}
     .button.icon-calculator {width:180px;}
