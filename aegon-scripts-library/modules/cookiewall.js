@@ -84,7 +84,7 @@ var cookieWall = {};
 
   function showCookieWall(pageToShow) {
     if (pageToShow === void 0) {
-      pageToShow = (cookieValue && cookieValue.toUpperCase() === COOKIE_VALUE_EXTENDED) ? 'advanced' : null
+      pageToShow = (cookieValue && cookieValue.toUpperCase() === COOKIE_VALUE_EXTENDED) ? 'advanced' : null;
     }
 
     var cookieWallElm = $('.blocking-popup.cookie-wall');
@@ -116,7 +116,7 @@ var cookieWall = {};
           showPopupContent(pageToShow);
         }
       }
-    })
+    });
   }
   cookieWall.showCookieWall = showCookieWall;
 
@@ -264,7 +264,7 @@ var cookieWall = {};
       if (options.async) {
         $('head').append(elm);
       } else {
-        document.write(elm.outerHTML);
+        document.write(elm.outerHTML);// jshint ignore:line
       }
     }
   }

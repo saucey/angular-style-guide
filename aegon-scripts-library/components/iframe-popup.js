@@ -13,7 +13,7 @@
       // In case attach function isn't called yet, we catch the call now and wait for attach to actually do it.
       alreadyCalledURL = url;
     },
-    attach: function (context, settings) {
+    attach: function (context, settings) {// jshint ignore:line
       var styleElm = document.createElement("style");
       styleElm.innerHTML = "html, body { overflow: hidden; height: 100%; }";
 
