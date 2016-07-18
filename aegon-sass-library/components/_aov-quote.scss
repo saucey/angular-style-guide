@@ -73,6 +73,12 @@
     }
   }
 }
+@include breakpoint($brk-tablet) {
+  .quickquote.aov-quote .result .row .label {
+    max-width: 100%;
+    width: auto;
+  }
+}
 @include breakpoint($brk-mobile) {
   .quickquote.aov-quote {
     .field {
@@ -82,8 +88,8 @@
         width:100%;
       }
       .label {
-        width: 50%;
-        min-width: 250px;
+        width: 100%;
+        min-width: 100%;
       }
     }
     .result .row .value {
@@ -94,6 +100,9 @@
     .result .row .label {
       max-width:100%;
       width:100%;
+    }
+    .result .row .helptext {
+      clear:both;
     }
   }
 }
