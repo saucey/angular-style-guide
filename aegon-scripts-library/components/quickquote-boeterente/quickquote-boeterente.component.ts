@@ -175,6 +175,8 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
   // Mortgage options:
   mortgageOps: Object[] = ['Maak uw keuze', 'Aflossingsvrij', 'Annuitair', '(Bank)Spaar', 'Lineair', 'Overig'];
   // Scope variable initiation.
+  initiated: boolean = false;
+  finalized: boolean = false;
   mortgageType: number = 0;
   // Used for tealium.
   mortgageName: string;
@@ -216,6 +218,20 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
   init(index: number): void {
     this.mortgageType = Number(index);
     this.mortgageName = String(this.mortgageOps[index]);
+
+    if (!this.initiated && this.mortgageType > 0) {
+      let formInit = {
+        page_cat_4_productgroup: 'hypotheek',
+        product_category: ['hypotheek'],
+        form_name: 'qq-rente_wijzigen',
+        step_name: 'qq-berekening-start',
+        page_step:'02',
+        event: 'qq_started'
+      };
+      this.tealium(formInit);
+
+      this.initiated = true;
+    }
 
     this.validate();
   }
@@ -271,21 +287,6 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
     this.highlightErrors();
     // If no errors.
     if (this.isReady) {
-      // Tealium variable for the start event
-      let formInit = {
-        page_cat_4_productgroup: 'hypotheek',
-        page_cat_5_product: 'hypotheek-' + this.mortgageName,
-        product_name: ['hypotheek-' + this.mortgageName],
-        product_category: ['hypotheek'],
-        form_name: 'qq-rente_wijzigen',
-        step_name: 'qq-berekening - start',
-        page_step:'02',
-        event: 'qq_started',
-        hypotheekvorm: this.mortgageName
-      };
-
-      this.tealium(formInit);
-
       // Adds the loader to the submit button.
       this.calculating = true;
 
@@ -385,17 +386,22 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
         }
 
         // Calculation finished.
-        let formComplete = {
-          page_cat_4_productgroup: 'hypotheek',
-          page_cat_5_product: 'hypotheek-' + this.mortgageName,
-          product_name: ['hypotheek-' + this.mortgageName],
-          product_category: ['hypotheek'],
-          form_name: 'qq-rente_wijzigen',
-          step_name: 'qq-bevestiging',
-          page_step: '03',
-          event: 'qq_completed'
-        };
-        this.tealium(formComplete);
+        if (!this.finalized) {
+          let formComplete = {
+            page_cat_4_productgroup: 'hypotheek',
+            page_cat_5_product: 'hypotheek-' + this.mortgageName,
+            product_name: ['hypotheek-' + this.mortgageName],
+            product_category: ['hypotheek'],
+            form_name: 'qq-rente_wijzigen',
+            step_name: 'qq-bevestiging',
+            page_step: '03',
+            event: 'qq_completed',
+            hypotheekvorm: this.mortgageName
+          };
+          this.tealium(formComplete);
+
+          this.finalized = true;
+        }
       });
     }
   }
