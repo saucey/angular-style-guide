@@ -89,14 +89,14 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
           <aegon-help>Help !</aegon-help>
         </div>
         <div class="inputs">
-          <aegon-input-number prefix="€" [(ngModel)]="grossYearAmount" (change)="getgrossYearAmount()" [max]="99999999"></aegon-input-number>
+          <aegon-input-number prefix="€" [(ngModel)]="grossYearAmount" [max]="99999999"></aegon-input-number>
         </div>
         <aegon-solo-slider prefix="€" [(ngModel)]="grossYearAmount" [range]="{
           'min': [  minGrossYearAmount ],
           '25%': [  1000 ],
           '50%': [ 2000 ],
           '75%': [  3000 ],
-          'max': [ 7500 ]
+          'max': [ 999999 ]
         }">
         </aegon-solo-slider>
         <div class="min">&euro; {{minGrossYearAmount}}</div>
@@ -128,14 +128,14 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
         </div>
       </div>
       <div class="field">
+        <a class="button orange icon-right arrow">
+          Adviesgesprek aanvragen
+        </a>
         <div class="label">
           <a href="#" class="icon-skinnyarrow">
             Bekijk en mail overzicht
           </a>
         </div>
-        <a class="button orange icon-right arrow">
-          Adviesgesprek aanvragen
-        </a>
       </div>
     </div>
   </div>
@@ -152,10 +152,6 @@ export class AovQuoteComponent implements OnInit {
     private http:Http
   ) {}
 
-  getgrossYearAmount(): number {
-    grossYearAmount: this.grossYearAmount;
-    return this.grossYearAmount;
-  }
 
   ngOnInit() {
 
