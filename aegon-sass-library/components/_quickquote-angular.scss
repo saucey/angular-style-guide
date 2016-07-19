@@ -149,6 +149,8 @@
         width: 400px;
         color: $black;
         padding: 18px;
+        -webkit-font-smoothing: auto;
+        -moz-osx-font-smoothing: auto;
       }
     }
   }
