@@ -354,7 +354,6 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
           let periodIntstDiff = +(oldPeriodIntst) - +(newPeriodIntst);
           periodIntstDiff = +(periodIntstDiff.toFixed(2));
 
-          //console.log('periods difference = ' + periodIntstDiff);
           // Loop through periods.
           for (let i = periodStart; i < this.periodsLeft + 1; i++) {
             let cw = periodIntstDiff / (Math.pow((1 + (newMonthlyIntRate / 100)), (+i - periodStart + 1)));
