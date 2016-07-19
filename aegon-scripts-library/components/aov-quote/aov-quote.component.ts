@@ -153,7 +153,7 @@ export class AovQuoteComponent implements OnInit {
   ) {}
 
   getgrossYearAmount(): number {
-    //grossYearAmount: this.grossYearAmount;
+    grossYearAmount: this.grossYearAmount;
     return this.grossYearAmount;
   }
 
