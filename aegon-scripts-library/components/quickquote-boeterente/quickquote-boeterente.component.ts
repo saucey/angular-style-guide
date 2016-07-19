@@ -304,7 +304,7 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
 
       /* 4. Total cash value (Totale contante waarde) */
       // 4.1. Define Interest rate contract per month.
-      let oldMonthlyIntRate = this.roundToDeg((this.oldIntRate / 12), 4);
+      let oldMonthlyIntRate = this.oldIntRate / 12;
 
       // 4.2. Define interest rate market per month
       let d = new Date();
@@ -331,6 +331,7 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
 
       // 4.3. Define interest for 1 period based on contract interest.
       let oldPeriodIntst = ((oldMonthlyIntRate * basisFee) / 100).toFixed(2);
+
       /* Service that retrieves the interest rate
        * corresponding to the amount of this.periodsLeft
        */
@@ -345,6 +346,7 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
           // Market monthly interest rate.
           newMonthlyIntRate = this.newIntRate / 12;
 
+
           // 4.4. Define interest for 1 period based on market interest.
           let newPeriodIntst = ((newMonthlyIntRate * basisFee) / 100).toFixed(2);
 
@@ -352,11 +354,11 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
           let periodIntstDiff = +(oldPeriodIntst) - +(newPeriodIntst);
           periodIntstDiff = +(periodIntstDiff.toFixed(2));
 
-
+          //console.log('periods difference = ' + periodIntstDiff);
           // Loop through periods.
           for (let i = periodStart; i < this.periodsLeft + 1; i++) {
             let cw = periodIntstDiff / (Math.pow((1 + (newMonthlyIntRate / 100)), (+i - periodStart + 1)));
-            cw = +(cw.toFixed(2));
+
             tcw = tcw + cw;
           }
           // Set the value of total fee.

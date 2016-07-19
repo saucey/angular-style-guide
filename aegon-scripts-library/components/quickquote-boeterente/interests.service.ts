@@ -110,7 +110,7 @@ export class InterestsService {
 					intsTable[key] = tempPerc[0];
 				}
 			}
-			console.log(intsTable);
+
 			/*
 			 * Special calculation for periods
 			 * from 2 up to 5 years.
