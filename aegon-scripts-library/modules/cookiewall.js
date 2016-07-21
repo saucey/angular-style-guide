@@ -1,16 +1,19 @@
 /*
   Cookiewall usage.
 
-  In the <head> of the pages right below where jquery is loaded add the cookiewall.js script import tag.
+  Right below where jquery is loaded add the cookiewall.js script import tag.
 
   After that add the following below the cookiewall.js import.
     * When a page needs to be excluded from the cookiewall, don't run the initialize function.
 
-  <script>
-    cookieWall.initialize();
-  </script>
+  <script>cookieWall.initialize('/', 'aegon.nl', 'http://my/optional/custom/content/url');</script>
 
-  The initialize will check if the cookie exists and if not will render the cookiewall. A choice then needs
+  The initialize function parameters are:
+    * Cookie path
+    * Cookie domain
+    * Optional custom content URL that contains the JSON data for the cookiewall popup content.
+
+  The initialize function will check if the cookie exists and if not will render the cookiewall. A choice then needs
   to be made for basis ('S') or optimaal ('E').
 
   Depending on what choice has been made scripts can be loaded or not. The cookiewall can
@@ -31,15 +34,15 @@ var cookieWall = {};
 
   'use strict';
   // When retrieving the cookie and it exist, store the value.
-  var cookieValue;
-  var whitelisted = true;
-
-  var path;
-  var domain;
-
-  var COOKIE_NAME = 'AEGON.Cookie.OptIn',
+  var cookieValue,
+    whitelisted = true,
+    path,
+    domain,
+    customCookieContentURL,
+    COOKIE_NAME = 'AEGON.Cookie.OptIn',
     COOKIE_VALUE_STANDARD = 'S',
-    COOKIE_VALUE_EXTENDED = 'E';
+    COOKIE_VALUE_EXTENDED = 'E',
+    DEFAULT_COOKIE_CONTENT_URL = '/lpa/cookie/cookie/cookietext.json';
 
 
   /* Cookie helper functions */
@@ -105,7 +108,7 @@ var cookieWall = {};
       type: 'GET',
       dataType: 'text',
       global: false,
-      url: '/lpa/cookie/cookie/cookietext.json',
+      url: customCookieContentURL || DEFAULT_COOKIE_CONTENT_URL,
       success: function (response) {
         response = JSON.parse(response);
         if (response.cookietext) {
@@ -187,9 +190,10 @@ var cookieWall = {};
    Run the initialize function prior to scripts that need to be included conditionally. Make sure Jquery is available.
    <script>cookieWall.initialize('/', 'aegon.nl')<script>
    */
-  function initialize(_path, _domain, elmToShow) {
+  function initialize(_path, _domain, _customCookieContentURL, pageToShow) {
     path = _path;
     domain = _domain;
+    customCookieContentURL = _customCookieContentURL;
 
     whitelisted = false;
     cookieValue = getCookie(COOKIE_NAME);
@@ -207,8 +211,8 @@ var cookieWall = {};
     }
     $("head").append(styleElm);
 
-    if (elmToShow && cookieValue) {
-      showCookieWall(name);
+    if (pageToShow && cookieValue) {
+      showCookieWall(pageToShow);
     }
   }
   cookieWall.initialize = initialize;

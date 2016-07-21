@@ -12,6 +12,7 @@
   Drupal.aegonModal = function(action, options, callback) {
     var modal,
     defaults = {
+      id: 'aegon-modal', // @string: unique id.
       title: '', // @string: title text, no HTML
       body: '', // @string: HTML for the body
       close: true, // @boolean: Add close button
@@ -102,6 +103,7 @@
          */
         if(action !== 'update') {
           var modalEle = document.createElement('DIV');
+          modalEle.id = settings.id;
           modalEle.className = 'aegon-modal visible';
           modalEle.innerHTML = modalInner;
           // add inline width css
