@@ -208,22 +208,9 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
   ) {}
 
   /*
-   * Function that runs first and sends
-   * the view form tealium variable
+   * Function that runs first
    */
-  ngOnInit():void {
-    let formView = {
-      page_cat_4_productgroup: 'hypotheek',
-      page_cat_5_product: 'hypotheek-rente',
-      product_name: ['hypotheek-rente'],
-      product_category: ['hypotheek'],
-      form_name: 'qq-rente_wijzigen',
-      step_name: 'qq-berekening-view',
-      page_step:'01',
-      event: 'qq_view'
-    };
-    this.tealium(formView);
-  }
+  ngOnInit():void {}
 
   /*
    * Initial tealium event 
@@ -235,19 +222,17 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
     if (!this.initiated && this.mortgageType > 0) {
       let formInit = {
         page_cat_4_productgroup: 'hypotheek',
-        page_cat_5_product: 'hypotheek-' + this.mortgageName,
-        product_name: ['hypotheek-' + this.mortgageName],
         product_category: ['hypotheek'],
         form_name: 'qq-rente_wijzigen',
-        step_name: 'qq-berekening - start',
+        step_name: 'qq-berekening-start',
         page_step:'02',
-        event: 'qq_started',
-        hypotheekvorm: this.mortgageName
+        event: 'qq_started'
       };
       this.tealium(formInit);
 
       this.initiated = true;
     }
+
     this.validate();
   }
   /*
@@ -320,7 +305,7 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
 
       /* 4. Total cash value (Totale contante waarde) */
       // 4.1. Define Interest rate contract per month.
-      let oldMonthlyIntRate = this.roundToDeg((this.oldIntRate / 12), 4);
+      let oldMonthlyIntRate = this.oldIntRate / 12;
 
       // 4.2. Define interest rate market per month
       let d = new Date();
@@ -347,6 +332,7 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
 
       // 4.3. Define interest for 1 period based on contract interest.
       let oldPeriodIntst = ((oldMonthlyIntRate * basisFee) / 100).toFixed(2);
+
       /* Service that retrieves the interest rate
        * corresponding to the amount of this.periodsLeft
        */
@@ -361,6 +347,7 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
           // Market monthly interest rate.
           newMonthlyIntRate = this.newIntRate / 12;
 
+
           // 4.4. Define interest for 1 period based on market interest.
           let newPeriodIntst = ((newMonthlyIntRate * basisFee) / 100).toFixed(2);
 
@@ -368,11 +355,10 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
           let periodIntstDiff = +(oldPeriodIntst) - +(newPeriodIntst);
           periodIntstDiff = +(periodIntstDiff.toFixed(2));
 
-
           // Loop through periods.
           for (let i = periodStart; i < this.periodsLeft + 1; i++) {
             let cw = periodIntstDiff / (Math.pow((1 + (newMonthlyIntRate / 100)), (+i - periodStart + 1)));
-            cw = +(cw.toFixed(2));
+
             tcw = tcw + cw;
           }
           // Set the value of total fee.
@@ -399,7 +385,7 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
           this.calculated = true;        
         }
 
-        // Check in case users calculate again.
+        // Calculation finished.
         if (!this.finalized) {
           let formComplete = {
             page_cat_4_productgroup: 'hypotheek',
@@ -409,7 +395,8 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
             form_name: 'qq-rente_wijzigen',
             step_name: 'qq-bevestiging',
             page_step: '03',
-            event: 'qq_completed'
+            event: 'qq_completed',
+            hypotheekvorm: this.mortgageName
           };
           this.tealium(formComplete);
 

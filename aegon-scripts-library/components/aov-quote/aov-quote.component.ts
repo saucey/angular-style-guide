@@ -151,7 +151,7 @@ export class AovQuoteComponent implements OnInit {
   constructor(
     private http:Http
   ) {}
-  
+
   ngOnInit() {}
 
 }
