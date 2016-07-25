@@ -78,10 +78,10 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
           </aegon-help>
         </div>
         <div class="inputs">
-          <aegon-input-radio [name]="boe">Ja</aegon-input-radio>
-          <aegon-input-radio [name]="oeb">Nee</aegon-input-radio>
-          <aegon-input-radio [name]="obe">OK</aegon-input-radio>
-          <aegon-input-radio [name]="beo">Argh</aegon-input-radio>
+          <aegon-input-radio [name]="option1">2 weken </aegon-input-radio>
+          <aegon-input-radio [name]="option2">1 maand</aegon-input-radio>
+          <aegon-input-radio [name]="option3">3 maanden</aegon-input-radio>
+          <aegon-input-radio [name]="option4">1 jaar</aegon-input-radio>
         </div>
       </div>
       <div class="field">
