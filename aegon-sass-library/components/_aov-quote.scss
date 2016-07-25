@@ -5,6 +5,21 @@
   .calculation {
     width:100%;
     padding:20px 0;
+    .inputs aegon-input-radio {
+      display:block;
+      text-align:left;
+      label.radio {
+        padding-left:35px;
+      }
+      label.radio > input[type="radio"] {
+        position:absolute;
+        top:0;
+        left:0;
+        &+ span.radio {
+          top:-9px;
+        }
+      }
+    }
   }
   h3 {
     margin-left:0;
