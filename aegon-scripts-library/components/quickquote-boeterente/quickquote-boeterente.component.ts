@@ -134,7 +134,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteBoet
           </div>
         </div>
       </div>
-      <div *ngIf="calculated">
+      <div>
         <div class="result">
           <div *ngIf="validIntst">
             <div class="bigger">
@@ -155,8 +155,8 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteBoet
             </div>
             <div class="small">
               <div class="row">
-                <div class="label"><p>Resterende rentevastperiode: <b>{{ periodsLeft }}</b> {{ periodsLeft > 1 ? 'maanden' : 'maand' }}<b></b></p>
-                <p>Vergelijkingsrente: {{ newIntRate }}% <aegon-help position="top">Het actuele rentepercentage dat geldt voor de periode van uw resterende rentevastperiode. U vindt de geldende percentages op onze pagina met actuele rentepercentages. </aegon-help></p>
+                <div class="label"><p>Op basis van:<br>Resterende rentevastperiode: <b>{{ periodsLeft }}</b> {{ periodsLeft > 1 ? 'maanden' : 'maand' }}<br>
+                  Vergelijkingsrente: {{ newIntRate }}% <aegon-help position="top">Het actuele rentepercentage dat geldt voor de periode van uw resterende rentevastperiode. U vindt de geldende percentages op onze pagina met actuele rentepercentages. </aegon-help></p>
                 </div>
                 <div class="label">
                   <a class="button orange icon-right arrow" [attr.href]="'/zakelijk/inkomensverzekeringen/arbeidsongeschiktheidsverzekering/arbeidsongeschiktheidsverzekering-berekenen?AO1_VERZSOM=' + grossTotalCosts">Bekijk de adviesmogelijkheden</a>
@@ -372,7 +372,7 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
           // Set the value of total fee.
           if (((this.initialAmount - repymnt) > penaltyFree)) {
             this.totalFee = (((this.initialAmount - repymnt) - penaltyFree) * tcw) / basisFee;
-            this.monthlyFee = this.totalFee / 12;
+            this.monthlyFee = this.totalFee / this.periodsLeft;
           }
           else {
             this.totalFee = 0;
