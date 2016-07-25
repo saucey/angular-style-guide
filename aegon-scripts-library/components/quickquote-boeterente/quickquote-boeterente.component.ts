@@ -139,10 +139,17 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteBoet
           <div *ngIf="validIntst">
             <div class="bigger">
               <div class="row">
-                <span class="label">Indicatie omzettingskosten</span>
+                <span class="label">Indicatie huidige resterende rente</span>
                 <span class="value">
                   <span class="curr">€</span>
                   <span class="amount">{{totalFee | money}}*</span>
+                </span>
+              </div>
+              <div class="row">
+                <span class="label">Indicatie huidige rente per maand</span>
+                <span class="value">
+                  <span class="curr">€</span>
+                  <span class="amount">{{monthlyFee | money}} <small>bruto</small></span>
                 </span>
               </div>
             </div>
@@ -188,6 +195,7 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
   oldIntRate: number = 0;
   nhg: boolean;
   totalFee: number = 0;
+  monthlyFee: number = 0;
   periodsLeft: number;
   newIntRate: number;
   isReady: boolean = false;
@@ -364,6 +372,7 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
           // Set the value of total fee.
           if (((this.initialAmount - repymnt) > penaltyFree)) {
             this.totalFee = (((this.initialAmount - repymnt) - penaltyFree) * tcw) / basisFee;
+            this.monthlyFee = this.totalFee / 12;
           }
           else {
             this.totalFee = 0;
