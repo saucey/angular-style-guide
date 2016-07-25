@@ -227,19 +227,33 @@
     }
     &.messages--error {
       .icon {
-        .path1:before {
-          content: "\e62e";
-          color: $white;
-        }
-        .path2:before {
-          margin-left: -1.1826171875em;
+        width: 37px;
+        border-bottom: 29px solid $white;
+        border-left: 18px solid transparent;
+        border-right: 18px solid transparent;
+        border-radius: 3px;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        -ms-border-radius: 3px;
+        &:after {
+          display: inline-block;
           content: "\e634";
           color: $red;
+          font-family: $font_icons;
+          min-width: 1.5em;
+          padding-right: 8px;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
         }
-        .path3:before {
-          margin-left: -1.185em;
+        &:before {
           content: "\e635";
           color: $red;
+          z-index: 1;
+        }
+        &:after, &:before {
+          position: absolute;
+          top: 1px;
+          left: -17px;
         }
       }
     }
