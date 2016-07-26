@@ -88,53 +88,39 @@
       }
     }
   }
-  li.value {
-    @media screen and(min-width: $rc-m-min-width) and(max-width: $rc-l-max-width) {
-      height: $elements_height;
-    }
-    span {
-      &.content,
-      &.help {
-        display: inline-block;
-        float: none;
+  li{
+    &.value {
+      @media screen and(min-width: $rc-m-min-width) and(max-width: $rc-l-max-width) {
+        height: $elements_height;
       }
-      &.content {
-        width: 228px;
-      }
-      &.help {
-        margin-left: 10px;
-        padding: 0;
-
-        &:before {
-          line-height: $elements_height;
-
-          position: static;
-
-          display: inline-block;
+      span {
+        &.content {
+          width: 228px;
+          max-width: 85%;
         }
       }
     }
-  }
-  li.label {
-    min-height: 0;
-    @media screen and(min-width: $rc-m-min-width) and(max-width: $rc-l-max-width) {
-      height: inherit; //$elements_height;
+    &.label {
+      min-height: 0;
+      @media screen and(min-width: $rc-m-min-width) and(max-width: $rc-l-max-width) {
+        height: inherit; //$elements_height;
+      }
+      &:after {
+        content: ':';
+      }
     }
-    &:after {
-      content: ':';
+    &.invalid {
+      position: relative;
+      input ~ .errorText,
+      select ~ .errorText {
+        position: absolute;
+        top: auto;
+        bottom: 100%;
+      }
     }
-  }
-  li.invalid {
-    position: relative;
-    input ~ .errorText,
-    select ~ .errorText {
-      position: absolute;
-      top: auto;
-      bottom: 100%;
+    &.left {
+      float: left;
     }
-  }
-  label.left {
-    float: left;
   }
   input[type=text],
   input[type=email],
@@ -495,7 +481,7 @@ ul.horizontal {
     display: table-cell;
     vertical-align: middle;
     &.label {
-      font-family: $font_medium;
+      font-family: $font_normal;
     }
     &.value {
       font-family: $font_light;
