@@ -1,161 +1,154 @@
 .communication_preferences {
-
   dl.table.row-fluid {
-
     > dt {
       position: relative;
       display: block;
       min-width: 100%;
-
       font-family: $font_normal;
-      @include rem('padding-right', 22);
-    }
 
+      @include rem("padding-right", 22);
+    }
     > dd {
       display: block;
       margin-left: 0;
     }
   }
-
   span.icon-questionmark {
-    user-select: none;
     cursor: default;
-    font-family: $font_icons;
-    @include rem('font-size', 16);
+    user-select: none;
     color: $dark_blue;
-  }
+    font-family: $font_icons;
 
+    @include rem("font-size", 16);
+  }
   span[tooltip] {
-    display: block;
     position: absolute;
     top: 0;
     right: 0;
-
-    @include rem('width', 20);
+    display: block;
     text-align: center;
 
+    @include rem("width", 20);
     &:before {
-      visibility: hidden;
-      opacity: 0;
-
       position: absolute;
-      @include rem('top', 15);
-      left: 0%;
-
+      left: 0;
       display: block;
+      visibility: hidden;
       width: 0;
       height: 0;
-
-      content: '';
+      content: "";
+      transition: 0.1s all 0.3s;
+      opacity: 0;
       border-style: solid;
-      @include rem('border-width', 10);
       border-color: transparent transparent $slightly_lighter_blue transparent;
 
-      transition: .1s all .3s;
+      @include rem("top", 15);
+      @include rem("border-width", 10);
     }
-
     &:after {
-      visibility: hidden;
-      opacity: 0;
-
       position: absolute;
-      @include rem('top', 15+18px);
-      @include rem('right', -10);
-
-      font-family: $font_light;
-      content: attr(tooltip);
-
-      font-size: $small;
-      color: $black;
-      text-align: left;
-      @include rem('padding', 12);
-
-      display: block;
-      width: 300px;
-
       z-index: 5;
+      display: block;
+      visibility: hidden;
+      width: 300px;
+      content: attr(tooltip);
+      transition: 0.1s all 0.3s;
+      text-align: left;
+      opacity: 0;
+      color: $black;
       background-color: $slightly_lighter_blue;
-      @include rem('border-radius', $frame_border_radius);
+      font-family: $font_light;
+      font-size: $small;
 
-      transition: .1s all .3s;
+      @include rem("padding", 12);
+      @include rem("right", -10);
+      @include rem("top", 15+18px);
+      @include rem("border-radius", $frame_border_radius);
     }
-
     &:hover:before,
     &:hover:after {
       visibility: visible;
+      transition: 0.1s all 0s;
       opacity: 1;
-      transition: .1s all 0s;
     }
   }
-
   label {
-    &.checkbox{
+    &.checkbox {
       display: block;
-      line-height: 25px;
       padding-left: 17px;
-      > input[type="checkbox"] + span.checkbox {
-        width: 25px;
-        height: 25px;
-        &:before {
-          top: 0;
-          left: -4px;
-          font-size: 16px;
+      line-height: 25px;
+      > input[type="checkbox"] {
+        & + span.checkbox,
+        & ~ span.checkbox {
+          width: 25px;
+          height: 25px;
+          &:before {
+            top: 0;
+            left: -4px;
+            font-size: 16px;
+          }
         }
       }
     }
-
-    &.radio, &.checkbox{
+    &.radio,
+    &.checkbox {
       @include rem("margin-bottom", 5);
     }
     &.radio {
-      line-height: 24px;
       margin-top: 8px;
       padding-left: 15px;
-      > input[type="radio"] + span.radio {
-        width: 24px;
-        height: 24px;
-        top: 0;
-        &:before {
-          top: 4px;
-          left: -2px;
-          font-size: 24px;
+      line-height: 24px;
+      > input[type="radio"] {
+        & + span.radio,
+        & ~ span.radio {
+          top: 0;
+          width: 24px;
+          height: 24px;
+          &:before {
+            top: 4px;
+            left: -2px;
+            font-size: 24px;
+          }
         }
       }
     }
   }
   button.edit.transparent {
-    line-height: inherit;
     float: none;
     margin: 0;
     padding: 0;
+    line-height: inherit;
   }
-  ul.horizontal.visible{
-    li{
-      > ul.horizontal > li.span12{
-         margin-left: 0;
-        @include rem(padding-left, 40); 
+  ul.horizontal.visible {
+    li {
+      > ul.horizontal > li.span12 {
+        margin-left: 0;
+
+        @include rem(padding-left, 40);
       }
     }
   }
   // the following should be global. Placing it here for now.
-  input.checkbox, label.radio{
-    &.disabled{
-        color: #D9D9D9;
-        span.radio{
-          cursor: not-allowed;
-          opacity: 0.6;
-        }
+  input.checkbox,
+  label.radio {
+    &.disabled {
+      color: #d9d9d9;
+      span.radio {
+        cursor: not-allowed;
+        opacity: 0.6;
+      }
     }
   }
-  input{
-    &:disabled, &[disabled]{
-      &[type=checkbox]{
-        ~ .checkbox{
+  input {
+    &:disabled,
+    &[disabled] {
+      &[type=checkbox] {
+        & ~ .checkbox {
           cursor: not-allowed;
         }
       }
-      &[type=radio]{
-        ~ .radio{
+      &[type=radio] {
+        & ~ .radio {
           cursor: not-allowed;
         }
       }
@@ -169,38 +162,31 @@
 // --------------------------------------------------
 
 @include breakpoint($brk-tablet) {
-
   .communication_preferences {
-
     dl.table.row-fluid {
-
       > dt, > dd {
         display: table-cell;
         min-width: inherit;
-
         &.top span[tooltip] {
           top: 0;
           margin-top: 0;
         }
       }
-
       > dd {
-        @include rem('padding-left', 16);
+        @include rem("padding-left", 16);
       }
     }
-
     span[tooltip] {
       top: 50%;
-      @include rem('margin-top', -12.5px);
 
+      @include rem("margin-top", -12.5px);
       &:before {
         top: 15px;
-        left: 0%;
+        left: 0;
       }
-
       &:after {
-        left: -150px;
         top: 15+18px;
+        left: -150px;
       }
     }
   }
@@ -211,18 +197,17 @@
   .communication_preferences {
     &.container_12 {
       h3 {
-        color: #000000;
-        @include rem('font-size', 20);
-      }      
+        color: #000;
+
+        @include rem("font-size", 20);
+      }
       .horizontal.row-fluid {
         .label.span3 {
           width: 85%;
         }
-
         .span1 {
           width: 15%;
         }
-
         .value.span8 {
           width: 100%;
         }
