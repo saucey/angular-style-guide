@@ -25,7 +25,7 @@ label.radio {
         color: $blue;
       }
     }
-    & + span.radio, 
+    & + span.radio,
     & ~ span.radio {
       position: absolute;
       top: -$elements_radio_top;
