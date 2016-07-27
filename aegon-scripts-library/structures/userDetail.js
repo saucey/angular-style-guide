@@ -100,9 +100,7 @@
     attached: false,
 
     setup: function (settings) {
-      // Make sure the button is always shown, later on we will check against login status
-      $('.login-link-wrapper').css('display', 'block');
-      
+    
       // Check if current website is backend
       if (window.location.hostname.search('.aegon.com') !== -1) {
         return;
