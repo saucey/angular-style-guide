@@ -187,6 +187,11 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteBoet
                 <p>U heeft het resterende rentebedrag uitgerekend voor uw huidige rentevastperiode. Door uw nieuwe rentevastperiode in te voeren bepaalt u of het voor uw situatie voordelig kan zijn om de hypotheek aan te passen. Bekijk aan de hand van onderstaande mogelijkheden wat het beste bij u past. Log in bij Mijn Aegon om uw definitieve berekening te doen en te downloaden als PDF.</p>
               </div>
             </div>
+            <div class="cta-wrapper">
+              <div class="row">
+                <a href="/mijnaegon/" class="button green icon-right icon-lock">Log in bij Mijn Aegon</a>
+              </div>
+            </div>
           </div>
           <div *ngIf="!validIntst" class="not-possible">
             <h4>Berekening niet mogelijk</h4>

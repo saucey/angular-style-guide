@@ -135,6 +135,14 @@ button,
       background-size: 70%;
       color: transparent;
     }
+    &.icon-lock {
+      &:after {
+        content: $font_icons_lock;
+      }
+      &.green:after {
+        background-color: $lighter_green;
+      }
+    }
   }
   &.white,
   &.transparent {
