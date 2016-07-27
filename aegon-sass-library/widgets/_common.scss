@@ -1,8 +1,10 @@
 .personal_details_widget,
 .communication_preferences,
 .lhfs_widget {
-  border-top: 1px solid #aaa;
-
+  h3 {
+    font-weight: normal;
+    @include rem('font-size', 24);
+  }
   @include rem("padding", 30, 0, 40, 0);
   .tip,
   .error,
@@ -26,6 +28,15 @@
   ul.actions {
     margin-bottom: 0;
   }
+  label {
+    font-weight: normal;
+    &.checkbox {
+      > input[type="checkbox"] + span.checkbox,
+      > input[type="checkbox"] + a.checkbox {
+        top: 0;
+      }
+    }
+  }
   li.invalid,
   label.invalid {
     position: relative;
@@ -37,12 +48,57 @@
       left: 0;
     }
   }
+  li{
+    &.value {
+      &.on:before, &.off:before {
+        font-family: $font_icons;
+        margin-right: 15px;
+      }
+      &.on {
+        &:before {
+          content: $font_icons_check;
+          color: $blue;
+        }
+      }
+      &.off {
+        &:before {
+          content: $font_icons_minus;
+          color: #ccc;
+        }
+      }
+    }
+    span {
+      &.content,
+      &.help {
+        display: inline-block;
+        float: none;
+      }
+      &.help {
+        margin-left: 10px;
+        padding: 0;
+
+        &:before {
+          //line-height: $elements_height;
+
+          position: static;
+
+          display: inline-block;
+        }
+      }
+    }
+  }
   .disclaimer-text {
     margin-top: -15px;
     margin-bottom: 40px;
   }
   :-ms-input-placeholder {
     color: $darker_grey;
+  }
+
+  &.container_12 {
+    .row-fluid .span12 {
+      margin-left: 0;
+    }
   }
 }
 // fix for mijn betalingen
