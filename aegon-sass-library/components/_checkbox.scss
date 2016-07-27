@@ -13,7 +13,9 @@ label.checkbox {
     opacity: 0;
     //display: none;
     &:checked + span.checkbox,
-    &:checked + a.checkbox {
+    &:checked + a.checkbox,
+    &:checked ~ span.checkbox,
+    &:checked ~ a.checkbox {
       //background: url(../assets/images/icons/btn-checkbox.png) center 100% no-repeat;
       background-color: $beige;
       &:before {
@@ -28,7 +30,9 @@ label.checkbox {
       }
     }
     & + span.checkbox,
-    & + a.checkbox {
+    & + a.checkbox,
+    & ~ span.checkbox,
+    & ~ a.checkbox {
       position: absolute;
       top: -$elements_checkbox_top;
       left: -3px;

@@ -93,15 +93,18 @@
       display: block;
       line-height: 25px;
       padding-left: 17px;
-      > input[type="checkbox"] + span.checkbox {
-        width: 25px;
-        height: 25px;
-        &:before {
-          top: 0;
-          left: -4px;
-          font-size: 16px;
+      > input[type="checkbox"] {
+        & + span.checkbox,
+        & ~ span.checkbox {
+          width: 25px;
+          height: 25px;
+          &:before {
+            top: 0;
+            left: -4px;
+            font-size: 16px;
+          }
         }
-      }
+      } 
     }
 
     &.radio, &.checkbox{
@@ -111,14 +114,17 @@
       line-height: 24px;
       margin-top: 8px;
       padding-left: 15px;
-      > input[type="radio"] + span.radio {
-        width: 24px;
-        height: 24px;
-        top: 0;
-        &:before {
-          top: 4px;
-          left: -2px;
-          font-size: 24px;
+      > input[type="radio"] { 
+        & + span.radio,
+        & ~ span.radio {
+          width: 24px;
+          height: 24px;
+          top: 0;
+          &:before {
+            top: 4px;
+            left: -2px;
+            font-size: 24px;
+          }
         }
       }
     }
@@ -150,12 +156,12 @@
   input{
     &:disabled, &[disabled]{
       &[type=checkbox]{
-        ~ .checkbox{
+        & ~ .checkbox{
           cursor: not-allowed;
         }
       }
       &[type=radio]{
-        ~ .radio{
+        & ~ .radio{
           cursor: not-allowed;
         }
       }
