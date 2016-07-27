@@ -11,12 +11,10 @@ label.checkbox {
     top: $elements_checkbox_top;
     left: 5px;
     opacity: 0;
-    //display: none;
     &:checked + span.checkbox,
     &:checked + a.checkbox,
     &:checked ~ span.checkbox,
     &:checked ~ a.checkbox {
-      //background: url(../assets/images/icons/btn-checkbox.png) center 100% no-repeat;
       background-color: $beige;
       &:before {
         position: relative;
@@ -26,7 +24,6 @@ label.checkbox {
         content: $font_icons_check;
         text-align: right;
         color: $blue;
-        //top: 3px;
       }
     }
     & + span.checkbox,
@@ -40,7 +37,6 @@ label.checkbox {
       width: $elements_checkbox_height;
       height: $elements_checkbox_height;
       cursor: pointer;
-      //background: url(../assets/images/icons/btn-checkbox.png) center 0 no-repeat;
       border: $elements_border;
       border-radius: $elements_border_radius;
       background-color: $beige;
