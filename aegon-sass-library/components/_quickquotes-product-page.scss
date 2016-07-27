@@ -167,6 +167,21 @@
       }
     }
   }
+  //QUOTE AOV TOOL ( NOT QUICKQUOTE )
+  .aov-quote.angular.quickquote {
+    .calculation .field {
+      .label {
+        //width:63%;
+      }
+      .inputs {
+        //width:37%;
+      }
+      .slider-container {
+        width:100%;
+      }
+    }
+  }
+
 }
 
 @include breakpoint($brk-mobile) {
@@ -255,6 +270,18 @@
       .field {
         .inputs {
           width:100%;
+        }
+      }
+    }
+    //QUOTE AOV TOOL ( NOT QUICKQUOTE )
+    .quickquote.aov-quote {
+      .field {
+        .label {
+          width:100%;
+        }
+        .inputs {
+          width:100%;
+          min-width:193px;
         }
       }
     }
