@@ -8,6 +8,7 @@ import {InputDateComponent, InputDateValueAccessor} from '../angular-components/
 import {CheckboxComponent, CheckboxValueAccessor} from '../angular-components/checkbox.component';
 import {MoneyPipe} from "../angular-components/money.pipe";
 import {SoloSliderComponent, SoloSliderValueAccessor} from "../angular-components/solo-slider.component";
+import {InputRadioComponent, InputRadioValueAccessor} from '../angular-components/input-radio.component';
 
 var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTemplate'));
 
@@ -15,7 +16,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
   selector: 'aegon-aov-quote',
   directives: [
     HelpComponent, InputNumberComponent, InputNumberValueAccessor, InputDateComponent, InputDateValueAccessor,
-    CheckboxComponent, CheckboxValueAccessor, SoloSliderComponent, SoloSliderValueAccessor
+    CheckboxComponent, CheckboxValueAccessor, SoloSliderComponent, SoloSliderValueAccessor, InputRadioComponent, InputRadioValueAccessor
   ],
   template: templateElem ? templateElem.value : `
   <div class="quickquote angular aov-quote">
@@ -77,10 +78,10 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
           </aegon-help>
         </div>
         <div class="inputs">
-          <aegon-checkbox>2 weken</aegon-checkbox>
-          <aegon-checkbox>1 maand</aegon-checkbox>
-          <aegon-checkbox>3 maanden</aegon-checkbox>
-          <aegon-checkbox>1 jaar</aegon-checkbox>
+          <aegon-input-radio [name]="option">2 weken </aegon-input-radio>
+          <aegon-input-radio [name]="option">1 maand</aegon-input-radio>
+          <aegon-input-radio [name]="option">3 maanden</aegon-input-radio>
+          <aegon-input-radio [name]="option">1 jaar</aegon-input-radio>
         </div>
       </div>
       <div class="field">

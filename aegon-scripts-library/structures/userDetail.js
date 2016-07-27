@@ -100,10 +100,7 @@
     attached: false,
 
     setup: function (settings) {
-
-      // Make sure the button is always shown, later on we will check against login status
-      $('.login-link-wrapper').css('display', 'block');
-
+      
       // Check if current website is backend
       if (window.location.hostname.search('.aegon.com') !== -1) {
         return;
@@ -123,6 +120,9 @@
       }
       else {
         if (!this.lastLogin()) {
+          // Make sure the button is always shown, later on we will check against login status
+          $('.login-link-wrapper').css('display', 'block');
+          
           return;
         }
         this.apiUrl = realEndpoint;
@@ -288,8 +288,8 @@
         this.events();
       }
       else {
-        $(".login-link").addClass("visible");
-
+        // If not loggedIn, show login button
+        $(".login-link-wrapper").css('display', 'block');
       }
     },
 
