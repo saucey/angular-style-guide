@@ -42,8 +42,8 @@
       border-style: solid;
       border-color: transparent transparent $slightly_lighter_blue transparent;
 
-      @include rem("border-width", 10);
       @include rem("top", 15);
+      @include rem("border-width", 10);
     }
     &:after {
       position: absolute;
@@ -60,10 +60,10 @@
       font-family: $font_light;
       font-size: $small;
 
-      @include rem("border-radius", $frame_border_radius);
-      @include rem("top", 15+18px);
-      @include rem("right", -10);
       @include rem("padding", 12);
+      @include rem("right", -10);
+      @include rem("top", 15+18px);
+      @include rem("border-radius", $frame_border_radius);
     }
     &:hover:before,
     &:hover:after {
