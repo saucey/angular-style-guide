@@ -90,14 +90,13 @@
   .result {
     overflow: visible;
     .bigger {
+      margin-bottom: 25px;
       .label {
         font-family: $font_normal;
         font-size: 24px;
         vertical-align: bottom;
-        margin-bottom: 25px;
       }
       .value {
-        margin-bottom: 25px;
         > * {
           font-size: 36px;
         }

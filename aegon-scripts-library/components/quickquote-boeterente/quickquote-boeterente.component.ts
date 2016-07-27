@@ -145,22 +145,46 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteBoet
                   <span class="amount">{{totalFee | money}}*</span>
                 </span>
               </div>
+            </div>
+            <div class="bigger">
               <div class="row">
                 <span class="label">Indicatie huidige rente per maand</span>
                 <span class="value">
                   <span class="curr">€</span>
                   <span class="amount">{{monthlyFee | money}} <small>bruto</small></span>
                 </span>
+                <div class="small">
+                  <div class="row">
+                    <div class="label"><p>Op basis van:<br>Resterende rentevastperiode: <b>{{ periodsLeft }}</b> {{ periodsLeft > 1 ? 'maanden' : 'maand' }}<br>
+                      Vergelijkingsrente: {{ newIntRate }}% <aegon-help position="top">Het actuele rentepercentage dat geldt voor de periode van uw resterende rentevastperiode. U vindt de geldende percentages op onze pagina met actuele rentepercentages. </aegon-help></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="bigger">
+              <div class="row">
+                <span class="label">Indicatie huidige resterende rente</span>
+                <span class="value">
+                  <span class="curr">€</span>
+                  <span class="amount">{{totalFee | money}}  <small>bruto</small></span>
+                </span>
+                <div class="small">
+                  <div class="row">
+                    <div class="label"><p>Op basis van:<br>Nieuwe rentevastperiode met rente: {{ newIntRate }}%</p>
+                    </div>
+                    <div class="label">
+                      <select [(ngModel)]="mortgageType" class="no-dd" [class.error]="mortgageTypeErr" (change)="init($event.target.value);">
+                        <option *ngFor="#m of mortgageOps; #i = index" [value]="i">{{m}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="small">
               <div class="row">
-                <div class="label"><p>Op basis van:<br>Resterende rentevastperiode: <b>{{ periodsLeft }}</b> {{ periodsLeft > 1 ? 'maanden' : 'maand' }}<br>
-                  Vergelijkingsrente: {{ newIntRate }}% <aegon-help position="top">Het actuele rentepercentage dat geldt voor de periode van uw resterende rentevastperiode. U vindt de geldende percentages op onze pagina met actuele rentepercentages. </aegon-help></p>
-                </div>
-                <div class="label">
-                  <a class="button orange icon-right arrow" [attr.href]="'/zakelijk/inkomensverzekeringen/arbeidsongeschiktheidsverzekering/arbeidsongeschiktheidsverzekering-berekenen?AO1_VERZSOM=' + grossTotalCosts">Bekijk de adviesmogelijkheden</a>
-                </div>
+                <p>U heeft het resterende rentebedrag uitgerekend voor uw huidige rentevastperiode. Door uw nieuwe rentevastperiode in te voeren bepaalt u of het voor uw situatie voordelig kan zijn om de hypotheek aan te passen. Bekijk aan de hand van onderstaande mogelijkheden wat het beste bij u past. Log in bij Mijn Aegon om uw definitieve berekening te doen en te downloaden als PDF.</p>
               </div>
             </div>
           </div>
