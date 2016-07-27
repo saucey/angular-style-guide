@@ -31,10 +31,14 @@
   label {
     font-weight: normal;
     &.checkbox {
-      > input[type="checkbox"] + span.checkbox,
-      > input[type="checkbox"] + a.checkbox {
-        top: 0;
-      }
+      > input[type="checkbox"] {
+        & + span.checkbox,
+        & + a.checkbox,
+        & ~ span.checkbox,
+        & ~ a.checkbox {
+          top: 0;
+        }
+      } 
     }
   }
   li.invalid,
@@ -134,7 +138,9 @@
     label.checkbox {
       > input[type="checkbox"] {
         & + span.checkbox,
-        & + a.checkbox {
+        & + a.checkbox,
+        & ~ span.checkbox,
+        & ~ a.checkbox {
           left: 0; // fix for alignment in mobile view
         }
       }
@@ -149,9 +155,12 @@
       &.checkbox {
         margin-top: 0;
         padding-top: 18px;
-        > input[type="checkbox"] + span.checkbox {
-          top: 18px;
-        }
+        > input[type="checkbox"] {
+          & + span.checkbox,
+          & ~ span.checkbox {
+            top: 18px;
+          }
+        } 
       }
     }
   }
