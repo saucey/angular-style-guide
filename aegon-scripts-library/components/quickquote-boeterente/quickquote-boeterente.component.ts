@@ -162,6 +162,36 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteBoet
                 </div>
               </div>
             </div>
+            <div class="bigger">
+              <div class="row">
+                <span class="label">Indicatie nieuwe rente per maand</span>
+                <span class="value">
+                  <span class="curr">€</span>
+                  <span class="amount">{{totalFee | money}}  <small>bruto</small></span>
+                </span>
+                <div class="small">
+                  <div class="row">
+                    <div class="label"><p>Op basis van:<br>Nieuwe rentevastperiode met rente: {{ newIntRate }}%</p>
+                    </div>
+                    <div class="label">
+                      <select [(ngModel)]="mortgageType" class="no-dd" [class.error]="mortgageTypeErr" (change)="init($event.target.value);">
+                        <option *ngFor="#m of mortgageOps; #i = index" [value]="i">{{m}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="small">
+              <div class="row">
+                <p>U heeft het resterende rentebedrag uitgerekend voor uw huidige rentevastperiode. Door uw nieuwe rentevastperiode in te voeren bepaalt u of het voor uw situatie voordelig kan zijn om de hypotheek aan te passen. Bekijk aan de hand van onderstaande mogelijkheden wat het beste bij u past. Log in bij Mijn Aegon om uw definitieve berekening te doen en te downloaden als PDF.</p>
+              </div>
+            </div>
+            <div class="cta-wrapper">
+              <div class="row text-right">
+                <a href="/mijnaegon/" class="button green icon-right icon-lock">Log in bij Mijn Aegon</a>
+              </div>
+            </div>
           </div>
           <div *ngIf="!validIntst" class="not-possible">
             <h4>Berekening niet mogelijk</h4>
