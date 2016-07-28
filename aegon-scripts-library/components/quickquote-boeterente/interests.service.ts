@@ -52,7 +52,6 @@ export class InterestsService {
 	 * Process the data retrieved from back-end
 	 */
 	private processData(res: Object): number {
-		console.log(res);
 		let table: Array<any> = [],
 			intsTable: Object = {},
 			months: number = this.inputData.months,
