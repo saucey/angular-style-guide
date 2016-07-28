@@ -254,7 +254,7 @@
           position: absolute;
           top: 1px;
           left: -17px;
-          @include rem('line-height', 29);
+          line-height: 29px;
         }
       }
     }

@@ -211,6 +211,7 @@ export class InterestsService {
 						"Rente bij meer dan 81% van de marktwaarde": "3,70%"
 					}
 				],
+				"Table ID": "hypotheek-met-nhg",
 				"Table footer": "<p>De rentepercentages gelden per 2 maart 2016 en zijn onder voorbehoud van typefouten</p>\n"
 			},
 			{
@@ -260,6 +261,7 @@ export class InterestsService {
 						"Rente bij meer dan 81% van de marktwaarde": "3,70%"
 					}
 				],
+				"Table ID": "hypotheek-zonder-nhg",
 				"Table footer": "<p><span style=\"line-height: 20.8px;\">De rentepercentages gelden per 2 maart 2016 en zijn onder voorbehoud van typefouten.</span></p>\n"
 			},
 			{

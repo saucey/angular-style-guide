@@ -1,4 +1,21 @@
 .quickquote.angular.boeterente {
+  input[type=text],
+  input[type=number],
+  select {
+    max-width: 100%;
+    text-transform: none;
+  }
+  select {
+    padding: 9px 20px 9px 10px;
+    -webkit-appearance: none;
+    -moz-appearance:    none;
+    -ms-appearance:     none;
+    appearance:         none;
+    background: #fff url($image_path + 'icons/select.png') no-repeat 95% center;
+  }
+  select::-ms-expand {
+    display: none;
+  }
   .messages.messages--alert {
     margin: 0 0 15px;
     border: none;
@@ -8,26 +25,11 @@
     }
   }
   .calculation {
-    input[type=text],
-    input[type=number],
-    select {
-      text-transform: none;
-    }
-    select {
-      padding: 9px 20px 9px 10px;
-      -webkit-appearance: none;
-      -moz-appearance:    none;
-      -ms-appearance:     none;
-      appearance:         none;
-      background: #fff url('../images/icons/select.png') no-repeat 95% center;
-    }
-    select::-ms-expand {
-      display: none;
-    }
     > div > .field:last-child {
       margin-bottom: 0;
     }
     .field {
+      margin-bottom: 15px;
       aegon-input-number, aegon-input-date, aegon-input-radio {
         display: inline-block;
         &.error {
@@ -42,7 +44,6 @@
           }
         }
       }
-      margin-bottom: 15px;
       label.radio {
         padding-left: 35px;
         > input[type="radio"] {
@@ -55,23 +56,34 @@
           }
         }
       } 
-      .button[disabled],
-      .button[disabled]:hover,
-      .button.disabled,
-      .button.disabled:hover {
-        opacity: 0.8;
-        cursor: not-allowed;
+      .button{
+        max-width: 100%;
+        [disabled],
+        .button[disabled]:hover,
+        .button.disabled,
+        .button.disabled:hover {
+          opacity: 0.8;
+          cursor: not-allowed;
+        }
       }
-      .input.date {
-        display: block;
-        float: left;
-        border: 1px solid $slightly_darker_grey;
-        border-radius: 3px;
-        background-color: $white;
-        input {
-          border: none;
-          &:last-child {
-            margin-right: 0;
+      .input{
+        &.date {
+          display: block;
+          float: left;
+          border: 1px solid $slightly_darker_grey;
+          border-radius: 3px;
+          background-color: $white;
+          input {
+            border: none;
+            &:last-child {
+              margin-right: 0;
+            }
+          }
+        }
+        &.number {
+          input[type=text] {
+            width: 100%;
+            max-width: 180px;
           }
         }
       }
@@ -87,41 +99,52 @@
       }
     }
   }
+  .field .label {
+    max-width: 100%;
+    padding-right: 10px;
+  }
+  .label {
+    .help:not(.dialog) {
+      position: static;
+      display: inline-block;
+      float: none;
+      padding: 0;
+      margin-left: 10px;
+      &:before {
+        position: static;
+      }
+    }
+  }
   .result {
     overflow: visible;
     .bigger {
+      margin-bottom: 25px;
       .label {
         font-family: $font_normal;
         font-size: 24px;
         vertical-align: bottom;
-        margin-bottom: 25px;
       }
       .value {
-        margin-bottom: 25px;
         > * {
           font-size: 36px;
+        }
+        small {
+          font-size: 20px;
         }
       } 
     }
     .small {
       .label {
         vertical-align: top;
-        .help:not(.dialog) {
-          position: static;
-          display: inline-block;
-          float: none;
-          padding: 10px 1px;
-          &:before {
-            position: static;
-          }
+        p {
+          line-height: 26px;
         }
       }
     	p {
         color: $white;
-        line-height: 1;
+        line-height: 22px;
     		margin-bottom: 10px;
         .help.dialog {
-          line-height: 26px;
         }
     	}
     }
@@ -148,6 +171,7 @@
     color: #000;
   }
 }
+
 @include breakpoint($brk-tablet) {
   .quickquote.angular.boeterente {
     .messages.messages--alert {
@@ -170,23 +194,31 @@
       h3:before {
         left: 20px;
       }
+      .label {
+        width: 66%;
+      }
+      .inputs {
+        width: 33%;
+      }
       .field {
         padding-left: 30px;
       }
     }
     .result {
       .label {
-        width: 50%;
-        max-width: 350px;
+        width: 33%;
+        &:first-child {
+          width: 66%;
+        }
+        //max-width: 350px;
       }
       .bigger {
         .value {
-          padding-left: 10px;
+          width: 33%;
         } 
       }
       .small {
         .label:last-child {
-          padding-left: 10px;
         }
       }
     }

@@ -139,20 +139,26 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteBoet
           <div *ngIf="validIntst">
             <div class="bigger">
               <div class="row">
-                <span class="label">Indicatie omzettingskosten</span>
+                <span class="label">Indicatie huidige resterende rente</span>
                 <span class="value">
                   <span class="curr">€</span>
                   <span class="amount">{{totalFee | money}}*</span>
                 </span>
               </div>
             </div>
-            <div class="small">
+            <div class="bigger">
               <div class="row">
-                <div class="label"><p>Resterende rentevastperiode: <b>{{ periodsLeft }}</b> {{ periodsLeft > 1 ? 'maanden' : 'maand' }}<b></b></p>
-                <p>Vergelijkingsrente: {{ newIntRate }}% <aegon-help position="top">Het actuele rentepercentage dat geldt voor de periode van uw resterende rentevastperiode. U vindt de geldende percentages op onze pagina met actuele rentepercentages. </aegon-help></p>
-                </div>
-                <div class="label">
-                  <a class="button orange icon-right arrow" [attr.href]="'/zakelijk/inkomensverzekeringen/arbeidsongeschiktheidsverzekering/arbeidsongeschiktheidsverzekering-berekenen?AO1_VERZSOM=' + grossTotalCosts">Bekijk de adviesmogelijkheden</a>
+                <span class="label">Indicatie huidige rente per maand</span>
+                <span class="value">
+                  <span class="curr">€</span>
+                  <span class="amount">{{monthlyFee | money}} <small>bruto</small></span>
+                </span>
+                <div class="small">
+                  <div class="row">
+                    <div class="label"><p>Op basis van:<br>Resterende rentevastperiode: <b>{{ periodsLeft }}</b> {{ periodsLeft > 1 ? 'maanden' : 'maand' }}<br>
+                      Vergelijkingsrente: {{ newIntRate }}% <aegon-help position="top">Het actuele rentepercentage dat geldt voor de periode van uw resterende rentevastperiode. U vindt de geldende percentages op onze pagina met actuele rentepercentages. </aegon-help></p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -175,11 +181,12 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
   // Mortgage options:
   mortgageOps: Object[] = ['Maak uw keuze', 'Aflossingsvrij', 'Annuitair', '(Bank)Spaar', 'Lineair', 'Overig'];
   // Scope variable initiation.
+  // Used for tealium.
   initiated: boolean = false;
   finalized: boolean = false;
-  mortgageType: number = 0;
-  // Used for tealium.
   mortgageName: string;
+  // User entered data vars.
+  mortgageType: number = 0;
   initialAmount: number = 0;
   extraPymnt: boolean;
   pymntThisYear: number = 0;
@@ -187,12 +194,18 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
   interestPeriodEnd: string;
   oldIntRate: number = 0;
   nhg: boolean;
+  // Calculation variables.
   totalFee: number = 0;
+  monthlyFee: number = 0;
   periodsLeft: number;
   newIntRate: number;
   isReady: boolean = false;
+  // UI vars.
+  // Adds loading class to button.
   calculating: boolean = false;
+  // Shows result.
   calculated: boolean = false;
+  // Shows not valid interest message.
   validIntst: boolean = true;
   // Errors
   errorsHighlighted: boolean = false;
@@ -218,7 +231,7 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
   init(index: number): void {
     this.mortgageType = Number(index);
     this.mortgageName = String(this.mortgageOps[index]);
-
+    // Fired only once after the mortgage type is changed.
     if (!this.initiated && this.mortgageType > 0) {
       let formInit = {
         page_cat_4_productgroup: 'hypotheek',
@@ -317,7 +330,8 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
        * sets next month to January and adds 1 to the year.
        */
       let nextMonth = d.getMonth() !== 11 ? this.numberPadding((d.getMonth() + 2), 2) : '01',
-        year = d.getMonth() !== 11 ? d.getFullYear() : d.getFullYear() + 1;
+          year = d.getMonth() !== 11 ? d.getFullYear() : d.getFullYear() + 1;
+
       let startDate = year + '-' + nextMonth + '-' + '01';
       /* 4.6.Define periods to be calculated (!!Ingangsdatum leenlaag
        * is geen invoer )
@@ -364,6 +378,7 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
           // Set the value of total fee.
           if (((this.initialAmount - repymnt) > penaltyFree)) {
             this.totalFee = (((this.initialAmount - repymnt) - penaltyFree) * tcw) / basisFee;
+            this.monthlyFee = this.totalFee / this.periodsLeft;
           }
           else {
             this.totalFee = 0;
