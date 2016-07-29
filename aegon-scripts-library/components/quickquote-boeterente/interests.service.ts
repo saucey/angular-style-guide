@@ -110,21 +110,24 @@ export class InterestsService {
 					intsTable[key] = tempPerc[0];
 				}
 			}
-
+			// Variable interest rate
+			if(years === 0) {
+				interest = intsTable.hasOwnProperty('variabel') ? intsTable['variabel'] : 0;
+			}
+			else if(years > 0 && years < 2) {
+				interest = intsTable.hasOwnProperty('2') ? intsTable['2'] : 0;
+			}
 			/*
 			 * Special calculation for periods
 			 * from 2 up to 5 years.
 			 */
-			if( years >= 2 && years <= 5) {
+			else if( years >= 2 && years <= 5) {
 				let twoYearsInts = intsTable.hasOwnProperty('2') ? intsTable['2'] : 0,
 					fiveYearsInts = intsTable.hasOwnProperty('5') ? intsTable['5'] : 0,
 					period = months - 24;
 
 				interest = +((twoYearsInts + ((period / 36) * (fiveYearsInts - twoYearsInts))).toFixed(2));
 
-			}
-			else if(years < 2) {
-				interest = intsTable.hasOwnProperty('2') ? intsTable['2'] : 0;
 			}
 			else if(years > 5) {
 				// Round the years value up.
