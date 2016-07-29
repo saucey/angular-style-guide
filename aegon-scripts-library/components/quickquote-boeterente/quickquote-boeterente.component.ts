@@ -167,15 +167,20 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteBoet
                 <span class="label">Indicatie nieuwe rente per maand</span>
                 <span class="value">
                   <span class="curr">€</span>
-                  <span class="amount">{{totalFee | money}}  <small>bruto</small></span>
+                  <span class="amount">{{newMonthlyFee | money}}  <small>bruto</small></span>
                 </span>
                 <div class="small">
                   <div class="row">
-                    <div class="label"><p>Op basis van:<br>Nieuwe rentevastperiode met rente: {{ newIntRate }}%</p>
+                    <div class="label"><p>Op basis van:<br>Nieuwe rentevastperiode met rente: {{ newPeriodInt }}%</p>
                     </div>
                     <div class="label">
-                      <select [(ngModel)]="mortgageType" class="no-dd" [class.error]="mortgageTypeErr" (change)="init($event.target.value);">
-                        <option *ngFor="#m of mortgageOps; #i = index" [value]="i">{{m}}</option>
+                      <select [(ngModel)]="newPeriod" class="no-dd" (change)="newPeriod = $event.target.value; calculateNewMonthlyFee();">
+                        <option [value]="0">Variabele rente</option>
+                        <option [value]="2">2 jaar</option>
+                        <option [value]="5">5 jaar</option>
+                        <option [value]="10">10 jaar</option>
+                        <option [value]="15">15 jaar</option>
+                        <option [value]="20">20 jaar</option>
                       </select>
                     </div>
                   </div>
@@ -230,6 +235,9 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
   periodsLeft: number;
   newIntRate: number;
   isReady: boolean = false;
+  newPeriod: number = 0;
+  newPeriodInt: number = 0;
+  newMonthlyFee: number = 0;
   // UI vars.
   // Adds loading class to button.
   calculating: boolean = false;
@@ -449,6 +457,10 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
         }
       });
     }
+  }
+
+  calculateNewMonthlyFee():void {
+
   }
   /*
    * Special calculation between two dates to get
