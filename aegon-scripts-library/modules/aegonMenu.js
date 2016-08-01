@@ -229,7 +229,7 @@
         var height = jQuery(window).height();
         var width = jQuery(window).width();
         //jQuery('h1#page-title div.field-item').html(WURFL.complete_device_name);
-        if (old_width != width) {
+        if (old_width !== width) {
             //To check the portrait & landscape view
             if (width > height) {
                 jQuery('#portraitwidth').val(jQuery(window).width());
@@ -240,7 +240,7 @@
                 if (jQuery(window).width() >= 768) {
                     //To check ipad device on the userAgent
                     if (navigator.userAgent.toLowerCase().indexOf("ipad") > -1) {
-                        window.addEventListener("orientationchange", function(event) {
+                        window.addEventListener("orientationchange", function(event) {// jshint ignore:line
                             check_screen_size();  // capture the exact width of the screen and perform action
                             jQuery('.toggle-title').removeClass('open');
                         });
@@ -254,11 +254,11 @@
             else {
                 //jQuery('h1#page-title div.field-item').html(WURFL.complete_device_name);
                 var storedweightval = jQuery('#portraitwidth').val();
-                if (jQuery(window).width() == storedweightval) {
+                if (jQuery(window).width() === storedweightval) {
                     jQuery('.toggle-title').removeClass('open');
                 }
                 else {
-                    if (jQuery(window).width() >= 768 || jQuery(window).width() == 600) {
+                    if (jQuery(window).width() >= 768 || jQuery(window).width() === 600) {
                         jQuery('.toggle-title').removeClass('open');
                         check_screen_size();
                         jQuery('#portraitwidth').val(jQuery(window).width());
@@ -384,18 +384,21 @@
     function change_pbb_view(device) {
         jQuery('.pbb-view div.sm').show();
         jQuery(".pbb-view .span4 .content").height('auto');
-        if (device == 'desktop') {
+        switch(device) {
+          case 'desktop':
             jQuery('.pbb-view div.sm:gt(2)').hide();
             //jQuery('.pbb-view div.sm:nth-child(3n)').hide();
             jQuery('.pbb-sm a').attr('numitems', '2');
             //jQuery('.ppb-view div.sm:gt(2)').css('color', 'red');
-        } else if(device == 'tablet') {
+          break;
+          case 'tablet':
             jQuery('.pbb-view div.sm:gt(1)').hide();
             jQuery('.pbb-sm a').attr('numitems', '1');
-
-        } else if(device == 'mobile') {
+          break;
+          case 'mobile':
             jQuery('.pbb-view div.sm:gt(2)').hide();
             jQuery('.pbb-sm a').attr('numitems', '2');
+          break;
         }
     }
 
@@ -405,7 +408,7 @@
      */
     function check_inpage_navigation(){
         var $in_length = jQuery("div.inpage-navigation").length;
-        if($in_length == 0 ){
+        if($in_length === 0 ){
             jQuery("section.content").addClass("fullwidth");
         }
     }
@@ -522,29 +525,29 @@
     function document_download_properties() {
         var device_type = get_device_type();
         jQuery('.field--name-body .img__view_mode__default').each(function() {
-            if (device_type == 'ipad' || device_type == 'iphone') {
+            if (device_type === 'ipad' || device_type === 'iphone') {
                 jQuery('.field--name-body .img__view_mode__default a').attr('target', '_blank');
             }
         });
 
         jQuery('.field--name-field-downloads .field-item').each(function() {
-            if (device_type == 'ipad' || device_type == 'iphone') {
+            if (device_type === 'ipad' || device_type === 'iphone') {
                 jQuery('.field--name-field-downloads .field-item a').attr('target', '_blank');
             }
         });
     }
-
+    /* jshint ignore:start */
     function inpagechatclose(){
         jQuery('#inpage-chat').hide();
     }
-
+    /* jshint ignore:end */
     function check_image_properties(){
         jQuery("div.field--name-body img").each(function() {
             var img_align = jQuery(this).attr('data-picture-align');
-            if(img_align == 'left') {
+            if(img_align === 'left') {
                 jQuery(this).addClass("image-left");
             }
-            if(img_align == 'right') {
+            if(img_align === 'right') {
                 jQuery(this).addClass("image-right");
             }
         });
