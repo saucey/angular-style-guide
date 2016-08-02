@@ -134,7 +134,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
             Adviesgesprek aanvragen
           </a>
           <div class="label">
-            <a href="#" class="icon-skinnyarrow">
+            <a href="#" class="icon-skinnyarrow" (click)="step = 'summary'">
               Bekijk en mail overzicht
             </a>
           </div>
@@ -155,6 +155,8 @@ export class AovQuoteComponent implements OnInit {
   maxGrossYearAmount: number = 35000;
 
   public step: string;
+
+  public data: any;
 
   constructor(
     private http:Http
