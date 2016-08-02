@@ -9,6 +9,7 @@ import {CheckboxComponent, CheckboxValueAccessor} from '../angular-components/ch
 import {MoneyPipe} from "../angular-components/money.pipe";
 import {SoloSliderComponent, SoloSliderValueAccessor} from "../angular-components/solo-slider.component";
 import {InputRadioComponent, InputRadioValueAccessor} from '../angular-components/input-radio.component';
+import {InputChoiceDropDownComponent, InputChoiceDropDownValueAccessor} from "../angular-components/input-choice-dropdown.component";
 
 var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTemplate'));
 
@@ -16,7 +17,8 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
   selector: 'aegon-aov-quote',
   directives: [
     HelpComponent, InputNumberComponent, InputNumberValueAccessor, InputDateComponent, InputDateValueAccessor,
-    CheckboxComponent, CheckboxValueAccessor, SoloSliderComponent, SoloSliderValueAccessor, InputRadioComponent, InputRadioValueAccessor
+    CheckboxComponent, CheckboxValueAccessor, SoloSliderComponent, SoloSliderValueAccessor, InputRadioComponent, InputRadioValueAccessor,
+    InputChoiceDropDownComponent, InputChoiceDropDownValueAccessor
   ],
   template: templateElem ? templateElem.value : `
   <div class="quickquote angular aov-quote">
@@ -24,12 +26,15 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
       <h3 prefix="/">Uw gegevens</h3>
       <div class="field">
         <div class="label">
-          Wat is uw geboortedatum?     
+          Wat is uw geboortedatum?
         </div>
         <div class="inputs">
-          <aegon-input-date></aegon-input-date>
+          <aegon-input-date [(ngModel)]="birthDate"></aegon-input-date>
         </div>
       </div>
+      <p class="error" *ngIf="birthDateError">
+        Wilt u een geldige geboortedatum invoeren?
+      </p>
       <div class="field">
         <div class="label">
           Wat is uw beroep?
@@ -38,16 +43,18 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
           </aegon-help>          
         </div>
         <div class="inputs">
-          <select class="no-dd" required>
-            <option value="" disabled>1 maand</option>
-            <option [value]="0">2 weken</option>
-            <option [value]="0">2 weken</option>
-            <option [value]="1">1 maand</option>
-            <option [value]="2">3 maanden</option>
-            <option [value]="3">1 jaar</option>
-          </select>
-        </div>      
+          <aegon-input-choice-dropdown [(ngModel)]="profession"
+                                       [items]="professions"
+                                       [emptyMessage]="'Er zijn geen beroepen gevonden'"
+                                       [minChars]="2"
+                                       (fetch)="fetchProfessions($event)"
+                                       (select)="selectProfession($event)">
+          </aegon-input-choice-dropdown>
+        </div>
       </div>
+      <p class="error" *ngIf="professionError">
+        Wilt u een geldig beroep selecteren?
+      </p>
       <div class="field">
         <div class="label">
           Wat is uw bruto jaarinkomen?
@@ -56,17 +63,21 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
           </aegon-help>          
         </div>
         <div class="inputs">
-          <aegon-input-number prefix="€" [max]="99999999"></aegon-input-number>
+          <aegon-input-number [(ngModel)]="grossIncome" prefix="€" [max]="99999999"></aegon-input-number>
         </div>
       </div>
+      <p class="error" *ngIf="grossIncomeError">
+        Wilt u een jaarinkomen invoeren?
+      </p>
       <div class="field">
         <div class="label">        
         </div>
         <div class="inputs">
-          <button class="button icon-right icon-calculator" (click)="step = 'calculation'">
+          <button class="button icon-right icon-calculator" (click)="showCalculation()">
             Bereken premie
           </button>      
         </div>
+
       </div>
     
       <div class="calculation indication" *ngIf="step === 'calculation'">
@@ -134,7 +145,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
             Adviesgesprek aanvragen
           </a>
           <div class="label">
-            <a href="#" class="icon-skinnyarrow" (click)="step = 'summary'">
+            <a href="#" class="icon-skinnyarrow" (click)="showSummary()">
               Bekijk en mail overzicht
             </a>
           </div>
@@ -154,9 +165,22 @@ export class AovQuoteComponent implements OnInit {
   minGrossYearAmount: number = 700;
   maxGrossYearAmount: number = 35000;
 
-  public step: string;
 
-  public data: any;
+  public step: string;
+  public professions: any[];
+
+  public birthDate: string;
+  public birthDateError: boolean;
+  public profession: string;
+  public professionError: boolean;
+  public grossIncome: number;
+  public grossIncomeError: boolean;
+  public startingTerm: string;
+  public startingTermError: boolean;
+  public insuranceAmount: number;
+  public insuranceAmountError: boolean;
+  public grossMonthly: number;
+  public netMonthly: number;
 
   constructor(
     private http:Http
@@ -164,4 +188,66 @@ export class AovQuoteComponent implements OnInit {
 
   ngOnInit() {}
 
+  validatePersonalInformation(): boolean {
+    let hasErrors: boolean = false;
+    this.birthDateError = false;
+    this.professionError = false;
+    this.grossIncomeError = false;
+
+    if (!this.birthDate) {
+      this.birthDateError = true;
+      hasErrors = true;
+    }
+    if (!this.profession) {
+      this.professionError = true;
+      hasErrors = true;
+    }
+    if (!this.grossIncome) {
+      this.grossIncomeError = true;
+      hasErrors = true;
+    }
+
+    return !hasErrors;
+  }
+
+
+  validateChoices(): boolean {
+    let hasErrors: boolean = false;
+    this.startingTermError = false;
+    this.insuranceAmountError = false;
+
+    if (!this.startingTerm) {
+      this.startingTermError = true;
+      hasErrors = true;
+    }
+    if (!this.insuranceAmount) {
+      this.insuranceAmountError = true;
+      hasErrors = true;
+    }
+
+    return !hasErrors;
+  }
+
+  showCalculation() {
+    if (this.validatePersonalInformation()) {
+      this.step = 'calculation';
+    }
+  }
+
+  showSummary() {
+    if (this.validatePersonalInformation() && this.validateChoices()) {
+      this.step = 'calculation';
+    }
+  }
+
+  fetchProfessions(searchString) {
+    this.professions = [{label: 'AAAAA', key: 'AAAAA'}, {label: 'BBBBB', key: 'BBBBB'}]
+  }
+
+  selectProfession(obj) {
+    this.profession = null;
+    if (obj && obj.key) {
+      this.profession = obj.key;
+    }
+  }
 }
