@@ -20,7 +20,6 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
   ],
   template: templateElem ? templateElem.value : `
   <div class="quickquote angular aov-quote">
-  
     <template [ngIf]="step !== 'summary'">
       <h3 prefix="/">Uw gegevens</h3>
       <div class="field">
@@ -58,31 +57,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
         </div>
         <div class="inputs">
           <aegon-input-number prefix="€" [max]="99999999"></aegon-input-number>
-        </div> <h3 prefix="/">Uw gegevens</h3>
-      <div class="field">
-        <div class="label">
-          Wat is uw geboortedatum?     
         </div>
-        <div class="inputs">
-          <aegon-input-date></aegon-input-date>
-        </div>
-      </div>
-      <div class="field">
-        <div class="label">
-          Wat is uw beroep?
-          <aegon-help>
-            Maak uw beroepskeuze
-          </aegon-help>          
-        </div>
-        <div class="inputs">
-          <select class="no-dd" required>
-            <option value="" disabled>1 maand</option>
-            <option [value]="0">2 weken</option>
-            <option [value]="0">2 weken</option>
-            <option [value]="1">1 maand</option>
-            <option [value]="2">3 maanden</option>
-            <option [value]="3">1 jaar</option>
-          </sel
       </div>
       <div class="field">
         <div class="label">        
@@ -117,66 +92,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
           </div>
           <div class="inputs">
             <aegon-input-number prefix="€" [(ngModel)]="grossYearAmount" [max]="99999999"></aegon-input-number>
-          </div> <h3 prefix="/">Uw gegevens</h3>
-      <div class="field">
-        <div class="label">
-          Wat is uw geboortedatum?     
-        </div>
-        <div class="inputs">
-          <aegon-input-date></aegon-input-date>
-        </div>
-      </div>
-      <div class="field">
-        <div class="label">
-          Wat is uw beroep?
-          <aegon-help>
-            Maak uw beroepskeuze
-          </aegon-help>          
-        </div>
-        <div class="inputs">
-          <select class="no-dd" required>
-            <option value="" disabled>1 maand</option>
-            <option [value]="0">2 weken</option>
-            <option [value]="0">2 weken</option>
-            <option [value]="1">1 maand</option>
-            <option [value]="2">3 maanden</option>
-            <option [value]="3">1 jaar</option>
-          </select>
-        </div>      
-      </div>
-      <div class="field">
-        <div class="label">
-          Wat is uw bruto jaarinkomen?
-          <aegon-help>
-            Maak uw beroepskeuze
-          </aegon-help>          
-        </div>
-        <div class="inputs">
-          <aegon-input-number prefix="€" [max]="99999999"></aegon-input-number>
-        </div>
-      </div>
-      <div class="field">
-        <div class="label">        
-        </div>
-        <div class="inputs">
-          <button class="button icon-right icon-calculator" (click)="step = 'calculation'">
-            Bereken premie
-          </button>      
-        </div>
-      </div>
-    
-      <div class="calculation indication" *ngIf="step === 'calculation'">
-        <h3 prefix="/">Uw keuzes</h3>
-        <div class="field">
-          <div class="label">
-            Na welk termijn wilt u dat u uitkering start?
-            <aegon-help>
-              Maak uw beroepskeuze
-            </aegon-help>
           </div>
-          <div class="inputs">
-            <aegon-input-radio [name]="option">2 weken </aegon-input-radio>
-            <aegon-input-radio [name
           <aegon-solo-slider prefix="€" [(ngModel)]="grossYearAmount" [range]="{
             'min': [  minGrossYearAmount ],
             '25%': [  1000 ],
@@ -218,20 +134,16 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
             Adviesgesprek aanvragen
           </a>
           <div class="label">
-            <a href="#" class="icon-skinnyarrow" (click)="step = 'summary'">
+            <a href="#" class="icon-skinnyarrow">
               Bekijk en mail overzicht
             </a>
           </div>
         </div>
       </div>
     </template>
-    
     <div class="aov-quote-summary" *ngIf="step === 'summary'">
     
-    
-    
     </div>
-    
   </div>
   `,
   providers: [HTTP_PROVIDERS],
@@ -243,7 +155,6 @@ export class AovQuoteComponent implements OnInit {
   maxGrossYearAmount: number = 35000;
 
   public step: string;
-
 
   constructor(
     private http:Http
