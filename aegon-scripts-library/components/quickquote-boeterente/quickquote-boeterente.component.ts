@@ -416,7 +416,7 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
           // Set the value of total fee.
           if (((this.initialAmount - repymnt) > penaltyFree)) {
             this.totalFee = (((this.initialAmount - repymnt) - penaltyFree) * tcw) / basisFee;
-            this.monthlyFee = this.totalFee / this.periodsLeft;
+            this.monthlyFee = this.calculateMonthlyFee(basisFee, this.oldIntRate);
           }
           else {
             this.totalFee = 0;
@@ -459,8 +459,8 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
     }
   }
 
-  calculateNewMonthlyFee():void {
-
+  calculateMonthlyFee(mortgage: number, interest: number):number {
+    return ((mortgage * interest) / 100) / 12;
   }
   /*
    * Special calculation between two dates to get
