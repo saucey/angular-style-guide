@@ -141,8 +141,31 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
         </div>
       </div>
     </template>
-    <div class="aov-quote-summary" *ngIf="step === 'summary'">
-    
+    <div id="aov-quote-summary" *ngIf="step === 'summary'">
+      <h1>Samenvatting</h1>
+      <h2 class="subtitle">Uw premie-indicatie</h2>
+      
+      
+      <div class="static-section">
+        <h3 class="title">Uitgangspunten</h3>
+          U kunt de Aegon Arbeidsongeschiktheidsverzekering met een adviseur volledig aanpassen aan uw persoonlijke situatie.<br>
+          Voor deze indicatie zijn we uitgegaan van:
+          <ul class="bullet">
+            <li>De meest uitgebreide dekking inclusief ongevallen, lichamelijke en psychische ziektes en zwangerschap en bevalling.</li>
+            <li>Dat de verzekering tot 67 jaar loopt.</li>
+            <li>Dat de hoogte van een uitkering gelijk blijft als u arbeidsongeschikt bent.</li>
+            <li>Een doorlopende korting van 5%, die u houdt zolang uw verzekering bij ons loopt. U kunt ook kiezen voor een eenmalige korting van 30% in het eerste jaar.</li>
+          </ul>
+      </div>
+      <div class="static-section">
+        <h3 class="title">Uw geschatte maandpremie</h3>
+        Uw geschatte premie is bruto € 167,19 per maand. Uw nettopremie na aftrek van belastingvoordeel is € 108,67 per maand. Dit is de maandpremie in het eerste kalenderjaar inclusief 5% doorlopende korting. Beide bedragen zijn een indicatie. Uw uiteindelijke maandpremie kan afwijken op basis van onder meer uw feitelijke werkzaamheden.
+      </div>
+      <div class="static-section">
+        <h3 class="title">Hoe verder?</h3>
+        Verzekeren is maatwerk. Uw adviseur kijkt samen met u wat het beste bij u past. Maak een afspraak voor een persoonlijk gesprek.<br>
+        Aan het advies zijn kosten verbonden. Deze bespreekt u in het eerste vrijblijvende gesprek met de adviseur.
+      </div>
     </div>
   </div>
   `,
