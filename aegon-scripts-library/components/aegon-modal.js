@@ -274,6 +274,17 @@
         if( $this.attr('data-modal-width') !== undefined && ! isNaN($this.attr('data-modal-width')) ) {
           $ops.width = parseInt($this.attr('data-modal-width'));
         }
+        /* href attr check for existing element.
+         * If it finds the element, the body options
+         * is overwritten with the content of the div.
+         */
+        if($this.attr('href').indexOf('#') === 0) {
+          var $target = $(document).find($this.attr('href'));
+          if($($target).length) {
+            $ops.body = $target.html();
+          }
+        }
+        
         // If the options object has valid options, opens the modal.
         if(Object.keys($ops).length > 0) {
           Drupal.aegonModal($ops);
