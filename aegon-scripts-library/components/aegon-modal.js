@@ -19,6 +19,7 @@
       ajax: false, // @boolean: whether to add the loader or not
       ajaxText: '', // @string: Text to show while waiting for ajax if ajax === true
       overlay: true, // @boolean: dark overlay behind the modal
+      overlayClose: false, // @boolean: close the modal by clicking the overlay.
       timeOut: 0, // @number (miliseconds): the amount of time of wait till show the message if ajax === true
       timeOutMessage: '', // @string: message to show after time out if ajax === true
       width: '' // @int: the width of the modal (it has a max-width of 100% so there won't be scroll).
@@ -128,7 +129,7 @@
         // overlay layout
         if(settings.overlay) {
           if(! $(document).find('.aegon-modal-overlay').length) {
-            if(! settings.close) {
+            if(! settings.close || settings.overlayClose) {
               // if the close button is not desire, attache click event to overlay
               $('body').append('<div class="aegon-modal-overlay close-modal lightbox"></div>');
             } else {
@@ -212,6 +213,73 @@
      * or true when closed.
      */
     return modal;
+  };
+
+  /*
+   * Autorun function when elements have 
+   * attribute data-aegon="modal"
+   * The options for the modal will be set
+   * by the data-modal attributes.
+   */
+
+  Drupal.behaviors.aegonModalRun = {
+    attach: function(context) {
+      $(document, context).on('click', '[data-aegon="modal"]', function(e) {
+        e.preventDefault();
+
+        var $this = $(this),
+            $ops = {},
+            $boolRexExp = /(true|false)/;
+        // Title content.
+        if( $this.attr('data-modal-title') !== undefined && $this.attr('data-modal-title').trim() !== '' ) {
+          $ops.title = $this.attr('data-modal-title');
+        }
+        // Body content.
+        if( $this.attr('data-modal-body') !== undefined && $this.attr('data-modal-body').trim() !== '' ) {
+          $ops.body = $this.attr('data-modal-body');
+        }
+        // ID.
+        if( $this.attr('data-modal-id') !== undefined && $this.attr('data-modal-id').trim() !== '' ) {
+          $ops.id = $this.attr('data-modal-id');
+        }
+        // Close button.
+        if( $this.attr('data-modal-close') !== undefined && $this.attr('data-modal-close').match($boolRexExp) ) {
+          $ops.close = $this.attr('data-modal-close') === 'true';
+        }
+        // Ajax.
+        if($this.attr('data-modal-ajax') !== undefined && $this.attr('data-modal-ajax').match($boolRexExp)) {
+          $ops.ajax = $this.attr('data-modal-ajax') === 'true';
+        }
+        // ajaxText.
+        if( $this.attr('data-modal-ajaxText') !== undefined && $this.attr('data-modal-ajaxText').trim() !== '' ) {
+          $ops.ajaxText = $this.attr('data-modal-ajaxText');
+        }
+        // Overlay.
+        if( $this.attr('data-modal-overlay') !== undefined && $this.attr('data-modal-overlay').match($boolRexExp) ) {
+          $ops.overlay = $this.attr('data-modal-overlay') === 'true';
+        }
+        // OverlayClose.
+        if( $this.attr('data-modal-overlayClose') !== undefined && $this.attr('data-modal-overlayClose').match($boolRexExp) ) {
+          $ops.overlayClose = $this.attr('data-modal-overlayClose') === 'true';
+        }
+        // timeOut.
+        if( $this.attr('data-modal-timeOut') !== undefined && ! isNaN($this.attr('data-modal-timeOut')) ) {
+          $ops.timeOut = parseInt($this.attr('data-modal-timeOut'));
+        }
+        // timeOutMessage.
+        if( $this.attr('data-modal-timeOutMessage') !== undefined && $this.attr('data-modal-timeOutMessage').trim() !== '' ) {
+          $ops.timeOutMessage = $this.attr('data-modal-timeOutMessage');
+        }
+        // width.
+        if( $this.attr('data-modal-width') !== undefined && ! isNaN($this.attr('data-modal-width')) ) {
+          $ops.width = parseInt($this.attr('data-modal-width'));
+        }
+        // If the options object has valid options, opens the modal.
+        if(Object.keys($ops).length > 0) {
+          Drupal.aegonModal($ops);
+        }
+      });
+    }
   };
 
   $(window).on('resize', function() {
