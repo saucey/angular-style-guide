@@ -196,3 +196,31 @@
 //  }
 //
 //}
+
+#aov-quote-summary {
+  h1 {
+    color: $slightly_darker_blue;
+    margin: 0;
+  }
+  h2.subtitle {
+    font-weight: normal;
+    font-style: normal;
+    font-size: 25px;
+    color: $blue;
+  }
+  .static-section {
+    margin-bottom: 21px;
+    h3.title {
+      color: $dark_blue;
+      margin-bottom: 21px;
+    }
+    .content {
+      ul.bullet {
+        margin: 0;
+        li:before {
+          color: $black;
+        }
+      }
+    }
+  }
+}
