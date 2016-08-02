@@ -20,125 +20,218 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
   ],
   template: templateElem ? templateElem.value : `
   <div class="quickquote angular aov-quote">
-    <h3 prefix="/">Uw gegevens</h3>
-    <div class="field">
-      <div class="label">
-        Wat is uw geboortedatum?     
-      </div>
-      <div class="inputs">
-        <aegon-input-date></aegon-input-date>
-      </div>
-    </div>
-    <div class="field">
-      <div class="label">
-        Wat is uw beroep?
-        <aegon-help>
-          Maak uw beroepskeuze
-        </aegon-help>          
-      </div>
-      <div class="inputs">
-        <select class="no-dd" required>
-          <option value="" disabled>1 maand</option>
-          <option [value]="0">2 weken</option>
-          <option [value]="0">2 weken</option>
-          <option [value]="1">1 maand</option>
-          <option [value]="2">3 maanden</option>
-          <option [value]="3">1 jaar</option>
-        </select>
-      </div>      
-    </div>
-    <div class="field">
-      <div class="label">
-        Wat is uw bruto jaarinkomen?
-        <aegon-help>
-          Maak uw beroepskeuze
-        </aegon-help>          
-      </div>
-      <div class="inputs">
-        <aegon-input-number prefix="€" [max]="99999999"></aegon-input-number>
-      </div>
-    </div>
-    <div class="field">
-      <div class="label">        
-      </div>
-      <div class="inputs">
-        <button class="button icon-right icon-calculator" (click)="step = 'calculation'">
-          Bereken premie
-        </button>      
-      </div>
-    </div>
   
-    <div class="calculation indication" *ngIf="step === 'calculation'">
-      <h3 prefix="/">Uw keuzes</h3>
+    <template [ngIf]="step !== 'summary'">
+      <h3 prefix="/">Uw gegevens</h3>
       <div class="field">
         <div class="label">
-          Na welk termijn wilt u dat u uitkering start?
+          Wat is uw geboortedatum?     
+        </div>
+        <div class="inputs">
+          <aegon-input-date></aegon-input-date>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          Wat is uw beroep?
           <aegon-help>
             Maak uw beroepskeuze
-          </aegon-help>
+          </aegon-help>          
         </div>
         <div class="inputs">
-          <aegon-input-radio [name]="option">2 weken </aegon-input-radio>
-          <aegon-input-radio [name]="option">1 maand</aegon-input-radio>
-          <aegon-input-radio [name]="option">3 maanden</aegon-input-radio>
-          <aegon-input-radio [name]="option">1 jaar</aegon-input-radio>
+          <select class="no-dd" required>
+            <option value="" disabled>1 maand</option>
+            <option [value]="0">2 weken</option>
+            <option [value]="0">2 weken</option>
+            <option [value]="1">1 maand</option>
+            <option [value]="2">3 maanden</option>
+            <option [value]="3">1 jaar</option>
+          </select>
+        </div>      
+      </div>
+      <div class="field">
+        <div class="label">
+          Wat is uw bruto jaarinkomen?
+          <aegon-help>
+            Maak uw beroepskeuze
+          </aegon-help>          
+        </div>
+        <div class="inputs">
+          <aegon-input-number prefix="€" [max]="99999999"></aegon-input-number>
+        </div> <h3 prefix="/">Uw gegevens</h3>
+      <div class="field">
+        <div class="label">
+          Wat is uw geboortedatum?     
+        </div>
+        <div class="inputs">
+          <aegon-input-date></aegon-input-date>
         </div>
       </div>
       <div class="field">
         <div class="label">
-          Welk bruto jaarbedrag wilt u verzekeren?
-          <aegon-help>Help !</aegon-help>
+          Wat is uw beroep?
+          <aegon-help>
+            Maak uw beroepskeuze
+          </aegon-help>          
         </div>
         <div class="inputs">
-          <aegon-input-number prefix="€" [(ngModel)]="grossYearAmount" [max]="99999999"></aegon-input-number>
-        </div>
-        <aegon-solo-slider prefix="€" [(ngModel)]="grossYearAmount" [range]="{
-          'min': [  minGrossYearAmount ],
-          '25%': [  1000 ],
-          '50%': [ 2000 ],
-          '75%': [  3000 ],
-          'max': [ 999999 ]
-        }">
-        </aegon-solo-slider>
-        <div class="min">&euro; {{minGrossYearAmount}}</div>
-        <div class="max">&euro; {{maxGrossYearAmount}}</div>
+          <select class="no-dd" required>
+            <option value="" disabled>1 maand</option>
+            <option [value]="0">2 weken</option>
+            <option [value]="0">2 weken</option>
+            <option [value]="1">1 maand</option>
+            <option [value]="2">3 maanden</option>
+            <option [value]="3">1 jaar</option>
+          </sel
       </div>
-      <div class="result">
-        <div class="linear">
-          <div class="row">
-            <div class="label">
-              Bruto premie per maand
-            </div>
-            <div class="value">&euro; 300<span>,-</span></div>
-            <span class="helptext">
-              Dit is het bedrag dat u maandelijks betaalt, inclusief 5% doorlopende korting. 
-              Uw premie is fiscaal aftrekbaar. Als u een uitkering krijgt dan betaalt u daar belasting over.
-            </span>
+      <div class="field">
+        <div class="label">        
+        </div>
+        <div class="inputs">
+          <button class="button icon-right icon-calculator" (click)="step = 'calculation'">
+            Bereken premie
+          </button>      
+        </div>
+      </div>
+    
+      <div class="calculation indication" *ngIf="step === 'calculation'">
+        <h3 prefix="/">Uw keuzes</h3>
+        <div class="field">
+          <div class="label">
+            Na welk termijn wilt u dat u uitkering start?
+            <aegon-help>
+              Maak uw beroepskeuze
+            </aegon-help>
           </div>
-          <div class="row">
-            <div class="label">
-              Netto premie per maand        
-            </div>
-            <div class="value">&euro; 300<span>,-</span></div>
-            <span class="helptext"> 
-              Dit is het bedrag na aftrek van belastingvoordeel. 
-              Wij rekenen met gemiddeld belastingvoordeel van 35%. 
-              Voor uw situatie kan dit meer of minder zijn.
-            </span> 
+          <div class="inputs">
+            <aegon-input-radio [name]="option">2 weken </aegon-input-radio>
+            <aegon-input-radio [name]="option">1 maand</aegon-input-radio>
+            <aegon-input-radio [name]="option">3 maanden</aegon-input-radio>
+            <aegon-input-radio [name]="option">1 jaar</aegon-input-radio>
           </div>
+        </div>
+        <div class="field">
+          <div class="label">
+            Welk bruto jaarbedrag wilt u verzekeren?
+            <aegon-help>Help !</aegon-help>
+          </div>
+          <div class="inputs">
+            <aegon-input-number prefix="€" [(ngModel)]="grossYearAmount" [max]="99999999"></aegon-input-number>
+          </div> <h3 prefix="/">Uw gegevens</h3>
+      <div class="field">
+        <div class="label">
+          Wat is uw geboortedatum?     
+        </div>
+        <div class="inputs">
+          <aegon-input-date></aegon-input-date>
         </div>
       </div>
       <div class="field">
-        <a class="button orange icon-right arrow">
-          Adviesgesprek aanvragen
-        </a>
         <div class="label">
-          <a href="#" class="icon-skinnyarrow">
-            Bekijk en mail overzicht
+          Wat is uw beroep?
+          <aegon-help>
+            Maak uw beroepskeuze
+          </aegon-help>          
+        </div>
+        <div class="inputs">
+          <select class="no-dd" required>
+            <option value="" disabled>1 maand</option>
+            <option [value]="0">2 weken</option>
+            <option [value]="0">2 weken</option>
+            <option [value]="1">1 maand</option>
+            <option [value]="2">3 maanden</option>
+            <option [value]="3">1 jaar</option>
+          </select>
+        </div>      
+      </div>
+      <div class="field">
+        <div class="label">
+          Wat is uw bruto jaarinkomen?
+          <aegon-help>
+            Maak uw beroepskeuze
+          </aegon-help>          
+        </div>
+        <div class="inputs">
+          <aegon-input-number prefix="€" [max]="99999999"></aegon-input-number>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">        
+        </div>
+        <div class="inputs">
+          <button class="button icon-right icon-calculator" (click)="step = 'calculation'">
+            Bereken premie
+          </button>      
+        </div>
+      </div>
+    
+      <div class="calculation indication" *ngIf="step === 'calculation'">
+        <h3 prefix="/">Uw keuzes</h3>
+        <div class="field">
+          <div class="label">
+            Na welk termijn wilt u dat u uitkering start?
+            <aegon-help>
+              Maak uw beroepskeuze
+            </aegon-help>
+          </div>
+          <div class="inputs">
+            <aegon-input-radio [name]="option">2 weken </aegon-input-radio>
+            <aegon-input-radio [name
+          <aegon-solo-slider prefix="€" [(ngModel)]="grossYearAmount" [range]="{
+            'min': [  minGrossYearAmount ],
+            '25%': [  1000 ],
+            '50%': [ 2000 ],
+            '75%': [  3000 ],
+            'max': [ 999999 ]
+          }">
+          </aegon-solo-slider>
+          <div class="min">&euro; {{minGrossYearAmount}}</div>
+          <div class="max">&euro; {{maxGrossYearAmount}}</div>
+        </div>
+        <div class="result">
+          <div class="linear">
+            <div class="row">
+              <div class="label">
+                Bruto premie per maand
+              </div>
+              <div class="value">&euro; 300<span>,-</span></div>
+              <span class="helptext">
+                Dit is het bedrag dat u maandelijks betaalt, inclusief 5% doorlopende korting. 
+                Uw premie is fiscaal aftrekbaar. Als u een uitkering krijgt dan betaalt u daar belasting over.
+              </span>
+            </div>
+            <div class="row">
+              <div class="label">
+                Netto premie per maand        
+              </div>
+              <div class="value">&euro; 300<span>,-</span></div>
+              <span class="helptext"> 
+                Dit is het bedrag na aftrek van belastingvoordeel. 
+                Wij rekenen met gemiddeld belastingvoordeel van 35%. 
+                Voor uw situatie kan dit meer of minder zijn.
+              </span> 
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <a class="button orange icon-right arrow">
+            Adviesgesprek aanvragen
           </a>
+          <div class="label">
+            <a href="#" class="icon-skinnyarrow" (click)="step = 'summary'">
+              Bekijk en mail overzicht
+            </a>
+          </div>
         </div>
       </div>
+    </template>
+    
+    <div class="aov-quote-summary" *ngIf="step === 'summary'">
+    
+    
+    
     </div>
+    
   </div>
   `,
   providers: [HTTP_PROVIDERS],
@@ -148,6 +241,9 @@ export class AovQuoteComponent implements OnInit {
   grossYearAmount: number = 17500;
   minGrossYearAmount: number = 700;
   maxGrossYearAmount: number = 35000;
+
+  public step: string;
+
 
   constructor(
     private http:Http
