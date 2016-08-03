@@ -231,7 +231,10 @@
         //flex-direction: column;
     }
     .data-section {
+      flex-wrap: wrap;
       .data-fields {
+        min-height: 0 !important;
+        margin-left: 0;
         label {
           font-family: "senticosansdtregular", Arial, Verdana, sans-serif;
         }
