@@ -25,6 +25,7 @@
     }
   }
   .calculation {
+    width: 100%;
     > div > .field:last-child {
       margin-bottom: 0;
     }
@@ -56,16 +57,6 @@
           }
         }
       } 
-      .button{
-        max-width: 100%;
-        [disabled],
-        .button[disabled]:hover,
-        .button.disabled,
-        .button.disabled:hover {
-          opacity: 0.8;
-          cursor: not-allowed;
-        }
-      }
       .input{
         &.date {
           display: block;
@@ -88,6 +79,16 @@
         }
       }
       .inputs {
+        .button{
+          max-width: 100%;
+          &[disabled],
+          &[disabled]:hover,
+          &.disabled,
+          &.disabled:hover {
+            opacity: 0.8;
+            cursor: not-allowed;
+          }
+        }
         button.icon-calculator {
           margin-bottom: 0;
         }
@@ -195,26 +196,27 @@
         left: 20px;
       }
       .label {
-        width: 66%;
+        width: 60%;
       }
       .inputs {
-        width: 33%;
+        width: 38%;
       }
       .field {
         padding-left: 30px;
       }
     }
     .result {
+      padding-left: 50px;
       .label {
-        width: 33%;
+        width: 38%;
         &:first-child {
-          width: 66%;
+          width: 60%;
         }
         //max-width: 350px;
       }
       .bigger {
         .value {
-          width: 33%;
+          width: 38%;
         } 
       }
       .small {
