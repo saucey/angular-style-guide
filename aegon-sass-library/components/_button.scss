@@ -145,10 +145,12 @@ button,
       }
     }
   }
+  &.white {
+    background-color: $white;
+  }
   &.white,
   &.transparent {
     color: $blue;
-    background-color: $white;
     &.arrow {
       &:before {
         position: absolute;

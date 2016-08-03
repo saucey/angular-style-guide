@@ -135,28 +135,20 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteBoet
         </div>
       </div>
       <div *ngIf="calculated">
+      <div>
         <div class="result">
           <div *ngIf="validIntst">
             <div class="bigger">
               <div class="row">
-                <span class="label">Indicatie huidige resterende rente</span>
+                <span class="label">Indicatie eenmalige omzettingskosten</span>
                 <span class="value">
                   <span class="curr">€</span>
                   <span class="amount">{{totalFee | money}}*</span>
                 </span>
-              </div>
-            </div>
-            <div class="bigger">
-              <div class="row">
-                <span class="label">Indicatie huidige rente per maand</span>
-                <span class="value">
-                  <span class="curr">€</span>
-                  <span class="amount">{{monthlyFee | money}} <small>bruto</small></span>
-                </span>
                 <div class="small">
                   <div class="row">
                     <div class="label"><p>Op basis van:<br>Resterende rentevastperiode: <b>{{ periodsLeft }}</b> {{ periodsLeft > 1 ? 'maanden' : 'maand' }}<br>
-                      Vergelijkingsrente: {{ newIntRate }}% <aegon-help position="top">Het actuele rentepercentage dat geldt voor de periode van uw resterende rentevastperiode. U vindt de geldende percentages op onze pagina met actuele rentepercentages. </aegon-help></p>
+                      Vergelijkingsrente: {{ newIntRate | money }}% <aegon-help position="top">Het actuele rentepercentage dat geldt voor de periode van uw resterende rentevastperiode. U vindt de geldende percentages op onze pagina met actuele rentepercentages. </aegon-help></p>
                     </div>
                   </div>
                 </div>
@@ -164,32 +156,53 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteBoet
             </div>
             <div class="bigger">
               <div class="row">
-                <span class="label">Indicatie nieuwe rente per maand</span>
-                <span class="value">
-                  <span class="curr">€</span>
-                  <span class="amount">{{newMonthlyFee | money}}  <small>bruto</small></span>
-                </span>
+                <span class="label">Indicatie nieuwe rente</span>
                 <div class="small">
                   <div class="row">
-                    <div class="label"><p>Op basis van:<br>Nieuwe rentevastperiode met rente: {{ newPeriodInt }}%</p>
+                    <!-- Indicatie nieuwe rente intro text -->
+                    <p>Na betaling van de omzettingskosten kunt u profiteren van een lagere rente. Het verschil in maandlasten is afhankelijk van de nieuwe rentevastperiode die u wenst.</p>
+                  </div>                
+                  <div class="row">
+                    <div class="label"><p>Nieuwe rentevastperiode met rente: {{ newPeriodInt | money }}%</p>
                     </div>
                     <div class="label">
-                      <select [(ngModel)]="newPeriod" class="no-dd" (change)="newPeriod = $event.target.value; calculateNewMonthlyFee();">
+                      <select [(ngModel)]="newPeriod" class="no-dd" (change)="newPeriod = $event.target.value; calculateNewMonthlyPymnt();">
                         <option [value]="0">Variabele rente</option>
-                        <option [value]="2">2 jaar</option>
-                        <option [value]="5">5 jaar</option>
-                        <option [value]="10">10 jaar</option>
-                        <option [value]="15">15 jaar</option>
-                        <option [value]="20">20 jaar</option>
+                        <option [value]="24">2 jaar</option>
+                        <option [value]="60">5 jaar</option>
+                        <option [value]="120">10 jaar</option>
+                        <option [value]="180">15 jaar</option>
+                        <option [value]="240">20 jaar</option>
                       </select>
                     </div>
+                  </div>
+                  <div class="row">
+                    <div class="label"><p>Huidige rente per maand</p></div>
+                    <span class="value">
+                      <span class="curr">€</span>
+                      <span class="amount">{{monthlyFee | money}}  <small>bruto</small></span>
+                    </span>
+                  </div>
+                  <div class="row">
+                    <div class="label"><p>Nieuwe rente per maand</p></div>
+                    <span class="value">
+                      <span class="curr">€</span>
+                      <span class="amount">{{newMonthlyPymnt | money}}  <small>bruto</small></span>
+                    </span>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="small">
+            <div class="bigger">
               <div class="row">
-                <p>U heeft het resterende rentebedrag uitgerekend voor uw huidige rentevastperiode. Door uw nieuwe rentevastperiode in te voeren bepaalt u of het voor uw situatie voordelig kan zijn om de hypotheek aan te passen. Bekijk aan de hand van onderstaande mogelijkheden wat het beste bij u past. Log in bij Mijn Aegon om uw definitieve berekening te doen en te downloaden als PDF.</p>
+                <span class="label">Hoe verder, omzetten of rentemiddelen?</span>
+                <div class="small">
+                  <div class="row">
+                    <!-- Indicatie nieuwe rente intro text -->
+                    <p>Als het aanpassen van de rente in uw situatie interessant is dan kunt u de omzettingskosten in één keer betalen of u kunt gebruik maken van rentemiddeling.</p>
+                    <p><a href="#" class="button transparent arrow inline">Lees meer over de voor- en nadelen van deze opties</a></p>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="cta-wrapper">
@@ -230,6 +243,7 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
   oldIntRate: number = 0;
   nhg: boolean;
   // Calculation variables.
+  repymnt: number = 0;
   totalFee: number = 0;
   monthlyFee: number = 0;
   periodsLeft: number;
@@ -237,7 +251,7 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
   isReady: boolean = false;
   newPeriod: number = 0;
   newPeriodInt: number = 0;
-  newMonthlyFee: number = 0;
+  newMonthlyPymnt: number = 0;
   // UI vars.
   // Adds loading class to button.
   calculating: boolean = false;
@@ -346,13 +360,14 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
       let penaltyFree = this.roundToDeg((0.1 * this.initialAmount), 2);
 
       // 2. Repayment (Bedrag aflossing).
-      let repymnt = 0;
       if (this.extraPymnt === true) {
-        repymnt = this.pymntThisYear + this.pymntPrevYears;
+        this.repymnt = this.pymntThisYear + this.pymntPrevYears;
+      } else {
+        this.repymnt = 0;
       }
 
       // 3. Basis penalty-calculation (grondslag boeteberekening).
-      let basisFee = (this.initialAmount - penaltyFree - repymnt);
+      let basisFee = (this.initialAmount - penaltyFree - this.repymnt);
 
       /* 4. Total cash value (Totale contante waarde) */
       // 4.1. Define Interest rate contract per month.
@@ -414,13 +429,18 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
             tcw = tcw + cw;
           }
           // Set the value of total fee.
-          if (((this.initialAmount - repymnt) > penaltyFree)) {
-            this.totalFee = (((this.initialAmount - repymnt) - penaltyFree) * tcw) / basisFee;
-            this.monthlyFee = this.calculateMonthlyFee(basisFee, this.oldIntRate);
+          if (((this.initialAmount - this.repymnt) > penaltyFree)) {
+            this.totalFee = (((this.initialAmount - this.repymnt) - penaltyFree) * tcw) / basisFee;
+            console.log('Monthly interest payment user input:');
+            this.monthlyFee = this.calculateMonthlyFee(this.initialAmount, this.oldIntRate);
           }
           else {
             this.totalFee = 0;
           }
+
+          // Calculates the initial new monthly payment with variable interest.
+          this.calculateNewMonthlyPymnt();
+
           // Removes the class pending in the button.
           this.calculating = false;
           // Shows the value.
@@ -459,7 +479,23 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
     }
   }
 
-  calculateMonthlyFee(mortgage: number, interest: number):number {
+  calculateNewMonthlyPymnt(): void {
+    // Retrieves the interest rate corresponding to the chosen period.
+    this.intstService.getMarketInterestRate({months: this.newPeriod, nhg: this.nhg}).then((interests) => {
+        // New interest setting.
+        this.newPeriodInt = interests;
+        let mortgage = this.initialAmount - this.repymnt;
+        console.log('Monthly interest payment by dropdown:');
+        // New monthly payment setting.
+        this.newMonthlyPymnt = this.calculateMonthlyFee(mortgage, this.newPeriodInt);
+    });
+  }
+
+  private calculateMonthlyFee(mortgage: number, interest: number):number {
+    console.log('Morgage value = ' + mortgage);
+    console.log('Interest value = ' + interest);
+    console.log('Total monthly payment = ' + ((mortgage * interest) / 100) / 12);
+    console.log('--------------------------------------------------------');
     return ((mortgage * interest) / 100) / 12;
   }
   /*
@@ -546,6 +582,7 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
   /*
    * Validates date strings
    * @param date: date string in format yyyy-mm-dd
+   * @param future: boolean. If it should be a furure date
    * @return boolean
    */
   validateDate(date: string, future: boolean = false): boolean {

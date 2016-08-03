@@ -359,7 +359,7 @@ div.alert {
 
 .aegon-modal {
   position: fixed;
-  z-index: 6;
+  z-index: 9999; // There's a 999 
   left: 50%;
   width: 500px;
   max-width: 90%;
