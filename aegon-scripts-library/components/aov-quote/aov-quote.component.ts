@@ -144,8 +144,43 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
     <div id="aov-quote-summary" *ngIf="step === 'summary'">
       <h1>Samenvatting</h1>
       <h2 class="subtitle">Uw premie-indicatie</h2>
-      
-      
+      <div id="premium-section" class="call-execution-block container_12  same-height row-fluid">
+        <div class="data-section span6 container_12">
+          <div class="span12 container_12 data-fields">
+            <label class="label span4" for="field-geboortedatum">Uw geboortedatum</label>
+            <span id="field-geboortedatum" class="value span8">20-03-2013</span>
+          </div>
+          <div class="span12 container_12 data-fields">
+            <label class="label span4" for="field-beroep">Uw beroep</label>
+            <span id="field-beroep" class="value span8">Palingvisser</span>
+          </div>
+          <div class="span12 container_12 data-fields">
+            <label class="label span4" for="field-bruto-jaarinkomen">Uw bruto jaarinkomen</label>
+            <span id="field-bruto-jaarinkomen" class="value span8">€ 40.000 netto</span>
+          </div>
+          <div class="span12 container_12 data-fields">
+            <label class="label span4" for="field-eigen-risicoperiode">Eigen risicoperiode</label>
+            <span id="field-eigen-risicoperiode" class="value span8">1 maand</span>
+          </div>
+          <div class="span12 container_12 data-fields">
+            <label class="label span4" for="field-verzekerde-uitgaven">Verzekerde uitgaven</label>
+            <span id="field-verzekerde-uitgaven" class="value span8">€ 1230 netto per maand</span>
+          </div>
+          <div class="span12 container_12 data-fields">
+            <label class="label span4" for="field-bruto-premie">Bruto premie per maand</label>
+            <span id="field-bruto-premie" class="value span8">€ 167</span>
+          </div>
+          <div class="span12 container_12 data-fields">
+            <label class="label span4" for="field-netto-premie">Netto premie per maand</label>
+            <span id="field-bruto-premie" class="value span8">€ 108</span>
+          </div>
+        </div>
+        <div class="action-section span6">
+          <div class="row-fluid">
+            <label class="label" ></label>
+          </div>
+        </div>
+      </div>
       <div class="static-section">
         <h3 class="title">Uitgangspunten</h3>
           U kunt de Aegon Arbeidsongeschiktheidsverzekering met een adviseur volledig aanpassen aan uw persoonlijke situatie.<br>
