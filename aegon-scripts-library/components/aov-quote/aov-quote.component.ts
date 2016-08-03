@@ -43,12 +43,13 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
           </aegon-help>          
         </div>
         <div class="inputs">
-          <aegon-input-choice-dropdown [(ngModel)]="profession"
-                                       [items]="professions"
-                                       [emptyMessage]="'Er zijn geen beroepen gevonden'"
-                                       [minChars]="2"
-                                       (fetch)="fetchProfessions($event)"
-                                       (select)="selectProfession($event)">
+          <aegon-input-choice-dropdown
+            [(ngModel)]="profession"
+            [items]="professions"
+            [emptyMessage]="'Er zijn geen beroepen gevonden'"
+            [minChars]="2"
+            (fetch)="fetchProfessions($event)"
+            (select)="selectProfession($event)">
           </aegon-input-choice-dropdown>
         </div>
       </div>
@@ -264,7 +265,13 @@ export class AovQuoteComponent implements OnInit {
   }
 
   fetchProfessions(searchString) {
-    this.professions = [{label: 'AAAAA', key: 'AAAAA'}, {label: 'BBBBB', key: 'BBBBB'}]
+    this.professions = [
+      {label: 'Programmeur', key: 'Programmeur'},
+      {label: 'Goeroe', key: 'Goeroe'},
+      {label: 'Putjeschepper type A', key: 'Putjeschepper type A'},
+      {label: 'Putjeschepper type B', key: 'Putjeschepper type B'},
+      {label: 'Kaasmaker', key: 'Kaasmaker'}
+    ]
   }
 
   selectProfession(obj) {

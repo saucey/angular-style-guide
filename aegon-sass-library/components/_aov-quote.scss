@@ -33,9 +33,6 @@
     display:none;
   }
 
-  .input.date input {
-    margin-right:4px;
-  }
   .field {
     .icon-skinnyarrow:before {
       font-size: 0.75rem;
@@ -70,7 +67,7 @@
   }
   input[type=text], input[type=number], select {
     width:100%;
-    background:rgba(236, 237, 231, 1);
+    background: $grey;
   }
   .result {
     -webkit-border-radius:5px;

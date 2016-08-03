@@ -7,7 +7,7 @@ import {CONST_EXPR} from "angular2/src/facade/lang";
   template: `
     <span class="input choice-dropdown">
       <input #inputEl type="text" [attr.placeholder]="placeholder" [required]="required"
-             [ngModel]="model" (ngModelChange)="goFetch($event)" (focus)="focus.emit()" (blur)="blur.emit()">
+             [ngModel]="label" (ngModelChange)="goFetch($event)" (focus)="focus.emit()" (blur)="blur.emit()">
       <ul class="choice-dropdown-choices" *ngIf="fetchValue && fetchValue.length >= minChars">
         <li *ngIf="!items && emptyMessage">{{emptyMessage}}</li>
         <li class="choice-dropdown-choice" *ngFor="#item of items" (click)="select(item)">{{item.label}}</li>
@@ -16,11 +16,11 @@ import {CONST_EXPR} from "angular2/src/facade/lang";
   `
 })
 export class InputChoiceDropDownComponent {
-  @Input() required: boolean;
-  @Input() placeholder: string;
-  @Input() emptyMessage: string;
-  @Input() items: string[] = [];
-  @Input() minChars: number = 2;
+  @Input()  required: boolean;
+  @Input()  placeholder: string;
+  @Input()  emptyMessage: string;
+  @Input()  items: string[] = [];
+  @Input()  minChars: number = 2;
 
   @Output() modelChange: EventEmitter<any> = new EventEmitter();
   @Output() focus: EventEmitter<any> = new EventEmitter();
@@ -29,8 +29,9 @@ export class InputChoiceDropDownComponent {
 
   @ViewChild('inputEl') inputEl: ElementRef;
 
-  model: string;
-  fetchValue: string;
+  public label: string;
+  public model: string;
+  public fetchValue: string;
 
   goFetch(value) {
     this.fetchValue = value;
@@ -42,12 +43,20 @@ export class InputChoiceDropDownComponent {
 
   select(value) {
     this.model = value;
+    this.label = value.label;
     this.modelChange.emit(value);
     this.items = [];
   }
 
   setValue(value) {
-    this.model = value || null;
+    if (value && value.label) {
+      this.model = value;
+      this.label = value.label;
+    } else {
+      this.model = null;
+      this.label = null;
+    }
+
   }
 }
 
