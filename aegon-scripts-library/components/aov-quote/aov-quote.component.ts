@@ -188,7 +188,10 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
         </div>
         <div class="action-section span6">
           <div class="row-fluid">
-            <label class="label" ></label>
+            <label class="label span12" for="aanvragen">Wilt u een vrijblijvend adviesgesprek?</label>
+            <span id="aanvragen" class="btn btn-orange-icon-square-arrow-right button orange arrow">
+              <a href="#">Adviesgesprek aanvragen</a>
+            </span>
           </div>
         </div>
       </div>
