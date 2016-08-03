@@ -1,7 +1,7 @@
 .quickquote.aov-quote {
   background:none;
   color:#000;
-  max-width:620px;
+  //max-width:620px;
   .calculation {
     width:100%;
     padding:20px 0;
@@ -218,6 +218,27 @@
           color: $black;
         }
       }
+    }
+  }
+
+  #premium-section {
+    //display: flex;
+    /* Small screens */
+    @media all and (max-width: 500px) {
+        //flex-direction: column;
+    }
+    .data-section {
+      flex-wrap: wrap;
+      .data-fields {
+        min-height: 0 !important;
+        margin-left: 0;
+        label {
+          font-family: "senticosansdtregular", Arial, Verdana, sans-serif;
+        }
+      }
+    }
+    .action-section {
+
     }
   }
 }
