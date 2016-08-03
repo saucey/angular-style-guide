@@ -1,6 +1,7 @@
 .personal_details_widget,
 .communication_preferences,
 .lhfs_widget {
+  border-top: 1px solid #aaa;
   @include rem("padding", 30, 0, 40, 0);
   h3 {
     font-weight: normal;
@@ -63,7 +64,7 @@
       &.on {
         &:before {
           content: $font_icons_check;
-          color: $blue;
+          color: #ccc;
         }
       }
       &.off {
