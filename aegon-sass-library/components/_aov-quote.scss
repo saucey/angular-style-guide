@@ -267,6 +267,15 @@
     }
   }
 
+  @media only screen and (max-width : 1140px) and (min-width: 1023px) {
+    .action-section {
+      button.aanvragen-button {
+        width: 100%;
+        max-width: 100%;
+      }
+    }
+  }
+
   @media only screen and (max-width : 1024px) and (min-width: 900px) {
     .action-section {
       label {
