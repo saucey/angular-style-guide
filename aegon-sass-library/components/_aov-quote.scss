@@ -200,6 +200,9 @@
   label, button {
   font-family: "senticosansdtregular", Arial, Verdana, sans-serif;
   }
+  .dark-blue {
+    color: $dark_blue;
+  }
   h1 {
     color: $slightly_darker_blue;
     margin: 0;
@@ -242,6 +245,9 @@
     .action-section {
       label {
         margin-left: 2%;
+        &.aanvragen-label {
+          margin-top: 65px;
+        }
       }
       input[type="text"] {
         height: 50px;
@@ -254,6 +260,44 @@
         display: block;
         margin: 0 0 0 2%;
         height: 50px;
+        &.aanvragen-button {
+          color: $black;
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width : 1024px) and (min-width: 900px) {
+    .action-section {
+      label {
+        margin-bottom: 10px;
+        &.aanvragen-label {
+          margin-top: 100px;
+        }
+      }
+      button {
+        width: 100%;
+        margin-top: 15px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 899px) {
+    .data-section {
+      margin-left: 2%;
+    }
+    .action-section {
+      margin-left: 0;
+      margin-right: 4%;
+      label {
+        margin-top: 30px !important;
+      }
+      input {
+        width: 100%;
+        margin-bottom: 15px;
+      }
+      button {
+        width: 100%;
       }
     }
   }

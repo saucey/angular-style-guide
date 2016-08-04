@@ -179,21 +179,21 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
             <span id="field-verzekerde-uitgaven" class="value span6">€ 1230 netto per maand</span>
           </div>
           <div class="span12 container_12 data-fields">
-            <label class="label span6" for="field-bruto-premie">Bruto premie per maand</label>
-            <span id="field-bruto-premie" class="value span6">€ 167</span>
+            <label class="label span6 dark-blue" for="field-bruto-premie">Bruto premie per maand</label>
+            <span id="field-bruto-premie" class="value span6 dark-blue">€ 167</span>
           </div>
           <div class="span12 container_12 data-fields">
-            <label class="label span6" for="field-netto-premie">Netto premie per maand</label>
-            <span id="field-bruto-premie" class="value span6">€ 108</span>
+            <label class="label span6 dark-blue" for="field-netto-premie">Netto premie per maand</label>
+            <span id="field-bruto-premie" class="value span6 dark-blue">€ 108</span>
           </div>
         </div>
         <div class="action-section span6">
           <div class="row-fluid">
-            <label class="span12" for="text-input">Samenvatting e-mailen</label>
+            <label class="span12 dark-blue" for="text-input">Samenvatting e-mailen</label>
             <input class="span5" id="text-input" placeholder="Uw e-mailadres" tabindex="1" type="text">
             <button class="arrow span4" type="button" disabled>Vesturen</button>
-            <label class="label span12" for="aanvragen">Wilt u een vrijblijvend adviesgesprek?</label>
-            <button class="arrow span7 orange" type="button">Adviesgesprek aanvragen</button>
+            <label class="label span12 aanvragen-label dark-blue" for="aanvragen">Wilt u een vrijblijvend adviesgesprek?</label>
+            <button class="arrow span8 orange aanvragen-button" type="button">Adviesgesprek aanvragen</button>
           </div>
         </div>
       </div>
