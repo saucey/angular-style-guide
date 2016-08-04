@@ -57,6 +57,9 @@
   }
   li {
     &.value {
+      &.on, &.off {
+        padding-left: 5px;
+      }
       &.on:before,
       &.off:before {
         margin-right: 15px;
