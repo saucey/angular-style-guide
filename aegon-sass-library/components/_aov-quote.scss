@@ -214,16 +214,16 @@
     color: $blue;
   }
   .static-section {
+    color: $dark_blue;
     margin-bottom: 21px;
     h3.title {
-      color: $dark_blue;
       margin-bottom: 21px;
     }
     .content {
       ul.bullet {
         margin: 0;
         li:before {
-          color: $black;
+          color: $dark_blue !important;
         }
       }
     }
