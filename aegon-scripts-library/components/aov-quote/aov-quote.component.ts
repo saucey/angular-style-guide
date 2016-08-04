@@ -189,13 +189,11 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
         </div>
         <div class="action-section span6">
           <div class="row-fluid">
-            <label for="text-input" class="span12">Samenvatting e-mailen</label>
-            <input type="text" class="span6" id="text-input" tabindex="1" placeholder="Uw e-mailadres" />
-            <button class="arrow span5" type="button">Vesturen</button>
+            <label class="span12" for="text-input">Samenvatting e-mailen</label>
+            <input class="span5" id="text-input" placeholder="Uw e-mailadres" tabindex="1" type="text">
+            <button class="arrow span4" type="button" disabled>Vesturen</button>
             <label class="label span12" for="aanvragen">Wilt u een vrijblijvend adviesgesprek?</label>
-            <span id="aanvragen" class="span7 btn btn-orange-icon-square-arrow-right button orange arrow">
-              <a href="#">Adviesgesprek aanvragen</a>
-            </span>
+            <button class="arrow span7 orange" type="button">Adviesgesprek aanvragen</button>
           </div>
         </div>
       </div>

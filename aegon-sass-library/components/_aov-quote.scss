@@ -196,7 +196,8 @@
 //}
 
 #aov-quote-summary {
-  label {
+  line-height: 35px;
+  label, button {
   font-family: "senticosansdtregular", Arial, Verdana, sans-serif;
   }
   h1 {
@@ -239,7 +240,21 @@
       }
     }
     .action-section {
-
+      label {
+        margin-left: 2%;
+      }
+      input[type="text"] {
+        height: 50px;
+        margin-right: 10px;
+      }
+      button {
+        position: relative;
+        right: initial;
+        bottom: initial;
+        display: block;
+        margin: 0 0 0 2%;
+        height: 50px;
+      }
     }
   }
 }
