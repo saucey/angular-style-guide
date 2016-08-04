@@ -164,6 +164,16 @@ div.greyoverlay {
   height: 32px;
 }
 
+/*----- Helpers -----*/
+.flleft {
+  float:left;
+}
+.flright {
+  float:left;
+}
+.clearfloat {
+  float: none;
+}
 /*----- UI mobile tap status -----*/
 body.mobile-tap {
 

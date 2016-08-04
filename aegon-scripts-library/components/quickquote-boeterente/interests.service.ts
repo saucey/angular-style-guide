@@ -151,7 +151,6 @@ export class InterestsService {
 				}
 			}
 		}
-		console.log('Interest = ' + interest);
 		return interest;
 
 	}
