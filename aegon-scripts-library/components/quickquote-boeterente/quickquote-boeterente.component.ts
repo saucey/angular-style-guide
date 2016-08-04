@@ -218,7 +218,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteBoet
               </div>
             </div>
             <div class="cta-wrapper">
-              <div class="row">
+              <div class="row clearfix">
                 <a href="#" class="button transparent arrow flleft">Meer over de voor- en nadelen van de opties</a>
                 <a href="/mijnaegon/" class="button green icon-right icon-lock not-loggedin-content">Log in bij Mijn Aegon</a>
               </div>

@@ -241,9 +241,6 @@
       .inputs {
         width: 34%;
       }
-      .field {
-        padding-left: 30px;
-      }
     }
     .result {
       padding-left: 30px;
@@ -272,7 +269,14 @@
     }
   }
 }
-@media screen and (min-width: $rc-m-min-width) and (max-width: $rc-m-max-width) {
+@media screen and (min-width: $rc-m-max-width) {
+  .quickquote.angular.boeterente {
+    .calculation {
+      .field {
+        padding-left: 30px;
+      }
+    }
+  }
 }
 /* Big screens */
 @media screen and (min-width: $rc-l-min-width) {
