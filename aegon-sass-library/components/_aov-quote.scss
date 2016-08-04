@@ -277,7 +277,12 @@
       }
       button {
         width: 100%;
+        max-width: 100%;
         margin-top: 15px;
+      }
+      input {
+        width: 100%;
+        margin-bottom: 15px;
       }
     }
   }
@@ -298,6 +303,7 @@
       }
       button {
         width: 100%;
+        max-width: 100%;
       }
     }
   }

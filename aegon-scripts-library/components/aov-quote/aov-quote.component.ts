@@ -157,7 +157,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
       <h1>Samenvatting</h1>
       <h2 class="subtitle">Uw premie-indicatie</h2>
       <div id="premium-section" class="call-execution-block container_12  same-height row-fluid">
-        <div class="data-section span6 container_12">
+        <div class="data-section span12 container_12">
           <div class="span12 container_12 data-fields">
             <label class="label span6" for="field-geboortedatum">Uw geboortedatum</label>
             <span id="field-geboortedatum" class="value span6">20-03-2013</span>
@@ -187,7 +187,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
             <span id="field-bruto-premie" class="value span6 dark-blue">€ 108</span>
           </div>
         </div>
-        <div class="action-section span6">
+        <div class="action-section span12">
           <div class="row-fluid">
             <label class="span12 dark-blue" for="text-input">Samenvatting e-mailen</label>
             <input class="span5" id="text-input" placeholder="Uw e-mailadres" tabindex="1" type="text">
