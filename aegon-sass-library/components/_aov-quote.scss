@@ -65,9 +65,10 @@
   .max {
     text-align:right;
   }
-  input[type=text], input[type=number], select {
-    width:100%;
-    background: $grey;
+  .gray-field {
+    input[type=text], input[type=number], select {
+      background: $grey;
+    }
   }
   .result {
     -webkit-border-radius:5px;
@@ -195,6 +196,9 @@
 //}
 
 #aov-quote-summary {
+  label {
+  font-family: "senticosansdtregular", Arial, Verdana, sans-serif;
+  }
   h1 {
     color: $slightly_darker_blue;
     margin: 0;
@@ -225,16 +229,13 @@
     //display: flex;
     /* Small screens */
     @media all and (max-width: 500px) {
-        //flex-direction: column;
+      //flex-direction: column;
     }
     .data-section {
       flex-wrap: wrap;
       .data-fields {
         min-height: 0 !important;
         margin-left: 0;
-        label {
-          font-family: "senticosansdtregular", Arial, Verdana, sans-serif;
-        }
       }
     }
     .action-section {
