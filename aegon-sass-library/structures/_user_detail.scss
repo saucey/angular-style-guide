@@ -261,6 +261,10 @@ body.shw-widgets-logged-in {
   .user_detail_widget, .link-logged-in .link-alternative a {
     display: block;
   }
+  /* Class to show content if user is not logged in. */
+  .not-loggedin-content {
+    display: none !important;
+  }
 }
 
 .link-alternative a {

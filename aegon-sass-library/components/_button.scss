@@ -131,7 +131,7 @@ button,
     }
     &.pending:after {
       color: transparent;
-      background-image: url($image_path ) "spinner.gif";
+      background-image: url($image_path + "spinner.gif" );
       background-repeat: no-repeat;
       background-position: center;
       background-size: 70%;;
@@ -139,6 +139,7 @@ button,
     &.icon-lock {
       &:after {
         content: $font_icons_lock;
+        font-size: inherit;
       }
       &.green:after {
         background-color: $lighter_green;

@@ -1,4 +1,5 @@
 .quickquote.angular.boeterente {
+  max-width: 780px;
   input[type=text],
   input[type=number],
   select {
@@ -6,6 +7,7 @@
     text-transform: none;
   }
   select {
+    width: 100%;
     padding: 9px 20px 9px 10px;
     -webkit-appearance: none;
     -moz-appearance:    none;
@@ -31,8 +33,13 @@
     }
     .field {
       margin-bottom: 15px;
-      aegon-input-number, aegon-input-date, aegon-input-radio {
+      aegon-input-radio {
         display: inline-block;
+      }
+      aegon-input-number, aegon-input-date {
+        display: block;
+      }
+      aegon-input-number, aegon-input-date, aegon-input-radio {
         &.error {
           background: none;
           border-radius: 0;
@@ -47,6 +54,7 @@
       }
       label.radio {
         padding-left: 35px;
+        margin-right: 10px;
         > input[type="radio"] {
           position: absolute;
           top: 0;
@@ -60,13 +68,17 @@
       .input{
         &.date {
           display: block;
-          float: left;
           border: 1px solid $slightly_darker_grey;
           border-radius: 3px;
           background-color: $white;
           input {
+            width: 28%;
+            min-width: 52px;
             border: none;
+            border-radius: 0;
             &:last-child {
+              width: 38%;
+              min-width: 53px;
               margin-right: 0;
             }
           }
@@ -74,12 +86,13 @@
         &.number {
           input[type=text] {
             width: 100%;
-            max-width: 180px;
+            max-width: 100%;
           }
         }
       }
       .inputs {
         .button{
+          width: 100%;
           max-width: 100%;
           &[disabled],
           &[disabled]:hover,
@@ -118,16 +131,32 @@
   }
   .result {
     overflow: visible;
+    .amount {
+      margin-right: 0;
+    }
+    .button.arrow{
+      text-decoration: underline;
+      &:before {
+        color: $white;
+      }
+    }
+    .row:first-child {
+      margin-top: 0;
+    }
     .bigger {
       margin-bottom: 25px;
       .label {
         font-family: $font_normal;
         font-size: 24px;
         vertical-align: bottom;
+        select {
+          margin-bottom: 10px;
+        }
       }
       .value {
-        > * {
+        > *, > * span {
           font-size: 36px;
+          text-align: left;
         }
         small {
           font-size: 20px;
@@ -136,7 +165,6 @@
     }
     .small {
       .label {
-        vertical-align: top;
         p {
           line-height: 26px;
         }
@@ -171,8 +199,20 @@
     line-height: 22px;
     color: #000;
   }
+  ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: $grey;
+  }
+  ::-moz-placeholder { /* Firefox 19+ */
+    color: $grey;
+  }
+  :-ms-input-placeholder { /* IE 10+ */
+    color: $grey;
+  }
+  :-moz-placeholder { /* Firefox 18- */
+    color: $grey;
+  }
 }
-
+/* Screen > mobile */
 @include breakpoint($brk-tablet) {
   .quickquote.angular.boeterente {
     .messages.messages--alert {
@@ -191,36 +231,68 @@
       }
     }
     .calculation {
-      @include rem("padding", 30, 30, 18, 20);
+      @include rem("padding", 30, 20, 18);
       h3:before {
         left: 20px;
       }
       .label {
-        width: 60%;
+        width: 65%;
       }
       .inputs {
-        width: 38%;
+        width: 34%;
       }
       .field {
         padding-left: 30px;
       }
     }
     .result {
-      padding-left: 50px;
+      padding-left: 30px;
+      padding-right: 30px;
       .label {
-        width: 38%;
+        width: 34%;
         &:first-child {
-          width: 60%;
+          width: 65%;
         }
         //max-width: 350px;
       }
       .bigger {
         .value {
-          width: 38%;
+          width: 34%;
         } 
       }
       .small {
         .label:last-child {
+        }
+      }
+      .cta-wrapper {
+        .row {
+          text-align: right;
+        }
+      }
+    }
+  }
+}
+@media screen and (min-width: $rc-m-min-width) and (max-width: $rc-m-max-width) {
+}
+/* Big screens */
+@media screen and (min-width: $rc-l-min-width) {
+  .quickquote.angular.boeterente {
+    .calculation {
+      @include rem("padding", 30, 50, 18, 20);
+    }
+    .result {
+      padding-left: 50px;
+      padding-right: 50px;
+    }
+  }
+}
+/* Mobile specific */
+@include breakpoint($brk-mobile) {
+  .quickquote.angular.boeterente {
+    .result {
+      .bigger {
+        .label {
+          margin-bottom: 10px;
         }
       }
     }
