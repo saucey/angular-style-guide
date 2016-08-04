@@ -432,7 +432,7 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
           if (((this.initialAmount - this.repymnt) > penaltyFree)) {
             this.totalFee = (((this.initialAmount - this.repymnt) - penaltyFree) * tcw) / basisFee;
             console.log('Monthly interest payment user input:');
-            this.monthlyFee = this.calculateMonthlyFee(this.initialAmount, this.oldIntRate);
+            this.monthlyFee = this.calculateMonthlyFee((this.initialAmount - this.repymnt), this.oldIntRate);
           }
           else {
             this.totalFee = 0;
