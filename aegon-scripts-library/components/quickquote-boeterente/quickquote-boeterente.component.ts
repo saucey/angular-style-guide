@@ -136,7 +136,6 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteBoet
         </div>
       </div>
       <div *ngIf="calculated">
-      <div>
         <div class="result">
           <div *ngIf="validIntst">
             <div class="bigger">
@@ -164,9 +163,10 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteBoet
                     <p>Na betaling van de omzettingskosten kunt u profiteren van een lagere rente. Het verschil in maandlasten is afhankelijk van de nieuwe rentevastperiode die u wenst.</p>
                   </div>                
                   <div class="row">
-                    <div class="label"><p>Nieuwe rentevastperiode met rente: <b><span *ngIf="newPeriod > -1">{{ newPeriodInt | money }}</span><span *ngIf="newPeriod == -1">- </span>%</b></p>
+                    <div class="label"><p>Nieuwe rentevastperiode<span *ngIf="newPeriod > -1"> met rente: <b>{{ newPeriodInt | money }}%</b></span></p>
                     </div>
                     <div class="label">
+                      <!-- These are the options for the interest period, the value is in months. -->
                       <select [(ngModel)]="newPeriod" class="no-dd" (change)="newPeriod = $event.target.value; calculateNewMonthlyPymnt();">
                         <option [value]="-1">Kies</option>
                         <option [value]="0">Variabele rente</option>

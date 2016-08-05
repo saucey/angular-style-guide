@@ -130,11 +130,12 @@
     }
   }
   .result {
+    line-height: 1.15;
     overflow: visible;
     .amount {
       margin-right: 0;
     }
-    .button.arrow{
+    .button.arrow.transparent{
       text-decoration: underline;
       &:before {
         color: $white;
