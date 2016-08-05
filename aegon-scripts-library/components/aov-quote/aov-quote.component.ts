@@ -200,7 +200,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
             </div>
             <div class="email-resend-wrapper" [hidden]="!reSendEmailShown">
               <label class="span6 dark-blue" for="email-address-field">E-mail verstuurd</label>
-              <button type="button" (click)="emailButtonPending=false" class="button transparent arrow span6">Nogmaals versturen</button>
+              <button type="button" (click)="reSendEmailShown=false" class="button transparent arrow span6">Nogmaals versturen</button>
             </div>
             
             <label class="label span12 aanvragen-label dark-blue" for="aanvragen">Wilt u een vrijblijvend adviesgesprek?</label>
@@ -345,5 +345,7 @@ export class AovQuoteComponent implements OnInit {
       alert("Email sent");
       this.emailButtonPending = false;
     }
+    this.emailButtonPending = false;
+    this.reSendEmailShown = true;
   }
 }
