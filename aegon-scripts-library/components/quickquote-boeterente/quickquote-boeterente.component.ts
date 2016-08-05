@@ -441,10 +441,12 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
 
             tcw = tcw + cw;
           }
-          // Set the value of total fee.
+          // Set the value of total fee and monthly fee.
           if (((this.initialAmount - this.repymnt) > penaltyFree)) {
-            this.totalFee = (((this.initialAmount - this.repymnt) - penaltyFree) * tcw) / basisFee;
-            this.monthlyFee = this.calculateMonthlyFee((this.initialAmount - this.repymnt), this.oldIntRate);
+            let totalFee = (((this.initialAmount - this.repymnt) - penaltyFree) * tcw) / basisFee;
+            this.totalFee = Math.floor(totalFee);
+
+            this.monthlyFee = Math.floor(this.calculateMonthlyFee((this.initialAmount - this.repymnt), this.oldIntRate));
           }
           else {
             this.totalFee = 0;
@@ -487,7 +489,10 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
       });
     }
   }
-
+  /*
+   * Calculates the monthly payment with the new
+   * interest rate.
+   */
   calculateNewMonthlyPymnt(): void {
     // Retrieves the interest rate corresponding to the chosen period.
     if(this.newPeriod > -1){
@@ -496,11 +501,12 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
           this.newPeriodInt = interests;
           let mortgage = this.initialAmount - this.repymnt;
           // New monthly payment setting.
-          this.newMonthlyPymnt = this.calculateMonthlyFee(mortgage, this.newPeriodInt);
+          this.newMonthlyPymnt = Math.floor(this.calculateMonthlyFee(mortgage, this.newPeriodInt));
       });
     }
   }
-
+   /* Calculates the monthly interest fee.
+    */
   private calculateMonthlyFee(mortgage: number, interest: number):number {
     return ((mortgage * interest) / 100) / 12;
   }

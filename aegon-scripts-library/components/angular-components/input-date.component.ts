@@ -32,7 +32,8 @@ export class InputDateComponent {
   @Output() modelChange: any = new EventEmitter();
 
   keydown(event: KeyboardEvent): void {
-    if (event.keyCode > 57) {
+    let kc = event.keyCode;
+    if ((kc > 57 && kc < 96) || kc > 105 ) {
       // No numeric char, so cancel.
       event.preventDefault();
       return;

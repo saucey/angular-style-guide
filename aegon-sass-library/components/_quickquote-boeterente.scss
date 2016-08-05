@@ -67,18 +67,18 @@
       } 
       .input{
         &.date {
+          max-width: 250px;
           display: block;
           border: 1px solid $slightly_darker_grey;
           border-radius: 3px;
           background-color: $white;
           input {
-            width: 28%;
-            min-width: 52px;
+            width: 30%;
             border: none;
             border-radius: 0;
+            margin-right: 0;
             &:last-child {
               width: 38%;
-              min-width: 53px;
               margin-right: 0;
             }
           }
@@ -255,6 +255,7 @@
       .bigger {
         .value {
           width: 34%;
+          white-space: nowrap;
         } 
       }
       .small {
@@ -269,11 +270,14 @@
     }
   }
 }
-@media screen and (min-width: $rc-m-max-width) {
+/* Tablet specific */
+@media screen and (min-width: $rc-m-min-width) and (max-width: $rc-m-max-width) {
   .quickquote.angular.boeterente {
     .calculation {
       .field {
-        padding-left: 30px;
+        label.radio {
+          margin-right: 0;
+        }
       }
     }
   }
@@ -283,6 +287,9 @@
   .quickquote.angular.boeterente {
     .calculation {
       @include rem("padding", 30, 50, 18, 20);
+      .field {
+        padding-left: 30px;
+      }
     }
     .result {
       padding-left: 50px;
