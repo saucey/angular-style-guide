@@ -249,6 +249,9 @@
           margin-top: 65px;
         }
       }
+      p.error {
+        margin-left: 2%;
+      }
       input[type="text"] {
         height: 50px;
         margin-right: 10px;
@@ -316,4 +319,17 @@
       }
     }
   }
+
+  @media screen and (max-width: 350px) {
+      .data-section {
+        .data-fields {
+          label.label, span.value {
+            margin-bottom: 0;
+          }
+        }
+      }
+      button.aanvragen-button {
+        font-size: smaller;
+      }
+    }
 }
