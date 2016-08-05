@@ -191,16 +191,16 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
         <div class="action-section span12">
           <div class="row-fluid">
             <label class="span12 dark-blue" for="email-address-field">Samenvatting e-mailen</label>
-            <div class="email-send-form-wrapper" [hidden]="!reSendEmailShown">
+            <div class="email-send-form-wrapper" [hidden]="reSendEmailShown">
               <input class="span5" id="email-address-field" [(ngModel)]="emailAddress" placeholder="Uw e-mailadres" tabindex="1" type="text">
               <button class="arrow span4" type="button" [class.pending]="emailButtonPending" [disabled]="emailAddress.trim()==''||emailButtonPending" (click)="sendEmailClick()">Vesturen</button>
               <p class="error span12" *ngIf="emailAddressError">
                 Wilt u een geldige e-mailadres invoeren?
               </p>
             </div>
-            <div class="email-resend-wrapper" [hidden]="reSendEmailShown">
-              <label class="span12 dark-blue" for="email-address-field">E-mail verstuurd</label>
-              <button type="button" (click)="emailButtonPending=false" class="button transparent arrow">Nogmaals versturen</button>
+            <div class="email-resend-wrapper" [hidden]="!reSendEmailShown">
+              <label class="span6 dark-blue" for="email-address-field">E-mail verstuurd</label>
+              <button type="button" (click)="emailButtonPending=false" class="button transparent arrow span6">Nogmaals versturen</button>
             </div>
             
             <label class="label span12 aanvragen-label dark-blue" for="aanvragen">Wilt u een vrijblijvend adviesgesprek?</label>
