@@ -184,14 +184,17 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
           </div>
           <div class="span12 container_12 data-fields">
             <label class="label span6 dark-blue" for="field-netto-premie">Netto premie per maand</label>
-            <span id="field-bruto-premie" class="value span6 dark-blue">€ 108</span>
+            <span id="field-netto-premie" class="value span6 dark-blue">€ 108</span>
           </div>
         </div>
         <div class="action-section span12">
           <div class="row-fluid">
-            <label class="span12 dark-blue" for="text-input">Samenvatting e-mailen</label>
-            <input class="span5" id="text-input" placeholder="Uw e-mailadres" tabindex="1" type="text">
-            <button class="arrow span4" type="button" disabled>Vesturen</button>
+            <label class="span12 dark-blue" for="email-address-field">Samenvatting e-mailen</label>
+            <input class="span5" id="email-address-field" [(ngModel)]="emailAddress" placeholder="Uw e-mailadres" tabindex="1" type="text">
+            <p class="error " *ngIf="emailAddressError">
+              Wilt u een geldige e-mailadres invoeren?
+            </p>
+            <button class="arrow span4" type="button" [disabled]="emailAddress.trim()==''" (click)="sendEmailClick()">Vesturen</button>
             <label class="label span12 aanvragen-label dark-blue" for="aanvragen">Wilt u een vrijblijvend adviesgesprek?</label>
             <button class="arrow span8 orange aanvragen-button" type="button">Adviesgesprek aanvragen</button>
           </div>
@@ -242,6 +245,8 @@ export class AovQuoteComponent implements OnInit {
   public startingTermError: boolean;
   public insuranceAmount: number;
   public insuranceAmountError: boolean;
+  public emailAddress: string = "";
+  public emailAddressError: boolean;
   public grossMonthly: number;
   public netMonthly: number;
 
@@ -317,6 +322,24 @@ export class AovQuoteComponent implements OnInit {
     this.profession = null;
     if (obj && obj.key) {
       this.profession = obj.key;
+    }
+  }
+
+  validateEmail() {
+    var emailAddress_regexp = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
+
+    this.emailAddressError = false;
+
+    if (this.emailAddress != "" && (this.emailAddress.length <= 5 || !emailAddress_regexp.test(this.emailAddress))) {
+      this.emailAddressError = true;
+    }
+
+    return this.emailAddressError;
+  }
+
+  sendEmailClick() {
+    if(!this.validateEmail()) {
+      alert("Email sent");
     }
   }
 }
