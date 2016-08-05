@@ -9,7 +9,7 @@ import {CheckboxComponent, CheckboxValueAccessor} from '../angular-components/ch
 import {MoneyPipe} from "../angular-components/money.pipe";
 import {SoloSliderComponent, SoloSliderValueAccessor} from "../angular-components/solo-slider.component";
 import {InputRadioComponent, InputRadioValueAccessor} from '../angular-components/input-radio.component';
-import {InputChoiceDropDownComponent, InputChoiceDropDownValueAccessor} from "../angular-components/input-choice-dropdown.component";
+import {InputChoiceDropDownComponent} from "../angular-components/input-choice-dropdown.component";
 
 var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTemplate'));
 
@@ -18,13 +18,14 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
   directives: [
     HelpComponent, InputNumberComponent, InputNumberValueAccessor, InputDateComponent, InputDateValueAccessor,
     CheckboxComponent, CheckboxValueAccessor, SoloSliderComponent, SoloSliderValueAccessor, InputRadioComponent, InputRadioValueAccessor,
-    InputChoiceDropDownComponent, InputChoiceDropDownValueAccessor
+    InputChoiceDropDownComponent
   ],
   template: templateElem ? templateElem.value : `
   <div class="quickquote angular aov-quote">
-    <template [ngIf]="step !== 'summary'">
+    <section class="personal-details" *ngIf="page !== 'summary'">
+      
       <h3 prefix="/">Uw gegevens</h3>
-      <div class="field">
+      <div class="field gray-field">
         <div class="label">
           Wat is uw geboortedatum?
         </div>
@@ -32,10 +33,8 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
           <aegon-input-date [(ngModel)]="birthDate"></aegon-input-date>
         </div>
       </div>
-      <p class="error" *ngIf="birthDateError">
-        Wilt u een geldige geboortedatum invoeren?
-      </p>
-      <div class="field">
+      
+      <div class="field gray-field">
         <div class="label">
           Wat is uw beroep?
           <aegon-help>
@@ -44,19 +43,17 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
         </div>
         <div class="inputs">
           <aegon-input-choice-dropdown
-            [(ngModel)]="profession"
+            [model]="profession"
             [items]="professions"
             [emptyMessage]="'Er zijn geen beroepen gevonden'"
             [minChars]="2"
-            (fetch)="fetchProfessions($event)"
-            (select)="selectProfession($event)">
+            (aaFetch)="fetchProfessions($event)"
+            (aaSelect)="profession = $event">
           </aegon-input-choice-dropdown>
         </div>
       </div>
-      <p class="error" *ngIf="professionError">
-        Wilt u een geldig beroep selecteren?
-      </p>
-      <div class="field">
+      
+      <div class="field gray-field">
         <div class="label">
           Wat is uw bruto jaarinkomen?
           <aegon-help>
@@ -67,21 +64,23 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
           <aegon-input-number [(ngModel)]="grossIncome" prefix="€" [max]="99999999"></aegon-input-number>
         </div>
       </div>
-      <p class="error" *ngIf="grossIncomeError">
-        Wilt u een jaarinkomen invoeren?
-      </p>
-      <div class="field">
-        <div class="label">        
-        </div>
+      
+      <div class="field gray-field">
+        <div class="label"></div>
         <div class="inputs">
           <button class="button icon-right icon-calculator" (click)="showCalculation()">
             Bereken premie
-          </button>      
+          </button>
         </div>
-
       </div>
+      
+      <p class="error" *ngIf="birthDateError || professionError || grossIncomeError">
+        Wilt u uw alle vragen beantwoorden.
+      </p>
+    </section>
     
-      <div class="calculation indication" *ngIf="step === 'calculation'">
+    <section *ngIf="step === 'calculation'" class="calculation">
+      <div class="calculation indication">
         <h3 prefix="/">Uw keuzes</h3>
         <div class="field">
           <div class="label">
@@ -152,8 +151,10 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
           </div>
         </div>
       </div>
-    </template>
-    <div id="aov-quote-summary" *ngIf="step === 'summary'">
+    </section>
+    
+    
+    <div id="aov-quote-summary" *ngIf="page === 'summary'">
       <h1>Samenvatting</h1>
       <h2 class="subtitle">Uw premie-indicatie</h2>
       <div id="premium-section" class="call-execution-block container_12  same-height row-fluid">
@@ -191,10 +192,10 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
           <div class="row-fluid">
             <label class="span12 dark-blue" for="email-address-field">Samenvatting e-mailen</label>
             <input class="span5" id="email-address-field" [(ngModel)]="emailAddress" placeholder="Uw e-mailadres" tabindex="1" type="text">
-            <p class="error " *ngIf="emailAddressError">
+            <button class="arrow span4" type="button" [class.pending]="emailButtonPending" [disabled]="emailAddress.trim()==''||emailButtonPending" (click)="sendEmailClick()">Vesturen</button>
+            <p class="error span12" *ngIf="emailAddressError">
               Wilt u een geldige e-mailadres invoeren?
             </p>
-            <button class="arrow span4" type="button" [disabled]="emailAddress.trim()==''" (click)="sendEmailClick()">Vesturen</button>
             <label class="label span12 aanvragen-label dark-blue" for="aanvragen">Wilt u een vrijblijvend adviesgesprek?</label>
             <button class="arrow span8 orange aanvragen-button" type="button">Adviesgesprek aanvragen</button>
           </div>
@@ -227,14 +228,15 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
   pipes: [MoneyPipe]
 })
 export class AovQuoteComponent implements OnInit {
-  grossYearAmount: number = 17500;
-  minGrossYearAmount: number = 700;
-  maxGrossYearAmount: number = 35000;
 
+  @Input() public page: string;
 
   public step: string;
-  public professions: any[];
+  public grossYearAmount: number = 17500;
+  public minGrossYearAmount: number = 700;
+  public maxGrossYearAmount: number = 35000;
 
+  public professions: any[];
   public birthDate: string;
   public birthDateError: boolean;
   public profession: string;
@@ -247,6 +249,7 @@ export class AovQuoteComponent implements OnInit {
   public insuranceAmountError: boolean;
   public emailAddress: string = "";
   public emailAddressError: boolean;
+  public emailButtonPending: boolean = false;
   public grossMonthly: number;
   public netMonthly: number;
 
@@ -278,7 +281,6 @@ export class AovQuoteComponent implements OnInit {
     return !hasErrors;
   }
 
-
   validateChoices(): boolean {
     let hasErrors: boolean = false;
     this.startingTermError = false;
@@ -297,32 +299,24 @@ export class AovQuoteComponent implements OnInit {
   }
 
   showCalculation() {
+    // Show the next steps that the user needs to fill in.
     if (this.validatePersonalInformation()) {
       this.step = 'calculation';
     }
   }
 
   showSummary() {
-    if (this.validatePersonalInformation() && this.validateChoices()) {
-    }
-    this.step = 'summary';
+    // This needs to redirect to another page.
+    console.log('show summary');
+    this.page = 'summary';
   }
 
   fetchProfessions(searchString) {
-    this.professions = [
-      {label: 'Programmeur', key: 'Programmeur'},
-      {label: 'Goeroe', key: 'Goeroe'},
-      {label: 'Putjeschepper type A', key: 'Putjeschepper type A'},
-      {label: 'Putjeschepper type B', key: 'Putjeschepper type B'},
-      {label: 'Kaasmaker', key: 'Kaasmaker'}
-    ]
-  }
+    console.log('fetchProfessions');
+    // Dummy professions
+    this.professions = ['Programmeur', 'Goeroe', 'Putjeschepper type A', 'Putjeschepper type B', 'Kaasmaker']
 
-  selectProfession(obj) {
-    this.profession = null;
-    if (obj && obj.key) {
-      this.profession = obj.key;
-    }
+    // Create service call.
   }
 
   validateEmail() {
