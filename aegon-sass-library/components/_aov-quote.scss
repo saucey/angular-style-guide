@@ -1,7 +1,7 @@
 .quickquote.aov-quote {
-  background:none;
+  background: none;
   color:#000;
-  //max-width:620px;
+
   .calculation {
     width:100%;
     padding:20px 0;
@@ -24,6 +24,7 @@
       margin-bottom:.5em;
     }
   }
+
   h3 {
     margin-left:0;
     color:#000;
@@ -38,30 +39,27 @@
       font-size: 0.75rem;
     }
     .label {width:60%;max-width:368px;}
-      .label + * {float:right;text-align:right;}
     .inputs {width:40%;max-width:180px;}
     .button.icon-calculator {width:180px;}
   }
-  .field:last-child {
-    .label {
-      width:auto;
-    }
-    .button {}
-  }
+
   .slider-container {
     clear:both;
     margin:2em 0 .5em;
     float:left;
     padding-right:20px;
   }
+
   .noUi-origin {
     margin-right:-20px;
     background:#ecede7;
   }
+
   .min, .max {
     width:50%;
     float:left;
   }
+
   .max {
     text-align:right;
   }

@@ -94,13 +94,62 @@
       margin: 9px 0 16px;
       line-height: 26px;
     }
+
     .input.date  {
-      input {
-        width:52px;
-        padding-right:0;
+      display: inline-block;
+      position: relative;
+      white-space: nowrap;
+
+      &:after,
+      &:before {
+        content: '/';
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        padding: 9px 0;
+        opacity: 0.4;
+        pointer-events: none;
+        clear: both;
+        visibility: visible;
       }
-      input + input + input {width:64px;}
+
+      &:before {
+        left: 53px;
+      }
+      &:after {
+        left: 103px;
+      }
+
+      input {
+        margin-right: 0;
+        padding-right: 0;
+      }
+
+      .year {
+        width: 72px;
+        border-radius: 0 5px 5px 0;
+        border-left: none;
+      }
+
+      .day,
+      .month {
+        text-align: right;
+        position: relative;
+        width: 54px;
+      }
+
+      .month {
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+      }
+
+      .day {
+        border-radius: 5px 0 0 5px;
+        border-right: none;
+      }
     }
+
     .inputs {
       float: left;
       width: 50%;
@@ -282,6 +331,14 @@
       overflow-x: visible;
       overflow-y: auto;
       border: solid 1px $slightly_darker_grey;
+
+      &:after {
+        content: ' ';
+        clear: both;
+        display: block;
+        height: 0;
+        visibility: hidden;
+      }
     }
 
     .choice-dropdown-choice {
