@@ -194,6 +194,9 @@
 //}
 
 #aov-quote-summary {
+  [hidden] {
+    display: none !important;
+  }
   line-height: 35px;
   label, button {
   font-family: "senticosansdtregular", Arial, Verdana, sans-serif;

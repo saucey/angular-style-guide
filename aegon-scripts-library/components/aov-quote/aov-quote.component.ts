@@ -191,11 +191,18 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
         <div class="action-section span12">
           <div class="row-fluid">
             <label class="span12 dark-blue" for="email-address-field">Samenvatting e-mailen</label>
-            <input class="span5" id="email-address-field" [(ngModel)]="emailAddress" placeholder="Uw e-mailadres" tabindex="1" type="text">
-            <button class="arrow span4" type="button" [class.pending]="emailButtonPending" [disabled]="emailAddress.trim()==''||emailButtonPending" (click)="sendEmailClick()">Vesturen</button>
-            <p class="error span12" *ngIf="emailAddressError">
-              Wilt u een geldige e-mailadres invoeren?
-            </p>
+            <div class="email-send-form-wrapper" [hidden]="!reSendEmailShown">
+              <input class="span5" id="email-address-field" [(ngModel)]="emailAddress" placeholder="Uw e-mailadres" tabindex="1" type="text">
+              <button class="arrow span4" type="button" [class.pending]="emailButtonPending" [disabled]="emailAddress.trim()==''||emailButtonPending" (click)="sendEmailClick()">Vesturen</button>
+              <p class="error span12" *ngIf="emailAddressError">
+                Wilt u een geldige e-mailadres invoeren?
+              </p>
+            </div>
+            <div class="email-resend-wrapper" [hidden]="reSendEmailShown">
+              <label class="span12 dark-blue" for="email-address-field">E-mail verstuurd</label>
+              <button type="button" (click)="emailButtonPending=false" class="button transparent arrow">Nogmaals versturen</button>
+            </div>
+            
             <label class="label span12 aanvragen-label dark-blue" for="aanvragen">Wilt u een vrijblijvend adviesgesprek?</label>
             <button class="arrow span8 orange aanvragen-button" type="button">Adviesgesprek aanvragen</button>
           </div>
@@ -252,6 +259,7 @@ export class AovQuoteComponent implements OnInit {
   public emailButtonPending: boolean = false;
   public grossMonthly: number;
   public netMonthly: number;
+  public reSendEmailShown: boolean = false;
 
   constructor(
     private http:Http
@@ -332,8 +340,10 @@ export class AovQuoteComponent implements OnInit {
   }
 
   sendEmailClick() {
+    this.emailButtonPending = true;
     if(!this.validateEmail()) {
       alert("Email sent");
+      this.emailButtonPending = false;
     }
   }
 }
