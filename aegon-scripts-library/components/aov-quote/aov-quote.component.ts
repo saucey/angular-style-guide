@@ -342,10 +342,8 @@ export class AovQuoteComponent implements OnInit {
   sendEmailClick() {
     this.emailButtonPending = true;
     if(!this.validateEmail()) {
-      alert("Email sent");
-      this.emailButtonPending = false;
+      this.reSendEmailShown = true;
     }
     this.emailButtonPending = false;
-    this.reSendEmailShown = true;
   }
 }
