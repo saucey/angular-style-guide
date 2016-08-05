@@ -240,6 +240,10 @@
       .data-fields {
         min-height: 0 !important;
         margin-left: 0;
+        display: block;
+        label.label, span.value {
+          margin-bottom: 0;
+        }
       }
     }
     .action-section {
@@ -321,13 +325,6 @@
   }
 
   @media screen and (max-width: 350px) {
-      .data-section {
-        .data-fields {
-          label.label, span.value {
-            margin-bottom: 0;
-          }
-        }
-      }
       button.aanvragen-button {
         font-size: smaller;
       }
