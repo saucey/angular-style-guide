@@ -275,7 +275,6 @@ export class AovQuoteComponent implements OnInit {
     return !hasErrors;
   }
 
-
   validateChoices(): boolean {
     let hasErrors: boolean = false;
     this.startingTermError = false;
@@ -294,12 +293,14 @@ export class AovQuoteComponent implements OnInit {
   }
 
   showCalculation() {
+    // Show the next steps that the user needs to fill in.
     if (this.validatePersonalInformation()) {
       this.step = 'calculation';
     }
   }
 
   showSummary() {
+    // This needs to redirect to another page.
     console.log('show summary');
     this.page = 'summary';
   }
@@ -307,10 +308,9 @@ export class AovQuoteComponent implements OnInit {
   fetchProfessions(searchString) {
     console.log('fetchProfessions');
     // Dummy professions
-
-
-
     this.professions = ['Programmeur', 'Goeroe', 'Putjeschepper type A', 'Putjeschepper type B', 'Kaasmaker']
+
+    // Create service call.
   }
 
 }
