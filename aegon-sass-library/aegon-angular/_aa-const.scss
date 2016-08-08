@@ -1,0 +1,6 @@
+// Animation constants
+$animation_short: 150ms;
+$animation_normal: 300ms;
+
+// Additional breakpoint for mobile portrait
+$brk-mobile-portrait: 'only screen' (max-width 350px);

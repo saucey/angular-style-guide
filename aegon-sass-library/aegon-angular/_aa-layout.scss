@@ -1,0 +1,31 @@
+/**
+ * Generic layout css
+ */
+
+// Split view on larger devices; all in 1 column on smaller devices
+@include breakpoint($brk-ipad-portrait) {
+  .aa-split-view {
+    display: table;
+    width: 100%;
+  }
+  .aa-split-view__left, .aa-split-view__right {
+    display: table-cell;
+    vertical-align: top;
+    width: 50%;
+  }
+}
+@include breakpoint($brk-mobile) {
+  .aa-split-view {
+    display: block;
+  }
+  .aa-split-view__left, .aa-split-view__right {
+    display: block;
+    width: auto;
+  }
+}
+
+// Float layout some items
+.aa-group {
+  display: inline-block;
+  text-align: left;
+}

@@ -1,0 +1,33 @@
+/**
+ * Global Aegon Angular classes
+ * Only use a global class for very generic and frequently reused styles
+ * Used for: default backgrounds, fonts, layout fixes, animations
+ */
+
+// Ensures the parent element gets the right height when it has floating children
+// http://stackoverflow.com/questions/9543541/what-does-the-clearfix-class-do-in-css
+.aa__clearfix:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: " ";
+	clear: both;
+	height: 0;
+}
+
+// Fade in animation class
+.aa-fade-in {
+  opacity: 0;  /* make things invisible upon start */
+  animation: aa-fade-in ease-in 1s;
+  animation-fill-mode:forwards;
+  animation-duration:1s;
+}
+// animation keyframes
+@keyframes aa-fade-in {
+  from {
+    opacity: 0;
+  } to {
+    opacity:1;
+  }
+}
+

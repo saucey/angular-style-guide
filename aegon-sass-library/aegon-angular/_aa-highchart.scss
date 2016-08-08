@@ -1,0 +1,14 @@
+/**
+ * Charting module styling. Highcharts.
+ */
+
+// A generic highchart area
+.aa-highchart {
+  background-color: white;
+  height: 300px;
+  cursor: default;
+  // Style plot lines
+  .highcharts-plot-line-label {
+		font-family: $font_light;
+  }
+}

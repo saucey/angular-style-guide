@@ -10,7 +10,7 @@
   }
   .ui-slider .ui-slider-range {
     background: $white;
-    
+
   }
   .ui-slider-handle {
     position: absolute;
@@ -23,7 +23,7 @@
     outline: 0;
     background: $white;
     box-shadow: 1px 1px 1px $darker_grey;
-
+    left: -10px;
     -webkit-appearance: none;
   }
   .ui-slider-handle:hover {
