@@ -80,7 +80,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteBoet
                 Dit jaar
               </div>
               <div class="inputs">
-                <aegon-input-number prefix="€" [(ngModel)]="pymntThisYear"></aegon-input-number>
+                <aegon-input-number prefix="€" [(ngModel)]="pymntThisYear" (blur)="validate()" [class.error]="pymntThisYear > 0 && pymtsErr"></aegon-input-number>
               </div>
             </div>
             <div class="field">
@@ -88,7 +88,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteBoet
                 Voorgaande jaren
               </div>
               <div class="inputs">
-                <aegon-input-number prefix="€" [(ngModel)]="pymntPrevYears"></aegon-input-number>
+                <aegon-input-number prefix="€" [(ngModel)]="pymntPrevYears" (blur)="validate()" [class.error]="pymntPrevYears > 0 && pymtsErr"></aegon-input-number>
               </div>
             </div>
           </div>
@@ -143,7 +143,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteBoet
                 <span class="label">Indicatie omzettingskosten</span>
                 <div class="value">
                   <span class="curr">€</span>
-                  <span class="amount">{{totalFee | money}}*</span>
+                  <span class="amount">{{ totalFee | money }}*</span>
                 </div>
                 <div class="small">
                   <div class="row">
@@ -182,14 +182,14 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteBoet
                     <div class="label"><p>Huidige rente per maand</p></div>
                     <span class="value">
                       <span class="curr">€</span>
-                      <span class="amount">{{monthlyFee | money}}</span> <small>bruto</small>
+                      <span class="amount">{{ monthlyFee | money }}</span> <small>bruto</small>
                     </span>
                   </div>
                   <div class="row">
                     <div class="label"><p>Nieuwe rente per maand</p></div>
                     <span class="value">
                       <span class="curr">€</span>
-                      <span class="amount"><span *ngIf="newPeriod > -1">{{newMonthlyPymnt | money}}</span><span *ngIf="newPeriod == -1">- </span></span> <small>bruto</small>
+                      <span class="amount"><span *ngIf="newPeriod > -1">{{ newMonthlyPymnt | money }}</span><span *ngIf="newPeriod == -1">- </span></span> <small>bruto</small>
                     </span>
                   </div>
                 </div>
@@ -225,6 +225,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteBoet
             </div>
           </div>
           <div *ngIf="!validIntst" class="not-possible">
+            <!-- User interest lower than market interest message -->
             <h4>Berekening niet mogelijk</h4>
             <p>Het ingevoerde rentepercentage is lager dan de nu geldende marktrente. Het is daarom niet mogelijk om de omzettingskosten te berekenen. Controleer of u het juiste rentepercentage heeft ingevoerd.</p>
           </div>
@@ -249,7 +250,7 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
   // User entered data vars.
   mortgageType: number = 0;
   initialAmount: number = 0;
-  extraPymnt: boolean;
+  extraPymnt: boolean = false;
   pymntThisYear: number = 0;
   pymntPrevYears: number = 0;
   interestPeriodEnd: string;
@@ -276,6 +277,7 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
   errorsHighlighted: boolean = false;
   mortgageTypeErr: boolean = false;
   initialAmountErr: boolean = false;
+  pymtsErr: boolean = false;
   interestPeriodEndErr: boolean = false;
   oldIntRateErr: boolean = false;
   nhgErr: boolean = false;
@@ -324,6 +326,7 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
 
     this.isReady = (this.mortgageType > 0 &&
       this.initialAmount > 0  &&
+      (!this.extraPymnt || this.extraPymnt && (this.initialAmount > (this.pymntThisYear + this.pymntPrevYears))) &&
       validateDate(this.interestPeriodEnd, true) &&
       this.oldIntRate > 0 &&
       this.nhg !== undefined);
@@ -342,8 +345,11 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
     // Mortgage type error.
     this.mortgageTypeErr = (this.mortgageType === 0) ? true : false;
 
+    // Extra payments higher than mortgage value error.
+    this.pymtsErr = this.extraPymnt && (this.initialAmount <= (this.pymntPrevYears + this.pymntThisYear));
+
     // Initial amount error.
-    this.initialAmountErr = (this.initialAmount === 0 || this.initialAmount === null) ? true : false;
+    this.initialAmountErr = (this.initialAmount === 0 || this.initialAmount === null || this.pymtsErr) ? true : false;
 
     // Interest period end.
     this.interestPeriodEndErr = validateDate(this.interestPeriodEnd, true) ? false : true;
@@ -427,7 +433,6 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
           // Market monthly interest rate.
           newMonthlyIntRate = this.newIntRate / 12;
 
-
           // 4.4. Define interest for 1 period based on market interest.
           let newPeriodIntst = ((newMonthlyIntRate * basisFee) / 100).toFixed(2);
 
@@ -444,14 +449,13 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
           // Set the value of total fee and monthly fee.
           if (((this.initialAmount - this.repymnt) > penaltyFree)) {
             let totalFee = (((this.initialAmount - this.repymnt) - penaltyFree) * tcw) / basisFee;
-            this.totalFee = Math.floor(totalFee);
+            this.totalFee = Math.round(totalFee);
 
-            this.monthlyFee = Math.floor(this.calculateMonthlyFee((this.initialAmount - this.repymnt), this.oldIntRate));
+            this.monthlyFee = Math.round(this.calculateMonthlyFee((this.initialAmount - this.repymnt), this.oldIntRate));
           }
           else {
             this.totalFee = 0;
           }
-
           // Removes the class pending in the button.
           this.calculating = false;
           // Shows the value.
@@ -501,7 +505,7 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
           this.newPeriodInt = interests;
           let mortgage = this.initialAmount - this.repymnt;
           // New monthly payment setting.
-          this.newMonthlyPymnt = Math.floor(this.calculateMonthlyFee(mortgage, this.newPeriodInt));
+          this.newMonthlyPymnt = Math.round(this.calculateMonthlyFee(mortgage, this.newPeriodInt));
       });
     }
   }
