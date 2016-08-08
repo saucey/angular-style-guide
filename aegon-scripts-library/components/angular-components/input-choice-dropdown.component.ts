@@ -7,21 +7,21 @@ import {CONST_EXPR} from "angular2/src/facade/lang";
   template: `
     <span class="input choice-dropdown" #dropDownEl>
       <input #inputEl type="text" [attr.placeholder]="placeholder" [attr.required]="required"
-             [ngModel]="model" (ngModelChange)="modelChange($event)" (blur)="closeDropDown(dropDownEl)">
+             [ngModel]="model.label" (ngModelChange)="modelChange($event)" (blur)="closeDropDown(dropDownEl)">
       <ul class="choice-dropdown-choices" *ngIf="enabled && fetchValue.length >= minChars">
         <li *ngIf="!items && emptyMessage">{{emptyMessage}}</li>
-        <li class="choice-dropdown-choice" *ngFor="#item of items" (click)="select(item)">{{item}}</li>
+        <li class="choice-dropdown-choice" *ngFor="#item of items" (click)="select(item)">{{item.label}}</li>
       </ul>
     </span>
   `
 })
 export class InputChoiceDropDownComponent {
+  @Input()  model: any;
   @Input()  required: boolean;
   @Input()  placeholder: string;
   @Input()  emptyMessage: string;
   @Input()  items: string[] = [];
   @Input()  minChars: number = 2;
-  @Input()  model: any;
 
   @Output() aaSelect: EventEmitter<any> = new EventEmitter();
   @Output() aaFetch: EventEmitter<any> = new EventEmitter();
@@ -38,7 +38,7 @@ export class InputChoiceDropDownComponent {
       this.prevValue = value;
 
       if (this.model) {
-        this.aaSelect.emit(null);
+        this.aaSelect.emit({});
       }
 
       // Set fetch values
