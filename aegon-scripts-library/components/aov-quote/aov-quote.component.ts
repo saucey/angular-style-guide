@@ -216,7 +216,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
             </div>
             
             <label class="label span12 aanvragen-label dark-blue" for="aanvragen">Wilt u een vrijblijvend adviesgesprek?</label>
-            <button class="arrow span8 orange aanvragen-button" type="button">Adviesgesprek aanvragen</button>
+            <a class="arrow span8 orange aanvragen-button button" href="https://www.aegon.nl/zakelijk/inkomensverzekeringen/arbeidsongeschiktheidsverzekering/afspraak-arbeidsongeschiktheidsverzekering-advies">Neem contact met mij op</a>
           </div>
         </div>
       </div>

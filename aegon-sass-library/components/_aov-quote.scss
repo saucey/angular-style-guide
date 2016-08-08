@@ -261,7 +261,7 @@
         height: 50px;
         margin-right: 10px;
       }
-      button {
+      button, .button {
         position: relative;
         right: initial;
         bottom: initial;
@@ -284,7 +284,7 @@
 
   @media only screen and (max-width : 1140px) and (min-width: 1023px) {
     .action-section {
-      button.aanvragen-button {
+      .aanvragen-button {
         width: 100%;
         max-width: 100%;
       }
@@ -333,7 +333,7 @@
   }
 
   @media screen and (max-width: 350px) {
-      button.aanvragen-button {
+      .aanvragen-button {
         font-size: smaller;
       }
     }
