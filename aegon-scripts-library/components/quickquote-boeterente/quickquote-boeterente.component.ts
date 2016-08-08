@@ -80,7 +80,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteBoet
                 Dit jaar
               </div>
               <div class="inputs">
-                <aegon-input-number prefix="€" [(ngModel)]="pymntThisYear" (blur)="validate()" [class.error]="initialAmountErr"></aegon-input-number>
+                <aegon-input-number prefix="€" [(ngModel)]="pymntThisYear" (blur)="validate()" [class.error]="pymntThisYear > 0 && pymtsErr"></aegon-input-number>
               </div>
             </div>
             <div class="field">
@@ -88,7 +88,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteBoet
                 Voorgaande jaren
               </div>
               <div class="inputs">
-                <aegon-input-number prefix="€" [(ngModel)]="pymntPrevYears" (blur)="validate()" [class.error]="initialAmountErr"></aegon-input-number>
+                <aegon-input-number prefix="€" [(ngModel)]="pymntPrevYears" (blur)="validate()" [class.error]="pymntPrevYears > 0 && pymtsErr"></aegon-input-number>
               </div>
             </div>
           </div>
@@ -344,7 +344,7 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
   highlightErrors(): void {
     // Mortgage type error.
     this.mortgageTypeErr = (this.mortgageType === 0) ? true : false;
-    
+
     // Extra payments higher than mortgage value error.
     this.pymtsErr = this.extraPymnt && (this.initialAmount <= (this.pymntPrevYears + this.pymntThisYear));
 
