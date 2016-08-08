@@ -344,7 +344,8 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
   highlightErrors(): void {
     // Mortgage type error.
     this.mortgageTypeErr = (this.mortgageType === 0) ? true : false;
-
+    
+    // Extra payments higher than mortgage value error.
     this.pymtsErr = this.extraPymnt && (this.initialAmount <= (this.pymntPrevYears + this.pymntThisYear));
 
     // Initial amount error.
