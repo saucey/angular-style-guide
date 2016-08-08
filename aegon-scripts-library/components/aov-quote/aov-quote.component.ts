@@ -199,7 +199,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
               </p>
             </div>
             <div class="email-resend-wrapper" [hidden]="!reSendEmailShown">
-              <label class="span6 dark-blue" for="email-address-field">E-mail verstuurd</label>
+              <label class="span5 dark-blue" for="email-address-field">E-mail verstuurd</label>
               <button type="button" (click)="reSendEmailShown=false" class="button transparent arrow span6">Nogmaals versturen</button>
             </div>
             

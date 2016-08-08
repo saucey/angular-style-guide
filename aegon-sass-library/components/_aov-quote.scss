@@ -272,6 +272,13 @@
           color: $black;
         }
       }
+      .email-resend-wrapper {
+        button {
+          padding: 0 0 0 12px;
+          height: 35px;
+          margin: 0;
+        }
+      }
     }
   }
 
