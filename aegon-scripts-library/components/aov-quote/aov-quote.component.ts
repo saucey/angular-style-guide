@@ -33,12 +33,18 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
           <aegon-input-date [(ngModel)]="birthDate"></aegon-input-date>
         </div>
       </div>
-      
+      <p class="error" *ngIf="birthDateError">
+          Controleer of uw geboortedatum klopt. Is dit juist? Dan is uw leeftijd te dicht op de maximale leeftijd
+          die wij voor uw beroep verzekeren. Of u bent jonger dan 18 jaar. Neem contact op met een adviseur voor
+          een advies op maat.
+      </p>
+        
       <div class="field gray-field">
         <div class="label">
           Wat is uw beroep?
           <aegon-help>
-            Maak uw beroepskeuze
+            Vul de eerste letters van uw beroep in en kies uw beroep uit de lijst. Staat uw beroep er niet tussen? 
+            Kies dan het beroep dat het best bij uw werkzaamheden past.
           </aegon-help>          
         </div>
         <div class="inputs">
@@ -52,19 +58,27 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
           </aegon-input-choice-dropdown>
         </div>
       </div>
-      
+      <p class="error" *ngIf="professionError">
+        Voor dit beroep kan geen premie worden berekend. Neem contact op met een adviseur voor een advies op maat.
+      </p>
+            
       <div class="field gray-field">
         <div class="label">
           Wat is uw bruto jaarinkomen?
           <aegon-help>
-            Maak uw beroepskeuze
+            Vul uw bruto inkomen in voor aftrek van belasting. Als dit schommelt, geeft u een gemiddelde over de 
+            afgelopen drie jaar. Als starter geeft u een indicatie wat u denkt te gaan verdienen.
           </aegon-help>          
         </div>
         <div class="inputs">
-          <aegon-input-number [(ngModel)]="grossIncome" prefix="€" [max]="99999999"></aegon-input-number>
+          <aegon-input-number [(ngModel)]="grossIncome" prefix="€" [max]="1000000"></aegon-input-number>
         </div>
       </div>
-      
+      <p class="error" *ngIf="grossIncomeError">
+        Geef hier uw bruto jaarinkomen op. Deze moet minimaal €3.125 zijn. U kunt 80% van uw inkomen voor 
+        arbeidsongeschiktheid verzekeren.
+      </p>
+            
       <div class="field gray-field">
         <div class="label"></div>
         <div class="inputs">
@@ -74,9 +88,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
         </div>
       </div>
       
-      <p class="error" *ngIf="birthDateError || professionError || grossIncomeError">
-        Wilt u uw alle vragen beantwoorden.
-      </p>
+
     </section>
     
     <section *ngIf="step === 'calculation'" class="calculation">
@@ -236,7 +248,11 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
 })
 export class AovQuoteComponent implements OnInit {
 
-  @Input() public page: string;
+  @Input()  public  page: string;
+  @Input()  private mailUrl: string;
+  @Input()  private professionUrlCredentials: string = 'appAegonNLCalculateTST:YXBwQWVnb25OTENhbGN1bGF0ZVRTVDo3T3V3Tk5UVlM0ako4bU81RjBiSA';
+  @Input()  private professionUrl: string = 'http://ail.test.intra.aegon.nl/US_RestGatewayWeb/rest/requestResponse/BS_AE_POLIS_AOV_02/retrieveProfessions';
+  @Input()  private summaryPath: string = '';
 
   public step: string;
   public grossYearAmount: number = 17500;
@@ -261,27 +277,85 @@ export class AovQuoteComponent implements OnInit {
   public netMonthly: number;
   public reSendEmailShown: boolean = false;
 
+  private rawProfessions: string[];
+  private credentials: string;
+  public  serviceError: boolean;
+
+
+  //TODO variables in session storage
+  // aovQQ
+  //   aovBirthDate     aovProfession     aovGrossIncome     aovStartingTerm     aovInsuranceAmount    aovGrossMonthly   aovNetMonthly
+  //
+
   constructor(
     private http:Http
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.initProfessions();
+  }
+
+  handleError(error: Response) {
+    this.serviceError = true;
+    console.log('Server error', error);
+    return Observable.throw('Server error');
+  }
+
+  initProfessions() {
+    let options:any = {};
+    options.withCredentials = true;
+
+    let headers = new Headers({"Authorization" : `Basic ${this.professionUrlCredentials}`});
+    options.headers = headers;
+
+    return this.http.get(this.professionUrl, options)
+       .toPromise()
+       .then((response) => {
+         // TODO use the xml to fill the professions array
+         console.log(response);
+       })
+       .catch(this.handleError);
+  }
 
   validatePersonalInformation(): boolean {
     let hasErrors: boolean = false;
+
     this.birthDateError = false;
     this.professionError = false;
     this.grossIncomeError = false;
 
-    if (!this.birthDate) {
+    // Calculate age.
+    let age = 0;
+    if (this.birthDate) {
+      let bd: string[] = this.birthDate.split("-");
+      let today = new Date();
+      let nowyear = today.getFullYear();
+      let nowmonth = today.getMonth();
+      let nowday = today.getDate();
+
+      let birthyear = parseInt(bd[0], 10);
+      let birthmonth = parseInt(bd[1], 10);
+      let birthday = parseInt(bd[2], 10);
+
+      age = nowyear - birthyear;
+      let age_month = nowmonth - birthmonth;
+      let age_day = nowday - birthday;
+
+      if (age_month < 0 || (age_month == 0 && age_day < 0)) {
+        age -= 1;
+      }
+    }
+
+    if (!this.birthDate || age < 18 || age > 59 ) {
       this.birthDateError = true;
       hasErrors = true;
     }
+
     if (!this.profession) {
       this.professionError = true;
       hasErrors = true;
     }
-    if (!this.grossIncome) {
+    if (!this.grossIncome || (this.grossIncome && this.grossIncome < 3125 && this.grossIncome > 1000000)) {
       this.grossIncomeError = true;
       hasErrors = true;
     }
@@ -314,7 +388,7 @@ export class AovQuoteComponent implements OnInit {
   }
 
   showSummary() {
-    // This needs to redirect to another page.
+    // This needs to redirect to another page. use this.summaryPath
     console.log('show summary');
     this.page = 'summary';
   }
@@ -340,6 +414,8 @@ export class AovQuoteComponent implements OnInit {
   }
 
   sendEmailClick() {
+    // TODO look at quickquote dip, it has a http.post example.
+
     this.emailButtonPending = true;
     if(!this.validateEmail()) {
       this.reSendEmailShown = true;

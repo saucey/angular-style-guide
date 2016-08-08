@@ -5,9 +5,9 @@ import {CONST_EXPR} from "angular2/src/facade/lang";
 @Component({
   selector: 'aegon-input-choice-dropdown',
   template: `
-    <span class="input choice-dropdown">
+    <span class="input choice-dropdown" #dropDownEl>
       <input #inputEl type="text" [attr.placeholder]="placeholder" [attr.required]="required"
-             [ngModel]="model" (ngModelChange)="modelChange($event)">
+             [ngModel]="model" (ngModelChange)="modelChange($event)" (blur)="closeDropDown(dropDownEl)">
       <ul class="choice-dropdown-choices" *ngIf="enabled && fetchValue.length >= minChars">
         <li *ngIf="!items && emptyMessage">{{emptyMessage}}</li>
         <li class="choice-dropdown-choice" *ngFor="#item of items" (click)="select(item)">{{item}}</li>
@@ -46,6 +46,8 @@ export class InputChoiceDropDownComponent {
       if (value.length >= this.minChars) {
         this.aaFetch.emit(value)
       }
+
+      this.aaSelect.emit(value);
     }
   }
 
@@ -54,5 +56,12 @@ export class InputChoiceDropDownComponent {
     this.fetchValue = value;
     this.aaSelect.emit(value);
     this.items = [];
+  }
+
+  closeDropDown(dropDownEl) {
+    if (!dropDownEl.querySelector(":hover")) {
+      this.enabled = false;
+
+    }
   }
 }
