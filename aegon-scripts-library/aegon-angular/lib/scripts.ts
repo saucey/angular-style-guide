@@ -9,8 +9,7 @@
  * upgrading easier. Also all external scripts are listed in a single file.
  */
 var SCRIPTFILES = {
-    highcharts: 'http://code.highcharts.com/highcharts.js',
-    select2: ''
+    highcharts: 'https://code.highcharts.com/4.2.6/highcharts.js',
   },
   promises = {};
 /**
