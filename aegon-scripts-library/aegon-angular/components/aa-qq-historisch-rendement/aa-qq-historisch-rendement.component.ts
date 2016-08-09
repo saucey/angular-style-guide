@@ -23,7 +23,6 @@ declare var jQuery;
   pipes: [MoneyPipe]
 })
 export class QQHistorischRendementComponent implements AfterViewInit {
-  @ViewChild('root') rootEl: ElementRef;
   @ViewChild('chart') highchart: HighchartComponent;
   private historicalRoi: HistoricalRoi = new HistoricalRoi(options.data);
   private chartState:any = {};
