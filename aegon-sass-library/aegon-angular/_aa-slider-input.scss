@@ -1,0 +1,75 @@
+/**
+ * Number input combined with slider
+ */
+.aa-slider-input {
+  width: 100%;
+  user-select: none;
+  label {
+    display: table-cell;
+    width: 100%;
+    max-width: 100%;
+    vertical-align: top;
+    @include rem('padding-top', 8);
+    @include rem('padding-bottom', 10);
+    color: $blue;
+    user-select: none;
+    font-weight: normal;
+  }
+}
+.aa-slider-input__header {
+  display: table;
+  width: auto;
+}
+.aa-slider-input__hint {
+  display: table-cell;
+  vertical-align: top;
+  @include rem('padding', 9, 15, 0, 5);
+  user-select: none;
+}
+.aa-slider-input__input {
+  display: table-cell;
+  vertical-align: top;
+  width: 120px;
+  @include rem('padding-bottom', 5);
+}
+.aa-slider-input__slider {
+  @include rem('padding-top', 20);
+  @include rem('padding-bottom', 20);
+  padding-left: 0;
+  padding-right: 0;
+  margin: 0 !important;
+  display: block;
+  user-select: none;
+  // Make the slider visually a big longer, but also make sure the knobs don't slide exactly till the end
+  // Because that will cause them to overflow into the outer margin which looks not as nice
+  .noUi-horizontal {
+    border-left: 5px solid #007bc8;
+    border-right: 5px solid white;
+    .noUi-origin {
+      border-radius: 0;
+    }
+  }
+}
+
+@include breakpoint($brk-mobile-portrait) {
+  .aa-slider-input__header {
+    display: block;
+  }
+  .aa-slider-input__hint {
+    padding-right: 0;
+  }
+  .aa-slider-input__input {
+    width: 100%;
+    display: block;
+    padding-left: 0;
+    text-align: left;
+    input {
+      width: 100% !important;
+    }
+  }
+  .aa-slider-input__slider {
+    padding-left: 3px;
+    padding-right: 3px;
+  }
+}
+

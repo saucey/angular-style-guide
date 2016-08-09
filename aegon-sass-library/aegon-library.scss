@@ -43,6 +43,9 @@
 /* All library components and specific modules */
 @import "components/all";
 
+/* All aegon angular components */
+@import "aegon-angular/all";
+
 /* Pages specific styles */
 @import "pages/all";
 
@@ -51,3 +54,4 @@
 
 /* Structures, like userdetail, etc. */
 @import "structures/all";
+

@@ -1,0 +1,62 @@
+/**
+ * Numeric input component
+ */
+
+.aa-input-number {
+  position: relative;
+  // Actual input field
+  input {
+    text-align: right;
+    @include rem('width', 120);
+  }
+}
+
+
+// Meta text
+.aa-input-number__prefix, .aa-input-number__suffix {
+  position: absolute;
+  z-index: 1;
+  color: $darker_grey;
+  pointer-events: none;
+}
+
+.aa-input-number__prefix {
+  left: 10px;
+}
+.aa-input-number__prefix:before {
+  position: absolute;
+  @include rem('top', 9);
+}
+
+.aa-input-number__suffix {
+  right: 0;
+}
+.aa-input-number__suffix:before {
+  position: absolute;
+  @include rem('top', 9);
+}
+
+// Euro input style; add class higher up in the element tree somewhere
+.aa-input--euro {
+  // Add prefix space to input
+  .aa-input-number__prefix:before {
+    content: "€";
+  }
+  input {
+    @include rem('padding-left', 30);
+  }
+}
+
+// Year input style; add class higher up in the element tree somewhere
+.aa-input--year {
+  // Add postfix space to input
+  .aa-input-number__suffix:before {
+    content: 'jaar';
+    @include rem('right', 10);
+  }
+  input {
+    @include rem('padding-right', 45);
+  }
+}
+
+
