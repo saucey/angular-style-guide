@@ -12,6 +12,17 @@ $qq_border_radius: 6px;
   position: relative;
   background: $pastel_light_blue;
   border-radius: $qq_border_radius;
+  // Normalize/reset; required for aegonmf old theme
+  input[type=email], input[type=number], input[type=text] {
+    padding-top: 9px;
+    padding-bottom: 9px;
+  }
+  button, input, optgroup, select, textarea {
+    color: inherit;
+    font: inherit;
+    margin: 0;
+  }
+
   // Calculator icon
   h3 {
     color: $slightly_darker_blue;
@@ -115,7 +126,9 @@ $qq_border_radius: 6px;
   @include rem('margin-top', 20);
   color: $white;
   &:after {
-    content:'>';
+    content: $font_icons_arrow_right_skinny;
+    font-family: $font_icons;
+    font-size: 12px;
     display:block;
     height:100%;
     position:absolute;
@@ -237,9 +250,8 @@ $qq_border_radius: 6px;
 
 @include breakpoint($brk-ipad-portrait) {
   .aa-qq__controls {
-    @include rem('padding-left', 30);
     @include rem('padding-top', 15);
-    @include rem('padding-bottom', 15);
+    @include rem('padding-bottom', 10);
   }
 }
 
@@ -258,10 +270,6 @@ $qq_border_radius: 6px;
   .aa-qq__controls {
     padding: 0;
     @include rem('padding-top', 20);
-    .aa-control {
-      display: block;
-      @include rem('margin-bottom', 10);
-    }
   }
 }
 

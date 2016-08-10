@@ -44,6 +44,7 @@
   }
   input {
     @include rem('padding-left', 30);
+    @include rem('padding-right', 10);
   }
 }
 
@@ -55,6 +56,7 @@
     @include rem('right', 10);
   }
   input {
+    @include rem('padding-left', 10);
     @include rem('padding-right', 45);
   }
 }

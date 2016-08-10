@@ -5,6 +5,7 @@ import {parseNumber} from '../angular-components/input-number.component';
 interface DataFormat {
 	months: number;
 	nhg: boolean;
+	lowest?: boolean;
 }
 
 @Injectable()
@@ -12,15 +13,24 @@ export class InterestsService {
 	/*
 	 * Data format
 	 */
-	private inputData: DataFormat = {months:0, nhg: false};
+	private defaultData: DataFormat = {months:0, nhg: false, lowest: true}; 
+	private inputData: DataFormat;
 	
 	constructor (private http: Http) {}
 
 	// API url
 	private intstUrl = '/particulier/feed/json/table';
-	
+
+	/*
+	 * Retrieves the interest table from the API
+	 * 
+	 * @param data {Object}: 
+	 *  - months {number} = the length of the mortgage in months
+	 *	- nhg {boolean} = whether the mortgage is nhg
+	 *	- lowest {boolean} (optional) = which interest to get
+	 */
 	public getMarketInterestRate(data: DataFormat): any {
-		this.inputData = data;
+		this.inputData = Object.assign(this.defaultData, data);
 		// Checks if it's local environment
 		if(window.location.href.indexOf('localhost') > -1) {
 			// Gets the mockdata.
@@ -54,13 +64,14 @@ export class InterestsService {
 	private processData(res: Object): number {
 		let table: Array<any> = [],
 			intsTable: Object = {},
-			months: number = this.inputData.months,
+			inputData: DataFormat = this.inputData,
+			months: number = inputData.months,
 			years: number = months / 12,
 			interest: number = 0;
 
 		// Choose the interest table depending on NHG.
 		for(let i in res) {
-			if(this.inputData.nhg) {
+			if(inputData.nhg) {
 				if(res[i]['Table ID'] == 'hypotheek-met-nhg') {
 					table = res[i].Table;
 				}
@@ -104,7 +115,7 @@ export class InterestsService {
 
 				if(tempPerc.length > 0) {
 					tempPerc.sort(function(a, b) {
-						return a - b;
+						return inputData.lowest ? a - b : a + b;
 					});
 
 					intsTable[key] = tempPerc[0];
@@ -265,55 +276,6 @@ export class InterestsService {
 				],
 				"Table ID": "hypotheek-zonder-nhg",
 				"Table footer": "<p><span style=\"line-height: 20.8px;\">De rentepercentages gelden per 2 maart 2016 en zijn onder voorbehoud van typefouten.</span></p>\n"
-			},
-			{
-				"Title": "DFRRE",
-				"Nid": "36598",
-				"Table": [
-					{
-						"U wilt uw rente...": "variabel",
-						"Rente tot en met 67,5% van de marktwaarde": "2,16%",
-						"Rente tot en met 81% van de marktwaarde": "2,26%",
-						"Rente bij meer dan 81% van de marktwaarde": "2,71%"
-					},
-					{
-						"U wilt uw rente...": "2 jaar vast",
-						"Rente tot en met 67,5% van de marktwaarde": "2,01%",
-						"Rente tot en met 81% van de marktwaarde": "2,11%",
-						"Rente bij meer dan 81% van de marktwaarde": "2,56%"
-					},
-					{
-						"U wilt uw rente...": "5 jaar vast",
-						"Rente tot en met 67,5% van de marktwaarde": "2,21%",
-						"Rente tot en met 81% van de marktwaarde": "2,31%",
-						"Rente bij meer dan 81% van de marktwaarde": "2,76%"
-					},
-					{
-						"U wilt uw rente...": "6 t/m 10 jaar vast",
-						"Rente tot en met 67,5% van de marktwaarde": "2,40%",
-						"Rente tot en met 81% van de marktwaarde": "2,50%",
-						"Rente bij meer dan 81% van de marktwaarde": "2,95%"
-					},
-					{
-						"U wilt uw rente...": "11 t/m 15 jaar vast",
-						"Rente tot en met 67,5% van de marktwaarde": "2,70%",
-						"Rente tot en met 81% van de marktwaarde": "2,80%",
-						"Rente bij meer dan 81% van de marktwaarde": "3,25%"
-					},
-					{
-						"U wilt uw rente...": "16 t/m 20 jaar vast",
-						"Rente tot en met 67,5% van de marktwaarde": "2,80%",
-						"Rente tot en met 81% van de marktwaarde": "2,90%",
-						"Rente bij meer dan 81% van de marktwaarde": "3,35%"
-					},
-					{
-						"U wilt uw rente...": "21 t/m 30 jaar vast",
-						"Rente tot en met 67,5% van de marktwaarde": "3,15%",
-						"Rente tot en met 81% van de marktwaarde": "3,25%",
-						"Rente bij meer dan 81% van de marktwaarde": "3,70%"
-					}
-				],
-				"Table footer": null
 			}
 		];
 

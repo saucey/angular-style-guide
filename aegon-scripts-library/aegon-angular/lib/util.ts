@@ -85,3 +85,77 @@ export function rangeArray (from:number, to:number, func:any) : number[] {
   return res;
 };
 
+export function jsonAttribute(element:any, name: string) : any {
+	if (!element || !element.getAttribute) {
+		return;
+	}
+  var str = element.getAttribute(name),
+  	json;
+	try {
+		json = JSON.parse(str);
+	} catch (e) {
+		// Ignore;
+		return;
+	}
+	return json;
+}
+
+/**
+ * Simple deepclone by just serializing/deserializing object
+ * @param {Object} obj Object to clone
+ * @returns {Object} New deep cloned object
+ */
+export function clone(obj:any) : any {
+	return JSON.parse(JSON.stringify(obj));
+}
+
+/**
+ * Merges two object and fills in omitted properties with values from the supplied
+ * default object
+ */
+export function mergeObjects(sourceObj: any = {}, mergeObj: any = {}) : any {
+	var result = clone(sourceObj),
+		keys = Object.keys(mergeObj);
+	// Add keys to result object
+	keys.map((key) => {
+		result[key] = mergeObj[key];
+	})
+	return result;
+}
+
+/**
+ * Check whether input is an object
+ * @param {Object} obj Object to check
+ * @returns {Boolean} True of input is object
+ */
+export function isObject(input) : boolean {
+	return (typeof input === "object") && (input !== null);
+}
+
+/**
+ * Check whether input is a function
+ * @param {Any} input Input to check
+ * @returns {Boolean} True if input is a function
+ */
+ export function isFunction(input) : boolean {
+	return (typeof input === "function");
+}
+
+/**
+ * Check whether input is a string
+ * @param {Any} input Input to check
+ * @returns {Boolean} True if input is a string
+ */
+export function isString(input) : boolean {
+	return (typeof input === 'string');
+}
+
+/**
+ * Check whether input is a array
+ * @param {Any} input Input to check
+ * @returns {Boolean} True if input is an array
+ */
+export function isArray(input) : boolean {
+	return (input instanceof Array);
+}
+
