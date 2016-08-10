@@ -589,11 +589,13 @@ var dummyRiskFactor = {
   providers: [HTTP_PROVIDERS],
   pipes: [MoneyPipe]
 })
+//TODO ADD BASE64
 export class AovQuoteComponent implements OnInit {
   @Input()  public  page: string;
-  @Input()  private mailUrl: string;
-  @Input()  private serviceCredentials: string = 'appAegonNLCalculateTST:7OuwNNTVS4jJ8mO5F0bH';
+  @Input()  private mailUrl: string = 'http://ail.test.intra.aegon.nl/BS_Utilities_Communication_03Web/sca/BS_Utilities_Communication_03_ExpWS';
+  @Input()  private mailCredentials: string = 'AppAegonNLDrupalTST:dUACcFMYvwhnrnnfdq9h';
   @Input()  private serviceUrl: string = 'http://ail.test.intra.aegon.nl/US_RestGatewayWeb/rest/requestResponse/BS_AE_POLIS_AOV_02/';
+  @Input()  private serviceCredentials: string = 'appAegonNLCalculateTST:7OuwNNTVS4jJ8mO5F0bH';
   @Input()  private summaryPath: string = '';
 
   public  showCalculator: boolean;
@@ -892,12 +894,26 @@ export class AovQuoteComponent implements OnInit {
   }
 
   sendEmailClick() {
-    // TODO look at quickquote dip, it has a http.post example.
+    // TODO look at quickquote dip, it has a http.post example.   this.mailUrl
 
     this.emailButtonPending = true;
     if(!this.validateEmail()) {
       this.reSendEmailShown = true;
     }
     this.emailButtonPending = false;
-  }
+
+    let XMLBody = {};
+
+    let headers = new Headers({'Content-Type': 'application/xml', "Authorization" : `Basic ${this.mailCredentials}`});
+    let options = new RequestOptions({headers: headers});
+
+    this.http.post(this.mailUrl , JSON.stringify(XMLBody), options)
+      .map(res => res.json())
+      .catch(this.handleError)
+      .subscribe(data => {
+        console.log('send');
+      }, error => console.log(error));
+    }
+
+
 }

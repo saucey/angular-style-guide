@@ -2,10 +2,8 @@ import {Component, Input, Output, EventEmitter, Provider, Directive, forwardRef,
 import {NG_VALUE_ACCESSOR, ControlValueAccessor} from "angular2/common";
 import {CONST_EXPR} from "angular2/src/facade/lang";
 
-// TODO Remove me, i am replaced by aegon-angular aa-input-dropdown
-
 @Component({
-  selector: 'aegon-input-choice-dropdown',
+  selector: 'aa-input-dropdown',
   template: `
     <span class="input choice-dropdown" #dropDownEl>
       <input #inputEl type="text" [attr.placeholder]="placeholder" [attr.required]="required"
@@ -17,7 +15,7 @@ import {CONST_EXPR} from "angular2/src/facade/lang";
     </span>
   `
 })
-export class InputChoiceDropDownComponent {
+export class InputDropDownComponent {
   @Input()  model: any;
   @Input()  required: boolean;
   @Input()  placeholder: string;
