@@ -1,16 +1,9 @@
 import * as libUtil from "../../lib/util";
 const PIPS_EVERY_YEARS = 50;
 export const options = {
-  title: 'Vergelijk sparen en beleggen over 100 jaar',
-  period_range: {
-    'min': [  0, 100 ],
-    '25%': [ 1000, 1000 ],
-    '50%': [ 10000, 5000 ],
-    '75%': [ 50000, 5000 ],
-    'max': [ 100000 ]
-  },
+  title: 'Vergelijk sparen en beleggen',
   // Data to use for calculation
-	// See: https://refreshless.com/nouislider/pips/
+  // Date: 5-Aug-2016
   data: {
     startYear: 1871,
     savings: [0.0635,0.0781,0.0835,0.0686,0.0496,0.0533,0.0503,0.049,0.0425,0.051,0.0479,0.0526,0.0535,0.0565,0.0422,0.0426,0.0611,0.0502,0.0468,0.0541,0.0597,0.0393,0.0852,0.0332,0.0309,0.0576,0.0344,0.0355,0.0336,0.0464,0.043,0.0472,0.055,0.0434,0.0417,0.0547,0.0623,0.0532,0.0365,0.0526,0.04,0.0435,0.0565,0.0464,0.0365,0.0364,0.0425,0.0598,0.0556,0.073,0.0744,0.0458,0.0496,0.0434,0.0387,0.0428,0.0426,0.0464,0.0601,0.0415,0.0243,0.0336,0.0146,0.0101,0.0075,0.0075,0.0088,0.0088,0.0056,0.0056,0.0053,0.0063,0.0069,0.0072,0.0075,0.0076,0.0101,0.0135,0.0158,0.0132,0.0212,0.0239,0.0258,0.018,0.0181,0.0321,0.0386,0.0254,0.0374,0.0428,0.0291,0.0339,0.035,0.0409,0.0446,0.0544,0.0555,0.0617,0.0805,0.0911,0.0566,0.0462,0.0793,0.1103,0.0724,0.057,0.0528,0.0778,0.1088,0.1137,0.1763,0.146,0.0937,0.1111,0.0835,0.0731,0.0625,0.0763,0.0929,0.0843,0.0692,0.0391,0.0344,0.0435,0.0645,0.0568,0.0578,0.0568,0.0531,0.0661,0.0463,0.0185,0.0118,0.0149,0.0341,0.0532,0.0534,0.0342,0.01015,0.00455,0.00365,0.0025,0.0025,0.0025,0.0025,0.0025],
@@ -30,8 +23,6 @@ export const options = {
   	},
   	pips: { // Shows scale and values below chart
   		mode: 'values',
-  		// density: 100,
-  		// values: [1875, 2016],
   		density: 3.5,
   		// Create scale values at PIPS_EVERY_YEARS interval
     	values: libUtil.rangeArray(1875, 2016, (value) => {
@@ -39,14 +30,26 @@ export const options = {
     	})
   	}
   },
-  period_initial: 1000,
-  period_label: 'Selecteer een periode',
-  result_summary_label: 'Gemiddeld resultaat voor periode*',
-  result_savings_label: 'Sparen',
-  result_savings_help: 'Resultaat is gebaseerd op het gemiddelde rendement van de geselecteerde periode.',
-  result_invest_label: 'Beleggen',
-  restlt_invest_help: 'Resultaat is gebaseerd op het gemiddelde rendement van de geselecteerde periode.',
-  conversate_text: 'Gratis orientatiegesprek aanvragen',
-  cta_button_text: 'Begin met Beleggen',
-  disclaimer_text: 'Resultaat is op basis van ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Hier kunnen geen rechtnen aan worden ontleend.'
+  period: {
+    label: 'Selecteer een periode'
+  },
+  result: {
+    period: {
+      label: 'Gemiddeld resultaat voor periode*'
+    },
+    savings: {
+      label: 'Sparen',
+      help: 'Resultaat is gebaseerd op het gemiddelde rendement van de geselecteerde periode.'
+    },
+    invest: {
+      label: 'Beleggen',
+      help: 'Resultaat is gebaseerd op het gemiddelde rendement van de geselecteerde periode.'
+    }
+  },
+  cta: {
+    text: 'Begin met Beleggen',
+    url: 'https://www.aegon.nl/particulier/beleggen/u-wilt-zelf-voor-het-eerst-beleggen'
+  },
+  disclaimer: "Bovenstaande berekening is een indicatie. Aan deze indicatie kunnen geen rechten worden ontleend. Beleggen brengt kosten en risico's met zich mee die niet bij sparen voorkomen. De waarde van uw belegging kan fluctueren. In het verleden behaalde resultaten bieden geen garantie voor de toekomst.",
+  chartUpdateDelay: 500 // // Update chart at most every given milliseconds, e.g. 1000 for 1 sec throttle.
 };

@@ -87,3 +87,4 @@ export function numberFromAttribute(element:any, name:string, fallback:number = 
     num = str ? parseFloat(str) : fallback;
   return isNaN(num) ? fallback : num;
 };
+

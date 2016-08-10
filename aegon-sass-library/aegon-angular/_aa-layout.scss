@@ -13,6 +13,9 @@
     vertical-align: top;
     width: 50%;
   }
+  .aa-split-view__right {
+    @include rem('padding-left', 30);
+  }
 }
 @include breakpoint($brk-mobile) {
   .aa-split-view {
@@ -22,10 +25,13 @@
     display: block;
     width: auto;
   }
+  .aa-split-view__right {
+    padding-left: 0;
+  }
 }
 
 // Float layout some items
 .aa-group {
-  display: inline-block;
+  display: block;
   text-align: left;
 }

@@ -1,4 +1,4 @@
-import {Component, Input, ElementRef, ViewChild, AfterViewInit} from 'angular2/core';
+import {Component, Input, ElementRef, ViewChild, AfterViewInit, OnInit} from 'angular2/core';
 import {MoneyPipe} from "../../pipes/money.pipe";
 import {SliderComponent} from '../aa-slider/aa-slider.component';
 import {HintComponent} from '../aa-hint/aa-hint.component';
@@ -8,9 +8,7 @@ import {template} from "./template";
 import {options} from "./options";
 import {HistoricalRoi} from "../../lib/calculations/historicalRoi";
 import {createChartConfig, createSeriesData} from "./chart";
-
-const TIMEOUT_CHART_UPDATE = 1000,
-  UPDATE_THROTTLE = 500;
+import {AAConfigComponent} from '../../lib/classes/AAConfigComponent';
 
 declare var jQuery;
 
@@ -22,14 +20,12 @@ declare var jQuery;
   template: template,
   pipes: [MoneyPipe]
 })
-export class QQHistorischRendementComponent implements AfterViewInit {
+export class QQHistorischRendementComponent extends AAConfigComponent implements OnInit, AfterViewInit {
   @ViewChild('chart') highchart: HighchartComponent;
   private historicalRoi: HistoricalRoi = new HistoricalRoi(options.data);
   private chartState:any = {};
   private currentTimeout: any = undefined;
-  private calculate: any = libUtil.debounce(() => {
-      this.doCalculate();
-    }, UPDATE_THROTTLE);
+  private calculate: any;
 
   options : any = options;
   resultData: any = {};
@@ -38,8 +34,18 @@ export class QQHistorischRendementComponent implements AfterViewInit {
     upper: options.slider.start[1]
   }
 
-  constructor() {
+  // Let parent class initialize config; the dependency injection with ElementRef
+  // doesn't work directly so we have to call it explicitly.
+  constructor(thisElement: ElementRef) {
+    super(thisElement);
   }
+  ngOnInit() : void {
+    super.ngOnInit();
+    this.calculate = libUtil.debounce(() => {
+      this.doCalculate();
+    }, this.options.chartUpdateDelay);
+  }
+
   /**
    * Triggers after view has been inited. This is after template loading and intializing.
    */
