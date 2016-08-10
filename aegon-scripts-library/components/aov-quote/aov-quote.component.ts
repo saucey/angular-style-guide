@@ -3,368 +3,26 @@ import {HTTP_PROVIDERS, Http, Headers, RequestOptions, Response} from "angular2/
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
 import {HelpComponent} from '../angular-components/help.component'
-import {InputNumberComponent, InputNumberValueAccessor, formatNumber} from '../angular-components/input-number.component';
+import {InputNumberComponent} from '../../aegon-angular/components/aa-input-number/aa-input-number.component';
 import {InputDateComponent, InputDateValueAccessor} from '../angular-components/input-date.component';
 import {CheckboxComponent, CheckboxValueAccessor} from '../angular-components/checkbox.component';
 import {MoneyPipe} from "../angular-components/money.pipe";
-import {SoloSliderComponent, SoloSliderValueAccessor} from "../angular-components/solo-slider.component";
-import {InputRadioComponent, InputRadioValueAccessor} from '../angular-components/input-radio.component';
-import {InputChoiceDropDownComponent} from "../angular-components/input-choice-dropdown.component";
+import {InputRadioComponent} from "../../aegon-angular/components/aa-input-radio/aa-input-radio.component";
+import {InputDropDownComponent} from "../../aegon-angular/components/aa-input-dropdown/aa-input-dropdown.component";
+import {SliderInputComponent} from "../../aegon-angular/components/aa-slider-input/aa-slider-input.component";
 
 var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTemplate'));
-
-
-
-var dummyProfessions = {
-  "retrieveProfessionsResponse": {
-    "PROCES": {
-      "STATUS": "MS000",
-      "VOLGNUM": "1",
-      "STATUST": "Success"
-    },
-    "AILHEADER": {
-      "CLIENTID": "A2T1 HappyFlow",
-      "CORRELATIONID": "##BS_AE_POLIS_AOV_02##Mon Aug 08 12:49:39 BST 2016##"
-    },
-    "_AE_BEROEPENLIJST_AOV": [
-      {
-        "_AE_BRPNAAM": "Aannemer",
-        "_AE_BKLSVAST": "N",
-        "_AE_BRPCODE": "1",
-        "_AE_BRPSUBNM": "Aannemer",
-        "BKLASSE": "4",
-        "_AE_BKLSMAX": "4.0"
-      },
-      {
-        "_AE_BRPNAAM": "Aannemer",
-        "_AE_BKLSVAST": "N",
-        "_AE_BRPCODE": "723",
-        "_AE_BRPSUBNM": "Aannemer commercieel, leidinggevend",
-        "BKLASSE": "2"
-      },
-      {
-        "_AE_BRPNAAM": "Kweker",
-        "_AE_BKLSVAST": "N",
-        "_AE_BRPCODE": "387",
-        "_AE_BRPSUBNM": "Aardbeienkweker (kassen)",
-        "BKLASSE": "3",
-        "_AE_BKLSMAX": "4.0"
-      },
-      {
-        "_AE_BRPNAAM": "Kweker",
-        "_AE_BKLSMIN": "3.0",
-        "_AE_BKLSVAST": "N",
-        "_AE_BRPCODE": "401",
-        "_AE_BRPSUBNM": "Aardbeienkweker (koude grond)",
-        "BKLASSE": "4",
-        "_AE_BKLSMAX": "4.0"
-      },
-      {
-        "_AE_BRPNAAM": "Aardewerkdecorateur",
-        "_AE_BKLSVAST": "N",
-        "_AE_BRPCODE": "2",
-        "_AE_BRPSUBNM": "Aardewerkdecorateur",
-        "BKLASSE": "3",
-        "_AE_BKLSMAX": "3.0"
-      },
-      {
-        "_AE_BRPNAAM": "Accountmanager",
-        "_AE_BKLSVAST": "N",
-        "_AE_BRPCODE": "5",
-        "_AE_BRPSUBNM": "Account-manager",
-        "BKLASSE": "1",
-        "_AE_BKLSMAX": "3.0"
-      },
-      {
-        "_AE_BRPNAAM": "Accountant",
-        "_AE_BKLSVAST": "J",
-        "_AE_BRPCODE": "3",
-        "_AE_BRPSUBNM": "Accountant",
-        "BKLASSE": "1"
-      },
-      {
-        "_AE_BRPNAAM": "Accountant",
-        "_AE_BKLSVAST": "J",
-        "_AE_BRPCODE": "4",
-        "_AE_BRPSUBNM": "Accountant - Administratie consultant",
-        "BKLASSE": "1"
-      },
-      {
-        "_AE_BRPNAAM": "Acquisiteur",
-        "_AE_BKLSVAST": "N",
-        "_AE_BRPCODE": "6",
-        "_AE_BRPSUBNM": "Acquisiteur",
-        "BKLASSE": "2",
-        "_AE_BKLSMAX": "3.0"
-      },
-      {
-        "_AE_BRPNAAM": "Acrobaat",
-        "_AE_BKLSVAST": "J",
-        "_AE_BRPCODE": "7",
-        "_AE_BRPSUBNM": "Acrobaat",
-        "BKLASSE": "0",
-        "_AE_BRPOPM": "Niet acceptabel"
-      },
-      {
-        "_AE_BRPSUBNM": "Acteur",
-        "_AE_BRPNAAM": "Acteur",
-        "_AE_BKLSMAX": "4.0",
-        "_AE_MINWTTD": "90",
-        "_AE_BRPOPM": "Acceptatie in overleg met maatschappij",
-        "BKLASSE": "3",
-        "_AE_BRPCODE": "8",
-        "_AE_BKLSVAST": "N",
-        "_AE_BKLSMIN": "3.0"
-      },
-      {
-        "_AE_BRPNAAM": "Actuarieel medewerker",
-        "_AE_BKLSVAST": "J",
-        "_AE_BRPCODE": "9",
-        "_AE_BRPSUBNM": "Actuarieel medewerker",
-        "BKLASSE": "1"
-      },
-      {
-        "_AE_BRPNAAM": "Actuarieel rekenaar",
-        "_AE_BKLSVAST": "J",
-        "_AE_BRPCODE": "10",
-        "_AE_BRPSUBNM": "Actuarieel rekenaar",
-        "BKLASSE": "1"
-      },
-      {
-        "_AE_BRPNAAM": "Actuaris",
-        "_AE_BKLSVAST": "J",
-        "_AE_BRPCODE": "11",
-        "_AE_BRPSUBNM": "Actuaris",
-        "BKLASSE": "1"
-      },
-      {
-        "_AE_BRPNAAM": "Acupuncturist",
-        "_AE_BKLSVAST": "J",
-        "_AE_BRPCODE": "12",
-        "_AE_BRPSUBNM": "Acupuncturist (geen arts)",
-        "BKLASSE": "0",
-        "_AE_BRPOPM": "Niet acceptabel"
-      },
-      {
-        "_AE_BRPNAAM": "Acupuncturist",
-        "_AE_BKLSVAST": "J",
-        "_AE_BRPCODE": "13",
-        "_AE_BRPSUBNM": "Acupuncturist (tevens arts)",
-        "BKLASSE": "1"
-      },
-      {
-        "_AE_BRPNAAM": "Administrateur",
-        "_AE_BKLSVAST": "J",
-        "_AE_BRPCODE": "14",
-        "_AE_BRPSUBNM": "Administrateur",
-        "BKLASSE": "1"
-      },
-      {
-        "_AE_BRPNAAM": "Winkelier",
-        "_AE_BKLSMIN": "2.0",
-        "_AE_BKLSVAST": "N",
-        "_AE_BRPCODE": "695",
-        "_AE_BRPSUBNM": "Winkelier slijterij",
-        "BKLASSE": "2",
-        "_AE_BKLSMAX": "3.0"
-      },
-      {
-        "_AE_BRPNAAM": "Winkelier",
-        "_AE_BKLSMIN": "3.0",
-        "_AE_BKLSVAST": "N",
-        "_AE_BRPCODE": "703",
-        "_AE_BRPSUBNM": "Winkelier wild en gevogelte",
-        "BKLASSE": "3",
-        "_AE_BKLSMAX": "4.0"
-      },
-      {
-        "_AE_BRPNAAM": "Winkelier",
-        "_AE_BKLSMIN": "2.0",
-        "_AE_BKLSVAST": "N",
-        "_AE_BRPCODE": "704",
-        "_AE_BRPSUBNM": "Winkelier witgoed",
-        "BKLASSE": "2"
-      },
-      {
-        "_AE_BRPNAAM": "Woninginrichter",
-        "_AE_BKLSVAST": "N",
-        "_AE_BRPCODE": "709",
-        "_AE_BRPSUBNM": "Woninginrichter",
-        "BKLASSE": "4",
-        "_AE_MAXENDLF": "60",
-        "_AE_BKLSMAX": "4.0"
-      },
-      {
-        "_AE_BRPNAAM": "Stoffeerder",
-        "_AE_BKLSMIN": "3.0",
-        "_AE_BKLSVAST": "N",
-        "_AE_BRPCODE": "588",
-        "_AE_BRPSUBNM": "Woningstoffeerder",
-        "BKLASSE": "5",
-        "_AE_MAXENDLF": "60"
-      },
-      {
-        "_AE_BRPNAAM": "Leraar",
-        "_AE_BKLSMIN": "2.0",
-        "_AE_BKLSVAST": "N",
-        "_AE_BRPCODE": "424",
-        "_AE_BRPSUBNM": "Yogaleraar",
-        "BKLASSE": "3",
-        "_AE_BKLSMAX": "4.0"
-      },
-      {
-        "_AE_BRPNAAM": "Teler",
-        "_AE_BKLSVAST": "N",
-        "_AE_BRPCODE": "606",
-        "_AE_BRPSUBNM": "Zaadteler (kassen)",
-        "BKLASSE": "3",
-        "_AE_BKLSMAX": "4.0"
-      },
-      {
-        "_AE_BRPNAAM": "Zadelmaker",
-        "_AE_BKLSMIN": "2.0",
-        "_AE_BKLSVAST": "N",
-        "_AE_BRPCODE": "712",
-        "_AE_BRPSUBNM": "Zadelmaker",
-        "BKLASSE": "3",
-        "_AE_BKLSMAX": "4.0"
-      },
-      {
-        "_AE_BRPNAAM": "Zanger",
-        "_AE_BKLSVAST": "N",
-        "_AE_BRPCODE": "713",
-        "_AE_BRPSUBNM": "Zanger",
-        "BKLASSE": "3",
-        "_AE_BRPOPM": "Acceptatie in overleg met maatschappij",
-        "_AE_BKLSMAX": "3.0"
-      },
-      {
-        "_AE_BRPNAAM": "Leraar",
-        "_AE_BKLSVAST": "N",
-        "_AE_BRPCODE": "423",
-        "_AE_BRPSUBNM": "Zangleraar",
-        "BKLASSE": "2",
-        "_AE_BKLSMAX": "2.0"
-      },
-      {
-        "_AE_BRPNAAM": "Zangpedagoog",
-        "_AE_BKLSVAST": "N",
-        "_AE_BRPCODE": "715",
-        "_AE_BRPSUBNM": "Zangpedagoog",
-        "BKLASSE": "2",
-        "_AE_BKLSMAX": "2.0"
-      },
-      {
-        "_AE_BRPNAAM": "Visser",
-        "_AE_BKLSVAST": "J",
-        "_AE_BRPCODE": "716",
-        "_AE_BRPSUBNM": "Zeevisser",
-        "_AE_MINWTTD": "90",
-        "BKLASSE": "4",
-        "_AE_MAXENDLF": "60",
-        "_AE_BRPOPM": "Alleen acceptabel voor exploitant of mede-exploitant"
-      },
-      {
-        "_AE_BRPNAAM": "Zeilmaker",
-        "_AE_BKLSVAST": "N",
-        "_AE_BRPCODE": "717",
-        "_AE_BRPSUBNM": "Zeilmaker",
-        "BKLASSE": "3",
-        "_AE_BKLSMAX": "3.0"
-      },
-      {
-        "_AE_BRPNAAM": "Zenuwarts",
-        "_AE_BKLSVAST": "J",
-        "_AE_BRPCODE": "718",
-        "_AE_BRPSUBNM": "Zenuwarts",
-        "BKLASSE": "1"
-      },
-      {
-        "_AE_BRPNAAM": "Beveiligingsbeambte",
-        "_AE_BKLSMIN": "3.0",
-        "_AE_BKLSVAST": "N",
-        "_AE_BRPCODE": "98",
-        "_AE_BRPSUBNM": "beveiligingsbeambte",
-        "BKLASSE": "3",
-        "_AE_BKLSMAX": "4.0"
-      },
-      {
-        "_AE_BRPNAAM": "Bromfiets- en rijwielhersteller",
-        "_AE_BKLSVAST": "N",
-        "_AE_BRPCODE": "125",
-        "_AE_BRPSUBNM": "bromfiets- en rijwielhersteller",
-        "BKLASSE": "3",
-        "_AE_BKLSMAX": "3.0"
-      },
-      {
-        "_AE_BRPNAAM": "Bakker",
-        "_AE_BKLSVAST": "N",
-        "_AE_BRPCODE": "66",
-        "_AE_BRPSUBNM": "broodbakker",
-        "BKLASSE": "3",
-        "_AE_MAXENDLF": "60",
-        "_AE_BKLSMAX": "4.0"
-      },
-      {
-        "_AE_BRPNAAM": "Handelaar",
-        "_AE_BKLSVAST": "N",
-        "_AE_BRPCODE": "247",
-        "_AE_BRPSUBNM": "fruithandelaar (detailhandel)",
-        "BKLASSE": "3",
-        "_AE_BKLSMAX": "3.0"
-      },
-      {
-        "_AE_BRPNAAM": "Winkelier",
-        "_AE_BKLSMIN": "2.0",
-        "_AE_BKLSVAST": "N",
-        "_AE_BRPCODE": "659",
-        "_AE_BRPSUBNM": "winkelier in banket/brood",
-        "BKLASSE": "2"
-      },
-      {
-        "_AE_BRPNAAM": "Winkelier",
-        "_AE_BKLSMIN": "2.0",
-        "_AE_BKLSVAST": "N",
-        "_AE_BRPCODE": "700",
-        "_AE_BRPSUBNM": "winkelier in videos",
-        "BKLASSE": "2",
-        "_AE_BKLSMAX": "3.0"
-      }
-    ]
-  }
-};
-
-var dummyRiskFactor = {
-  "calculateRiskFactorResponse": {
-    "_AE_RISICOKLASSE_AOV": {
-      "_AE_RISKKLASSE": "3.5"
-    },
-    "PROCES": {
-      "STATUS": "MS000",
-      "VOLGNUM": "1",
-      "STATUST": "Success"
-    },
-    "AILHEADER": {
-      "CLIENTID": "RCAL",
-      "CORRELATIONID": "## batch 7 ##"
-    }
-  }
-}
-
-
-
-
 
 @Component({
   selector: 'aegon-aov-quote',
   directives: [
-    HelpComponent, InputNumberComponent, InputNumberValueAccessor, InputDateComponent, InputDateValueAccessor,
-    CheckboxComponent, CheckboxValueAccessor, SoloSliderComponent, SoloSliderValueAccessor, InputRadioComponent, InputRadioValueAccessor,
-    InputChoiceDropDownComponent
+    HelpComponent, InputNumberComponent, InputDateComponent, InputDateValueAccessor,
+    CheckboxComponent, CheckboxValueAccessor, SliderInputComponent, InputRadioComponent,
+    InputDropDownComponent
   ],
   template: templateElem ? templateElem.value : `
   <div class="quickquote angular aov-quote">
-    <section class="personal-details" *ngIf="page !== 'summary'">
+    <section class="personal-details" *ngIf="!showSummary">
       
       <h3 prefix="/">Uw gegevens</h3>
       <div class="field gray-field">
@@ -390,14 +48,14 @@ var dummyRiskFactor = {
           </aegon-help>          
         </div>
         <div class="inputs" (click)="showCalculator = false">
-          <aegon-input-choice-dropdown
+          <aa-input-dropdown
             [model]="profession"
             [items]="professionsFiltered"
             [emptyMessage]="'Er zijn geen beroepen gevonden'"
             [minChars]="2"
             (aaFetch)="fetchProfessions($event)"
             (aaSelect)="selectProfession($event)">
-          </aegon-input-choice-dropdown>
+          </aa-input-dropdown>
         </div>
       </div>
       <p class="error" *ngIf="professionError">
@@ -413,7 +71,7 @@ var dummyRiskFactor = {
           </aegon-help>          
         </div>
         <div class="inputs" (click)="showCalculator = false">
-          <aegon-input-number [(ngModel)]="grossIncome" prefix="€" [max]="1000000"></aegon-input-number>
+          <aa-input-number [(ngModel)]="grossIncome" prefix="€" [max]="1000000"></aa-input-number>
         </div>
       </div>
       <p class="error" *ngIf="grossIncomeError">
@@ -424,52 +82,43 @@ var dummyRiskFactor = {
       <div class="field gray-field" *ngIf="!showCalculator">
         <div class="label"></div>
         <div class="inputs">
-          <button class="button icon-right icon-calculator" (click)="showCalculation()">
+          <button class="button icon-right icon-calculator" (click)="startCalculator()">
             Bereken premie
           </button>
         </div>
       </div>
     </section>
     
-    
-    
      
     <section *ngIf="showCalculator" class="calculation">
       <div class="calculation indication">
         <h3 prefix="/">Uw keuzes</h3>
+        
         <div class="field">
           <div class="label">
-            Na welk termijn wilt u dat u uitkering start?
-            <aegon-help>
-              Maak uw beroepskeuze
-            </aegon-help>
+            Welke eigen risicoperiode kiest u?
+            <aa-hint text="Uw uitkering start na afloop van deze periode. De meest gekozen periode is 1 maand."></aa-hint>
           </div>
           <div class="inputs">
-            <aegon-input-radio name="startingTerm">2 weken </aegon-input-radio>
-            <aegon-input-radio name="startingTerm">1 maand</aegon-input-radio>
-            <aegon-input-radio name="startingTerm">3 maanden</aegon-input-radio>
-            <aegon-input-radio name="startingTerm">1 jaar</aegon-input-radio>
+            <aa-input-radio [(ngModel)]="startingTerm" (aaChange)="fetchCalculationSpecification()" name="term" value="14">2 weken </aa-input-radio>
+            <aa-input-radio [(ngModel)]="startingTerm" (aaChange)="fetchCalculationSpecification()" name="term" value="30">1 maand</aa-input-radio>
+            <aa-input-radio [(ngModel)]="startingTerm" (aaChange)="fetchCalculationSpecification()" name="term" value="90">3 maanden</aa-input-radio>
+            <aa-input-radio [(ngModel)]="startingTerm" (aaChange)="fetchCalculationSpecification()" name="term" value="365">1 jaar</aa-input-radio>
           </div>
         </div>
+        
         <div class="field">
-          <div class="label">
-            Welk bruto jaarbedrag wilt u verzekeren?
-            <aegon-help>Help !</aegon-help>
-          </div>
           <div class="inputs">
-            <aegon-input-number prefix="€" [(ngModel)]="grossYearAmount" [max]="99999999"></aegon-input-number>
+            <aa-slider-input class="aa-qq__control aa-input--euro" 
+              [(ngModel)]="grossYearAmount" 
+              (change)="fetchCalculationSpecification()" 
+              [sliderOptions]="sliderOptions" 
+              [label]="'Welk bruto jaarbedrag wilt u verzekeren?'" 
+              [helpText]="'Dit is het bedrag na aftrek van belastingvoordeel. Wij rekenen met een gemiddeld belastingvoordeel van 35%. Voor uw situatie kan dit meer of minder zijn.'">
+            </aa-slider-input>          
           </div>
-          <aegon-solo-slider prefix="€" [(ngModel)]="grossYearAmount" [range]="{
-            'min': [  minGrossYearAmount ],
-            '25%': [  1000 ],
-            '50%': [ 2000 ],
-            '75%': [  3000 ],
-            'max': [ 999999 ]
-          }">
-          </aegon-solo-slider>
-          <div class="min">&euro; {{minGrossYearAmount}}</div>
-          <div class="max">&euro; {{maxGrossYearAmount}}</div>
         </div>
+        
         <div class="result">
           <div class="linear">
             <div class="row">
@@ -500,7 +149,7 @@ var dummyRiskFactor = {
             Adviesgesprek aanvragen
           </a>
           <div class="label">
-            <a href="#" class="icon-skinnyarrow" (click)="showSummary()">
+            <a href="#" class="icon-skinnyarrow" (click)="gotoSummary()">
               Bekijk en mail overzicht
             </a>
           </div>
@@ -509,7 +158,7 @@ var dummyRiskFactor = {
     </section>
     
     
-    <div id="aov-quote-summary" *ngIf="page === 'summary'">
+    <div id="aov-quote-summary" *ngIf="showSummary">
       <h1>Samenvatting</h1>
       <h2 class="subtitle">Uw premie-indicatie</h2>
       <div id="premium-section" class="call-execution-block container_12  same-height row-fluid">
@@ -591,42 +240,64 @@ var dummyRiskFactor = {
 })
 //TODO ADD BASE64
 export class AovQuoteComponent implements OnInit {
-  @Input()  public  page: string;
+  @Input()  public  showSummary: boolean = false;
   @Input()  private mailUrl: string = 'http://ail.test.intra.aegon.nl/BS_Utilities_Communication_03Web/sca/BS_Utilities_Communication_03_ExpWS';
   @Input()  private mailCredentials: string = 'AppAegonNLDrupalTST:dUACcFMYvwhnrnnfdq9h';
   @Input()  private serviceUrl: string = 'http://ail.test.intra.aegon.nl/US_RestGatewayWeb/rest/requestResponse/BS_AE_POLIS_AOV_02/';
   @Input()  private serviceCredentials: string = 'appAegonNLCalculateTST:7OuwNNTVS4jJ8mO5F0bH';
-  @Input()  private summaryPath: string = '';
+  @Input()  private summaryPath: string = '#';
+
+  public sliderOptions = {
+  	start: 3500, // Handle start position
+  	connect: true, // Display a colored bar between the handles
+  	step: 500, // Slider moves in increments of xx
+  	orientation: 'horizontal', // Orient the slider vertically
+  	behaviour: 'snap', // click anywhere to start dragging + draggable range
+  	range: { // Slider can select '0' to '100'
+  		'min': 2500,
+  		'max': 125000
+  	},
+  	pips: { // Shows scale and values below chart
+  		mode: 'range',
+  		// density: 100,
+  		// values: [1875, 2016],
+  		density: 100,
+  	}
+  };
 
   public  showCalculator: boolean;
   public  grossYearAmount: number = 17500;
-  public  minGrossYearAmount: number = 700;
-  public  maxGrossYearAmount: number = 35000;
-
+  public  minGrossYearAmount: number = 3125;
+  public  maxGrossYearAmount: number = 100000;
+  public  minAge: number = 18;
+  public  maxAge: number = 59;
+  
   public  birthDate: string;
   public  birthDateError: boolean;
   public  professionError: boolean;
   public  grossIncome: number;
   public  grossIncomeError: boolean;
-  public  startingTerm: string;
+
+  public  startingTerm: number = 30;
   public  startingTermError: boolean;
   public  insuranceAmount: number;
   public  insuranceAmountError: boolean;
   public  emailAddress: string = "";
   public  emailAddressError: boolean;
+
+  public  serviceError: boolean;
+  public  pending: number = 0;
+
   public  emailButtonPending: boolean = false;
-  public  grossMonthly: number;
-  public  netMonthly: number;
   public  reSendEmailShown: boolean = false;
 
+  public  grossMonthly: number;
+  public  netMonthly: number;
   public  profession: any = {};
   public  professions: any[] = [];
   public  professionsFiltered: any[] = [];
   private rawProfessions: any = {};
-
   public  riskFactor: any = {};
-
-  public  serviceError: boolean;
 
 
   //TODO variables in session storage
@@ -639,30 +310,39 @@ export class AovQuoteComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log(dummyProfessions);
+
+
     this.initProfessions();
   }
 
   handleError(error: Response) {
     this.serviceError = true;
     console.log('Server error', error);
+    this.pending -= 1;
     return Observable.throw('Server error');
   }
 
   processProfessions(response) {
+    // Check if the response contains professions
     if (response.retrieveProfessionsResponse &&
         response.retrieveProfessionsResponse._AE_BEROEPENLIJST_AOV) {
       for (let prof of response.retrieveProfessionsResponse._AE_BEROEPENLIJST_AOV) {
+        // Add each profession to the rawProfession dictionary under its key.
         this.rawProfessions[prof._AE_BRPCODE] = prof;
+        // Make each profession available for the input dropdown in the format that the dropdown needs.
         this.professions.push({key: prof._AE_BRPCODE, label: prof._AE_BRPSUBNM || prof._AE_BRPNAAM})
       }
     }
   }
 
   initProfessions() {
+    this.pending += 1;
     this.serviceError = false;
 
     if (dummyProfessions) {
       this.processProfessions(dummyProfessions);
+      this.pending -= 1;
       return;
     }
 
@@ -675,26 +355,20 @@ export class AovQuoteComponent implements OnInit {
     let headers = new Headers({'Content-Type': 'application/json', "Authorization" : `Basic ${this.serviceCredentials}`});
     let options = new RequestOptions({headers: headers});
 
-    // Calculate and riskfactor
+    // Fetch professions.
     this.http.post(this.serviceUrl + 'retrieveProfessions', JSON.stringify(body), options)
       .map(res => res.json())
       .catch(this.handleError)
       .subscribe(data => {
         this.processProfessions(data);
+        this.pending -= 1;
       }, error => console.log(error));
   }
 
-  validatePersonalInformation(): boolean {
-    let hasErrors: boolean = false;
-
-    this.birthDateError = false;
-    this.professionError = false;
-    this.grossIncomeError = false;
-
-    // Calculate age.
+  calculateAge(date) {
     let age = 0;
-    if (this.birthDate) {
-      let bd: string[] = this.birthDate.split("-");
+    if (date) {
+      let bd: string[] = date.split("-");
       let today = new Date();
       let nowyear = today.getFullYear();
       let nowmonth = today.getMonth();
@@ -712,8 +386,22 @@ export class AovQuoteComponent implements OnInit {
         age -= 1;
       }
     }
+    return age;
+  }
 
-    if (!this.birthDate || age < 18 || age > 59 ) {
+  validatePersonalInformation(): boolean {
+    let hasErrors: boolean = false;
+
+    this.birthDateError = false;
+    this.professionError = false;
+    this.grossIncomeError = false;
+
+    // Calculate age.
+    let age = this.calculateAge(this.birthDate);
+
+    if (!this.birthDate || 
+        age < this.minAge || 
+        age > this.maxAge ) {
       this.birthDateError = true;
       hasErrors = true;
     }
@@ -723,7 +411,9 @@ export class AovQuoteComponent implements OnInit {
       hasErrors = true;
     }
 
-    if (!this.grossIncome || (this.grossIncome && this.grossIncome < 3125 && this.grossIncome > 1000000)) {
+    if (!this.grossIncome || (this.grossIncome &&
+        this.grossIncome < this.minGrossYearAmount &&
+        this.grossIncome > this.maxGrossYearAmount)) {
       this.grossIncomeError = true;
       hasErrors = true;
     }
@@ -748,18 +438,23 @@ export class AovQuoteComponent implements OnInit {
     return !hasErrors;
   }
 
-  showCalculation() {
-    // Show the next steps that the user needs to fill in.
+  startCalculator() {
+    // Validate the personal information. If it is valid then the calculator can be shown.
     if (this.validatePersonalInformation()) {
-      this.showCalculator = true;
+      // Show calculator
 
-      this.fetchCalculationSpecification();
+      let callback = () => {
+        this.showCalculator = true;
+      };
+
+      this.fetchCalculationSpecification(callback);
+
     }
   }
 
-  showSummary() {
+  gotoSummary() {
     // This needs to redirect to another page. use this.summaryPath
-    this.page = 'summary';
+    window.location.href = this.summaryPath;
   }
 
   fetchProfessions(searchString) {
@@ -781,28 +476,25 @@ export class AovQuoteComponent implements OnInit {
           "CORRELATIONID": "## batch 7 ##"
         },
         "_AE_BEROEPENLIJST_AOV": {
-          "_AE_RISICOKLASSE_AOV": {
-            "PERREIS": "20",
-            "PERHAND": "80",
-            "_AE_OPLHBOWO": "true",
-            "PERADM": "2"
-          }
+
         }
       }
     };
 
     if (rawProfession) {
+      // BKLASSE is mandatory.
+      body.calculateRiskFactorRequest._AE_BEROEPENLIJST_AOV['BKLASSE'] = rawProfession.BKLASSE;
 
-      if (rawProfession.BKLASSE) {
-        body.calculateRiskFactorRequest._AE_BEROEPENLIJST_AOV['BKLASSE'] = rawProfession.BKLASSE;
-      }
       if (rawProfession._AE_BKLSMIN) {
+        // Optional
         body.calculateRiskFactorRequest._AE_BEROEPENLIJST_AOV['_AE_BKLSMIN'] = rawProfession._AE_BKLSMIN;
       }
       if (rawProfession._AE_BKLSMAX) {
+        // Optional
         body.calculateRiskFactorRequest._AE_BEROEPENLIJST_AOV['_AE_BKLSMAX'] = rawProfession._AE_BKLSMAX;
       }
       if (rawProfession._AE_BKLSVAST) {
+        // Optional
         body.calculateRiskFactorRequest._AE_BEROEPENLIJST_AOV['_AE_BKLSVAST'] = rawProfession._AE_BKLSVAST;
       }
 
@@ -832,54 +524,77 @@ export class AovQuoteComponent implements OnInit {
 
   }
 
-  fetchCalculationSpecification() {
+
+  processCalculationSpecification(response, cb) {
+    cb();
+  }
+
+  fetchCalculationSpecification(cb:any = () => {}) {
     if (this.riskFactor) {
+      
+      if (dummyCalculateSpecification) {
+        this.processCalculationSpecification(dummyCalculateSpecification, cb);
+        return;
+      }
+
+      
       let body = {
-      "calculateRiskFactorRequest": {
-        "AILHEADER": {
-          "CLIENTID": "RCAL",
-          "CORRELATIONID": "## batch 7 ##"
-        },
-        "_AE_BEROEPENLIJST_AOV": {
-          "_AE_RISICOKLASSE_AOV": {
-            "PERREIS": "20",
-            "PERHAND": "80",
-            "_AE_OPLHBOWO": "true",
-            "PERADM": "2"
+        "calculateSpecificationRequest": {
+          "AILHEADER": {
+            "CLIENTID": "RCAL",
+            "CORRELATIONID": "## batch 7 ##"
+          },
+          "CONTRACT_POLIS": {
+            "DPRC": "0",
+            "INGDAT": "2011-09-05",
+            "_AE_BETAALAFSPRAAK": { "BETTERM": "3" },
+            "_AE_VERZEKERD_OBJECT": {
+              "_AE_OVERIG": {
+                "_AE_OBJECT_PERSOON": {
+                  "OBJECT_PERS_BEROEP_GEGEV": {
+                    "_AE_RISICOKLASSE_AOV": { "_AE_RISKKLASSE": "3" }
+                  },
+                  "GEBDAT": "1971-07-01"
+                }
+              }
+            },
+            "DEKKING": {
+              "VERZSOM": "25000",
+              "HVVDAT": "2022-05-01",
+              "MYCODE": "1149",
+              "DEKKING_AOV": {
+                "_AE_COMBINATIEKORT": "false",
+                "_AE_COMMERCIELEKORT": "0",
+                "_AE_MANTELKORT": "10",
+                "WACHTTY": "365",
+                "_AE_AANVANGSKORT": "true",
+                "_AE_VERZSOM_B": "44000",
+                "UDRAFWJ": "5",
+                "AOPVU": "50",
+                "CBSSTG": "false",
+                "ENDLFTD": "60",
+                "INDEX": "true",
+                "TARIEF": "C",
+                "INDPERC": "2",
+                "KLIMPRC": "2"
+              }
+            }
           }
         }
-      }
-    };
-
-    if (rawProfession) {
-
-      if (rawProfession.BKLASSE) {
-        body.calculateRiskFactorRequest._AE_BEROEPENLIJST_AOV['BKLASSE'] = rawProfession.BKLASSE;
-      }
-      if (rawProfession._AE_BKLSMIN) {
-        body.calculateRiskFactorRequest._AE_BEROEPENLIJST_AOV['_AE_BKLSMIN'] = rawProfession._AE_BKLSMIN;
-      }
-      if (rawProfession._AE_BKLSMAX) {
-        body.calculateRiskFactorRequest._AE_BEROEPENLIJST_AOV['_AE_BKLSMAX'] = rawProfession._AE_BKLSMAX;
-      }
-      if (rawProfession._AE_BKLSVAST) {
-        body.calculateRiskFactorRequest._AE_BEROEPENLIJST_AOV['_AE_BKLSVAST'] = rawProfession._AE_BKLSVAST;
-      }
+      };
 
       let headers = new Headers({'Content-Type': 'application/json', "Authorization" : `Basic ${this.serviceCredentials}`});
       let options = new RequestOptions({headers: headers});
 
-      // Calculate and set riskfactor
-      this.http.post(this.serviceUrl + 'calculateRiskFactor' , JSON.stringify(body), options)
+      // Update calculations.
+      this.http.post(this.serviceUrl + 'calculationSpecification' , JSON.stringify(body), options)
         .map(res => res.json())
         .catch(this.handleError)
         .subscribe(data => {
-          this.processRiskFactor(data);
+          this.processCalculationSpecification(data, cb);
         }, error => console.log(error));
-      }
     }
   }
-
 
   validateEmail() {
     var emailAddress_regexp = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
