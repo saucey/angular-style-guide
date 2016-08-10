@@ -16,7 +16,7 @@ export class InterestsService {
 	private defaultData: DataFormat = {months:0, nhg: false, lowest: true}; 
 	private inputData: DataFormat;
 	
-	constructor (private http?: Http) {}
+	constructor (private http: Http) {}
 
 	// API url
 	private intstUrl = '/particulier/feed/json/table';

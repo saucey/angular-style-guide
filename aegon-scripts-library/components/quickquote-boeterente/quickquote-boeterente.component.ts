@@ -76,6 +76,8 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
 
   /*
    * Initial tealium event 
+   *
+   * @param index {number}: the index
    */
   init(index: number): void {
     this.mortgageType = Number(index);
@@ -299,6 +301,9 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
     }
   }
    /* Calculates the monthly interest fee.
+    *
+    * @param mortgage {number}: the mortgage amount
+    * @param interest {number}: the interest percentage
     */
   private calculateMonthlyFee(mortgage: number, interest: number):number {
     return ((mortgage * interest) / 100) / 12;
@@ -307,8 +312,10 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
    * Special calculation between two dates to get
    * penalty applicable periods
    * 
-   * @param date: start date of the mortgage or applicable term.
-   * @param latestDate: end date of mortgage or 
+   * @param date {string}: start date of the mortgage or applicable term.
+   * @param latestDate {string}: end date of mortgage.
+   * @param type {string} (start|end): if start retrieves the start period number
+   *   if end retrieves the last period number. 
    */
   getTermsAmount(date: string, latestDate: string, type: string = 'end'): number {
     /* 
@@ -362,8 +369,8 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
   /*
    * Rounds the decimals to a certain
    * amount of characters.
-   * @param num: the float number
-   * @param deg: the amount of decimal chars.
+   * @param num {number}: the float number
+   * @param deg {number}: the amount of decimal chars.
    */
   roundToDeg(num: number, deg: number): number {
     let degs = Math.pow(10, deg);
@@ -371,8 +378,8 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
   }
   /*
    * Adds leading zeros to a number.
-   * @param num: the number to add padding.
-   * @param length: the length of the expected number
+   * @param num {any}: the number to add padding.
+   * @param length {number}: the length of the expected number
    *   with leading zeros including the number itself.
    */
   numberPadding(num: any, length: number): string {
@@ -388,6 +395,8 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
   /*
    * Checks if utag and utag_data exist
    * and triggers tealium functions.
+   * 
+   * @param data {Object}: an object with the variables.
    */
   private tealium (data: Object): void {
     // Merge properties with global utag_data object when available.
