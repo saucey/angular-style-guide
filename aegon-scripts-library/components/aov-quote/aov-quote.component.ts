@@ -334,6 +334,25 @@ var dummyProfessions = {
   }
 };
 
+var dummyRiskFactor = {
+  "calculateRiskFactorResponse": {
+    "_AE_RISICOKLASSE_AOV": {
+      "_AE_RISKKLASSE": "3.5"
+    },
+    "PROCES": {
+      "STATUS": "MS000",
+      "VOLGNUM": "1",
+      "STATUST": "Success"
+    },
+    "AILHEADER": {
+      "CLIENTID": "RCAL",
+      "CORRELATIONID": "## batch 7 ##"
+    }
+  }
+}
+
+
+
 
 
 @Component({
@@ -412,6 +431,9 @@ var dummyProfessions = {
       </div>
     </section>
     
+    
+    
+     
     <section *ngIf="showCalculator" class="calculation">
       <div class="calculation indication">
         <h3 prefix="/">Uw keuzes</h3>
@@ -423,10 +445,10 @@ var dummyProfessions = {
             </aegon-help>
           </div>
           <div class="inputs">
-            <aegon-input-radio [name]="startingTerm">2 weken </aegon-input-radio>
-            <aegon-input-radio [name]="startingTerm">1 maand</aegon-input-radio>
-            <aegon-input-radio [name]="startingTerm">3 maanden</aegon-input-radio>
-            <aegon-input-radio [name]="startingTerm">1 jaar</aegon-input-radio>
+            <aegon-input-radio name="startingTerm">2 weken </aegon-input-radio>
+            <aegon-input-radio name="startingTerm">1 maand</aegon-input-radio>
+            <aegon-input-radio name="startingTerm">3 maanden</aegon-input-radio>
+            <aegon-input-radio name="startingTerm">1 jaar</aegon-input-radio>
           </div>
         </div>
         <div class="field">
@@ -570,7 +592,7 @@ var dummyProfessions = {
 export class AovQuoteComponent implements OnInit {
   @Input()  public  page: string;
   @Input()  private mailUrl: string;
-  @Input()  private serviceCredentials: string = 'appAegonNLCalculateTST:YXBwQWVnb25OTENhbGN1bGF0ZVRTVDo3T3V3Tk5UVlM0ako4bU81RjBiSA';
+  @Input()  private serviceCredentials: string = 'appAegonNLCalculateTST:7OuwNNTVS4jJ8mO5F0bH';
   @Input()  private serviceUrl: string = 'http://ail.test.intra.aegon.nl/US_RestGatewayWeb/rest/requestResponse/BS_AE_POLIS_AOV_02/';
   @Input()  private summaryPath: string = '';
 
@@ -600,10 +622,9 @@ export class AovQuoteComponent implements OnInit {
   public  professionsFiltered: any[] = [];
   private rawProfessions: any = {};
 
-  public  riskFactor: any;
+  public  riskFactor: any = {};
 
   public  serviceError: boolean;
-  private serviceHeaders = new Headers({"Authorization" : `Basic ${this.serviceCredentials}`});
 
 
   //TODO variables in session storage
@@ -643,12 +664,22 @@ export class AovQuoteComponent implements OnInit {
       return;
     }
 
-    this.http.get(this.serviceUrl + 'retrieveProfessions', this.serviceHeaders)
-       .toPromise()
-       .then((response) => {
-         this.processProfessions(response.json());
-       })
-       .catch(this.handleError);
+    let body = {
+      "retrieveProfessionsRequest": {
+        "AILHEADER": { "CLIENTID": "A2T1 HappyFlow" }
+      }
+    };
+
+    let headers = new Headers({'Content-Type': 'application/json', "Authorization" : `Basic ${this.serviceCredentials}`});
+    let options = new RequestOptions({headers: headers});
+
+    // Calculate and riskfactor
+    this.http.post(this.serviceUrl + 'retrieveProfessions', JSON.stringify(body), options)
+      .map(res => res.json())
+      .catch(this.handleError)
+      .subscribe(data => {
+        this.processProfessions(data);
+      }, error => console.log(error));
   }
 
   validatePersonalInformation(): boolean {
@@ -689,6 +720,7 @@ export class AovQuoteComponent implements OnInit {
       this.professionError = true;
       hasErrors = true;
     }
+
     if (!this.grossIncome || (this.grossIncome && this.grossIncome < 3125 && this.grossIncome > 1000000)) {
       this.grossIncomeError = true;
       hasErrors = true;
@@ -718,6 +750,8 @@ export class AovQuoteComponent implements OnInit {
     // Show the next steps that the user needs to fill in.
     if (this.validatePersonalInformation()) {
       this.showCalculator = true;
+
+      this.fetchCalculationSpecification();
     }
   }
 
@@ -733,31 +767,118 @@ export class AovQuoteComponent implements OnInit {
   }
 
   processRiskFactor(response) {
-    this.riskFactor = response['something']
+    this.riskFactor = response;
+  }
+
+
+  fetchRiskFactor(rawProfession) {
+    let body = {
+      "calculateRiskFactorRequest": {
+        "AILHEADER": {
+          "CLIENTID": "RCAL",
+          "CORRELATIONID": "## batch 7 ##"
+        },
+        "_AE_BEROEPENLIJST_AOV": {
+          "_AE_RISICOKLASSE_AOV": {
+            "PERREIS": "20",
+            "PERHAND": "80",
+            "_AE_OPLHBOWO": "true",
+            "PERADM": "2"
+          }
+        }
+      }
+    };
+
+    if (rawProfession) {
+
+      if (rawProfession.BKLASSE) {
+        body.calculateRiskFactorRequest._AE_BEROEPENLIJST_AOV['BKLASSE'] = rawProfession.BKLASSE;
+      }
+      if (rawProfession._AE_BKLSMIN) {
+        body.calculateRiskFactorRequest._AE_BEROEPENLIJST_AOV['_AE_BKLSMIN'] = rawProfession._AE_BKLSMIN;
+      }
+      if (rawProfession._AE_BKLSMAX) {
+        body.calculateRiskFactorRequest._AE_BEROEPENLIJST_AOV['_AE_BKLSMAX'] = rawProfession._AE_BKLSMAX;
+      }
+      if (rawProfession._AE_BKLSVAST) {
+        body.calculateRiskFactorRequest._AE_BEROEPENLIJST_AOV['_AE_BKLSVAST'] = rawProfession._AE_BKLSVAST;
+      }
+
+      let headers = new Headers({'Content-Type': 'application/json', "Authorization" : `Basic ${this.serviceCredentials}`});
+      let options = new RequestOptions({headers: headers});
+
+      // Calculate and set riskfactor
+      this.http.post(this.serviceUrl + 'calculateRiskFactor' , JSON.stringify(body), options)
+        .map(res => res.json())
+        .catch(this.handleError)
+        .subscribe(data => {
+          this.processRiskFactor(data);
+        }, error => console.log(error));
+    }
   }
 
   selectProfession(professionObj) {
     // Set the profession
     this.profession = professionObj;
 
-    let rawProfession = this.rawProfessions[professionObj.key];
+    if (professionObj) {
+      // A profession is known so riskfactor can be retrieved.
+      this.fetchRiskFactor(this.rawProfessions[professionObj.key])
+    } else {
+      this.riskFactor = {};
+    }
 
-    let body:any = {};
-
-    if (rawProfession.BKLASSE) body['BKLASSE'] = rawProfession['BKLASSE'];
-    if (rawProfession._AE_BKLSMIN) body['_AE_BKLSMIN'] = rawProfession['_AE_BKLSMIN'];
-    if (rawProfession._AE_BKLSMAX) body['_AE_BKLSMAX'] = rawProfession['_AE_BKLSMAX'];
-    if (rawProfession._AE_BKLSVAST) body['_AE_BKLSVAST'] = rawProfession['_AE_BKLSVAST'];
-
-    // Calculate and set riskfactor
-    this.http.post(this.serviceUrl + 'calculateRiskFactor', body, this.serviceHeaders)
-       .toPromise()
-       .then((response) => {
-         this.processRiskFactor(response.json());
-       })
-       .catch(this.handleError);
   }
-  
+
+  fetchCalculationSpecification() {
+    if (this.riskFactor) {
+      let body = {
+      "calculateRiskFactorRequest": {
+        "AILHEADER": {
+          "CLIENTID": "RCAL",
+          "CORRELATIONID": "## batch 7 ##"
+        },
+        "_AE_BEROEPENLIJST_AOV": {
+          "_AE_RISICOKLASSE_AOV": {
+            "PERREIS": "20",
+            "PERHAND": "80",
+            "_AE_OPLHBOWO": "true",
+            "PERADM": "2"
+          }
+        }
+      }
+    };
+
+    if (rawProfession) {
+
+      if (rawProfession.BKLASSE) {
+        body.calculateRiskFactorRequest._AE_BEROEPENLIJST_AOV['BKLASSE'] = rawProfession.BKLASSE;
+      }
+      if (rawProfession._AE_BKLSMIN) {
+        body.calculateRiskFactorRequest._AE_BEROEPENLIJST_AOV['_AE_BKLSMIN'] = rawProfession._AE_BKLSMIN;
+      }
+      if (rawProfession._AE_BKLSMAX) {
+        body.calculateRiskFactorRequest._AE_BEROEPENLIJST_AOV['_AE_BKLSMAX'] = rawProfession._AE_BKLSMAX;
+      }
+      if (rawProfession._AE_BKLSVAST) {
+        body.calculateRiskFactorRequest._AE_BEROEPENLIJST_AOV['_AE_BKLSVAST'] = rawProfession._AE_BKLSVAST;
+      }
+
+      let headers = new Headers({'Content-Type': 'application/json', "Authorization" : `Basic ${this.serviceCredentials}`});
+      let options = new RequestOptions({headers: headers});
+
+      // Calculate and set riskfactor
+      this.http.post(this.serviceUrl + 'calculateRiskFactor' , JSON.stringify(body), options)
+        .map(res => res.json())
+        .catch(this.handleError)
+        .subscribe(data => {
+          this.processRiskFactor(data);
+        }, error => console.log(error));
+      }
+    }
+  }
+
+
   validateEmail() {
     var emailAddress_regexp = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
 
