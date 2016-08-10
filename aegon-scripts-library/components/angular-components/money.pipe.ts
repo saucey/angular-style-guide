@@ -4,8 +4,6 @@ import {formatNumber} from "./input-number.component";
 @Pipe({name: 'money'})
 export class MoneyPipe implements PipeTransform {
   transform(value:number, args:string[]) : any {
-    if (value) {
-      return formatNumber(value);
-    }
+    return formatNumber(value);
   };
 }

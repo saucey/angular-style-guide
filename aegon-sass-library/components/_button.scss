@@ -13,8 +13,8 @@
   font-family: $font_icons;
   line-height: 44px;
 
-  @include rem("font-size", 11);
   @include rem("border-radius", 0, $elements_border_radius, $elements_border_radius, 0);
+  @include rem("font-size", 11);
 }
 
 button,
@@ -107,6 +107,7 @@ button,
     }
     &.icon-calculator:after {
       content: $font_icons_calculator;
+
       @include rem("font-size", 20);
     }
     &.arrow:after {
@@ -135,38 +136,54 @@ button,
       background-color: rgba(255, 255, 255, 0.2);
     }
     &.pending:after {
+      color: transparent;
       background-image: url($image_path + "spinner.gif");
       background-repeat: no-repeat;
       background-position: center;
-      background-size: 70%;
-      color: transparent;
+      background-size: 70%;;
     }
     &.icon-lock {
       &:after {
         content: $font_icons_lock;
+        font-size: inherit;
       }
       &.green:after {
         background-color: $lighter_green;
       }
     }
   }
+  &.white {
+    background-color: $white;
+  }
   &.white,
   &.transparent {
     color: $blue;
-    background-color: $white;
-    &.arrow:before {
-      position: absolute;
-      margin-top: -10px;
-      margin-left: -25px;
-      padding: 11px;
-      content: $font_icons_arrow_right;
-      color: $blue;
-      //currently deactivated as the current design calls for something without arrow
-      background-color: transparent;
-      font-family: $font_icons;
-      font-size: 11px;
+    &.arrow {
+      &:before {
+        position: absolute;
+        margin-top: -10px;
+        margin-left: -25px;
+        padding: 11px;
+        content: $font_icons_arrow_right;
+        color: $blue;
+        //currently deactivated as the current design calls for something without arrow
+        background-color: transparent;
+        font-family: $font_icons;
 
-      @include rem("font-size", 11);
+        @include rem("font-size", 11);
+      }
+      &.inline {
+        margin: 0;
+        padding: 0;
+        &:before {
+          position: static;
+          display: inline-block;
+          margin: 0 10px 0 0;
+          padding: 0;
+
+          @include rem("font-size", 12);
+        }
+      }
     }
     &.arrow:after {
       margin-right: 0;

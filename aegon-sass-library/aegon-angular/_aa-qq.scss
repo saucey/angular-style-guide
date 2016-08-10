@@ -1,0 +1,268 @@
+/**
+ * Quick Quote styles
+ */
+
+$qq_border_radius: 6px;
+// Quickquote
+.aa-qq {
+  width: 100%;
+  height: auto;
+  user-select: none;
+  max-width:1008px;
+  position: relative;
+  background: $pastel_light_blue;
+  border-radius: $qq_border_radius;
+  // Calculator icon
+  h3 {
+    color: $slightly_darker_blue;
+    @include rem('margin', 0, 0, 30, 30);
+    font-family: $font_normal;
+    font-weight: bold;
+    &:before {
+      font-family: $font_icons;
+      content: $font_icons_calculator;
+      left: 30px;
+      position: absolute;
+    }
+  }
+}
+// White triangle
+.aa-qq__triangle {
+  width: 50px;
+  height: 22px;
+  top: 0;
+  left: 54px;
+  position: absolute;
+  overflow: hidden;
+  user-select: none;
+  &:after {
+    content: '';
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    background-color: #fff;
+    border-radius: 5px;
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    bottom: 8px;
+    left: 50%;
+    pointer-events: none;
+    margin-left: -16px;
+  }
+}
+
+// Calculation area
+.aa-qq__calculation {
+  position: relative;
+  width: 100%;
+  user-select: none; // prevent text selection in the ui
+  @include rem('padding', 30);
+  input {
+    background-color: white;
+  }
+}
+
+// Result area
+.aa-qq__result {
+  background: $slightly_darker_blue;
+  border-radius: 0 0 $qq_border_radius $qq_border_radius;
+  user-select: auto;
+  color: white;
+  @include rem('padding', 30);
+  width: 100%;
+  display: block;
+  overflow: visible;
+  .aa-hint {
+    @include rem('margin-left', 10);
+    @include rem('margin-right', 10);
+  }
+}
+// Result
+.aa-qq__result-box {
+  text-align: left;
+}
+
+// Group multiple result boxes .aa-qq-result-box
+.aa-qq__result-group {
+  display: block;
+  position: relative;
+  clear: both;
+}
+// Single result: title, help, amount
+.aa-qq__result-box {
+  display: inline;
+  float: left;
+  xmin-width: 200px;
+  width: 33%;
+  font-family: $font_thin;
+  @include rem('margin-bottom', 15);
+}
+.aa-qq__result-title {
+  @include rem('font-size', 18);
+  @include rem('padding-bottom', 5);
+}
+.aa-qq__result-amount {
+  @include rem('font-size', 26);
+  font-family: $font_normal;
+  display: block;
+}
+.aa-qq__conversate {
+  font-family: $font_thin;
+  float: left;
+  position: relative;
+  @include rem('line-height', 26);
+  @include rem('padding-left', 20);
+  @include rem('margin-top', 20);
+  color: $white;
+  &:after {
+    content:'>';
+    display:block;
+    height:100%;
+    position:absolute;
+    left:0;
+    top:0;
+    margin-right: 10px;
+  }
+}
+// Main call to action button
+.aa-qq__cta-button {
+  float: right;
+  text-align: right !important;
+  @include rem('padding-top', 10);
+  @include rem('padding-left', 10);
+  margin-bottom: 0;
+  a {
+    margin: 0;
+  }
+}
+// Outside bottom disclaimer
+.aa-qq__disclaimer {
+  @include rem('font-size', 14);
+  @include rem('padding', 10);
+  font-family: $font_light;
+  color: $slightly_darker_blue;
+  background-color: white;
+  position: relative;
+}
+.aa-qq__disclaimer--star {
+  @include rem('padding-left', 25);
+  &:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: '*';
+    @include rem('font-size', 14);
+    @include rem('padding', 10);
+    font-family: $font_light;
+    color: $slightly_darker_blue;
+  }
+}
+
+// Mobile QuickQuote
+@include breakpoint($brk-mobile) {
+  .aa-qq {
+    h3 {
+      @include rem('margin-bottom', 15);
+      &:before {
+        @include rem('left', 15);
+      }
+    }
+  }
+  .aa-qq__calculation, .aa-qq__result  {
+    @include rem('padding', 15);
+  }
+  .aa-qq__calculation {
+    @include rem('padding-top', 30);
+  }
+  .aa-qq__result-box {
+    display: block;
+    width: 100%;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  .aa-qq__cta-button {
+    display: block;
+    text-align: left !important;
+    float: none;
+    clear: both;
+    padding-left: 0;
+  }
+}
+
+// Mobile portrait QuickQuote
+@include breakpoint($brk-mobile-portrait) {
+  .aa-qq__calculation  {
+    @include rem('padding-left', 15);
+    @include rem('padding-right', 15);
+  }
+  .aa-qq__cta-button {
+    a {
+      width: 100%;
+    }
+  }
+}
+
+// Chart
+.aa-qq__chart {
+  overflow: hidden;
+  position: relative;
+  margin-top: 0;
+  .aa-highchart {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: auto;
+    border-radius: $default-border-radius;
+    // Adjust chart border radius
+    .highcharts-container {
+      border-radius: $default-border-radius;
+      overflow: hidden;
+    }
+  }
+}
+
+// Controls
+.aa-qq__controls {
+}
+.aa-qq__control {
+  display: block;
+  @include rem('margin-bottom', 15);
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+@include breakpoint($brk-ipad-portrait) {
+  .aa-qq__controls {
+    @include rem('padding-left', 30);
+    @include rem('padding-top', 15);
+    @include rem('padding-bottom', 15);
+  }
+}
+
+@include breakpoint($brk-tablet) {
+  .aa-qq__chart {
+    height: 300px;
+    @include rem('margin-bottom', 20);
+  }
+}
+
+@include breakpoint($brk-mobile) {
+  .aa-qq__chart {
+    height: 300px;
+    @include rem('margin-top', 20);
+  }
+  .aa-qq__controls {
+    padding: 0;
+    @include rem('padding-top', 20);
+    .aa-control {
+      display: block;
+      @include rem('margin-bottom', 10);
+    }
+  }
+}
+
+

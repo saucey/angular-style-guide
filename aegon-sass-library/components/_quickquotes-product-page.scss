@@ -167,8 +167,21 @@
       }
     }
   }
-}
+  //QUOTE AOV TOOL ( NOT QUICKQUOTE )
+  .aov-quote.quickquote.angular {
+    .field {
+      .label , .inputs {
+        width:50%;
+      }
+    }
+    .calculation .field {
+      .slider-container {
+        width:100%;
+      }
+    }
+  }
 
+}
 @include breakpoint($brk-mobile) {
   .node-type-product {
     //QUICKQUOTE HELP ELEMENT ( for non-angular quickquotes only )
@@ -255,6 +268,18 @@
       .field {
         .inputs {
           width:100%;
+        }
+      }
+    }
+    //QUOTE AOV TOOL ( NOT QUICKQUOTE )
+    .quickquote.aov-quote.angular {
+      .field {
+        .label {
+          width:100%;
+        }
+        .inputs {
+          width:100%;
+          min-width:193px;
         }
       }
     }
@@ -370,6 +395,14 @@
           width: 58%;
           max-width: 370px;
         }
+      }
+    }
+  }
+  //QUOTE AOV TOOL ( NOT QUICKQUOTE )
+  .aov-quote.quickquote.angular {
+    .field {
+      .label , .inputs {
+        width:50%;
       }
     }
   }

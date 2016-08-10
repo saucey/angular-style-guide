@@ -1,6 +1,8 @@
 .personal_details_widget,
 .communication_preferences,
 .lhfs_widget {
+  border-top: 1px solid #aaa;
+
   @include rem("padding", 30, 0, 40, 0);
   h3 {
     font-weight: normal;
@@ -55,21 +57,26 @@
   }
   li {
     &.value {
+      &.on, &.off {
+        position: relative;
+        padding-left: 40px;
+      }
       &.on:before,
       &.off:before {
-        margin-right: 15px;
+        position: absolute;
+        left: 10px;
+        top: 0;
         font-family: $font_icons;
+        color: #ccc;
       }
       &.on {
         &:before {
           content: $font_icons_check;
-          color: $blue;
         }
       }
       &.off {
         &:before {
           content: $font_icons_minus;
-          color: #ccc;
         }
       }
     }
@@ -170,6 +177,12 @@
   .lhfs_widget,
   .communication_preferences {
     &.container_12 {
+      h3.row-fluid {
+        .span8 {
+          // Edit button
+          width: 25%;
+        }
+      }
       .row-fluid {
         .span1 {
           width: 5%;

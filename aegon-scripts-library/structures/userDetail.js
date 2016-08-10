@@ -592,7 +592,7 @@
     clearLastLogin: function () {
 
       // Remove mijn_last_login's cookie as first
-      $.removeCookie(mijnAegonCookieLoggedInName);
+      $.removeCookie(mijnAegonCookieLoggedInName, { path: '/' });
 
       // On logout or if user is not logged in show login button
       $('.login-link-wrapper').css('display', 'block');

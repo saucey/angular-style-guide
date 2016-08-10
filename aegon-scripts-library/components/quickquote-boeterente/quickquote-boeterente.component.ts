@@ -8,6 +8,7 @@ import {InputNumberComponent, InputNumberValueAccessor} from '../angular-compone
 import {InputRadioComponent, InputRadioValueAccessor} from '../angular-components/input-radio.component';
 import {MoneyPipe} from "../angular-components/money.pipe";
 import {InterestsService} from "./interests.service";
+import {validateDate} from "../angular-components/validation.component";
 
 var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteBoeterenteTemplate'));
 @Component({
@@ -79,7 +80,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteBoet
                 Dit jaar
               </div>
               <div class="inputs">
-                <aegon-input-number prefix="€" [(ngModel)]="pymntThisYear"></aegon-input-number>
+                <aegon-input-number prefix="€" [(ngModel)]="pymntThisYear" (blur)="validate()" [class.error]="pymntThisYear > 0 && pymtsErr"></aegon-input-number>
               </div>
             </div>
             <div class="field">
@@ -87,7 +88,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteBoet
                 Voorgaande jaren
               </div>
               <div class="inputs">
-                <aegon-input-number prefix="€" [(ngModel)]="pymntPrevYears"></aegon-input-number>
+                <aegon-input-number prefix="€" [(ngModel)]="pymntPrevYears" (blur)="validate()" [class.error]="pymntPrevYears > 0 && pymtsErr"></aegon-input-number>
               </div>
             </div>
           </div>
@@ -139,31 +140,92 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteBoet
           <div *ngIf="validIntst">
             <div class="bigger">
               <div class="row">
-                <span class="label">Indicatie huidige resterende rente</span>
-                <span class="value">
+                <span class="label">Indicatie omzettingskosten</span>
+                <div class="value">
                   <span class="curr">€</span>
-                  <span class="amount">{{totalFee | money}}*</span>
-                </span>
-              </div>
-            </div>
-            <div class="bigger">
-              <div class="row">
-                <span class="label">Indicatie huidige rente per maand</span>
-                <span class="value">
-                  <span class="curr">€</span>
-                  <span class="amount">{{monthlyFee | money}} <small>bruto</small></span>
-                </span>
+                  <span class="amount">{{ totalFee | money }}*</span>
+                </div>
                 <div class="small">
                   <div class="row">
-                    <div class="label"><p>Op basis van:<br>Resterende rentevastperiode: <b>{{ periodsLeft }}</b> {{ periodsLeft > 1 ? 'maanden' : 'maand' }}<br>
-                      Vergelijkingsrente: {{ newIntRate }}% <aegon-help position="top">Het actuele rentepercentage dat geldt voor de periode van uw resterende rentevastperiode. U vindt de geldende percentages op onze pagina met actuele rentepercentages. </aegon-help></p>
+                    <div class="label"><p>Op basis van:<br>Resterende rentevastperiode: <b>{{ periodsLeft }} {{ periodsLeft > 1 ? 'maanden' : 'maand' }}</b><br>
+                      Vergelijkingsrente: {{ newIntRate | money }}% <aegon-help position="top">Het actuele rentepercentage dat geldt voor de periode van uw resterende rentevastperiode. U vindt de geldende percentages op onze pagina met actuele rentepercentages. </aegon-help></p>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+            <div class="bigger">
+              <div class="row">
+                <span class="label">Optie 1: omzetten naar marktrente</span>
+                <div class="small">
+                  <div class="row">
+                    <!-- Indicatie nieuwe rente intro text -->
+                    <p>Na betaling van de omzettingskosten kunt u profiteren van een lagere rente. Het verschil in maandlasten is afhankelijk van de nieuwe rentevastperiode die u wenst.</p>
+                  </div>                
+                  <div class="row">
+                    <div class="label"><p>Nieuwe rentevastperiode<span *ngIf="newPeriod > -1"> met rente: <b>{{ newPeriodInt | money }}%</b></span></p>
+                    </div>
+                    <div class="label">
+                      <!-- These are the options for the interest period, the value is in months. -->
+                      <select [(ngModel)]="newPeriod" class="no-dd" (change)="newPeriod = $event.target.value; calculateNewMonthlyPymnt();">
+                        <option [value]="-1">Kies</option>
+                        <option [value]="0">Variabele rente</option>
+                        <option [value]="24">2 jaar</option>
+                        <option [value]="60">5 jaar</option>
+                        <option [value]="120">10 jaar</option>
+                        <option [value]="180">15 jaar</option>
+                        <option [value]="240">20 jaar</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="label"><p>Huidige rente per maand</p></div>
+                    <span class="value">
+                      <span class="curr">€</span>
+                      <span class="amount">{{ monthlyFee | money }}</span> <small>bruto</small>
+                    </span>
+                  </div>
+                  <div class="row">
+                    <div class="label"><p>Nieuwe rente per maand</p></div>
+                    <span class="value">
+                      <span class="curr">€</span>
+                      <span class="amount"><span *ngIf="newPeriod > -1">{{ newMonthlyPymnt | money }}</span><span *ngIf="newPeriod == -1">- </span></span> <small>bruto</small>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="bigger">
+              <div class="row">
+                <span class="label">Optie 2: rentemiddelen</span>
+                <div class="small">
+                  <div class="row"><div>
+                    <!-- Optie 2 text -->
+                    <p>De omzettingskosten worden met een renteopslag doorberekend. De oude en nieuwe rente wordt 'gemiddeld'. Log in bij Mijn Aegon om uw nieuwe rente per maand te zien.</p>
+                  </div></div>
+                </div>
+              </div>
+            </div>
+            <div class="bigger">
+              <div class="row">
+                <span class="label">Hoe verder?</span>
+                <div class="small">
+                  <div class="row">
+                    <!-- Hoe verder text -->
+                    <p>Als het aanpassen van uw hypotheekrente u interessant lijkt ga dan naar Mijn Aegon en download uw hypotheekrente opties als PDF</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="cta-wrapper">
+              <div class="row clearfix">
+                <a href="#" class="button transparent arrow flleft">Meer over de voor- en nadelen van de opties</a>
+                <a href="/mijnaegon/" class="button green icon-right icon-lock not-loggedin-content">Log in bij Mijn Aegon</a>
+              </div>
+            </div>
           </div>
           <div *ngIf="!validIntst" class="not-possible">
+            <!-- User interest lower than market interest message -->
             <h4>Berekening niet mogelijk</h4>
             <p>Het ingevoerde rentepercentage is lager dan de nu geldende marktrente. Het is daarom niet mogelijk om de omzettingskosten te berekenen. Controleer of u het juiste rentepercentage heeft ingevoerd.</p>
           </div>
@@ -188,18 +250,22 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
   // User entered data vars.
   mortgageType: number = 0;
   initialAmount: number = 0;
-  extraPymnt: boolean;
+  extraPymnt: boolean = false;
   pymntThisYear: number = 0;
   pymntPrevYears: number = 0;
   interestPeriodEnd: string;
   oldIntRate: number = 0;
   nhg: boolean;
   // Calculation variables.
+  repymnt: number = 0;
   totalFee: number = 0;
   monthlyFee: number = 0;
   periodsLeft: number;
   newIntRate: number;
   isReady: boolean = false;
+  newPeriod: number = -1;
+  newPeriodInt: number = 0;
+  newMonthlyPymnt: number = 0;
   // UI vars.
   // Adds loading class to button.
   calculating: boolean = false;
@@ -211,6 +277,7 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
   errorsHighlighted: boolean = false;
   mortgageTypeErr: boolean = false;
   initialAmountErr: boolean = false;
+  pymtsErr: boolean = false;
   interestPeriodEndErr: boolean = false;
   oldIntRateErr: boolean = false;
   nhgErr: boolean = false;
@@ -259,7 +326,8 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
 
     this.isReady = (this.mortgageType > 0 &&
       this.initialAmount > 0  &&
-      this.validateDate(this.interestPeriodEnd, true) &&
+      (!this.extraPymnt || this.extraPymnt && (this.initialAmount > (this.pymntThisYear + this.pymntPrevYears))) &&
+      validateDate(this.interestPeriodEnd, true) &&
       this.oldIntRate > 0 &&
       this.nhg !== undefined);
 
@@ -277,11 +345,14 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
     // Mortgage type error.
     this.mortgageTypeErr = (this.mortgageType === 0) ? true : false;
 
+    // Extra payments higher than mortgage value error.
+    this.pymtsErr = this.extraPymnt && (this.initialAmount <= (this.pymntPrevYears + this.pymntThisYear));
+
     // Initial amount error.
-    this.initialAmountErr = (this.initialAmount === 0 || this.initialAmount === null) ? true : false;
+    this.initialAmountErr = (this.initialAmount === 0 || this.initialAmount === null || this.pymtsErr) ? true : false;
 
     // Interest period end.
-    this.interestPeriodEndErr = this.validateDate(this.interestPeriodEnd, true) ? false : true;
+    this.interestPeriodEndErr = validateDate(this.interestPeriodEnd, true) ? false : true;
     
     // Old interest rate error.
     this.oldIntRateErr = (this.oldIntRate === 0 || this.oldIntRate === null) ? true : false;
@@ -308,13 +379,14 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
       let penaltyFree = this.roundToDeg((0.1 * this.initialAmount), 2);
 
       // 2. Repayment (Bedrag aflossing).
-      let repymnt = 0;
       if (this.extraPymnt === true) {
-        repymnt = this.pymntThisYear + this.pymntPrevYears;
+        this.repymnt = this.pymntThisYear + this.pymntPrevYears;
+      } else {
+        this.repymnt = 0;
       }
 
       // 3. Basis penalty-calculation (grondslag boeteberekening).
-      let basisFee = (this.initialAmount - penaltyFree - repymnt);
+      let basisFee = (this.initialAmount - penaltyFree - this.repymnt);
 
       /* 4. Total cash value (Totale contante waarde) */
       // 4.1. Define Interest rate contract per month.
@@ -361,7 +433,6 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
           // Market monthly interest rate.
           newMonthlyIntRate = this.newIntRate / 12;
 
-
           // 4.4. Define interest for 1 period based on market interest.
           let newPeriodIntst = ((newMonthlyIntRate * basisFee) / 100).toFixed(2);
 
@@ -375,10 +446,12 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
 
             tcw = tcw + cw;
           }
-          // Set the value of total fee.
-          if (((this.initialAmount - repymnt) > penaltyFree)) {
-            this.totalFee = (((this.initialAmount - repymnt) - penaltyFree) * tcw) / basisFee;
-            this.monthlyFee = this.totalFee / this.periodsLeft;
+          // Set the value of total fee and monthly fee.
+          if (((this.initialAmount - this.repymnt) > penaltyFree)) {
+            let totalFee = (((this.initialAmount - this.repymnt) - penaltyFree) * tcw) / basisFee;
+            this.totalFee = Math.round(totalFee);
+
+            this.monthlyFee = Math.round(this.calculateMonthlyFee((this.initialAmount - this.repymnt), this.oldIntRate));
           }
           else {
             this.totalFee = 0;
@@ -421,6 +494,27 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
     }
   }
   /*
+   * Calculates the monthly payment with the new
+   * interest rate.
+   */
+  calculateNewMonthlyPymnt(): void {
+    // Retrieves the interest rate corresponding to the chosen period.
+    if(this.newPeriod > -1){
+      this.intstService.getMarketInterestRate({months: this.newPeriod, nhg: this.nhg}).then((interests) => {
+          // New interest setting.
+          this.newPeriodInt = interests;
+          let mortgage = this.initialAmount - this.repymnt;
+          // New monthly payment setting.
+          this.newMonthlyPymnt = Math.round(this.calculateMonthlyFee(mortgage, this.newPeriodInt));
+      });
+    }
+  }
+   /* Calculates the monthly interest fee.
+    */
+  private calculateMonthlyFee(mortgage: number, interest: number):number {
+    return ((mortgage * interest) / 100) / 12;
+  }
+  /*
    * Special calculation between two dates to get
    * penalty applicable periods
    * 
@@ -432,7 +526,7 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
      * Throw exeption if the dates given are not
      * valid.
      */
-    if (!this.validateDate(date) || !this.validateDate(latestDate)) {
+    if (!validateDate(date) || !validateDate(latestDate)) {
       throw new Error("Dates should be in format yyyy-mm-dd.");
     }
     /* 
@@ -500,63 +594,6 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
       pad += '0';
     }
     return pad + num;
-  }
-  /*
-   * Validates date strings
-   * @param date: date string in format yyyy-mm-dd
-   * @return boolean
-   */
-  validateDate(date: string, future: boolean = false): boolean {
-    // Accepted date format RegExp (yyyy-mm-dd).
-    let dateFmt = /^\d{4}\-\d{2}\-\d{2}$/;
-
-    if (!dateFmt.test(date)) {
-      return false;
-    }
-
-    let d, m, y;
-    // Divide year, month and day.
-    y = date.slice(0, 4);
-    m = date.slice(5, 7);
-    d = date.slice(-2);
-
-    // Month and day validation.
-    if (parseInt(m) > 12 || parseInt(d) > 31) {
-      return false;
-    } 
-    else {
-      // Checks if the day number is higher than the month has.
-      if ((m == '04' || m == '06' || m == '09' || m == '11') && d > 30) {
-        return false;
-      }
-      // February check.
-      if (m == '02') {
-        // Checks if the day is higher than 29.
-        if (parseInt(d) > 29) {
-          return false;
-        } 
-        else {
-          // Leap year day validation.
-          if (!(((y % 4 === 0) && (y % 100 !== 0)) || (y % 400 === 0)) && parseInt(d) > 28) {
-            return false;
-          }
-        }
-      }
-    }
-    /* If passed, checks the given date
-     * to be a future date.
-     */
-    if(future) {
-      let fDate = new Date(date);
-      let today = new Date();
-
-      if(fDate <= today) {
-        return false;
-      }
-    }
-
-    // Passed all validations.
-    return true;
   }
 
   /*

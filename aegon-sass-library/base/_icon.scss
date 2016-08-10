@@ -14,12 +14,13 @@ a.icon-user-link:before {
   min-width: 1.5em;
 }
 
-.icon-uniE600:before {
-  content: '\e600';
+.icon-uniE600:before,
+.icon-arrow-right:before {
+  content: $font_icons_arrow_right;
 }
-
-.icon-uniE601:before {
-  content: '\e601';
+.icon-uniE601:before,
+.icon-arrow-location:before {
+  content: $font_icons_arrow_location;
 }
 
 .icon-uniE602:before {
@@ -38,8 +39,9 @@ a.icon-user-link:before {
   content: '\e605';
 }
 
-.icon-uniE606:before {
-  content: '\e606';
+.icon-uniE606:before,
+.icon-person-outline:before {
+  content: $font_icons_person_outline;
 }
 
 .icon-uniE607:before {
@@ -73,15 +75,12 @@ a.icon-user-link:before {
 .icon-uniE619:before {
   content: '\e619';
 }
-
 .icon-uniE61A:before {
   content: '\e61a';
 }
-
 .icon-uniE61B:before {
   content: '\e61b';
 }
-
 .icon-uniE629:before {
   content: '\e629';
 }
@@ -105,19 +104,18 @@ a.icon-user-link:before {
   content: $font_icons_old_man;
 }
 
-.icon-uniE60D:before {
-  content: '\e60d';
-}
-.icon-uniE60E:before {
-  content: '\e60e';
+.icon-uniE60D:before,
+.icon-circled-x:before {
+  content: $font_icons_circled_x;
 }
 
 .icon-uniE60F:before {
   content: '\e60f';
 }
 
-.icon-uniE62B:before {
-  content: '\e62b';
+.icon-uniE62B:before,
+.icon-tools:before {
+  content: $font_icons_tools;
 }
 
 .icon-uniE630:before {
@@ -165,22 +163,26 @@ a.icon-user-link:before {
 .icon-unie900:before {
   content: '\e900';
 }
+.icon-plus-light:before,
 .icon-unie904:before {
-  content: '\e904';
+  content: $font_icons_plus_light;
 }
+.icon-muteren:before,
 .icon-unie905:before {
-  content: '\e905';
+  content: $font_icons_muteren;
 }
-.icon-unie906:before {
-  content: '\e906';
+.icon-unie906:before,
+.icon-inzien:before {
+  content: $font_icons_inzien;
 }
-.icon-unie907:before {
-  content: '\e907';
+.icon-unie907:before,
+.icon-contract-details:before {
+  content: $font_icons_contract_details;
 }
+.icon-zakelijk:before,
 .icon-unie908:before {
-  content:  '\e908';
+  content: $font_icons_zakelijk;
 }
-
 .icon-pdf:before {
   content: '\e639';
 }
@@ -251,7 +253,7 @@ a.menu-5662:before {
   @extend .icon-uniE60A;
 }
 
-.icon-person,
+.icon-person:before,
 .icon-user-link:before {
   @extend .icon-uniE636:before;
 }
@@ -297,107 +299,65 @@ a.menu-5662:before {
 .icon-chat:before {
   content: $font_icons_chat;
 }
-
 .icon-comment:before {
   content: $font_icons_comment;
 }
-
 .icon-search:before {
   content: $font_icons_search;
 }
-
 .icon-info:before {
   content: $font_icons_info;
 }
-
 .icon-advisor:before {
   content: $font_icons_man_in_tie;
 }
-
 .icon-mijn-betalingen:before {
   content: $font_icons_betalingen;
 }
-
 .icon-plus:before {
   content: $font_icons_plus;
 }
-
 .icon-plus-regular:before {
   content: $font_icons_plus_regular;
 }
-
-.icon-plus-light:before {
-  content: $font_icons_plus_light;
-}
-
 .icon-skinnyarrow:before {
   content: $font_icons_arrow_right_skinny;
 }
-
 .icon-blog:before {
   content: $font_icons_edit;
 }
-
 .icon-calculator:before {
   content: $font_icons_calculator;
 }
-
 .icon-check:before {
   content: $font_icons_check;
 }
-
 .icon-radio:before {
   content: $font_icons_radio;
 }
-
-.icon-fist-full:before {
+.icon-fist-full:before,
+.icon-thumb-down:before,
+.icon-uniE60E:before {
   content: $font_icons_fistfull;
 }
-
 .icon-error:before {
   content: $font_icons_error;
 }
-
-.icon-arrow-right:before {
-  content: $font_icons_arrow_right;
-}
-
 .icon-arrow-down:before {
   content: $font_icons_arrow_down;
 }
-
 .icon-tip:before {
   content: $font_icons_tip;
 }
-
 .icon-help:before {
   content: $font_icons_help;
 }
-
 .icon-claim-indienen:before {
   content: $font_icons_claim_indienen;
 }
-
 .icon-offreren:before {
   content: $font_icons_offreren;
 }
-
-.icon-contract-details:before {
-  content: $font_icons_contract_details;
-}
-
-.icon-inzien:before {
-  content: $font_icons_inzien;
-}
-
-.icon-muteren:before {
-  content: $font_icons_muteren;
-}
-
-.icon-zakelijk:before {
-  content: $font_icons_zakelijk;
-}
-
 .icon-chart:before {
   content: $font_icons_chart;
 }
@@ -417,9 +377,6 @@ a.menu-5662:before {
 .icon-chart:before {
   content: $font_icons_chart;
 }
-.icon-arrow-location:before {
-  content: $font_icons_arrow_location;
-}
 .icon-contact-service:before {
   content: $font-icons_headhphones;
 }
@@ -428,9 +385,6 @@ a.menu-5662:before {
 }
 .icon-clock:before {
   content: $font_icons_clock;
-}
-.icon-thumb-down {
-  content: $font_icons_fistfull;
 }
 .icon-call:before,
 .icon-phone:before {
@@ -478,8 +432,9 @@ a.menu-5662:before {
   content: $font_icons_minus;
 }
 
-
-
+.icon-whatsapp:before {
+  content: $font_icons_whatsapp;
+}
 
 
 // Do not apply icons to old aegon menu.
