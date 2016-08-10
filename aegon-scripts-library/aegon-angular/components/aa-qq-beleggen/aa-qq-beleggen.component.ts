@@ -12,7 +12,7 @@
  * - options.ts: Configuration and texts
  * - chart.ts: Chart options
  */
-import {Component, Input, ElementRef, ViewChild, AfterViewInit} from 'angular2/core';
+import {Component, Input, ElementRef, ViewChild, OnInit} from 'angular2/core';
 import {MoneyPipe} from "../../pipes/money.pipe";
 import {SliderInputComponent} from '../aa-slider-input/aa-slider-input.component';
 import {HintComponent} from '../aa-hint/aa-hint.component';
@@ -24,12 +24,13 @@ import * as libUtil from "../../lib/util";
 import {template} from "./template";
 import {options} from "./options";
 import {createChartConfig, createPlotLinesData, createSeriesData} from "./chart";
+import {AAConfigComponent} from '../../lib/classes/AAConfigComponent';
 
 declare var jQuery;
-const TIMEOUT_CHART_UPDATE = 1000, // Update chart at most every given milliseconds, e.g. 1000 for 1 sec throttle.
-  ROUND_AMOUNT_PRECISION = -1; // Show numbers rounded to given number of decimals. Negative = rounded multiples, e.g. 3 = 1000's.
 
-
+/**
+ * aa-qq-beleggen component
+ */
 @Component({
   selector: 'aa-qq-beleggen',
   directives: [
@@ -38,46 +39,35 @@ const TIMEOUT_CHART_UPDATE = 1000, // Update chart at most every given milliseco
   template: template,
   pipes: [MoneyPipe]
 })
-export class QQBeleggenComponent implements AfterViewInit {
+export class QQBeleggenComponent extends AAConfigComponent implements OnInit {
   @ViewChild('root') rootEl: ElementRef;
   @ViewChild('chart') highchart: HighchartComponent;
+
   private chartState:any = {}; // store internal state of the chart to prevent redraw
   private currentTimeout: any = undefined;
-  private calculate : any = libUtil.debounce(() => {
-      this.doCalculate();
-    }, 500);
+  private calculate : any;
+  initialInlay: number;
+  periodicInlay: number;
+  durationAmount: number;
+  resultInlay: number;
+  resultSavings: number;
+  resultPessimistic: number;
+  resultNeutral: number;
+  resultOptimistic: number;
 
-  options : any = options;
-  initialInlay: number = 100;
-  periodicInlay: number = 10;
-  durationAmount: number = 10;
-  resultInlay: number = 0;
-  resultSavings: number = 0;
-  resultPessimistic: number = 0;
-  resultNeutral: number = 0;
-  resultOptimistic: number = 0;
-  interestSavings: number = 0.5;
-  interestPessimistic: number = 1.0;
-  interestNeutral: number = 2.0;
-  interestOptimistic: number = 3.0;
+  // Public properties
+  public options : any = options;
 
-  constructor() {
+  // Let parent class initialize config; the dependency injection with ElementRef
+  // doesn't work directly so we have to call it explicitly.
+  constructor(thisElement: ElementRef) {
+    super(thisElement);
   }
-  /**
-   * Triggers after view has been inited. This is after template loading and intializing.
-   */
-  ngAfterViewInit(): void {
-    var nativeElem = this.rootEl ? this.rootEl.nativeElement : undefined;
-    if (!nativeElem) {
-      return;
-    }
-    // Grab interest rates from html
-    this.interestSavings = libFormat.numberFromAttribute(nativeElem, 'data-interestSavings', this.interestSavings);
-    this.interestPessimistic = libFormat.numberFromAttribute(nativeElem, 'data-interestInvestPessimistic', this.interestPessimistic);
-    this.interestNeutral = libFormat.numberFromAttribute(nativeElem, 'data-interestInvestNeutral', this.resultNeutral);
-    this.interestOptimistic = libFormat.numberFromAttribute(nativeElem, 'data-interestInvestOptimistic', this.interestOptimistic);
-    // Show chart
-    var self = this;
+  ngOnInit() : void {
+    super.ngOnInit();
+    this.calculate = libUtil.debounce(() => {
+      this.doCalculate();
+    }, this.options.chartUpdateDelay);
   }
 
   /**
@@ -86,10 +76,10 @@ export class QQBeleggenComponent implements AfterViewInit {
   doCalculate(): void {
     // Update main result values
     this.resultInlay = libInterest.inlayResult(this.initialInlay, this.periodicInlay, this.durationAmount);
-    this.resultSavings = libInterest.interestResult(this.initialInlay, this.periodicInlay, this.durationAmount, this.interestSavings, ROUND_AMOUNT_PRECISION);
-    this.resultPessimistic = libInterest.interestResult(this.initialInlay, this.periodicInlay, this.durationAmount, this.interestPessimistic, ROUND_AMOUNT_PRECISION);
-    this.resultNeutral = libInterest.interestResult(this.initialInlay, this.periodicInlay, this.durationAmount, this.interestNeutral, ROUND_AMOUNT_PRECISION);
-    this.resultOptimistic = libInterest.interestResult(this.initialInlay, this.periodicInlay, this.durationAmount, this.interestOptimistic, ROUND_AMOUNT_PRECISION);
+    this.resultSavings = libInterest.interestResult(this.initialInlay, this.periodicInlay, this.durationAmount, this.options.interest.savings, this.options.resultRoundPrecision);
+    this.resultPessimistic = libInterest.interestResult(this.initialInlay, this.periodicInlay, this.durationAmount, this.options.interest.pessimistic, this.options.resultRoundPrecision);
+    this.resultNeutral = libInterest.interestResult(this.initialInlay, this.periodicInlay, this.durationAmount, this.options.interest.neutral, this.options.resultRoundPrecision);
+    this.resultOptimistic = libInterest.interestResult(this.initialInlay, this.periodicInlay, this.durationAmount, this.options.interest.optimistic, this.options.resultRoundPrecision);
     // Chart
     this.updateChart();
   }
@@ -110,10 +100,10 @@ export class QQBeleggenComponent implements AfterViewInit {
     var
       // Update series data for the chart
       rawData = {
-        savings: libInterest.interestSeries(this.initialInlay, this.periodicInlay, this.durationAmount, this.interestSavings, ROUND_AMOUNT_PRECISION),
-        investPessimistic: libInterest.interestSeries(this.initialInlay, this.periodicInlay, this.durationAmount, this.interestPessimistic, ROUND_AMOUNT_PRECISION),
-        investNeutral: libInterest.interestSeries(this.initialInlay, this.periodicInlay, this.durationAmount, this.interestNeutral, ROUND_AMOUNT_PRECISION),
-        investOptimistic: libInterest.interestSeries(this.initialInlay, this.periodicInlay, this.durationAmount, this.interestOptimistic, ROUND_AMOUNT_PRECISION),
+        savings: libInterest.interestSeries(this.initialInlay, this.periodicInlay, this.durationAmount, this.options.interest.savings, this.options.result.roundPrecision),
+        investPessimistic: libInterest.interestSeries(this.initialInlay, this.periodicInlay, this.durationAmount, this.options.interest.pessimistic, this.options.resultRoundPrecision),
+        investNeutral: libInterest.interestSeries(this.initialInlay, this.periodicInlay, this.durationAmount, this.options.interest.neutral, this.options.resultRoundPrecision),
+        investOptimistic: libInterest.interestSeries(this.initialInlay, this.periodicInlay, this.durationAmount, this.options.interest.optimistic, this.options.resultRoundPrecision),
         inlay: libInterest.inlaySeries(this.initialInlay, this.periodicInlay, this.durationAmount),
       },
       chart = this.highchart, // Reference to current highcharts() object
@@ -135,7 +125,7 @@ export class QQBeleggenComponent implements AfterViewInit {
         plotLines.forEach(function (plotLine) {
           axis.addPlotLine(plotLine);
         });
-      }, TIMEOUT_CHART_UPDATE);
+      }, this.options.chartUpdateDelay);
       this.chartState = chartState;
       return;
     };
