@@ -43,12 +43,12 @@
 /* All library components and specific modules */
 @import "components/all";
 
-/* The new aegon angular components */
-@import "aegon-angular/all";
-
 /* Pages specific styles */
 @import "pages/all";
 
 /* All modules, theme modules*/
 @import "modules/all";
+
+/* Structures, like userdetail, etc. */
+@import "structures/all";
 
