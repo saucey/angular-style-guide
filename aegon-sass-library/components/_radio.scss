@@ -13,6 +13,7 @@ label.radio {
     left: 5px;
     opacity: 0;
     &:checked + span.radio,
+    &:checked + input[type="hidden"] + span.radio,
     &:checked ~ span.radio {
       background-color: $beige;
       &:before {
@@ -26,6 +27,7 @@ label.radio {
       }
     }
     & + span.radio,
+    & + input[type="hidden"] + span.radio,
     & ~ span.radio {
       position: absolute;
       top: -$elements_radio_top;
