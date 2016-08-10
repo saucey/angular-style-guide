@@ -160,7 +160,7 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
 
       // 1. Amount penalty-free repayment (Bedrag boetevrije aflossing).
       // Default 10%.
-      let tenPrcnt = this.roundToDeg((0.1 * this.initialAmount), 2),
+      let tenPrcnt = (0.1 * this.initialAmount),
           penaltyFree;
 
       // 2. Repayment (Bedrag aflossing).
@@ -175,6 +175,9 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
         penaltyFree = tenPrcnt;
         this.repymnt = 0;
       }
+      // Rounded in 2 decimals.
+      penaltyFree = this.roundToDeg(penaltyFree, 2);
+
       console.log('Penalty free = ' + penaltyFree);
       // 3. Basis penalty-calculation (grondslag boeteberekening).
       let basisFee = (this.initialAmount - this.repymnt - penaltyFree);
