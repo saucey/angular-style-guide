@@ -178,10 +178,9 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
       // Rounded in 2 decimals.
       penaltyFree = this.roundToDeg(penaltyFree, 2);
 
-      console.log('Penalty free = ' + penaltyFree);
       // 3. Basis penalty-calculation (grondslag boeteberekening).
       let basisFee = (this.initialAmount - this.repymnt - penaltyFree);
-      console.log('Basis fee = ' + basisFee);
+
       /* 4. Total cash value (Totale contante waarde) */
       // 4.1. Define Interest rate contract per month.
       let oldMonthlyIntRate = this.oldIntRate / 12;
