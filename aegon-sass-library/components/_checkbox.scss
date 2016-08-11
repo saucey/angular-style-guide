@@ -12,6 +12,7 @@ label.checkbox {
     left: 5px;
     opacity: 0;
     &:checked + span.checkbox,
+    &:checked + input[type="hidden"] + span.checkbox,
     &:checked + a.checkbox,
     &:checked ~ span.checkbox,
     &:checked ~ a.checkbox {
@@ -27,6 +28,7 @@ label.checkbox {
       }
     }
     & + span.checkbox,
+    & + input[type="hidden"] + span.checkbox,
     & + a.checkbox,
     & ~ span.checkbox,
     & ~ a.checkbox {
