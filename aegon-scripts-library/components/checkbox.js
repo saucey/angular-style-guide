@@ -16,6 +16,6 @@
 
       this.attached = true;
     },
-    attached: false,
+    attached: false
   };
 })(jQuery);
