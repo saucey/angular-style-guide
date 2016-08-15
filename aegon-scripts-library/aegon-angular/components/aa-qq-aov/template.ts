@@ -12,18 +12,27 @@ export const template = `
         </div>
       </div>
       <p class="error" *ngIf="birthDateError">
-        Controleer of uw geboortedatum klopt. Is dit juist? Dan is uw leeftijd te dicht op de maximale leeftijd die wij voor uw beroep verzekeren. Of u bent jonger dan 18 jaar. Neem contact op met een adviseur voor een advies op maat.
+          Controleer of uw geboortedatum klopt. Is dit juist? Dan is uw leeftijd te dicht op de maximale leeftijd
+          die wij voor uw beroep verzekeren. Of u bent jonger dan 18 jaar. Neem contact op met een adviseur voor
+          een advies op maat.
       </p>
 
       <div class="field gray-field">
         <div class="label">
           Wat is uw beroep?
           <aegon-help>
-            Vul de eerste letters van uw beroep in en kies uw beroep uit de lijst. Staat uw beroep er niet tussen? Kies dan het beroep dat het best bij uw werkzaamheden past.
+            Vul de eerste letters van uw beroep in en kies uw beroep uit de lijst. Staat uw beroep er niet tussen?
+            Kies dan het beroep dat het best bij uw werkzaamheden past.
           </aegon-help>
         </div>
         <div class="inputs" (click)="showCalculator = false">
-          <aa-input-dropdown [model]="profession" [items]="professionsFiltered" [emptyMessage]="'Er zijn geen beroepen gevonden'" [minChars]="2" (aaFetch)="fetchProfessions($event)" (aaSelect)="selectProfession($event)">
+          <aa-input-dropdown
+            [model]="profession"
+            [items]="professionsFiltered"
+            [emptyMessage]="'Er zijn geen beroepen gevonden'"
+            [minChars]="2"
+            (aaFetch)="fetchProfessions($event)"
+            (aaSelect)="selectProfession($event)">
           </aa-input-dropdown>
         </div>
       </div>
@@ -35,7 +44,8 @@ export const template = `
         <div class="label">
           Wat is uw bruto jaarinkomen?
           <aegon-help>
-            Vul uw bruto inkomen in voor aftrek van belasting. Als dit schommelt, geeft u een gemiddelde over de afgelopen drie jaar. Als starter geeft u een indicatie wat u denkt te gaan verdienen.
+            Vul uw bruto inkomen in voor aftrek van belasting. Als dit schommelt, geeft u een gemiddelde over de
+            afgelopen drie jaar. Als starter geeft u een indicatie wat u denkt te gaan verdienen.
           </aegon-help>
         </div>
         <div class="inputs" (click)="showCalculator = false">
@@ -43,15 +53,16 @@ export const template = `
         </div>
       </div>
       <p class="error" *ngIf="grossIncomeError">
-        Geef hier uw bruto jaarinkomen op. Deze moet minimaal €3.125 zijn. U kunt 80% van uw inkomen voor arbeidsongeschiktheid verzekeren.
+        Geef hier uw bruto jaarinkomen op. Deze moet minimaal €3.125 zijn. U kunt 80% van uw inkomen voor
+        arbeidsongeschiktheid verzekeren.
       </p>
 
       <div class="field gray-field" *ngIf="!showCalculator">
         <div class="label"></div>
         <div class="inputs">
           <button class="button icon-right icon-calculator" (click)="startCalculator()">
-              Bereken premie
-            </button>
+            Bereken premie
+          </button>
         </div>
       </div>
     </section>
@@ -76,7 +87,12 @@ export const template = `
 
         <div class="field">
           <div class="inputs">
-            <aa-slider-input class="aa-qq__control aa-input--euro" [(ngModel)]="grossYearAmount" (change)="fetchCalculationSpecification()" [sliderOptions]="sliderOptions" [label]="'Welk bruto jaarbedrag wilt u verzekeren?'" [helpText]="'Dit is het bedrag na aftrek van belastingvoordeel. Wij rekenen met een gemiddeld belastingvoordeel van 35%. Voor uw situatie kan dit meer of minder zijn.'">
+            <aa-slider-input class="aa-qq__control aa-input--euro"
+              [(ngModel)]="grossYearAmount"
+              (change)="fetchCalculationSpecification()"
+              [sliderOptions]="options.slider"
+              [label]="'Welk bruto jaarbedrag wilt u verzekeren?'"
+              [helpText]="'Dit is het bedrag na aftrek van belastingvoordeel. Wij rekenen met een gemiddeld belastingvoordeel van 35%. Voor uw situatie kan dit meer of minder zijn.'">
             </aa-slider-input>
           </div>
         </div>
@@ -89,9 +105,9 @@ export const template = `
               </div>
               <div class="value">&euro; 300<span>,-</span></div>
               <span class="helptext">
-                  Dit is het bedrag dat u maandelijks betaalt, inclusief 5% doorlopende korting.
-                  Uw premie is fiscaal aftrekbaar. Als u een uitkering krijgt dan betaalt u daar belasting over.
-                </span>
+                Dit is het bedrag dat u maandelijks betaalt, inclusief 5% doorlopende korting.
+                Uw premie is fiscaal aftrekbaar. Als u een uitkering krijgt dan betaalt u daar belasting over.
+              </span>
             </div>
             <div class="row">
               <div class="label">
@@ -99,21 +115,21 @@ export const template = `
               </div>
               <div class="value">&euro; 300<span>,-</span></div>
               <span class="helptext">
-                  Dit is het bedrag na aftrek van belastingvoordeel.
-                  Wij rekenen met gemiddeld belastingvoordeel van 35%.
-                  Voor uw situatie kan dit meer of minder zijn.
-                </span>
+                Dit is het bedrag na aftrek van belastingvoordeel.
+                Wij rekenen met gemiddeld belastingvoordeel van 35%.
+                Voor uw situatie kan dit meer of minder zijn.
+              </span>
             </div>
           </div>
         </div>
         <div class="field">
           <a class="button orange icon-right arrow">
-              Adviesgesprek aanvragen
-            </a>
+            Adviesgesprek aanvragen
+          </a>
           <div class="label">
             <a href="#" class="icon-skinnyarrow" (click)="gotoSummary()">
-                Bekijk en mail overzicht
-              </a>
+              Bekijk en mail overzicht
+            </a>
           </div>
         </div>
       </div>
@@ -175,20 +191,24 @@ export const template = `
         </div>
       </div>
       <div class="static-section">
-        <h3 class="title">Uitgangspunten</h3> U kunt de Aegon Arbeidsongeschiktheidsverzekering met een adviseur volledig aanpassen aan uw persoonlijke situatie.<br> Voor deze indicatie zijn we uitgegaan van:
-        <ul class="bullet">
-          <li>De meest uitgebreide dekking inclusief ongevallen, lichamelijke en psychische ziektes en zwangerschap en bevalling.</li>
-          <li>Dat de verzekering tot 67 jaar loopt.</li>
-          <li>Dat de hoogte van een uitkering gelijk blijft als u arbeidsongeschikt bent.</li>
-          <li>Een doorlopende korting van 5%, die u houdt zolang uw verzekering bij ons loopt. U kunt ook kiezen voor een eenmalige korting van 30% in het eerste jaar.</li>
-        </ul>
+        <h3 class="title">Uitgangspunten</h3>
+          U kunt de Aegon Arbeidsongeschiktheidsverzekering met een adviseur volledig aanpassen aan uw persoonlijke situatie.<br>
+          Voor deze indicatie zijn we uitgegaan van:
+          <ul class="bullet">
+            <li>De meest uitgebreide dekking inclusief ongevallen, lichamelijke en psychische ziektes en zwangerschap en bevalling.</li>
+            <li>Dat de verzekering tot 67 jaar loopt.</li>
+            <li>Dat de hoogte van een uitkering gelijk blijft als u arbeidsongeschikt bent.</li>
+            <li>Een doorlopende korting van 5%, die u houdt zolang uw verzekering bij ons loopt. U kunt ook kiezen voor een eenmalige korting van 30% in het eerste jaar.</li>
+          </ul>
       </div>
       <div class="static-section">
-        <h3 class="title">Uw geschatte maandpremie</h3> Uw geschatte premie is bruto € 167,19 per maand. Uw nettopremie na aftrek van belastingvoordeel is € 108,67 per maand. Dit is de maandpremie in het eerste kalenderjaar inclusief 5% doorlopende korting. Beide bedragen zijn een indicatie. Uw uiteindelijke
-        maandpremie kan afwijken op basis van onder meer uw feitelijke werkzaamheden.
+        <h3 class="title">Uw geschatte maandpremie</h3>
+        Uw geschatte premie is bruto € 167,19 per maand. Uw nettopremie na aftrek van belastingvoordeel is € 108,67 per maand. Dit is de maandpremie in het eerste kalenderjaar inclusief 5% doorlopende korting. Beide bedragen zijn een indicatie. Uw uiteindelijke maandpremie kan afwijken op basis van onder meer uw feitelijke werkzaamheden.
       </div>
       <div class="static-section">
-        <h3 class="title">Hoe verder?</h3> Verzekeren is maatwerk. Uw adviseur kijkt samen met u wat het beste bij u past. Maak een afspraak voor een persoonlijk gesprek.<br> Aan het advies zijn kosten verbonden. Deze bespreekt u in het eerste vrijblijvende gesprek met de adviseur.
+        <h3 class="title">Hoe verder?</h3>
+        Verzekeren is maatwerk. Uw adviseur kijkt samen met u wat het beste bij u past. Maak een afspraak voor een persoonlijk gesprek.<br>
+        Aan het advies zijn kosten verbonden. Deze bespreekt u in het eerste vrijblijvende gesprek met de adviseur.
       </div>
     </div>
   </div>
