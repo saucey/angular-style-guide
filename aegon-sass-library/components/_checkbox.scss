@@ -12,7 +12,6 @@ label.checkbox {
     left: 5px;
     opacity: 0;
     &:checked + span.checkbox,
-    &:checked + input[type="hidden"] + span.checkbox,
     &:checked + a.checkbox,
     &:checked ~ span.checkbox,
     &:checked ~ a.checkbox {
@@ -28,7 +27,6 @@ label.checkbox {
       }
     }
     & + span.checkbox,
-    & + input[type="hidden"] + span.checkbox,
     & + a.checkbox,
     & ~ span.checkbox,
     & ~ a.checkbox {
@@ -56,7 +54,17 @@ label.checkbox {
       }
     }
   }
+  // Fix for native android browser.
+  span.checkbox:before,
+  a.checkbox:before {
+    -webkit-animation: androidNative infinite 1s;
+  }
   &.required {
     margin-top: 15px; //make space for the error message on top of the checkbox in case one needs to be displayed
   }
+}
+// Fix for native android browser.
+@-webkit-keyframes androidNative { 
+  from { fill: 0; } 
+  to { fill: 0; } 
 }
