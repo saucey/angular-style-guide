@@ -310,9 +310,12 @@ export class AovQuoteComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+<<<<<<< HEAD
     // console.log(dummyProfessions);
 
 
+=======
+>>>>>>> b6e29ff00c6b4b73724b2fb8b3a56f3f01196611
     this.initProfessions();
   }
 
@@ -469,6 +472,14 @@ export class AovQuoteComponent implements OnInit {
 
 
   fetchRiskFactor(rawProfession) {
+    this.pending += 1;
+
+    if (dummyRiskFactor) {
+      this.pending -= 1;
+      this.processRiskFactor(dummyRiskFactor);
+      return;
+    }
+
     let body = {
       "calculateRiskFactorRequest": {
         "AILHEADER": {
@@ -506,6 +517,7 @@ export class AovQuoteComponent implements OnInit {
         .map(res => res.json())
         .catch(this.handleError)
         .subscribe(data => {
+          this.pending -= 1;
           this.processRiskFactor(data);
         }, error => console.log(error));
     }
@@ -516,12 +528,12 @@ export class AovQuoteComponent implements OnInit {
     this.profession = professionObj;
 
     if (professionObj) {
-      // A profession is known so riskfactor can be retrieved.
+      // When a profession is known the riskfactor can be retrieved from the service.
       this.fetchRiskFactor(this.rawProfessions[professionObj.key])
     } else {
+      // No profession found, empty the riskFactor.
       this.riskFactor = {};
     }
-
   }
 
 
@@ -529,14 +541,24 @@ export class AovQuoteComponent implements OnInit {
     cb();
   }
 
+  zeroPad(num, places) {
+    var zero = places - num.toString().length + 1;
+    return Array(+(zero > 0 && zero)).join("0") + num;
+  }
+
   fetchCalculationSpecification(cb:any = () => {}) {
+    this.pending += 1;
+
     if (this.riskFactor) {
 
-      // if (dummyCalculateSpecification) {
-      //   this.processCalculationSpecification(dummyCalculateSpecification, cb);
-      //   return;
-      // }
+      if (dummyCalculateSpecification) {
+        this.pending -= 1;
+        this.processCalculationSpecification(dummyCalculateSpecification, cb);
+        return;
+      }
 
+      let now = new Date();
+      let dateString = `${now.getFullYear()}-${this.zeroPad(now.getMonth() + 1, 2)}-${this.zeroPad(now.getDate(), 2)}`;
 
       let body = {
         "calculateSpecificationRequest": {
@@ -546,7 +568,7 @@ export class AovQuoteComponent implements OnInit {
           },
           "CONTRACT_POLIS": {
             "DPRC": "0",
-            "INGDAT": "2011-09-05",
+            "INGDAT": dateString,
             "_AE_BETAALAFSPRAAK": { "BETTERM": "3" },
             "_AE_VERZEKERD_OBJECT": {
               "_AE_OVERIG": {
@@ -583,6 +605,7 @@ export class AovQuoteComponent implements OnInit {
         }
       };
 
+
       let headers = new Headers({'Content-Type': 'application/json', "Authorization" : `Basic ${this.serviceCredentials}`});
       let options = new RequestOptions({headers: headers});
 
@@ -592,6 +615,7 @@ export class AovQuoteComponent implements OnInit {
         .catch(this.handleError)
         .subscribe(data => {
           this.processCalculationSpecification(data, cb);
+          this.pending -= 1;
         }, error => console.log(error));
     }
   }
