@@ -177,13 +177,24 @@ export const template = `
                 </div>
               </div>
             </div>
-            <div class="bigger">
+            <div class="bigger" *ngIf="mortgageType != 3 && mortgageType != 5">
               <div class="row">
                 <span class="label">Optie 2: rentemiddelen</span>
                 <div class="small">
                   <div class="row"><div>
                     <!-- Optie 2 text -->
                     <p>De omzettingskosten worden met een renteopslag doorberekend. De oude en nieuwe rente wordt 'gemiddeld'. Log in bij Mijn Aegon om uw nieuwe rente per maand te zien.</p>
+                  </div></div>
+                </div>
+              </div>
+            </div>
+            <div class="bigger" *ngIf="mortgageType == 3 || mortgageType == 5">
+              <div class="row">
+                <span class="label">Optie 2: for Spaar and Overige</span>
+                <div class="small">
+                  <div class="row"><div>
+                    <!-- Optie 2 text for Spaar and Overige -->
+                    <p>Placeholder text for Spaar and Overige</p>
                   </div></div>
                 </div>
               </div>
@@ -202,7 +213,10 @@ export const template = `
             <div class="cta-wrapper">
               <div class="row clearfix">
                 <a href="#" class="button transparent arrow flleft">Meer over de voor- en nadelen van de opties</a>
-                <a href="/mijnaegon/" class="button green icon-right icon-lock not-loggedin-content">Log in bij Mijn Aegon</a>
+                <!-- log in to mijn aegon button (user is logged out) -->
+                <a href="/sso-box/wayf.html?int_source=/inloggen/" class="button green icon-right icon-lock hide-if-shw-loggedin">Log in bij Mijn Aegon</a>
+                <!-- go to mijn aegon button (user is logged in) -->
+                <a href="/mijnaegon/mijnproducten" class="button green icon-right icon-lock hide-if-shw-loggedout inline-block">Ga naar Mijn Aegon</a>
               </div>
             </div>
           </div>
