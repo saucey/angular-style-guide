@@ -1,3 +1,8 @@
+/**
+ * Path accessor library to "dot into" an object and get/set values
+ * Paths don't need to exist, they will be created dynamically
+ * Example: set a.b.c to 'test': xsr.path(object, 'a.b.c', 'test')
+ */
 import * as libUtil from "./util";
 
 /**
@@ -19,7 +24,7 @@ import * as libUtil from "./util";
  * - path(obj, 'a.b') -> returns 'old'
  * - path(obj, 'a.b', 'new value') -> updates obj and sets 'old' to 'new value'
  */
-export function path(obj: any, path: string, value: any, options: any = {}) : any {
+export function path(obj: any, path: string = undefined, value: any = undefined, options: any = {}) : any {
   if (path === undefined) {
     return {
       value: obj,

@@ -1,27 +1,30 @@
+/**
+ * Quick Quote Historical ROI
+ */
 import {Component, Input, ElementRef, ViewChild, AfterViewInit, OnInit} from 'angular2/core';
-import {MoneyPipe} from "../../pipes/money.pipe";
-import {SliderComponent} from '../aa-slider/aa-slider.component';
-import {HintComponent} from '../aa-hint/aa-hint.component';
-import {HighchartComponent} from "../aa-highchart/aa-highchart.component";
 import * as libUtil from "../../lib/util";
+import {HistoricalRoi} from "../../lib/calculations/historicalRoi";
+// AA components
+import {AAConfigComponent} from '../../lib/classes/AAConfigComponent';
+import {AAMoneyPipe} from "../../pipes/money.pipe";
+import {AASliderComponent} from '../aa-slider/aa-slider.component';
+import {AAHintComponent} from '../aa-hint/aa-hint.component';
+import {AAHighchartComponent} from "../aa-highchart/aa-highchart.component";
+// Locals
 import {template} from "./template";
 import {options} from "./options";
-import {HistoricalRoi} from "../../lib/calculations/historicalRoi";
 import {createChartConfig, createSeriesData} from "./chart";
-import {AAConfigComponent} from '../../lib/classes/AAConfigComponent';
-
-declare var jQuery;
 
 @Component({
   selector: 'aa-qq-historisch-rendement',
   directives: [
-    SliderComponent, HintComponent, HighchartComponent
+    AASliderComponent, AAHintComponent, AAHighchartComponent
   ],
   template: template,
-  pipes: [MoneyPipe]
+  pipes: [AAMoneyPipe]
 })
-export class QQHistorischRendementComponent extends AAConfigComponent implements OnInit, AfterViewInit {
-  @ViewChild('chart') highchart: HighchartComponent;
+export class AAQQHistorischRendementComponent extends AAConfigComponent implements OnInit, AfterViewInit {
+  @ViewChild('chart') highchart: AAHighchartComponent;
   private historicalRoi: HistoricalRoi = new HistoricalRoi(options.data);
   private chartState:any = {};
   private currentTimeout: any = undefined;

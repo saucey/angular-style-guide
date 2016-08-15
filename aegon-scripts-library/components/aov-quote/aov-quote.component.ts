@@ -3,27 +3,27 @@ import {HTTP_PROVIDERS, Http, Headers, RequestOptions, Response} from "angular2/
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
 import {HelpComponent} from '../angular-components/help.component'
-import {InputNumberComponent} from '../../aegon-angular/components/aa-input-number/aa-input-number.component';
 import {InputDateComponent, InputDateValueAccessor} from '../angular-components/input-date.component';
 import {CheckboxComponent, CheckboxValueAccessor} from '../angular-components/checkbox.component';
 import {MoneyPipe} from "../angular-components/money.pipe";
-import {InputRadioComponent} from "../../aegon-angular/components/aa-input-radio/aa-input-radio.component";
-import {InputDropDownComponent} from "../../aegon-angular/components/aa-input-dropdown/aa-input-dropdown.component";
-import {SliderInputComponent} from "../../aegon-angular/components/aa-slider-input/aa-slider-input.component";
+import {AAInputNumberComponent} from '../../aegon-angular/components/aa-input-number/aa-input-number.component';
+import {AAInputRadioComponent} from "../../aegon-angular/components/aa-input-radio/aa-input-radio.component";
+import {AAInputDropDownComponent} from "../../aegon-angular/components/aa-input-dropdown/aa-input-dropdown.component";
+import {AASliderInputComponent} from "../../aegon-angular/components/aa-slider-input/aa-slider-input.component";
 
 var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTemplate'));
 
 @Component({
   selector: 'aegon-aov-quote',
   directives: [
-    HelpComponent, InputNumberComponent, InputDateComponent, InputDateValueAccessor,
-    CheckboxComponent, CheckboxValueAccessor, SliderInputComponent, InputRadioComponent,
-    InputDropDownComponent
+    HelpComponent, AAInputNumberComponent, InputDateComponent, InputDateValueAccessor,
+    CheckboxComponent, CheckboxValueAccessor, AASliderInputComponent, AAInputRadioComponent,
+    AAInputDropDownComponent
   ],
   template: templateElem ? templateElem.value : `
   <div class="quickquote angular aov-quote">
     <section class="personal-details" *ngIf="!showSummary">
-      
+
       <h3 prefix="/">Uw gegevens</h3>
       <div class="field gray-field">
         <div class="label">
@@ -38,14 +38,14 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
           die wij voor uw beroep verzekeren. Of u bent jonger dan 18 jaar. Neem contact op met een adviseur voor
           een advies op maat.
       </p>
-        
+
       <div class="field gray-field">
         <div class="label">
           Wat is uw beroep?
           <aegon-help>
-            Vul de eerste letters van uw beroep in en kies uw beroep uit de lijst. Staat uw beroep er niet tussen? 
+            Vul de eerste letters van uw beroep in en kies uw beroep uit de lijst. Staat uw beroep er niet tussen?
             Kies dan het beroep dat het best bij uw werkzaamheden past.
-          </aegon-help>          
+          </aegon-help>
         </div>
         <div class="inputs" (click)="showCalculator = false">
           <aa-input-dropdown
@@ -61,24 +61,24 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
       <p class="error" *ngIf="professionError">
         Voor dit beroep kan geen premie worden berekend. Neem contact op met een adviseur voor een advies op maat.
       </p>
-            
+
       <div class="field gray-field">
         <div class="label">
           Wat is uw bruto jaarinkomen?
           <aegon-help>
-            Vul uw bruto inkomen in voor aftrek van belasting. Als dit schommelt, geeft u een gemiddelde over de 
+            Vul uw bruto inkomen in voor aftrek van belasting. Als dit schommelt, geeft u een gemiddelde over de
             afgelopen drie jaar. Als starter geeft u een indicatie wat u denkt te gaan verdienen.
-          </aegon-help>          
+          </aegon-help>
         </div>
         <div class="inputs" (click)="showCalculator = false">
           <aa-input-number [(ngModel)]="grossIncome" prefix="€" [max]="1000000"></aa-input-number>
         </div>
       </div>
       <p class="error" *ngIf="grossIncomeError">
-        Geef hier uw bruto jaarinkomen op. Deze moet minimaal €3.125 zijn. U kunt 80% van uw inkomen voor 
+        Geef hier uw bruto jaarinkomen op. Deze moet minimaal €3.125 zijn. U kunt 80% van uw inkomen voor
         arbeidsongeschiktheid verzekeren.
       </p>
-            
+
       <div class="field gray-field" *ngIf="!showCalculator">
         <div class="label"></div>
         <div class="inputs">
@@ -88,12 +88,12 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
         </div>
       </div>
     </section>
-    
-     
+
+
     <section *ngIf="showCalculator" class="calculation">
       <div class="calculation indication">
         <h3 prefix="/">Uw keuzes</h3>
-        
+
         <div class="field">
           <div class="label">
             Welke eigen risicoperiode kiest u?
@@ -106,19 +106,19 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
             <aa-input-radio [(ngModel)]="startingTerm" (aaChange)="fetchCalculationSpecification()" name="term" value="365">1 jaar</aa-input-radio>
           </div>
         </div>
-        
+
         <div class="field">
           <div class="inputs">
-            <aa-slider-input class="aa-qq__control aa-input--euro" 
-              [(ngModel)]="grossYearAmount" 
-              (change)="fetchCalculationSpecification()" 
-              [sliderOptions]="sliderOptions" 
-              [label]="'Welk bruto jaarbedrag wilt u verzekeren?'" 
+            <aa-slider-input class="aa-qq__control aa-input--euro"
+              [(ngModel)]="grossYearAmount"
+              (change)="fetchCalculationSpecification()"
+              [sliderOptions]="sliderOptions"
+              [label]="'Welk bruto jaarbedrag wilt u verzekeren?'"
               [helpText]="'Dit is het bedrag na aftrek van belastingvoordeel. Wij rekenen met een gemiddeld belastingvoordeel van 35%. Voor uw situatie kan dit meer of minder zijn.'">
-            </aa-slider-input>          
+            </aa-slider-input>
           </div>
         </div>
-        
+
         <div class="result">
           <div class="linear">
             <div class="row">
@@ -127,20 +127,20 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
               </div>
               <div class="value">&euro; 300<span>,-</span></div>
               <span class="helptext">
-                Dit is het bedrag dat u maandelijks betaalt, inclusief 5% doorlopende korting. 
+                Dit is het bedrag dat u maandelijks betaalt, inclusief 5% doorlopende korting.
                 Uw premie is fiscaal aftrekbaar. Als u een uitkering krijgt dan betaalt u daar belasting over.
               </span>
             </div>
             <div class="row">
               <div class="label">
-                Netto premie per maand        
+                Netto premie per maand
               </div>
               <div class="value">&euro; 300<span>,-</span></div>
-              <span class="helptext"> 
-                Dit is het bedrag na aftrek van belastingvoordeel. 
-                Wij rekenen met gemiddeld belastingvoordeel van 35%. 
+              <span class="helptext">
+                Dit is het bedrag na aftrek van belastingvoordeel.
+                Wij rekenen met gemiddeld belastingvoordeel van 35%.
                 Voor uw situatie kan dit meer of minder zijn.
-              </span> 
+              </span>
             </div>
           </div>
         </div>
@@ -156,8 +156,8 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
         </div>
       </div>
     </section>
-    
-    
+
+
     <div id="aov-quote-summary" *ngIf="showSummary">
       <h1>Samenvatting</h1>
       <h2 class="subtitle">Uw premie-indicatie</h2>
@@ -206,7 +206,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#aovQuoteTempla
               <label class="span5 dark-blue" for="email-address-field">E-mail verstuurd</label>
               <button type="button" (click)="reSendEmailShown=false" class="button transparent arrow span6">Nogmaals versturen</button>
             </div>
-            
+
             <label class="label span12 aanvragen-label dark-blue" for="aanvragen">Wilt u een vrijblijvend adviesgesprek?</label>
             <a class="arrow span8 orange aanvragen-button button" href="https://www.aegon.nl/zakelijk/inkomensverzekeringen/arbeidsongeschiktheidsverzekering/afspraak-arbeidsongeschiktheidsverzekering-advies">Neem contact met mij op</a>
           </div>
@@ -271,7 +271,7 @@ export class AovQuoteComponent implements OnInit {
   public  maxGrossYearAmount: number = 100000;
   public  minAge: number = 18;
   public  maxAge: number = 59;
-  
+
   public  birthDate: string;
   public  birthDateError: boolean;
   public  professionError: boolean;
@@ -310,7 +310,7 @@ export class AovQuoteComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log(dummyProfessions);
+    // console.log(dummyProfessions);
 
 
     this.initProfessions();
@@ -340,11 +340,11 @@ export class AovQuoteComponent implements OnInit {
     this.pending += 1;
     this.serviceError = false;
 
-    if (dummyProfessions) {
-      this.processProfessions(dummyProfessions);
-      this.pending -= 1;
-      return;
-    }
+    // if (dummyProfessions) {
+    //   this.processProfessions(dummyProfessions);
+    //   this.pending -= 1;
+    //   return;
+    // }
 
     let body = {
       "retrieveProfessionsRequest": {
@@ -399,8 +399,8 @@ export class AovQuoteComponent implements OnInit {
     // Calculate age.
     let age = this.calculateAge(this.birthDate);
 
-    if (!this.birthDate || 
-        age < this.minAge || 
+    if (!this.birthDate ||
+        age < this.minAge ||
         age > this.maxAge ) {
       this.birthDateError = true;
       hasErrors = true;
@@ -531,13 +531,13 @@ export class AovQuoteComponent implements OnInit {
 
   fetchCalculationSpecification(cb:any = () => {}) {
     if (this.riskFactor) {
-      
-      if (dummyCalculateSpecification) {
-        this.processCalculationSpecification(dummyCalculateSpecification, cb);
-        return;
-      }
 
-      
+      // if (dummyCalculateSpecification) {
+      //   this.processCalculationSpecification(dummyCalculateSpecification, cb);
+      //   return;
+      // }
+
+
       let body = {
         "calculateSpecificationRequest": {
           "AILHEADER": {

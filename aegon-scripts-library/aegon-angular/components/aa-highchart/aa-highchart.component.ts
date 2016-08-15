@@ -1,3 +1,10 @@
+/**
+ * Simple wrapper for the highcharts charting component.
+ * Highcharts script is lazily loaded at most once
+ * This component basically initializes the element and offers a simple way to
+ * render a chart by supplying a chart options object.
+ * See: http://api.highcharts.com/highcharts
+ */
 import {Component, Input, Output, EventEmitter, ElementRef, ViewChild, AfterViewInit, OnInit} from 'angular2/core';
 import {loadScript} from "../../lib/scripts";
 import {template} from "./template";
@@ -9,11 +16,15 @@ declare var jQuery;
   template: template
 })
 
-export class HighchartComponent {
+export class AAHighchartComponent {
+  // Options object for chart. If supplied chart will be based on this,
+  // otherwise use .createChart(options)
   @Input() options: any = {};
+  // Fired when library is loaded
   @Output() ready: any = new EventEmitter();
-
+  // Placeholder for the chart
   @ViewChild('chart') chartEl: ElementRef;
+  // Highcharts interface on the element
   public highcharts: any; // highcharts reference; only available after the chart has been initialized (drawn)
 
   /**
@@ -24,6 +35,10 @@ export class HighchartComponent {
     loadScript('highcharts')
     .then(() => {
       this.ready.emit();
+      // Init chart if options supplied
+      if (this.options) {
+        this.createChart();
+      }
     });
   }
   /**
@@ -70,4 +85,3 @@ export class HighchartComponent {
     return false;
   }
 }
-

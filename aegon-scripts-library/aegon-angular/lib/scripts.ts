@@ -11,6 +11,7 @@
 var SCRIPTFILES = {
     highcharts: 'https://code.highcharts.com/4.2.6/highcharts.js',
   },
+  // Internal promises hash for loaded scripts
   promises = {};
 /**
  * Loads an external javascript file at most once. Even if this library is

@@ -1,40 +1,37 @@
 import {
-  Component, Input, Output, EventEmitter, Provider, Directive, forwardRef, ViewChild, ElementRef
-} from 'angular2/core';
+  Component, Input, Output, EventEmitter, Provider, Directive, forwardRef, ViewChild, ElementRef, AfterViewInit} from 'angular2/core';
 import {NG_VALUE_ACCESSOR, ControlValueAccessor} from "angular2/common";
 import {CONST_EXPR} from "angular2/src/facade/lang";
-import {AfterViewInit} from "angular2/core";
-import {InputNumberComponent} from '../aa-input-number/aa-input-number.component';
-import {SliderComponent, DEFAULT_SLIDER_OPTIONS} from '../aa-slider/aa-slider.component';
-import {HintComponent} from '../aa-hint/aa-hint.component';
+import {AAInputNumberComponent} from '../aa-input-number/aa-input-number.component';
+import {AASliderComponent} from '../aa-slider/aa-slider.component';
+import {AAHintComponent} from '../aa-hint/aa-hint.component';
 import {template} from "./template";
 
 // Custom value accessor for ngModel support
 const CUSTOM_VALUE_ACCESSOR = CONST_EXPR(new Provider(
-  NG_VALUE_ACCESSOR, {useExisting: forwardRef(() => SliderInputComponent), multi: true}));
+  NG_VALUE_ACCESSOR, {useExisting: forwardRef(() => AASliderInputComponent), multi: true}));
 
 declare var noUiSlider: any;
-declare var wNumb: any;
 
 @Component({
   selector: 'aa-slider-input',
   host: {'(modelChange)': 'onChange($event)'},
   providers: [CUSTOM_VALUE_ACCESSOR],
   directives: [
-    SliderComponent, HintComponent, InputNumberComponent
+    AASliderComponent, AAHintComponent, AAInputNumberComponent
   ],
   template: template
 })
 
-export class SliderInputComponent implements ControlValueAccessor {
+export class AASliderInputComponent implements ControlValueAccessor {
   @Input() label: string;
   @Input() helpText: string;
-  @Input() sliderOptions:any = DEFAULT_SLIDER_OPTIONS;
+  @Input() sliderOptions:any;
 
   @Output() modelChange: any = new EventEmitter();
   @Output() focus: any = new EventEmitter();
   @Output() change: any = new EventEmitter();
-  @ViewChild('aaSlider') aaSlider: SliderComponent;
+  @ViewChild('aaSlider') aaSlider: AASliderComponent;
 
   value: number;
 

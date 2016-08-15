@@ -1,5 +1,5 @@
 /**
- * Number parsing, formatting and rounding functions
+ * Number formatting, parsing, rounding utils
  */
 
 /**

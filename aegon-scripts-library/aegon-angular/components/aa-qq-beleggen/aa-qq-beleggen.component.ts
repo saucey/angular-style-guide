@@ -13,18 +13,20 @@
  * - chart.ts: Chart options
  */
 import {Component, Input, ElementRef, ViewChild, OnInit} from 'angular2/core';
-import {MoneyPipe} from "../../pipes/money.pipe";
-import {SliderInputComponent} from '../aa-slider-input/aa-slider-input.component';
-import {HintComponent} from '../aa-hint/aa-hint.component';
-import {HighchartComponent} from "../aa-highchart/aa-highchart.component";
 import {loadScript} from "../../lib/scripts";
 import * as libFormat from "../../lib/format";
 import * as libInterest from "../../lib/calculations/interest";
 import * as libUtil from "../../lib/util";
+// AA components
+import {AAConfigComponent} from '../../lib/classes/AAConfigComponent';
+import {AAMoneyPipe} from "../../pipes/money.pipe";
+import {AASliderInputComponent} from '../aa-slider-input/aa-slider-input.component';
+import {AAHintComponent} from '../aa-hint/aa-hint.component';
+import {AAHighchartComponent} from "../aa-highchart/aa-highchart.component";
+// Locals
 import {template} from "./template";
 import {options} from "./options";
 import {createChartConfig, createPlotLinesData, createSeriesData} from "./chart";
-import {AAConfigComponent} from '../../lib/classes/AAConfigComponent';
 
 declare var jQuery;
 
@@ -34,14 +36,14 @@ declare var jQuery;
 @Component({
   selector: 'aa-qq-beleggen',
   directives: [
-    HintComponent, SliderInputComponent, HighchartComponent
+    AAHintComponent, AASliderInputComponent, AAHighchartComponent
   ],
   template: template,
-  pipes: [MoneyPipe]
+  pipes: [AAMoneyPipe]
 })
-export class QQBeleggenComponent extends AAConfigComponent implements OnInit {
+export class AAQQBeleggenComponent extends AAConfigComponent implements OnInit {
   @ViewChild('root') rootEl: ElementRef;
-  @ViewChild('chart') highchart: HighchartComponent;
+  @ViewChild('chart') highchart: AAHighchartComponent;
 
   private chartState:any = {}; // store internal state of the chart to prevent redraw
   private currentTimeout: any = undefined;

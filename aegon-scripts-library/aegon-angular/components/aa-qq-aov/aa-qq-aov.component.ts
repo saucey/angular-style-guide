@@ -1,29 +1,36 @@
+/**
+ * AOV quick quote
+ */
 import {Component, OnInit, Input} from 'angular2/core';
 import {HTTP_PROVIDERS, Http, Headers, RequestOptions, Response} from "angular2/http";
 import {Observable} from 'rxjs/Observable';
-import {InputNumberComponent} from '../aa-input-number/aa-input-number.component';
+// AA components
+import {AAMoneyPipe} from "../../pipes/money.pipe";
+import {AAInputRadioComponent} from "../aa-input-radio/aa-input-radio.component";
+import {AAInputDropDownComponent} from "../aa-input-dropdown/aa-input-dropdown.component";
+import {AASliderInputComponent} from "../aa-slider-input/aa-slider-input.component";
+import {AAInputNumberComponent} from '../aa-input-number/aa-input-number.component';
+// Old components
 import {InputDateComponent, InputDateValueAccessor} from '../../../components/angular-components/input-date.component';
 import {CheckboxComponent, CheckboxValueAccessor} from '../../../components/angular-components/checkbox.component';
-import {MoneyPipe} from "../../pipes/money.pipe";
-import {InputRadioComponent} from "../aa-input-radio/aa-input-radio.component";
-import {InputDropDownComponent} from "../aa-input-dropdown/aa-input-dropdown.component";
-import {SliderInputComponent} from "../aa-slider-input/aa-slider-input.component";
+// Locals
 import {template} from "./template";
 import {options} from "./options";
 
 @Component({
   selector: 'aegon-aov-quote',
   directives: [
-    InputNumberComponent, InputDateComponent, InputDateValueAccessor,
-    CheckboxComponent, CheckboxValueAccessor, SliderInputComponent, InputRadioComponent,
-    InputDropDownComponent
+    // New
+    AAInputNumberComponent, AASliderInputComponent, AAInputRadioComponent, AAInputDropDownComponent,
+    // Old
+    InputDateComponent, InputDateValueAccessor, CheckboxComponent, CheckboxValueAccessor
   ],
   template: template,
   providers: [HTTP_PROVIDERS],
-  pipes: [MoneyPipe]
+  pipes: [AAMoneyPipe]
 })
 //TODO ADD BASE64
-export class AovQuoteComponent implements OnInit {
+export class AAQQAovComponent implements OnInit {
   @Input()  public  showSummary: boolean = false;
   @Input()  private mailUrl: string = 'http://ail.test.intra.aegon.nl/BS_Utilities_Communication_03Web/sca/BS_Utilities_Communication_03_ExpWS';
   @Input()  private mailCredentials: string = 'AppAegonNLDrupalTST:dUACcFMYvwhnrnnfdq9h';
