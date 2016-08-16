@@ -5,6 +5,7 @@ import {Component, OnInit, Input} from 'angular2/core';
 import {HTTP_PROVIDERS, Http, Headers, RequestOptions, Response} from "angular2/http";
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
+import {HelpComponent} from '../../../components/angular-components/help.component';
 // AA components
 import {AAMoneyPipe} from "../../pipes/money.pipe";
 import {AAInputRadioComponent} from "../aa-input-radio/aa-input-radio.component";
@@ -24,7 +25,7 @@ import {options} from "./options";
     // New
     AAInputNumberComponent, AASliderInputComponent, AAInputRadioComponent, AAInputDropDownComponent,
     // Old
-    InputDateComponent, InputDateValueAccessor, CheckboxComponent, CheckboxValueAccessor
+    InputDateComponent, InputDateValueAccessor, CheckboxComponent, CheckboxValueAccessor, HelpComponent
   ],
   template: template,
   providers: [HTTP_PROVIDERS],
