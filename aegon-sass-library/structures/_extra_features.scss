@@ -7,7 +7,7 @@
 // Use only this .hide-if-shw-loggedout if necessary and let all elements 
 // visible by default.
 .hide-if-shw-loggedout {
-  display: none;
+  display: none !important;
 }
 
 // Hide/show any elements based on current user status
@@ -22,23 +22,23 @@
   // .show-if-shw-loggedin.inline-block -> show as inline-block
   .show-if-shw-loggedin,
   .hide-if-shw-loggedout {
-    display: inline;
+    display: inline !important;
 
     &.inline {
-      display: inline;
+      display: inline !important;
     }
 
     &.inline-block {
-      display: inline-block;
+      display: inline-block !important;
     }
 
     &.block {
-      display: block;
+      display: block !important;
     }
   }
 
   // Additional class to hide if shw widget is logged in
   .hide-if-shw-loggedin {
-    display: none;
+    display: none !important;
   }
 }
