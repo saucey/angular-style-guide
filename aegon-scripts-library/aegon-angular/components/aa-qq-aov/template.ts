@@ -43,7 +43,7 @@ export const template = `
       <div class="field gray-field">
         <div class="label">
           Wat is uw bruto jaarinkomen?
-          <aegon-help>
+          <aegon-help text="{{waardeA}}">
             Vul uw bruto inkomen in voor aftrek van belasting. Als dit schommelt, geeft u een gemiddelde over de
             afgelopen drie jaar. Als starter geeft u een indicatie wat u denkt te gaan verdienen.
           </aegon-help>

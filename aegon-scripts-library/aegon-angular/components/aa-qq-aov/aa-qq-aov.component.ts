@@ -18,6 +18,12 @@ import {CheckboxComponent, CheckboxValueAccessor} from '../../../components/angu
 // Locals
 import {template} from "./template";
 import {options} from "./options";
+import {calculateAge} from "../../lib/date";
+import {zeroPad} from "../../lib/format";
+import {mockProfessionsResponse} from "./mock-professions";
+import {mockRiskFactorResponse} from "./mock-riskfactor";
+import {isString} from "angular2/src/facade/lang";
+import {mockSpecificationResponse} from "./mock-specification";
 
 @Component({
   selector: 'aa-qq-aov',
@@ -83,7 +89,7 @@ export class AAQQAovComponent implements OnInit {
   //
 
   constructor(
-    private http:Http
+    private http: Http
   ) {}
 
   ngOnInit() {
@@ -92,8 +98,9 @@ export class AAQQAovComponent implements OnInit {
 
   handleError(error: Response) {
     this.serviceError = true;
-    console.log('Server error', error);
+    console.error('Server error', error);
     this.pending -= 1;
+    alert('Het is niet gelukt om gegevens op te vragen door een technisch probleem. Probeer het later opnieuw.')
     return Observable.throw('Server error');
   }
 
@@ -111,14 +118,11 @@ export class AAQQAovComponent implements OnInit {
   }
 
   initProfessions() {
-    this.pending += 1;
     this.serviceError = false;
 
-    // if (dummyProfessions) {
-    //   this.processProfessions(dummyProfessions);
-    //   this.pending -= 1;
-    //   return;
-    // }
+    // TODO Remove mock data when we're done.
+    this.processProfessions(mockProfessionsResponse);
+    return;
 
     let body = {
       "retrieveProfessionsRequest": {
@@ -130,37 +134,14 @@ export class AAQQAovComponent implements OnInit {
     let options = new RequestOptions({headers: headers});
 
     // Fetch professions.
+    this.pending += 1;
     this.http.post(this.serviceUrl + 'retrieveProfessions', JSON.stringify(body), options)
       .map(res => res.json())
       .catch(this.handleError)
       .subscribe(data => {
         this.processProfessions(data);
         this.pending -= 1;
-      }, error => console.log(error));
-  }
-
-  calculateAge(date) {
-    let age = 0;
-    if (date) {
-      let bd: string[] = date.split("-");
-      let today = new Date();
-      let nowyear = today.getFullYear();
-      let nowmonth = today.getMonth();
-      let nowday = today.getDate();
-
-      let birthyear = parseInt(bd[0], 10);
-      let birthmonth = parseInt(bd[1], 10);
-      let birthday = parseInt(bd[2], 10);
-
-      age = nowyear - birthyear;
-      let age_month = nowmonth - birthmonth;
-      let age_day = nowday - birthday;
-
-      if (age_month < 0 || (age_month == 0 && age_day < 0)) {
-        age -= 1;
-      }
-    }
-    return age;
+      }, error => console.error(error));
   }
 
   validatePersonalInformation(): boolean {
@@ -171,7 +152,7 @@ export class AAQQAovComponent implements OnInit {
     this.grossIncomeError = false;
 
     // Calculate age.
-    let age = this.calculateAge(this.birthDate);
+    let age = calculateAge(this.birthDate);
 
     if (!this.birthDate ||
         age < this.minAge ||
@@ -180,7 +161,8 @@ export class AAQQAovComponent implements OnInit {
       hasErrors = true;
     }
 
-    if (!this.profession) {
+    if (!this.profession || this.professions.indexOf(this.profession) === -1) {
+      // Profession isn't one of the profession objects!
       this.professionError = true;
       hasErrors = true;
     }
@@ -215,13 +197,10 @@ export class AAQQAovComponent implements OnInit {
   startCalculator() {
     // Validate the personal information. If it is valid then the calculator can be shown.
     if (this.validatePersonalInformation()) {
-      // Show calculator
-
-      let callback = () => {
+      // Show calculator once we have fetched the data.
+      this.fetchCalculationSpecification(() => {
         this.showCalculator = true;
-      };
-
-      this.fetchCalculationSpecification(callback);
+      });
 
     }
   }
@@ -231,25 +210,14 @@ export class AAQQAovComponent implements OnInit {
     window.location.href = this.summaryPath;
   }
 
-  fetchProfessions(searchString) {
-    this.professionsFiltered = this.professions.filter((value) => {
-      return value.label.toLowerCase().indexOf(searchString.toLowerCase()) > -1;
-    });
-  }
-
   processRiskFactor(response) {
     this.riskFactor = response;
   }
 
-
   fetchRiskFactor(rawProfession) {
-    this.pending += 1;
-
-    if (dummyRiskFactor) {
-      this.pending -= 1;
-      this.processRiskFactor(dummyRiskFactor);
-      return;
-    }
+    // TODO Remove mock data when we're done.
+    this.processRiskFactor(mockRiskFactorResponse);
+    return;
 
     let body = {
       "calculateRiskFactorRequest": {
@@ -284,12 +252,13 @@ export class AAQQAovComponent implements OnInit {
       let options = new RequestOptions({headers: headers});
 
       // Calculate and set riskfactor
+      this.pending += 1;
       this.http.post(this.serviceUrl + 'calculateRiskFactor' , JSON.stringify(body), options)
         .map(res => res.json())
         .catch(this.handleError)
         .subscribe(data => {
           this.processRiskFactor(data);
-        }, error => console.log(error));
+        }, error => console.error(error));
     }
   }
 
@@ -306,34 +275,24 @@ export class AAQQAovComponent implements OnInit {
     }
   }
 
+  fetchProfessions(searchString) {
+    this.professionsFiltered = this.professions.filter((value) => {
+      return value.label.toLowerCase().indexOf(searchString.toLowerCase()) > -1;
+    });
+  }
 
   processCalculationSpecification(response, cb) {
     cb();
   }
 
-  zeroPad(num, places) {
-    var zero = places - num.toString().length + 1;
-    return Array(+(zero > 0 && zero)).join("0") + num;
-  }
-
   fetchCalculationSpecification(cb:any = () => {}) {
-    this.pending += 1;
-
     if (this.riskFactor) {
-
-      // if (dummyCalculateSpecification) {
-      //   this.processCalculationSpecification(dummyCalculateSpecification, cb);
-      //   return;
-      // }
-
-      if (dummyCalculateSpecification) {
-        this.pending -= 1;
-        this.processCalculationSpecification(dummyCalculateSpecification, cb);
-        return;
-      }
+      // TODO Remove mock data when we're done.
+      this.processCalculationSpecification(mockSpecificationResponse, cb);
+      return;
 
       let now = new Date();
-      let dateString = `${now.getFullYear()}-${this.zeroPad(now.getMonth() + 1, 2)}-${this.zeroPad(now.getDate(), 2)}`;
+      let dateString = `${now.getFullYear()}-${zeroPad(now.getMonth() + 1, 2)}-${zeroPad(now.getDate(), 2)}`;
 
       let body = {
         "calculateSpecificationRequest": {
@@ -384,13 +343,14 @@ export class AAQQAovComponent implements OnInit {
       let options = new RequestOptions({headers: headers});
 
       // Update calculations.
+      this.pending += 1;
       this.http.post(this.serviceUrl + 'calculationSpecification' , JSON.stringify(body), options)
           .map(res => res.json())
           .catch(this.handleError)
           .subscribe(data => {
             this.processCalculationSpecification(data, cb);
             this.pending -= 1;
-          }, error => console.log(error));
+          }, error => console.error(error));
     }
   }
 
@@ -441,10 +401,9 @@ export class AAQQAovComponent implements OnInit {
         .map(res => res.json())
         .catch(this.handleError)
         .subscribe(data => {
-          console.log('send');
           this.emailButtonPending = false;
           this.reSendEmailShown = true;
-        }, error => console.log(error));
+        }, error => console.error(error));
 
     return false;
   }

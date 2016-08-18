@@ -310,12 +310,6 @@ export class AovQuoteComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-<<<<<<< HEAD
-    // console.log(dummyProfessions);
-
-
-=======
->>>>>>> b6e29ff00c6b4b73724b2fb8b3a56f3f01196611
     this.initProfessions();
   }
 
