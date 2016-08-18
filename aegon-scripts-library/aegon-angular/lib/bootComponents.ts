@@ -17,6 +17,7 @@ import {AAInputDropDownComponent} from '../components/aa-input-dropdown/aa-input
 import {AAInputNumberComponent} from '../components/aa-input-number/aa-input-number.component';
 import {AAInputRadioComponent} from '../components/aa-input-radio/aa-input-radio.component';
 import {AASliderComponent} from '../components/aa-slider/aa-slider.component';
+import {AALightboxComponent} from '../components/aa-lightbox/aa-lightbox.component';
 import {AASliderInputComponent} from '../components/aa-slider-input/aa-slider-input.component';
 // Quick quotes
 import {AAQQBeleggenComponent} from '../components/aa-qq-beleggen/aa-qq-beleggen.component';
@@ -38,10 +39,11 @@ const
     AAInputRadioComponent,
     AASliderComponent,
     AASliderInputComponent,
+    AALightboxComponent,
     // Quick quotes
     AAQQBeleggenComponent,
     AAQQHistorischRendementComponent,
-    AAQQAovComponent
+    AAQQAovComponent,
   ],
   /**
    * Allow these components as bootstrap components

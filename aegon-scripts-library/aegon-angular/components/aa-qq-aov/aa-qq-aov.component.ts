@@ -18,7 +18,7 @@ import {template} from "./template";
 import {options} from "./options";
 
 @Component({
-  selector: 'aegon-aov-quote',
+  selector: 'aa-qq-aov',
   directives: [
     // New
     AAInputNumberComponent, AASliderInputComponent, AAInputRadioComponent, AAInputDropDownComponent,

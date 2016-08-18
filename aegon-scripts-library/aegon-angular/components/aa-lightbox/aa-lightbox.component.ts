@@ -8,14 +8,15 @@ import {AAConfigComponent} from '../../lib/classes/AAConfigComponent';
 })
 
 export class AALightboxComponent extends AAConfigComponent {
+  @Input() aaData: any = {};
+  public test : string = 'aa-lightbox TEST';
   // Let parent class initialize config; the dependency injection with ElementRef
   // doesn't work directly so we have to call it explicitly.
-  // constructor(private elementRef: ElementRef) {
-  //   super(elementRef);
-  //   console.log('this', this);
-  // }
-
-  constructor(loader: DynamicComponentLoader, elementRef: ElementRef, injector: Injector) {
+  constructor(private elementRef: ElementRef) {
     super(elementRef);
+    setTimeout(() => {
+      console.log('set name');
+      this.aaData.name = "aa-lightbox Update";
+    }, 2000)
   }
 }

@@ -310,12 +310,6 @@ export class AovQuoteComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-<<<<<<< HEAD
-    // console.log(dummyProfessions);
-
-
-=======
->>>>>>> b6e29ff00c6b4b73724b2fb8b3a56f3f01196611
     this.initProfessions();
   }
 
@@ -474,11 +468,11 @@ export class AovQuoteComponent implements OnInit {
   fetchRiskFactor(rawProfession) {
     this.pending += 1;
 
-    if (dummyRiskFactor) {
-      this.pending -= 1;
-      this.processRiskFactor(dummyRiskFactor);
-      return;
-    }
+    // if (dummyRiskFactor) {
+    //   this.pending -= 1;
+    //   this.processRiskFactor(dummyRiskFactor);
+    //   return;
+    // }
 
     let body = {
       "calculateRiskFactorRequest": {
@@ -551,11 +545,11 @@ export class AovQuoteComponent implements OnInit {
 
     if (this.riskFactor) {
 
-      if (dummyCalculateSpecification) {
-        this.pending -= 1;
-        this.processCalculationSpecification(dummyCalculateSpecification, cb);
-        return;
-      }
+      // if (dummyCalculateSpecification) {
+      //   this.pending -= 1;
+      //   this.processCalculationSpecification(dummyCalculateSpecification, cb);
+      //   return;
+      // }
 
       let now = new Date();
       let dateString = `${now.getFullYear()}-${this.zeroPad(now.getMonth() + 1, 2)}-${this.zeroPad(now.getDate(), 2)}`;

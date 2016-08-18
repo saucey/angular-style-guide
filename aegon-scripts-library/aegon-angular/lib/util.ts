@@ -19,14 +19,20 @@
 export function throttle(func: any, interval: number = 1000) : any {
   var lastTime = 0,
     timeout,
+    args,
     runFunc = () => {
+    	var res;
       timeout = undefined;
       lastTime = new Date().getTime();
-      return func.call(this);
+      res = func.apply(this, args);
+      args = undefined;
+      return res;
     }
 	return function() {
     // Already waiting for timeout
+  	args = arguments;
 	  if (timeout) {
+	  	// Update arguments
 	    return;
 	  }
 	  var now = new Date().getTime(),
@@ -107,6 +113,20 @@ export function jsonAttribute(element:any, name: string) : any {
  */
 export function clone(obj:any) : any {
 	return JSON.parse(JSON.stringify(obj));
+}
+
+/**
+ * Simple deep equal function
+ * @param {Any} val1 First value to compare
+ * @param {Any} val2 Second value to compare
+ * @returns {Boolean} True if objects/values are deeply equal.
+ * - JS objects are compared by stringified value. JS objects don't have
+ *   ordered fields, so serializing it to JSON should give fields in random order.
+ * - However in practice fields are serialized in definition order.
+ * - This means that: {a: 1, b: 2} and {b: 2, a: 1} are not equal by this function!
+ */
+export function equal(val1: any, val2: any) : boolean {
+	return JSON.stringify(val1) === JSON.stringify(val2);
 }
 
 /**

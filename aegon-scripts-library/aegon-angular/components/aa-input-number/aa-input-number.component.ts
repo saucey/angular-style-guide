@@ -85,10 +85,11 @@ export class AAInputNumberComponent implements ControlValueAccessor {
     commaIndex = value.lastIndexOf(',');
     fractionalPart = commaIndex > -1 ? ',' + value.substr(commaIndex + 1).replace(/\D/g, '') : '';
     formatted = num ? libFormat.formatNumber(num, false) + fractionalPart : '';
-    this.model = value;
     this.internalValue = num;
     // We're using a timeout, so the change detector detects a change in the model.
-    setTimeout(() => {this.model = formatted;}, 0);
+    setTimeout(() => {
+      this.model = formatted;
+    });
   }
   // Change callback
   updateExternalModel() {

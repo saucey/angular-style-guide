@@ -71,11 +71,11 @@ export const options = {
   },
   conversate: {
     text: 'Gratis orientatiegesprek aanvragen',
-    url: 'https://www.aegon.nl/particulier/beleggen/adviesgesprek-beleggen'
+    url: '/particulier/beleggen/adviesgesprek-beleggen'
   },
   cta: {
     text: 'Direct zelf regelen',
-    url: 'https://online.aegon.nl/bank/public/AccountOpening?ProductId=77'
+    url: '/bank/public/AccountOpening?ProductId=77'
   },
   disclaimer: "Bovenstaande berekening is een indicatie. Aan deze indicatie kunnen geen rechten worden ontleend. Beleggen brengt kosten en risico's met zich mee die niet bij sparen voorkomen. De waarde van uw belegging kan fluctueren. In het verleden behaalde resultaten bieden geen garantie voor de toekomst.",
   chartUpdateDelay: 500 // // Update chart at most every given milliseconds, e.g. 1000 for 1 sec throttle.
