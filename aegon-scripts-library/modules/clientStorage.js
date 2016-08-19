@@ -2,6 +2,9 @@
  * 
  * Local storage wrapper: Basically is a Singleton and when instanciated, 
  * will return three different objects for Session, Local and Cookie storage.  
+ * Ex. cs = clienteStorage.getinstance();
+ *       cs.session.setItem(key, value);
+ *       cs.session.getItem(key);
  * The library also provide options to encode the data based on Base64.
  *
  * Author: Antonio D'Angelo, antonio.dangelo@hcl.com
