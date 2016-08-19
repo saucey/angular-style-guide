@@ -104,13 +104,13 @@ clientStorage = (function() {
         return item;
     }
 
-    function innerSetItem(storage, keyName, value) {
+    function innerSetItem(storage, keyName, value, forceEncoding) {
         var key = keyName,
             item = value;
 
         item = JSON.stringify(item);
 
-        if(options.encoding) {
+        if(options.encoding || forceEncoding) {
             item = encode(item);
             if(options.fullEncoded) {
                 key = encode(keyName);
