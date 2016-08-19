@@ -65,10 +65,10 @@ export const template = `
             <aa-hint [text]="options.riskPeriod.help"></aa-hint>
           </div>
           <div class="inputs">
-            <aa-input-radio [(ngModel)]="startingTerm" (aaChange)="fetchCalculationSpecification()" name="term" value="14">2 weken </aa-input-radio>
-            <aa-input-radio [(ngModel)]="startingTerm" (aaChange)="fetchCalculationSpecification()" name="term" value="30">1 maand</aa-input-radio>
-            <aa-input-radio [(ngModel)]="startingTerm" (aaChange)="fetchCalculationSpecification()" name="term" value="90">3 maanden</aa-input-radio>
-            <aa-input-radio [(ngModel)]="startingTerm" (aaChange)="fetchCalculationSpecification()" name="term" value="365">1 jaar</aa-input-radio>
+            <aa-input-radio [(ngModel)]="startingTerm" (aaChange)="fetchCalculationSpecification()" name="term" [value]="14">2 weken </aa-input-radio>
+            <aa-input-radio [(ngModel)]="startingTerm" (aaChange)="fetchCalculationSpecification()" name="term" [value]="30">1 maand</aa-input-radio>
+            <aa-input-radio [(ngModel)]="startingTerm" (aaChange)="fetchCalculationSpecification()" name="term" [value]="90">3 maanden</aa-input-radio>
+            <aa-input-radio [(ngModel)]="startingTerm" (aaChange)="fetchCalculationSpecification()" name="term" [value]="365">1 jaar</aa-input-radio>
           </div>
         </div>
 

@@ -160,9 +160,7 @@ export class AAQQAovComponent implements OnInit {
       hasErrors = true;
     }
 
-    if (!this.grossIncome || (this.grossIncome &&
-        this.grossIncome < this.options.income.min &&
-        this.grossIncome > this.options.income.max)) {
+    if (!this.grossIncome || this.grossIncome < this.options.income.min || this.grossIncome > this.options.income.max) {
       this.grossIncomeError = true;
       hasErrors = true;
     }
