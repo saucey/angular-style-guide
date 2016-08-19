@@ -149,7 +149,7 @@ clientStorage = (function() {
                 "getItem": function(_keyName) {
                     return innerGetItem(sessionStorage, _keyName);
                 },
-                "setItem": function(_key, _value) {
+                "setItem": function(_key, _value, _options) {
                     return innerSetItem(sessionStorage, _key, _value, _options)
                 },
                 "removeItem": function(_key) {
@@ -168,7 +168,7 @@ clientStorage = (function() {
                 "getItem": function(_keyName) {
                     return innerGetItem(localStorage, _keyName);
                 },
-                "setItem": function(_key, _value) {
+                "setItem": function(_key, _value, _options) {
                     return innerSetItem(localStorage, _key, _value, _options)
                 },
                 "removeItem": function(_key) {
@@ -186,8 +186,8 @@ clientStorage = (function() {
                 "getItem": function(_keyName) {
                     return getCookie(_keyName);
                 },
-                "setItem": function(_key, _value, _exp_date) {
-                    return setCookie(_key, _value, {exdays: _exp_date});
+                "setItem": function(_key, _value, options) {
+                    return setCookie(_key, _value, options);
                 },
                 "removeItem": function(_key) {
                     return removeCookie(_key);
