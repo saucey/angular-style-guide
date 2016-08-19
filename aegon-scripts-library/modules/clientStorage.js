@@ -1,5 +1,8 @@
 /*
- * Local storage wrapper
+ * 
+ * Local storage wrapper: Basically is a Singleton and when instanciated, 
+ * will return three different objects for Session, Local and Cookie storage.  
+ * The library also provide options to encode the data based on Base64.
  *
  * Author: Antonio D'Angelo, antonio.dangelo@hcl.com
  *
@@ -202,7 +205,7 @@ clientStorage = (function() {
                     return innerGetItem(sessionStorage, _keyName);
                 },
                 "setItem": function(_key, _value) {
-                    return innerSetItem(sessionStorage, _key, _value)
+                    return innerSetItem(sessionStorage, _key, _value, _forceEncoding)
                 },
                 "removeItem": function(_key) {
                     return innerRemoveItem(sessionStorage, _key);
@@ -221,7 +224,7 @@ clientStorage = (function() {
                     return innerGetItem(localStorage, _keyName);
                 },
                 "setItem": function(_key, _value) {
-                    return innerSetItem(localStorage, _key, _value)
+                    return innerSetItem(localStorage, _key, _value, _forceEncoding)
                 },
                 "removeItem": function(_key) {
                     return innerRemoveItem(localStorage, _key);
