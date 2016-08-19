@@ -79,6 +79,7 @@
       line-height: 25px;
       > input[type="checkbox"] {
         & + span.checkbox,
+        & + input[type="hidden"] + span.checkbox,
         & ~ span.checkbox {
           width: 25px;
           height: 25px;
@@ -100,6 +101,7 @@
       line-height: 24px;
       > input[type="radio"] {
         & + span.radio,
+        & + input[type="hidden"] + span.radio,
         & ~ span.radio {
           top: 0;
           width: 24px;
