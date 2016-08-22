@@ -10,7 +10,7 @@
 *
 */
 
-window.clientStorage = (function() {
+clientStorage = (function() {
   "use strict";
 
   var Base64={
