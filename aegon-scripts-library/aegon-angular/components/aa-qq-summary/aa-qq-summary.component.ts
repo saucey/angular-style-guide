@@ -32,7 +32,7 @@ export class AAQQSummaryComponent implements OnInit {
   public  pending: number = 0;
   public  emailButtonPending: boolean = false;
   public  reSendEmailShown: boolean = false;
-  public clientStorageAOV: any = window.clientStorage.session.aovQQ;
+  public clientStorageAOV: any = clientStorage.session.aovQQ;
 
   public aov_qq_data: any = {
     "birthDate": this.clientStorageAOV.birthDate || "",
