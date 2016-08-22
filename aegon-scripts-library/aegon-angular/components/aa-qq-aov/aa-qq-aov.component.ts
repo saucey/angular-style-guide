@@ -23,6 +23,7 @@ import {zeroPad} from "../../lib/format";
 import {mockProfessionsResponse} from "./mock-professions";
 import {mockRiskFactorResponse} from "./mock-riskfactor";
 import {mockSpecificationResponse} from "./mock-specification";
+import {AAHintComponent} from "../aa-hint/aa-hint.component";
 
 @Component({
   selector: 'aa-qq-aov',
@@ -30,7 +31,7 @@ import {mockSpecificationResponse} from "./mock-specification";
     // New
     AAInputNumberComponent, AASliderInputComponent, AAInputRadioComponent, AAInputDropDownComponent,
     // Old
-    InputDateComponent, InputDateValueAccessor, CheckboxComponent, CheckboxValueAccessor, HelpComponent
+    InputDateComponent, InputDateValueAccessor, CheckboxComponent, CheckboxValueAccessor, AAHintComponent
   ],
   template: template,
   providers: [HTTP_PROVIDERS],
@@ -189,7 +190,7 @@ export class AAQQAovComponent implements OnInit {
     // Validate the personal information. If it is valid then the calculator can be shown.
     if (this.validatePersonalInformation()) {
       // Show calculator once we have fetched the data.
-      this.fetchCalculationSpecification(() => {
+      this.fetchSpecification(() => {
         this.showCalculator = true;
       });
 
@@ -264,14 +265,14 @@ export class AAQQAovComponent implements OnInit {
     });
   }
 
-  processCalculationSpecification(response, cb) {
+  processSpecification(response, cb) {
     cb();
   }
 
-  fetchCalculationSpecification(callback: any = () => {}) {
+  fetchSpecification(callback: any = () => {}) {
     if (this.riskFactor) {
       if (options.mockData) {
-        this.processCalculationSpecification(mockSpecificationResponse, callback);
+        this.processSpecification(mockSpecificationResponse, callback);
         return;
       }
 
@@ -325,7 +326,7 @@ export class AAQQAovComponent implements OnInit {
       };
 
       this.callService('calculationSpecification', body, responseData => {
-        this.processCalculationSpecification(responseData, callback);
+        this.processSpecification(responseData, callback);
       });
     }
   }

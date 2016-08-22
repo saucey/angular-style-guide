@@ -36,7 +36,11 @@ export const options = {
   calculateButtonText: 'Bereken premie',
 
   otherChoicesHeading: 'Uw keuzes',
-  riskPeriod: {
+  startingTerm: {
+    choice1: '2 weken',
+    choice2: '1 maand',
+    choice3: '3 maanden',
+    choice4: '1 jaar',
     label: 'Welke eigen risicoperiode kiest u?',
     help: 'Uw uitkering start na afloop van deze periode. De meest gekozen periode is 1 maand.'
   },
