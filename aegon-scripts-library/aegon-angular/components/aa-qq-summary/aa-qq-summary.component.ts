@@ -21,9 +21,9 @@ import {options} from "./options";
 })
 
 export class AAQQSummaryComponent implements OnInit {
-  @Input()  private mailUrl: string = 'http://ail.test.intra.aegon.nl/BS_Utilities_Communication_03Web/sca/BS_Utilities_Communication_03_ExpWS';
-  @Input()  private mailCredentials: string = 'AppAegonNLDrupalTST:dUACcFMYvwhnrnnfdq9h';
-  @Input()  private summaryPath: string = '#';
+  private mailUrl: string = 'http://ail.test.intra.aegon.nl/BS_Utilities_Communication_03Web/sca/BS_Utilities_Communication_03_ExpWS';
+  private mailCredentials: string = 'AppAegonNLDrupalTST:dUACcFMYvwhnrnnfdq9h';
+  private summaryPath: string = '#';
 
   public options: any = options;
   public  emailAddress: string = "";
@@ -32,16 +32,16 @@ export class AAQQSummaryComponent implements OnInit {
   public  pending: number = 0;
   public  emailButtonPending: boolean = false;
   public  reSendEmailShown: boolean = false;
-  public clientStorageAOV: any = clinetStorage.session.aovQQ;
+  public clientStorageAOV: any = window.clientStorage.session.aovQQ;
 
   public aov_qq_data: any = {
-    "birthDate": clientStorageAOV.birthDate || "",
-    "profession": clientStorageAOV.profession || "",
-    "grossYearAmount": clientStorageAOV.grossYearAmount ||0,
-    "startingTerm": clientStorageAOV.startingTerm || 30,
-    "insuranceAmount": clientStorageAOV.insuranceAmount || 0,
-    "grossMonthly": clientStorageAOV.grossMonthly || 0,
-    "netMonthly": clientStorageAOV.netMonthly || 0
+    "birthDate": this.clientStorageAOV.birthDate || "",
+    "profession": this.clientStorageAOV.profession || "",
+    "grossYearAmount": this.clientStorageAOV.grossYearAmount ||0,
+    "startingTerm": this.clientStorageAOV.startingTerm || 30,
+    "insuranceAmount": this.clientStorageAOV.insuranceAmount || 0,
+    "grossMonthly": this.clientStorageAOV.grossMonthly || 0,
+    "netMonthly": this.clientStorageAOV.netMonthly || 0
   };
 
   constructor(

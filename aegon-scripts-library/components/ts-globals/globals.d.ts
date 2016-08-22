@@ -12,3 +12,4 @@ interface utagConstructor {
     link(data: Object): boolean;
 }
 declare var utag: utagConstructor;
+declare var clientStorage: any;
