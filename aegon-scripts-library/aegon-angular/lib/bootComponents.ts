@@ -22,6 +22,7 @@ import {AASliderInputComponent} from '../components/aa-slider-input/aa-slider-in
 import {AAQQBeleggenComponent} from '../components/aa-qq-beleggen/aa-qq-beleggen.component';
 import {AAQQHistorischRendementComponent} from '../components/aa-qq-historisch-rendement/aa-qq-historisch-rendement.component';
 import {AAQQAovComponent} from '../components/aa-qq-aov/aa-qq-aov.component';
+import {AAQQSummaryComponent} from '../components/aa-qq-summary/aa-qq-summary.component';
 
 declare var System;
 
@@ -41,7 +42,8 @@ const
     // Quick quotes
     AAQQBeleggenComponent,
     AAQQHistorischRendementComponent,
-    AAQQAovComponent
+    AAQQAovComponent,
+    AAQQSummaryComponent
   ],
   /**
    * Allow these components as bootstrap components

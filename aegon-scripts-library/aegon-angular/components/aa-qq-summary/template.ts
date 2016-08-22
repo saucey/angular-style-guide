@@ -74,5 +74,4 @@ export const template = `
         Aan het advies zijn kosten verbonden. Deze bespreekt u in het eerste vrijblijvende gesprek met de adviseur.
       </div>
     </div>
-  </div>
 `;
