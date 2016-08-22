@@ -2,66 +2,53 @@ export const template = `
   <div class="quickquote angular aov-quote">
     <section class="personal-details" *ngIf="!showSummary">
 
-      <h3 prefix="/">Uw gegevens</h3>
+      <h3 prefix="/">{{ options.personalDataHeading }}</h3>
+      
       <div class="field gray-field">
         <div class="label">
-          Wat is uw geboortedatum?
+          {{ options.birthDate.label }}
+          <aa-hint [text]="options.birthDate.help"></aa-hint>
         </div>
         <div class="inputs" (click)="showCalculator = false">
           <aegon-input-date [(ngModel)]="birthDate"></aegon-input-date>
         </div>
       </div>
-      <p class="error" *ngIf="birthDateError">
-          Controleer of uw geboortedatum klopt. Is dit juist? Dan is uw leeftijd te dicht op de maximale leeftijd
-          die wij voor uw beroep verzekeren. Of u bent jonger dan 18 jaar. Neem contact op met een adviseur voor
-          een advies op maat.
-      </p>
+      <p class="error" *ngIf="birthDateError">{{ options.birthDate.error }}</p>
 
       <div class="field gray-field">
         <div class="label">
-          Wat is uw beroep?
-          <aegon-help>
-            Vul de eerste letters van uw beroep in en kies uw beroep uit de lijst. Staat uw beroep er niet tussen?
-            Kies dan het beroep dat het best bij uw werkzaamheden past.
-          </aegon-help>
+          {{ options.profession.label }}
+          <aa-hint [text]="options.profession.help"></aa-hint>
         </div>
         <div class="inputs" (click)="showCalculator = false">
           <aa-input-dropdown
             [model]="profession"
             [items]="professionsFiltered"
-            [emptyMessage]="'Er zijn geen beroepen gevonden'"
+            [emptyMessage]="options.profession.noMatchText"
             [minChars]="2"
             (aaFetch)="fetchProfessions($event)"
             (aaSelect)="selectProfession($event)">
           </aa-input-dropdown>
         </div>
       </div>
-      <p class="error" *ngIf="professionError">
-        Voor dit beroep kan geen premie worden berekend. Neem contact op met een adviseur voor een advies op maat.
-      </p>
+      <p class="error" *ngIf="professionError">{{ options.profession.error }}</p>
 
       <div class="field gray-field">
         <div class="label">
-          Wat is uw bruto jaarinkomen?
-          <aegon-help text="{{waardeA}}">
-            Vul uw bruto inkomen in voor aftrek van belasting. Als dit schommelt, geeft u een gemiddelde over de
-            afgelopen drie jaar. Als starter geeft u een indicatie wat u denkt te gaan verdienen.
-          </aegon-help>
+          {{ options.income.label }}
+          <aa-hint [text]="options.income.help"></aa-hint>
         </div>
         <div class="inputs" (click)="showCalculator = false">
-          <aa-input-number [(ngModel)]="grossIncome" prefix="€" [max]="1000000"></aa-input-number>
+          <aa-input-number [(ngModel)]="grossIncome" prefix="€" [max]="options.income.max"></aa-input-number>
         </div>
       </div>
-      <p class="error" *ngIf="grossIncomeError">
-        Geef hier uw bruto jaarinkomen op. Deze moet minimaal €3.125 zijn. U kunt 80% van uw inkomen voor
-        arbeidsongeschiktheid verzekeren.
-      </p>
+      <p class="error" *ngIf="grossIncomeError">{{ options.income.error }}</p>
 
       <div class="field gray-field" *ngIf="!showCalculator">
         <div class="label"></div>
         <div class="inputs">
           <button class="button icon-right icon-calculator" (click)="startCalculator()">
-            Bereken premie
+            {{ options.calculateButtonText }}
           </button>
         </div>
       </div>
@@ -70,18 +57,18 @@ export const template = `
 
     <section *ngIf="showCalculator" class="calculation">
       <div class="calculation indication">
-        <h3 prefix="/">Uw keuzes</h3>
+        <h3 prefix="/">{{ options.otherChoicesHeading }}</h3>
 
         <div class="field">
           <div class="label">
-            Welke eigen risicoperiode kiest u?
-            <aa-hint text="Uw uitkering start na afloop van deze periode. De meest gekozen periode is 1 maand."></aa-hint>
+            {{options.startingTerm.label}}
+            <aa-hint [text]="options.startingTerm.help"></aa-hint>
           </div>
           <div class="inputs">
-            <aa-input-radio [(ngModel)]="startingTerm" (aaChange)="fetchCalculationSpecification()" name="term" value="14">2 weken </aa-input-radio>
-            <aa-input-radio [(ngModel)]="startingTerm" (aaChange)="fetchCalculationSpecification()" name="term" value="30">1 maand</aa-input-radio>
-            <aa-input-radio [(ngModel)]="startingTerm" (aaChange)="fetchCalculationSpecification()" name="term" value="90">3 maanden</aa-input-radio>
-            <aa-input-radio [(ngModel)]="startingTerm" (aaChange)="fetchCalculationSpecification()" name="term" value="365">1 jaar</aa-input-radio>
+            <aa-input-radio [(ngModel)]="startingTerm" (aaChange)="fetchSpecification()" name="term" [value]="14">{{ options.startingTerm.choice1 }}</aa-input-radio>
+            <aa-input-radio [(ngModel)]="startingTerm" (aaChange)="fetchSpecification()" name="term" [value]="30">{{ options.startingTerm.choice2 }}</aa-input-radio>
+            <aa-input-radio [(ngModel)]="startingTerm" (aaChange)="fetchSpecification()" name="term" [value]="90">{{ options.startingTerm.choice3 }}</aa-input-radio>
+            <aa-input-radio [(ngModel)]="startingTerm" (aaChange)="fetchSpecification()" name="term" [value]="365">{{ options.startingTerm.choice4 }}</aa-input-radio>
           </div>
         </div>
 
@@ -89,10 +76,10 @@ export const template = `
           <div class="inputs">
             <aa-slider-input class="aa-qq__control aa-input--euro"
               [(ngModel)]="grossYearAmount"
-              (change)="fetchCalculationSpecification()"
-              [sliderOptions]="options.slider"
-              [label]="'Welk bruto jaarbedrag wilt u verzekeren?'"
-              [helpText]="'Dit is het bedrag na aftrek van belastingvoordeel. Wij rekenen met een gemiddeld belastingvoordeel van 35%. Voor uw situatie kan dit meer of minder zijn.'">
+              (change)="fetchSpecification()"
+              [sliderOptions]="options.grossYearAmount.slider"
+              [label]="options.grossYearAmount.label"
+              [helpText]="options.grossYearAmount.help">
             </aa-slider-input>
           </div>
         </div>
@@ -101,34 +88,31 @@ export const template = `
           <div class="linear">
             <div class="row">
               <div class="label">
-                Bruto premie per maand
+                {{ options.result.grossPremium.label }}
               </div>
               <div class="value">&euro; 300<span>,-</span></div>
               <span class="helptext">
-                Dit is het bedrag dat u maandelijks betaalt, inclusief 5% doorlopende korting.
-                Uw premie is fiscaal aftrekbaar. Als u een uitkering krijgt dan betaalt u daar belasting over.
+                {{ options.result.grossPremium.help }}
               </span>
             </div>
             <div class="row">
               <div class="label">
-                Netto premie per maand
+                {{ options.result.netPremium.label }}
               </div>
               <div class="value">&euro; 300<span>,-</span></div>
               <span class="helptext">
-                Dit is het bedrag na aftrek van belastingvoordeel.
-                Wij rekenen met gemiddeld belastingvoordeel van 35%.
-                Voor uw situatie kan dit meer of minder zijn.
+                {{ options.result.netPremium.help }}
               </span>
             </div>
           </div>
         </div>
         <div class="field">
           <a class="button orange icon-right arrow">
-            Adviesgesprek aanvragen
+            {{ options.result.adviseButtonText }}
           </a>
           <div class="label">
             <a href="#" class="icon-skinnyarrow" (click)="gotoSummary()">
-              Bekijk en mail overzicht
+              {{ options.result.summaryButtonText }}
             </a>
           </div>
         </div>

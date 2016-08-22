@@ -9,6 +9,9 @@
     margin-bottom: 0.2em;
     font-family: $font_normal;
     font-weight: bold;
+    h3 {
+      margin-top: 0;
+    }
   }
   .button {
     text-align: left;
@@ -19,7 +22,7 @@
    */
   &.messages--generic {
     background-color: $pastel_light_blue;
-    .header {
+    .header, .header > * {
       color: $slightly_darker_blue;
     }
     .content {
@@ -178,6 +181,18 @@
       &.pension {
         .icon:before {
           content: $font_icons_chart;
+        }
+      }
+      &.mortgage {
+        @include rem('padding-left', 55);
+        .icon{
+          @include rem('font-size', 20);
+          &:before {
+            content: $font_icons_calculator;
+          }
+        }
+        .content {
+          color: $slightly_darker_blue;
         }
       }
       &.big {
