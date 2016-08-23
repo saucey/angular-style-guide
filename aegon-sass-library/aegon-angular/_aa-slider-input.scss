@@ -40,13 +40,13 @@
   margin: 0 !important;
   display: block;
   user-select: none;
-  // Make the slider visually a big longer, but also make sure the knobs don't slide exactly till the end
+  // Make the slider visually a bit longer, but also make sure the knobs don't slide exactly till the end
   // Because that will cause them to overflow into the outer margin which looks not as nice
   .noUi-horizontal {
-    border-left: 5px solid #007bc8;
-    border-right: 5px solid white;
+    padding-left: 5px;
+    padding-right: 5px;
     .noUi-origin {
-      border-radius: 0;
+      margin-right: -5px;
     }
   }
 }

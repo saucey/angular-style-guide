@@ -54,6 +54,7 @@ export const options = {
     },
     help: 'Vul een periode in tussen 1 en 50 jaar. Wilt u korter dan 10 jaar vermogen opbouwen? Dan heeft u weinig tijd om eventuele koersdalingen goed te maken.'
   },
+  // resultRoundPrecision: -1,
   result: {
     inlay: {
       label: 'Totale inleg'

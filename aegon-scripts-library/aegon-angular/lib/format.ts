@@ -1,5 +1,5 @@
 /**
- * Number parsing, formatting and rounding functions
+ * Number formatting, parsing, rounding utils
  */
 
 /**
@@ -74,17 +74,26 @@ export function parseNumber(value: any): number {
 
 /**
  * Read attribute from element and try to return a number
- * @param {DOMElement} element DOM element to get attribute from
+ * @param {Element} element DOM element to get attribute from
  * @param {String} name Attribute name to get value from
  * @param {Number} fallback Fallback result if value not available or parsing fails
  * @returns {Number} Parsed value or fallback value on fail
  */
-export function numberFromAttribute(element:any, name:string, fallback:number = 0) : number {
+export function numberFromAttribute(element: Element, name:string, fallback:number = 0) : number {
   if (!element || !element.getAttribute) {
     return fallback;
   }
   var str = element.getAttribute(name),
     num = str ? parseFloat(str) : fallback;
   return isNaN(num) ? fallback : num;
-};
+}
 
+/**
+ * Convert number to zero padded String of given length.
+ * @param {number} num Number to pad.
+ * @param {number} len Length of the String to which we pad the number.
+ */
+export function zeroPad(num: number, len: number): String {
+  var zero = len - num.toString().length + 1;
+  return Array(+(zero > 0 && zero)).join("0") + num;
+}

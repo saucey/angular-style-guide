@@ -39,6 +39,12 @@ button,
     color: inherit;
     background: none;
   }
+  &:disabled, &.disabled {
+    opacity: 0.6;
+    &:hover {
+      opacity: 0.6;
+    }
+  }
   &:hover {
     opacity: 0.8;
   }

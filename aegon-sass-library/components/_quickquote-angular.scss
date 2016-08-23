@@ -94,13 +94,62 @@
       margin: 9px 0 16px;
       line-height: 26px;
     }
+
     .input.date  {
-      input {
-        width:52px;
-        padding-right:0;
+      display: inline-block;
+      position: relative;
+      white-space: nowrap;
+
+      &:after,
+      &:before {
+        content: '/';
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        padding: 9px 0;
+        opacity: 0.4;
+        pointer-events: none;
+        clear: both;
+        visibility: visible;
       }
-      input + input + input {width:64px;}
+
+      &:before {
+        left: 53px;
+      }
+      &:after {
+        left: 103px;
+      }
+
+      input {
+        margin-right: 0;
+        padding-right: 0;
+      }
+
+      .year {
+        width: 72px;
+        border-radius: 0 5px 5px 0;
+        border-left: none;
+      }
+
+      .day,
+      .month {
+        text-align: right;
+        position: relative;
+        width: 54px;
+      }
+
+      .month {
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+      }
+
+      .day {
+        border-radius: 5px 0 0 5px;
+        border-right: none;
+      }
     }
+
     .inputs {
       float: left;
       width: 50%;
@@ -264,6 +313,52 @@
       margin-left: -0.8em;
     }
   }
+
+  .choice-dropdown {
+    position: relative;
+
+    .choice-dropdown-choices {
+      position: absolute;
+      z-index: 4;
+      top: 100%;
+      left: 0;
+      margin: 9px 0 0;
+      max-height: 200px;
+      min-width: 100%;
+      max-width: 100%;
+
+      text-align: left;
+      overflow-x: visible;
+      overflow-y: auto;
+      border: solid 1px $slightly_darker_grey;
+
+      &:after {
+        content: ' ';
+        clear: both;
+        display: block;
+        height: 0;
+        visibility: hidden;
+      }
+    }
+
+    .choice-dropdown-choice {
+      padding: 8px 10px;
+      text-overflow: ellipsis;
+      border-bottom: solid 1px $slightly_darker_grey;
+      overflow: hidden;
+      cursor: pointer;
+      background-color: $grey;
+      transition: background-color 200ms;
+
+      &:hover {
+        background-color: $slightly_darker_grey;
+      }
+
+      &:last-of-type {
+        border: none;
+      }
+    }
+  }
 }
 
 @media only screen and (max-width: 640px) {
@@ -289,7 +384,14 @@
     width: 100%;
   }
 }
+
 @media only screen and (max-width: 870px) {
   .quickquote.angular .field .label {width:100%;}
+}
+
+@media only screen and (min-width: 980px) {
+  .quickquote.angular .choice-dropdown .choice-dropdown-choices {
+    max-width: 300px;
+  }
 }
 //@media (max-width: 1100px){}

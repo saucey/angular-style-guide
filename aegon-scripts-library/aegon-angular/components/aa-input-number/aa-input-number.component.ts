@@ -1,5 +1,6 @@
 /**
- * A number input control that validates input, has min-max validation and prefix/postfix content
+ * A number input control that validates input
+ * It has min-max validation and prefix/postfix content
  */
 import {
   Component, Input, Output, EventEmitter, Provider, Directive, forwardRef, ViewChild, ElementRef
@@ -7,25 +8,19 @@ import {
 import {NG_VALUE_ACCESSOR, ControlValueAccessor} from "angular2/common";
 import {CONST_EXPR} from "angular2/src/facade/lang";
 import * as libFormat from "../../lib/format";
+// Locals
+import {template} from "./template";
 
 const CUSTOM_VALUE_ACCESSOR = CONST_EXPR(new Provider(
-  NG_VALUE_ACCESSOR, {useExisting: forwardRef(() => InputNumberComponent), multi: true}));
+  NG_VALUE_ACCESSOR, {useExisting: forwardRef(() => AAInputNumberComponent), multi: true}));
 
 @Component({
   selector: 'aa-input-number',
   host: {'(modelChange)': 'onChange($event)'},
   providers: [CUSTOM_VALUE_ACCESSOR],
-  template: `
-    <span class="aa-input-number">
-      <span class="aa-input-number__prefix"></span>
-      <span class="aa-input-number__suffix"></span>
-      <input [attr.id]="inputId" #inputEl type="text" [attr.placeholder]="placeholder" [attr.required]="required"
-             [ngModel]="model" (ngModelChange)="changeValue($event)"
-             (focus)="focus.emit()" (blur)="formatAndBlur()" (keydown.enter)="enter.emit()">
-    </span>
-  `
+  template: template
 })
-export class InputNumberComponent implements ControlValueAccessor {
+export class AAInputNumberComponent implements ControlValueAccessor {
   @Input() prefix: string;
   @Input() suffix: string;
   @Input() forceDecimals: any;
@@ -52,6 +47,11 @@ export class InputNumberComponent implements ControlValueAccessor {
   onTouched = () => {};
   registerOnChange(fn: (_: any) => void): void { this.onChange = fn; }
   registerOnTouched(fn: () => void): void { this.onTouched = fn; }
+  // Model change
+  writeValue(value: any) : void {
+    this.internalValue = value;
+    this.model = value && libFormat.formatNumber(value) || '0';
+  }
 
   /**
    * Main component
@@ -65,16 +65,17 @@ export class InputNumberComponent implements ControlValueAccessor {
       this.forceDecimals = false;
     }
   }
+  // Select the actual input element
   select(): void {
     this.inputEl.nativeElement.select();
   }
-
+  // Format the input number and blur the input element
   formatAndBlur(): void {
     this.model = libFormat.formatNumber(libFormat.parseNumber(this.model), true, this.forceDecimals);
     this.updateExternalModel();
     this.blur.emit();
   }
-
+  // Value change callback
   changeValue(value) {
     let num = libFormat.parseNumber(value),
       commaIndex, fractionalPart, formatted;
@@ -86,18 +87,11 @@ export class InputNumberComponent implements ControlValueAccessor {
     formatted = num ? libFormat.formatNumber(num, false) + fractionalPart : '';
     this.model = value;
     this.internalValue = num;
-    // this.modelChange.emit(num);
     // We're using a timeout, so the change detector detects a change in the model.
     setTimeout(() => {this.model = formatted;}, 0);
   }
-
+  // Change callback
   updateExternalModel() {
     this.modelChange.emit(this.internalValue);
   }
-
-  writeValue(value: any) : void {
-    this.internalValue = value;
-    this.model = value && libFormat.formatNumber(value) || '0';
-  }
 }
-
