@@ -31,7 +31,7 @@
       options = null;
     }
 
-    // if only the options are passed 
+    // if only the options are passed
     if(typeof action === 'object') {
       options = action;
       // Will be the default action.
@@ -81,14 +81,14 @@
         }
         // timeout for ajax
         if(! isNaN(settings.timeOut) && parseInt(settings.timeOut) > 0) {
-          window.aegonModalTimeout = setTimeout(function(){ 
+          window.aegonModalTimeout = setTimeout(function(){
             // loader for ajax content
             if(typeof settings.timeOutMessage === 'string' && settings.timeOutMessage.trim() !== '') {
               if($(document).find('.aegon-modal').length > 0) {
                 $(document).find('.aegon-modal').append('<p class="ajax-timeout">' + settings.timeOutMessage + '</p>');
               }
             }
-          }, 
+          },
           parseInt(settings.timeOut));
         }
       }
@@ -119,7 +119,7 @@
           // Add click event to close modal
           $(document).on('click', '.aegon-modal .close-modal, .aegon-modal-overlay.close-modal', function() {
             Drupal.aegonModal('close');
-          });        
+          });
         }else{
           $modal = $(document).find('.aegon-modal');
           // updates the content of the modal
@@ -148,21 +148,26 @@
         return $modal;
 
       } else {
-        var e = new Error('No options were passed for the modal content'); 
+        var e = new Error('No options were passed for the modal content');
         throw e;
       }
     }
     /*
-     * Positions the modal in the 
+     * Positions the modal in the
      * middle of the screen
      */
     function positionModal() {
       var $modal = $(document).find('.aegon-modal'),
-      $window = $(window);
+        $window = $(window),
+        MODAL_MARGIN = 20,
+        windowWidth = $window.width(),
+        maxWidth = windowWidth,
+        modalWidth = $modal.outerWidth(),
+        elemWidth = Math.min(maxWidth, modalWidth) - 2 * MODAL_MARGIN;
 
       if($modal.length){
         // Reset CSS
-        $modal.css({'bottom':'auto', 'overflow-y':'visible', 'margin-left': - ($modal.outerWidth() / 2) });
+        $modal.css({'bottom':'auto', 'overflow-y':'visible', 'max-width': '100vw', 'margin-left': - (elemWidth / 2) });
 
         if($window.height() < $modal.outerHeight()) {
           $modal.css({'top': 20, 'bottom': 20, 'overflow-y':'auto'});
@@ -216,7 +221,7 @@
   };
 
   /*
-   * Autorun function when elements have 
+   * Autorun function when elements have
    * attribute data-aegon="modal"
    * The options for the modal will be set
    * by the data-modal attributes.
@@ -284,7 +289,7 @@
             $ops.body = $target.html();
           }
         }
-        
+
         // If the options object has valid options, opens the modal.
         if(Object.keys($ops).length > 0) {
           Drupal.aegonModal($ops);

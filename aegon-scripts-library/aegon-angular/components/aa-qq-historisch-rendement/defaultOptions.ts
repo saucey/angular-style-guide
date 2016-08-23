@@ -1,6 +1,6 @@
 import * as libUtil from "../../lib/util";
 const PIPS_EVERY_YEARS = 50;
-export const options = {
+export const defaultOptions = {
   title: 'Vergelijk sparen en beleggen',
   // Data to use for calculation
   // Date: 5-Aug-2016
@@ -48,7 +48,7 @@ export const options = {
   },
   cta: {
     text: 'Begin met Beleggen',
-    url: 'https://www.aegon.nl/particulier/beleggen/u-wilt-zelf-voor-het-eerst-beleggen'
+    url: '/particulier/beleggen/u-wilt-zelf-voor-het-eerst-beleggen'
   },
   disclaimer: "Bovenstaande berekening is een indicatie. Aan deze indicatie kunnen geen rechten worden ontleend. Beleggen brengt kosten en risico's met zich mee die niet bij sparen voorkomen. De waarde van uw belegging kan fluctueren. In het verleden behaalde resultaten bieden geen garantie voor de toekomst.",
   chartUpdateDelay: 500 // // Update chart at most every given milliseconds, e.g. 1000 for 1 sec throttle.

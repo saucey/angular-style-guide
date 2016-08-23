@@ -42,6 +42,7 @@ export class AASliderInputComponent implements ControlValueAccessor {
   onChange = (_) => {};
   onTouched = () => {};
   writeValue(value: any): void {
+    // Incoming change from outside
     this.value = value;
   }
   registerOnChange(fn: (_: any) => void): void {
@@ -58,12 +59,15 @@ export class AASliderInputComponent implements ControlValueAccessor {
   // Use the slider's model as the change model for our own change emitter
   // In case the input changes the slider updates, and then triggers this handler
   sliderChange(value) : void {
+    // Notify outside world with new value (provided by slider)
+    this.value = value;
     this.modelChange.emit(value);
     this.change.emit(value);
   }
-  // If input changes, update the mode. This will update the slider.
+  // If input changes, update the model. This will update the slider.
   // The slider will round to an acceptable range and trigger the ngModel events
   inputChange(value) : void {
+    // Updating internal model will trigger slider change
     this.value = value;
   }
 }

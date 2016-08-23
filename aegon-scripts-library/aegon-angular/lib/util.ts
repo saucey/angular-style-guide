@@ -19,14 +19,20 @@
 export function throttle(func: any, interval: number = 1000) : any {
   var lastTime = 0,
     timeout,
+    args,
     runFunc = () => {
+    	var res;
       timeout = undefined;
       lastTime = new Date().getTime();
-      return func.call(this);
+      res = func.apply(this, args);
+      args = undefined;
+      return res;
     }
 	return function() {
     // Already waiting for timeout
+  	args = arguments;
 	  if (timeout) {
+	  	// Update arguments
 	    return;
 	  }
 	  var now = new Date().getTime(),
@@ -110,6 +116,36 @@ export function clone(obj:any) : any {
 }
 
 /**
+ * Simple deep equal function
+ * @param {Any} val1 First value to compare
+ * @param {Any} val2 Second value to compare
+ * @returns {Boolean} True if objects/values are deeply equal.
+ * - JS objects are compared by stringified value. JS objects don't have
+ *   ordered fields, so serializing it to JSON should give fields in random order.
+ * - However in practice fields are serialized in definition order.
+ * - This means that: {a: 1, b: 2} and {b: 2, a: 1} are not equal by this function!
+ */
+export function equal(val1: any, val2: any) : boolean {
+	return JSON.stringify(val1) === JSON.stringify(val2);
+}
+
+/**
+ * Try parse a json string, catch error and optionally return a default value
+ * @param {String} str String to parse
+ * @param {Any} defaultValue Value to return if parsing fails
+ * @returns {Any} JSON parsed value or defaultValue on error
+ */
+export function tryParseJson(str: string, defaultValue: any = undefined) {
+	var json;
+	try {
+		json = JSON.parse(str);
+	} catch (e) {
+		return defaultValue;
+	}
+	return json;
+}
+
+/**
  * Merges two object and fills in omitted properties with values from the supplied
  * default object
  */
@@ -157,5 +193,14 @@ export function isString(input) : boolean {
  */
 export function isArray(input) : boolean {
 	return (input instanceof Array);
+}
+
+/**
+ * Remove leading and trailing spaces from string
+ * @param {String} str Input string to trim
+ * @returns {String} Trimmed string
+ */
+export function trim(str : string) : string {
+  return str === undefined ? undefined : str.replace(/^\s+|\s+$/g, '');
 }
 

@@ -8,11 +8,20 @@ import {
   Component, Input, Output, EventEmitter, Provider, Directive, forwardRef, ViewChild, ElementRef, AfterViewInit} from 'angular2/core';
 import {NG_VALUE_ACCESSOR, ControlValueAccessor} from "angular2/common";
 import {CONST_EXPR} from "angular2/src/facade/lang";
+import * as libUtil from "../../lib/util";
+
+// Locals
 import {template} from "./template";
 import {options} from "./options";
 
 const CUSTOM_VALUE_ACCESSOR = CONST_EXPR(new Provider(
-  NG_VALUE_ACCESSOR, {useExisting: forwardRef(() => AASliderComponent), multi: true}));
+    NG_VALUE_ACCESSOR, {
+      useExisting: forwardRef(() => AASliderComponent),
+      multi: true}
+    )
+  ),
+  TIMEOUT_MANUAL_SLIDE = 50, // ms after manual slide release before we accept model changes again
+  THROTTLE_UPDATES = 100; // ms for throttling slider update
 
 declare var noUiSlider: any;
 declare var jQuery: any;
@@ -56,9 +65,10 @@ export class AASliderComponent implements AfterViewInit, ControlValueAccessor {
   // Triggers on change
   writeValue(value: any): void {
     // Do nothing
-    if (this.manualSlide || JSON.stringify(value) === JSON.stringify(this.value)) {
+    if (this.manualSlide || libUtil.equal(value, this.value)) {
       return;
     }
+    // console.log('aa-slider.writeValue', 'newvalue', this.value, '->', value);
     this.value = value;
     if (this.sliderElement) {
       // Update noUi slider
@@ -86,6 +96,7 @@ export class AASliderComponent implements AfterViewInit, ControlValueAccessor {
     this.lowerHandle = jQuery(sliderElement).find('.noUi-handle-lower');
     this.upperHandle = jQuery(sliderElement).find('.noUi-handle-upper');
     // Setup events
+    // Register manual sliding flag, so we don't set the slider when we're sliding it ourselves
     sliderElement.noUiSlider.on('start', () => {
       clearTimeout(this.slideTimer);
       this.manualSlide = true;
@@ -93,11 +104,13 @@ export class AASliderComponent implements AfterViewInit, ControlValueAccessor {
     sliderElement.noUiSlider.on('end', () => {
       this.slideTimer = setTimeout(() => {
         this.manualSlide = false;
-      }, 100);
+      }, TIMEOUT_MANUAL_SLIDE);
     });
-    sliderElement.noUiSlider.on('update', values => {
-      this.sliderChange(values);
-    });
+    var self = this;
+    sliderElement.noUiSlider.on('update', libUtil.throttle((values) => {
+      // console.log('nouislider update', values);
+      self.sliderChange(values);
+    }, THROTTLE_UPDATES));
   }
 
   // Direct noUi slider change handler

@@ -15,19 +15,12 @@
 	height: 0;
 }
 
-// Fade in animation class
-.aa-fade-in {
-  opacity: 0;  /* make things invisible upon start */
-  animation: aa-fade-in ease-in 1s;
-  animation-fill-mode:forwards;
-  animation-duration:1s;
-}
-// animation keyframes
-@keyframes aa-fade-in {
-  from {
-    opacity: 0;
-  } to {
-    opacity:1;
-  }
-}
 
+.aegon-modal {
+	padding: 30px !important;
+	padding-top: 60px !important;
+	> .close-modal {
+		right: 15px;
+		top: 15px;
+	}
+}

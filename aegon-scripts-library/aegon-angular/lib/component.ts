@@ -1,7 +1,8 @@
 /**
  * Component related utily functions
  */
-import {Component} from 'angular2/core';
+import {Component, ElementRef} from 'angular2/core';
+import {AATemplateComponent} from './classes/AATemplateComponent';
 
 /**
  * Dynamically create a component based on supplied input/template
@@ -11,8 +12,18 @@ import {Component} from 'angular2/core';
  * @param {Any[]} directives List of directives to include
  * @returns {Component} Newly created component definition
  */
-export function toComponent(selector: string = 'dummy', template, directives = []) : any {
-  @Component({ selector, template, directives })
-  class FakeComponent { }
-  return FakeComponent;
+export function toComponent(selector: string, template: string, directives : any[] = []) : any {
+  @Component({
+    selector: selector,
+    directives: directives,
+    template: template
+  })
+  class TemplateComponent extends AATemplateComponent {
+    // Let parent class initialize config; the dependency injection with ElementRef
+    // doesn't work directly so we have to call it explicitly.
+    constructor(private elementRef: ElementRef) {
+      super(elementRef);
+    }
+  }
+  return TemplateComponent;
 };

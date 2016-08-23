@@ -18,14 +18,14 @@ import * as libFormat from "../../lib/format";
 import * as libInterest from "../../lib/calculations/interest";
 import * as libUtil from "../../lib/util";
 // AA components
-import {AAConfigComponent} from '../../lib/classes/AAConfigComponent';
+import {AABaseComponent} from '../../lib/classes/AABaseComponent';
 import {AAMoneyPipe} from "../../pipes/money.pipe";
 import {AASliderInputComponent} from '../aa-slider-input/aa-slider-input.component';
 import {AAHintComponent} from '../aa-hint/aa-hint.component';
 import {AAHighchartComponent} from "../aa-highchart/aa-highchart.component";
 // Locals
 import {template} from "./template";
-import {options} from "./options";
+import {defaultOptions} from "./defaultOptions";
 import {createChartConfig, createPlotLinesData, createSeriesData} from "./chart";
 
 declare var jQuery;
@@ -41,24 +41,17 @@ declare var jQuery;
   template: template,
   pipes: [AAMoneyPipe]
 })
-export class AAQQBeleggenComponent extends AAConfigComponent implements OnInit {
+export class AAQQBeleggenComponent extends AABaseComponent {
+  @Input() options: any = {};
+  @Input() data: any = {};
   @ViewChild('root') rootEl: ElementRef;
   @ViewChild('chart') highchart: AAHighchartComponent;
+
+  public defaultOptions : any = defaultOptions;
 
   private chartState:any = {}; // store internal state of the chart to prevent redraw
   private currentTimeout: any = undefined;
   private calculate : any;
-  initialInlay: number;
-  periodicInlay: number;
-  durationAmount: number;
-  resultInlay: number;
-  resultSavings: number;
-  resultPessimistic: number;
-  resultNeutral: number;
-  resultOptimistic: number;
-
-  // Public properties
-  public options : any = options;
 
   // Let parent class initialize config; the dependency injection with ElementRef
   // doesn't work directly so we have to call it explicitly.
@@ -69,7 +62,7 @@ export class AAQQBeleggenComponent extends AAConfigComponent implements OnInit {
     super.ngOnInit();
     this.calculate = libUtil.debounce(() => {
       this.doCalculate();
-    }, this.options.chartUpdateDelay);
+    }, this.data.options.chartUpdateDelay);
   }
 
   /**
@@ -77,11 +70,11 @@ export class AAQQBeleggenComponent extends AAConfigComponent implements OnInit {
    */
   doCalculate(): void {
     // Update main result values
-    this.resultInlay = libInterest.inlayResult(this.initialInlay, this.periodicInlay, this.durationAmount);
-    this.resultSavings = libInterest.interestResult(this.initialInlay, this.periodicInlay, this.durationAmount, this.options.interest.savings, this.options.resultRoundPrecision);
-    this.resultPessimistic = libInterest.interestResult(this.initialInlay, this.periodicInlay, this.durationAmount, this.options.interest.pessimistic, this.options.resultRoundPrecision);
-    this.resultNeutral = libInterest.interestResult(this.initialInlay, this.periodicInlay, this.durationAmount, this.options.interest.neutral, this.options.resultRoundPrecision);
-    this.resultOptimistic = libInterest.interestResult(this.initialInlay, this.periodicInlay, this.durationAmount, this.options.interest.optimistic, this.options.resultRoundPrecision);
+    this.data.resultInlay = libInterest.inlayResult(this.data.initialInlay, this.data.periodicInlay, this.data.durationAmount);
+    this.data.resultSavings = libInterest.interestResult(this.data.initialInlay, this.data.periodicInlay, this.data.durationAmount, this.data.options.interest.savings, this.data.options.resultRoundPrecision);
+    this.data.resultPessimistic = libInterest.interestResult(this.data.initialInlay, this.data.periodicInlay, this.data.durationAmount, this.data.options.interest.pessimistic, this.data.options.resultRoundPrecision);
+    this.data.resultNeutral = libInterest.interestResult(this.data.initialInlay, this.data.periodicInlay, this.data.durationAmount, this.data.options.interest.neutral, this.data.options.resultRoundPrecision);
+    this.data.resultOptimistic = libInterest.interestResult(this.data.initialInlay, this.data.periodicInlay, this.data.durationAmount, this.data.options.interest.optimistic, this.data.options.resultRoundPrecision);
     // Chart
     this.updateChart();
   }
@@ -91,9 +84,9 @@ export class AAQQBeleggenComponent extends AAConfigComponent implements OnInit {
    */
   updateChart() : void {
     var chartState = {
-        initialInlay: this.initialInlay,
-        periodicInlay: this.periodicInlay,
-        durationAmount: this.durationAmount
+        initialInlay: this.data.initialInlay,
+        periodicInlay: this.data.periodicInlay,
+        durationAmount: this.data.durationAmount
       };
     // Nothing to do; prevents chart redraw without change
     if (JSON.stringify(this.chartState) === JSON.stringify(chartState)) {
@@ -102,36 +95,17 @@ export class AAQQBeleggenComponent extends AAConfigComponent implements OnInit {
     var
       // Update series data for the chart
       rawData = {
-        savings: libInterest.interestSeries(this.initialInlay, this.periodicInlay, this.durationAmount, this.options.interest.savings, this.options.result.roundPrecision),
-        investPessimistic: libInterest.interestSeries(this.initialInlay, this.periodicInlay, this.durationAmount, this.options.interest.pessimistic, this.options.resultRoundPrecision),
-        investNeutral: libInterest.interestSeries(this.initialInlay, this.periodicInlay, this.durationAmount, this.options.interest.neutral, this.options.resultRoundPrecision),
-        investOptimistic: libInterest.interestSeries(this.initialInlay, this.periodicInlay, this.durationAmount, this.options.interest.optimistic, this.options.resultRoundPrecision),
-        inlay: libInterest.inlaySeries(this.initialInlay, this.periodicInlay, this.durationAmount),
+        savings: libInterest.interestSeries(this.data.initialInlay, this.data.periodicInlay, this.data.durationAmount, this.data.options.interest.savings, this.data.options.result.roundPrecision),
+        investPessimistic: libInterest.interestSeries(this.data.initialInlay, this.data.periodicInlay, this.data.durationAmount, this.data.options.interest.pessimistic, this.data.options.resultRoundPrecision),
+        investNeutral: libInterest.interestSeries(this.data.initialInlay, this.data.periodicInlay, this.data.durationAmount, this.data.options.interest.neutral, this.data.options.resultRoundPrecision),
+        investOptimistic: libInterest.interestSeries(this.data.initialInlay, this.data.periodicInlay, this.data.durationAmount, this.data.options.interest.optimistic, this.data.options.resultRoundPrecision),
+        inlay: libInterest.inlaySeries(this.data.initialInlay, this.data.periodicInlay, this.data.durationAmount),
       },
       chart = this.highchart, // Reference to current highcharts() object
       plotLines = createPlotLinesData(rawData),
       seriesData = createSeriesData(rawData),
       updateSeriesData = [rawData.investOptimistic, rawData.investNeutral, rawData.investPessimistic, rawData.savings, rawData.inlay];
-    // Init or update chart?
-    // Update only: if duration is the same, and chart is available
-    if (false && chart && (chartState.durationAmount === this.chartState.durationAmount) && chart.updateSeries(updateSeriesData)) {
-      // Update plotlines
-      var axis = chart.highcharts.yAxis[0];
-      axis.removePlotLine('savings');
-      axis.removePlotLine('invest');
-      if (this.currentTimeout) {
-        clearTimeout(this.currentTimeout);
-      }
-      // Wait for chart animation to finish
-      this.currentTimeout = setTimeout(function () {
-        plotLines.forEach(function (plotLine) {
-          axis.addPlotLine(plotLine);
-        });
-      }, this.options.chartUpdateDelay);
-      this.chartState = chartState;
-      return;
-    };
-    // Otherwise init/redraw chart
+    // Init/redraw chart
     var config = createChartConfig(seriesData, plotLines);
     this.highchart.createChart(config);
     this.chartState = chartState;
