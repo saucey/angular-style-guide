@@ -38,7 +38,7 @@ export const template = `
             <label class="span12 dark-blue" for="email-address-field">Samenvatting e-mailen</label>
             <div class="email-send-form-wrapper" [hidden]="reSendEmailShown">
               <input class="span5" id="email-address-field" [(ngModel)]="emailAddress" placeholder="Uw e-mailadres" tabindex="1" type="text">
-              <button class="arrow span4" type="button" [class.pending]="emailButtonPending" [disabled]="emailAddress.trim()==''||emailButtonPending" (click)="sendEmailClick()">Vesturen</button>
+              <button class="arrow span4" type="button" [class.pending]="emailButtonPending" [disabled]="emailAddress.trim()==''||emailButtonPending" (click)="sendEmailClick()">Versturen</button>
               <p class="error span12" *ngIf="emailAddressError">
                 Wilt u een geldige e-mailadres invoeren?
               </p>
