@@ -49,7 +49,7 @@ export const template = `
             </div>
 
             <label class="label span12 aanvragen-label dark-blue" for="aanvragen">Wilt u een vrijblijvend adviesgesprek?</label>
-            <a class="arrow span8 orange aanvragen-button button" [attr.href]="options.actionButton.url">{{ options.actionButton.label }}</a>
+            <a class="arrow span8 orange-gradient aanvragen-button button" [attr.href]="options.actionButton.url">{{ options.actionButton.label }}</a>
           </div>
         </div>
       </div>
