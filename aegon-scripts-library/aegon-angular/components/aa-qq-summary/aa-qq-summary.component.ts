@@ -1,5 +1,5 @@
 /**
- * AOV quick quote
+ * Summary quick quote
  */
 import {Component, OnInit, Input} from 'angular2/core';
 import {HTTP_PROVIDERS, Http, Headers, RequestOptions, Response} from "angular2/http";
@@ -22,8 +22,8 @@ import {options} from "./options";
 })
 
 export class AAQQSummaryComponent implements OnInit {
-  private mailUrl: string = 'http://ail.test.intra.aegon.nl/BS_Utilities_Communication_03Web/sca/BS_Utilities_Communication_03_ExpWS';
-  private mailCredentials: string = 'AppAegonNLDrupalTST:dUACcFMYvwhnrnnfdq9h';
+  private mailUrl: string = options.mailUrl;
+  private mailCredentials: string = options.mailCredentials;
   private summaryPath: string = '#';
 
   public options: any = options;
