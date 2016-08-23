@@ -7,6 +7,7 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
 // AA components
 import {AAMoneyPipe} from "../../pipes/money.pipe";
+import {AAPeriodPipe} from "../../pipes/period.pipe";
 // Locals
 import {template} from "./template";
 import {options} from "./options";
@@ -17,7 +18,7 @@ import {options} from "./options";
   ],
   template: template,
   providers: [HTTP_PROVIDERS],
-  pipes: [AAMoneyPipe]
+  pipes: [AAMoneyPipe, AAPeriodPipe]
 })
 
 export class AAQQSummaryComponent implements OnInit {

@@ -18,7 +18,7 @@ export const template = `
           </div>
           <div class="span12 container_12 data-fields">
             <label class="label span6" for="field-eigen-risicoperiode">Eigen risicoperiode</label>
-            <span id="field-eigen-risicoperiode" class="value span6">{{aov_qq_data.startingTerm}}</span>
+            <span id="field-eigen-risicoperiode" class="value span6">{{aov_qq_data.startingTerm || period}}</span>
           </div>
           <div class="span12 container_12 data-fields">
             <label class="label span6" for="field-verzekerde-uitgaven">Verzekerde uitgaven</label>
