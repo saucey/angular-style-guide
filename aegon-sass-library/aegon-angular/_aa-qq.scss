@@ -273,4 +273,8 @@ $qq_border_radius: 6px;
   }
 }
 
-
+.aa-amount--euro:before {
+  content: '€';
+  margin-right: 8px;
+  position: relative;
+}

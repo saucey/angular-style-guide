@@ -9,6 +9,7 @@ import 'components/angular-bootstrap/main';
 import {bootstrap} from 'angular2/platform/browser';
 // Libs
 import * as libComponent from "./component";
+import * as libUtil from "./util";
 
 // Include all components; they will be added to the dynamic component directives
 import {AAHighchartComponent} from '../components/aa-highchart/aa-highchart.component';
@@ -19,6 +20,7 @@ import {AAInputRadioComponent} from '../components/aa-input-radio/aa-input-radio
 import {AASliderComponent} from '../components/aa-slider/aa-slider.component';
 import {AALightboxComponent} from '../components/aa-lightbox/aa-lightbox.component';
 import {AASliderInputComponent} from '../components/aa-slider-input/aa-slider-input.component';
+import {AADataComponent} from '../components/aa-data/aa-data.component';
 // Quick quotes
 import {AAQQBeleggenComponent} from '../components/aa-qq-beleggen/aa-qq-beleggen.component';
 import {AAQQHistorischRendementComponent} from '../components/aa-qq-historisch-rendement/aa-qq-historisch-rendement.component';
@@ -29,6 +31,7 @@ declare var System;
 const
   /**
    * These will be added to dynamically generated components so you can use them automatically
+   * Add your own component here to be able to use it in an <aa-template>
    */
   ALL_COMPONENTS = [
     // Components
@@ -40,6 +43,7 @@ const
     AASliderComponent,
     AASliderInputComponent,
     AALightboxComponent,
+    AADataComponent,
     // Quick quotes
     AAQQBeleggenComponent,
     AAQQHistorischRendementComponent,
@@ -64,7 +68,7 @@ const
    * is a workaround for that. After processing it is available in the
    * aaContent attribute, and on this.contentHtml
    */
-  AA_CONTENT_SELECTOR = '[aaContent]'
+  AA_CONTENT_SELECTOR = 'aa-data'
 
 /**
  * Check for existence and boot up component
@@ -88,14 +92,27 @@ var bootComponents = function () {
       if (!elem) {
         return;
       }
-      elem.setAttribute('aaContent', elem.innerHTML);
+      elem.setAttribute('aaContentHtml', libUtil.trim(elem.innerHTML));
     },
     randomId = function (prefix : string = 'id-') {
       return prefix + new Date().getTime().toString(36);
     },
     elems;
-  // Create unique component for each template
-  // And bootstrap automatically
+  /**
+   * Store innerHTML for some components
+   * Add inner html as attribute, because innerHTML is not available anymore
+   * in the constructor
+   * Here we hack the innerhtml into an attribute, and use it on component
+   * instantiation.
+   */
+  elems = document.querySelectorAll(AA_CONTENT_SELECTOR);
+  for (let i = 0; i < elems.length; i++) {
+    saveContentHtml(elems[i]);
+  }
+  /**
+   * Now we can create unique components for each template we encounter
+   * Create unique component and bootstrap
+   */
   elems = document.querySelectorAll(AA_TEMPLATE_SELECTOR);
   for (let i = 0; i < elems.length; i++) {
     let id = randomId(),
@@ -106,19 +123,9 @@ var bootComponents = function () {
     bootstrap(component);
   };
   /**
-   * Store innerHTML template for later
-   * Add inner html as attribute, because angular doesn't allow contentchildren
-   * on root/bootstrap elements. This means that's only allowed in the templates
-   * which would disable the use of templates for content editors
-   * Here we hack the innerhtml into an attribute, and use it on component
-   * instantiation.
-   */
-  elems = document.querySelectorAll(AA_CONTENT_SELECTOR);
-  for (let i = 0; i < elems.length; i++) {
-    saveContentHtml(elems[i]);
-  }
-  /**
-   * Auto bootstrap the selected list of components
+   * Auto bootstrap a selected list of components
+   * DEPRECATED: now always use aa-template with in it the template you want to
+   * bootstrap
    */
   Object.keys(BOOTSTRAP_COMPONENTS).map((key) => {
     let elems = document.querySelectorAll(key);
@@ -129,7 +136,6 @@ var bootComponents = function () {
       }
       // Import component script
       var value = BOOTSTRAP_COMPONENTS[key];
-      // console.log('bootstrap', key, elem, value);
       if (value) {
         importsTodo.push(value);
       }

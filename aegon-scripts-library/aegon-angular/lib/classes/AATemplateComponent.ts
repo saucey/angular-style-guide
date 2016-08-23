@@ -1,12 +1,23 @@
 import {Component, ElementRef, ViewChild, AfterViewInit, OnInit} from 'angular2/core';
-import {AAConfigComponent} from './AAConfigComponent';
+import {AABaseComponent} from './AABaseComponent';
+import * as libUtil from "../util";
 
-export class AATemplateComponent extends AAConfigComponent implements OnInit {
-  public data : any = {};
-
+export class AATemplateComponent extends AABaseComponent implements OnInit {
+  constructor(thisElement: ElementRef) {
+    super(thisElement);
+    var attrData = this.element.getAttribute('data'),
+      json;
+    if (attrData) {
+      // Parse data attribute as JSON
+      this.data = libUtil.tryParseJson(attrData, {});
+    }
+  }
   ngOnInit(): void {
+    // Add loaded class; hides loading indicator
+    // Do this after all values and options have been initialized
     super.ngOnInit();
-    this.data = this.options;
-    console.log('template init', this.data);
+    setTimeout(() => {
+      this.element.className += ' aa-template--loaded';
+    }, 0)
   }
 }

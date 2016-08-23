@@ -1,6 +1,6 @@
 import * as libUtil from "../../lib/util";
 const PIPS_EVERY_YEARS = 50;
-export const options = {
+export const defaultOptions = {
   title: 'Vergelijk sparen en beleggen',
   // Data to use for calculation
   // Date: 5-Aug-2016

@@ -1,0 +1,20 @@
+/**
+ * All generic animation classes
+ */
+
+// Fade in animation class
+.aa-fade-in {
+  opacity: 0;
+  animation: aa-fade-in ease-in 1s;
+  animation-fill-mode:forwards;
+  animation-duration:1s;
+}
+// animation keyframes
+@keyframes aa-fade-in {
+  from {
+    opacity: 0;
+  } to {
+    opacity: 1;
+  }
+}
+

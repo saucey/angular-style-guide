@@ -13,7 +13,11 @@ import {AATemplateComponent} from './classes/AATemplateComponent';
  * @returns {Component} Newly created component definition
  */
 export function toComponent(selector: string, template: string, directives : any[] = []) : any {
-  @Component({ selector, template, directives })
+  @Component({
+    selector: selector,
+    directives: directives,
+    template: template
+  })
   class TemplateComponent extends AATemplateComponent {
     // Let parent class initialize config; the dependency injection with ElementRef
     // doesn't work directly so we have to call it explicitly.

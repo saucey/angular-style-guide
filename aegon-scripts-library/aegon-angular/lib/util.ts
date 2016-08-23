@@ -130,6 +130,22 @@ export function equal(val1: any, val2: any) : boolean {
 }
 
 /**
+ * Try parse a json string, catch error and optionally return a default value
+ * @param {String} str String to parse
+ * @param {Any} defaultValue Value to return if parsing fails
+ * @returns {Any} JSON parsed value or defaultValue on error
+ */
+export function tryParseJson(str: string, defaultValue: any = undefined) {
+	var json;
+	try {
+		json = JSON.parse(str);
+	} catch (e) {
+		return defaultValue;
+	}
+	return json;
+}
+
+/**
  * Merges two object and fills in omitted properties with values from the supplied
  * default object
  */
@@ -177,5 +193,14 @@ export function isString(input) : boolean {
  */
 export function isArray(input) : boolean {
 	return (input instanceof Array);
+}
+
+/**
+ * Remove leading and trailing spaces from string
+ * @param {String} str Input string to trim
+ * @returns {String} Trimmed string
+ */
+export function trim(str : string) : string {
+  return str === undefined ? undefined : str.replace(/^\s+|\s+$/g, '');
 }
 
