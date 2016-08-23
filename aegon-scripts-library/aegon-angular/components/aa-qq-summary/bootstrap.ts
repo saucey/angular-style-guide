@@ -1,5 +1,5 @@
 import 'components/angular-bootstrap/main';
 import {bootstrap}    from 'angular2/platform/browser';
-import {AovQuoteComponent} from './aov-quote.component';
+import {AAQQSummaryComponent} from './aa-qq-summary.component';
 
-bootstrap(AovQuoteComponent);
+bootstrap(AAQQSummaryComponent);

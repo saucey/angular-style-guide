@@ -4,6 +4,8 @@
 import {Component, OnInit, Input} from 'angular2/core';
 import {HTTP_PROVIDERS, Http, Headers, RequestOptions, Response} from "angular2/http";
 import {Observable} from 'rxjs/Observable';
+import 'rxjs/Rx';
+import {HelpComponent} from '../../../components/angular-components/help.component';
 // AA components
 import {AAMoneyPipe} from "../../pipes/money.pipe";
 import {AAInputRadioComponent} from "../aa-input-radio/aa-input-radio.component";
@@ -16,6 +18,12 @@ import {CheckboxComponent, CheckboxValueAccessor} from '../../../components/angu
 // Locals
 import {template} from "./template";
 import {options} from "./options";
+import {calculateAge} from "../../lib/date";
+import {zeroPad} from "../../lib/format";
+import {mockProfessionsResponse} from "./mock-professions";
+import {mockRiskFactorResponse} from "./mock-riskfactor";
+import {mockSpecificationResponse} from "./mock-specification";
+import {AAHintComponent} from "../aa-hint/aa-hint.component";
 
 @Component({
   selector: 'aa-qq-aov',
@@ -23,7 +31,7 @@ import {options} from "./options";
     // New
     AAInputNumberComponent, AASliderInputComponent, AAInputRadioComponent, AAInputDropDownComponent,
     // Old
-    InputDateComponent, InputDateValueAccessor, CheckboxComponent, CheckboxValueAccessor
+    InputDateComponent, InputDateValueAccessor, CheckboxComponent, CheckboxValueAccessor, AAHintComponent
   ],
   template: template,
   providers: [HTTP_PROVIDERS],
@@ -31,21 +39,10 @@ import {options} from "./options";
 })
 //TODO ADD BASE64
 export class AAQQAovComponent implements OnInit {
-  @Input()  public  showSummary: boolean = false;
-  @Input()  private mailUrl: string = 'http://ail.test.intra.aegon.nl/BS_Utilities_Communication_03Web/sca/BS_Utilities_Communication_03_ExpWS';
-  @Input()  private mailCredentials: string = 'AppAegonNLDrupalTST:dUACcFMYvwhnrnnfdq9h';
-  @Input()  private serviceUrl: string = 'http://ail.test.intra.aegon.nl/US_RestGatewayWeb/rest/requestResponse/BS_AE_POLIS_AOV_02/';
-  @Input()  private serviceCredentials: string = 'appAegonNLCalculateTST:7OuwNNTVS4jJ8mO5F0bH';
-  @Input()  private summaryPath: string = '#';
-
-  public options: any = options;
+  public  options: any = options;
 
   public  showCalculator: boolean;
-  public  grossYearAmount: number = 17500;
-  public  minGrossYearAmount: number = 3125;
-  public  maxGrossYearAmount: number = 100000;
-  public  minAge: number = 18;
-  public  maxAge: number = 59;
+  public  grossYearAmount: number = options.grossYearAmount.initial;
 
   public  birthDate: string;
   public  birthDateError: boolean;
@@ -81,7 +78,7 @@ export class AAQQAovComponent implements OnInit {
   //
 
   constructor(
-    private http:Http
+    private http: Http
   ) {}
 
   ngOnInit() {
@@ -90,8 +87,9 @@ export class AAQQAovComponent implements OnInit {
 
   handleError(error: Response) {
     this.serviceError = true;
-    console.log('Server error', error);
+    console.error('Server error', error);
     this.pending -= 1;
+    alert('Het is niet gelukt om gegevens op te vragen door een technisch probleem. Probeer het later opnieuw.');
     return Observable.throw('Server error');
   }
 
@@ -108,15 +106,26 @@ export class AAQQAovComponent implements OnInit {
     }
   }
 
-  initProfessions() {
+  callService(name: string, data: any, callback) {
+    let headers = new Headers({'Content-Type': 'application/json', "Authorization" : `Basic ${this.options.serviceCredentials}`});
+    let options = new RequestOptions({headers: headers});
     this.pending += 1;
+    this.http.post(this.options.serviceUrl + name, JSON.stringify(data), options)
+      .map(res => res.json())
+      .catch(this.handleError)
+      .subscribe(data => {
+        this.pending -= 1;
+        callback(data);
+      }, error => console.error(error));
+  }
+
+  initProfessions() {
     this.serviceError = false;
 
-    // if (dummyProfessions) {
-    //   this.processProfessions(dummyProfessions);
-    //   this.pending -= 1;
-    //   return;
-    // }
+    if (this.options.mockData) {
+      this.processProfessions(mockProfessionsResponse);
+      return;
+    }
 
     let body = {
       "retrieveProfessionsRequest": {
@@ -124,41 +133,9 @@ export class AAQQAovComponent implements OnInit {
       }
     };
 
-    let headers = new Headers({'Content-Type': 'application/json', "Authorization" : `Basic ${this.serviceCredentials}`});
-    let options = new RequestOptions({headers: headers});
-
-    // Fetch professions.
-    this.http.post(this.serviceUrl + 'retrieveProfessions', JSON.stringify(body), options)
-      .map(res => res.json())
-      .catch(this.handleError)
-      .subscribe(data => {
-        this.processProfessions(data);
-        this.pending -= 1;
-      }, error => console.log(error));
-  }
-
-  calculateAge(date) {
-    let age = 0;
-    if (date) {
-      let bd: string[] = date.split("-");
-      let today = new Date();
-      let nowyear = today.getFullYear();
-      let nowmonth = today.getMonth();
-      let nowday = today.getDate();
-
-      let birthyear = parseInt(bd[0], 10);
-      let birthmonth = parseInt(bd[1], 10);
-      let birthday = parseInt(bd[2], 10);
-
-      age = nowyear - birthyear;
-      let age_month = nowmonth - birthmonth;
-      let age_day = nowday - birthday;
-
-      if (age_month < 0 || (age_month == 0 && age_day < 0)) {
-        age -= 1;
-      }
-    }
-    return age;
+    this.callService('retrieveProfessions', body, responseData => {
+      this.processProfessions(responseData);
+    });
   }
 
   validatePersonalInformation(): boolean {
@@ -169,23 +146,22 @@ export class AAQQAovComponent implements OnInit {
     this.grossIncomeError = false;
 
     // Calculate age.
-    let age = this.calculateAge(this.birthDate);
+    let age = calculateAge(this.birthDate);
 
     if (!this.birthDate ||
-        age < this.minAge ||
-        age > this.maxAge ) {
+        age < this.options.birthDate.minAge ||
+        age > this.options.birthDate.maxAge ) {
       this.birthDateError = true;
       hasErrors = true;
     }
 
-    if (!this.profession) {
+    if (!this.profession || this.professions.indexOf(this.profession) === -1) {
+      // Profession isn't one of the profession objects!
       this.professionError = true;
       hasErrors = true;
     }
 
-    if (!this.grossIncome || (this.grossIncome &&
-        this.grossIncome < this.minGrossYearAmount &&
-        this.grossIncome > this.maxGrossYearAmount)) {
+    if (!this.grossIncome || this.grossIncome < this.options.income.min || this.grossIncome > this.options.income.max) {
       this.grossIncomeError = true;
       hasErrors = true;
     }
@@ -213,34 +189,28 @@ export class AAQQAovComponent implements OnInit {
   startCalculator() {
     // Validate the personal information. If it is valid then the calculator can be shown.
     if (this.validatePersonalInformation()) {
-      // Show calculator
-
-      let callback = () => {
+      // Show calculator once we have fetched the data.
+      this.fetchSpecification(() => {
         this.showCalculator = true;
-      };
-
-      this.fetchCalculationSpecification(callback);
+      });
 
     }
   }
 
   gotoSummary() {
-    // This needs to redirect to another page. use this.summaryPath
-    window.location.href = this.summaryPath;
-  }
-
-  fetchProfessions(searchString) {
-    this.professionsFiltered = this.professions.filter((value) => {
-      return value.label.toLowerCase().indexOf(searchString.toLowerCase()) > -1;
-    });
+    window.location.href = this.options.summaryPath;
   }
 
   processRiskFactor(response) {
     this.riskFactor = response;
   }
 
-
   fetchRiskFactor(rawProfession) {
+    if (options.mockData) {
+      this.processRiskFactor(mockRiskFactorResponse);
+      return;
+    }
+
     let body = {
       "calculateRiskFactorRequest": {
         "AILHEADER": {
@@ -270,16 +240,9 @@ export class AAQQAovComponent implements OnInit {
         body.calculateRiskFactorRequest._AE_BEROEPENLIJST_AOV['_AE_BKLSVAST'] = rawProfession._AE_BKLSVAST;
       }
 
-      let headers = new Headers({'Content-Type': 'application/json', "Authorization" : `Basic ${this.serviceCredentials}`});
-      let options = new RequestOptions({headers: headers});
-
-      // Calculate and set riskfactor
-      this.http.post(this.serviceUrl + 'calculateRiskFactor' , JSON.stringify(body), options)
-        .map(res => res.json())
-        .catch(this.handleError)
-        .subscribe(data => {
-          this.processRiskFactor(data);
-        }, error => console.log(error));
+      this.callService('calculateRiskFactor', body, responseData => {
+        this.processRiskFactor(responseData);
+      });
     }
   }
 
@@ -288,28 +251,35 @@ export class AAQQAovComponent implements OnInit {
     this.profession = professionObj;
 
     if (professionObj) {
-      // A profession is known so riskfactor can be retrieved.
+      // When a profession is known the riskfactor can be retrieved from the service.
       this.fetchRiskFactor(this.rawProfessions[professionObj.key])
     } else {
+      // No profession found, empty the riskFactor.
       this.riskFactor = {};
     }
-
   }
 
+  fetchProfessions(searchString) {
+    this.professionsFiltered = this.professions.filter((value) => {
+      return value.label.toLowerCase().indexOf(searchString.toLowerCase()) > -1;
+    });
+  }
 
-  processCalculationSpecification(response, cb) {
+  processSpecification(response, cb) {
     cb();
   }
 
-  fetchCalculationSpecification(cb:any = () => {}) {
+  fetchSpecification(callback: any = () => {}) {
     if (this.riskFactor) {
+      if (options.mockData) {
+        this.processSpecification(mockSpecificationResponse, callback);
+        return;
+      }
 
-      // if (dummyCalculateSpecification) {
-      //   this.processCalculationSpecification(dummyCalculateSpecification, cb);
-      //   return;
-      // }
+      let now = new Date();
+      let dateString = `${now.getFullYear()}-${zeroPad(now.getMonth() + 1, 2)}-${zeroPad(now.getDate(), 2)}`;
 
-
+      // TODO: fill in the values.
       let body = {
         "calculateSpecificationRequest": {
           "AILHEADER": {
@@ -355,52 +325,9 @@ export class AAQQAovComponent implements OnInit {
         }
       };
 
-      let headers = new Headers({'Content-Type': 'application/json', "Authorization" : `Basic ${this.serviceCredentials}`});
-      let options = new RequestOptions({headers: headers});
-
-      // Update calculations.
-      this.http.post(this.serviceUrl + 'calculationSpecification' , JSON.stringify(body), options)
-        .map(res => res.json())
-        .catch(this.handleError)
-        .subscribe(data => {
-          this.processCalculationSpecification(data, cb);
-        }, error => console.log(error));
+      this.callService('calculationSpecification', body, responseData => {
+        this.processSpecification(responseData, callback);
+      });
     }
   }
-
-  validateEmail() {
-    var emailAddress_regexp = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
-
-    this.emailAddressError = false;
-
-    if (this.emailAddress != "" && (this.emailAddress.length <= 5 || !emailAddress_regexp.test(this.emailAddress))) {
-      this.emailAddressError = true;
-    }
-
-    return this.emailAddressError;
-  }
-
-  sendEmailClick() {
-    // TODO look at quickquote dip, it has a http.post example.   this.mailUrl
-
-    this.emailButtonPending = true;
-    if(!this.validateEmail()) {
-      this.reSendEmailShown = true;
-    }
-    this.emailButtonPending = false;
-
-    let XMLBody = {};
-
-    let headers = new Headers({'Content-Type': 'application/xml', "Authorization" : `Basic ${this.mailCredentials}`});
-    let options = new RequestOptions({headers: headers});
-
-    this.http.post(this.mailUrl , JSON.stringify(XMLBody), options)
-      .map(res => res.json())
-      .catch(this.handleError)
-      .subscribe(data => {
-        console.log('send');
-      }, error => console.log(error));
-    }
-
-
 }

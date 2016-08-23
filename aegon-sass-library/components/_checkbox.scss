@@ -54,7 +54,17 @@ label.checkbox {
       }
     }
   }
+  // Fix for native android browser.
+  span.checkbox:before,
+  a.checkbox:before {
+    -webkit-animation: androidNative infinite 1s;
+  }
   &.required {
     margin-top: 15px; //make space for the error message on top of the checkbox in case one needs to be displayed
   }
+}
+// Fix for native android browser.
+@-webkit-keyframes androidNative { 
+  from { fill: 0; } 
+  to { fill: 0.01; } 
 }

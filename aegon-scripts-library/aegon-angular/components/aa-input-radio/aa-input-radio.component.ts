@@ -24,7 +24,7 @@ export class AAInputRadioComponent implements ControlValueAccessor {
   @Output() modelChange: any = new EventEmitter();
   @Output() aaChange: any = new EventEmitter();
 
-  model: boolean;
+  model: any;
 
   /**
    * ControlValueAccessor interface
