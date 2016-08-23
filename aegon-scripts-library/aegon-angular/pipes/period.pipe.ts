@@ -9,7 +9,7 @@ import {Pipe, PipeTransform} from 'angular2/core';
 export class AAPeriodPipe implements PipeTransform {
   transform(value:number, args:any[]) : any {
     if (value === undefined) {
-      return;
+      return "";
     }
     switch (value) {
       case 7:
@@ -25,9 +25,10 @@ export class AAPeriodPipe implements PipeTransform {
         return "3 maanden";
         break;
       case 365:
-        return "3 maanden";
+        return "1 jaar";
         break;
       default:
+        return "1 maand";
       }
   };
 }
