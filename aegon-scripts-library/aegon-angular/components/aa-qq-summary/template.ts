@@ -14,23 +14,23 @@ export const template = `
           </div>
           <div class="span12 container_12 data-fields">
             <label class="label span6" for="field-bruto-jaarinkomen">Uw bruto jaarinkomen</label>
-            <span id="field-bruto-jaarinkomen" class="value span6">€ {{aov_qq_data.grossYearAmount || money}} netto</span>
+            <span id="field-bruto-jaarinkomen" class="value span6">€ {{aov_qq_data.grossYearAmount | money}} netto</span>
           </div>
           <div class="span12 container_12 data-fields">
             <label class="label span6" for="field-eigen-risicoperiode">Eigen risicoperiode</label>
-            <span id="field-eigen-risicoperiode" class="value span6">{{aov_qq_data.startingTerm || period}}</span>
+            <span id="field-eigen-risicoperiode" class="value span6">{{aov_qq_data.startingTerm | period}}</span>
           </div>
           <div class="span12 container_12 data-fields">
             <label class="label span6" for="field-verzekerde-uitgaven">Verzekerde uitgaven</label>
-            <span id="field-verzekerde-uitgaven" class="value span6">€ {{aov_qq_data.insuranceAmount || money}} netto per maand</span>
+            <span id="field-verzekerde-uitgaven" class="value span6">€ {{aov_qq_data.insuranceAmount | money}} netto per maand</span>
           </div>
           <div class="span12 container_12 data-fields">
             <label class="label span6 dark-blue" for="field-bruto-premie">Bruto premie per maand</label>
-            <span id="field-bruto-premie" class="value span6 dark-blue">€ {{aov_qq_data.grossMonthly || money}}</span>
+            <span id="field-bruto-premie" class="value span6 dark-blue">€ {{aov_qq_data.grossMonthly | money}}</span>
           </div>
           <div class="span12 container_12 data-fields">
             <label class="label span6 dark-blue" for="field-netto-premie">Netto premie per maand</label>
-            <span id="field-netto-premie" class="value span6 dark-blue">€ {{aov_qq_data.netMonthly || money}}</span>
+            <span id="field-netto-premie" class="value span6 dark-blue">€ {{aov_qq_data.netMonthly | money}}</span>
           </div>
         </div>
         <div class="action-section span12">
@@ -66,7 +66,7 @@ export const template = `
       </div>
       <div class="static-section">
         <h3 class="title">Uw geschatte maandpremie</h3>
-        Uw geschatte premie is bruto €  {{aov_qq_data.grossMonthly || money}} per maand. Uw nettopremie na aftrek van belastingvoordeel is € {{aov_qq_data.netMonthly || money}} per maand. Dit is de maandpremie in het eerste kalenderjaar inclusief 5% doorlopende korting. Beide bedragen zijn een indicatie. Uw uiteindelijke maandpremie kan afwijken op basis van onder meer uw feitelijke werkzaamheden.
+        Uw geschatte premie is bruto €  {{aov_qq_data.grossMonthly | money}} per maand. Uw nettopremie na aftrek van belastingvoordeel is € {{aov_qq_data.netMonthly | money}} per maand. Dit is de maandpremie in het eerste kalenderjaar inclusief 5% doorlopende korting. Beide bedragen zijn een indicatie. Uw uiteindelijke maandpremie kan afwijken op basis van onder meer uw feitelijke werkzaamheden.
       </div>
       <div class="static-section">
         <h3 class="title">Hoe verder?</h3>
