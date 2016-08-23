@@ -8,27 +8,30 @@ import {Pipe, PipeTransform} from 'angular2/core';
 // Arguments: [round #digits]
 export class AAPeriodPipe implements PipeTransform {
   transform(value:number, args:any[]) : any {
+    var res:string = "";
     if (value === undefined) {
       return "";
     }
     switch (value) {
       case 7:
-        return "1 week";
+        res =  "1 week";
         break;
       case 14:
-        return "2 weken";
+        res =  "2 weken";
         break;
       case 30:
-        return "1 maand";
+        res =  "1 maand";
         break;
       case 90:
-        return "3 maanden";
+        res =  "3 maanden";
         break;
       case 365:
-        return "1 jaar";
+        res =  "1 jaar";
         break;
       default:
-        return "1 maand";
+        res =  "1 maand";
       }
+
+      return res;
   };
 }
