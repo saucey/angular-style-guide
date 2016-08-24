@@ -37,10 +37,24 @@ export const options = {
 
   otherChoicesHeading: 'Uw keuzes',
   startingTerm: {
-    choice1: '2 weken',
-    choice2: '1 maand',
-    choice3: '3 maanden',
-    choice4: '1 jaar',
+    choices: [
+      {
+        label: '2 weken',
+        value: 14
+      },
+      {
+        label: '1 maand',
+        value: 30
+      },
+      {
+        label: '3 maanden',
+        value: 90
+      },
+      {
+        label: '1 jaar',
+        value: 365
+      }
+    ],
     label: 'Welke eigen risicoperiode kiest u?',
     help: 'Uw uitkering start na afloop van deze periode. De meest gekozen periode is 1 maand.'
   },
