@@ -54,7 +54,8 @@ label.checkbox {
       }
     }
   }
-  // Fix for native android browser.
+  // Fix for native android browser :checked ~ selector:before not working
+  // http://stackoverflow.com/a/8320736.
   span.checkbox,
   a.checkbox {
     -webkit-animation: androidNative infinite 1s;
