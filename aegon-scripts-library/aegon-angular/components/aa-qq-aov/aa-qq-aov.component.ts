@@ -60,9 +60,6 @@ export class AAQQAovComponent implements OnInit {
   public  serviceError: boolean;
   public  pending: number = 0;
 
-  public  emailButtonPending: boolean = false;
-  public  reSendEmailShown: boolean = false;
-
   public  grossMonthly: number;
   public  netMonthly: number;
   public  profession: any = {};
@@ -283,7 +280,7 @@ export class AAQQAovComponent implements OnInit {
         return;
       }
 
-      let now = new Date();
+      let now:any = new Date();
       let dateString = `${now.getFullYear()}-${zeroPad(now.getMonth() + 1, 2)}-${zeroPad(now.getDate(), 2)}`;
 
       let birthDate = stringToDate(this.birthDate);
