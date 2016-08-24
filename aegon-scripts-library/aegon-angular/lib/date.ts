@@ -36,3 +36,33 @@ export function calculateAge(birthDate: any): number {
   }
   return age;
 }
+
+/**
+ * Return date from string
+ * @param {any} date String formatted like 'yyyy-mm-dd'.
+ * @returns {Date} Date object
+ *
+ * EXAMPLE
+ * - stringToDate('2015-03-21') -> Date object for 2015-03-21
+ */
+export function stringToDate(date: string) {
+  let splitted = this.birthDate.split('-');
+  if (splitted.length === 3) {
+    return new Date(parseInt(splitted[0], 10), parseInt(splitted[1], 10), parseInt(splitted[2], 10));
+  }
+  return null;
+}
+
+/**
+ * Add an amount of years to a date object
+ * @param {Date} date Date object .
+ * @param {number} years amount of years to add.
+ * @returns {Date} Date object
+ *
+ * EXAMPLE
+ * - addYears(new Date(), 30) -> Date object 30 years from now
+ * - addYears(new Date(), -10) -> Date object 10 years in the past
+ */
+export function addYearsToDate(date: Date, years: number) {
+  return new Date().setFullYear(date.setFullYear(date.getFullYear() + years));
+}

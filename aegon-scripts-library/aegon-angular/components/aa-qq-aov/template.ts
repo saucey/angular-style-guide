@@ -65,10 +65,10 @@ export const template = `
             <aa-hint [text]="options.startingTerm.help"></aa-hint>
           </div>
           <div class="inputs">
-            <aa-input-radio [(ngModel)]="startingTerm" (aaChange)="fetchSpecification()" name="term" [value]="14">{{ options.startingTerm.choice1 }}</aa-input-radio>
-            <aa-input-radio [(ngModel)]="startingTerm" (aaChange)="fetchSpecification()" name="term" [value]="30">{{ options.startingTerm.choice2 }}</aa-input-radio>
-            <aa-input-radio [(ngModel)]="startingTerm" (aaChange)="fetchSpecification()" name="term" [value]="90">{{ options.startingTerm.choice3 }}</aa-input-radio>
-            <aa-input-radio [(ngModel)]="startingTerm" (aaChange)="fetchSpecification()" name="term" [value]="365">{{ options.startingTerm.choice4 }}</aa-input-radio>
+            <aa-input-radio *ngFor="#choice of options.startingTerm.choices" name="term"
+                            [(ngModel)]="startingTerm" 
+                            (aaChange)="fetchSpecification()"  
+                            [value]="choice.value">{{ choice.label }}</aa-input-radio>
           </div>
         </div>
 
