@@ -55,8 +55,10 @@ export const template = `
       </div>
       <div class="static-section">
         <h3 class="title">Uitgangspunten</h3>
+        <p>
           U kunt de Aegon Arbeidsongeschiktheidsverzekering met een adviseur volledig aanpassen aan uw persoonlijke situatie.<br>
           Voor deze indicatie zijn we uitgegaan van:
+        </p>  
           <ul class="bullet">
             <li>De meest uitgebreide dekking inclusief ongevallen, lichamelijke en psychische ziektes en zwangerschap en bevalling.</li>
             <li>Dat de verzekering tot 67 jaar loopt.</li>
@@ -66,12 +68,16 @@ export const template = `
       </div>
       <div class="static-section">
         <h3 class="title">Uw geschatte maandpremie</h3>
-        Uw geschatte premie is bruto €  {{aov_qq_data.grossMonthly | money}} per maand. Uw nettopremie na aftrek van belastingvoordeel is € {{aov_qq_data.netMonthly | money}} per maand. Dit is de maandpremie in het eerste kalenderjaar inclusief 5% doorlopende korting. Beide bedragen zijn een indicatie. Uw uiteindelijke maandpremie kan afwijken op basis van onder meer uw feitelijke werkzaamheden.
+        <p>
+          Uw geschatte premie is bruto €  {{aov_qq_data.grossMonthly | money}} per maand. Uw nettopremie na aftrek van belastingvoordeel is € {{aov_qq_data.netMonthly | money}} per maand. Dit is de maandpremie in het eerste kalenderjaar inclusief 5% doorlopende korting. Beide bedragen zijn een indicatie. Uw uiteindelijke maandpremie kan afwijken op basis van onder meer uw feitelijke werkzaamheden.
+        </p>
       </div>
       <div class="static-section">
         <h3 class="title">Hoe verder?</h3>
-        Verzekeren is maatwerk. Uw adviseur kijkt samen met u wat het beste bij u past. Maak een afspraak voor een persoonlijk gesprek.<br>
-        Aan het advies zijn kosten verbonden. Deze bespreekt u in het eerste vrijblijvende gesprek met de adviseur.
+        <p>
+          Verzekeren is maatwerk. Uw adviseur kijkt samen met u wat het beste bij u past. Maak een afspraak voor een persoonlijk gesprek.<br>
+          Aan het advies zijn kosten verbonden. Deze bespreekt u in het eerste vrijblijvende gesprek met de adviseur.
+        </p>
       </div>
     </div>
 `;
