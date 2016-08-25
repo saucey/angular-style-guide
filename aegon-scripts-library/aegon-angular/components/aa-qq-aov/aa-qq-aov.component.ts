@@ -283,7 +283,7 @@ export class AAQQAovComponent implements OnInit {
         return;
       }
 
-      let now = new Date();
+      let now: any = new Date();
       let dateString = `${now.getFullYear()}-${zeroPad(now.getMonth() + 1, 2)}-${zeroPad(now.getDate(), 2)}`;
 
       let birthDate = stringToDate(this.birthDate);
