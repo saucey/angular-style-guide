@@ -1,0 +1,70 @@
+/**
+ * Template loader indicator
+ */
+
+// Root template
+aa-template {
+  position: relative;
+  height: 70px;
+  display: block;
+  overflow: hidden;
+  background-color: $grey;
+  > * {
+    visibility: hidden;
+  }
+  opacity: 0;
+  animation: aa-fade-in ease-in 1s;
+  animation-fill-mode: forwards;
+  animation-duration: 1s;
+}
+
+// Loading text
+aa-template:after {
+  content: 'Bezig met laden...';
+  position: absolute;
+  line-height: 50px;
+  color: $blue;
+  font-size: 1.0625rem;
+	font-family: $font_light;
+  margin-left: 60px;
+  left: 10px;
+  top: 10px;
+}
+
+// Spinner
+// SVG source for data url
+// <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+// width="50px" height="50px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+// <path fill="#3395d3" d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z">
+// <animateTransform attributeType="xml"
+//   attributeName="transform"
+//   type="rotate"
+//   from="0 25 25"
+//   to="360 25 25"
+//   dur="1.2s"
+//   repeatCount="indefinite"/>
+// </path>
+// </svg>
+aa-template:before {
+  position: absolute;
+  // background: url($image_path + 'spinner.svg') no-repeat 50% 0%;
+  background: url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJsb2FkZXItMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQogd2lkdGg9IjUwcHgiIGhlaWdodD0iNTBweCIgdmlld0JveD0iMCAwIDUwIDUwIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MCA1MDsiIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPHBhdGggZmlsbD0iIzMzOTVkMyIgZD0iTTQzLjkzNSwyNS4xNDVjMC0xMC4zMTgtOC4zNjQtMTguNjgzLTE4LjY4My0xOC42ODNjLTEwLjMxOCwwLTE4LjY4Myw4LjM2NS0xOC42ODMsMTguNjgzaDQuMDY4YzAtOC4wNzEsNi41NDMtMTQuNjE1LDE0LjYxNS0xNC42MTVjOC4wNzIsMCwxNC42MTUsNi41NDMsMTQuNjE1LDE0LjYxNUg0My45MzV6Ij4NCjxhbmltYXRlVHJhbnNmb3JtIGF0dHJpYnV0ZVR5cGU9InhtbCINCiAgYXR0cmlidXRlTmFtZT0idHJhbnNmb3JtIg0KICB0eXBlPSJyb3RhdGUiDQogIGZyb209IjAgMjUgMjUiDQogIHRvPSIzNjAgMjUgMjUiDQogIGR1cj0iMS4ycyINCiAgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiLz4NCjwvcGF0aD4NCjwvc3ZnPg==) no-repeat 50% 0%;
+  width: 50px;
+  height: 50px;
+  content: '';
+  top: 10px;
+  left: 10px;
+}
+
+// Remove all loading styles once loaded
+aa-template.aa-template--loaded {
+  height: auto;
+  &:before, &:after {
+    display: none;
+  }
+  > * {
+    visibility: visible;
+  }
+  background-color: transparent;
+}
+

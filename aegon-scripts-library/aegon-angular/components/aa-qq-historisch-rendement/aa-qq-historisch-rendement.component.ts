@@ -5,14 +5,14 @@ import {Component, Input, ElementRef, ViewChild, AfterViewInit, OnInit} from 'an
 import * as libUtil from "../../lib/util";
 import {HistoricalRoi} from "../../lib/calculations/historicalRoi";
 // AA components
-import {AAConfigComponent} from '../../lib/classes/AAConfigComponent';
+import {AABaseComponent} from '../../lib/classes/AABaseComponent';
 import {AAMoneyPipe} from "../../pipes/money.pipe";
 import {AASliderComponent} from '../aa-slider/aa-slider.component';
 import {AAHintComponent} from '../aa-hint/aa-hint.component';
 import {AAHighchartComponent} from "../aa-highchart/aa-highchart.component";
 // Locals
 import {template} from "./template";
-import {options} from "./options";
+import {defaultOptions} from "./defaultOptions";
 import {createChartConfig, createSeriesData} from "./chart";
 
 @Component({
@@ -23,18 +23,23 @@ import {createChartConfig, createSeriesData} from "./chart";
   template: template,
   pipes: [AAMoneyPipe]
 })
-export class AAQQHistorischRendementComponent extends AAConfigComponent implements OnInit, AfterViewInit {
+export class AAQQHistorischRendementComponent extends AABaseComponent {
+  @Input() options: any = {};
+  @Input() data: any = {};
   @ViewChild('chart') highchart: AAHighchartComponent;
-  private historicalRoi: HistoricalRoi = new HistoricalRoi(options.data);
+
+  // Init calculation class
+  private historicalRoi: HistoricalRoi = new HistoricalRoi(defaultOptions.data);
   private chartState:any = {};
   private currentTimeout: any = undefined;
   private calculate: any;
 
-  options : any = options;
+  public defaultOptions : any = defaultOptions;
+
   resultData: any = {};
   inputData: any = {
-    lower: options.slider.start[0],
-    upper: options.slider.start[1]
+    lower: defaultOptions.slider.start[0],
+    upper: defaultOptions.slider.start[1]
   }
 
   // Let parent class initialize config; the dependency injection with ElementRef
@@ -46,7 +51,7 @@ export class AAQQHistorischRendementComponent extends AAConfigComponent implemen
     super.ngOnInit();
     this.calculate = libUtil.debounce(() => {
       this.doCalculate();
-    }, this.options.chartUpdateDelay);
+    }, this.data.options.chartUpdateDelay);
   }
 
   /**

@@ -19,7 +19,7 @@ declare var jQuery;
 export class AAHighchartComponent {
   // Options object for chart. If supplied chart will be based on this,
   // otherwise use .createChart(options)
-  @Input() options: any = {};
+  @Input() options: any;
   // Fired when library is loaded
   @Output() ready: any = new EventEmitter();
   // Placeholder for the chart

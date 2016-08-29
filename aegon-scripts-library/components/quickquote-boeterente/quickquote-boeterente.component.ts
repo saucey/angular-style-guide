@@ -22,6 +22,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteBoet
   pipes: [MoneyPipe]
 })
 export class QuickQuoteBoeterenteComponent implements OnInit {
+  @ViewChild('mortgageSelect') mortgageSelect: ElementRef;
   // Mortgage options:
   mortgageOps: Object[] = ['Maak uw keuze', 'Aflossingsvrij', 'Annuitair', '(Bank)Spaar', 'Lineair', 'Overig'];
   // Scope variable initiation.
@@ -81,10 +82,13 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
    */
   init(index: number): void {
     this.mortgageType = Number(index);
-    this.mortgageName = String(this.mortgageOps[index]);
+    let mortgageSelect = this.mortgageSelect.nativeElement;
+    this.mortgageName = String(mortgageSelect.options[mortgageSelect.selectedIndex].text);
     // Fired only once after the mortgage type is changed.
     if (!this.initiated && this.mortgageType > 0) {
       let formInit = {
+        page_cat_1_type: 'quick_quotes',
+        page_cat_2_name: 'berekening',
         page_cat_4_productgroup: 'hypotheek',
         product_category: ['hypotheek'],
         form_name: 'qq-rente_wijzigen',
@@ -269,6 +273,8 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
         // Calculation finished.
         if (!this.finalized) {
           let formComplete = {
+            page_cat_1_type: 'quick_quotes',
+            page_cat_2_name: 'berekening',
             page_cat_4_productgroup: 'hypotheek',
             page_cat_5_product: 'hypotheek-' + this.mortgageName,
             product_name: ['hypotheek-' + this.mortgageName],

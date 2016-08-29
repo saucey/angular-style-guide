@@ -3,8 +3,8 @@
  * http://kushagragour.in/lab/hint/
  */
 
-$hint_font_size: 18;
-$hint_line_height: 24;
+$hint_font_size: 18px;
+$hint_line_height: 24px;
 $hint_info_bg: $slightly_lighter_blue;
 $hint_info_border: 1px solid $light_blue;
 
@@ -62,8 +62,8 @@ $hint_info_border: 1px solid $light_blue;
 		border-radius: 3px;
 		color: $black;
 		padding: 12px 15px;
-		@include rem('font-size', $hint_font_size);
-		@include rem('line-height', $hint_line_height);
+		font-size: $hint_font_size;
+		line-height: $hint_line_height; // Using rem is not working in IE
 		font-family: $font_light;
 		font-weight: normal;
 		pointer-events: none;
