@@ -1,7 +1,7 @@
 /**
  * AOV quick quote
  */
-import {Component, OnInit, Input} from 'angular2/core';
+import {Component, OnInit, Input, EventEmitter} from 'angular2/core';
 import {HTTP_PROVIDERS, Http, Headers, RequestOptions, Response} from "angular2/http";
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
@@ -18,7 +18,7 @@ import {CheckboxComponent, CheckboxValueAccessor} from '../../../components/angu
 // Locals
 import {template} from "./template";
 import {options} from "./options";
-import {calculateAge, stringToDate, addYearsToDate} from "../../lib/date";
+import {calculateAge, stringToDate, addYearsToDate, getDateDiffInYears, cloneDate} from "../../lib/date";
 import {zeroPad} from "../../lib/format";
 import {mockProfessionsResponse} from "./mock-professions";
 import {mockRiskFactorResponse} from "./mock-riskfactor";
@@ -50,9 +50,9 @@ export class AAQQAovComponent implements OnInit {
   public  grossIncome: number;
   public  grossIncomeError: boolean;
 
-  public  startingTerm: number = 30;
+  public  startingTerm: number = options.startingTerm.initial;
   public  startingTermError: boolean;
-  public  insuranceAmount: number;
+  public  insuranceAmount: number = options.income.initial;
   public  insuranceAmountError: boolean;
   public  emailAddress: string = "";
   public  emailAddressError: boolean;
@@ -69,11 +69,10 @@ export class AAQQAovComponent implements OnInit {
   private rawProfessions: any = {};
   public  riskFactor: any = {};
 
+  public  grossPremium: number = 0;
+  public  netPremium: number = 0;
 
-  //TODO variables in session storage
-  // aovQQ
-  //   aovBirthDate     aovProfession     aovGrossIncome     aovStartingTerm     aovInsuranceAmount    aovGrossMonthly   aovNetMonthly
-  //
+  public  fetchSpecification$: EventEmitter<any> = new EventEmitter;
 
   constructor(
     private http: Http
@@ -81,6 +80,13 @@ export class AAQQAovComponent implements OnInit {
 
   ngOnInit() {
     this.initProfessions();
+
+    // Debounce the request so it doesn't fire constantly.
+    this.fetchSpecification$.debounceTime(500)
+      .subscribe(() => {
+        console.log('fetchSpecification$ debounced fired');
+        this.fetchSpecification();
+      });
   }
 
   handleError(error: Response) {
@@ -93,7 +99,7 @@ export class AAQQAovComponent implements OnInit {
 
   processProfessions(response) {
     // Check if the response contains professions
-    if (response.retrieveProfessionsResponse &&
+    if (response && response.retrieveProfessionsResponse &&
         response.retrieveProfessionsResponse._AE_BEROEPENLIJST_AOV) {
       for (let prof of response.retrieveProfessionsResponse._AE_BEROEPENLIJST_AOV) {
         // Add each profession to the rawProfession dictionary under its key.
@@ -184,7 +190,7 @@ export class AAQQAovComponent implements OnInit {
     return !hasErrors;
   }
 
-  startCalculator() {
+  openCalculator() {
     // Validate the personal information. If it is valid then the calculator can be shown.
     if (this.validatePersonalInformation()) {
       // Show calculator once we have fetched the data.
@@ -263,13 +269,30 @@ export class AAQQAovComponent implements OnInit {
     });
   }
 
-  processSpecification(response, cb) {
-    cb();
+  processSpecification(response, callback) {
+    let src: any = response;  
+    let path = ['calculateSpecificationResponse', 'CONTRACT_POLIS', 'DEKKING', 0, 'DEKKING_AOV'];
+  
+    for (let part of path) {
+      if (src[part]) {
+        src = src[part]
+      } else {
+        src = null;
+        break;
+      }
+    } 
+      
+    if (src && src['_AE_JAARPREM']) {
+      let monthly = src['_AE_JAARPREM'] / 12;
+      this.grossPremium = Math.round(monthly);
+      this.netPremium = Math.round(monthly * 0.65);
+
+      callback();
+    }
+        
   }
 
-  // TODO debounce deze functie!!
   fetchSpecification(callback: any = () => {}) {
-
     if (this.riskFactor) {
       if (!this.validatePersonalInformation() || !this.validateChoices()) {
         return;
@@ -284,7 +307,8 @@ export class AAQQAovComponent implements OnInit {
       let dateString = `${now.getFullYear()}-${zeroPad(now.getMonth() + 1, 2)}-${zeroPad(now.getDate(), 2)}`;
 
       let birthDate = stringToDate(this.birthDate);
-      let maxInsuranceDate = addYearsToDate(birthDate, this.rawProfession._AE_BKLSMAX);
+      let maxInsuranceDate = cloneDate(birthDate);
+      addYearsToDate(maxInsuranceDate, this.rawProfession._AE_BKLSMAX);
 
       let body = {
         "calculateSpecificationRequest": {
@@ -319,7 +343,7 @@ export class AAQQAovComponent implements OnInit {
                 "_AE_COMMERCIELEKORT": "5",
                 "WACHTTY": this.startingTerm,
                 "_AE_AANVANGSKORT": "false",
-                "UDRAFWJ": maxInsuranceDate - now,
+                "UDRAFWJ": getDateDiffInYears(now, maxInsuranceDate),
                 "AOPVU": "25",
                 "CBSSTG": "false",
                 "ENDLFTD": this.rawProfession._AE_BKLSMAX,

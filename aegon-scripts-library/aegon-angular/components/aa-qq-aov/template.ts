@@ -47,7 +47,7 @@ export const template = `
       <div class="field gray-field" *ngIf="!showCalculator">
         <div class="label"></div>
         <div class="inputs">
-          <button class="button icon-right icon-calculator" (click)="startCalculator()">
+          <button class="button icon-right icon-calculator" (click)="openCalculator()">
             {{ options.calculateButtonText }}
           </button>
         </div>
@@ -65,9 +65,9 @@ export const template = `
             <aa-hint [text]="options.startingTerm.help"></aa-hint>
           </div>
           <div class="inputs">
-            <aa-input-radio *ngFor="#choice of options.startingTerm.choices" name="term"
+            <aa-input-radio *ngFor="#choice of options.startingTerm.choices" [name]="term"
                             [(ngModel)]="startingTerm" 
-                            (aaChange)="fetchSpecification()"  
+                            (aaChange)="fetchSpecification$.emit()"  
                             [value]="choice.value">{{ choice.label }}</aa-input-radio>
           </div>
         </div>
@@ -76,7 +76,7 @@ export const template = `
           <div class="inputs">
             <aa-slider-input class="aa-qq__control aa-input--euro"
               [(ngModel)]="grossYearAmount"
-              (change)="fetchSpecification()"
+              (change)="fetchSpecification$.emit()"
               [sliderOptions]="options.grossYearAmount.slider"
               [label]="options.grossYearAmount.label"
               [helpText]="options.grossYearAmount.help">
@@ -90,7 +90,7 @@ export const template = `
               <div class="label">
                 {{ options.result.grossPremium.label }}
               </div>
-              <div class="value">&euro; 300<span>,-</span></div>
+              <div class="value">&euro; {{ grossPremium }}<span>,-</span></div>
               <span class="helptext">
                 {{ options.result.grossPremium.help }}
               </span>
@@ -99,7 +99,7 @@ export const template = `
               <div class="label">
                 {{ options.result.netPremium.label }}
               </div>
-              <div class="value">&euro; 300<span>,-</span></div>
+              <div class="value">&euro; {{ netPremium }}<span>,-</span></div>
               <span class="helptext">
                 {{ options.result.netPremium.help }}
               </span>

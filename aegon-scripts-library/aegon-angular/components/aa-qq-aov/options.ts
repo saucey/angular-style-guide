@@ -25,6 +25,7 @@ export const options = {
     error: `Voor dit beroep kan geen premie worden berekend. Neem contact op met een adviseur voor een advies op maat.`
   },
   income: {
+    initial: 30000,
     min: 3125,
     max: 1000000,
     label: 'Wat is uw bruto jaarinkomen?',
@@ -37,6 +38,7 @@ export const options = {
 
   otherChoicesHeading: 'Uw keuzes',
   startingTerm: {
+    initial: 30,
     choices: [
       {
         label: '2 weken',
