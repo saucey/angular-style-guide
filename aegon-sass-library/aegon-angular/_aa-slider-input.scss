@@ -33,11 +33,11 @@
   @include rem('padding-bottom', 5);
 }
 .aa-slider-input__slider {
-  @include rem('padding-top', 20);
-  @include rem('padding-bottom', 20);
+  @include rem('padding-top', 40);
+  @include rem('padding-bottom', 40);
   padding-left: 0;
   padding-right: 0;
-  margin: 0 !important;
+  margin: 0;
   display: block;
   user-select: none;
   // Make the slider visually a bit longer, but also make sure the knobs don't slide exactly till the end

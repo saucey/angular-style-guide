@@ -1,12 +1,13 @@
-export const options = {
+declare var wNumb: any;
+
+export const defaultOptions = {
   mockData: true,
-  
   serviceUrl: 'http://ail.test.intra.aegon.nl/US_RestGatewayWeb/rest/requestResponse/BS_AE_POLIS_AOV_02/',
   serviceCredentials: 'appAegonNLCalculateTST:7OuwNNTVS4jJ8mO5F0bH',
   summaryPath: '#',
   mailUrl: 'http://ail.test.intra.aegon.nl/BS_Utilities_Communication_03Web/sca/BS_Utilities_Communication_03_ExpWS',
   mailCredentials: 'AppAegonNLDrupalTST:dUACcFMYvwhnrnnfdq9h',
-  
+  specificationCallDelay: 500,
   personalDataHeading: 'Uw gegevens',
   birthDate: {
     minAge: 18,
@@ -60,10 +61,10 @@ export const options = {
     label: 'Welke eigen risicoperiode kiest u?',
     help: 'Uw uitkering start na afloop van deze periode. De meest gekozen periode is 1 maand.'
   },
+
   grossYearAmount: {
-    initial: 17500,
     slider: {
-      start: 3500, // Handle start position
+      start: 2500, // Handle start position
       step: 500, // Slider moves in increments of xx
       orientation: 'horizontal', // Orient the slider vertically
       behaviour: 'snap', // click anywhere to start dragging + draggable range
@@ -71,18 +72,22 @@ export const options = {
         'min': 2500,
         'max': 125000
       },
+      connect: 'lower',
       pips: { // Shows scale and values below chart
         mode: 'range',
-        // density: 100,
-        // values: [1875, 2016],
         density: 100,
+        format: wNumb({
+          mark: ',',
+          thousand: '.',
+          prefix: '€',
+          decimals: 0
+        })
       }
     },
     label: 'Welk bruto jaarbedrag wilt u verzekeren?',
     help: `Dit is het bedrag na aftrek van belastingvoordeel. Wij rekenen met een gemiddeld belastingvoordeel van 35%.
            Voor uw situatie kan dit meer of minder zijn.`
   },
-
   result: {
     grossPremium: {
       label: 'Bruto premie per maand',

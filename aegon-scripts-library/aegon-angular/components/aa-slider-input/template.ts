@@ -12,9 +12,7 @@ export const template = `
       </div>
     </div>
     <div class="aa-slider-input__slider">
-      <div class="aa-slider-input__slider">
-        <aa-slider #aaSlider class="aa-qq__control" [options]="sliderOptions" [hint]="false" [(ngModel)]="value" (change)="sliderChange($event)"></aa-slider>
-      </div>
+      <aa-slider #aaSlider class="aa-qq__control" [options]="sliderOptions" [hint]="false" [(ngModel)]="value" (change)="sliderChange($event)"></aa-slider>
     </div>
   </div>
 `;
