@@ -35,3 +35,39 @@
   display: block;
   text-align: left;
 }
+
+.aa-layout__fill {
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+}
+
+.aa-layout__slides {
+	overflow: hidden;
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+	flex: 0 0 100%;
+	justify-content: flex-start;
+	align-items: flex-start;
+	position: relative;
+	display: flex;
+}
+
+.aa-layout__slide {
+	flex: 0 0 100%;
+	width: 100%;
+	transition: all 300ms ease-in-out;
+	position: relative;
+}
+
+// Match at least a full screen and center content
+.aa-layout__full {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+

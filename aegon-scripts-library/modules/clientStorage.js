@@ -1,7 +1,7 @@
 /*
-* 
-* Local storage wrapper: Basically is a Singleton and when instanciated, 
-* will return three different objects for Session, Local and Cookie storage.  
+*
+* Local storage wrapper: Basically is a Singleton and when instanciated,
+* will return three different objects for Session, Local and Cookie storage.
 * Ex. clienteStorage.session.setItem(key, value);
 *       clienteStorage.session.getItem(key);
 * The library also provide options to encode the data based on Base64.
@@ -106,7 +106,9 @@ window.clientStorage = (function() {
       return t;
     }
   },
-  base64Pattern = /^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$/;
+  base64Pattern = /^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$/,
+  localStorage = window.localStorage,
+  sessionStorage = window.sessionStorage;
 
   function isEncoded(str) {
     return base64Pattern.test(str);
@@ -173,7 +175,7 @@ window.clientStorage = (function() {
 
   function setCookie(cname, cvalue, options) {
     var d = new Date();
-    d.setTime(d.getTime() + ((Number.parseInt(options.exdays)||2000)*24*60*60*1000));
+    d.setTime(d.getTime() + ((Number.parseInt(options.exdays, 10)||2000)*24*60*60*1000));
 
     var expires = "expires="+d.toUTCString();
     if(typeof cvalue ==='object') {
@@ -219,7 +221,7 @@ window.clientStorage = (function() {
       document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
     }
   }
-  
+
   return {
     "session": {
       "length": sessionStorage.length,
@@ -240,7 +242,7 @@ window.clientStorage = (function() {
       }
     },
     "local": {
-      "length": sessionStorage.length,
+      "length": localStorage.length,
       "key": function(_key) {
         return localStorage.key(_key);
       },

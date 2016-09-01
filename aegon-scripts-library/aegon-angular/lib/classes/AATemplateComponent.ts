@@ -18,6 +18,6 @@ export class AATemplateComponent extends AABaseComponent implements OnInit {
     super.ngOnInit();
     setTimeout(() => {
       this.element.className += ' aa-template--loaded';
-    }, 0)
+    }, 10);
   }
 }

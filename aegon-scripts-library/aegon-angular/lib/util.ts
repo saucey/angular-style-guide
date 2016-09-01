@@ -204,3 +204,11 @@ export function trim(str : string) : string {
   return str === undefined ? undefined : str.replace(/^\s+|\s+$/g, '');
 }
 
+/**
+ * Simple array dedupe
+ */
+export function uniqueArray(input : any[]) : any {
+	return input.filter(function(item, pos, self) {
+    return self.indexOf(item) === pos;
+	});
+}

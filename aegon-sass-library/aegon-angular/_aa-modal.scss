@@ -1,0 +1,207 @@
+/**
+ * Modal dialog
+ */
+$modal_width: 1000px;
+
+// Root of modal template
+.aa-modal {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+  z-index: 1000010;
+	transform: translateZ(0);
+  user-select: none;
+}
+
+// Disable scrolling on body
+body.aa-modal--open {
+	overflow: hidden !important;
+}
+
+// Semi transparent background
+.aa-modal__bg {
+	background-color: rgba(0, 0, 0, 0.3);
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	opacity: 1;
+  animation: aa-fade-in ease-out;
+  animation-fill-mode: forwards;
+  animation-duration: 300ms;
+  user-select: none;
+}
+
+// Element that defines the width
+// Maximum size is width of screen
+// Optionally set width to define custom width
+.aa-modal__dialog-width {
+	position: absolute;
+	display: block;
+	width: $modal_width;
+	max-width: 100%;
+	max-width: 100vw;
+	left: 50%;
+	top: 50%;
+	border-radius: 5px;
+	overflow: hidden;
+	box-shadow: 15px 15px 30px rgba(0,0,0,0.3);
+	border: 1px solid rgba(242,242,242,0.5);
+	max-width: 100%;
+	max-width: calc(100vw - 60px);
+	transform: translateX(-50%) translateY(-50%) scale(0.85);
+  opacity: 0;
+  animation: aa-center-zoom-in ease-out;
+  animation-fill-mode: forwards;
+  animation-duration: 150ms;
+  animation-delay: 100ms;
+}
+
+
+// Element that defines the height
+// Height is automatically based on content, max-width height of screen
+// Optionally set height to define custom height
+.aa-modal__dialog-height {
+	background-color: $white;
+	position: relative;
+	overflow-y: auto;
+	max-height: 100%;
+	max-height: 100vh;
+	max-height: calc(100vh - 60px);
+}
+
+// CLOSE BUTTON
+.aa-modal__close {
+  z-index: 1000011;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  transition: all 150ms ease-in-out;
+	cursor: pointer;
+	transform: scale(1);
+	overflow: hidden;
+	border-radius: 50%;
+	background-color: $blue;
+  &:hover {
+  	xtransform: rotate(90deg);
+  }
+}
+// Close button icon
+.aa-modal__close:before {
+	position: absolute;
+	content: $font_icons_circled_x;
+  font-family: "aegon_icons";
+  display: block;
+  font-size: 34px;
+  line-height: 34px;
+  text-align: center;
+	color: $white;
+	transform: translate(-1px, -1px);
+  -webkit-font-smoothing: antialiased;
+}
+
+// TITLE
+.aa-modal__title {
+	position: absolute;
+	overflow: hidden;
+	height: 60px;
+	line-height: 60px;
+	left: 0;
+	right: 30px;
+	font-size: $x-large;
+	background-color: white;
+  color: $blue;
+  user-select: none;
+  z-index: 1000010;
+  padding: 0 20px;
+  color: $slightly_darker_blue;
+  font-family: $font_normal;
+  font-weight: bold;
+}
+
+// CONTENT AREA
+// Optional overflow scrolling content area
+// aa-modal-content element is transcluded in this area
+.aa-modal__content {
+	padding: 30px;
+	padding-top: 15px;
+	position: relative;
+	margin-top: 60px;
+}
+
+// ACTIONS
+// Bottom bar with optional action buttons. Always visible; even if content needs to scroll
+
+// Show actions if enabled in options
+.aa-modal--actions {
+	.aa-modal__content {
+		margin-bottom: 80px;
+	}
+	.aa-modal__actions {
+		display: block;
+	}
+}
+
+.aa-modal.aa-modal--closing {
+	.aa-modal__bg {
+	  animation: aa-fade-out ease-out;
+	  animation-duration: 300ms;
+	  animation-fill-mode: forwards;
+	  opacity: 1;
+	}
+	.aa-modal__dialog-width {
+		display: none;
+	  animation: aa-center-zoom-out ease-out;
+	  animation-duration: 150ms;
+	}
+}
+
+
+// Style actions bar
+.aa-modal__actions {
+	display: none;
+	position: absolute;
+	height: 80px;
+	line-height: 60px;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	font-size: 18px;
+	font-weight: normal;
+	background-color: white;
+  color: $blue;
+  user-select: none;
+  z-index: 1000010;
+  padding: 15px;
+  color: $slightly_darker_blue;
+	box-shadow: 0 -15px 30px rgba(0,0,0,0.10);
+	padding-top: 15px;
+}
+
+// Align items in action bar
+.aa-modal__action--left {
+	float: left;
+	margin-right: 10px;
+}
+.aa-modal__action--right {
+	float: right;
+	margin-left: 10px;
+}
+
+// MOBILE
+@include breakpoint($brk-mobile) {
+	.aa-modal__dialog-width {
+		max-width: 100vw;
+		border-radius: 0;
+	}
+	.aa-modal__dialog-height {
+		max-height: 100vh;
+	}
+}
+
