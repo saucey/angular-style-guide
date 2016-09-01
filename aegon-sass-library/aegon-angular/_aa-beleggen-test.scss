@@ -16,7 +16,7 @@
   font-size: $medium;
 }
 
-.aa-beleggen-test--state-results {
+.aa-state--results {
 	.aa-beleggen-test__results {
 		display: flex;
 	}
@@ -73,7 +73,6 @@
 }
 
 .aa-beleggen-test__image {
-	background-image: url($image_path + 'beleggen/beleggenquiz.svg');
 	background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;

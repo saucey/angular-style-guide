@@ -19,19 +19,16 @@
 	}
 }
 
-.aa-leadform--state-start {
+.aa-state--start {
 	.aa-leadform__loading, .aa-leadform__thanks {
 		display: none;
 	}
 }
 
-.aa-leadform--state-loading {
+.aa-state--loading {
 	.aa-leadform__thanks {
 		display: none;
 	}
-}
-
-.aa-leadform--state-thanks {
 }
 
 .aa-leadform__loading {
@@ -59,10 +56,10 @@
 	min-width: 300px;
 	width: 50%;
 	flex: 1 1 auto;
-	background-image: url($image_path + 'beleggen/ebook.jpg');
 	background-size: cover;
 	background-position: center 75%;
   background-repeat: no-repeat;
+  border: 1px solid $grey;
 }
 
 .aa-leadform__form {

@@ -1,27 +1,41 @@
 export const template = `
-  <div class="aa-beleggen-test" [ngClass]="'aa-beleggen-test--state-' + data.state">
+  <div class="aa-beleggen-test"
+    [ngClass]="['aa-state--' + data.state, data.options.cssClass || '']">
     <div class="aa-beleggen-test__intro">
-      <div class="aa-beleggen-test__header aa-text__color--white"> {{ data.options.header }} </div>
-      <div class="aa-beleggen-test__subheader aa-text__color--white"> {{ data.options.subheader }} </div>
-      <div class="aa-beleggen-test__action aa-text__color--white" (click)="reset()">
-        <span *ngIf="!data.done"> {{ data.options.action }} </span>
-        <span *ngIf="data.done"> {{ data.options.opnieuw }} </span>
+      <div class="aa-beleggen-test__header aa-text__color--white">
+        {{ data.options.header }}
       </div>
-      <div class="aa-beleggen-test__image"></div>
+      <div class="aa-beleggen-test__subheader aa-text__color--white">
+        {{ data.options.subheader }}
+      </div>
+      <div class="aa-beleggen-test__action aa-text__color--white" (click)="reset()">
+        <span *ngIf="!data.done">
+          {{ data.options.action }}
+        </span>
+        <span *ngIf="data.done">
+          {{ data.options.opnieuw }}
+        </span>
+      </div>
+      <div class="aa-beleggen-test__image"
+        [style.background-image]="'url(' + data.options.image + ')'">
+      </div>
     </div>
     <div class="aa-beleggen-test__test">
       <div class="aa-beleggen-test__results aa-fade-in aa-layout__fill"
         [ngClass]="{'aa-beleggen-test__results--winner': data.tips.length === 0 }">
         <div class="aa-beleggen-test__title">
-          {{ data.tips.length === 0 ? data.options.result.winnerTitle : (data.score + ' van de ' + data.countQuestions + ' vragen goed!') }}
+          {{ data.tips.length === 0 ? data.options.result.winner.title : (data.score + ' van de ' + data.countQuestions + ' vragen goed!') }}
         </div>
         <div class="aa-beleggen-test__result-text">
-          {{ data.tips.length === 0 ? data.options.result.winnerText : data.options.result.text }}
+          {{ data.tips.length === 0 ? data.options.result.winner.text : data.options.result.text }}
         </div>
         <div class="aa-beleggen-test__tip-head">
-          <div class="aa-beleggen-test__tip-label aa-beleggen-test__title"> Tip {{ data.tips.length > 1 ? (data.tip + 1) : ''}}</div>
+          <div class="aa-beleggen-test__tip-label aa-beleggen-test__title">
+            Tip {{ data.tips.length > 1 ? (data.tip + 1)  + ' van ' + data.tips.length : ''}}
+          </div>
           <div class="aa-beleggen-test__tip-navs">
-            <div class="aa-beleggen-test__tip-next aa-beleggen-test__tip-nav" (click)="nextTip()"
+            <div class="aa-beleggen-test__tip-next aa-beleggen-test__tip-nav"
+              (click)="nextTip()"
               *ngIf="data.tips.length > 1">
             </div>
           </div>
@@ -50,7 +64,10 @@ export const template = `
       <div class="aa-beleggen-test__nrs">
         <div class="aa-beleggen-test__nr"
           *ngFor="#question of data.options.questions; #i=index"
-          [ngClass]="{'aa-beleggen-test__nr--active': data.question === i, 'aa-beleggen-test__nr--completed': i <= data.lastQuestion}"
+          [ngClass]="{
+            'aa-beleggen-test__nr--active': data.question === i,
+            'aa-beleggen-test__nr--completed': i <= data.lastQuestion
+          }"
           (click)="gotoQuestion(i)">
           {{ i + 1}}
         </div>

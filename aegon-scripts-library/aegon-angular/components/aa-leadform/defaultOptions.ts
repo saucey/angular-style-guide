@@ -5,6 +5,8 @@ export var defaultOptions = {
   header: "Gratis e-book 'Beleggen voor beginners'",
   subheader: 'Tips en handleiding voor de beginnende belegger',
   title: 'Ontvang het gratis e-book',
+  image: '/images/beleggen/ebook.jpg',
+  cssClass: 'aa-my-test aa-bb',
   disclaimer: 'Aegon gaat vertrouwelijk om met jouw persoonsgegevens. Door dit formulier te verzenden geef je Aegon toestemming om jou telefonisch of per e-mail te benaderen voor marketingdoeleinden over beleggen.',
   button: 'Aanvragen',
   thanks: {
@@ -20,50 +22,41 @@ export var defaultOptions = {
    * FORM POSTING
    */
   // Url to post form to; usually for all FormAssembly forms the same
-  postUrl: '/particulier/forms/processor',
-  // Friendly names for form fields; use the friendly name in your template,
-  // and the real form name will be submitted
-  fields : {
-    aanhef: {
-      name: 'tfa_141',
-      dhr: 'Dhr.',
-      mevr: 'Mevr.'
-    },
-    voorletters: {
-      name: 'tfa_142',
-      placeholder: 'Voorletters'
-    },
-    tussenvoegsel: {
-      name: 'tfa_143',
-      placeholder: 'Tussenvoegsel'
-    },
-    achternaam: {
-      name: 'tfa_144',
-      placeholder: 'Achternaam'
-    },
-    email: {
-      name: 'tfa_145',
-      placeholder: 'E-mail adres'
-    },
-    voorwaarden: {
-      name: 'voorwaarden',
-      text: 'Ik accepteer de voorwaarden'
-    }
-  },
   // Hidden form fields & values; use the actual values here
   // Key/values will be added to form post data automatically
   hiddenFields: {
     nid: 35973, // Drupal form node id. Get it from the form edit url in Drupal
     // ADDITIONAL HIDDEN FIELDS FOR FORM
     tfa_146: 'EBKBEGIN', // Herkomstcode
-    tfa_test: 'TEST',
     tfa_147: function () {
       console.log('function', this);
       return new Date().getTime()
     }
   },
   form: {
-    nid: 35973,
+    postUrl: '/particulier/forms/processor',
+    nodeId: 35973, // Form node id in Drupal. Get it from the form edit url.
+    // Friendly names for form fields; use the friendly name in your template,
+    // and the real form name will be submitted
+    fields : {
+      aanhef: {
+        dhr: 'Dhr.',
+        mevr: 'Mevr.'
+      },
+      voorletters: {
+        placeholder: 'Voorletters'
+      },
+      tussenvoegsel: {
+        placeholder: 'Tussenvoegsel'
+      },
+      achternaam: {
+        placeholder: 'Achternaam'
+      },
+      email: {
+        placeholder: 'E-mail adres'
+      }
+    },
+    // Alias to real input name mapping. Right hand side is submitted to processor.
     mapping: {
       aanhef: 'tfa_141',
       voorletters: 'tfa_142',
@@ -72,6 +65,10 @@ export var defaultOptions = {
       email: 'tfa_145',
       herkomstcode: 'tfa_146',
       datumtijd: 'tfa_147'
+    },
+    // Hardcoded default values for certain hidden fields.
+    values: {
+      herkomstcode: 'EBKBEGIN'
     }
   },
   /**

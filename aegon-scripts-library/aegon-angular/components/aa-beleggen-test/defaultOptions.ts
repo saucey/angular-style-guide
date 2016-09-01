@@ -2,6 +2,7 @@ export const defaultOptions = {
   header: 'Is beleggen iets voor u?',
   subheader: 'Beleggen is een mooie manier om uw geld te laten groeien. Maar is het ook écht iets voor u is?',
   action: 'Doe de quiz!',
+  image: '/images/beleggen/beleggenquiz.svg',
   opnieuw: 'Doe de quiz nog een keer',
   cta: {
     text: 'Begin met beleggen',
@@ -10,8 +11,10 @@ export const defaultOptions = {
   result: {
     title: '{{ data.score }} van de {{ data.countQuestions }} vragen goed', // not working yet
     text: 'Verbeter uw kennis van beleggen met de volgende tips.',
-    winnerTitle: 'Alle vragen goed!',
-    winnerText: 'Gefeliciteerd, het lijkt erop dat u helemaal klaar bent om meer uit uw geld te halen.',
+    winner: {
+      title: 'Alle vragen goed!',
+      text: 'Gefeliciteerd, het lijkt erop dat u helemaal klaar bent om meer uit uw geld te halen.'
+    }
   },
   questions: [
     {

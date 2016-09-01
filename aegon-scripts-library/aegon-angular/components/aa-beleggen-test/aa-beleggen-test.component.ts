@@ -15,11 +15,6 @@ declare var jQuery: any;
 export class AABeleggenTestComponent extends AABaseComponent {
   @Input() options: any = {};
   @Input() data: any = {};
-  @Input() visible: boolean = false;
-
-  // Internal slider DOM reference
-  @ViewChild('form') form: ElementRef;
-
   public defaultOptions : any = defaultOptions;
   public questions: any;
   private answerTimeout: any;
@@ -28,24 +23,17 @@ export class AABeleggenTestComponent extends AABaseComponent {
   constructor(elementRef: ElementRef, private zone:NgZone) {
     super(elementRef);
   }
-
+  // Always call the super
   ngOnInit(): void {
     super.ngOnInit();
-    // Initial state
-    this.data.state = this.data.state || 'start';
 
     // Init initial state
     this.reset();
-
-    // Demo mode?
-    if (this.data.options.demo) {
-      setInterval(() => {
-        this.data.state = this.data.state === 'start' ? 'loading' : this.data.state === 'loading' ? 'thanks' : 'start';
-      }, this.data.options.demo);
-    }
   }
-  // Reset state
+  // Reset quiz and start over; UI will automatically update
   reset() : void {
+    // Initial state
+    this.data.state = 'start';
     this.data.question = 0;
     this.data.answers = {};
     this.data.lastQuestion = 0;
@@ -56,7 +44,7 @@ export class AABeleggenTestComponent extends AABaseComponent {
     this.data.score = 0;
     this.data.countQuestions = this.data.options.questions.length;
   }
-
+  // Give an answer to a question
   answer(question : number, answer : boolean) : void {
     if (this.answerTimeout) {
       return;
@@ -73,7 +61,7 @@ export class AABeleggenTestComponent extends AABaseComponent {
       });
     }, 150);
   }
-
+  // Goto next question
   nextQuestion() : void {
     this.data.question = this.data.question + 1;
     this.data.lastQuestion = Math.max(this.data.lastQuestion, this.data.question);
@@ -81,11 +69,11 @@ export class AABeleggenTestComponent extends AABaseComponent {
       this.gotoResults();
     }
   }
-
+  // Directly goto a question
   gotoQuestion(nr : number) : void {
     this.data.question = Math.min(nr, this.data.lastQuestion);
   }
-
+  // Show me the results!
   gotoResults() : void {
     this.data.state = 'results';
     this.data.done = true;
@@ -102,17 +90,8 @@ export class AABeleggenTestComponent extends AABaseComponent {
       }
     });
   }
-
-  nextTip() : void {
-    this.data.tip = (this.data.tip + 1) % this.data.tips.length;
-  }
-
-  prevTip() : void {
-    this.data.tip = (this.data.tip - 1 + this.data.tips.length) % this.data.tips.length;
-  }
-
-  gotoQuestions() : void {
-    this.data.state = 'start';
-    this.data.question = 0;
+  // Goto next tip
+  nextTip(delta : number = 1) : void {
+    this.data.tip = (this.data.tip + delta + this.data.tips.length) % this.data.tips.length;
   }
 }
