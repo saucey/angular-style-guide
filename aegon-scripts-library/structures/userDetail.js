@@ -1,6 +1,4 @@
-/**
- * @file
- * @fileJshint multistr: true */
+/*jshint multistr: true */
 
 /**
  * User details script
@@ -544,7 +542,6 @@
 
       // In the end of animation of .highlight div, add class .processed to
       // widget's container to hide itself.
-      /*jshint multistr: true */
       this.widget.find('.highlight').one('webkitAnimationEnd oanimationend \
         msAnimationEnd animationend', function () {
         $(this).parents('.user_detail_widget').addClass('processed');
