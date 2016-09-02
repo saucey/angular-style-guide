@@ -18,7 +18,7 @@ import {CheckboxComponent, CheckboxValueAccessor} from '../../../components/angu
 // Locals
 import {template} from "./template";
 import {options} from "./options";
-import {calculateAge} from "../../lib/date";
+import {calculateAge, stringToDate, addYearsToDate} from "../../lib/date";
 import {zeroPad} from "../../lib/format";
 import {mockProfessionsResponse} from "./mock-professions";
 import {mockRiskFactorResponse} from "./mock-riskfactor";
@@ -68,6 +68,7 @@ export class AAQQAovComponent implements OnInit {
   public  profession: any = {};
   public  professions: any[] = [];
   public  professionsFiltered: any[] = [];
+  private rawProfession: any;
   private rawProfessions: any = {};
   public  riskFactor: any = {};
 
@@ -217,9 +218,7 @@ export class AAQQAovComponent implements OnInit {
           "CLIENTID": "RCAL",
           "CORRELATIONID": "## batch 7 ##"
         },
-        "_AE_BEROEPENLIJST_AOV": {
-
-        }
+        "_AE_BEROEPENLIJST_AOV": {}
       }
     };
 
@@ -252,9 +251,11 @@ export class AAQQAovComponent implements OnInit {
 
     if (professionObj) {
       // When a profession is known the riskfactor can be retrieved from the service.
-      this.fetchRiskFactor(this.rawProfessions[professionObj.key])
+      this.rawProfession = this.rawProfessions[professionObj.key];
+      this.fetchRiskFactor(this.rawProfession);
     } else {
       // No profession found, empty the riskFactor.
+      this.rawProfession = null;
       this.riskFactor = {};
     }
   }
@@ -269,17 +270,25 @@ export class AAQQAovComponent implements OnInit {
     cb();
   }
 
+  // TODO debounce deze functie!!
   fetchSpecification(callback: any = () => {}) {
+
     if (this.riskFactor) {
+      if (!this.validatePersonalInformation() || !this.validateChoices()) {
+        return;
+      }
+
       if (options.mockData) {
         this.processSpecification(mockSpecificationResponse, callback);
         return;
       }
 
-      let now = new Date();
+      let now: any = new Date();
       let dateString = `${now.getFullYear()}-${zeroPad(now.getMonth() + 1, 2)}-${zeroPad(now.getDate(), 2)}`;
 
-      // TODO: fill in the values.
+      let birthDate = stringToDate(this.birthDate);
+      let maxInsuranceDate = addYearsToDate(birthDate, this.rawProfession._AE_BKLSMAX);
+
       let body = {
         "calculateSpecificationRequest": {
           "AILHEADER": {
@@ -288,37 +297,37 @@ export class AAQQAovComponent implements OnInit {
           },
           "CONTRACT_POLIS": {
             "DPRC": "0",
-            "INGDAT": "2011-09-05",
-            "_AE_BETAALAFSPRAAK": { "BETTERM": "3" },
+            "INGDAT": dateString,
+            "_AE_BETAALAFSPRAAK": {
+              "BETTERM": "1"
+            },
             "_AE_VERZEKERD_OBJECT": {
               "_AE_OVERIG": {
                 "_AE_OBJECT_PERSOON": {
                   "OBJECT_PERS_BEROEP_GEGEV": {
-                    "_AE_RISICOKLASSE_AOV": { "_AE_RISKKLASSE": "3" }
+                    "_AE_RISICOKLASSE_AOV": {
+                      "_AE_RISKKLASSE": this.riskFactor.calculateRiskFactorResponse._AE_RISICOKLASSE_AOV._AE_RISKKLASSE
+                    }
                   },
-                  "GEBDAT": "1971-07-01"
+                  "GEBDAT": this.birthDate
                 }
               }
             },
             "DEKKING": {
-              "VERZSOM": "25000",
-              "HVVDAT": "2022-05-01",
-              "MYCODE": "1149",
+              "VERZSOM": this.insuranceAmount,
+              "HVVDAT": maxInsuranceDate,
+              "MYCODE": "1150",
               "DEKKING_AOV": {
                 "_AE_COMBINATIEKORT": "false",
-                "_AE_COMMERCIELEKORT": "0",
-                "_AE_MANTELKORT": "10",
-                "WACHTTY": "365",
-                "_AE_AANVANGSKORT": "true",
-                "_AE_VERZSOM_B": "44000",
-                "UDRAFWJ": "5",
-                "AOPVU": "50",
+                "_AE_COMMERCIELEKORT": "5",
+                "WACHTTY": this.startingTerm,
+                "_AE_AANVANGSKORT": "false",
+                "UDRAFWJ": maxInsuranceDate - now,
+                "AOPVU": "25",
                 "CBSSTG": "false",
-                "ENDLFTD": "60",
-                "INDEX": "true",
-                "TARIEF": "C",
-                "INDPERC": "2",
-                "KLIMPRC": "2"
+                "ENDLFTD": this.rawProfession._AE_BKLSMAX,
+                "INDEX": "false",
+                "TARIEF": "C"
               }
             }
           }

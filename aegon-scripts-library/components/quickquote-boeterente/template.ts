@@ -11,8 +11,13 @@ export const template = `
             </aegon-help>
           </div>
           <div class="inputs">
-            <select [(ngModel)]="mortgageType" class="no-dd" [class.error]="mortgageTypeErr" (change)="init($event.target.value);">
-              <option *ngFor="#m of mortgageOps; #i = index" [value]="i">{{m}}</option>
+            <select #mortgageSelect [(ngModel)]="mortgageType" class="no-dd" [class.error]="mortgageTypeErr" (change)="init($event.target.value);">
+              <option [value]="0" selected>Maak uw keuze</option>
+              <option [value]="1">Aflossingsvrij</option>
+              <option [value]="2">Annuitair</option>
+              <option [value]="3">(Bank)Spaar</option>
+              <option [value]="4">Lineair</option>
+              <option [value]="5">Overig</option>            
             </select>
           </div>
         </div>

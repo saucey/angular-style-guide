@@ -22,6 +22,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteBoet
   pipes: [MoneyPipe]
 })
 export class QuickQuoteBoeterenteComponent implements OnInit {
+  @ViewChild('mortgageSelect') mortgageSelect: ElementRef;
   // Mortgage options:
   mortgageOps: Object[] = ['Maak uw keuze', 'Aflossingsvrij', 'Annuitair', '(Bank)Spaar', 'Lineair', 'Overig'];
   // Scope variable initiation.
@@ -81,7 +82,8 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
    */
   init(index: number): void {
     this.mortgageType = Number(index);
-    this.mortgageName = String(this.mortgageOps[index]);
+    let mortgageSelect = this.mortgageSelect.nativeElement;
+    this.mortgageName = String(mortgageSelect.options[mortgageSelect.selectedIndex].text);
     // Fired only once after the mortgage type is changed.
     if (!this.initiated && this.mortgageType > 0) {
       let formInit = {
