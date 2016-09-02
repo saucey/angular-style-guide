@@ -71,9 +71,9 @@
     attach: function (context, settings) {
       if (!this.attached) {
         this.context = context;
+        // Run before real initialization.
+        this.setup(settings);
       }
-      // Run before real initialization.
-      this.setup(settings);
 
       // Register a public method for deinitialize.
       win.shwGlobal.userLogout = (function (onlyLocal) {
