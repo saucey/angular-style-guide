@@ -5,7 +5,7 @@
  * - There is no more specific util library where you can put it
  * - It is of a rare/miscellaneous/random type
  * - If you can group more than 2 functions around the same concept put it in a
- *   separate library. Example: number formatting, dom manipulation, lightbox
+ *   separate library. Example: number formatting, dom manipulation, calculation
  */
 
 /**
@@ -49,8 +49,8 @@ export function throttle(func: any, interval: number = 1000) : any {
 /**
  * Returns a function, that, as long as it continues to be invoked, will not
  * be triggered. The function will be called after it stops being called for
- * N milliseconds. If `immediate` is passed, trigger the function on the
- * leading edge, instead of the trailing.
+ * N milliseconds. If `immediate` is passed, trigger the function also on the
+ *   leading edge
  * @param {Function} func Function to make debounce
  * @param {Number} wait Number of ms to wait before the debounce kicks in (debounce time)
  * @param {Boolean} immediate Should the callback also be triggered as soon as it is triggered. Will also fire after the wait timeout
@@ -72,7 +72,8 @@ export function debounce(func: any, wait: number = 1000, immediate: boolean = fa
 };
 
 /**
- * Create an array of values between <from> and <to>. Used to create ranges for slider pips/scales
+ * Create an array of values between <from> and <to>.
+ * Used to create ranges for slider pips/scales
  * @param {Number} from Value to start with (lower)
  * @param {Number} to Value to end with (upper, inclusive)
  * @param {Function} func Optional function to decide whether to include value or not
@@ -91,19 +92,14 @@ export function rangeArray (from:number, to:number, func:any) : number[] {
   return res;
 };
 
+/**
+ * Get an attribute from the supplied element and parse it as a JSON
+ * @param {Element} element HTML element to get attribute from
+ * @param {String} name Name of the attribute to parse
+ * @returns {Any} The parsed JSON primitive or object
+ */
 export function jsonAttribute(element:any, name: string) : any {
-	if (!element || !element.getAttribute) {
-		return;
-	}
-  var str = element.getAttribute(name),
-  	json;
-	try {
-		json = JSON.parse(str);
-	} catch (e) {
-		// Ignore;
-		return;
-	}
-	return json;
+  return element && element.getAttribute ? tryParseJson(element.getAttribute(name)) : undefined;
 }
 
 /**
@@ -206,6 +202,8 @@ export function trim(str : string) : string {
 
 /**
  * Simple array dedupe
+ * @param {Array} input Array to dedupe values from
+ * @returns {Array} Returns a new deduped array
  */
 export function uniqueArray(input : any[]) : any {
 	return input.filter(function(item, pos, self) {

@@ -1,5 +1,5 @@
 export const template = `
-  <div class="aa-leadform"
+  <div class="aa-leadform" #root
     [ngClass]="['aa-state--' + data.state, data.options.cssClass || '']">
     <div class="aa-leadform__intro"
       [style.background-image]="'url(' + data.options.image + ')'">
@@ -12,7 +12,7 @@ export const template = `
     </div>
     <div class="aa-leadform__form">
       <div class="aa-leadform__loading aa-fade-in aa-layout__fill">
-        <div class="aa-loading"></div>
+        <div class="aa-loading" aa-loading-text="ff wachten..."></div>
       </div>
       <div class="aa-leadform__thanks aa-fade-in aa-layout__fill">
         <div class="aa-leadform__title">
@@ -30,14 +30,14 @@ export const template = `
       <form #form="ngForm" (ngSubmit)="onSubmit()" novalidate="novalidate">
         <div class="aa-leadform__line">
           <label class="radio aa-radio aa-leadform__aanhef">
-          	<input id="aanhefM" type="radio" required [attr.value]="data.options.form.fields.aanhef.dhr"/>
+          	<input class="aa-leadform__aanhef-m" type="radio" name="aanhef" required [attr.value]="data.options.form.fields.aanhef.dhr"/>
           	<span class="radio aa-radio__radio"></span>
           	<span class="aa-radio__text">
           	  {{ data.options.form.fields.aanhef.dhr }}
         	  </span>
           </label>
           <label class="radio aa-radio aa-leadform__aanhef">
-          	<input id="aanhefF"  type="radio" checked [attr.value]="data.options.form.fields.aanhef.mevr"/>
+          	<input class="aa-leadform__aanhef-f" type="radio" name="aanhef" checked [attr.value]="data.options.form.fields.aanhef.mevr"/>
           	<span class="radio aa-radio__radio"></span>
           	<span class="aa-radio__text">
           	  {{ data.options.form.fields.aanhef.mevr }}

@@ -2,7 +2,7 @@
  * Beleggen test: "is beleggen iets voor jou?"
  */
 
-.aa-beleggen-test {
+.aa-quiz {
 	max-width: 1024px;
 	display: flex;
 	flex-direction: row;
@@ -17,12 +17,12 @@
 }
 
 .aa-state--results {
-	.aa-beleggen-test__results {
+	.aa-quiz__results {
 		display: flex;
 	}
 }
 
-.aa-beleggen-test__intro {
+.aa-quiz__intro {
 	padding: 15px;
 	min-height: 250px;
 	min-width: 300px;
@@ -36,7 +36,7 @@
 	justify-content: space-between;
 }
 
-.aa-beleggen-test__title {
+.aa-quiz__title {
   color: $slightly_darker_blue;
   font-family: $font_normal;
   font-size: $large;
@@ -44,7 +44,7 @@
   line-height: 1.2;
 }
 
-.aa-beleggen-test__header {
+.aa-quiz__header {
   color: $slightly_darker_blue;
   font-family: $font_light;
   font-size: $xx-large;
@@ -53,7 +53,7 @@
   margin-bottom: 10px;
 }
 
-.aa-beleggen-test__subheader {
+.aa-quiz__subheader {
   color: $slightly_darker_blue;
   font-family: $font_light;
   font-size: $large;
@@ -62,7 +62,7 @@
   margin-bottom: 10px;
 }
 
-.aa-beleggen-test__action {
+.aa-quiz__action {
   color: $slightly_darker_blue;
   font-family: $font_light;
   font-size: $large;
@@ -72,7 +72,7 @@
   cursor: pointer;
 }
 
-.aa-beleggen-test__image {
+.aa-quiz__image {
 	background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
@@ -83,7 +83,7 @@
   margin: 15px auto 15px auto;
 }
 
-.aa-beleggen-test__test {
+.aa-quiz__test {
 	background-color: white;
 	position: relative;
 	flex: 1 1 auto;
@@ -100,7 +100,7 @@
 	border: 1px solid $slightly_darker_blue;
 }
 
-.aa-beleggen-test__nrs {
+.aa-quiz__nrs {
   flex: 0 0 auto;
 	display: flex;
 	flex-direction: row;
@@ -108,7 +108,7 @@
 	margin-bottom: 15px;
 }
 
-.aa-beleggen-test__nr {
+.aa-quiz__nr {
   flex: 0 0 auto;
 	cursor: pointer;
 	border-radius: 50%;
@@ -124,19 +124,19 @@
 	font-size: $medium;
   transition: background 150ms ease-out;
   border: 2px solid $dark_grey;
-  &.aa-beleggen-test__nr--completed {
+  &.aa-quiz__nr--completed {
   	background-color: $slightly_darker_blue;
   	color: white;
   	border: 2px solid $slightly_darker_blue;
   }
-	&.aa-beleggen-test__nr--active {
+	&.aa-quiz__nr--active {
 		border: 2px solid $slightly_darker_blue;
 		background-color: white;
 		color: $slightly_darker_blue;
 	}
 }
 
-.aa-beleggen-test__question-box {
+.aa-quiz__question-box {
 	overflow: hidden;
 	flex: 0 1 100%;
 	justify-content: flex-start;
@@ -145,7 +145,7 @@
 	display: flex;
 }
 
-.aa-beleggen-test__question {
+.aa-quiz__question {
 	flex: 0 0 100%;
 	width: 100%;
 	justify-content: flex-start;
@@ -156,7 +156,7 @@
 	padding: 15px;
 }
 
-.aa-beleggen-test__question-bubble {
+.aa-quiz__question-bubble {
 	flex: 1 1 100%;
 	width: 100%;
 	background-color: $slightly_darker_blue;
@@ -172,7 +172,7 @@
 }
 
 
-.aa-beleggen-test__question-label {
+.aa-quiz__question-label {
 	margin-bottom: 30px;
 	&:before {
 		content: '';
@@ -187,22 +187,22 @@
 	}
 }
 
-.aa-beleggen-test__buttons {
+.aa-quiz__buttons {
 	flex: 0 0 auto;
 	display: flex;
 	justify-content: space-around;
 }
 
-.aa-beleggen-test__buttons--clicked {
-	.aa-beleggen-test__button {
+.aa-quiz__buttons--clicked {
+	.aa-quiz__button {
 		background-color: $dark_grey;
-		&.aa-beleggen-test__button--answer {
+		&.aa-quiz__button--answer {
 			xbackground-color: $dark_grey !important;
 		}
 	}
 }
 
-.aa-beleggen-test__button {
+.aa-quiz__button {
 	width: 100px;
 	padding: 15px;
   font-family: $font_normal;
@@ -212,18 +212,18 @@
   transition: all 150ms ease-out;
   transform: translateZ(0);
   margin-bottom: 0;
-	&.aa-beleggen-test__button--answer, &:active {
+	&.aa-quiz__button--answer, &:active {
 		background-color: $slightly_darker_blue;
 		color: white;
 	}
-	&.aa-beleggen-test__button--clicked {
+	&.aa-quiz__button--clicked {
 		transform: scale(1.1);
 		background-color: $slightly_darker_blue;
 		color: white;
 	}
 }
 
-.aa-beleggen-test__results {
+.aa-quiz__results {
 	z-index: 11;
 	display: none;
 	background-color: white;
@@ -231,27 +231,27 @@
 	flex-direction: column;
 }
 
-.aa-beleggen-test__results--winner {
-	.aa-beleggen-test__tip-head, .aa-beleggen-test__tips {
+.aa-quiz__results--winner {
+	.aa-quiz__tip-head, .aa-quiz__tips {
 		display: none;
 	}
-	.aa-beleggen-test__winner {
+	.aa-quiz__winner {
 		display: block;
 	}
 }
 
-.aa-beleggen-test__tips, .aa-beleggen-test__winner {
+.aa-quiz__tips, .aa-quiz__winner {
 	position: relative;
 	flex: 1 1 100%;
 	background-color: $grey;
 }
 
-.aa-beleggen-test__winner {
+.aa-quiz__winner {
 	display: none;
 	padding: 15px;
 }
 
-.aa-beleggen-test__check {
+.aa-quiz__check {
   font-size: $medium;
   margin-left: 30px;
   margin-bottom: 5px;
@@ -268,7 +268,7 @@
 }
 
 
-.aa-beleggen-test__tip {
+.aa-quiz__tip {
 	display: block;
 	overflow-y: auto;
 	height: 100%;
@@ -277,13 +277,13 @@
 	cursor: pointer;
 }
 
-.aa-beleggen-test__tip-text {
+.aa-quiz__tip-text {
 	padding: 15px;
 	padding-top: 0;
 }
 
 
-.aa-beleggen-test__tip-head {
+.aa-quiz__tip-head {
 	flex: 0 0 auto;
 	display: flex;
 	flex-direction: row;
@@ -294,13 +294,13 @@
 	background-color: $grey;
 }
 
-.aa-beleggen-test__tip-label {
+.aa-quiz__tip-label {
 	flex: 1 1 100%;
 	color: $black;
   line-height: 30px;
 }
 
-.aa-beleggen-test__tip-prev {
+.aa-quiz__tip-prev {
 	flex: 0 0 auto;
 	&:before {
 		transform: rotate(180deg);
@@ -308,16 +308,16 @@
 	}
 }
 
-.aa-beleggen-test__tip-next {
+.aa-quiz__tip-next {
 	flex: 0 0 auto;
 	transform: scale(1);
 }
-.aa-beleggen-test__tip-navs {
+.aa-quiz__tip-navs {
 	flex: 0 0 auto;
 	height: 30px;
 	overflow: hidden;
 }
-.aa-beleggen-test__tip-nav {
+.aa-quiz__tip-nav {
   font-size: $medium;
 	transition: transform 150ms ease-out;
 	transform-origin: 100% center;
@@ -345,7 +345,7 @@
 	}
 }
 
-.aa-beleggen-test__cta {
+.aa-quiz__cta {
 	flex: 0 0 auto;
 	margin-top: 15px;
 	.button {
@@ -353,7 +353,7 @@
 	}
 }
 
-.aa-beleggen-test__result-text {
+.aa-quiz__result-text {
 	flex: 0 0 auto;
 	color: $slightly_darker_blue;
 	margin-bottom: 15px;
@@ -361,7 +361,7 @@
 }
 
 @include breakpoint($brk-mobile) {
-	.aa-beleggen-test__test, .aa-beleggen-test__results	{
+	.aa-quiz__test, .aa-quiz__results	{
 		padding: 15px;
 	}
 }

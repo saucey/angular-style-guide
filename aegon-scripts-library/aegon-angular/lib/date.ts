@@ -45,6 +45,5 @@ export function formatDateSorted(input : any) : string {
     days = pad(date.getDate(), 2),
     hours = pad(date.getHours(), 2),
     mins = pad(date.getMinutes(), 2);
-  console.log(years, mons, days, hours, mins)
   return [years, mons, days, hours, mins].join('');
 }

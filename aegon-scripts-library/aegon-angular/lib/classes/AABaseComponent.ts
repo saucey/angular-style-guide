@@ -27,6 +27,10 @@ export class AABaseComponent implements OnInit {
   public options: any = {};
   public contentHtml: string;
 
+  // Global registration
+  // Now we use a global window object to enable external Javascript access.
+  // We could also use a public static property, but that would prevent external
+  // access.
   public global : any = window[GLOBAL_KEY] = window[GLOBAL_KEY] || {};
   private globalId: string;
 
@@ -35,19 +39,35 @@ export class AABaseComponent implements OnInit {
       aaContentHtml = nativeElement.getAttribute('aaContentHtml');
     // Native element reference
     this.element = nativeElement;
+    // aaData json
+    var attrData = this.element.getAttribute('aaData'),
+      json;
+    if (attrData) {
+      // Parse data attribute as JSON
+      this.data = libUtil.tryParseJson(attrData, {});
+    }
+
     // Parse content HTML
     if (aaContentHtml) {
       this.contentHtml = aaContentHtml;
     }
   }
+  /**
+   * Get a key from global window object
+   */
   getGlobal(key : string) : any {
     return this.global[key];
   }
+  /**
+   * Set a key on global window object
+   */
   setGlobal(key : string, value : any) : any {
     this.global[key] = value;
     return value;
   }
-  // Runs when input/output is parsed (in this case options)
+  /**
+   * Runs when input/output is parsed (in this case options)
+   */
   ngOnInit(): void {
     var keys = Object.keys(this.options) || [],
       aaId = this.element.getAttribute('aaId');
@@ -66,15 +86,24 @@ export class AABaseComponent implements OnInit {
       });
     }
     // console.log('merged', this.data.options);
+
+    // Reset state
+    this.reset();
   }
-  // Remove component
+  reset() : void {
+    // Init/reset state
+  }
+
+  // Unregister on destroy
   ngOnDestroy() {
     if (this.globalId) {
       // Unregister object
       this.setGlobal(this.globalId, undefined);
     }
   }
-  // Force a dirty check from "outside" to make sure all bindings are refreshed
+  /**
+   * Force a dirty check from "outside" to make sure all bindings are refreshed
+   */
   public refresh(func: any = undefined) : void {
     func = func || (() => {});
     // Run dirty check
@@ -84,9 +113,7 @@ export class AABaseComponent implements OnInit {
     if (this['zone']) {
       this['zone'].run(func);
     }
-    // Trigger resize to make sure charts display correctly
+    // Trigger resize to make sure components redraw
     window.dispatchEvent(new Event('resize'));
   }
-
 }
-

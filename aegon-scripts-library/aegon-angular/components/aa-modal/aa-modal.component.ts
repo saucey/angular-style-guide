@@ -2,14 +2,14 @@ import {Component, Input, Output, NgZone, ElementRef} from 'angular2/core';
 import {template} from "./template";
 import {AABaseComponent} from '../../lib/classes/AABaseComponent';
 import {defaultOptions} from "./defaultOptions";
-import {AAAppendPrependDirective} from '../../directives/aa-append-prepend/aa-append-prepend.directive';
+import {AAElementDirective} from '../../directives/aa-element/aa-element.directive';
 
 import * as libDom from "../../lib/dom";
 
 @Component({
   selector: 'aa-modal',
   template: template,
-  directives: [AAAppendPrependDirective]
+  directives: [AAElementDirective]
 })
 
 export class AAModalComponent extends AABaseComponent {
@@ -122,10 +122,10 @@ export class AAModalComponent extends AABaseComponent {
   public close() : void {
     this.closing = true;
     this.unregisterKeyHandler();
+    this.resetScroll();
     setTimeout(() => {
       this.closing = false;
       this.visible = false;
-      this.resetScroll();
       this.refresh();
     }, this.data.options.closeDuration);
     this.refresh();

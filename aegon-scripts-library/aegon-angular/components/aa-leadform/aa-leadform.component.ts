@@ -2,7 +2,7 @@
  * A lead generation form that accepts user details
  * Form is posted to a configured backend form in Drupal (through FormAssembly)
  * To make this work, first configure the form in FormAssembly, then in Drupal
- * Enter the form details in the options file.
+ * Enter the form configuration in the options
  */
 
 import {Component, Input, Output, NgZone, ElementRef, ViewChild} from 'angular2/core';
@@ -23,10 +23,10 @@ declare var jQuery: any;
 export class AALeadformComponent extends AABaseComponent {
   @Input() options: any = {};
   @Input() data: any = {};
-  @Input() visible: boolean = false;
 
   // Internal slider DOM reference
   @ViewChild('form') form: ElementRef;
+  @ViewChild('root') root: ElementRef;
 
   public defaultOptions : any = defaultOptions;
   /**
@@ -44,18 +44,15 @@ export class AALeadformComponent extends AABaseComponent {
 
   ngOnInit(): void {
     super.ngOnInit();
-    // Initial state
-    this.data.state = this.data.state || 'start';
 
+    // Init state
+    this.reset();
+  }
+
+  reset() : void {
     // Init data
     this.data.form = {};
-
-    // Demo mode?
-    if (this.data.options.demo) {
-      setInterval(() => {
-        this.data.state = this.data.state === 'start' ? 'loading' : this.data.state === 'loading' ? 'thanks' : 'start';
-      }, this.data.options.demo);
-    }
+    this.data.state = 'start';
   }
 
   private kvPair(key, value) : string {
@@ -77,8 +74,9 @@ export class AALeadformComponent extends AABaseComponent {
    */
   private getAanhef() : string {
     var key = this.data.options.form.mapping.aanhef,
-      male = document.getElementById('aanhefM'),
-      female = document.getElementById('aanhefF'),
+      elem = this.root.nativeElement,
+      male = elem.querySelector('input.aa-leadform__aanhef-m'),
+      female = elem.querySelector('input.aa-leadform__aanhef-f'),
       value = male['checked'] ? this.data.options.form.fields.aanhef.dhr : this.data.options.form.fields.aanhef.mevr;
     return this.kvPair(key, value);
   }
@@ -116,7 +114,6 @@ export class AALeadformComponent extends AABaseComponent {
    * - Hidden fields
    * - Dynamic fields
    */
-
   private postForm() : any {
     var url = this.data.options.form.postUrl,
       dataAanhef = [this.getAanhef()],
@@ -124,14 +121,20 @@ export class AALeadformComponent extends AABaseComponent {
       dataHidden = this.serializeData(this.mapFormData(this.data.options.form.values)),
       dataDynamic = this.serializeData(this.mapFormData(this.dynamicFields())),
       encodedData = [].concat(dataAanhef, dataForm, dataHidden, dataDynamic).join('&');
-    // console.log('encodedData', dataAanhef, dataForm, dataHidden, encodedData);
+    // console.log('form post', url, encodedData);
     return jQuery.post(url, encodedData);
   }
 
+  /**
+   * Goto thank you screen
+   */
   private thanks() : void {
     this.data.state = 'thanks';
   }
 
+  /**
+   * Form submit handler
+   */
   onSubmit() {
     this.data.state = 'loading';
     // POST form
@@ -139,7 +142,11 @@ export class AALeadformComponent extends AABaseComponent {
     .then(() => {
       this.thanks();
     }).fail((e) => {
-      console.log('error', e);
+      // Ignore errors
+      // Currently always a 403 is returned on posting the form through jQuery.post()
+      // Probably drupal is configured to check additional fields (tokens, etc)
+      // Nevertheless the form is handled according to the definition (mail is sent)
+      // That's why we can ignore the 403 error
       this.thanks();
     });
   }

@@ -13,18 +13,23 @@ import * as libUtil from "./util";
 
 // Include all components; they will be added to the dynamic component directives
 // DON'T FORGET TO REGISTER COMPONENT IN ALL_COMPONENTS FOR USING IN AA-TEMPLATE
-import {AAHighchartComponent} from '../components/aa-highchart/aa-highchart.component';
+// Core
+import {AAElementDirective} from '../directives/aa-element/aa-element.directive';
+import {AACssComponent} from '../components/aa-css/aa-css.component';
+import {AADataComponent} from '../components/aa-data/aa-data.component';
+// Visual components
+import {AAModalComponent} from '../components/aa-modal/aa-modal.component';
 import {AAHintComponent} from '../components/aa-hint/aa-hint.component';
-import {AAInputDropDownComponent} from '../components/aa-input-dropdown/aa-input-dropdown.component';
+import {AAHighchartComponent} from '../components/aa-highchart/aa-highchart.component';
+// Inputs & sliders
 import {AAInputNumberComponent} from '../components/aa-input-number/aa-input-number.component';
 import {AAInputRadioComponent} from '../components/aa-input-radio/aa-input-radio.component';
+import {AAInputDropDownComponent} from '../components/aa-input-dropdown/aa-input-dropdown.component';
 import {AASliderComponent} from '../components/aa-slider/aa-slider.component';
 import {AASliderInputComponent} from '../components/aa-slider-input/aa-slider-input.component';
-import {AADataComponent} from '../components/aa-data/aa-data.component';
-import {AAModalComponent} from '../components/aa-modal/aa-modal.component';
+// Mini apps
 import {AALeadformComponent} from '../components/aa-leadform/aa-leadform.component';
-import {AABeleggenTestComponent} from '../components/aa-beleggen-test/aa-beleggen-test.component';
-import {AAAppendPrependDirective} from '../directives/aa-append-prepend/aa-append-prepend.directive';
+import {AAQuizComponent} from '../components/aa-quiz/aa-quiz.component';
 // Quick quotes
 import {AAQQBeleggenComponent} from '../components/aa-qq-beleggen/aa-qq-beleggen.component';
 import {AAQQHistorischRendementComponent} from '../components/aa-qq-historisch-rendement/aa-qq-historisch-rendement.component';
@@ -41,7 +46,8 @@ const
    */
   ALL_COMPONENTS = [
     // Core
-    AAAppendPrependDirective,
+    AAElementDirective,
+    AACssComponent,
     // Components
     AAHighchartComponent,
     AAHintComponent,
@@ -53,7 +59,7 @@ const
     AADataComponent,
     AAModalComponent,
     AALeadformComponent,
-    AABeleggenTestComponent,
+    AAQuizComponent,
     // Quick quotes
     AAQQBeleggenComponent,
     AAQQHistorischRendementComponent,
@@ -71,7 +77,7 @@ const
    * in the aaContentHtml attribute, and on this.contentHtml if you base your
    * component on AABaseComponent
    */
-  AA_CONTENT_SELECTOR = 'aa-data'
+  AA_CONTENT_SELECTOR = 'aa-data,aa-css'
 
 /**
  * Boot the components
@@ -112,7 +118,11 @@ var bootComponents = function () {
     bootstrap(component);
   };
 };
-
+var initialized = false;
 export function init() : void {
+  if (initialized) {
+    return;
+  }
+  initialized = true;
   bootComponents();
 }

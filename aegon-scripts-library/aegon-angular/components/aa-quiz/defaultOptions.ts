@@ -1,8 +1,8 @@
 export const defaultOptions = {
   header: 'Is beleggen iets voor u?',
   subheader: 'Beleggen is een mooie manier om uw geld te laten groeien. Maar is het ook écht iets voor u is?',
-  action: 'Doe de quiz!',
   image: '/images/beleggen/beleggenquiz.svg',
+  action: 'Doe de quiz!',
   opnieuw: 'Doe de quiz nog een keer',
   cta: {
     text: 'Begin met beleggen',
@@ -16,7 +16,8 @@ export const defaultOptions = {
       text: 'Gefeliciteerd, het lijkt erop dat u helemaal klaar bent om meer uit uw geld te halen.'
     }
   },
-  questions: [
+  questions: [],
+  xquestions: [
     {
       q: 'Weet u hoeveel geld er elke maand binnenkomt en hoeveel u uitgeeft?',
       correct: true,

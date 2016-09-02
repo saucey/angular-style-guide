@@ -43,9 +43,10 @@ export function parse (str: string) : any {
 				};
 			}
 		}
+	// parse the input
 	try {
 		str = str || '';
-		var split = str.split(/;/),
+		var split = str.split(/;/), // Split the input on ; char
 			curKey,
 			curValue;
 		// Allow separator char (;) in value part. How do we detect that:
