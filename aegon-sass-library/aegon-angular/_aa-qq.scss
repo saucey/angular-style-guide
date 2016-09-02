@@ -156,6 +156,7 @@ $qq_border_radius: 6px;
   color: $slightly_darker_blue;
   background-color: white;
   position: relative;
+  line-height: 1.2;
 }
 .aa-qq__disclaimer--star {
   @include rem('padding-left', 25);

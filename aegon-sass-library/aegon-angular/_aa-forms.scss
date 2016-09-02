@@ -1,0 +1,29 @@
+/**
+ * Forms
+ */
+
+.aa-radio {
+  cursor: pointer;
+}
+
+.aa-radio__text {
+  display: block;
+  margin-top: -22px;
+  margin-left: 20px;
+}
+
+.aa-radio__radio:before {
+  display: none !important;
+}
+
+// We need to use !important because of the very specific generic styles on
+// radio buttons that supply the overall styling of it.
+.aa-radio__radio {
+  transition: all 150ms ease-out;
+  border: 4px solid white !important;
+  background-color: $white !important;
+}
+
+.aa-radio > input[type="radio"]:checked + .aa-radio__radio {
+  background-color: $blue !important; //#3395d3
+}

@@ -7,11 +7,6 @@ import {isString, isDate} from "angular2/src/facade/lang";
 /**
  * Calculate the current age, given a certain date.
  * @param {any} birthDate Date object or String formatted like 'yyyy-mm-dd'.
- * @returns {number} The rounded number
- *
- * EXAMPLE
- * - round(12345.6789, 2) -> 12345.68
- * - round(12345.6789, -2) -> 12300
  */
 export function calculateAge(birthDate: any): number {
   let age: number;
@@ -38,6 +33,21 @@ export function calculateAge(birthDate: any): number {
 }
 
 /**
+ * Format date as a sortable string: YYYYMMDDHHMM
+ */
+export function formatDateSorted(input : any) : string {
+  var pad = function pad(number, padTo) {
+      return ('00000000000000000000' + number.toString()).slice(-padTo);
+    },
+    date = isDate(input) ? input : isString(input) ? new Date(input) : new Date(),
+    years = date.getFullYear(),
+    mons = pad(date.getMonth() + 1, 2),
+    days = pad(date.getDate(), 2),
+    hours = pad(date.getHours(), 2),
+    mins = pad(date.getMinutes(), 2);
+  return [years, mons, days, hours, mins].join('');
+}
+
  * Return date from string
  * @param {any} date String formatted like 'yyyy-mm-dd'.
  * @returns {Date} Date object
@@ -66,3 +76,6 @@ export function stringToDate(date: string) {
 export function addYearsToDate(date: Date, years: number) {
   return new Date().setFullYear(date.setFullYear(date.getFullYear() + years));
 }
+
+
+

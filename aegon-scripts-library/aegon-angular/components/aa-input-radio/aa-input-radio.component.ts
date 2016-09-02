@@ -38,7 +38,6 @@ export class AAInputRadioComponent implements ControlValueAccessor {
   writeValue(value: any) : void {
     this.model = value;
   }
-
   setValue(value) {
     this.model = value;
   }

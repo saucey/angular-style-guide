@@ -11,6 +11,9 @@ import {Component, ElementRef, Input, OnInit} from 'angular2/core';
 import * as libUtil from "../util";
 import * as libXsr from "../xsr";
 
+// Global windows key for cross component communication
+const GLOBAL_KEY = '__AA__';
+
 declare var window : any;
 
 /**
@@ -24,28 +27,93 @@ export class AABaseComponent implements OnInit {
   public options: any = {};
   public contentHtml: string;
 
+  // Global registration
+  // Now we use a global window object to enable external Javascript access.
+  // We could also use a public static property, but that would prevent external
+  // access.
+  public global : any = window[GLOBAL_KEY] = window[GLOBAL_KEY] || {};
+  private globalId: string;
+
   constructor(thisElement: ElementRef) {
     var nativeElement = thisElement.nativeElement,
       aaContentHtml = nativeElement.getAttribute('aaContentHtml');
-    // native element reference
+    // Native element reference
     this.element = nativeElement;
+    // aaData json
+    var attrData = this.element.getAttribute('aaData'),
+      json;
+    if (attrData) {
+      // Parse data attribute as JSON
+      this.data = libUtil.tryParseJson(attrData, {});
+    }
+
     // Parse content HTML
     if (aaContentHtml) {
       this.contentHtml = aaContentHtml;
     }
   }
-  // Runs when input/output is parsed (in this case options)
+  /**
+   * Get a key from global window object
+   */
+  getGlobal(key : string) : any {
+    return this.global[key];
+  }
+  /**
+   * Set a key on global window object
+   */
+  setGlobal(key : string, value : any) : any {
+    this.global[key] = value;
+    return value;
+  }
+  /**
+   * Runs when input/output is parsed (in this case options)
+   */
   ngOnInit(): void {
-    var keys = Object.keys(this.options) || [];
-    // Merge options with default options; first clone default options
-    // Add resulting options to data object
+    var keys = Object.keys(this.options) || [],
+      aaId = this.element.getAttribute('aaId');
+    // Register aaId as global?
+    if (aaId) {
+      this.setGlobal(aaId, this);
+      this.globalId = aaId;
+      // console.log('basecomponent register aaId', aaId, this);
+    }
+    // Merge options with default options
     if (this.options || this.defaultOptions) {
+      // First clone default options
       this.data.options = this.defaultOptions ? libUtil.clone(this.defaultOptions) : {};
       keys.map((key) => {
         libXsr.path(this.data.options, key, this.options[key]);
       });
     }
     // console.log('merged', this.data.options);
+
+    // Reset state
+    this.reset();
+  }
+  reset() : void {
+    // Init/reset state
+  }
+
+  // Unregister on destroy
+  ngOnDestroy() {
+    if (this.globalId) {
+      // Unregister object
+      this.setGlobal(this.globalId, undefined);
+    }
+  }
+  /**
+   * Force a dirty check from "outside" to make sure all bindings are refreshed
+   */
+  public refresh(func: any = undefined) : void {
+    func = func || (() => {});
+    // Run dirty check
+    // Use this['zone'] notation, because of a TypeScript quirk
+    // You cannot declare zone here, and have it injected in the constructor of the
+    // derived class without getting warnings.
+    if (this['zone']) {
+      this['zone'].run(func);
+    }
+    // Trigger resize to make sure components redraw
+    window.dispatchEvent(new Event('resize'));
   }
 }
-
