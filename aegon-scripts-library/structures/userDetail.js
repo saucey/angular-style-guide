@@ -66,7 +66,11 @@
     // Create a deferred object, which will be resolved when the data is retrieved
     deferredData: $.Deferred(),
 
+    // Context passed by Drupal.
+    context: null,
+
     attach: function (context, settings) {
+      this.context = context;
       // Run before real initialization
       this.setup(settings);
 
@@ -100,7 +104,7 @@
     attached: false,
 
     setup: function (settings) {
-      
+      var context = this.context;
       // Check if current website is backend
       if (window.location.hostname.search('.aegon.com') !== -1) {
         return;
@@ -121,7 +125,7 @@
       else {
         if (!this.lastLogin()) {
           // Make sure the button is always shown, later on we will check against login status
-          $('.login-link-wrapper').css('display', 'block');
+          $('.login-link-wrapper', context).css('display', 'block');
           
           return;
         }
@@ -261,7 +265,8 @@
     initialize: function (data) {
 
       // Local variables
-      var that = this;
+      var that = this,
+          context = that.context;
 
       // Callback to prevent appendTo before correct end of parseWidget()
       var callback = function (domWidget) {
@@ -274,11 +279,11 @@
       if (data.loggedIn) {
 
         // User is logged in, so we can get rid of the button
-        $('.login-link-wrapper').css('display', 'none');
+        $('.login-link-wrapper', context).css('display', 'none');
 
         // User has not given a mobile number thus we need the banner asking for it
         if (!data.userMobile) {
-          $('.messages.messages--attention.request_mobile_number').css('display', 'block');
+          $('.messages.messages--attention.request_mobile_number', context).css('display', 'block');
         }
 
         // Parse the DOM before appendTo
@@ -289,17 +294,18 @@
       }
       else {
         // If not loggedIn, show login button
-        $(".login-link-wrapper").css('display', 'block');
+        $(".login-link-wrapper", context).css('display', 'block');
       }
     },
 
     parseWidget: function (data, callback) {
 
       // Vars for local scope
-      var $template, dateFormatted;
+      var $template, dateFormatted, 
+          context = this.context;
 
       // Convert template in jQuery DOM
-      $template = $(".user_detail_widget"); //$(template);
+      $template = $(".user_detail_widget", context); //$(template);
 
       // Templating data
 
@@ -342,20 +348,20 @@
       $(win).trigger('shwUserLoggedIn');
 
       // Show/hide logged's items
-      $('body').addClass('shw-widgets-logged-in');
+      $('body', context).addClass('shw-widgets-logged-in');
 
       // show the element nicely
       //$(".inplace").show(1000);
 
       // Shows and hides the dropdown menu and grey overlay on mobile (< 641px) when logging in (only once)
       if(!this.hasBeenShown() && $(window).width() < 641) {
-        $('section.content').prepend('<div class="greyoverlay"></div>').promise().done(function() {
+        $('section.content', context).prepend('<div class="greyoverlay"></div>').promise().done(function() {
           // Hide .text when collapsing menu for the first time
           $('.dropdown > .text').css('display', 'none');
           // Show dropdown and greyoverlay
           $('.dropdown, .greyoverlay').css('display', 'block');
         });
-        $('.dropdown').delay(3000).slideUp(500).promise().done(function(){
+        $('.dropdown', context).delay(3000).slideUp(500).promise().done(function(){
           // Remove display block from .dropdown
           $('.dropdown').css('display', '');
           // Fadeout greyoverlay
@@ -436,7 +442,8 @@
       if(typeof this.widget === 'undefined') { return; }
 
       // Cache the button in local variable
-      var btnLoggedIn = this.widget.find('button.btn-login-loggedin');
+      var btnLoggedIn = this.widget.find('button.btn-login-loggedin'),
+          context = this.context;
 
       // Local functions
       var Fn = {
@@ -511,7 +518,7 @@
       }
 
       // Bind resize window to add/remove body class .mobile-tap
-      $(window).on('resize', windowResize).resize();
+      $(window, context).on('resize', windowResize).resize();
 
       // Hover on button login set class .off on itself and unbind
       btnLoggedIn.on('mouseenter', loginButtonHover);
@@ -521,7 +528,7 @@
 
       // Bind click on section.content to remove the dark overlay related to
       // body.mobile-tap and run the logic
-      $('section.content').on('click', sectionContentClick);
+      $('section.content', context).on('click', sectionContentClick);
 
       // In the end of animation of .highlight div, add class .processed to
       // widget's container to hide itself
@@ -590,12 +597,12 @@
 
     // clearLastLogin: function (response) {
     clearLastLogin: function () {
-
+      var context = this.context;
       // Remove mijn_last_login's cookie as first
       $.removeCookie(mijnAegonCookieLoggedInName, { path: '/' });
 
       // On logout or if user is not logged in show login button
-      $('.login-link-wrapper').css('display', 'block');
+      $('.login-link-wrapper', context).css('display', 'block');
 
       // Then throw an error in console
       //if (response) { throw response.responseText; }
@@ -607,8 +614,9 @@
      * @return {boolean} wrapper for this.userLoggedIn()
      */
     deinitialize: function (onlyLocal) {
+      var context = this.context;
       // Remove classes to hide logged's items
-      $('body').removeClass('shw-widgets-logged-in mobile-tap sliding-popup-processed section-particulier');
+      $('body', context).removeClass('shw-widgets-logged-in mobile-tap sliding-popup-processed section-particulier');
 
       // Remove mijn_last_login's cookie
       this.clearLastLogin();

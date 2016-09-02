@@ -1,3 +1,9 @@
+#### 02-09-2016
+Added context key to Drupal.behaviors.userDetailWidget located in aegon-scripts-library/structures/userDetail.js
+
+By adding the context passed by Drupal in the attach function, we avoid running the attach function multiple times when a block is loaded by ajax.
+[More info](https://www.lullabot.com/articles/understanding-javascript-behaviors-in-drupal)
+
 #### 20-04-2016
 
 Added function to create consistent responsive modal content:
