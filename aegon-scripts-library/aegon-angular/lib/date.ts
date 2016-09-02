@@ -47,7 +47,7 @@ export function formatDateSorted(input : any) : string {
     mins = pad(date.getMinutes(), 2);
   return [years, mons, days, hours, mins].join('');
 }
-
+/**
  * Return date from string
  * @param {any} date String formatted like 'yyyy-mm-dd'.
  * @returns {Date} Date object
