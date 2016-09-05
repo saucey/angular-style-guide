@@ -147,7 +147,9 @@ export const template = `
                 <div class="small">
                   <div class="row">
                     <!-- Indicatie nieuwe rente intro text -->
-                    <p>Na betaling van de omzettingskosten kunt u profiteren van een lagere rente. Het verschil in maandlasten is afhankelijk van de nieuwe rentevastperiode die u wenst.</p>
+                    <p>Na betaling van de omzettingskosten kunt u profiteren van een lagere rente. Het verschil in maandlasten is afhankelijk van de nieuwe rentevastperiode die u wenst.
+                      <a href="#" class="button arrow transparent inline">Meer over omzetten naar marktrente</a>
+                    </p>
                   </div>                
                   <div class="row">
                     <div class="label"><p>Nieuwe rentevastperiode<span *ngIf="newPeriod > -1"> met rente: <b>{{ newPeriodInt | money }}%</b></span></p>
@@ -187,8 +189,10 @@ export const template = `
                 <span class="label">Optie 2: rentemiddelen</span>
                 <div class="small">
                   <div class="row"><div>
-                    <!-- Optie 2 text -->
-                    <p>De omzettingskosten worden met een renteopslag doorberekend. De oude en nieuwe rente wordt 'gemiddeld'. Log in bij Mijn Aegon om uw nieuwe rente per maand te zien.</p>
+                    <!-- Optie 2 text for rentemiddelen -->
+                    <p>De omzettingskosten worden met een renteopslag doorberekend. De oude en nieuwe rente wordt 'gemiddeld'. Log in bij Mijn Aegon om uw nieuwe rente per maand te zien.<br>
+                      <a href="#" class="button arrow transparent inline">Meer over rentemiddeling</a>
+                    </p>
                   </div></div>
                 </div>
               </div>
