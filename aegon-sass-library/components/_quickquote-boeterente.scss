@@ -39,6 +39,9 @@
       aegon-input-number, aegon-input-date {
         display: block;
       }
+      aegon-input-date {
+        float: left;
+      }
       aegon-input-number, aegon-input-date, aegon-input-radio {
         &.error {
           background: none;
@@ -72,11 +75,23 @@
           border: 1px solid $slightly_darker_grey;
           border-radius: 3px;
           background-color: $white;
+          float: left;
+          padding: 0 3px;
+          &:before {
+            left:31%;
+          }
+          &:after {
+            left: 60%;
+          }
           input {
             width: 30%;
             border: none;
             border-radius: 0;
             margin-right: 0;
+            text-align: center;
+            &:first-child {
+              border-radius: 0;
+            }
             &:last-child {
               width: 38%;
               margin-right: 0;
