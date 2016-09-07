@@ -8,7 +8,7 @@
 
   // Add new item to public Drupal object
   Drupal.behaviors.lhfs_widget = {
-    attach: function () {
+    attach: function (context) {
 
       Drupal.behaviors.tooltip.activate("#lhfs_widget");
 
@@ -20,18 +20,18 @@
 
       // Check if div#lhfs_widget exist
       if ($('.lhfs_widget').length > 0) {
-        $("#lhfs_widget .tip").addClass("visible");
-        $("#lhfs_widget li.product ul.horizontal").removeClass("visible");
-        $("#lhfs_widget li.product ul.horizontal").addClass("visible");
-        $("#lhfs_widget li.product ul.horizontal.error").removeClass("visible");
+        $("#lhfs_widget .tip", context).addClass("visible");
+        $("#lhfs_widget li.product ul.horizontal", context).removeClass("visible");
+        $("#lhfs_widget li.product ul.horizontal", context).addClass("visible");
+        $("#lhfs_widget li.product ul.horizontal.error", context).removeClass("visible");
 
-        $(".success")
+        $(".success", context)
           .appendTo("body") //move .success to the body, so that it can be centered and fixed to the screen
           .css("top", (($(window).height() - $(".success").height()) / 2) + "px");  //center .success vertically
-        $(".lightbox")
+        $(".lightbox", context)
           .appendTo("body"); //move .lightbox to the body & after .success so that the visible style for .success still applies
 
-        var form = $('#lhfs_widget').find('form'),
+        var form = $('#lhfs_widget', context).find('form'),
             $incasso = form.find('.incasso'),
             incassoCheckbox = $incasso.find('input');
 
@@ -52,7 +52,7 @@
 
         // Multiple select elements on the page are possible
         // Loop through all of them and change the closest input field according to the value
-        $('#lhfs_widget select').each(function() {
+        $('#lhfs_widget select', context).each(function() {
           val = $(this).val(),
           parent = $(this).closest('.product'),
           $iban = parent.find('ul.account'),
@@ -71,7 +71,7 @@
         });  
 
         // Behaviour when switching payment methods
-        $('#lhfs_widget  select').change(function () {
+        $('#lhfs_widget  select', context).change(function () {
           val = $(this).val(),
           parent = $(this).closest('.product'),
           $iban = parent.find('ul.account'),
