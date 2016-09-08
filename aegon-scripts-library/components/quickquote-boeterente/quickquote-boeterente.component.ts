@@ -246,8 +246,11 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
           // Set the value of total fee and monthly fee.
           if (((this.initialAmount - this.repymnt) > penaltyFree)) {
             let totalFee = (((this.initialAmount - this.repymnt) - penaltyFree) * tcw) / basisFee;
-            this.totalFee = Math.round(totalFee);
-
+            console.log('Indicatie omzettingskosten:');
+            console.log('Original value:' + totalFee);
+            this.totalFee = this.roundToTenth(totalFee, 100);
+            console.log('Value after rounding to closest 100: ' + this.totalFee);
+            console.log('Huidige rente per maand:');
             this.monthlyFee = Math.round(this.calculateMonthlyFee((this.initialAmount - this.repymnt), this.oldIntRate));
           }
           else {
@@ -304,6 +307,7 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
           this.newPeriodInt = interests;
           let mortgage = this.initialAmount - this.repymnt;
           // New monthly payment setting.
+          console.log('Nieuwe rente per maand:');
           this.newMonthlyPymnt = Math.round(this.calculateMonthlyFee(mortgage, this.newPeriodInt));
       });
     }
@@ -314,7 +318,12 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
     * @param interest {number}: the interest percentage
     */
   private calculateMonthlyFee(mortgage: number, interest: number):number {
-    return ((mortgage * interest) / 100) / 12;
+    let res = ((mortgage * interest) / 100) / 12;
+    console.log('Original value: ' + res);
+    res = this.roundToTenth(res, 10);
+    console.log('Value after rounding to closest 10: ' + res);
+
+    return res;
   }
   /*
    * Special calculation between two dates to get
@@ -380,17 +389,35 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
    * @param num {number}: the float number
    * @param deg {number}: the amount of decimal chars.
    */
-  roundToDeg(num: number, deg: number): number {
+  private roundToDeg(num: number, deg: number): number {
     let degs = Math.pow(10, deg);
     return Math.round(num * degs) / degs;
   }
+
+  /*
+   * Rounds integers to the closest
+   * multiple of 10.
+   * @param num {number}: the int number
+   * @param deg {number}: the multiple of 10 to round to.
+   */
+  private roundToTenth(num: number, round: number): number {
+    /*
+     * If the int is multiple of the round
+     * returns the same number
+     */
+    if(num % round === 0) {
+      return num;
+    }
+    return Math.ceil(num / round) * round;
+  }
+  
   /*
    * Adds leading zeros to a number.
    * @param num {any}: the number to add padding.
    * @param length {number}: the length of the expected number
    *   with leading zeros including the number itself.
    */
-  numberPadding(num: any, length: number): string {
+  private numberPadding(num: any, length: number): string {
     let str = num.toString().length, 
         pad = '';
 
