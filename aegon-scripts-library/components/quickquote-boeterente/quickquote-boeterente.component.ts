@@ -251,7 +251,7 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
             this.totalFee = this.roundToTenth(totalFee, 100);
             console.log('Value after rounding to closest 100: ' + this.totalFee);
             console.log('Huidige rente per maand:');
-            this.monthlyFee = Math.round(this.calculateMonthlyFee((this.initialAmount - this.repymnt), this.oldIntRate));
+            this.monthlyFee = this.calculateMonthlyFee((this.initialAmount - this.repymnt), this.oldIntRate);
           }
           else {
             this.totalFee = 0;
