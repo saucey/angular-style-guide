@@ -105,7 +105,7 @@ export class AAQQSummaryComponent implements OnInit {
 
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
-    this.http.post(location.host+this.mailUrl, JSON.stringify(dataReq), options)
+    this.http.post(this.mailUrl, JSON.stringify(dataReq), options)
       .map(res => res.json())
       .catch(this.handleError)
       .subscribe(data => {
