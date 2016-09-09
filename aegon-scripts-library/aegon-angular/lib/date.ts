@@ -55,7 +55,7 @@ export function formatDateSorted(input : any) : string {
  * EXAMPLE
  * - stringToDate('2015-03-21') -> Date object for 2015-03-21
  */
-export function stringToDate(date: string) {
+export function stringToDate(date: string): Date {
   let splitted = this.birthDate.split('-');
   if (splitted.length === 3) {
     return new Date(parseInt(splitted[0], 10), parseInt(splitted[1], 10), parseInt(splitted[2], 10));
@@ -63,19 +63,46 @@ export function stringToDate(date: string) {
   return null;
 }
 
+
+/**
+ * Clone a Date object
+ * @param {Date} date Date object.
+ * @returns {Date} Date object
+ *
+ * EXAMPLE
+ * - cloneDate(new Date()) -> Date object
+ */
+export function cloneDate(date: Date): Date {
+  return new Date(date.getTime());
+}
+
+
 /**
  * Add an amount of years to a date object
- * @param {Date} date Date object .
+ * @param {Date} date Date object.
  * @param {number} years amount of years to add.
  * @returns {Date} Date object
  *
  * EXAMPLE
- * - addYears(new Date(), 30) -> Date object 30 years from now
- * - addYears(new Date(), -10) -> Date object 10 years in the past
+ * - addYearsToDate(new Date(), 30) -> Date object 30 years from now
+ * - addYearsToDate(new Date(), -10) -> Date object 10 years in the past
  */
-export function addYearsToDate(date: Date, years: number) {
-  return new Date().setFullYear(date.setFullYear(date.getFullYear() + years));
+export function addYearsToDate(date: Date, years: number): void {
+  date.setFullYear(date.getFullYear() + years);
 }
 
 
+/**
+ * Resturn the difference between two dates as years
+ * @param {Date} date Date object.
+ * @param {Date} date Date object.
+ * @returns {number} Amount of years
+ *
+ * EXAMPLE
+ * - getDateDiffInYears(dateObject, dateObject) -> Number of years
+ */
+export function getDateDiffInYears(dateOne: Date, dateTwo: Date): number {
+  let timeDiff = Math.abs(dateTwo.getTime() - dateOne.getTime());
+  return Math.ceil(timeDiff / (1000 * 3600 * 24 * 365));
+}
 

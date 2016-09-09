@@ -1,10 +1,12 @@
 /**
  * AOV quick quote
  */
-import {Component, OnInit, Input} from 'angular2/core';
+import {Component, OnInit, Input, EventEmitter, ElementRef} from 'angular2/core';
 import {HTTP_PROVIDERS, Http, Headers, RequestOptions, Response} from "angular2/http";
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
+import * as libUtil from "../../lib/util";
+
 import {HelpComponent} from '../../../components/angular-components/help.component';
 // AA components
 import {AAMoneyPipe} from "../../pipes/money.pipe";
@@ -17,13 +19,15 @@ import {InputDateComponent, InputDateValueAccessor} from '../../../components/an
 import {CheckboxComponent, CheckboxValueAccessor} from '../../../components/angular-components/checkbox.component';
 // Locals
 import {template} from "./template";
-import {options} from "./options";
-import {calculateAge, stringToDate, addYearsToDate} from "../../lib/date";
+import {defaultOptions} from "./defaultOptions";
+import {calculateAge, stringToDate, addYearsToDate, getDateDiffInYears, cloneDate} from "../../lib/date";
 import {zeroPad} from "../../lib/format";
 import {mockProfessionsResponse} from "./mock-professions";
 import {mockRiskFactorResponse} from "./mock-riskfactor";
 import {mockSpecificationResponse} from "./mock-specification";
 import {AAHintComponent} from "../aa-hint/aa-hint.component";
+import {AABaseComponent} from "../../lib/classes/AABaseComponent";
+
 
 @Component({
   selector: 'aa-qq-aov',
@@ -38,11 +42,14 @@ import {AAHintComponent} from "../aa-hint/aa-hint.component";
   pipes: [AAMoneyPipe]
 })
 //TODO ADD BASE64
-export class AAQQAovComponent implements OnInit {
-  public  options: any = options;
+export class AAQQAovComponent extends AABaseComponent implements OnInit {
+  @Input() options: any = {};
+  @Input() data: any = {};
+
+  public  defaultOptions: any = defaultOptions;
 
   public  showCalculator: boolean;
-  public  grossYearAmount: number = options.grossYearAmount.initial;
+  public  grossYearAmount: number;
 
   public  birthDate: string;
   public  birthDateError: boolean;
@@ -50,7 +57,7 @@ export class AAQQAovComponent implements OnInit {
   public  grossIncome: number;
   public  grossIncomeError: boolean;
 
-  public  startingTerm: number = 30;
+  public  startingTerm: number;
   public  startingTermError: boolean;
   public  insuranceAmount: number;
   public  insuranceAmountError: boolean;
@@ -59,9 +66,6 @@ export class AAQQAovComponent implements OnInit {
 
   public  serviceError: boolean;
   public  pending: number = 0;
-
-  public  emailButtonPending: boolean = false;
-  public  reSendEmailShown: boolean = false;
 
   public  grossMonthly: number;
   public  netMonthly: number;
@@ -72,18 +76,34 @@ export class AAQQAovComponent implements OnInit {
   private rawProfessions: any = {};
   public  riskFactor: any = {};
 
+  public  grossPremium: number = 0;
+  public  netPremium: number = 0;
 
-  //TODO variables in session storage
-  // aovQQ
-  //   aovBirthDate     aovProfession     aovGrossIncome     aovStartingTerm     aovInsuranceAmount    aovGrossMonthly   aovNetMonthly
-  //
+  public  fetchSpecification$: EventEmitter<any> = new EventEmitter;
 
+    // Let parent class initialize config; the dependency injection with ElementRef
+  // doesn't work directly so we have to call it explicitly.
   constructor(
+    private thisElement: ElementRef,
     private http: Http
-  ) {}
+  ) {
+    super(thisElement);
+  }
 
   ngOnInit() {
+    super.ngOnInit();
+
+    this.startingTerm = this.data.options.startingTerm.initial;
+    this.insuranceAmount = this.data.options.income.initial;
+
     this.initProfessions();
+
+    // Debounce the request so it doesn't fire constantly.
+    this.fetchSpecification$.debounceTime(this.data.options.specificationCallDelay)
+      .subscribe(() => {
+        console.log('fetchSpecification$ debounced fired');
+        this.fetchSpecification();
+      });
   }
 
   handleError(error: Response) {
@@ -96,7 +116,7 @@ export class AAQQAovComponent implements OnInit {
 
   processProfessions(response) {
     // Check if the response contains professions
-    if (response.retrieveProfessionsResponse &&
+    if (response && response.retrieveProfessionsResponse &&
         response.retrieveProfessionsResponse._AE_BEROEPENLIJST_AOV) {
       for (let prof of response.retrieveProfessionsResponse._AE_BEROEPENLIJST_AOV) {
         // Add each profession to the rawProfession dictionary under its key.
@@ -108,10 +128,10 @@ export class AAQQAovComponent implements OnInit {
   }
 
   callService(name: string, data: any, callback) {
-    let headers = new Headers({'Content-Type': 'application/json', "Authorization" : `Basic ${this.options.serviceCredentials}`});
+    let headers = new Headers({'Content-Type': 'application/json', "Authorization" : `Basic ${this.data.options.serviceCredentials}`});
     let options = new RequestOptions({headers: headers});
     this.pending += 1;
-    this.http.post(this.options.serviceUrl + name, JSON.stringify(data), options)
+    this.http.post(this.data.options.serviceUrl + name, JSON.stringify(data), options)
       .map(res => res.json())
       .catch(this.handleError)
       .subscribe(data => {
@@ -123,7 +143,7 @@ export class AAQQAovComponent implements OnInit {
   initProfessions() {
     this.serviceError = false;
 
-    if (this.options.mockData) {
+    if (this.data.options.mockData) {
       this.processProfessions(mockProfessionsResponse);
       return;
     }
@@ -150,8 +170,8 @@ export class AAQQAovComponent implements OnInit {
     let age = calculateAge(this.birthDate);
 
     if (!this.birthDate ||
-        age < this.options.birthDate.minAge ||
-        age > this.options.birthDate.maxAge ) {
+        age < this.data.options.birthDate.minAge ||
+        age > this.data.options.birthDate.maxAge ) {
       this.birthDateError = true;
       hasErrors = true;
     }
@@ -162,7 +182,7 @@ export class AAQQAovComponent implements OnInit {
       hasErrors = true;
     }
 
-    if (!this.grossIncome || this.grossIncome < this.options.income.min || this.grossIncome > this.options.income.max) {
+    if (!this.grossIncome || this.grossIncome < this.data.options.income.min || this.grossIncome > this.data.options.income.max) {
       this.grossIncomeError = true;
       hasErrors = true;
     }
@@ -187,7 +207,7 @@ export class AAQQAovComponent implements OnInit {
     return !hasErrors;
   }
 
-  startCalculator() {
+  openCalculator() {
     // Validate the personal information. If it is valid then the calculator can be shown.
     if (this.validatePersonalInformation()) {
       // Show calculator once we have fetched the data.
@@ -199,7 +219,7 @@ export class AAQQAovComponent implements OnInit {
   }
 
   gotoSummary() {
-    window.location.href = this.options.summaryPath;
+    window.location.href = this.data.options.summaryPath;
   }
 
   processRiskFactor(response) {
@@ -207,7 +227,7 @@ export class AAQQAovComponent implements OnInit {
   }
 
   fetchRiskFactor(rawProfession) {
-    if (options.mockData) {
+    if (this.data.options.mockData) {
       this.processRiskFactor(mockRiskFactorResponse);
       return;
     }
@@ -266,28 +286,46 @@ export class AAQQAovComponent implements OnInit {
     });
   }
 
-  processSpecification(response, cb) {
-    cb();
+  processSpecification(response, callback) {
+    let src: any = response;  
+    let path = ['calculateSpecificationResponse', 'CONTRACT_POLIS', 'DEKKING', 0, 'DEKKING_AOV'];
+  
+    for (let part of path) {
+      if (src[part]) {
+        src = src[part]
+      } else {
+        src = null;
+        break;
+      }
+    } 
+      
+    if (src && src['_AE_JAARPREM']) {
+      let monthly = src['_AE_JAARPREM'] / 12;
+      this.grossPremium = Math.round(monthly);
+      this.netPremium = Math.round(monthly * 0.65);
+
+      callback();
+    }
+        
   }
 
-  // TODO debounce deze functie!!
   fetchSpecification(callback: any = () => {}) {
-
     if (this.riskFactor) {
       if (!this.validatePersonalInformation() || !this.validateChoices()) {
         return;
       }
 
-      if (options.mockData) {
+      if (this.data.options.mockData) {
         this.processSpecification(mockSpecificationResponse, callback);
         return;
       }
 
-      let now: any = new Date();
+      let now: Date = new Date();
       let dateString = `${now.getFullYear()}-${zeroPad(now.getMonth() + 1, 2)}-${zeroPad(now.getDate(), 2)}`;
 
       let birthDate = stringToDate(this.birthDate);
-      let maxInsuranceDate = addYearsToDate(birthDate, this.rawProfession._AE_BKLSMAX);
+      let maxInsuranceDate = cloneDate(birthDate);
+      addYearsToDate(maxInsuranceDate, this.rawProfession._AE_BKLSMAX);
 
       let body = {
         "calculateSpecificationRequest": {
@@ -322,7 +360,7 @@ export class AAQQAovComponent implements OnInit {
                 "_AE_COMMERCIELEKORT": "5",
                 "WACHTTY": this.startingTerm,
                 "_AE_AANVANGSKORT": "false",
-                "UDRAFWJ": maxInsuranceDate - now,
+                "UDRAFWJ": getDateDiffInYears(now, maxInsuranceDate),
                 "AOPVU": "25",
                 "CBSSTG": "false",
                 "ENDLFTD": this.rawProfession._AE_BKLSMAX,

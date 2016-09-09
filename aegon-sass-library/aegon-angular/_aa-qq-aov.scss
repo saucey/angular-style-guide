@@ -1,4 +1,14 @@
 .quickquote.aov-quote {
+
+  .aa-qq-aov__slider {
+    .aa-slider-input__slider {
+      padding-left: 50px;
+      padding-right: 50px;
+    }
+  }
+
+
+
   background: none;
   color:#000;
 
@@ -51,7 +61,6 @@
   }
 
   .noUi-origin {
-    margin-right:-20px;
     background:#ecede7;
   }
 

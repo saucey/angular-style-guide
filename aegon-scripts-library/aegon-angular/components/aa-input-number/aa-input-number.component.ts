@@ -27,6 +27,7 @@ export class AAInputNumberComponent implements ControlValueAccessor {
   @Input() required: boolean;
   @Input() max: number;
   @Input() placeholder: string;
+  @Input() defaultValue: string = '0';
   @Input() inputId: string = 'input-' + (new Date().getTime()).toString(36);  // Create unique id for input field
 
   @Output() modelChange: any = new EventEmitter();
@@ -50,7 +51,7 @@ export class AAInputNumberComponent implements ControlValueAccessor {
   // Model change
   writeValue(value: any) : void {
     this.internalValue = value;
-    this.model = value && libFormat.formatNumber(value) || '0';
+    this.model = value && libFormat.formatNumber(value) || this.defaultValue;
   }
 
   /**
