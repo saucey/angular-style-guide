@@ -13,9 +13,9 @@
    */
   Drupal.behaviors.myDocumentsWidget = {
 
-    attach: function () {
+    attach: function (context) {
 
-      $('.my_documents_widget article h2').on('click', function () {
+      $('.my_documents_widget article h2', context).on('click', function () {
         $(this).parent('article').toggleClass('open')
           .siblings().removeClass('open');
       });

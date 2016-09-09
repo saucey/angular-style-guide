@@ -45,6 +45,6 @@ export class AADataComponent extends AABaseComponent {
     }
     // Set value at supplied path (replace this.data if no path given)
     libXsr.path(this.data, this.path, value);
-    console.log('aa-data', this.data, this.path, value)
+    // console.log('aa-data', this.data, this.path, value)
   }
 }

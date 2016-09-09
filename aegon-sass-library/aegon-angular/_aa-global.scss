@@ -16,11 +16,8 @@
 }
 
 
-.aegon-modal {
-	padding: 30px !important;
-	padding-top: 60px !important;
-	> .close-modal {
-		right: 15px;
-		top: 15px;
-	}
+// Overflow div with touch momentum on iOS
+.aa__overflowy {
+	-webkit-overflow-scrolling: touch;
+	overflow-y: auto;
 }

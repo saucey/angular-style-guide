@@ -1,17 +1,13 @@
 /**
  * Aegon Angular boot script
- * Bootstraps aa-* components on the page.
+ * Runs on initial download (as js file, not as a TypeScript module)
  * You don't need to bootstrap components yourself in the page
  */
-// import {Component} from 'angular2/core';
 declare var System;
+
 document.addEventListener("DOMContentLoaded", function () {
   /**
-   * Check for existence and boot up component
-   * - First checking, might result in higher start up times
-   * - If no component is found the component is not initialized
-   * - Currently the code for every component is loaded anyway on every page, so
-   *   we don't reduce download size in this way.
+   * Bootstrap full library from separate module
    */
   System.import('aegon-angular/lib/bootComponents')
   .then((module) => {
