@@ -13,11 +13,9 @@
    */
   Drupal.behaviors.communicationPreferences = {
     attach: function (context) {
-      if(! this.attached) {
-        Drupal.behaviors.tooltip.activate("#communication_preferences");
+      Drupal.behaviors.tooltip.activate("#communication_preferences");
 
-        Drupal.behaviors.validation.IEFix("form[name=communication_preferences_form]", false);
-      }
+      Drupal.behaviors.validation.IEFix("form[name=communication_preferences_form]", false);
 
       // activate the panel for alert options
       var cp_alerts = $(document, context).find("input[name=alerts]"),
