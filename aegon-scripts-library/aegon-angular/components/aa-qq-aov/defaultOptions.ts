@@ -1,12 +1,10 @@
 declare var wNumb: any;
 
 export const defaultOptions = {
-  mockData: true,
-  serviceUrl: 'http://ail.test.intra.aegon.nl/US_RestGatewayWeb/rest/requestResponse/BS_AE_POLIS_AOV_02/',
-  serviceCredentials: 'appAegonNLCalculateTST:7OuwNNTVS4jJ8mO5F0bH',
+  mockData: false,
+  serviceUrl: '/US_RestGatewayWeb/rest/requestResponse/BS_AE_POLIS_AOV_02/',
+  serviceCredentials: 'FIXME',
   summaryPath: '#',
-  mailUrl: 'http://ail.test.intra.aegon.nl/BS_Utilities_Communication_03Web/sca/BS_Utilities_Communication_03_ExpWS',
-  mailCredentials: 'AppAegonNLDrupalTST:dUACcFMYvwhnrnnfdq9h',
   specificationCallDelay: 500,
   personalDataHeading: 'Uw gegevens',
   birthDate: {
@@ -26,7 +24,6 @@ export const defaultOptions = {
     error: `Voor dit beroep kan geen premie worden berekend. Neem contact op met een adviseur voor een advies op maat.`
   },
   income: {
-    initial: 30000,
     min: 3125,
     max: 1000000,
     label: 'Wat is uw bruto jaarinkomen?',
@@ -75,13 +72,7 @@ export const defaultOptions = {
       connect: 'lower',
       pips: { // Shows scale and values below chart
         mode: 'range',
-        density: 100,
-        format: wNumb({
-          mark: ',',
-          thousand: '.',
-          prefix: '€',
-          decimals: 0
-        })
+        density: 100
       }
     },
     label: 'Welk bruto jaarbedrag wilt u verzekeren?',

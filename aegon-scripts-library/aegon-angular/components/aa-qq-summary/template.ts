@@ -14,7 +14,7 @@ export const template = `
           </div>
           <div class="span12 container_12 data-fields">
             <label class="label span6" for="field-bruto-jaarinkomen">Uw bruto jaarinkomen</label>
-            <span id="field-bruto-jaarinkomen" class="value span6">€ {{aov_qq_data.grossYearAmount | money}} netto</span>
+            <span id="field-bruto-jaarinkomen" class="value span6">€ {{aov_qq_data.grossIncome |   money}}</span>
           </div>
           <div class="span12 container_12 data-fields">
             <label class="label span6" for="field-eigen-risicoperiode">Eigen risicoperiode</label>
@@ -26,11 +26,11 @@ export const template = `
           </div>
           <div class="span12 container_12 data-fields">
             <label class="label span6" for="field-bruto-premie">Bruto premie per maand</label>
-            <span id="field-bruto-premie" class="value span6">€ {{aov_qq_data.grossMonthly | money}}</span>
+            <span id="field-bruto-premie" class="value span6">€ {{aov_qq_data.grossPremium | money}}</span>
           </div>
           <div class="span12 container_12 data-fields">
             <label class="label span6" for="field-netto-premie">Netto premie per maand</label>
-            <span id="field-netto-premie" class="value span6">€ {{aov_qq_data.netMonthly | money}}</span>
+            <span id="field-netto-premie" class="value span6">€ {{aov_qq_data.netPremium | money}}</span>
           </div>
         </div>
         <div class="action-section span12">

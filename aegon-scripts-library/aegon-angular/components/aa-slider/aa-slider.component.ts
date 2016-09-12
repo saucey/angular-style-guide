@@ -89,6 +89,11 @@ export class AASliderComponent implements AfterViewInit, ControlValueAccessor {
    */
   ngAfterViewInit(): void {
     var sliderElement = this.sliderEl.nativeElement;
+
+    if (this.value !== void 0 && this.value !== null) {
+      this.options.start = this.value;
+    }
+
     // Hook up events
     noUiSlider.create(sliderElement, this.options);
     // Save handles for future use

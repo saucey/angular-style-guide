@@ -38,11 +38,11 @@ export class AAQQSummaryComponent implements OnInit {
   public aov_qq_data: any = {
     "birthDate": this.clientStorageAOV.birthDate || "",
     "profession": this.clientStorageAOV.profession || "",
-    "grossYearAmount": this.clientStorageAOV.grossYearAmount ||0,
+    "grossIncome": this.clientStorageAOV.grossIncome || 0,
     "startingTerm": this.clientStorageAOV.startingTerm || 30,
     "insuranceAmount": this.clientStorageAOV.insuranceAmount || 0,
-    "grossMonthly": this.clientStorageAOV.grossMonthly || 0,
-    "netMonthly": this.clientStorageAOV.netMonthly || 0
+    "grossPremium": this.clientStorageAOV.grossPremium || 0,
+    "netPremium": this.clientStorageAOV.netPremium || 0
   };
 
   constructor(
@@ -50,7 +50,7 @@ export class AAQQSummaryComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    
+
   }
 
   handleError(error: Response) {
@@ -89,18 +89,18 @@ export class AAQQSummaryComponent implements OnInit {
     //   // Mock: remove when in test
     //   this.emailButtonPending = false;
     //   this.reSendEmailShown = true;
-    //   return false;  
+    //   return false;
     // }
 
     let dataReq = {
-       "Email" : this.emailAddress,
+        "Email" : this.emailAddress,
         "Geboortedatum" : this.aov_qq_data.birthDate,
         "Beroep" : this.aov_qq_data.profession,
-        "Bruto_Jaarinkomen" : this.aov_qq_data.grossYearAmount,
+        "Bruto_Jaarinkomen" : this.aov_qq_data.grossIncome,
         "Eigen_risicoperiode" : this.aov_qq_data.startingTerm,
         "Verzekerdbedrag" : this.aov_qq_data.insuranceAmount,
-        "Bruto_premie_permaand" : this.aov_qq_data.grossMonthly,
-        "Netto_premie_permaand" : this.aov_qq_data.netMonthly
+        "Bruto_premie_permaand" : this.aov_qq_data.grossPremium,
+        "Netto_premie_permaand" : this.aov_qq_data.netPremium
     };
 
     let headers = new Headers({'Content-Type': 'application/json'});

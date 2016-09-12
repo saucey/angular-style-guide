@@ -1,6 +1,6 @@
 export const template = `
   <div class="quickquote angular aov-quote">
-    <section class="personal-details">
+    <section class="personal-details" (select)="showCalculator = false">
 
       <h3 prefix="/">{{ data.options.personalDataHeading }}</h3>
       
@@ -39,7 +39,7 @@ export const template = `
           <aa-hint [text]="data.options.income.help"></aa-hint>
         </div>
         <div class="inputs" (click)="showCalculator = false">
-          <aa-input-number [(ngModel)]="grossIncome" (modelChange)="grossYearAmount = $event * 0.8" class="aa-input--euro"
+          <aa-input-number [(ngModel)]="grossIncome" (modelChange)="prefillGrossYearAmount($event)" class="aa-input--euro"
                            [max]="data.options.income.max" defaultValue=""></aa-input-number>
         </div>
       </div>
@@ -66,9 +66,9 @@ export const template = `
             <aa-hint [text]="data.options.startingTerm.help"></aa-hint>
           </div>
           <div class="inputs">
-            <aa-input-radio *ngFor="#choice of data.options.startingTerm.choices" [name]="term"
+            <aa-input-radio *ngFor="#choice of data.options.startingTerm.choices" name="term"
                             [(ngModel)]="startingTerm" 
-                            (aaChange)="fetchSpecification$.emit()"  
+                            (modelChange)="fetchSpecification$.emit()"  
                             [value]="choice.value">{{ choice.label }}</aa-input-radio>
           </div>
         </div>
@@ -77,7 +77,7 @@ export const template = `
           <div class="field">
             <aa-slider-input class="aa-qq-aov__slider aa-qq__control aa-input--euro"
               [(ngModel)]="grossYearAmount"
-              (change)="fetchSpecification$.emit()"
+              (modelChange)="fetchSpecification$.emit()"
               [sliderOptions]="data.options.grossYearAmount.slider"
               [label]="data.options.grossYearAmount.label"
               [helpText]="data.options.grossYearAmount.help">
