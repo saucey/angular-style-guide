@@ -14,9 +14,7 @@ import {AAInputRadioComponent} from "../aa-input-radio/aa-input-radio.component"
 import {AAInputDropDownComponent} from "../aa-input-dropdown/aa-input-dropdown.component";
 import {AASliderInputComponent} from "../aa-slider-input/aa-slider-input.component";
 import {AAInputNumberComponent} from '../aa-input-number/aa-input-number.component';
-// Old components
-import {InputDateComponent, InputDateValueAccessor} from '../../../components/angular-components/input-date.component';
-import {CheckboxComponent, CheckboxValueAccessor} from '../../../components/angular-components/checkbox.component';
+import {AAInputDateComponent} from '../aa-input-date/aa-input-date.component';
 // Locals
 import {template} from "./template";
 import {defaultOptions} from "./defaultOptions";
@@ -32,48 +30,43 @@ import {AABaseComponent} from "../../lib/classes/AABaseComponent";
 @Component({
   selector: 'aa-qq-aov',
   directives: [
-    // New
-    AAInputNumberComponent, AASliderInputComponent, AAInputRadioComponent, AAInputDropDownComponent,
-    // Old
-    InputDateComponent, InputDateValueAccessor, CheckboxComponent, CheckboxValueAccessor, AAHintComponent
+    AAInputNumberComponent,
+    AASliderInputComponent,
+    AAInputRadioComponent,
+    AAInputDropDownComponent,
+    AAInputDateComponent,
+    AAHintComponent
   ],
   template: template,
   providers: [HTTP_PROVIDERS],
   pipes: [AAMoneyPipe]
 })
-//TODO ADD BASE64
 export class AAQQAovComponent extends AABaseComponent implements OnInit {
   @Input() options: any = {};
   @Input() data: any = {};
-
   public  defaultOptions: any = defaultOptions;
 
   public  showCalculator: boolean;
-  public  grossYearAmount: number;
 
   public  birthDate: string;
   public  birthDateError: boolean;
-  public  professionError: boolean;
-  public  grossIncome: number;
-  public  grossIncomeError: boolean;
 
-  public  startingTerm: number;
-  public  startingTermError: boolean;
-  public  insuranceAmount: number;
-  public  insuranceAmountError: boolean;
-  public  emailAddress: string = "";
-  public  emailAddressError: boolean;
-
-  public  serviceError: boolean;
-  public  pending: number = 0;
-
-  public  grossMonthly: number;
-  public  netMonthly: number;
   public  profession: any = {};
   public  professions: any[] = [];
   public  professionsFiltered: any[] = [];
   private rawProfession: any;
   private rawProfessions: any = {};
+
+  public  professionError: boolean;
+  public  grossIncome: number;
+  public  grossIncomeError: boolean;
+
+  public  startingTerm: number;
+  public  grossYearAmount: number;
+
+  public  serviceError: boolean;
+  public  pending: number = 0;
+
   public  riskFactor: any = {};
 
   public  grossPremium: number = 0;
@@ -81,28 +74,38 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
 
   public  fetchSpecification$: EventEmitter<any> = new EventEmitter;
 
-    // Let parent class initialize config; the dependency injection with ElementRef
+  // Let parent class initialize config; the dependency injection with ElementRef
   // doesn't work directly so we have to call it explicitly.
   constructor(
-    private thisElement: ElementRef,
+    private elementRef: ElementRef,
     private http: Http
   ) {
-    super(thisElement);
+    super(elementRef);
   }
 
   ngOnInit() {
     super.ngOnInit();
 
     this.startingTerm = this.data.options.startingTerm.initial;
-    this.insuranceAmount = this.data.options.income.initial;
 
     this.initProfessions();
 
     // Debounce the request so it doesn't fire constantly.
     this.fetchSpecification$.debounceTime(this.data.options.specificationCallDelay)
       .subscribe(() => {
-        console.log('fetchSpecification$ debounced fired');
-        this.fetchSpecification();
+        this.fetchSpecification(() => {
+          let bdTokens = this.birthDate.split('-');
+          let summaryData = {
+            birthDate: `${bdTokens[2]}-${bdTokens[1]}-${bdTokens[0]}`,
+            profession: this.profession && this.profession.label || "",
+            grossIncome: this.grossIncome || 0,
+            startingTerm: this.startingTerm || 30,
+            grossYearAmount: this.grossYearAmount || 0,
+            grossPremium: this.grossPremium || 0,
+            netPremium: this.netPremium || 0
+          };
+          clientStorage.session.setItem("aovQQ", summaryData);
+        });
       });
   }
 
@@ -190,23 +193,6 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
     return !hasErrors;
   }
 
-  validateChoices(): boolean {
-    let hasErrors: boolean = false;
-    this.startingTermError = false;
-    this.insuranceAmountError = false;
-
-    if (!this.startingTerm) {
-      this.startingTermError = true;
-      hasErrors = true;
-    }
-    if (!this.insuranceAmount) {
-      this.insuranceAmountError = true;
-      hasErrors = true;
-    }
-
-    return !hasErrors;
-  }
-
   openCalculator() {
     // Validate the personal information. If it is valid then the calculator can be shown.
     if (this.validatePersonalInformation()) {
@@ -220,6 +206,20 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
 
   gotoSummary() {
     window.location.href = this.data.options.summaryPath;
+  }
+
+  prefillGrossYearAmount(amount) {
+    let min = this.data.options.grossYearAmount.slider.range.min;
+    let max = Math.min(
+      this.data.options.grossYearAmount.maxInsuranceAmount,
+      Math.max(
+        min,
+        Math.round(amount * 0.8)
+      )
+    );
+
+    this.grossYearAmount = max;
+    this.data.options.grossYearAmount.slider.range.max = max;
   }
 
   processRiskFactor(response) {
@@ -287,9 +287,9 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
   }
 
   processSpecification(response, callback) {
-    let src: any = response;  
+    let src: any = response;
     let path = ['calculateSpecificationResponse', 'CONTRACT_POLIS', 'DEKKING', 0, 'DEKKING_AOV'];
-  
+
     for (let part of path) {
       if (src[part]) {
         src = src[part]
@@ -297,8 +297,8 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
         src = null;
         break;
       }
-    } 
-      
+    }
+
     if (src && src['_AE_JAARPREM']) {
       let monthly = src['_AE_JAARPREM'] / 12;
       this.grossPremium = Math.round(monthly);
@@ -306,12 +306,12 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
 
       callback();
     }
-        
+
   }
 
   fetchSpecification(callback: any = () => {}) {
     if (this.riskFactor) {
-      if (!this.validatePersonalInformation() || !this.validateChoices()) {
+      if (!this.validatePersonalInformation()) {
         return;
       }
 
@@ -352,10 +352,11 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
               }
             },
             "DEKKING": {
-              "VERZSOM": this.insuranceAmount,
+              "VERZSOM": this.grossYearAmount,
               "HVVDAT": maxInsuranceDate,
               "MYCODE": "1150",
               "DEKKING_AOV": {
+                "VERZSOM_B": this.grossYearAmount,
                 "_AE_COMBINATIEKORT": "false",
                 "_AE_COMMERCIELEKORT": "5",
                 "WACHTTY": this.startingTerm,
