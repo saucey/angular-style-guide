@@ -60,6 +60,7 @@ export const defaultOptions = {
   },
 
   grossYearAmount: {
+    maxInsuranceAmount: 125000,
     slider: {
       start: 2500, // Handle start position
       step: 500, // Slider moves in increments of xx

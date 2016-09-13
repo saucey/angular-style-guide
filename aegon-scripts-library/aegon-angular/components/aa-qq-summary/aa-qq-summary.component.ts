@@ -40,7 +40,7 @@ export class AAQQSummaryComponent implements OnInit {
     "profession": this.clientStorageAOV.profession || "",
     "grossIncome": this.clientStorageAOV.grossIncome || 0,
     "startingTerm": this.clientStorageAOV.startingTerm || 30,
-    "insuranceAmount": this.clientStorageAOV.insuranceAmount || 0,
+    "grossYearAmount": this.clientStorageAOV.grossYearAmount || 0,
     "grossPremium": this.clientStorageAOV.grossPremium || 0,
     "netPremium": this.clientStorageAOV.netPremium || 0
   };
@@ -98,7 +98,7 @@ export class AAQQSummaryComponent implements OnInit {
         "Beroep" : this.aov_qq_data.profession,
         "Bruto_Jaarinkomen" : this.aov_qq_data.grossIncome,
         "Eigen_risicoperiode" : this.aov_qq_data.startingTerm,
-        "Verzekerdbedrag" : this.aov_qq_data.insuranceAmount,
+        "Verzekerdbedrag" : this.aov_qq_data.grossYearAmount,
         "Bruto_premie_permaand" : this.aov_qq_data.grossPremium,
         "Netto_premie_permaand" : this.aov_qq_data.netPremium
     };

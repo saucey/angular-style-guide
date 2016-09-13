@@ -1,0 +1,56 @@
+/**
+ * Date input component
+ */
+
+.aa-input-date {
+  display: inline-block;
+  position: relative;
+  white-space: nowrap;
+
+  &:after,
+  &:before {
+    content: '/';
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    padding: 9px 0 0;
+    opacity: 0.4;
+    pointer-events: none;
+    clear: both;
+    visibility: visible;
+  }
+
+  &:before {
+    left: 53px;
+  }
+  &:after {
+    left: 103px;
+  }
+
+  .aa-input-date__year {
+    width: 72px !important;
+    border-radius: 0 5px 5px 0 !important;
+    border-left: none;
+  }
+
+  .aa-input-date__day,
+  .aa-input-date__month {
+    text-align: center !important;
+    position: relative;
+    width: 54px !important;
+  }
+
+  .aa-input-date__month {
+    border-radius: 0 !important;
+    border-left: none;
+    border-right: none;
+  }
+
+  .aa-input-date__day {
+    border-radius: 5px 0 0 5px !important;
+    border-right: none;
+  }
+}
+
+
+

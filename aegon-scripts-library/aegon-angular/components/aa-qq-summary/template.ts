@@ -21,8 +21,8 @@ export const template = `
             <span id="field-eigen-risicoperiode" class="value span6">{{aov_qq_data.startingTerm | period}}</span>
           </div>
           <div class="span12 container_12 data-fields">
-            <label class="label span6" for="field-verzekerde-uitgaven">Verzekerde uitgaven</label>
-            <span id="field-verzekerde-uitgaven" class="value span6">€ {{aov_qq_data.insuranceAmount | money}} netto per maand</span>
+            <label class="label span6" for="field-verzekerde-bedrag">Verzekerd bedrag</label>
+            <span id="field-verzekerde-bedrag" class="value span6">€ {{aov_qq_data.grossYearAmount | money}}</span>
           </div>
           <div class="span12 container_12 data-fields">
             <label class="label span6" for="field-bruto-premie">Bruto premie per maand</label>

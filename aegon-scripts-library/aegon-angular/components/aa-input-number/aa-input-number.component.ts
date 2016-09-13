@@ -90,10 +90,20 @@ export class AAInputNumberComponent implements ControlValueAccessor {
     // We're using a timeout, so the change detector detects a change in the model.
     setTimeout(() => {
       this.model = formatted;
+      this.updateExternalModel();
     });
   }
   // Change callback
   updateExternalModel() {
     this.modelChange.emit(this.internalValue);
+  }
+  // Only accept numeric values.
+  keydown(event: KeyboardEvent): void {
+    let kc = event.keyCode;
+    if ((kc > 57 && kc < 96) || kc > 105 ) {
+      // No numeric char, so cancel.
+      event.preventDefault();
+      return;
+    }
   }
 }

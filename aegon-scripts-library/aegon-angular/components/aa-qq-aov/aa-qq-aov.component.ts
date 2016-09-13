@@ -14,9 +14,7 @@ import {AAInputRadioComponent} from "../aa-input-radio/aa-input-radio.component"
 import {AAInputDropDownComponent} from "../aa-input-dropdown/aa-input-dropdown.component";
 import {AASliderInputComponent} from "../aa-slider-input/aa-slider-input.component";
 import {AAInputNumberComponent} from '../aa-input-number/aa-input-number.component';
-// Old components
-import {InputDateComponent, InputDateValueAccessor} from '../../../components/angular-components/input-date.component';
-import {CheckboxComponent, CheckboxValueAccessor} from '../../../components/angular-components/checkbox.component';
+import {AAInputDateComponent} from '../aa-input-date/aa-input-date.component';
 // Locals
 import {template} from "./template";
 import {defaultOptions} from "./defaultOptions";
@@ -32,10 +30,12 @@ import {AABaseComponent} from "../../lib/classes/AABaseComponent";
 @Component({
   selector: 'aa-qq-aov',
   directives: [
-    // New
-    AAInputNumberComponent, AASliderInputComponent, AAInputRadioComponent, AAInputDropDownComponent,
-    // Old
-    InputDateComponent, InputDateValueAccessor, AAHintComponent
+    AAInputNumberComponent,
+    AASliderInputComponent,
+    AAInputRadioComponent,
+    AAInputDropDownComponent,
+    AAInputDateComponent,
+    AAHintComponent
   ],
   template: template,
   providers: [HTTP_PROVIDERS],
@@ -100,6 +100,7 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
             profession: this.profession && this.profession.label || "",
             grossIncome: this.grossIncome || 0,
             startingTerm: this.startingTerm || 30,
+            grossYearAmount: this.grossYearAmount || 0,
             grossPremium: this.grossPremium || 0,
             netPremium: this.netPremium || 0
           };
@@ -208,7 +209,17 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
   }
 
   prefillGrossYearAmount(amount) {
-    this.grossYearAmount = Math.round(amount * 0.8);
+    let min = this.data.options.grossYearAmount.slider.range.min;
+    let max = Math.min(
+      this.data.options.grossYearAmount.maxInsuranceAmount,
+      Math.max(
+        min,
+        Math.round(amount * 0.8)
+      )
+    );
+
+    this.grossYearAmount = max;
+    this.data.options.grossYearAmount.slider.range.max = max;
   }
 
   processRiskFactor(response) {
@@ -345,6 +356,7 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
               "HVVDAT": maxInsuranceDate,
               "MYCODE": "1150",
               "DEKKING_AOV": {
+                "VERZSOM_B": this.grossYearAmount,
                 "_AE_COMBINATIEKORT": "false",
                 "_AE_COMMERCIELEKORT": "5",
                 "WACHTTY": this.startingTerm,

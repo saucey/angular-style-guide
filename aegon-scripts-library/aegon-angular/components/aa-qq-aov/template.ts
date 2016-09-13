@@ -10,7 +10,7 @@ export const template = `
           <aa-hint [text]="data.options.birthDate.help"></aa-hint>
         </div>
         <div class="inputs" (click)="showCalculator = false">
-          <aegon-input-date [(ngModel)]="birthDate"></aegon-input-date>
+          <aa-input-date [(ngModel)]="birthDate"></aa-input-date>
         </div>
       </div>
       <p class="error" *ngIf="birthDateError">{{ data.options.birthDate.error }}</p>
@@ -66,10 +66,12 @@ export const template = `
             <aa-hint [text]="data.options.startingTerm.help"></aa-hint>
           </div>
           <div class="inputs">
-            <aa-input-radio *ngFor="#choice of data.options.startingTerm.choices" name="term"
-                            [(ngModel)]="startingTerm" 
-                            (modelChange)="fetchSpecification$.emit()"  
-                            [value]="choice.value">{{ choice.label }}</aa-input-radio>
+            <div *ngFor="#choice of data.options.startingTerm.choices">
+              <aa-input-radio name="term"
+                [(ngModel)]="startingTerm" 
+                (modelChange)="fetchSpecification$.emit()"  
+                [value]="choice.value">{{ choice.label }}</aa-input-radio>
+            </div>
           </div>
         </div>
         
