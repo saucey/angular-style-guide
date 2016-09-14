@@ -1,0 +1,56 @@
+/**
+ * Choice dropdown input component
+ */
+
+.aa-input-dropdown {
+  position: relative;
+}
+
+.aa-input-dropdown__choices {
+  position: absolute;
+  z-index: 4;
+  top: 100%;
+  left: 0;
+  margin: 9px 0 0;
+  max-height: 200px;
+  min-width: 100%;
+  max-width: 100%;
+
+  text-align: left;
+  overflow-x: visible;
+  overflow-y: auto;
+  border: solid 1px $slightly_darker_grey;
+
+  &:after {
+    content: ' ';
+    clear: both;
+    display: block;
+    height: 0;
+    visibility: hidden;
+  }
+}
+
+.aa-input-dropdown__choice {
+  padding: 8px 10px;
+  text-overflow: ellipsis;
+  border-bottom: solid 1px $slightly_darker_grey;
+  overflow: hidden;
+  cursor: pointer;
+  background-color: $grey;
+  transition: background-color 200ms;
+
+  &:hover {
+    background-color: $slightly_darker_grey;
+  }
+
+  &:last-of-type {
+    border: none;
+  }
+}
+
+
+@media only screen and (min-width: 980px) {
+  .aa-input-dropdown__choices {
+    max-width: 300px;
+  }
+}

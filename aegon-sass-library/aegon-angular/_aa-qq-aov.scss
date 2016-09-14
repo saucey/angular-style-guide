@@ -1,203 +1,132 @@
-.quickquote.aov-quote {
+.aa-qq-aov {
+  max-width: 650px;
+}
 
-  .aa-qq-aov__slider {
-    .aa-slider-input__slider {
-      padding-left: 50px;
-      padding-right: 50px;
-    }
+.aa-qq-aov__slider {
+  .aa-slider-input__slider {
+    padding-left: 40px;
+    padding-right: 40px;
   }
+}
 
+.aa-qq-aov__personal-details {
+  margin-bottom: 50px;
+}
 
+.aa-qq-aov__field {
+  display: flex;
+  flex-flow: row nowrap;
+  position: relative;
+  min-height: 40px;
+  margin-bottom: 20px;
+}
 
-  background: none;
-  color:#000;
+.aa-qq-aov__label {
+    flex: 1 1 auto;
+    display: inline-block;
+    padding: 9px 0;
+}
 
-  .calculation {
-    width:100%;
-    padding:20px 0;
-    .inputs aegon-input-radio {
-      display:block;
-      text-align:left;
-      label.radio {
-        padding-left:35px;
-      }
-      label.radio > input[type="radio"] {
-        position:absolute;
-        top:0;
-        left:0;
-        &+ span.radio {
-          top:-9px;
-        }
-      }
-    }
-    .inputs aegon-input-radio:last-child {
-      margin-bottom:.5em;
-    }
-  }
+.aa-qq-aob__radiobuttons {
+  margin-bottom: 40px;
+}
 
-  h3 {
-    margin-left:0;
-    color:#000;
-    margin-bottom: .5em;
-  }
-  h3:before {
-    display:none;
-  }
+.aa-qq-aov__inputs {
+  flex: 0 0 180px;
+}
 
-  .field {
-    .icon-skinnyarrow:before {
-      font-size: 0.75rem;
-    }
-    .label {width:60%;max-width:368px;}
-    .inputs {width:40%;max-width:180px;}
-    .button.icon-calculator {width:180px;}
+.aa-qq-aov__input {
+  input {
+    width: 180px;
   }
+}
 
-  .slider-container {
-    clear:both;
-    margin:2em 0 .5em;
-    float:left;
-    padding-right:20px;
-  }
+.aa-qq-aov__radio {
+  margin-left: 20px;
+  width: 160px;
+}
 
-  .noUi-origin {
-    background:#ecede7;
-  }
+.aa-qq-aov__open-calculator {
+  width: 180px;
+}
 
-  .min, .max {
-    width:50%;
-    float:left;
-  }
+.aa-qq-aov__calculator {
+  margin-bottom: 60px;
+}
 
-  .max {
-    text-align:right;
+.aa-qq-aov__slider {
+  input {
+    width: 180px;
   }
-  .gray-field {
-    input[type=text], input[type=number], select {
-      background: $grey;
-    }
-  }
-  .result {
-    -webkit-border-radius:5px;
-    -moz-border-radius:5px;
-    border-radius:5px;
-    margin:26px 0;
-    overflow:visible;
-    .row {
-      margin:0 0 .5em 0;
-      .label {
-        max-width:320px;
-        padding-right: 50px;
-        width:auto;
-      }
-      .helptext {
-        display: block;
-        font-size: .75em;
-        line-height: 1.2em;
-        color: lightblue;
-      }
-      .value {
-        max-width:220px;
-        width:auto;
-        float:right;
-      }
-    }
-  }
-  .result + .field .label {
+}
 
+.aa-qq-aov__result {
+
+}
+
+.aa-qq-aov__result__container {
+  padding: 20px 30px 5px 30px;
+  margin-bottom: 30px;
+  border-radius: 5px;
+  color: $white;
+  background: $slightly_darker_blue;
+
+  .aa-hint__icon:before {
+    color: white;
   }
-  label.checkbox > input[type="checkbox"] + span.checkbox {
-    background:#ecede7;
-  }
+}
+
+.aa-qq-aov__result__label {
+   flex: 1 1 auto;
+   font-size: 22px;
+}
+
+.aa-qq-aov__actions {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.aa-qq-aov__actions__label {
+  flex: 1 1 auto;
+  padding: 9px 0;
+}
+
+.aa-qq-aov__result__row {
+  display: flex;
+  flex-flow: row nowrap;
+
+  margin-bottom: 15px;
+}
+
+.aa-qq-aov__result__premium {
+  flex: 0 0 160px;
+  font-size: 25px;
+}
+
+.aa-qq-aov__result__premium__currency {
+  display: inline-block;
+  margin-left: 30px;
+  margin-right: 20px;
+}
+
+.aa-qq-aov__action-right {
+  flex: 0 0 auto;
 }
 
 
 @include breakpoint($brk-mobile) {
-  .quickquote.aov-quote {
-    .field {
-      margin-bottom:0;
-      .inputs {
-        float:left;
-        clear:both;
-        width:100%;
-      }
-      .label {
-        width: auto;
-        min-width: 0;
-      }
-    }
-    .result + .field .label {
-      width:auto;
-      padding-right:0;
-      clear:left;
-    }
-    .result + .field a.button {
-      float:left;
-      clear:both;
-    }
-    .result .row .value {
-      max-width: 220px;
-      width: auto;
-      float: left;
-    }
-    .result .row .label {
-      max-width:100%;
-      width:auto;
-      float:left;
-    }
-    .result .row .helptext {
-      clear:both;
-    }
+  .aa-qq-aov__field {
+
   }
-}
-@include breakpoint($brk-tablet) {
-  .quickquote.aov-quote {
-    .field {
-      .label {
-        width: 53%;
-      }
-      .inputs {
-        width: 47%;
-      }
-    }
-    .result + .field .label {
-      width:auto;
-      padding-right:0;
-      clear:left;
-    }
-    .result + .field a.button {
-      float:left;
-      clear:both;
-    }
+
+
+
+  .aa-qq-aov__label {
+    padding-right: 0;
   }
-}
-@include breakpoint($brk-ipad-portrait) {
-  .quickquote.aov-quote {
-    .result + .field a.button {
-      float:right;
-      clear:none;
-    }
-    .field {
-      .label {
-        width: 60%;
-      }
-      .inputs {
-        width: 40%;
-      }
-    }
+
+  .aa-qq-aov__inputs {
+    position: static;
   }
+
 }
-//@include breakpoint($brk-ipad-landscape) {
-//  .quickquote.aov-quote {
-//    .result .row .label {
-//      max-width: 100%;
-//      width: auto;
-//    }
-//    .result + .field .label {
-//      width:auto;
-//      padding-right:0;
-//      background:red;
-//    }
-//  }
-//
-//}
