@@ -24,6 +24,7 @@ export class AAInputNumberComponent implements ControlValueAccessor {
   @Input() prefix: string;
   @Input() suffix: string;
   @Input() forceDecimals: any;
+  @Input() allowDecimals: any;
   @Input() required: boolean;
   @Input() max: number;
   @Input() placeholder: string;
@@ -100,6 +101,12 @@ export class AAInputNumberComponent implements ControlValueAccessor {
   // Only accept numeric values.
   keydown(event: KeyboardEvent): void {
     let kc = event.keyCode;
+
+    // Allow typing comma for decimal numbers
+    if (this.allowDecimals && kc === 188) {
+      return;
+    }
+
     if ((kc > 57 && kc < 96) || kc > 105 ) {
       // No numeric char, so cancel.
       event.preventDefault();
