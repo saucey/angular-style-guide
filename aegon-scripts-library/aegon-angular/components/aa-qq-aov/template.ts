@@ -7,6 +7,8 @@ export const template = `
       <div class="aa-qq-aov__field aa__clearfix">
         <div class="aa-qq-aov__label">
           {{ data.options.birthDate.label }}
+        </div>
+        <div class="aa-qq-aov__personal-details__hint">
           <aa-hint [text]="data.options.birthDate.help"></aa-hint>
         </div>
         <div class="aa-qq-aov__inputs" (click)="showCalculator = false">
@@ -18,6 +20,8 @@ export const template = `
       <div class="aa-qq-aov__field aa__clearfix">
         <div class="aa-qq-aov__label">
           {{ data.options.profession.label }}
+        </div>
+        <div class="aa-qq-aov__personal-details__hint">
           <aa-hint [text]="data.options.profession.help"></aa-hint>
         </div>
         <div class="aa-qq-aov__inputs" (click)="showCalculator = false">
@@ -36,6 +40,8 @@ export const template = `
       <div class="aa-qq-aov__field aa__clearfix">
         <div class="aa-qq-aov__label">
           {{ data.options.income.label }}
+        </div>
+        <div class="aa-qq-aov__personal-details__hint">
           <aa-hint [text]="data.options.income.help"></aa-hint>
         </div>
         <div class="aa-qq-aov__inputs" (click)="showCalculator = false">
@@ -64,6 +70,8 @@ export const template = `
         <div class="aa-qq-aov__field aa-qq-aob__radiobuttons aa__clearfix">
           <div class="aa-qq-aov__label">
             {{data.options.startingTerm.label}}
+          </div>
+          <div class="aa-qq-aov__personal-details__hint">
             <aa-hint [text]="data.options.startingTerm.help"></aa-hint>
           </div>
           <div class="aa-qq-aov__inputs">
@@ -92,20 +100,20 @@ export const template = `
           <div class="aa-qq-aov__result__row">
             <div class="aa-qq-aov__result__label">
               {{ data.options.result.grossPremium.label }}
-              <aa-hint [text]="data.options.result.grossPremium.help"></aa-hint>
             </div>
+            <aa-hint [text]="data.options.result.grossPremium.help"></aa-hint>
             <div class="aa-qq-aov__result__premium aa__clearfix">
-              <span class="aa-qq-aov__result__premium__currency">&euro;</span>
+              <span class="aa-qq-aov__result__currency">&euro;</span>
               {{ grossPremium }}<span>,-</span>
             </div>
           </div>
           <div class="aa-qq-aov__result__row">
             <div class="aa-qq-aov__result__label">
               {{ data.options.result.netPremium.label }}
-              <aa-hint [text]="data.options.result.grossPremium.help"></aa-hint>
             </div>
+            <aa-hint [text]="data.options.result.grossPremium.help"></aa-hint>
             <div class="aa-qq-aov__result__premium aa__clearfix">
-              <span class="aa-qq-aov__result__premium__currency">&euro;</span>
+              <span class="aa-qq-aov__result__currency">&euro;</span>
               {{ netPremium }}<span>,-</span>
             </div>
           </div>

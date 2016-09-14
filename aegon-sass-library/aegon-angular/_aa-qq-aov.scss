@@ -13,9 +13,14 @@
   margin-bottom: 50px;
 }
 
+.aa-qq-aov__personal-details__hint {
+  margin: 0 16px 0 10px;
+}
+
 .aa-qq-aov__field {
   display: flex;
   flex-flow: row nowrap;
+  align-items: baseline;
   position: relative;
   min-height: 40px;
   margin-bottom: 20px;
@@ -84,6 +89,7 @@
 .aa-qq-aov__actions {
   display: flex;
   flex-flow: row nowrap;
+  align-items: baseline;
 }
 
 .aa-qq-aov__actions__label {
@@ -92,9 +98,10 @@
 }
 
 .aa-qq-aov__result__row {
+  position: relative;
   display: flex;
   flex-flow: row nowrap;
-
+  align-items: baseline;
   margin-bottom: 15px;
 }
 
@@ -103,10 +110,10 @@
   font-size: 25px;
 }
 
-.aa-qq-aov__result__premium__currency {
+.aa-qq-aov__result__currency {
   display: inline-block;
   margin-left: 30px;
-  margin-right: 20px;
+  margin-right: 10px;
 }
 
 .aa-qq-aov__action-right {
@@ -116,17 +123,46 @@
 
 @include breakpoint($brk-mobile) {
   .aa-qq-aov__field {
-
+    flex-wrap: wrap;
   }
-
+  .aa-qq-aov__result__row {
+    flex-wrap: wrap;
+  }
+  .aa-qq-aov__actions {
+    flex-wrap: wrap;
+  }
 
 
   .aa-qq-aov__label {
-    padding-right: 0;
+    padding-right: 40px;
+  }
+
+  .aa-qq-aov__result__label {
+    padding-right: 40px;
+  }
+
+  .aa-qq-aov__result__premium {
+    flex: 0 0 100%;
+  }
+
+  .aa-qq-aov__result__currency {
+    margin-left: 0;
   }
 
   .aa-qq-aov__inputs {
-    position: static;
+    flex: 0 0 100%;
+  }
+
+  .aa-qq-aov__result__row aa-hint {
+    position: absolute;
+    right: 0;
+    top: 9px;
+  }
+
+  .aa-qq-aov__personal-details__hint {
+    position: absolute;
+    right: 0;
+    top: 0;
   }
 
 }
