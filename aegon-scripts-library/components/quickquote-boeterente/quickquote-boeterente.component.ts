@@ -246,11 +246,7 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
           // Set the value of total fee and monthly fee.
           if (((this.initialAmount - this.repymnt) > penaltyFree)) {
             let totalFee = (((this.initialAmount - this.repymnt) - penaltyFree) * tcw) / basisFee;
-            console.log('Indicatie omzettingskosten:');
-            console.log('Original value:' + totalFee);
             this.totalFee = this.roundToTenth(totalFee, 100);
-            console.log('Value after rounding to closest 100: ' + this.totalFee);
-            console.log('Huidige rente per maand:');
             this.monthlyFee = this.calculateMonthlyFee((this.initialAmount - this.repymnt), this.oldIntRate);
           }
           else {
@@ -307,7 +303,6 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
           this.newPeriodInt = interests;
           let mortgage = this.initialAmount - this.repymnt;
           // New monthly payment setting.
-          console.log('Nieuwe rente per maand:');
           this.newMonthlyPymnt = Math.round(this.calculateMonthlyFee(mortgage, this.newPeriodInt));
       });
     }
@@ -319,9 +314,7 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
     */
   private calculateMonthlyFee(mortgage: number, interest: number):number {
     let res = ((mortgage * interest) / 100) / 12;
-    console.log('Original value: ' + res);
     res = this.roundToTenth(res, 10);
-    console.log('Value after rounding to closest 10: ' + res);
 
     return res;
   }
