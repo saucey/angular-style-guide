@@ -1,27 +1,31 @@
 export const template = `
-  <div class="quickquote angular aov-quote">
-    <section class="personal-details" (select)="showCalculator = false">
+  <div class="aa-qq-aov">
+    <section class="aa-qq-aov__personal-details" (select)="showCalculator = false">
 
       <h3 prefix="/">{{ data.options.personalDataHeading }}</h3>
       
-      <div class="field gray-field">
-        <div class="label">
+      <div class="aa-qq-aov__field aa__clearfix">
+        <div class="aa-qq-aov__label">
           {{ data.options.birthDate.label }}
+        </div>
+        <div class="aa-qq-aov__personal-details__hint">
           <aa-hint [text]="data.options.birthDate.help"></aa-hint>
         </div>
-        <div class="inputs" (click)="showCalculator = false">
-          <aa-input-date [(ngModel)]="birthDate"></aa-input-date>
+        <div class="aa-qq-aov__inputs" (click)="showCalculator = false">
+          <aa-input-date [(ngModel)]="birthDate" class="aa-qq-aov__input"></aa-input-date>
         </div>
       </div>
-      <p class="error" *ngIf="birthDateError">{{ data.options.birthDate.error }}</p>
+      <p class="aa-error" *ngIf="birthDateError">{{ data.options.birthDate.error }}</p>
 
-      <div class="field gray-field">
-        <div class="label">
+      <div class="aa-qq-aov__field aa__clearfix">
+        <div class="aa-qq-aov__label">
           {{ data.options.profession.label }}
+        </div>
+        <div class="aa-qq-aov__personal-details__hint">
           <aa-hint [text]="data.options.profession.help"></aa-hint>
         </div>
-        <div class="inputs" (click)="showCalculator = false">
-          <aa-input-dropdown
+        <div class="aa-qq-aov__inputs" (click)="showCalculator = false">
+          <aa-input-dropdown class="aa-qq-aov__input"
             [model]="profession"
             [items]="professionsFiltered"
             [emptyMessage]="data.options.profession.noMatchText"
@@ -31,95 +35,101 @@ export const template = `
           </aa-input-dropdown>
         </div>
       </div>
-      <p class="error" *ngIf="professionError">{{ data.options.profession.error }}</p>
+      <p class="aa-error" *ngIf="professionError">{{ data.options.profession.error }}</p>
 
-      <div class="field gray-field">
-        <div class="label">
+      <div class="aa-qq-aov__field aa__clearfix">
+        <div class="aa-qq-aov__label">
           {{ data.options.income.label }}
+        </div>
+        <div class="aa-qq-aov__personal-details__hint">
           <aa-hint [text]="data.options.income.help"></aa-hint>
         </div>
-        <div class="inputs" (click)="showCalculator = false">
-          <aa-input-number [(ngModel)]="grossIncome" (modelChange)="prefillGrossYearAmount($event)" class="aa-input--euro"
+        <div class="aa-qq-aov__inputs" (click)="showCalculator = false">
+          <aa-input-number [(ngModel)]="grossIncome" (modelChange)="prefillGrossYearAmount($event)" class="aa-input--euro aa-qq-aov__input"
                            [max]="data.options.income.max" defaultValue=""></aa-input-number>
         </div>
       </div>
-      <p class="error" *ngIf="grossIncomeError">{{ data.options.income.error }}</p>
+      <p class="aa-error" *ngIf="grossIncomeError">{{ data.options.income.error }}</p>
 
-      <div class="field gray-field" *ngIf="!showCalculator">
-        <div class="label"></div>
-        <div class="inputs">
-          <button class="button icon-right icon-calculator" (click)="openCalculator()">
-            {{ data.options.calculateButtonText }}
-          </button>
+      <template [ngIf]="!showCalculator">
+        <div class="aa-qq-aov__field aa__clearfix">
+          <div class="aa-qq-aov__label"></div>
+          <div class="aa-qq-aov__inputs">
+            <button class="button icon-right icon-calculator aa-qq-aov__open-calculator" (click)="openCalculator()">
+              {{ data.options.calculateButtonText }}
+            </button>
+          </div>
         </div>
-      </div>
+      </template>
+      
     </section>
 
-
-    <section *ngIf="showCalculator" class="calculation">
-      <div class="calculation indication">
+    <template [ngIf]="showCalculator">
+      <section class="aa-qq-aov__calculator">
         <h3 prefix="/">{{ data.options.otherChoicesHeading }}</h3>
-
-        <div class="field">
-          <div class="label">
+        <div class="aa-qq-aov__field aa-qq-aob__radiobuttons aa__clearfix">
+          <div class="aa-qq-aov__label">
             {{data.options.startingTerm.label}}
+          </div>
+          <div class="aa-qq-aov__personal-details__hint">
             <aa-hint [text]="data.options.startingTerm.help"></aa-hint>
           </div>
-          <div class="inputs">
-            <div *ngFor="#choice of data.options.startingTerm.choices">
+          <div class="aa-qq-aov__inputs">
+            <div class="aa-qq-aov__radio" *ngFor="#choice of data.options.startingTerm.choices">
               <aa-input-radio name="term"
                 [(ngModel)]="startingTerm" 
-                (modelChange)="fetchSpecification$.emit()"  
+                (modelChange)="fetchSpecification$.emit()"
                 [value]="choice.value">{{ choice.label }}</aa-input-radio>
             </div>
           </div>
         </div>
         
-        <div class="calculation">
-          <div class="field">
-            <aa-slider-input class="aa-qq-aov__slider aa-qq__control aa-input--euro"
-              [(ngModel)]="grossYearAmount"
-              (modelChange)="fetchSpecification$.emit()"
-              [sliderOptions]="data.options.grossYearAmount.slider"
-              [label]="data.options.grossYearAmount.label"
-              [helpText]="data.options.grossYearAmount.help">
-            </aa-slider-input>
-          </div>
+        <div class="aa-qq-aov__field aa__clearfix">
+          <aa-slider-input class="aa-qq-aov__slider aa-qq__control aa-input--euro"
+            [(ngModel)]="grossYearAmount"
+            (modelChange)="fetchSpecification$.emit()"
+            [sliderOptions]="data.options.grossYearAmount.slider"
+            [label]="data.options.grossYearAmount.label"
+            [helpText]="data.options.grossYearAmount.help">
+          </aa-slider-input>
         </div>
-
-        <div class="result">
-          <div class="linear">
-            <div class="row">
-              <div class="label">
-                {{ data.options.result.grossPremium.label }}
-              </div>
-              <div class="value">&euro; {{ grossPremium }}<span>,-</span></div>
-              <span class="helptext">
-                {{ data.options.result.grossPremium.help }}
-              </span>
+      </section>
+  
+      <section class="aa-qq-aov__result">
+        <div class="aa-qq-aov__result__container">
+          <div class="aa-qq-aov__result__row">
+            <div class="aa-qq-aov__result__label">
+              {{ data.options.result.grossPremium.label }}
             </div>
-            <div class="row">
-              <div class="label">
-                {{ data.options.result.netPremium.label }}
-              </div>
-              <div class="value">&euro; {{ netPremium }}<span>,-</span></div>
-              <span class="helptext">
-                {{ data.options.result.netPremium.help }}
-              </span>
+            <aa-hint [text]="data.options.result.grossPremium.help"></aa-hint>
+            <div class="aa-qq-aov__result__premium aa__clearfix">
+              <span class="aa-qq-aov__result__currency">&euro;</span>
+              {{ grossPremium }}<span>,-</span>
             </div>
           </div>
+          <div class="aa-qq-aov__result__row">
+            <div class="aa-qq-aov__result__label">
+              {{ data.options.result.netPremium.label }}
+            </div>
+            <aa-hint [text]="data.options.result.grossPremium.help"></aa-hint>
+            <div class="aa-qq-aov__result__premium aa__clearfix">
+              <span class="aa-qq-aov__result__currency">&euro;</span>
+              {{ netPremium }}<span>,-</span>
+            </div>
+          </div>
         </div>
-        <div class="field">
-          <a class="button orange icon-right arrow">
-            {{ data.options.result.adviseButtonText }}
-          </a>
-          <div class="label">
+        
+        <div class="aa-qq-aov__actions">
+          <span class="aa-qq-aov__actions__label">
             <a href="#" class="icon-skinnyarrow" (click)="gotoSummary()">
               {{ data.options.result.summaryButtonText }}
             </a>
-          </div>
+          </span>
+          <a class="button orange icon-right arrow aa-qq-aov__action-right">
+            {{ data.options.result.adviseButtonText }}
+          </a>
         </div>
-      </div>
-    </section>
+      </section>
+    </template>
   </div>
 `;
