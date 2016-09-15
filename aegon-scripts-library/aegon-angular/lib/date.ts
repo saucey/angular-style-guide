@@ -58,7 +58,7 @@ export function formatDateSorted(input : any) : string {
 export function stringToDate(date: string): Date {
   let splitted = date.split('-');
   if (splitted.length === 3) {
-    return new Date(parseInt(splitted[0], 10), parseInt(splitted[1], 10), parseInt(splitted[2], 10));
+    return new Date(parseInt(splitted[0], 10), parseInt(splitted[1], 10) - 1, parseInt(splitted[2], 10));
   }
   return null;
 }
