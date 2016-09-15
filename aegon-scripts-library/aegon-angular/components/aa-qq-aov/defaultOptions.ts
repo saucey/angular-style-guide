@@ -1,7 +1,9 @@
 declare var wNumb: any;
 
 export const defaultOptions = {
-  mockData: false,
+  mockProfessions: false,
+  mockRiskFactor: false,
+  mockSpecification: false,
   serviceUrl: '/services/US_RestGatewayWeb/rest/requestResponse/BS_AE_POLIS_AOV_02/',
   serviceCredentials: 'FIXME',
   summaryPath: '#',

@@ -146,7 +146,7 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
   initProfessions() {
     this.serviceError = false;
 
-    if (this.data.options.mockData) {
+    if (this.data.options.mockProfessions) {
       this.processProfessions(mockProfessionsResponse);
       return;
     }
@@ -227,7 +227,7 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
   }
 
   fetchRiskFactor(rawProfession) {
-    if (this.data.options.mockData) {
+    if (this.data.options.mockRiskFactor) {
       this.processRiskFactor(mockRiskFactorResponse);
       return;
     }
@@ -315,7 +315,7 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
         return;
       }
 
-      if (this.data.options.mockData) {
+      if (this.data.options.mockSpecification) {
         this.processSpecification(mockSpecificationResponse, callback);
         return;
       }
