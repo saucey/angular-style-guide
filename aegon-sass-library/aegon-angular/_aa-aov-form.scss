@@ -1,0 +1,61 @@
+.main-color{
+  color: $blue_gray;
+}
+
+.aov-form.quickquote {
+  .field {
+    .label {
+      float: none;
+    }
+  }
+}
+
+.aov-form__list {
+
+  .aov-form__section {
+    position: relative;
+  }
+
+  .aov-form__selection {
+    @include rem('margin', 0, 0, 15);
+  }
+
+  .aov-form__numberCircle {
+    position: absolute;
+    left: -40px;
+    z-index: 2000;
+    border-radius: 50%;
+    behavior: url(PIE.htc);
+    width: 30px;
+    height: 30px;
+    padding: 8px;
+    background: #308ccd;
+    border: 2px solid #308ccd;
+    color: #fff;
+    text-align: center;
+    font: 18px Arial, sans-serif;
+    font-weight: bold;
+    line-height: 10px;
+    display: inline-block;
+  }
+
+  .aov-form__box {
+    width: 100%;
+    height: auto;
+    position: relative;
+    background: #D9EBF7;
+    border-radius: 6px;
+    padding: 20px;
+  }
+
+  .aov-form__radio__text {
+    display: inline-block;
+    max-width: 500px;
+    margin-top: -17px;
+    p {
+      @include rem('margin', 0, 0, 0);
+    }
+  }
+
+}
+

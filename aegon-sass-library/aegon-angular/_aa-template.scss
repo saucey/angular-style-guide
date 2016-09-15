@@ -59,6 +59,7 @@ aa-template:before {
 // Remove all loading styles once loaded
 aa-template.aa-template--loaded {
   height: auto;
+  overflow: visible;
   &:before, &:after {
     display: none;
   }
