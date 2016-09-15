@@ -362,7 +362,7 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
               "HVVDAT": maxInsuranceDateString,
               "MYCODE": "1150",
               "DEKKING_AOV": {
-                "VERZSOM_B": this.grossYearAmount,
+                "_AE_VERZSOM_B": this.grossYearAmount,
                 "_AE_COMBINATIEKORT": "false",
                 "_AE_COMMERCIELEKORT": "5",
                 "WACHTTY": this.startingTerm,
