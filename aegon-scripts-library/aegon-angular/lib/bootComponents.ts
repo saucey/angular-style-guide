@@ -25,6 +25,7 @@ import {AADataComponent} from '../components/aa-data/aa-data.component';
 import {AAQQBeleggenComponent} from '../components/aa-qq-beleggen/aa-qq-beleggen.component';
 import {AAQQHistorischRendementComponent} from '../components/aa-qq-historisch-rendement/aa-qq-historisch-rendement.component';
 import {AAQQAovComponent} from '../components/aa-qq-aov/aa-qq-aov.component';
+import {AAAovFormComponent} from '../components/aa-aov-form/aa-aov-form.component';
 import {AAQQSummaryComponent} from '../components/aa-qq-summary/aa-qq-summary.component';
 
 declare var System;
@@ -49,6 +50,7 @@ const
     AAQQBeleggenComponent,
     AAQQHistorischRendementComponent,
     AAQQAovComponent,
+    AAAovFormComponent,
     AAQQSummaryComponent
   ],
   /**
