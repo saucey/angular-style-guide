@@ -9,6 +9,7 @@ export const defaultOptions = {
   summaryPath: '#',
   specificationCallDelay: 500,
   personalDataHeading: 'Uw gegevens',
+  defaultMaxEndAge: 67,
   birthDate: {
     minAge: 18,
     maxAge: 59,
