@@ -32,7 +32,7 @@ export class AADataComponent extends AABaseComponent {
     switch (this.type) {
       // JSON
       case 'json':
-        value = libUtil.tryParseJson(source)
+        value = libUtil.tryParseJson(source);
         break;
       // Just raw string; use [innerHtml] to bind in template attribute
       case 'text':
