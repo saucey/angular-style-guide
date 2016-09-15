@@ -16,15 +16,7 @@ label.radio {
     &:checked + input[type="hidden"] + span.radio,
     &:checked ~ span.radio {
       background-color: $beige;
-      &:before {
-        position: relative;
-        top: 12px;
-        left: -3px;
-        list-style-type: disc;
-        content: $font_icons_radio;
-        text-align: right;
-        color: $blue;
-      }
+      box-shadow: 0 0 0 4px $white inset, 0 0 0 20px $blue inset;
     }
     & + span.radio,
     & + input[type="hidden"] + span.radio,
@@ -39,12 +31,6 @@ label.radio {
       border: $elements_border;
       border-radius: $elements_radio_height / 2;
       background-color: $beige;
-      &:before {
-        display: block;
-        content: "";
-        font-family: $font_icons;
-        font-size: 30px;
-      }
     }
   }
 }

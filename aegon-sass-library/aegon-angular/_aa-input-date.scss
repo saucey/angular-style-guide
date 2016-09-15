@@ -30,33 +30,44 @@
   input {
     text-align: center;
   }
+}
 
-  .aa-input-date__year {
+.aa-input-date__textfield {
+  position: relative;
+  -moz-appearance: textfield;
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+input[type=number] {
+  &.aa-input-date__year {
     width: 40% !important;
     border-radius: 0 3px 3px 0 !important;
     border-left: none;
     padding-left: 0;
   }
 
-  .aa-input-date__day,
-  .aa-input-date__month {
-    position: relative;
+  &.aa-input-date__day,
+  &.aa-input-date__month {
     width: 30% !important;
     padding-right: 0;
   }
 
-  .aa-input-date__month {
-    border-radius: 0 !important;
+  &.aa-input-date__month {
+    border-radius: 0;
     border-left: none;
     border-right: none;
     padding-left: 0;
   }
 
-  .aa-input-date__day {
-    border-radius: 3px 0 0 3px !important;
+  &.aa-input-date__day {
+    border-radius: 0 3px 3px 0 !important;
     border-right: none;
   }
 }
-
 
 
