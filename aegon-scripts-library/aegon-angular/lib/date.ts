@@ -56,7 +56,7 @@ export function formatDateSorted(input : any) : string {
  * - stringToDate('2015-03-21') -> Date object for 2015-03-21
  */
 export function stringToDate(date: string): Date {
-  let splitted = this.birthDate.split('-');
+  let splitted = date.split('-');
   if (splitted.length === 3) {
     return new Date(parseInt(splitted[0], 10), parseInt(splitted[1], 10), parseInt(splitted[2], 10));
   }
