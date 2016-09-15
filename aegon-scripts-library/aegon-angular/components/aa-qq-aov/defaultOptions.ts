@@ -5,7 +5,7 @@ export const defaultOptions = {
   mockRiskFactor: false,
   mockSpecification: false,
   serviceUrl: '/services/US_RestGatewayWeb/rest/requestResponse/BS_AE_POLIS_AOV_02/',
-  serviceCredentials: 'FIXME',
+  serviceCredentials: 'FILL_ME_IN_AA_DATA',
   summaryPath: '#',
   specificationCallDelay: 500,
   personalDataHeading: 'Uw gegevens',
