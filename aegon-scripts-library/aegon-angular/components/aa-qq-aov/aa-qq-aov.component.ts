@@ -324,8 +324,14 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
       let dateString = `${now.getFullYear()}-${zeroPad(now.getMonth() + 1, 2)}-${zeroPad(now.getDate(), 2)}`;
 
       let birthDate = stringToDate(this.birthDate);
+
+      
+      let maxAge = parseInt(this.rawProfession._AE_MAXENDLF || this.data.options.defaultMaxEndAge, 10);
+
       let maxInsuranceDate = cloneDate(birthDate);
-      addYearsToDate(maxInsuranceDate, this.rawProfession._AE_BKLSMAX);
+      addYearsToDate(maxInsuranceDate, maxAge);
+
+      let maxInsuranceDateString = `${maxInsuranceDate.getFullYear()}-${zeroPad(maxInsuranceDate.getMonth() + 1, 2)}-${zeroPad(maxInsuranceDate.getDate(), 2)}`;
 
       let body = {
         "calculateSpecificationRequest": {
@@ -353,7 +359,7 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
             },
             "DEKKING": {
               "VERZSOM": this.grossYearAmount,
-              "HVVDAT": maxInsuranceDate,
+              "HVVDAT": maxInsuranceDateString,
               "MYCODE": "1150",
               "DEKKING_AOV": {
                 "VERZSOM_B": this.grossYearAmount,
@@ -364,7 +370,7 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
                 "UDRAFWJ": getDateDiffInYears(now, maxInsuranceDate),
                 "AOPVU": "25",
                 "CBSSTG": "false",
-                "ENDLFTD": this.rawProfession._AE_BKLSMAX,
+                "ENDLFTD": maxAge,
                 "INDEX": "false",
                 "TARIEF": "C"
               }

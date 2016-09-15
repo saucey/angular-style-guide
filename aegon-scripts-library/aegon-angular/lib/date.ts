@@ -103,6 +103,6 @@ export function addYearsToDate(date: Date, years: number): void {
  */
 export function getDateDiffInYears(dateOne: Date, dateTwo: Date): number {
   let timeDiff = Math.abs(dateTwo.getTime() - dateOne.getTime());
-  return Math.ceil(timeDiff / (1000 * 3600 * 24 * 365));
+  return Math.ceil(timeDiff / (1000 * 60 * 60 * 24 * 365));
 }
 
