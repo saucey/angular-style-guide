@@ -373,7 +373,7 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
         }
       };
 
-      this.callService('calculationSpecification', body, responseData => {
+      this.callService('calculateSpecification', body, responseData => {
         this.processSpecification(responseData, callback);
       });
     }
