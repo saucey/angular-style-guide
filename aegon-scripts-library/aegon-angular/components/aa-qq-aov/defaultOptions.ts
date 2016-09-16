@@ -1,12 +1,15 @@
 declare var wNumb: any;
 
 export const defaultOptions = {
-  mockData: false,
-  serviceUrl: '/US_RestGatewayWeb/rest/requestResponse/BS_AE_POLIS_AOV_02/',
-  serviceCredentials: 'FIXME',
+  mockProfessions: false,
+  mockRiskFactor: false,
+  mockSpecification: false,
+  serviceUrl: '/services/US_RestGatewayWeb/rest/requestResponse/BS_AE_POLIS_AOV_02/',
+  serviceCredentials: 'FILL_ME_IN_AA_DATA',
   summaryPath: '#',
   specificationCallDelay: 500,
   personalDataHeading: 'Uw gegevens',
+  defaultMaxEndAge: 67,
   birthDate: {
     minAge: 18,
     maxAge: 59,

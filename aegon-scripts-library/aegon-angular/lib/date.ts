@@ -56,9 +56,9 @@ export function formatDateSorted(input : any) : string {
  * - stringToDate('2015-03-21') -> Date object for 2015-03-21
  */
 export function stringToDate(date: string): Date {
-  let splitted = this.birthDate.split('-');
+  let splitted = date.split('-');
   if (splitted.length === 3) {
-    return new Date(parseInt(splitted[0], 10), parseInt(splitted[1], 10), parseInt(splitted[2], 10));
+    return new Date(parseInt(splitted[0], 10), parseInt(splitted[1], 10) - 1, parseInt(splitted[2], 10));
   }
   return null;
 }
@@ -103,6 +103,6 @@ export function addYearsToDate(date: Date, years: number): void {
  */
 export function getDateDiffInYears(dateOne: Date, dateTwo: Date): number {
   let timeDiff = Math.abs(dateTwo.getTime() - dateOne.getTime());
-  return Math.ceil(timeDiff / (1000 * 3600 * 24 * 365));
+  return Math.ceil(timeDiff / (1000 * 60 * 60 * 24 * 365));
 }
 

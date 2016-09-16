@@ -146,7 +146,7 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
   initProfessions() {
     this.serviceError = false;
 
-    if (this.data.options.mockData) {
+    if (this.data.options.mockProfessions) {
       this.processProfessions(mockProfessionsResponse);
       return;
     }
@@ -227,7 +227,7 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
   }
 
   fetchRiskFactor(rawProfession) {
-    if (this.data.options.mockData) {
+    if (this.data.options.mockRiskFactor) {
       this.processRiskFactor(mockRiskFactorResponse);
       return;
     }
@@ -315,7 +315,7 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
         return;
       }
 
-      if (this.data.options.mockData) {
+      if (this.data.options.mockSpecification) {
         this.processSpecification(mockSpecificationResponse, callback);
         return;
       }
@@ -324,8 +324,14 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
       let dateString = `${now.getFullYear()}-${zeroPad(now.getMonth() + 1, 2)}-${zeroPad(now.getDate(), 2)}`;
 
       let birthDate = stringToDate(this.birthDate);
+
+      
+      let maxAge = parseInt(this.rawProfession._AE_MAXENDLF || this.data.options.defaultMaxEndAge, 10);
+
       let maxInsuranceDate = cloneDate(birthDate);
-      addYearsToDate(maxInsuranceDate, this.rawProfession._AE_BKLSMAX);
+      addYearsToDate(maxInsuranceDate, maxAge);
+
+      let maxInsuranceDateString = `${maxInsuranceDate.getFullYear()}-${zeroPad(maxInsuranceDate.getMonth() + 1, 2)}-${zeroPad(maxInsuranceDate.getDate(), 2)}`;
 
       let body = {
         "calculateSpecificationRequest": {
@@ -353,10 +359,10 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
             },
             "DEKKING": {
               "VERZSOM": this.grossYearAmount,
-              "HVVDAT": maxInsuranceDate,
+              "HVVDAT": maxInsuranceDateString,
               "MYCODE": "1150",
               "DEKKING_AOV": {
-                "VERZSOM_B": this.grossYearAmount,
+                "_AE_VERZSOM_B": this.grossYearAmount,
                 "_AE_COMBINATIEKORT": "false",
                 "_AE_COMMERCIELEKORT": "5",
                 "WACHTTY": this.startingTerm,
@@ -364,7 +370,7 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
                 "UDRAFWJ": getDateDiffInYears(now, maxInsuranceDate),
                 "AOPVU": "25",
                 "CBSSTG": "false",
-                "ENDLFTD": this.rawProfession._AE_BKLSMAX,
+                "ENDLFTD": maxAge,
                 "INDEX": "false",
                 "TARIEF": "C"
               }
@@ -373,7 +379,7 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
         }
       };
 
-      this.callService('calculationSpecification', body, responseData => {
+      this.callService('calculateSpecification', body, responseData => {
         this.processSpecification(responseData, callback);
       });
     }
