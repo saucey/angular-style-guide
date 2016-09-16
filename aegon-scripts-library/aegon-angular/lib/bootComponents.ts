@@ -34,6 +34,7 @@ import {AAQuizComponent} from '../components/aa-quiz/aa-quiz.component';
 import {AAQQBeleggenComponent} from '../components/aa-qq-beleggen/aa-qq-beleggen.component';
 import {AAQQHistorischRendementComponent} from '../components/aa-qq-historisch-rendement/aa-qq-historisch-rendement.component';
 import {AAQQAovComponent} from '../components/aa-qq-aov/aa-qq-aov.component';
+import {AAQQBoeterenteComponent} from '../components/aa-qq-boeterente/aa-qq-boeterente.component';
 import {AAQQSummaryComponent} from '../components/aa-qq-summary/aa-qq-summary.component';
 
 
@@ -64,6 +65,7 @@ const
     AAQQBeleggenComponent,
     AAQQHistorischRendementComponent,
     AAQQAovComponent,
+    AAQQBoeterenteComponent,
     AAQQSummaryComponent
   ],
   /**

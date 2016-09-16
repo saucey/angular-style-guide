@@ -72,6 +72,24 @@ export function parseNumber(value: any): number {
   }
 }
 
+/*
+ * Rounds integers to the closest
+ * multiple of 10.
+ * @param num {number}: the int number
+ * @param deg {number}: the multiple of 10 to round to.
+ */
+export function roundToTenth(num: number, round: number): number {
+  /*
+   * If the int is multiple of the round
+   * returns the same number
+   */
+  if(num % round === 0) {
+    return num;
+  }
+  return Math.ceil(num / round) * round;
+}
+
+
 /**
  * Read attribute from element and try to return a number
  * @param {Element} element DOM element to get attribute from

@@ -21,10 +21,14 @@
   }
 
   &:before {
-    left: 53px;
+    left: calc(29% - 8px);
   }
   &:after {
-    left: 103px;
+    left: calc(62% - 15px);
+  }
+
+  input {
+    text-align: center;
   }
 }
 
@@ -41,23 +45,27 @@
 
 input[type=number] {
   &.aa-input-date__year {
-    width: 72px !important;
-    border-radius: 0 5px 5px 0 !important;
+    width: 40% !important;
+    border-radius: 0 3px 3px 0 !important;
     border-left: none;
+    padding-left: 0;
+  }
+
+  &.aa-input-date__day,
+  &.aa-input-date__month {
+    width: 30% !important;
+    padding-right: 0;
   }
 
   &.aa-input-date__month {
-    text-align: center;
-    width: 54px;
     border-radius: 0;
     border-left: none;
     border-right: none;
+    padding-left: 0;
   }
 
   &.aa-input-date__day {
-     text-align: center;
-    width: 54px;
-    border-radius: 5px 0 0 5px;
+    border-radius: 3px 0 0 3px !important;
     border-right: none;
   }
 }
