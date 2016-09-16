@@ -225,7 +225,7 @@ export class InterestsService {
 					}
 				],
 				"Table ID": "hypotheek-met-nhg",
-				"Table footer": "<p>De rentepercentages gelden per 2 maart 2016 en zijn onder voorbehoud van typefouten</p>\n"
+				"Table footer": "<p>De rentepercentages gelden per 2 maart 2016 en zijn onder voorbehoud van typefouten</p>"
 			},
 			{
 				"Title": "Hypotheek zonder NHG",
@@ -275,7 +275,7 @@ export class InterestsService {
 					}
 				],
 				"Table ID": "hypotheek-zonder-nhg",
-				"Table footer": "<p><span style=\"line-height: 20.8px;\">De rentepercentages gelden per 2 maart 2016 en zijn onder voorbehoud van typefouten.</span></p>\n"
+				"Table footer": "<p>De rentepercentages gelden per 2 maart 2016 en zijn onder voorbehoud van typefouten.</p>"
 			}
 		];
 

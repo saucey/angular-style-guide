@@ -5,8 +5,8 @@ import 'rxjs/Rx';
 import {defaultOptions} from "./defaultOptions";
 import {AAMoneyPipe} from "../../pipes/money.pipe";
 import {InterestsService} from "./interests.service";
-import {validateDate} from "../../../components/angular-components/validation.component";
-import {roundToTenth, zeroPad} from "../../lib/format";
+import {validateDate} from "../../lib/date";
+import {round, roundToTenth, zeroPad} from "../../lib/format";
 import {calculateMonthlyFee} from "../../lib/calculations/interest"
 
 import {AABaseComponent} from "../../lib/classes/AABaseComponent";
@@ -37,8 +37,6 @@ export class AAQQBoeterenteComponent extends AABaseComponent implements OnInit {
   @Input() options: any = {};
   @Input() data: any = {};
 
-  // Mortgage options:
-  mortgageOps: Object[] = ['Maak uw keuze', 'Aflossingsvrij', 'Annuitair', '(Bank)Spaar', 'Lineair', 'Overig'];
   // Scope variable initiation.
   // Used for tealium.
   initiated: boolean = false;
@@ -200,7 +198,7 @@ export class AAQQBoeterenteComponent extends AABaseComponent implements OnInit {
         this.repymnt = 0;
       }
       // Rounded in 2 decimals.
-      penaltyFree = this.roundToDeg(penaltyFree, 2);
+      penaltyFree = round(penaltyFree, 2);
 
       // 3. Basis penalty-calculation (grondslag boeteberekening).
       let basisFee = (this.initialAmount - this.repymnt - penaltyFree);
@@ -267,7 +265,8 @@ export class AAQQBoeterenteComponent extends AABaseComponent implements OnInit {
           if (((this.initialAmount - this.repymnt) > penaltyFree)) {
             let totalFee = (((this.initialAmount - this.repymnt) - penaltyFree) * tcw) / basisFee;
             this.totalFee = roundToTenth(totalFee, 100);
-            this.monthlyFee = calculateMonthlyFee((this.initialAmount - this.repymnt), this.oldIntRate);
+            let monthlyFee = calculateMonthlyFee((this.initialAmount - this.repymnt), this.oldIntRate);
+            this.monthlyFee = roundToTenth(monthlyFee, 10);
           }
           else {
             this.totalFee = 0;
@@ -323,7 +322,8 @@ export class AAQQBoeterenteComponent extends AABaseComponent implements OnInit {
         this.newPeriodInt = interests;
         let mortgage = this.initialAmount - this.repymnt;
         // New monthly payment setting.
-        this.newMonthlyPymnt = Math.round(calculateMonthlyFee(mortgage, this.newPeriodInt));
+        let newMonthlyPymnt = calculateMonthlyFee(mortgage, this.newPeriodInt);
+        this.newMonthlyPymnt = roundToTenth(newMonthlyPymnt, 10);
       });
     }
   }
@@ -384,17 +384,6 @@ export class AAQQBoeterenteComponent extends AABaseComponent implements OnInit {
       // =(((YEAR(H18) - YEAR(H10)) * 12) - (MONTH(H10)) + MONTH(H18)) + 1
       return (((lY - y) * 12) - m + lM) + 1;
     }
-  }
-
-  /*
-   * Rounds the decimals to a certain
-   * amount of characters.
-   * @param num {number}: the float number
-   * @param deg {number}: the amount of decimal chars.
-   */
-  private roundToDeg(num: number, deg: number): number {
-    let degs = Math.pow(10, deg);
-    return Math.round(num * degs) / degs;
   }
 
   /*
