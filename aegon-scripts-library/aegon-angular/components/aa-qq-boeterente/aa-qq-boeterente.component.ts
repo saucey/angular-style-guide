@@ -3,12 +3,12 @@ import {HTTP_PROVIDERS, Http, Headers, RequestOptions, Response} from "angular2/
 
 import 'rxjs/Rx';
 import {defaultOptions} from "./defaultOptions";
-import {InputDateComponent, InputDateValueAccessor} from '../../../components/angular-components/input-date.component';
-import {InputNumberComponent, InputNumberValueAccessor} from '../../../components/angular-components/input-number.component';
-import {InputRadioComponent, InputRadioValueAccessor} from '../../../components/angular-components/input-radio.component';
-import {MoneyPipe} from "../../../components/angular-components/money.pipe";
+import {AAMoneyPipe} from "../../pipes/money.pipe";
 import {InterestsService} from "./interests.service";
 import {validateDate} from "../../../components/angular-components/validation.component";
+import {roundToTenth, zeroPad} from "../../lib/format";
+import {calculateMonthlyFee} from "../../lib/calculations/interest"
+
 import {AABaseComponent} from "../../lib/classes/AABaseComponent";
 
 import {AAInputNumberComponent} from '../aa-input-number/aa-input-number.component';
@@ -25,17 +25,11 @@ import {template} from "./template";
     AAHintComponent,
     AAInputNumberComponent,
     AAInputRadioComponent,
-    AAInputDateComponent,
-    InputDateComponent,
-    InputDateValueAccessor,
-    InputNumberComponent,
-    InputNumberValueAccessor,
-    InputRadioComponent,
-    InputRadioValueAccessor
+    AAInputDateComponent
   ],
   template: template,
   providers: [HTTP_PROVIDERS, InterestsService],
-  pipes: [MoneyPipe]
+  pipes: [AAMoneyPipe]
 })
 export class AAQQBoeterenteComponent extends AABaseComponent implements OnInit {
   @ViewChild('mortgageSelect') mortgageSelect: ElementRef;
@@ -218,13 +212,13 @@ export class AAQQBoeterenteComponent extends AABaseComponent implements OnInit {
       // 4.2. Define interest rate market per month
       let d = new Date();
       // Current date.
-      let currDate = d.getFullYear() + '-' + this.numberPadding((d.getMonth() + 1), 2) + '-' + this.numberPadding(d.getDate(), 2);
+      let currDate = d.getFullYear() + '-' + zeroPad((d.getMonth() + 1), 2) + '-' + zeroPad(d.getDate(), 2);
 
       /* Set current date to 1st of next month.
        * Check month and year. If current month is December
        * sets next month to January and adds 1 to the year.
        */
-      let nextMonth = d.getMonth() !== 11 ? this.numberPadding((d.getMonth() + 2), 2) : '01',
+      let nextMonth = d.getMonth() !== 11 ? zeroPad((d.getMonth() + 2), 2) : '01',
         year = d.getMonth() !== 11 ? d.getFullYear() : d.getFullYear() + 1;
 
       let startDate = year + '-' + nextMonth + '-' + '01';
@@ -272,8 +266,8 @@ export class AAQQBoeterenteComponent extends AABaseComponent implements OnInit {
           // Set the value of total fee and monthly fee.
           if (((this.initialAmount - this.repymnt) > penaltyFree)) {
             let totalFee = (((this.initialAmount - this.repymnt) - penaltyFree) * tcw) / basisFee;
-            this.totalFee = this.roundToTenth(totalFee, 100);
-            this.monthlyFee = this.calculateMonthlyFee((this.initialAmount - this.repymnt), this.oldIntRate);
+            this.totalFee = roundToTenth(totalFee, 100);
+            this.monthlyFee = calculateMonthlyFee((this.initialAmount - this.repymnt), this.oldIntRate);
           }
           else {
             this.totalFee = 0;
@@ -329,21 +323,11 @@ export class AAQQBoeterenteComponent extends AABaseComponent implements OnInit {
         this.newPeriodInt = interests;
         let mortgage = this.initialAmount - this.repymnt;
         // New monthly payment setting.
-        this.newMonthlyPymnt = Math.round(this.calculateMonthlyFee(mortgage, this.newPeriodInt));
+        this.newMonthlyPymnt = Math.round(calculateMonthlyFee(mortgage, this.newPeriodInt));
       });
     }
   }
-  /* Calculates the monthly interest fee.
-   *
-   * @param mortgage {number}: the mortgage amount
-   * @param interest {number}: the interest percentage
-   */
-  private calculateMonthlyFee(mortgage: number, interest: number):number {
-    let res = ((mortgage * interest) / 100) / 12;
-    res = this.roundToTenth(res, 10);
 
-    return res;
-  }
   /*
    * Special calculation between two dates to get
    * penalty applicable periods
@@ -411,39 +395,6 @@ export class AAQQBoeterenteComponent extends AABaseComponent implements OnInit {
   private roundToDeg(num: number, deg: number): number {
     let degs = Math.pow(10, deg);
     return Math.round(num * degs) / degs;
-  }
-
-  /*
-   * Rounds integers to the closest
-   * multiple of 10.
-   * @param num {number}: the int number
-   * @param deg {number}: the multiple of 10 to round to.
-   */
-  private roundToTenth(num: number, round: number): number {
-    /*
-     * If the int is multiple of the round
-     * returns the same number
-     */
-    if(num % round === 0) {
-      return num;
-    }
-    return Math.ceil(num / round) * round;
-  }
-
-  /*
-   * Adds leading zeros to a number.
-   * @param num {any}: the number to add padding.
-   * @param length {number}: the length of the expected number
-   *   with leading zeros including the number itself.
-   */
-  private numberPadding(num: any, length: number): string {
-    let str = num.toString().length,
-      pad = '';
-
-    for (let i = 0; i < (length - str); i++) {
-      pad += '0';
-    }
-    return pad + num;
   }
 
   /*

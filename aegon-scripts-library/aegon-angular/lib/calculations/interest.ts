@@ -79,3 +79,14 @@ export function inlaySeries(initialInlay: number, periodicInlay: number, periodC
   return result;
 }
 
+/* Calculates the monthly interest fee.
+ *
+ * @param mortgage {number}: the mortgage amount
+ * @param interest {number}: the interest percentage
+ */
+export function calculateMonthlyFee(mortgage: number, interest: number):number {
+  let res = ((mortgage * interest) / 100) / 12;
+  res = libFormat.roundToTenth(res, 10);
+
+  return res;
+}
