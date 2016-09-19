@@ -72,7 +72,9 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
   public  grossPremium: number = 0;
   public  netPremium: number = 0;
 
-  public  fetchSpecification$: EventEmitter<any> = new EventEmitter;
+  public  fetchSpecification$: EventEmitter<any> = new EventEmitter();
+
+  public  grossYearlyExpenseAmount: number = clientStorage.local.getItem("grossYearlyExpenseAmount");
 
   // Let parent class initialize config; the dependency injection with ElementRef
   // doesn't work directly so we have to call it explicitly.
@@ -221,7 +223,7 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
       )
     );
 
-    let expenses = clientStorage.local.getItem("grossYearlyExpenseAmount");
+    let expenses = this.grossYearlyExpenseAmount;
     if (expenses > 0) {
       this.grossYearAmount = Math.max(min, Math.min(expenses, max));
     } else {

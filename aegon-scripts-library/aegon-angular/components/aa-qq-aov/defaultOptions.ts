@@ -96,5 +96,10 @@ export const defaultOptions = {
     },
     adviseButtonText: 'Adviesgesprek aanvragen',
     summaryButtonText: 'Bekijk en mail overzicht'
+  },
+  sticky: {
+    heading: 'Samenvatting',
+    subheading: 'Indicatie uitgaven',
+    note: '* berekend aan de hand van uw netto maandelijkse uitgaven'
   }
 };
