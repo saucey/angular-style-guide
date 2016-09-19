@@ -153,7 +153,10 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
 
     let body = {
       "retrieveProfessionsRequest": {
-        "AILHEADER": { "CLIENTID": "A2T1 HappyFlow" }
+        "AILHEADER": {
+          "CLIENTID": "AEGONNL",
+          "CORRELATIONID": `##BS_AE_POLIS_AOV_02##${new Date().toString()}##`
+        }
       }
     };
 
@@ -235,27 +238,23 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
     let body = {
       "calculateRiskFactorRequest": {
         "AILHEADER": {
-          "CLIENTID": "RCAL",
-          "CORRELATIONID": "## batch 7 ##"
+          "CLIENTID": "AEGONNL",
+          "CORRELATIONID": `##BS_AE_POLIS_AOV_02##${new Date().toString()}##`
         },
         "_AE_BEROEPENLIJST_AOV": {}
       }
     };
 
     if (rawProfession) {
-      // BKLASSE is mandatory.
+      // Mandatory values.
       body.calculateRiskFactorRequest._AE_BEROEPENLIJST_AOV['BKLASSE'] = rawProfession.BKLASSE;
+      body.calculateRiskFactorRequest._AE_BEROEPENLIJST_AOV['_AE_BKLSMAX'] = rawProfession._AE_BKLSMAX || 0;
 
+      // Optional values
       if (rawProfession._AE_BKLSMIN) {
-        // Optional
         body.calculateRiskFactorRequest._AE_BEROEPENLIJST_AOV['_AE_BKLSMIN'] = rawProfession._AE_BKLSMIN;
       }
-      if (rawProfession._AE_BKLSMAX) {
-        // Optional
-        body.calculateRiskFactorRequest._AE_BEROEPENLIJST_AOV['_AE_BKLSMAX'] = rawProfession._AE_BKLSMAX;
-      }
       if (rawProfession._AE_BKLSVAST) {
-        // Optional
         body.calculateRiskFactorRequest._AE_BEROEPENLIJST_AOV['_AE_BKLSVAST'] = rawProfession._AE_BKLSVAST;
       }
 
@@ -310,7 +309,7 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
   }
 
   fetchSpecification(callback: any = () => {}) {
-    if (this.riskFactor) {
+    if (this.riskFactor && this.riskFactor.calculateRiskFactorResponse) {
       if (!this.validatePersonalInformation()) {
         return;
       }
@@ -329,6 +328,7 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
       let maxAge = parseInt(this.rawProfession._AE_MAXENDLF || this.data.options.defaultMaxEndAge, 10);
 
       let maxInsuranceDate = cloneDate(birthDate);
+      // Add the maximum age as years to the Date object.
       addYearsToDate(maxInsuranceDate, maxAge);
 
       let maxInsuranceDateString = `${maxInsuranceDate.getFullYear()}-${zeroPad(maxInsuranceDate.getMonth() + 1, 2)}-${zeroPad(maxInsuranceDate.getDate(), 2)}`;
@@ -336,8 +336,8 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
       let body = {
         "calculateSpecificationRequest": {
           "AILHEADER": {
-            "CLIENTID": "RCAL",
-            "CORRELATIONID": "## batch 7 ##"
+            "CLIENTID": "AEGONNL",
+            "CORRELATIONID": `##BS_AE_POLIS_AOV_02##${new Date().toString()}##`
           },
           "CONTRACT_POLIS": {
             "DPRC": "0",
@@ -382,6 +382,8 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
       this.callService('calculateSpecification', body, responseData => {
         this.processSpecification(responseData, callback);
       });
+    } else {
+      console.error('No riskfactor has been delivered. Cannot calculate.')
     }
   }
 }
