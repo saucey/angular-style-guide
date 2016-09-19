@@ -28,6 +28,7 @@ export class AAInputNumberComponent implements ControlValueAccessor {
   @Input() required: boolean;
   @Input() max: number;
   @Input() placeholder: string;
+  @Input() disabled: boolean = false;
   @Input() defaultValue: string = '0';
   @Input() inputId: string = 'input-' + (new Date().getTime()).toString(36);  // Create unique id for input field
 
@@ -105,6 +106,15 @@ export class AAInputNumberComponent implements ControlValueAccessor {
     // Allow typing comma for decimal numbers
     if (this.allowDecimals && kc === 188) {
       return;
+    }
+
+    if (event.srcElement['value']) {
+      let value = libFormat.parseNumber(event.srcElement['value']);
+      if (this.max && value >= this.max && kc >= 48 && kc <= 57) {
+        // The value is already at its maximum, so don't allow input.
+        event.preventDefault();
+        return;
+      }
     }
 
     if ((kc > 57 && kc < 96) || kc > 105 ) {
