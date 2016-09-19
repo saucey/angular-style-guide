@@ -21,14 +21,10 @@
   }
 
   &:before {
-    left: calc(29% - 8px);
+    left: 24%;
   }
   &:after {
-    left: calc(62% - 15px);
-  }
-
-  input {
-    text-align: center;
+    left: 55%;
   }
 }
 
@@ -45,13 +41,16 @@
 
 input[type=number] {
   &.aa-input-date__year {
-    width: 40% !important;
+    width: 35% !important;
     border-radius: 0 3px 3px 0 !important;
     border-left: none;
     padding-left: 0;
   }
 
-  &.aa-input-date__day,
+  &.aa-input-date__day {
+    width: 35% !important;
+    padding-right: 0;
+  }
   &.aa-input-date__month {
     width: 30% !important;
     padding-right: 0;

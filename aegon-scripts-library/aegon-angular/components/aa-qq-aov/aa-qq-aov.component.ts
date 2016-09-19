@@ -221,7 +221,12 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
       )
     );
 
-    this.grossYearAmount = max;
+    let expenses = clientStorage.local.getItem("grossYearlyExpenseAmount");
+    if (expenses > 0) {
+      this.grossYearAmount = Math.max(min, Math.min(expenses, max));
+    } else {
+      this.grossYearAmount = max;
+    }
     this.data.options.grossYearAmount.slider.range.max = max;
   }
 
@@ -324,7 +329,7 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
 
       let birthDate = stringToDate(this.birthDate);
 
-      
+
       let maxAge = parseInt(this.rawProfession._AE_MAXENDLF || this.data.options.defaultMaxEndAge, 10);
 
       let maxInsuranceDate = cloneDate(birthDate);
