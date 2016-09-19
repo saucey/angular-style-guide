@@ -84,7 +84,8 @@ export const template = `
           </div>
         </div>
         
-        <div class="aa-qq-aov__field aa__clearfix">
+        <div class="aa-qq-aov__field aa__clearfix" 
+             *ngIf="data.options.grossYearAmount.slider.range.max !== data.options.grossYearAmount.slider.range.min">
           <aa-slider-input class="aa-qq-aov__slider aa-qq__control aa-input--euro"
             [(ngModel)]="grossYearAmount"
             (modelChange)="fetchSpecification$.emit()"
@@ -92,6 +93,21 @@ export const template = `
             [label]="data.options.grossYearAmount.label"
             [helpText]="data.options.grossYearAmount.help">
           </aa-slider-input>
+        </div>
+        
+        <div *ngIf="data.options.grossYearAmount.slider.range.max === data.options.grossYearAmount.slider.range.min">
+          <div class="aa-qq-aov__field aa__clearfix">
+            <div class="aa-qq-aov__label">
+              {{ data.options.grossYearAmount.label }}
+            </div>
+            <div class="aa-qq-aov__personal-details__hint">
+              <aa-hint [text]="data.options.grossYearAmount.help"></aa-hint>
+            </div>
+            <div class="aa-qq-aov__inputs">
+              <aa-input-number [ngModel]="data.options.grossYearAmount.slider.range.min" 
+                               class="aa-input--euro aa-qq-aov__input" [disabled]="true"></aa-input-number>
+            </div>
+          </div>
         </div>
       </section>
   
