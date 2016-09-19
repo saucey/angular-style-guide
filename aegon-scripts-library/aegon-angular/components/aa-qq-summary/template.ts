@@ -39,10 +39,10 @@ export const template = `
             <div class="email-send-form-wrapper" [hidden]="reSendEmailShown">
               <input class="span6" id="email-address-field" [(ngModel)]="emailAddress" placeholder="Uw e-mailadres" tabindex="1" type="text">
               <button class="arrow span5" type="button" [class.pending]="emailButtonPending" [disabled]="emailAddress.trim()==''||emailButtonPending" (click)="sendEmailClick()">Versturen</button>
-              <p class="error span12" *ngIf="emailAddressError">
-                Wilt u een geldige e-mailadres invoeren?
-              </p>
             </div>
+            <p class="aa-error span10" *ngIf="emailAddressError">
+              Wilt u een geldige e-mailadres invoeren?
+            </p>
             <div class="email-resend-wrapper" [hidden]="!reSendEmailShown">
               <label class="span5 dark-blue" for="email-address-field">E-mail verstuurd</label>
               <button type="button" (click)="reSendEmailShown=false" class="button transparent arrow span6">Nogmaals versturen</button>

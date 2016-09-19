@@ -121,7 +121,7 @@ export const template = `
         
         <div class="aa-qq-aov__actions">
           <span class="aa-qq-aov__actions__label">
-            <a href="#" class="icon-skinnyarrow" (click)="gotoSummary()">
+            <a href="#" class="button arrow white" (click)="gotoSummary()">
               {{ data.options.result.summaryButtonText }}
             </a>
           </span>

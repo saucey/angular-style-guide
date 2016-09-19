@@ -2,13 +2,6 @@
   max-width: 650px;
 }
 
-.aa-qq-aov__slider {
-  .aa-slider-input__slider {
-    padding-left: 40px;
-    padding-right: 40px;
-  }
-}
-
 .aa-qq-aov__personal-details {
   margin-bottom: 50px;
 }
@@ -47,8 +40,37 @@
 }
 
 .aa-qq-aov__radio {
-  margin-left: 20px;
-  width: 160px;
+  width: 180px;
+
+  label {
+    font-weight: normal;
+  }
+
+  label.radio > input[type="radio"] + span.radio {
+    top: -8px;
+  }
+}
+
+.aa-qq-aov .aa-slider .noUi-background {
+  background: $grey;
+}
+
+.aa-qq-aov {
+  .noUi-pips-horizontal {
+    :nth-child(2) {
+      width: auto;
+      margin-left: -3px;
+      text-align: left;
+    }
+    :nth-child(4) {
+      width: auto;
+      margin-left: 0;
+      left: auto !important;
+      right: 0;
+      text-align: right;
+      margin-right: -3px;
+    }
+  }
 }
 
 .aa-qq-aov__open-calculator {
