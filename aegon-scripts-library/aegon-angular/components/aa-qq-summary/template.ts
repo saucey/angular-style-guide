@@ -14,7 +14,7 @@ export const template = `
           </div>
           <div class="span12 container_12 data-fields">
             <label class="label span6" for="field-bruto-jaarinkomen">Uw bruto jaarinkomen</label>
-            <span id="field-bruto-jaarinkomen" class="value span6">€ {{aov_qq_data.grossIncome |   money}}</span>
+            <span id="field-bruto-jaarinkomen" class="value span6">€ {{aov_qq_data.grossIncome | money}}</span>
           </div>
           <div class="span12 container_12 data-fields">
             <label class="label span6" for="field-eigen-risicoperiode">Eigen risicoperiode</label>
@@ -38,7 +38,7 @@ export const template = `
             <label class="span12 dark-blue" for="email-address-field">Samenvatting e-mailen</label>
             <div class="email-send-form-wrapper" [hidden]="reSendEmailShown">
               <input class="span6" id="email-address-field" [(ngModel)]="emailAddress" placeholder="Uw e-mailadres" tabindex="1" type="text">
-              <button class="arrow span5" type="button" [class.pending]="emailButtonPending" [disabled]="emailAddress.trim()==''||emailButtonPending" (click)="sendEmailClick()">Versturen</button>
+              <button class="arrow span5" type="button" [class.pending]="emailButtonPending" [disabled]="emailAddress.trim() == '' || emailButtonPending" (click)="sendEmailClick()">Versturen</button>
             </div>
             <p class="aa-error span10" *ngIf="emailAddressError">
               Wilt u een geldige e-mailadres invoeren?
@@ -69,7 +69,7 @@ export const template = `
       <div class="static-section">
         <h3 class="title">Uw geschatte maandpremie</h3>
         <p>
-          Uw geschatte premie is bruto €  {{aov_qq_data.grossMonthly | money}} per maand. Uw nettopremie na aftrek van belastingvoordeel is € {{aov_qq_data.netMonthly | money}} per maand. Dit is de maandpremie in het eerste kalenderjaar inclusief 5% doorlopende korting. Beide bedragen zijn een indicatie. Uw uiteindelijke maandpremie kan afwijken op basis van onder meer uw feitelijke werkzaamheden.
+          Uw geschatte premie is bruto € {{aov_qq_data.grossPremium | money}} per maand. Uw nettopremie na aftrek van belastingvoordeel is € {{aov_qq_data.netPremium | money}} per maand. Dit is de maandpremie in het eerste kalenderjaar inclusief 5% doorlopende korting. Beide bedragen zijn een indicatie. Uw uiteindelijke maandpremie kan afwijken op basis van onder meer uw feitelijke werkzaamheden.
         </p>
       </div>
       <div class="static-section">
