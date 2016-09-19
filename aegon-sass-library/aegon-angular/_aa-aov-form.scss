@@ -16,6 +16,21 @@
     position: relative;
   }
 
+  .transition {
+    max-height: 600px!important;
+  }
+
+  .aov-form__personTypeWrapper {
+    -webkit-transition: max-height 1s;
+    -moz-transition: max-height 1s;
+    -ms-transition: max-height 1s;
+    -o-transition: max-height 1s;
+    transition: max-height 1s;
+    overflow: hidden;
+    max-height: 0;
+    // "height: 0" not work with css transitions
+  }
+
   .aov-form__selection {
     @include rem('margin', 0, 0, 15);
   }

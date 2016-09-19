@@ -14,6 +14,8 @@ import * as libUtil from "./util";
 // Include all components; they will be added to the dynamic component directives
 import {AAHighchartComponent} from '../components/aa-highchart/aa-highchart.component';
 import {AAHintComponent} from '../components/aa-hint/aa-hint.component';
+import {AAAovFormMeComponent} from '../components/aa-aov-form-me/aa-aov-form-me.component';
+import {AACollapseComponent} from '../components/aa-collapse/aa-collapse.component';
 import {AAInputDropDownComponent} from '../components/aa-input-dropdown/aa-input-dropdown.component';
 import {AAInputNumberComponent} from '../components/aa-input-number/aa-input-number.component';
 import {AAInputRadioComponent} from '../components/aa-input-radio/aa-input-radio.component';
@@ -46,7 +48,9 @@ const
     AASliderInputComponent,
     AALightboxComponent,
     AADataComponent,
+    AACollapseComponent,
     // Quick quotes
+    AAAovFormMeComponent,
     AAQQBeleggenComponent,
     AAQQHistorischRendementComponent,
     AAQQAovComponent,
