@@ -25,7 +25,7 @@ export const template = `
           <aa-hint [text]="data.options.birthDate.help"></aa-hint>
         </div>
         <div class="aa-qq-aov__inputs" (click)="showCalculator = false">
-          <aa-input-date [(ngModel)]="birthDate" class="aa-qq-aov__input" [setFocus]="true"></aa-input-date>
+          <aa-input-date [(ngModel)]="birthDate" class="aa-qq-aov__input" [setFocus]="setFocus"></aa-input-date>
         </div>
       </div>
       <p class="aa-error" *ngIf="birthDateError">{{ data.options.birthDate.error }}</p>
