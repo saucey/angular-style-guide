@@ -1,5 +1,3 @@
-declare var wNumb: any;
-
 export const defaultOptions = {
   mockProfessions: false,
   mockRiskFactor: false,
@@ -80,8 +78,10 @@ export const defaultOptions = {
       }
     },
     label: 'Welk bruto jaarbedrag wilt u verzekeren?',
-    help: `Dit is het bedrag na aftrek van belastingvoordeel. Wij rekenen met een gemiddeld belastingvoordeel van 35%.
-           Voor uw situatie kan dit meer of minder zijn.`
+    help: `Vul hier het bedrag in dat u wilt verzekeren. 
+           Dit is maximaal 80% van uw bruto jaarinkomen. 
+           Het minimum bedrag is €2.500 en mag maximaal € 125.000,- zijn. 
+           Wilt u meer of minder verzekeren bespreek dan de mogelijkheden met een adviseur.`
   },
   result: {
     grossPremium: {
@@ -96,5 +96,14 @@ export const defaultOptions = {
     },
     adviseButtonText: 'Adviesgesprek aanvragen',
     summaryButtonText: 'Bekijk en mail overzicht'
+  },
+  sticky: {
+    heading: 'Samenvatting',
+    subheading: 'Indicatie uitgaven',
+    note: '* berekend aan de hand van uw netto maandelijkse uitgaven'
+  },
+  disclaimer: {
+    advisor: `Verzekeren is maatwerk. Een adviseur helpt u hierbij.`,
+    cost: `Aan het advies zijn kosten verbonden. Deze bespreekt u in het eerste vrijblijvende gesprek met adviseur.`
   }
 };

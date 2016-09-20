@@ -1,4 +1,17 @@
 export const template = `
+  <!--<aa-sticky *ngIf="grossYearlyExpenseAmount" [heading]="data.options.sticky.heading">
+    <h1 class="aa-sticky__heading">{{ data.options.sticky.subheading }}</h1>
+    <aa-editable-value>
+      <aa-editable-label>
+        &euro; {{ grossYearlyExpenseAmount | money }] bruto per jaar*
+      </aa-editable-label>
+      <aa-editable-input>
+        <aa-input-number [(ngModel)]="grossYearlyExpenseAmount">
+      </aa-input-number>
+      </aa-editable-input>
+    </aa-editable-value>
+    <p>{{ data.options.sticky.note }}</p>
+  </aa-sticky>-->
   <div class="aa-qq-aov">
     <section class="aa-qq-aov__personal-details" (select)="showCalculator = false">
 
@@ -12,7 +25,7 @@ export const template = `
           <aa-hint [text]="data.options.birthDate.help"></aa-hint>
         </div>
         <div class="aa-qq-aov__inputs" (click)="showCalculator = false">
-          <aa-input-date [(ngModel)]="birthDate" class="aa-qq-aov__input"></aa-input-date>
+          <aa-input-date [(ngModel)]="birthDate" class="aa-qq-aov__input" [setFocus]="true"></aa-input-date>
         </div>
       </div>
       <p class="aa-error" *ngIf="birthDateError">{{ data.options.birthDate.error }}</p>
@@ -120,19 +133,24 @@ export const template = `
             <aa-hint [text]="data.options.result.grossPremium.help"></aa-hint>
             <div class="aa-qq-aov__result__premium aa__clearfix">
               <span class="aa-qq-aov__result__currency">&euro;</span>
-              {{ grossPremium }}<span>,-</span>
+              {{ grossPremium }}
             </div>
           </div>
           <div class="aa-qq-aov__result__row">
             <div class="aa-qq-aov__result__label">
               {{ data.options.result.netPremium.label }}
             </div>
-            <aa-hint [text]="data.options.result.grossPremium.help"></aa-hint>
+            <aa-hint [text]="data.options.result.netPremium.help"></aa-hint>
             <div class="aa-qq-aov__result__premium aa__clearfix">
               <span class="aa-qq-aov__result__currency">&euro;</span>
-              {{ netPremium }}<span>,-</span>
+              {{ netPremium }}
             </div>
           </div>
+        </div>
+        
+        <div class="aa-qq-aov__disclaimer">
+          <div class="aa-qq__disclaimer aa-qq__disclaimer--star">{{ data.options.disclaimer.advisor }}</div>
+          <div class="aa-qq__disclaimer aa-qq__disclaimer--star">{{ data.options.disclaimer.cost }}</div>
         </div>
         
         <div class="aa-qq-aov__actions">
@@ -145,6 +163,7 @@ export const template = `
             {{ data.options.result.adviseButtonText }}
           </a>
         </div>
+       
       </section>
     </template>
   </div>

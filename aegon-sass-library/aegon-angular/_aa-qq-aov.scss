@@ -55,6 +55,15 @@
   background: $grey;
 }
 
+.aa-qq-aov__disclaimer {
+  margin-bottom: 30px;
+
+  .aa-qq__disclaimer {
+    padding-top: 7px;
+    padding-bottom: 7px;
+  }
+}
+
 .aa-qq-aov {
   .noUi-pips-horizontal {
     :nth-child(2) {
@@ -71,6 +80,10 @@
       margin-right: -3px;
     }
   }
+}
+
+.aa-qq-aov .aa-slider-input__header label {
+  color: $black;
 }
 
 .aa-qq-aov__open-calculator {
@@ -93,7 +106,6 @@
 
 .aa-qq-aov__result__container {
   padding: 20px 30px 5px 30px;
-  margin-bottom: 30px;
   border-radius: 5px;
   color: $white;
   background: $slightly_darker_blue;

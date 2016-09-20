@@ -69,10 +69,12 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
 
   public  riskFactor: any = {};
 
-  public  grossPremium: number = 0;
-  public  netPremium: number = 0;
+  public  grossPremium: string = "0,00";
+  public  netPremium: string = "0,00";
 
-  public  fetchSpecification$: EventEmitter<any> = new EventEmitter;
+  public  fetchSpecification$: EventEmitter<any> = new EventEmitter();
+
+  public  grossYearlyExpenseAmount: number = clientStorage.local.getItem("grossYearlyExpenseAmount");
 
   // Let parent class initialize config; the dependency injection with ElementRef
   // doesn't work directly so we have to call it explicitly.
@@ -94,9 +96,8 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
     this.fetchSpecification$.debounceTime(this.data.options.specificationCallDelay)
       .subscribe(() => {
         this.fetchSpecification(() => {
-          let bdTokens = this.birthDate.split('-');
           let summaryData = {
-            birthDate: `${bdTokens[2]}-${bdTokens[1]}-${bdTokens[0]}`,
+            birthDate: this.birthDate,
             profession: this.profession && this.profession.label || "",
             grossIncome: this.grossIncome || 0,
             startingTerm: this.startingTerm || 30,
@@ -107,6 +108,16 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
           clientStorage.session.setItem("aovQQ", summaryData);
         });
       });
+
+    
+    // Add a euro sign in front of 
+    if (!this.data.options.grossYearAmount.slider.pips.format) {
+      this.data.options.grossYearAmount.slider.pips['format'] = {
+        to: (value) => {
+          return '€ ' + value;
+        }
+      }
+    }
   }
 
   handleError(error: Response) {
@@ -221,7 +232,7 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
       )
     );
 
-    let expenses = clientStorage.local.getItem("grossYearlyExpenseAmount");
+    let expenses = this.grossYearlyExpenseAmount;
     if (expenses > 0) {
       this.grossYearAmount = Math.max(min, Math.min(expenses, max));
     } else {
@@ -305,8 +316,8 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
 
     if (src && src['_AE_JAARPREM']) {
       let monthly = src['_AE_JAARPREM'] / 12;
-      this.grossPremium = Math.round(monthly);
-      this.netPremium = Math.round(monthly * 0.65);
+      this.grossPremium = monthly.toFixed(2).replace('.', ',');
+      this.netPremium = (monthly * 0.65).toFixed(2).replace('.', ',');
 
       callback();
     }
