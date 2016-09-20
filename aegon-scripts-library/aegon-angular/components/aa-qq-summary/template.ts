@@ -32,12 +32,15 @@ export const template = `
             <label class="label span6" for="field-netto-premie">Netto premie per maand</label>
             <span id="field-netto-premie" class="value span6">€ {{aov_qq_data.netPremium | money}}</span>
           </div>
+          <div class="span12 container_12 data-fields">
+            <a href="{{options.goBackAndChangeUrl}}" class="button transparent arrow">Wijzig bovenstaande gegevens</a>
+          </div>
         </div>
         <div class="action-section span12">
           <div class="row-fluid">
             <label class="span12 dark-blue" for="email-address-field">Samenvatting e-mailen</label>
             <div class="email-send-form-wrapper" [hidden]="reSendEmailShown">
-              <input class="span6" id="email-address-field" [(ngModel)]="emailAddress" placeholder="Uw e-mailadres" tabindex="1" type="text">
+              <input class="span6" id="email-address-field" #emailAddressField [(ngModel)]="emailAddress" placeholder="Uw e-mailadres" tabindex="1" type="text">
               <button class="arrow span5" type="button" [class.pending]="emailButtonPending" [disabled]="emailAddress.trim() == '' || emailButtonPending" (click)="sendEmailClick()">Versturen</button>
             </div>
             <p class="aa-error span10" *ngIf="emailAddressError">

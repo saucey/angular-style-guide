@@ -5,5 +5,6 @@ export const options = {
   actionButton: {
   	url: 'https://www.aegon.nl/zakelijk/inkomensverzekeringen/arbeidsongeschiktheidsverzekering/afspraak-arbeidsongeschiktheidsverzekering-advies',
   	label: 'Neem contact met mij op'
-  }
+  },
+  goBackAndChangeUrl: '/aov-premie-berekenen-flexible'
 };
