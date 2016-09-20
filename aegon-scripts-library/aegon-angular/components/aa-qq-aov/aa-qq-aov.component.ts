@@ -186,19 +186,34 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
     // Calculate age.
     let age = calculateAge(this.birthDate);
 
+    // Calculate maximum age.
+    let maxAge = this.data.options.birthDate.maxAge;
+
+    // If we have a profession that has a maximum age, use this age instead.
+    if (this.rawProfession &&
+        this.rawProfession._AE_MAXENDLF) {
+      let _AE_MAXENDLF = parseInt(this.rawProfession._AE_MAXENDLF, 10);
+      if (_AE_MAXENDLF < maxAge) {
+        maxAge = _AE_MAXENDLF;
+      }
+    }
+
+    // Check if birthDate has been filled and that the person is not older than the maximum age.
     if (!this.birthDate ||
         age < this.data.options.birthDate.minAge ||
-        age > this.data.options.birthDate.maxAge ) {
+        age > maxAge ) {
       this.birthDateError = true;
       hasErrors = true;
     }
 
+    // Check is a profession has been set.
     if (!this.profession || this.professions.indexOf(this.profession) === -1) {
       // Profession isn't one of the profession objects!
       this.professionError = true;
       hasErrors = true;
     }
 
+    // Chekc if the grossIncome has been set and that is between the minimum and maximum.
     if (!this.grossIncome || this.grossIncome < this.data.options.income.min || this.grossIncome > this.data.options.income.max) {
       this.grossIncomeError = true;
       hasErrors = true;
