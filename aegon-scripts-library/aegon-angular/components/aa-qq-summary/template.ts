@@ -37,7 +37,7 @@ export const template = `
           <div class="row-fluid">
             <label class="span12 dark-blue" for="email-address-field">Samenvatting e-mailen</label>
             <div class="email-send-form-wrapper" [hidden]="reSendEmailShown">
-              <input class="span6" id="email-address-field" [(ngModel)]="emailAddress" placeholder="Uw e-mailadres" tabindex="1" type="text">
+              <input class="span6" id="email-address-field" #emailAddressField [(ngModel)]="emailAddress" placeholder="Uw e-mailadres" tabindex="1" type="text">
               <button class="arrow span5" type="button" [class.pending]="emailButtonPending" [disabled]="emailAddress.trim() == '' || emailButtonPending" (click)="sendEmailClick()">Versturen</button>
             </div>
             <p class="aa-error span10" *ngIf="emailAddressError">
