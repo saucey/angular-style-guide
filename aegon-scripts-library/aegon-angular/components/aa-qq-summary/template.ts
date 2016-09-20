@@ -26,11 +26,11 @@ export const template = `
           </div>
           <div class="span12 container_12 data-fields">
             <label class="label span6" for="field-bruto-premie">Bruto premie per maand</label>
-            <span id="field-bruto-premie" class="value span6">€ {{aov_qq_data.grossPremium | money}}</span>
+            <span id="field-bruto-premie" class="value span6">€ {{aov_qq_data.grossPremium}}</span>
           </div>
           <div class="span12 container_12 data-fields">
             <label class="label span6" for="field-netto-premie">Netto premie per maand</label>
-            <span id="field-netto-premie" class="value span6">€ {{aov_qq_data.netPremium | money}}</span>
+            <span id="field-netto-premie" class="value span6">€ {{aov_qq_data.netPremium}}</span>
           </div>
           <div class="span12 container_12 data-fields">
             <a href="{{options.goBackAndChangeUrl}}" class="button transparent arrow">Wijzig bovenstaande gegevens</a>
@@ -72,7 +72,7 @@ export const template = `
       <div class="static-section">
         <h3 class="title">Uw geschatte maandpremie</h3>
         <p>
-          Uw geschatte premie is bruto € {{aov_qq_data.grossPremium | money}} per maand. Uw nettopremie na aftrek van belastingvoordeel is € {{aov_qq_data.netPremium | money}} per maand. Dit is de maandpremie in het eerste kalenderjaar inclusief 5% doorlopende korting. Beide bedragen zijn een indicatie. Uw uiteindelijke maandpremie kan afwijken op basis van onder meer uw feitelijke werkzaamheden.
+          Uw geschatte premie is bruto € {{aov_qq_data.grossPremium}} per maand. Uw nettopremie na aftrek van belastingvoordeel is € {{aov_qq_data.netPremium}} per maand. Dit is de maandpremie in het eerste kalenderjaar inclusief 5% doorlopende korting. Beide bedragen zijn een indicatie. Uw uiteindelijke maandpremie kan afwijken op basis van onder meer uw feitelijke werkzaamheden.
         </p>
       </div>
       <div class="static-section">
