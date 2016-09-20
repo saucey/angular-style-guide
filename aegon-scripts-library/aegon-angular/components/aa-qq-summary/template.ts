@@ -6,7 +6,7 @@ export const template = `
         <div class="data-section span12 container_12">
           <div class="span12 container_12 data-fields">
             <label class="label span6" for="field-geboortedatum">Uw geboortedatum</label>
-            <span id="field-geboortedatum" class="value span6">{{aov_qq_data.birthDate}}</span>
+            <span id="field-geboortedatum" class="value span6">{{aov_qq_data.birthDate | reverseDateString}}</span>
           </div>
           <div class="span12 container_12 data-fields">
             <label class="label span6" for="field-beroep">Uw beroep</label>

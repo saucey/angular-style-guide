@@ -11,6 +11,7 @@ import {AAPeriodPipe} from "../../pipes/period.pipe";
 // Locals
 import {template} from "./template";
 import {options} from "./options";
+import {AAReverseDateStringPipe} from "../../pipes/reverseDateString.pipe";
 
 @Component({
   selector: 'aa-qq-summary',
@@ -18,7 +19,7 @@ import {options} from "./options";
   ],
   template: template,
   providers: [HTTP_PROVIDERS],
-  pipes: [AAMoneyPipe, AAPeriodPipe]
+  pipes: [AAMoneyPipe, AAPeriodPipe, AAReverseDateStringPipe]
 })
 
 export class AAQQSummaryComponent implements OnInit {
@@ -92,12 +93,14 @@ export class AAQQSummaryComponent implements OnInit {
     //   return false;
     // }
 
+    let startingTerm = new AAPeriodPipe().transform(this.aov_qq_data.startingTerm, null);
+
     let dataReq = {
         "Email" : this.emailAddress,
         "Geboortedatum" : this.aov_qq_data.birthDate,
         "Beroep" : this.aov_qq_data.profession,
         "Bruto_Jaarinkomen" : this.aov_qq_data.grossIncome,
-        "Eigen_risicoperiode" : this.aov_qq_data.startingTerm,
+        "Eigen_risicoperiode" : startingTerm,
         "Verzekerdbedrag" : this.aov_qq_data.grossYearAmount,
         "Bruto_premie_permaand" : this.aov_qq_data.grossPremium,
         "Netto_premie_permaand" : this.aov_qq_data.netPremium
