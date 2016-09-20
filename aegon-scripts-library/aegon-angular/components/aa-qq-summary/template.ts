@@ -32,6 +32,9 @@ export const template = `
             <label class="label span6" for="field-netto-premie">Netto premie per maand</label>
             <span id="field-netto-premie" class="value span6">€ {{aov_qq_data.netPremium | money}}</span>
           </div>
+          <div class="span12 container_12 data-fields">
+            <a href="{{options.goBackAndChangeUrl}}" class="button transparent arrow">Wijzig bovenstaande gegevens</a>
+          </div>
         </div>
         <div class="action-section span12">
           <div class="row-fluid">
