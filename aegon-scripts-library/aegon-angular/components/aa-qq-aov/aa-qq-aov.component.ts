@@ -5,9 +5,7 @@ import {Component, OnInit, Input, EventEmitter, ElementRef} from 'angular2/core'
 import {HTTP_PROVIDERS, Http, Headers, RequestOptions, Response} from "angular2/http";
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
-import * as libUtil from "../../lib/util";
 
-import {HelpComponent} from '../../../components/angular-components/help.component';
 // AA components
 import {AAMoneyPipe} from "../../pipes/money.pipe";
 import {AAInputRadioComponent} from "../aa-input-radio/aa-input-radio.component";
@@ -44,9 +42,12 @@ import {AABaseComponent} from "../../lib/classes/AABaseComponent";
 export class AAQQAovComponent extends AABaseComponent implements OnInit {
   @Input() options: any = {};
   @Input() data: any = {};
-  public  defaultOptions: any = defaultOptions;
 
-  public  showCalculator: boolean;
+  public  defaultOptions: any = defaultOptions;
+  public  pending: number = 0;
+  public  showCalculator: boolean = false;
+  public  serviceError: boolean;
+  public  setFocus: boolean = true;
 
   public  birthDate: string;
   public  birthDateError: boolean;
@@ -54,18 +55,14 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
   public  profession: any = {};
   public  professions: any[] = [];
   public  professionsFiltered: any[] = [];
-  private rawProfession: any;
-  private rawProfessions: any = {};
-
   public  professionError: boolean;
+
   public  grossIncome: number;
   public  grossIncomeError: boolean;
 
   public  startingTerm: number;
-  public  grossYearAmount: number;
 
-  public  serviceError: boolean;
-  public  pending: number = 0;
+  public  grossYearAmount: number;
 
   public  riskFactor: any = {};
 
@@ -75,6 +72,7 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
   public  fetchSpecification$: EventEmitter<any> = new EventEmitter();
 
   public  grossYearlyExpenseAmount: number = clientStorage.local.getItem("grossYearlyExpenseAmount");
+  public  clientStorageAOV: any = clientStorage.session.getItem("aovQQ") || void 0;
 
   // Let parent class initialize config; the dependency injection with ElementRef
   // doesn't work directly so we have to call it explicitly.
@@ -89,14 +87,14 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
     super.ngOnInit();
 
     this.startingTerm = this.data.options.startingTerm.initial;
-
     this.initProfessions();
 
     // Debounce the request so it doesn't fire constantly.
     this.fetchSpecification$.debounceTime(this.data.options.specificationCallDelay)
       .subscribe(() => {
         this.fetchSpecification(() => {
-          let summaryData = {
+          // Data needed for the summary.
+          let data = {
             birthDate: this.birthDate,
             profession: this.profession && this.profession.label || "",
             grossIncome: this.grossIncome || 0,
@@ -105,12 +103,17 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
             grossPremium: this.grossPremium || 0,
             netPremium: this.netPremium || 0
           };
-          clientStorage.session.setItem("aovQQ", summaryData);
+
+          // Data needed for prefilling the aov quote.
+          data['professionCode'] = this.profession.raw._AE_BRPCODE;
+          data['riskFactor'] = this.riskFactor;
+
+          clientStorage.session.setItem("aovQQ", data);
         });
       });
 
     
-    // Add a euro sign in front of 
+    // Add a euro sign in front of the amount. This doesn't work if we set it in defaultOption.ts.
     if (!this.data.options.grossYearAmount.slider.pips.format) {
       this.data.options.grossYearAmount.slider.pips['format'] = {
         to: (value) => {
@@ -128,15 +131,43 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
     return Observable.throw('Server error');
   }
 
-  processProfessions(response) {
-    // Check if the response contains professions
-    if (response && response.retrieveProfessionsResponse &&
-        response.retrieveProfessionsResponse._AE_BEROEPENLIJST_AOV) {
-      for (let prof of response.retrieveProfessionsResponse._AE_BEROEPENLIJST_AOV) {
-        // Add each profession to the rawProfession dictionary under its key.
-        this.rawProfessions[prof._AE_BRPCODE] = prof;
-        // Make each profession available for the input dropdown in the format that the dropdown needs.
-        this.professions.push({key: prof._AE_BRPCODE, label: prof._AE_BRPSUBNM || prof._AE_BRPNAAM})
+  prefillAOVQQ(cl) {
+    if (cl.birthDate) {
+      this.birthDate = cl.birthDate;
+    }
+
+    if (cl.grossIncome) {
+      this.grossIncome = cl.grossIncome;
+    }
+
+    if (cl.startingTerm) {
+      this.startingTerm = cl.startingTerm;
+    }
+
+    if (cl.grossYearAmount) {
+      this.grossYearAmount = cl.grossYearAmount;
+    }
+
+    if (cl.professionCode) {
+      for (let professionObj of this.professions) {
+        if (professionObj['raw']._AE_BRPCODE === cl.professionCode) {
+          // Set the profession.
+          this.profession = professionObj;
+
+          // Fetch the Riskfactor and let it also fetch the specification if all personal details are available.
+          let valid = cl.birthDate && cl.professionCode && cl.grossIncome;
+
+          if (cl.riskFactor) {
+            this.riskFactor = cl.riskFactor;
+            if (valid) {
+              this.setFocus = false;
+              this.openCalculator();
+            }
+          } else {
+            this.fetchRiskFactor(professionObj.raw, valid);
+          }
+          break;
+        }
       }
     }
   }
@@ -154,11 +185,26 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
       }, error => console.error(error));
   }
 
+  processProfessions(response) {
+    // Check if the response contains professions
+    if (response && response.retrieveProfessionsResponse &&
+        response.retrieveProfessionsResponse._AE_BEROEPENLIJST_AOV) {
+      for (let prof of response.retrieveProfessionsResponse._AE_BEROEPENLIJST_AOV) {
+        // Make each profession available for the input dropdown in the format that the dropdown needs.
+        this.professions.push({key: prof._AE_BRPCODE, label: prof._AE_BRPSUBNM || prof._AE_BRPNAAM, raw: prof})
+      }
+    }
+  }
+
   initProfessions() {
     this.serviceError = false;
 
     if (this.data.options.mockProfessions) {
       this.processProfessions(mockProfessionsResponse);
+
+      if (this.clientStorageAOV) {
+        this.prefillAOVQQ(this.clientStorageAOV);
+      }
       return;
     }
 
@@ -172,7 +218,13 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
     };
 
     this.callService('retrieveProfessions', body, responseData => {
+      // Process the professions.
       this.processProfessions(responseData);
+
+      // If the clientStorage contains AOV information, the prefill the AOV.
+      if (this.clientStorageAOV) {
+        this.prefillAOVQQ(this.clientStorageAOV);
+      }
     });
   }
 
@@ -190,9 +242,8 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
     let maxAge = this.data.options.birthDate.maxAge;
 
     // If we have a profession that has a maximum age, use this age instead.
-    if (this.rawProfession &&
-        this.rawProfession._AE_MAXENDLF) {
-      let _AE_MAXENDLF = parseInt(this.rawProfession._AE_MAXENDLF, 10);
+    if (this.profession && this.profession.raw._AE_MAXENDLF) {
+      let _AE_MAXENDLF = parseInt(this.profession.raw._AE_MAXENDLF, 10);
       if (_AE_MAXENDLF < maxAge) {
         maxAge = _AE_MAXENDLF;
       }
@@ -213,7 +264,7 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
       hasErrors = true;
     }
 
-    // Chekc if the grossIncome has been set and that is between the minimum and maximum.
+    // Check if the grossIncome has been set and that is between the minimum and maximum.
     if (!this.grossIncome || this.grossIncome < this.data.options.income.min || this.grossIncome > this.data.options.income.max) {
       this.grossIncomeError = true;
       hasErrors = true;
@@ -226,10 +277,10 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
     // Validate the personal information. If it is valid then the calculator can be shown.
     if (this.validatePersonalInformation()) {
       // Show calculator once we have fetched the data.
-      this.fetchSpecification(() => {
-        this.showCalculator = true;
-      });
 
+      this.fetchSpecification(() => {
+          this.showCalculator = true;
+      });
     }
   }
 
@@ -256,13 +307,19 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
     this.data.options.grossYearAmount.slider.range.max = max;
   }
 
-  processRiskFactor(response) {
+  processRiskFactor(response, prefill) {
     this.riskFactor = response;
+
+    if (prefill) {
+      // We are prefilling the form, automatically fetch the calculation.
+      this.setFocus = false;
+      this.openCalculator();
+    }
   }
 
-  fetchRiskFactor(rawProfession) {
+  fetchRiskFactor(rawProfession, prefill = false) {
     if (this.data.options.mockRiskFactor) {
-      this.processRiskFactor(mockRiskFactorResponse);
+      this.processRiskFactor(mockRiskFactorResponse, prefill);
       return;
     }
 
@@ -290,7 +347,7 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
       }
 
       this.callService('calculateRiskFactor', body, responseData => {
-        this.processRiskFactor(responseData);
+        this.processRiskFactor(responseData, prefill);
       });
     }
   }
@@ -301,11 +358,9 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
 
     if (professionObj) {
       // When a profession is known the riskfactor can be retrieved from the service.
-      this.rawProfession = this.rawProfessions[professionObj.key];
-      this.fetchRiskFactor(this.rawProfession);
+      this.fetchRiskFactor(professionObj.raw);
     } else {
       // No profession found, empty the riskFactor.
-      this.rawProfession = null;
       this.riskFactor = {};
     }
   }
@@ -354,9 +409,8 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
       let dateString = `${now.getFullYear()}-${zeroPad(now.getMonth() + 1, 2)}-${zeroPad(now.getDate(), 2)}`;
 
       let birthDate = stringToDate(this.birthDate);
-
-
-      let maxAge = parseInt(this.rawProfession._AE_MAXENDLF || this.data.options.defaultMaxEndAge, 10);
+      
+      let maxAge = parseInt(this.profession.raw._AE_MAXENDLF || this.data.options.defaultMaxEndAge, 10);
 
       let maxInsuranceDate = cloneDate(birthDate);
       // Add the maximum age as years to the Date object.
