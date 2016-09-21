@@ -291,7 +291,7 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
     // Check if birthDate has been filled and that the person is not older than the maximum age.
     if (!this.birthDate ||
         age < this.data.options.birthDate.minAge ||
-        age > maxAge ) {
+        age >= maxAge ) {
       this.birthDateError = true;
       hasErrors = true;
     }
