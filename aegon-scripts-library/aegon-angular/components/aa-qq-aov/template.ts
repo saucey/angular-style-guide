@@ -68,7 +68,7 @@ export const template = `
         <div class="aa-qq-aov__field aa__clearfix">
           <div class="aa-qq-aov__label"></div>
           <div class="aa-qq-aov__inputs">
-            <button class="button icon-right icon-calculator aa-qq-aov__open-calculator" (click)="openCalculator()">
+            <button class="button icon-right icon-calculator aa-qq-aov__open-calculator" (click)="openCalculator(true)">
               {{ data.options.calculateButtonText }}
             </button>
           </div>
@@ -122,7 +122,15 @@ export const template = `
             </div>
           </div>
         </div>
+        
+        <div *ngIf="showExpensesToLow || showExpensesToHigh" 
+             class="aa-qq-aov__expenses messages messages--warning visible">
+           <span class="icon"></span>
+           <div *ngIf="showExpensesToLow" class="content">{{data.options.grossYearAmount.expensesToLow | replace : {'[[expenseAmount]]': grossYearlyExpenseAmount} }}</div>
+           <div *ngIf="showExpensesToHigh" class="content">{{data.options.grossYearAmount.expensesToHigh | replace : {'[[expenseAmount]]': grossYearlyExpenseAmount} }}</div>
+        </div>
       </section>
+      
   
       <section class="aa-qq-aov__result">
         <div class="aa-qq-aov__result__container">
