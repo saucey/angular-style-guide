@@ -320,6 +320,20 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
       
       this.fetchSpecification(() => {
           this.showCalculator = true;
+
+          aegonTealium({
+            page_cat_1_type: 'quick_quotes',
+            page_cat_2_name: 'berekening',
+            page_cat_3_section: "particulier",
+            page_cat_4_productgroup: 'inkomensverzekeringen',
+            page_cat_5_product: "aov",
+            product_name: ['aov'],
+            product_category: ['inkomensverzekeringen'],
+            form_name: 'aov premie',
+            step_name: 'qq-berekening-bevestiging',
+            page_step:'03',
+            event: 'qq_completed'
+          });
         
       });
     }

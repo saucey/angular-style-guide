@@ -12,6 +12,7 @@ import {AAPeriodPipe} from "../../pipes/period.pipe";
 import {template} from "./template";
 import {options} from "./options";
 import {AAReverseDateStringPipe} from "../../pipes/reverseDateString.pipe";
+import {aegonTealium} from "../../lib/aegon_tealium";
 
 @Component({
   selector: 'aa-qq-summary',
@@ -54,7 +55,18 @@ export class AAQQSummaryComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit() {
-
+    aegonTealium({
+      page_cat_1_type: 'quick_quotes',
+      page_cat_2_name: 'samenvatting',
+      page_cat_3_section: "particulier",
+      page_cat_4_productgroup: 'inkomensverzekeringen',
+      page_cat_5_product: "aov",
+      product_name: ['aov'],
+      product_category: ['inkomensverzekeringen'],
+      form_name: 'aov premie',
+      step_name: 'qq-berekening-samenvatting',
+      page_step:'04'
+    });
   }
 
   ngAfterViewInit() {
@@ -123,7 +135,9 @@ export class AAQQSummaryComponent implements OnInit, AfterViewInit {
       .subscribe(data => {
         this.emailButtonPending = false;
         this.reSendEmailShown = true;
-        console.log(data);
+        aegonTealium({
+          event: 'qq_email'
+        });
       }, error => console.error(error));
 
       return false;
