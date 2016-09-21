@@ -34,6 +34,7 @@ export class AASliderInputComponent implements ControlValueAccessor {
   @ViewChild('aaSlider') aaSlider: AASliderComponent;
 
   value: number;
+  inputValue: number;
 
   /**
    * ControlValueAccessor interface
@@ -44,6 +45,7 @@ export class AASliderInputComponent implements ControlValueAccessor {
   writeValue(value: any): void {
     // Incoming change from outside
     this.value = value;
+    this.inputValue = value;
   }
   registerOnChange(fn: (_: any) => void): void {
     this.onChange = fn;
@@ -61,13 +63,27 @@ export class AASliderInputComponent implements ControlValueAccessor {
   sliderChange(value) : void {
     // Notify outside world with new value (provided by slider)
     this.value = value;
+    this.inputValue = value;
     this.modelChange.emit(value);
     this.change.emit(value);
   }
   // If input changes, update the model. This will update the slider.
-  // The slider will round to an acceptable range and trigger the ngModel events
-  inputChange(value) : void {
+  // The slider will round to an acceptable range and trigger the ngModel events.
+  inputOnChange(value) : void {
+    this.inputValue = value;
+
+    let min = this.sliderOptions.range && this.sliderOptions.range.min || void 0;
+
     // Updating internal model will trigger slider change
-    this.value = value;
+    if (min !== void 0) {
+      // Input value is below minimum, set the slider to minimal.
+      this.value = value >= min ? value : min;
+    } else {
+      this.value = value;
+    }
+  }
+  // Input has changed, make sure the input reflects the slider value.
+  inputChange() {
+    this.inputValue = this.value;
   }
 }
