@@ -1,7 +1,7 @@
 /**
  * AOV quick quote
  */
-import {Component, OnInit, Input, EventEmitter, ElementRef} from 'angular2/core';
+import {Component, OnInit, Input, EventEmitter, ElementRef, Renderer} from 'angular2/core';
 import {HTTP_PROVIDERS, Http, Headers, RequestOptions, Response} from "angular2/http";
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
@@ -23,6 +23,7 @@ import {mockRiskFactorResponse} from "./mock-riskfactor";
 import {mockSpecificationResponse} from "./mock-specification";
 import {AAHintComponent} from "../aa-hint/aa-hint.component";
 import {AABaseComponent} from "../../lib/classes/AABaseComponent";
+import {aegonTealium} from "../../lib/aegon_tealium";
 
 
 @Component({
@@ -74,11 +75,14 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
   public  grossYearlyExpenseAmount: number = clientStorage.local.getItem("grossYearlyExpenseAmount");
   public  clientStorageAOV: any = clientStorage.session.getItem("aovQQ") || void 0;
 
+  public globalListenFunc: Function;
+
   // Let parent class initialize config; the dependency injection with ElementRef
   // doesn't work directly so we have to call it explicitly.
   constructor(
     private elementRef: ElementRef,
-    private http: Http
+    private http: Http,
+    private renderer: Renderer
   ) {
     super(elementRef);
   }
@@ -121,6 +125,38 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
         }
       }
     }
+
+    aegonTealium({
+      page_cat_1_type: 'quick_quotes',
+      page_cat_2_name: 'berekening',
+      page_cat_3_section: "particulier",
+      page_cat_4_productgroup: 'inkomensverzekeringen',
+      page_cat_5_product: "aov",
+      product_name: ['aov'],
+      product_category: ['inkomensverzekeringen'],
+      form_name: 'aov premie',
+      step_name: 'qq-berekening-view',
+      page_step:'01',
+      event: 'qq_view'
+    });
+
+    this.globalListenFunc = this.renderer.listenGlobal('document', 'click', (event) => {
+      aegonTealium({
+        page_cat_1_type: 'quick_quotes',
+        page_cat_2_name: 'berekening',
+        page_cat_3_section: "particulier",
+        page_cat_4_productgroup: 'inkomensverzekeringen',
+        page_cat_5_product: "aov",
+        product_name: ['aov'],
+        product_category: ['inkomensverzekeringen'],
+        form_name: 'aov premie',
+        step_name: 'qq-berekening-start',
+        page_step:'02',
+        event: 'qq_started'
+      });
+      this.globalListenFunc();
+    });
+
   }
 
   handleError(error: Response) {
@@ -191,7 +227,10 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
         response.retrieveProfessionsResponse._AE_BEROEPENLIJST_AOV) {
       for (let prof of response.retrieveProfessionsResponse._AE_BEROEPENLIJST_AOV) {
         // Make each profession available for the input dropdown in the format that the dropdown needs.
-        this.professions.push({key: prof._AE_BRPCODE, label: prof._AE_BRPSUBNM || prof._AE_BRPNAAM, raw: prof})
+        // Only professions that have a BKLASSE higher than 0 can be used.
+        if (prof.BKLASSE !== "0") {
+          this.professions.push({key: prof._AE_BRPCODE, label: prof._AE_BRPSUBNM || prof._AE_BRPNAAM, raw: prof})
+        }
       }
     }
   }
@@ -277,9 +316,11 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
     // Validate the personal information. If it is valid then the calculator can be shown.
     if (this.validatePersonalInformation()) {
       // Show calculator once we have fetched the data.
-
+      this.prefillGrossYearAmount(this.grossIncome);
+      
       this.fetchSpecification(() => {
           this.showCalculator = true;
+        
       });
     }
   }
