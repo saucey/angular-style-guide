@@ -354,11 +354,15 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
     );
 
     let expenses = this.grossYearlyExpenseAmount;
-    if (expenses > 0) {
-      this.grossYearAmount = Math.max(min, Math.min(expenses, max));
-    } else {
-      this.grossYearAmount = max;
+
+    if (!this.grossYearAmount) {
+      if (expenses > 0) {
+        this.grossYearAmount = Math.max(min, Math.min(expenses, max));
+      } else {
+        this.grossYearAmount = max;
+      }
     }
+    
     this.data.options.grossYearAmount.slider.range.max = max;
   }
 
