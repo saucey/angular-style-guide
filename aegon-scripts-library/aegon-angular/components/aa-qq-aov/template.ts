@@ -12,7 +12,7 @@ export const template = `
     </aa-editable-value>
     <p>{{ data.options.sticky.note }}</p>
   </aa-sticky>-->
-  <div class="aa-qq-aov">
+  <div class="aa-qq-aov aa-qq" data-productcategory="inkomensverzekeringen" data-productname="aov">
     <section class="aa-qq-aov__personal-details" (select)="showCalculator = false">
 
       <h3 prefix="/">{{ data.options.personalDataHeading }}</h3>
