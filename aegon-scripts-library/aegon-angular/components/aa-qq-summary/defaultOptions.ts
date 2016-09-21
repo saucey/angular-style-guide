@@ -1,4 +1,4 @@
-export const options = {
+export const defaultOptions = {
   title: 'Summary',
   mailUrl: '/data/email/sendEmail',
   mailCredentials: 'AppAegonNLDrupalTST:dUACcFMYvwhnrnnfdq9h',

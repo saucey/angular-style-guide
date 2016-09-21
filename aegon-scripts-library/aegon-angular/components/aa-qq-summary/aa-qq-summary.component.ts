@@ -10,7 +10,8 @@ import {AAMoneyPipe} from "../../pipes/money.pipe";
 import {AAPeriodPipe} from "../../pipes/period.pipe";
 // Locals
 import {template} from "./template";
-import {options} from "./options";
+import {defaultOptions} from "./defaultOptions";
+import {AABaseComponent} from "../../lib/classes/AABaseComponent";
 import {AAReverseDateStringPipe} from "../../pipes/reverseDateString.pipe";
 import {aegonTealium} from "../../lib/aegon_tealium";
 
@@ -23,19 +24,24 @@ import {aegonTealium} from "../../lib/aegon_tealium";
   pipes: [AAMoneyPipe, AAPeriodPipe, AAReverseDateStringPipe]
 })
 
-export class AAQQSummaryComponent implements OnInit, AfterViewInit {
-  private mailUrl: string = options.mailUrl;
-  private mailCredentials: string = options.mailCredentials;
+export class AAQQSummaryComponent extends AABaseComponent implements OnInit, AfterViewInit {
+  @Input() options: any = {};
+  @Input() data: any = {};
+
+  public  defaultOptions: any = defaultOptions;
+
+  private mailUrl: string;
+  private mailCredentials: string;
   private summaryPath: string = '#';
 
-  public options: any = options;
   public  emailAddress: string = "";
   public  emailAddressError: boolean;
   public  serviceError: boolean;
   public  pending: number = 0;
   public  emailButtonPending: boolean = false;
   public  reSendEmailShown: boolean = false;
-  public clientStorageAOV: any = clientStorage.session.getItem("aovQQ") || {};
+
+  public  clientStorageAOV: any = clientStorage.session.getItem("aovQQ") || {};
 
   @ViewChild('emailAddressField') emailAddressField: ElementRef;
 
@@ -51,10 +57,18 @@ export class AAQQSummaryComponent implements OnInit, AfterViewInit {
   };
 
   constructor(
-    private http: Http
-  ) {}
+    private http: Http,
+    private elementRef: ElementRef
+  ) {
+    super(elementRef);
+  }
 
   ngOnInit() {
+    super.ngOnInit();
+
+    this.mailUrl = this.data.options.mailUrl;
+    this.mailCredentials = this.data.options.mailCredentials;
+
     aegonTealium({
       page_cat_1_type: 'quick_quotes',
       page_cat_2_name: 'samenvatting',
