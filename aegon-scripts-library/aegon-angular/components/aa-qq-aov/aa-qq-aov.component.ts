@@ -227,7 +227,10 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
         response.retrieveProfessionsResponse._AE_BEROEPENLIJST_AOV) {
       for (let prof of response.retrieveProfessionsResponse._AE_BEROEPENLIJST_AOV) {
         // Make each profession available for the input dropdown in the format that the dropdown needs.
-        this.professions.push({key: prof._AE_BRPCODE, label: prof._AE_BRPSUBNM || prof._AE_BRPNAAM, raw: prof})
+        // Only professions that have a BKLASSE higher than 0 can be used.
+        if (prof.BKLASSE !== "0") {
+          this.professions.push({key: prof._AE_BRPCODE, label: prof._AE_BRPSUBNM || prof._AE_BRPNAAM, raw: prof})
+        }
       }
     }
   }
@@ -313,9 +316,11 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
     // Validate the personal information. If it is valid then the calculator can be shown.
     if (this.validatePersonalInformation()) {
       // Show calculator once we have fetched the data.
-
+      this.prefillGrossYearAmount(this.grossIncome);
+      
       this.fetchSpecification(() => {
           this.showCalculator = true;
+        
       });
     }
   }

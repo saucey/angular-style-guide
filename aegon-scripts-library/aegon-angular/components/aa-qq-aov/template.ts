@@ -58,7 +58,7 @@ export const template = `
           <aa-hint [text]="data.options.income.help"></aa-hint>
         </div>
         <div class="aa-qq-aov__inputs" (click)="showCalculator = false">
-          <aa-input-number [(ngModel)]="grossIncome" (modelChange)="prefillGrossYearAmount($event)" class="aa-input--euro aa-qq-aov__input"
+          <aa-input-number [(ngModel)]="grossIncome" class="aa-input--euro aa-qq-aov__input"
                            [max]="data.options.income.max" defaultValue=""></aa-input-number>
         </div>
       </div>
