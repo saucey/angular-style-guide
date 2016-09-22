@@ -8,6 +8,7 @@ import 'rxjs/Rx';
 
 // AA components
 import {AAMoneyPipe} from "../../pipes/money.pipe";
+import {AAReplacePipe} from "../../pipes/replace.pipe";
 import {AAInputRadioComponent} from "../aa-input-radio/aa-input-radio.component";
 import {AAInputDropDownComponent} from "../aa-input-dropdown/aa-input-dropdown.component";
 import {AASliderInputComponent} from "../aa-slider-input/aa-slider-input.component";
@@ -38,7 +39,7 @@ import {aegonTealium} from "../../lib/aegon_tealium";
   ],
   template: template,
   providers: [HTTP_PROVIDERS],
-  pipes: [AAMoneyPipe]
+  pipes: [AAMoneyPipe, AAReplacePipe]
 })
 export class AAQQAovComponent extends AABaseComponent implements OnInit {
   @Input() options: any = {};
@@ -64,6 +65,9 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
   public  startingTerm: number;
 
   public  grossYearAmount: number;
+  
+  public  showExpensesToHigh: boolean = false;
+  public  showExpensesToLow: boolean = false;
 
   public  riskFactor: any = {};
 
@@ -312,11 +316,11 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
     return !hasErrors;
   }
 
-  openCalculator() {
+  openCalculator(force = false) {
     // Validate the personal information. If it is valid then the calculator can be shown.
     if (this.validatePersonalInformation()) {
       // Show calculator once we have fetched the data.
-      this.prefillGrossYearAmount(this.grossIncome);
+      this.prefillGrossYearAmount(this.grossIncome, force);
       
       this.fetchSpecification(() => {
           this.showCalculator = true;
@@ -343,7 +347,7 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
     window.location.href = this.data.options.summaryPath;
   }
 
-  prefillGrossYearAmount(amount) {
+  prefillGrossYearAmount(amount, force = false) {
     let min = this.data.options.grossYearAmount.slider.range.min;
     let max = Math.min(
       this.data.options.grossYearAmount.maxInsuranceAmount,
@@ -355,15 +359,24 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
 
     let expenses = this.grossYearlyExpenseAmount;
 
-    if (!this.grossYearAmount) {
+    if (!this.grossYearAmount || force) {
       if (expenses > 0) {
         this.grossYearAmount = Math.max(min, Math.min(expenses, max));
       } else {
         this.grossYearAmount = max;
       }
     }
-    
+
     this.data.options.grossYearAmount.slider.range.max = max;
+    
+    if (expenses) {
+      // Check with the findings of the lastentool.
+      this.showExpensesToHigh = this.data.options.grossYearAmount.slider.range.max < expenses;
+
+      if (!this.showExpensesToHigh) {
+        this.showExpensesToLow = expenses < this.data.options.grossYearAmount.slider.range.min;
+      }
+    }
   }
 
   processRiskFactor(response, prefill) {
