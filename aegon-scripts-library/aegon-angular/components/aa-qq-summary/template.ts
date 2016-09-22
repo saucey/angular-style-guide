@@ -6,7 +6,7 @@ export const template = `
         <div class="data-section span12 container_12">
           <div class="span12 container_12 data-fields">
             <label class="label span6" for="field-geboortedatum">Uw geboortedatum</label>
-            <span id="field-geboortedatum" class="value span6">{{aov_qq_data.birthDate}}</span>
+            <span id="field-geboortedatum" class="value span6">{{aov_qq_data.birthDate | reverseDateString}}</span>
           </div>
           <div class="span12 container_12 data-fields">
             <label class="label span6" for="field-beroep">Uw beroep</label>
@@ -14,42 +14,45 @@ export const template = `
           </div>
           <div class="span12 container_12 data-fields">
             <label class="label span6" for="field-bruto-jaarinkomen">Uw bruto jaarinkomen</label>
-            <span id="field-bruto-jaarinkomen" class="value span6">€ {{aov_qq_data.grossYearAmount | money}} netto</span>
+            <span id="field-bruto-jaarinkomen" class="value span6">€ {{aov_qq_data.grossIncome | money}}</span>
           </div>
           <div class="span12 container_12 data-fields">
             <label class="label span6" for="field-eigen-risicoperiode">Eigen risicoperiode</label>
             <span id="field-eigen-risicoperiode" class="value span6">{{aov_qq_data.startingTerm | period}}</span>
           </div>
           <div class="span12 container_12 data-fields">
-            <label class="label span6" for="field-verzekerde-uitgaven">Verzekerde uitgaven</label>
-            <span id="field-verzekerde-uitgaven" class="value span6">€ {{aov_qq_data.insuranceAmount | money}} netto per maand</span>
+            <label class="label span6" for="field-verzekerde-bedrag">Verzekerd bedrag</label>
+            <span id="field-verzekerde-bedrag" class="value span6">€ {{aov_qq_data.grossYearAmount | money}}</span>
           </div>
           <div class="span12 container_12 data-fields">
             <label class="label span6" for="field-bruto-premie">Bruto premie per maand</label>
-            <span id="field-bruto-premie" class="value span6">€ {{aov_qq_data.grossMonthly | money}}</span>
+            <span id="field-bruto-premie" class="value span6">€ {{aov_qq_data.grossPremium}}</span>
           </div>
           <div class="span12 container_12 data-fields">
             <label class="label span6" for="field-netto-premie">Netto premie per maand</label>
-            <span id="field-netto-premie" class="value span6">€ {{aov_qq_data.netMonthly | money}}</span>
+            <span id="field-netto-premie" class="value span6">€ {{aov_qq_data.netPremium}}</span>
+          </div>
+          <div class="span12 container_12 data-fields">
+            <a href="{{data.options.goBackAndChangeUrl}}" class="button transparent arrow">Wijzig bovenstaande gegevens</a>
           </div>
         </div>
         <div class="action-section span12">
           <div class="row-fluid">
             <label class="span12 dark-blue" for="email-address-field">Samenvatting e-mailen</label>
             <div class="email-send-form-wrapper" [hidden]="reSendEmailShown">
-              <input class="span6" id="email-address-field" [(ngModel)]="emailAddress" placeholder="Uw e-mailadres" tabindex="1" type="text">
-              <button class="arrow span5" type="button" [class.pending]="emailButtonPending" [disabled]="emailAddress.trim()==''||emailButtonPending" (click)="sendEmailClick()">Versturen</button>
-              <p class="error span12" *ngIf="emailAddressError">
-                Wilt u een geldige e-mailadres invoeren?
-              </p>
+              <input class="span6" id="email-address-field" #emailAddressField [(ngModel)]="emailAddress" placeholder="Uw e-mailadres" tabindex="1" type="text">
+              <button class="arrow span5" type="button" [class.pending]="emailButtonPending" [disabled]="emailAddress.trim() == '' || emailButtonPending" (click)="sendEmailClick()">Versturen</button>
             </div>
+            <p class="aa-error span10" *ngIf="emailAddressError">
+              Wilt u een geldige e-mailadres invoeren?
+            </p>
             <div class="email-resend-wrapper" [hidden]="!reSendEmailShown">
               <label class="span5 dark-blue" for="email-address-field">E-mail verstuurd</label>
               <button type="button" (click)="reSendEmailShown=false" class="button transparent arrow span6">Nogmaals versturen</button>
             </div>
 
             <label class="label span12 aanvragen-label dark-blue" for="aanvragen">Wilt u een vrijblijvend adviesgesprek?</label>
-            <a class="arrow span8 orange-gradient aanvragen-button button" [attr.href]="options.actionButton.url">{{ options.actionButton.label }}</a>
+            <a class="arrow span8 orange-gradient aanvragen-button button" [attr.href]="data.options.actionButton.url">{{ data.options.actionButton.label }}</a>
           </div>
         </div>
       </div>
@@ -69,7 +72,7 @@ export const template = `
       <div class="static-section">
         <h3 class="title">Uw geschatte maandpremie</h3>
         <p>
-          Uw geschatte premie is bruto €  {{aov_qq_data.grossMonthly | money}} per maand. Uw nettopremie na aftrek van belastingvoordeel is € {{aov_qq_data.netMonthly | money}} per maand. Dit is de maandpremie in het eerste kalenderjaar inclusief 5% doorlopende korting. Beide bedragen zijn een indicatie. Uw uiteindelijke maandpremie kan afwijken op basis van onder meer uw feitelijke werkzaamheden.
+          Uw geschatte premie is bruto € {{aov_qq_data.grossPremium}} per maand. Uw nettopremie na aftrek van belastingvoordeel is € {{aov_qq_data.netPremium}} per maand. Dit is de maandpremie in het eerste kalenderjaar inclusief 5% doorlopende korting. Beide bedragen zijn een indicatie. Uw uiteindelijke maandpremie kan afwijken op basis van onder meer uw feitelijke werkzaamheden.
         </p>
       </div>
       <div class="static-section">

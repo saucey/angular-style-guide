@@ -1,122 +1,178 @@
 export const template = `
-  <div class="quickquote angular aov-quote">
-    <section class="personal-details">
+  <!--<aa-sticky *ngIf="grossYearlyExpenseAmount" [heading]="data.options.sticky.heading">
+    <h1 class="aa-sticky__heading">{{ data.options.sticky.subheading }}</h1>
+    <aa-editable-value>
+      <aa-editable-label>
+        &euro; {{ grossYearlyExpenseAmount | money }] bruto per jaar*
+      </aa-editable-label>
+      <aa-editable-input>
+        <aa-input-number [(ngModel)]="grossYearlyExpenseAmount">
+      </aa-input-number>
+      </aa-editable-input>
+    </aa-editable-value>
+    <p>{{ data.options.sticky.note }}</p>
+  </aa-sticky>-->
+  <div class="aa-qq-aov">
+    <section class="aa-qq-aov__personal-details" (select)="showCalculator = false">
 
-      <h3 prefix="/">{{ options.personalDataHeading }}</h3>
+      <h3 prefix="/">{{ data.options.personalDataHeading }}</h3>
       
-      <div class="field gray-field">
-        <div class="label">
-          {{ options.birthDate.label }}
-          <aa-hint [text]="options.birthDate.help"></aa-hint>
+      <div class="aa-qq-aov__field aa__clearfix">
+        <div class="aa-qq-aov__label">
+          {{ data.options.birthDate.label }}
         </div>
-        <div class="inputs" (click)="showCalculator = false">
-          <aegon-input-date [(ngModel)]="birthDate"></aegon-input-date>
+        <div class="aa-qq-aov__personal-details__hint">
+          <aa-hint [text]="data.options.birthDate.help"></aa-hint>
+        </div>
+        <div class="aa-qq-aov__inputs" (click)="showCalculator = false">
+          <aa-input-date [(ngModel)]="birthDate" class="aa-qq-aov__input" [setFocus]="setFocus"></aa-input-date>
         </div>
       </div>
-      <p class="error" *ngIf="birthDateError">{{ options.birthDate.error }}</p>
+      <p class="aa-error" *ngIf="birthDateError">{{ data.options.birthDate.error }}</p>
 
-      <div class="field gray-field">
-        <div class="label">
-          {{ options.profession.label }}
-          <aa-hint [text]="options.profession.help"></aa-hint>
+      <div class="aa-qq-aov__field aa__clearfix">
+        <div class="aa-qq-aov__label">
+          {{ data.options.profession.label }}
         </div>
-        <div class="inputs" (click)="showCalculator = false">
-          <aa-input-dropdown
+        <div class="aa-qq-aov__personal-details__hint">
+          <aa-hint [text]="data.options.profession.help"></aa-hint>
+        </div>
+        <div class="aa-qq-aov__inputs" (click)="showCalculator = false">
+          <aa-input-dropdown class="aa-qq-aov__input"
             [model]="profession"
             [items]="professionsFiltered"
-            [emptyMessage]="options.profession.noMatchText"
+            [emptyMessage]="data.options.profession.noMatchText"
             [minChars]="2"
             (aaFetch)="fetchProfessions($event)"
             (aaSelect)="selectProfession($event)">
           </aa-input-dropdown>
         </div>
       </div>
-      <p class="error" *ngIf="professionError">{{ options.profession.error }}</p>
+      <p class="aa-error" *ngIf="professionError">{{ data.options.profession.error }}</p>
 
-      <div class="field gray-field">
-        <div class="label">
-          {{ options.income.label }}
-          <aa-hint [text]="options.income.help"></aa-hint>
+      <div class="aa-qq-aov__field aa__clearfix">
+        <div class="aa-qq-aov__label">
+          {{ data.options.income.label }}
         </div>
-        <div class="inputs" (click)="showCalculator = false">
-          <aa-input-number [(ngModel)]="grossIncome" prefix="€" [max]="options.income.max"></aa-input-number>
+        <div class="aa-qq-aov__personal-details__hint">
+          <aa-hint [text]="data.options.income.help"></aa-hint>
+        </div>
+        <div class="aa-qq-aov__inputs" (click)="showCalculator = false">
+          <aa-input-number [(ngModel)]="grossIncome" class="aa-input--euro aa-qq-aov__input"
+                           [max]="data.options.income.max" defaultValue=""></aa-input-number>
         </div>
       </div>
-      <p class="error" *ngIf="grossIncomeError">{{ options.income.error }}</p>
+      <p class="aa-error" *ngIf="grossIncomeError">{{ data.options.income.error }}</p>
 
-      <div class="field gray-field" *ngIf="!showCalculator">
-        <div class="label"></div>
-        <div class="inputs">
-          <button class="button icon-right icon-calculator" (click)="startCalculator()">
-            {{ options.calculateButtonText }}
-          </button>
+      <template [ngIf]="!showCalculator">
+        <div class="aa-qq-aov__field aa__clearfix">
+          <div class="aa-qq-aov__label"></div>
+          <div class="aa-qq-aov__inputs">
+            <button class="button icon-right icon-calculator aa-qq-aov__open-calculator" (click)="openCalculator(true)">
+              {{ data.options.calculateButtonText }}
+            </button>
+          </div>
         </div>
-      </div>
+      </template>
+      
     </section>
 
-
-    <section *ngIf="showCalculator" class="calculation">
-      <div class="calculation indication">
-        <h3 prefix="/">{{ options.otherChoicesHeading }}</h3>
-
-        <div class="field">
-          <div class="label">
-            {{options.startingTerm.label}}
-            <aa-hint [text]="options.startingTerm.help"></aa-hint>
+    <template [ngIf]="showCalculator">
+      <section class="aa-qq-aov__calculator">
+        <h3 prefix="/">{{ data.options.otherChoicesHeading }}</h3>
+        <div class="aa-qq-aov__field aa-qq-aob__radiobuttons aa__clearfix">
+          <div class="aa-qq-aov__label">
+            {{data.options.startingTerm.label}}
           </div>
-          <div class="inputs">
-            <aa-input-radio *ngFor="#choice of options.startingTerm.choices" name="term"
-                            [(ngModel)]="startingTerm" 
-                            (aaChange)="fetchSpecification()"  
-                            [value]="choice.value">{{ choice.label }}</aa-input-radio>
+          <div class="aa-qq-aov__personal-details__hint">
+            <aa-hint [text]="data.options.startingTerm.help"></aa-hint>
           </div>
-        </div>
-
-        <div class="field">
-          <div class="inputs">
-            <aa-slider-input class="aa-qq__control aa-input--euro"
-              [(ngModel)]="grossYearAmount"
-              (change)="fetchSpecification()"
-              [sliderOptions]="options.grossYearAmount.slider"
-              [label]="options.grossYearAmount.label"
-              [helpText]="options.grossYearAmount.help">
-            </aa-slider-input>
-          </div>
-        </div>
-
-        <div class="result">
-          <div class="linear">
-            <div class="row">
-              <div class="label">
-                {{ options.result.grossPremium.label }}
-              </div>
-              <div class="value">&euro; 300<span>,-</span></div>
-              <span class="helptext">
-                {{ options.result.grossPremium.help }}
-              </span>
-            </div>
-            <div class="row">
-              <div class="label">
-                {{ options.result.netPremium.label }}
-              </div>
-              <div class="value">&euro; 300<span>,-</span></div>
-              <span class="helptext">
-                {{ options.result.netPremium.help }}
-              </span>
+          <div class="aa-qq-aov__inputs">
+            <div class="aa-qq-aov__radio" *ngFor="#choice of data.options.startingTerm.choices">
+              <aa-input-radio name="term"
+                [(ngModel)]="startingTerm" 
+                (modelChange)="fetchSpecification$.emit()"
+                [value]="choice.value">{{ choice.label }}</aa-input-radio>
             </div>
           </div>
         </div>
-        <div class="field">
-          <a class="button orange icon-right arrow">
-            {{ options.result.adviseButtonText }}
-          </a>
-          <div class="label">
-            <a href="#" class="icon-skinnyarrow" (click)="gotoSummary()">
-              {{ options.result.summaryButtonText }}
+        
+        <div class="aa-qq-aov__field aa__clearfix" 
+             *ngIf="data.options.grossYearAmount.slider.range.max !== data.options.grossYearAmount.slider.range.min">
+          <aa-slider-input class="aa-qq-aov__slider aa-qq__control aa-input--euro"
+            [(ngModel)]="grossYearAmount"
+            (modelChange)="fetchSpecification$.emit()"
+            [sliderOptions]="data.options.grossYearAmount.slider"
+            [label]="data.options.grossYearAmount.label"
+            [helpText]="data.options.grossYearAmount.help">
+          </aa-slider-input>
+        </div>
+        
+        <div *ngIf="data.options.grossYearAmount.slider.range.max === data.options.grossYearAmount.slider.range.min">
+          <div class="aa-qq-aov__field aa__clearfix">
+            <div class="aa-qq-aov__label">
+              {{ data.options.grossYearAmount.label }}
+            </div>
+            <div class="aa-qq-aov__personal-details__hint">
+              <aa-hint [text]="data.options.grossYearAmount.help"></aa-hint>
+            </div>
+            <div class="aa-qq-aov__inputs">
+              <aa-input-number [ngModel]="data.options.grossYearAmount.slider.range.min" 
+                               class="aa-input--euro aa-qq-aov__input" [disabled]="true"></aa-input-number>
+            </div>
+          </div>
+        </div>
+        
+        <div *ngIf="showExpensesToLow || showExpensesToHigh" 
+             class="aa-qq-aov__expenses messages messages--warning visible">
+           <span class="icon"></span>
+           <div *ngIf="showExpensesToLow" class="content">{{data.options.grossYearAmount.expensesToLow | replace : {'[[expenseAmount]]': grossYearlyExpenseAmount} }}</div>
+           <div *ngIf="showExpensesToHigh" class="content">{{data.options.grossYearAmount.expensesToHigh | replace : {'[[expenseAmount]]': grossYearlyExpenseAmount} }}</div>
+        </div>
+      </section>
+      
+  
+      <section class="aa-qq-aov__result">
+        <div class="aa-qq-aov__result__container">
+          <div class="aa-qq-aov__result__row">
+            <div class="aa-qq-aov__result__label">
+              {{ data.options.result.grossPremium.label }}
+            </div>
+            <aa-hint [text]="data.options.result.grossPremium.help"></aa-hint>
+            <div class="aa-qq-aov__result__premium aa__clearfix">
+              <span class="aa-qq-aov__result__currency">&euro;</span>
+              {{ grossPremium }}
+            </div>
+          </div>
+          <div class="aa-qq-aov__result__row">
+            <div class="aa-qq-aov__result__label">
+              {{ data.options.result.netPremium.label }}
+            </div>
+            <aa-hint [text]="data.options.result.netPremium.help"></aa-hint>
+            <div class="aa-qq-aov__result__premium aa__clearfix">
+              <span class="aa-qq-aov__result__currency">&euro;</span>
+              {{ netPremium }}
+            </div>
+          </div>
+        </div>
+        
+        <div class="aa-qq-aov__disclaimer">
+          <div class="aa-qq__disclaimer aa-qq__disclaimer--star">{{ data.options.disclaimer.advisor }}</div>
+          <div class="aa-qq__disclaimer aa-qq__disclaimer--star">{{ data.options.disclaimer.cost }}</div>
+        </div>
+        
+        <div class="aa-qq-aov__actions">
+          <span class="aa-qq-aov__actions__label">
+            <a href="#" class="button arrow white" (click)="gotoSummary()">
+              {{ data.options.result.summaryButtonText }}
             </a>
-          </div>
+          </span>
+          <a class="button orange icon-right arrow aa-qq-aov__action-right">
+            {{ data.options.result.adviseButtonText }}
+          </a>
         </div>
-      </div>
-    </section>
+       
+      </section>
+    </template>
   </div>
 `;

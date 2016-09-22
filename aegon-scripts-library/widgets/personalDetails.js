@@ -12,7 +12,7 @@
    * Add new item to public Drupal object
    */
   Drupal.behaviors.personalDetailsWidget = {
-    attach: function () {
+    attach: function (context) {
       Drupal.behaviors.tooltip.activate("#personal_details_widget");
 
       var Validation = Drupal.behaviors.validation;
@@ -23,19 +23,19 @@
 
       // activate the tabs for Dutch or foreign addresses
       // residential address
-      $("input[name=ra_NL]").click( function () {
+      $("input[name=ra_NL]", context).click( function () {
         var NL = parseInt($(this).val()) > 0;
         $(".address .residential .NL").toggleClass("visible", NL);
         $(".address .residential .world").toggleClass("visible", !NL);
       });
-      $("input[name=ra_NL]:checked").click();
+      $("input[name=ra_NL]:checked", context).click();
       // communication address
-      $("input[name=ca_NL]").click( function () {
+      $("input[name=ca_NL]", context).click( function () {
         var NL = parseInt($(this).val()) > 0;
         $(".address .correspondential .NL").toggleClass("visible", NL);
         $(".address .correspondential .world").toggleClass("visible", !NL);
       });
-      $("input[name=ca_NL]:checked").click();
+      $("input[name=ca_NL]:checked", context).click();
 
       // AJAX call on changing the postal code / house nr
 
@@ -110,13 +110,13 @@
       };
 
       
-      $('#personal_details_widget input[rel^=address-lookup]').change(function(){
+      $('#personal_details_widget input[rel^=address-lookup]', context).change(function(){
         if ($zipcodeField.val().length > 0 && $housenumberField.val().length > 0) {
           getAddress();
         }
       });
 
-      $('#personal_details_widget input[rel^=ca-address-lookup]').change(function(){
+      $('#personal_details_widget input[rel^=ca-address-lookup]', context).change(function(){
         if ($zipcodeField_ca.val().length > 0 && $housenumberField_ca.val().length > 0) {
           getAddress('ca');
         }
@@ -124,7 +124,7 @@
 
     this.attached = true;
     },
-    attached: false,
+    attached: false
   };
 
 })(this.document, this, this.jQuery, this.Drupal);

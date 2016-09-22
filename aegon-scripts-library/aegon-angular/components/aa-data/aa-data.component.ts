@@ -32,7 +32,7 @@ export class AADataComponent extends AABaseComponent {
     switch (this.type) {
       // JSON
       case 'json':
-        value = libUtil.tryParseJson(source)
+        value = libUtil.tryParseJson(source);
         break;
       // Just raw string; use [innerHtml] to bind in template attribute
       case 'text':
@@ -45,6 +45,6 @@ export class AADataComponent extends AABaseComponent {
     }
     // Set value at supplied path (replace this.data if no path given)
     libXsr.path(this.data, this.path, value);
-    console.log('aa-data', this.data, this.path, value)
+    // console.log('aa-data', this.data, this.path, value)
   }
 }

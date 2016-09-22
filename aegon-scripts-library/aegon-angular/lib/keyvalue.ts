@@ -32,20 +32,28 @@ export function parse (str: string) : any {
 			return value;
 		},
 		parseLine = function (line) {
-			var split = line.split('='),
-				key = (split && split.length > 0 && split[0]) ? libUtil.trim(split[0]) : undefined,
-				value;
+			let i = line.indexOf('=');
+			let key: string;
+			let value: any;
+
+			if (i > 0) {
+				key = libUtil.trim(line.substring(0, i)) || void 0;
+			}
+
 			if (key) {
-				value = parseValue(libUtil.trim(split[1]));
+				value = parseValue(
+					libUtil.trim(line.substring(i + 1, line.length))
+				);
 				return {
 					key: key,
 					value: value
 				};
 			}
-		}
+		};
+	// parse the input
 	try {
 		str = str || '';
-		var split = str.split(/;/),
+		var split = str.split(/;/), // Split the input on ; char
 			curKey,
 			curValue;
 		// Allow separator char (;) in value part. How do we detect that:

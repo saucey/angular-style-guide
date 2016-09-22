@@ -23,6 +23,11 @@
   .content {
     padding: 17px;
   }
+  div.title {
+    @media screen and (min-width: $rc-m-min-width) {
+      padding-top: 1.1em;
+    }
+  }
   h2 {
     color: $black;
     font-family: $font_medium;

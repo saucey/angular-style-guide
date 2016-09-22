@@ -26,13 +26,14 @@ export class AAHighchartComponent {
   @ViewChild('chart') chartEl: ElementRef;
   // Highcharts interface on the element
   public highcharts: any; // highcharts reference; only available after the chart has been initialized (drawn)
+  private loaded : any;
 
   /**
    * Constructor
    */
   constructor() {
     // Load highcharts at most once
-    loadScript('highcharts')
+    this.loaded = loadScript('highcharts')
     .then(() => {
       this.ready.emit();
       // Init chart if options supplied
@@ -59,13 +60,25 @@ export class AAHighchartComponent {
    * @returns {Object} Highcharts object of created chart
    */
   createChart(options: any = this.options) : any {
-    var elem = this.getElement(),
-      highcharts = elem.highcharts ? elem.highcharts(options) : undefined;
-    if (!highcharts) {
-      return;
-    }
-    this.highcharts = elem.highcharts();
-    return highcharts;
+    // Run after script has loaded
+    return this.loaded
+    .then(() => {
+      var elem = this.getElement(),
+        highcharts = elem.highcharts ? elem.highcharts(options) : undefined;
+      highcharts = elem.highcharts();
+      if (!highcharts) {
+        return;
+      }
+      this.highcharts = highcharts;
+      return highcharts;
+    });
+  }
+
+  /**
+   * Reflow/draw chart
+   */
+  reflow() : void {
+    this.highcharts ? this.highcharts.reflow() : undefined;
   }
 
   /**

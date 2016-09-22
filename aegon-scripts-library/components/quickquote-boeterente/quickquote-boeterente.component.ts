@@ -246,9 +246,8 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
           // Set the value of total fee and monthly fee.
           if (((this.initialAmount - this.repymnt) > penaltyFree)) {
             let totalFee = (((this.initialAmount - this.repymnt) - penaltyFree) * tcw) / basisFee;
-            this.totalFee = Math.round(totalFee);
-
-            this.monthlyFee = Math.round(this.calculateMonthlyFee((this.initialAmount - this.repymnt), this.oldIntRate));
+            this.totalFee = this.roundToTenth(totalFee, 100);
+            this.monthlyFee = this.calculateMonthlyFee((this.initialAmount - this.repymnt), this.oldIntRate);
           }
           else {
             this.totalFee = 0;
@@ -314,7 +313,10 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
     * @param interest {number}: the interest percentage
     */
   private calculateMonthlyFee(mortgage: number, interest: number):number {
-    return ((mortgage * interest) / 100) / 12;
+    let res = ((mortgage * interest) / 100) / 12;
+    res = this.roundToTenth(res, 10);
+
+    return res;
   }
   /*
    * Special calculation between two dates to get
@@ -380,17 +382,35 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
    * @param num {number}: the float number
    * @param deg {number}: the amount of decimal chars.
    */
-  roundToDeg(num: number, deg: number): number {
+  private roundToDeg(num: number, deg: number): number {
     let degs = Math.pow(10, deg);
     return Math.round(num * degs) / degs;
   }
+
+  /*
+   * Rounds integers to the closest
+   * multiple of 10.
+   * @param num {number}: the int number
+   * @param deg {number}: the multiple of 10 to round to.
+   */
+  private roundToTenth(num: number, round: number): number {
+    /*
+     * If the int is multiple of the round
+     * returns the same number
+     */
+    if(num % round === 0) {
+      return num;
+    }
+    return Math.ceil(num / round) * round;
+  }
+  
   /*
    * Adds leading zeros to a number.
    * @param num {any}: the number to add padding.
    * @param length {number}: the length of the expected number
    *   with leading zeros including the number itself.
    */
-  numberPadding(num: any, length: number): string {
+  private numberPadding(num: any, length: number): string {
     let str = num.toString().length, 
         pad = '';
 

@@ -21,8 +21,10 @@ export class AAInputRadioComponent implements ControlValueAccessor {
   @Input() value: any;
   @Input() name: any;
 
-  @Output() modelChange: any = new EventEmitter();
+  // When updating to a newer version of angular the aaChange can be removed.
+  // The way to go is using the ngModelChange event.
   @Output() aaChange: any = new EventEmitter();
+  @Output() modelChange: any = new EventEmitter();
 
   model: any;
 
@@ -34,13 +36,18 @@ export class AAInputRadioComponent implements ControlValueAccessor {
   onTouched = () => {};
   registerOnChange(fn: (_: any) => void): void { this.onChange = fn; }
   registerOnTouched(fn: () => void): void { this.onTouched = fn; }
-  // Modal update
+  // Model update
   writeValue(value: any) : void {
     this.model = value;
   }
-
   setValue(value) {
     this.model = value;
-  }
+    this.modelChange.emit(value);
 
+    setTimeout(() => {
+      // When updating to a newer version of angular the aaChange can be removed.
+      // The way to go is using the ngModelChange event.
+      this.aaChange.emit(value);
+    });
+  }
 }

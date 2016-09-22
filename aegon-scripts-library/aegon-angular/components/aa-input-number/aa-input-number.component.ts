@@ -24,9 +24,12 @@ export class AAInputNumberComponent implements ControlValueAccessor {
   @Input() prefix: string;
   @Input() suffix: string;
   @Input() forceDecimals: any;
+  @Input() allowDecimals: any;
   @Input() required: boolean;
   @Input() max: number;
   @Input() placeholder: string;
+  @Input() disabled: boolean = false;
+  @Input() defaultValue: string = '0';
   @Input() inputId: string = 'input-' + (new Date().getTime()).toString(36);  // Create unique id for input field
 
   @Output() modelChange: any = new EventEmitter();
@@ -50,7 +53,7 @@ export class AAInputNumberComponent implements ControlValueAccessor {
   // Model change
   writeValue(value: any) : void {
     this.internalValue = value;
-    this.model = value && libFormat.formatNumber(value) || '0';
+    this.model = value && libFormat.formatNumber(value) || this.defaultValue;
   }
 
   /**
@@ -89,10 +92,35 @@ export class AAInputNumberComponent implements ControlValueAccessor {
     // We're using a timeout, so the change detector detects a change in the model.
     setTimeout(() => {
       this.model = formatted;
+      this.updateExternalModel();
     });
   }
   // Change callback
   updateExternalModel() {
     this.modelChange.emit(this.internalValue);
+  }
+  // Only accept numeric values.
+  keydown(event: KeyboardEvent): void {
+    let kc = event.keyCode;
+
+    // Allow typing comma for decimal numbers
+    if (this.allowDecimals && kc === 188) {
+      return;
+    }
+
+    if (event.srcElement['value']) {
+      let value = libFormat.parseNumber(event.srcElement['value']);
+      if (this.max && value >= this.max && kc >= 48 && kc <= 57) {
+        // The value is already at its maximum, so don't allow input.
+        event.preventDefault();
+        return;
+      }
+    }
+
+    if ((kc > 57 && kc < 96) || kc > 105 ) {
+      // No numeric char, so cancel.
+      event.preventDefault();
+      return;
+    }
   }
 }

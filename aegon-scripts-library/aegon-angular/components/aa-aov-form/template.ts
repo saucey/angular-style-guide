@@ -147,17 +147,44 @@ export const template = `
                 </div>
                 <!-- /.main -->
             </li>
+                        <li class="aov-form__section">
+                <span class="aov-form__numberCircle">3</span>
+
+                <div class="main">
+                    <h2>Hoe lang wilt u verzekerd zijn?</h2>
+                    <p>Dit is de periode dat de verzekering loopt. Mocht u in deze periode overlijden, krijgt u het keuzebedrag uitgekeerd. Hier uitleggen wat de overwegingen zijn. Waarom langer / korter? Waar rekening mee houden? (Hoe lang moet u nog aflossen op uw hypotheek? Wanneer gaan de kinderen uit huis? Hoe staat u er over X jaar voor?)</p>
+                    <div class="container">
+                        <div class="content">
+                            <div class="inner-content">
+                                <p>Ingangsmaand en jaar van uw verzekering</p>
+                                  <div class="inputs slider">
+                                    <aegon-slider (click)="submitAmount()" (change)="calculate()" prefix="€" [range]="{
+                                      'min': [  200 ],
+                                      '25%': [  1000 ],
+                                      '50%': [ 2000 ],
+                                      '75%': [  3000 ],
+                                      'max': [ 7500 ]
+                                    }" [initial]="2500" label="Inkomen" [(ngModel)]="incomeValue" >
+                                    </aegon-slider>
+                                  </div>
+
+                                <button class="arrow" disabled type="button" (click)="save(personInfo)">Volgende vraag</button>
+                                
+                            </div>
+                        </div>
+                        <div class="side">
+                            <aside>
+                              <h2>76%</h2>
+                              <h4>van ouders met kinderen kiest voor een looptijd van</h4>
+                              <h3>20 jaar</h3>
+                            </aside>
+                        </div>
+                    </div>
+                    <!-- /.containter -->
+                </div>
+                <!-- /.main -->
+            </li>
         </ul>
-          <div class="inputs slider">
-            <aegon-slider (click)="submitAmount()" (change)="calculate()" prefix="€" [range]="{
-              'min': [  200 ],
-              '25%': [  1000 ],
-              '50%': [ 2000 ],
-              '75%': [  3000 ],
-              'max': [ 7500 ]
-            }" [initial]="2500" label="Inkomen" helpText="Dit is de helptekst voor de eerste slider" [(ngModel)]="incomeValue" >
-            </aegon-slider>
-          </div>
     </section>
 </div>
 `;

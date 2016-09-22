@@ -1,13 +1,13 @@
-export const options = {
-  mockData: true,
-  
-  serviceUrl: 'http://ail.test.intra.aegon.nl/US_RestGatewayWeb/rest/requestResponse/BS_AE_POLIS_AOV_02/',
-  serviceCredentials: 'appAegonNLCalculateTST:7OuwNNTVS4jJ8mO5F0bH',
+export const defaultOptions = {
+  mockProfessions: false,
+  mockRiskFactor: false,
+  mockSpecification: false,
+  serviceUrl: '/services/US_RestGatewayWeb/rest/requestResponse/BS_AE_POLIS_AOV_02/',
+  serviceCredentials: 'FILL_ME_IN_AA_DATA',
   summaryPath: '#',
-  mailUrl: 'http://ail.test.intra.aegon.nl/BS_Utilities_Communication_03Web/sca/BS_Utilities_Communication_03_ExpWS',
-  mailCredentials: 'AppAegonNLDrupalTST:dUACcFMYvwhnrnnfdq9h',
-  
+  specificationCallDelay: 500,
   personalDataHeading: 'Uw gegevens',
+  defaultMaxEndAge: 67,
   birthDate: {
     minAge: 18,
     maxAge: 59,
@@ -37,6 +37,7 @@ export const options = {
 
   otherChoicesHeading: 'Uw keuzes',
   startingTerm: {
+    initial: 30,
     choices: [
       {
         label: '2 weken',
@@ -58,10 +59,11 @@ export const options = {
     label: 'Welke eigen risicoperiode kiest u?',
     help: 'Uw uitkering start na afloop van deze periode. De meest gekozen periode is 1 maand.'
   },
+
   grossYearAmount: {
-    initial: 17500,
+    maxInsuranceAmount: 125000,
     slider: {
-      start: 3500, // Handle start position
+      start: 2500, // Handle start position
       step: 500, // Slider moves in increments of xx
       orientation: 'horizontal', // Orient the slider vertically
       behaviour: 'snap', // click anywhere to start dragging + draggable range
@@ -69,18 +71,21 @@ export const options = {
         'min': 2500,
         'max': 125000
       },
+      connect: 'lower',
       pips: { // Shows scale and values below chart
         mode: 'range',
-        // density: 100,
-        // values: [1875, 2016],
-        density: 100,
+        density: 100
       }
     },
     label: 'Welk bruto jaarbedrag wilt u verzekeren?',
-    help: `Dit is het bedrag na aftrek van belastingvoordeel. Wij rekenen met een gemiddeld belastingvoordeel van 35%.
-           Voor uw situatie kan dit meer of minder zijn.`
+    help: `Vul hier het bedrag in dat u wilt verzekeren. 
+           Dit is maximaal 80% van uw bruto jaarinkomen. 
+           Het minimum bedrag is €2.500 en mag maximaal € 125.000,- zijn. 
+           Wilt u meer of minder verzekeren bespreek dan de mogelijkheden met een adviseur.`,
+    expensesToHigh: `Uw bruto jaaruitgaven van € [[expenseAmount]] zijn hoger dan het maximum te verzekeren bedrag. 
+    Dat bedrag is maximaal 80% van uw gemiddelde bruto jaarinkomen.`,
+    expensesToLow: `Uw bruto jaaruitgaven van € [[expenseAmount]] zijn lager dan het minimaal te verzekeren bedrag van € 2500.`
   },
-
   result: {
     grossPremium: {
       label: 'Bruto premie per maand',
@@ -94,5 +99,14 @@ export const options = {
     },
     adviseButtonText: 'Adviesgesprek aanvragen',
     summaryButtonText: 'Bekijk en mail overzicht'
+  },
+  sticky: {
+    heading: 'Samenvatting',
+    subheading: 'Indicatie uitgaven',
+    note: '* berekend aan de hand van uw netto maandelijkse uitgaven'
+  },
+  disclaimer: {
+    advisor: `Verzekeren is maatwerk. Een adviseur helpt u hierbij.`,
+    cost: `Aan het advies zijn kosten verbonden. Deze bespreekt u in het eerste vrijblijvende gesprek met adviseur.`
   }
 };

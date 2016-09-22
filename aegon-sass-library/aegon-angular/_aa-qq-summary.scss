@@ -58,6 +58,14 @@
           margin-bottom: 15px;
         }
       }
+      a.button {
+        margin-bottom: 0;
+        bottom: 0;
+        right: 0;
+        position: relative;;
+        padding-top: 0px;
+        padding-bottom: 0px;
+      }
     }
     .action-section {
       label {
@@ -77,8 +85,8 @@
       }
       button, .button {
         position: relative;
-        right: initial;
-        bottom: initial;
+        right: 0;
+        bottom: 0;
         display: block;
         margin: 0 0 0 2%;
         height: 50px;

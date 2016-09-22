@@ -1,0 +1,292 @@
+.quickquote.angular.aa-boeterente {
+  max-width: 780px;
+
+  input {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  input[type=text],
+  input[type=number],
+  select {
+    max-width: 100%;
+    text-transform: none;
+  }
+  select {
+    width: 100%;
+    padding: 9px 20px 9px 10px;
+    -webkit-appearance: none;
+    -moz-appearance:    none;
+    -ms-appearance:     none;
+    appearance:         none;
+    background: #fff url($image_path + 'icons/select.png') no-repeat 95% center;
+  }
+  select::-ms-expand {
+    display: none;
+  }
+
+  .messages.messages--alert {
+    margin: 0 0 15px;
+    border: none;
+    background: $blue;
+    .content {
+      color: $white;
+    }
+  }
+  .calculation {
+    width: 100%;
+    > div > .field:last-child {
+      margin-bottom: 0;
+    }
+    .field {
+      margin-bottom: 15px;
+
+      aa-input-number, aa-input-radio, aa-input-date {
+        &.error {
+          background: none;
+          border-radius: 0;
+          margin-top: 0;
+          padding: 0;
+          border: none;
+          input[type="text"], .aa-input-date, label.radio > input[type="radio"] + span.radio {
+            border: 1px solid #C41F2C;
+            color: #ca4642;
+          }
+          .aa-input-date {
+            border-radius: 3px;
+          }
+        }
+      }
+      label.radio {
+        padding-left: 35px;
+        margin-right: 10px;
+        > input[type="radio"] {
+          position: absolute;
+          top: 0;
+          left: 0;
+          + span.radio {
+            top:-9px;
+            background-color: $white;
+          }
+        }
+      }
+      .inputs {
+        .button{
+          width: 100%;
+          max-width: 100%;
+          &[disabled],
+          &[disabled]:hover,
+          &.disabled,
+          &.disabled:hover {
+            opacity: 0.8;
+            cursor: not-allowed;
+          }
+        }
+        button.icon-calculator {
+          margin-bottom: 0;
+        }
+        &.short {
+          input[type="text"] {
+            width: 90px;
+          }
+        }
+      }
+    }
+  }
+  .field .label {
+    max-width: 100%;
+    padding-right: 10px;
+  }
+  .label {
+    .help:not(.dialog) {
+      position: static;
+      display: inline-block;
+      float: none;
+      padding: 0;
+      margin-left: 10px;
+      &:before {
+        position: static;
+      }
+    }
+  }
+  .result {
+    line-height: 1.15;
+    overflow: visible;
+    .amount {
+      margin-right: 0;
+    }
+    .button.arrow.transparent {
+      text-decoration: underline;
+      &:before {
+        color: $white;
+      }
+    }
+    .row:first-child {
+      margin-top: 0;
+    }
+    .bigger {
+      margin-bottom: 25px;
+      .label {
+        font-family: $font_normal;
+        font-size: 24px;
+        vertical-align: bottom;
+        select {
+          margin-bottom: 10px;
+        }
+      }
+      .value {
+        > *, > * span {
+          font-size: 36px;
+          text-align: left;
+        }
+        small {
+          font-size: 20px;
+        }
+      }
+    }
+    .small {
+      .label {
+        p {
+          line-height: 26px;
+        }
+      }
+      p {
+        color: $white;
+        line-height: 22px;
+        margin-bottom: 10px;
+        .help.dialog {
+        }
+      }
+    }
+    .footer {
+      padding-top: 15px;
+    }
+    .not-possible {
+      @include rem('padding', 0, 20);
+      h4 {
+        font-family: $font_normal;
+        font-size: 24px;
+        margin: 0 0 20px;
+      }
+      h4, p {
+        color: $white;
+      }
+    }
+  }
+  .disclaimer {
+    background-color: #ffffff;
+    padding: 10px 15px;
+    font-size: 16px;
+    line-height: 22px;
+    color: #000;
+  }
+  ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: $grey;
+  }
+  ::-moz-placeholder { /* Firefox 19+ */
+    color: $grey;
+  }
+  :-ms-input-placeholder { /* IE 10+ */
+    color: $grey;
+  }
+  :-moz-placeholder { /* Firefox 18- */
+    color: $grey;
+  }
+}
+/* Screen > mobile */
+@include breakpoint($brk-tablet) {
+  .quickquote.angular.aa-boeterente {
+    .messages.messages--alert {
+      position: relative;
+      border-radius: 5px;
+      @include rem("padding", 12, 30, 12, 55);
+      .icon {
+        position: absolute;
+        left: 10px;
+        font-family: "aegon_icons";
+        @include rem('font-size', 30);
+        &:before {
+          content: "\e631";
+          color: $white;
+        }
+      }
+    }
+    .calculation {
+      @include rem("padding", 30, 20, 18);
+      h3:before {
+        left: 20px;
+      }
+      .label {
+        width: 65%;
+      }
+      .inputs {
+        width: 34%;
+      }
+    }
+    .result {
+      padding-left: 30px;
+      padding-right: 30px;
+      .label {
+        width: 34%;
+        &:first-child {
+          width: 65%;
+        }
+        //max-width: 350px;
+      }
+      .bigger {
+        .value {
+          width: 34%;
+          white-space: nowrap;
+        }
+      }
+      .small {
+        .label:last-child {
+        }
+      }
+      .cta-wrapper {
+        .row {
+          text-align: right;
+        }
+      }
+    }
+  }
+}
+/* Tablet specific */
+@media screen and (min-width: $rc-m-min-width) and (max-width: $rc-m-max-width) {
+  .quickquote.angular.aa-boeterente {
+    .calculation {
+      .field {
+        label.radio {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}
+/* Big screens */
+@media screen and (min-width: $rc-l-min-width) {
+  .quickquote.angular.aa-boeterente {
+    .calculation {
+      @include rem("padding", 30, 50, 18, 20);
+      .field {
+        padding-left: 30px;
+      }
+    }
+    .result {
+      padding-left: 50px;
+      padding-right: 50px;
+    }
+  }
+}
+/* Mobile specific */
+@include breakpoint($brk-mobile) {
+  .quickquote.angular.aa-boeterente {
+    .result {
+      .bigger {
+        .label {
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+}

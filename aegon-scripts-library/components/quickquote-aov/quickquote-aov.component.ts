@@ -538,7 +538,9 @@ export class QuickQuoteAovComponent implements OnInit {
   }
 
   private netToGross(netAmount){
-    return Math.round((netAmount / .65) * 12);
+    let result = Math.round((netAmount / .65) * 12);
+    clientStorage.local.setItem("grossYearlyExpenseAmount", result);
+    return result;
   };
 
   private getAmountForGroupedCosts(costMapping, flattenedArray) {

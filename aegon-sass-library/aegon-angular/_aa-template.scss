@@ -5,21 +5,23 @@
 // Root template
 aa-template {
   position: relative;
-  height: 70px;
+  display: none;
+}
+
+aa-template.aa-template--loading {
   display: block;
-  overflow: hidden;
+  height: 70px;
   background-color: $grey;
+  border-radius: 5px;
   > * {
     visibility: hidden;
   }
-  opacity: 0;
-  animation: aa-fade-in ease-in 1s;
-  animation-fill-mode: forwards;
-  animation-duration: 1s;
+  opacity: 1;
+  margin: 15px;
 }
 
 // Loading text
-aa-template:after {
+aa-template.aa-template--loading:after, .aa-loading:after {
   content: 'Bezig met laden...';
   position: absolute;
   line-height: 50px;
@@ -45,9 +47,8 @@ aa-template:after {
 //   repeatCount="indefinite"/>
 // </path>
 // </svg>
-aa-template:before {
+aa-template.aa-template--loading::before, .aa-loading:before {
   position: absolute;
-  // background: url($image_path + 'spinner.svg') no-repeat 50% 0%;
   background: url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJsb2FkZXItMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQogd2lkdGg9IjUwcHgiIGhlaWdodD0iNTBweCIgdmlld0JveD0iMCAwIDUwIDUwIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MCA1MDsiIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPHBhdGggZmlsbD0iIzMzOTVkMyIgZD0iTTQzLjkzNSwyNS4xNDVjMC0xMC4zMTgtOC4zNjQtMTguNjgzLTE4LjY4My0xOC42ODNjLTEwLjMxOCwwLTE4LjY4Myw4LjM2NS0xOC42ODMsMTguNjgzaDQuMDY4YzAtOC4wNzEsNi41NDMtMTQuNjE1LDE0LjYxNS0xNC42MTVjOC4wNzIsMCwxNC42MTUsNi41NDMsMTQuNjE1LDE0LjYxNUg0My45MzV6Ij4NCjxhbmltYXRlVHJhbnNmb3JtIGF0dHJpYnV0ZVR5cGU9InhtbCINCiAgYXR0cmlidXRlTmFtZT0idHJhbnNmb3JtIg0KICB0eXBlPSJyb3RhdGUiDQogIGZyb209IjAgMjUgMjUiDQogIHRvPSIzNjAgMjUgMjUiDQogIGR1cj0iMS4ycyINCiAgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiLz4NCjwvcGF0aD4NCjwvc3ZnPg==) no-repeat 50% 0%;
   width: 50px;
   height: 50px;
@@ -58,8 +59,14 @@ aa-template:before {
 
 // Remove all loading styles once loaded
 aa-template.aa-template--loaded {
+  display: block;
   height: auto;
+  margin: 0;
+  border-radius: 0;
   overflow: visible;
+  animation: aa-fade-in ease-in 300ms;
+  animation-fill-mode: forwards;
+  animatino-delay: 100ms;
   &:before, &:after {
     display: none;
   }
@@ -67,5 +74,19 @@ aa-template.aa-template--loaded {
     visibility: visible;
   }
   background-color: transparent;
+}
+
+// Hidden templates never show up
+aa-template.aa-template--hidden {
+  display: none !important;
+}
+
+// Loading indicator
+.aa-loading {
+  position: relative;
+  margin-top: -20px;
+  &:after {
+    position: relative;
+  }
 }
 

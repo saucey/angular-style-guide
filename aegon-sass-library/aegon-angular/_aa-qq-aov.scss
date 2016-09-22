@@ -1,194 +1,206 @@
-.quickquote.aov-quote {
-  background: none;
-  color:#000;
+.aa-qq-aov {
+  max-width: 650px;
+}
 
-  .calculation {
-    width:100%;
-    padding:20px 0;
-    .inputs aegon-input-radio {
-      display:block;
-      text-align:left;
-      label.radio {
-        padding-left:35px;
-      }
-      label.radio > input[type="radio"] {
-        position:absolute;
-        top:0;
-        left:0;
-        &+ span.radio {
-          top:-9px;
-        }
-      }
+.aa-qq-aov__personal-details {
+  margin-bottom: 50px;
+}
+
+.aa-qq-aov__personal-details__hint {
+  margin: 0 16px 0 10px;
+}
+
+.aa-qq-aov__field {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: baseline;
+  position: relative;
+  min-height: 40px;
+  margin-bottom: 20px;
+}
+
+.aa-qq-aov__label {
+    flex: 1 1 auto;
+    display: inline-block;
+    padding: 9px 0;
+}
+
+.aa-qq-aob__radiobuttons {
+  margin-bottom: 40px;
+}
+
+.aa-qq-aov__inputs {
+  flex: 0 0 180px;
+}
+
+.aa-qq-aov__input {
+  input {
+    width: 180px;
+  }
+}
+
+.aa-qq-aov__radio {
+  width: 180px;
+
+  label {
+    font-weight: normal;
+  }
+
+  label.radio > input[type="radio"] + span.radio {
+    top: -8px;
+  }
+}
+
+.aa-qq-aov .aa-slider .noUi-background {
+  background: $grey;
+}
+
+.aa-qq-aov__expenses {
+  margin-top: 60px;
+}
+
+.aa-qq-aov__disclaimer {
+  margin-bottom: 30px;
+
+  .aa-qq__disclaimer {
+    padding-top: 7px;
+    padding-bottom: 7px;
+  }
+}
+
+.aa-qq-aov {
+  .noUi-pips-horizontal {
+    :nth-child(2) {
+      width: auto;
+      margin-left: -3px;
+      text-align: left;
     }
-    .inputs aegon-input-radio:last-child {
-      margin-bottom:.5em;
-    }
-  }
-
-  h3 {
-    margin-left:0;
-    color:#000;
-    margin-bottom: .5em;
-  }
-  h3:before {
-    display:none;
-  }
-
-  .field {
-    .icon-skinnyarrow:before {
-      font-size: 0.75rem;
-    }
-    .label {width:60%;max-width:368px;}
-    .inputs {width:40%;max-width:180px;}
-    .button.icon-calculator {width:180px;}
-  }
-
-  .slider-container {
-    clear:both;
-    margin:2em 0 .5em;
-    float:left;
-    padding-right:20px;
-  }
-
-  .noUi-origin {
-    margin-right:-20px;
-    background:#ecede7;
-  }
-
-  .min, .max {
-    width:50%;
-    float:left;
-  }
-
-  .max {
-    text-align:right;
-  }
-  .gray-field {
-    input[type=text], input[type=number], select {
-      background: $grey;
-    }
-  }
-  .result {
-    -webkit-border-radius:5px;
-    -moz-border-radius:5px;
-    border-radius:5px;
-    margin:26px 0;
-    overflow:visible;
-    .row {
-      margin:0 0 .5em 0;
-      .label {
-        max-width:320px;
-        padding-right: 50px;
-        width:auto;
-      }
-      .helptext {
-        display: block;
-        font-size: .75em;
-        line-height: 1.2em;
-        color: lightblue;
-      }
-      .value {
-        max-width:220px;
-        width:auto;
-        float:right;
-      }
+    :nth-child(4) {
+      width: auto;
+      margin-left: 0;
+      left: auto !important;
+      right: 0;
+      text-align: right;
+      margin-right: -3px;
     }
   }
-  .result + .field .label {
+}
 
+.aa-qq-aov .aa-slider-input__header label {
+  color: $black;
+}
+
+.aa-qq-aov__open-calculator {
+  width: 180px;
+}
+
+.aa-qq-aov__calculator {
+  margin-bottom: 60px;
+}
+
+.aa-qq-aov__slider {
+  input {
+    width: 180px;
   }
-  label.checkbox > input[type="checkbox"] + span.checkbox {
-    background:#ecede7;
+}
+
+.aa-qq-aov__result {
+
+}
+
+.aa-qq-aov__result__container {
+  padding: 20px 30px 5px 30px;
+  border-radius: 5px;
+  color: $white;
+  background: $slightly_darker_blue;
+
+  .aa-hint__icon:before {
+    color: white;
   }
+}
+
+.aa-qq-aov__result__label {
+   flex: 1 1 auto;
+   font-size: 22px;
+}
+
+.aa-qq-aov__actions {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: baseline;
+}
+
+.aa-qq-aov__actions__label {
+  flex: 1 1 auto;
+  padding: 9px 0;
+}
+
+.aa-qq-aov__result__row {
+  position: relative;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: baseline;
+  margin-bottom: 15px;
+}
+
+.aa-qq-aov__result__premium {
+  flex: 0 0 160px;
+  font-size: 25px;
+}
+
+.aa-qq-aov__result__currency {
+  display: inline-block;
+  margin-left: 30px;
+  margin-right: 10px;
+}
+
+.aa-qq-aov__action-right {
+  flex: 0 0 auto;
 }
 
 
 @include breakpoint($brk-mobile) {
-  .quickquote.aov-quote {
-    .field {
-      margin-bottom:0;
-      .inputs {
-        float:left;
-        clear:both;
-        width:100%;
-      }
-      .label {
-        width: auto;
-        min-width: 0;
-      }
-    }
-    .result + .field .label {
-      width:auto;
-      padding-right:0;
-      clear:left;
-    }
-    .result + .field a.button {
-      float:left;
-      clear:both;
-    }
-    .result .row .value {
-      max-width: 220px;
-      width: auto;
-      float: left;
-    }
-    .result .row .label {
-      max-width:100%;
-      width:auto;
-      float:left;
-    }
-    .result .row .helptext {
-      clear:both;
-    }
+  .aa-qq-aov__field {
+    flex-wrap: wrap;
   }
-}
-@include breakpoint($brk-tablet) {
-  .quickquote.aov-quote {
-    .field {
-      .label {
-        width: 53%;
-      }
-      .inputs {
-        width: 47%;
-      }
-    }
-    .result + .field .label {
-      width:auto;
-      padding-right:0;
-      clear:left;
-    }
-    .result + .field a.button {
-      float:left;
-      clear:both;
-    }
+  .aa-qq-aov__result__row {
+    flex-wrap: wrap;
   }
-}
-@include breakpoint($brk-ipad-portrait) {
-  .quickquote.aov-quote {
-    .result + .field a.button {
-      float:right;
-      clear:none;
-    }
-    .field {
-      .label {
-        width: 60%;
-      }
-      .inputs {
-        width: 40%;
-      }
-    }
+  .aa-qq-aov__actions {
+    flex-wrap: wrap;
   }
+
+
+  .aa-qq-aov__label {
+    padding-right: 40px;
+  }
+
+  .aa-qq-aov__result__label {
+    padding-right: 40px;
+  }
+
+  .aa-qq-aov__result__premium {
+    flex: 0 0 100%;
+  }
+
+  .aa-qq-aov__result__currency {
+    margin-left: 0;
+  }
+
+  .aa-qq-aov__inputs {
+    flex: 0 0 100%;
+  }
+
+  .aa-qq-aov__result__row aa-hint {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  .aa-qq-aov__personal-details__hint {
+    position: absolute;
+    right: 0;
+    top: 9px;
+  }
+
 }
-//@include breakpoint($brk-ipad-landscape) {
-//  .quickquote.aov-quote {
-//    .result .row .label {
-//      max-width: 100%;
-//      width: auto;
-//    }
-//    .result + .field .label {
-//      width:auto;
-//      padding-right:0;
-//      background:red;
-//    }
-//  }
-//
-//}
