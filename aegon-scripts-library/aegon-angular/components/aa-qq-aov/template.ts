@@ -1,9 +1,9 @@
 export const template = `
-  <!--<aa-sticky *ngIf="grossYearlyExpenseAmount" [heading]="data.options.sticky.heading">
+  <aa-sticky *ngIf="grossYearlyExpenseAmount" [heading]="data.options.sticky.heading">
     <h1 class="aa-sticky__heading">{{ data.options.sticky.subheading }}</h1>
     <aa-editable-value>
       <aa-editable-label>
-        &euro; {{ grossYearlyExpenseAmount | money }] bruto per jaar*
+        &euro; {{ grossYearlyExpenseAmount | money }} bruto per jaar*
       </aa-editable-label>
       <aa-editable-input>
         <aa-input-number [(ngModel)]="grossYearlyExpenseAmount">
@@ -11,7 +11,8 @@ export const template = `
       </aa-editable-input>
     </aa-editable-value>
     <p>{{ data.options.sticky.note }}</p>
-  </aa-sticky>-->
+  </aa-sticky>
+  
   <div class="aa-qq-aov">
     <section class="aa-qq-aov__personal-details" (select)="showCalculator = false">
 
