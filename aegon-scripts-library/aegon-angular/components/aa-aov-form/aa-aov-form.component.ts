@@ -13,6 +13,7 @@ import {AAInputRadioComponent} from "../aa-input-radio/aa-input-radio.component"
 import {AAInputDropDownComponent} from "../aa-input-dropdown/aa-input-dropdown.component";
 import {AASliderInputComponent} from "../aa-slider-input/aa-slider-input.component";
 import {AAInputNumberComponent} from '../aa-input-number/aa-input-number.component';
+import {SliderComponent, SliderValueAccessor} from '../../../components/angular-components/slider.component';
 
 // Old components
 
@@ -29,6 +30,8 @@ import {mockRiskFactorResponse} from "./mock-riskfactor";
 import {mockSpecificationResponse} from "./mock-specification";
 import {AAHintComponent} from "../aa-hint/aa-hint.component";
 import {AAAovFormMeComponent} from "../aa-aov-form-me/aa-aov-form-me.component";
+import {AAAovFormYouComponent} from "../aa-aov-form-you/aa-aov-form-you.component";
+import {AAAovFormBothComponent} from "../aa-aov-form-both/aa-aov-form-both.component";
 import {AACollapseComponent} from "../aa-collapse/aa-collapse.component";
 
 @Component({
@@ -37,7 +40,9 @@ import {AACollapseComponent} from "../aa-collapse/aa-collapse.component";
     // New
     AAInputNumberComponent, AASliderInputComponent, AAInputRadioComponent, AAInputDropDownComponent,
     // Old
-    CheckboxComponent, CheckboxValueAccessor, AAHintComponent, AAAovFormMeComponent, AACollapseComponent
+    CheckboxComponent, CheckboxValueAccessor, AAHintComponent, AAAovFormMeComponent, AACollapseComponent, AAAovFormYouComponent, AAAovFormBothComponent,
+    //slider Stuff
+    SliderComponent, SliderValueAccessor
   ],
   template: template,
   providers: [HTTP_PROVIDERS],
@@ -83,6 +88,7 @@ export class AAAovFormComponent implements OnInit {
   public  professionsFiltered: any[] = [];
   private rawProfession: any;
   private rawProfessions: any = {};
+  public  aov: any = {};
   public  riskFactor: any = {};
   public  type: any = {};
   public  who: any = {};
@@ -104,6 +110,15 @@ export class AAAovFormComponent implements OnInit {
   ngOnInit() {
   }
 
+  isSmoker(val: string) {
+    console.log(val, 'this is the value passed into!!!');
+  }
+
+  birthDayDate(val: string) {
+    console.log(val, 'this is the birthday date in the parent!!!');
+  }
+
+
   coll(box: string) {
 
     switch (box) {
@@ -124,6 +139,5 @@ export class AAAovFormComponent implements OnInit {
         break;
       default:
     }
-
   }
 }

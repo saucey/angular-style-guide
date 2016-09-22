@@ -10,7 +10,7 @@ export const template = `
   <p class="main-color">Heeft u de lasstste 2 jaar gerookt?</p>
   <div class=" aov-form__selection">
     <label class="radio">
-      <input type="radio" checked name="radio" value="value3"/>
+      <input type="radio" checked name="smokerYou" value="value3"/>
       <span class="radio"></span>
       <div class="aov-form__radio__text">
         <p><strong>ja</strong></p>
@@ -20,7 +20,7 @@ export const template = `
   
   <div class=" aov-form__selection">
     <label class="radio">
-      <input type="radio" checked name="radio" value="value3"/>
+      <input type="radio" checked name="smokerYou" value="value3"/>
       <span class="radio"></span>
       <div class="aov-form__radio__text">
         <p><strong>Nee</strong></p>
@@ -33,5 +33,4 @@ export const template = `
       <button class="arrow" type="button">Opslaan en volgende vraag</button>
     </li>
   </ul>
-  
 `;

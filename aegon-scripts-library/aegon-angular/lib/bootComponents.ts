@@ -15,6 +15,8 @@ import * as libUtil from "./util";
 import {AAHighchartComponent} from '../components/aa-highchart/aa-highchart.component';
 import {AAHintComponent} from '../components/aa-hint/aa-hint.component';
 import {AAAovFormMeComponent} from '../components/aa-aov-form-me/aa-aov-form-me.component';
+import {AAAovFormYouComponent} from '../components/aa-aov-form-you/aa-aov-form-you.component';
+import {AAAovFormBothComponent} from '../components/aa-aov-form-both/aa-aov-form-both.component';
 import {AACollapseComponent} from '../components/aa-collapse/aa-collapse.component';
 import {AAInputDropDownComponent} from '../components/aa-input-dropdown/aa-input-dropdown.component';
 import {AAInputNumberComponent} from '../components/aa-input-number/aa-input-number.component';
@@ -49,6 +51,8 @@ const
     AALightboxComponent,
     AADataComponent,
     AACollapseComponent,
+    AAAovFormYouComponent,
+    AAAovFormBothComponent,
     // Quick quotes
     AAAovFormMeComponent,
     AAQQBeleggenComponent,

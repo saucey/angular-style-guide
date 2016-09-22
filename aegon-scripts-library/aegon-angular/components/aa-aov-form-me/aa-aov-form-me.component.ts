@@ -5,7 +5,7 @@
  * @input {String} position Position relative to the cursor to position the hint
  * - Currently only bottom-left is supported
  */
-import {Component, Input, ElementRef, OnInit} from "angular2/core";
+import {Component, ElementRef, OnInit, EventEmitter} from "angular2/core";
 import {template} from "./template";
 
 import {InputDateComponent, InputDateValueAccessor} from '../../../components/angular-components/input-date.component';
@@ -13,12 +13,37 @@ import {InputDateComponent, InputDateValueAccessor} from '../../../components/an
 @Component({
   selector: 'aa-aov-form-me',
   template: template,
-  directives:[InputDateComponent, InputDateValueAccessor]
+  directives:[InputDateComponent, InputDateValueAccessor],
+  outputs: ['smoker', 'birth']
 })
+
 export class AAAovFormMeComponent {
+
   public  birthDate: string;
+  public dobis: string ;
+  public smokeris: string;
 
   constructor(private elementRef:ElementRef) {}
+
+  smoker = new EventEmitter<string>();
+  birth = new EventEmitter<string>();
+
+  isSmoker(value: string) {
+    this.dobis = this.smoker.emit(value);
+  }
+
+  dob(value: string) {
+    this.smokeris = this.birth.emit(value);
+  }
+
+  save(){
+    console.log(this.dobis, 'this is save');
+    console.log(this.smokeris, 'the is save');
+
+    //close the parent blue box
+    //store the data
+
+  }
 
   ngOnInit() {
 

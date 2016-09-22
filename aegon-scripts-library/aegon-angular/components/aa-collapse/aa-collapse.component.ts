@@ -3,7 +3,7 @@ import {AnimationBuilder} from 'angular2/src/animate/animation_builder';
 import {CssAnimationBuilder} from 'angular2/src/animate/css_animation_builder';
 
 @Directive({
-  selector: '[collapse]',
+  selector: '[aa-collapse]',
   host: {
     '[attr.aria-expanded]': '!collapse',
     '[attr.aria-hidden]': 'collapse'
@@ -11,7 +11,7 @@ import {CssAnimationBuilder} from 'angular2/src/animate/css_animation_builder';
 })
 export class AACollapseComponent implements OnChanges {
   @Input() duration: number = 500;
-  @Input() collapse: boolean;
+  @Input('aa-collapse') collapse: boolean;
   private _animation: CssAnimationBuilder;
 
   constructor(animationBuilder:AnimationBuilder, private _element:ElementRef) {

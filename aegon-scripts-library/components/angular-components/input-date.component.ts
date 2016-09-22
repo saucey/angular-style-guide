@@ -19,7 +19,7 @@ import {CONST_EXPR} from "angular2/src/facade/lang";
              (keydown)="keydown($event)" (keyup)="keyup('year', $event)"
              (focus)="yearEl.select()" (input)="keyup('year', $event)" (blur)="year = format(year, 4)">
     </span>
-  `
+  `,
 })
 export class InputDateComponent {
   @Input() required: boolean;

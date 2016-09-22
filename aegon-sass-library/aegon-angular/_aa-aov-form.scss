@@ -8,6 +8,21 @@
       float: none;
     }
   }
+
+  .content,
+  .side {
+    padding-bottom: 99999px;
+    margin-bottom: -99999px;
+    aside {
+      padding: 20px;
+    }
+    h2 {
+      font-size: 3em;
+    }
+    h4, h3, h2 {
+      color: white;
+    }
+  }
 }
 
 .aov-form__list {
@@ -71,6 +86,54 @@
       @include rem('margin', 0, 0, 0);
     }
   }
-
 }
 
+.main .container {
+  padding-right: 250px;
+  overflow: hidden;
+
+  .content {
+    float: left;
+    width: 100%;
+    background-color: $pastel_light_blue;
+    .inner-content {
+      padding: 20px;
+    }
+
+    .quickquote {
+      select {
+        width: 50%;
+      }
+    }
+  }
+}
+
+.side {
+  float: right;
+  margin-right: -250px;
+  width: 250px;
+  background-color: $dark_blue;
+}
+
+@media all and (max-width: 840px) {
+  .main .container {
+    padding: 0;
+    overflow: visible;
+  }
+  .content {
+    float: none
+  }
+  .side {
+    float: none;
+    margin-right: 0;
+    width: 100%;
+  }
+  .content,
+  .side {
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+  .content {
+    margin-bottom: 30px
+  }
+}
