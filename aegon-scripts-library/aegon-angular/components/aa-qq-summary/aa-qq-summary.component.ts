@@ -1,27 +1,23 @@
 /**
  * Summary quick quote
  */
-import {Component, OnInit, Input, AfterViewInit,  ViewChild, ElementRef} from 'angular2/core';
-import {HTTP_PROVIDERS, Http, Headers, RequestOptions, Response} from "angular2/http";
+import {Component, OnInit, Input, AfterViewInit,  ViewChild, ElementRef} from '@angular/core';
+import {Http, Headers, RequestOptions, Response} from "@angular/http";
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
-// AA components
-import {AAMoneyPipe} from "../../pipes/money.pipe";
-import {AAPeriodPipe} from "../../pipes/period.pipe";
+
 // Locals
 import {template} from "./template";
 import {defaultOptions} from "./defaultOptions";
 import {AABaseComponent} from "../../lib/classes/AABaseComponent";
-import {AAReverseDateStringPipe} from "../../pipes/reverseDateString.pipe";
+import {AAPeriodPipe} from "../../pipes/period.pipe";
+
 import {aegonTealium} from "../../lib/aegon_tealium";
 
 @Component({
   selector: 'aa-qq-summary',
-  directives: [
-  ],
   template: template,
-  providers: [HTTP_PROVIDERS],
-  pipes: [AAMoneyPipe, AAPeriodPipe, AAReverseDateStringPipe]
+  providers: []
 })
 
 export class AAQQSummaryComponent extends AABaseComponent implements OnInit, AfterViewInit {

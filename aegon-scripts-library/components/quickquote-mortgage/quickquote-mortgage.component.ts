@@ -1,25 +1,17 @@
-import {Component, OnInit, Input} from 'angular2/core';
-import {HTTP_PROVIDERS, Http, Headers, RequestOptions, Response} from "angular2/http";
+import {Component, OnInit, Input, ViewChild, ElementRef} from '@angular/core';
+import {Http, Headers, RequestOptions, Response} from "@angular/http";
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
-import {HelpComponent} from '../angular-components/help.component'
-import {SliderComponent, SliderValueAccessor} from '../angular-components/slider.component';
-import {InputDateComponent, InputDateValueAccessor} from '../angular-components/input-date.component';
-import {CheckboxComponent, CheckboxValueAccessor} from '../angular-components/checkbox.component';
-import {MoneyPipe} from "../angular-components/money.pipe";
-import {AfterViewInit} from "angular2/core";
-import {ViewChild} from "angular2/core";
-import {ElementRef} from "angular2/core";
+
+import {migrateTemplate} from "../../aegon-angular/lib/util";
 
 
 var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMortgageTemplate'));
 @Component({
   selector: 'aegon-quickquote-mortgage',
-  directives: [
-    HelpComponent, SliderComponent, InputDateComponent, InputDateValueAccessor,
-    CheckboxComponent, CheckboxValueAccessor, SliderValueAccessor
-  ],
-  template: templateElem ? templateElem.value : `
+
+  template: templateElem ? migrateTemplate(templateElem.value) : `
+<button (click)="incomeValue = 1000">Make it 1000</button>
     <div class="quickquote lijfrente sparen mortgage" #interest data-interest="2.95,3.25,3.25,3.25,3.25,3.25,3.35,3.35,3.35,3.35,3.35,3.70,3.70,3.70,3.70,3.70,3.70,3.70,3.70,3.70,3.70">
       <div class="triangle"></div>
       <div class="calculation">
@@ -108,8 +100,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
       </div>
     </div>
   `,
-  providers: [HTTP_PROVIDERS],
-  pipes: [MoneyPipe]
+  providers: []
 })
 export class QuickQuoteMortgageComponent   {
   incomeValue:  number;

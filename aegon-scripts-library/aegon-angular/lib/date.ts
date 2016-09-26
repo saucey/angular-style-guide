@@ -2,7 +2,7 @@
  * Date utils
  */
 
-import {isString, isDate} from "angular2/src/facade/lang";
+import {isString, isDate} from "./util";
 
 /**
  * Calculate the current age, given a certain date.

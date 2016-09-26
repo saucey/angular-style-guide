@@ -183,6 +183,15 @@ export function isString(input) : boolean {
 }
 
 /**
+ * Check whether input is a Date instance
+ * @param {Any} input Input to check
+ * @returns {Boolean} True if input is a string
+ */
+export function isDate(obj) {
+  return obj instanceof Date && !isNaN(obj.valueOf());
+}
+
+/**
  * Check whether input is a array
  * @param {Any} input Input to check
  * @returns {Boolean} True if input is an array
@@ -209,4 +218,12 @@ export function uniqueArray(input : any[]) : any {
 	return input.filter(function(item, pos, self) {
     return self.indexOf(item) === pos;
 	});
+}
+
+/**
+ * Temporary method to migrate angular.beta templates to final 2.0 syntax.
+ * To be used for external templates kept outside of the codebase
+ */
+export function migrateTemplate(template : string) : string {
+  return template.replace(/(\*ngFor=\"#)/g, '*ngFor="let ');
 }

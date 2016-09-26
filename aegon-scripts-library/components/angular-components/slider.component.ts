@@ -1,21 +1,16 @@
 import {
   Component, Input, Output, EventEmitter, Provider, Directive, forwardRef, ViewChild, ElementRef
-} from 'angular2/core';
-import {NG_VALUE_ACCESSOR, ControlValueAccessor} from "angular2/common";
-import {CONST_EXPR} from "angular2/src/facade/lang";
-import {InputNumberComponent, InputNumberValueAccessor} from './input-number.component';
-import {HelpComponent} from './help.component'
-import {AfterViewInit} from "angular2/core";
-import {NgZone} from "angular2/core";
+} from '@angular/core';
+import {NG_VALUE_ACCESSOR, ControlValueAccessor} from "@angular/forms";
+
+import {AfterViewInit} from "@angular/core";
+import {NgZone} from "@angular/core";
 
 declare var noUiSlider: any;
 declare var wNumb: any;
 
 @Component({
   selector: 'aegon-slider',
-  directives: [
-    HelpComponent, InputNumberComponent, InputNumberValueAccessor
-  ],
   template: `
     <div class="one-off slider">
       <div class="input-header">
@@ -61,7 +56,7 @@ export class SliderComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     var sliderElement = this.sliderEl.nativeElement;
     var settings = {
-      start: [ this.value === void 0 ? this.initial : this.value ],
+      start: [ (this.value === void 0 || this.value === null) ? this.initial : this.value ],
       range: this.range,
       format: wNumb({
         decimals: 0
@@ -77,20 +72,20 @@ export class SliderComponent implements AfterViewInit {
         this.manualSlide = false;
       }, 100);
     });
-    sliderElement.noUiSlider.on('update', values => {
-      this.zone.run(() => {
-        this.value = parseFloat(values[0]);
+
+    sliderElement.noUiSlider.on('update', (values) => {
+
+      setTimeout(() => {
+        this.value = values[0];
         this.modelChange.emit(this.value);
-        setTimeout(() => {
-          this.change.emit(this.value);
-        });
+        this.change.emit(this.value);
       });
     });
   }
 
   setValue(value) {
     this.value = value;
-    if (this.sliderEl && !this.manualSlide) {
+    if (this.sliderEl && !this.manualSlide && this.sliderEl.nativeElement.noUiSlider) {
       // Only set the slider when the value comes from outside this component.
       this.sliderEl.nativeElement.noUiSlider.updateOptions({range: this.range});
       this.sliderEl.nativeElement.noUiSlider.set(this.value);
@@ -98,8 +93,11 @@ export class SliderComponent implements AfterViewInit {
   }
 }
 
-const CUSTOM_VALUE_ACCESSOR = CONST_EXPR(new Provider(
-  NG_VALUE_ACCESSOR, {useExisting: forwardRef(() => SliderValueAccessor), multi: true}));
+const CUSTOM_VALUE_ACCESSOR = {
+  provide: NG_VALUE_ACCESSOR,
+  useExisting: forwardRef(() => SliderValueAccessor),
+  multi: true
+};
 
 @Directive({
   selector: 'aegon-slider',

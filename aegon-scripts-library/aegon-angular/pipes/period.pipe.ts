@@ -2,7 +2,7 @@
  * Period pipe.
  * Given a number of days, returns the right period (2 week, 1 Maand, ...)
  */
-import {Pipe, PipeTransform} from 'angular2/core';
+import {Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({name: 'period'})
 // Arguments: [round #digits]

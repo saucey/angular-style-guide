@@ -1,4 +1,4 @@
-import {Component, Input, ElementRef} from 'angular2/core';
+import {Component, Input, ElementRef} from '@angular/core';
 import {template} from "./template";
 import {AABaseComponent} from '../../lib/classes/AABaseComponent';
 import {defaultOptions} from "./defaultOptions";
@@ -6,8 +6,7 @@ import {AAElementDirective} from '../../directives/aa-element/aa-element.directi
 
 @Component({
   selector: 'aa-sticky',
-  template: template,
-  directives: [AAElementDirective]
+  template: template
 })
 export class AAStickyComponent extends AABaseComponent {
   @Input() options: any = {};
