@@ -1,5 +1,5 @@
-import {Injectable} from 'angular2/core';
-import {Http, Response} from "angular2/http";
+import {Injectable} from '@angular/core';
+import {Http, Response} from "@angular/http";
 import {Observable} from 'rxjs/Observable';
 import {parseNumber} from '../angular-components/input-number.component';
 interface DataFormat {
@@ -13,9 +13,9 @@ export class InterestsService {
 	/*
 	 * Data format
 	 */
-	private defaultData: DataFormat = {months:0, nhg: false, lowest: true}; 
+	private defaultData: DataFormat = {months:0, nhg: false, lowest: true};
 	private inputData: DataFormat;
-	
+
 	constructor (private http: Http) {}
 
 	// API url
@@ -23,8 +23,8 @@ export class InterestsService {
 
 	/*
 	 * Retrieves the interest table from the API
-	 * 
-	 * @param data {Object}: 
+	 *
+	 * @param data {Object}:
 	 *  - months {number} = the length of the mortgage in months
 	 *	- nhg {boolean} = whether the mortgage is nhg
 	 *	- lowest {boolean} (optional) = which interest to get
@@ -35,7 +35,7 @@ export class InterestsService {
 		if(window.location.href.indexOf('localhost') > -1) {
 			// Gets the mockdata.
 			return this.getMockData();
-		} 
+		}
 		else {
 			// Gets the real data.
 			return this.getAPIdata();
@@ -51,7 +51,7 @@ export class InterestsService {
 		return this.http.get(this.intstUrl)
 			.map((res: Response) => {
 				let response = res.json();
-				
+
 				return this.processData(response);
 			})
 			.catch(this.handleError)
@@ -75,7 +75,7 @@ export class InterestsService {
 				if(res[i]['Table ID'] == 'hypotheek-met-nhg') {
 					table = res[i].Table;
 				}
-			} 
+			}
 			else {
 				if(res[i]['Table ID'] == 'hypotheek-zonder-nhg') {
 					table = res[i].Table;
@@ -145,7 +145,7 @@ export class InterestsService {
 				years =  Math.ceil(years);
 				// The highest a person can pay a mortgage
 				// period in years.
-				let highest: number = 30; 
+				let highest: number = 30;
 				if(years > highest) {
 					// If it's more than 30 years
 					years =  highest;
@@ -157,7 +157,7 @@ export class InterestsService {
 
 						if(years >= parseInt(fromTo[0]) && years <= parseInt(fromTo[1])) {
 							interest = intsTable[p];
-						} 
+						}
 					}
 				}
 			}

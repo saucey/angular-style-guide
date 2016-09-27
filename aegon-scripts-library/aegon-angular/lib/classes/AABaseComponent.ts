@@ -7,7 +7,7 @@
  * - Example: title -> modifies options.title
  * - inlay.slider.start -> modifies the options.inlay.slider.start property
  */
-import {Component, ElementRef, Input, OnInit} from 'angular2/core';
+import {Component, ElementRef, Input, OnInit} from '@angular/core';
 import * as libUtil from "../util";
 import * as libXsr from "../xsr";
 

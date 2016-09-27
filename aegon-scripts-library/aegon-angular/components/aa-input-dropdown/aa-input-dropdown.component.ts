@@ -1,7 +1,7 @@
-import {Component, Input, Output, EventEmitter, Provider, Directive, forwardRef, ViewChild, ElementRef} from 'angular2/core';
+import {Component, Input, Output, EventEmitter, Provider, Directive, forwardRef, ViewChild, ElementRef} from '@angular/core';
 // Locals
 import {template} from "./template";
-import {isString} from "angular2/src/facade/lang";
+import {isString} from "../../lib/util";
 
 @Component({
   selector: 'aa-input-dropdown',

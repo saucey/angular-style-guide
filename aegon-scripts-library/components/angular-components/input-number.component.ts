@@ -1,8 +1,7 @@
 import {
   Component, Input, Output, EventEmitter, Provider, Directive, forwardRef, ViewChild, ElementRef
-} from 'angular2/core';
-import {NG_VALUE_ACCESSOR, ControlValueAccessor} from "angular2/common";
-import {CONST_EXPR} from "angular2/src/facade/lang";
+} from '@angular/core';
+import {NG_VALUE_ACCESSOR, ControlValueAccessor} from "@angular/forms";
 
 export function formatNumber(value: any, fractional: boolean = true, forceDecimals: boolean = false): string {
   // Round to 2 fraction digits. We don't use toFixed(), because we won't enforce the fractional part on round numbers.
@@ -75,7 +74,7 @@ export class InputNumberComponent {
   model: string;
 
   constructor() {
-    // Check if forceDecimals is set and transforme it 
+    // Check if forceDecimals is set and transforme it
     // to boolean.
     if (this.forceDecimals !== undefined) {
       this.forceDecimals = Boolean(parseInt(this.forceDecimals));
@@ -112,8 +111,11 @@ export class InputNumberComponent {
   }
 }
 
-const CUSTOM_VALUE_ACCESSOR = CONST_EXPR(new Provider(
-  NG_VALUE_ACCESSOR, {useExisting: forwardRef(() => InputNumberValueAccessor), multi: true}));
+const CUSTOM_VALUE_ACCESSOR = {
+  provide: NG_VALUE_ACCESSOR,
+  useExisting: forwardRef(() => InputNumberValueAccessor),
+  multi: true
+};
 
 @Directive({
   selector: 'aegon-input-number',

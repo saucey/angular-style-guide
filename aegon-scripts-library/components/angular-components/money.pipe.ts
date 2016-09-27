@@ -1,4 +1,4 @@
-import {Pipe, PipeTransform} from 'angular2/core';
+import {Pipe, PipeTransform} from '@angular/core';
 import {formatNumber} from "./input-number.component";
 
 @Pipe({name: 'money'})

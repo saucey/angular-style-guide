@@ -1,12 +1,10 @@
-import {Component, OnInit, Input} from 'angular2/core';
+import {Component, OnInit, Input} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
-import {HTTP_PROVIDERS, JSONP_PROVIDERS, Jsonp, Http, Headers, RequestOptions, Response} from "angular2/http";
+import {Jsonp, Http, Headers, RequestOptions, Response} from "@angular/http";
 import 'rxjs/Rx';
-import {HelpComponent} from '../angular-components/help.component'
-import {InputNumberComponent, InputNumberValueAccessor, formatNumber} from '../angular-components/input-number.component';
-import {InputDateComponent, InputDateValueAccessor} from '../angular-components/input-date.component';
-import {InputRadioComponent, InputRadioValueAccessor} from '../angular-components/input-radio.component';
-import {MoneyPipe} from "../angular-components/money.pipe";
+
+import {migrateTemplate} from "../../aegon-angular/lib/util";
+
 import {NibudService} from "./nibud.service";
 
 
@@ -19,11 +17,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
 
 @Component({
   selector: 'aegon-quickquote-aov',
-  directives: [
-    HelpComponent, InputNumberComponent, InputNumberValueAccessor, InputDateComponent, InputDateValueAccessor,
-    InputRadioComponent, InputRadioValueAccessor
-  ],
-  template: templateElem ? templateElem.value : `
+  template: templateElem ? migrateTemplate(templateElem.value) : `
     <div class="quickquote angular aov">
       <div class="triangle"></div>
       <div class="calculation">
@@ -324,8 +318,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
       </div>
     </div>
   `,
-  providers: [NibudService, HTTP_PROVIDERS, JSONP_PROVIDERS],
-  pipes: [MoneyPipe]
+  providers: [NibudService]
 })
 export class QuickQuoteAovComponent implements OnInit {
   step: string = 'start';

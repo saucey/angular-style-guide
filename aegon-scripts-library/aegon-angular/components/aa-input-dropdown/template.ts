@@ -4,7 +4,7 @@ export const template = `
       [ngModel]="model.label" (ngModelChange)="modelChange($event)" (blur)="blur(dropDownEl)" (keydown)="handleKey($event)">
     <ul class="aa-input-dropdown__choices" *ngIf="enabled && fetchValue.length >= minChars">
       <li *ngIf="!items && emptyMessage">{{emptyMessage}}</li>
-      <li class="aa-input-dropdown__choice" *ngFor="#item of items" (click)="select(item)">{{item.label}}</li>
+      <li class="aa-input-dropdown__choice" *ngFor="let item of items" (click)="select(item)">{{item.label}}</li>
     </ul>
   </span>
 `;

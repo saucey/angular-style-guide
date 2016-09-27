@@ -5,22 +5,22 @@
  */
 
 import {
-  Component, Input, Output, EventEmitter, Provider, Directive, forwardRef, ViewChild, ElementRef, AfterViewInit} from 'angular2/core';
-import {NG_VALUE_ACCESSOR, ControlValueAccessor} from "angular2/common";
-import {CONST_EXPR} from "angular2/src/facade/lang";
+  Component, Input, Output, EventEmitter, Provider, Directive, forwardRef, ViewChild, ElementRef, AfterViewInit} from '@angular/core';
+import {NG_VALUE_ACCESSOR, ControlValueAccessor} from "@angular/forms";
+
 import * as libUtil from "../../lib/util";
 
 // Locals
 import {template} from "./template";
 import {options} from "./options";
 
-const CUSTOM_VALUE_ACCESSOR = CONST_EXPR(new Provider(
-    NG_VALUE_ACCESSOR, {
-      useExisting: forwardRef(() => AASliderComponent),
-      multi: true}
-    )
-  ),
-  TIMEOUT_MANUAL_SLIDE = 50, // ms after manual slide release before we accept model changes again
+const CUSTOM_VALUE_ACCESSOR = {
+  provide: NG_VALUE_ACCESSOR,
+  useExisting: forwardRef(() => AASliderComponent),
+  multi: true
+};
+
+const TIMEOUT_MANUAL_SLIDE = 50, // ms after manual slide release before we accept model changes again
   THROTTLE_UPDATES = 100; // ms for throttling slider update
 
 declare var noUiSlider: any;
@@ -30,7 +30,6 @@ export const DEFAULT_SLIDER_OPTIONS = options;
 
 @Component({
   selector: 'aa-slider',
-  directives: [],
   host: {'(modelChange)': 'onChange($event)'},
   providers: [CUSTOM_VALUE_ACCESSOR],
   template: template

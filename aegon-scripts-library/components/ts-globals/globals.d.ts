@@ -13,3 +13,5 @@ interface utagConstructor {
 }
 declare var utag: utagConstructor;
 declare var clientStorage: any;
+
+declare function require(path: string): any;
