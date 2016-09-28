@@ -5,7 +5,7 @@
  * render a chart by supplying a chart options object.
  * See: http://api.highcharts.com/highcharts
  */
-import {Component, Input, Output, EventEmitter, ElementRef, ViewChild, AfterViewInit, OnInit} from 'angular2/core';
+import {Component, Input, Output, EventEmitter, ElementRef, ViewChild, AfterViewInit, OnInit} from '@angular/core';
 import {loadScript} from "../../lib/scripts";
 import {template} from "./template";
 

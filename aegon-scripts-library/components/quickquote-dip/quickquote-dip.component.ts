@@ -1,12 +1,9 @@
-import {Component, OnInit, Input} from 'angular2/core';
-import {HTTP_PROVIDERS, Http, Headers, RequestOptions, Response} from "angular2/http";
+import {Component, OnInit, Input} from '@angular/core';
+import {Http, Headers, RequestOptions, Response} from "@angular/http";
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
-import {HelpComponent} from '../angular-components/help.component'
-import {InputNumberComponent, InputNumberValueAccessor, formatNumber} from '../angular-components/input-number.component';
-import {InputDateComponent, InputDateValueAccessor} from '../angular-components/input-date.component';
-import {CheckboxComponent, CheckboxValueAccessor} from '../angular-components/checkbox.component';
-import {MoneyPipe} from "../angular-components/money.pipe";
+
+import {migrateTemplate} from "../../aegon-angular/lib/util";
 
 const monthLabels: string[] = [
   'januari', 'februari', 'maart', 'april', 'mei', 'juni',
@@ -17,11 +14,8 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteDipT
 
 @Component({
   selector: 'aegon-quickquote-dip',
-  directives: [
-    HelpComponent, InputNumberComponent, InputNumberValueAccessor, InputDateComponent, InputDateValueAccessor,
-    CheckboxComponent, CheckboxValueAccessor
-  ],
-  template: templateElem ? templateElem.value : `
+
+  template: templateElem ? migrateTemplate(templateElem.value) : `
     <div class="quickquote angular">
       <div class="triangle"></div>
       <div class="calculation">
@@ -110,7 +104,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteDipT
             <div class="inputs">
               <select [ngModel]="startingDate" (change)="changeStartingDate($event.target.value)" required>
                 <option value="" disabled>Maak uw keuze</option>
-                <option *ngFor="#date of startingDateChoices" [value]="date.value">{{date.label}}</option>
+                <option *ngFor="let date of startingDateChoices" [value]="date.value">{{date.label}}</option>
               </select>
             </div>
           </div>
@@ -182,8 +176,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteDipT
       </div>
     </div>
   `,
-  providers: [HTTP_PROVIDERS],
-  pipes: [MoneyPipe]
+  providers: []
 })
 export class QuickQuoteDipComponent implements OnInit {
   step: number = 1;

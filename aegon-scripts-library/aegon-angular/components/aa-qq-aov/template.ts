@@ -89,7 +89,7 @@ export const template = `
             <aa-hint [text]="data.options.startingTerm.help"></aa-hint>
           </div>
           <div class="aa-qq-aov__inputs">
-            <div class="aa-qq-aov__radio" *ngFor="#choice of data.options.startingTerm.choices">
+            <div class="aa-qq-aov__radio" *ngFor="let choice of data.options.startingTerm.choices">
               <aa-input-radio name="term"
                 [(ngModel)]="startingTerm" 
                 (modelChange)="fetchSpecification$.emit()"

@@ -1,7 +1,7 @@
 /**
  * Move element in the DOM, append or prepend to another parent
  */
-import {Directive, Input, Output, NgZone, ElementRef} from 'angular2/core';
+import {Directive, Input, Output, NgZone, ElementRef} from '@angular/core';
 import {AABaseComponent} from '../../lib/classes/AABaseComponent';
 
 @Directive({

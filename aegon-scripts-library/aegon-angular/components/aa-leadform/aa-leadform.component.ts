@@ -5,7 +5,7 @@
  * Enter the form configuration in the options
  */
 
-import {Component, Input, Output, NgZone, ElementRef, ViewChild} from 'angular2/core';
+import {Component, Input, Output, NgZone, ElementRef, ViewChild} from '@angular/core';
 import {template} from "./template";
 import {AABaseComponent} from '../../lib/classes/AABaseComponent';
 import {defaultOptions} from "./defaultOptions";

@@ -1,7 +1,7 @@
 /**
  * General base class for all AA directives
  */
-import {ElementRef, OnInit} from 'angular2/core';
+import {ElementRef, OnInit} from '@angular/core';
 
 export class AABaseDirective{
   public element: any;

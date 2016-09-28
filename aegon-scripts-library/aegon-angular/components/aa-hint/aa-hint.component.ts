@@ -5,8 +5,8 @@
  * @input {String} position Position relative to the cursor to position the hint
  * - Currently only bottom-left is supported
  */
-import {Component, Input} from "angular2/core";
-import {template} from "./template";
+import { Component, Input } from "@angular/core";
+import { template } from "./template";
 
 @Component({
   selector: 'aa-hint',

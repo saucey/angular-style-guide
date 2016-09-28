@@ -1,49 +1,26 @@
 /**
  * AOV quick quote
  */
-import {Component, OnInit, Input, EventEmitter, ElementRef, Renderer} from 'angular2/core';
-import {HTTP_PROVIDERS, Http, Headers, RequestOptions, Response} from "angular2/http";
+import {Component, OnInit, Input, EventEmitter, ElementRef, Renderer} from '@angular/core';
+import {Http, Headers, RequestOptions, Response} from "@angular/http";
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
 
-// AA components
-import {AAMoneyPipe} from "../../pipes/money.pipe";
-import {AAReplacePipe} from "../../pipes/replace.pipe";
-import {AAInputRadioComponent} from "../aa-input-radio/aa-input-radio.component";
-import {AAInputDropDownComponent} from "../aa-input-dropdown/aa-input-dropdown.component";
-import {AASliderInputComponent} from "../aa-slider-input/aa-slider-input.component";
-import {AAInputNumberComponent} from '../aa-input-number/aa-input-number.component';
-import {AAInputDateComponent} from '../aa-input-date/aa-input-date.component';
-import {AAEditableValueComponent} from '../aa-editable-value/aa-editable-value.component';
-import {AAStickyComponent} from "../aa-sticky/aa-sticky.component";
-// Locals
-import {template} from "./template";
-import {defaultOptions} from "./defaultOptions";
 import {calculateAge, stringToDate, addYearsToDate, getDateDiffInYears, cloneDate} from "../../lib/date";
 import {zeroPad} from "../../lib/format";
+import {AABaseComponent} from "../../lib/classes/AABaseComponent";
+
 import {mockProfessionsResponse} from "./mock-professions";
 import {mockRiskFactorResponse} from "./mock-riskfactor";
 import {mockSpecificationResponse} from "./mock-specification";
-import {AAHintComponent} from "../aa-hint/aa-hint.component";
-import {AABaseComponent} from "../../lib/classes/AABaseComponent";
+import {defaultOptions} from "./defaultOptions";
 import {aegonTealium} from "../../lib/aegon_tealium";
-
+import {template} from "./template";
 
 @Component({
   selector: 'aa-qq-aov',
-  directives: [
-    AAInputNumberComponent,
-    AASliderInputComponent,
-    AAInputRadioComponent,
-    AAInputDropDownComponent,
-    AAInputDateComponent,
-    AAHintComponent,
-    AAStickyComponent,
-    AAEditableValueComponent
-  ],
   template: template,
-  providers: [HTTP_PROVIDERS],
-  pipes: [AAMoneyPipe, AAReplacePipe]
+  providers: []
 })
 export class AAQQAovComponent extends AABaseComponent implements OnInit {
   @Input() options: any = {};

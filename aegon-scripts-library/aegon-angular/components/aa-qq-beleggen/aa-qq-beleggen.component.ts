@@ -12,16 +12,11 @@
  * - options.ts: Configuration and texts
  * - chart.ts: Chart options
  */
-import {Component, Input, ElementRef, ViewChild, OnInit} from 'angular2/core';
-import {loadScript} from "../../lib/scripts";
-import * as libFormat from "../../lib/format";
+import {Component, Input, ElementRef, ViewChild, OnInit} from '@angular/core';
 import * as libInterest from "../../lib/calculations/interest";
 import * as libUtil from "../../lib/util";
 // AA components
 import {AABaseComponent} from '../../lib/classes/AABaseComponent';
-import {AAMoneyPipe} from "../../pipes/money.pipe";
-import {AASliderInputComponent} from '../aa-slider-input/aa-slider-input.component';
-import {AAHintComponent} from '../aa-hint/aa-hint.component';
 import {AAHighchartComponent} from "../aa-highchart/aa-highchart.component";
 // Locals
 import {template} from "./template";
@@ -35,11 +30,7 @@ declare var jQuery;
  */
 @Component({
   selector: 'aa-qq-beleggen',
-  directives: [
-    AAHintComponent, AASliderInputComponent, AAHighchartComponent
-  ],
-  template: template,
-  pipes: [AAMoneyPipe]
+  template: template
 })
 export class AAQQBeleggenComponent extends AABaseComponent {
   @Input() options: any = {};

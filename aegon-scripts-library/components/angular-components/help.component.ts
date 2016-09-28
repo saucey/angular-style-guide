@@ -1,4 +1,4 @@
-import {Component, Input, ViewChild, ElementRef} from "angular2/core";
+import {Component, Input, ViewChild, ElementRef} from "@angular/core";
 
 @Component({
   selector: 'aegon-help',
@@ -44,7 +44,7 @@ export class HelpComponent {
           left = trigger.offsetLeft + 35;
           break;
         default:
-          // default is bottom 
+          // default is bottom
           top = trigger.offsetTop + trigger.offsetHeight + 20;
           left = trigger.offsetLeft - (dialog.offsetWidth / 2);
       }

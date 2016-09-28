@@ -1,4 +1,4 @@
-import {Component, Input} from 'angular2/core';
+import {Component, Input, ElementRef} from '@angular/core';
 import {template} from "./template";
 
 @Component({
