@@ -12,7 +12,7 @@
  * - options.ts: Configuration and texts
  * - chart.ts: Chart options
  */
-import {Component, Input, ElementRef, ViewChild, OnInit} from 'angular2/core';
+import {Component, Input, ElementRef, ViewChild, OnInit, Renderer} from 'angular2/core';
 import {loadScript} from "../../lib/scripts";
 import * as libFormat from "../../lib/format";
 import * as libInterest from "../../lib/calculations/interest";
@@ -27,6 +27,7 @@ import {AAHighchartComponent} from "../aa-highchart/aa-highchart.component";
 import {template} from "./template";
 import {defaultOptions} from "./defaultOptions";
 import {createChartConfig, createPlotLinesData, createSeriesData} from "./chart";
+import {aegonTealium} from "../../lib/aegon_tealium";
 
 declare var jQuery;
 
@@ -53,15 +54,46 @@ export class AAQQBeleggenComponent extends AABaseComponent {
   private currentTimeout: any = undefined;
   private calculate : any;
 
+  public qqStarted: any = false;
+  public globalListenFunc: Function;
+
   // Let parent class initialize config; the dependency injection with ElementRef
   // doesn't work directly so we have to call it explicitly.
-  constructor(thisElement: ElementRef) {
+  constructor(
+    thisElement: ElementRef,
+    private renderer: Renderer
+  ) {
     super(thisElement);
   }
   ngOnInit() : void {
     super.ngOnInit();
     this.calculate = libUtil.debounce(() => {
       this.doCalculate();
+
+      aegonTealium({
+        page_cat_2_name: 'berekening',
+        step_name: 'qq-berekening-view',
+        product_name: ['beleggen'],
+        product_category: ['beleggen'],
+        page_step:'01',
+        event: 'qq_view',
+        form_name: document.querySelector('h1#page-title').innerText || ""
+      });
+
+      this.globalListenFunc = this.renderer.listenGlobal('input', 'focus click', (event) => {
+        aegonTealium({
+          page_cat_2_name: 'berekening',
+          step_name: 'qq-berekening-start',
+          product_name: ['beleggen'],
+          product_category: ['beleggen'],
+          page_step:'02',
+          event: 'qq_started',
+          form_name: document.querySelector('h1#page-title').innerText || ""
+        });
+        console.log("focus");
+        this.globalListenFunc();
+      });
+
     }, this.data.options.chartUpdateDelay);
   }
 
