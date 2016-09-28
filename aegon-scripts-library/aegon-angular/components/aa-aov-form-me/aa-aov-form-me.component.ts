@@ -5,22 +5,20 @@
  * @input {String} position Position relative to the cursor to position the hint
  * - Currently only bottom-left is supported
  */
-import {Component, ElementRef, OnInit, EventEmitter} from "angular2/core";
+import {Component, ElementRef, OnInit, EventEmitter} from "@angular/core";
 import {template} from "./template";
 
-import {InputDateComponent, InputDateValueAccessor} from '../../../components/angular-components/input-date.component';
 
 @Component({
   selector: 'aa-aov-form-me',
   template: template,
-  directives:[InputDateComponent, InputDateValueAccessor],
   outputs: ['smoker', 'birth']
 })
 
 export class AAAovFormMeComponent {
 
   public  birthDate: string;
-  public dobis: string ;
+  public dobis: string;
   public smokeris: string;
 
   constructor(private elementRef:ElementRef) {}

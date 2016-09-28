@@ -2,7 +2,7 @@
  * Reverse date string pipe.
  * Converts yyyy-mm-dd to dd-mm-yyyy.
  */
-import {Pipe, PipeTransform} from 'angular2/core';
+import {Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({name: 'reverseDateString'})
 export class AAReverseDateStringPipe implements PipeTransform {

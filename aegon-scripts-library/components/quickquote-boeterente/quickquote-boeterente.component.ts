@@ -1,25 +1,18 @@
-import {Component, Input, ElementRef, ViewChild, AfterViewInit, OnInit} from 'angular2/core';
-import {HTTP_PROVIDERS, Http, Headers, RequestOptions, Response} from "angular2/http";
+import {Component, Input, ElementRef, ViewChild, AfterViewInit, OnInit} from '@angular/core';
+import {Http, Headers, RequestOptions, Response} from "@angular/http";
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
-import {HelpComponent} from '../angular-components/help.component';
-import {InputDateComponent, InputDateValueAccessor} from '../angular-components/input-date.component';
-import {InputNumberComponent, InputNumberValueAccessor} from '../angular-components/input-number.component';
-import {InputRadioComponent, InputRadioValueAccessor} from '../angular-components/input-radio.component';
-import {MoneyPipe} from "../angular-components/money.pipe";
+
 import {InterestsService} from "./interests.service";
 import {validateDate} from "../angular-components/validation.component";
 import {template} from "./template";
+import {migrateTemplate} from "../../aegon-angular/lib/util";
 
 var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteBoeterenteTemplate'));
 @Component({
   selector: 'aegon-quickquote-boeterente',
-  directives: [
-    HelpComponent, InputDateComponent, InputDateValueAccessor, InputNumberComponent, InputNumberValueAccessor, InputRadioComponent, InputRadioValueAccessor
-  ],
-  template: templateElem ? templateElem.value : template,
-  providers: [HTTP_PROVIDERS, InterestsService],
-  pipes: [MoneyPipe]
+  template: migrateTemplate(templateElem ? templateElem.value : template),
+  providers: [InterestsService]
 })
 export class QuickQuoteBoeterenteComponent implements OnInit {
   @ViewChild('mortgageSelect') mortgageSelect: ElementRef;
@@ -76,7 +69,7 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
   ngOnInit():void {}
 
   /*
-   * Initial tealium event 
+   * Initial tealium event
    *
    * @param index {number}: the index
    */
@@ -141,7 +134,7 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
 
     // Interest period end.
     this.interestPeriodEndErr = validateDate(this.interestPeriodEnd, true) ? false : true;
-    
+
     // Old interest rate error.
     this.oldIntRateErr = (this.oldIntRate === 0 || this.oldIntRate === null) ? true : false;
 
@@ -266,7 +259,7 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
           // Removes the class pending in the button.
           this.calculating = false;
           // Shows the value.
-          this.calculated = true;        
+          this.calculated = true;
         }
 
         // Calculation finished.
@@ -321,21 +314,21 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
   /*
    * Special calculation between two dates to get
    * penalty applicable periods
-   * 
+   *
    * @param date {string}: start date of the mortgage or applicable term.
    * @param latestDate {string}: end date of mortgage.
    * @param type {string} (start|end): if start retrieves the start period number
-   *   if end retrieves the last period number. 
+   *   if end retrieves the last period number.
    */
   getTermsAmount(date: string, latestDate: string, type: string = 'end'): number {
-    /* 
+    /*
      * Throw exeption if the dates given are not
      * valid.
      */
     if (!validateDate(date) || !validateDate(latestDate)) {
       throw new Error("Dates should be in format yyyy-mm-dd.");
     }
-    /* 
+    /*
      * Throw exeption if the type parameter do not
      * match the available options.
      */
@@ -403,7 +396,7 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
     }
     return Math.ceil(num / round) * round;
   }
-  
+
   /*
    * Adds leading zeros to a number.
    * @param num {any}: the number to add padding.
@@ -411,7 +404,7 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
    *   with leading zeros including the number itself.
    */
   private numberPadding(num: any, length: number): string {
-    let str = num.toString().length, 
+    let str = num.toString().length,
         pad = '';
 
     for (let i = 0; i < (length - str); i++) {
@@ -423,7 +416,7 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
   /*
    * Checks if utag and utag_data exist
    * and triggers tealium functions.
-   * 
+   *
    * @param data {Object}: an object with the variables.
    */
   private tealium (data: Object): void {
@@ -445,13 +438,13 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
                 }
             }
         }
-    }    
+    }
     // Check if utag can be used.
     if(typeof utag == 'object' && typeof utag.view == 'function') {
       utag.view(data);
     } else {
       // Give some time to load.
-      setTimeout(() => { 
+      setTimeout(() => {
         if (typeof utag == 'object' && typeof utag.view == 'function') {
           utag.view(data);
         }

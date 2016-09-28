@@ -1,4 +1,4 @@
-import {Component, ElementRef, ViewChild, AfterViewInit, OnInit} from 'angular2/core';
+import {Component, ElementRef, ViewChild, AfterViewInit, OnInit} from '@angular/core';
 import {AABaseComponent} from './AABaseComponent';
 import * as libUtil from "../util";
 

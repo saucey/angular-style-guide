@@ -1,7 +1,7 @@
 /**
  * AOV quick quote
  */
-import {Component, OnInit, Input, ElementRef} from 'angular2/core';
+import {Component, OnInit, Input, ElementRef} from '@angular/core';
 // AA components
 
 

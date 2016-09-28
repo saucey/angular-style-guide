@@ -1,8 +1,8 @@
 /**
  * AOV quick quote
  */
-import {Component, OnInit, Input, ElementRef} from 'angular2/core';
-import {HTTP_PROVIDERS, Http, Headers, RequestOptions, Response} from "angular2/http";
+import {Component, OnInit, Input, ElementRef} from '@angular/core';
+import {HTTP_PROVIDERS, Http, Headers, RequestOptions, Response} from "@angular/http";
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
 import {HelpComponent} from '../../../components/angular-components/help.component';
@@ -114,7 +114,7 @@ export class AAAovFormComponent implements OnInit {
 
   ngOnInit() {
     this.data = {
-      fakevar: 500
+      fakevar: 500,
       options: {
         slider: {
           start: 3500, // Handle start position

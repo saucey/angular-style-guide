@@ -1,4 +1,4 @@
-import {Component, Input, Output, NgZone, ElementRef} from 'angular2/core';
+import {Component, Input, Output, NgZone, ElementRef} from '@angular/core';
 import {template} from "./template";
 import {AABaseComponent} from '../../lib/classes/AABaseComponent';
 import {defaultOptions} from "./defaultOptions";
@@ -8,8 +8,7 @@ import * as libDom from "../../lib/dom";
 
 @Component({
   selector: 'aa-modal',
-  template: template,
-  directives: [AAElementDirective]
+  template: template
 })
 
 export class AAModalComponent extends AABaseComponent {

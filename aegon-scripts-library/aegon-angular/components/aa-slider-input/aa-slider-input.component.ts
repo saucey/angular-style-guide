@@ -1,15 +1,18 @@
 import {
-  Component, Input, Output, EventEmitter, Provider, Directive, forwardRef, ViewChild, ElementRef, AfterViewInit} from 'angular2/core';
-import {NG_VALUE_ACCESSOR, ControlValueAccessor} from "angular2/common";
-import {CONST_EXPR} from "angular2/src/facade/lang";
+  Component, Input, Output, EventEmitter, Provider, Directive, forwardRef, ViewChild, ElementRef, AfterViewInit} from '@angular/core';
+import {NG_VALUE_ACCESSOR, ControlValueAccessor} from "@angular/forms";
+
 import {AAInputNumberComponent} from '../aa-input-number/aa-input-number.component';
 import {AASliderComponent} from '../aa-slider/aa-slider.component';
 import {AAHintComponent} from '../aa-hint/aa-hint.component';
 import {template} from "./template";
 
-// Custom value accessor for ngModel support
-const CUSTOM_VALUE_ACCESSOR = CONST_EXPR(new Provider(
-  NG_VALUE_ACCESSOR, {useExisting: forwardRef(() => AASliderInputComponent), multi: true}));
+const CUSTOM_VALUE_ACCESSOR = {
+  provide: NG_VALUE_ACCESSOR,
+  useExisting: forwardRef(() => AASliderInputComponent),
+  multi: true
+};
+
 
 declare var noUiSlider: any;
 
@@ -17,9 +20,6 @@ declare var noUiSlider: any;
   selector: 'aa-slider-input',
   host: {'(modelChange)': 'onChange($event)'},
   providers: [CUSTOM_VALUE_ACCESSOR],
-  directives: [
-    AASliderComponent, AAHintComponent, AAInputNumberComponent
-  ],
   template: template
 })
 
