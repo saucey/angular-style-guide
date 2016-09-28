@@ -14,6 +14,7 @@
   Drupal.behaviors.personalDetailsWidget = {
     attach: function (context) {
       Drupal.behaviors.tooltip.activate("#personal_details_widget");
+      Drupal.behaviors.tooltip.activate("#mobile_number");
 
       var Validation = Drupal.behaviors.validation;
       var formSelector = "form[name=personal_details_form]";
