@@ -43,7 +43,7 @@ export const template = `
         <div class="aa-layout__slides aa-quiz__tips">
           <div class="aa-layout__slide aa-quiz__tip"
             [ngStyle]="{'transform': 'translateX(-' + data.tip * 100 + '%)'}"
-            *ngFor="let tip of data.tips; #i=index"
+            *ngFor="let tip of data.tips; let i=index"
             (click)="nextTip()">
             <div class="aa-quiz__tip-text"> {{ tip.tip }} </div>
           </div>
@@ -63,7 +63,7 @@ export const template = `
 
       <div class="aa-quiz__nrs">
         <div class="aa-quiz__nr"
-          *ngFor="let question of data.options.questions; #i=index"
+          *ngFor="let question of data.options.questions; let i=index"
           [ngClass]="{
             'aa-quiz__nr--active': data.question === i,
             'aa-quiz__nr--completed': i <= data.lastQuestion
@@ -76,7 +76,7 @@ export const template = `
         <div class="aa-quiz__question aa-layout__slide"
           [ngClass]="'aa-quiz--q-' + data.question"
           [ngStyle]="{'transform': 'translateX(-' + data.question * 100 + '%)'}"
-          *ngFor="let question of data.options.questions; #i=index">
+          *ngFor="let question of data.options.questions; let i=index">
           <div class="aa-quiz__question-bubble">
             <div class="aa-quiz__question-label">Vraag {{ i + 1 }}</div>
             <div class="aa-quiz__question-text">
