@@ -44,6 +44,7 @@ import {AAQQHistorischRendementComponent} from '../components/aa-qq-historisch-r
 import {AAQQAovComponent} from '../components/aa-qq-aov/aa-qq-aov.component';
 
 import {AAAovFormComponent} from '../components/aa-aov-form/aa-aov-form.component';
+import {AAPensionFormComponent} from '../components/aa-pension-form/aa-pension-form.component';
 
 import {AAQQBoeterenteComponent} from '../components/aa-qq-boeterente/aa-qq-boeterente.component';
 
@@ -86,6 +87,7 @@ const
     AAQQAovComponent,
 
     AAAovFormComponent,
+    AAPensionFormComponent,
 
     AAQQBoeterenteComponent,
 

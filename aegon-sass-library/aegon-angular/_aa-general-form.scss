@@ -1,0 +1,117 @@
+
+
+.main-color{
+  color: $blue_gray;
+}
+
+
+.sub-header {
+  font-size: 25px;
+  color: $lochmara_approx;
+  line-height: 1em;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.number-form__list {
+  margin-top: 60px;
+
+  .number-form__list__section {
+    @include rem('margin', 0, 0, 15);
+    position: relative;
+  }
+
+  .number-form__list__numberCircle {
+    position: absolute;
+    left: -40px;
+    z-index: 2000;
+    top: -5px;
+    border-radius: 50%;
+    behavior: url(PIE.htc);
+    width: 30px;
+    height: 30px;
+    padding: 8px;
+    background: #308ccd;
+    border: 2px solid #308ccd;
+    color: #fff;
+    text-align: center;
+    font: 18px Arial, sans-serif;
+    font-weight: bold;
+    line-height: 10px;
+    display: inline-block;
+  }
+}
+
+.general-form__box {
+  width: 100%;
+  height: auto;
+  position: relative;
+  background: #D9EBF7;
+  border-radius: 6px;
+  padding: 20px;
+}
+
+.general-form__radio__text {
+  display: inline-block;
+  max-width: 500px;
+  margin-top: -17px;
+  p {
+    @include rem('margin', 0, 0, 0);
+  }
+}
+
+.form-element-text__row {
+  padding: 0;
+  .table {
+    display: table;
+    border-collapse: separate;
+  }
+  .row {
+    display: table-row
+  }
+  .col {
+    display: table-cell;
+    padding: 30px;
+    &.form-element__column {
+      border-radius: 5px 0 0 5px;
+      background-color: $pastel_light_blue;
+    }
+    &.form-text__column {
+      width: 300px;
+      background-color: green;
+      border-radius: 0 5px 5px 0;
+      background-color: $dark_blue;
+        aside {
+          padding: 20px;
+        }
+        h2 {
+          font-size: 3em;
+        }
+        h4, h3, h2 {
+          color: white;
+        }
+    }
+  }
+}
+
+@media all and (max-width: 840px) {
+  /* demo 3 */
+  .form-element-text__row {
+    padding: 0 30px;
+    .table {
+      display: block
+    }
+    .row {
+      display: block
+    }
+    .col {
+      display: block
+    }
+    .col.form-element__column {
+      margin-bottom: 30px
+    }
+    .col.form-text__column {
+      width: 100%
+    }
+  }
+}

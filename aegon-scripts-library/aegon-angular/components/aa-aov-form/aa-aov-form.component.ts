@@ -13,8 +13,8 @@ import {AAInputRadioComponent} from "../aa-input-radio/aa-input-radio.component"
 import {AAInputDropDownComponent} from "../aa-input-dropdown/aa-input-dropdown.component";
 import {AASliderInputComponent} from "../aa-slider-input/aa-slider-input.component";
 import {AAInputNumberComponent} from '../aa-input-number/aa-input-number.component';
-import {SliderComponent, SliderValueAccessor} from '../../../components/angular-components/slider.component';
-
+import {AASliderInputComponent} from "../aa-slider-input/aa-slider-input.component";
+import {AASliderComponent} from "../aa-slider/aa-slider.component";
 // Old components
 
 import {InputDateComponent, InputDateValueAccessor} from '../../../components/angular-components/input-date.component';
@@ -42,7 +42,7 @@ import {AACollapseComponent} from "../aa-collapse/aa-collapse.component";
     // Old
     CheckboxComponent, CheckboxValueAccessor, AAHintComponent, AAAovFormMeComponent, AACollapseComponent, AAAovFormYouComponent, AAAovFormBothComponent,
     //slider Stuff
-    SliderComponent, SliderValueAccessor
+    AASliderInputComponent, AASliderComponent
   ],
   template: template,
   providers: [HTTP_PROVIDERS],
@@ -51,6 +51,8 @@ import {AACollapseComponent} from "../aa-collapse/aa-collapse.component";
 
 //TODO ADD BASE64
 export class AAAovFormComponent implements OnInit {
+  @Input() options: any = {};
+  @Input() data: any = {};
 
   public collapsed1: boolean = true;
   public collapsed2: boolean = true;
@@ -81,6 +83,8 @@ export class AAAovFormComponent implements OnInit {
   public  emailButtonPending: boolean = false;
   public  reSendEmailShown: boolean = false;
 
+  public  grossYearAmount: number;
+
   public  grossMonthly: number;
   public  netMonthly: number;
   public  profession: any = {};
@@ -93,6 +97,7 @@ export class AAAovFormComponent implements OnInit {
   public  type: any = {};
   public  who: any = {};
   public  press: boolean = false;
+
 
   //TODO variables in session storage
   // aovQQ
@@ -108,6 +113,27 @@ export class AAAovFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.data = {
+      fakevar: 500
+      options: {
+        slider: {
+          start: 3500, // Handle start position
+          step: 500, // Slider moves in increments of xx
+          orientation: 'horizontal', // Orient the slider vertically
+          behaviour: 'snap', // click anywhere to start dragging + draggable range
+          range: { // Slider can select '0' to '100'
+            'min': 2500,
+            'max': 125000
+          },
+          pips: { // Shows scale and values below chart
+            mode: 'range',
+            // density: 100,
+            // values: [1875, 2016],
+            density: 100,
+          }
+        },
+      }
+    };
   }
 
   isSmoker(val: string) {
