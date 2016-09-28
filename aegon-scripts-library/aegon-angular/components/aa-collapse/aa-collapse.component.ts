@@ -1,92 +1,92 @@
-import {Directive, OnChanges, ElementRef, Input} from '@angular/core';
-import {AnimationBuilder} from '@angular/src/animate/animation_builder';
-import {CssAnimationBuilder} from '@angular/src/animate/css_animation_builder';
+// import {Directive, OnChanges, ElementRef, Input} from '@angular/core';
+// import {AnimationBuilder} from '@angular/src/animate/animation_builder';
+// import {CssAnimationBuilder} from '@angular/src/animate/css_animation_builder';
 
-@Directive({
-  selector: '[aa-collapse]',
-  host: {
-    '[attr.aria-expanded]': '!collapse',
-    '[attr.aria-hidden]': 'collapse'
-  }
-})
-export class AACollapseComponent implements OnChanges {
-  @Input() duration: number = 500;
-  @Input('aa-collapse') collapse: boolean;
-  private _animation: CssAnimationBuilder;
+// @Directive({
+//   selector: '[aa-collapse]',
+//   host: {
+//     '[attr.aria-expanded]': '!collapse',
+//     '[attr.aria-hidden]': 'collapse'
+//   }
+// })
+// export class AACollapseComponent implements OnChanges {
+//   @Input() duration: number = 500;
+//   @Input('aa-collapse') collapse: boolean;
+//   private _animation: CssAnimationBuilder;
 
-  constructor(animationBuilder:AnimationBuilder, private _element:ElementRef) {
-    this._animation = animationBuilder.css();
-  }
+//   constructor(animationBuilder:AnimationBuilder, private _element:ElementRef) {
+//     this._animation = animationBuilder.css();
+//   }
 
-  ngOnChanges(changes) {
-    if (changes.collapse) {
-      if (this.collapse) {
-        this.hide()
-      } else {
-        this.show();
-      }
-    }
-  }
+//   ngOnChanges(changes) {
+//     if (changes.collapse) {
+//       if (this.collapse) {
+//         this.hide()
+//       } else {
+//         this.show();
+//       }
+//     }
+//   }
 
-  hide(): void {
-    this._baseSequence
-      .setFromStyles({
-        height: this._element.nativeElement.scrollHeight + 'px',
-        overflow: 'hidden'
-      })
-      .setToStyles({
-        height: '0',
-        paddingTop: '0',
-        paddingBottom: '0'
-      });
+//   hide(): void {
+//     this._baseSequence
+//       .setFromStyles({
+//         height: this._element.nativeElement.scrollHeight + 'px',
+//         overflow: 'hidden'
+//       })
+//       .setToStyles({
+//         height: '0',
+//         paddingTop: '0',
+//         paddingBottom: '0'
+//       });
 
-    let a = this._animation.start(this._element.nativeElement);
-    a.onComplete(() => {
-      a.removeClasses(['in']); // rapid change will leave in
-      a.addClasses(['collapse']);
-    });
-  }
+//     let a = this._animation.start(this._element.nativeElement);
+//     a.onComplete(() => {
+//       a.removeClasses(['in']); // rapid change will leave in
+//       a.addClasses(['collapse']);
+//     });
+//   }
 
-  show(): void {
-    this._animation
-      .setDuration(0)
-      .addClass('in')
-      .setFromStyles({
-        overflow: 'hidden'
-      })
-      .setToStyles({
-        paddingTop: '',
-        paddingBottom: ''
-      })
-      .start(this._element.nativeElement)
-      .onComplete(() => {
-        let a = this._baseSequence
-          .setFromStyles({
-            height: '0'
-          })
-          .setToStyles({
-            height: this._element.nativeElement.scrollHeight + 'px'
-          })
-          .start(this._element.nativeElement);
+//   show(): void {
+//     this._animation
+//       .setDuration(0)
+//       .addClass('in')
+//       .setFromStyles({
+//         overflow: 'hidden'
+//       })
+//       .setToStyles({
+//         paddingTop: '',
+//         paddingBottom: ''
+//       })
+//       .start(this._element.nativeElement)
+//       .onComplete(() => {
+//         let a = this._baseSequence
+//           .setFromStyles({
+//             height: '0'
+//           })
+//           .setToStyles({
+//             height: this._element.nativeElement.scrollHeight + 'px'
+//           })
+//           .start(this._element.nativeElement);
 
-        a.onComplete(() =>  a.addClasses(['collapse', 'in'])  );
-      });
-  }
+//         a.onComplete(() =>  a.addClasses(['collapse', 'in'])  );
+//       });
+//   }
 
-  private get _elementHeight(): number {
-    let el = this._element.nativeElement;
-    var height = el.offsetHeight;
-    var style = getComputedStyle(el);
+//   private get _elementHeight(): number {
+//     let el = this._element.nativeElement;
+//     var height = el.offsetHeight;
+//     var style = getComputedStyle(el);
 
-    height += parseInt(style.marginTop) + parseInt(style.marginBottom);
-    return height;
-  }
+//     height += parseInt(style.marginTop) + parseInt(style.marginBottom);
+//     return height;
+//   }
 
-  private get _baseSequence(): CssAnimationBuilder {
-    return this._animation
-      .setDuration(this.duration)
-      .removeClass('collapse')
-      .removeClass('in')
-      .addAnimationClass('collapsing')
-  }
-}
+//   private get _baseSequence(): CssAnimationBuilder {
+//     return this._animation
+//       .setDuration(this.duration)
+//       .removeClass('collapse')
+//       .removeClass('in')
+//       .addAnimationClass('collapsing')
+//   }
+// }

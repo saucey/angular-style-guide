@@ -6,44 +6,6 @@
 // Core
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-// Include all components; they will be added to the dynamic component directives
-// DON'T FORGET TO REGISTER COMPONENT IN ALL_COMPONENTS FOR USING IN AA-TEMPLATE
-// Core
-import {AAElementDirective} from '../directives/aa-element/aa-element.directive';
-import {AACssComponent} from '../components/aa-css/aa-css.component';
-import {AADataComponent} from '../components/aa-data/aa-data.component';
-// Visual components
-import {AAModalComponent} from '../components/aa-modal/aa-modal.component';
-import {AAHintComponent} from '../components/aa-hint/aa-hint.component';
-
-import {AAAovFormMeComponent} from '../components/aa-aov-form-me/aa-aov-form-me.component';
-import {AAAovFormYouComponent} from '../components/aa-aov-form-you/aa-aov-form-you.component';
-import {AAAovFormBothComponent} from '../components/aa-aov-form-both/aa-aov-form-both.component';
-import {AACollapseComponent} from '../components/aa-collapse/aa-collapse.component';
-import {AAInputDropDownComponent} from '../components/aa-input-dropdown/aa-input-dropdown.component';
-
-import {AAHighchartComponent} from '../components/aa-highchart/aa-highchart.component';
-// Inputs & sliders
-
-import {AAInputNumberComponent} from '../components/aa-input-number/aa-input-number.component';
-import {AAInputRadioComponent} from '../components/aa-input-radio/aa-input-radio.component';
-import {AAInputDropDownComponent} from '../components/aa-input-dropdown/aa-input-dropdown.component';
-import {AASliderComponent} from '../components/aa-slider/aa-slider.component';
-import {AASliderInputComponent} from '../components/aa-slider-input/aa-slider-input.component';
-// Mini apps
-import {AALeadformComponent} from '../components/aa-leadform/aa-leadform.component';
-import {AAQuizComponent} from '../components/aa-quiz/aa-quiz.component';
-// Quick quotes
-import {AAQQBeleggenComponent} from '../components/aa-qq-beleggen/aa-qq-beleggen.component';
-import {AAQQHistorischRendementComponent} from '../components/aa-qq-historisch-rendement/aa-qq-historisch-rendement.component';
-import {AAQQAovComponent} from '../components/aa-qq-aov/aa-qq-aov.component';
-
-import {AAAovFormComponent} from '../components/aa-aov-form/aa-aov-form.component';
-import {AAPensionFormComponent} from '../components/aa-pension-form/aa-pension-form.component';
-
-import {AAQQBoeterenteComponent} from '../components/aa-qq-boeterente/aa-qq-boeterente.component';
-
-import {AAQQSummaryComponent} from '../components/aa-qq-summary/aa-qq-summary.component';
 const platform = platformBrowserDynamic();
 
 // LibsW
@@ -53,45 +15,7 @@ import * as libUtil from "./util";
 declare var System;
 
 const
-  /**
-   * These will be added to dynamically generated components so you can use them automatically
-   * Add your own component here to be able to use it in an <aa-template>
-   */
-  ALL_COMPONENTS = [
-    // Core
-    AAElementDirective,
-    AACssComponent,
-    // Components
-    AAHighchartComponent,
-    AAHintComponent,
-    AAInputDropDownComponent,
-    AAInputNumberComponent,
-    AAInputRadioComponent,
-    AASliderComponent,
-    AASliderInputComponent,
-    AADataComponent,
 
-    AACollapseComponent,
-    AAAovFormYouComponent,
-    AAAovFormBothComponent,
-
-    AAModalComponent,
-    AALeadformComponent,
-    AAQuizComponent,
-
-    // Quick quotes
-    AAAovFormMeComponent,
-    AAQQBeleggenComponent,
-    AAQQHistorischRendementComponent,
-    AAQQAovComponent,
-
-    AAAovFormComponent,
-    AAPensionFormComponent,
-
-    AAQQBoeterenteComponent,
-
-    AAQQSummaryComponent
-  ],
   /**
    * Selector to use for auto bootstrap templates
    */

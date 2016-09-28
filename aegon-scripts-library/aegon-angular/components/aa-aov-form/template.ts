@@ -50,17 +50,6 @@ export const template = `
               </label>
             </div>
 
-            <div class="my-box" [aa-collapse]="collapsed1" [duration]="duration">
-              <aa-aov-form-me (birth)="birthDayDate($event)" (smoker)="isSmoker($event)" [birthDate]="options.birthDate.help"></aa-aov-form-me>
-            </div>
-
-            <div class="my-box" [aa-collapse]="collapsed2" [duration]="duration">
-              <aa-aov-form-you [birthDate]="options.birthDate.help"></aa-aov-form-you>
-            </div>
-
-            <div class="my-box" [aa-collapse]="collapsed3" [duration]="duration">
-              <aa-aov-form-both [birthDate]="options.birthDate.help"></aa-aov-form-both>
-            </div>
           </div>
 
         </div>

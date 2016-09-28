@@ -2,7 +2,7 @@
  * AOV quick quote
  */
 import {Component, OnInit, Input, ElementRef} from '@angular/core';
-import {HTTP_PROVIDERS, Http, Headers, RequestOptions, Response} from "@angular/http";
+import {Http, Headers, RequestOptions, Response} from "@angular/http";
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
 import {HelpComponent} from '../../../components/angular-components/help.component';
@@ -13,7 +13,6 @@ import {AAInputRadioComponent} from "../aa-input-radio/aa-input-radio.component"
 import {AAInputDropDownComponent} from "../aa-input-dropdown/aa-input-dropdown.component";
 import {AASliderInputComponent} from "../aa-slider-input/aa-slider-input.component";
 import {AAInputNumberComponent} from '../aa-input-number/aa-input-number.component';
-import {AASliderInputComponent} from "../aa-slider-input/aa-slider-input.component";
 import {AASliderComponent} from "../aa-slider/aa-slider.component";
 // Old components
 
@@ -32,21 +31,11 @@ import {AAHintComponent} from "../aa-hint/aa-hint.component";
 import {AAAovFormMeComponent} from "../aa-aov-form-me/aa-aov-form-me.component";
 import {AAAovFormYouComponent} from "../aa-aov-form-you/aa-aov-form-you.component";
 import {AAAovFormBothComponent} from "../aa-aov-form-both/aa-aov-form-both.component";
-import {AACollapseComponent} from "../aa-collapse/aa-collapse.component";
+// import {AACollapseComponent} from "../aa-collapse/aa-collapse.component";
 
 @Component({
   selector: 'aa-aov-form',
-  directives: [
-    // New
-    AAInputNumberComponent, AASliderInputComponent, AAInputRadioComponent, AAInputDropDownComponent,
-    // Old
-    CheckboxComponent, CheckboxValueAccessor, AAHintComponent, AAAovFormMeComponent, AACollapseComponent, AAAovFormYouComponent, AAAovFormBothComponent,
-    //slider Stuff
-    AASliderInputComponent, AASliderComponent
-  ],
   template: template,
-  providers: [HTTP_PROVIDERS],
-  pipes: [AAMoneyPipe]
 })
 
 //TODO ADD BASE64
@@ -60,7 +49,6 @@ export class AAAovFormComponent implements OnInit {
 
   private duration: number = 500;
 
-  public  options: any = options;
   public  showCalculator: boolean;
   public  grossYearAmount: number = options.grossYearAmount.initial;
 
@@ -82,8 +70,6 @@ export class AAAovFormComponent implements OnInit {
 
   public  emailButtonPending: boolean = false;
   public  reSendEmailShown: boolean = false;
-
-  public  grossYearAmount: number;
 
   public  grossMonthly: number;
   public  netMonthly: number;

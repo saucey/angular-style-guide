@@ -10,8 +10,6 @@ import {template} from "./template";
 
 @Component({
   selector: 'aa-pension-form',
-  directives: [
-  ],
   template: template,
 })
 

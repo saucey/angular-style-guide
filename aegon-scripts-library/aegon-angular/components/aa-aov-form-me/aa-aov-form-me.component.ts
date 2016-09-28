@@ -18,8 +18,8 @@ import {template} from "./template";
 export class AAAovFormMeComponent {
 
   public  birthDate: string;
-  public dobis: string;
-  public smokeris: string;
+  public dobis: any;
+  public smokeris: any;
 
   constructor(private elementRef:ElementRef) {}
 

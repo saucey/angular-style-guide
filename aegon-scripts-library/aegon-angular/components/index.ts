@@ -17,3 +17,8 @@ export * from './aa-quiz/aa-quiz.component';
 export * from './aa-slider/aa-slider.component';
 export * from './aa-slider-input/aa-slider-input.component';
 export * from './aa-sticky/aa-sticky.component';
+export * from './aa-aov-form/aa-aov-form.component';
+export * from './aa-aov-form-both/aa-aov-form-both.component';
+export * from './aa-aov-form-me/aa-aov-form-me.component';
+export * from './aa-aov-form-you/aa-aov-form-you.component';
+export * from './aa-pension-form/aa-pension-form.component';
