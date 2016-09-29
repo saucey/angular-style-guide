@@ -22,3 +22,4 @@ export * from './aa-aov-form-both/aa-aov-form-both.component';
 export * from './aa-aov-form-me/aa-aov-form-me.component';
 export * from './aa-aov-form-you/aa-aov-form-you.component';
 export * from './aa-pension-form/aa-pension-form.component';
+export * from './aa-collapse/aa-collapse.component';

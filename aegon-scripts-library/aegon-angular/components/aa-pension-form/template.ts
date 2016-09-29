@@ -30,5 +30,11 @@ export const template = `
             </div>
         </div>
       </li>
+      <div>
+        <h1>this is my content</h1>
+      </div>
+      
+      <aa-collapse></aa-collapse>
+      
     </ul>
 `;

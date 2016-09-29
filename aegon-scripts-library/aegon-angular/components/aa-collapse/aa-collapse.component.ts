@@ -1,92 +1,70 @@
-// import {Directive, OnChanges, ElementRef, Input} from '@angular/core';
-// import {AnimationBuilder} from '@angular/src/animate/animation_builder';
-// import {CssAnimationBuilder} from '@angular/src/animate/css_animation_builder';
+/**
+ * AOV quick quote
+ */
+import {Component, OnInit, Input, ElementRef, trigger, state, animate, transition, style} from '@angular/core';
+// AA components
+import {AABaseComponent} from "../../lib/classes/AABaseComponent";
 
-// @Directive({
-//   selector: '[aa-collapse]',
-//   host: {
-//     '[attr.aria-expanded]': '!collapse',
-//     '[attr.aria-hidden]': 'collapse'
-//   }
-// })
-// export class AACollapseComponent implements OnChanges {
-//   @Input() duration: number = 500;
-//   @Input('aa-collapse') collapse: boolean;
-//   private _animation: CssAnimationBuilder;
 
-//   constructor(animationBuilder:AnimationBuilder, private _element:ElementRef) {
-//     this._animation = animationBuilder.css();
-//   }
+import {template} from "./template";
 
-//   ngOnChanges(changes) {
-//     if (changes.collapse) {
-//       if (this.collapse) {
-//         this.hide()
-//       } else {
-//         this.show();
-//       }
-//     }
-//   }
+@Component({
+  selector: 'aa-collapse',
+  template: template,
+  animations: [
+    trigger('visibility', [
+      state('shown', style({
+        height: '*',
+        overflow: 'hidden',
 
-//   hide(): void {
-//     this._baseSequence
-//       .setFromStyles({
-//         height: this._element.nativeElement.scrollHeight + 'px',
-//         overflow: 'hidden'
-//       })
-//       .setToStyles({
-//         height: '0',
-//         paddingTop: '0',
-//         paddingBottom: '0'
-//       });
+      })),
+      state('hidden', style({
+        height: '0',
+        overflow: 'hidden',
 
-//     let a = this._animation.start(this._element.nativeElement);
-//     a.onComplete(() => {
-//       a.removeClasses(['in']); // rapid change will leave in
-//       a.addClasses(['collapse']);
-//     });
-//   }
+      })),
+      transition('* => *', animate('.3s ease'))
+    ])
+  ]
+})
 
-//   show(): void {
-//     this._animation
-//       .setDuration(0)
-//       .addClass('in')
-//       .setFromStyles({
-//         overflow: 'hidden'
-//       })
-//       .setToStyles({
-//         paddingTop: '',
-//         paddingBottom: ''
-//       })
-//       .start(this._element.nativeElement)
-//       .onComplete(() => {
-//         let a = this._baseSequence
-//           .setFromStyles({
-//             height: '0'
-//           })
-//           .setToStyles({
-//             height: this._element.nativeElement.scrollHeight + 'px'
-//           })
-//           .start(this._element.nativeElement);
+//TODO ADD BASE64
+export class AACollapseComponent extends AABaseComponent implements OnInit {
+  public visibility = {
+    one: 'hidden',
+    two: 'shown',
+    three: 'hidden'
+  };
 
-//         a.onComplete(() =>  a.addClasses(['collapse', 'in'])  );
-//       });
-//   }
+  constructor(
+    private elementRef: ElementRef
+  ) {
+    super(elementRef);
+    console.log('child obj');
+  }
 
-//   private get _elementHeight(): number {
-//     let el = this._element.nativeElement;
-//     var height = el.offsetHeight;
-//     var style = getComputedStyle(el);
+  ngOnInit() {
+    super.ngOnInit();
+  }
 
-//     height += parseInt(style.marginTop) + parseInt(style.marginBottom);
-//     return height;
-//   }
-
-//   private get _baseSequence(): CssAnimationBuilder {
-//     return this._animation
-//       .setDuration(this.duration)
-//       .removeClass('collapse')
-//       .removeClass('in')
-//       .addAnimationClass('collapsing')
-//   }
-// }
+  coll(val: string) {
+    switch (val) {
+      case "box1":
+        this.visibility.one = 'shown';
+        this.visibility.two = 'hidden';
+        this.visibility.three = 'hidden';
+        break;
+      case "box2":
+        this.visibility.one = 'hidden';
+        this.visibility.two = 'shown';
+        this.visibility.three = 'hidden';
+        break;
+      case "box3":
+        this.visibility.one = 'hidden';
+        this.visibility.two = 'hidden';
+        this.visibility.three = 'shown';
+        break;
+      default:
+    }
+  }
+}

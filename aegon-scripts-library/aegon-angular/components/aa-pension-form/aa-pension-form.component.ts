@@ -3,7 +3,7 @@
  */
 import {Component, OnInit, Input, ElementRef} from '@angular/core';
 // AA components
-
+import {AABaseComponent} from "../../lib/classes/AABaseComponent";
 
 
 import {template} from "./template";
@@ -14,14 +14,17 @@ import {template} from "./template";
 })
 
 //TODO ADD BASE64
-export class AAPensionFormComponent {
+export class AAPensionFormComponent extends AABaseComponent implements OnInit {
 
 
-  constructor() {
-
+  constructor(
+    private elementRef: ElementRef
+  ) {
+    super(elementRef);
   }
 
   ngOnInit() {
+    super.ngOnInit();
   }
 
 

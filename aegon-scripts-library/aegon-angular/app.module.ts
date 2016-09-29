@@ -7,6 +7,7 @@ import { FormsModule }   from '@angular/forms';
 import * as aaComp from './components';
 import * as aaPipes from './pipes';
 import { AAElementDirective } from './directives/aa-element/aa-element.directive.ts'
+import { AACollapseDirective } from './directives/aa-collapse/aa-collapse.directive.ts'
 import * as comp from '../components/angular-components';
 
 import {QuickQuoteBoeterenteComponent} from '../components/quickquote-boeterente/quickquote-boeterente.component';
@@ -16,6 +17,7 @@ import {QuickQuoteMortgageComponent} from '../components/quickquote-mortgage/qui
 
 const internalDeclarations = [
   AAElementDirective,
+  AACollapseDirective,
   aaComp.AAHintComponent,
   aaComp.AASliderComponent,
   aaComp.AASliderInputComponent,
@@ -67,6 +69,8 @@ const exportedDeclarations = [
   aaComp.AAAovFormYouComponent,
 
   aaComp.AAPensionFormComponent,
+  aaComp.AACollapseComponent,
+
   //aaComp.AAQuizComponent,
 ];
 

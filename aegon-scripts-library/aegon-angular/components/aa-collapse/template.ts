@@ -1,37 +1,31 @@
 export const template = `
-  <div class="field white-field">
-    <div class="label main-color">
-    </div>
-    <div (click)="showCalculator = false">
-      <aegon-input-date [(ngModel)]="birthDate"></aegon-input-date>
-    </div>
-  </div>
-  
-  <p class="main-color">Heeft u de lasstste 2 jaar gerookt?</p>
-  <div class=" aov-form__selection">
-    <label class="radio">
-      <input type="radio" checked name="radio" value="value3"/>
-      <span class="radio"></span>
-      <div class="aov-form__radio__text">
-        <p><strong>ja</strong></p>
+<button (click)="coll('box1')">one</button>
+<button (click)="coll('box2')">two</button>
+<button (click)="coll('box3')">three</button>
+
+    {{visibility.one}}
+    {{visibility.two}}
+    {{visibility.three}}
+    
+    <div [@visibility]="visibility.one">
+      <div style="background-color: red; padding: 20px; box-sizing: border-box;">
+        <p>Animate good times! box1 Come on!</p>
+        <p>Animate good times! box1 Come on!</p>
+        <p>Animate good times! box1 Come on!</p>
+        <p>Animate good times! box1 Come on!</p>
       </div>
-    </label>
-  </div>
-  
-  <div class=" aov-form__selection">
-    <label class="radio">
-      <input type="radio" checked name="radio" value="value3"/>
-      <span class="radio"></span>
-      <div class="aov-form__radio__text">
-        <p><strong>Nee</strong></p>
+    </div>
+    
+    <div [@visibility]="visibility.two">
+      <div style="background-color:  green; padding: 20px; box-sizing: border-box;">
+        Animate good times! box1 Come on!
       </div>
-    </label>
-  </div>
-  
-  <ul class="actions edit row-fluid">
-    <li class="edit span12">
-      <button class="arrow" type="button">Opslaan en volgende vraag</button>
-    </li>
-  </ul>
-  
+    </div>
+    
+    <div [@visibility]="visibility.three">
+      <div style="background-color:  blue; padding: 20px; box-sizing: border-box;">
+        Animate good times! box1 Come on!
+      </div>
+    </div>
+    
 `;
