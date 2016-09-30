@@ -1,4 +1,4 @@
-import {Directive, OnChanges, ElementRef, Input, trigger, state, animate, transition, style} from '@angular/core';
+import {Directive, ElementRef, Input, trigger, state, animate, transition, style} from '@angular/core';
 
 // import {AnimationBuilder} from '@angular/src/animate/animation_builder';
 // import {CssAnimationBuilder} from '@angular/src/animate/css_animation_builder';
@@ -11,7 +11,7 @@ import {Directive, OnChanges, ElementRef, Input, trigger, state, animate, transi
   }
 })
 
-export class AACollapseDirective implements OnChanges {
+export class AACollapseDirective {
 
 
   constructor(private _element:ElementRef) {

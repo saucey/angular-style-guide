@@ -2,7 +2,7 @@ import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule, JsonpModule } from '@angular/http';
 
-import { FormsModule }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 
 import * as aaComp from './components';
 import * as aaPipes from './pipes';
@@ -79,7 +79,8 @@ const exportedDeclarations = [
       BrowserModule,
       FormsModule,
       HttpModule,
-      JsonpModule
+      JsonpModule,
+      ReactiveFormsModule
   ],
   declarations: [
     ...internalDeclarations,

@@ -1,9 +1,14 @@
 
-
 .main-color{
   color: $blue_gray;
 }
 
+.input.number {
+  input {
+    width: 180px;
+    background-color: white;
+  }
+}
 
 .sub-header {
   font-size: 25px;
@@ -17,7 +22,7 @@
   margin-top: 60px;
 
   .number-form__list__section {
-    @include rem('margin', 0, 0, 15);
+    @include rem('margin', 0, 0, 40);
     position: relative;
   }
 
@@ -61,7 +66,7 @@
 }
 
 .form-element-text__row {
-  padding: 0;
+  //padding: 0;
   .table {
     display: table;
     border-collapse: separate;
@@ -71,10 +76,29 @@
   }
   .col {
     display: table-cell;
-    padding: 30px;
+    padding: 20px;
     &.form-element__column {
       border-radius: 5px 0 0 5px;
       background-color: $pastel_light_blue;
+      vertical-align: top;
+        .head {
+          display: block;
+          color: $lochmara_approx;
+          margin-bottom: 5px;
+        }
+        p {
+          margin: 0;
+        }
+        .inputs {
+          margin: 10px 0 30px 0;
+        }
+        .arrow {
+          font-weight: bold;
+          padding-right: 70px;
+          &:after{
+            padding: 4px 15px 0;
+          }
+        }
     }
     &.form-text__column {
       width: 300px;
@@ -82,7 +106,7 @@
       border-radius: 0 5px 5px 0;
       background-color: $dark_blue;
         aside {
-          padding: 20px;
+          //padding: 20px;
         }
         h2 {
           font-size: 3em;

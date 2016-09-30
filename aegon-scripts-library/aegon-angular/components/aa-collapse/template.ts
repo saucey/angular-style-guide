@@ -13,6 +13,7 @@ export const template = `
         <p>Animate good times! box1 Come on!</p>
         <p>Animate good times! box1 Come on!</p>
         <p>Animate good times! box1 Come on!</p>
+        <button class="arrow" disabled type="button" (click)="save(personInfo)">Volgende vraag</button>
       </div>
     </div>
     
