@@ -1,35 +1,66 @@
 /**
- * Provides the styles for collapsible content wrap.
+ * Provides the styles for collapsible row content.
  * */
-.collapsible-content-wrap {
+.collapsible-row {
 
-  .collapsible-content-row {
+  border-top: 1px solid #d6d6d6;
+  border-bottom: 1px solid #d6d6d6;
 
-    .collapsible-content-title {
+  & + .collapsible-row {
+    border-top: none;
+  }
+
+  .collapsible-row__title {
+    color: #20201e;
+    display: inline-block;
+    float: left;
+  }
+
+  .collapsible-content-icons {
+    display: inline-block;
+    float: right;
+    min-width: 30%;
+
+    .collapsible-content-icon {
       display: inline-block;
-      float: left;
+      margin-right: 3%;
     }
 
-    .collapsible-content-icons {
-      display: inline-block;
-      float: right;
+    .collapsible-content-link {
 
-      .collapsible-content-icon {
-        display: inline-block;
-      }
-
-      .collapsible-content-link {
-
-      }
-
-      .collapsible-content-image {
-        width: 40px;
-        height: 40px;
-      }
     }
 
-    .collapsible-content-description {
-      display: none;
+    .collapsible-content-link__image {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  .collapsible-description {
+
+    padding: 10px;
+    margin-bottom: 10px;
+    background: #f2f2f2;
+
+
+    .collapsible-description__image {
+      display: inline-block;
+      width: 5%;
+      vertical-align: top;
+    }
+
+    .collapsible-description__intro {
+      display: inline-block;
+      width: 90%;
+      margin-left: 3%;
+    }
+
+    .collapsible-description__text {
+
+    }
+
+    .collapsible-description-actions {
+
     }
   }
 }
