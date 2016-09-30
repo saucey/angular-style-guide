@@ -4,7 +4,7 @@ export const template = `
       <p class="row-fluid sticky-text-content">
         <span>&euro; {{ grossYearlyExpenseAmount | money }} bruto per jaar*</span>
         <span>
-          <a href="{{ data.options.sticky.editSummaryLink }}" class="button transparent arrow">Wijzig</a>
+          <a href="{{ data.options.sticky.editSummaryLink }}" class="button transparent arrow">{{data.options.sticky.editLabelLink}}</a>
         </span>
       </p>
       <p class="row-fluid">{{ data.options.sticky.note }}</p>
