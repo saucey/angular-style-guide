@@ -1,49 +1,155 @@
-<div class="collapsible-content-wrap">
+<div class="collapsible-row" *ngFor="let content of contentList">
 
-  <div class="collapsible-content-row">
-    <h4 class="collapsible-content-title">Wat krijgt u in deze regeling?</h4>
-    <ul class="collapsible-content-icons">
-      <li class="collapsible-content-icon">
-        <a class="collapsible-content-link">
-          <img src="http://dxlfb468n8ekd.cloudfront.net/gsc/KCO7E5/1d/ac/2e/1dac2e0ddf6544b0a6e4ec9835cce890/images/wia_onepage/u231.png?token=683d83598e1e3cb74ced32c746882621" class="collapsible-content-image" />
-        </a>
-      </li>
-      <li class="collapsible-content-icon">
-        <a class="collapsible-content-link">
-          <img src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/KCO7E5/1d/ac/2e/1dac2e0ddf6544b0a6e4ec9835cce890/images/wia_onepage/u769.jpg?token=d4ef7dcde6a063fc8e07fe3089969bbf" class="collapsible-content-image" />
-        </a>
-      </li>
-    </ul>
+  <h5 class="collapsible-row__title">{{ content.title }}</h5>
 
-    <div class="clearfix"></div>
+  <ul class="collapsible-content-icons">
+    <li class="collapsible-content-icon" *ngFor="let icon of content.iconsList; let id = index;">
+      <a class="collapsible-content-link" (click)="setActiveRow(id)">
+        <img
+          [src]="icon"
+          class="collapsible-content-link__image" />
+      </a>
+    </li>
+  </ul>
 
-    <div class="collapsible-content-description"></div>
+  <div class="clearfix"></div>
+
+  <div *ngFor="let description of content.descriptionsList; let id = index;">
+
+    <div *ngIf="getActiveRow() == id" class="collapsible-description">
+
+      <img [src]="description.image" class="collapsible-description__image" />
+
+      <p class="collapsible-description__intro">{{ description.intro }}</p>
+
+      <div class="collapsible-description__text" *ngIf="isFullTextShown() && isDescriptionTextValid(description)">{{ description.text }}</div>
+
+      <div class="collapsible-description-actions">
+        <a (click)="setActiveRow(null)" class="transparent">Close <span class="icon-arrow-down"></span></a>
+        <a (click)="setShowFullText(true)" *ngIf="false === isFullTextShown() && isDescriptionTextValid(description)">See more <span class="icon-arrow-down"></span></a>
+      </div>
+    </div>
+
   </div>
 
-  <div class="collapsible-content-row">
+</div>
 
-    <h4 class="collapsible-content-title">Wat krijgt u in deze regeling niet?</h4>
-    <ul class="collapsible-content-icons">
-      <li class="collapsible-content-icon">
-        <a class="collapsible-content-link">
-          <img src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/KCO7E5/1d/ac/2e/1dac2e0ddf6544b0a6e4ec9835cce890/images/wia_onepage/u773.png?token=a47152343b92d7852409a94c5f268d7e" class="collapsible-content-image" />
-        </a>
-      </li>
-      <li class="collapsible-content-icon">
-        <a class="collapsible-content-link">
-          <img src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/KCO7E5/1d/ac/2e/1dac2e0ddf6544b0a6e4ec9835cce890/images/wia_onepage/u775.jpg?token=c3b7c01fc31679f29c229596e6df0ece" class="collapsible-content-image" />
-        </a>
-      </li>
-      <li class="collapsible-content-icon">
-        <a class="collapsible-content-link">
-          <img src="http://d2v8ggac1o0f6z.cloudfront.net/gsc/KCO7E5/1d/ac/2e/1dac2e0ddf6544b0a6e4ec9835cce890/images/wia_onepage/u777.jpg?token=43c06fa598d28d56748e8e8b97b9b4b8" class="collapsible-content-image" />
-        </a>
-      </li>
-    </ul>
 
-    <div class="clearfix"></div>
+<div class="collapsible-row">
 
-    <div class="collapsible-content-description"></div>
+  <h5 class="collapsible-row__title">Wat krijgt u in deze regeling?</h5>
+
+  <ul class="collapsible-content-icons">
+    <li class="collapsible-content-icon">
+      <a class="collapsible-content-link" (click)="setActiveRow('12')">
+        <img
+          src="http://dxlfb468n8ekd.cloudfront.net/gsc/KCO7E5/1d/ac/2e/1dac2e0ddf6544b0a6e4ec9835cce890/images/wia_onepage/u231.png?token=683d83598e1e3cb74ced32c746882621"
+          class="collapsible-content-link__image"/>
+      </a>
+    </li>
+    <li class="collapsible-content-icon">
+      <a class="collapsible-content-link" (click)="setActiveRow('123')">
+        <img
+          src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/KCO7E5/1d/ac/2e/1dac2e0ddf6544b0a6e4ec9835cce890/images/wia_onepage/u769.jpg?token=d4ef7dcde6a063fc8e07fe3089969bbf"
+          class="collapsible-content-link__image"/>
+      </a>
+    </li>
+  </ul>
+
+  <div class="clearfix"></div>
+
+
+  <div class="collapsible-description" *ngIf="activeRow == 12">
+
+    <img
+      src="http://dxlfb468n8ekd.cloudfront.net/gsc/KCO7E5/1d/ac/2e/1dac2e0ddf6544b0a6e4ec9835cce890/images/wia_onepage/u231.png?token=683d83598e1e3cb74ced32c746882621"/>
+
+    <p class="collapsible-description__intro">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget
+      imperdiet nisl. Vivamus convallis velit nulla. Morbi non odio varius sem porttitor maximus. Praesent egestas
+      ligula ac diam luctus, id congue elit venenatis. Donec maximus quis tellus in tristique. Duis ut enim augue.
+      Phasellus molestie eros eget viverra malesuada. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+
+    <div class="collapsible-description-actions">
+      <button (click)="setActiveRow(null)">Close</button>
+    </div>
+
   </div>
+
+  <div class="collapsible-description" *ngIf="activeRow == 123">
+
+    <img
+      src="http://dxlfb468n8ekd.cloudfront.net/gsc/KCO7E5/1d/ac/2e/1dac2e0ddf6544b0a6e4ec9835cce890/images/wia_onepage/u231.png?token=683d83598e1e3cb74ced32c746882621"/>
+
+    <p class="collapsible-description__intro">Wilt u precies weten wat deze regeling u biedt? Kijk dan in de
+      polisvoorwaarden. U vindt deze onderaan de pagina onder documenten of vraag de polisvoorwaarden bij ons op.</p>
+
+    <div class="collapsible-description__text" *ngIf="isFullTextShown()">
+      Hieronder ziet u wat uw werkgever voor u geregeld heeft als u arbeidsongeschikt bent. Uw werkgever heeft een:
+
+      WGA-Excedentverzekering
+      U kan langere tijd niet of minder werken. U krijgt daarom een WGA-uitkering van het UWV. Verdiende u voordat u
+      arbeidsongeschikt werd meer dan de loongrens voor de sociale verzekeringen (2016: € 52.766,37)? Dan krijgt u voor
+      het loon boven die loongrens geen uitkering van het UWV. Met de WGA-Excedentverzekering krijgt u dan wel een
+      uitkering voor het loon boven die loongrens.
+      WGA-Aanvullingsverzekering light
+      U kan langere tijd niet of minder werken. Dan komt uw inkomen in gevaar. Het UWV bepaalt hoeveel u nog wél kan
+      werken en wat u daarmee nog kan verdienen. Dit noemen we uw ‘restverdiencapaciteit’. De hoogte van uw uitkering
+      van het UWV hangt af van deze restverdiencapaciteit. En van wat u verdiende voordat u arbeidsongeschikt werd. Met
+      de WGA-Aanvullingsverzekering light krijgt u een uitkering als u volgens het UWV recht heeft op een
+      WGA-vervolguitkering.
+      WGA-Aanvullingsverzekering
+      U kan langere tijd niet of minder werken. Dan komt uw inkomen in gevaar. Het UWV bepaalt hoeveel u nog wél kan
+      werken en wat u daarmee nog kan verdienen. Dit noemen we uw ‘restverdiencapaciteit’. De hoogte van uw uitkering
+      van het UWV hangt af van deze restverdiencapaciteit. En van wat u verdiende voordat u arbeidsongeschikt werd. Met
+      de WGA-Aanvullingsverzekering krijgt u een uitkering als u volgens het UWV minimaal 35% arbeidsongeschikt bent,
+      maar niet 80% of meer.
+      WIA-35minverzekering
+      Bent u langer dan twee jaar arbeidsongeschikt? Dan komt u in de WIA en kan u er in inkomen flink op achteruitgaan.
+      Bent u volgens de WIA-beschikking van het UWV minder dan 35% arbeidsongeschikt? Dan krijgt u zelfs helemaal geen
+      uitkering. Met de WIA-35minverzekering krijgt u een uitkering als u volgens het UWV minder dan 35%
+      arbeidsongeschikt bent.
+      Bent u langer dan twee jaar arbeidsongeschikt? Dan komt u in de WIA en kan u er in inkomen flink op achteruitgaan.
+      Bent u volgens de WIA-beschikking van het UWV minder dan 35% arbeidsongeschikt? Dan krijgt u zelfs helemaal geen
+      uitkering. Met de WIA-Bodemverzekering krijgt u een uitkering als u volgens het UWV 15% of meer arbeidsongeschikt
+      bent, maar minder dan 35%
+    </div>
+
+    <div class="collapsible-description-actions">
+      <button (click)="setActiveRow(null)">Close</button>
+      <button (click)="setShowFullText(true)" *ngIf="false === isFullTextShown()">See more</button>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="collapsible-row">
+
+  <h5 class="collapsible-row__title">Wat krijgt u in deze regeling niet?</h5>
+  <ul class="collapsible-content-icons">
+    <li class="collapsible-content-icon">
+      <a class="collapsible-content-link">
+        <img
+          src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/KCO7E5/1d/ac/2e/1dac2e0ddf6544b0a6e4ec9835cce890/images/wia_onepage/u773.png?token=a47152343b92d7852409a94c5f268d7e"
+          class="collapsible-content-link__image"/>
+      </a>
+    </li>
+    <li class="collapsible-content-icon">
+      <a class="collapsible-content-link">
+        <img
+          src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/KCO7E5/1d/ac/2e/1dac2e0ddf6544b0a6e4ec9835cce890/images/wia_onepage/u775.jpg?token=c3b7c01fc31679f29c229596e6df0ece"
+          class="collapsible-content-link__image"/>
+      </a>
+    </li>
+    <li class="collapsible-content-icon">
+      <a class="collapsible-content-link">
+        <img
+          src="http://d2v8ggac1o0f6z.cloudfront.net/gsc/KCO7E5/1d/ac/2e/1dac2e0ddf6544b0a6e4ec9835cce890/images/wia_onepage/u777.jpg?token=43c06fa598d28d56748e8e8b97b9b4b8"
+          class="collapsible-content-link__image"/>
+      </a>
+    </li>
+  </ul>
+
+  <div class="clearfix"></div>
 
 </div>
