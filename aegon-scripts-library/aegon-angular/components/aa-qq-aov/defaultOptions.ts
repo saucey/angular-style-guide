@@ -104,7 +104,8 @@ export const defaultOptions = {
     heading: 'Samenvatting',
     subheading: 'Indicatie uitgaven',
     note: '* berekend aan de hand van uw netto maandelijkse uitgaven',
-    editSummaryLink: '/template-quickquote-aov.html'
+    editSummaryLink: '/template-quickquote-aov.html',
+    editLabelLink: 'Wijzig'
   },
   disclaimer: {
     advisor: `Verzekeren is maatwerk. Een adviseur helpt u hierbij.`,
