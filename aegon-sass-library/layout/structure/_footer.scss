@@ -250,3 +250,13 @@
     @include rem('padding-right', 20);
   }
 }
+
+.block__content {
+  .row-fluid {
+    &.border-top-blue {
+      border-top: 1px solid #335970;
+      padding-top: 25px;
+      margin-top: 25px;
+    }
+  }
+}

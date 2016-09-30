@@ -60,7 +60,8 @@ const exportedDeclarations = [
   aaComp.AAQQBoeterenteComponent,
   aaComp.AAQQHistorischRendementComponent,
   aaComp.AAQQSummaryComponent,
-  aaComp.AAQuizComponent
+  aaComp.AAQuizComponent,
+  aaComp.AAEditableValueComponent
 ];
 
 @NgModule({
