@@ -32,7 +32,7 @@ export class InterestsService {
 	public getMarketInterestRate(data: DataFormat): any {
 		this.inputData = Object.assign(this.defaultData, data);
 		// Checks if it's local environment
-		if(window.location.href.indexOf('localhost') > -1) {
+		if(window.location.hostname.indexOf('localhost') > -1) {
 			// Gets the mockdata.
 			return this.getMockData();
 		}
@@ -67,19 +67,12 @@ export class InterestsService {
 	 * Process the data retrieved from back-end
 	 */
 	private processData(res: Object): number {
-		let table: Object = res[0].table,
+		let table = res[0].table,
 			interest: number = 0;
-		console.log(table);
 
 		if(table) {
 			// Data formatting.
-			for(let i in table) {
-				// Loop through the keys
-				for(let p in table[i]) {
-					interest = table[i][p];
-				}
-
-			}
+			interest = table.Interest;
 		}
 		return interest;
 
@@ -97,15 +90,13 @@ export class InterestsService {
 	private getMockData(): Promise<any> {
 		let result = [
 			{
-				"title": "Actuele Hypotheekrente",
-				"nid": 39121,
-				"tableid": "hypotheek-met-nhg",
+				"title": "Hypotheek zonder NHG",
+				"nid": 39122,
+				"tableid": "hypotheek-zonder-nhg",
 				"table": {
-					"16-20 jaar": {
-						"De hoogte van uw rente is...": 2.7
-					}
+					"Interest": 2.4
 				},
-				"footer": "De rentepercentages gelden per 20 juli 2016 tot publicatie van het nieuwe rentebericht en zijn onder voorbehoud van typefouten. \n"
+				"footer": null
 			}
 		];
 
