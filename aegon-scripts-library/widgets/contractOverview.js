@@ -53,7 +53,7 @@
           data: jsonPayload,
           dataType: 'json',
           success: function(data) {
-\            if(typeof data === 'string') {
+            if(typeof data === 'string') {
               data = $.parseJSON(data);
             }
             // Check for retrieveResponse in the passed object.
