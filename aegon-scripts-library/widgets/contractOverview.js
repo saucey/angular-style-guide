@@ -53,7 +53,6 @@
           data: jsonPayload,
           dataType: 'json',
           success: function(data) {
-            console.log(data);
             if(typeof data === 'string') {
               data = $.parseJSON(data);
             }
