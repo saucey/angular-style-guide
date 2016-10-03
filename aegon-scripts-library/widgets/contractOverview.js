@@ -14,8 +14,10 @@
   Drupal.behaviors.contractOverview = {
     attach: function (context) {
       Drupal.behaviors.tooltip.activate(".contract_overview_widget");
+
+      var mobileBanner = $('.request_mobile_number', context);
       // Checks if mobile number banner is in DOM
-      if($('.request_mobile_number', context).length) {
+      if(mobileBanner.length) {
         // Check if current website is backend.
         if (window.location.hostname.search('.aegon.com') !== -1) {
           return;
@@ -61,7 +63,10 @@
 
             var userData = data.retrieveResponse.PARTIJ;
             if(userData.MOBIEL !== '') {
-              $('.request_mobile_number', context).show();
+              mobileBanner.fadeIn();
+            }
+            else {
+              mobileBanner.hide();
             }
           }
         });
