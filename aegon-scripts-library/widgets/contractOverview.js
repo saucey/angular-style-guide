@@ -58,12 +58,12 @@
               data = $.parseJSON(data);
             }
             // Check for retrieveResponse in the passed object.
-            if (!('retrieveResponse' in data)) {
+            if (typeof data !== 'object' || !('retrieveResponse' in data)) {
               return;
             }
 
             var userData = data.retrieveResponse.PARTIJ;
-            if(userData.MOBIEL !== '') {
+            if(userData.MOBIEL === '') {
               mobileBanner.fadeIn();
             }
             else {
