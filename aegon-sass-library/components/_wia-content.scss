@@ -27,7 +27,10 @@
     }
 
     .collapsible-content-link {
-
+      &:hover {
+        cursor: pointer;
+        cursor: hand;
+      }
     }
 
     .collapsible-content-link__image {
@@ -37,30 +40,73 @@
   }
 
   .collapsible-description {
-
-    padding: 10px;
+    padding: 18px;
     margin-bottom: 10px;
     background: #f2f2f2;
 
-
     .collapsible-description__image {
       display: inline-block;
-      width: 5%;
+      width: 6%;
       vertical-align: top;
     }
 
     .collapsible-description__intro {
       display: inline-block;
-      width: 90%;
-      margin-left: 3%;
+      width: 85%;
+      margin-left: 5%;
+      font-family: $font_light;
+      font-size: 18px;
+      line-height: 28px;
     }
 
     .collapsible-description__text {
-
+      font-family: $font_light;
+      font-size: 18px;
+      line-height: 28px;
+      width: 85%;
+      margin-left: 11%;
     }
 
     .collapsible-description-actions {
+      margin-left: 11%;
+      margin-top: 50px;
 
+      .action_close {
+        margin-right: 40px;
+      }
+    }
+
+    .action_close:hover,
+    .action_show:hover {
+      cursor: pointer;
+      cursor: hand;
+    }
+
+    .action_close:after {
+      -webkit-transform: rotate(270deg);
+      -ms-transform: rotate(270deg);
+      transform: rotate(270deg);
+    }
+
+    .action_show:after {
+      -webkit-transform: rotate(90deg);
+      -ms-transform: rotate(90deg);
+      transform: rotate(90deg);
+    }
+
+    .action_close:after,
+    .action_show:after {
+      display: inline-block;
+      margin-left: 5px;
+      content: "\e600";
+      transition: -webkit-transform 0.2s ease;
+      transition: transform 0.2s ease;
+      vertical-align: bottom;
+      font-family: "aegon_icons";
+      font-size: 15px;
+      font-size: 0.9375rem;
+      font-weight: normal;
+      -webkit-font-smoothing: antialiased;
     }
   }
 }
