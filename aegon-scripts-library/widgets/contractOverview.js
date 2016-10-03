@@ -12,7 +12,7 @@
    * Add new item to public Drupal object
    */
   Drupal.behaviors.contractOverview = {
-    attach: function (context) {
+    attach: function (context, settings) {
       Drupal.behaviors.tooltip.activate(".contract_overview_widget");
 
       var mobileBanner = $('.request_mobile_number', context);
@@ -34,7 +34,8 @@
           apiUrl = '/file/example/user_detail_bs.json';
         }        
         // Payload for JSONP.
-        var jsonPayload = {
+        var now = new Date(),
+        jsonPayload = {
           'retrieveRequest': {
             'AILHEADER': {
               'CLIENTID': 'MijnAegonUserWidget',
