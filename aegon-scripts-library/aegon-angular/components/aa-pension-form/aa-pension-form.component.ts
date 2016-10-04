@@ -1,8 +1,9 @@
 /**
  * AOV quick quote
  */
-import {Component, OnInit, Input, ElementRef, trigger, state, animate, transition, style} from '@angular/core';
+import {Component, OnInit, ElementRef, trigger, state, animate, transition, style} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {calculateAge} from "../../lib/date";
 
 // AA components
 import {AABaseComponent} from "../../lib/classes/AABaseComponent";
@@ -32,10 +33,23 @@ import {template} from "./template";
 
 //TODO ADD BASE64
 export class AAPensionFormComponent extends AABaseComponent implements OnInit {
-  public step: number = 1;
+
   public pensionAmount: number;
   public amountTooSmall: boolean;
   public message: boolean = false;
+  public birthDate: string;
+  public age: number;
+
+  public step1: boolean = true;
+  public step2: boolean = true;
+  public step3: boolean = true;
+  public step4: boolean = true;
+  public step5: boolean = true;
+
+  public minAge: number = 50;
+  public maxAge: number = 75;
+  public isAgeValid: boolean = true;
+  public partnerDob: string = "hidden";
 
   form = new FormGroup({
     first: new FormControl('Nhhh', Validators.minLength(10)),
@@ -55,7 +69,9 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
   public visibility = {
     one: 'show',
     two: 'hidden',
-    three: 'hidden'
+    three: 'hidden',
+    four: 'hidden',
+    five: 'hidden'
   };
 
   constructor(
@@ -68,6 +84,38 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
     super.ngOnInit();
   }
 
+  editVisibility1(val): any {
+    return val == 'show' ? 'hidden' : 'show';
+  }
+
+  editVisibility2(val): any {
+
+    if(this.step2) return 'hidden';
+    return val == 'show' ? 'hidden' : 'show';
+
+  }
+
+  editVisibility3(val): any {
+
+    if(this.step3) return 'hidden';
+    return val == 'show' ? 'hidden' : 'show';
+
+  }
+
+  editVisibility4(val): any {
+
+    if(this.step4) return 'hidden';
+    return val == 'show' ? 'hidden' : 'show';
+
+  }
+
+  editVisibility5(val): any {
+
+    if(this.step5) return 'hidden';
+    return val == 'show' ? 'hidden' : 'show';
+
+  }
+
   submitAmount(): void {
 
     if (!this.isValidAmount()) {
@@ -75,6 +123,31 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
       this.visibility.one = "hidden";
       this.visibility.two = "show";
     }
+
+  }
+
+  submitPensionLocation(): void {
+
+      this.step2 = false;
+      this.visibility.two = "hidden";
+      this.visibility.three = "show";
+  }
+
+  submitDob(): void{
+      this.step3 = false;
+      this.visibility.three = "hidden";
+      this.visibility.four = "show";
+  }
+
+  submitUserPartnerDob(): void{
+    this.step4 = false;
+    this.visibility.four = "hidden";
+    this.visibility.five = "show";
+  }
+
+  submitFinal(): void{
+    this.step5 = false;
+    this.visibility.five = "hidden";
   }
 
   isValidAmount(): boolean {
@@ -84,26 +157,70 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
 
   }
 
+  validateAge(val): any {
+
+    this.age = calculateAge(val);
+    console.log(this.age, 'age');
+
+    if(!this.age){
+      return this.isAgeValid = true;
+      console.log('this is undefined!!!!');
+    }
+
+    if(this.age < this.minAge){
+      console.log('age is too young');
+      return this.isAgeValid = true;
+    }
+
+    if(this.age > this.maxAge){
+      console.log('age is too old');
+     return this.isAgeValid = true;
+    }
+
+    return this.isAgeValid = false;
+
+  }
+
   editSection(val): any {
     this.coll(val);
   }
 
-    coll(val: string) {
+  coll(val: string) {
     switch (val) {
       case "box1":
         this.visibility.one = 'show';
         this.visibility.two = 'hidden';
         this.visibility.three = 'hidden';
+        this.visibility.four = 'hidden';
+        this.visibility.five = 'hidden';
         break;
       case "box2":
         this.visibility.one = 'hidden';
         this.visibility.two = 'show';
         this.visibility.three = 'hidden';
+        this.visibility.four = 'hidden';
+        this.visibility.five = 'hidden';
         break;
       case "box3":
         this.visibility.one = 'hidden';
         this.visibility.two = 'hidden';
         this.visibility.three = 'show';
+        this.visibility.four = 'hidden';
+        this.visibility.five = 'hidden';
+        break;
+      case "box4":
+        this.visibility.one = 'hidden';
+        this.visibility.two = 'hidden';
+        this.visibility.three = 'hidden';
+        this.visibility.four = 'show';
+        this.visibility.five = 'hidden';
+        break;
+      case "box5":
+        this.visibility.one = 'hidden';
+        this.visibility.two = 'hidden';
+        this.visibility.three = 'hidden';
+        this.visibility.four = 'hidden';
+        this.visibility.five = 'show';
         break;
       default:
     }

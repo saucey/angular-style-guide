@@ -10,7 +10,69 @@
   }
 }
 
-.sub-header {
+.inputs.birthdate {
+  .aa-input-date {
+    width: 180px;
+    input {
+      background-color: white;
+    }
+  }
+}
+
+.inputs.select {
+  select {
+    background-color: white;
+    width: 180px;
+  }
+}
+
+
+
+.white-radio-wrapper {
+  margin: 15px 0 20px 0;
+  label.white-radio {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+
+label.radio {
+  &.white-radio {
+    &.extended-text {
+      span.label-text {
+        line-height: 21px;
+        margin-top: -10px!important;
+        strong {
+          display: inline-block;
+          margin-bottom: 10px;
+        }
+        //border: 1px solid red;
+      }
+    }
+    > input[type="radio"] {
+      &:checked + span.radio,
+      &:checked + input[type="hidden"] + span.radio,
+      &:checked ~ span.radio {
+        background-color: white;
+      }
+      & + span.radio,
+      & + input[type="hidden"] + span.radio,
+      & ~ span.label-text {
+        float: left;
+        font-weight: 200;
+      }
+      & ~ span.label-text {
+        margin-top: -7px;
+        margin-left: 20px;
+      }
+      & ~ span.radio {
+        background-color: white;
+      }
+    }
+  }
+}
+
+.general-form__box__sub__header {
   font-size: 25px;
   color: $lochmara_approx;
   line-height: 1em;
@@ -18,11 +80,17 @@
   display: block;
 }
 
+.general-form__box__head {
+  display: block;
+  color: $lochmara_approx;
+  margin-bottom: 5px;
+}
+
 .number-form__list {
   margin-top: 60px;
 
   .number-form__list__section {
-    @include rem('margin', 0, 0, 40);
+    @include rem('margin', 0, 0, 20);
     position: relative;
   }
 
@@ -81,11 +149,6 @@
       border-radius: 5px 0 0 5px;
       background-color: $pastel_light_blue;
       vertical-align: top;
-        .head {
-          display: block;
-          color: $lochmara_approx;
-          margin-bottom: 5px;
-        }
         p {
           margin: 0;
         }
