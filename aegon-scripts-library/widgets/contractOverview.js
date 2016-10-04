@@ -62,7 +62,8 @@
             }
 
             var userData = data.retrieveResponse.PARTIJ;
-            if(userData.MOBIEL === '') {
+            // Check if mobile number is defined.
+            if(!('MOBIEL' in userData) || userData.MOBIEL === '') {
               mobileBanner.fadeIn();
             }
             else {
