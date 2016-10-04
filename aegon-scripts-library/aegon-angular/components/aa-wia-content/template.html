@@ -1,27 +1,27 @@
-<div class="collapsible-row" *ngFor="let content of contentList">
+<div class="collapsible-row" *ngFor="let content of topicsList; let row = index;">
 
   <h5 class="collapsible-row__title">{{ content.title }}</h5>
 
   <ul class="collapsible-content-icons">
-    <li class="collapsible-content-icon" *ngFor="let icon of content.iconsList; let id = index;">
-      <a class="collapsible-content-link" (click)="setActiveRow(id)">
-        <img [src]="icon" class="collapsible-content-link__image" />
+    <li class="collapsible-content-icon" *ngFor="let topic of content.topics; let column = index;">
+      <a class="collapsible-content-link" (click)="setActiveItem(row, column)">
+        <img [src]="topic.image" class="collapsible-content-link__image" />
       </a>
     </li>
   </ul>
 
   <div class="clearfix"></div>
 
-  <div *ngFor="let description of content.descriptionsList; let id = index;">
-    <div *ngIf="getActiveRow() == id" [@shrinkOut]  class="collapsible-description">
+  <div *ngFor="let topic of content.topics; let column = index;">
+    <div *ngIf="getActiveItem().column == column && getActiveItem().row == row" [@shrinkOut]  class="collapsible-description">
 
-      <img [src]="description.image" class="collapsible-description__image" />
-      <p class="collapsible-description__intro">{{ description.intro }}</p>
-      <div class="collapsible-description__text" *ngIf="isFullTextShown(description)">{{ description.text }}</div>
+      <img [src]="topic.image" class="collapsible-description__image" />
+      <p class="collapsible-description__intro" [innerHTML]="topic.intro"></p>
+      <div class="collapsible-description__text" *ngIf="isFullTextShown(topic)" [innerHTML]="topic.text"></div>
 
       <div class="collapsible-description-actions">
-        <a (click)="setActiveRow(null)" class="action_close">Close</a>
-        <a (click)="setShowFullText(true)" *ngIf="'hidden' == visibility && isDescriptionTextValid(description)" class="action_show">See more</a>
+        <a (click)="setActiveItem(null, null)" class="action_close">Close</a>
+        <a (click)="setShowFullText(true)" *ngIf="'hidden' == visibility && isDescriptionTextValid(topic)" class="action_show">See more</a>
       </div>
     </div>
   </div>

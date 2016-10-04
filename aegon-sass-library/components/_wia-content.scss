@@ -67,6 +67,12 @@
       margin-left: 11%;
     }
 
+    .collapsible-description__title {
+      color: #000;
+      font-weight: bolder;
+      @include rem("font-size",18);
+    }
+
     .collapsible-description-actions {
       margin-left: 11%;
       margin-top: 50px;
@@ -109,4 +115,10 @@
       -webkit-font-smoothing: antialiased;
     }
   }
+
+  .phld {
+    color: #ca4642;
+    font-weight: bolder;
+  }
+
 }
