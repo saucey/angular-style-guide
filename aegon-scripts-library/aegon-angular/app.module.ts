@@ -63,13 +63,8 @@ const exportedDeclarations = [
   aaComp.AAQQHistorischRendementComponent,
   aaComp.AAQQSummaryComponent,
 
-  aaComp.AAAovFormComponent,
-  aaComp.AAAovFormBothComponent,
-  aaComp.AAAovFormMeComponent,
-  aaComp.AAAovFormYouComponent,
 
   aaComp.AAPensionFormComponent,
-  aaComp.AACollapseComponent,
 
   //aaComp.AAQuizComponent,
 ];
