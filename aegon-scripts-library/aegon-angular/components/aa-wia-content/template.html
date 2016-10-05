@@ -16,12 +16,12 @@
     <div *ngIf="getActiveItem().column == column && getActiveItem().row == row" [@shrinkOut]  class="collapsible-description">
 
       <img [src]="topic.image" class="collapsible-description__image" />
-      <p class="collapsible-description__intro" [innerHTML]="topic.intro"></p>
+      <p class="collapsible-description__intro" *ngIf="false == isFullTextShown(topic)" [innerHTML]="topic.intro"></p>
       <div class="collapsible-description__text" *ngIf="isFullTextShown(topic)" [innerHTML]="topic.text"></div>
 
       <div class="collapsible-description-actions">
-        <a (click)="setActiveItem(null, null)" class="action_close">Close</a>
-        <a (click)="setShowFullText(true)" *ngIf="'hidden' == visibility && isDescriptionTextValid(topic)" class="action_show">See more</a>
+        <a (click)="setActiveItem(null, null)" class="action_close">Sluit</a>
+        <a (click)="setShowFullText(true)" *ngIf="'hidden' == visibility && isDescriptionTextValid(topic)" class="action_show">Lees meer</a>
       </div>
     </div>
   </div>

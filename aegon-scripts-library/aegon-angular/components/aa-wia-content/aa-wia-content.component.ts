@@ -52,7 +52,7 @@ export class AAWiaContentComponent extends AABaseComponent implements OnInit {
       title: 'Wat krijgt u in deze regeling?',
       topics: [
         {
-          image: '/images/wia-content/u233.png',
+          image: 'https://s3-eu-west-1.amazonaws.com/anl-ma-staticcontent/content/pensioen123/test/arbeidsongeschiktheidspensioen.png',
           intro: '<p>Uw werkgever sloot voor u de:</p>' +
           '<p><span class="phld">als IVA-EXCED</span>IVA-EXCEDIVA-Excedentverzekering <span class="phld">Dekperc</span>. Met de IVA-Excedentverzekering krijgt u een uitkering als u volgens het UWV minimaal 80% duurzaam arbeidsongeschikt bent.</p>' +
           '<p><span class="phld">als WGA-EXCED</span>WGA-Excedentverzekering <span class="phld">Dekperc</span>. Met de WGA-Excedentverzekering krijgt u een uitkering als u volgens het UWV minimaal 35% arbeidsongeschikt bent, maar niet minimaal 80% duurzaam.</p>' +
@@ -69,7 +69,7 @@ export class AAWiaContentComponent extends AABaseComponent implements OnInit {
           '<p><span class="phld">als WIA-35MIN en Variant = BODEM</span> Bent u langer dan twee jaar arbeidsongeschikt? Dan komt u in de WIA en kan u er in inkomen flink op achteruitgaan. Bent u volgens de WIA-beschikking van het UWV minder dan 35% arbeidsongeschikt? Dan krijgt u zelfs helemaal geen uitkering. Met de WIA-Bodemverzekering krijgt u een uitkering als u volgens het UWV 15% of meer arbeidsongeschikt bent, maar minder dan 35%.</p>'
         },
         {
-          image: '/images/wia-content/u767.jpg',
+          image: 'https://s3-eu-west-1.amazonaws.com/anl-ma-staticcontent/content/pensioen123/test/reglement.png',
           intro: 'Wilt u precies weten wat deze regeling u biedt? Kijk op <a href="www.aegon.nl/pensioenwet">www.aegon.nl/pensioenwet</a> of vraag de polisvoorwaarden bij ons op.',
           text: '<p>Wilt u precies weten wat deze regeling u biedt? Kijk dan in de polisvoorwaarden. U vindt deze op <a href="www.aegon.nl/pensioenwet">www.aegon.nl/pensioenwet</a> onderaan de pagina onder de downloads of vraag de polisvoorwaarden bij ons op.</p>' +
           '<p>Let op: <br />Neemt u via uw werkgever ook deel in een pensioenregeling met een uitkering bij uw pensionering en/of een uitkering aan uw eventuele partner en/of kinderen als u overlijdt? Dan ontvangt u hiervan een apart overzicht van het pensioenfonds of de verzekeraar. U kunt ook kijken op www.mijnpensioenoverzicht.nl voor informatie over uw andere pensioenregelingen en uw AOW.</p>'
@@ -80,17 +80,17 @@ export class AAWiaContentComponent extends AABaseComponent implements OnInit {
       title: 'Wat krijgt u in deze regeling niet?',
       topics: [
         {
-          image: '/images/wia-content/u771.png',
+          image: 'https://s3-eu-west-1.amazonaws.com/anl-ma-staticcontent/content/pensioen123/test/ouderdomspensioen_56_geen.png',
           intro: 'In deze regeling krijgt u geen ouderdomspensioen. Het kan zijn dat u ouderdomspensioen opbouwt in een andere pensioenregeling.',
           text: ''
         },
         {
-          image: '/images/wia-content/u773.jpg',
+          image: 'https://s3-eu-west-1.amazonaws.com/anl-ma-staticcontent/content/pensioen123/test/reglement.png',
           intro: 'Komt u te overlijden? In deze regeling krijgt uw eventuele partner dan geen partnerpensioen en krijgen uw eventuele kinderen dan geen wezenpensioen. Het kan zijn dat u partner- en/of wezenpensioen in een andere pensioenregeling heeft.',
           text: ''
         },
         {
-          image: '/images/wia-content/u775.jpg',
+          image: 'https://s3-eu-west-1.amazonaws.com/anl-ma-staticcontent/content/pensioen123/test/arbeidsongeschiktheidspensioen_geen.png',
           intro: 'Wordt u ziek nadat u uit dienst bent gegaan bij deze werkgever? Dan krijgt u geen arbeidsongeschiktheidspensioen van ons.',
           text: ''
         }
@@ -100,7 +100,7 @@ export class AAWiaContentComponent extends AABaseComponent implements OnInit {
       title: 'Hoe bent u verzekerd?',
       topics: [
         {
-          image: '/images/wia-content/u777.jpg',
+          image: 'https://s3-eu-west-1.amazonaws.com/anl-ma-staticcontent/content/pensioen123/test/drie_pijlers.png',
           intro: '<p>U bent op drie manieren verzekerd bij arbeidsongeschiktheid:</p>' +
           '<p>A. De Wet werk en inkomen naar arbeidsvermogen (WIA). De WIA-uitkering is een arbeidsongeschiktheidsuitkering van de overheid als u in Nederland werkt. Op <a href="www.uwv.nl">www.uwv.nl</a> leest u meer over de WIA-uitkering.</p>' +
           '<p>B. Uw arbeidsongeschiktheidspensioen bij Aegon. U bent hiervoor verzekerd via uw werkgever. Hierover gaat dit Pensioen 1-2-3.</p>' +
@@ -113,7 +113,7 @@ export class AAWiaContentComponent extends AABaseComponent implements OnInit {
           '<p>C. Een uitkering bij arbeidsongeschiktheid die u zelf misschien regelde. Bijvoorbeeld een arbeidsongeschiktheids- of woonlastenverzekering.</p>'
         },
         {
-          image: '/images/wia-content/u233.png',
+          image: 'https://s3-eu-west-1.amazonaws.com/anl-ma-staticcontent/content/pensioen123/test/arbeidsongeschiktheidspensioen.png',
           intro: '<p>Bent u na twee jaar ziekte volgens het UWV 35% of meer arbeidsongeschikt? Dan komt u in de WIA. De WIA is de Wet werk en inkomen naar arbeidsvermogen. Via die wet krijgt u een uitkering. De WIA is een ingewikkelde wet en is onder te verdelen in twee regelingen:</p>' +
           '<p>U bent minimaal 35% arbeidsongeschikt, maar niet minimaal 80% duurzaam. U krijgt dan een WGA-uitkering.</p>' +
           '<p>U bent minimaal 80% duurzaam arbeidsongeschikt. U krijgt dan een IVA-uitkering.</p>' +
@@ -127,7 +127,7 @@ export class AAWiaContentComponent extends AABaseComponent implements OnInit {
           text: ''
         },
         {
-          image: '/images/wia-content/u781.jpg',
+          image: 'https://s3-eu-west-1.amazonaws.com/anl-ma-staticcontent/content/pensioen123/test/premieverdeling_beide_56.png',
           intro: '<p>Uw werkgever betaalt de premie voor uw regeling. Uw werkgever kan met u afgesproken hebben dat u de premie helemaal of voor een deel aan hem terugbetalen. Deze premie vindt u dan terug op uw loonstrook. Omdat de premie wordt afgetrokken van uw brutoloon, betaalt u hierover geen loonbelasting en premies sociale verzekeringen.</p>',
           text: ''
         }
@@ -137,12 +137,12 @@ export class AAWiaContentComponent extends AABaseComponent implements OnInit {
       title: 'Welke keuzes heeft u?',
       topics: [
         {
-          image:  '/images/wia-content/u783.jpg',
+          image:  'https://s3-eu-west-1.amazonaws.com/anl-ma-staticcontent/content/pensioen123/test/keuze.png',
           intro:  'U kunt stoppen met deelname aan deze regeling.',
           text:   ''
         },
         {
-          image:  '/images/wia-content/u785.jpg',
+          image:  'https://s3-eu-west-1.amazonaws.com/anl-ma-staticcontent/content/pensioen123/test/pensioenvergelijker.png',
           intro:  'Wilt u uw pensioenregeling vergelijken? U vindt de pensioenvergelijker op <a href="www.aegon.nl/pensioenwet">www.aegon.nl/pensioenwet</a> onderaan de pagina onder de downloads of u kunt deze bij ons opvragen.',
           text:   ''
         }
@@ -152,7 +152,7 @@ export class AAWiaContentComponent extends AABaseComponent implements OnInit {
       title: 'Hoe zeker is uw uitkering?',
       topics: [
         {
-          image: '/images/wia-content/u787.jpg',
+          image: 'https://s3-eu-west-1.amazonaws.com/anl-ma-staticcontent/content/pensioen123/test/uitkeringszekerheid_risico.png',
           intro: '<p><span class="phld">als IVA-EXCED en/of WGA-EXCED en/of WGA-AANV IVA-Excedentverzekering IvaEx_dekperc% ,/en WGA-Excedentverzekering WgaEx_dekperc% en WGA-Aanvullingsverzekering (light/upgrade)</span> <br />Uw uitkering wordt elk jaar op 1 januari <Klim_srt> verhoogd. Hieronder ziet u wat de afgelopen drie jaar de gemiddelde jaarlijkse prijsstijging voor consumenten was. Zo kunt u vaststellen in hoeverre de uitkering waardevast was.</p>' +
           '<table><thead><tr><th>Jaar</th><th>Prijsstijging</th><th>Stijging uitkering</th></tr></thead><tbody>' +
           '<tr><th>t-1</th><th><span class="phld">CBS-prijsindex t-1</span></th><th>Klim_srt t-1</th></tr>' +
@@ -173,10 +173,45 @@ export class AAWiaContentComponent extends AABaseComponent implements OnInit {
           text:  ''
         },
         {
-          image: '/images/wia-content/u789.jpg',
+          image: 'https://s3-eu-west-1.amazonaws.com/anl-ma-staticcontent/content/pensioen123/test/uitkeringszekerheid_risico.png',
           intro: '<p>De hoogte van uw uitkering is afhankelijk van hoeveel u nog wel kunt werken en hoeveel u daarmee verdient.</p>',
           text:  '<p>Benieuwd naar uw andere pensioenaanspraken? Kijk dan op <a href="www.mijnpensioenoverzicht.nl">www.mijnpensioenoverzicht.nl</a>. <br /> Meer weten over uw arbeidsongeschiktheidspensioen? Kijk dan op <a href="www.aegon.nl/pensioenwet">www.aegon.nl/pensioenwet</a>.</p>' +
           '<p>De hoogte van uw uitkering is afhankelijk van hoeveel u nog wel kunt werken en hoeveel u daarmee verdient.</p>'
+        }
+      ]
+    },
+    {
+      title: 'Welke kosten maken wij?',
+      topics: [
+        {
+          image: 'https://s3-eu-west-1.amazonaws.com/anl-ma-staticcontent/content/pensioen123/test/kosten.png',
+          intro: '<p>Aegon maakt kosten om de regeling uit te voeren.</p>',
+          text:  ''
+        }
+      ]
+    },
+    {
+      title: 'Wanneer moet u in actie komen?',
+      topics: [
+        {
+          image: 'https://s3-eu-west-1.amazonaws.com/anl-ma-staticcontent/content/pensioen123/test/arbeidsongeschiktheidspensioen.png',
+          intro: '<p>Als u arbeidsongeschikt wordt.</p>',
+          text:  '<p>Als u arbeidsongeschikt wordt. Als u (gedeeltelijk) arbeidsongeschikt wordt, ontvangt u eerst twee jaar lang een inkomen van uw werkgever. U krijgt minimaal 70% van uw loon. Dit loon kan gemaximeerd zijn. Kijk daarvoor in uw arbeidsovereenkomst of CAO.</p>'
+        },
+        {
+          image: 'https://s3-eu-west-1.amazonaws.com/anl-ma-staticcontent/content/pensioen123/test/mijnpensioenoverzicht.png',
+          intro: '<p>Bekijk eens per jaar hoeveel pensioen u heeft opgebouwd op <a href="www.mijnpensioenoverzicht.nl">www.mijnpensioenoverzicht.nl</a>. <br />Let op: Deze arbeidsongeschiktheidspensioenregeling staat daar niet.</p>',
+          text:  '<p>Bekijk eens per jaar hoeveel pensioen u heeft opgebouwd op <a href="www.mijnpensioenoverzicht.nl">www.mijnpensioenoverzicht.nl</a>. <br />Let op: Deze arbeidsongeschiktheidspensioenregeling staat daar niet.</p>'
+        },
+        {
+          image: 'https://s3-eu-west-1.amazonaws.com/anl-ma-staticcontent/content/pensioen123/test/keuze.png',
+          intro: '<p>Als u gebruik wilt maken van de mogelijkheid om te stoppen met deelname aan deze regeling.</p>',
+          text:  '<p>Als u gebruik wilt maken van de mogelijkheid om te stoppen met deelname aan deze regeling.</p>'
+        },
+        {
+          image: 'https://s3-eu-west-1.amazonaws.com/anl-ma-staticcontent/content/pensioen123/test/vragen.png',
+          intro: '<p>Heeft u vragen of bent u arbeidsongeschikt? Neem dan contact op met uw werkgever. Op <a href="www.aegon.nl/pensioenwet">www.aegon.nl/pensioenwet</a> kunt u ook terecht voor meer informatie.</p>',
+          text:  '<p>Heeft u vragen of bent u arbeidsongeschikt? Neem dan contact op met uw werkgever. Op <a href="www.aegon.nl/pensioenwet">www.aegon.nl/pensioenwet</a> kunt u ook terecht voor meer informatie.</p>'
         }
       ]
     }
@@ -185,7 +220,7 @@ export class AAWiaContentComponent extends AABaseComponent implements OnInit {
   /**
    * Active item location by row and column
    */
-  public activeItem: Object = {
+  public activeItem = {
     row: null,
     column: null
   };
