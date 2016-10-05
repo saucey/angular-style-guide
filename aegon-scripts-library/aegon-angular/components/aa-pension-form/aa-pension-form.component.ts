@@ -160,20 +160,16 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
   validateAge(val): any {
 
     this.age = calculateAge(val);
-    console.log(this.age, 'age');
 
     if(!this.age){
       return this.isAgeValid = true;
-      console.log('this is undefined!!!!');
     }
 
     if(this.age < this.minAge){
-      console.log('age is too young');
       return this.isAgeValid = true;
     }
 
     if(this.age > this.maxAge){
-      console.log('age is too old');
      return this.isAgeValid = true;
     }
 
