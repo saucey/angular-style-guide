@@ -57,7 +57,7 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
 
   public  fetchSpecification$: EventEmitter<any> = new EventEmitter();
 
-  public  grossYearlyExpenseAmount: number = clientStorage.local.getItem("grossYearlyExpenseAmount");
+  public  grossYearlyExpenseAmount: number = clientStorage.session.getItem("grossYearlyExpenseAmount");
   public  clientStorageAOV: any = clientStorage.session.getItem("aovQQ") || void 0;
 
   public globalListenFunc: Function;

@@ -1,0 +1,31 @@
+.aa-sticky {
+	@media screen and (min-width: 1280px) {
+		float: right;
+		max-width: 330px;
+		margin: 35px 0 0 20px !important;    
+	}
+	h3.aa-sticky__heading {
+		min-height: 0;
+	}
+	p.aa-sticky__heading {
+		margin: 0;
+	}
+	p.sticky-text-content {
+		margin-bottom: 40px;	
+		span {
+			margin-right: 10px;
+			a.button {
+				position: relative;
+				right: 0;
+				bottom: 0;
+				display: inline-block;
+				width: auto;
+				max-width: 80%;
+				height: auto;    
+				margin: 0 0 0 16px;
+    				padding: 0;
+			}
+		}
+	}
+
+}

@@ -9,11 +9,11 @@ import {Pipe, PipeTransform} from '@angular/core';
 @Pipe({name: 'replace'})
 export class AAReplacePipe implements PipeTransform {
   transform(value:string, args:any[]) : any {
-    if (args.length > 0 && args[0]) {
+    if (args) {
       var result = '' + value;
 
-      for (let key in args[0]) {
-        result = result.replace(key, '' + args[0][key]);
+      for (let key in args) {
+        result = result.replace(key, '' + args[key]);
       }
 
       return result;

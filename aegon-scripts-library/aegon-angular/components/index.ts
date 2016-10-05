@@ -18,3 +18,4 @@ export * from './aa-slider/aa-slider.component';
 export * from './aa-slider-input/aa-slider-input.component';
 export * from './aa-sticky/aa-sticky.component';
 export * from './aa-pension-form/aa-pension-form.component';
+export * from './aa-editable-value/aa-editable-value.component';

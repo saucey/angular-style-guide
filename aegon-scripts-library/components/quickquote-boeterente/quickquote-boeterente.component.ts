@@ -3,7 +3,7 @@ import {Http, Headers, RequestOptions, Response} from "@angular/http";
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
 
-import {InterestsService} from "./interests.service";
+import {InterestsService} from "../../aegon-angular/components/aa-qq-boeterente/interests.service";
 import {validateDate} from "../angular-components/validation.component";
 import {template} from "./template";
 import {migrateTemplate} from "../../aegon-angular/lib/util";

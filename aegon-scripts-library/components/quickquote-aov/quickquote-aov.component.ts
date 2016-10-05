@@ -532,7 +532,7 @@ export class QuickQuoteAovComponent implements OnInit {
 
   private netToGross(netAmount){
     let result = Math.round((netAmount / .65) * 12);
-    clientStorage.local.setItem("grossYearlyExpenseAmount", result);
+    clientStorage.session.setItem("grossYearlyExpenseAmount", result);
     return result;
   };
 
