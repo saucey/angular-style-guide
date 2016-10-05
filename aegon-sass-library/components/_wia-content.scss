@@ -3,8 +3,11 @@
  * */
 .collapsible-row {
 
-  border-top: 1px solid #d6d6d6;
-  border-bottom: 1px solid #d6d6d6;
+  $imageSize: 43px;
+  $rowHeight: 70px;
+
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
 
   & + .collapsible-row {
     border-top: none;
@@ -14,19 +17,33 @@
     color: #20201e;
     display: inline-block;
     float: left;
+    font-family: $font_light;
+    font-size: 18px;
+    font-weight: lighter;
+    margin: 0;
+    height: $rowHeight;
+    line-height: $rowHeight;
+    vertical-align: middle;
   }
 
   .collapsible-content-icons {
     display: inline-block;
     float: right;
     min-width: 30%;
+    height: $rowHeight;
+    line-height: $rowHeight;
+    margin: 0;
 
     .collapsible-content-icon {
       display: inline-block;
-      margin-right: 3%;
+      vertical-align: middle;
     }
 
     .collapsible-content-link {
+      display: block;
+      width: $imageSize;
+      height: $imageSize;
+
       &:hover {
         cursor: pointer;
         cursor: hand;
@@ -34,51 +51,43 @@
     }
 
     .collapsible-content-link__image {
-      width: 40px;
-      height: 40px;
+      max-height: $imageSize;
     }
   }
 
   .collapsible-description {
-    padding: 18px;
-    margin-bottom: 10px;
+    padding: 15px;
     background: #f2f2f2;
+    overflow: hidden;
 
     .collapsible-description__image {
       display: inline-block;
-      width: 6%;
       vertical-align: top;
+      width: 80px;
+      margin-right: 10px;
     }
 
     .collapsible-description__intro {
       display: inline-block;
-      width: 85%;
-      margin-left: 5%;
+      width: calc(100% - 95px);
       font-family: $font_light;
       font-size: 18px;
       line-height: 28px;
     }
 
     .collapsible-description__text {
+      display: inline-block;
+      width: calc(100% - 95px);
       font-family: $font_light;
       font-size: 18px;
       line-height: 28px;
-      width: 85%;
-      margin-left: 11%;
-    }
-
-    .collapsible-description__title {
-      color: #000;
-      font-weight: bolder;
-      @include rem("font-size",18);
     }
 
     .collapsible-description-actions {
-      margin-left: 11%;
-      margin-top: 50px;
+      margin-left: 95px;
 
       .action_close {
-        margin-right: 40px;
+        margin-right: 25px;
       }
     }
 
@@ -116,9 +125,11 @@
     }
   }
 
+  /**
+   * Just for temporary use. It's highlighting some placeholders.
+   * */
   .phld {
     color: #ca4642;
     font-weight: bolder;
   }
-
 }
