@@ -6,6 +6,10 @@
 	}
 	h3.aa-sticky__heading {
 		min-height: 0;
+		font-weight: normal;
+	}
+	h4.aa-sticky__heading {
+		margin-bottom: 0;
 	}
 	p.aa-sticky__heading {
 		margin: 0;
@@ -14,6 +18,10 @@
 		margin-bottom: 40px;	
 		span {
 			margin-right: 10px;
+			&.sticky-button {
+				display: block;
+				margin-top: 15px;
+			}
 			a.button {
 				position: relative;
 				right: 0;
