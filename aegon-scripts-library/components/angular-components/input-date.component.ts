@@ -18,7 +18,7 @@ import {NG_VALUE_ACCESSOR, ControlValueAccessor} from "@angular/forms";
              (keydown)="keydown($event)" (keyup)="keyup('year', $event)"
              (focus)="yearEl.select()" (input)="keyup('year', $event)" (blur)="year = format(year, 4)">
     </span>
-  `
+  `,
 })
 export class InputDateComponent {
   @Input() required: boolean;
