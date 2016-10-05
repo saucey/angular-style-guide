@@ -1,9 +1,9 @@
 export const template = `
   <aa-sticky *ngIf="grossYearlyExpenseAmount" [heading]="data.options.sticky.heading">
-    <p class="aa-sticky__heading row-fluid">{{ data.options.sticky.subheading }}</p>
+    <h4 class="aa-sticky__heading row-fluid">{{ data.options.sticky.subheading }}</h4>
       <p class="row-fluid sticky-text-content">
         <span>&euro; {{ grossYearlyExpenseAmount | money }} bruto per jaar*</span>
-        <span>
+        <span class="sticky-button">
           <a href="{{ data.options.sticky.editSummaryLink }}" class="button transparent arrow">{{data.options.sticky.editLabelLink}}</a>
         </span>
       </p>
