@@ -35,7 +35,7 @@ declare var jQuery;
   selector: 'aa-qq-beleggen',
   template: template
 })
-export class AAQQBeleggenComponent extends AABaseComponent {
+export class AAQQBeleggenComponent extends AABaseComponent implements OnInit {
   @Input() options: any = {};
   @Input() data: any = {};
   @ViewChild('root') rootEl: ElementRef;
@@ -60,8 +60,10 @@ export class AAQQBeleggenComponent extends AABaseComponent {
   }
   ngOnInit() : void {
     super.ngOnInit();
-    this.calculate = libUtil.debounce(() => {
-      this.doCalculate();
+
+       var title = (document.querySelector('h1#page-title') || [])[0]  || {},
+         qq_started = false,
+         first_calculation = false;
 
       aegonTealium({
         page_cat_2_name: 'berekening',
@@ -70,10 +72,14 @@ export class AAQQBeleggenComponent extends AABaseComponent {
         product_category: ['beleggen'],
         page_step:'01',
         event: 'qq_view',
-        form_name: document.querySelector('h1#page-title').innerText || ""
+        form_name: title.innerText || ""
       });
+      console.log("Beleggen qq_view");
 
-      this.globalListenFunc = this.renderer.listenGlobal('input', 'focus click', (event) => {
+    this.calculate = libUtil.debounce(() => {
+      this.doCalculate();
+
+      if(!qq_started && first_calculation) {
         aegonTealium({
           page_cat_2_name: 'berekening',
           step_name: 'qq-berekening-start',
@@ -81,11 +87,13 @@ export class AAQQBeleggenComponent extends AABaseComponent {
           product_category: ['beleggen'],
           page_step:'02',
           event: 'qq_started',
-          form_name: document.querySelector('h1#page-title').innerText || ""
+          form_name: title.innerHTML || ""
         });
-        console.log("focus");
-        this.globalListenFunc();
-      });
+        console.log("Beleggen qq_started");
+        qq_started = true;
+      }
+
+      first_calculation = true;
 
     }, this.data.options.chartUpdateDelay);
   }
