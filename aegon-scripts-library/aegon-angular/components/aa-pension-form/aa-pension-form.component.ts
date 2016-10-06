@@ -1,7 +1,9 @@
 /**
  * AOV quick quote
  */
-import {Component, OnInit, ElementRef, trigger, state, animate, transition, style} from '@angular/core';
+import {
+  Component, OnInit, ElementRef, trigger, state, animate, transition, style, SimpleChanges
+} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {calculateAge} from "../../lib/date";
 
@@ -45,11 +47,18 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
   public step3: boolean = true;
   public step4: boolean = true;
   public step5: boolean = true;
+  public startingDateChoices: any[] = [];
+
+  public amountIsValid: boolean = false;
+  public userToYoung: boolean = false;
+  public userToOld: boolean = false;
+  public userAgeInvalid: boolean = false;
 
   public minAge: number = 50;
   public maxAge: number = 75;
   public isAgeValid: boolean = true;
-  public partnerDob: string = "hidden";
+  public hasPartner: string = "hidden";
+  public partnerDob: string = "show";
 
   form = new FormGroup({
     first: new FormControl('Nhhh', Validators.minLength(10)),
@@ -152,8 +161,16 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
 
   isValidAmount(): boolean {
 
-    this.amountTooSmall = this.pensionAmount > 25000;
-    return !this.amountTooSmall;
+    if(this.pensionAmount !== undefined && this.pensionAmount !== 0){
+
+      this.amountTooSmall = this.pensionAmount >= 25000;
+      this.amountIsValid = !this.amountTooSmall;
+
+      return !this.amountTooSmall;
+    }
+
+    this.amountIsValid = false;
+    return true;
 
   }
 
@@ -161,17 +178,33 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
 
     this.age = calculateAge(val);
 
-    if(!this.age){
+    if(this.age == undefined){
+      this.userAgeInvalid = true;
+      this.userToYoung = false;
+      this.userToOld = false;
+
       return this.isAgeValid = true;
     }
 
     if(this.age < this.minAge){
+      this.userAgeInvalid = false;
+      this.userToYoung = true;
+      this.userToOld = false;
+
       return this.isAgeValid = true;
     }
 
     if(this.age > this.maxAge){
-     return this.isAgeValid = true;
+      this.userAgeInvalid = false;
+      this.userToYoung = false;
+      this.userToOld = true;
+
+      return this.isAgeValid = true;
     }
+
+    this.userAgeInvalid = false;
+    this.userToYoung = false;
+    this.userToOld = false;
 
     return this.isAgeValid = false;
 

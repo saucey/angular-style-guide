@@ -25,13 +25,15 @@ export const template = `
                         <div class="inputs">
                         
                           <aegon-input-number #amountInput prefix="€" [(ngModel)]="pensionAmount" [max]="99999999"
-                                             (focus)="amountTooSmall = false; amountInput.select()" (blur)="isValidAmount()"
+                                             (focus)="amountTooSmall = false; amountInput.select()" (keyup)="isValidAmount()"
                                              (enter)="submitAmount()" [placeholder]="'min 25.000'">
                           </aegon-input-number>
                           
-                        <span *ngIf="isValidAmount()">
-                          value of the input is too low!
-                        </span>
+                          <span class="error-message__wrapper" *ngIf="amountIsValid">
+                            <p class="error">
+                              Totaal bedrag moet minimaal €25.000 bedragen
+                            </p>
+                          </span>
                         </div>
                         
                         <button class="arrow button" type="button" (click)="submitAmount()" [disabled]="isValidAmount()">Volgende vraag</button>
@@ -108,6 +110,25 @@ export const template = `
                         
                         <div class="inputs birthdate">
                           <aa-input-date (modelChange)="validateAge($event)" [(ngModel)]="birthDate" class="aa-qq-aov__input" [setFocus]="setFocus"></aa-input-date>
+                          
+                          <span class="error-message__wrapper" *ngIf="userAgeInvalid">
+                            <p class="error">
+                              User age in is invalid
+                            </p>
+                          </span>
+                        
+                          <span class="error-message__wrapper" *ngIf="userToYoung">
+                            <p class="error">
+                              User to young
+                            </p>
+                          </span>
+                          
+                          <span class="error-message__wrapper" *ngIf="userToOld">
+                            <p class="error">
+                              User to old
+                            </p>
+                          </span>
+                          
                         </div>
                         
                         <button class="arrow button" type="button" (click)="submitDob()" [disabled]="isAgeValid">Volgende vraag</button>
@@ -141,47 +162,52 @@ export const template = `
                       <div class="col form-element__column">
                       
                         <span class="general-form__box__head">Heeft u een partner?</span>
+                        
                         <div class="white-radio-wrapper">
                           <label class="radio white-radio">
-                            <input type="radio" name="aov.who" value="Aegon" [(ngModel)]="whofor" (change)="partnerDob = 'show'" />
+                            <input type="radio" name="aov.who" value="Aegon" [(ngModel)]="whofor" (change)="hasPartner = 'show'" />
                             <span class="radio"></span>
                             <span class="label-text">Ja, ik heb een partner</span>
                           </label>
                         
                           <label class="radio white-radio">
-                            <input type="radio" name="aov.who" value="Andere verzekeraar(s) of pensioenfonds(en)" [(ngModel)]="whofor" (change)="partnerDob = 'hidden'" />
+                            <input type="radio" name="aov.who" value="Andere verzekeraar(s) of pensioenfonds(en)" [(ngModel)]="whofor" (change)="hasPartner = 'hidden'" />
                             <span class="radio"></span>
                             <span class="label-text">Nee, ik heb geen partner</span>
                           </label>
                         </div>
                         
-                        <div [@visibility]="partnerDob">
+                        <div [@visibility]="hasPartner">
                           <span class="general-form__box__head">Wilt u een partnerpensioen voor uw partner verzekeren?</span>
-                          <div class="white-radio-wrapper">
-                            <label class="radio white-radio extended-text">
-                              <input type="radio" name="aov.partner" value="Aegon" [(ngModel)]="pensionLocation" />
-                              <span class="radio"></span>
-                              <span class="label-text"><strong>Ja, ik wil een partnerpensioen verzekeren</strong></span>
-                              <span class="label-text">bij mijn overlijden ontvangt mijn partner 70% van het <br> pensioen dat ik zelf ontvang</span>
-                            </label>
-                          
-                            <label class="radio white-radio extended-text">
-                              <input type="radio" name="aov.partner" value="Andere verzekeraar(s) of pensioenfonds(en)" [(ngModel)]="pensionLocation" />
-                              <span class="radio"></span>
-                              <span class="label-text"><strong>Nee, ik wil geen partnerpensioen verzekeren</strong></span>
-                              <span class="label-text">bij mijn overlijden ontvangt mijn partner geen <br> partnerpensioen. Hier moet uw partner schriftelijk mee <br> instemmen</span>
-                            </label>
-                          </div>              
-                             
-                             
-                          <span class="general-form__box__head">Uw geboortedatum</span>
-                          
-                          <div class="inputs birthdate">
-                            <aa-input-date (modelChange)="validateAge($event)" [(ngModel)]="birthDate" class="aa-qq-aov__input" [setFocus]="setFocus"></aa-input-date>
-                          </div>
+                            <div class="white-radio-wrapper">
+                              <label class="radio white-radio extended-text">
+                                <input type="radio" name="aov.partner" value="Aegon" [(ngModel)]="pensionLocation" (change)="partnerDob = 'show'" />
+                                <span class="radio"></span>
+                                <span class="label-text"><strong>Ja, ik wil een partnerpensioen verzekeren</strong></span>
+                                <span class="label-text">bij mijn overlijden ontvangt mijn partner 70% van het <br> pensioen dat ik zelf ontvang</span>
+                              </label>
+                            
+                              <label class="radio white-radio extended-text">
+                                <input type="radio" name="aov.partner" value="Andere verzekeraar(s) of pensioenfonds(en)" [(ngModel)]="pensionLocation" (change)="partnerDob = 'hidden'" />
+                                <span class="radio"></span>
+                                <span class="label-text"><strong>Nee, ik wil geen partnerpensioen verzekeren</strong></span>
+                                <span class="label-text">bij mijn overlijden ontvangt mijn partner geen <br> partnerpensioen. Hier moet uw partner schriftelijk mee <br> instemmen</span>
+                              </label>
+                            </div>              
+                               
+                            <div [@visibility]="partnerDob">
+                              <div style="height: 100%;">
+                                <span class="general-form__box__head">Uw geboortedatum</span>
+                                
+                                <div class="inputs birthdate">
+                                  <aa-input-date (modelChange)="validateAge($event)" [(ngModel)]="birthDate" class="aa-qq-aov__input" [setFocus]="setFocus"></aa-input-date>
+                                </div>
+                              </div>
+                            </div>
                         </div>
-                        
-                        <button class="arrow button" type="button" (click)="submitUserPartnerDob()" [disabled]="isAgeValid">Volgende vraag</button>
+                        <div>
+                          <button class="arrow button" type="button" (click)="submitUserPartnerDob()" [disabled]="isAgeValid">Volgende vraag</button>
+                        </div>  
                       </div>
                       <div class="col form-text__column">
                           <h2>Sidebar</h2>
@@ -213,13 +239,14 @@ export const template = `
                         <p>De ingangsdatum van uw pensioen is altijd per de 1ste van de maand. De pensioenuitkering ontvangt u dan niet direct. die ontvangt u altijd aan het einde van de maand (rond de 25ste).</p>
                           
                         <div class="inputs select">
-                          <select #mortgageSelect [(ngModel)]="mortgageType" class="no-dd" (change)="init($event.target.value);">
-                            <option [value]="0" selected>first</option>
-                            <option [value]="1">second</option>
-                            <option [value]="2">third</option>
-                            <option [value]="3">fourth</option>
-                            <option [value]="4">fifth</option>
-                            <option [value]="5">sixth</option>
+                          <select #mortgageSelect [(ngModel)]="mortgageType" class="no-dd" (change)="init($event.target.value); required">
+                            <option value="" disabled>Maak uw keuze</option>
+                            <option [value]="1">first</option>
+                            <option [value]="2">second</option>
+                            <option [value]="3">third</option>
+                            <option [value]="4">fourth</option>
+                            <option [value]="5">fifth</option>
+                            <option [value]="6">sixth</option>
                           </select>
                         </div>
                         

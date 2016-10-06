@@ -1,4 +1,19 @@
 
+.error-message__wrapper {
+  margin-top: 20px;
+  display: block;
+}
+
+.error {
+  background-color: #edd5d9;
+  background-image: none;
+  border-radius: 5px;
+  margin-top: .9375rem;
+  padding: 1.125rem;
+  border: 1px solid #C41F2C;
+  color: #ca4642;
+}
+
 .main-color{
   color: $blue_gray;
 }
@@ -33,6 +48,10 @@
   label.white-radio {
     width: 100%;
     margin-bottom: 10px;
+    > span.radio {
+      left: 0!important
+    ;
+    }
   }
 }
 
