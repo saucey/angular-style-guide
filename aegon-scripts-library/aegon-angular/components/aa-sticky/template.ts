@@ -1,6 +1,6 @@
 export const template = `
-  <div class="aa-sticky">
-    <h1 class="aa-sticky__heading">{{ heading }}</h1>
+  <div class="aa-sticky  call-execution-block container_12 same-height">
+    <h3 class="aa-sticky__heading row-fluid">{{ heading }}</h3>
     <ng-content></ng-content>
   </div>
 `;

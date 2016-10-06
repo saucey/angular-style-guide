@@ -1,8 +1,11 @@
 /**
  * Component related utily functions
  */
-import {Component, ElementRef} from 'angular2/core';
+import {Component, ElementRef, NgModule} from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
 import {AATemplateComponent} from './classes/AATemplateComponent';
+import {AppComponentModule} from '../app.module'
 
 /**
  * Dynamically create a component based on supplied input/template
@@ -12,10 +15,10 @@ import {AATemplateComponent} from './classes/AATemplateComponent';
  * @param {Any[]} directives List of directives to include
  * @returns {Component} Newly created component definition
  */
-export function toComponent(selector: string, template: string, directives : any[] = []) : any {
+export function toComponentModule(selector: string, template: string) : any {
+
   @Component({
     selector: selector,
-    directives: directives,
     template: template
   })
   class TemplateComponent extends AATemplateComponent {
@@ -25,5 +28,13 @@ export function toComponent(selector: string, template: string, directives : any
       super(elementRef);
     }
   }
-  return TemplateComponent;
+
+  @NgModule({
+    imports:      [ AppComponentModule, BrowserModule ],
+    declarations: [ TemplateComponent ],
+    bootstrap:    [ TemplateComponent ]
+  })
+  class TemplateComponentModule { }
+
+  return TemplateComponentModule;
 };

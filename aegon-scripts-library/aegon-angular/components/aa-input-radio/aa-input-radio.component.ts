@@ -1,15 +1,14 @@
-import {Component, Input, Output, EventEmitter, Provider, Directive, forwardRef} from 'angular2/core';
-import {NG_VALUE_ACCESSOR, ControlValueAccessor} from "angular2/common";
-import {CONST_EXPR} from "angular2/src/facade/lang";
+import {Component, Input, Output, EventEmitter, Provider, Directive, forwardRef} from '@angular/core';
+import {NG_VALUE_ACCESSOR, ControlValueAccessor} from "@angular/forms";
+
 // Locals
 import {template} from "./template";
 
-const CUSTOM_VALUE_ACCESSOR = CONST_EXPR(new Provider(
-  NG_VALUE_ACCESSOR, {
-      useExisting: forwardRef(() => AAInputRadioComponent),
-      multi: true
-    })
-  );
+const CUSTOM_VALUE_ACCESSOR = {
+  provide: NG_VALUE_ACCESSOR,
+  useExisting: forwardRef(() => AAInputRadioComponent),
+  multi: true
+};
 
 @Component({
   selector: 'aa-input-radio',

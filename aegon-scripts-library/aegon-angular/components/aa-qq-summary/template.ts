@@ -33,7 +33,7 @@ export const template = `
             <span id="field-netto-premie" class="value span6">€ {{aov_qq_data.netPremium}}</span>
           </div>
           <div class="span12 container_12 data-fields">
-            <a href="{{options.goBackAndChangeUrl}}" class="button transparent arrow">Wijzig bovenstaande gegevens</a>
+            <a href="{{data.options.goBackAndChangeUrl}}" class="button transparent arrow">Wijzig bovenstaande gegevens</a>
           </div>
         </div>
         <div class="action-section span12">
@@ -52,7 +52,7 @@ export const template = `
             </div>
 
             <label class="label span12 aanvragen-label dark-blue" for="aanvragen">Wilt u een vrijblijvend adviesgesprek?</label>
-            <a class="arrow span8 orange-gradient aanvragen-button button" [attr.href]="options.actionButton.url">{{ options.actionButton.label }}</a>
+            <a class="arrow span8 orange-gradient aanvragen-button button" [attr.href]="data.options.actionButton.url">{{ data.options.actionButton.label }}</a>
           </div>
         </div>
       </div>

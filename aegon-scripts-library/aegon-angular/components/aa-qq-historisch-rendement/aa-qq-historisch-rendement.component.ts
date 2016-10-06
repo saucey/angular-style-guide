@@ -1,14 +1,12 @@
 /**
  * Quick Quote Historical ROI
  */
-import {Component, Input, ElementRef, ViewChild, AfterViewInit, OnInit} from 'angular2/core';
+import {Component, Input, ElementRef, ViewChild, AfterViewInit, OnInit} from '@angular/core';
 import * as libUtil from "../../lib/util";
 import {HistoricalRoi} from "../../lib/calculations/historicalRoi";
 // AA components
 import {AABaseComponent} from '../../lib/classes/AABaseComponent';
-import {AAMoneyPipe} from "../../pipes/money.pipe";
-import {AASliderComponent} from '../aa-slider/aa-slider.component';
-import {AAHintComponent} from '../aa-hint/aa-hint.component';
+
 import {AAHighchartComponent} from "../aa-highchart/aa-highchart.component";
 // Locals
 import {template} from "./template";
@@ -17,11 +15,7 @@ import {createChartConfig, createSeriesData} from "./chart";
 
 @Component({
   selector: 'aa-qq-historisch-rendement',
-  directives: [
-    AASliderComponent, AAHintComponent, AAHighchartComponent
-  ],
-  template: template,
-  pipes: [AAMoneyPipe]
+  template: template
 })
 export class AAQQHistorischRendementComponent extends AABaseComponent {
   @Input() options: any = {};

@@ -1,44 +1,26 @@
 /**
  * AOV quick quote
  */
-import {Component, OnInit, Input, EventEmitter, ElementRef, Renderer} from 'angular2/core';
-import {HTTP_PROVIDERS, Http, Headers, RequestOptions, Response} from "angular2/http";
+import {Component, OnInit, Input, EventEmitter, ElementRef, Renderer} from '@angular/core';
+import {Http, Headers, RequestOptions, Response} from "@angular/http";
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
 
-// AA components
-import {AAMoneyPipe} from "../../pipes/money.pipe";
-import {AAInputRadioComponent} from "../aa-input-radio/aa-input-radio.component";
-import {AAInputDropDownComponent} from "../aa-input-dropdown/aa-input-dropdown.component";
-import {AASliderInputComponent} from "../aa-slider-input/aa-slider-input.component";
-import {AAInputNumberComponent} from '../aa-input-number/aa-input-number.component';
-import {AAInputDateComponent} from '../aa-input-date/aa-input-date.component';
-// Locals
-import {template} from "./template";
-import {defaultOptions} from "./defaultOptions";
 import {calculateAge, stringToDate, addYearsToDate, getDateDiffInYears, cloneDate} from "../../lib/date";
 import {zeroPad} from "../../lib/format";
+import {AABaseComponent} from "../../lib/classes/AABaseComponent";
+
 import {mockProfessionsResponse} from "./mock-professions";
 import {mockRiskFactorResponse} from "./mock-riskfactor";
 import {mockSpecificationResponse} from "./mock-specification";
-import {AAHintComponent} from "../aa-hint/aa-hint.component";
-import {AABaseComponent} from "../../lib/classes/AABaseComponent";
+import {defaultOptions} from "./defaultOptions";
 import {aegonTealium} from "../../lib/aegon_tealium";
-
+import {template} from "./template";
 
 @Component({
   selector: 'aa-qq-aov',
-  directives: [
-    AAInputNumberComponent,
-    AASliderInputComponent,
-    AAInputRadioComponent,
-    AAInputDropDownComponent,
-    AAInputDateComponent,
-    AAHintComponent
-  ],
   template: template,
-  providers: [HTTP_PROVIDERS],
-  pipes: [AAMoneyPipe]
+  providers: []
 })
 export class AAQQAovComponent extends AABaseComponent implements OnInit {
   @Input() options: any = {};
@@ -65,6 +47,9 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
 
   public  grossYearAmount: number;
 
+  public  showExpensesToHigh: boolean = false;
+  public  showExpensesToLow: boolean = false;
+
   public  riskFactor: any = {};
 
   public  grossPremium: string = "0,00";
@@ -72,7 +57,7 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
 
   public  fetchSpecification$: EventEmitter<any> = new EventEmitter();
 
-  public  grossYearlyExpenseAmount: number = clientStorage.local.getItem("grossYearlyExpenseAmount");
+  public  grossYearlyExpenseAmount: number = clientStorage.session.getItem("grossYearlyExpenseAmount");
   public  clientStorageAOV: any = clientStorage.session.getItem("aovQQ") || void 0;
 
   public globalListenFunc: Function;
@@ -116,7 +101,7 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
         });
       });
 
-    
+
     // Add a euro sign in front of the amount. This doesn't work if we set it in defaultOption.ts.
     if (!this.data.options.grossYearAmount.slider.pips.format) {
       this.data.options.grossYearAmount.slider.pips['format'] = {
@@ -291,7 +276,7 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
     // Check if birthDate has been filled and that the person is not older than the maximum age.
     if (!this.birthDate ||
         age < this.data.options.birthDate.minAge ||
-        age > maxAge ) {
+        age >= maxAge ) {
       this.birthDateError = true;
       hasErrors = true;
     }
@@ -312,12 +297,12 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
     return !hasErrors;
   }
 
-  openCalculator() {
+  openCalculator(force = false) {
     // Validate the personal information. If it is valid then the calculator can be shown.
     if (this.validatePersonalInformation()) {
       // Show calculator once we have fetched the data.
-      this.prefillGrossYearAmount(this.grossIncome);
-      
+      this.prefillGrossYearAmount(this.grossIncome, force);
+
       this.fetchSpecification(() => {
           this.showCalculator = true;
 
@@ -334,7 +319,7 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
             page_step:'03',
             event: 'qq_completed'
           });
-        
+
       });
     }
   }
@@ -343,7 +328,7 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
     window.location.href = this.data.options.summaryPath;
   }
 
-  prefillGrossYearAmount(amount) {
+  prefillGrossYearAmount(amount, force = false) {
     let min = this.data.options.grossYearAmount.slider.range.min;
     let max = Math.min(
       this.data.options.grossYearAmount.maxInsuranceAmount,
@@ -354,12 +339,25 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
     );
 
     let expenses = this.grossYearlyExpenseAmount;
-    if (expenses > 0) {
-      this.grossYearAmount = Math.max(min, Math.min(expenses, max));
-    } else {
-      this.grossYearAmount = max;
+
+    if (!this.grossYearAmount || force) {
+      if (expenses > 0) {
+        this.grossYearAmount = Math.max(min, Math.min(expenses, max));
+      } else {
+        this.grossYearAmount = max;
+      }
     }
+
     this.data.options.grossYearAmount.slider.range.max = max;
+
+    if (expenses) {
+      // Check with the findings of the lastentool.
+      this.showExpensesToHigh = this.data.options.grossYearAmount.slider.range.max < expenses;
+
+      if (!this.showExpensesToHigh) {
+        this.showExpensesToLow = expenses < this.data.options.grossYearAmount.slider.range.min;
+      }
+    }
   }
 
   processRiskFactor(response, prefill) {
@@ -464,7 +462,7 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
       let dateString = `${now.getFullYear()}-${zeroPad(now.getMonth() + 1, 2)}-${zeroPad(now.getDate(), 2)}`;
 
       let birthDate = stringToDate(this.birthDate);
-      
+
       let maxAge = parseInt(this.profession.raw._AE_MAXENDLF || this.data.options.defaultMaxEndAge, 10);
 
       let maxInsuranceDate = cloneDate(birthDate);

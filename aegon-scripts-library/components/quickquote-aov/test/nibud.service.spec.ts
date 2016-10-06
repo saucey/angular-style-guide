@@ -1,8 +1,11 @@
 import {NibudService} from '../nibud.service';
-import {HTTP_PROVIDERS, Http} from 'angular2/http';
+import {Http} from '@angular/http';
 //import {beforeEachProviders, beforeEach} from "angular2/testing";
 //import beforeEach = testing.beforeEach;
-import {describe, it, beforeEach, expect} from 'angular2/testing';
+
+// below elements are not longer in core/testing
+// they will have to be loaded from a different source
+//import {describe, it, beforeEach, expect} from '@angular/core/testing';
 
 describe('NibudService', () => {
 

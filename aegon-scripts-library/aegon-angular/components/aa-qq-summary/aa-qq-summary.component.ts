@@ -1,41 +1,43 @@
 /**
  * Summary quick quote
  */
-import {Component, OnInit, Input, AfterViewInit,  ViewChild, ElementRef} from 'angular2/core';
-import {HTTP_PROVIDERS, Http, Headers, RequestOptions, Response} from "angular2/http";
+import {Component, OnInit, Input, AfterViewInit,  ViewChild, ElementRef} from '@angular/core';
+import {Http, Headers, RequestOptions, Response} from "@angular/http";
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
-// AA components
-import {AAMoneyPipe} from "../../pipes/money.pipe";
-import {AAPeriodPipe} from "../../pipes/period.pipe";
+
 // Locals
 import {template} from "./template";
-import {options} from "./options";
-import {AAReverseDateStringPipe} from "../../pipes/reverseDateString.pipe";
+import {defaultOptions} from "./defaultOptions";
+import {AABaseComponent} from "../../lib/classes/AABaseComponent";
+import {AAPeriodPipe} from "../../pipes/period.pipe";
+
 import {aegonTealium} from "../../lib/aegon_tealium";
 
 @Component({
   selector: 'aa-qq-summary',
-  directives: [
-  ],
   template: template,
-  providers: [HTTP_PROVIDERS],
-  pipes: [AAMoneyPipe, AAPeriodPipe, AAReverseDateStringPipe]
+  providers: []
 })
 
-export class AAQQSummaryComponent implements OnInit, AfterViewInit {
-  private mailUrl: string = options.mailUrl;
-  private mailCredentials: string = options.mailCredentials;
+export class AAQQSummaryComponent extends AABaseComponent implements OnInit, AfterViewInit {
+  @Input() options: any = {};
+  @Input() data: any = {};
+
+  public  defaultOptions: any = defaultOptions;
+
+  private mailUrl: string;
+  private mailCredentials: string;
   private summaryPath: string = '#';
 
-  public options: any = options;
   public  emailAddress: string = "";
   public  emailAddressError: boolean;
   public  serviceError: boolean;
   public  pending: number = 0;
   public  emailButtonPending: boolean = false;
   public  reSendEmailShown: boolean = false;
-  public clientStorageAOV: any = clientStorage.session.getItem("aovQQ") || {};
+
+  public  clientStorageAOV: any = clientStorage.session.getItem("aovQQ") || {};
 
   @ViewChild('emailAddressField') emailAddressField: ElementRef;
 
@@ -51,10 +53,18 @@ export class AAQQSummaryComponent implements OnInit, AfterViewInit {
   };
 
   constructor(
-    private http: Http
-  ) {}
+    private http: Http,
+    private elementRef: ElementRef
+  ) {
+    super(elementRef);
+  }
 
   ngOnInit() {
+    super.ngOnInit();
+
+    this.mailUrl = this.data.options.mailUrl;
+    this.mailCredentials = this.data.options.mailCredentials;
+
     aegonTealium({
       page_cat_1_type: 'quick_quotes',
       page_cat_2_name: 'samenvatting',

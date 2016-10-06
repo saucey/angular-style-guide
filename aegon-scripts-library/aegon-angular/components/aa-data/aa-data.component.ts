@@ -1,4 +1,4 @@
-import {Injector, DynamicComponentLoader, Component, Input, Output, EventEmitter, ElementRef, ViewChild, AfterViewInit, OnInit} from 'angular2/core';
+import {Injector, Component, Input, Output, EventEmitter, ElementRef, ViewChild, AfterViewInit, OnInit} from '@angular/core';
 import {AABaseComponent} from '../../lib/classes/AABaseComponent';
 import * as libXsr from "../../lib/xsr";
 import * as libUtil from "../../lib/util";

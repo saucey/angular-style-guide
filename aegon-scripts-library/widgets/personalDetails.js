@@ -21,6 +21,11 @@
         Validation.otherFix(formSelector, false);
       }
 
+      var formSelectorMobile = "form#persoonsgegevens_verfication_form";
+      if (!Validation.IEFix(formSelectorMobile, false)) {
+        Validation.otherFix(formSelectorMobile, false);
+      }
+
       // activate the tabs for Dutch or foreign addresses
       // residential address
       $("input[name=ra_NL]", context).click( function () {

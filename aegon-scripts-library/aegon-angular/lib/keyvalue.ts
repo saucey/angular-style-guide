@@ -24,7 +24,7 @@ export function parse (str: string) : any {
 				return result;
 			}
 			// Number
-			result = parseFloat(value);
+			result = +value;
 			if (!isNaN(result)) {
 				return result;
 			}

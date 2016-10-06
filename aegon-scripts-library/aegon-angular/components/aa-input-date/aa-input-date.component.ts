@@ -1,13 +1,13 @@
-import {
-  Component, Input, Output, EventEmitter, Provider, Directive, forwardRef, ViewChild, ElementRef,
-  AfterViewInit
-} from 'angular2/core';
-import {NG_VALUE_ACCESSOR, ControlValueAccessor} from "angular2/common";
-import {CONST_EXPR} from "angular2/src/facade/lang";
+import {Component, Input, Output, EventEmitter, AfterViewInit, forwardRef, ViewChild, ElementRef} from '@angular/core';
+import {NG_VALUE_ACCESSOR, ControlValueAccessor} from "@angular/forms";
+
 import {template} from "./template";
 
-const CUSTOM_VALUE_ACCESSOR = CONST_EXPR(new Provider(
-  NG_VALUE_ACCESSOR, {useExisting: forwardRef(() => AAInputDateComponent), multi: true}));
+const CUSTOM_VALUE_ACCESSOR = {
+  provide: NG_VALUE_ACCESSOR,
+  useExisting: forwardRef(() => AAInputDateComponent),
+  multi: true
+};
 
 @Component({
   selector: 'aa-input-date',
@@ -19,6 +19,8 @@ export class AAInputDateComponent implements ControlValueAccessor, AfterViewInit
   @Input() required: boolean;
   @Input() setFocus: boolean;
   @Output() modelChange: any = new EventEmitter();
+
+  @Output() example: any = new EventEmitter();
 
   @ViewChild('dayEl') dayEl: ElementRef;
   @ViewChild('monthEl') monthEl: ElementRef;
@@ -42,7 +44,8 @@ export class AAInputDateComponent implements ControlValueAccessor, AfterViewInit
     this.setValue(value);
   }
 
-  constructor() {}
+  constructor() {
+  }
 
   ngAfterViewInit() {
     if (this.setFocus) {
@@ -62,6 +65,7 @@ export class AAInputDateComponent implements ControlValueAccessor, AfterViewInit
   }
 
   keyup(part: string, event: KeyboardEvent): void {
+
     let value: string = (<HTMLInputElement>event.target).value,
       change: any = {};
     // Avoid typing more numbers than allowed.
@@ -98,14 +102,18 @@ export class AAInputDateComponent implements ControlValueAccessor, AfterViewInit
     let day: string = params.day || this.day,
       month: string = params.month || this.month,
       year: string = params.year || this.year,
+
       dayNum: number = parseInt(day, 10),
       monthNum: number = parseInt(month, 10) - 1,
       yearNum: number = parseInt(year, 10),
+
       date: Date = new Date(yearNum, monthNum, dayNum),
       modelValue: string;
+
     if (date.getDate() === dayNum && date.getMonth() === monthNum && date.getFullYear() === yearNum) {
       modelValue = `${this.format(year, 4)}-${this.format(month, 2)}-${this.format(day, 2)}`;
     }
+
     this.modelChange.emit(modelValue);
   }
 

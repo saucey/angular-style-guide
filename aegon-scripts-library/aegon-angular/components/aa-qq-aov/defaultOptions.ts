@@ -81,7 +81,10 @@ export const defaultOptions = {
     help: `Vul hier het bedrag in dat u wilt verzekeren. 
            Dit is maximaal 80% van uw bruto jaarinkomen. 
            Het minimum bedrag is €2.500 en mag maximaal € 125.000,- zijn. 
-           Wilt u meer of minder verzekeren bespreek dan de mogelijkheden met een adviseur.`
+           Wilt u meer of minder verzekeren bespreek dan de mogelijkheden met een adviseur.`,
+    expensesToHigh: `Uw bruto jaaruitgaven van € [[expenseAmount]] zijn hoger dan het maximum te verzekeren bedrag. 
+    Dat bedrag is maximaal 80% van uw gemiddelde bruto jaarinkomen.`,
+    expensesToLow: `Uw bruto jaaruitgaven van € [[expenseAmount]] zijn lager dan het minimaal te verzekeren bedrag van € 2500.`
   },
   result: {
     grossPremium: {
@@ -100,7 +103,9 @@ export const defaultOptions = {
   sticky: {
     heading: 'Samenvatting',
     subheading: 'Indicatie uitgaven',
-    note: '* berekend aan de hand van uw netto maandelijkse uitgaven'
+    note: '* berekend aan de hand van uw netto maandelijkse uitgaven',
+    editSummaryLink: '/template-quickquote-aov.html',
+    editLabelLink: 'Wijzig'
   },
   disclaimer: {
     advisor: `Verzekeren is maatwerk. Een adviseur helpt u hierbij.`,

@@ -1,9 +1,7 @@
-import {Component, Input, ElementRef, ViewChild, AfterViewInit, OnInit} from 'angular2/core';
-import {HTTP_PROVIDERS, Http, Headers, RequestOptions, Response} from "angular2/http";
+import {Component, Input, ElementRef, ViewChild, AfterViewInit, OnInit} from '@angular/core';
 
 import 'rxjs/Rx';
 import {defaultOptions} from "./defaultOptions";
-import {AAMoneyPipe} from "../../pipes/money.pipe";
 import {InterestsService} from "./interests.service";
 import {validateDate} from "../../lib/date";
 import {round, roundToTenth, zeroPad} from "../../lib/format";
@@ -11,25 +9,12 @@ import {calculateMonthlyFee} from "../../lib/calculations/interest"
 
 import {AABaseComponent} from "../../lib/classes/AABaseComponent";
 
-import {AAInputNumberComponent} from '../aa-input-number/aa-input-number.component';
-import {AAHintComponent} from "../aa-hint/aa-hint.component";
-import {AAInputRadioComponent} from "../aa-input-radio/aa-input-radio.component";
-import {AAInputDateComponent} from "../aa-input-date/aa-input-date.component";
-
-import {template} from "./template";
-
+const template = require('./template.html');
 
 @Component({
   selector: 'aa-qq-boeterente',
-  directives: [
-    AAHintComponent,
-    AAInputNumberComponent,
-    AAInputRadioComponent,
-    AAInputDateComponent
-  ],
   template: template,
-  providers: [HTTP_PROVIDERS, InterestsService],
-  pipes: [AAMoneyPipe]
+  providers: [InterestsService]
 })
 export class AAQQBoeterenteComponent extends AABaseComponent implements OnInit {
   @ViewChild('mortgageSelect') mortgageSelect: ElementRef;

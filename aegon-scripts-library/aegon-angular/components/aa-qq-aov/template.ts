@@ -1,17 +1,15 @@
 export const template = `
-  <!--<aa-sticky *ngIf="grossYearlyExpenseAmount" [heading]="data.options.sticky.heading">
-    <h1 class="aa-sticky__heading">{{ data.options.sticky.subheading }}</h1>
-    <aa-editable-value>
-      <aa-editable-label>
-        &euro; {{ grossYearlyExpenseAmount | money }] bruto per jaar*
-      </aa-editable-label>
-      <aa-editable-input>
-        <aa-input-number [(ngModel)]="grossYearlyExpenseAmount">
-      </aa-input-number>
-      </aa-editable-input>
-    </aa-editable-value>
-    <p>{{ data.options.sticky.note }}</p>
-  </aa-sticky>-->
+  <aa-sticky *ngIf="grossYearlyExpenseAmount" [heading]="data.options.sticky.heading">
+    <h4 class="aa-sticky__heading row-fluid">{{ data.options.sticky.subheading }}</h4>
+      <p class="row-fluid sticky-text-content">
+        <span>&euro; {{ grossYearlyExpenseAmount | money }} bruto per jaar*</span>
+        <span class="sticky-button">
+          <a href="{{ data.options.sticky.editSummaryLink }}" class="button transparent arrow">{{data.options.sticky.editLabelLink}}</a>
+        </span>
+      </p>
+      <p class="row-fluid">{{ data.options.sticky.note }}</p>
+  </aa-sticky>
+  
   <div class="aa-qq-aov">
     <section class="aa-qq-aov__personal-details" (select)="showCalculator = false">
 
@@ -68,7 +66,7 @@ export const template = `
         <div class="aa-qq-aov__field aa__clearfix">
           <div class="aa-qq-aov__label"></div>
           <div class="aa-qq-aov__inputs">
-            <button class="button icon-right icon-calculator aa-qq-aov__open-calculator" (click)="openCalculator()">
+            <button class="button icon-right icon-calculator aa-qq-aov__open-calculator" (click)="openCalculator(true)">
               {{ data.options.calculateButtonText }}
             </button>
           </div>
@@ -88,7 +86,7 @@ export const template = `
             <aa-hint [text]="data.options.startingTerm.help"></aa-hint>
           </div>
           <div class="aa-qq-aov__inputs">
-            <div class="aa-qq-aov__radio" *ngFor="#choice of data.options.startingTerm.choices">
+            <div class="aa-qq-aov__radio" *ngFor="let choice of data.options.startingTerm.choices">
               <aa-input-radio name="term"
                 [(ngModel)]="startingTerm" 
                 (modelChange)="fetchSpecification$.emit()"
@@ -122,7 +120,15 @@ export const template = `
             </div>
           </div>
         </div>
+        
+        <div *ngIf="showExpensesToLow || showExpensesToHigh" 
+             class="aa-qq-aov__expenses messages messages--warning visible">
+           <span class="icon"></span>
+           <div *ngIf="showExpensesToLow" class="content">{{data.options.grossYearAmount.expensesToLow | replace : {'[[expenseAmount]]': grossYearlyExpenseAmount} }}</div>
+           <div *ngIf="showExpensesToHigh" class="content">{{data.options.grossYearAmount.expensesToHigh | replace : {'[[expenseAmount]]': grossYearlyExpenseAmount} }}</div>
+        </div>
       </section>
+      
   
       <section class="aa-qq-aov__result">
         <div class="aa-qq-aov__result__container">
