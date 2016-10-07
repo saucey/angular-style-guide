@@ -12,7 +12,9 @@
  * - options.ts: Configuration and texts
  * - chart.ts: Chart options
  */
-import {Component, Input, ElementRef, ViewChild, OnInit} from '@angular/core';
+import {Component, Input, ElementRef, ViewChild, OnInit, Renderer} from '@angular/core';
+import {loadScript} from "../../lib/scripts";
+import * as libFormat from "../../lib/format";
 import * as libInterest from "../../lib/calculations/interest";
 import * as libUtil from "../../lib/util";
 // AA components
@@ -22,6 +24,7 @@ import {AAHighchartComponent} from "../aa-highchart/aa-highchart.component";
 import {template} from "./template";
 import {defaultOptions} from "./defaultOptions";
 import {createChartConfig, createPlotLinesData, createSeriesData} from "./chart";
+import {aegonTealium} from "../../lib/aegon_tealium";
 
 declare var jQuery;
 
@@ -32,7 +35,7 @@ declare var jQuery;
   selector: 'aa-qq-beleggen',
   template: template
 })
-export class AAQQBeleggenComponent extends AABaseComponent {
+export class AAQQBeleggenComponent extends AABaseComponent implements OnInit {
   @Input() options: any = {};
   @Input() data: any = {};
   @ViewChild('root') rootEl: ElementRef;
@@ -44,15 +47,54 @@ export class AAQQBeleggenComponent extends AABaseComponent {
   private currentTimeout: any = undefined;
   private calculate : any;
 
+  public qqStarted: any = false;
+  public globalListenFunc: Function;
+
   // Let parent class initialize config; the dependency injection with ElementRef
   // doesn't work directly so we have to call it explicitly.
-  constructor(thisElement: ElementRef) {
+  constructor(
+    thisElement: ElementRef,
+    private renderer: Renderer
+  ) {
     super(thisElement);
   }
   ngOnInit() : void {
     super.ngOnInit();
+
+       var title = (document.querySelector('h1#page-title') || [])[0]  || {},
+         qq_started = false,
+         first_calculation = false;
+
+      aegonTealium({
+        page_cat_2_name: 'berekening',
+        step_name: 'qq-berekening-view',
+        product_name: ['beleggen'],
+        product_category: ['beleggen'],
+        page_step:'01',
+        event: 'qq_view',
+        form_name: title.innerText || ""
+      });
+      console.log("Beleggen qq_view");
+
     this.calculate = libUtil.debounce(() => {
       this.doCalculate();
+
+      if(!qq_started && first_calculation) {
+        aegonTealium({
+          page_cat_2_name: 'berekening',
+          step_name: 'qq-berekening-start',
+          product_name: ['beleggen'],
+          product_category: ['beleggen'],
+          page_step:'02',
+          event: 'qq_started',
+          form_name: title.innerHTML || ""
+        });
+        console.log("Beleggen qq_started");
+        qq_started = true;
+      }
+
+      first_calculation = true;
+
     }, this.data.options.chartUpdateDelay);
   }
 
