@@ -11,7 +11,6 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
   selector: 'aegon-quickquote-mortgage',
 
   template: templateElem ? migrateTemplate(templateElem.value) : `
-<button (click)="incomeValue = 1000">Make it 1000</button>
     <div class="quickquote lijfrente sparen mortgage" #interest data-interest="2.95,3.25,3.25,3.25,3.25,3.25,3.35,3.35,3.35,3.35,3.35,3.70,3.70,3.70,3.70,3.70,3.70,3.70,3.70,3.70,3.70">
       <div class="triangle"></div>
       <div class="calculation">
