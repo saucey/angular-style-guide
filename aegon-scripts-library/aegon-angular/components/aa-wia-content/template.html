@@ -2,13 +2,13 @@
 
   <h5 class="collapsible-row__title">{{ content.title }}</h5>
 
-  <ul class="collapsible-content-icons">
-    <li class="collapsible-content-icon" *ngFor="let topic of content.topics; let column = index;">
+  <div class="collapsible-content-icons">
+    <div class="collapsible-content-icon" *ngFor="let topic of content.topics; let column = index;">
       <a class="collapsible-content-link" (click)="setActiveItem(row, column)">
         <img [src]="topic.image" class="collapsible-content-link__image" />
       </a>
-    </li>
-  </ul>
+    </div>
+  </div>
 
   <div class="clearfix"></div>
 
