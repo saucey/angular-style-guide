@@ -229,7 +229,6 @@ export class AAWiaContentComponent extends AABaseComponent implements OnInit {
 
   public showFullText: boolean = false;
 
-  // refactor to descriptionText visible
   public visibility: string = 'hidden';
 
   constructor(private elementRef: ElementRef) {
