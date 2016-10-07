@@ -148,18 +148,17 @@ export class AALeadformComponent extends AABaseComponent {
    */
   onSubmit() {
     this.data.state = 'loading';
+    if(!this.form_submitted) {
+      aegonTealium({
+        event: 'form_completed',
+        form_name: this.data.options.header || ""
+      });
+      console.log("Leadform form_completed");
+      this.form_submitted = true;
+    }
     // POST form
     this.postForm()
     .then(() => {
-      if(!this.form_submitted) {
-        aegonTealium({
-          event: 'form_completed',
-          form_name: this.data.options.header || ""
-        });
-        console.log("Leadform form_completed");
-        this.form_submitted = true;
-      }
-
       this.thanks();
     }).fail((e) => {
       // Ignore errors
