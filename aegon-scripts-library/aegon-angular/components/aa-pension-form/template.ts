@@ -200,7 +200,25 @@ export const template = `
                                 <span class="general-form__box__head">Uw geboortedatum</span>
                                 
                                 <div class="inputs birthdate">
-                                  <aa-input-date (modelChange)="validateAge($event)" [(ngModel)]="birthDate" class="aa-qq-aov__input" [setFocus]="setFocus"></aa-input-date>
+                                  <aa-input-date (modelChange)="validateAge($event)" [(ngModel)]="birthDateOfPartner" class="aa-qq-aov__input" [setFocus]="setFocus"></aa-input-date>
+                                  
+                                  <span class="error-message__wrapper" *ngIf="userAgeInvalid">
+                                    <p class="error">
+                                      User age in is invalid
+                                    </p>
+                                  </span>
+                                
+                                  <span class="error-message__wrapper" *ngIf="userToYoung">
+                                    <p class="error">
+                                      User to young
+                                    </p>
+                                  </span>
+                                  
+                                  <span class="error-message__wrapper" *ngIf="userToOld">
+                                    <p class="error">
+                                      User to old
+                                    </p>
+                                  </span>
                                 </div>
                               </div>
                             </div>
@@ -237,16 +255,11 @@ export const template = `
                       <div class="col form-element__column">
                         <span class="general-form__box__head">Ingangsdatum van uw pensioenverzekering</span>
                         <p>De ingangsdatum van uw pensioen is altijd per de 1ste van de maand. De pensioenuitkering ontvangt u dan niet direct. die ontvangt u altijd aan het einde van de maand (rond de 25ste).</p>
-                          
+                        
                         <div class="inputs select">
-                          <select #mortgageSelect [(ngModel)]="mortgageType" class="no-dd" (change)="init($event.target.value); required">
+                          <select [ngModel]="startingDate" class="no-dd" (change)="changeStartingDate($event.target.value)" required>
                             <option value="" disabled>Maak uw keuze</option>
-                            <option [value]="1">first</option>
-                            <option [value]="2">second</option>
-                            <option [value]="3">third</option>
-                            <option [value]="4">fourth</option>
-                            <option [value]="5">fifth</option>
-                            <option [value]="6">sixth</option>
+                            <option *ngFor="let date of startingDateChoices" [value]="date.value">{{date.label}}</option>
                           </select>
                         </div>
                         

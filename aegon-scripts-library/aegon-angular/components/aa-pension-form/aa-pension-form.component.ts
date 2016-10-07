@@ -13,6 +13,11 @@ import {AABaseComponent} from "../../lib/classes/AABaseComponent";
 
 import {template} from "./template";
 
+const monthLabels: string[] = [
+  'januari', 'februari', 'maart', 'april', 'mei', 'juni',
+  'juli', 'augustus', 'september', 'oktober', 'november', 'december'
+];
+
 @Component({
   selector: 'aa-pension-form',
   template: template,
@@ -40,6 +45,7 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
   public amountTooSmall: boolean;
   public message: boolean = false;
   public birthDate: string;
+  public birthDateOfPartner: string;
   public age: number;
 
   public step1: boolean = true;
@@ -47,6 +53,7 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
   public step3: boolean = true;
   public step4: boolean = true;
   public step5: boolean = true;
+  public startingDate: string = '';
   public startingDateChoices: any[] = [];
 
   public amountIsValid: boolean = false;
@@ -90,7 +97,36 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
   }
 
   ngOnInit() {
-    super.ngOnInit();
+    // super.ngOnInit();
+    let date: Date = new Date(),
+      year: number = date.getFullYear(),
+      month: number = date.getMonth() + 1;
+    for (let i: number = 0; i < 12; i++) {
+      if (month === 12) {
+        month = 1;
+        year += 1;
+      } else {
+        month += 1;
+      }
+      let value = year + '-' + (month < 10 ? '0': '') + month + '-01',
+        label = '1 ' + monthLabels[month - 1] + ' ' + year;
+      this.startingDateChoices.push({value: value, label: label});
+    }
+  }
+
+  changeStartingDate(value: string): void {
+    this.startingDate = value;
+    // this.startingDateTooFar = false;
+    this.startingDateChoices.some((date, index) => {
+      if (date.value === value && index >= 3) {
+        // this.startingDateTooFar = true;
+        return true;
+      }
+    });
+  }
+
+  goTO(currentStep, nextStep): any {
+
   }
 
   editVisibility1(val): any {
