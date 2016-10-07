@@ -1,0 +1,35 @@
+/**
+ * Provides the styles for collapsible content wrap.
+ * */
+.collapsible-content-wrap {
+
+  .collapsible-content-row {
+
+    .collapsible-content-title {
+      display: inline-block;
+      float: left;
+    }
+
+    .collapsible-content-icons {
+      display: inline-block;
+      float: right;
+
+      .collapsible-content-icon {
+        display: inline-block;
+      }
+
+      .collapsible-content-link {
+
+      }
+
+      .collapsible-content-image {
+        width: 40px;
+        height: 40px;
+      }
+    }
+
+    .collapsible-content-description {
+      display: none;
+    }
+  }
+}
