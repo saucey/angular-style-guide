@@ -20,7 +20,7 @@ export const template = `
         </div>
         <p> {{ data.options.thanks.line1 }} </p>
         <p> {{ data.options.thanks.line2 }} </p>
-        <a [attr.href]="data.options.download.url" class="aa-leadform__thanks-button button orange icon-right arrow">
+        <a (click)="fireTealiumDownloadEbook()" [attr.href]="data.options.download.url" class="aa-leadform__thanks-button button orange icon-right arrow">
           {{ data.options.download.text }}
         </a>
       </div>
@@ -29,14 +29,14 @@ export const template = `
       </div>
       <form #form="ngForm" (ngSubmit)="onSubmit()" novalidate="novalidate">
         <div class="aa-leadform__line">
-          <label class="radio aa-radio aa-leadform__aanhef">
+          <label class="radio aa-radio aa-leadform__aanhef" (click)="fireTealiumFormStarted()">
           	<input class="aa-leadform__aanhef-m" type="radio" name="aanhef" required [attr.value]="data.options.form.fields.aanhef.dhr"/>
           	<span class="radio aa-radio__radio"></span>
           	<span class="aa-radio__text">
           	  {{ data.options.form.fields.aanhef.dhr }}
         	  </span>
           </label>
-          <label class="radio aa-radio aa-leadform__aanhef">
+          <label class="radio aa-radio aa-leadform__aanhef" (click)="fireTealiumFormStarted()">
           	<input class="aa-leadform__aanhef-f" type="radio" name="aanhef" checked [attr.value]="data.options.form.fields.aanhef.mevr"/>
           	<span class="radio aa-radio__radio"></span>
           	<span class="aa-radio__text">
@@ -45,16 +45,16 @@ export const template = `
           </label>
         </div>
         <div class="aa-leadform__line">
-          <input ngControl="voorletters" name="form-voorletters" [(ngModel)]="data.form.voorletters" type="text" required [attr.placeholder]="data.options.form.fields.voorletters.placeholder" class="aa-leadform__voorletters aa-leadform__sep">
+          <input (click)="fireTealiumFormStarted()" ngControl="voorletters" name="form-voorletters" [(ngModel)]="data.form.voorletters" type="text" required [attr.placeholder]="data.options.form.fields.voorletters.placeholder" class="aa-leadform__voorletters aa-leadform__sep">
           <input type="text" name="form-tussenvoegsel" [(ngModel)]="data.form.tussenvoegsel" [attr.placeholder]="data.options.form.fields.tussenvoegsel.placeholder"  class="aa-leadform__tussenvoegsel aa-leadform__sep">
         </div>
 
         <div class="aa-leadform__line aa-leadform__sep">
-          <input ngControl="achternaam" name="form-achternaam" [(ngModel)]="data.form.achternaam" type="text" required [attr.placeholder]="data.options.form.fields.achternaam.placeholder" class="aa-leadform__achternaam">
+          <input (click)="fireTealiumFormStarted()" ngControl="achternaam" name="form-achternaam" [(ngModel)]="data.form.achternaam" type="text" required [attr.placeholder]="data.options.form.fields.achternaam.placeholder" class="aa-leadform__achternaam">
         </div>
 
         <div class="aa-leadform__line aa-leadform__sep">
-          <input ngControl="email" name="form-email" [(ngModel)]="data.form.email" type="email" required pattern="[^ @]*@[^ @]+" [attr.placeholder]="data.options.form.fields.email.placeholder" class="aa-leadform__email">
+          <input (click)="fireTealiumFormStarted()" ngControl="email" name="form-email" [(ngModel)]="data.form.email" type="email" required pattern="[^ @]*@[^ @]+" [attr.placeholder]="data.options.form.fields.email.placeholder" class="aa-leadform__email">
         </div>
 
         <div class="aa-leadform__line aa-leadform__terms">
