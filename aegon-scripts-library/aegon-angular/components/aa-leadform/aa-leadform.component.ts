@@ -167,16 +167,6 @@ export class AALeadformComponent extends AABaseComponent {
       // Probably drupal is configured to check additional fields (tokens, etc)
       // Nevertheless the form is handled according to the definition (mail is sent)
       // That's why we can ignore the 403 error
-
-      if(!this.form_submitted) {
-        aegonTealium({
-          event: 'form_not_completed',
-          form_name: this.data.options.header || ""
-        });
-        console.log("Leadform form_not_completed");
-        this.form_submitted = true;
-      }
-
       this.thanks();
     });
   }
@@ -199,7 +189,7 @@ export class AALeadformComponent extends AABaseComponent {
        return;
 
      aegonTealium({
-      event: 'form_started',
+      event: 'e-book_download',
       form_name: this.data.options.header || ""
      });
      console.log("Leadform e-book downloaded");
