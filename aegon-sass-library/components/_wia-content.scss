@@ -1,7 +1,7 @@
 /**
  * Provides the styles for collapsible row content.
  * */
-.collapsible-row {
+.aa-collapsible-row {
 
   $imageSize: 43px;
   $rowHeight: 70px;
@@ -9,7 +9,7 @@
   border-top: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
 
-  & + .collapsible-row {
+  & + .aa-collapsible-row {
     border-top: none;
   }
 
