@@ -45,16 +45,16 @@ export const template = `
           </label>
         </div>
         <div class="aa-leadform__line">
-          <input ngControl="voorletters" [(ngModel)]="data.form.voorletters" type="text" required [attr.placeholder]="data.options.form.fields.voorletters.placeholder" class="aa-leadform__voorletters aa-leadform__sep">
-          <input type="text" [(ngModel)]="data.form.tussenvoegsel" [attr.placeholder]="data.options.form.fields.tussenvoegsel.placeholder"  class="aa-leadform__tussenvoegsel aa-leadform__sep">
+          <input ngControl="voorletters" name="form-voorletters" [(ngModel)]="data.form.voorletters" type="text" required [attr.placeholder]="data.options.form.fields.voorletters.placeholder" class="aa-leadform__voorletters aa-leadform__sep">
+          <input type="text" name="form-tussenvoegsel" [(ngModel)]="data.form.tussenvoegsel" [attr.placeholder]="data.options.form.fields.tussenvoegsel.placeholder"  class="aa-leadform__tussenvoegsel aa-leadform__sep">
         </div>
 
         <div class="aa-leadform__line aa-leadform__sep">
-          <input ngControl="achternaam" [(ngModel)]="data.form.achternaam" type="text" required [attr.placeholder]="data.options.form.fields.achternaam.placeholder" class="aa-leadform__achternaam">
+          <input ngControl="achternaam" name="form-achternaam" [(ngModel)]="data.form.achternaam" type="text" required [attr.placeholder]="data.options.form.fields.achternaam.placeholder" class="aa-leadform__achternaam">
         </div>
 
         <div class="aa-leadform__line aa-leadform__sep">
-          <input ngControl="email" [(ngModel)]="data.form.email" type="email" required pattern="[^ @]*@[^ @]+" [attr.placeholder]="data.options.form.fields.email.placeholder" class="aa-leadform__email">
+          <input ngControl="email" name="form-email" [(ngModel)]="data.form.email" type="email" required pattern="[^ @]*@[^ @]+" [attr.placeholder]="data.options.form.fields.email.placeholder" class="aa-leadform__email">
         </div>
 
         <div class="aa-leadform__line aa-leadform__terms">
