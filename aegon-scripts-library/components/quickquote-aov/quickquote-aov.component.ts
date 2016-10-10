@@ -281,7 +281,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
         <div class="bigger" *ngIf="!showTotalAmount">
           <div class="row">
             <span class="label">Herkent u zich in deze bedragen?</span>
-            <button class="button icon-right icon-calculator" (click)="showTotalAmount = true">
+            <button class="button icon-right icon-calculator" (click)="showTotalAmount = true; tealiumStep3(); tealiumStep4();">
               Bereken totaal
             </button>
           </div>
@@ -543,5 +543,68 @@ export class QuickQuoteAovComponent implements OnInit {
     });
 
     return groupCosts;
+  }
+
+  private tealiumStep3() {
+    this.tealium({
+       page_cat_2_name : 'bevestiging',
+       step_name : 'qq-berekening-bevestiging',
+       product_name : ["aov"],
+       product_category : ["inkomensverzekeringen"],
+       page_step : '03',
+       event : 'qq_step_03'
+    });
+    console.info("page_step : '03'","event : 'qq_step_03'");
+  }
+
+  private tealiumStep4() {
+    this.tealium({
+       page_cat_2_name : 'bevestiging',
+       //step_name : 'qq-berekening-bevestiging',
+       product_name : ["aov"],
+       product_category : ["inkomensverzekeringen"],
+       page_step : '04',
+       event : 'event30'
+    });
+    console.info("page_step : '04'","event : 'event30'");
+  }
+
+  /*
+   * Checks if utag and utag_data exist
+   * and triggers tealium functions.
+   *
+   * @param data {Object}: an object with the variables.
+   */
+  private tealium (data: Object): void {
+    // Merge properties with global utag_data object when available.
+    var opt = [
+        "page_cat_1_type",
+        "page_cat_2_name",
+        "page_cat_3_section",
+        "page_cat_4_productgroup",
+        "page_cat_5_product",
+        "page_cat_6_businessline"
+    ];
+
+    if (typeof utag_data == 'object') {
+        for(let i=0;i<opt.length;i++) {
+            if (!data.hasOwnProperty(opt[i])) {
+                if (utag_data.hasOwnProperty(opt[i]) && utag_data[opt[i]] != "" ) {
+                    data[opt[i]] = utag_data[opt[i]];
+                }
+            }
+        }
+    }
+    // Check if utag can be used.
+    if(typeof utag == 'object' && typeof utag.view == 'function') {
+      utag.view(data);
+    } else {
+      // Give some time to load.
+      setTimeout(() => {
+        if (typeof utag == 'object' && typeof utag.view == 'function') {
+          utag.view(data);
+        }
+      }, 1600);
+    }
   }
 }
