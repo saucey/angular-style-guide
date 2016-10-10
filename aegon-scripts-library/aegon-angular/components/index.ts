@@ -13,6 +13,7 @@ export * from './aa-qq-beleggen/aa-qq-beleggen.component';
 export * from './aa-qq-boeterente/aa-qq-boeterente.component';
 export * from './aa-qq-historisch-rendement/aa-qq-historisch-rendement.component';
 export * from './aa-qq-summary/aa-qq-summary.component';
+export * from './aa-qq-mortgage/aa-qq-mortgage.component';
 export * from './aa-quiz/aa-quiz.component';
 export * from './aa-slider/aa-slider.component';
 export * from './aa-slider-input/aa-slider-input.component';
