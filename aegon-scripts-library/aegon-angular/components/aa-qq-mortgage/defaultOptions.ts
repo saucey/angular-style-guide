@@ -1,25 +1,25 @@
 export const defaultOptions = {
   title: 'Bereken uw maximale hypotheek',
   
-  incomeLabel: 'Inkomen',
-  incomeHelpText: 'Geef uw inkomen op',
+  incomeLabel: 'Vul hier uw bruto maandinkomen in',
+  incomeHelpText: 'Dit is uw maandelijkse bruto inkomen exclusief uw vakantiegeld en eventuele dertiende maand.',
   incomeExtraMonthLabel: 'Vaste 13e maand',
   incomeVacationMoneyLabel: 'Vakantiegeld',
 
-  incomePartnerLabel: 'Inkomen Partner',
-  incomePartnerHelpText: 'Geef het inkomen van uw partner op',
+  incomePartnerLabel: 'Vul hier het bruto inkomen van uw partner in',
+  incomePartnerHelpText: 'Dit is het maandelijkse bruto inkomen van uw partner exclusief vakantiegeld en eventuele dertiende maand.',
   incomePartnerExtraMonthLabel: 'Vaste 13e maand',
   incomePartnerVacationMoneyLabel: 'Vakantiegeld',  
 
-  interestYearsLabel: 'Rentevaste periode',
-  interestYearsHelpText: 'Geef uw rentevaste persiode op',
+  interestYearsLabel: 'Kies uw rentevaste periode',
+  interestYearsHelpText: 'U zet bij het afsluiten van uw hypotheek het rentepercentage voor een bepaalde periode vast. Dit heet de rentevaste periode. Wanneer de rentevaste periode voorbij is, kiest u opnieuw hoe lang u uw rente wilt vastzetten.',
 
-  playWithMortgageLabel: 'Bereken wat uw huis per maand kost',
-  playValueLabel: 'Maximale hypotheek',
-  playValueHelpText: 'Geef de maximale hypotheekwaarde op',
+  playWithMortgageLabel: 'Bereken uw maandlasten bij een lagere hypotheek',
+  playValueLabel: 'Uw maximale hypotheek',
+  playValueHelpText: 'Vul het hypotheekbedrag in dat u wilt lenen. Zo berekent u wat uw bruto maandlasten zijn bij een lager bedrag dan uw maximale hypotheek.',
 
   mortgageValueTitle: 'Hypotheekbedrag',
   monthlyPaymentTitle: 'Bruto maandlasten',
-  ctaButtonText: 'Direct regelen',
+  ctaButtonText: 'Bekijk de adviesmogelijkheden',
   ctaButtonUrl: '/particulier/hypotheek/hypotheekadvies'
 };
