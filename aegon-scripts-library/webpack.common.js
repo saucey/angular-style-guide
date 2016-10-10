@@ -15,7 +15,8 @@ module.exports = {
     module: {
         loaders: [
             { test: /\.html$/, loader: 'raw-loader', exclude: /node_modules/ },
-            { test: /\.ts$/, loader: 'ts-loader' }
+            { test: /\.ts$/, loader: 'ts-loader' },
+            { test: /\.json$/, loader: 'json-loader' }
         ]
     },
     postcss: function () {
