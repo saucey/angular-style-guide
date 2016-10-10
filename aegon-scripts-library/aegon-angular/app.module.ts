@@ -60,6 +60,7 @@ const exportedDeclarations = [
   aaComp.AAQQBoeterenteComponent,
   aaComp.AAQQHistorischRendementComponent,
   aaComp.AAQQSummaryComponent,
+  aaComp.AAQQMortgageComponent,
   aaComp.AAPensionFormComponent,
   aaComp.AALeadformComponent,
   aaComp.AAQuizComponent,
