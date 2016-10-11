@@ -46,7 +46,9 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
   public message: boolean = false;
   public birthDate: string;
   public age: number;
-  public initChange: boolean;
+  public initChangeHasPartnerNo: boolean;
+  public initChangeHasPartnerYes: boolean;
+  public initChangeNoPolicy: boolean;
 
   public currentStep = 'step1';
   public dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -139,10 +141,10 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
 
   btnValidationForUserPartner(): boolean {
 
-    if(this.hasPartner !== 'show' && this.initChange == true) return false;
+    if(this.hasPartner !== 'show' && this.initChangeHasPartnerNo == true) return false;
 
-    if(this.hasPartner == 'show' && this.partnerDob == 'hidden') return false;
-
+    if(this.initChangeNoPolicy && this.partnerDob == 'hidden') return false;
+    //
     if(!this.isAgeValid) return false;
 
     return true;
