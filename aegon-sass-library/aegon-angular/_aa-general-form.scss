@@ -4,6 +4,29 @@
   display: block;
 }
 
+.form-text__column__svg__logo {
+  width: 80px;
+  margin-bottom: 30px;
+}
+
+.form-section__input__results {
+  padding: 10px 30px 10px 20px;
+  background-color: #D9EBF7;
+  border-radius: 5px;
+  position: relative;
+  span {
+    font-weight: bold;
+  }
+  .edit {
+    cursor:pointer;
+    position: absolute;
+    top: -10px;
+    right: 30px;
+    color: $lochmara_approx;
+    font-weight: normal;
+  }
+}
+
 .error {
   background-color: #edd5d9;
   background-image: none;
@@ -101,7 +124,7 @@ label.radio {
   font-size: 25px;
   color: $lochmara_approx;
   line-height: 1em;
-  margin-bottom: 5px;
+  margin-bottom: 15px;
   display: block;
 }
 
@@ -115,7 +138,7 @@ label.radio {
   margin-top: 60px;
 
   .number-form__list__section {
-    @include rem('margin', 0, 0, 20);
+    @include rem('margin', 0, 0, 40);
     position: relative;
   }
 
@@ -174,6 +197,7 @@ label.radio {
       border-radius: 5px 0 0 5px;
       background-color: $pastel_light_blue;
       vertical-align: top;
+      width: 100%;
         p {
           margin: 0;
         }
@@ -189,19 +213,30 @@ label.radio {
         }
     }
     &.form-text__column {
-      width: 300px;
+      min-width: 300px;
       background-color: green;
       border-radius: 0 5px 5px 0;
       background-color: $dark_blue;
-        aside {
-          //padding: 20px;
+      span {
+        color: white;
+        display: block;
+        font-weight: bold;
+
+        &.header {
+          font-size: 1.8em;
+          margin-bottom: 10px;
         }
-        h2 {
-          font-size: 3em;
+
+        &.content {
+          font-size: 1.1em;
+          margin-bottom: 20px;
         }
-        h4, h3, h2 {
-          color: white;
+
+        &.brand {
+          font-weight: normal;
+          font-size: 0.8em;
         }
+      }
     }
   }
 }

@@ -31,6 +31,7 @@ const internalDeclarations = [
   aaPipes.AAPeriodPipe,
   aaPipes.AAReplacePipe,
   aaPipes.AAReverseDateStringPipe,
+  aaPipes.DateToReadableString,
 
   comp.HelpComponent,
   comp.InputNumberComponent,

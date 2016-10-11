@@ -45,14 +45,20 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
   public amountTooSmall: boolean;
   public message: boolean = false;
   public birthDate: string;
-  public birthDateOfPartner: string;
   public age: number;
 
-  public step1: boolean = true;
-  public step2: boolean = true;
-  public step3: boolean = true;
-  public step4: boolean = true;
-  public step5: boolean = true;
+
+  public currentStep = 'step1';
+  public dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+
+  public step = {
+    1: true,
+    2: true,
+    3: true,
+    4: true,
+    5: true
+  };
+
   public startingDate: string = '';
   public startingDateChoices: any[] = [];
 
@@ -67,27 +73,15 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
   public hasPartner: string = "hidden";
   public partnerDob: string = "show";
 
-  form = new FormGroup({
-    first: new FormControl('Nhhh', Validators.minLength(10)),
-    last: new FormControl('Drew'),
-    third: new FormControl('Drew'),
-    fourth: new FormControl('Drew'),
-  });
-
-  get first(): any { return this.form.get('first'); }
-
-  onSubmit(): void {
-    console.log(this.form.value);  // {first: 'Nancy', last: 'Drew'}
-  }
-
-  setValue() { this.form.setValue({first: 'Carson', last: 'Drew'}); }
+  public usersDobReadable: string = '';
+  public partnersDobReadable: string = '';
 
   public visibility = {
-    one: 'show',
-    two: 'hidden',
-    three: 'hidden',
-    four: 'hidden',
-    five: 'hidden'
+    1: 'show',
+    2: 'hidden',
+    3: 'hidden',
+    4: 'hidden',
+    5: 'hidden'
   };
 
   constructor(
@@ -125,74 +119,32 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
     });
   }
 
-  goTO(currentStep, nextStep): any {
-
+  editVisibility(val): any{
+    if(this.step[val]) return 'hidden';
+    return this.visibility[val] == 'show' ? 'hidden' : 'show';
   }
 
-  editVisibility1(val): any {
-    return val == 'show' ? 'hidden' : 'show';
+  goTo(current, next): any {
+    this.step[current] = false;
+    this.visibility[current] = "hidden";
+    this.visibility[next] = "show";
   }
 
-  editVisibility2(val): any {
-
-    if(this.step2) return 'hidden';
-    return val == 'show' ? 'hidden' : 'show';
-
-  }
-
-  editVisibility3(val): any {
-
-    if(this.step3) return 'hidden';
-    return val == 'show' ? 'hidden' : 'show';
-
-  }
-
-  editVisibility4(val): any {
-
-    if(this.step4) return 'hidden';
-    return val == 'show' ? 'hidden' : 'show';
-
-  }
-
-  editVisibility5(val): any {
-
-    if(this.step5) return 'hidden';
-    return val == 'show' ? 'hidden' : 'show';
-
-  }
-
-  submitAmount(): void {
-
-    if (!this.isValidAmount()) {
-      //show the hidden div with money value
-      this.visibility.one = "hidden";
-      this.visibility.two = "show";
+  editSection(val): any {
+    for (let i = 1; i <= 5; i++) {
+      this.visibility[i] = (val == i) ? 'show' : 'hidden';
     }
-
   }
 
-  submitPensionLocation(): void {
+  btnValidationForUserPartner(): boolean {
 
-      this.step2 = false;
-      this.visibility.two = "hidden";
-      this.visibility.three = "show";
-  }
+    if(this.hasPartner == 'hidden') return false;
 
-  submitDob(): void{
-      this.step3 = false;
-      this.visibility.three = "hidden";
-      this.visibility.four = "show";
-  }
+    if(this.hasPartner !== 'hidden' && this.partnerDob == 'hidden') return false;
 
-  submitUserPartnerDob(): void{
-    this.step4 = false;
-    this.visibility.four = "hidden";
-    this.visibility.five = "show";
-  }
+    if(!this.isAgeValid) return false;
 
-  submitFinal(): void{
-    this.step5 = false;
-    this.visibility.five = "hidden";
+    return true;
   }
 
   isValidAmount(): boolean {
@@ -210,9 +162,12 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
 
   }
 
+
   validateAge(val): any {
 
     this.age = calculateAge(val);
+
+    this.usersDobReadable = new Date(val).toLocaleDateString('nl-NL', this.dateOptions);
 
     if(this.age == undefined){
       this.userAgeInvalid = true;
@@ -244,51 +199,6 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
 
     return this.isAgeValid = false;
 
-  }
-
-  editSection(val): any {
-    this.coll(val);
-  }
-
-  coll(val: string) {
-    switch (val) {
-      case "box1":
-        this.visibility.one = 'show';
-        this.visibility.two = 'hidden';
-        this.visibility.three = 'hidden';
-        this.visibility.four = 'hidden';
-        this.visibility.five = 'hidden';
-        break;
-      case "box2":
-        this.visibility.one = 'hidden';
-        this.visibility.two = 'show';
-        this.visibility.three = 'hidden';
-        this.visibility.four = 'hidden';
-        this.visibility.five = 'hidden';
-        break;
-      case "box3":
-        this.visibility.one = 'hidden';
-        this.visibility.two = 'hidden';
-        this.visibility.three = 'show';
-        this.visibility.four = 'hidden';
-        this.visibility.five = 'hidden';
-        break;
-      case "box4":
-        this.visibility.one = 'hidden';
-        this.visibility.two = 'hidden';
-        this.visibility.three = 'hidden';
-        this.visibility.four = 'show';
-        this.visibility.five = 'hidden';
-        break;
-      case "box5":
-        this.visibility.one = 'hidden';
-        this.visibility.two = 'hidden';
-        this.visibility.three = 'hidden';
-        this.visibility.four = 'hidden';
-        this.visibility.five = 'show';
-        break;
-      default:
-    }
   }
 }
 
