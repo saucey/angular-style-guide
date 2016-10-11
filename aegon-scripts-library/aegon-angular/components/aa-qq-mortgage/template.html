@@ -49,7 +49,7 @@
             '50%': [ 10 ],
             '75%': [ 15 ],
             'max': [ 28 ]
-          }" [initial]="2" (change)="calculate()" label="data.options.interestYearsLabel" helpText="{{data.options.interestYearsHelpText}}" [(ngModel)]="interestYears">
+          }" [initial]="2" (change)="calculate()" label="{{data.options.interestYearsLabel}}" helpText="{{data.options.interestYearsHelpText}}" [(ngModel)]="interestYears">
           </aegon-slider>
         </div>
       </div>
