@@ -63,20 +63,20 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
 
   public startingDate: string = '';
   public startingDateChoices: any[] = [];
+  public isAgeValid: any[] = [];
+  public userAgeInvalid: any[] = [];
+  public userToOld: any[] = [];
+  public userToYoung: any[] = [];
 
   public amountIsValid: boolean = false;
-  public userToYoung: boolean = false;
-  public userToOld: boolean = false;
-  public userAgeInvalid: boolean = false;
 
   public minAge: number = 50;
   public maxAge: number = 75;
-  public isAgeValid: boolean = true;
 
   public hasPartner: string = "hidden";
   public partnerDob: string = "hidden";
 
-  public usersDobReadable: string = '';
+  public usersDobReadable: any[] = [];
   public partnersDobReadable: string = '';
 
   public visibility = {
@@ -144,8 +144,8 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
     if(this.hasPartner !== 'show' && this.initChangeHasPartnerNo == true) return false;
 
     if(this.initChangeNoPolicy && this.partnerDob == 'hidden') return false;
-    //
-    if(!this.isAgeValid) return false;
+
+    if(!this.isAgeValid[1] && this.isAgeValid[1] !== undefined) return false;
 
     return true;
   }
@@ -166,41 +166,41 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
   }
 
 
-  validateAge(val): any {
+  validateUserAge(val, index): any {
 
     this.age = calculateAge(val);
 
-    this.usersDobReadable = new Date(val).toLocaleDateString('nl-NL', this.dateOptions);
+    this.usersDobReadable[index] = new Date(val).toLocaleDateString('nl-NL', this.dateOptions);
 
     if(this.age == undefined){
-      this.userAgeInvalid = true;
-      this.userToYoung = false;
-      this.userToOld = false;
+      this.userAgeInvalid[index] = true;
+      this.userToYoung[index] = false;
+      this.userToOld[index] = false;
 
-      return this.isAgeValid = true;
+      return this.isAgeValid[index] = true;
     }
 
     if(this.age < this.minAge){
-      this.userAgeInvalid = false;
-      this.userToYoung = true;
-      this.userToOld = false;
+      this.userAgeInvalid[index]  = false;
+      this.userToYoung[index]  = true;
+      this.userToOld[index]  = false;
 
-      return this.isAgeValid = true;
+      return this.isAgeValid[index] = true;
     }
 
     if(this.age > this.maxAge){
-      this.userAgeInvalid = false;
-      this.userToYoung = false;
-      this.userToOld = true;
+      this.userAgeInvalid[index]  = false;
+      this.userToYoung[index]  = false;
+      this.userToOld[index]  = true;
 
-      return this.isAgeValid = true;
+      return this.isAgeValid[index] = true;
     }
 
-    this.userAgeInvalid = false;
-    this.userToYoung = false;
-    this.userToOld = false;
+    this.userAgeInvalid[index] = false;
+    this.userToYoung[index] = false;
+    this.userToOld[index] = false;
 
-    return this.isAgeValid = false;
+    return this.isAgeValid[index] = false;
 
   }
 }

@@ -97,8 +97,8 @@ export const template = `
             <span>
             {{whofor}} <br>
             {{partnersInfo}}<br>
-            <span *ngIf='usersDobReadable !== "" && initChangeNoPolicy == false'>
-               Geboortedatum partner {{usersDobReadable}}
+            <span *ngIf='usersDobReadable[1] !== "" && initChangeNoPolicy == false'>
+               Geboortedatum partner {{usersDobReadable[1]}}
             </span>
             
             </span>
@@ -150,21 +150,21 @@ export const template = `
                                 <span class="general-form__box__head">Uw geboortedatum</span>
                                 
                                 <div class="inputs birthdate">
-                                  <aa-input-date (modelChange)="validateAge($event)" [(ngModel)]="birthDateOfPartner" class="aa-qq-aov__input" [setFocus]="setFocus"></aa-input-date>
+                                  <aa-input-date (modelChange)="validateUserAge($event, 1)" [(ngModel)]="birthDateOfPartner" class="aa-qq-aov__input" [setFocus]="setFocus"></aa-input-date>
                                   
-                                  <span class="error-message__wrapper" *ngIf="userAgeInvalid">
+                                  <span class="error-message__wrapper" *ngIf="userAgeInvalid[1]">
                                     <p class="error">
                                       User age in is invalid
                                     </p>
                                   </span>
                                 
-                                  <span class="error-message__wrapper" *ngIf="userToYoung">
+                                  <span class="error-message__wrapper" *ngIf="userToYoung[1]">
                                     <p class="error">
                                       User to young
                                     </p>
                                   </span>
                                   
-                                  <span class="error-message__wrapper" *ngIf="userToOld">
+                                  <span class="error-message__wrapper" *ngIf="userToOld[1]">
                                     <p class="error">
                                       User to old
                                     </p>
@@ -209,21 +209,21 @@ export const template = `
                         <span class="general-form__box__head">Uw geboortedatum</span>
                         
                         <div class="inputs birthdate">
-                          <aa-input-date (modelChange)="validateAge($event)" [(ngModel)]="birthDate" class="aa-qq-aov__input" [setFocus]="setFocus"></aa-input-date>
+                          <aa-input-date (modelChange)="validateUserAge($event, 2)" [(ngModel)]="birthDate" class="aa-qq-aov__input" [setFocus]="setFocus"></aa-input-date>
                           
-                          <span class="error-message__wrapper" *ngIf="userAgeInvalid">
+                          <span class="error-message__wrapper" *ngIf="userAgeInvalid[2]">
                             <p class="error">
                               User age in is invalid
                             </p>
                           </span>
                         
-                          <span class="error-message__wrapper" *ngIf="userToYoung">
+                          <span class="error-message__wrapper" *ngIf="userToYoung[2]">
                             <p class="error">
                               User to young
                             </p>
                           </span>
                           
-                          <span class="error-message__wrapper" *ngIf="userToOld">
+                          <span class="error-message__wrapper" *ngIf="userToOld[2]">
                             <p class="error">
                               User to old
                             </p>
@@ -231,7 +231,7 @@ export const template = `
                           
                         </div>
                         
-                        <button class="arrow button" type="button" (click)="goTo(4,5)" [disabled]="isAgeValid">Volgende vraag</button>
+                        <button class="arrow button" type="button" (click)="goTo(4,5)" [disabled]="isAgeValid[2]">Volgende vraag</button>
                         
                       </div>
                       <div class="col form-text__column">
