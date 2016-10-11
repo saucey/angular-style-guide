@@ -11,7 +11,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMort
   selector: 'aegon-quickquote-mortgage',
 
   template: templateElem ? migrateTemplate(templateElem.value) : `
-    <div class="quickquote angular mortgage" data-interest="2.95,3.25,3.25,3.25,3.25,3.25,3.35,3.35,3.35,3.35,3.35,3.70,3.70,3.70,3.70,3.70,3.70,3.70,3.70,3.70,3.70">
+    <div class="quickquote angular mortgage" #interest data-interest="2.95,3.25,3.25,3.25,3.25,3.25,3.35,3.35,3.35,3.35,3.35,3.70,3.70,3.70,3.70,3.70,3.70,3.70,3.70,3.70,3.70">
       <div class="triangle"></div>
       <div class="calculation">
         <h3>Bereken uw maximale hypotheek</h3>
