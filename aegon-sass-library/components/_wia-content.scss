@@ -1,0 +1,135 @@
+/**
+ * Provides the styles for collapsible row content.
+ * */
+.aa-collapsible-row {
+
+  $imageSize: 43px;
+  $rowHeight: 70px;
+
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+
+  & + .aa-collapsible-row {
+    border-top: none;
+  }
+
+  .collapsible-row__title {
+    color: #20201e;
+    display: inline-block;
+    float: left;
+    font-family: $font_light;
+    font-size: 18px;
+    font-weight: lighter;
+    margin: 0;
+    height: $rowHeight;
+    line-height: $rowHeight;
+    vertical-align: middle;
+  }
+
+  .collapsible-content-icons {
+    display: inline-block;
+    float: right;
+    min-width: 30%;
+    height: $rowHeight;
+    line-height: $rowHeight;
+    margin: 0;
+
+    .collapsible-content-icon {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .collapsible-content-link {
+      display: block;
+      width: $imageSize;
+      height: $imageSize;
+
+      &:hover {
+        cursor: pointer;
+        cursor: hand;
+      }
+    }
+
+    .collapsible-content-link__image {
+      max-height: $imageSize;
+    }
+  }
+
+  .collapsible-description {
+    padding: 15px;
+    background: #f2f2f2;
+    overflow: hidden;
+
+    .collapsible-description__image {
+      display: inline-block;
+      vertical-align: top;
+      width: 80px;
+      margin-right: 10px;
+    }
+
+    .collapsible-description__intro {
+      display: inline-block;
+      width: calc(100% - 95px);
+      font-family: $font_light;
+      font-size: 18px;
+      line-height: 28px;
+    }
+
+    .collapsible-description__text {
+      display: inline-block;
+      width: calc(100% - 95px);
+      font-family: $font_light;
+      font-size: 18px;
+      line-height: 28px;
+    }
+
+    .collapsible-description-actions {
+      margin-left: 95px;
+
+      .action_close {
+        margin-right: 25px;
+      }
+    }
+
+    .action_close:hover,
+    .action_show:hover {
+      cursor: pointer;
+      cursor: hand;
+    }
+
+    .action_close:after {
+      -webkit-transform: rotate(270deg);
+      -ms-transform: rotate(270deg);
+      transform: rotate(270deg);
+    }
+
+    .action_show:after {
+      -webkit-transform: rotate(90deg);
+      -ms-transform: rotate(90deg);
+      transform: rotate(90deg);
+    }
+
+    .action_close:after,
+    .action_show:after {
+      display: inline-block;
+      margin-left: 5px;
+      content: "\e600";
+      transition: -webkit-transform 0.2s ease;
+      transition: transform 0.2s ease;
+      vertical-align: bottom;
+      font-family: "aegon_icons";
+      font-size: 15px;
+      font-size: 0.9375rem;
+      font-weight: normal;
+      -webkit-font-smoothing: antialiased;
+    }
+  }
+
+  /**
+   * Just for temporary use. It's highlighting some placeholders.
+   * */
+  .phld {
+    color: #ca4642;
+    font-weight: bolder;
+  }
+}

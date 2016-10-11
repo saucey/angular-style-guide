@@ -1,0 +1,29 @@
+<div class="aa-collapsible-row" *ngFor="let content of topicsList; let row = index;">
+
+  <h5 class="collapsible-row__title">{{ content.title }}</h5>
+
+  <div class="collapsible-content-icons">
+    <div class="collapsible-content-icon" *ngFor="let topic of content.topics; let column = index;">
+      <a class="collapsible-content-link" (click)="setActiveItem(row, column)">
+        <img [src]="topic.image" class="collapsible-content-link__image" />
+      </a>
+    </div>
+  </div>
+
+  <div class="clearfix"></div>
+
+  <div *ngFor="let topic of content.topics; let column = index;">
+    <div *ngIf="getActiveItem().column == column && getActiveItem().row == row" [@shrinkOut]  class="collapsible-description">
+
+      <img [src]="topic.image" class="collapsible-description__image" />
+      <p class="collapsible-description__intro" *ngIf="false == isFullTextShown(topic)" [innerHTML]="topic.intro"></p>
+      <div class="collapsible-description__text" *ngIf="isFullTextShown(topic)" [innerHTML]="topic.text"></div>
+
+      <div class="collapsible-description-actions">
+        <a (click)="setActiveItem(null, null)" class="action_close">Sluit</a>
+        <a (click)="setShowFullText(true)" *ngIf="'hidden' == visibility && isDescriptionTextValid(topic)" class="action_show">Lees meer</a>
+      </div>
+    </div>
+  </div>
+
+</div>

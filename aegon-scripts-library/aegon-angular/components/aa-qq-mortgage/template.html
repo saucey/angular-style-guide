@@ -1,0 +1,90 @@
+<div class="quickquote lijfrente sparen mortgage" #interest data-interest="2.95,3.25,3.25,3.25,3.25,3.25,3.35,3.35,3.35,3.35,3.35,3.70,3.70,3.70,3.70,3.70,3.70,3.70,3.70,3.70,3.70">
+  <div class="triangle"></div>
+  <div class="calculation">
+    <h3>{{data.options.title}}</h3>
+    
+    <div class="field">
+      <div class="inputs slider">
+        <aegon-slider (click)="submitAmount()" (change)="calculate()" prefix="€" [range]="{
+          'min': [  200 ],
+          '25%': [  1000 ],
+          '50%': [ 2000 ],
+          '75%': [  3000 ],
+          'max': [ 7500 ]
+        }" [initial]="2500" label="{{data.options.incomeLabel}}" helpText="{{data.options.incomeHelpText}}" [(ngModel)]="incomeValue" >
+        </aegon-slider>
+      </div>
+    </div>
+    
+    <div *ngIf="step > 1">
+      <div class="field">
+        <div class="inputs right">
+          <aegon-checkbox (change)="calculate()" [(ngModel)]="extraMonth">{{data.options.incomeExtraMonthLabel}}</aegon-checkbox>
+          <aegon-checkbox (change)="calculate()" [(ngModel)]="vacationMoney">{{data.options.incomeVacationMoneyLabel}}</aegon-checkbox>
+        </div>
+      </div>
+      <div class="field">
+        <div class="inputs slider">
+          <aegon-slider prefix="€" placeholder="0" [range]="{
+            'min': [    0 ],
+            '25%': [ 1000 ],
+            '50%': [ 2000 ],
+            '75%': [ 3000 ],
+            'max': [ 7500 ]
+          }" [initial]="0" label="{{data.options.incomePartnerLabel}}" helpText="{{data.options.incomePartnerHelpText}}" (change)="calculate()" [(ngModel)]="incomePartnerValue" >
+          </aegon-slider>
+        </div>
+      </div>
+      <div class="field">
+        <div class="inputs right">
+          <aegon-checkbox (change)="calculate()" [(ngModel)]="extraMonthPartner">{{data.options.incomePartnerExtraMonthLabel}}</aegon-checkbox>
+          <aegon-checkbox (change)="calculate()" [(ngModel)]="vacationMoneyPartner">{{data.options.incomePartnerVacationMoneyLabel}}</aegon-checkbox>
+        </div>
+      </div>
+      <div class="field">
+        <div class="inputs slider">
+          <aegon-slider suffix="jaar" [range]="{
+            'min': [  2 ],
+            '25%': [  5 ],
+            '50%': [ 10 ],
+            '75%': [ 15 ],
+            'max': [ 28 ]
+          }" [initial]="2" (change)="calculate()" label="data.options.interestYearsLabel" helpText="{{data.options.interestYearsHelpText}}" [(ngModel)]="interestYears">
+          </aegon-slider>
+        </div>
+      </div>
+      <div class="field">
+        <span class="inputs">
+          <aegon-checkbox [(ngModel)]="playWithMortgage">
+            {{data.options.playWithMortgageLabel}}
+          </aegon-checkbox>
+        </span>
+      </div>
+      <div *ngIf="playWithMortgage" class="field">
+        <div class="inputs slider">
+          <aegon-slider prefix="€" [range]="{
+            'min': [ 0 ],
+            'max': [ calculatedValue ]
+          }" [initial]="calculatedValue" (change)="monthlyPayment = getMonthlyPayment()" label="{{data.options.playValueLabel}}" helpText="{{data.options.playValueHelpText}}" [(ngModel)]="playValue" >
+          </aegon-slider>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div *ngIf="step > 1" class="result" >
+    <div class="payment-result">
+      <div class="result1">
+        <div class="title">{{data.options.mortgageValueTitle}}</div>
+        <div id="pension-calculated" class="calculated">&euro; {{playValue | money}}<span>,- *</span></div>
+      </div>
+      <div class="result2">
+        <div class="title">{{data.options.monthlyPaymentTitle}}</div>
+        <div id="interest-calculated" class="calculated">&euro; {{monthlyPayment | money}}<span>,- *</span></div>
+      </div>
+    </div>
+    <p class="result-button">
+      <button class="button orange-gradient icon-right arrow"><a href="{{data.options.ctaButtonUrl}}">{{data.options.ctaButtonText}}</a></button>
+    </p>
+  </div>
+</div>

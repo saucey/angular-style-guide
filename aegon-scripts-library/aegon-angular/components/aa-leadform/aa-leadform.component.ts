@@ -12,6 +12,7 @@ import {defaultOptions} from "./defaultOptions";
 import * as libDom from "../../lib/dom";
 import * as libUtil from "../../lib/util";
 import * as libDate from "../../lib/date";
+import {aegonTealium} from "../../lib/aegon_tealium";
 
 declare var jQuery: any;
 
@@ -27,6 +28,10 @@ export class AALeadformComponent extends AABaseComponent {
   // Internal slider DOM reference
   @ViewChild('form') form: ElementRef;
   @ViewChild('root') root: ElementRef;
+
+  public form_started:boolean = false;
+  public form_submitted:boolean = false;
+  public ebook_downloaded:boolean = false;
 
   public defaultOptions : any = defaultOptions;
   /**
@@ -44,6 +49,12 @@ export class AALeadformComponent extends AABaseComponent {
 
   ngOnInit(): void {
     super.ngOnInit();
+
+    aegonTealium({
+      event: 'form_view',
+      form_name: this.data.options.header || ""
+    });
+    console.log("Leadform form_view");
 
     // Init state
     this.reset();
@@ -137,6 +148,14 @@ export class AALeadformComponent extends AABaseComponent {
    */
   onSubmit() {
     this.data.state = 'loading';
+    if(!this.form_submitted) {
+      aegonTealium({
+        event: 'form_completed',
+        form_name: this.data.options.header || ""
+      });
+      console.log("Leadform form_completed");
+      this.form_submitted = true;
+    }
     // POST form
     this.postForm()
     .then(() => {
@@ -150,4 +169,30 @@ export class AALeadformComponent extends AABaseComponent {
       this.thanks();
     });
   }
+
+   fireTealiumFormStarted() {
+     if(this.form_started)
+       return;
+
+     aegonTealium({
+      event: 'form_started',
+      form_name: this.data.options.header || ""
+     });
+     console.log("Leadform form_started");
+
+     this.form_started = true;
+   }
+
+   fireTealiumDownloadEbook() {
+     if(this.ebook_downloaded)
+       return;
+
+     aegonTealium({
+      event: 'e-book_download',
+      form_name: this.data.options.header || ""
+     });
+     console.log("Leadform e-book downloaded");
+
+     this.ebook_downloaded = true;
+   }
 }

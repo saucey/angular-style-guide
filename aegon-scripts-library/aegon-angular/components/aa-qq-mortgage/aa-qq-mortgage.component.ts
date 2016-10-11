@@ -1,107 +1,26 @@
+/**
+ * Mortgage quick quote
+ */
+
 import {Component, OnInit, Input, ViewChild, ElementRef} from '@angular/core';
 import {Http, Headers, RequestOptions, Response} from "@angular/http";
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
+import {AABaseComponent} from "../../lib/classes/AABaseComponent";
 
-import {migrateTemplate} from "../../aegon-angular/lib/util";
+// Locals
+import {defaultOptions} from "./defaultOptions";
+const template = require('./template.html');
 
-
-var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteMortgageTemplate'));
 @Component({
-  selector: 'aegon-quickquote-mortgage',
-
-  template: templateElem ? migrateTemplate(templateElem.value) : `
-    <div class="quickquote lijfrente sparen mortgage" #interest data-interest="2.95,3.25,3.25,3.25,3.25,3.25,3.35,3.35,3.35,3.35,3.35,3.70,3.70,3.70,3.70,3.70,3.70,3.70,3.70,3.70,3.70">
-      <div class="triangle"></div>
-      <div class="calculation">
-        <h3>Bereken uw maximale hypotheek</h3>
-        <div class="field">
-          <div class="inputs slider">
-            <aegon-slider (click)="submitAmount()" (change)="calculate()" prefix="€" [range]="{
-              'min': [  200 ],
-              '25%': [  1000 ],
-              '50%': [ 2000 ],
-              '75%': [  3000 ],
-              'max': [ 7500 ]
-            }" [initial]="2500" label="Inkomen" helpText="Dit is de helptekst voor de eerste slider" [(ngModel)]="incomeValue" >
-            </aegon-slider>
-          </div>
-        </div>
-        <div *ngIf="step > 1">
-          <div class="field">
-            <div class="inputs right">
-              <aegon-checkbox (change)="calculate()" [(ngModel)]="extraMonth">Vaste 13e maand</aegon-checkbox>
-              <aegon-checkbox (change)="calculate()" [(ngModel)]="vacationMoney">Vakantiegeld</aegon-checkbox>
-            </div>
-          </div>
-          <div class="field">
-            <div class="inputs slider">
-              <aegon-slider prefix="€" placeholder="0" [range]="{
-                'min': [    0 ],
-                '25%': [ 1000 ],
-                '50%': [ 2000 ],
-                '75%': [ 3000 ],
-                'max': [ 7500 ]
-              }" [initial]="0" label="Inkomen Partner" helpText="Dit is de helptekst voor de tweede slider" (change)="calculate()" [(ngModel)]="incomePartnerValue" >
-              </aegon-slider>
-            </div>
-          </div>
-          <div class="field">
-            <div class="inputs right">
-              <aegon-checkbox (change)="calculate()" [(ngModel)]="extraMonthPartner">Vaste 13e maand</aegon-checkbox>
-              <aegon-checkbox (change)="calculate()" [(ngModel)]="vacationMoneyPartner">Vakantiegeld</aegon-checkbox>
-            </div>
-          </div>
-          <div class="field">
-            <div class="inputs slider">
-              <aegon-slider suffix="jaar" [range]="{
-                'min': [  2 ],
-                '25%': [  5 ],
-                '50%': [ 10 ],
-                '75%': [ 15 ],
-                'max': [ 28 ]
-              }" [initial]="2" (change)="calculate()" label="Rentevaste periode" helpText="Dit is de helptekst voor de derde slider" [(ngModel)]="interestYears">
-              </aegon-slider>
-            </div>
-          </div>
-          <div class="field">
-            <span class="inputs">
-              <aegon-checkbox [(ngModel)]="playWithMortgage">
-               Bereken wat uw huis per maand kost
-              </aegon-checkbox>
-            </span>
-          </div>
-          <div *ngIf="playWithMortgage" class="field">
-            <div class="inputs slider">
-              <aegon-slider prefix="€" [range]="{
-                'min': [ 0 ],
-                'max': [ calculatedValue ]
-              }" [initial]="calculatedValue" (change)="monthlyPayment = getMonthlyPayment()" label="Maximale hypotheek" helpText="Dit is de helptekst voor de vierde slider" [(ngModel)]="playValue" >
-              </aegon-slider>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div *ngIf="step > 1" class="result" >
-        <div class="payment-result">
-          <div class="result1">
-            <div class="title">Hypotheekbedrag</div>
-            <div id="pension-calculated" class="calculated">&euro; {{playValue | money}}<span>,- *</span></div>
-          </div>
-          <div class="result2">
-            <div class="title">Bruto maandlasten</div>
-            <div id="interest-calculated" class="calculated">&euro; {{monthlyPayment | money}}<span>,- *</span></div>
-          </div>
-        </div>
-        <p class="result-button">
-          <button class="button orange-gradient icon-right arrow"><a href="/particulier/hypotheek/hypotheekadvies">Direct regelen</a></button>
-        </p>
-      </div>
-    </div>
-  `,
+  selector: 'aa-qq-mortgage',
+  template: template,
   providers: []
 })
-export class QuickQuoteMortgageComponent   {
+
+export class AAQQMortgageComponent extends AABaseComponent implements OnInit {
+  public  defaultOptions: any = defaultOptions;
+  
   incomeValue:  number;
   incomePartnerValue: number;
   interestYears: number;
@@ -120,8 +39,15 @@ export class QuickQuoteMortgageComponent   {
   @ViewChild('interest') interestRef: ElementRef;
 
   constructor(
+    private thisElement: ElementRef,
     private http: Http
-  ) {}
+  ) { 
+    super(thisElement); 
+  }
+
+  ngOnInit() {
+    super.ngOnInit();
+  }
 
   roundHundreds(value): number {
     return (100 * Math.round(value / 100));
