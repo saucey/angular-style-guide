@@ -123,12 +123,11 @@ export const template = `
                           </label>
                         
                           <label class="radio white-radio">
-                            <input type="radio" name="aov.who" value="Nee, ik heb geen partner" [(ngModel)]="whofor" (change)="hasPartner = 'hidden'" />
+                            <input type="radio" name="aov.who" value="Nee, ik heb geen partner" [(ngModel)]="whofor" (change)="hasPartner = 'hidden'; initChange = true" />
                             <span class="radio"></span>
                             <span class="label-text">Nee, ik heb geen partner</span>
                           </label>
                         </div>
-                        
                         <div [@visibility]="hasPartner">
                           <span class="general-form__box__head">Wilt u een partnerpensioen voor uw partner verzekeren?</span>
                             <div class="white-radio-wrapper">
@@ -145,7 +144,7 @@ export const template = `
                                 <span class="label-text"><strong>Nee, ik wil geen partnerpensioen verzekeren</strong></span>
                                 <span class="label-text">bij mijn overlijden ontvangt mijn partner geen <br> partnerpensioen. Hier moet uw partner schriftelijk mee <br> instemmen</span>
                               </label>
-                            </div>              
+                            </div>
                             <div [@visibility]="partnerDob">
                               <div style="height: 100%;">
                                 <span class="general-form__box__head">Uw geboortedatum</span>
