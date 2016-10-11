@@ -129,7 +129,13 @@ label.radio {
 }
 
 h2 {
-  @extend &.general-form__box__sub__header;
+  &.general-form__box__sub__header {
+    font-size: 25px;
+    color: $lochmara_approx;
+    line-height: 1em;
+    margin-bottom: 15px;
+    display: block;
+  }
 }
 
 .general-form__box__head {
