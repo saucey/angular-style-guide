@@ -97,7 +97,7 @@ export const template = `
             <span>
             {{whofor}} <br>
             {{partnersInfo}}<br>
-            <span *ngIf='usersDobReadable !== ""'>
+            <span *ngIf='usersDobReadable !== "" && initChangeNoPolicy == false'>
                Geboortedatum partner {{usersDobReadable}}
             </span>
             
@@ -117,35 +117,34 @@ export const template = `
                         
                         <div class="white-radio-wrapper">
                           <label class="radio white-radio">
-                            <input type="radio" name="aov.who" value="Ja, ik heb een partner" [(ngModel)]="whofor" (change)="hasPartner = 'show'" />
+                            <input type="radio" name="aov.who" value="Ja, ik heb een partner" [(ngModel)]="whofor" (change)="hasPartner = 'show'; initChangeHasPartnerYes = true" />
                             <span class="radio"></span>
                             <span class="label-text">Ja, ik heb een partner</span>
                           </label>
                         
                           <label class="radio white-radio">
-                            <input type="radio" name="aov.who" value="Nee, ik heb geen partner" [(ngModel)]="whofor" (change)="hasPartner = 'hidden'" />
+                            <input type="radio" name="aov.who" value="Nee, ik heb geen partner" [(ngModel)]="whofor" (change)="hasPartner = 'hidden'; initChangeHasPartnerNo = true" />
                             <span class="radio"></span>
                             <span class="label-text">Nee, ik heb geen partner</span>
                           </label>
                         </div>
-                        
                         <div [@visibility]="hasPartner">
                           <span class="general-form__box__head">Wilt u een partnerpensioen voor uw partner verzekeren?</span>
                             <div class="white-radio-wrapper">
                               <label class="radio white-radio extended-text">
-                                <input type="radio" name="aov.partner" value="Ja, ik wil een partnerpensioen verzekeren" [(ngModel)]="partnersInfo" (change)="partnerDob = 'show'" />
+                                <input type="radio" name="aov.partner" value="Ja, ik wil een partnerpensioen verzekeren" [(ngModel)]="partnersInfo" (change)="partnerDob = 'show'; initChangeNoPolicy = false" />
                                 <span class="radio"></span>
                                 <span class="label-text"><strong>Ja, ik wil een partnerpensioen verzekeren</strong></span>
                                 <span class="label-text">bij mijn overlijden ontvangt mijn partner 70% van het <br> pensioen dat ik zelf ontvang</span>
                               </label>
                             
                               <label class="radio white-radio extended-text">
-                                <input type="radio" name="aov.partner" value="Nee, ik wil geen partnerpensioen verzekeren" [(ngModel)]="partnersInfo" (change)="partnerDob = 'hidden'" />
+                                <input type="radio" name="aov.partner" value="Nee, ik wil geen partnerpensioen verzekeren" [(ngModel)]="partnersInfo" (change)="partnerDob = 'hidden'; initChangeNoPolicy = true " />
                                 <span class="radio"></span>
                                 <span class="label-text"><strong>Nee, ik wil geen partnerpensioen verzekeren</strong></span>
                                 <span class="label-text">bij mijn overlijden ontvangt mijn partner geen <br> partnerpensioen. Hier moet uw partner schriftelijk mee <br> instemmen</span>
                               </label>
-                            </div>              
+                            </div>
                             <div [@visibility]="partnerDob">
                               <div style="height: 100%;">
                                 <span class="general-form__box__head">Uw geboortedatum</span>
