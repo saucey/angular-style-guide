@@ -146,7 +146,6 @@ export const template = `
                                 <span class="label-text">bij mijn overlijden ontvangt mijn partner geen <br> partnerpensioen. Hier moet uw partner schriftelijk mee <br> instemmen</span>
                               </label>
                             </div>              
-                               
                             <div [@visibility]="partnerDob">
                               <div style="height: 100%;">
                                 <span class="general-form__box__head">Uw geboortedatum</span>

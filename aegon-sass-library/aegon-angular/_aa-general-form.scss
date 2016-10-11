@@ -128,6 +128,10 @@ label.radio {
   display: block;
 }
 
+h2 {
+  @extend &.general-form__box__sub__header;
+}
+
 .general-form__box__head {
   display: block;
   color: $lochmara_approx;

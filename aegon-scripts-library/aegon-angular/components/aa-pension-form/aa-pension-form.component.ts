@@ -71,7 +71,7 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
   public maxAge: number = 75;
   public isAgeValid: boolean = true;
   public hasPartner: string = "hidden";
-  public partnerDob: string = "show";
+  public partnerDob: string = "hidden";
 
   public usersDobReadable: string = '';
   public partnersDobReadable: string = '';
