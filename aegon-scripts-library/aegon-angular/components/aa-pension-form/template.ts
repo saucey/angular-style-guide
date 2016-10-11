@@ -66,24 +66,24 @@ export const template = `
               <span class="general-form__box__head">Uw pensioenkapitaal is opgebouwd bij</span>
               <div class="white-radio-wrapper">
                 <label class="radio white-radio">
-                  <input type="radio" name="aov.person" value="Aegon" [(ngModel)]="pensionLocation" />
+                  <input type="radio" name="aov.person" value="Aegon" [(ngModel)]="pensionLocation" (change)="pensionValidLocation = true" />
                   <span class="radio"></span>
                   <span class="label-text">Aegon</span>
                 </label>
               
                 <label class="radio white-radio">
-                  <input type="radio" name="aov.person" value="Andere verzekeraar(s) of pensioenfonds(en)" [(ngModel)]="pensionLocation" />
+                  <input type="radio" name="aov.person" value="Andere verzekeraar(s) of pensioenfonds(en)" [(ngModel)]="pensionLocation" (change)="pensionValidLocation = true"/>
                   <span class="radio"></span>
                   <span class="label-text">Andere verzekeraar(s) of pensioenfonds(en)</span>
                 </label>
                 
                 <label class="radio white-radio">
-                  <input type="radio" name="aov.person" value="Zowel bij Aegon als bij andere verzekeraar(s) of pensioenfonds(en)" [(ngModel)]="pensionLocation" />
+                  <input type="radio" name="aov.person" value="Zowel bij Aegon als bij andere verzekeraar(s) of pensioenfonds(en)" [(ngModel)]="pensionLocation" (change)="pensionValidLocation = true"/>
                   <span class="radio"></span>
                   <span class="label-text">Zowel bij Aegon als bij andere verzekeraar(s) of pensioenfonds(en)</span>
                 </label>
               </div>
-              <button class="arrow button" type="button" (click)="goTo(2,3)" [disabled]="isValidAmount()">Volgende vraag</button>
+              <button class="arrow button" type="button" (click)="goTo(2,3)" [disabled]="!pensionValidLocation">Volgende vraag</button>
           </div>
         </div>
         

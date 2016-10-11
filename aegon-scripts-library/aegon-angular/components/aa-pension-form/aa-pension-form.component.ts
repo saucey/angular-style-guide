@@ -47,7 +47,6 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
   public birthDate: string;
   public age: number;
 
-
   public currentStep = 'step1';
   public dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
 
