@@ -67,6 +67,8 @@ const exportedDeclarations = [
   aaComp.AAWiaContentComponent,
   aaComp.AAPensionFormComponent,
   aaComp.AALeadformComponent,
+  aaComp.AAWiaCalculator,
+  aaComp.AAWiaCalculatorGraph,
   aaComp.AAQuizComponent,
   aaComp.AAEditableValueComponent
 ];

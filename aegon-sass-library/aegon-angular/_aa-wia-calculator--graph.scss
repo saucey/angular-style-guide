@@ -1,0 +1,89 @@
+.aa-wia-calculator-graph {
+  .edit-form {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 800px;
+    height: 100%;
+    color: black;
+    textarea {
+
+      height: calc(100% - 50px);
+      color: black;
+      width: 100%;
+    }
+  }
+
+  .aa-block-graph {
+    padding: 20px;
+    height: 380px;
+
+    &, * {
+      box-sizing: border-box;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+  }
+
+  .aa-block-graph__bar-block {
+    height: 100%;
+    padding: 3px;
+  }
+
+  .aa-block-graph__bar-block-inner {
+    height: 100%;
+    box-shadow: -1px 1px 3px -1px #797979;
+    border-radius: 3px;
+    text-indent: -99999px;
+
+    &:hover {
+      opacity: 0.6;
+    }
+  }
+
+  .aa-block-graph__label {
+    text-align: center;
+    color: #ddd;
+    font-size: 12px  !important;
+    text-transform: uppercase;
+  }
+
+  .aa-block-graph__label--top {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+  }
+  .aa-block-graph__label__percentage {
+    display: block;
+    font-size: 11px  !important;
+  }
+  .aa-block-graph__label__amount {
+    display: block;
+    font-size: 14px  !important;
+    font-weight: bold;
+    margin: -9px 0 0;
+  }
+
+  .aa-block-graph__col {
+    float: left;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+  .aa-block-graph__col1, .aa-block-graph__col2 {
+    padding-bottom: 20px;
+    padding-top: 40px;
+  }
+  .aa-block-graph__col34 {
+    padding-bottom: 20px;
+  }
+
+  .aa-block-graph__bar, .aa-block-graph__space, .aa-block-graph__bar-wrapper, .aa-block-graph__col {
+    transition: all 300ms ease-in-out;
+    overflow: hidden;
+  }
+
+}
