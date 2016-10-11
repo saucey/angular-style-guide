@@ -1,7 +1,7 @@
 <div class="quickquote lijfrente sparen mortgage" #interest data-interest="2.95,3.25,3.25,3.25,3.25,3.25,3.35,3.35,3.35,3.35,3.35,3.70,3.70,3.70,3.70,3.70,3.70,3.70,3.70,3.70,3.70">
   <div class="triangle"></div>
   <div class="calculation">
-    <h3>Bereken uw maximale hypotheek</h3>
+    <h3>{{data.options.title}}</h3>
     
     <div class="field">
       <div class="inputs slider">
@@ -11,7 +11,7 @@
           '50%': [ 2000 ],
           '75%': [  3000 ],
           'max': [ 7500 ]
-        }" [initial]="2500" label="Inkomen" helpText="Dit is de helptekst voor de eerste slider" [(ngModel)]="incomeValue" >
+        }" [initial]="2500" label="{{data.options.incomeLabel}}" helpText="{{data.options.incomeHelpText}}" [(ngModel)]="incomeValue" >
         </aegon-slider>
       </div>
     </div>
@@ -19,8 +19,8 @@
     <div *ngIf="step > 1">
       <div class="field">
         <div class="inputs right">
-          <aegon-checkbox (change)="calculate()" [(ngModel)]="extraMonth">Vaste 13e maand</aegon-checkbox>
-          <aegon-checkbox (change)="calculate()" [(ngModel)]="vacationMoney">Vakantiegeld</aegon-checkbox>
+          <aegon-checkbox (change)="calculate()" [(ngModel)]="extraMonth">{{data.options.incomeExtraMonthLabel}}</aegon-checkbox>
+          <aegon-checkbox (change)="calculate()" [(ngModel)]="vacationMoney">{{data.options.incomeVacationMoneyLabel}}</aegon-checkbox>
         </div>
       </div>
       <div class="field">
@@ -31,14 +31,14 @@
             '50%': [ 2000 ],
             '75%': [ 3000 ],
             'max': [ 7500 ]
-          }" [initial]="0" label="Inkomen Partner" helpText="Dit is de helptekst voor de tweede slider" (change)="calculate()" [(ngModel)]="incomePartnerValue" >
+          }" [initial]="0" label="{{data.options.incomePartnerLabel}}" helpText="{{data.options.incomePartnerHelpText}}" (change)="calculate()" [(ngModel)]="incomePartnerValue" >
           </aegon-slider>
         </div>
       </div>
       <div class="field">
         <div class="inputs right">
-          <aegon-checkbox (change)="calculate()" [(ngModel)]="extraMonthPartner">Vaste 13e maand</aegon-checkbox>
-          <aegon-checkbox (change)="calculate()" [(ngModel)]="vacationMoneyPartner">Vakantiegeld</aegon-checkbox>
+          <aegon-checkbox (change)="calculate()" [(ngModel)]="extraMonthPartner">{{data.options.incomePartnerExtraMonthLabel}}</aegon-checkbox>
+          <aegon-checkbox (change)="calculate()" [(ngModel)]="vacationMoneyPartner">{{data.options.incomePartnerVacationMoneyLabel}}</aegon-checkbox>
         </div>
       </div>
       <div class="field">
@@ -49,14 +49,14 @@
             '50%': [ 10 ],
             '75%': [ 15 ],
             'max': [ 28 ]
-          }" [initial]="2" (change)="calculate()" label="Rentevaste periode" helpText="Dit is de helptekst voor de derde slider" [(ngModel)]="interestYears">
+          }" [initial]="2" (change)="calculate()" label="data.options.interestYearsLabel" helpText="{{data.options.interestYearsHelpText}}" [(ngModel)]="interestYears">
           </aegon-slider>
         </div>
       </div>
       <div class="field">
         <span class="inputs">
           <aegon-checkbox [(ngModel)]="playWithMortgage">
-          Bereken wat uw huis per maand kost
+            {{data.options.playWithMortgageLabel}}
           </aegon-checkbox>
         </span>
       </div>
@@ -65,7 +65,7 @@
           <aegon-slider prefix="€" [range]="{
             'min': [ 0 ],
             'max': [ calculatedValue ]
-          }" [initial]="calculatedValue" (change)="monthlyPayment = getMonthlyPayment()" label="Maximale hypotheek" helpText="Dit is de helptekst voor de vierde slider" [(ngModel)]="playValue" >
+          }" [initial]="calculatedValue" (change)="monthlyPayment = getMonthlyPayment()" label="{{data.options.playValueLabel}}" helpText="{{data.options.playValueHelpText}}" [(ngModel)]="playValue" >
           </aegon-slider>
         </div>
       </div>
@@ -75,16 +75,16 @@
   <div *ngIf="step > 1" class="result" >
     <div class="payment-result">
       <div class="result1">
-        <div class="title">Hypotheekbedrag</div>
+        <div class="title">{{data.options.mortgageValueTitle}}</div>
         <div id="pension-calculated" class="calculated">&euro; {{playValue | money}}<span>,- *</span></div>
       </div>
       <div class="result2">
-        <div class="title">Bruto maandlasten</div>
+        <div class="title">{{data.options.monthlyPaymentTitle}}</div>
         <div id="interest-calculated" class="calculated">&euro; {{monthlyPayment | money}}<span>,- *</span></div>
       </div>
     </div>
     <p class="result-button">
-      <button class="button orange-gradient icon-right arrow"><a href="/particulier/hypotheek/hypotheekadvies">Direct regelen</a></button>
+      <button class="button orange-gradient icon-right arrow"><a href="{{data.options.ctaButtonUrl}}">{{data.options.ctaButtonText}}</a></button>
     </p>
   </div>
 </div>
