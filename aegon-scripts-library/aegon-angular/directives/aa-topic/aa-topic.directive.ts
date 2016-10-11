@@ -24,9 +24,14 @@ export class AATopicDirective {
     ngOnInit() {
         const percentage = '70%';
         let text = this.topicText.text;
+        let defaultPercentage = this.topicText.defaultPercentage;
 
         if (text.indexOf(this.searchPlaceholder, 0) != -1) {
-            text = this.replaceAll(text, this.searchPlaceholder, percentage);
+            if (defaultPercentage === false) {
+                text = this.replaceAll(text, this.searchPlaceholder, '');
+            } else {
+                text = this.replaceAll(text, this.searchPlaceholder, percentage);
+            }
         }
 
         this.element.nativeElement.innerHTML = text;

@@ -117,7 +117,7 @@ export class AAWiaContentComponent extends AABaseComponent implements OnInit {
      * @returns {boolean}
      */
     public isDescriptionTextValid = (description) => {
-        if (description.hasOwnProperty('text') && typeof description.text != 'undefined' && description.text != null && description.text.length > 0) {
+        if (description.hasOwnProperty('longDescription') && typeof description.longDescription != 'undefined' && description.longDescription != null && description.longDescription.length > 0) {
             return true;
         } else {
             return false;
@@ -140,6 +140,7 @@ export class AAWiaContentComponent extends AABaseComponent implements OnInit {
         }
 
         if (typeof filter == 'string') {
+            return true;
             // search for the filter in selected attributes
             // if it matches then return true
             // else false
