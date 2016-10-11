@@ -124,6 +124,28 @@ export class AAWiaContentComponent extends AABaseComponent implements OnInit {
         }
     }
 
+    /**
+     *
+     *
+     * @param {boolean|string} filter
+     * @returns {boolean}
+     */
+    public filterTopic(filter) {
+        if (filter === false) {
+            return true;
+        }
+
+        if (filter === true) {
+            return false;
+        }
+
+        if (typeof filter == 'string') {
+            // search for the filter in selected attributes
+            // if it matches then return true
+            // else false
+        }
+    }
+
     ngOnInit(): void {
         super.ngOnInit();
     }

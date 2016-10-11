@@ -16,9 +16,17 @@
     <div *ngIf="getActiveItem().column == column && getActiveItem().row == row" [@shrinkOut]  class="collapsible-description">
 
       <img [src]="topic.image" class="collapsible-description__image" />
-      <p class="collapsible-description__intro" *ngIf="false == isFullTextShown(topic)" [innerHTML]="topic.intro"></p>
-      <div class="collapsible-description__text" *ngIf="isFullTextShown(topic)" [innerHTML]="topic.text">
 
+      <div class="collapsible-description__intro" *ngIf="false == isFullTextShown(topic)">
+        <div *ngFor="let topicText of topic.intro">
+          <p *ngIf="filterTopic(topicText.filter)" [innerHTML]="topicText.text"></p>
+        </div>
+      </div>
+
+      <div class="collapsible-description__text" *ngIf="isFullTextShown(topic)">
+        <div *ngFor="let topicText of topic.text">
+          <p *ngIf="filterTopic(topicText.filter)" [innerHTML]="topicText.text"></p>
+        </div>
       </div>
 
       <div class="collapsible-description-actions">
