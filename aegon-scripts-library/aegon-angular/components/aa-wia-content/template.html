@@ -19,7 +19,7 @@
 
       <div class="collapsible-description__intro" *ngIf="false == isFullTextShown(topic)">
         <div *ngFor="let topicText of topic.intro">
-          <p *ngIf="filterTopic(topicText.filter)" [innerHTML]="topicText.text"></p>
+          <p *ngIf="filterTopic(topicText.filter)" aaTopic [topicText]="topicText"></p>
         </div>
       </div>
 

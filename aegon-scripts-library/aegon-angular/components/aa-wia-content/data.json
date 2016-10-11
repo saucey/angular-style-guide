@@ -11,11 +11,11 @@
           },
           {
             "filter": false,
-            "text": "<p><span class=\"phld\">als IVA-EXCED</span>IVA-EXCEDIVA-Excedentverzekering <span class=\"phld\">Dekperc</span>. Met de IVA-Excedentverzekering krijgt u een uitkering als u volgens het UWV minimaal 80% duurzaam arbeidsongeschikt bent.</p>"
+            "text": "<p><span class=\"phld\">als IVA-EXCED</span>IVA-EXCEDIVA-Excedentverzekering <span class=\"phld\"><dekperc>Dekperc</dekperc></span>. Met de IVA-Excedentverzekering krijgt u een uitkering als u volgens het UWV minimaal 80% duurzaam arbeidsongeschikt bent.</p>"
           },
           {
             "filter": false,
-            "text": "<p><span class=\"phld\">als WGA-EXCED</span>WGA-Excedentverzekering <span class=\"phld\">Dekperc</span>. Met de WGA-Excedentverzekering krijgt u een uitkering als u volgens het UWV minimaal 35% arbeidsongeschikt bent, maar niet minimaal 80% duurzaam.</p>"
+            "text": "<p><span class=\"phld\">als WGA-EXCED</span>WGA-Excedentverzekering <span class=\"phld\"><dekperc>Dekperc</dekperc></span>. Met de WGA-Excedentverzekering krijgt u een uitkering als u volgens het UWV minimaal 35% arbeidsongeschikt bent, maar niet minimaal 80% duurzaam.</p>"
           },
           {
             "filter": false,
@@ -33,11 +33,11 @@
         "text": [
           {
             "filter": false,
-            "text": "<p><span class=\"phld\">als IVA-EXCEDIVA</span>-Excedentverzekering <span class=\"phld\">Dekperc</span>. U kan niet meer werken. Volgens het UWV bent u 80% of meer arbeidsongeschikt. Verder denkt het UWV niet dat u in de komende vijf jaar weer kan gaan werken. U krijgt daarom een IVA-uitkering. De hoogte van de IVA-uitkering van het UWV is 75% van uw salaris voordat u arbeidsongeschikt werd. Verdiende u voordat u arbeidsongeschikt werd meer dan de loongrens voor de sociale verzekeringen (2016: € 52.766,37)? Dan krijgt u voor het loon boven die loongrens geen uitkering van het UWV. Met de IVA-Excedentverzekering krijgt u dan wel een uitkering voor het loon boven die loongrens.</p>"
+            "text": "<p><span class=\"phld\">als IVA-EXCEDIVA</span>-Excedentverzekering <span class=\"phld\"><dekperc>Dekperc</dekperc></span>. U kan niet meer werken. Volgens het UWV bent u 80% of meer arbeidsongeschikt. Verder denkt het UWV niet dat u in de komende vijf jaar weer kan gaan werken. U krijgt daarom een IVA-uitkering. De hoogte van de IVA-uitkering van het UWV is 75% van uw salaris voordat u arbeidsongeschikt werd. Verdiende u voordat u arbeidsongeschikt werd meer dan de loongrens voor de sociale verzekeringen (2016: € 52.766,37)? Dan krijgt u voor het loon boven die loongrens geen uitkering van het UWV. Met de IVA-Excedentverzekering krijgt u dan wel een uitkering voor het loon boven die loongrens.</p>"
           },
           {
             "filter": false,
-            "text": "<p><span class=\"phld\">als WGA-EXCED</span> WGA-Excedentverzekering <span class=\"phld\">Dekperc</span>.U kan langere tijd niet of minder werken. U krijgt daarom een WGA-uitkering van het UWV. Verdiende u voordat u arbeidsongeschikt werd meer dan de loongrens voor de sociale verzekeringen (2016: € 52.766,37)? Dan krijgt u voor het loon boven die loongrens geen uitkering van het UWV. Met de WGA-Excedentverzekering krijgt u dan wel een uitkering voor het loon boven die loongrens.</p>"
+            "text": "<p><span class=\"phld\">als WGA-EXCED</span> WGA-Excedentverzekering <span class=\"phld\"><dekperc>Dekperc</dekperc></span>.U kan langere tijd niet of minder werken. U krijgt daarom een WGA-uitkering van het UWV. Verdiende u voordat u arbeidsongeschikt werd meer dan de loongrens voor de sociale verzekeringen (2016: € 52.766,37)? Dan krijgt u voor het loon boven die loongrens geen uitkering van het UWV. Met de WGA-Excedentverzekering krijgt u dan wel een uitkering voor het loon boven die loongrens.</p>"
           },
           {
             "filter": false,
@@ -144,15 +144,15 @@
           },
           {
             "filter": false,
-            "text": "<p>Ondanks deze wettelijke uitkeringen, kan u er in inkomen op achteruit gaan als u arbeidsongeschikt bent. <span class=\"phld\">als WGA-EXCED en/of WGA-AANV en geen IVA-EXCED</span>Deze regeling geeft een aanvulling op uw</p><p>Benieuwd naar uw andere pensioenaanspraken? Kijk dan op <a href=\"www.mijnpensioenoverzicht.nl\">www.mijnpensioenoverzicht.nl</a>. <br />Meer weten over uw arbeidsongeschiktheidspensioen? Kijk dan op <a href=\"www.aegon.nl/pensioenwet\">www.aegon.nl/pensioenwet</a>.</p><p>WGA-uitkering. Uw uitkering stopt als u de AOW-leeftijd bereikt of nog daarvoor <span class=\"phld\">Eindlftd</span> jaar wordt.<span class=\"phld\">als WGA-EXCED</span>De aanvulling vanuit uw WGA-Excedentverzekering <span class=\"phld\">Dekperc</span> berekenen wij over uw <span class=\"phld\">Loonbegrip</span> tot en met € <span class=\"phld\">Afw_maxln</span>.</p>"
+            "text": "<p>Ondanks deze wettelijke uitkeringen, kan u er in inkomen op achteruit gaan als u arbeidsongeschikt bent. <span class=\"phld\">als WGA-EXCED en/of WGA-AANV en geen IVA-EXCED</span>Deze regeling geeft een aanvulling op uw</p><p>Benieuwd naar uw andere pensioenaanspraken? Kijk dan op <a href=\"www.mijnpensioenoverzicht.nl\">www.mijnpensioenoverzicht.nl</a>. <br />Meer weten over uw arbeidsongeschiktheidspensioen? Kijk dan op <a href=\"www.aegon.nl/pensioenwet\">www.aegon.nl/pensioenwet</a>.</p><p>WGA-uitkering. Uw uitkering stopt als u de AOW-leeftijd bereikt of nog daarvoor <span class=\"phld\">Eindlftd</span> jaar wordt.<span class=\"phld\">als WGA-EXCED</span>De aanvulling vanuit uw WGA-Excedentverzekering <span class=\"phld\"><dekperc>Dekperc</dekperc></span> berekenen wij over uw <span class=\"phld\">Loonbegrip</span> tot en met € <span class=\"phld\">Afw_maxln</span>.</p>"
           },
           {
             "filter": false,
-            "text": "<p><span class=\"phld\">als IVA-EXCED en geen WGA-EXCED en/of WGA-AANV</span>Deze regeling geeft een aanvulling op uw IVA-uitkering. De aanvulling vanuit uw IVA-Excedentverzekering <span class=\"phld\">Dekperc</span> berekenen wij over uw <span class=\"phld\">Loonbegrip</span> tot en met € <span class=\"phld\">Afw_maxln</span>. Uw uitkering stopt als u de AOW-leeftijd bereikt of nog daarvoor <span class=\"phld\">Eindlftd</span> jaar wordt.</p>"
+            "text": "<p><span class=\"phld\">als IVA-EXCED en geen WGA-EXCED en/of WGA-AANV</span>Deze regeling geeft een aanvulling op uw IVA-uitkering. De aanvulling vanuit uw IVA-Excedentverzekering <span class=\"phld\"><dekperc>Dekperc</dekperc></span> berekenen wij over uw <span class=\"phld\">Loonbegrip</span> tot en met € <span class=\"phld\">Afw_maxln</span>. Uw uitkering stopt als u de AOW-leeftijd bereikt of nog daarvoor <span class=\"phld\">Eindlftd</span> jaar wordt.</p>"
           },
           {
             "filter": false,
-            "text": "<p><span class=\"phld\">als IVA-EXCED en WGA-EXCED en/of WGA-AANV</span> Deze regeling geeft een aanvulling op uw IVA- en WGA-uitkering. Uw uitkering stopt als u de AOW-leeftijd bereikt of nog daarvoor <span class=\"phld\">Eindlftd</span> jaar wordt. <span class=\"phld\">als WGA-EXCED</span> De aanvulling vanuit uw WGA-Excedentverzekering <span class=\"phld\">Dekperc</span> berekenen wij over uw <span class=\"phld\">Loonbegrip</span> tot en met € <span class=\"phld\">Afw_maxln</span>. <span class=\"phld\">als IVA-EXCED</span> De aanvulling vanuit uw IVA-Excedentverzekering <span class=\"phld\">Dekperc</span> berekenen wij over uw <span class=\"phld\">Loonbegrip</span> tot en met € <span class=\"phld\">Afw_maxln</span>.</p>"
+            "text": "<p><span class=\"phld\">als IVA-EXCED en WGA-EXCED en/of WGA-AANV</span> Deze regeling geeft een aanvulling op uw IVA- en WGA-uitkering. Uw uitkering stopt als u de AOW-leeftijd bereikt of nog daarvoor <span class=\"phld\">Eindlftd</span> jaar wordt. <span class=\"phld\">als WGA-EXCED</span> De aanvulling vanuit uw WGA-Excedentverzekering <span class=\"phld\"><dekperc>Dekperc</dekperc></span> berekenen wij over uw <span class=\"phld\">Loonbegrip</span> tot en met € <span class=\"phld\">Afw_maxln</span>. <span class=\"phld\">als IVA-EXCED</span> De aanvulling vanuit uw IVA-Excedentverzekering <span class=\"phld\"><dekperc>Dekperc</dekperc></span> berekenen wij over uw <span class=\"phld\">Loonbegrip</span> tot en met € <span class=\"phld\">Afw_maxln</span>.</p>"
           },
           {
             "filter": false,
@@ -210,7 +210,7 @@
         "intro": [
           {
             "filter": false,
-            "text": "<p><span class=\"phld\">als IVA-EXCED en/of WGA-EXCED en/of WGA-AANV IVA-Excedentverzekering IvaEx_dekperc% ,/en WGA-Excedentverzekering WgaEx_dekperc% en WGA-Aanvullingsverzekering (light/upgrade)</span> <br />Uw uitkering wordt elk jaar op 1 januari <Klim_srt> verhoogd. Hieronder ziet u wat de afgelopen drie jaar de gemiddelde jaarlijkse prijsstijging voor consumenten was. Zo kunt u vaststellen in hoeverre de uitkering waardevast was.</p>"
+            "text": "<p><span class=\"phld\">als IVA-EXCED en/of WGA-EXCED en/of WGA-AANV IVA-Excedentverzekering IvaEx_<dekperc>Dekperc</dekperc>% ,/en WGA-Excedentverzekering WgaEx_<dekperc>Dekperc</dekperc>% en WGA-Aanvullingsverzekering (light/upgrade)</span> <br />Uw uitkering wordt elk jaar op 1 januari <Klim_srt> verhoogd. Hieronder ziet u wat de afgelopen drie jaar de gemiddelde jaarlijkse prijsstijging voor consumenten was. Zo kunt u vaststellen in hoeverre de uitkering waardevast was.</p>"
           },
           {
             "filter": false,
