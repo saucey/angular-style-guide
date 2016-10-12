@@ -236,7 +236,7 @@ export const template = `
                         
                       </div>
                       <div class="col form-text__column">
-                          <img class="form-text__column__svg__logo" src="../assets/images/calendar-date-2.svg">
+                          <span class="form-text__icon icon-calendar-date-2"></span>
                           <span class="header">80%</span>
                           <span class="content">van pensioenaanvragers met een partner verzekert een partnerpensioen</span>
                           <span class="brand">Bron:Aegon</span>
