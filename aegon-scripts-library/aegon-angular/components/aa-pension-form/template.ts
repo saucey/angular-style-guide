@@ -272,7 +272,7 @@ export const template = `
                           </select>
                         </div>
                         
-                        <button class="arrow button" type="button" (click)="goTo(5)" [disabled]="startingDate == ''">Volgende vraag</button>
+                        <button class="button icon-right icon-calculator" type="button" (click)="goTo(5)" [disabled]="startingDate == ''">Bereken pensioenuitkering</button>
                         
                       </div>
                       <div class="col form-text__column">
