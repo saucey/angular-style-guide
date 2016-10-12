@@ -26,14 +26,13 @@ const monthLabels: string[] = [
       state('show', style({
         height: '*',
         overflow: 'hidden',
-
       })),
       state('hidden', style({
         height: '0',
         overflow: 'hidden',
-
+        opacity: 0,
       })),
-      transition('* => *', animate('.5s ease'))
+      transition('* => *', animate('.5s ease')),
     ])
   ]
 })
