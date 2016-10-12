@@ -6,7 +6,8 @@ import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 
 import * as aaComp from './components';
 import * as aaPipes from './pipes';
-import { AAElementDirective } from './directives/aa-element/aa-element.directive.ts'
+import { AAElementDirective } from './directives/aa-element/aa-element.directive.ts';
+import { AATopicDirective } from './directives/aa-topic/aa-topic.directive';
 import * as comp from '../components/angular-components';
 
 import {QuickQuoteBoeterenteComponent} from '../components/quickquote-boeterente/quickquote-boeterente.component';
@@ -16,6 +17,7 @@ import {QuickQuoteMortgageComponent} from '../components/quickquote-mortgage/qui
 
 const internalDeclarations = [
   AAElementDirective,
+  AATopicDirective,
   aaComp.AAHintComponent,
   aaComp.AASliderComponent,
   aaComp.AASliderInputComponent,
