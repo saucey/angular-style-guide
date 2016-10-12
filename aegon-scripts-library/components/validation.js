@@ -306,7 +306,7 @@
       mobile: {
         nl: function (val) {
           // Empty|Local numbers|International numbers.
-          return val.match(/^(|(?:06)[1-9][0-9]{7}|(?:00)[1-9][0-9]{7,12})$/);
+          return val.match(/^((?:06)[1-9][0-9]{7}|(?:00)[1-9][0-9]{7,12})$/);
         },
       },
       'house-nr': function (val) {
