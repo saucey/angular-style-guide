@@ -61,14 +61,14 @@
     });
 
     describe('Mobile phone validation', function () {
-      it('should return an array for valid mobile phone numbers or empy values', function() {
+      it('should return an array for valid mobile phone numbers', function() {
         expect(validation.mobile.nl('0612345678')).not.toBeNull();
-        expect(validation.mobile.nl('')).not.toBeNull();
         expect(validation.mobile.nl('0044612345678')).not.toBeNull();
       });
-      it('should return null for invalid phone numbers', function() {
+      it('should return null for invalid phone numbers or empy values', function() {
         expect(validation.mobile.nl('0912345678')).toBeNull();
         expect(validation.mobile.nl('invalid')).toBeNull();
+        expect(validation.mobile.nl('')).toBeNull();
       });
     });
 
