@@ -1,0 +1,81 @@
+@import "aa-wia-calculator--graph";
+
+.aa-wia-calculator {
+
+  * {
+    line-height: 26px;
+  }
+
+  //overwrite aegonmf styles
+  ul li {
+    color: inherit;
+    padding: 0;
+    background: none;
+  }
+
+  .calculation {
+    width: 100%; //override media-query styles which set it to 80%
+  }
+
+  .aa-wia-calculator-graph {
+    float: left;
+    width: 60%;
+  }
+
+  .aa-wia-calculator-graph-legend {
+    float: left;
+    width: 40%;
+    padding-left: 5%;
+  }
+
+  .products-list {
+    margin-top: 20px;
+  }
+
+  .product-item {
+
+    display: block;
+    height: 26px;
+    font-size: 0.9em;
+
+    input:checked + label {
+      font-weight: bold;
+      color: #fff;
+      background: brown;
+    }
+
+    .product-attrs {
+      float: right;
+    }
+  }
+
+  .product-item--disabled {
+    pointer-events: none;
+    cursor: default !important;
+    label {
+      background: #aaa;
+    }
+  }
+
+  .legend-block {
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+  }
+
+  .aa-wia-calculator-graph-legend {
+    ul {
+      margin-bottom: 10px;
+    }
+
+    * {
+      font-size: 15px;
+    }
+
+    .legend-headline {
+      font-weight: bold;
+      font-size: 16px !important;
+    }
+  }
+
+}

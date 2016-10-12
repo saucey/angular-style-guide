@@ -1,0 +1,114 @@
+<div class="quickquote angular aa-wia-calculator">
+  <div class="triangle"></div>
+  <div class="clearfix">
+    <div class="calculation calculation-section">
+      <h3>{{ data.options.headline }}</h3>
+
+      <div>
+        <div class="label">
+          {{ data.options.salaryLabel }}
+          <aa-hint [text]="data.options.salaryHint"></aa-hint>
+        </div>
+        <div class="inputs">
+          <aa-input-number
+            class="aa-input--euro"
+            [(ngModel)]="initialAmount"
+            defaultValue=""
+            [placeholder]="'0'"
+            [class.error]="initialAmountErr"
+            (modelChange)="updateIncome($event)">
+          </aa-input-number>
+        </div>
+      </div>
+
+      <div>
+        <ul class="products-list">
+          <li *ngFor="let product of productsData; trackBy:trackById" class="product-item clearfix"
+              [class.product-item--disabled]="product.disabled">
+
+            <label class="checkbox product-title">
+              <input type="checkbox" [(ngModel)]="product.selected" (change)="updateProduct(product, $event)">
+              <span class="checkbox"></span>
+              {{ product.label }}
+            </label>
+
+            <div class="product-attrs" *ngIf="product.selected && product.attrs?.length">
+              <ul>
+                <li *ngFor="let attr of product.attrs">
+                  {{ attr.label }}
+                  <select [(ngModel)]="attr.value" (change)="updateProductAttr(attr, $event)">
+                    <option *ngFor="let option of attr.options"
+                            value="{{ option.value }}">{{ option.label }}
+                    </option>
+                  </select>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+
+
+      </div>
+
+      <div>
+        <!--<button class="button arrow" (click)="submit()" [disabled]="!canSubmit">-->
+        <!--Calculate-->
+        <!--</button>-->
+      </div>
+
+    </div>
+    <div class="graph-section" *ngIf="submitted">
+      <div class="result">
+
+        <aa-wia-calculator-graph class="aa-wia-calculator-graph" [data]='graphData'
+                                 *ngIf="graphData"></aa-wia-calculator-graph>
+
+        <ul class="aa-wia-calculator-graph-legend" *ngIf="legendData?.items?.length">
+          <li *ngFor="let group of legendData?.items">
+            <span class="legend-headline">{{ legendData.groups[group].meta.label }}</span>
+            <ul>
+              <li *ngFor="let component of legendData.groups[group].items" class="legend-item">
+                <span [style.backgroundColor]="component.meta.color" class="legend-block"></span>
+                {{component.meta.label}}
+              </li>
+            </ul>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="calculation">
+    <div class="field">
+      <aa-slider-input class="aa-qq-aov__slider aa-qq__control aa-input--percentage"
+                       [(ngModel)]="disability.value"
+                       (modelChange)="sliderUpdate(disability, $event)"
+                       [sliderOptions]="disability.options"
+                       [label]="disability.label"
+                       [helpText]="'Help'">
+      </aa-slider-input>
+    </div>
+
+
+    <div class="field" *ngIf="disability.value < 80">
+      <aa-slider-input class="aa-qq-aov__slider aa-qq__control aa-input--percentage"
+                       [(ngModel)]="usage.value"
+                       (modelChange)="sliderUpdate(usage, $event)"
+                       [sliderOptions]="usage.options"
+                       [label]="usage.label"
+                       [helpText]="'Help'">
+      </aa-slider-input>
+    </div>
+
+    <div class="field" *ngIf="disability.value >= 80">
+
+      Duurzaam arbeidsongeschikt
+
+      <label class="checkbox">
+        <input type="checkbox" [(ngModel)]="permanentDisability" (change)="update()">
+        <span class="checkbox"></span>
+      </label>
+    </div>
+  </div>
+</div>

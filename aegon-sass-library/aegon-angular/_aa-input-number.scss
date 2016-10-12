@@ -60,6 +60,18 @@
   }
 }
 
+// Percentage input style
+.aa-input--percentage {
+  // Add prefix space to input
+  .aa-input-number__prefix:before {
+    content: "%";
+  }
+  input {
+    @include rem('padding-left', 30);
+    @include rem('padding-right', 10);
+  }
+}
+
 // Year input style; add class higher up in the element tree somewhere
 .aa-input--year {
   // Add postfix space to input
