@@ -20,6 +20,8 @@ const template = require('./template.html');
 
 export class AAQQMortgageComponent extends AABaseComponent implements OnInit {
   public  defaultOptions: any = defaultOptions;
+  @Input() options: any = {};
+  @Input() data: any = {};
   
   incomeValue:  number;
   incomePartnerValue: number;
