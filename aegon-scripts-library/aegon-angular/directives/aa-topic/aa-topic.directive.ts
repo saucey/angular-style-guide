@@ -22,7 +22,7 @@ export class AATopicDirective {
     }
 
     ngOnInit() {
-        const percentage = '70%';
+        const percentage = ' 70%';
         let text = this.topicText.text;
         let defaultPercentage = this.topicText.defaultPercentage;
 

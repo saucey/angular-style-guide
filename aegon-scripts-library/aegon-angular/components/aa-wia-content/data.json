@@ -12,12 +12,12 @@
           {
             "filter": "als IVA-EXCED",
             "defaultPercentage": false,
-            "text": "<p>IVA-Excedentverzekering <dekperc>Dekperc</dekperc>. Met de IVA-Excedentverzekering krijgt u een uitkering als u volgens het UWV minimaal 80% duurzaam arbeidsongeschikt bent.</p>"
+            "text": "<p>IVA-Excedentverzekering<dekperc>Dekperc</dekperc>. Met de IVA-Excedentverzekering krijgt u een uitkering als u volgens het UWV minimaal 80% duurzaam arbeidsongeschikt bent.</p>"
           },
           {
             "filter": "als WGA-EXCED",
             "defaultPercentage": false,
-            "text": "<p>WGA-Excedentverzekering <dekperc>Dekperc</dekperc>. Met de WGA-Excedentverzekering krijgt u een uitkering als u volgens het UWV minimaal 35% arbeidsongeschikt bent, maar niet minimaal 80% duurzaam.</p>"
+            "text": "<p>WGA-Excedentverzekering<dekperc>Dekperc</dekperc>. Met de WGA-Excedentverzekering krijgt u een uitkering als u volgens het UWV minimaal 35% arbeidsongeschikt bent, maar niet minimaal 80% duurzaam.</p>"
           },
           {
             "filter": "als WGA-AANV en Soort-aanvulling = LIGHT",
@@ -44,20 +44,20 @@
           {
             "filter": "als IVA-EXCEDIVA",
             "defaultPercentage": false,
-            "text": "<p>IVA-Excedentverzekering <dekperc>Dekperc</dekperc>. U kan niet meer werken. Volgens het UWV bent u 80% of meer arbeidsongeschikt. Verder denkt het UWV niet dat u in de komende vijf jaar weer kan gaan werken. U krijgt daarom een IVA-uitkering. De hoogte van de IVA-uitkering van het UWV is 75% van uw salaris voordat u arbeidsongeschikt werd. Verdiende u voordat u arbeidsongeschikt werd meer dan de loongrens voor de sociale verzekeringen (2016: € 52.766,37)? Dan krijgt u voor het loon boven die loongrens geen uitkering van het UWV. Met de IVA-Excedentverzekering krijgt u dan wel een uitkering voor het loon boven die loongrens.</p>"
+            "text": "<p>IVA-Excedentverzekering<dekperc>Dekperc</dekperc>.<br /> U kan niet meer werken. Volgens het UWV bent u 80% of meer arbeidsongeschikt. Verder denkt het UWV niet dat u in de komende vijf jaar weer kan gaan werken. U krijgt daarom een IVA-uitkering. De hoogte van de IVA-uitkering van het UWV is 75% van uw salaris voordat u arbeidsongeschikt werd. Verdiende u voordat u arbeidsongeschikt werd meer dan de loongrens voor de sociale verzekeringen (2016: € 52.766,37)? Dan krijgt u voor het loon boven die loongrens geen uitkering van het UWV. Met de IVA-Excedentverzekering krijgt u dan wel een uitkering voor het loon boven die loongrens.</p>"
           },
           {
             "filter": "als WGA-EXCED",
             "defaultPercentage": false,
-            "text": "<p>WGA-Excedentverzekering <dekperc>Dekperc</dekperc>. U kan langere tijd niet of minder werken. U krijgt daarom een WGA-uitkering van het UWV. Verdiende u voordat u arbeidsongeschikt werd meer dan de loongrens voor de sociale verzekeringen (2016: € 52.766,37)? Dan krijgt u voor het loon boven die loongrens geen uitkering van het UWV. Met de WGA-Excedentverzekering krijgt u dan wel een uitkering voor het loon boven die loongrens.</p>"
+            "text": "<p>WGA-Excedentverzekering<dekperc>Dekperc</dekperc>.<br /> U kan langere tijd niet of minder werken. U krijgt daarom een WGA-uitkering van het UWV. Verdiende u voordat u arbeidsongeschikt werd meer dan de loongrens voor de sociale verzekeringen (2016: € 52.766,37)? Dan krijgt u voor het loon boven die loongrens geen uitkering van het UWV. Met de WGA-Excedentverzekering krijgt u dan wel een uitkering voor het loon boven die loongrens.</p>"
           },
           {
             "filter": "als WGA-AANV en Soort-aanvulling = LIGHT",
-            "text": "<p>WGA-Aanvullingsverzekering light. U kan langere tijd niet of minder werken. Dan komt uw inkomen in gevaar. Het UWV bepaalt hoeveel u nog wél kan werken en wat u daarmee nog kan verdienen. Dit noemen we uw ‘restverdiencapaciteit’. De hoogte van uw uitkering van het UWV hangt af van deze restverdiencapaciteit. En van wat u verdiende voordat u arbeidsongeschikt werd. Met de WGA-Aanvullingsverzekering light krijgt u een uitkering als u volgens het UWV recht heeft op een WGA-vervolguitkering.</p>"
+            "text": "<p>WGA-Aanvullingsverzekering light.<br /> U kan langere tijd niet of minder werken. Dan komt uw inkomen in gevaar. Het UWV bepaalt hoeveel u nog wél kan werken en wat u daarmee nog kan verdienen. Dit noemen we uw ‘restverdiencapaciteit’. De hoogte van uw uitkering van het UWV hangt af van deze restverdiencapaciteit. En van wat u verdiende voordat u arbeidsongeschikt werd. Met de WGA-Aanvullingsverzekering light krijgt u een uitkering als u volgens het UWV recht heeft op een WGA-vervolguitkering.</p>"
           },
           {
             "filter": "als WGA-AANV en Soort-aanvulling = STANDAARD, leeg of UPGRADE",
-            "text": "<p>WGA-Aanvullingsverzekering <upgrade>. U kan langere tijd niet of minder werken. Dan komt uw inkomen in gevaar. Het UWV bepaalt hoeveel u nog wél kan werken en wat u daarmee nog kan verdienen. Dit noemen we uw ‘restverdiencapaciteit’. De hoogte van uw uitkering van het UWV hangt af van deze restverdiencapaciteit. En van wat u verdiende voordat u arbeidsongeschikt werd. Met de WGA-Aanvullingsverzekering <upgrade> krijgt u een uitkering als u volgens het UWV minimaal 35% arbeidsongeschikt bent, maar niet 80% of meer.</p>"
+            "text": "<p>WGA-Aanvullingsverzekering<upgrade>.<br /> U kan langere tijd niet of minder werken. Dan komt uw inkomen in gevaar. Het UWV bepaalt hoeveel u nog wél kan werken en wat u daarmee nog kan verdienen. Dit noemen we uw ‘restverdiencapaciteit’. De hoogte van uw uitkering van het UWV hangt af van deze restverdiencapaciteit. En van wat u verdiende voordat u arbeidsongeschikt werd. Met de WGA-Aanvullingsverzekering <upgrade> krijgt u een uitkering als u volgens het UWV minimaal 35% arbeidsongeschikt bent, maar niet 80% of meer.</p>"
           },
           {
             "filter": "als WIA-35MIN en Variant ≠ BODEM",
@@ -143,7 +143,43 @@
           },
           {
             "filter": false,
-            "text": "<p>1. U krijgt geen uitkering <br/>U bent minder dan 35% arbeidsongeschikt. U krijgt geen uitkering.</p><p>2. U krijgt een WGA-uitkering <br />U bent minimaal 35% arbeidsongeschikt. Of u bent minimaal 80% arbeidsongeschikt en het UWV denkt dat u in de komende 5 jaar weer meer kunt gaan werken. Dan krijgt u een uitkering vanuit de regeling Werkhervatting Gedeeltelijk Arbeidsgeschikten (WGA). Deze regeling maakt onderdeel uit van de WIA.</p><p>3. U krijgt een IVA-uitkering <br />U bent minimaal 80% arbeidsongeschikt. En het UWV denkt dat u in de komende 5 jaar niet meer kunt gaan werken. Dan krijgt u een uitkering vanuit de regeling Inkomensvoorziening Volledig Arbeidsongeschikten (IVA). Deze regeling maakt onderdeel uit van de WIA. <br />Op <a href=\"www.uwv.nl\">www.uwv.nl</a> leest u meer over de WIA-uitkering.</p><p>B. Uw arbeidsongeschiktheidspensioen bij Aegon. U bent hiervoor verzekerd via uw werkgever. Hierover gaat dit Pensioen 1-2-3. <br /><span class=\"phld\">als IVA-EXCED</span> Met de IVA-Excedentverzekering krijgt u een uitkering als u volgens het UWV minimaal 80% duurzaam arbeidsongeschikt bent. <br />><span class=\"phld\">als WGA-EXCED</span> Met de WGA-Excedentverzekering krijgt u een uitkering als u volgens het UWV minimaal 35% arbeidsongeschikt bent, maar niet minimaal 80% duurzaam. <br /><span class=\"phld\">als WGA-AANV en Soort-aanvulling = LIGHT</span> Met de WGA-Aanvullingsverzekering light krijgt u een uitkering als u volgens het UWV recht heeft op een WGA-vervolguitkering. <span class=\"phld\">als WGA-AANV en Soort-aanvulling = STANDAARD, leeg of UPGRADE</span> Met de WGA-Aanvullingsverzekering <span class=\"phld\">upgrade</span> krijgt u een uitkering als u volgens het UWV minimaal 35% arbeidsongeschikt bent, maar niet 80% of meer. <br /><span class=\"phld\">als WIA-35MIN en Variant ≠ BODEM</span> Met de WIA-35minverzekering krijgt u een uitkering als u volgens het UWV minder dan 35% arbeidsongeschikt bent. <br /><span class=\"phld\">als WIA-35MIN en Variant = BODEM</span> Met de WIA-Bodemverzekering krijgt u een uitkering als u volgens het UWV 15% of meer arbeidsongeschikt bent, maar minder dan 35%.</p><p>C. Een uitkering bij arbeidsongeschiktheid die u zelf misschien regelde. Bijvoorbeeld een arbeidsongeschiktheids- of woonlastenverzekering.</p>"
+            "text": "<p>1. U krijgt geen uitkering <br/>U bent minder dan 35% arbeidsongeschikt. U krijgt geen uitkering.</p><p>2. U krijgt een WGA-uitkering <br />U bent minimaal 35% arbeidsongeschikt. Of u bent minimaal 80% arbeidsongeschikt en het UWV denkt dat u in de komende 5 jaar weer meer kunt gaan werken. Dan krijgt u een uitkering vanuit de regeling Werkhervatting Gedeeltelijk Arbeidsgeschikten (WGA). Deze regeling maakt onderdeel uit van de WIA.</p>"
+          },
+          {
+            "filter": false,
+            "text": "<p>3. U krijgt een IVA-uitkering <br />U bent minimaal 80% arbeidsongeschikt. En het UWV denkt dat u in de komende 5 jaar niet meer kunt gaan werken. Dan krijgt u een uitkering vanuit de regeling Inkomensvoorziening Volledig Arbeidsongeschikten (IVA). Deze regeling maakt onderdeel uit van de WIA. <br />Op <a href=\"www.uwv.nl\">www.uwv.nl</a> leest u meer over de WIA-uitkering.</p>"
+          },
+          {
+            "filter": false,
+            "text": "<p>B. Uw arbeidsongeschiktheidspensioen bij Aegon. U bent hiervoor verzekerd via uw werkgever. Hierover gaat dit Pensioen 1-2-3.</p>"
+          },
+          {
+            "filter": "als IVA-EXCED",
+            "text": "<p>Met de IVA-Excedentverzekering krijgt u een uitkering als u volgens het UWV minimaal 80% duurzaam arbeidsongeschikt bent.</p>"
+          },
+          {
+            "filter": "als WGA-EXCED",
+            "text": "<p>Met de WGA-Excedentverzekering krijgt u een uitkering als u volgens het UWV minimaal 35% arbeidsongeschikt bent, maar niet minimaal 80% duurzaam.</p>"
+          },
+          {
+            "filter": "als WGA-AANV en Soort-aanvulling = LIGHT",
+            "text": "<p>Met de WGA-Aanvullingsverzekering light krijgt u een uitkering als u volgens het UWV recht heeft op een WGA-vervolguitkering.</p>"
+          },
+          {
+            "filter": "als WGA-AANV en Soort-aanvulling = STANDAARD, leeg of UPGRADE",
+            "text": "<p>Met de WGA-Aanvullingsverzekering upgrade krijgt u een uitkering als u volgens het UWV minimaal 35% arbeidsongeschikt bent, maar niet 80% of meer.</p>"
+          },
+          {
+            "filter": "als WIA-35MIN en Variant ≠ BODEM",
+            "text": "<p>Met de WIA-35minverzekering krijgt u een uitkering als u volgens het UWV minder dan 35% arbeidsongeschikt bent.</p>"
+          },
+          {
+            "filter": "als WIA-35MIN en Variant = BODEM",
+            "text": "<p>Met de WIA-Bodemverzekering krijgt u een uitkering als u volgens het UWV 15% of meer arbeidsongeschikt bent, maar minder dan 35%.</p>"
+          },
+          {
+            "filter": false,
+            "text": "<p>C. Een uitkering bij arbeidsongeschiktheid die u zelf misschien regelde. Bijvoorbeeld een arbeidsongeschiktheids- of woonlastenverzekering.</p>"
           }
         ]
       },
@@ -160,15 +196,15 @@
           },
           {
             "filter": true,
-            "text":  "Deze regeling geeft een aanvulling op uw</p><p>Benieuwd naar uw andere pensioenaanspraken? Kijk dan op <a href=\"www.mijnpensioenoverzicht.nl\">www.mijnpensioenoverzicht.nl</a>. <br />Meer weten over uw arbeidsongeschiktheidspensioen? Kijk dan op <a href=\"www.aegon.nl/pensioenwet\">www.aegon.nl/pensioenwet</a>.</p><p>WGA-uitkering. Uw uitkering stopt als u de AOW-leeftijd bereikt of nog daarvoor <span class=\"phld\">Eindlftd</span> jaar wordt.<span class=\"phld\">als WGA-EXCED</span>De aanvulling vanuit uw WGA-Excedentverzekering <span class=\"phld\"><dekperc>Dekperc</dekperc></span> berekenen wij over uw <span class=\"phld\">Loonbegrip</span> tot en met € <span class=\"phld\">Afw_maxln</span>.</p>"
+            "text":  "Deze regeling geeft een aanvulling op uw</p><p>Benieuwd naar uw andere pensioenaanspraken? Kijk dan op <a href=\"www.mijnpensioenoverzicht.nl\">www.mijnpensioenoverzicht.nl</a>. <br />Meer weten over uw arbeidsongeschiktheidspensioen? Kijk dan op <a href=\"www.aegon.nl/pensioenwet\">www.aegon.nl/pensioenwet</a>.</p><p>WGA-uitkering. Uw uitkering stopt als u de AOW-leeftijd bereikt of nog daarvoor <span class=\"phld\">Eindlftd</span> jaar wordt.<span class=\"phld\">als WGA-EXCED</span>De aanvulling vanuit uw WGA-Excedentverzekering<dekperc>Dekperc</dekperc> berekenen wij over uw <span class=\"phld\">Loonbegrip</span> tot en met € <span class=\"phld\">Afw_maxln</span>.</p>"
           },
           {
             "filter": true,
-            "text": "<p><span class=\"phld\">als IVA-EXCED en geen WGA-EXCED en/of WGA-AANV</span>Deze regeling geeft een aanvulling op uw IVA-uitkering. De aanvulling vanuit uw IVA-Excedentverzekering <span class=\"phld\"><dekperc>Dekperc</dekperc></span> berekenen wij over uw <span class=\"phld\">Loonbegrip</span> tot en met € <span class=\"phld\">Afw_maxln</span>. Uw uitkering stopt als u de AOW-leeftijd bereikt of nog daarvoor <span class=\"phld\">Eindlftd</span> jaar wordt.</p>"
+            "text": "<p><span class=\"phld\">als IVA-EXCED en geen WGA-EXCED en/of WGA-AANV</span>Deze regeling geeft een aanvulling op uw IVA-uitkering. De aanvulling vanuit uw IVA-Excedentverzekering<dekperc>Dekperc</dekperc> berekenen wij over uw <span class=\"phld\">Loonbegrip</span> tot en met € <span class=\"phld\">Afw_maxln</span>. Uw uitkering stopt als u de AOW-leeftijd bereikt of nog daarvoor <span class=\"phld\">Eindlftd</span> jaar wordt.</p>"
           },
           {
             "filter": true,
-            "text": "<p><span class=\"phld\">als IVA-EXCED en WGA-EXCED en/of WGA-AANV</span> Deze regeling geeft een aanvulling op uw IVA- en WGA-uitkering. Uw uitkering stopt als u de AOW-leeftijd bereikt of nog daarvoor <span class=\"phld\">Eindlftd</span> jaar wordt. <span class=\"phld\">als WGA-EXCED</span> De aanvulling vanuit uw WGA-Excedentverzekering <span class=\"phld\"><dekperc>Dekperc</dekperc></span> berekenen wij over uw <span class=\"phld\">Loonbegrip</span> tot en met € <span class=\"phld\">Afw_maxln</span>. <span class=\"phld\">als IVA-EXCED</span> De aanvulling vanuit uw IVA-Excedentverzekering <span class=\"phld\"><dekperc>Dekperc</dekperc></span> berekenen wij over uw <span class=\"phld\">Loonbegrip</span> tot en met € <span class=\"phld\">Afw_maxln</span>.</p>"
+            "text": "<p><span class=\"phld\">als IVA-EXCED en WGA-EXCED en/of WGA-AANV</span> Deze regeling geeft een aanvulling op uw IVA- en WGA-uitkering. Uw uitkering stopt als u de AOW-leeftijd bereikt of nog daarvoor <span class=\"phld\">Eindlftd</span> jaar wordt. <span class=\"phld\">als WGA-EXCED</span> De aanvulling vanuit uw WGA-Excedentverzekering<dekperc>Dekperc</dekperc> berekenen wij over uw <span class=\"phld\">Loonbegrip</span> tot en met € <span class=\"phld\">Afw_maxln</span>. <span class=\"phld\">als IVA-EXCED</span> De aanvulling vanuit uw IVA-Excedentverzekering<dekperc>Dekperc</dekperc> berekenen wij over uw <span class=\"phld\">Loonbegrip</span> tot en met € <span class=\"phld\">Afw_maxln</span>.</p>"
           },
           {
             "filter": true,
@@ -305,12 +341,7 @@
             "text": "<p>Bekijk eens per jaar hoeveel pensioen u heeft opgebouwd op <a href=\"www.mijnpensioenoverzicht.nl\">www.mijnpensioenoverzicht.nl</a>. <br />Let op: Deze arbeidsongeschiktheidspensioenregeling staat daar niet.</p>"
           }
         ],
-        "longDescription": [
-          {
-            "filter": false,
-            "text": "<p>Bekijk eens per jaar hoeveel pensioen u heeft opgebouwd op <a href=\"www.mijnpensioenoverzicht.nl\">www.mijnpensioenoverzicht.nl</a>. <br />Let op: Deze arbeidsongeschiktheidspensioenregeling staat daar niet.</p>"
-          }
-        ]
+        "longDescription": []
       },
       {
         "image": "https://s3-eu-west-1.amazonaws.com/anl-ma-staticcontent/content/pensioen123/test/keuze.png",
@@ -320,12 +351,7 @@
             "text": "<p>Als u gebruik wilt maken van de mogelijkheid om te stoppen met deelname aan deze regeling.</p>"
           }
         ],
-        "longDescription": [
-          {
-            "filter": false,
-            "text": "<p>Als u gebruik wilt maken van de mogelijkheid om te stoppen met deelname aan deze regeling.</p>"
-          }
-        ]
+        "longDescription": []
       },
       {
         "image": "https://s3-eu-west-1.amazonaws.com/anl-ma-staticcontent/content/pensioen123/test/vragen.png",
@@ -335,12 +361,7 @@
             "text": "<p>Heeft u vragen of bent u arbeidsongeschikt? Neem dan contact op met uw werkgever. Op <a href=\"www.aegon.nl/pensioenwet\">www.aegon.nl/pensioenwet</a> kunt u ook terecht voor meer informatie.</p>"
           }
         ],
-        "longDescription": [
-          {
-            "filter": false,
-            "text": "<p>Heeft u vragen of bent u arbeidsongeschikt? Neem dan contact op met uw werkgever. Op <a href=\"www.aegon.nl/pensioenwet\">www.aegon.nl/pensioenwet</a> kunt u ook terecht voor meer informatie.</p>"
-          }
-        ]
+        "longDescription": []
       }
     ]
   }
