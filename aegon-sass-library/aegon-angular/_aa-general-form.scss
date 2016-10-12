@@ -1,3 +1,20 @@
+.icon-piggy-bank {
+  background-image: url($image_path + 'piggy-bank.svg');
+}
+
+.icon-calendar-date-2 {
+  background-image: url($image_path + 'calendar-date-2.svg');
+}
+
+.form-text__icon {
+  background-size:80px 80px;
+  -o-background-size: 80px 80px;
+  -webkit-background-size: 80px 80px;
+  background-size:cover;
+  height: 80px;
+  width: 80px;
+  margin-bottom: 30px;
+}
 
 .error-message__wrapper {
   margin-top: 20px;

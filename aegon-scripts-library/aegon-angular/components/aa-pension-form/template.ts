@@ -1,6 +1,7 @@
 export const template = `
 <h1>Stel uw pensioenproduction samen</h1>
 <h2 class="general-form__box__sub__header">Uw situatie: u gaat binnenkort met pensioen</h2>
+    <div class="icon-piggy-bank"></div>
     <ul class="number-form__list">
       <li class='number-form__list__section'>
         <span class="number-form__list__numberCircle">1</span>
@@ -39,7 +40,7 @@ export const template = `
                         
                       </div>
                       <div class="col form-text__column">
-                          <img class="form-text__column__svg__logo" src="../assets/images/piggy-bank.svg">
+                          <span class="form-text__icon icon-piggy-bank"></span>
                           <span class="header">€ 95.0000</span>
                           <span class="content">is het kapitaal dat werknemers gemiddeld opbouwen bij 4 werkgevers</span>
                           <span class="brand">Bron:Aegon</span>
@@ -178,7 +179,7 @@ export const template = `
                         </div>  
                       </div>
                       <div class="col form-text__column">
-                          <img class="form-text__column__svg__logo" src="../assets/images/calendar-date-2.svg">
+                          <span class="form-text__icon icon-calendar-date-2"></span>
                           <span class="header">66 jaar</span>
                           <span class="content">is de gemiddelde pensioenieeftijd</span>
                           <span class="brand">Bron:CBS</span>
@@ -276,7 +277,7 @@ export const template = `
                         
                       </div>
                       <div class="col form-text__column">
-                          <img class="form-text__column__svg__logo" src="../assets/images/piggy-bank.svg">
+                          <span class="form-text__icon icon-piggy-bank"></span>
                           <span class="content">Meest gekozen ingangsdatum is 7 maanden na de pensioengerechtigde leeftijd </span>
                           <span>Bron:Aegon</span>
                       </div>
