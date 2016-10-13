@@ -96,13 +96,14 @@ export const template = `
         
         <div [@visibility]="editVisibility(3)"> 
           <div class="form-section__input__results">
-            <span>
-            {{whofor}} <br>
-            {{partnersInfo}}<br>
-            <span *ngIf='usersDobReadable[1] !== "" && initChangeNoPolicy == false'>
-               Geboortedatum partner {{usersDobReadable[1]}}
+            <span class="block">
+              {{whofor}}
             </span>
-            
+            <span class="block">
+                {{partnersInfo}}
+            </span>             
+            <span class="block" *ngIf='partnersDobReadable[1] !== "" && initChangeNoPolicy == false'>
+               Geboortedatum partner {{partnersDobReadable[1]}}
             </span>
             <span class="edit" (click)="editSection(3)"> > Aanpassen</span>
           </div>
