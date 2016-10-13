@@ -168,7 +168,7 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
 
     this.age = calculateAge(val);
 
-    this.usersDobReadable[index] = new Date(val).toLocaleDateString('nl-NL', this.dateOptions);
+    this.partnersDobReadable[index] = new Date(val).toLocaleDateString('nl-NL', this.dateOptions);
 
     if(this.age == undefined){
       this.userAgeInvalid[index] = true;
