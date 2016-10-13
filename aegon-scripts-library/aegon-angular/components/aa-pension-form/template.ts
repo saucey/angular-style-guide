@@ -1,15 +1,16 @@
 export const template = `
 <h1>Stel uw pensioenproduction samen</h1>
 <h2 class="general-form__box__sub__header">Uw situatie: u gaat binnenkort met pensioen</h2>
-    <div class="icon-piggy-bank"></div>
     <ul class="number-form__list">
       <li class='number-form__list__section'>
+      
         <span class="number-form__list__numberCircle">1</span>
+        
         <span class="general-form__box__sub__header">Uw pensioenkapitaal</span>
         
         <div [@visibility]="editVisibility(1)"> 
           <div class="form-section__input__results">
-            <span>€ {{pensionAmount}}</span>
+            <span>€ {{pensionAmount | money}}</span>
             <span class="edit" (click)="editSection(1)"> > Aanpassen</span>
           </div>
         </div>
