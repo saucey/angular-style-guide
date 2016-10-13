@@ -75,8 +75,7 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
   public hasPartner: string = "hidden";
   public partnerDob: string = "hidden";
 
-  public usersDobReadable: any[] = [];
-  public partnersDobReadable: string = '';
+  public partnersDobReadable: any[] = [];
 
   public visibility = {
     1: 'show',
