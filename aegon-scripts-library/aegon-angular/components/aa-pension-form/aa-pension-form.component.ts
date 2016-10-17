@@ -69,8 +69,14 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
 
   public amountIsValid: boolean = false;
 
-  public minAge: number = 50;
+  public minAge = {
+    1: 50,
+    2: 18
+  };
+
   public maxAge: number = 75;
+
+
 
   public hasPartner: string = "hidden";
   public partnerDob: string = "hidden";
@@ -164,7 +170,7 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
   }
 
 
-  validateUserAge(val, index): any {
+  validateUserAge(val, index, minAgeIndex): any {
 
     this.age = calculateAge(val);
 
@@ -178,7 +184,7 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
       return this.isAgeValid[index] = true;
     }
 
-    if(this.age < this.minAge){
+    if(this.age < this.minAge[minAgeIndex]){
       this.userAgeInvalid[index]  = false;
       this.userToYoung[index]  = true;
       this.userToOld[index]  = false;

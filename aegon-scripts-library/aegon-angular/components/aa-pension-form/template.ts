@@ -153,7 +153,7 @@ export const template = `
                                 <span class="general-form__box__head">Uw geboortedatum</span>
                                 
                                 <div class="inputs birthdate">
-                                  <aa-input-date (modelChange)="validateUserAge($event, 1)" [(ngModel)]="pension['birthDateOfPartner']" class="aa-qq-aov__input" [setFocus]="setFocus"></aa-input-date>
+                                  <aa-input-date (modelChange)="validateUserAge($event, 1, 2)" [(ngModel)]="pension['birthDateOfPartner']" class="aa-qq-aov__input" [setFocus]="setFocus"></aa-input-date>
                                   
                                   <span class="error-message__wrapper" *ngIf="userAgeInvalid[1]">
                                     <p class="error">
@@ -212,7 +212,7 @@ export const template = `
                         <span class="general-form__box__head">Uw geboortedatum</span>
                         
                         <div class="inputs birthdate">
-                          <aa-input-date (modelChange)="validateUserAge($event, 2)" [(ngModel)]="pension['birthDate']" class="aa-qq-aov__input" [setFocus]="setFocus"></aa-input-date>
+                          <aa-input-date (modelChange)="validateUserAge($event, 2, 1)" [(ngModel)]="pension['birthDate']" class="aa-qq-aov__input" [setFocus]="setFocus"></aa-input-date>
                           
                           <span class="error-message__wrapper" *ngIf="userAgeInvalid[2]">
                             <p class="error">
