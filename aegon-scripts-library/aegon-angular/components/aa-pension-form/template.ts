@@ -10,13 +10,13 @@ export const template = `
         
         <div [@visibility]="editVisibility(1)"> 
           <div class="form-section__input__results">
-            <span>€ {{pensionAmount | money}}</span>
+            <span>€ {{pension['pensionAmount']| money}}</span>
             <span class="edit" (click)="editSection(1)"> > Aanpassen</span>
           </div>
         </div>
        
         <div [@visibility]="visibility[1]"> 
-          <p>Uw pensioenkapitaal heeft u opgebouwd bij al uw werkgevers</p>
+          <p class="general-form__para">Uw pensioenkapitaal heeft u opgebouwd bij al uw werkgevers</p>
           <div class="form-element-text__row">
               <div class="table">
                   <div class="row">
@@ -25,7 +25,7 @@ export const template = `
                         <p>Heeft u bij meer pensioenverzekeraars een pensioenkapitaal? Tel dan alle bedragen bij elkaar op en vul het totaalbedrag hier in.</p>  
                         <div class="inputs">
                         
-                          <aegon-input-number #amountInput prefix="€" [(ngModel)]="pensionAmount" [max]="99999999"
+                          <aegon-input-number #amountInput prefix="€" [(ngModel)]="pension['pensionAmount']" [max]="99999999"
                                              (focus)="amountTooSmall = false; amountInput.select()" (keyup)="isValidAmount()"
                                              (enter)="submitAmount()" [placeholder]="'min 25.000'">
                           </aegon-input-number>
@@ -57,30 +57,30 @@ export const template = `
         
         <div [@visibility]="editVisibility(2)"> 
           <div class="form-section__input__results">
-            <span>{{pensionLocation}}</span>
+            <span>{{pension['pensionLocation']}}</span>
             <span class="edit" (click)="editSection(2)"> > Aanpassen</span>
           </div>
         </div>        
         
         <div [@visibility]="visibility[2]"> 
-            <p>Om het juiste rendement te kunnen tonen dient u hier in te vullen bij welke verzekeraars of pensioenfondsen uw pensioen is opgebouwd.</p>
+            <p class="general-form__para">Om het juiste rendement te kunnen tonen dient u hier in te vullen bij welke verzekeraars of pensioenfondsen uw pensioen is opgebouwd.</p>
             <div class="general-form__box">
               <span class="general-form__box__head">Uw pensioenkapitaal is opgebouwd bij</span>
               <div class="white-radio-wrapper">
                 <label class="radio white-radio">
-                  <input type="radio" name="aov.person" value="Aegon" [(ngModel)]="pensionLocation" (change)="pensionValidLocation = true" />
+                  <input type="radio" name="aov.person" value="Aegon" [(ngModel)]="pension['pensionLocation']" (change)="pensionValidLocation = true" />
                   <span class="radio"></span>
                   <span class="label-text">Aegon</span>
                 </label>
               
                 <label class="radio white-radio">
-                  <input type="radio" name="aov.person" value="Andere verzekeraar(s) of pensioenfonds(en)" [(ngModel)]="pensionLocation" (change)="pensionValidLocation = true"/>
+                  <input type="radio" name="aov.person" value="Andere verzekeraar(s) of pensioenfonds(en)" [(ngModel)]="pension['pensionLocation']" (change)="pensionValidLocation = true"/>
                   <span class="radio"></span>
                   <span class="label-text">Andere verzekeraar(s) of pensioenfonds(en)</span>
                 </label>
                 
                 <label class="radio white-radio">
-                  <input type="radio" name="aov.person" value="Zowel bij Aegon als bij andere verzekeraar(s) of pensioenfonds(en)" [(ngModel)]="pensionLocation" (change)="pensionValidLocation = true"/>
+                  <input type="radio" name="aov.person" value="Zowel bij Aegon als bij andere verzekeraar(s) of pensioenfonds(en)" [(ngModel)]="pension['pensionLocation']" (change)="pensionValidLocation = true"/>
                   <span class="radio"></span>
                   <span class="label-text">Zowel bij Aegon als bij andere verzekeraar(s) of pensioenfonds(en)</span>
                 </label>
@@ -97,12 +97,12 @@ export const template = `
         <div [@visibility]="editVisibility(3)"> 
           <div class="form-section__input__results">
             <span class="block">
-              {{whofor}}
+              {{pension['whofor']}}
             </span>
-            <span class="block">
-                {{partnersInfo}}
+            <span *ngIf='hasPartner !== "hidden" 'class="block">
+                {{pension['partnersInfo']}}
             </span>             
-            <span class="block" *ngIf='partnersDobReadable[1] !== "" && initChangeNoPolicy == false'>
+            <span class="block" *ngIf='hasPartner !== "hidden" && partnersDobReadable[1] !== "" && initChangeNoPolicy == false'>
                Geboortedatum partner {{partnersDobReadable[1]}}
             </span>
             <span class="edit" (click)="editSection(3)"> > Aanpassen</span>
@@ -110,7 +110,7 @@ export const template = `
         </div>
        
         <div [@visibility]="visibility[3]"> 
-          <p>Heeft u een partner? En wilt u dat uw partner een pensioenuitkering krijgt na uw overlijden? Dan kunt u een partnerpensioen verzekeren. De uitkering is 70% van het pensioen dat u ontvangt.</p>
+          <p class="general-form__para">Heeft u een partner? En wilt u dat uw partner een pensioenuitkering krijgt na uw overlijden? Dan kunt u een partnerpensioen verzekeren. De uitkering is 70% van het pensioen dat u ontvangt.</p>
           <div class="form-element-text__row">
               <div class="table">
                   <div class="row">
@@ -120,13 +120,13 @@ export const template = `
                         
                         <div class="white-radio-wrapper">
                           <label class="radio white-radio">
-                            <input type="radio" name="aov.who" value="Ja, ik heb een partner" [(ngModel)]="whofor" (change)="hasPartner = 'show'; initChangeHasPartnerYes = true" />
+                            <input type="radio" name="aov.who" value="Ja, ik heb een partner" [(ngModel)]="pension['whofor']" (change)="hasPartner = 'show'; initChangeHasPartnerYes = true" />
                             <span class="radio"></span>
                             <span class="label-text">Ja, ik heb een partner</span>
                           </label>
                         
                           <label class="radio white-radio">
-                            <input type="radio" name="aov.who" value="Nee, ik heb geen partner" [(ngModel)]="whofor" (change)="hasPartner = 'hidden'; initChangeHasPartnerNo = true" />
+                            <input type="radio" name="aov.who" value="Nee, ik heb geen partner" [(ngModel)]="pension['whofor']" (change)="hasPartner = 'hidden'; initChangeHasPartnerNo = true" />
                             <span class="radio"></span>
                             <span class="label-text">Nee, ik heb geen partner</span>
                           </label>
@@ -135,14 +135,14 @@ export const template = `
                           <span class="general-form__box__head">Wilt u een partnerpensioen voor uw partner verzekeren?</span>
                             <div class="white-radio-wrapper">
                               <label class="radio white-radio extended-text">
-                                <input type="radio" name="aov.partner" value="Ja, ik wil een partnerpensioen verzekeren" [(ngModel)]="partnersInfo" (change)="partnerDob = 'show'; initChangeNoPolicy = false" />
+                                <input type="radio" name="aov.partner" value="Ja, ik wil een partnerpensioen verzekeren" [(ngModel)]="pension['partnersInfo']" (change)="partnerDob = 'show'; initChangeNoPolicy = false" />
                                 <span class="radio"></span>
                                 <span class="label-text"><strong>Ja, ik wil een partnerpensioen verzekeren</strong></span>
                                 <span class="label-text">bij mijn overlijden ontvangt mijn partner 70% van het <br> pensioen dat ik zelf ontvang</span>
                               </label>
                             
                               <label class="radio white-radio extended-text">
-                                <input type="radio" name="aov.partner" value="Nee, ik wil geen partnerpensioen verzekeren" [(ngModel)]="partnersInfo" (change)="partnerDob = 'hidden'; initChangeNoPolicy = true " />
+                                <input type="radio" name="aov.partner" value="Nee, ik wil geen partnerpensioen verzekeren" [(ngModel)]="pension['partnersInfo']" (change)="partnerDob = 'hidden'; initChangeNoPolicy = true " />
                                 <span class="radio"></span>
                                 <span class="label-text"><strong>Nee, ik wil geen partnerpensioen verzekeren</strong></span>
                                 <span class="label-text">bij mijn overlijden ontvangt mijn partner geen <br> partnerpensioen. Hier moet uw partner schriftelijk mee <br> instemmen</span>
@@ -153,7 +153,7 @@ export const template = `
                                 <span class="general-form__box__head">Uw geboortedatum</span>
                                 
                                 <div class="inputs birthdate">
-                                  <aa-input-date (modelChange)="validateUserAge($event, 1)" [(ngModel)]="birthDateOfPartner" class="aa-qq-aov__input" [setFocus]="setFocus"></aa-input-date>
+                                  <aa-input-date (modelChange)="validateUserAge($event, 1)" [(ngModel)]="pension['birthDateOfPartner']" class="aa-qq-aov__input" [setFocus]="setFocus"></aa-input-date>
                                   
                                   <span class="error-message__wrapper" *ngIf="userAgeInvalid[1]">
                                     <p class="error">
@@ -197,13 +197,13 @@ export const template = `
         
         <div [@visibility]="editVisibility(4)"> 
           <div class="form-section__input__results">
-            <span>Mijn geboortedatum {{birthDate | dateToReadableString}} </span>
+            <span>Mijn geboortedatum {{pension['birthDate']| dateToReadableString}} </span>
             <span class="edit" (click)="editSection(4)"> > Aanpassen</span>
           </div>
         </div>
        
         <div [@visibility]="visibility[4]"> 
-          <p>Om uw pensioenuitkering exact uit te rekenen hebben we uw geboortedatum nodig</p>
+          <p class="general-form__para">Om uw pensioenuitkering exact uit te rekenen hebben we uw geboortedatum nodig</p>
           <div class="form-element-text__row">
               <div class="table">
                   <div class="row">
@@ -212,7 +212,7 @@ export const template = `
                         <span class="general-form__box__head">Uw geboortedatum</span>
                         
                         <div class="inputs birthdate">
-                          <aa-input-date (modelChange)="validateUserAge($event, 2)" [(ngModel)]="birthDate" class="aa-qq-aov__input" [setFocus]="setFocus"></aa-input-date>
+                          <aa-input-date (modelChange)="validateUserAge($event, 2)" [(ngModel)]="pension['birthDate']" class="aa-qq-aov__input" [setFocus]="setFocus"></aa-input-date>
                           
                           <span class="error-message__wrapper" *ngIf="userAgeInvalid[2]">
                             <p class="error">
@@ -260,7 +260,7 @@ export const template = `
         </div>
        
         <div [@visibility]="visibility[5]"> 
-          <p>Hier uitleggen waarom je een bepaalde datum zou kiezen en wat het voordeel is om bijvoorbeeld later te beginnen met uitkeren dan direct op je pensioenleeftijd.</p>
+          <p class="general-form__para">Hier uitleggen waarom je een bepaalde datum zou kiezen en wat het voordeel is om bijvoorbeeld later te beginnen met uitkeren dan direct op je pensioenleeftijd.</p>
           <div class="form-element-text__row">
               <div class="table">
                   <div class="row">
@@ -275,7 +275,7 @@ export const template = `
                           </select>
                         </div>
                         
-                        <button class="button icon-right icon-calculator" type="button" (click)="goTo(5)" [disabled]="startingDate == ''">Bereken pensioenuitkering</button>
+                        <button class="button icon-right icon-calculator" type="button" (click)="goTo(5); submitForm(pension)" [disabled]="startingDate == ''">Bereken pensioenuitkering</button>
                         
                       </div>
                       <div class="col form-text__column">
