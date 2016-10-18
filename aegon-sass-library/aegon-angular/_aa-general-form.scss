@@ -276,7 +276,7 @@ ul.number-form__list {
 @media all and (max-width: 840px) {
   /* demo 3 */
   .form-element-text__row {
-    padding: 0 30px;
+    padding: 0px;
     .table {
       display: block
     }
@@ -287,10 +287,16 @@ ul.number-form__list {
       display: block
     }
     .col.form-element__column {
-      margin-bottom: 30px
+      border-radius: 5px 5px 0 0;
+      //margin-bottom: 30px
     }
     .col.form-text__column {
+      border-radius: 0 0 5px 5px;
       width: 100%
     }
   }
+
+    .general-form__para {
+      margin-bottom: 15px;
+    }
 }

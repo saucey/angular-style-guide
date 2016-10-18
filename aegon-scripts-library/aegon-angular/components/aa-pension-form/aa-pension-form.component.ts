@@ -40,10 +40,10 @@ const monthLabels: string[] = [
 //TODO ADD BASE64
 export class AAPensionFormComponent extends AABaseComponent implements OnInit {
 
-  public pensionAmount: number;
+  public pension = new Array<{pensionAmount:number, birthDate:string}>();
+
   public amountTooSmall: boolean;
   public message: boolean = false;
-  public birthDate: string;
   public age: number;
   public initChangeHasPartnerNo: boolean;
   public initChangeHasPartnerYes: boolean;
@@ -69,7 +69,11 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
 
   public amountIsValid: boolean = false;
 
-  public minAge: number = 50;
+  public minAge = {
+    1: 50,
+    2: 18
+  };
+
   public maxAge: number = 75;
 
   public hasPartner: string = "hidden";
@@ -150,9 +154,9 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
 
   isValidAmount(): boolean {
 
-    if(this.pensionAmount !== undefined && this.pensionAmount !== 0){
+    if(this.pension['pensionAmount']!== undefined && this.pension['pensionAmount'] !== 0){
 
-      this.amountTooSmall = this.pensionAmount >= 25000;
+      this.amountTooSmall = this.pension['pensionAmount'] >= 25000;
       this.amountIsValid = !this.amountTooSmall;
 
       return !this.amountTooSmall;
@@ -164,7 +168,7 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
   }
 
 
-  validateUserAge(val, index): any {
+  validateUserAge(val, index, minAgeIndex): any {
 
     this.age = calculateAge(val);
 
@@ -178,7 +182,7 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
       return this.isAgeValid[index] = true;
     }
 
-    if(this.age < this.minAge){
+    if(this.age < this.minAge[minAgeIndex]){
       this.userAgeInvalid[index]  = false;
       this.userToYoung[index]  = true;
       this.userToOld[index]  = false;
@@ -199,6 +203,12 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
     this.userToOld[index] = false;
 
     return this.isAgeValid[index] = false;
+
+  }
+
+  submitForm(obj): void {
+    //this is were we need to set session and api call
+    console.log(obj, 'the object of the value');
 
   }
 }
