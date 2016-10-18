@@ -3,8 +3,7 @@
  */
 
 // Imports
-import {Component, Compiler, ElementRef, Input, OnInit, ViewChild, ViewContainerRef} from "@angular/core";
-// import {FORM_DIRECTIVES} from "@angular/common";
+import {Component, Compiler, Directive, ElementRef, Input, OnInit, ViewChild, ViewContainerRef} from "@angular/core";
 import {AABaseComponent} from "../../lib/classes/AABaseComponent";
 import {defaultOptions} from "./defaultOptions";
 
@@ -40,11 +39,17 @@ export class AAPageComponent extends AABaseComponent implements OnInit {
   createPagePartial() {
     @Component({
       selector: 'page-partial',
-      templateUrl: defaultOptions.pagePartialSrc,
-      // directives: FORM_DIRECTIVES
+      templateUrl: 'partials/dip-vpu.html',
     })
     
     class pagePartial {}
     return pagePartial ;
   }
+}
+
+@Directive({ selector: '[myHighlight]' })
+export class HighlightDirective {
+    constructor(el: ElementRef, renderer: Renderer) {
+       renderer.setElementStyle(el.nativeElement, 'backgroundColor', 'yellow');
+    }
 }
