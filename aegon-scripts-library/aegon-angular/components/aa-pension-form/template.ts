@@ -25,10 +25,10 @@ export const template = `
                         <p>Heeft u bij meer pensioenverzekeraars een pensioenkapitaal? Tel dan alle bedragen bij elkaar op en vul het totaalbedrag hier in.</p>  
                         <div class="inputs">
                         
-                          <aegon-input-number #amountInput prefix="€" [(ngModel)]="pension['pensionAmount']" [max]="99999999"
+                          <aa-input-number class="aa-input--euro" #amountInput prefix="€" [(ngModel)]="pension['pensionAmount']" [max]="99999999"
                                              (focus)="amountTooSmall = false; amountInput.select()" (keyup)="isValidAmount()"
                                              (enter)="submitAmount()" [placeholder]="'min 25.000'">
-                          </aegon-input-number>
+                          </aa-input-number>
                           
                           <span class="error-message__wrapper" *ngIf="amountIsValid">
                             <p class="error">
