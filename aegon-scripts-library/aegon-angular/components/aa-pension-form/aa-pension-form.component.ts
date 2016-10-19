@@ -214,4 +214,8 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
     console.log(obj, 'the object of the value');
 
   }
+
+  testMethod(val: number): number {
+    return val;
+  }
 }

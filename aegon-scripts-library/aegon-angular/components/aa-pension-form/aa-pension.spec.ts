@@ -1,32 +1,40 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, async } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA }          from '@angular/core';
+import {CommonModule} from "@angular/common";
+import {FormsModule} from "@angular/forms";
 import { AAPensionFormComponent } from './aa-pension-form.component';
 import { AAMoneyPipe } from '../../pipes/money.pipe';
-import { AAInputNumberComponent } from '../aa-input-number/aa-input-number.component';
+import { DateToReadableString } from '../../pipes/dateToReadableString.pipe';
+// import { AAInputNumberComponent } from '../aa-input-number/aa-input-number.component';
 import {
   Component, OnInit, ElementRef, trigger, state, animate, transition, style, SimpleChanges
 } from '@angular/core';
 
 
-describe('AppComponent', () => {
+describe('AA Pension Form Component', () => {
   let comp: AAPensionFormComponent;
   let fixture : ComponentFixture<AAPensionFormComponent>;
 
-  beforeEach(() => {
+  beforeEach(async(()  => {
 
     // refine the test module by declaring the test component
     TestBed.configureTestingModule({
-      // imports: [InputNumberComponent],
-      declarations: [AAPensionFormComponent, AAMoneyPipe, AAInputNumberComponent]
+      imports: [CommonModule, FormsModule],
+      declarations: [AAPensionFormComponent, DateToReadableString, AAMoneyPipe],
+      schemas:      [ NO_ERRORS_SCHEMA ]
+    })
+    .compileComponents()
+    .then(() => {
+
+      fixture = TestBed.createComponent(AAPensionFormComponent);
+
+      comp = fixture.componentInstance; // BannerComponent test instance
     });
 
-    fixture = TestBed.createComponent(AAPensionFormComponent);
-
-    comp = fixture.componentInstance; // BannerComponent test instance
-
-  });
+  }));
 
   it('should equal 1', () => {
-    // expect(comp.testMethod(1)).toEqual(1);
+    expect(comp.testMethod(1)).toEqual(1);
   });
 
 });
