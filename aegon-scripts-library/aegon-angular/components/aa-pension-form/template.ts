@@ -23,7 +23,7 @@ export const template = `
                       <div class="col form-element__column">
                         <span class="general-form__box__head">Hoogte van uw pensoenkapitaal</span>
                         <p>Heeft u bij meer pensioenverzekeraars een pensioenkapitaal? Tel dan alle bedragen bij elkaar op en vul het totaalbedrag hier in.</p>  
-                        <div class="inputs">
+                        <div class="inputs number">
                         
                           <aa-input-number class="aa-input--euro" #amountInput prefix="€" [(ngModel)]="pension['pensionAmount']" [max]="99999999"
                                              (focus)="amountTooSmall = false; amountInput.select()" (keyup)="isValidAmount()"

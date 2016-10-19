@@ -5,11 +5,6 @@ import {FormsModule} from "@angular/forms";
 import { AAPensionFormComponent } from './aa-pension-form.component';
 import { AAMoneyPipe } from '../../pipes/money.pipe';
 import { DateToReadableString } from '../../pipes/dateToReadableString.pipe';
-// import { AAInputNumberComponent } from '../aa-input-number/aa-input-number.component';
-import {
-  Component, OnInit, ElementRef, trigger, state, animate, transition, style, SimpleChanges
-} from '@angular/core';
-
 
 describe('AA Pension Form Component', () => {
   let comp: AAPensionFormComponent;
