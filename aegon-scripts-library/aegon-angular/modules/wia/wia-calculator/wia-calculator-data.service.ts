@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Http } from "@angular/http";
 import { Observable } from "rxjs/Observable";
-import { WIAInputEntity } from "../wia-page/wia-input.entity";
+import { WIAInputEntity } from "../wia-page/models/wia-input.entity";
 
 const productsMetadata = require('./datasets/components.json');
 const componentGroups = require('./datasets/componentsGroups.json');

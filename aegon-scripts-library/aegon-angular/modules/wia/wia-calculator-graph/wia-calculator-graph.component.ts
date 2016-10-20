@@ -23,7 +23,7 @@ interface GraphConfig {
   selector: 'aa-wia-calculator-graph',
   template: require('./template.html')
 })
-export class WiaCalculatorGraph implements OnChanges {
+export class WiaCalculatorGraphComponent implements OnChanges {
   @Input() data: GraphConfig;
 
   public trackByBar(index, item) {

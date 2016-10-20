@@ -54,13 +54,6 @@
     ]
   },
   {
-    "id": "WGA_AANV_STANDARD",
-    "label": "WGA_AANV_STANDARD",
-    "desc": "",
-    "selected": false,
-    "attrs": []
-  },
-  {
     "id": "WGA_AANV_LIGHT",
     "label": "WGA_AANV_LIGHT",
     "desc": "",

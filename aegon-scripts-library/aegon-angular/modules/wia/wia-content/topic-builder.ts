@@ -5,7 +5,7 @@
  * @author Florian Popa <florian@webgenerals.com>
  */
 import { Injectable } from "@angular/core";
-import { WIAInputEntity } from "../wia-page/wia-input.entity";
+import { WIAInputEntity } from "../wia-page/models/wia-input.entity";
 import { WiaTopicRow } from "./wia-content-entities/wia-topic-row.entity";
 import { WiaTopicEntity } from "./wia-content-entities/wia-topic.entity";
 import { WiaTopicDescriptionEntity } from "./wia-content-entities/wia-topic-description.entity";

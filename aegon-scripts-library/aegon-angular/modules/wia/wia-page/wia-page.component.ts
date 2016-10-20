@@ -10,7 +10,7 @@ import { WiaPageService } from "./wia-page.service";
 /**
  * Collapsible content component
  */
-export class WiaPage implements OnInit {
+export class WiaPageComponent implements OnInit {
 
   constructor(private wiaPageService: WiaPageService) {
 

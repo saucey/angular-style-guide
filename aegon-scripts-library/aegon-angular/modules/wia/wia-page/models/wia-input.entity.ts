@@ -4,7 +4,7 @@
  * @description Holds information regarding the product and income input
  * @author Florian Popa <florian@webgenerals.com>
  */
-import { ProductEntity } from "../wia-content/product.entity";
+import { ProductEntity } from "./product.entity";
 
 export interface WIAInputEntity {
 

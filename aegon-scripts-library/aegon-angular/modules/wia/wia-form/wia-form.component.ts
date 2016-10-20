@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit } from "@angular/core";
 import { AABaseComponent } from "../../../lib/classes/AABaseComponent";
-import { WIAInputEntity } from "../wia-page/wia-input.entity";
+import { WIAInputEntity } from "../wia-page/models/wia-input.entity";
 import { WiaPageService } from "../wia-page/wia-page.service";
 import { WiaPageProductsService } from "../wia-page/wia-page.products.service";
 import { WiaPagePersonalizationService } from "../wia-page/wia-page.personalization.service";
@@ -16,7 +16,7 @@ const template = require('./template.html');
 /**
  * Collapsible content component
  */
-export class WiaForm extends AABaseComponent implements OnInit {
+export class WiaFormComponent extends AABaseComponent implements OnInit {
 
   public products;
   public income = null;

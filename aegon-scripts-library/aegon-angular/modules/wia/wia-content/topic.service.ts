@@ -8,7 +8,7 @@
 import { Injectable } from "@angular/core";
 import { WiaContentService } from "./wia-content.service";
 import { WiaPageService } from "../wia-page/wia-page.service";
-import { WIAInputEntity } from "../wia-page/wia-input.entity";
+import { WIAInputEntity } from "../wia-page/models/wia-input.entity";
 import { TopicBuilder } from "./topic-builder";
 import { TopicRowEntity } from "./topic-entities/topic-row.entity";
 import { clone } from "../../../lib/util";

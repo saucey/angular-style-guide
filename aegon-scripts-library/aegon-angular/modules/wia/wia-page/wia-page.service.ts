@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
-import { WIAInputEntity } from "./wia-input.entity";
+import { WIAInputEntity } from "./models/wia-input.entity";
 import { WiaPageProductsService } from "./wia-page.products.service";
 import { WiaPagePersonalizationService } from "./wia-page.personalization.service";
 

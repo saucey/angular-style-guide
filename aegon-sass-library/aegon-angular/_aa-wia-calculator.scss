@@ -35,8 +35,8 @@
   .product-item {
 
     display: block;
-    height: 26px;
     font-size: 0.9em;
+    overflow: hidden;
 
     input:checked + label {
       font-weight: bold;

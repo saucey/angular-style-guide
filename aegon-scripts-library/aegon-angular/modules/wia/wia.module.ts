@@ -1,24 +1,26 @@
 import { NgModule } from "@angular/core";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 import { HttpModule } from "@angular/http";
+
 import { AAComponentsModule } from "../../aa.module";
 import { DeprecatedComponentsModule } from "../../deprecated-components.module";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { WiaCalculator } from "./wia-calculator/wia-calculator.component";
-import { WiaCalculatorGraph } from "./wia-calculator-graph/wia-calculator-graph.component";
+
+import { WiaCalculatorComponent } from "./wia-calculator/wia-calculator.component";
+import { WiaCalculatorGraphComponent } from "./wia-calculator-graph/wia-calculator-graph.component";
 import { WiaContentComponent } from "./wia-content/wia-content.component";
-import { WiaForm } from "./wia-form/wia-form.component";
-import { WiaPage } from "./wia-page/wia-page.component";
+import { WiaFormComponent } from "./wia-form/wia-form.component";
+import { WiaPageComponent } from "./wia-page/wia-page.component";
 
 export const WiaPageExports = [
-  WiaCalculator,
-  WiaForm,
-  WiaPage,
+  WiaCalculatorComponent,
+  WiaFormComponent,
+  WiaPageComponent,
   WiaContentComponent
 ];
 
 export const declarations = [
-  WiaCalculatorGraph,
+  WiaCalculatorGraphComponent,
   ...WiaPageExports
 ];
 

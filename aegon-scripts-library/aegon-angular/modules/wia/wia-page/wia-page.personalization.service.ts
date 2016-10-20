@@ -1,11 +1,18 @@
 import { Injectable } from "@angular/core";
-import { WIAInputEntity } from "./wia-input.entity";
-import { WiaPageProductsService } from "./wia-page.products.service";
+import { WIAInputEntity } from "./models/wia-input.entity";
+
+import {
+  WGA_EXCED_Code,
+  WGA_EXCED_Value,
+  IVA_EXCED_Code,
+  IVA_EXCED_Value,
+  WGA_AANV_Code,
+  WIA_35MIN_Code,
+  WIA_35MIN_Value
+} from "./models/personalization";
 
 @Injectable()
 export class WiaPagePersonalizationService {
-
-  private wiaPageProductsService: WiaPageProductsService;
 
   public incomeClasses = [
     5000,
@@ -24,35 +31,25 @@ export class WiaPagePersonalizationService {
   ];
 
   constructor() {
-
-    this.wiaPageProductsService = new WiaPageProductsService();
   }
 
   public getUrlCode(): string {
-
     return window.location.hash.substr(1);
   }
 
   public setUrlCode(code: string): void {
-
     window.location.hash = code;
   }
 
   public getUrlConfiguration(): WIAInputEntity {
 
     const code = this.getUrlCode();
-
-    if (code && code.length === 5) {
-      return this.codeToInput(code);
-    }
-
-    return;
+    return code && code.length === 5 ? this.codeToInput(code) : null;
   }
 
   public setUrlConfiguration(configuration: WIAInputEntity): void {
 
     const code = this.inputToCode(configuration);
-
     this.setUrlCode(code);
   }
 
@@ -64,11 +61,9 @@ export class WiaPagePersonalizationService {
 
   public inputToCode(input: WIAInputEntity): string {
 
-    const products = this.wiaPageProductsService.getProducts();
-
     const to36 = number => (+number).toString(35); // leave 'z' free to replace 'o's later
-    const code = [];
-    let substring = '';
+    const code = []; // array of final code elements
+    let substring = ''; // temporary variable to construct single code character from multiple digits
 
     //income
     code.push(to36(this.getIncomeClass(input.income)));
@@ -83,56 +78,44 @@ export class WiaPagePersonalizationService {
       code.push(to36(~~(input.usage / 10)));
     }
 
-
     //WGA_EXCED
     const WGA_EXCED: any = input.products.find(el => el.id === 'WGA_EXCED');
-    const WGA_EXCED_PROD: any = products.find(el => el.id === 'WGA_EXCED');
-    if (WGA_EXCED) {
-      substring += WGA_EXCED_PROD.attrs[0].options.findIndex(attr => attr.value === WGA_EXCED.attrs[0].value) + 1; //+1, because 0 is off
-    } else {
-      substring += 0;
-    }
+    substring += WGA_EXCED ? WGA_EXCED_Code[WGA_EXCED_Value[WGA_EXCED.attrs[0].value]] : 0;
 
     //IVA_EXCED
     const IVA_EXCED: any = input.products.find(el => el.id === 'IVA_EXCED');
-    const IVA_EXCED_PROD: any = products.find(el => el.id === 'IVA_EXCED');
-    if (IVA_EXCED) {
-      substring += IVA_EXCED_PROD.attrs[0].options.findIndex(attr => attr.value === IVA_EXCED.attrs[0].value) + 1; //+1, because 0 is off
-    } else {
-      substring += 0;
-    }
+    substring += IVA_EXCED ? IVA_EXCED_Code[IVA_EXCED_Value[IVA_EXCED.attrs[0].value]] : 0;
 
     code.push(to36(substring));
 
     substring = '';
 
     //WGA_AANV
-    const WGA_AANV = input.products.find(el => el.id === 'WGA_AANV_STANDARD');
+    const WGA_AANV_STANDARD = input.products.find(el => el.id === 'WGA_AANV_STANDARD');
     const WGA_AANV_LIGHT = input.products.find(el => el.id === 'WGA_AANV_LIGHT');
     const WGA_AANV_UPGRADE = input.products.find(el => el.id === 'WGA_AANV_UPGRADE');
 
-    if (WGA_AANV) {
-      substring += 1;
+    if (WGA_AANV_STANDARD) {
+      substring += WGA_AANV_Code.Standard;
     } else if (WGA_AANV_LIGHT) {
-      substring += 2;
+      substring += WGA_AANV_Code.Light;
     } else if (WGA_AANV_UPGRADE) {
-      substring += 3;
+      substring += WGA_AANV_Code.Upgrade;
     } else {
-      substring += 0;
+      substring += WGA_AANV_Code.Off;
     }
 
     //35MIN
     const WIA_35MIN_BODEM = input.products.find(el => el.id === 'WIA_35MIN_BODEM');
     const WIA_35MIN: any = input.products.find(el => el.id === 'WIA_35MIN');
-    const WIA_35MIN_PROD: any = products.find(el => el.id === 'WIA_35MIN');
 
     //IVA_EXCED
     if (WIA_35MIN_BODEM) {
-      substring += 1;
+      substring += WIA_35MIN_Value.Boden;
     } else if (WIA_35MIN) {
-      substring += WIA_35MIN_PROD.attrs[0].options.findIndex(attr => attr.value === WIA_35MIN.attrs[0].value) + 2; //+2, because 0 is off, 1 is BODEM
+      substring += WIA_35MIN_Code[WIA_35MIN_Value[WIA_35MIN.attrs[0].value]];
     } else {
-      substring += 0;
+      substring += WIA_35MIN_Code.Off;
     }
 
     code.push(to36(substring));
@@ -142,44 +125,49 @@ export class WiaPagePersonalizationService {
 
   public codeToInput(code: string): WIAInputEntity {
 
-    const productsMeta = this.wiaPageProductsService.getProducts();
-
     const to10 = number => Number.parseInt(number, 35); // leave 'z' free to replace 'o's later
 
     const codeChars = code.replace(/Z/g, 'O').toLowerCase().split('');
 
     const products = [];
 
+    // Income
     const income = this.incomeClasses[to10(codeChars[0])];
+
+    // Disability
     const disability = to10(codeChars[1]) * 10;
+
+    // Usage
     const usage = codeChars[2] === 'p' ? 50 : to10(codeChars[2]) * 10;
+
+    // Permanent disability
     const permDisability = codeChars[2] === 'p';
 
+    // Convert character to two digits number
     let WGAIVA = to10(codeChars[3]).toString();
     WGAIVA = WGAIVA.length === 1 ? '0' + WGAIVA : WGAIVA;
-
     let WGA = +WGAIVA[0];
     let IVA = +WGAIVA[1];
 
-    if (WGA) {
+    if (WGA_EXCED_Code[WGA] !== 'Off') {
       products.push({
         id: 'WGA_EXCED',
         attrs: [
           {
             id: 'COV_RATE',
-            value: productsMeta.find(e => e.id === 'WGA_EXCED').attrs[0].options[WGA - 1].value
+            value: WGA_EXCED_Value[WGA_EXCED_Code[WGA]]
           }
         ]
       })
     }
 
-    if (IVA) {
+    if (IVA_EXCED_Code[IVA] !== 'Off') {
       products.push({
         id: 'IVA_EXCED',
         attrs: [
           {
             id: 'COV_RATE',
-            value: productsMeta.find(e => e.id === 'IVA_EXCED').attrs[0].options[IVA - 1].value
+            value: IVA_EXCED_Value[IVA_EXCED_Code[IVA]]
           }
         ]
       })
@@ -191,19 +179,19 @@ export class WiaPagePersonalizationService {
     let AANV = +AANVMIN35[0];
     let MIN35 = +AANVMIN35[1];
 
-    if (AANV) {
+    if (WGA_AANV_Code[AANV] !== 'Off') {
       products.push({
         id: {
-          1: 'WGA_AANV_STANDARD',
-          2: 'WGA_AANV_LIGHT',
-          3: 'WGA_AANV_UPGRADE'
+          [WGA_AANV_Code.Standard]: 'WGA_AANV_STANDARD',
+          [WGA_AANV_Code.Light]: 'WGA_AANV_LIGHT',
+          [WGA_AANV_Code.Upgrade]: 'WGA_AANV_UPGRADE'
         }[AANV],
         attrs: []
       })
     }
 
-    if (MIN35) {
-      if (MIN35 === 1) {
+    if (WIA_35MIN_Code[MIN35] !== 'Off') {
+      if (WIA_35MIN_Code[MIN35] === 'Boden') {
         products.push({
           id: 'WIA_35MIN_BODEM',
           attrs: []
@@ -215,7 +203,7 @@ export class WiaPagePersonalizationService {
           attrs: [
             {
               id: 'BEN_PERIOD',
-              value: productsMeta.find(e => e.id === 'WIA_35MIN').attrs[0].options[MIN35 - 2].value
+              value: WIA_35MIN_Value[WIA_35MIN_Code[MIN35]]
             }
           ]
         })
@@ -231,5 +219,4 @@ export class WiaPagePersonalizationService {
       productsIds: products.map(e => e.id)
     };
   }
-
 }

@@ -4,7 +4,7 @@ import { CalculatorDataService } from "./wia-calculator-data.service";
 import { WiaPageProductsService } from "../wia-page/wia-page.products.service";
 import { WiaPagePersonalizationService } from "../wia-page/wia-page.personalization.service";
 import { defaultOptions } from "./defaultOptions";
-import { WIAInputEntity } from "../wia-page/wia-input.entity";
+import { WIAInputEntity } from "../wia-page/models/wia-input.entity";
 import { WiaPageService } from "../wia-page/wia-page.service";
 
 @Component({
@@ -12,7 +12,7 @@ import { WiaPageService } from "../wia-page/wia-page.service";
   template: require('./template.html'),
   providers: [CalculatorDataService, WiaPageProductsService, WiaPagePersonalizationService]
 })
-export class WiaCalculator extends AABaseComponent implements OnInit {
+export class WiaCalculatorComponent extends AABaseComponent implements OnInit {
   @Input() options: any = {};
   @Input() data: any = {};
 
