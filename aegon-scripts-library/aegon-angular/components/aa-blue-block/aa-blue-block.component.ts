@@ -30,6 +30,7 @@ export class AABlueBlockComponent extends AABaseComponent implements OnInit {
     private thisElement: ElementRef,
     private genericService: GenericService
   ) {
+
     super(thisElement);
   }
   /*
@@ -49,10 +50,13 @@ export class AABlueBlockComponent extends AABaseComponent implements OnInit {
   }
 
   /*
-   * Check if shows the button
+   * Check if show the button
    *
    */
   showButton(): boolean {
+    if(!this.data.options.button.show) {
+      return false;
+    }
     return true;
   }
   
