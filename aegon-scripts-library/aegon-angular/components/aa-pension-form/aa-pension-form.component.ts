@@ -2,16 +2,15 @@
  * AOV quick quote
  */
 import {
-  Component, OnInit, ElementRef, trigger, state, animate, transition, style, SimpleChanges
+  Component, Input, OnInit, ElementRef, trigger, state, animate, transition, style, SimpleChanges
 } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {calculateAge} from "../../lib/date";
 
 // AA components
 import {AABaseComponent} from "../../lib/classes/AABaseComponent";
-
-
-import {template} from "./template";
+import {defaultOptions} from "./defaultOptions";
+const template = require('./template.html');
 
 const monthLabels: string[] = [
   'januari', 'februari', 'maart', 'april', 'mei', 'juni',
@@ -40,8 +39,15 @@ const monthLabels: string[] = [
 //TODO ADD BASE64
 export class AAPensionFormComponent extends AABaseComponent implements OnInit {
 
-  public pension = new Array<{pensionAmount:number, birthDate:string}>();
+  @Input() options: any = {};
+  @Input() data: any = {};
 
+  public pension: {
+    pensionAmount?: number,
+    birthDate?: string
+  } = {};
+
+  public defaultOptions: any = defaultOptions;
   public amountTooSmall: boolean;
   public message: boolean = false;
   public age: number;
@@ -76,7 +82,7 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
 
   public maxAge = {
     user: 75,
-    partner: 150,
+    partner: 115,
   };
 
   public hasPartner: string = "hidden";
@@ -99,7 +105,7 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
   }
 
   ngOnInit() {
-    // super.ngOnInit();
+    super.ngOnInit();
     let date: Date = new Date(),
       year: number = date.getFullYear(),
       month: number = date.getMonth() + 1;
@@ -155,11 +161,18 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
     return true;
   }
 
+  btnValidationForUser(): boolean {
+
+    if(this.isAgeValid[2] == undefined || this.isAgeValid[2] == true ) return true;
+    return false;
+
+  }
+
   isValidAmount(): boolean {
 
-    if(this.pension['pensionAmount']!== undefined && this.pension['pensionAmount'] !== 0){
+    if(this.pension.pensionAmount!== undefined && this.pension.pensionAmount !== 0){
 
-      this.amountTooSmall = this.pension['pensionAmount'] >= 25000;
+      this.amountTooSmall = this.pension.pensionAmount >= 25000;
       this.amountIsValid = !this.amountTooSmall;
 
       return !this.amountTooSmall;

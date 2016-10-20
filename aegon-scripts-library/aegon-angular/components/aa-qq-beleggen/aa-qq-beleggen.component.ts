@@ -96,6 +96,7 @@ export class AAQQBeleggenComponent extends AABaseComponent implements OnInit {
       first_calculation = true;
 
     }, this.data.options.chartUpdateDelay);
+
   }
 
   /**
