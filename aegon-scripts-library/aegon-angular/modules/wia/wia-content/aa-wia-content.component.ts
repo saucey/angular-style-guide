@@ -12,7 +12,7 @@ import {
 import { AABaseComponent } from "../../../lib/classes/AABaseComponent";
 const template = require('./template.html');
 
-const contentData = require('./data.json');
+const contentData = '';
 
 @Component({
     selector: 'aa-wia-content',

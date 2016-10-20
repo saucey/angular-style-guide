@@ -13,6 +13,7 @@ import { AATopicDirective } from './directives/aa-topic/aa-topic.directive';
 const declarations = [
     AAElementDirective,
     AATopicDirective,
+    aaComp.AABlueBlockPageComponent,
     aaComp.AAHintComponent,
     aaComp.AASliderComponent,
     aaComp.AASliderInputComponent,

@@ -1,3 +1,4 @@
+export * from './aa-blue-block-page/aa-blue-block-page.component';
 export * from './aa-css/aa-css.component';
 export * from './aa-data/aa-data.component';
 export * from './aa-highchart/aa-highchart.component';
