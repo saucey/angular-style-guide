@@ -9,7 +9,7 @@ import {
     trigger, state, animate, transition, style
 } from '@angular/core';
 
-import {AABaseComponent} from "../../lib/classes/AABaseComponent";
+import { AABaseComponent } from "../../../lib/classes/AABaseComponent";
 const template = require('./template.html');
 
 const contentData = '';
@@ -47,7 +47,7 @@ const contentData = '';
 /**
  * Collapsible content component
  */
-export class AAWiaContentComponent extends AABaseComponent implements OnInit {
+export class WiaContentComponent extends AABaseComponent implements OnInit {
 
     public productsList = [];
 

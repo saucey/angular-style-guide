@@ -1,7 +1,6 @@
 export * from './aa-blue-block-page/aa-blue-block-page.component';
 export * from './aa-css/aa-css.component';
 export * from './aa-data/aa-data.component';
-export * from './aa-editable-value/aa-editable-value.component';
 export * from './aa-highchart/aa-highchart.component';
 export * from './aa-hint/aa-hint.component';
 export * from './aa-input-date/aa-input-date.component';
@@ -21,6 +20,4 @@ export * from './aa-slider/aa-slider.component';
 export * from './aa-slider-input/aa-slider-input.component';
 export * from './aa-sticky/aa-sticky.component';
 export * from './aa-pension-form/aa-pension-form.component';
-export * from './aa-wia-content/aa-wia-content.component';
-export * from './aa-wia-calculator/aa-wia-calculator.component';
-export * from './aa-wia-calculator-graph/aa-wia-calculator-graph.component';
+export * from './aa-editable-value/aa-editable-value.component';

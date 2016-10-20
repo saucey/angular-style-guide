@@ -1,6 +1,6 @@
 import { Component, Input, ElementRef, OnInit } from '@angular/core';
 
-import { AABaseComponent } from "../../lib/classes/AABaseComponent";
+import { AABaseComponent } from "../../../lib/classes/AABaseComponent";
 import { CalculatorDataService } from "./aa-wia-calculator-data.service";
 import { CalculatorProductsService } from "./aa-wia-calculator-products.service";
 import { defaultOptions } from "./defaultOptions";
@@ -13,7 +13,7 @@ const components = require('./datasets/components.json');
   template: require('./template.html'),
   providers: [CalculatorDataService, CalculatorProductsService]
 })
-export class AAWiaCalculator extends AABaseComponent implements OnInit {
+export class WiaCalculator extends AABaseComponent implements OnInit {
   @Input() options: any = {};
   @Input() data: any = {};
 
