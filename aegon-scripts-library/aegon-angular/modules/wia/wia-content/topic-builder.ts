@@ -48,19 +48,43 @@ export class TopicBuilder {
 
         shortDescriptions.forEach((description: WiaTopicDescriptionEntity, index) => {
           if (false === this.isDescriptionFiltered(description.filter)) {
-            topicRowCollection[rowIndex].topics[colIndex].shortDescription.push(description.text);
+            let plainDescription = this.findAndReplaceAttributes(description.text, description.filter);
+            topicRowCollection[rowIndex].topics[colIndex].shortDescription.push(plainDescription);
           }
         });
 
         longDescriptions.forEach((description, index) => {
           if (false === this.isDescriptionFiltered(description.filter)) {
-            topicRowCollection[rowIndex].topics[colIndex].longDescription.push(description.text);
+            let plainDescription = this.findAndReplaceAttributes(description.text, description.filter);
+            topicRowCollection[rowIndex].topics[colIndex].longDescription.push(plainDescription);
           }
         });
       });
     });
 
     return topicRowCollection;
+  }
+
+  private findAndReplaceAttributes(descriptionText: string, filterList): string {
+    if (filterList === true || false === filterList) {
+      return descriptionText;
+    } else {
+      let plainDescription = descriptionText;
+      for (let filter of filterList) {
+        for (let product of this.productIncomeData.products) {
+          if (product.id == filter) {
+            for ( let attribute of product.attrs ) {
+              let placeholder = '%' + attribute.id + '%';
+              if (plainDescription.indexOf(placeholder) != -1) {
+                plainDescription = plainDescription.replace(placeholder, (attribute.value as string));
+              }
+            }
+          }
+        }
+      }
+
+      return plainDescription;
+    }
   }
 
   private isDescriptionFiltered(descriptionFilter): boolean {
@@ -71,7 +95,7 @@ export class TopicBuilder {
     } else if (typeof descriptionFilter === 'object') {
       for (let productId of descriptionFilter) {
         for (let product of this.productIncomeData.products) {
-          if (product.id == productId) {
+          if (product.id == productId) {  // @TODO enforce string comparison by strong typing
             return false;
           }
         }

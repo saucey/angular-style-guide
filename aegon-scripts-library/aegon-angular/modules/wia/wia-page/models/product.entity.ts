@@ -1,3 +1,4 @@
+import { ProductAttributeEntity } from "./product-attribute.entity";
 /**
  * ProductEntity created on 10/17/16 4:12 PM.
  *
@@ -8,6 +9,6 @@ export interface ProductEntity {
   id: string,
   endAge?: number,
   benefitIndex?: number,
-  attrs: any[],
+  attrs: Array<ProductAttributeEntity>,
   label?: string
 }

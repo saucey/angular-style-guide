@@ -30,7 +30,7 @@ export class WiaPageService {
 
       this.externalInput$.subscribe(newInput => {
 
-        console.log('Obervable:', newInput);
+        // console.log('Obervable:', newInput);
         this.wiaPagePersonalizationService.setUrlConfiguration(newInput);
       });
     }

@@ -4,6 +4,7 @@ import { WIAInputEntity } from "../wia-page/models/wia-input.entity";
 import { WiaPageService } from "../wia-page/wia-page.service";
 import { WiaPageProductsService } from "../wia-page/wia-page.products.service";
 import { WiaPagePersonalizationService } from "../wia-page/wia-page.personalization.service";
+import { ProductAttributeEntity } from "../wia-page/models/product-attribute.entity";
 
 const template = require('./template.html');
 
@@ -104,6 +105,20 @@ export class WiaFormComponent extends AABaseComponent implements OnInit {
     this.products.forEach((el: any) => {
       el.disabled = availableProducts.indexOf(el.id) === -1;
     });
+  }
+
+  /**
+   * Checks if the product attribute is visible
+   *
+   * @param {ProductAttributeEntity} productAttribute
+   * @returns {boolean}
+   */
+  public isProductAttributeVisible(productAttribute: ProductAttributeEntity) {
+    if (productAttribute.hasOwnProperty('visible') && true === productAttribute.visible) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
 }

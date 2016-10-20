@@ -154,7 +154,7 @@ export class WiaPagePersonalizationService {
         id: 'WGA_EXCED',
         attrs: [
           {
-            id: 'COV_RATE',
+            id: 'COVERAGE_RATE_WGA',
             value: WGA_EXCED_Value[WGA_EXCED_Code[WGA]]
           }
         ]
@@ -166,7 +166,7 @@ export class WiaPagePersonalizationService {
         id: 'IVA_EXCED',
         attrs: [
           {
-            id: 'COV_RATE',
+            id: 'COVERAGE_RATE_WGA',
             value: IVA_EXCED_Value[IVA_EXCED_Code[IVA]]
           }
         ]
@@ -202,7 +202,7 @@ export class WiaPagePersonalizationService {
           id: 'WIA_35MIN',
           attrs: [
             {
-              id: 'BEN_PERIOD',
+              id: 'BENEFIT_PERIOD',
               value: WIA_35MIN_Value[WIA_35MIN_Code[MIN35]]
             }
           ]

@@ -1,3 +1,4 @@
+/*
 import { WiaPagePersonalizationService } from "../wia-page.personalization.service";
 
 describe('CalculatorProductService', () => {
@@ -41,7 +42,7 @@ describe('CalculatorProductService', () => {
             id: 'IVA_EXCED',
             attrs: [
               {
-                id: 'COV_RATE',
+                id: 'COVERAGE_RATE_WGA',
                 value: 0
               }
             ]
@@ -63,7 +64,7 @@ describe('CalculatorProductService', () => {
             id: 'WGA_EXCED',
             attrs: [
               {
-                id: 'COV_RATE',
+                id: 'COVERAGE_RATE_WGA',
                 value: 0
               }
             ]
@@ -85,7 +86,7 @@ describe('CalculatorProductService', () => {
             id: 'IVA_EXCED',
             attrs: [
               {
-                id: 'COV_RATE',
+                id: 'COVERAGE_RATE_WGA',
                 value: 80
               }
             ]
@@ -107,7 +108,7 @@ describe('CalculatorProductService', () => {
             id: 'WGA_EXCED',
             attrs: [
               {
-                id: 'COV_RATE',
+                id: 'COVERAGE_RATE_WGA',
                 value: 0
               }
             ]
@@ -116,7 +117,7 @@ describe('CalculatorProductService', () => {
             id: 'IVA_EXCED',
             attrs: [
               {
-                id: 'COV_RATE',
+                id: 'COVERAGE_RATE_WGA',
                 value: 0
               }
             ]
@@ -155,7 +156,7 @@ describe('CalculatorProductService', () => {
             id: 'WIA_35MIN',
             attrs: [
               {
-                id: 'BEN_PERIOD',
+                id: 'BENEFIT_PERIOD',
                 value: 7.5
               }
             ]
@@ -209,3 +210,4 @@ describe('CalculatorProductService', () => {
   })
 
 });
+*/

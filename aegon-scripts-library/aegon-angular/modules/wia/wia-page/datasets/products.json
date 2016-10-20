@@ -6,13 +6,14 @@
     "selected": false,
     "attrs": [
       {
-        "id": "COV_RATE",
-        "label": "Dekkingsgraad",
-        "value": 0,
+        "id": "COVERAGE_RATE_WGA",
+        "label": "Dekkingsgraad WGA",
+        "value": 70,
+        "visible": true,
         "options": [
           {
-            "value": 0,
-            "label": "0%"
+            "value": 70,
+            "label": "70%"
           },
           {
             "value": 75,
@@ -23,6 +24,89 @@
             "label": "80%"
           }
         ]
+      },
+      {
+        "id": "END_AGE",
+        "label": "EindLeeftijd",
+        "value": 65,
+        "visible": false,
+        "options": [
+          {
+            "value": 65,
+            "label": "65%"
+          },
+          {
+            "value": 67,
+            "label": "67%"
+          },
+          {
+            "value": 70,
+            "label": "70%"
+          }
+        ]
+      },
+      {
+        "id": "BENEFIT_INDEX",
+        "label": "Indexering uitkering (Klim_srt)",
+        "value": "Geen",
+        "visible": false,
+        "options": [
+          {
+            "value": "Geen",
+            "label": null
+          },
+          {
+            "value": "CBS",
+            "label": null
+          },
+          {
+            "value": "2%",
+            "label": null
+          },
+          {
+            "value": "3%",
+            "label": null
+          }
+        ]
+      },
+      {
+        "id": "WAGE_DEFINITION",
+        "label": "Loonbegrip",
+        "value": "belastbaar loon boven de SV-loongrens",
+        "visible": false,
+        "options": [
+          {
+            "value": "belastbaar loon boven de SV-loongrens",
+            "label": null
+          },
+          {
+            "value": "belastbaar loon boven de SV-loongrens",
+            "label": null
+          }
+        ]
+      },
+      {
+        "id": "DEVIATED_MAXIMUM_WAGE",
+        "label": "Afwijkend Maximum Loon(Afw_maxln)",
+        "value": "125.000",
+        "visible": false,
+        "options": [
+          {
+            "value": "125.000",
+            "label": null
+          },
+          {
+            "value": "meer dan 125.000",
+            "label": null
+          }
+        ]
+      },
+      {
+        "id": "INSURED_AMOUNT",
+        "label": "Verzekerd Bedrag (Verz_bedr)",
+        "value": 0,
+        "visible": false,
+        "options": []
       }
     ]
   },
@@ -33,13 +117,14 @@
     "selected": false,
     "attrs": [
       {
-        "id": "COV_RATE",
-        "label": "Dekkingsgraad",
-        "value": 0,
+        "id": "COVERAGE_RATE_IVA",
+        "label": "Dekkingsgraad IVA",
+        "value": 70,
+        "visible": true,
         "options": [
           {
-            "value": 0,
-            "label": "0%"
+            "value": 70,
+            "label": "70%"
           },
           {
             "value": 75,
@@ -50,6 +135,89 @@
             "label": "80%"
           }
         ]
+      },
+      {
+        "id": "END_AGE",
+        "label": "EindLeeftijd",
+        "value": 65,
+        "visible": false,
+        "options": [
+          {
+            "value": 65,
+            "label": "65%"
+          },
+          {
+            "value": 67,
+            "label": "67%"
+          },
+          {
+            "value": 70,
+            "label": "70%"
+          }
+        ]
+      },
+      {
+        "id": "BENEFIT_INDEX",
+        "label": "Indexering uitkering (Klim_srt)",
+        "value": "Geen",
+        "visible": false,
+        "options": [
+          {
+            "value": "Geen",
+            "label": null
+          },
+          {
+            "value": "CBS",
+            "label": null
+          },
+          {
+            "value": "2%",
+            "label": null
+          },
+          {
+            "value": "3%",
+            "label": null
+          }
+        ]
+      },
+      {
+        "id": "WAGE_DEFINITION",
+        "label": "Loonbegrip",
+        "value": "belastbaar loon boven de SV-loongrens",
+        "visible": false,
+        "options": [
+          {
+            "value": "belastbaar loon boven de SV-loongrens",
+            "label": null
+          },
+          {
+            "value": "belastbaar loon boven de SV-loongrens",
+            "label": null
+          }
+        ]
+      },
+      {
+        "id": "DEVIATED_MAXIMUM_WAGE",
+        "label": "Afwijkend Maximum Loon(Afw_maxln)",
+        "value": "125.000",
+        "visible": false,
+        "options": [
+          {
+            "value": "125.000",
+            "label": null
+          },
+          {
+            "value": "meer dan 125.000",
+            "label": null
+          }
+        ]
+      },
+      {
+        "id": "INSURED_AMOUNT",
+        "label": "Verzekerd Bedrag (Verz_bedr)",
+        "value": 0,
+        "visible": false,
+        "options": []
       }
     ]
   },
@@ -58,14 +226,153 @@
     "label": "WGA_AANV_LIGHT",
     "desc": "",
     "selected": false,
-    "attrs": []
+    "attrs": [
+      {
+        "id": "END_AGE",
+        "label": "EindLeeftijd",
+        "value": 65,
+        "visible": false,
+        "options": [
+          {
+            "value": 65,
+            "label": "65%"
+          },
+          {
+            "value": 67,
+            "label": "67%"
+          },
+          {
+            "value": 70,
+            "label": "70%"
+          }
+        ]
+      },
+      {
+        "id": "BENEFIT_INDEX",
+        "label": "Indexering uitkering (Klim_srt)",
+        "value": "Geen",
+        "visible": false,
+        "options": [
+          {
+            "value": "Geen",
+            "label": null
+          },
+          {
+            "value": "CBS",
+            "label": null
+          },
+          {
+            "value": "2%",
+            "label": null
+          },
+          {
+            "value": "3%",
+            "label": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "WGA_AANV_STANDARD",
+    "attrs": [
+      {
+        "id": "END_AGE",
+        "label": "EindLeeftijd",
+        "value": 65,
+        "visible": false,
+        "options": [
+          {
+            "value": 65,
+            "label": "65%"
+          },
+          {
+            "value": 67,
+            "label": "67%"
+          },
+          {
+            "value": 70,
+            "label": "70%"
+          }
+        ]
+      },
+      {
+        "id": "BENEFIT_INDEX",
+        "label": "Indexering uitkering (Klim_srt)",
+        "value": "Geen",
+        "visible": false,
+        "options": [
+          {
+            "value": "Geen",
+            "label": null
+          },
+          {
+            "value": "CBS",
+            "label": null
+          },
+          {
+            "value": "2%",
+            "label": null
+          },
+          {
+            "value": "3%",
+            "label": null
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "WGA_AANV_UPGRADE",
     "label": "WGA_AANV_UPGRADE",
     "desc": "",
     "selected": false,
-    "attrs": []
+    "attrs": [
+      {
+        "id": "END_AGE",
+        "label": "EindLeeftijd",
+        "value": 65,
+        "visible": false,
+        "options": [
+          {
+            "value": 65,
+            "label": "65%"
+          },
+          {
+            "value": 67,
+            "label": "67%"
+          },
+          {
+            "value": 70,
+            "label": "70%"
+          }
+        ]
+      },
+      {
+        "id": "BENEFIT_INDEX",
+        "label": "Indexering uitkering (Klim_srt)",
+        "value": "Geen",
+        "visible": false,
+        "options": [
+          {
+            "value": "Geen",
+            "label": null
+          },
+          {
+            "value": "CBS",
+            "label": null
+          },
+          {
+            "value": "2%",
+            "label": null
+          },
+          {
+            "value": "3%",
+            "label": null
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "WIA_35MIN",
@@ -74,9 +381,10 @@
     "selected": false,
     "attrs": [
       {
-        "id": "BEN_PERIOD",
+        "id": "BENEFIT_PERIOD",
         "label": "Uitkeringsduur",
-        "value": 7.5,
+        "value": 5,
+        "visible": false,
         "options": [
           {
             "value": 5,
@@ -99,6 +407,27 @@
     "label": "WIA_35MIN_BODEM",
     "desc": "",
     "selected": false,
-    "attrs": []
+    "attrs": [
+      {
+        "id": "BENEFIT_PERIOD",
+        "label": "Uitkeringsduur",
+        "value": 5,
+        "visible": false,
+        "options": [
+          {
+            "value": 5,
+            "label": "5%"
+          },
+          {
+            "value": 7.5,
+            "label": "7.5%"
+          },
+          {
+            "value": 10,
+            "label": "10%"
+          }
+        ]
+      }
+    ]
   }
 ]

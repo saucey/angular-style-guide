@@ -6,20 +6,20 @@
         "image": "https://s3-eu-west-1.amazonaws.com/anl-ma-staticcontent/content/pensioen123/test/arbeidsongeschiktheidspensioen.png",
         "shortDescription": [
           {
-            "filter": true,
+            "filter": false,
             "text": "<p>Uw werkgever sloot voor u de:</p>"
           },
           {
             "filter": [
               "IVA_EXCED"
             ],
-            "text": "<p>IVA-Excedentverzekering<dekperc>Dekperc</dekperc>. Met de IVA-Excedentverzekering krijgt u een uitkering als u volgens het UWV minimaal 80% duurzaam arbeidsongeschikt bent.</p>"
+            "text": "<p>IVA-Excedentverzekering <code>%COVERAGE_RATE_IVA%</code>. Met de IVA-Excedentverzekering krijgt u een uitkering als u volgens het UWV minimaal 80% duurzaam arbeidsongeschikt bent.</p>"
           },
           {
             "filter": [
               "WGA_EXCED"
             ],
-            "text": "<p>WGA-Excedentverzekering<dekperc>Dekperc</dekperc>. Met de WGA-Excedentverzekering krijgt u een uitkering als u volgens het UWV minimaal 35% arbeidsongeschikt bent, maar niet minimaal 80% duurzaam.</p>"
+            "text": "<p>WGA-Excedentverzekering <code>%COVERAGE_RATE_WGA%</code>. Met de WGA-Excedentverzekering krijgt u een uitkering als u volgens het UWV minimaal 35% arbeidsongeschikt bent, maar niet minimaal 80% duurzaam.</p>"
           },
           {
             "filter": [
@@ -57,13 +57,13 @@
             "filter": [
               "IVA_EXCED"
             ],
-            "text": "<p>IVA-Excedentverzekering<dekperc>Dekperc</dekperc>.<br /> U kan niet meer werken. Volgens het UWV bent u 80% of meer arbeidsongeschikt. Verder denkt het UWV niet dat u in de komende vijf jaar weer kan gaan werken. U krijgt daarom een IVA-uitkering. De hoogte van de IVA-uitkering van het UWV is 75% van uw salaris voordat u arbeidsongeschikt werd. Verdiende u voordat u arbeidsongeschikt werd meer dan de loongrens voor de sociale verzekeringen (2016: € 52.766,37)? Dan krijgt u voor het loon boven die loongrens geen uitkering van het UWV. Met de IVA-Excedentverzekering krijgt u dan wel een uitkering voor het loon boven die loongrens.</p>"
+            "text": "<p>IVA-Excedentverzekering <code>%COVERAGE_RATE_IVA%</code>.<br /> U kan niet meer werken. Volgens het UWV bent u 80% of meer arbeidsongeschikt. Verder denkt het UWV niet dat u in de komende vijf jaar weer kan gaan werken. U krijgt daarom een IVA-uitkering. De hoogte van de IVA-uitkering van het UWV is 75% van uw salaris voordat u arbeidsongeschikt werd. Verdiende u voordat u arbeidsongeschikt werd meer dan de loongrens voor de sociale verzekeringen (2016: € 52.766,37)? Dan krijgt u voor het loon boven die loongrens geen uitkering van het UWV. Met de IVA-Excedentverzekering krijgt u dan wel een uitkering voor het loon boven die loongrens.</p>"
           },
           {
             "filter": [
               "WGA_EXCED"
             ],
-            "text": "<p>WGA-Excedentverzekering<dekperc>Dekperc</dekperc>.<br /> U kan langere tijd niet of minder werken. U krijgt daarom een WGA-uitkering van het UWV. Verdiende u voordat u arbeidsongeschikt werd meer dan de loongrens voor de sociale verzekeringen (2016: € 52.766,37)? Dan krijgt u voor het loon boven die loongrens geen uitkering van het UWV. Met de WGA-Excedentverzekering krijgt u dan wel een uitkering voor het loon boven die loongrens.</p>"
+            "text": "<p>WGA-Excedentverzekering <code>%COVERAGE_RATE_WGA%</code>.<br /> U kan langere tijd niet of minder werken. U krijgt daarom een WGA-uitkering van het UWV. Verdiende u voordat u arbeidsongeschikt werd meer dan de loongrens voor de sociale verzekeringen (2016: € 52.766,37)? Dan krijgt u voor het loon boven die loongrens geen uitkering van het UWV. Met de WGA-Excedentverzekering krijgt u dan wel een uitkering voor het loon boven die loongrens.</p>"
           },
           {
             "filter": [
@@ -231,24 +231,56 @@
             "text": "<p>Ondanks deze wettelijke uitkeringen, kan u er in inkomen op achteruit gaan als u arbeidsongeschikt bent.</p>"
           },
           {
-            "filter": true,
-            "text": "Deze regeling geeft een aanvulling op uw</p><p>Benieuwd naar uw andere pensioenaanspraken? Kijk dan op <a href=\"www.mijnpensioenoverzicht.nl\">www.mijnpensioenoverzicht.nl</a>. <br />Meer weten over uw arbeidsongeschiktheidspensioen? Kijk dan op <a href=\"www.aegon.nl/pensioenwet\">www.aegon.nl/pensioenwet</a>.</p><p>WGA-uitkering. Uw uitkering stopt als u de AOW-leeftijd bereikt of nog daarvoor <span class=\"phld\">Eindlftd</span> jaar wordt.<span class=\"phld\">als WGA-EXCED</span>De aanvulling vanuit uw WGA-Excedentverzekering<dekperc>Dekperc</dekperc> berekenen wij over uw <span class=\"phld\">Loonbegrip</span> tot en met € <span class=\"phld\">Afw_maxln</span>.</p>"
+            "filter": [
+              "WGA_EXCED",
+              "WGA_AANV_STANDARD"
+            ],
+            "text": "Deze regeling geeft een aanvulling op uw WGA-uitkering. Uw uitkering stopt als u de AOW-leeftijd bereikt of nog daarvoor <code>%END_AGE%</code> jaar wordt."
           },
           {
-            "filter": true,
-            "text": "<p><span class=\"phld\">als IVA-EXCED en geen WGA-EXCED en/of WGA-AANV</span>Deze regeling geeft een aanvulling op uw IVA-uitkering. De aanvulling vanuit uw IVA-Excedentverzekering<dekperc>Dekperc</dekperc> berekenen wij over uw <span class=\"phld\">Loonbegrip</span> tot en met € <span class=\"phld\">Afw_maxln</span>. Uw uitkering stopt als u de AOW-leeftijd bereikt of nog daarvoor <span class=\"phld\">Eindlftd</span> jaar wordt.</p>"
+            "filter": [
+              "WGA_EXCED"
+            ],
+            "text": "De aanvulling vanuit uw WGA-Excedentverzekering <code>%COVERAGE_RATE_WGA%</code> berekenen wij over uw <code>%WAGE_DEFINITION%</code> tot en met € <code>%DEVIATED_MAXIMUM_WAGE%</code>."
           },
           {
-            "filter": true,
-            "text": "<p><span class=\"phld\">als IVA-EXCED en WGA-EXCED en/of WGA-AANV</span> Deze regeling geeft een aanvulling op uw IVA- en WGA-uitkering. Uw uitkering stopt als u de AOW-leeftijd bereikt of nog daarvoor <span class=\"phld\">Eindlftd</span> jaar wordt. <span class=\"phld\">als WGA-EXCED</span> De aanvulling vanuit uw WGA-Excedentverzekering<dekperc>Dekperc</dekperc> berekenen wij over uw <span class=\"phld\">Loonbegrip</span> tot en met € <span class=\"phld\">Afw_maxln</span>. <span class=\"phld\">als IVA-EXCED</span> De aanvulling vanuit uw IVA-Excedentverzekering<dekperc>Dekperc</dekperc> berekenen wij over uw <span class=\"phld\">Loonbegrip</span> tot en met € <span class=\"phld\">Afw_maxln</span>.</p>"
+            "filter": [
+              "IVA_EXCED",
+              "WGA_AANV_STANDARD"
+            ],
+            "text": "<p>Deze regeling geeft een aanvulling op uw IVA-uitkering. De aanvulling vanuit uw IVA-Excedentverzekering <code>%COVERAGE_RATE_IVA%</code> berekenen wij over uw <code>%WAGE_DEFINITION%</code> tot en met € <code>%DEVIATED_MAXIMUM_WAGE%</code>. Uw uitkering stopt als u de AOW-leeftijd bereikt of nog daarvoor <code>%END_AGE%</code> jaar wordt.</p>"
           },
           {
-            "filter": true,
-            "text": "<p><span class=\"phld\">als WIA-35MIN en Variant ≠ BODEM</span> Bent u na twee jaar ziekte volgens het UWV minder dan 35% arbeidsongeschikt? Dan krijgt u geen WIA-uitkering. U zoekt dan in overleg met uw werkgever passend werk. Met dit passend werk verdient u mogelijk minder. Deze regeling geeft dan <span class=\"phld\">Uitkduur</span> jaar een aanvulling op uw nieuwe loon. Uw uitkering stopt als u de AOW-leeftijd bereikt of nog daarvoor 70 jaar wordt.</p>"
+            "filter": [
+              "IVA_EXCED",
+              "WGA_EXCED",
+              "WGA_AANV_STANDARD"
+            ],
+            "text": "<p>Deze regeling geeft een aanvulling op uw IVA- en WGA-uitkering. Uw uitkering stopt als u de AOW-leeftijd bereikt of nog daarvoor <code>%END_AGE%</code> jaar wordt.</p>"
           },
           {
-            "filter": true,
-            "text": "<p><span class=\"phld\">als WIA-35MIN en Variant = BODEM</span> Bent u na twee jaar ziekte volgens het UWV minimaal 15 arbeidsongeschikt, maar minder dan 35%? Dan krijgt u geen WIA-uitkering. U zoekt dan in overleg met uw werkgever passend werk. Met dit passend werk verdient u mogelijk minder. Deze regeling geeft dan 7,5 jaar een aanvulling op uw nieuwe loon. Uw uitkering stopt als u de AOW-leeftijd bereikt of nog daarvoor 70 jaar wordt.</p>"
+            "filter": [
+              "WGA_EXCED"
+            ],
+            "text": "De aanvulling vanuit uw WGA-Excedentverzekering <code>%COVERAGE_RATE_WGA%</code> berekenen wij over uw <code>%WAGE_DEFINITION%</code> tot en met € <code>%DEVIATED_MAXIMUM_WAGE%</code>."
+          },
+          {
+            "filter": [
+              "IVA_EXCED"
+            ],
+            "text": "De aanvulling vanuit uw IVA-Excedentverzekering <code>%COVERAGE_RATE_IVA%</code> berekenen wij over uw <code>%WAGE_DEFINITION%</code> tot en met € <code>%DEVIATED_MAXIMUM_WAGE%</code>.</p>"
+          },
+          {
+            "filter": [
+              "WIA_35MIN"
+            ],
+            "text": "<p>Bent u na twee jaar ziekte volgens het UWV minder dan 35% arbeidsongeschikt? Dan krijgt u geen WIA-uitkering. U zoekt dan in overleg met uw werkgever passend werk. Met dit passend werk verdient u mogelijk minder. Deze regeling geeft dan <code>%BENEFIT_PERIOD%</code> jaar een aanvulling op uw nieuwe loon. Uw uitkering stopt als u de AOW-leeftijd bereikt of nog daarvoor 70 jaar wordt.</p>"
+          },
+          {
+            "filter": [
+              "WIA_35MIN_BODEM"
+            ],
+            "text": "<p>Bent u na twee jaar ziekte volgens het UWV minimaal 15 arbeidsongeschikt, maar minder dan 35%? Dan krijgt u geen WIA-uitkering. U zoekt dan in overleg met uw werkgever passend werk. Met dit passend werk verdient u mogelijk minder. Deze regeling geeft dan 7,5 jaar een aanvulling op uw nieuwe loon. Uw uitkering stopt als u de AOW-leeftijd bereikt of nog daarvoor 70 jaar wordt.</p>"
           }
         ],
         "longDescription": []
@@ -301,19 +333,33 @@
             "text": "<p>Uw werkgever kan gekozen hebben om uw uitkering elk jaar op 1 januari te laten verhogen. Dit om uw uitkering waardevast te houden.</p>"
           },
           {
-            "filter": true,
-            "text": "<p>Uw uitkering wordt elk jaar op 1 januari <Klim_srt> verhoogd. Hieronder ziet u wat de afgelopen drie jaar de gemiddelde jaarlijkse prijsstijging voor consumenten was. Zo kunt u vaststellen in hoeverre de uitkering waardevast was.</p>"
+            "filter": [
+              "IVA_EXCED",
+              "WGA_EXCED",
+              "WGA_AANV_STANDARD"
+            ],
+            "text": "<p>IVA-Excedentverzekering <code>%COVERAGE_RATE_IVA%</code>, en WGA-Excedentverzekering <code>%COVERAGE_RATE_WGA%</code> en WGA-Aanvullingsverzekering (light/upgrade). Uw uitkering wordt elk jaar op 1 januari <code>%BENEFIT_INDEX%</code> verhoogd. Hieronder ziet u wat de afgelopen drie jaar de gemiddelde jaarlijkse prijsstijging voor consumenten was. Zo kunt u vaststellen in hoeverre de uitkering waardevast was.</p>"
           },
           {
-            "filter": true,
+            "filter": [
+              "IVA_EXCED",
+              "WGA_EXCED",
+              "WGA_AANV_STANDARD"
+            ],
             "text": "<table><thead><tr><th>Jaar</th><th>Prijsstijging</th><th>Stijging uitkering</th></tr></thead><tbody><tr><th>t-1</th><th><span class=\"phld\">CBS-prijsindex t-1</span></th><th>Klim_srt t-1</th></tr><tr><th>t-2</th><th><span class=\"phld\">CBS-prijsindex t-2</span></th><th>Klim_srt t-2</th></tr><tr><th>t-3</th><th><span class=\"phld\">CBS-prijsindex t-3</span></th><th>Klim_srt t-3</th></tr></tbody></table>"
           },
           {
-            "filter": true,
-            "text": "<p><span class=\"phld\">WIA-35minverzekering/WIA-Bodemverzekering</span> <br />Uw uitkering wordt elk jaar op 1 januari met de CBS-loonindex verhoogd. Hieronder ziet u wat de afgelopen drie jaar de gemiddelde jaarlijkse prijsstijging voor consumenten was. Zo kunt u vaststellen in hoeverre de uitkering waardevast was.</p>"
+            "filter": [
+              "WIA_35MIN_BODEM",
+              "WIA_35MIN"
+            ],
+            "text": "<p>Uw uitkering wordt elk jaar op 1 januari met de CBS-loonindex verhoogd. Hieronder ziet u wat de afgelopen drie jaar de gemiddelde jaarlijkse prijsstijging voor consumenten was. Zo kunt u vaststellen in hoeverre de uitkering waardevast was.</p>"
           },
           {
-            "filter": true,
+            "filter": [
+              "WIA_35MIN_BODEM",
+              "WIA_35MIN"
+            ],
             "text": "<table><thead><tr><th>Jaar</th><th>Prijsstijging</th><th>Stijging uitkering</th></tr></thead><tbody><tr><th>t-1</th><th>CBS-prijsindex t-1</th><th>Index t-1</th></tr><tr><th>t-2</th><th>CBS-prijsindex t-2</th><th>Index t-2</th></tr><tr><th>t-3</th><th>CBS-prijsindex t-3</th><th>Index t-3</th></tr></tbody></table>"
           }
         ],
@@ -327,12 +373,7 @@
             "text": "<p>De hoogte van uw uitkering is afhankelijk van hoeveel u nog wel kunt werken en hoeveel u daarmee verdient.</p>"
           }
         ],
-        "longDescription": [
-          {
-            "filter": false,
-            "text": "<p>Benieuwd naar uw andere pensioenaanspraken? Kijk dan op <a href=\"www.mijnpensioenoverzicht.nl\">www.mijnpensioenoverzicht.nl</a>. <br /> Meer weten over uw arbeidsongeschiktheidspensioen? Kijk dan op <a href=\"www.aegon.nl/pensioenwet\">www.aegon.nl/pensioenwet</a>.</p><p>De hoogte van uw uitkering is afhankelijk van hoeveel u nog wel kunt werken en hoeveel u daarmee verdient.</p>"
-          }
-        ]
+        "longDescription": []
       }
     ]
   },

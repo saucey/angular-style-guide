@@ -13,8 +13,6 @@ import { TopicBuilder } from "./topic-builder";
 import { TopicRowEntity } from "./topic-entities/topic-row.entity";
 import { clone } from "../../../lib/util";
 
-const PRODUCT_DATA = require('./data/product-data.json');
-
 @Injectable()
 export class TopicService {
 
@@ -37,9 +35,6 @@ export class TopicService {
    * @returns {Array<TopicRowEntity>}
    */
   getTopics(): TopicRowEntity[] {
-
-    this.productIncomeData.products = PRODUCT_DATA.products;
-
     this
       .topicBuilder
       .withProductIncomeData(this.productIncomeData);

@@ -9,7 +9,6 @@
 </div>
 
 
-
 <aa-modal [visible]="modalVisible" [options]="options">
   <div data-aa-modal-content>
     <div class="form-1" *ngIf="visiblePage === 1">
@@ -49,14 +48,14 @@
           </label>
           <div class="product-attrs" [hidden]="!product.selected || !product.attrs?.length">
             <ul>
-              <li *ngFor="let attr of product.attrs; trackBy:trackById">
-                {{ attr.label }}
-                <select class="no-dd" name="wia-form-selectProduct-{{attr.id}}" [(ngModel)]="attr.value">
-                  <option *ngFor="let option of attr.options; trackBy:trackByValue"
-                          value="{{ option.value }}">{{ option.label }}
-                  </option>
-                </select>
-              </li>
+              <div *ngFor="let attr of product.attrs; trackBy:trackById">
+                <li *ngIf="isProductAttributeVisible(attr)">
+                  {{ attr.label }}
+                  <select class="no-dd" name="wia-form-selectProduct-{{attr.id}}" [(ngModel)]="attr.value">
+                        <option *ngFor="let option of attr.options; trackBy:trackByValue" value="{{ option.value }}">{{ option.label }}</option>
+                  </select>
+                </li>
+              </div>
             </ul>
           </div>
         </div>
