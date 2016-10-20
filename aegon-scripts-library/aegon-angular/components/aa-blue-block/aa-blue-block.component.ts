@@ -14,6 +14,7 @@ const template = require('./template.html');
   template: template,
   providers: [GenericService]
 })
+
 export class AABlueBlockComponent extends AABaseComponent implements OnInit {
   @Input() options: any = {};
   @Input() data: any = {};
@@ -43,7 +44,16 @@ export class AABlueBlockComponent extends AABaseComponent implements OnInit {
    *
    * @param index {number}: the index
    */
-   init(index: number): void {
-      this.initiated = true;
-    }
+  init(index: number): void {
+    this.initiated = true;
   }
+
+  /*
+   * Check if shows the button
+   *
+   */
+  showButton(): boolean {
+    return true;
+  }
+  
+}

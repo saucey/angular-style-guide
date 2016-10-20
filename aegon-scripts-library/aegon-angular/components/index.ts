@@ -23,3 +23,4 @@ export * from './aa-editable-value/aa-editable-value.component';
 export * from './aa-wia-content/aa-wia-content.component';
 export * from './aa-wia-calculator/aa-wia-calculator.component';
 export * from './aa-wia-calculator-graph/aa-wia-calculator-graph.component';
+export * from './aa-blue-block/aa-blue-block.component';

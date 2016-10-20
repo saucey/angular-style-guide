@@ -70,7 +70,8 @@ const exportedDeclarations = [
   aaComp.AAWiaCalculator,
   aaComp.AAWiaCalculatorGraph,
   aaComp.AAQuizComponent,
-  aaComp.AAEditableValueComponent
+  aaComp.AAEditableValueComponent,
+  aaComp.AABlueBlockComponent
 ];
 
 @NgModule({
