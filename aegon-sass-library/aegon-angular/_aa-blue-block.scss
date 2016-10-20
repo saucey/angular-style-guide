@@ -19,7 +19,8 @@
 	.aa-bb--header {
 	}
 	.aa-bb--content {
-		overflow: auto;
+		overflow-y: auto;
+		overflow-x: hidden;
 		border-top: 1px solid $white;
 		padding: 15px 0;
 		&:first-child {
