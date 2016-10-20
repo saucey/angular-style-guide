@@ -1,24 +1,12 @@
 export const defaultOptions = {
   left: {
-    service: 'dip',
     title: 'Title',
-    intro: 'Intro',
-    cta: {
-      text: 'Button text',
-      url: 'http://test'
-    }    
+    intro: 'Intro',   
   },
-
   right: {
-    service: 'vpu',
     title: 'Title',
-    intro: 'Intro',
-    cta: {
-      text: 'Button text',
-      url: 'http://test'
-    }    
+    intro: 'Intro',  
   },
-  
   otherServiceLink: {
     text: 'Link text',
     url: 'http://test'
