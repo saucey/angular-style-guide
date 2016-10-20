@@ -1,3 +1,4 @@
+export * from './aa-blue-block-page/aa-blue-block-page.component';
 export * from './aa-css/aa-css.component';
 export * from './aa-data/aa-data.component';
 export * from './aa-editable-value/aa-editable-value.component';
@@ -9,7 +10,6 @@ export * from './aa-input-number/aa-input-number.component';
 export * from './aa-input-radio/aa-input-radio.component';
 export * from './aa-leadform/aa-leadform.component';
 export * from './aa-modal/aa-modal.component';
-export * from './aa-page/aa-page.component';
 export * from './aa-qq-aov/aa-qq-aov.component';
 export * from './aa-qq-beleggen/aa-qq-beleggen.component';
 export * from './aa-qq-boeterente/aa-qq-boeterente.component';

@@ -1,0 +1,26 @@
+<div class="aa-page">
+  <div class="container_12">
+    <div class="row-fluid"> 
+        <div class="span6">
+          <h2>{{data.options.left.title}}</h2>
+          <p>{{data.options.left.intro}}</p>
+        </div>
+        <div class="span6">
+          <h2>{{data.options.right.title}}</h2>
+          <p>{{data.options.right.intro}}</p>
+        </div>
+    </div>
+  </div>
+
+  <div class="container_12">
+    <div class="row-fluid"> 
+        <div class="span6">
+          <ng-content select="[blue-block-left]"></ng-content>
+        </div>
+
+        <div class="span6">
+          <ng-content select="[blue-block-right]"></ng-content>
+        </div>        
+    </div>
+  </div>
+</div>
