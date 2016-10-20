@@ -1,29 +1,73 @@
-<form style="margin: 10px; border: 1px solid black; padding: 10px;" (submit)="submit($event)">
-  <label>
-    Income:
-    <input name="wia-form-income" type="number" [(ngModel)]="income">
-  </label>
-  <h5>Products</h5>
-  <div *ngFor="let product of products; trackBy:trackById">
-    <label>
-      {{product.id}}
-      <input type="checkbox" name="wia-form-product-{{product.id}}"
-             [(ngModel)]="product.selected"
-             [disabled]="product.disabled"
-             (change)="updateProduct(product, $event)">
-    </label>
-    <div class="product-attrs" [hidden]="!product.selected || !product.attrs?.length">
-      <ul>
-        <li *ngFor="let attr of product.attrs; trackBy:trackById">
-          {{ attr.label }}
-          <select class="no-dd" name="wia-form-selectProduct-{{attr.id}}" [(ngModel)]="attr.value">
-            <option *ngFor="let option of attr.options; trackBy:trackByValue"
-                    value="{{ option.value }}">{{ option.label }}
-            </option>
-          </select>
-        </li>
+<div class="messages messages--functional visible">
+  <div class="header">
+    Stel uw persoonlijk situatie in
+  </div>
+  <div class="content">
+    Bekijk uw persoonlijke situatie met uw productcode of stel zelf uw situatie in
+  </div>
+  <button class="button arrow" (click)="modalVisible = true">Situatie instellen</button>
+</div>
+
+
+
+<aa-modal [visible]="modalVisible" [options]="options">
+  <div data-aa-modal-content>
+    <div class="form-1" *ngIf="visiblePage === 1">
+      <p>Stel uw persoonlijke situatie in en bereken hoe hoog uw inkomen is bij langdurige arbeidsongeschiktheid.</p>
+
+      <label>De verzekeringscode van uw werkgever</label>
+      <input type="text" [(ngModel)]="personalizationCode" placeholder="355A0"/>
+
+      <div>
+        <button class="button arrow" (click)="onCodeSubmit()">Bereken</button>
+      </div>
+
+      <ul class="arrow">
+        <li><a (click)="visiblePage = 2">Verzekeringsproducten zelf invoeren</a></li>
       </ul>
+
+    </div>
+    <div class="form-2" *ngIf="visiblePage === 2">
+      <p>Stel uw persoonlijke situatie in en bereken hoe hoog uw inkomen is bij langdurige arbeidsongeschiktheid.</p>
+
+      <label>De verzekeringscode van uw werkgever</label>
+
+
+      <form (submit)="onProductFormSubmit($event)">
+        <label>
+          Income:
+          <input name="wia-form-income" type="number" [(ngModel)]="income">
+        </label>
+        <h5>Products</h5>
+        <div *ngFor="let product of products; trackBy:trackById">
+          <label>
+            {{product.id}}
+            <input type="checkbox" name="wia-form-product-{{product.id}}"
+                   [(ngModel)]="product.selected"
+                   [disabled]="product.disabled"
+                   (change)="updateProduct(product, $event)">
+          </label>
+          <div class="product-attrs" [hidden]="!product.selected || !product.attrs?.length">
+            <ul>
+              <li *ngFor="let attr of product.attrs; trackBy:trackById">
+                {{ attr.label }}
+                <select class="no-dd" name="wia-form-selectProduct-{{attr.id}}" [(ngModel)]="attr.value">
+                  <option *ngFor="let option of attr.options; trackBy:trackByValue"
+                          value="{{ option.value }}">{{ option.label }}
+                  </option>
+                </select>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <ul class="arrow">
+          <li><a (click)="visiblePage = 1">Productcode invoeren</a></li>
+        </ul>
+
+        <button class="button arrow">Bereken</button>
+      </form>
+
     </div>
   </div>
-  <button>Apply</button>
-</form>
+</aa-modal>

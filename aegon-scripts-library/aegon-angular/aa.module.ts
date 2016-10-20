@@ -21,6 +21,7 @@ const declarations = [
     aaComp.AAInputNumberComponent,
     aaComp.AAHighchartComponent,
     aaComp.AAStickyComponent,
+    aaComp.AAModalComponent,
     aaComp.AACollapsibleTopicComponent,
 
     aaPipes.AAMoneyPipe,

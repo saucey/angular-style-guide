@@ -20,6 +20,14 @@ export class WiaForm extends AABaseComponent implements OnInit {
 
   public products;
   public income = null;
+  public modalVisible = false;
+  public personalizationCode: string = '';
+
+  public visiblePage: number = 1;
+
+  public options = {
+    title: 'Uw persoonlijke situatie instellen'
+  };
 
   constructor(private elementRef: ElementRef,
               private wiaPageProductsService: WiaPageProductsService,
@@ -57,13 +65,24 @@ export class WiaForm extends AABaseComponent implements OnInit {
     }
   }
 
-  submit(event) {
+  onProductFormSubmit(event) {
 
     event.preventDefault();
 
     const payload = this.serializeInput();
 
+    this.modalVisible = false;
+
     this.wiaPageService.externalInput$.next(payload);
+  }
+
+  onCodeSubmit() {
+
+    const input: WIAInputEntity = this.wiaPagePersonalizationService.codeToInput(this.personalizationCode);
+
+    this.modalVisible = false;
+
+    this.wiaPageService.externalInput$.next(input);
   }
 
   public trackById(index, el) {
