@@ -42,7 +42,8 @@ const declarations = [
     aaComp.AAPensionFormComponent,
     aaComp.AALeadformComponent,
     aaComp.AAQuizComponent,
-    aaComp.AAEditableValueComponent
+    aaComp.AAEditableValueComponent,
+    aaComp.AABlueBlockComponent
 ];
 
 //Exports

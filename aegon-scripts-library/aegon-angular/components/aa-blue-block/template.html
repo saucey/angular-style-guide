@@ -1,0 +1,29 @@
+<div class="aa-bb--wrapper" [class.padding-bottom-fix]="showButton()">
+  <div class="aa-bb--content container_14">
+    <h3 class="aa-bb--content-title span14"> {{ data.options.title }} </h3>
+    <label class="span7 aa-bb--content-label">Label</label>
+    <span class="span7 aa-bb--content-value">$100000</span>
+    <label class="span14 aa-bb--content-label">Label</label>
+    <label class="span7 aa-bb--content-label lighter-label">Label</label>
+    <span class="span7 aa-bb--content-value">$100000</span>
+    <label class="span7 aa-bb--content-label lighter-label">Label</label>
+    <span class="span7 aa-bb--content-value">$100000</span>
+    <label class="span7 aa-bb--content-label lighter-label">Label</label>
+    <span class="span7 aa-bb--content-value">$100000</span>
+    <label class="span7 aa-bb--content-label">Label</label>
+    <span class="span7 aa-bb--content-value">$100000</span>
+  </div>
+  <div class="aa-bb--content container_14">
+    <h3 class="aa-bb--content-title span14"> {{ data.options.title }} </h3>
+    <label class="span7 aa-bb--content-label">Label</label>
+    <span class="span7 aa-bb--content-value">$100000</span>
+    <label class="span7 aa-bb--content-label">Label</label>
+    <span class="span7 aa-bb--content-value">$100000</span>
+  </div>
+  <div class="aa-bb--footer container_14">
+    <a *ngIf="showButton()" class="button orange-gradient icon-right arrow">
+      {{data.options.button.label}}
+    </a>
+    <span class="aa-bb--caption span14">{{data.options.caption}}</span>
+  </div>
+</div>
