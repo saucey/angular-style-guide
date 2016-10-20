@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges } from "@angular/core";
 
 interface BarConfig {
   percentage: number,
@@ -26,7 +26,7 @@ interface GraphConfig {
 export class WiaCalculatorGraph implements OnChanges {
   @Input() data: GraphConfig;
 
-  public trackByBar (index, item) {
+  public trackByBar(index, item) {
 
     return item.id;
   }
@@ -36,8 +36,8 @@ export class WiaCalculatorGraph implements OnChanges {
   ngOnChanges(changes) {
 
     const col3 = changes.data.currentValue.col3;
-    const col4  = changes.data.currentValue.col4;
-    const col34  = changes.data.currentValue.col34;
+    const col4 = changes.data.currentValue.col4;
+    const col34 = changes.data.currentValue.col34;
 
     const firstCol3Item = col3.bars.filter(bar => bar.percentage > 0).slice(-1)[0];
     const firstCol4Item = col4.bars.filter(bar => bar.percentage > 0).slice(-1)[0];
@@ -47,17 +47,20 @@ export class WiaCalculatorGraph implements OnChanges {
       col4.bars = col4.bars.filter(el => el.id !== firstCol4Item.id);
 
       col34.bars = [firstCol3Item];
+
     } else {
       col34.bars = [
         {
           percentage: 0,
+          id: 'GOV_01', //@FIXME must be dynamic, needed for animation
           meta: {}
         }
       ]
     }
+
   }
 
-  public sumHeights (bars: Array<BarConfig>) : number {
+  public sumHeights(bars: Array<BarConfig>): number {
 
     return bars.reduce((sum, bar) => sum + bar.percentage, 0)
   }

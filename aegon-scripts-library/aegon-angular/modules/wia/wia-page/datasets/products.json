@@ -1,0 +1,111 @@
+[
+  {
+    "id": "WGA_EXCED",
+    "label": "WGA-Excedentverzekering",
+    "desc": "",
+    "selected": false,
+    "attrs": [
+      {
+        "id": "COV_RATE",
+        "label": "Dekkingsgraad",
+        "value": 0,
+        "options": [
+          {
+            "value": 0,
+            "label": "0%"
+          },
+          {
+            "value": 75,
+            "label": "75%"
+          },
+          {
+            "value": 80,
+            "label": "80%"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "IVA_EXCED",
+    "label": "IVA_EXCED",
+    "desc": "",
+    "selected": false,
+    "attrs": [
+      {
+        "id": "COV_RATE",
+        "label": "Dekkingsgraad",
+        "value": 0,
+        "options": [
+          {
+            "value": 0,
+            "label": "0%"
+          },
+          {
+            "value": 75,
+            "label": "75%"
+          },
+          {
+            "value": 80,
+            "label": "80%"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "WGA_AANV_STANDARD",
+    "label": "WGA_AANV_STANDARD",
+    "desc": "",
+    "selected": false,
+    "attrs": []
+  },
+  {
+    "id": "WGA_AANV_LIGHT",
+    "label": "WGA_AANV_LIGHT",
+    "desc": "",
+    "selected": false,
+    "attrs": []
+  },
+  {
+    "id": "WGA_AANV_UPGRADE",
+    "label": "WGA_AANV_UPGRADE",
+    "desc": "",
+    "selected": false,
+    "attrs": []
+  },
+  {
+    "id": "WIA_35MIN",
+    "label": "WIA_35MIN",
+    "desc": "",
+    "selected": false,
+    "attrs": [
+      {
+        "id": "BEN_PERIOD",
+        "label": "Uitkeringsduur",
+        "value": 7.5,
+        "options": [
+          {
+            "value": 5,
+            "label": "5%"
+          },
+          {
+            "value": 7.5,
+            "label": "7.5%"
+          },
+          {
+            "value": 10,
+            "label": "10%"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "WIA_35MIN_BODEM",
+    "label": "WIA_35MIN_BODEM",
+    "desc": "",
+    "selected": false,
+    "attrs": []
+  }
+]

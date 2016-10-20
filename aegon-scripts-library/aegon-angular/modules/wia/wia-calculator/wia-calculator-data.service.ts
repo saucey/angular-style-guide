@@ -1,25 +1,17 @@
-import { Injectable } from '@angular/core';
-import { Http, URLSearchParams } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
+import { Injectable } from "@angular/core";
+import { Http } from "@angular/http";
+import { Observable } from "rxjs/Observable";
+import { WIAInputEntity } from "../wia-page/wia-input.entity";
 
 const productsMetadata = require('./datasets/components.json');
 const componentGroups = require('./datasets/componentsGroups.json');
 const mocks = require('./datasets/demo.json');
 
-interface InputParams {
-  income: number,
-  disability: number,
-  permDisability: boolean,
-  usage: number,
-  products: Array<string>
-}
-
 @Injectable()
 export class CalculatorDataService {
 
-  constructor(
-    private http: Http
-  ) {}
+  constructor(private http: Http) {
+  }
 
   private static extractComponentsFromProducts(products) {
 
@@ -101,44 +93,62 @@ export class CalculatorDataService {
     return res;
   }
 
-  getData (input: InputParams) {
+  getData(input: WIAInputEntity) {
 
     //return Observable.of(rawData)
     //return this.getAjaxData(input).map(data => data.json())
 
-   return Observable.of(this.getFromDataset(input))
-      .map(this.parseRawData.bind(this));
+    return Observable.of(this.getFromDataset(input))
+      .map(this.parseRawData.bind(this))
+      .map(response => {
+
+        if (!response) {
+          return;
+        }
+
+        return {
+          graphData: response,
+          legendData: this.getLegendFromGraphData(response)
+        }
+      });
   }
 
+  createOptionsKey(params) {
 
-  createOptionsKey (params) {
+    const products = params.products.sort((a, b) => {
+
+      // sort by string
+      return a.id < b.id ? -1 : 1;
+    }).map(product => {
+
+      return [
+        product.id,
+        ...product.attrs.map(el => el.value)
+      ]
+    });
 
     return [
       params.income,
       params.disability,
       params.usage,
       params.permDisability,
-      params.products.length ? [
-        params.products[0].id,
-        [
-          params.products[0].attrs[0].id,
-          params.products[0].attrs[0].value
-        ]
-      ] : []
+      products
     ]
   }
 
-  uniqueValues (value, index, self) {
+  uniqueValues(value, index, self) {
 
     return self.indexOf(value) === index;
   }
 
-  getFromDataset(input: InputParams) {
+  getFromDataset(input: WIAInputEntity) {
 
     const key = JSON.stringify(this.createOptionsKey(input));
 
     if (mocks[key]) {
 
+
+      console.info('Got from dataset: ' + key, 'in', mocks);
       return mocks[key];
     } else {
 
@@ -146,7 +156,7 @@ export class CalculatorDataService {
     }
   }
 
-  // getAjaxData(input: InputParams) {
+  // getAjaxData(input: WIAInputEntity) {
   //
   //   // Parameters obj-
   //   let params: URLSearchParams = new URLSearchParams();
@@ -163,7 +173,7 @@ export class CalculatorDataService {
   //   });
   // }
 
-  getLegendFromGraphData (graphData) {
+  getLegendFromGraphData(graphData) {
     const components = [];
     const added = {};
 
@@ -178,7 +188,7 @@ export class CalculatorDataService {
         }
       });
 
-    const res:any = {};
+    const res: any = {};
 
     const enabledGroups = components.map(el => el.meta.type).filter(this.uniqueValues);
 

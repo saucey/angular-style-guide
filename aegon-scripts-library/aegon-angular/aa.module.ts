@@ -8,11 +8,9 @@ import { DeprecatedComponentsModule } from './deprecated-components.module'
 import * as aaComp from './components';
 import * as aaPipes from './pipes';
 import { AAElementDirective } from './directives/aa-element/aa-element.directive.ts';
-import { AATopicDirective } from './directives/aa-topic/aa-topic.directive';
 
 const declarations = [
     AAElementDirective,
-    AATopicDirective,
     aaComp.AABlueBlockPageComponent,
     aaComp.AAHintComponent,
     aaComp.AASliderComponent,
@@ -23,7 +21,8 @@ const declarations = [
     aaComp.AAInputNumberComponent,
     aaComp.AAHighchartComponent,
     aaComp.AAStickyComponent,
-    
+    aaComp.AACollapsibleTopicComponent,
+
     aaPipes.AAMoneyPipe,
     aaPipes.AAPeriodPipe,
     aaPipes.AAReplacePipe,

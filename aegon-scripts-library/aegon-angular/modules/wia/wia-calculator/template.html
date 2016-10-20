@@ -36,7 +36,7 @@
               <ul>
                 <li *ngFor="let attr of product.attrs">
                   {{ attr.label }}
-                  <select [(ngModel)]="attr.value" (change)="updateProductAttr(attr, $event)">
+                  <select class="no-dd" [(ngModel)]="attr.value" (change)="updateProductAttr(attr, $event)">
                     <option *ngFor="let option of attr.options"
                             value="{{ option.value }}">{{ option.label }}
                     </option>
@@ -106,7 +106,7 @@
       Duurzaam arbeidsongeschikt
 
       <label class="checkbox">
-        <input type="checkbox" [(ngModel)]="permanentDisability" (change)="update()">
+        <input type="checkbox" [(ngModel)]="permanentDisability" (change)="updatePermDisability()">
         <span class="checkbox"></span>
       </label>
     </div>

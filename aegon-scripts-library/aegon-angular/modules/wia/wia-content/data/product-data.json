@@ -1,0 +1,30 @@
+[
+  {
+    "id": "WGA_EXCED",
+    "attrs": []
+  },
+  {
+    "id": "IVA_EXCED",
+    "attrs": []
+  },
+  {
+    "id": "WGA_AANV_STANDARD",
+    "attrs": []
+  },
+  {
+    "id": "WGA_AANV_LIGHT",
+    "attrs": []
+  },
+  {
+    "id": "WGA_AANV_UPGRADE",
+    "attrs": []
+  },
+  {
+    "id": "WIA_35MIN",
+    "attrs": []
+  },
+  {
+    "id": "WIA_35MIN_BODEM",
+    "attrs": []
+  }
+]

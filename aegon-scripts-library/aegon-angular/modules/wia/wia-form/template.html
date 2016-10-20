@@ -1,0 +1,29 @@
+<form style="margin: 10px; border: 1px solid black; padding: 10px;" (submit)="submit($event)">
+  <label>
+    Income:
+    <input name="wia-form-income" type="number" [(ngModel)]="income">
+  </label>
+  <h5>Products</h5>
+  <div *ngFor="let product of products; trackBy:trackById">
+    <label>
+      {{product.id}}
+      <input type="checkbox" name="wia-form-product-{{product.id}}"
+             [(ngModel)]="product.selected"
+             [disabled]="product.disabled"
+             (change)="updateProduct(product, $event)">
+    </label>
+    <div class="product-attrs" [hidden]="!product.selected || !product.attrs?.length">
+      <ul>
+        <li *ngFor="let attr of product.attrs; trackBy:trackById">
+          {{ attr.label }}
+          <select class="no-dd" name="wia-form-selectProduct-{{attr.id}}" [(ngModel)]="attr.value">
+            <option *ngFor="let option of attr.options; trackBy:trackByValue"
+                    value="{{ option.value }}">{{ option.label }}
+            </option>
+          </select>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <button>Apply</button>
+</form>
