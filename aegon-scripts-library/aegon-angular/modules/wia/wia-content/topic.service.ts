@@ -11,6 +11,9 @@ import { WiaPageService } from "../wia-page/wia-page.service";
 import { WIAInputEntity } from "../wia-page/wia-input.entity";
 import { TopicBuilder } from "./topic-builder";
 import { TopicRowEntity } from "./topic-entities/topic-row.entity";
+import { clone } from "../../../lib/util";
+
+const PRODUCT_DATA = require('./data/product-data.json');
 
 @Injectable()
 export class TopicService {
@@ -24,7 +27,7 @@ export class TopicService {
     this.topicBuilder = topicBuilder;
 
     wiaPageService.externalInput$.subscribe(value => {
-      this.productIncomeData = value;
+      this.productIncomeData = clone(value);
     });
   }
 
@@ -34,6 +37,9 @@ export class TopicService {
    * @returns {Array<TopicRowEntity>}
    */
   getTopics(): TopicRowEntity[] {
+
+    this.productIncomeData.products = PRODUCT_DATA.products;
+
     this
       .topicBuilder
       .withProductIncomeData(this.productIncomeData);
@@ -41,8 +47,6 @@ export class TopicService {
     let wiaContent = this
       .wiaContentService
       .getWiaContent();
-
-    console.log(wiaContent, this.productIncomeData);
 
     this
       .topicBuilder

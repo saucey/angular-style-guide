@@ -26,6 +26,13 @@ export class WiaContentService {
     // return this
     //  .http
     //  .get('http://localhost:80');
+
+    /*http.get('./data/product-data.json')
+      .map(res => res.json())
+      .subscribe(data => this.data = data,
+        err => console.log(err),
+        () => console.log('Completed'));*/
+
   }
 
 }
