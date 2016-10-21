@@ -1,22 +1,30 @@
-<div class="aa-bb-page">
+<div [ngClass]="{'aa-bb-page--hidden': pageIsHidden}" class="aa-bb-page">
+
   <div class="container_12">
     <div class="row-fluid"> 
-        <div class="span6">
+        <div class="span6 span6--block">
           <div class="aa-bb-page__bb-text">
             <h2>{{data.options.left.title}}</h2>
-            <p>{{data.options.left.intro}}</p>
+            <p>{{data.options.left.text}}</p>
           </div>          
           <ng-content select="[blue-block-left]"></ng-content>
         </div>
 
-        <div class="span6">
+        <div class="span6 span6--block">
           <div class="aa-bb-page__bb-text">
             <h2>{{data.options.right.title}}</h2>
-            <p>{{data.options.right.intro}}</p>  
+            <p>{{data.options.right.text}}</p>  
           </div>        
           <ng-content select="[blue-block-right]"></ng-content>
         </div>        
     </div>
   </div>
-  <a href="{{data.options.otherServiceLink.url}}">{{data.options.otherServiceLink.text}}</a>
+  
+  <a *ngIf="hasLink" href="{{data.options.link.url}}">{{data.options.link.text}}</a>
+
+  <div *ngIf="hasBottomContent">
+    <h2>{{data.options.bottom.title}}</h2>
+    <p>{{data.options.bottom.text}}</p>      
+  </div>
+
 </div>
