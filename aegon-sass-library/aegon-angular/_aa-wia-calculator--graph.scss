@@ -1,22 +1,9 @@
-.aa-wia-calculator-graph {
-  .edit-form {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 800px;
-    height: 100%;
-    color: black;
-    textarea {
-
-      height: calc(100% - 50px);
-      color: black;
-      width: 100%;
-    }
-  }
+.wia-calculator-graph {
+  height: 100%;
+  display: block;
 
   .aa-block-graph {
-    padding: 20px;
-    height: 380px;
+    height: 100%;
 
     &, * {
       box-sizing: border-box;
@@ -29,42 +16,15 @@
 
   .aa-block-graph__bar-block {
     height: 100%;
-    padding: 3px;
+    padding: 2px;
   }
 
   .aa-block-graph__bar-block-inner {
     height: 100%;
-    box-shadow: -1px 1px 3px -1px #797979;
-    border-radius: 3px;
-    text-indent: -99999px;
-
+    position: relative;
     &:hover {
-      opacity: 0.6;
+      opacity: 0.8;
     }
-  }
-
-  .aa-block-graph__label {
-    text-align: center;
-    color: #ddd;
-    font-size: 12px  !important;
-    text-transform: uppercase;
-  }
-
-  .aa-block-graph__label--top {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-  }
-  .aa-block-graph__label__percentage {
-    display: block;
-    font-size: 11px  !important;
-  }
-  .aa-block-graph__label__amount {
-    display: block;
-    font-size: 14px  !important;
-    font-weight: bold;
-    margin: -9px 0 0;
   }
 
   .aa-block-graph__col {
@@ -73,17 +33,18 @@
     position: relative;
     overflow: hidden;
   }
-  .aa-block-graph__col1, .aa-block-graph__col2 {
-    padding-bottom: 20px;
-    padding-top: 40px;
-  }
-  .aa-block-graph__col34 {
-    padding-bottom: 20px;
-  }
 
   .aa-block-graph__bar, .aa-block-graph__space, .aa-block-graph__bar-wrapper, .aa-block-graph__col {
     transition: all 300ms ease-in-out;
     overflow: hidden;
   }
 
+  .aa-block-graph-amount {
+    display: block;
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
 }

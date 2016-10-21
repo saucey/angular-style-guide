@@ -21,6 +21,7 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit {
   public submitted: boolean = true;
   public initialAmount: number = 35000;
   public permanentDisability: boolean = false;
+  public mySwitch: boolean = false;
 
   public disability = {
     value: 50,
@@ -32,7 +33,40 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit {
       range: {
         min: 0,
         max: 100
-      }
+      },
+      ranges: [
+        {
+          start: 0,
+          end: 35,
+          color: '#B6D9EF'
+        }, {
+          start: 35,
+          end: 80,
+          color: '#85BFE5'
+        }, {
+          start: 80,
+          end: 100,
+          color: '#3395D4'
+        }
+      ],
+      labels: [
+        {
+          value: 0,
+          label: '0 %'
+        },
+        {
+          value: 35,
+          label: '35'
+        },
+        {
+          value: 80,
+          label: '80'
+        },
+        {
+          value: 100,
+          label: '100 %'
+        }
+      ]
     }
   };
 
@@ -46,11 +80,36 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit {
       range: {
         min: 0,
         max: 100
-      }
+      },
+      ranges: [
+        {
+          start: 0,
+          end: 50,
+          color: '#85BFE5'
+        }, {
+          start: 50,
+          end: 100,
+          color: '#3395D4'
+        }
+      ],
+      labels: [
+        {
+          value: 0,
+          label: '0 %'
+        },
+        {
+          value: 50,
+          label: '50'
+        },
+        {
+          value: 100,
+          label: '100 %'
+        }
+      ]
     }
   };
 
-  public graphData;
+  public graphData : any[] = [];
 
   public legendData;
 
@@ -123,14 +182,24 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit {
       attrs: el.attrs.map(attr => ({id: attr.id, value: +attr.value}))
     }));
 
-    return {
+    const input : WIAInputEntity = {
       income: this.initialAmount,
       disability: this.disability.value,
-      permDisability: this.permanentDisability,
-      usage: this.usage.value,
       products,
       productsIds: products.map(e => e.id)
     };
+
+    if (this.disability.value >= 80) {
+
+      input.permDisability = this.permanentDisability;
+    }
+
+    if (this.disability.value >= 35 && this.disability.value < 80) {
+
+      input.usage = this.usage.value;
+    }
+
+    return input;
   }
 
   public update() {
@@ -147,7 +216,23 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit {
 
         const {graphData, legendData} = data;
 
-        this.graphData = graphData;
+        console.log('graphData', graphData);
+        console.log('graphData', legendData);
+
+        this.graphData = [
+          {
+            suppressAmountLabels: true,
+            columns: [graphData[0], graphData[1]]
+          },
+          {
+            columns: [graphData[2]]
+          },
+          {
+            subgraph: true,
+            columns: [graphData[3]]
+          }
+        ];
+
         this.legendData = legendData;
       }
 
@@ -196,6 +281,8 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit {
   }
 
   public updatePermDisability(val) {
+
+    console.log('updatePermDisability', val, this.permanentDisability);
 
     this.permanentDisability = !this.permanentDisability;
     this.update();

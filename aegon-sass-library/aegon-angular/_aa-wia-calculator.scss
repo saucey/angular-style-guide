@@ -1,81 +1,207 @@
 @import "aa-wia-calculator--graph";
 
-.aa-wia-calculator {
+$graphLabelHeight: 45px;
+$graphLabelBottomHeight: 70px;
+$graphLabelMargin: 5px;
 
-  * {
-    line-height: 26px;
+$chartHeight: 380px;
+$chartHeightMobile: 270px;
+$breakpoint: 800px;
+
+.wia_graph__legend {
+  width: 20%;
+  height: $chartHeight + $graphLabelBottomHeight + $graphLabelMargin;
+  float: left;
+  background: $white;
+  margin-top: $graphLabelHeight + 2*$graphLabelMargin;
+  position: relative;
+  text-align: right;
+
+  @media (max-width: $breakpoint) {
+    float: none;
+    width: 100% !important;
+    height: $chartHeightMobile + $graphLabelBottomHeight + $graphLabelMargin;
+  }
+}
+
+.wia_graph {
+  width: 80%;
+  float: left;
+
+  @media (max-width: $breakpoint) {
+    float: none;
+    width: 100% !important;
+  }
+}
+
+.wia_calculator {
+  background: $grey;
+  padding: 1em 2em;
+
+  //@TODO fix it globally
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
   }
 
-  //overwrite aegonmf styles
-  ul li {
-    color: inherit;
-    padding: 0;
-    background: none;
-  }
-
-  .calculation {
-    width: 100%; //override media-query styles which set it to 80%
-  }
-
-  .aa-wia-calculator-graph {
-    float: left;
-    width: 60%;
-  }
-
-  .aa-wia-calculator-graph-legend {
-    float: left;
-    width: 40%;
-    padding-left: 5%;
-  }
-
-  .products-list {
-    margin-top: 20px;
-  }
-
-  .product-item {
-
+  aa-slider {
     display: block;
-    font-size: 0.9em;
-    overflow: hidden;
-
-    input:checked + label {
-      font-weight: bold;
-      color: #fff;
-      background: brown;
-    }
-
-    .product-attrs {
-      float: right;
-    }
+    height: 25px;
+    margin: 20px 0 15px 0;
   }
 
-  .product-item--disabled {
-    pointer-events: none;
-    cursor: default !important;
-    label {
-      background: #aaa;
+  .wia-calculator-graph {
+    position: relative;
+    &:before {
+      content: '';
+      position: absolute;
+      z-index: 100;
+      left: 0;
+      border-top: 1px solid $darker_grey;
+      right: 0;
+      top: -5px;
     }
   }
+}
 
-  .legend-block {
+.wia_calculator__extra_inputs {
+  > * {
+    margin-top: 1em;
+    display: block;
+  }
+}
+
+.wia_calculator__coverages {
+  border-bottom: 1px solid $darker_grey;
+  margin-bottom: 30px;
+}
+
+.wia_calculator__coverages_arrow {
+  display: block;
+  box-shadow: 0px -2px 0px -1px $darker_grey inset;
+  position: relative;
+  height: 12px;
+  overflow: hidden;
+  &:before {
+    content: '';
     display: inline-block;
-    width: 13px;
-    height: 13px;
+    width: 15px;
+    height: 15px;
+    border: 1px solid $darker_grey;
+    transform: rotate(45deg);
+    background: $grey;
+    position: absolute;
+    top: 5px;
+    left: -7px;
+    margin-left: 50%;
+    transition: margin 300ms ease-in-out;
+  }
+  &[data-range1="true"]:before {
+    //margin-left: 16%;
+    margin-left: 1.5%;
+  }
+  &[data-range2="true"]:before {
+    //margin-left: 58%;
+    margin-left: 35%;
+  }
+  &[data-range3="true"]:before {
+    //margin-left: 87%;
+    margin-left: 80%;
+  }
+}
+
+.wia_graph__chart {
+  height: $chartHeight;
+
+  @media (max-width: $breakpoint) {
+    height: $chartHeightMobile;
+  }
+}
+
+.wia_graph__column {
+  float: left;
+  padding: 0 0 0 6px;
+
+  @media (max-width: $breakpoint) {
+    float: none;
+    width: 100% !important;
+    margin: 40px 0;
   }
 
-  .aa-wia-calculator-graph-legend {
-    ul {
-      margin-bottom: 10px;
-    }
-
-    * {
-      font-size: 15px;
-    }
-
-    .legend-headline {
-      font-weight: bold;
-      font-size: 16px !important;
-    }
+  &:nth-child(1) {
+    width: 27.5%;
+  }
+  &:nth-child(2) {
+    width: 27.5%;
+  }
+  &:nth-child(3) {
+    width: 45%;
   }
 
+  > * {
+    background: $white;
+    margin: $graphLabelMargin 0;
+    padding: 50px 5px 5px;
+  }
+}
+
+.wia_graph__top_label {
+  font-weight: 700;
+  font-size: 0.9em;
+  text-align: center;
+  padding: 10px 0;
+  height: $graphLabelHeight;
+}
+
+.wia_graph__bottom_label {
+  font-size: 0.9em;
+  text-align: center;
+  padding: 20px;
+  line-height: 1.2em;
+  height: $graphLabelBottomHeight;
+  > * {
+    display: block;
+  }
+}
+
+.wia_graph__legend__labels {
+  padding: 7px;
+  font-size: 0.95em;
+  bottom: 0;
+  position: absolute;
+  line-height: 1.1em;
+  right: 0;
+  > * {
+    display: block;
+  }
+}
+.wia_graph__legend__items {
+  position: absolute;
+  bottom: 50px;
+  left: 0;
+  right: 0;
+}
+
+.wia_graph__legend__guideline {
+  position: absolute;
+  right: 10px;
+  top: 32px;
+}
+
+.wia_graph__legend__items li {
+  background: #D9EBF7;
+  margin: 15px 0;
+  font-weight: 700;
+  padding: 5px 5px 5px 30px;
+  position: relative;
+  &.item-white {
+    color: $white;
+  }
+}
+
+.wia_graph__legend__help {
+  cursor: pointer;
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
 }

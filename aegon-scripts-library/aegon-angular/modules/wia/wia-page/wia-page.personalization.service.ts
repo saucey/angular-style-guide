@@ -33,6 +33,9 @@ export class WiaPagePersonalizationService {
   constructor() {
   }
 
+
+  private to36 = number => (+number).toString(35); // leave 'z' free to replace 'o's later
+
   public getUrlCode(): string {
     return window.location.hash.substr(1);
   }
@@ -59,24 +62,30 @@ export class WiaPagePersonalizationService {
     return this.incomeClasses.findIndex(el => el >= income);
   }
 
-  public inputToCode(input: WIAInputEntity): string {
+  private getIncomeFromInput(input: WIAInputEntity): string {
 
-    const to36 = number => (+number).toString(35); // leave 'z' free to replace 'o's later
-    const code = []; // array of final code elements
-    let substring = ''; // temporary variable to construct single code character from multiple digits
+    return this.to36(this.getIncomeClass(input.income));
+  }
 
-    //income
-    code.push(to36(this.getIncomeClass(input.income)));
+  private getDisabilityFromInput(input: WIAInputEntity): string {
 
-    //disability
-    code.push(to36(~~(input.disability / 10)));
+    return this.to36(~~(input.disability / 10));
+  }
 
-    //usage
+  private getUsageFromInput(input: WIAInputEntity): string {
+
     if (input.permDisability) {
-      code.push('P');
+      return 'P'
     } else {
-      code.push(to36(~~(input.usage / 10)));
+      return this.to36(~~(input.usage / 10))
     }
+  }
+
+
+  private getProductsFromInput(input: WIAInputEntity): string {
+
+    let finalString = ''; // array of final characters
+    let substring = ''; // temporary variable to construct single code character from multiple digits
 
     //WGA_EXCED
     const WGA_EXCED: any = input.products.find(el => el.id === 'WGA_EXCED');
@@ -86,7 +95,7 @@ export class WiaPagePersonalizationService {
     const IVA_EXCED: any = input.products.find(el => el.id === 'IVA_EXCED');
     substring += IVA_EXCED ? IVA_EXCED_Code[IVA_EXCED_Value[IVA_EXCED.attrs[0].value]] : 0;
 
-    code.push(to36(substring));
+    finalString += this.to36(substring);
 
     substring = '';
 
@@ -118,9 +127,19 @@ export class WiaPagePersonalizationService {
       substring += WIA_35MIN_Code.Off;
     }
 
-    code.push(to36(substring));
+    finalString += this.to36(substring);
 
-    return code.join('').toUpperCase().replace(/O/g, 'Z');
+    return finalString.toUpperCase().replace(/O/g, 'Z');
+  }
+
+  public inputToCode(input: WIAInputEntity): string {
+
+    return [
+      this.getIncomeFromInput(input),
+      this.getDisabilityFromInput(input),
+      this.getUsageFromInput(input),
+      this.getProductsFromInput(input)
+    ].join('').toUpperCase().replace(/O/g, 'Z');
   }
 
   public codeToInput(code: string): WIAInputEntity {

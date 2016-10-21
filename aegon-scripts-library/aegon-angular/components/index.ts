@@ -7,6 +7,7 @@ export * from './aa-input-date/aa-input-date.component';
 export * from './aa-input-dropdown/aa-input-dropdown.component';
 export * from './aa-input-number/aa-input-number.component';
 export * from './aa-input-radio/aa-input-radio.component';
+export * from './aa-input-switch/aa-input-switch.component';
 export * from './aa-leadform/aa-leadform.component';
 export * from './aa-modal/aa-modal.component';
 export * from './aa-qq-aov/aa-qq-aov.component';

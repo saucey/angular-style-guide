@@ -1,4 +1,3 @@
-/*
 import { WiaPagePersonalizationService } from "../wia-page.personalization.service";
 
 describe('CalculatorProductService', () => {
@@ -210,4 +209,3 @@ describe('CalculatorProductService', () => {
   })
 
 });
-*/

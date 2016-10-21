@@ -10,6 +10,9 @@ $slider_value_background: $slightly_lighter_blue;
 }
 
 .aa-slider {
+
+  position: relative;
+
   // Fix existing Aegon ui slider classes
   .noUi-handle {
     transition: all $animation_short ease;
@@ -89,4 +92,25 @@ $slider_value_background: $slightly_lighter_blue;
     font-size: 18px;
     margin-top: 10px;
   }
+}
+
+.aa-slider--ranges {
+  .noUi-origin {
+    background: none;
+  }
+}
+
+.aa-slider__label {
+  position: absolute;
+  left: 0;
+  transform: translateX(-10px);
+}
+.slider__label--first {
+  transform: none;
+}
+.slider__label--last {
+  transform: none;
+  right: 0;
+  left: initial;
+  margin-left: 0 !important;
 }

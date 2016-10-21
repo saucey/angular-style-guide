@@ -16,6 +16,7 @@ const declarations = [
     aaComp.AASliderComponent,
     aaComp.AASliderInputComponent,
     aaComp.AAInputRadioComponent,
+    aaComp.AAInputSwitchComponent,
     aaComp.AAInputDropDownComponent,
     aaComp.AAInputDateComponent,
     aaComp.AAInputNumberComponent,

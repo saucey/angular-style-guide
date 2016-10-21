@@ -115,6 +115,8 @@ export class AASliderComponent implements AfterViewInit, ControlValueAccessor {
       // console.log('nouislider update', values);
       self.sliderChange(values);
     }, THROTTLE_UPDATES));
+
+    this.setBackgroundRanges(this.options.ranges, this.options.range.max);
   }
 
   // Direct noUi slider change handler
@@ -144,5 +146,16 @@ export class AASliderComponent implements AfterViewInit, ControlValueAccessor {
     this.value = newValues;
     this.modelChange.emit(newValues);
     this.change.emit(newValues);
+  }
+
+  setBackgroundRanges (ranges : any[] = [], max: number) {
+
+    const rangesStrings:string[] = ranges.reduce((memo, range) => {
+
+      memo.push(`${range.color} ${range.start/max*100}%, ${range.color} ${range.end/max*100}%`);
+      return memo;
+    }, []);
+
+    this.sliderEl.nativeElement.style.background = `linear-gradient(90deg, ${rangesStrings.join(', ')})`;
   }
 }

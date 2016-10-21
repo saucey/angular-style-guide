@@ -26,7 +26,26 @@ declare var noUiSlider: any;
 export class AASliderInputComponent implements ControlValueAccessor {
   @Input() label: string;
   @Input() helpText: string;
-  @Input() sliderOptions:any;
+
+  //@TODO Fill more correct types
+  @Input() sliderOptions: {
+    range?: any,
+    [name: string]: any;
+
+    // set slider backgrounds for defined ranges
+    ranges?: {
+      start: number,
+      end: number,
+      color: string
+    }[],
+
+    // set labels under the slider for defined points
+    labels?: {
+      value: number,
+      label: string
+    }[]
+
+  };
 
   @Output() modelChange: any = new EventEmitter();
   @Output() focus: any = new EventEmitter();

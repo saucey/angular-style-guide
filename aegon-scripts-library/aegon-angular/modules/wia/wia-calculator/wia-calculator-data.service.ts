@@ -56,26 +56,22 @@ export class CalculatorDataService {
     }
 
     const res: any = {};
-    const cols = ['col1', 'col2', 'col3', 'col4'];
 
-    cols.forEach((cal, index) => {
-
-      const val = data.periods[index];
+    data.periods.forEach((val, index) => {
 
       if (val) {
 
-        res[cal] = {
+        res[index] = {
           amount: val.amount,
           label: val.label,
           percentage: val.percentage,
-          width: CalculatorDataService.getColumnWidth(data, index),
           bars: CalculatorDataService.sortByPriority(
             this.attachMetadata(CalculatorDataService.extractComponentsFromProducts(val.products))
           )
         };
       } else {
 
-        res[cal] = {
+        res[index] = {
           amount: 0,
           percentage: 0,
           width: 0,
@@ -85,10 +81,7 @@ export class CalculatorDataService {
 
     });
 
-    res.col34 = {
-      width: res.col3.width + res.col4.width,
-      bars: []
-    };
+    console.log('res', res);
 
     return res;
   }
@@ -192,7 +185,7 @@ export class CalculatorDataService {
 
     const enabledGroups = components.map(el => el.meta.type).filter(this.uniqueValues);
 
-    res.items = componentGroups.map(el => el.type).filter(type => enabledGroups.indexOf(type) > -1);
+    res.items = componentGroups.map(el => el.type).filter(type => enabledGroups.indexOf(type) > -1).reverse();
     res.groups = {};
 
     enabledGroups.forEach(groupId => {

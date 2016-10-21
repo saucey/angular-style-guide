@@ -5,11 +5,12 @@
   <div class="content">
     Bekijk uw persoonlijke situatie met uw productcode of stel zelf uw situatie in
   </div>
-  <button class="button arrow" (click)="modalVisible = true">Situatie instellen</button>
+  <button class="button arrow" (click)="global.wiaFormModal.open();">Situatie instellen</button>
 </div>
 
 
-<aa-modal [visible]="modalVisible" [options]="options">
+
+<aa-modal aaId="wiaFormModal" [visible]="modalVisible" [options]="options">
   <div data-aa-modal-content>
     <div class="form-1" *ngIf="visiblePage === 1">
       <p>Stel uw persoonlijke situatie in en bereken hoe hoog uw inkomen is bij langdurige arbeidsongeschiktheid.</p>

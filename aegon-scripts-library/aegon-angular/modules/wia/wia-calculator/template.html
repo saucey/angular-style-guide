@@ -1,114 +1,143 @@
-<div class="quickquote angular aa-wia-calculator">
-  <div class="triangle"></div>
-  <div class="clearfix">
-    <div class="calculation calculation-section">
-      <h3>{{ data.options.headline }}</h3>
+<div class="wia_calculator">
+  <h3>Vermindering van uw verdiencapaciteit</h3>
 
-      <div>
-        <div class="label">
-          {{ data.options.salaryLabel }}
-          <aa-hint [text]="data.options.salaryHint"></aa-hint>
-        </div>
-        <div class="inputs">
-          <aa-input-number
-            class="aa-input--euro"
-            [(ngModel)]="initialAmount"
-            defaultValue=""
-            [placeholder]="'0'"
-            [class.error]="initialAmountErr"
-            (modelChange)="updateIncome($event)">
-          </aa-input-number>
-        </div>
-      </div>
-
-      <div>
-        <ul class="products-list">
-          <li *ngFor="let product of productsData; trackBy:trackById" class="product-item clearfix"
-              [class.product-item--disabled]="product.disabled">
-
-            <label class="checkbox product-title">
-              <input type="checkbox" [(ngModel)]="product.selected" (change)="updateProduct(product, $event)">
-              <span class="checkbox"></span>
-              {{ product.label }}
-            </label>
-
-            <div class="product-attrs" *ngIf="product.selected && product.attrs?.length">
-              <ul>
-                <li *ngFor="let attr of product.attrs">
-                  {{ attr.label }}
-                  <select class="no-dd" [(ngModel)]="attr.value" (change)="updateProductAttr(attr, $event)">
-                    <option *ngFor="let option of attr.options"
-                            value="{{ option.value }}">{{ option.label }}
-                    </option>
-                  </select>
-                </li>
-              </ul>
-            </div>
-          </li>
-        </ul>
-
-
-      </div>
-
-      <div>
-        <!--<button class="button arrow" (click)="submit()" [disabled]="!canSubmit">-->
-        <!--Calculate-->
-        <!--</button>-->
-      </div>
-
-    </div>
-    <div class="graph-section" *ngIf="submitted">
-      <div class="result">
-
-        <aa-wia-calculator-graph class="aa-wia-calculator-graph" [data]='graphData'
-                                 *ngIf="graphData"></aa-wia-calculator-graph>
-
-        <ul class="aa-wia-calculator-graph-legend" *ngIf="legendData?.items?.length">
-          <li *ngFor="let group of legendData?.items">
-            <span class="legend-headline">{{ legendData.groups[group].meta.label }}</span>
-            <ul>
-              <li *ngFor="let component of legendData.groups[group].items" class="legend-item">
-                <span [style.backgroundColor]="component.meta.color" class="legend-block"></span>
-                {{component.meta.label}}
-              </li>
-            </ul>
-          </li>
-        </ul>
-
-      </div>
-    </div>
+  <div>
+    <aa-slider class="aa-input--percentage"
+               [(ngModel)]="disability.value"
+               (modelChange)="sliderUpdate(disability, $event)"
+               [options]="disability.options">
+    </aa-slider>
   </div>
 
-  <div class="calculation">
-    <div class="field">
-      <aa-slider-input class="aa-qq-aov__slider aa-qq__control aa-input--percentage"
-                       [(ngModel)]="disability.value"
-                       (modelChange)="sliderUpdate(disability, $event)"
-                       [sliderOptions]="disability.options"
-                       [label]="disability.label"
-                       [helpText]="'Help'">
-      </aa-slider-input>
+  <div class="wia_calculator__coverages">
+
+    <span class="wia_calculator__coverages_arrow"
+      [attr.data-range1]="disability.value < 35"
+      [attr.data-range2]="disability.value >= 35 && disability.value < 80"
+      [attr.data-range3]="disability.value >= 80"
+    ></span>
+
+    <div class="wia_calculator__coverages__r1" [hidden]="!(disability.value < 35)">
+      <h4>0-35% vermindering verdiencapaciteit</h4>
+
+      <p>U kunt langere tijd minder werken doordat u arbeidsongeschikt bent verklaard. Het UWV bepaalt
+        hoeveel u nog wél kan werken en wat u daarmee nog kan verdienen. Dit noemen we uw
+        ‘restverdiencapaciteit’. Is de vermindering van uw verdiencapaciteit minder dan 35% dan krijgt u geen
+        uitkering van de overheid.</p>
     </div>
 
+    <div class="wia_calculator__coverages__r2" [hidden]="!(disability.value >= 35 && disability.value < 80)">
+      <h4>35-80% vermindering verdiencapaciteit
+        U kan langere tijd niet of minder werken. Het</h4>
 
-    <div class="field" *ngIf="disability.value < 80">
-      <aa-slider-input class="aa-qq-aov__slider aa-qq__control aa-input--percentage"
-                       [(ngModel)]="usage.value"
-                       (modelChange)="sliderUpdate(usage, $event)"
-                       [sliderOptions]="usage.options"
-                       [label]="usage.label"
-                       [helpText]="'Help'">
-      </aa-slider-input>
+      <p>U kan langere tijd niet of minder werken. Het UWV bepaalt hoeveel u nog wél kan werken en wat u
+        daarmee nog kan verdienen. Dit noemen we uw ‘restverdiencapaciteit’. Er wordt vervolgens gekeken
+        naar uw benutting daarvan. Benut u minder dan 50% van uw ‘restverdiencapaciteit dan verliest u een
+        groot gedeelte van uw uitkering.</p>
+
+      <div class="row-fluid wia_calculator__extra_inputs">
+        <div class="span5">
+          Benutting restverdiencapaciteit:
+        </div>
+        <div class="span7">
+          <aa-slider class="aa-input--percentage"
+                     [(ngModel)]="usage.value"
+                     (modelChange)="sliderUpdate(usage, $event)"
+                     [options]="usage.options">
+          </aa-slider>
+        </div>
+      </div>
+
     </div>
 
-    <div class="field" *ngIf="disability.value >= 80">
+    <div class="wia_calculator__coverages__r3" [hidden]="!(disability.value >= 80)">
+      <h4>80-100% vermindering verdiencapaciteit</h4>
 
-      Duurzaam arbeidsongeschikt
+      <p>U kunt nagegoeg niet meer werken. Dan wordt u 80% of meer arbeidsongeschikt verklaart. Voor de
+        uitkering van de overheid wordt er een verschil gemaakt tussen duurzaam en niet duurzaam
+        arbeidsongeschikt. Als u langer dan 5 jaar niet kunt werken wordt er van duurzaam arbeidsongeschikt
+        gesproken.</p>
 
-      <label class="checkbox">
-        <input type="checkbox" [(ngModel)]="permanentDisability" (change)="updatePermDisability()">
-        <span class="checkbox"></span>
-      </label>
+      <div class="row-fluid wia_calculator__extra_inputs">
+        <div class="span5">
+          Duurzaam arbeidsongeschikt
+        </div>
+        <div class="span7">
+          <aa-input-switch [(ngModel)]="permanentDisability" (modelChange)="updatePermDisability()"></aa-input-switch>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="clearfix">
+    <div class="wia_graph__legend">
+      <span class="wia_graph__legend__guideline">Uw salaris</span>
+
+      <ul class="wia_graph__legend__items">
+        <li *ngFor="let item of legendData?.items" [style.background]="legendData.groups[item].meta.color">
+          <span class="wia_graph__legend__help icon-help"></span>
+          {{legendData.groups[item].meta.label}}
+        </li>
+      </ul>
+
+      <div class="wia_graph__legend__labels">
+        <strong>Totaal</strong>
+        <span>bruto per jaar</span>
+        <span>bruto per maand</span>
+      </div>
+
+    </div>
+    <div class="clearfix wia_graph">
+
+      <div  class="wia_graph__column">
+        <div class="wia_graph__top_label">
+          1e en 2e jaar <span class="wia_graph__top_label_help icon-help"></span>
+        </div>
+
+        <div class="wia_graph__chart">
+          <wia-calculator-graph class="wia-calculator-graph" [data]='graphData[0]' *ngIf="graphData[0]"></wia-calculator-graph>
+        </div>
+
+        <div class="wia_graph__bottom_label">
+          <strong>€47.540</strong>
+          <span>€3962</span>
+        </div>
+
+      </div>
+
+      <div  class="wia_graph__column">
+        <div class="wia_graph__top_label">
+          vanaf 3e jaar <span class="wia_graph__top_label_help icon-help"></span>
+        </div>
+
+        <div class="wia_graph__chart">
+          <wia-calculator-graph class="wia-calculator-graph" [data]='graphData[1]' *ngIf="graphData[1]"></wia-calculator-graph>
+        </div>
+
+        <div class="wia_graph__bottom_label">
+          <strong>€47.540</strong>
+          <span>€3962</span>
+        </div>
+
+      </div>
+
+      <div  class="wia_graph__column">
+
+        <div class="wia_graph__top_label">
+          tot pensioen leeftijd <span class="wia_graph__top_label_help icon-help"></span>
+        </div>
+
+        <div class="wia_graph__chart">
+          <wia-calculator-graph class="wia-calculator-graph" [data]='graphData[2]' *ngIf="graphData[2]"></wia-calculator-graph>
+        </div>
+
+        <div class="wia_graph__bottom_label">
+          <strong>€47.540</strong>
+          <span>€3962</span>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>

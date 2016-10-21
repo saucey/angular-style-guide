@@ -1,5 +1,7 @@
 /**
  * Set of mapping between product attributes values and its code values
+ *
+ * Used only for generating/decoding personalization code
  */
 export enum WGA_EXCED_Code {
   Off = 0,
