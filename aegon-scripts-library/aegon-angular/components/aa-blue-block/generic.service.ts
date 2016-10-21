@@ -4,26 +4,17 @@ import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class GenericService {
-	constructor (private http: Http) {}
-	/*
-	 * Retrieves the interest table from the API
-	 *
-	 * @param data {Object}:
-	 *  - months {number} = the length of the mortgage in months
-	 *	- nhg {boolean} = whether the mortgage is nhg
-	 *	- lowest {boolean} (optional) = which interest to get
-	 */
-	public getMarketInterestRate(): any {
-			// Gets the real data.
-			return this.getAPIdata();
-	}
-
+	constructor(private http: Http){
+		this.init();
+  	}
+	init() {}
 	/*
 	 * If corresponds, get the data from
 	 * the API.
 	 */
-	private getAPIdata(): Promise<any> {
-		return this.http.get('url')
+	private getApiData(url: string, data: Object): Promise<any> {
+		console.log("url: ", url);
+		return this.http.get(url)
 			.map((res: Response) => {
 				let response = res.json();
 
@@ -37,6 +28,7 @@ export class GenericService {
 	 * Process the data retrieved from back-end
 	 */
 	private processData(res: Object): number {
+		console.log("Response data: ", res);
 		return 0;
 
 	}
@@ -46,5 +38,29 @@ export class GenericService {
 	private handleError(error: Response) {
 		console.log('Server error', error);
 		return Observable.throw(error.json().error || 'Server error');
+	}
+
+	public dipFixed(): any {
+		// Gets the real data.
+		console.log("dipFixed service");
+		return this.getApiData('api/dipFixed', {});
+	}
+
+	public dipHighLow(data: Object): any {
+		// Gets the real data.
+		console.log("dipHighLow service");
+		//return this.getApiData(data);
+	}
+
+	public vpuVariable(data: Object): any {
+		// Gets the real data.
+		console.log("vpuVariable service");
+		//return this.getApiData(data);
+	}	
+
+	public vpuFixed(data: Object): any {
+		// Gets the real data.
+		console.log("vpuFixed service");
+		//return this.getApiData(data);
 	}
 }

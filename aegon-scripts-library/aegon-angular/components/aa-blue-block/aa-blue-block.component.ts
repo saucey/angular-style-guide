@@ -23,6 +23,9 @@ export class AABlueBlockComponent extends AABaseComponent implements OnInit {
   // Used for tealium.
   initiated: boolean = false;
   finalized: boolean = false;
+
+  //public serviceResArray: any = [1, 2, 3, 4, 5, 6];
+  //public serviceResIterator = this.serviceResArray[Symbol.iterator]();
   
   public  defaultOptions: any = defaultOptions;
 
@@ -38,6 +41,12 @@ export class AABlueBlockComponent extends AABaseComponent implements OnInit {
    */
   ngOnInit():void {
     super.ngOnInit();
+    /*
+      this.genericService[this.data.options.template]()
+        .then((data) => {
+          console.log("Data from component: ", data);
+        });
+    */
   }
 
   /*
@@ -59,5 +68,14 @@ export class AABlueBlockComponent extends AABaseComponent implements OnInit {
     }
     return true;
   }
+
+  /*
+   * Check if is a string
+   *
+   */
+  isString(obj: any): boolean {
+    return typeof obj === "string";
+  }    
+
   
 }
