@@ -42,10 +42,7 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
   @Input() options: any = {};
   @Input() data: any = {};
 
-  public pension: {
-    pensionAmount?: number,
-    birthDate?: string
-  } = {};
+  public pension: any = clientStorage.session.getItem("pensionInfo") || {};
 
   public defaultOptions: any = defaultOptions;
   public amountTooSmall: boolean;
@@ -59,11 +56,11 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
   public dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
 
   public step = {
-    1: true,
-    2: true,
-    3: true,
-    4: true,
-    5: true
+    1: false,
+    2: this.pension['pensionLocation'] !== undefined ? false : true,
+    3: this.pension['havePartner'] !== undefined ? false : true,
+    4: this.pension['birthDate'] !== undefined ? false : true,
+    5: this.pension['startingDate'] !== undefined ? false : true,
   };
 
   public startingDate: string = '';
@@ -120,6 +117,9 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
         label = '1 ' + monthLabels[month - 1] + ' ' + year;
       this.startingDateChoices.push({value: value, label: label});
     }
+
+    console.log(this.pension, 'this is pension');
+
   }
 
   changeStartingDate(value: string): void {
@@ -151,6 +151,14 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
   }
 
   btnValidationForUserPartner(): boolean {
+
+    console.log(this.pension['havePartner'], 'has value on page load');
+    console.log(this.hasPartner, 'has partner');
+    console.log(this.initChangeHasPartnerNo, 'init change has partner no');
+    console.log(this.initChangeNoPolicy, 'init change no policy');
+    console.log(this.partnerDob, 'partner DOB');
+
+    if(this.pension['havePartner'] !== undefined ) return false;
 
     if(this.hasPartner !== 'show' && this.initChangeHasPartnerNo == true) return false;
 
@@ -222,9 +230,11 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
 
   }
 
-  submitForm(obj): void {
+  submitForm(data): void {
     //this is were we need to set session and api call
-    console.log(obj, 'the object of the value');
+    console.log(data, 'the object of the value');
+    clientStorage.session.setItem("pensionInfo", data);
+
 
   }
 
