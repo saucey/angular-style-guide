@@ -79,6 +79,8 @@ export class AABaseComponent implements OnInit {
     }
     // Merge options with default options
     if (this.options || this.defaultOptions) {
+      console.log(this.defaultOptions, 'this is the default options!!!')
+
       // First clone default options
       this.data.options = this.defaultOptions ? libUtil.clone(this.defaultOptions) : {};
       keys.map((key) => {

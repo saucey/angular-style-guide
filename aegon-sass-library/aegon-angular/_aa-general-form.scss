@@ -61,7 +61,7 @@
   color: $blue_gray;
 }
 
-.input.number {
+.inputs.number {
   input {
     width: 180px;
     background-color: white;
@@ -202,6 +202,9 @@ ul.number-form__list {
   background: #D9EBF7;
   border-radius: 6px;
   padding: 20px;
+  button {
+    font-weight: bold;
+  }
 }
 
 .general-form__radio__text {
@@ -242,6 +245,9 @@ ul.number-form__list {
           &:after{
             padding: 4px 15px 0;
           }
+        }
+        button {
+          font-weight: bold;
         }
     }
     &.form-text__column {

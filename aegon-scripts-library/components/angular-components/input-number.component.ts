@@ -51,7 +51,7 @@ export function parseNumber(value: any): number {
       <span class="prefix">{{prefix}}</span>
       <span class="suffix">{{suffix}}</span>
       <input #inputEl type="text" [attr.placeholder]="placeholder" [required]="required"
-             [ngModel]="model" (ngModelChange)="changeValue($event)"
+             (ngModel)="model" (ngModelChange)="changeValue($event)"
              (focus)="focus.emit()" (blur)="formatAndBlur()" (keydown.enter)="enter.emit()">
     </span>
   `

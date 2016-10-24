@@ -22,6 +22,7 @@ import {template} from "./template";
   template: template,
   providers: []
 })
+
 export class AAQQAovComponent extends AABaseComponent implements OnInit {
   @Input() options: any = {};
   @Input() data: any = {};
@@ -71,6 +72,7 @@ export class AAQQAovComponent extends AABaseComponent implements OnInit {
   ) {
     super(elementRef);
   }
+
 
   ngOnInit() {
     super.ngOnInit();
