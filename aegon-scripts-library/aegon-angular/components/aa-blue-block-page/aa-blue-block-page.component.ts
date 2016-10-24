@@ -22,10 +22,10 @@ export class AABlueBlockPageComponent extends AABaseComponent implements OnInit 
   public defaultOptions: any = defaultOptions;
   public pensionInfo: any = this.getPensionInfo();
   
-  public pageIsHidden: boolean;
+  public pageIsHidden: boolean = true;
   public hasBottomContent: boolean;
   public hasLink: boolean;
-  public startPage: string = 'http://www.aegon.nl';
+  public startPage: string = 'http://localhost:3000/template-pension-form.html';
 
   constructor(private thisElement: ElementRef) {
     super(thisElement);
@@ -33,49 +33,49 @@ export class AABlueBlockPageComponent extends AABaseComponent implements OnInit 
 
   ngOnInit() {
     super.ngOnInit();
-    if(!this.isPensionInfoComplete()) this.redirectToStartPage();
-    this.setPageStructure(this.options.hidden);  
+
+    setTimeout(() => {
+      this.initialize();
+    }, 4000); 
   }
 
   // Reinitialize component, check pension info and set page structure again 
-  reinitialize() {
-    if(!this.isPensionInfoComplete()) this.redirectToStartPage();
-    this.setPageStructure();    
+  initialize() {
+    if(this.isPensionInfoAvailable(this.pensionInfo)) {             
+      this.setPageStructure();
+      this.pageIsHidden = false;      
+    
+    } else { this.redirectToStartPage(); }   
   }
 
   // Get the pension info from session storage
-  getPensionInfo() {
+  getPensionInfo(): any {
     return clientStorage.session.getItem('pensionInfo') || {};
   }
 
-  // Check if the pension info is complete and types are right
-  isPensionInfoComplete() {
-    if(Object.keys(this.pensionInfo).length === 0 && this.pensionInfo.constructor === Object) return false;
-    if(typeof(this.pensionInfo.pensionAmount) !== 'number') return false;
-    if(typeof(this.pensionInfo.pensionLocation) !== 'number') return false;
-    if(typeof(this.pensionInfo.hasPartner) !== 'boolean') return false;
-    if(typeof(this.pensionInfo.insurablePartner) !== 'boolean') return false;
-    if(typeof(this.pensionInfo.birthDate) !== 'string') return false;
-    if(typeof(this.pensionInfo.birthDateOfPartner) !== 'string') return false;
-    if(typeof(this.pensionInfo.startingDate) !== 'string') return false;  
+  // Check if the pension info is available
+  isPensionInfoAvailable(pensionInfo: any) {
+    if(Object.keys(pensionInfo).length === 0 && pensionInfo.constructor === Object) return false; 
     return true;
-  }
+  }  
 
-  // Redirect to another page
+  // Redirect to start page (if it is not already there)
   redirectToStartPage() {
-    console.log('Redirect to start page');
-    // window.location.href = this.startPage;
+    if(this.startPage !== window.location.href) window.location.href = this.startPage;       
   }
 
   // Set the page structure. Used by ngClass and ngIf in view 
-  setPageStructure(hidePage: boolean = false) {        
-    hidePage ? this.pageIsHidden = true : this.pageIsHidden = false;
-    this.isPensionLocationAegon() ? this.hasBottomContent = true : this.hasBottomContent = false
+  setPageStructure() {        
+    
+    // Link    
     this.options['link.text'] && this.options['link.url'] ? this.hasLink = true: this.hasLink = false;
+
+    // Bottom content
+    this.isPensionLocationAegon(this.pensionInfo.pensionLocation) ? this.hasBottomContent = true : this.hasBottomContent = false
   }
 
   // Check if the pension location is from Aegon or other insurance
-  isPensionLocationAegon() {
-    return (this.pensionInfo.pensionLocation === 0 || this.pensionInfo.pensionLocation === 2);
+  isPensionLocationAegon(pensionLocation: number) {    
+    return (pensionLocation == 0 || pensionLocation == 2);
   }
 }
