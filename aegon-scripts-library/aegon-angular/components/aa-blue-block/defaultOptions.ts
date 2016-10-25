@@ -71,5 +71,7 @@ export const defaultOptions = {
       "boxContent" : [{"label" : "Levenslang", "reference" : "lifelongPartner"}]
     } 
   ],
-  "template" : "dipHighLow"
+  "template" : "dipHighLow",
+  "callServiceOnInit" : true,
+  "serviceUrl" : "api/dipHighLow"
 };
