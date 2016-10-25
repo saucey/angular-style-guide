@@ -103,6 +103,7 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
 
   ngOnInit() {
     super.ngOnInit();
+
     let date: Date = new Date(),
       year: number = date.getFullYear(),
       month: number = date.getMonth() + 1;
@@ -117,8 +118,6 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
         label = '1 ' + monthLabels[month - 1] + ' ' + year;
       this.startingDateChoices.push({value: value, label: label});
     }
-
-    console.log(this.pension, 'this is pension');
 
   }
 
@@ -152,21 +151,19 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
 
   btnValidationForUserPartner(): boolean {
 
-    if(this.pension['havePartner'] !== undefined ) return false;
+    if(this.isAgeValid[1] == false) return false;
 
-    if(this.hasPartner !== 'show' && this.initChangeHasPartnerNo == true) return false;
+    if(this.initChangeNoPolicy == true) return false;
 
-    if(this.initChangeNoPolicy && this.partnerDob == 'hidden') return false;
+    if(this.hasPartner == 'show') return true;
 
-    if(!this.isAgeValid[1] && this.isAgeValid[1] !== undefined) return false;
+    if(this.hasPartner == 'hidden' && this.initChangeHasPartnerNo == true) return false;
 
+    //hidden the button validation
     return true;
   }
 
   btnValidationForUser(): boolean {
-
-    console.log(this.pension['birthDate'], 'session val od DOB');
-    console.log(this.isAgeValid[2], 'is the age valid');
 
     if(this.pension['birthDate'] !== '' && this.isAgeValid[2] == false || this.pension['birthDate'] !== '' && this.isAgeValid[2] == undefined) return false;
 
@@ -233,9 +230,9 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
 
   submitForm(data): void {
     //this is were we need to set session and api call
-    console.log(data, 'the object of the value');
     clientStorage.session.setItem("pensionInfo", data);
 
+    console.log(data, 'the data!!!');
 
   }
 

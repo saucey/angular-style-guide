@@ -102,8 +102,12 @@
       <li class='number-form__list__section'>
         <span class="number-form__list__numberCircle">3</span>
         <span class="general-form__box__sub__header">{{data.options.block3.title}}</span>
+
+
         <div [@visibility]="editVisibility(3)">
+
           <div class="form-section__input__results">
+
             <span class="block">
               <span *ngIf='pension["havePartner"] == "true" ' class="block">
                 Ja, ik heb een partner
@@ -112,7 +116,8 @@
                 Nee, ik heb geen partner
               </span>
             </span>
-            <span *ngIf='hasPartner !== "hidden" 'class="block">
+
+            <span *ngIf='hasPartner !== "hidden" || pension["havePartner"] == "true"' class="block">
               <span *ngIf='pension["insurablePartner"] == "true"'>
                 Ja, ik wil een partnerpensioen verzekeren
               </span>
@@ -120,10 +125,18 @@
                 Nee, ik wil geen partnerpensioen verzekeren
               </span>
             </span>
+
             <span class="block" *ngIf='hasPartner !== "hidden" && partnersDobReadable[1] !== "" && initChangeNoPolicy == false'>
                Geboortedatum partner {{partnersDobReadable[1]}}
             </span>
+
+            <span *ngIf='pension["birthDateOfPartner"] !== "" && initChangeNoPolicy !== false'>
+              <span>Geboortedatum partner {{pension['birthDateOfPartner']| dateToReadableString}} </span>
+            </span>
+
+            <!--<h1>{{pension['birthDateOfPartner']}}</h1>-->
             <span class="edit" (click)="editSection(3)"> > Aanpassen</span>
+
           </div>
         </div>
 
