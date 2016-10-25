@@ -8,18 +8,21 @@ export const defaultOptions = {
   },
   "dipFixed" : [{
       "boxTitle" : "Ouderdomspensioen",
-      "boxContent" : ["Levenslang"]
+      "boxContent" : [{"label" : "Levenslang", "reference" : "lifelongMine"}]
     }, {
       "boxTitle" : "Partnerpensioen",
-      "boxContent" : ["Levenslang"]
+      "boxContent" : [{"label" : "Levenslang", "reference" : "lifelongPartner"}]
     } 
   ],
   "dipHighLow" : [{
       "boxTitle" : "Ouderdomspensioen",
-      "boxContent" : ["Eerste 5 jaar", "Na 5 jaar"]
+      "boxContent" : [
+        {"label" : "Eerste 5 jaar", "reference" : "first5YearsMine"},
+        {"label" : "Na 5 jaar", "reference" : "after5YearsMine"}
+      ]
     }, {
       "boxTitle" : "Partnerpensioen",
-      "boxContent" : ["Levenslang"]
+      "boxContent" : [{"label" : "Levenslang", "reference" : "lifelongPartner"}]
     } 
   ],
   "vpuVariable" : [{
@@ -28,7 +31,11 @@ export const defaultOptions = {
         "Eerste jaar",
         { 
           "subBoxTitle" : "Na 10 jaar",
-          "subBoxContent" : ["Optimistisch", "Neutraal", "Pessimistisch"] 
+          "subBoxContent" : [
+            {"label" : "Optimistisch", "reference" : "optimisticMine"},
+            {"label" : "Neutraal", "reference" : "neutralMine"},
+            {"label" : "Pessimistisch", "reference" : "pessimisticMine"}
+           ] 
         }
       ]
     }, {
@@ -37,7 +44,11 @@ export const defaultOptions = {
         "Eerste 5 jaar",
         { 
           "subBoxTitle" : "Na 10 jaar",
-          "subBoxContent" : ["Optimistisch", "Neutraal", "Pessimistisch"] 
+          "subBoxContent" : [
+            {"label" : "Optimistisch", "reference" : "optimisticPartner"},
+            {"label" : "Neutraal", "reference" : "neutralPartner"},
+            {"label" : "Pessimistisch", "reference" : "pessimisticPartner"}
+          ] 
         }
       ]
     } 
@@ -48,13 +59,17 @@ export const defaultOptions = {
         "Eerste jaar",
         { 
           "subBoxTitle" : "Na 10 jaar",
-          "subBoxContent" : ["Optimistisch", "Neutraal", "Pessimistisch"] 
+          "subBoxContent" : [
+            {"label" : "Optimistisch", "reference" : "optimisticMine"},
+            {"label" : "Neutraal", "reference" : "neutralMine"},
+            {"label" : "Pessimistisch", "reference" : "pessimisticMine"}
+          ] 
         }
       ]
     }, {
       "boxTitle" : "Partnerpensioen",
-      "boxContent" : ["Levenslang"]
+      "boxContent" : [{"label" : "Levenslang", "reference" : "lifelongPartner"}]
     } 
   ],
-  "template" : "vpuVariable"
+  "template" : "dipHighLow"
 };
