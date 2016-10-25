@@ -41,7 +41,7 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
 
   @Input() options: any = {};
   @Input() data: any = {};
-  @Output() submit = new EventEmitter<boolean>();
+  @Input() bbpage;
 
   public pension: any = clientStorage.session.getItem("pensionInfo") || {};
 
@@ -235,7 +235,7 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
     //this is were we need to set session and api call
     console.log(data, 'the object of the value');
     clientStorage.session.setItem("pensionInfo", data);
-    this.submit.emit(true);
+    this.bbpage.initialize();    
   }
 
   testMethod(val: number): number {

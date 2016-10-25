@@ -18,10 +18,9 @@ const template = require('./template.html');
 export class AABlueBlockPageComponent extends AABaseComponent implements OnInit {
   @Input() options: any = {};
   @Input() data: any = {};
-  @Input() showme: boolean = false;
 
   public defaultOptions: any = defaultOptions;
-  public pensionInfo: any = this.getPensionInfo();
+  public pensionInfo: any = {};
   
   public pageIsHidden: boolean = true;
   public hasBottomContent: boolean;
@@ -39,7 +38,9 @@ export class AABlueBlockPageComponent extends AABaseComponent implements OnInit 
 
   // Reinitialize component, check pension info and set page structure again 
   public initialize() {
-    if(this.isPensionInfoAvailable(this.pensionInfo)) {             
+    this.pensionInfo = this.getPensionInfo();
+    
+    if(this.isPensionInfoAvailable(this.pensionInfo)) {    
       this.setPageStructure();
       this.pageIsHidden = false;          
     
