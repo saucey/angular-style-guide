@@ -12,12 +12,13 @@ const template = require('./template.html');
 
 @Component({
   selector: 'aa-blue-block-page',
-  template: template,
+  template: template
 })
 
 export class AABlueBlockPageComponent extends AABaseComponent implements OnInit {
   @Input() options: any = {};
   @Input() data: any = {};
+  @Input() showme: boolean = false;
 
   public defaultOptions: any = defaultOptions;
   public pensionInfo: any = this.getPensionInfo();
@@ -33,17 +34,14 @@ export class AABlueBlockPageComponent extends AABaseComponent implements OnInit 
 
   ngOnInit() {
     super.ngOnInit();
-
-    setTimeout(() => {
-      this.initialize();
-    }, 4000); 
+    this.initialize();
   }
 
   // Reinitialize component, check pension info and set page structure again 
-  initialize() {
+  public initialize() {
     if(this.isPensionInfoAvailable(this.pensionInfo)) {             
       this.setPageStructure();
-      this.pageIsHidden = false;      
+      this.pageIsHidden = false;          
     
     } else { this.redirectToStartPage(); }   
   }
