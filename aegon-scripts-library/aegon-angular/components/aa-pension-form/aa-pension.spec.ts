@@ -6,6 +6,8 @@ import { AAPensionFormComponent } from './aa-pension-form.component';
 import { AAMoneyPipe } from '../../pipes/money.pipe';
 import { DateToReadableString } from '../../pipes/dateToReadableString.pipe';
 
+require('../../../modules/clientStorage.js');
+
 describe('AA Pension Form Component', () => {
   let comp: AAPensionFormComponent;
   let fixture : ComponentFixture<AAPensionFormComponent>;
