@@ -29,20 +29,16 @@ export class WiaContentComponent extends AABaseComponent implements OnInit {
   constructor(private elementRef: ElementRef, topicService: TopicService, wiaPageService: WiaPageService) {
     super(elementRef);
     this.topicService = topicService;
-
-    // @TODO need to see if we can move this subscription at the service level only
-    wiaPageService.externalInput$.subscribe(value => {
-      this.topicsCollection = this
-        .topicService
-        .getTopics();
-    });
   }
 
   ngOnInit(): void {
     super.ngOnInit();
 
-    this.topicsCollection = this
+    this
       .topicService
-      .getTopics();
+      .getTopics()
+      .subscribe(data => {
+        this.topicsCollection = data;
+      });
   }
 }

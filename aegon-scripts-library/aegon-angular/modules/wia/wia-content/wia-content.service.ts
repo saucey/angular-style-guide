@@ -4,36 +4,44 @@
  * @description Manipulate the Wia static content
  * @author Florian Popa <florian@webgenerals.com>
  */
+
 import { Injectable } from "@angular/core";
-import { Http } from "@angular/http";
+import { Http, Response } from "@angular/http";
+import { WiaTopicRow } from "./wia-content-entities/wia-topic-row.entity";
+import { Observable, Subject } from "rxjs";
 
 const CONTENT_DATA = require('./data/wia-content-static-data.json');
 
 @Injectable()
 export class WiaContentService {
 
+  private wiaContentUrl = '/api/income123/content';
+
   constructor(private http: Http) {
   }
 
   /**
+   * Retrieves the Wia content
    *
-   * @TODO : Array<WiaTopicRow>
+   * @returns {Observable<R>}
    */
-  getWiaContent() {
-
-    return CONTENT_DATA;
-
-    // return this
-    //  .http
-    //  .get('http://localhost:80');
-
-    /*http.get('./data/product-data.json')
+  public getWiaContent(): Subject<WiaTopicRow[]> {
+    return this
+      .http
+      .get(this.wiaContentUrl)
       .map(res => res.json())
-      .subscribe(data => this.data = data,
-        err => console.log(err),
-        () => console.log('Completed'));*/
-
+      .catch(this.handleError);
   }
 
+  private handleError(error: Response | any) {
+    let errMsg: string;
+    if (error instanceof Response) {
+      const body = error.json() || '';
+      const err = body.error || JSON.stringify(body);
+      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+    } else {
+      errMsg = error.message ? error.message : error.toString();
+    }
+    return Observable.throw(errMsg);
+  }
 }
-

@@ -14,18 +14,22 @@ import { TopicRowEntity } from "./topic-entities/topic-row.entity";
 @Injectable()
 export class TopicBuilder {
 
-  private productIncomeData: WIAInputEntity;
+  private wiaInputData: WIAInputEntity;
   private wiaTopicRowCollection: WiaTopicRow[];
 
-  withProductIncomeData(productIncomeData: WIAInputEntity): void {
-    this.productIncomeData = productIncomeData;
+  /**
+   * @param {WIAInputEntity} wiaInputData
+   */
+  public withWiaInputData(wiaInputData: WIAInputEntity): void {
+    this.wiaInputData = wiaInputData;
   }
 
-  withWiaContent(wiaContent): void {
+  // @TODO what type is wiaContent
+  public withWiaContent(wiaContent): void {
     this.wiaTopicRowCollection = wiaContent;
   }
 
-  build(): Array<TopicRowEntity> {
+  public build(): Array<TopicRowEntity> {
 
     let topicRowCollection: Array<TopicRowEntity> = [];
 
@@ -71,7 +75,7 @@ export class TopicBuilder {
     } else {
       let plainDescription = descriptionText;
       for (let filter of filterList) {
-        for (let product of this.productIncomeData.products) {
+        for (let product of this.wiaInputData.products) {
           if (product.id == filter) {
             for ( let attribute of product.attrs ) {
               let placeholder = '%' + attribute.id + '%';
@@ -94,7 +98,7 @@ export class TopicBuilder {
       return false;
     } else if (typeof descriptionFilter === 'object') {
       for (let productId of descriptionFilter) {
-        for (let product of this.productIncomeData.products) {
+        for (let product of this.wiaInputData.products) {
           if (product.id == productId) {  // @TODO enforce string comparison by strong typing
             return false;
           }

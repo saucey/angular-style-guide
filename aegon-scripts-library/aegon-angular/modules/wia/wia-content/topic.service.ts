@@ -12,46 +12,52 @@ import { WIAInputEntity } from "../wia-page/models/wia-input.entity";
 import { TopicBuilder } from "./topic-builder";
 import { TopicRowEntity } from "./topic-entities/topic-row.entity";
 import { clone } from "../../../lib/util";
+import { WiaTopicRow } from "./wia-content-entities/wia-topic-row.entity";
+import { Observable } from "rxjs";
 
 @Injectable()
 export class TopicService {
 
   private wiaContentService: WiaContentService;
-  private productIncomeData: WIAInputEntity;
+  private wiaInputData: WIAInputEntity;
   private topicBuilder: TopicBuilder;
+  private wiaContentData: Array<WiaTopicRow>;
 
   constructor(wiaContentService: WiaContentService, wiaPageService: WiaPageService, topicBuilder: TopicBuilder) {
     this.wiaContentService = wiaContentService;
     this.topicBuilder = topicBuilder;
 
     wiaPageService.externalInput$.subscribe(value => {
-      this.productIncomeData = clone(value);
+      this.wiaInputData = clone(value);
     });
   }
 
 
   /**
+   * Retrieves and adapts the topic related data
    *
    * @returns {Array<TopicRowEntity>}
    */
-  getTopics(): TopicRowEntity[] {
-    this
-      .topicBuilder
-      .withProductIncomeData(this.productIncomeData);
 
-    let wiaContent = this
+  // @TODO
+  getTopics() {
+
+    return this
       .wiaContentService
-      .getWiaContent();
+      .getWiaContent()
+      .map(data => {
 
-    this
-      .topicBuilder
-      .withWiaContent(wiaContent);
+        this
+          .topicBuilder
+          .withWiaContent(data);
 
-    let topicsCollection = this
-      .topicBuilder
-      .build();
+        this
+          .topicBuilder
+          .withWiaInputData(this.wiaInputData);
 
-    return topicsCollection;
+        return this
+          .topicBuilder
+          .build();
+      });
   }
-
 }
