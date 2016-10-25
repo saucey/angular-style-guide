@@ -152,12 +152,6 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
 
   btnValidationForUserPartner(): boolean {
 
-    console.log(this.pension['havePartner'], 'has value on page load');
-    console.log(this.hasPartner, 'has partner');
-    console.log(this.initChangeHasPartnerNo, 'init change has partner no');
-    console.log(this.initChangeNoPolicy, 'init change no policy');
-    console.log(this.partnerDob, 'partner DOB');
-
     if(this.pension['havePartner'] !== undefined ) return false;
 
     if(this.hasPartner !== 'show' && this.initChangeHasPartnerNo == true) return false;
@@ -171,7 +165,14 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
 
   btnValidationForUser(): boolean {
 
+    console.log(this.pension['birthDate'], 'session val od DOB');
+    console.log(this.isAgeValid[2], 'is the age valid');
+
+    if(this.pension['birthDate'] !== '' && this.isAgeValid[2] == false || this.pension['birthDate'] !== '' && this.isAgeValid[2] == undefined) return false;
+
     if(this.isAgeValid[2] == undefined || this.isAgeValid[2] == true ) return true;
+
+
     return false;
 
   }
