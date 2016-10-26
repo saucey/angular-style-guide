@@ -42,10 +42,18 @@ export class AABlueBlockPageComponent extends AABaseComponent implements OnInit 
     
     if(this.isPensionInfoAvailable(this.pensionInfo)) {    
       this.setPageStructure();
-      this.pageIsHidden = false;          
+      this.showPage();        
     
     } else { this.redirectToStartPage(); }   
   }
+
+  hidePage() {
+    this.pageIsHidden = true;
+  }
+
+  showPage() {
+    this.pageIsHidden = false;
+  }  
 
   // Get the pension info from session storage
   getPensionInfo(): any {
