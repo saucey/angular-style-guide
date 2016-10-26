@@ -1,0 +1,18 @@
+[
+  {
+    "type": "INCOME",
+    "label": "Loondoorbetaling Werkgever"
+  },
+  {
+    "type": "GOV_01",
+    "label": "Eigen inkomen"
+  },
+  {
+    "type": "GOV_02",
+    "label": "Wettelijke WIA-uitkering"
+  },
+  {
+    "type": "WGA_EXCED",
+    "label": "Aegon WGA-Excedentverzekering"
+  }
+]

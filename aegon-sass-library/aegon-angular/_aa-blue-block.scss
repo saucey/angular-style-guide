@@ -1,0 +1,54 @@
+.aa-bb--wrapper {
+	background-color: $blue;
+	min-height: 200px;	
+	width: 100%;
+	margin: 10px 0;
+	padding: 10px 15px;
+	position: relative;
+	@include rem('border-radius', 3);
+	color: $white;
+	padding-bottom: 50px;
+	&.padding-bottom-fix {
+		padding-bottom: 105px;
+	}
+
+	[class*="span"] {
+		margin-left: 0 !important;
+	}
+
+	.aa-bb--header {
+	}
+	.aa-bb--content {
+		overflow-y: auto;
+		overflow-x: hidden;
+		border-top: 1px solid $white;
+		padding: 15px 0;
+		&:first-child {
+			border-top: none;
+			padding-top: 0;
+		}
+		.aa-bb--content-title {
+			color: $white;
+		}
+		.aa-bb--content-label {
+			font-size: 16px;
+			&.lighter-label {
+				font-weight: lighter;
+			}
+		}
+		.aa-bb--content-value {
+			font-size: 22px;
+		}
+	}
+	.aa-bb--footer {
+		position: absolute;
+    		bottom: 15px;
+		.button {
+			font-weight: bold;
+			padding-right: 70px;
+		}
+		.aa-bb--caption {
+			margin-left: 0;
+		}
+	}
+}

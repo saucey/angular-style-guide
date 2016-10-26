@@ -2,7 +2,7 @@
  * AOV quick quote
  */
 import {
-  Component, Input, OnInit, ElementRef, trigger, state, animate, transition, style, SimpleChanges
+  Component, Input, EventEmitter, Output, OnInit, ElementRef, trigger, state, animate, transition, style, SimpleChanges
 } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {calculateAge} from "../../lib/date";
@@ -41,6 +41,7 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
 
   @Input() options: any = {};
   @Input() data: any = {};
+  @Input() bbpage;
 
   public pension: any = clientStorage.session.getItem("pensionInfo") || {};
 
@@ -235,6 +236,7 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
 
     console.log(data, 'the data!!!');
 
+    this.bbpage.initialize();
   }
 
   testMethod(val: number): number {

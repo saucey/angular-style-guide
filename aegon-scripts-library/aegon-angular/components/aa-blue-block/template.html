@@ -1,0 +1,24 @@
+<div class="aa-bb--wrapper" [class.padding-bottom-fix]="showButton()" attr.data-bb-template="{{data.options.template}}">
+  <div class="aa-bb--content container_12 aa-bb--inner-block-{{i}}" *ngFor="let block of data.options[data.options.template]; let i = index;">
+    <h3 class="aa-bb--content-title span12"> {{ block.boxTitle }} </h3>
+    <div class="aa-bb--content-row" *ngFor="let blockValue of block.boxContent">
+      <div class="aa-bb--content-inner-row" *ngIf="isString(blockValue.label)">
+        <label class="span6 aa-bb--content-label">{{blockValue.label}}</label>
+        <span class="span6 aa-bb--content-value aa-bb--value-reference-{{blockValue.reference}}"></span>
+      </div>
+      <div class="aa-bb--content-inner-row" *ngIf="!isString(blockValue.label)">
+        <label class="span12 aa-bb--content-label">{{blockValue.subBoxTitle}}</label>
+        <div class="aa-bb--content-inner-row" *ngFor="let subBlockValue of blockValue.subBoxContent">
+          <label class="span6 aa-bb--content-label lighter-label">{{subBlockValue.label}}</label>
+          <span class="span6 aa-bb--content-value aa-bb--value-reference-{{subBlockValue.reference}}"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="aa-bb--footer container_12">
+    <a *ngIf="showButton()" class="button orange-gradient icon-right arrow">
+      {{data.options.button.label}}
+    </a>
+    <span class="aa-bb--caption span12">{{data.options.caption}}</span>
+  </div>
+</div>

@@ -436,6 +436,14 @@ a.menu-5662:before {
   content: $font_icons_whatsapp;
 }
 
+.icon-suitcase:before {
+  content: $font_icons_suitcase;
+}
+
+.icon-hammer:before {
+  content: $font_icons_hammer;
+}
+
 
 // Do not apply icons to old aegon menu.
 // TODO: Refactor menu's in Drupal module 'aegon_menu' to adapt to ATDL.
