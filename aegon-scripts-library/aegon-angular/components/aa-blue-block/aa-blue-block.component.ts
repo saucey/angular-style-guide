@@ -41,12 +41,9 @@ export class AABlueBlockComponent extends AABaseComponent implements OnInit {
    */
   ngOnInit():void {
     super.ngOnInit();
-    /*
-      this.genericService[this.data.options.template]()
-        .then((data) => {
-          console.log("Data from component: ", data);
-        });
-    */
+    if(this.data.options.callServiceOnInit) {
+      this.callService();   
+    }
   }
 
   /*
@@ -77,5 +74,42 @@ export class AABlueBlockComponent extends AABaseComponent implements OnInit {
     return typeof obj === "string";
   }    
 
+
+  /*
+   * Check if is a string
+   *
+   */
+  callService(): any {
+    this.genericService[this.data.options.template](this.data.options.serviceUrl)
+      .then((data) => {
+        console.log("Data from component: ", data);
+        this.updateValues(data);
+      });
+  }
+
+  /*
+   * Update DOM values
+   *
+   */
+  updateValues(data): any {
+    for(let key in data) {
+      document.querySelector( "div[data-bb-template=" +  this.data.options.template + "] .aa-bb--value-reference-"+key).textContent = data[key];
+    }
+  }
+
+  /*
+   * Shows loader during calls
+   *
+   */
+  showLoader() {
+    
+  }
   
+  /*
+   * Hides loader
+   *
+   */
+  hideLoader() {
+    
+  }
 }

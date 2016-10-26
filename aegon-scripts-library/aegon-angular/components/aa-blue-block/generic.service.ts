@@ -4,7 +4,9 @@ import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class GenericService {
-	constructor(private http: Http){
+	constructor(
+		private http: Http
+	) {
 		this.init();
   	}
 	init() {}
@@ -13,24 +15,15 @@ export class GenericService {
 	 * the API.
 	 */
 	private getApiData(url: string, data: Object): Promise<any> {
-		console.log("url: ", url);
+		console.log("%s calling...", url);
 		return this.http.get(url)
 			.map((res: Response) => {
 				let response = res.json();
-
-				return this.processData(response);
+				console.log("%s response: ", url, response);
+				return response;
 			})
 			.catch(this.handleError)
 			.toPromise();
-	}
-
-	/*
-	 * Process the data retrieved from back-end
-	 */
-	private processData(res: Object): number {
-		console.log("Response data: ", res);
-		return 0;
-
 	}
 	/*
 	 * Error handling function
@@ -40,27 +33,38 @@ export class GenericService {
 		return Observable.throw(error.json().error || 'Server error');
 	}
 
-	public dipFixed(): any {
+	public dipFixed(serviceUrl: string): Promise<any> {
 		// Gets the real data.
-		console.log("dipFixed service");
-		return this.getApiData('api/dipFixed', {});
+		let request = this.getApiData(serviceUrl, {});
+		
+		return request.then((response) => {
+		    return {
+		    	"lifelongMine" : 1000,
+		    	"lifelongPartner" : 500
+		    };
+		});
 	}
 
-	public dipHighLow(data: Object): any {
+	public dipHighLow(serviceUrl: string): Promise<any> {
 		// Gets the real data.
-		console.log("dipHighLow service");
-		//return this.getApiData(data);
+		let request = this.getApiData(serviceUrl, {});
+		
+		return request.then((response) => {
+		    return {
+		    	"first5YearsMine" : 10000,
+		    	"after5YearsMine" : 2500,
+		    	"lifelongPartner" : 500
+		    };
+		});
 	}
 
-	public vpuVariable(data: Object): any {
+	public vpuVariable(serviceUrl: string): Promise<any> {
 		// Gets the real data.
-		console.log("vpuVariable service");
-		//return this.getApiData(data);
+		return this.getApiData(serviceUrl, {});
 	}	
 
-	public vpuFixed(data: Object): any {
+	public vpuFixed(serviceUrl: string): Promise<any> {
 		// Gets the real data.
-		console.log("vpuFixed service");
-		//return this.getApiData(data);
+		return this.getApiData(serviceUrl, {});
 	}
 }
