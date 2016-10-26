@@ -4,7 +4,8 @@ export const defaultOptions = {
   "caption" : "Bedragen zijn bruto per maand",
   "button" : {
     "label" : "Vraag offerte aan",
-    "show" : true
+    "show" : false,
+    "url" : "/"
   },
   "dipFixed" : [{
       "boxTitle" : "Ouderdomspensioen",
@@ -73,5 +74,6 @@ export const defaultOptions = {
   ],
   "template" : "dipFixed",
   "callServiceOnInit" : true,
-  "serviceUrl" : "/services/US_RestGatewayWeb/rest/requestResponse/BS_PENSIOENOVEREENKOMST_ROA/calculate"
+  "serviceUrl" : "/services/US_RestGatewayWeb/rest/requestResponse/BS_PENSIOENOVEREENKOMST_ROA/calculate",
+  "serviceCredentials": "FILL_ME_IN_AA_DATA",
 };
