@@ -36,26 +36,6 @@ export class WiaPagePersonalizationService {
 
   private to36 = number => (+number).toString(35); // leave 'z' free to replace 'o's later
 
-  public getUrlCode(): string {
-    return window.location.hash.substr(1);
-  }
-
-  public setUrlCode(code: string): void {
-    window.location.hash = code;
-  }
-
-  public getUrlConfiguration(): WIAInputEntity {
-
-    const code = this.getUrlCode();
-    return code && code.length === 5 ? this.codeToInput(code) : null;
-  }
-
-  public setUrlConfiguration(configuration: WIAInputEntity): void {
-
-    const code = this.inputToCode(configuration);
-    this.setUrlCode(code);
-  }
-
   public getIncomeClass(income: number): number {
 
     // get first index that is big enough for given income

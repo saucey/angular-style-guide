@@ -1,23 +1,11 @@
-import { Component, OnInit } from "@angular/core";
-import { WiaPageService } from "./wia-page.service";
+import { Component } from "@angular/core";
 
 @Component({
   selector: 'aa-wia-page',
-  providers: [WiaPageService],
+  providers: [],
   template: '<ng-content></ng-content>'
 })
 
-/**
- * Collapsible content component
- */
-export class WiaPageComponent implements OnInit {
-
-  constructor(private wiaPageService: WiaPageService) {
-
-  }
-
-  ngOnInit(): void {
-
-  }
+export class WiaPageComponent {
 
 }

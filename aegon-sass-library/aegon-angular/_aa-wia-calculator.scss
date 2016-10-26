@@ -1,26 +1,26 @@
 @import "aa-wia-calculator--graph";
 
-$graphLabelHeight: 45px;
-$graphLabelBottomHeight: 70px;
-$graphLabelMargin: 5px;
+$wiaGraphLabelHeight: 45px;
+$wiaGraphLabelBottomHeight: 70px;
+$wiaGraphLabelMargin: 5px;
 
-$chartHeight: 380px;
-$chartHeightMobile: 270px;
-$breakpoint: 800px;
+$wiaChartHeight: 380px;
+$wiaChartHeightMobile: 270px;
+$wiaBreakpoint: 800px;
 
 .wia_graph__legend {
   width: 20%;
-  height: $chartHeight + $graphLabelBottomHeight + $graphLabelMargin;
+  height: $wiaChartHeight + $wiaGraphLabelBottomHeight + $wiaGraphLabelMargin;
   float: left;
   background: $white;
-  margin-top: $graphLabelHeight + 2*$graphLabelMargin;
+  margin-top: $wiaGraphLabelHeight + 2*$wiaGraphLabelMargin;
   position: relative;
   text-align: right;
 
-  @media (max-width: $breakpoint) {
+  @media (max-width: $wiaBreakpoint) {
     float: none;
     width: 100% !important;
-    height: $chartHeightMobile + $graphLabelBottomHeight + $graphLabelMargin;
+    height: $wiaChartHeightMobile + $wiaGraphLabelBottomHeight + $wiaGraphLabelMargin;
   }
 }
 
@@ -28,7 +28,7 @@ $breakpoint: 800px;
   width: 80%;
   float: left;
 
-  @media (max-width: $breakpoint) {
+  @media (max-width: $wiaBreakpoint) {
     float: none;
     width: 100% !important;
   }
@@ -110,10 +110,10 @@ $breakpoint: 800px;
 }
 
 .wia_graph__chart {
-  height: $chartHeight;
+  height: $wiaChartHeight;
 
-  @media (max-width: $breakpoint) {
-    height: $chartHeightMobile;
+  @media (max-width: $wiaBreakpoint) {
+    height: $wiaChartHeightMobile;
   }
 }
 
@@ -121,7 +121,7 @@ $breakpoint: 800px;
   float: left;
   padding: 0 0 0 6px;
 
-  @media (max-width: $breakpoint) {
+  @media (max-width: $wiaBreakpoint) {
     float: none;
     width: 100% !important;
     margin: 40px 0;
@@ -139,7 +139,7 @@ $breakpoint: 800px;
 
   > * {
     background: $white;
-    margin: $graphLabelMargin 0;
+    margin: $wiaGraphLabelMargin 0;
     padding: 50px 5px 5px;
   }
 }
@@ -149,7 +149,7 @@ $breakpoint: 800px;
   font-size: 0.9em;
   text-align: center;
   padding: 10px 0;
-  height: $graphLabelHeight;
+  height: $wiaGraphLabelHeight;
 }
 
 .wia_graph__bottom_label {
@@ -157,7 +157,7 @@ $breakpoint: 800px;
   text-align: center;
   padding: 20px;
   line-height: 1.2em;
-  height: $graphLabelBottomHeight;
+  height: $wiaGraphLabelBottomHeight;
   > * {
     display: block;
   }

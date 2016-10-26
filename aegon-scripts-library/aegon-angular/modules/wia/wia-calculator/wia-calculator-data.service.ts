@@ -62,6 +62,7 @@ export class CalculatorDataService {
       if (val) {
 
         res[index] = {
+          id: index,
           amount: val.amount,
           label: val.label,
           percentage: val.percentage,

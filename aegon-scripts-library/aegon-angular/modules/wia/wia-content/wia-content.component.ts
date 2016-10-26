@@ -9,13 +9,14 @@ import { AABaseComponent } from "../../../lib/classes/AABaseComponent";
 import { TopicService } from "./topic.service";
 import { WiaContentService } from "./wia-content.service";
 import { TopicBuilder } from "./topic-builder";
-import { WiaPageService } from "../wia-page/wia-page.service";
+import { WiaSubscriptionService } from "../wia-page/wia-page.subscription.service";
 
 @Component({
   selector: 'aa-wia-content',
   providers: [
     TopicService,
     TopicBuilder,
+    WiaSubscriptionService,
     WiaContentService
   ],
   template: `<aa-collapsible-topic [topicsCollection]="topicsCollection"></aa-collapsible-topic>`
@@ -26,7 +27,7 @@ export class WiaContentComponent extends AABaseComponent implements OnInit {
   public topicsCollection;
   private topicService: TopicService;
 
-  constructor(private elementRef: ElementRef, topicService: TopicService, wiaPageService: WiaPageService) {
+  constructor(private elementRef: ElementRef, topicService: TopicService) {
     super(elementRef);
     this.topicService = topicService;
   }

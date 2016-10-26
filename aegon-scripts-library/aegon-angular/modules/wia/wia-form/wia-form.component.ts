@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit } from "@angular/core";
 import { AABaseComponent } from "../../../lib/classes/AABaseComponent";
 import { WIAInputEntity } from "../wia-page/models/wia-input.entity";
-import { WiaPageService } from "../wia-page/wia-page.service";
+import { WiaSubscriptionService } from "../wia-page/wia-page.subscription.service";
 import { WiaPageProductsService } from "../wia-page/wia-page.products.service";
 import { WiaPagePersonalizationService } from "../wia-page/wia-page.personalization.service";
 import { ProductAttributeEntity } from "../wia-page/models/product-attribute.entity";
@@ -10,7 +10,7 @@ const template = require('./template.html');
 
 @Component({
   selector: 'aa-wia-form',
-  providers: [WiaPageService, WiaPageProductsService, WiaPagePersonalizationService],
+  providers: [WiaSubscriptionService, WiaPageProductsService, WiaPagePersonalizationService],
   template: template
 })
 
@@ -20,11 +20,13 @@ const template = require('./template.html');
 export class WiaFormComponent extends AABaseComponent implements OnInit {
 
   public products;
-  public income = null;
-  public modalVisible = false;
+  public income;
+  public submitted = false;
   public personalizationCode: string = '';
 
   public visiblePage: number = 1;
+
+  public step: number = 1;
 
   public options = {
     title: 'Uw persoonlijke situatie instellen'
@@ -33,11 +35,17 @@ export class WiaFormComponent extends AABaseComponent implements OnInit {
   constructor(private elementRef: ElementRef,
               private wiaPageProductsService: WiaPageProductsService,
               private wiaPagePersonalizationService: WiaPagePersonalizationService,
-              private wiaPageService: WiaPageService) {
+              private wiaSubscriptionService: WiaSubscriptionService) {
 
     super(elementRef);
 
     this.products = wiaPageProductsService.getProducts();
+
+
+    // Form filled or personalization code sent => form submitted
+    this.wiaSubscriptionService.subscribe(() => {
+      this.submitted = true;
+    });
   }
 
   ngOnInit(): void {
@@ -72,18 +80,14 @@ export class WiaFormComponent extends AABaseComponent implements OnInit {
 
     const payload = this.serializeInput();
 
-    this.modalVisible = false;
-
-    this.wiaPageService.externalInput$.next(payload);
+    this.wiaSubscriptionService.emit(payload);
   }
 
   onCodeSubmit() {
 
     const input: WIAInputEntity = this.wiaPagePersonalizationService.codeToInput(this.personalizationCode);
 
-    this.modalVisible = false;
-
-    this.wiaPageService.externalInput$.next(input);
+    this.wiaSubscriptionService.emit(input);
   }
 
   public trackById(index, el) {

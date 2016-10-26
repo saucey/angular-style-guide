@@ -1,16 +1,18 @@
 import { Component, Input, ElementRef, OnInit } from "@angular/core";
+
 import { AABaseComponent } from "../../../lib/classes/AABaseComponent";
+
 import { CalculatorDataService } from "./wia-calculator-data.service";
-import { WiaPageProductsService } from "../wia-page/wia-page.products.service";
-import { WiaPagePersonalizationService } from "../wia-page/wia-page.personalization.service";
 import { defaultOptions } from "./defaultOptions";
+import { WiaPagePersonalizationService } from "../wia-page/wia-page.personalization.service";
 import { WIAInputEntity } from "../wia-page/models/wia-input.entity";
-import { WiaPageService } from "../wia-page/wia-page.service";
+import { WiaSubscriptionService } from "../wia-page/wia-page.subscription.service";
+import { WiaUrlStateManager } from "../wia-page/wia-page.url-state.service";
 
 @Component({
   selector: 'aa-wia-calculator',
   template: require('./template.html'),
-  providers: [CalculatorDataService, WiaPageProductsService, WiaPagePersonalizationService]
+  providers: [CalculatorDataService, WiaPagePersonalizationService, WiaUrlStateManager, WiaSubscriptionService]
 })
 export class WiaCalculatorComponent extends AABaseComponent implements OnInit {
   @Input() options: any = {};
@@ -18,18 +20,14 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit {
 
   public defaultOptions: any = defaultOptions;
 
-  public submitted: boolean = true;
-  public initialAmount: number = 35000;
   public permanentDisability: boolean = false;
-  public mySwitch: boolean = false;
-
   public disability = {
     value: 50,
     help: 'TBD',
     label: 'Arbeidsongeschiktheidspercentage',
     options: {
       start: 50,
-      step: 10,
+      step: 1,
       range: {
         min: 0,
         max: 100
@@ -69,14 +67,13 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit {
       ]
     }
   };
-
   public usage = {
     value: 50,
     help: 'TBD',
     label: 'Benutting restverdiencapaciteit',
     options: {
       start: 50,
-      step: 10,
+      step: 1,
       range: {
         min: 0,
         max: 100
@@ -109,26 +106,20 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit {
     }
   };
 
-  public graphData : any[] = [];
+  public externalInput : WIAInputEntity;
 
+  public graphData : any[] = [];
   public legendData;
 
-  public productsData;
-
   constructor(thisElement: ElementRef,
-              private wiaPageProductsService: WiaPageProductsService,
               private wiaPagePersonalizationService: WiaPagePersonalizationService,
-              private wiaPageService: WiaPageService,
+              private wiaSubscriptionService: WiaSubscriptionService,
+              private wiaUrlStateManager: WiaUrlStateManager,
               private calculatorDataService: CalculatorDataService) {
 
     super(thisElement);
 
-
-    this.productsData = wiaPageProductsService.getProducts();
-
-    wiaPageService.externalInput$.subscribe(value => this.updateModel(value));
-
-    this.update();
+    wiaSubscriptionService.subscribe(value => this.updateModel(value));
   }
 
   ngOnInit(): void {
@@ -137,10 +128,13 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit {
 
   public updateModel(value: WIAInputEntity) {
 
-    if (value.income) {
-      this.initialAmount = value.income;
+    if (!value) {
+      return;
     }
 
+    this.externalInput = value;
+
+    //@TODO extend it instead of using ifs
     if (typeof value.disability !== 'undefined') {
       this.disability.value = value.disability;
     }
@@ -153,40 +147,16 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit {
       this.permanentDisability = value.permDisability;
     }
 
-    this.productsData.forEach((product: any) => {
-      const newProductInput: any = value.products.find(el => el.id === product.id);
-
-      //set selected status
-      product.selected = !!newProductInput;
-
-      //set new attributes values
-      if (newProductInput) {
-
-        newProductInput.attrs.forEach(attrInput => {
-          product.attrs.find(el => el.id === attrInput.id).value = attrInput.value;
-        });
-      }
-    });
-
     this.update();
-  }
-
-  public submit(): void {
-    this.submitted = true;
   }
 
   public getCurrentInput(): WIAInputEntity {
 
-    const products = this.productsData.filter(el => el.selected).map(el => ({
-      id: el.id,
-      attrs: el.attrs.map(attr => ({id: attr.id, value: +attr.value}))
-    }));
-
     const input : WIAInputEntity = {
-      income: this.initialAmount,
-      disability: this.disability.value,
-      products,
-      productsIds: products.map(e => e.id)
+      income: this.externalInput.income,
+      disability: Math.round(this.disability.value / 10) * 10,
+      products: this.externalInput.products,
+      productsIds: this.externalInput.productsIds
     };
 
     if (this.disability.value >= 80) {
@@ -196,7 +166,7 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit {
 
     if (this.disability.value >= 35 && this.disability.value < 80) {
 
-      input.usage = this.usage.value;
+      input.usage = Math.round(this.usage.value / 10) * 10
     }
 
     return input;
@@ -205,9 +175,9 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit {
   public update() {
 
     const currentInput = this.getCurrentInput();
-    const selectedProductsIds = currentInput.products.map(el => el.id);
 
-    this.wiaPagePersonalizationService.setUrlConfiguration(currentInput);
+    const code = this.wiaPagePersonalizationService.inputToCode(currentInput);
+    this.wiaUrlStateManager.setUrlCode(code);
 
     this.calculatorDataService.getData(currentInput).subscribe(data => {
 
@@ -217,7 +187,7 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit {
         const {graphData, legendData} = data;
 
         console.log('graphData', graphData);
-        console.log('graphData', legendData);
+        console.log('legendData', legendData);
 
         this.graphData = [
           {
@@ -235,15 +205,7 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit {
 
         this.legendData = legendData;
       }
-
-      const availableProducts = this.wiaPageProductsService.getAvailableProducts(selectedProductsIds);
-
-      this.productsData.forEach((product: any) => {
-        product.disabled = availableProducts.indexOf(product.id) === -1;
-      });
-
     })
-
   }
 
   public sliderUpdate(slider, val) {
@@ -251,31 +213,6 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit {
     if (slider.value !== val) {
 
       slider.value = val;
-      this.update();
-    }
-  }
-
-  public updateProduct(product) {
-
-    product.selected = !product.selected;
-    this.update();
-  }
-
-  public updateProductAttr(productAttr, event) {
-
-    if (productAttr.value !== event.target.value) {
-
-      productAttr.value = event.target.value;
-      this.update();
-    }
-  }
-
-
-  public updateIncome(val) {
-
-    if (this.initialAmount !== val) {
-
-      this.initialAmount = val;
       this.update();
     }
   }
@@ -292,5 +229,4 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit {
 
     return item.id;
   }
-
 }

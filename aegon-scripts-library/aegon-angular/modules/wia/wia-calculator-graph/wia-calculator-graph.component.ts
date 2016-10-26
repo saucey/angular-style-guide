@@ -1,12 +1,14 @@
 import { Component, Input, OnChanges } from "@angular/core";
 
 interface BarConfig {
+  id: string,
   percentage: number,
   amount?: number,
   meta?: Object
 }
 
 interface ColumnConfig {
+  id: string,
   bars: Array<BarConfig>
 }
 
@@ -22,37 +24,37 @@ interface GraphData {
 export class WiaCalculatorGraphComponent implements OnChanges {
   @Input() data: GraphData;
 
-  public trackByBar(index, item) {
+  public trackById(index, item) {
 
     return item.id;
   }
 
-  public subgraph : GraphData = {
-    columns: [
-      {
-        bars: [
-          {
-            percentage: 100,
-            amount: 100,
-            meta: {
-              color: 'red'
-            }
-          }
-        ]
-      },
-      {
-        bars: [
-          {
-            percentage: 100,
-            amount: 100,
-            meta: {
-              color: 'red'
-            }
-          }
-        ]
-      }
-    ]
-  };
+  // public subgraph : GraphData = {
+  //   columns: [
+  //     {
+  //       bars: [
+  //         {
+  //           percentage: 100,
+  //           amount: 100,
+  //           meta: {
+  //             color: 'red'
+  //           }
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       bars: [
+  //         {
+  //           percentage: 100,
+  //           amount: 100,
+  //           meta: {
+  //             color: 'red'
+  //           }
+  //         }
+  //       ]
+  //     }
+  //   ]
+  // };
 
   // merge two first elements in two last columns if they are the same type and have the same value
   ngOnChanges(changes) {

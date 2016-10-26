@@ -1,7 +1,7 @@
 <div class="aa-block-graph clearfix">
 
   <div class="aa-block-graph__col aa-block-graph__col1"
-       *ngFor="let column of data.columns"
+       *ngFor="let column of data.columns; trackBy:trackById"
        [style.width.%]="100 / data.columns.length">
 
     <div class="aa-block-graph__space" [style.height.%]="100 - sumHeights(column.bars)"></div>
@@ -13,7 +13,7 @@
     <!--</div>-->
 
 
-    <div class="aa-block-graph__bar" *ngFor="let bar of column.bars; trackBy:trackByBar"
+    <div class="aa-block-graph__bar" *ngFor="let bar of column.bars; trackBy:trackById"
          [style.height.%]="bar.percentage">
       <div class="aa-block-graph__bar-block">
         <div class="aa-block-graph__bar-block-inner" [style.backgroundColor]="bar.meta?.color"
