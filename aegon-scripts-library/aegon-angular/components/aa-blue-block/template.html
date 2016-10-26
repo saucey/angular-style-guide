@@ -1,16 +1,16 @@
-<div class="aa-bb--wrapper" [class.padding-bottom-fix]="showButton()">
-  <div class="aa-bb--content container_12" *ngFor="let block of data.options[data.options.template]">
+<div class="aa-bb--wrapper" [class.padding-bottom-fix]="showButton()" attr.data-bb-template="{{data.options.template}}">
+  <div class="aa-bb--content container_12 aa-bb--inner-block-{{i}}" *ngFor="let block of data.options[data.options.template]; let i = index;">
     <h3 class="aa-bb--content-title span12"> {{ block.boxTitle }} </h3>
-    <div class="aa-bb--content-row" *ngFor="let blockValue of block.boxContent; let i = index;">
-      <div class="aa-bb--content-inner-row" *ngIf="isString(blockValue)">
-        <label class="span6 aa-bb--content-label">{{blockValue}}</label>
-        <span class="span6 aa-bb--content-value">0</span>
+    <div class="aa-bb--content-row" *ngFor="let blockValue of block.boxContent">
+      <div class="aa-bb--content-inner-row" *ngIf="isString(blockValue.label)">
+        <label class="span6 aa-bb--content-label">{{blockValue.label}}</label>
+        <span class="span6 aa-bb--content-value aa-bb--value-reference-{{blockValue.reference}}"></span>
       </div>
-      <div class="aa-bb--content-inner-row" *ngIf="!isString(blockValue)">
+      <div class="aa-bb--content-inner-row" *ngIf="!isString(blockValue.label)">
         <label class="span12 aa-bb--content-label">{{blockValue.subBoxTitle}}</label>
-        <div class="aa-bb--content-inner-row" *ngFor="let subBlockValue of blockValue.subBoxContent; let j = index;">
-          <label class="span6 aa-bb--content-label lighter-label">{{subBlockValue}}</label>
-          <span class="span6 aa-bb--content-value">0</span>
+        <div class="aa-bb--content-inner-row" *ngFor="let subBlockValue of blockValue.subBoxContent">
+          <label class="span6 aa-bb--content-label lighter-label">{{subBlockValue.label}}</label>
+          <span class="span6 aa-bb--content-value aa-bb--value-reference-{{subBlockValue.reference}}"></span>
         </div>
       </div>
     </div>
