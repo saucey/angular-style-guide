@@ -198,11 +198,6 @@ let pensionInfo: any = clientStorage.session.getItem("pensionInfo") || null;
 		//return this.getApiData("post", serviceUrl, {});
 	}
 
-	calculate(serviceUrl: string, authToken: string, highLow: boolean): void {
-	    //let headers = new Headers({'Content-Type': 'application/json', "Authorization" : `Basic ${authToken}`});
-	    //let options = new RequestOptions({headers: headers});
-	  }
-
 	processResult(highLow, data) {
 	  console.log("processResult gets called", data);
 	  let response: any = {};
