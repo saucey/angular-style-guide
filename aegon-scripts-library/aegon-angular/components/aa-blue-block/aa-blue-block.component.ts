@@ -93,8 +93,10 @@ export class AABlueBlockComponent extends AABaseComponent implements OnInit {
    */
   updateValues(data): any {
     for(let key in data) {
-      document.querySelector( "div[data-bb-template=" +  this.data.options.template + "] .aa-bb--value-reference-"+key).textContent = data[key];
+      let element = document.querySelector( "div[data-bb-template=" +  this.data.options.template + "] .aa-bb--value-reference-"+key) || null;
+      if(element!==null) element.textContent = data[key];
     }
+    this.data.options.button.show = data.showButton;
   }
 
   /*

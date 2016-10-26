@@ -107,7 +107,7 @@ export class GenericService {
 	}
 
 	public dipHighLow(serviceUrl: string, serviceCredential: string): Promise<any> {
-let pensionInfo: any = clientStorage.session.getItem("pensionInfo") || null;
+		let pensionInfo: any = clientStorage.session.getItem("pensionInfo") || null;
 
 		if(pensionInfo===null) {
 			return new Promise((resolve) => {
@@ -230,6 +230,9 @@ let pensionInfo: any = clientStorage.session.getItem("pensionInfo") || null;
 	  if (highLow) {
 	    response.first5YearsMine = String(hlAmount);
 	  }
+
+	  let pensionInfo: any = clientStorage.session.getItem("pensionInfo");
+	  response.showButton = !(pensionInfo.pensionLocation===1);
 
 	  return response;
 
