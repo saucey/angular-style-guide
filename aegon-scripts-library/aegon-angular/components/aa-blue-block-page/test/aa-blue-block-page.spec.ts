@@ -2,8 +2,8 @@ import {ComponentFixture, TestBed, async } from '@angular/core/testing';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
-import {AABlueBlockPageComponent } from './aa-blue-block-page.component';
-require('../../../modules/clientStorage');
+import {AABlueBlockPageComponent } from '../aa-blue-block-page.component';
+require('../../../../modules/clientStorage');
 
 describe('AA Blue Block Page Component', () => {
   let comp: AABlueBlockPageComponent;
