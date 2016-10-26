@@ -71,7 +71,7 @@ export const defaultOptions = {
       "boxContent" : [{"label" : "Levenslang", "reference" : "lifelongPartner"}]
     } 
   ],
-  "template" : "dipHighLow",
+  "template" : "dipFixed",
   "callServiceOnInit" : true,
-  "serviceUrl" : "api/dipHighLow"
+  "serviceUrl" : "/services/US_RestGatewayWeb/rest/requestResponse/BS_PENSIOENOVEREENKOMST_ROA/calculate"
 };

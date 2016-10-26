@@ -14,9 +14,9 @@ export class GenericService {
 	 * If corresponds, get the data from
 	 * the API.
 	 */
-	private getApiData(url: string, data: Object): Promise<any> {
+	private getApiData(method: string, url: string, data: Object): Promise<any> {
 		console.log("%s calling...", url);
-		return this.http.get(url)
+		return this.http[method](url)
 			.map((res: Response) => {
 				let response = res.json();
 				console.log("%s response: ", url, response);
@@ -34,37 +34,203 @@ export class GenericService {
 	}
 
 	public dipFixed(serviceUrl: string): Promise<any> {
+		let pensionInfo: any = clientStorage.session.getItem("pensionInfo") || null;
+
+		if(pensionInfo===null) {
+			return new Promise((resolve) => {
+		      	resolve({});
+		    	});
+		}
+
+		console.log("pensionInfo", pensionInfo);
+
+		let body:any = {
+		      "BScalculateRequest": {
+		        "AILHEADER": {
+		          "CLIENTID": "BS_PENSIOENOVEREENKOMST_ROA_Rest",
+		          "CORRELATIONID": "##DIP SS##"
+		        },
+		        "DOSSIER": {
+		          "REKENFACTOREN": {
+		            "OVERGANG_OP_PP": 0.70,
+		            "VERHOUDING_HOOG_LAAG": 0.75
+		          },
+		          "PENSIOENOVEREENKOMST": {
+		            "STORTING_INLEG": {
+		              "KOOPSOM": pensionInfo.pensionAmount,
+		              "IND_VREEMDGELD": (pensionInfo.pensionLocation===1),
+		              "IND_HERKOMST_OVL": false
+		            },
+		            "PENSIOENAANSPRAAK": {
+		              "IND_OUDERDOMSPENSIOEN": true,
+		              "IND_NABESTAANDENPENSIOEN": pensionInfo.insurablePartner,
+		              "IND_HOOG_LAAGPENSIOEN": false,
+		              "IND_PREPENSIOEN": false,
+		              "BEGIN_DATUM_UITKERING": pensionInfo.startingDate,
+		              "DUUR_UITKERING_JAREN": 5,
+		              "TERMIJN_UITKERING": 1
+		            }
+		          },
+		          "PARTIJ": [
+		            {
+		              "_AE_PERSOON": {
+		                "VOLGNUM": 1,
+		                "GESLACH": "M",
+		                "GEBDAT": pensionInfo.birthDate
+		              }
+		            }
+		          ]
+		        }
+		      }
+		    };
+		    if (pensionInfo.insurablePartner) {
+		      body['BScalculateRequest']['DOSSIER']['PARTIJ'].push(
+		        {
+		          "_AE_PERSOON": {
+		            "VOLGNUM": 2,
+		            "GESLACH": "V",
+		            "GEBDAT": pensionInfo.birthDateOfPartner
+		          }
+		        }
+		      );
+		    }
+
 		// Gets the real data.
-		let request = this.getApiData(serviceUrl, {});
+		let request = this.getApiData("post", serviceUrl, body);
 		
 		return request.then((response) => {
-		    return {
-		    	"lifelongMine" : 1000,
-		    	"lifelongPartner" : 500
-		    };
+			return this.processResult(false, response);
 		});
 	}
 
 	public dipHighLow(serviceUrl: string): Promise<any> {
+let pensionInfo: any = clientStorage.session.getItem("pensionInfo") || null;
+
+		if(pensionInfo===null) {
+			return new Promise((resolve) => {
+		      	resolve({});
+		    	});
+		}
+
+		console.log("pensionInfo", pensionInfo);
+
+		let body:any = {
+		      "BScalculateRequest": {
+		        "AILHEADER": {
+		          "CLIENTID": "BS_PENSIOENOVEREENKOMST_ROA_Rest",
+		          "CORRELATIONID": "##DIP SS##"
+		        },
+		        "DOSSIER": {
+		          "REKENFACTOREN": {
+		            "OVERGANG_OP_PP": 0.70,
+		            "VERHOUDING_HOOG_LAAG": 0.75
+		          },
+		          "PENSIOENOVEREENKOMST": {
+		            "STORTING_INLEG": {
+		              "KOOPSOM": pensionInfo.pensionAmount,
+		              "IND_VREEMDGELD": (pensionInfo.pensionLocation===1),
+		              "IND_HERKOMST_OVL": false
+		            },
+		            "PENSIOENAANSPRAAK": {
+		              "IND_OUDERDOMSPENSIOEN": true,
+		              "IND_NABESTAANDENPENSIOEN": pensionInfo.insurablePartner,
+		              "IND_HOOG_LAAGPENSIOEN": false,
+		              "IND_PREPENSIOEN": false,
+		              "BEGIN_DATUM_UITKERING": pensionInfo.startingDate,
+		              "DUUR_UITKERING_JAREN": 5,
+		              "TERMIJN_UITKERING": 1
+		            }
+		          },
+		          "PARTIJ": [
+		            {
+		              "_AE_PERSOON": {
+		                "VOLGNUM": 1,
+		                "GESLACH": "M",
+		                "GEBDAT": pensionInfo.birthDate
+		              }
+		            }
+		          ]
+		        }
+		      }
+		    };
+		    if (pensionInfo.insurablePartner) {
+		      body['BScalculateRequest']['DOSSIER']['PARTIJ'].push(
+		        {
+		          "_AE_PERSOON": {
+		            "VOLGNUM": 2,
+		            "GESLACH": "V",
+		            "GEBDAT": pensionInfo.birthDateOfPartner
+		          }
+		        }
+		      );
+		    }
+
 		// Gets the real data.
-		let request = this.getApiData(serviceUrl, {});
+		let request = this.getApiData("post", serviceUrl, body);
 		
 		return request.then((response) => {
-		    return {
-		    	"first5YearsMine" : 10000,
-		    	"after5YearsMine" : 2500,
-		    	"lifelongPartner" : 500
-		    };
+			return this.processResult(true, response);
 		});
 	}
 
 	public vpuVariable(serviceUrl: string): Promise<any> {
+		//Mock
+		return new Promise((resolve) => {
+			resolve({});
+		});
 		// Gets the real data.
-		return this.getApiData(serviceUrl, {});
+		//return this.getApiData("post", serviceUrl, {});
 	}	
 
 	public vpuFixed(serviceUrl: string): Promise<any> {
+		//Mock
+		return new Promise((resolve) => {
+			resolve({});
+		});
+
 		// Gets the real data.
-		return this.getApiData(serviceUrl, {});
+		//return this.getApiData("post", serviceUrl, {});
+	}
+
+	calculate(serviceUrl: string, authToken: string, highLow: boolean): void {
+	    //let headers = new Headers({'Content-Type': 'application/json', "Authorization" : `Basic ${authToken}`});
+	    //let options = new RequestOptions({headers: headers});
+	  }
+
+	processResult(highLow, data) {
+	  console.log("processResult gets called", data);
+	  let response: any = {};
+	  let items: any[] = data['BScalculateResponse']['PENSIOENOVEREENKOMST']['PENSIOENAANSPRAAK'],
+	    hlAmount = 0;
+	  if (!Array.isArray(items)) {
+	    items = [items];
+	  }
+	  items.forEach(item => {
+	    let s = item['PENSIOENVORM'],
+	      value = item['BEDRAG'];
+	    value = value/12;
+	    if (highLow) {
+	      if (s === 'OPLL') {
+	        hlAmount += parseFloat(value);
+	        response.after5YearsMine = value;
+	      } else if (s === 'OPT') {
+	        hlAmount += parseFloat(value);
+	      } else if (s === 'PPLL') {
+	        response.lifelongPartner = value;
+	      }
+	    } else {
+	      if (s === 'OPLL') {
+	        response.lifelongMine = value;
+	      } else if (s === 'PPLL') {
+	        response.lifelongPartner = value;
+	      }
+	    }
+	  });
+	  if (highLow) {
+	    response.first5YearsMine = String(hlAmount);
+	  }
+
+	  return response;
+
 	}
 }
