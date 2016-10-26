@@ -10,6 +10,7 @@ import {
   WIA_35MIN_Code,
   WIA_35MIN_Value
 } from "./models/personalization";
+import { WiaInputUseCaseEnum } from "./models/wia-input-use-case.enum";
 
 @Injectable()
 export class WiaPagePersonalizationService {
@@ -165,7 +166,7 @@ export class WiaPagePersonalizationService {
         id: 'IVA_EXCED',
         attrs: [
           {
-            id: 'COVERAGE_RATE_WGA',
+            id: 'COVERAGE_RATE_IVA',
             value: IVA_EXCED_Value[IVA_EXCED_Code[IVA]]
           }
         ]
@@ -210,6 +211,7 @@ export class WiaPagePersonalizationService {
     }
 
     return {
+      useCase: WiaInputUseCaseEnum.PARTICIPANT,
       income,
       disability,
       usage,

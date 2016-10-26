@@ -5,6 +5,7 @@ import { WiaSubscriptionService } from "../wia-page/wia-page.subscription.servic
 import { WiaPageProductsService } from "../wia-page/wia-page.products.service";
 import { WiaPagePersonalizationService } from "../wia-page/wia-page.personalization.service";
 import { ProductAttributeEntity } from "../wia-page/models/product-attribute.entity";
+import { WiaInputUseCaseEnum } from "../wia-page/models/wia-input-use-case.enum";
 
 const template = require('./template.html');
 
@@ -62,6 +63,7 @@ export class WiaFormComponent extends AABaseComponent implements OnInit {
     const selectedProducts = this.getSelectedProducts();
 
     return {
+      useCase: WiaInputUseCaseEnum.USER,
       income: this.income,
       products: selectedProducts.map(product => ({
         id: product.id,

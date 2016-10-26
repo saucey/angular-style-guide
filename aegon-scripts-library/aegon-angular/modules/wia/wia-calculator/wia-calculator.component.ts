@@ -8,6 +8,7 @@ import { WiaPagePersonalizationService } from "../wia-page/wia-page.personalizat
 import { WIAInputEntity } from "../wia-page/models/wia-input.entity";
 import { WiaSubscriptionService } from "../wia-page/wia-page.subscription.service";
 import { WiaUrlStateManager } from "../wia-page/wia-page.url-state.service";
+import { WiaInputUseCaseEnum } from "../wia-page/models/wia-input-use-case.enum";
 
 @Component({
   selector: 'aa-wia-calculator',
@@ -154,6 +155,7 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit {
 
     const input : WIAInputEntity = {
       income: this.externalInput.income,
+      useCase: WiaInputUseCaseEnum.USER,
       disability: Math.round(this.disability.value / 10) * 10,
       products: this.externalInput.products,
       productsIds: this.externalInput.productsIds

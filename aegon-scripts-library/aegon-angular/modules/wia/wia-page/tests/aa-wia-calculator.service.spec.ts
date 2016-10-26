@@ -1,4 +1,5 @@
 import { WiaPagePersonalizationService } from "../wia-page.personalization.service";
+import { WiaInputUseCaseEnum } from "../models/wia-input-use-case.enum";
 
 describe('CalculatorProductService', () => {
 
@@ -8,6 +9,7 @@ describe('CalculatorProductService', () => {
     {
       label: 'works for basicInputNoProducts',
       input: {
+        useCase: WiaInputUseCaseEnum.PARTICIPANT,
         income: 5000,
         disability: 50,
         usage: 50,
@@ -20,6 +22,7 @@ describe('CalculatorProductService', () => {
     {
       label: 'works for basicInputNoProducts #2',
       input: {
+        useCase: WiaInputUseCaseEnum.PARTICIPANT,
         income: 35000,
         disability: 100,
         usage: 50,
@@ -32,6 +35,7 @@ describe('CalculatorProductService', () => {
     {
       label: 'works for IVA_EXCED',
       input: {
+        useCase: WiaInputUseCaseEnum.PARTICIPANT,
         income: 35000,
         disability: 100,
         usage: 50,
@@ -41,7 +45,7 @@ describe('CalculatorProductService', () => {
             id: 'IVA_EXCED',
             attrs: [
               {
-                id: 'COVERAGE_RATE_WGA',
+                id: 'COVERAGE_RATE_IVA',
                 value: 0
               }
             ]
@@ -54,6 +58,7 @@ describe('CalculatorProductService', () => {
     {
       label: 'works for WGA_EXCED',
       input: {
+        useCase: WiaInputUseCaseEnum.PARTICIPANT,
         income: 35000,
         disability: 100,
         usage: 50,
@@ -76,6 +81,7 @@ describe('CalculatorProductService', () => {
     {
       label: 'works for IVA_EXCED with non default coverage',
       input: {
+        useCase: WiaInputUseCaseEnum.PARTICIPANT,
         income: 35000,
         disability: 100,
         usage: 50,
@@ -85,7 +91,7 @@ describe('CalculatorProductService', () => {
             id: 'IVA_EXCED',
             attrs: [
               {
-                id: 'COVERAGE_RATE_WGA',
+                id: 'COVERAGE_RATE_IVA',
                 value: 80
               }
             ]
@@ -98,6 +104,7 @@ describe('CalculatorProductService', () => {
     {
       label: 'works for IVA_EXCED and WGA_EXCED',
       input: {
+        useCase: WiaInputUseCaseEnum.PARTICIPANT,
         income: 35000,
         disability: 100,
         usage: 50,
@@ -116,7 +123,7 @@ describe('CalculatorProductService', () => {
             id: 'IVA_EXCED',
             attrs: [
               {
-                id: 'COVERAGE_RATE_WGA',
+                id: 'COVERAGE_RATE_IVA',
                 value: 0
               }
             ]
@@ -129,6 +136,7 @@ describe('CalculatorProductService', () => {
     {
       label: 'works for WIA_35MIN_BODEM',
       input: {
+        useCase: WiaInputUseCaseEnum.PARTICIPANT,
         income: 35000,
         disability: 100,
         usage: 50,
@@ -146,6 +154,7 @@ describe('CalculatorProductService', () => {
     {
       label: 'works for WIA_35MIN',
       input: {
+        useCase: WiaInputUseCaseEnum.PARTICIPANT,
         income: 35000,
         disability: 100,
         usage: 50,
@@ -168,6 +177,7 @@ describe('CalculatorProductService', () => {
     {
       label: 'works for edge values',
       input: {
+        useCase: WiaInputUseCaseEnum.PARTICIPANT,
         income: 125000,
         disability: 100,
         usage: 100,

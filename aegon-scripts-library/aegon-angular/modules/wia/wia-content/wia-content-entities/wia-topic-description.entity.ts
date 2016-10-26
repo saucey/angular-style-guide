@@ -7,6 +7,7 @@
 
 export interface WiaTopicDescriptionEntity {
 
+  useCase?: Array<string>,
   filter: boolean|Array<string>,
   text: string,
 

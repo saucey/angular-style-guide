@@ -11,7 +11,7 @@ export class WiaSubscriptionService {
   private wiaPagePersonalizationService: WiaPagePersonalizationService;
   private wiaUrlStateManager: WiaUrlStateManager;
 
-  private externalInput$: BehaviorSubject<WIAInputEntity>;
+  public externalInput$: BehaviorSubject<WIAInputEntity>;
 
   constructor() {
 

@@ -10,22 +10,19 @@ import { Http, Response } from "@angular/http";
 import { WiaTopicRow } from "./wia-content-entities/wia-topic-row.entity";
 import { Observable, Subject } from "rxjs";
 
-const CONTENT_DATA = require('./data/wia-content-static-data.json');
-
 @Injectable()
 export class WiaContentService {
 
   private wiaContentUrl = '/api/income123/content';
 
-  constructor(private http: Http) {
-  }
+  constructor(private http: Http) {}
 
   /**
    * Retrieves the Wia content
    *
-   * @returns {Observable<R>}
+   * @returns {Observable<WiaTopicRow[]>}
    */
-  public getWiaContent(): Subject<WiaTopicRow[]> {
+  public getWiaContent(): Observable<WiaTopicRow[]> {
     return this
       .http
       .get(this.wiaContentUrl)

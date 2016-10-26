@@ -5,13 +5,16 @@
  * @author Florian Popa <florian@webgenerals.com>
  */
 import { ProductEntity } from "./product.entity";
+import { WiaInputUseCaseEnum } from "./wia-input-use-case.enum";
 
 export interface WIAInputEntity {
 
+  useCase: WiaInputUseCaseEnum,
   income: number,
   products: ProductEntity[],
   productsIds?: string[],
   disability?: number,
   usage?: number,
   permDisability?: boolean
+
 }

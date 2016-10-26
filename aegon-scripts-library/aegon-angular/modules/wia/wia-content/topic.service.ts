@@ -13,7 +13,8 @@ import { TopicBuilder } from "./topic-builder";
 import { TopicRowEntity } from "./topic-entities/topic-row.entity";
 import { clone } from "../../../lib/util";
 import { WiaTopicRow } from "./wia-content-entities/wia-topic-row.entity";
-import { Observable } from "rxjs";
+
+import { BehaviorSubject } from "rxjs";
 
 @Injectable()
 export class TopicService {
@@ -23,15 +24,50 @@ export class TopicService {
   private topicBuilder: TopicBuilder;
   private wiaContentData: Array<WiaTopicRow>;
 
+  public data;
+  public topics$: BehaviorSubject<any[]>;
+
   constructor(wiaContentService: WiaContentService, wiaPageService: WiaSubscriptionService, topicBuilder: TopicBuilder) {
     this.wiaContentService = wiaContentService;
     this.topicBuilder = topicBuilder;
 
+    this.topics$ = new BehaviorSubject(null);
+
     wiaPageService.subscribe(value => {
       this.wiaInputData = clone(value);
+
+      this.build();
     });
+
+    this
+      .wiaContentService
+      .getWiaContent()
+      .subscribe(data => {
+        this.data = data;
+        this.build();
+      });
   }
 
+  public build () : void {
+
+    if (!this.data) {
+      return;
+    }
+
+    this
+      .topicBuilder
+      .withWiaInputData(this.wiaInputData);
+
+    this
+      .topicBuilder
+      .withWiaContent(this.data);
+
+    this.topics$.next(
+      this
+        .topicBuilder
+        .build()
+    )
+  }
 
   /**
    * Retrieves and adapts the topic related data
@@ -40,24 +76,8 @@ export class TopicService {
    */
 
   // @TODO
-  getTopics() {
+  getTopics(callback) {
 
-    return this
-      .wiaContentService
-      .getWiaContent()
-      .map(data => {
-
-        this
-          .topicBuilder
-          .withWiaContent(data);
-
-        this
-          .topicBuilder
-          .withWiaInputData(this.wiaInputData);
-
-        return this
-          .topicBuilder
-          .build();
-      });
+    return this.topics$.filter(el => el !== null).subscribe(callback);
   }
 }
