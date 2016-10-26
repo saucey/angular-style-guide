@@ -25,7 +25,6 @@ export class AABlueBlockPageComponent extends AABaseComponent implements OnInit 
   public pageIsHidden: boolean = true;
   public hasBottomContent: boolean;
   public hasLink: boolean;
-  public startPage: string = 'http://localhost:3000/template-pension-form.html';
 
   constructor(private thisElement: ElementRef) {
     super(thisElement);
@@ -39,13 +38,21 @@ export class AABlueBlockPageComponent extends AABaseComponent implements OnInit 
   // Reinitialize component, check pension info and set page structure again 
   public initialize() {
     this.pensionInfo = this.getPensionInfo();
-    
+
     if(this.isPensionInfoAvailable(this.pensionInfo)) {    
       this.setPageStructure();
-      this.pageIsHidden = false;          
+      this.showPage();        
     
-    } else { this.redirectToStartPage(); }   
+    } else { if(this.options.startPage !== undefined) this.redirectToStartPage(); }   
   }
+
+  hidePage() {
+    this.pageIsHidden = true;
+  }
+
+  showPage() {
+    this.pageIsHidden = false;
+  }  
 
   // Get the pension info from session storage
   getPensionInfo(): any {
@@ -60,7 +67,7 @@ export class AABlueBlockPageComponent extends AABaseComponent implements OnInit 
 
   // Redirect to start page (if it is not already there)
   redirectToStartPage() {
-    if(this.startPage !== window.location.href) window.location.href = this.startPage;       
+    if(this.options.startPage !== window.location.href) window.location.href = this.options.startPage;       
   }
 
   // Set the page structure. Used by ngClass and ngIf in view 
