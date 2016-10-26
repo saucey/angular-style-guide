@@ -121,18 +121,23 @@
               <span *ngIf='pension["insurablePartner"] == "true"'>
                 Ja, ik wil een partnerpensioen verzekeren
               </span>
-              <span *ngIf='pension["insurablePartner"] == "false"'>
+
+              <span *ngIf='pension["insurablePartner"] == "false" && initChangeHasPartner == true || pension["havePartner"] == "true" && pension["insurablePartner"] == "false"'>
                 Nee, ik wil geen partnerpensioen verzekeren
               </span>
             </span>
 
-            <span class="block" *ngIf='hasPartner !== "hidden" && partnersDobReadable[1] !== "" && initChangeNoPolicy == false'>
+            <span class="block" *ngIf='hasPartner !== "hidden" && partnersDobReadable[1] !== "" && initChangeNoPolicy !== true && sessionPartnerDob == ""'>
                Geboortedatum partner {{partnersDobReadable[1]}}
             </span>
 
-            <span *ngIf='pension["birthDateOfPartner"] !== "" && initChangeNoPolicy !== false'>
-              <span>Geboortedatum partner {{pension['birthDateOfPartner']| dateToReadableString}} </span>
+            <span *ngIf='sessionPartnerDob !== "" && initChangeHasPartner !== false && initChangeNoPolicy !== true && pension["havePartner"] !== "false" && pension["insurablePartner"] !== "false"'>
+              <span>Geboortedatum partner {{sessionPartnerDob| dateToReadableString}}</span>
             </span>
+
+
+
+            <!--<p>{{initChangeNoPolicy}} | has partner, doesnt want to offer insurance</p>-->
 
             <!--<h1>{{pension['birthDateOfPartner']}}</h1>-->
             <span class="edit" (click)="editSection(3)"> > Aanpassen</span>
@@ -141,6 +146,7 @@
         </div>
 
         <div [@visibility]="visibility[3]">
+          <h1>{{pension["havePartner"]}}</h1>
           <p class="general-form__para">{{data.options.block3.test}}</p>
           <div class="form-element-text__row">
               <div class="table">
@@ -151,13 +157,13 @@
 
                         <div class="white-radio-wrapper">
                           <label class="radio white-radio">
-                            <input type="radio" name="whofor" value="true" [(ngModel)]="pension['havePartner']" (change)="hasPartner = 'show'; initChangeHasPartnerYes = true" />
+                            <input type="radio" name="whofor" value="true" [(ngModel)]="pension['havePartner']" (change)="hasPartner = 'show'; initChangeHasPartner = true" />
                             <span class="radio"></span>
                             <span class="label-text">{{data.options.block3.box.label1}}</span>
                           </label>
 
                           <label class="radio white-radio">
-                            <input type="radio" name="whofor" value="false" [(ngModel)]="pension['havePartner']" (change)="hasPartner = 'hidden'; initChangeHasPartnerNo = true" />
+                            <input type="radio" name="whofor" value="false" [(ngModel)]="pension['havePartner']" (change)="hasPartner = 'hidden'; initChangeHasPartner = false" />
                             <span class="radio"></span>
                             <span class="label-text">{{data.options.block3.box.label2}}</span>
                           </label>

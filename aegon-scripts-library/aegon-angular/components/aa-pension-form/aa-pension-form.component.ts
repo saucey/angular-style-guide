@@ -44,12 +44,13 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
 
   public pension: any = clientStorage.session.getItem("pensionInfo") || {};
 
+  public sessionPartnerDob = this.pension['birthDateOfPartner'] || '';
+
   public defaultOptions: any = defaultOptions;
   public amountTooSmall: boolean;
   public message: boolean = false;
   public age: number;
-  public initChangeHasPartnerNo: boolean;
-  public initChangeHasPartnerYes: boolean;
+  public initChangeHasPartner: boolean;
   public initChangeNoPolicy: boolean;
 
   public currentStep = 'step1';
@@ -157,7 +158,7 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
 
     if(this.hasPartner == 'show') return true;
 
-    if(this.hasPartner == 'hidden' && this.initChangeHasPartnerNo == true) return false;
+    if(this.hasPartner == 'hidden' && this.initChangeHasPartner == false) return false;
 
     //hidden the button validation
     return true;
