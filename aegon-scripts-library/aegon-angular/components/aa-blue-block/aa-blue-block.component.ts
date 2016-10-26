@@ -80,7 +80,7 @@ export class AABlueBlockComponent extends AABaseComponent implements OnInit {
    *
    */
   callService(): any {
-    this.genericService[this.data.options.template](this.data.options.serviceUrl)
+    this.genericService[this.data.options.template](this.data.options.serviceUrl, this.data.options.serviceCredentials)
       .then((data) => {
         console.log("Data from component: ", data);
         this.updateValues(data);

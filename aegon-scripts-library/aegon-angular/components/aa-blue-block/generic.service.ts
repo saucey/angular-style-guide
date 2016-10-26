@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Http, Response} from "@angular/http";
+import {Http, Headers, RequestOptions, Response} from "@angular/http";
 import {Observable} from 'rxjs/Observable';
 
 @Injectable()
@@ -14,9 +14,9 @@ export class GenericService {
 	 * If corresponds, get the data from
 	 * the API.
 	 */
-	private getApiData(method: string, url: string, data: Object): Promise<any> {
+	private getApiData(method: string, url: string, data: Object, options: Object): Promise<any> {
 		console.log("%s calling...", url);
-		return this.http[method](url)
+		return this.http[method](url, JSON.stringify(data), options || {})
 			.map((res: Response) => {
 				let response = res.json();
 				console.log("%s response: ", url, response);
@@ -33,7 +33,7 @@ export class GenericService {
 		return Observable.throw(error.json().error || 'Server error');
 	}
 
-	public dipFixed(serviceUrl: string): Promise<any> {
+	public dipFixed(serviceUrl: string, serviceCredential: string): Promise<any> {
 		let pensionInfo: any = clientStorage.session.getItem("pensionInfo") || null;
 
 		if(pensionInfo===null) {
@@ -44,6 +44,9 @@ export class GenericService {
 
 		console.log("pensionInfo", pensionInfo);
 
+		let headers = new Headers({'Content-Type': 'application/json', "Authorization" : `Basic ${serviceCredential}`});
+    		let options = new RequestOptions({headers: headers});
+
 		let body:any = {
 		      "BScalculateRequest": {
 		        "AILHEADER": {
@@ -96,14 +99,14 @@ export class GenericService {
 		    }
 
 		// Gets the real data.
-		let request = this.getApiData("post", serviceUrl, body);
+		let request = this.getApiData("post", serviceUrl, body, options);
 		
 		return request.then((response) => {
 			return this.processResult(false, response);
 		});
 	}
 
-	public dipHighLow(serviceUrl: string): Promise<any> {
+	public dipHighLow(serviceUrl: string, serviceCredential: string): Promise<any> {
 let pensionInfo: any = clientStorage.session.getItem("pensionInfo") || null;
 
 		if(pensionInfo===null) {
@@ -114,6 +117,9 @@ let pensionInfo: any = clientStorage.session.getItem("pensionInfo") || null;
 
 		console.log("pensionInfo", pensionInfo);
 
+		let headers = new Headers({'Content-Type': 'application/json', "Authorization" : `Basic ${serviceCredential}`});
+    		let options = new RequestOptions({headers: headers});
+
 		let body:any = {
 		      "BScalculateRequest": {
 		        "AILHEADER": {
@@ -166,14 +172,14 @@ let pensionInfo: any = clientStorage.session.getItem("pensionInfo") || null;
 		    }
 
 		// Gets the real data.
-		let request = this.getApiData("post", serviceUrl, body);
+		let request = this.getApiData("post", serviceUrl, body, options);
 		
 		return request.then((response) => {
 			return this.processResult(true, response);
 		});
 	}
 
-	public vpuVariable(serviceUrl: string): Promise<any> {
+	public vpuVariable(serviceUrl: string, serviceCredential: string): Promise<any> {
 		//Mock
 		return new Promise((resolve) => {
 			resolve({});
@@ -182,7 +188,7 @@ let pensionInfo: any = clientStorage.session.getItem("pensionInfo") || null;
 		//return this.getApiData("post", serviceUrl, {});
 	}	
 
-	public vpuFixed(serviceUrl: string): Promise<any> {
+	public vpuFixed(serviceUrl: string, serviceCredential: string): Promise<any> {
 		//Mock
 		return new Promise((resolve) => {
 			resolve({});
