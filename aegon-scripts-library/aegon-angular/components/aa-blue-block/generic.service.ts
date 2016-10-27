@@ -232,7 +232,7 @@ export class GenericService {
 	  }
 
 	  let pensionInfo: any = clientStorage.session.getItem("pensionInfo");
-	  response.showButton = !(pensionInfo.pensionLocation==1);
+	  response.showButton = pensionInfo.pensionLocation==1;
 
 	  return response;
 
