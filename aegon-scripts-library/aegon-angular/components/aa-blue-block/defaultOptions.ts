@@ -4,7 +4,8 @@ export const defaultOptions = {
   "caption" : "Bedragen zijn bruto per maand",
   "button" : {
     "label" : "Vraag offerte aan",
-    "show" : true
+    "show" : false,
+    "url" : "/"
   },
   "dipFixed" : [{
       "boxTitle" : "Ouderdomspensioen",

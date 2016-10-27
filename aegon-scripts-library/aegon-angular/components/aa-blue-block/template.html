@@ -16,7 +16,7 @@
     </div>
   </div>
   <div class="aa-bb--footer container_12">
-    <a *ngIf="showButton()" class="button orange-gradient icon-right arrow">
+    <a *ngIf="showButton()" class="button orange-gradient icon-right arrow" [href]="data.options.button.url">
       {{data.options.button.label}}
     </a>
     <span class="aa-bb--caption span12">{{data.options.caption}}</span>
