@@ -11,12 +11,21 @@ import { WiaTopicEntity } from "./wia-content-entities/wia-topic.entity";
 import { WiaTopicDescriptionEntity } from "./wia-content-entities/wia-topic-description.entity";
 import { TopicRowEntity } from "./topic-entities/topic-row.entity";
 import { WiaInputUseCaseEnum } from "../wia-page/models/wia-input-use-case.enum";
+import { TopicDescriptionFilterService } from "./topic-description-filter.service";
+import { ProductAttributesService } from "./product-attributes.service";
 
 @Injectable()
 export class TopicBuilder {
 
   private wiaInputData: WIAInputEntity;
   private wiaTopicRowCollection: WiaTopicRow[];
+  private topicDescriptionFilterService: TopicDescriptionFilterService;
+  private productAttributesService: ProductAttributesService;
+
+  constructor(topicDescriptionFilterService: TopicDescriptionFilterService, productAttributesService: ProductAttributesService) {
+    this.topicDescriptionFilterService = topicDescriptionFilterService;
+    this.productAttributesService = productAttributesService;
+  }
 
   /**
    * @param {WIAInputEntity} wiaInputData
@@ -78,124 +87,18 @@ export class TopicBuilder {
     let descriptionList: Array<string> = [];
 
     list.forEach((description: WiaTopicDescriptionEntity, index) => {
-      if (false === this.isDescriptionFiltered(description)) {
-        let plainDescription = this.findAndReplaceAttributes(description.text, description.filter);
+      if (false === this.topicDescriptionFilterService.isDescriptionFiltered(description, this.wiaInputData)) {
+        let plainDescription = this
+          .productAttributesService
+          .findAndReplaceAttributes(
+            description.text,
+            description.filter,
+            this.wiaInputData
+          );
         descriptionList.push(plainDescription);
       }
     });
 
     return descriptionList;
   }
-
-  private findAndReplaceAttributes(descriptionText: string, filterList): string {
-    let inputUseCase = this.wiaInputData.useCase;
-    let attributesList = [
-      '%COVERAGE_RATE_WGA%',
-      '%END_AGE%',
-      '%BENEFIT_INDEX%',
-      '%WAGE_DEFINITION%',
-      '%DEVIATED_MAXIMUM_WAGE%',
-      '%INSURED_AMOUNT%',
-      '%COVERAGE_RATE_IVA%',
-      '%INSURED_AMOUNT%',
-      '%BENEFIT_PERIOD%'
-    ];
-
-    // if there is a default or user case then remove the attributes
-    if (WiaInputUseCaseEnum.DEFAULT === inputUseCase || WiaInputUseCaseEnum.USER === inputUseCase) {
-
-      if (false === filterList) {
-        return descriptionText;
-      } else {
-        let plainDescription = descriptionText;
-        for (let placeholder of attributesList) {
-          if (plainDescription.indexOf(placeholder) != -1) {
-            plainDescription = plainDescription.replace(placeholder, '');
-          }
-        }
-
-        return plainDescription;
-      }
-
-    } else {
-      // if the case is participant then replace them
-      if (filterList === true || false === filterList) {
-        return descriptionText;
-      } else {
-        let plainDescription = descriptionText;
-        for (let filter of filterList) {
-          for (let product of this.wiaInputData.products) {
-            if (product.id == filter) {
-              for (let attribute of product.attrs) {
-                let placeholder = '%' + attribute.id + '%';
-                if (plainDescription.indexOf(placeholder) != -1) {
-                  plainDescription = plainDescription.replace(placeholder, (attribute.value as string));
-                }
-              }
-            }
-          }
-        }
-
-        return plainDescription;
-      }
-    }
-  }
-
-  /**
-   * Checks if the description should be shown/hidden
-   *
-   * @param {WiaTopicDescriptionEntity} descriptionFilter
-   * @returns {boolean}
-   */
-  private isDescriptionFiltered(descriptionFilter: WiaTopicDescriptionEntity): boolean {
-    if (this.matchesUseCase(descriptionFilter) && this.matchesFilters(descriptionFilter)) {
-      return false;
-    } else {
-      return true;
-    }
-  }
-
-  /**
-   * Checks if the description filters match the current products selected
-   *
-   * @param {WiaTopicDescriptionEntity} descriptionFilter
-   * @returns {boolean}
-   */
-  public matchesFilters(descriptionFilter: WiaTopicDescriptionEntity): boolean {
-    if (descriptionFilter.hasOwnProperty('filter') && typeof descriptionFilter.filter == 'object' && descriptionFilter.filter.length > 0 && (this.wiaInputData.useCase === WiaInputUseCaseEnum.PARTICIPANT || this.wiaInputData.useCase === WiaInputUseCaseEnum.USER)) {
-      for (let productId of descriptionFilter.filter) {
-        for (let product of this.wiaInputData.products) {
-          if (product.id == productId) {  // @TODO enforce string comparison by strong typing
-            return true;
-          }
-        }
-      }
-      return false;
-    } else {
-      return true;
-    }
-  }
-
-  /**
-   * Checks if the description applies to the current use case
-   *
-   * @param {WiaTopicDescriptionEntity} descriptionFilter
-   * @returns {boolean}
-   */
-  private matchesUseCase(descriptionFilter: WiaTopicDescriptionEntity): boolean {
-    if (descriptionFilter.hasOwnProperty('useCase') && descriptionFilter.useCase.length > 0) {
-      let inputUseCase = this.wiaInputData.useCase;
-
-      for (let useCase of descriptionFilter.useCase) {
-        if (inputUseCase === WiaInputUseCaseEnum[useCase]) {
-          return true;
-        }
-      }
-
-      return false;
-    } else {
-      return true;
-    }
-  }
-
 }

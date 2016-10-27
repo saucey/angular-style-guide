@@ -1,18 +1,18 @@
-import { TopicBuilder } from "../topic-builder";
 import { WiaInputUseCaseEnum } from "../../wia-page/models/wia-input-use-case.enum";
+import { TopicDescriptionFilterService } from "../topic-description-filter.service";
 /**
- * TopicBuilderSpec created on 10/27/16 10:38 AM.
+ * TopicDescriptionFilterServiceSpec created on 10/27/16 10:38 AM.
  *
- * @description Tests the behaviour of TopicBuilder
+ * @description Tests the behaviour of TopicDescriptionFilterService
  * @author Florian Popa <florian@webgenerals.com>
  */
 
-describe('TopicBuilderSpec', () => {
+describe('TopicDescriptionFilterServiceSpec', () => {
 
-  let topicBuilder: TopicBuilder;
+  let topicDescriptionFilterService: TopicDescriptionFilterService;
 
   beforeEach(() => {
-     topicBuilder = new TopicBuilder();
+     topicDescriptionFilterService = new TopicDescriptionFilterService();
   });
 
   it('should match the filters in the default case', () => {
@@ -28,8 +28,7 @@ describe('TopicBuilderSpec', () => {
       products: []
     };
 
-    topicBuilder.withWiaInputData(wiaInputData);
-    let matchFilter = topicBuilder.matchesFilters(descriptionFilter);
+    let matchFilter = topicDescriptionFilterService.matchesFilters(descriptionFilter, wiaInputData);
     expect(matchFilter).toBeTruthy();
   });
 
@@ -149,8 +148,7 @@ describe('TopicBuilderSpec', () => {
       ]
     };
 
-    topicBuilder.withWiaInputData(wiaInputData);
-    let matchFilter = topicBuilder.matchesFilters(descriptionFilter);
+    let matchFilter = topicDescriptionFilterService.matchesFilters(descriptionFilter, wiaInputData);
     expect(matchFilter).toBeTruthy();
   });
 
@@ -168,8 +166,7 @@ describe('TopicBuilderSpec', () => {
       products: []
     };
 
-    topicBuilder.withWiaInputData(wiaInputData);
-    let matchFilter = topicBuilder.matchesFilters(descriptionFilter);
+    let matchFilter = topicDescriptionFilterService.matchesFilters(descriptionFilter, wiaInputData);
     expect(matchFilter).toBeFalsy();
   });
 
@@ -289,8 +286,7 @@ describe('TopicBuilderSpec', () => {
       ]
     };
 
-    topicBuilder.withWiaInputData(wiaInputData);
-    let matchFilter = topicBuilder.matchesFilters(descriptionFilter);
+    let matchFilter = topicDescriptionFilterService.matchesFilters(descriptionFilter, wiaInputData);
     expect(matchFilter).toBeTruthy();
   });
 
@@ -308,11 +304,87 @@ describe('TopicBuilderSpec', () => {
       products: []
     };
 
-    topicBuilder.withWiaInputData(wiaInputData);
-    let matchFilter = topicBuilder.matchesFilters(descriptionFilter);
+    let matchFilter = topicDescriptionFilterService.matchesFilters(descriptionFilter, wiaInputData);
     expect(matchFilter).toBeFalsy();
   });
 
-  // add tests without filter
+  it('shoud match the use case for participant', () => {
+    let descriptionFilter = {
+      "useCase": [
+        "PARTICIPANT",
+      ],
+      "filter": [],
+      "text": ""
+    };
+
+    let wiaInputData = {
+      useCase: WiaInputUseCaseEnum.PARTICIPANT,
+      income: null,
+      products: []
+    };
+
+    let matchUseCase = topicDescriptionFilterService.matchesFilters(descriptionFilter, wiaInputData);
+    expect(matchUseCase).toBeTruthy();
+  });
+
+  it('should match the use case for user', () => {
+    let descriptionFilter = {
+      "useCase": [
+        "USER",
+      ],
+      "filter": [],
+      "text": ""
+    };
+
+    let wiaInputData = {
+      useCase: WiaInputUseCaseEnum.USER,
+      income: null,
+      products: []
+    };
+
+    let matchUseCase = topicDescriptionFilterService.matchesFilters(descriptionFilter, wiaInputData);
+    expect(matchUseCase).toBeTruthy();
+  });
+
+  it('should match the use case for default', () => {
+    let descriptionFilter = {
+      "useCase": [
+        "DEFAULT",
+      ],
+      "filter": [],
+      "text": ""
+    };
+
+    let wiaInputData = {
+      useCase: WiaInputUseCaseEnum.DEFAULT,
+      income: null,
+      products: []
+    };
+
+    let matchUseCase = topicDescriptionFilterService.matchesFilters(descriptionFilter, wiaInputData);
+    expect(matchUseCase).toBeTruthy();
+  });
+
+  it('should not filter the description by default', () => {
+    let descriptionFilter = {
+      "useCase": [
+        "DEFAULT",
+      ],
+      "filter": [
+        "WGA_AANV_STANDARD",
+        "WGA_AANV_UPGRADE"
+      ],
+      "text": ""
+    };
+
+    let wiaInputData = {
+      useCase: WiaInputUseCaseEnum.DEFAULT,
+      income: null,
+      products: []
+    };
+
+    let matchUseCase = topicDescriptionFilterService.isDescriptionFiltered(descriptionFilter, wiaInputData);
+    expect(matchUseCase).toBeFalsy();
+  });
 
 });

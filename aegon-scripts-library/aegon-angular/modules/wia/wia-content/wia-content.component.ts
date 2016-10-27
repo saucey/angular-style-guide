@@ -10,11 +10,15 @@ import { TopicService } from "./topic.service";
 import { WiaContentService } from "./wia-content.service";
 import { TopicBuilder } from "./topic-builder";
 import { WiaSubscriptionService } from "../wia-page/wia-page.subscription.service";
+import { TopicDescriptionFilterService } from "./topic-description-filter.service";
+import { ProductAttributesService } from "./product-attributes.service";
 
 @Component({
   selector: 'aa-wia-content',
   providers: [
     TopicService,
+    TopicDescriptionFilterService,
+    ProductAttributesService,
     TopicBuilder,
     WiaSubscriptionService,
     WiaContentService
