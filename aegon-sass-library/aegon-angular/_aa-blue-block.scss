@@ -23,6 +23,9 @@
 		overflow-x: hidden;
 		border-top: 1px solid $white;
 		padding: 15px 0;
+		&.hide-block {
+			display: none !important;
+		}
 		&:first-child {
 			border-top: none;
 			padding-top: 0;
@@ -38,6 +41,36 @@
 		}
 		.aa-bb--content-value {
 			font-size: 22px;
+		}
+		&.aa-bb--block-fixed-height-1 {
+			min-height: 85px;
+		}
+		&.aa-bb--block-fixed-height-2 {
+			min-height: 120px;
+		}
+		&.aa-bb--block-fixed-height-3 {
+			min-height: 155px;
+		}
+		&.aa-bb--block-fixed-height-4 {
+			min-height: 190px;
+		}
+		&.aa-bb--block-fixed-height-5 {
+			min-height: 225px;
+		}
+		&.aa-bb--block-fixed-height-6 {
+			min-height: 260px;
+		}
+		&.aa-bb--block-fixed-height-7 {
+			min-height: 295px;
+		}
+		&.aa-bb--block-fixed-height-8 {
+			min-height: 330px;
+		}
+		&.aa-bb--block-fixed-height-9 {
+			min-height: 365px;
+		}
+		&.aa-bb--block-fixed-height-10 {
+			min-height: 400px;
 		}
 	}
 	.aa-bb--footer {

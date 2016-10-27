@@ -1,5 +1,5 @@
 <div class="aa-bb--wrapper" [class.padding-bottom-fix]="showButton()" attr.data-bb-template="{{data.options.template}}">
-  <div class="aa-bb--content container_12 aa-bb--inner-block-{{i}}" *ngFor="let block of data.options[data.options.template]; let i = index;">
+  <div class="aa-bb--content container_12 aa-bb--inner-block-{{i}} aa-bb--inner-block-reference-{{block.showRules.dataReference}} aa-bb--block-fixed-height-{{block.fixedRowsHeight}}" [class.hide-block]="!block.showRules.onInit || block.showRules.alwaysShow" [class.hide-block-check]="!block.showRules.alwaysShow" *ngFor="let block of data.options[data.options.template]; let i = index;">
     <h3 class="aa-bb--content-title span12"> {{ block.boxTitle }} </h3>
     <div class="aa-bb--content-row" *ngFor="let blockValue of block.boxContent">
       <div class="aa-bb--content-inner-row" *ngIf="isString(blockValue.label)">
