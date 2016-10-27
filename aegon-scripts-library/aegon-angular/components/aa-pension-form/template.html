@@ -128,7 +128,7 @@
             </span>
 
             <span class="block" *ngIf='pension["insurablePartner"] !== "false" && hasPartner !== "hidden" && partnersDobReadable[1] !== "" && initChangeNoPolicy !== true && sessionPartnerDob == ""'>
-               Geboortedatum partner {{partnersDobReadable[1]}} the none session state
+               Geboortedatum partner {{partnersDobReadable[1]}}
             </span>
 
             <span *ngIf='sessionPartnerDob !== "" && initChangeHasPartner !== false && initChangeNoPolicy !== true && pension["havePartner"] !== "false" && pension["insurablePartner"] !== "false"'>
