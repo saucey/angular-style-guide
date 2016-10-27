@@ -232,9 +232,17 @@ export class GenericService {
 	  }
 
 	  let pensionInfo: any = clientStorage.session.getItem("pensionInfo");
-	  response.showButton = pensionInfo.pensionLocation==1;
+	  response.showButton = (pensionInfo.pensionLocation==1 && this.calculateFirst3Month(pensionInfo.startingDate));
 
 	  return response;
 
+	}
+
+	private calculateFirst3Month(date: string) {
+		let currentDate = new Date();
+		let startingDate = new Date(date);
+		let startingDateMonth = (currentDate.getFullYear()==startingDate.getFullYear()) ? startingDate.getMonth() : startingDate.getMonth()+12;
+
+		return (startingDateMonth-currentDate.getMonth())<=3;
 	}
 }
