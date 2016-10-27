@@ -172,12 +172,37 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
 
   btnValidationForUser(): boolean {
 
-    if(this.pension['birthDate'] !== '' && this.isAgeValid[2] == false || this.pension['birthDate'] !== '' && this.isAgeValid[2] == undefined) return false;
+    console.log(this.pension['birthDate'], 'the DOB!!!!');
+    console.log(this.isAgeValid[2], 'this is teh validation');
 
-    if(this.isAgeValid[2] == undefined || this.isAgeValid[2] == true ) return true;
+    // if(this.pension['birthDate'] !== '' && this.isAgeValid[2] == false || this.pension['birthDate'] !== '' && this.isAgeValid[2] == undefined) console.log('this is first') return false;
+
+    // if(this.isAgeValid[2] == undefined || this.isAgeValid[2] == true ) console.log('this is second') return true;
 
 
-    return false;
+    if(this.pension['birthDate'] !== "" && this.isAgeValid[2] == false ){
+
+      console.log('this birthdate valid');
+
+      return false;
+    }
+
+    if(this.pension['birthDate'] !== "" && this.pension['birthDate'] !== undefined && this.isAgeValid[2] == undefined ){
+
+      console.log('this birthdate valid and validation is undefined');
+
+      return false;
+    }
+
+
+    // if(this.pension['birthDate'] !== ""){
+    //
+    //   return false;
+    //
+    // }
+
+    //hide the button
+    return true;
 
   }
 
@@ -235,7 +260,7 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
 
   }
 
-  submitForm(data): void {    
+  submitForm(data): void {
     //this is were we need to set session and api call
     clientStorage.session.setItem("pensionInfo", data);
     this.bbpagecomponent.initialize();
