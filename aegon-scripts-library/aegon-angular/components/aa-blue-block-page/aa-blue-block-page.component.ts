@@ -72,6 +72,20 @@ export class AABlueBlockPageComponent extends AABaseComponent implements OnInit 
     if(this.options['start.url'] !== window.location.href) window.location.href = this.options['start.url'];       
   }
 
+  // Check if the pension location is from Aegon or other insurance
+  isPensionLocationAegon(pensionLocation: number) {    
+    return (pensionLocation == 0 || pensionLocation == 2);
+  }  
+
+	isStartingDateWithin3Months(date: string) {
+		let currentDate = new Date();
+		let startingDate = new Date(date);
+		let startingDateMonth = (currentDate.getFullYear() == startingDate.getFullYear()) ? 
+      startingDate.getMonth() : startingDate.getMonth() + 12;
+      
+		return (startingDateMonth - currentDate.getMonth()) <= 3;
+	}
+
   // Set the page structure. Used by ngClass and ngIf in view 
   setPageStructure() {      
 
@@ -82,12 +96,10 @@ export class AABlueBlockPageComponent extends AABaseComponent implements OnInit 
     this.options['link.text'] && this.options['link.url'] ? this.hasLink = true : this.hasLink = false;
 
     // Bottom content
-    this.options['bottom.title'] || this.options['bottom.text'] ? this.hasBottomContent = true: this.hasBottomContent = false;  
-    this.isPensionLocationAegon(this.pensionInfo.pensionLocation) ? this.bottomContentEnabled = true : this.bottomContentEnabled = false
-  }
-
-  // Check if the pension location is from Aegon or other insurance
-  isPensionLocationAegon(pensionLocation: number) {    
-    return (pensionLocation == 0 || pensionLocation == 2);
+    this.options['bottom.title'] || this.options['bottom.text'] ? 
+      this.hasBottomContent = true: this.hasBottomContent = false;  
+    
+    this.isPensionLocationAegon(this.pensionInfo.pensionLocation) && this.isStartingDateWithin3Months(this.pensionInfo.startingDate) ? 
+      this.bottomContentEnabled = true : this.bottomContentEnabled = false
   }
 }
