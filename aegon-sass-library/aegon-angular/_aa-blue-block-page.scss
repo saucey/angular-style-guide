@@ -1,6 +1,23 @@
 .aa-bb-page {
 	&.aa-bb-page--hidden { display: none; }
 
-
 	.span6--block { display: block; }
+
+	.aa-bb-page__leftContent,
+	.aa-bb-page__rightContent {
+		h3 {
+			color: $lochmara_approx;
+			font: 25px senticosansdtlight, Arial, Verdana, sans-serif;
+			margin: 0 0 12px;						
+		}
+
+		p { line-height: 1.1; }
+	}
+
+	.aa-bb-page__bottomContent {
+		h2 {
+			color: $lochmara_approx;
+			margin: 0 0 4px 0;						
+		}	
+	}
 }
