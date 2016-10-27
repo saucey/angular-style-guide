@@ -102,8 +102,12 @@
       <li class='number-form__list__section'>
         <span class="number-form__list__numberCircle">3</span>
         <span class="general-form__box__sub__header">{{data.options.block3.title}}</span>
+
+
         <div [@visibility]="editVisibility(3)">
+
           <div class="form-section__input__results">
+
             <span class="block">
               <span *ngIf='pension["havePartner"] == "true" ' class="block">
                 Ja, ik heb een partner
@@ -112,18 +116,32 @@
                 Nee, ik heb geen partner
               </span>
             </span>
-            <span *ngIf='hasPartner !== "hidden" 'class="block">
+
+            <span *ngIf='hasPartner !== "hidden" || pension["havePartner"] == "true"' class="block">
               <span *ngIf='pension["insurablePartner"] == "true"'>
                 Ja, ik wil een partnerpensioen verzekeren
               </span>
-              <span *ngIf='pension["insurablePartner"] == "false"'>
+
+              <span *ngIf='pension["insurablePartner"] == "false" && initChangeHasPartner == true || pension["havePartner"] == "true" && pension["insurablePartner"] == "false"'>
                 Nee, ik wil geen partnerpensioen verzekeren
               </span>
             </span>
-            <span class="block" *ngIf='hasPartner !== "hidden" && partnersDobReadable[1] !== "" && initChangeNoPolicy == false'>
-               Geboortedatum partner {{partnersDobReadable[1]}}
+
+            <span class="block" *ngIf='pension["insurablePartner"] !== "false" && hasPartner !== "hidden" && partnersDobReadable[1] !== "" && initChangeNoPolicy !== true && sessionPartnerDob == ""'>
+               Geboortedatum partner {{partnersDobReadable[1]}} the none session state
             </span>
+
+            <span *ngIf='sessionPartnerDob !== "" && initChangeHasPartner !== false && initChangeNoPolicy !== true && pension["havePartner"] !== "false" && pension["insurablePartner"] !== "false"'>
+              <span>Geboortedatum partner {{sessionPartnerDob| dateToReadableString}}</span>
+            </span>
+
+
+
+            <!--<p>{{initChangeNoPolicy}} | has partner, doesnt want to offer insurance</p>-->
+
+            <!--<h1>{{pension['birthDateOfPartner']}}</h1>-->
             <span class="edit" (click)="editSection(3)"> > Aanpassen</span>
+
           </div>
         </div>
 
@@ -138,13 +156,13 @@
 
                         <div class="white-radio-wrapper">
                           <label class="radio white-radio">
-                            <input type="radio" name="whofor" value="true" [(ngModel)]="pension['havePartner']" (change)="hasPartner = 'show'; initChangeHasPartnerYes = true" />
+                            <input type="radio" name="whofor" value="true" [(ngModel)]="pension['havePartner']" (change)="hasPartner = 'show'; initChangeHasPartner = true" />
                             <span class="radio"></span>
                             <span class="label-text">{{data.options.block3.box.label1}}</span>
                           </label>
 
                           <label class="radio white-radio">
-                            <input type="radio" name="whofor" value="false" [(ngModel)]="pension['havePartner']" (change)="hasPartner = 'hidden'; initChangeHasPartnerNo = true" />
+                            <input type="radio" name="whofor" value="false" [(ngModel)]="pension['havePartner']" (change)="hasPartner = 'hidden'; initChangeHasPartner = false" />
                             <span class="radio"></span>
                             <span class="label-text">{{data.options.block3.box.label2}}</span>
                           </label>
@@ -292,7 +310,7 @@
                           </select>
                         </div>
 
-                        <button class="button icon-right icon-calculator" type="button" (click)="goTo(5); submitForm(pension)" [disabled]="startingDate == ''">{{data.options.block5.box.btn}}</button>
+                        <button class="button icon-right icon-calculator" type="button" (click)="goTo(5); submitForm(pension)" [disabled]="pension['startingDate'] == ''">{{data.options.block5.box.btn}}</button>
 
                       </div>
                       <div class="col form-text__column">
