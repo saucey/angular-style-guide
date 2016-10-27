@@ -444,6 +444,18 @@ a.menu-5662:before {
   content: $font_icons_hammer;
 }
 
+.icon-verified {
+  &:before {
+    content: $font_icons_check;
+    color: $white;
+    background-color: $green;
+    padding: 5px;
+    line-height: 1;
+    border-radius: 50%;
+    @include rem('font-size', 12);
+  }
+}
+
 
 // Do not apply icons to old aegon menu.
 // TODO: Refactor menu's in Drupal module 'aegon_menu' to adapt to ATDL.

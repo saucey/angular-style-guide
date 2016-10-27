@@ -36,7 +36,6 @@ const monthLabels: string[] = [
   ]
 })
 
-//TODO ADD BASE64
 export class AAPensionFormComponent extends AABaseComponent implements OnInit {
 
   @Input() options: any = {};
@@ -47,12 +46,13 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
 
   public pension: any = clientStorage.session.getItem("pensionInfo") || {};
 
+  public sessionPartnerDob = this.pension['birthDateOfPartner'] || '';
+
   public defaultOptions: any = defaultOptions;
   public amountTooSmall: boolean;
   public message: boolean = false;
   public age: number;
-  public initChangeHasPartnerNo: boolean;
-  public initChangeHasPartnerYes: boolean;
+  public initChangeHasPartner: boolean;
   public initChangeNoPolicy: boolean;
 
   public currentStep = 'step1';
@@ -85,13 +85,13 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
     partner: 115,
   };
 
-  public hasPartner: string = "hidden";
-  public partnerDob: string = "hidden";
+  public hasPartner: string = this.pension['havePartner'] == "true" ? "show" :"hidden";
+  public partnerDob: string = this.pension['insurablePartner'] == "true" ? "show" :"hidden";
 
   public partnersDobReadable: any[] = [];
 
   public visibility = {
-    1: 'show',
+    1: this.pension['pensionAmount'] !== undefined ? 'hidden' : 'show',
     2: 'hidden',
     3: 'hidden',
     4: 'hidden',
@@ -106,6 +106,7 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
 
   ngOnInit() {
     super.ngOnInit();
+
     let date: Date = new Date(),
       year: number = date.getFullYear(),
       month: number = date.getMonth() + 1;
@@ -120,8 +121,6 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
         label = '1 ' + monthLabels[month - 1] + ' ' + year;
       this.startingDateChoices.push({value: value, label: label});
     }
-
-    console.log(this.pension, 'this is pension');
 
   }
 
@@ -148,33 +147,37 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
   }
 
   editSection(val): any {
+    this.bbpage.hidePage();
+    
     for (let i = 1; i <= 5; i++) {
       this.visibility[i] = (val == i) ? 'show' : 'hidden';
     }
   }
 
   btnValidationForUserPartner(): boolean {
+    if(this.pension['havePartner'] == "false") return false;
+    if(this.pension['havePartner'] == "true" && this.pension['insurablePartner'] == "false") return false;
+    if(this.pension['havePartner'] == "true" && this.pension['insurablePartner'] == "true" && this.isAgeValid[1] == undefined && this.pension['birthDateOfPartner'] !== undefined) return false;
 
-    console.log(this.pension['havePartner'], 'has value on page load');
-    console.log(this.hasPartner, 'has partner');
-    console.log(this.initChangeHasPartnerNo, 'init change has partner no');
-    console.log(this.initChangeNoPolicy, 'init change no policy');
-    console.log(this.partnerDob, 'partner DOB');
+    if(this.isAgeValid[1] == false) return false;
 
-    if(this.pension['havePartner'] !== undefined ) return false;
+    if(this.initChangeNoPolicy == true) return false;
 
-    if(this.hasPartner !== 'show' && this.initChangeHasPartnerNo == true) return false;
+    if(this.hasPartner == 'show') return true;
 
-    if(this.initChangeNoPolicy && this.partnerDob == 'hidden') return false;
+    if(this.hasPartner == 'hidden' && this.initChangeHasPartner == false) return false;
 
-    if(!this.isAgeValid[1] && this.isAgeValid[1] !== undefined) return false;
-
+    //hidden the button validation
     return true;
   }
 
   btnValidationForUser(): boolean {
 
+    if(this.pension['birthDate'] !== '' && this.isAgeValid[2] == false || this.pension['birthDate'] !== '' && this.isAgeValid[2] == undefined) return false;
+
     if(this.isAgeValid[2] == undefined || this.isAgeValid[2] == true ) return true;
+
+
     return false;
 
   }
@@ -235,7 +238,6 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
 
   submitForm(data): void {    
     //this is were we need to set session and api call
-    console.log(data, 'the object of the value');
     clientStorage.session.setItem("pensionInfo", data);
     this.bbpage.initialize();
     this.bbleft.callService();
