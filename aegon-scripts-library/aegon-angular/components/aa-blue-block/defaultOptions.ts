@@ -9,6 +9,7 @@ export const defaultOptions = {
     "url" : "/"
   },
   "dipFixed" : [{
+      "fixedRowsHeight" : 2,
       "showRules" : {
         "alwaysShow" : false,
         "onInit" : false,
@@ -27,6 +28,7 @@ export const defaultOptions = {
     } 
   ],
   "dipHighLow" : [{
+      "fixedRowsHeight" : 2,
       "showRules" : {
         "alwaysShow" : false,
         "onInit" : false,
@@ -55,7 +57,7 @@ export const defaultOptions = {
       },
       "boxTitle" : "Ouderdomspensioen",
       "boxContent" : [
-        "Eerste jaar",
+        {"label" : "Eerste jaar", "reference" : "firstYearsMine"},
         { 
           "subBoxTitle" : "Na 10 jaar",
           "subBoxContent" : [
@@ -73,7 +75,7 @@ export const defaultOptions = {
       },
       "boxTitle" : "Partnerpensioen",
       "boxContent" : [
-        "Eerste 5 jaar",
+        {"label" : "Eerste jaar", "reference" : "firstYearsPartner"},
         { 
           "subBoxTitle" : "Na 10 jaar",
           "subBoxContent" : [
@@ -93,7 +95,7 @@ export const defaultOptions = {
       },
       "boxTitle" : "Ouderdomspensioen",
       "boxContent" : [
-        "Eerste jaar",
+        {"label" : "Eerste jaar", "reference" : "firstYearsMine"},
         { 
           "subBoxTitle" : "Na 10 jaar",
           "subBoxContent" : [

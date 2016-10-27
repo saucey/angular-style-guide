@@ -188,7 +188,9 @@ export class GenericService {
 				"pessimisticMine" : 10000,
 				"optimisticPartner" : 10000,
 				"neutralPartner" : 10000,
-				"pessimisticPartner" : 10000
+				"pessimisticPartner" : 10000,
+				"firstYearsMine" : 10000,
+				"firstYearsPartner" : 10000
 			});
 		});
 		// Gets the real data.
@@ -202,7 +204,8 @@ export class GenericService {
 				"optimisticMine" : 10000,
 				"neutralMine" : 10000,
 				"pessimisticMine" : 10000,
-				"lifelongPartner" : 1000
+				"lifelongPartner" : 1000,
+				"firstYearsMine" : 10000
 			});
 		});
 
