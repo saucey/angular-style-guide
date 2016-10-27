@@ -128,7 +128,7 @@
             </span>
 
             <span class="block" *ngIf='pension["insurablePartner"] !== "false" && hasPartner !== "hidden" && partnersDobReadable[1] !== "" && initChangeNoPolicy !== true && sessionPartnerDob == ""'>
-               Geboortedatum partner {{partnersDobReadable[1]}} the none session state
+               Geboortedatum partner {{partnersDobReadable[1]}}
             </span>
 
             <span *ngIf='sessionPartnerDob !== "" && initChangeHasPartner !== false && initChangeNoPolicy !== true && pension["havePartner"] !== "false" && pension["insurablePartner"] !== "false"'>
@@ -310,7 +310,7 @@
                           </select>
                         </div>
 
-                        <button class="button icon-right icon-calculator" type="button" (click)="goTo(5); submitForm(pension)" [disabled]="pension['startingDate'] == ''">{{data.options.block5.box.btn}}</button>
+                        <button class="button icon-right icon-calculator" type="button" (click)="goTo(5); submitForm(pension)" [disabled]="!pension['startingDate']">{{data.options.block5.box.btn}}</button>
 
                       </div>
                       <div class="col form-text__column">
