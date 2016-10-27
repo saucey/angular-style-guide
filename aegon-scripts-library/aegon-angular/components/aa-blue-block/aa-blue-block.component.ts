@@ -92,8 +92,16 @@ export class AABlueBlockComponent extends AABaseComponent implements OnInit {
    *
    */
   updateValues(data): any {
+    let hiddenBlocks = document.querySelectorAll( "div[data-bb-template=" +  this.data.options.template + "] .hide-block-check") || [];
+
+    for (let i = 0; i < hiddenBlocks.length; i++) {
+      this.addClass(hiddenBlocks[i], 'hide-block');
+    }
+
     for(let key in data) {
       let element = document.querySelector( "div[data-bb-template=" +  this.data.options.template + "] .aa-bb--value-reference-"+key) || null;
+      let block = document.querySelector( "div[data-bb-template=" +  this.data.options.template + "] .aa-bb--inner-block-reference-"+key) || null;
+      if(block!==null) this.removeClass(block, 'hide-block');
       if(element!==null) element.textContent = data[key];
     }
     if(!this.data.options.button.forceShow) {
@@ -116,4 +124,27 @@ export class AABlueBlockComponent extends AABaseComponent implements OnInit {
   hideLoader() {
     
   }
+
+  private addClass(el, className) {
+    if (el.classList)
+      el.classList.add(className)
+    else if (!this.hasClass(el, className)) el.className += " " + className
+  }
+
+  private removeClass(el, className) {
+    if (el.classList)
+      el.classList.remove(className)
+    else if (this.hasClass(el, className)) {
+      var reg = new RegExp('(\\s|^)' + className + '(\\s|$)')
+      el.className=el.className.replace(reg, ' ')
+    }
+  }
+
+  private hasClass(el, className) {
+    if (el.classList)
+      return el.classList.contains(className)
+    else
+      return !!el.className.match(new RegExp('(\\s|^)' + className + '(\\s|$)'))
+  }
+
 }

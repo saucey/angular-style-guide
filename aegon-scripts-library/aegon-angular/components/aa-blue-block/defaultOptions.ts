@@ -9,25 +9,50 @@ export const defaultOptions = {
     "url" : "/"
   },
   "dipFixed" : [{
+      "showRules" : {
+        "alwaysShow" : false,
+        "onInit" : false,
+        "dataReference" : "lifelongMine"
+      },
       "boxTitle" : "Ouderdomspensioen",
       "boxContent" : [{"label" : "Levenslang", "reference" : "lifelongMine"}]
     }, {
+      "showRules" : {
+        "alwaysShow" : false,
+        "onInit" : false,
+        "dataReference" : "lifelongPartner"
+      },
       "boxTitle" : "Partnerpensioen",
       "boxContent" : [{"label" : "Levenslang", "reference" : "lifelongPartner"}]
     } 
   ],
   "dipHighLow" : [{
+      "showRules" : {
+        "alwaysShow" : false,
+        "onInit" : false,
+        "dataReference" : "first5YearsMine"
+      },
       "boxTitle" : "Ouderdomspensioen",
       "boxContent" : [
         {"label" : "Eerste 5 jaar", "reference" : "first5YearsMine"},
         {"label" : "Na 5 jaar", "reference" : "after5YearsMine"}
       ]
     }, {
+      "showRules" : {
+        "alwaysShow" : false,
+        "onInit" : false,
+        "dataReference" : "lifelongPartner"
+      },
       "boxTitle" : "Partnerpensioen",
       "boxContent" : [{"label" : "Levenslang", "reference" : "lifelongPartner"}]
     } 
   ],
   "vpuVariable" : [{
+      "showRules" : {
+        "alwaysShow" : false,
+        "onInit" : false,
+        "dataReference" : "optimisticMine"
+      },
       "boxTitle" : "Ouderdomspensioen",
       "boxContent" : [
         "Eerste jaar",
@@ -41,6 +66,11 @@ export const defaultOptions = {
         }
       ]
     }, {
+      "showRules" : {
+        "alwaysShow" : false,
+        "onInit" : false,
+        "dataReference" : "optimisticPartner"
+      },
       "boxTitle" : "Partnerpensioen",
       "boxContent" : [
         "Eerste 5 jaar",
@@ -56,6 +86,11 @@ export const defaultOptions = {
     } 
   ],
   "vpuFixed" : [{
+      "showRules" : {
+        "alwaysShow" : false,
+        "onInit" : false,
+        "dataReference" : "optimisticMine"
+      },
       "boxTitle" : "Ouderdomspensioen",
       "boxContent" : [
         "Eerste jaar",
@@ -69,6 +104,11 @@ export const defaultOptions = {
         }
       ]
     }, {
+      "showRules" : {
+        "alwaysShow" : false,
+        "onInit" : false,
+        "dataReference" : "lifelongPartner"
+      },
       "boxTitle" : "Partnerpensioen",
       "boxContent" : [{"label" : "Levenslang", "reference" : "lifelongPartner"}]
     } 

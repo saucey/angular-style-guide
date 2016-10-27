@@ -23,6 +23,9 @@
 		overflow-x: hidden;
 		border-top: 1px solid $white;
 		padding: 15px 0;
+		&.hide-block {
+			display: none !important;
+		}
 		&:first-child {
 			border-top: none;
 			padding-top: 0;
