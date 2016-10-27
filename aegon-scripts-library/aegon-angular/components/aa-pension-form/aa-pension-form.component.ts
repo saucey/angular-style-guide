@@ -153,19 +153,9 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
 
   btnValidationForUserPartner(): boolean {
 
-    console.log(this.isAgeValid[1], 'the is age valid!!!!');
-    console.log(this.pension['havePartner'], 'does have a partner!!!');
-    console.log(this.pension['insurablePartner'], 'insurable partner status!!!');
-
-    console.log(this.initChangeHasPartner, 'init change has partner value');
-
-    console.log(this.pension['birthDateOfPartner'], 'the birth date of partner!!!');
-
-
     if(this.pension['havePartner'] == "false") return false;
     if(this.pension['havePartner'] == "true" && this.pension['insurablePartner'] == "false") return false;
     if(this.pension['havePartner'] == "true" && this.pension['insurablePartner'] == "true" && this.isAgeValid[1] == undefined && this.pension['birthDateOfPartner'] !== undefined) return false;
-
 
     if(this.isAgeValid[1] == false) return false;
 
@@ -247,8 +237,6 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
   submitForm(data): void {
     //this is were we need to set session and api call
     clientStorage.session.setItem("pensionInfo", data);
-
-    console.log(data, 'the data!!!');
 
     this.bbpage.initialize();
   }
