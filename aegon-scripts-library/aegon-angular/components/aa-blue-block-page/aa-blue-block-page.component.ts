@@ -35,15 +35,15 @@ export class AABlueBlockPageComponent extends AABaseComponent implements OnInit 
     this.initialize();
   }
 
-  // Reinitialize component, check pension info and set page structure again 
+  // Get and check pension info, set page structure and call service from blue block component
   public initialize() {
     this.pensionInfo = this.getPensionInfo();
 
     if(this.isPensionInfoAvailable(this.pensionInfo)) {    
       this.setPageStructure();
-      this.showPage();        
-    
-    } else { if(this.options.startPage !== undefined) this.redirectToStartPage(); }   
+      this.showPage();
+          
+    } else { if(this.options['start.redirect'] == true) this.redirectToStartPage(); }   
   }
 
   hidePage() {
@@ -67,7 +67,7 @@ export class AABlueBlockPageComponent extends AABaseComponent implements OnInit 
 
   // Redirect to start page (if it is not already there)
   redirectToStartPage() {
-    if(this.options.startPage !== window.location.href) window.location.href = this.options.startPage;       
+    if(this.options['start.url'] !== window.location.href) window.location.href = this.options['start.url'];       
   }
 
   // Set the page structure. Used by ngClass and ngIf in view 
