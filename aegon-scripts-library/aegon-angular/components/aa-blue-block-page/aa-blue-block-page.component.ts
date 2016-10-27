@@ -23,8 +23,10 @@ export class AABlueBlockPageComponent extends AABaseComponent implements OnInit 
   public pensionInfo: any = {};
   
   public pageIsHidden: boolean = true;
-  public hasBottomContent: boolean;
+  public hasTopContent: boolean;
   public hasLink: boolean;
+  public hasBottomContent: boolean;
+  public bottomContentEnabled: boolean;
 
   constructor(private thisElement: ElementRef) {
     super(thisElement);
@@ -71,13 +73,17 @@ export class AABlueBlockPageComponent extends AABaseComponent implements OnInit 
   }
 
   // Set the page structure. Used by ngClass and ngIf in view 
-  setPageStructure() {        
+  setPageStructure() {      
+
+    // Top content
+    this.options['top.title'] ? this.hasTopContent = true: this.hasTopContent = false;
     
     // Link    
-    this.options['link.text'] && this.options['link.url'] ? this.hasLink = true: this.hasLink = false;
+    this.options['link.text'] && this.options['link.url'] ? this.hasLink = true : this.hasLink = false;
 
     // Bottom content
-    this.isPensionLocationAegon(this.pensionInfo.pensionLocation) ? this.hasBottomContent = true : this.hasBottomContent = false
+    this.options['bottom.title'] || this.options['bottom.text'] ? this.hasBottomContent = true: this.hasBottomContent = false;  
+    this.isPensionLocationAegon(this.pensionInfo.pensionLocation) ? this.bottomContentEnabled = true : this.bottomContentEnabled = false
   }
 
   // Check if the pension location is from Aegon or other insurance

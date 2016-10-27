@@ -41,8 +41,9 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
 
   @Input() options: any = {};
   @Input() data: any = {};
-  @Input() bbpagecomponent;
-  @Input() bbcomponent;
+  @Input() bbpage;
+  @Input() bbleft;
+  @Input() bbright;
 
   public pension: any = clientStorage.session.getItem("pensionInfo") || {};
 
@@ -236,8 +237,9 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
     //this is were we need to set session and api call
     console.log(data, 'the object of the value');
     clientStorage.session.setItem("pensionInfo", data);
-    this.bbpagecomponent.initialize();
-    this.bbcomponent.callService();    
+    this.bbpage.initialize();
+    this.bbleft.callService();
+    this.bbright.callService();    
   }
 
   testMethod(val: number): number {
