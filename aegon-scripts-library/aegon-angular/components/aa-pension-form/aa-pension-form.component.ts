@@ -148,7 +148,7 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
 
   editSection(val): any {
     this.bbpage.hidePage();
-    
+
     for (let i = 1; i <= 5; i++) {
       this.visibility[i] = (val == i) ? 'show' : 'hidden';
     }
@@ -173,38 +173,18 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
 
   btnValidationForUser(): boolean {
 
-    console.log(this.pension['birthDate'], 'the DOB!!!!');
-    console.log(this.isAgeValid[2], 'this is teh validation');
-
-    // if(this.pension['birthDate'] !== '' && this.isAgeValid[2] == false || this.pension['birthDate'] !== '' && this.isAgeValid[2] == undefined) console.log('this is first') return false;
-
-    // if(this.isAgeValid[2] == undefined || this.isAgeValid[2] == true ) console.log('this is second') return true;
-
-
     if(this.pension['birthDate'] !== "" && this.isAgeValid[2] == false ){
-
-      console.log('this birthdate valid');
 
       return false;
     }
 
     if(this.pension['birthDate'] !== "" && this.pension['birthDate'] !== undefined && this.isAgeValid[2] == undefined ){
 
-      console.log('this birthdate valid and validation is undefined');
-
       return false;
     }
 
-
-    // if(this.pension['birthDate'] !== ""){
-    //
-    //   return false;
-    //
-    // }
-
     //hide the button
     return true;
-
   }
 
   isValidAmount(): boolean {
@@ -266,7 +246,7 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
     clientStorage.session.setItem("pensionInfo", data);
     this.bbpage.initialize();
     this.bbleft.callService();
-    this.bbright.callService();    
+    this.bbright.callService();
   }
 
   testMethod(val: number): number {
