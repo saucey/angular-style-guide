@@ -182,7 +182,14 @@ export class GenericService {
 	public vpuVariable(serviceUrl: string, serviceCredential: string): Promise<any> {
 		//Mock
 		return new Promise((resolve) => {
-			resolve({});
+			resolve({
+				"optimisticMine" : 10000,
+				"neutralMine" : 10000,
+				"pessimisticMine" : 10000,
+				"optimisticPartner" : 10000,
+				"neutralPartner" : 10000,
+				"pessimisticPartner" : 10000
+			});
 		});
 		// Gets the real data.
 		//return this.getApiData("post", serviceUrl, {});
@@ -191,7 +198,12 @@ export class GenericService {
 	public vpuFixed(serviceUrl: string, serviceCredential: string): Promise<any> {
 		//Mock
 		return new Promise((resolve) => {
-			resolve({});
+			resolve({
+				"optimisticMine" : 10000,
+				"neutralMine" : 10000,
+				"pessimisticMine" : 10000,
+				"lifelongPartner" : 1000
+			});
 		});
 
 		// Gets the real data.

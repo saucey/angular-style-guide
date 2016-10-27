@@ -5,6 +5,7 @@ export const defaultOptions = {
   "button" : {
     "label" : "Vraag offerte aan",
     "show" : false,
+    "forceShow" : false,
     "url" : "/"
   },
   "dipFixed" : [{
