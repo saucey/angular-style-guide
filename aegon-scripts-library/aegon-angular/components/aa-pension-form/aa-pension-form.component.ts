@@ -36,13 +36,13 @@ const monthLabels: string[] = [
   ]
 })
 
-//TODO ADD BASE64
 export class AAPensionFormComponent extends AABaseComponent implements OnInit {
 
   @Input() options: any = {};
   @Input() data: any = {};
-  @Input() bbpagecomponent;
-  @Input() bbcomponent;
+  @Input() bbpage;
+  @Input() bbleft;
+  @Input() bbright;
 
   public pension: any = clientStorage.session.getItem("pensionInfo") || {};
 
@@ -91,7 +91,7 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
   public partnersDobReadable: any[] = [];
 
   public visibility = {
-    1: 'show',
+    1: this.pension['pensionAmount'] !== undefined ? 'hidden' : 'show',
     2: 'hidden',
     3: 'hidden',
     4: 'hidden',
@@ -147,13 +147,14 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
   }
 
   editSection(val): any {
+    this.bbpage.hidePage();
+    
     for (let i = 1; i <= 5; i++) {
       this.visibility[i] = (val == i) ? 'show' : 'hidden';
     }
   }
 
   btnValidationForUserPartner(): boolean {
-
     if(this.pension['havePartner'] == "false") return false;
     if(this.pension['havePartner'] == "true" && this.pension['insurablePartner'] == "false") return false;
     if(this.pension['havePartner'] == "true" && this.pension['insurablePartner'] == "true" && this.isAgeValid[1] == undefined && this.pension['birthDateOfPartner'] !== undefined) return false;
@@ -263,8 +264,9 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
   submitForm(data): void {
     //this is were we need to set session and api call
     clientStorage.session.setItem("pensionInfo", data);
-    this.bbpagecomponent.initialize();
-    this.bbcomponent.callService();
+    this.bbpage.initialize();
+    this.bbleft.callService();
+    this.bbright.callService();    
   }
 
   testMethod(val: number): number {

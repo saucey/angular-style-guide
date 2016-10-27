@@ -60,10 +60,10 @@ export class AABlueBlockComponent extends AABaseComponent implements OnInit {
    *
    */
   showButton(): boolean {
-    if(!this.data.options.button.show) {
-      return false;
+    if(this.data.options.button.show || this.data.options.button.forceShow) {
+      return true;
     }
-    return true;
+    return false;
   }
 
   /*
@@ -96,7 +96,9 @@ export class AABlueBlockComponent extends AABaseComponent implements OnInit {
       let element = document.querySelector( "div[data-bb-template=" +  this.data.options.template + "] .aa-bb--value-reference-"+key) || null;
       if(element!==null) element.textContent = data[key];
     }
-    this.data.options.button.show = data.showButton;
+    if(!this.data.options.button.forceShow) {
+      this.data.options.button.show = data.showButton || this.data.options.button.show;
+    }
   }
 
   /*
