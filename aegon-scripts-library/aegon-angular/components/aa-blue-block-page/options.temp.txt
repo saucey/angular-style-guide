@@ -1,0 +1,16 @@
+    start.url = /template-pension-form.html;
+    start.redirect = false;
+
+    top.title = Uw pensioensmogelijkheden;
+    
+    left.title = Direct Ingaand Pensioen;
+    left.text = Een pensioensuitkering met de zekerheid van een vaste uitkering per maand; 
+
+    right.title = Uitkerend Beleggingspensioen;
+    right.text = Uw pensioenkapitaal wordt belegd waarbij u kans heeft op een hogere pensioensuitkering;     
+
+    link.text = This is a link;
+    link.url = http://go.to.here;
+
+    bottom.title = Offerte aanvragen;
+    bottom.text = U heeft aangegeven datuw uw pensioen vrijkomt bij Aegon. U krijgt dan binnen 3 maanden voorafgaan aan uw pensioen automatisch per brief van ons een offerte;

@@ -8,6 +8,9 @@ require('../../../../modules/clientStorage');
 describe('AA Blue Block Page Component', () => {
   let comp: AABlueBlockPageComponent;
   let fixture : ComponentFixture<AABlueBlockPageComponent>;
+  let currentDate = new Date();
+  // let within3MonthsDate = currentDate.setMonth(currentDate.getMonth() + 1);
+  // let notWithin3MonthsDate = currentDate.setMonth(currentDate.getMonth() + 5);
   let testPensionInfo = {
     "pensionAmount" : 25000,
     "pensionLocation" : 0,
@@ -58,5 +61,14 @@ describe('AA Blue Block Page Component', () => {
 
   it('should agree pension location is Aegon and other insurance', () => {
     expect(comp.isPensionLocationAegon(2)).toBeTruthy();
-  });   
+  }); 
+
+  // it('should agree starting date is within 3 months', () => {
+  //   expect(comp.isStartingDateWithin3Months(within3MonthsDate)).toBeTruthy();
+  // });    
+
+  // it('should disagree starting date is within 3 months', () => {
+  //   expect(comp.isStartingDateWithin3Months(notWithin3MonthsDate)).not.toBeTruthy();
+  // });     
+
 });
