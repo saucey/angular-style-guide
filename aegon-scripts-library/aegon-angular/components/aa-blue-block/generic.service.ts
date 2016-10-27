@@ -61,7 +61,7 @@ export class GenericService {
 		          "PENSIOENOVEREENKOMST": {
 		            "STORTING_INLEG": {
 		              "KOOPSOM": pensionInfo.pensionAmount,
-		              "IND_VREEMDGELD": (pensionInfo.pensionLocation===1),
+		              "IND_VREEMDGELD": (pensionInfo.pensionLocation==1),
 		              "IND_HERKOMST_OVL": false
 		            },
 		            "PENSIOENAANSPRAAK": {
@@ -134,7 +134,7 @@ export class GenericService {
 		          "PENSIOENOVEREENKOMST": {
 		            "STORTING_INLEG": {
 		              "KOOPSOM": pensionInfo.pensionAmount,
-		              "IND_VREEMDGELD": (pensionInfo.pensionLocation===1),
+		              "IND_VREEMDGELD": (pensionInfo.pensionLocation==1),
 		              "IND_HERKOMST_OVL": false
 		            },
 		            "PENSIOENAANSPRAAK": {
@@ -182,7 +182,14 @@ export class GenericService {
 	public vpuVariable(serviceUrl: string, serviceCredential: string): Promise<any> {
 		//Mock
 		return new Promise((resolve) => {
-			resolve({});
+			resolve({
+				"optimisticMine" : 10000,
+				"neutralMine" : 10000,
+				"pessimisticMine" : 10000,
+				"optimisticPartner" : 10000,
+				"neutralPartner" : 10000,
+				"pessimisticPartner" : 10000
+			});
 		});
 		// Gets the real data.
 		//return this.getApiData("post", serviceUrl, {});
@@ -191,7 +198,12 @@ export class GenericService {
 	public vpuFixed(serviceUrl: string, serviceCredential: string): Promise<any> {
 		//Mock
 		return new Promise((resolve) => {
-			resolve({});
+			resolve({
+				"optimisticMine" : 10000,
+				"neutralMine" : 10000,
+				"pessimisticMine" : 10000,
+				"lifelongPartner" : 1000
+			});
 		});
 
 		// Gets the real data.
@@ -232,9 +244,17 @@ export class GenericService {
 	  }
 
 	  let pensionInfo: any = clientStorage.session.getItem("pensionInfo");
-	  response.showButton = !(pensionInfo.pensionLocation===1);
+	  response.showButton = (pensionInfo.pensionLocation==1 && this.calculateFirst3Month(pensionInfo.startingDate));
 
 	  return response;
 
+	}
+
+	private calculateFirst3Month(date: string) {
+		let currentDate = new Date();
+		let startingDate = new Date(date);
+		let startingDateMonth = (currentDate.getFullYear()==startingDate.getFullYear()) ? startingDate.getMonth() : startingDate.getMonth()+12;
+
+		return (startingDateMonth-currentDate.getMonth())<=3;
 	}
 }
