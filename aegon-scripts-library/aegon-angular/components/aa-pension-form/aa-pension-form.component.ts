@@ -148,7 +148,7 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
 
   editSection(val): any {
     this.bbpage.hidePage();
-    
+
     for (let i = 1; i <= 5; i++) {
       this.visibility[i] = (val == i) ? 'show' : 'hidden';
     }
@@ -173,13 +173,18 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
 
   btnValidationForUser(): boolean {
 
-    if(this.pension['birthDate'] !== '' && this.isAgeValid[2] == false || this.pension['birthDate'] !== '' && this.isAgeValid[2] == undefined) return false;
+    if(this.pension['birthDate'] !== "" && this.isAgeValid[2] == false ){
 
-    if(this.isAgeValid[2] == undefined || this.isAgeValid[2] == true ) return true;
+      return false;
+    }
 
+    if(this.pension['birthDate'] !== "" && this.pension['birthDate'] !== undefined && this.isAgeValid[2] == undefined ){
 
-    return false;
+      return false;
+    }
 
+    //hide the button
+    return true;
   }
 
   isValidAmount(): boolean {
@@ -236,12 +241,12 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
 
   }
 
-  submitForm(data): void {    
+  submitForm(data): void {
     //this is were we need to set session and api call
     clientStorage.session.setItem("pensionInfo", data);
     this.bbpage.initialize();
     this.bbleft.callService();
-    this.bbright.callService();    
+    this.bbright.callService();
   }
 
   testMethod(val: number): number {
