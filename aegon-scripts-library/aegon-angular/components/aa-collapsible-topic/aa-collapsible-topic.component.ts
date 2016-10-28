@@ -1,11 +1,22 @@
 /**
- * aa-collapsible-topic.component created on 10/18/16 10:29 AM.
+ * AACollapsibleTopicComponent created on 10/18/16 10:29 AM.
  *
  * @description Provides structure for displaying collapsible topics
  * @author Florian Popa <florian@webgenerals.com>
  */
 
-import {Component, ElementRef, OnInit, OnChanges, Input, trigger, state, animate, transition, style} from "@angular/core";
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  OnChanges,
+  Input,
+  trigger,
+  state,
+  animate,
+  transition,
+  style
+} from "@angular/core";
 
 @Component({
   selector: 'aa-collapsible-topic',
@@ -40,16 +51,11 @@ export class AACollapsibleTopicComponent implements OnInit {
   @Input()
   topicsCollection: string[];
 
-  /**
-   * Active item location by row and column
-   */
   public activeItem = {
     row: null,
     column: null
   };
-
   public showFullText: boolean = false;
-
   public visibility: string = 'hidden';
 
   /**
@@ -78,10 +84,21 @@ export class AACollapsibleTopicComponent implements OnInit {
     return this.activeItem;
   }
 
+  /**
+   * Checks if the full description is shown
+   *
+   * @param description
+   * @returns {boolean}
+   */
   public isFullTextShown = (description) => {
     return this.showFullText && this.isDescriptionTextValid(description);
   }
 
+  /**
+   * Changes the visibility of the description
+   *
+   * @param showFullText
+   */
   public setShowFullText = (showFullText) => {
     this.showFullText = showFullText;
     if (showFullText) {
@@ -102,27 +119,6 @@ export class AACollapsibleTopicComponent implements OnInit {
       return true;
     } else {
       return false;
-    }
-  }
-
-  /**
-   * @param {boolean|string} filter
-   * @returns {boolean}
-   */
-  public filterTopic(filter) {
-    if (filter === false) {
-      return true;
-    }
-
-    if (filter === true) {
-      return false;
-    }
-
-    if (typeof filter == 'string') {
-      return true;
-      // search for the filter in selected attributes
-      // if it matches then return true
-      // else false
     }
   }
 
