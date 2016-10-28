@@ -65,7 +65,7 @@ export class GenericService {
 		            },
 		            "PENSIOENAANSPRAAK": {
 		              "IND_OUDERDOMSPENSIOEN": true,
-		              "IND_NABESTAANDENPENSIOEN": pensionInfo.insurablePartner,
+		              "IND_NABESTAANDENPENSIOEN": (pensionInfo.insurablePartner=="true") ? true : false,
 		              "IND_HOOG_LAAGPENSIOEN": false,
 		              "IND_PREPENSIOEN": false,
 		              "BEGIN_DATUM_UITKERING": pensionInfo.startingDate,
@@ -85,7 +85,7 @@ export class GenericService {
 		        }
 		      }
 		    };
-		    if (pensionInfo.insurablePartner) {
+		    if ((pensionInfo.insurablePartner=="true") ? true : false) {
 		      body['BScalculateRequest']['DOSSIER']['PARTIJ'].push(
 		        {
 		          "_AE_PERSOON": {
@@ -136,7 +136,7 @@ export class GenericService {
 		            },
 		            "PENSIOENAANSPRAAK": {
 		              "IND_OUDERDOMSPENSIOEN": true,
-		              "IND_NABESTAANDENPENSIOEN": pensionInfo.insurablePartner,
+		              "IND_NABESTAANDENPENSIOEN": (pensionInfo.insurablePartner=="true") ? true : false,
 		              "IND_HOOG_LAAGPENSIOEN": false,
 		              "IND_PREPENSIOEN": false,
 		              "BEGIN_DATUM_UITKERING": pensionInfo.startingDate,
@@ -156,7 +156,7 @@ export class GenericService {
 		        }
 		      }
 		    };
-		    if (pensionInfo.insurablePartner) {
+		    if ((pensionInfo.insurablePartner=="true") ? true : false) {
 		      body['BScalculateRequest']['DOSSIER']['PARTIJ'].push(
 		        {
 		          "_AE_PERSOON": {
@@ -200,7 +200,7 @@ export class GenericService {
 		          "PENSIOENOVEREENKOMST": {
 				"PENSIOENAANSPRAAK": {
 		              "IND_OUDERDOMSPENSIOEN": true,
-		              "IND_NABESTAANDENPENSIOEN": pensionInfo.insurablePartner,
+		              "IND_NABESTAANDENPENSIOEN": (pensionInfo.insurablePartner=="true") ? true : false,
 		              "BEGIN_DATUM_UITKERING": pensionInfo.startingDate,
 		              "IND_VARIABEL_NABESTAANDENPENSIOEN": vpuVariable
 		            },
@@ -224,7 +224,7 @@ export class GenericService {
 		        }
 		      }
 		    };
-		    if (pensionInfo.insurablePartner) {
+		    if ((pensionInfo.insurablePartner=="true") ? true : false) {
 		      body['BScalculateVPURequest']['DOSSIER']['PARTIJ'].push(
 		        {
 		          "_AE_PERSOON": {
@@ -268,7 +268,7 @@ export class GenericService {
 		          "PENSIOENOVEREENKOMST": {
 				"PENSIOENAANSPRAAK": {
 		              "IND_OUDERDOMSPENSIOEN": true,
-		              "IND_NABESTAANDENPENSIOEN": pensionInfo.insurablePartner,
+		              "IND_NABESTAANDENPENSIOEN": (pensionInfo.insurablePartner=="true") ? true : false,
 		              "BEGIN_DATUM_UITKERING": pensionInfo.startingDate,
 		              "IND_VARIABEL_NABESTAANDENPENSIOEN": vpuVariable
 		            },
@@ -292,7 +292,7 @@ export class GenericService {
 		        }
 		      }
 		    };
-		    if (pensionInfo.insurablePartner) {
+		    if ((pensionInfo.insurablePartner=="true") ? true : false) {
 		      body['BScalculateVPURequest']['DOSSIER']['PARTIJ'].push(
 		        {
 		          "_AE_PERSOON": {
