@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers, RequestOptions, Response} from "@angular/http";
 import {Observable} from 'rxjs/Observable';
+import {AAMoneyPipe} from '../../pipes/money.pipe';
 
 @Injectable()
 export class GenericService {
@@ -41,8 +42,6 @@ export class GenericService {
 		      	resolve({});
 		    	});
 		}
-
-		console.log("pensionInfo", pensionInfo);
 
 		let headers = new Headers({'Content-Type': 'application/json', "Authorization" : `Basic ${serviceCredential}`});
     		let options = new RequestOptions({headers: headers});
@@ -114,8 +113,6 @@ export class GenericService {
 		      	resolve({});
 		    	});
 		}
-
-		console.log("pensionInfo", pensionInfo);
 
 		let headers = new Headers({'Content-Type': 'application/json', "Authorization" : `Basic ${serviceCredential}`});
     		let options = new RequestOptions({headers: headers});
@@ -228,22 +225,22 @@ export class GenericService {
 	    if (highLow) {
 	      if (s === 'OPLL') {
 	        hlAmount += parseFloat(value);
-	        response.after5YearsMine = value;
+	        response.after5YearsMine = "€ " + new AAMoneyPipe().transform(value, [true]);
 	      } else if (s === 'OPT') {
 	        hlAmount += parseFloat(value);
 	      } else if (s === 'PPLL') {
-	        response.lifelongPartner = value;
+	        response.lifelongPartner = "€ " + new AAMoneyPipe().transform(value, [true]);
 	      }
 	    } else {
 	      if (s === 'OPLL') {
-	        response.lifelongMine = value;
+	        response.lifelongMine = "€ " + new AAMoneyPipe().transform(value, [true]);
 	      } else if (s === 'PPLL') {
-	        response.lifelongPartner = value;
+	        response.lifelongPartner = "€ " + new AAMoneyPipe().transform(value, [true]);
 	      }
 	    }
 	  });
 	  if (highLow) {
-	    response.first5YearsMine = String(hlAmount);
+	    response.first5YearsMine = "€ " + new AAMoneyPipe().transform(hlAmount, []);
 	  }
 
 	  let pensionInfo: any = clientStorage.session.getItem("pensionInfo");
