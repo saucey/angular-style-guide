@@ -1,10 +1,9 @@
 @import "./aa-wia-calculator";
 
 .wia_form {
-  h1, h2, h3, h4, h5 {
-    font-weight: normal;
-  }
-  .hidden {
-    display: none !important;
+  margin: 2em 0;
+
+  .wia_form__products-switch {
+    margin: 1em 0;
   }
 }
