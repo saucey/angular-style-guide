@@ -22,3 +22,4 @@ export * from './aa-sticky/aa-sticky.component';
 export * from './aa-pension-form/aa-pension-form.component';
 export * from './aa-editable-value/aa-editable-value.component';
 export * from './aa-blue-block/aa-blue-block.component';
+export * from './aa-todos/aa-todos.component';
