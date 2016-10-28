@@ -20,15 +20,6 @@ export class CalculatorDataService {
       });
   }
 
-  private static getColumnWidth(data, index: number) {
-    return {
-      0: 15,
-      1: 15,
-      2: data.periods.length === 3 ? 70 : 30,
-      3: 40
-    }[index];
-  }
-
   // Sort by priority, for the same priority numbers use reverse order
   private static sortByPriority(items) {
     return items.reverse().sort((a, b) => a.priority < b.priority);
@@ -98,9 +89,10 @@ export class CalculatorDataService {
       // sort by string
       return a.id < b.id ? -1 : 1;
     }).map(product => {
+      console.log('product.attrs', product.attrs);
       return [
         product.id,
-        ...product.attrs.map(el => el.value)
+        product.attrs[0].value //@TODO handle attributes dynamically
       ]
     });
 
@@ -122,7 +114,7 @@ export class CalculatorDataService {
     if (MOCKS[OPTIONS_KEY]) {
       return MOCKS[OPTIONS_KEY];
     } else {
-
+      console.error('Couldn\'t find result for key: ' + OPTIONS_KEY, 'in', MOCKS)
     }
   }
 

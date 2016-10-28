@@ -12,7 +12,7 @@ export enum WGA_EXCED_Code {
 
 export enum WGA_EXCED_Value {
   Off = 1,
-  Attr1 = 0,
+  Attr1 = 70,
   Attr2 = 75,
   Attr3 = 80
 }
@@ -25,7 +25,7 @@ export enum IVA_EXCED_Code {
 }
 export enum IVA_EXCED_Value {
   Off = 1,
-  Attr1 = 0,
+  Attr1 = 70,
   Attr2 = 75,
   Attr3 = 80
 }

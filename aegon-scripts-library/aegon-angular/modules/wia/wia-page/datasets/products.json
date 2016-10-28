@@ -112,7 +112,7 @@
   },
   {
     "id": "IVA_EXCED",
-    "label": "IVA_EXCED",
+    "label": "IVA-Excedentverzekering",
     "desc": "",
     "selected": false,
     "attrs": [
@@ -223,7 +223,7 @@
   },
   {
     "id": "WGA_AANV_LIGHT",
-    "label": "WGA_AANV_LIGHT",
+    "label": "WGA-Aanvullingsverzekering light",
     "desc": "",
     "selected": false,
     "attrs": [
@@ -275,6 +275,7 @@
   },
   {
     "id": "WGA_AANV_STANDARD",
+    "hidden": true,
     "attrs": [
       {
         "id": "END_AGE",
@@ -324,7 +325,7 @@
   },
   {
     "id": "WGA_AANV_UPGRADE",
-    "label": "WGA_AANV_UPGRADE",
+    "label": "WGA-Aanvullingsverzekering upgrade",
     "desc": "",
     "selected": false,
     "attrs": [
@@ -376,7 +377,7 @@
   },
   {
     "id": "WIA_35MIN",
-    "label": "WIA_35MIN",
+    "label": "WIA-35minverzekering",
     "desc": "",
     "selected": false,
     "attrs": [
@@ -384,7 +385,7 @@
         "id": "BENEFIT_PERIOD",
         "label": "Uitkeringsduur",
         "value": 5,
-        "visible": false,
+        "visible": true,
         "options": [
           {
             "value": 5,
@@ -404,7 +405,7 @@
   },
   {
     "id": "WIA_35MIN_BODEM",
-    "label": "WIA_35MIN_BODEM",
+    "label": "WIA-35minverzekering",
     "desc": "",
     "selected": false,
     "attrs": [
@@ -416,15 +417,15 @@
         "options": [
           {
             "value": 5,
-            "label": "5%"
+            "label": "5"
           },
           {
             "value": 7.5,
-            "label": "7.5%"
+            "label": "7.5"
           },
           {
             "value": 10,
-            "label": "10%"
+            "label": "10"
           }
         ]
       }

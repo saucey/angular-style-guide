@@ -46,7 +46,7 @@ describe('CalculatorProductService', () => {
             attrs: [
               {
                 id: 'COVERAGE_RATE_IVA',
-                value: 0
+                value: 70
               }
             ]
           }
@@ -69,7 +69,7 @@ describe('CalculatorProductService', () => {
             attrs: [
               {
                 id: 'COVERAGE_RATE_WGA',
-                value: 0
+                value: 70
               }
             ]
           }
@@ -115,7 +115,7 @@ describe('CalculatorProductService', () => {
             attrs: [
               {
                 id: 'COVERAGE_RATE_WGA',
-                value: 0
+                value: 70
               }
             ]
           },
@@ -124,7 +124,7 @@ describe('CalculatorProductService', () => {
             attrs: [
               {
                 id: 'COVERAGE_RATE_IVA',
-                value: 0
+                value: 70
               }
             ]
           }

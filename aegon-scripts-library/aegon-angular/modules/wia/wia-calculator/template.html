@@ -24,6 +24,19 @@
         hoeveel u nog wél kan werken en wat u daarmee nog kan verdienen. Dit noemen we uw
         ‘restverdiencapaciteit’. Is de vermindering van uw verdiencapaciteit minder dan 35% dan krijgt u geen
         uitkering van de overheid.</p>
+
+      <div class="row-fluid wia_calculator__extra_inputs">
+        <div class="span5">
+          Benutting restverdiencapaciteit:
+        </div>
+        <div class="span7">
+          <aa-slider class="aa-input--percentage"
+                     [(ngModel)]="usage.value"
+                     (modelChange)="sliderUpdate(usage, $event)"
+                     [options]="usage.options">
+          </aa-slider>
+        </div>
+      </div>
     </div>
 
     <div class="wia_calculator__coverages__r2" [hidden]="!(disability.value >= 35 && disability.value < 80)">
@@ -76,7 +89,6 @@
 
       <ul class="wia_graph__legend__items">
         <li *ngFor="let item of legendData?.items" [style.background]="legendData.groups[item].meta.color">
-          <span class="wia_graph__legend__help icon-help"></span>
           {{legendData.groups[item].meta.label}}
         </li>
       </ul>
@@ -92,7 +104,7 @@
 
       <div  class="wia_graph__column">
         <div class="wia_graph__top_label">
-          1e en 2e jaar <span class="wia_graph__top_label_help icon-help"></span>
+          1e en 2e jaar
         </div>
 
         <div class="wia_graph__chart">
@@ -100,15 +112,15 @@
         </div>
 
         <div class="wia_graph__bottom_label">
-          <strong>€47.540</strong>
-          <span>€3962</span>
+          <strong>€{{ graphData[0].amountAnnual | money }}</strong>
+          <span>€{{ graphData[0].amountMonthly | money }}</span>
         </div>
 
       </div>
 
       <div  class="wia_graph__column">
         <div class="wia_graph__top_label">
-          vanaf 3e jaar <span class="wia_graph__top_label_help icon-help"></span>
+          vanaf 3e jaar
         </div>
 
         <div class="wia_graph__chart">
@@ -116,8 +128,8 @@
         </div>
 
         <div class="wia_graph__bottom_label">
-          <strong>€47.540</strong>
-          <span>€3962</span>
+          <strong>€{{ graphData[1].amountAnnual | money }}</strong>
+          <span>€{{ graphData[1].amountMonthly | money }}</span>
         </div>
 
       </div>
@@ -125,7 +137,7 @@
       <div  class="wia_graph__column">
 
         <div class="wia_graph__top_label">
-          tot pensioen leeftijd <span class="wia_graph__top_label_help icon-help"></span>
+          tot pensioen leeftijd
         </div>
 
         <div class="wia_graph__chart">
@@ -133,8 +145,8 @@
         </div>
 
         <div class="wia_graph__bottom_label">
-          <strong>€47.540</strong>
-          <span>€3962</span>
+          <strong>€{{ graphData[2].amountAnnual | money }}</strong>
+          <span>€{{ graphData[2].amountMonthly | money }}</span>
         </div>
       </div>
 

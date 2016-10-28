@@ -10,7 +10,7 @@
 
     <button class="button arrow" [class.hidden]="step > 1" (click)="step = 2">Bekijk</button>
 
-    <div [class.hidden]="step < 2">
+    <div *ngIf="step > 1" [@flyTop]="'in'">
       <div class="header">U wordt ziek en dan?</div>
       <p>Bent u na 2 jaar nog steeds ziek? Dan bepaalt het UWV wat u nog kunt verdienen in dezelfde of een andere baan, ook al bent u ziek. Dat is de restverdiencapaciteit: het bedrag dat u nog kunt verdienen.</p>
 
@@ -23,7 +23,7 @@
 
     <button class="button arrow" [class.hidden]="step === 1 || step > 2" (click)="step = 3">Vul in</button>
 
-    <div [class.hidden]="step < 3">
+    <div *ngIf="step > 2" [@flyTop]="'in'">
 
       <label>
         Uw salaris, bruto per jaar
@@ -41,17 +41,18 @@
             <button class="button arrow" (click)="onCodeSubmit()">Verder</button>
           </div>
 
-          <ul class="arrow">
+          <ul class="arrow wia_form__products-switch">
             <li><a (click)="visiblePage = 2">Geen code? zelf verzekering kiezen</a></li>
           </ul>
-
         </div>
+
+
         <div class="form-2" *ngIf="visiblePage === 2">
           <form (submit)="onProductFormSubmit($event)">
             <p>Het verzekeringsproduct dat u heeft:</p>
-            <div *ngFor="let product of products; trackBy:trackById">
+            <div *ngFor="let product of getProducts(); trackBy:trackById">
               <label>
-                {{product.id}}
+                {{product.label}}
                 <input type="checkbox" name="wia-form-product-{{product.id}}"
                        [(ngModel)]="product.selected"
                        [disabled]="product.disabled"
@@ -71,7 +72,7 @@
               </div>
             </div>
 
-            <ul class="arrow">
+            <ul class="arrow wia_form__products-switch">
               <li><a (click)="visiblePage = 1">Productcode ontvangen? Voer de code in</a></li>
             </ul>
 
@@ -79,6 +80,8 @@
           </form>
 
         </div>
+
+
       </div>
     </div>
 

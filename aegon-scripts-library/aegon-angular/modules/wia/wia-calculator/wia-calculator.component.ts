@@ -166,7 +166,7 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit {
       input.permDisability = this.permanentDisability;
     }
 
-    if (this.disability.value >= 35 && this.disability.value < 80) {
+    if (this.disability.value < 80) {
 
       input.usage = Math.round(this.usage.value / 10) * 10
     }
@@ -191,16 +191,23 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit {
         this.graphData = [
           {
             suppressAmountLabels: true,
+            amountAnnual: graphData[0].amount,
+            amountMonthly: graphData[0].amount / 12,
             columns: [graphData[0], graphData[1]]
           },
           {
+            amountAnnual: graphData[2].amount,
+            amountMonthly: graphData[2].amount / 12,
             columns: [graphData[2]]
           },
           {
-            subgraph: true,
+            amountAnnual: graphData[3].amount,
+            amountMonthly: graphData[3].amount / 12,
             columns: [graphData[3]]
           }
         ];
+        
+        console.log('this', this);
 
         this.legendData = legendData;
       }

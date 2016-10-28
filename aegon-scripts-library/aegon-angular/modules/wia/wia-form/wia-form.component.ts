@@ -1,4 +1,14 @@
-import { Component, ElementRef, OnInit } from "@angular/core";
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  trigger,
+  state,
+  style,
+  transition,
+  animate
+} from "@angular/core";
+
 import { AABaseComponent } from "../../../lib/classes/AABaseComponent";
 import { WIAInputModel } from "../wia-page/models/wia-input.model";
 import { WiaSubscriptionService } from "../wia-page/wia-page.subscription.service";
@@ -12,7 +22,22 @@ const FORM_TEMPLATE = require('./template.html');
 @Component({
   selector: 'aa-wia-form',
   providers: [WiaSubscriptionService, WiaPageProductsService, WiaPagePersonalizationService],
-  template: FORM_TEMPLATE
+  template: FORM_TEMPLATE,
+  animations: [
+    trigger('flyTop', [
+      state('in', style({
+        transform: 'translateY(0)',
+        opacity: 1
+      })),
+      transition('void => *', [
+        style({
+          transform: 'translateY(-5%)',
+          opacity: 0
+        }),
+        animate(300)
+      ])
+    ])
+  ]
 })
 
 /**
@@ -98,6 +123,10 @@ export class WiaFormComponent extends AABaseComponent implements OnInit {
 
   public trackByValue(index, el) {
     return el.value;
+  }
+
+  public getProducts () {
+    return this.products.filter(el => !el.hidden);
   }
 
   public updateProduct(product) {
