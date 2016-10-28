@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers, RequestOptions, Response} from "@angular/http";
 import {Observable} from 'rxjs/Observable';
+import {AAMoneyPipe} from '../../pipes/money.pipe';
 
 @Injectable()
 export class GenericService {
@@ -42,8 +43,6 @@ export class GenericService {
 		    	});
 		}
 
-		console.log("pensionInfo", pensionInfo);
-
 		let headers = new Headers({'Content-Type': 'application/json', "Authorization" : `Basic ${serviceCredential}`});
     		let options = new RequestOptions({headers: headers});
 
@@ -102,7 +101,7 @@ export class GenericService {
 		let request = this.getApiData("post", serviceUrl, body, options);
 		
 		return request.then((response) => {
-			return this.processResult(false, response);
+			return this.processResultDIP(false, response);
 		});
 	}
 
@@ -115,8 +114,6 @@ export class GenericService {
 		    	});
 		}
 
-		console.log("pensionInfo", pensionInfo);
-
 		let headers = new Headers({'Content-Type': 'application/json', "Authorization" : `Basic ${serviceCredential}`});
     		let options = new RequestOptions({headers: headers});
 
@@ -175,46 +172,148 @@ export class GenericService {
 		let request = this.getApiData("post", serviceUrl, body, options);
 		
 		return request.then((response) => {
-			return this.processResult(true, response);
+			return this.processResultDIP(true, response);
 		});
 	}
 
 	public vpuVariable(serviceUrl: string, serviceCredential: string): Promise<any> {
-		//Mock
-		return new Promise((resolve) => {
-			resolve({
-				"optimisticMine" : 10000,
-				"neutralMine" : 10000,
-				"pessimisticMine" : 10000,
-				"optimisticPartner" : 10000,
-				"neutralPartner" : 10000,
-				"pessimisticPartner" : 10000,
-				"firstYearsMine" : 10000,
-				"firstYearsPartner" : 10000
-			});
-		});
+		let pensionInfo: any = clientStorage.session.getItem("pensionInfo") || null;
+
+		if(pensionInfo===null) {
+			return new Promise((resolve) => {
+		      	resolve({});
+		    	});
+		}
+
+		let vpuVariable: boolean = true;
+
+		let headers = new Headers({'Content-Type': 'application/json', "Authorization" : `Basic ${serviceCredential}`});
+    		let options = new RequestOptions({headers: headers});
+
+		let body:any = {
+		      "BScalculateVPURequest": {
+		        "AILHEADER": {
+		          "CLIENTID": "AEGONNL",
+		          "CORRELATIONID": "##VPU SS##"
+		        },
+		        "DOSSIER": {		          
+		          "PENSIOENOVEREENKOMST": {
+				"PENSIOENAANSPRAAK": {
+		              "IND_OUDERDOMSPENSIOEN": true,
+		              "IND_NABESTAANDENPENSIOEN": pensionInfo.insurablePartner,
+		              "BEGIN_DATUM_UITKERING": pensionInfo.startingDate,
+		              "IND_VARIABEL_NABESTAANDENPENSIOEN": vpuVariable
+		            },
+		            "STORTING_INLEG": {
+		              "KOOPSOM": pensionInfo.pensionAmount,
+		              "IND_VREEMDGELD": true
+		            },
+		          },
+		          "PARTIJ": [
+		            {
+		              "_AE_PERSOON": {
+		                "VOLGNUM": 1,
+		                "GESLACH": "M",
+		                "GEBDAT": pensionInfo.birthDate
+		              }
+		            }
+		          ],
+				"REKENFACTOREN": {
+					"IND_NETTO_PENSIOEN": "false"
+			 	}
+		        }
+		      }
+		    };
+		    if (pensionInfo.insurablePartner) {
+		      body['BScalculateVPURequest']['DOSSIER']['PARTIJ'].push(
+		        {
+		          "_AE_PERSOON": {
+		            "VOLGNUM": 2,
+		            "GESLACH": "V",
+		            "GEBDAT": pensionInfo.birthDateOfPartner
+		          }
+		        }
+		      );
+		    }
+
 		// Gets the real data.
-		//return this.getApiData("post", serviceUrl, {});
+		let request = this.getApiData("post", serviceUrl, body, options);
+		
+		return request.then((response) => {
+			return this.processResultVPU(false, response);
+		});
 	}	
 
 	public vpuFixed(serviceUrl: string, serviceCredential: string): Promise<any> {
-		//Mock
-		return new Promise((resolve) => {
-			resolve({
-				"optimisticMine" : 10000,
-				"neutralMine" : 10000,
-				"pessimisticMine" : 10000,
-				"lifelongPartner" : 1000,
-				"firstYearsMine" : 10000
-			});
-		});
+		let pensionInfo: any = clientStorage.session.getItem("pensionInfo") || null;
+
+		if(pensionInfo===null) {
+			return new Promise((resolve) => {
+		      	resolve({});
+		    	});
+		}
+
+		let vpuVariable: boolean = false;
+
+		let headers = new Headers({'Content-Type': 'application/json', "Authorization" : `Basic ${serviceCredential}`});
+    		let options = new RequestOptions({headers: headers});
+
+		let body:any = {
+		      "BScalculateVPURequest": {
+		        "AILHEADER": {
+		          "CLIENTID": "AEGONNL",
+		          "CORRELATIONID": "##VPU SS##"
+		        },
+		        "DOSSIER": {		          
+		          "PENSIOENOVEREENKOMST": {
+				"PENSIOENAANSPRAAK": {
+		              "IND_OUDERDOMSPENSIOEN": true,
+		              "IND_NABESTAANDENPENSIOEN": pensionInfo.insurablePartner,
+		              "BEGIN_DATUM_UITKERING": pensionInfo.startingDate,
+		              "IND_VARIABEL_NABESTAANDENPENSIOEN": vpuVariable
+		            },
+		            "STORTING_INLEG": {
+		              "KOOPSOM": pensionInfo.pensionAmount,
+		              "IND_VREEMDGELD": true
+		            },
+		          },
+		          "PARTIJ": [
+		            {
+		              "_AE_PERSOON": {
+		                "VOLGNUM": 1,
+		                "GESLACH": "M",
+		                "GEBDAT": pensionInfo.birthDate
+		              }
+		            }
+		          ],
+				"REKENFACTOREN": {
+					"IND_NETTO_PENSIOEN": "false"
+			 	}
+		        }
+		      }
+		    };
+		    if (pensionInfo.insurablePartner) {
+		      body['BScalculateVPURequest']['DOSSIER']['PARTIJ'].push(
+		        {
+		          "_AE_PERSOON": {
+		            "VOLGNUM": 2,
+		            "GESLACH": "V",
+		            "GEBDAT": pensionInfo.birthDateOfPartner
+		          }
+		        }
+		      );
+		    }
 
 		// Gets the real data.
-		//return this.getApiData("post", serviceUrl, {});
+		let request = this.getApiData("post", serviceUrl, body, options);
+		
+		return request.then((response) => {
+			return this.processResultVPU(true, response);
+		});
 	}
 
-	processResult(highLow, data) {
-	  console.log("processResult gets called", data);
+	processResultDIP(highLow, data) {
+	  console.log("processResultDIP gets called", data);
 	  let response: any = {};
 	  let items: any[] = data['BScalculateResponse']['PENSIOENOVEREENKOMST']['PENSIOENAANSPRAAK'],
 	    hlAmount = 0;
@@ -228,22 +327,22 @@ export class GenericService {
 	    if (highLow) {
 	      if (s === 'OPLL') {
 	        hlAmount += parseFloat(value);
-	        response.after5YearsMine = value;
+	        response.after5YearsMine = "€ " + new AAMoneyPipe().transform(value, [true]);
 	      } else if (s === 'OPT') {
 	        hlAmount += parseFloat(value);
 	      } else if (s === 'PPLL') {
-	        response.lifelongPartner = value;
+	        response.lifelongPartner = "€ " + new AAMoneyPipe().transform(value, [true]);
 	      }
 	    } else {
 	      if (s === 'OPLL') {
-	        response.lifelongMine = value;
+	        response.lifelongMine = "€ " + new AAMoneyPipe().transform(value, [true]);
 	      } else if (s === 'PPLL') {
-	        response.lifelongPartner = value;
+	        response.lifelongPartner = "€ " + new AAMoneyPipe().transform(value, [true]);
 	      }
 	    }
 	  });
 	  if (highLow) {
-	    response.first5YearsMine = String(hlAmount);
+	    response.first5YearsMine = "€ " + new AAMoneyPipe().transform(hlAmount, []);
 	  }
 
 	  let pensionInfo: any = clientStorage.session.getItem("pensionInfo");
@@ -259,5 +358,49 @@ export class GenericService {
 		let startingDateMonth = (currentDate.getFullYear()==startingDate.getFullYear()) ? startingDate.getMonth() : startingDate.getMonth()+12;
 
 		return (startingDateMonth-currentDate.getMonth())<=3;
+	}
+
+	processResultVPU(vast, data) {
+	  console.log("processResultVPU gets called", data);
+	  let response: any = {};
+	  let items: any[] = data['BScalculateVPUResponse']['DOSSIER']['PENSIOENOVEREENKOMST']['PENSIOENAANSPRAAK'];
+	  let itemsOpll: any = {};
+	  let itemsPpll: any = {};
+
+	if (!Array.isArray(items)) {
+		items = [items];
+	}
+	
+	items.forEach(item => {
+	    let s = item['PENSIOENVORM'];
+		for(var index in item) { 
+			if(s === 'OPLL')
+				itemsOpll[index] = item[index];
+			else
+				itemsPpll[index] = item[index];
+		}
+	});
+
+	if(itemsPpll['BEDRAG']) {
+		if(vast) {
+			response.lifelongPartner = "€ " + new AAMoneyPipe().transform((itemsPpll['BEDRAG']/12), [true]);
+		} else {
+			response.firstYearsPartner = "€ " + new AAMoneyPipe().transform((itemsPpll['BEDRAG']/12), [true]);
+			response.optimisticPartner = "€ " + new AAMoneyPipe().transform((itemsPpll['BEDRAG10JAAR_OPTIMISTISCH']/12), [true]);
+			response.neutralPartner = "€ " + new AAMoneyPipe().transform((itemsPpll['BEDRAG10JAAR_STANDAARD']/12), [true]);
+			response.pessimisticPartner = "€ " + new AAMoneyPipe().transform((itemsPpll['BEDRAG10JAAR_PESSIMISTISCH']/12), [true]);
+		}
+	}
+
+	response.firstYearsMine = "€ " + new AAMoneyPipe().transform((itemsOpll['BEDRAG']/12), [true]);
+	response.optimisticMine = "€ " + new AAMoneyPipe().transform((itemsOpll['BEDRAG10JAAR_OPTIMISTISCH']/12), [true]);
+	response.neutralMine = "€ " + new AAMoneyPipe().transform((itemsOpll['BEDRAG10JAAR_STANDAARD']/12), [true]);
+	response.pessimisticMine = "€ " + new AAMoneyPipe().transform((itemsOpll['BEDRAG10JAAR_PESSIMISTISCH']/12), [true]);
+
+	  let pensionInfo: any = clientStorage.session.getItem("pensionInfo");
+	  response.showButton = this.calculateFirst3Month(pensionInfo.startingDate);
+
+	  return response;
+
 	}
 }
