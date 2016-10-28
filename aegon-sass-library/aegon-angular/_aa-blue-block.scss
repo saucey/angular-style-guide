@@ -1,3 +1,7 @@
+.container_12 .row-fluid .aa-bb--wrapper {
+	[class*="span"] {	min-height: 30px; }
+}
+
 .aa-bb--wrapper {
 	background-color: $blue;
 	min-height: 200px;	
@@ -13,7 +17,7 @@
 	}
 
 	[class*="span"] {
-		margin-left: 0 !important;
+		margin-left: 0 !important;		
 	}
 
 	.aa-bb--header {
@@ -32,6 +36,7 @@
 		}
 		.aa-bb--content-title {
 			color: $white;
+			margin: 14px 0;
 		}
 		.aa-bb--content-label {
 			font-size: 16px;

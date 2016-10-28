@@ -24,6 +24,8 @@ export class AABlueBlockPageComponent extends AABaseComponent implements OnInit 
   
   public pageIsHidden: boolean = true;
   public hasTopContent: boolean;
+  public columnLeftIsHidden: boolean;
+  public columnRightIsHidden: boolean;
   public hasLink: boolean;
   public hasBottomContent: boolean;
   public bottomContentEnabled: boolean;
@@ -91,7 +93,11 @@ export class AABlueBlockPageComponent extends AABaseComponent implements OnInit 
 
     // Top content
     this.options['top.title'] ? this.hasTopContent = true: this.hasTopContent = false;
-    
+
+    // Right column
+    this.options['right.hide'] == 'noInsurablePartner' ? this.columnRightIsHidden = true: this.columnRightIsHidden = false;    
+    console.info(this.options['right.hide']);
+
     // Link    
     this.options['link.text'] && this.options['link.url'] ? this.hasLink = true : this.hasLink = false;
 
