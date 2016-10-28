@@ -3,15 +3,42 @@
 
 	.span6--block { display: block; }
 
+	.aa-bb-page__topContent {
+		h2 {
+			color: $lochmara_approx;
+			font-size: 44px;
+			margin: 12px 0 22px;
+
+			@media (max-width: 640px) { 
+				font-size: 28px; 
+				overflow: hidden;	
+				text-overflow: ellipsis;
+				white-space: nowrap;			
+			}					
+
+			@media (max-width: 960px) { font-size: 36px; }			
+		}	
+	}	
+
+	.aa-bb-page__column {
+		&.aa-bb-page__column--hidden { display: none; }
+	}
 	.aa-bb-page__leftContent,
 	.aa-bb-page__rightContent {
 		h3 {
 			color: $lochmara_approx;
 			font: 25px senticosansdtlight, Arial, Verdana, sans-serif;
-			margin: 0 0 12px;						
+			margin: 0 0 12px;			
+
+			@media (max-width: 960px) { 
+				font-size: 20px;
+				overflow: hidden;	
+				text-overflow: ellipsis;
+				white-space: nowrap;					 
+			}						
 		}
 
-		p { line-height: 1.1; }
+		p { line-height: 1.15; }
 	}
 
 	.aa-bb-page__bottomContent {
