@@ -1,11 +1,11 @@
-import { CalculatorProductsService } from '../aa-wia-calculator-products.service';
+import { WiaPageProductsService } from "../wia-page.products.service";
 
 describe('CalculatorProductService', () => {
 
-  let productService: CalculatorProductsService;
+  let productService: WiaPageProductsService;
 
   beforeEach(() => {
-    productService = new CalculatorProductsService();
+    productService = new WiaPageProductsService();
 
     productService.setProductConfigurations([
       ['1', '2', '3'],

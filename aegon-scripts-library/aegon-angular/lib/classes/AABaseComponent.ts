@@ -75,11 +75,9 @@ export class AABaseComponent implements OnInit {
     if (aaId) {
       this.setGlobal(aaId, this);
       this.globalId = aaId;
-      // console.log('basecomponent register aaId', aaId, this);
     }
     // Merge options with default options
     if (this.options || this.defaultOptions) {
-      console.log(this.defaultOptions, 'this is the default options!!!')
 
       // First clone default options
       this.data.options = this.defaultOptions ? libUtil.clone(this.defaultOptions) : {};
@@ -87,8 +85,6 @@ export class AABaseComponent implements OnInit {
         libXsr.path(this.data.options, key, this.options[key]);
       });
     }
-    // console.log('merged', this.data.options);
-
     // Reset state
     this.reset();
   }

@@ -1,5 +1,5 @@
 {
-  "[35000,50,50,false,[]]": {
+  "[35000,50,50,null,[]]": {
     "periods": [
       {
         "label": "1e jaar",
@@ -12,7 +12,7 @@
               {
                 "id": "INCOME_01",
                 "percentage": 100,
-                "amount": 6410
+                "amount": 35000
               }
             ]
           }
@@ -28,7 +28,7 @@
               {
                 "id": "INCOME_02",
                 "percentage": 70,
-                "amount": 0
+                "amount": 24500
               }
             ]
           }
@@ -36,15 +36,15 @@
       },
       {
         "label": "3-38 maanden",
-        "amount": 6410,
-        "percentage": 70,
+        "amount": 17500,
+        "percentage": 50,
         "products": [
           {
             "components": [
               {
                 "id": "INCOME_01",
                 "percentage": 0,
-                "amount": 6410
+                "amount": 0
               },
               {
                 "id": "INCOME_02",
@@ -57,13 +57,13 @@
             "components": [
               {
                 "id": "GOV_01",
-                "percentage": 20,
-                "amount": 1234
+                "percentage": 30,
+                "amount": 10500
               },
               {
                 "id": "GOV_02",
-                "percentage": 25,
-                "amount": 5341.666666666666
+                "percentage": 20,
+                "amount": 7000
               }
             ]
           },
@@ -72,7 +72,7 @@
               {
                 "id": "WGA_01",
                 "percentage": 0,
-                "amount": 6410
+                "amount": 0
               },
               {
                 "id": "WIA_01",
@@ -86,7 +86,7 @@
               {
                 "id": "EXT_01",
                 "percentage": 0,
-                "amount": 1234
+                "amount": 0
               }
             ]
           }
@@ -94,15 +94,15 @@
       },
       {
         "label": "tot aan AOW-leeftijd",
-        "amount": 3000,
-        "percentage": 70,
+        "amount": 14000,
+        "percentage": 40,
         "products": [
           {
             "components": [
               {
                 "id": "INCOME_01",
                 "percentage": 0,
-                "amount": 6410
+                "amount": 0
               },
               {
                 "id": "INCOME_02",
@@ -115,13 +115,13 @@
             "components": [
               {
                 "id": "GOV_01",
-                "percentage": 20,
-                "amount": 1234
+                "percentage": 30,
+                "amount": 10500
               },
               {
                 "id": "GOV_03",
-                "percentage": 15,
-                "amount": 0
+                "percentage": 10,
+                "amount": 3500
               }
             ]
           },
@@ -130,7 +130,7 @@
               {
                 "id": "WGA_02",
                 "percentage": 0,
-                "amount": 6410
+                "amount": 0
               },
               {
                 "id": "WIA_01",
@@ -152,7 +152,7 @@
       }
     ]
   },
-  "[35000,50,50,false,[\"WGA_EXCED\",[\"ATTR_01\",60]]]": {
+  "[35000,50,50,null,[[\"WGA_EXCED\",70]]]": {
     "periods": [
       {
         "label": "1e jaar",
@@ -165,7 +165,7 @@
               {
                 "id": "INCOME_01",
                 "percentage": 100,
-                "amount": 6410
+                "amount": 35000
               }
             ]
           }
@@ -181,7 +181,7 @@
               {
                 "id": "INCOME_02",
                 "percentage": 70,
-                "amount": 0
+                "amount": 24500
               }
             ]
           }
@@ -189,15 +189,15 @@
       },
       {
         "label": "3-38 maanden",
-        "amount": 6419,
-        "percentage": 70,
+        "amount": 22750,
+        "percentage": 65,
         "products": [
           {
             "components": [
               {
                 "id": "INCOME_01",
                 "percentage": 0,
-                "amount": 6410
+                "amount": 0
               },
               {
                 "id": "INCOME_02",
@@ -210,13 +210,13 @@
             "components": [
               {
                 "id": "GOV_01",
-                "percentage": 20,
-                "amount": 1234
+                "percentage": 30,
+                "amount": 10500
               },
               {
                 "id": "GOV_02",
-                "percentage": 25,
-                "amount": 5341.666666666666
+                "percentage": 20,
+                "amount": 7000
               }
             ]
           },
@@ -224,8 +224,8 @@
             "components": [
               {
                 "id": "WGA_01",
-                "percentage": 5,
-                "amount": 6410
+                "percentage": 15,
+                "amount": 5250
               },
               {
                 "id": "WIA_01",
@@ -239,7 +239,7 @@
               {
                 "id": "EXT_01",
                 "percentage": 0,
-                "amount": 1234
+                "amount": 0
               }
             ]
           }
@@ -247,15 +247,15 @@
       },
       {
         "label": "tot aan AOW-leeftijd",
-        "amount": 3009,
-        "percentage": 70,
+        "amount": 22050,
+        "percentage": 63,
         "products": [
           {
             "components": [
               {
                 "id": "INCOME_01",
                 "percentage": 0,
-                "amount": 6410
+                "amount": 0
               },
               {
                 "id": "INCOME_02",
@@ -268,12 +268,26 @@
             "components": [
               {
                 "id": "GOV_01",
-                "percentage": 20,
-                "amount": 1234
+                "percentage": 30,
+                "amount": 10500
               },
               {
-                "id": "GOV_03",
+                "id": "GOV_02",
                 "percentage": 15,
+                "amount": 5250
+              }
+            ]
+          },
+          {
+            "components": [
+              {
+                "id": "WGA_01",
+                "percentage": 18,
+                "amount": 6300
+              },
+              {
+                "id": "WIA_01",
+                "percentage": 0,
                 "amount": 0
               }
             ]
@@ -281,9 +295,148 @@
           {
             "components": [
               {
+                "id": "EXT_01",
+                "percentage": 0,
+                "amount": 0
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "[35000,50,100,null,[]]": {
+    "periods": [
+      {
+        "label": "1e jaar",
+        "amount": 35000,
+        "percentage": 100,
+        "products": [
+          {
+            "label": "Income",
+            "components": [
+              {
+                "id": "INCOME_01",
+                "percentage": 100,
+                "amount": 35000
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "2e jaar",
+        "amount": 24500,
+        "percentage": 70,
+        "products": [
+          {
+            "components": [
+              {
+                "id": "INCOME_02",
+                "percentage": 70,
+                "amount": 24500
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "3-38 maanden",
+        "amount": 24500,
+        "percentage": 70,
+        "products": [
+          {
+            "components": [
+              {
+                "id": "INCOME_01",
+                "percentage": 0,
+                "amount": 0
+              },
+              {
+                "id": "INCOME_02",
+                "percentage": 0,
+                "amount": 0
+              }
+            ]
+          },
+          {
+            "components": [
+              {
+                "id": "GOV_01",
+                "percentage": 30,
+                "amount": 10500
+              },
+              {
+                "id": "GOV_02",
+                "percentage": 40,
+                "amount": 14000
+              }
+            ]
+          },
+          {
+            "components": [
+              {
+                "id": "WGA_01",
+                "percentage": 0,
+                "amount": 0
+              },
+              {
+                "id": "WIA_01",
+                "percentage": 0,
+                "amount": 0
+              }
+            ]
+          },
+          {
+            "components": [
+              {
+                "id": "EXT_01",
+                "percentage": 0,
+                "amount": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "tot aan AOW-leeftijd",
+        "amount": 21000,
+        "percentage": 20,
+        "products": [
+          {
+            "components": [
+              {
+                "id": "INCOME_01",
+                "percentage": 0,
+                "amount": 0
+              },
+              {
+                "id": "INCOME_02",
+                "percentage": 0,
+                "amount": 0
+              }
+            ]
+          },
+          {
+            "components": [
+              {
+                "id": "GOV_01",
+                "percentage": 30,
+                "amount": 10500
+              },
+              {
+                "id": "GOV_03",
+                "percentage": 30,
+                "amount": 3500
+              }
+            ]
+          },
+          {
+            "components": [
+              {
                 "id": "WGA_02",
-                "percentage": 9,
-                "amount": 6410
+                "percentage": 0,
+                "amount": 0
               },
               {
                 "id": "WIA_01",

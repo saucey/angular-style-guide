@@ -1,9 +1,9 @@
-<div class="aa-collapsible-row" *ngFor="let content of topicsList; let row = index;">
+<div class="aa-collapsible-row" *ngFor="let topicRow of topicsCollection; let row = index;">
 
-  <h5 class="collapsible-row__title">{{ content.title }}</h5>
+  <h5 class="collapsible-row__title">{{ topicRow.title }}</h5>
 
   <div class="collapsible-content-icons">
-    <div class="collapsible-content-icon" *ngFor="let topic of content.topics; let column = index;">
+    <div class="collapsible-content-icon" *ngFor="let topic of topicRow.topics; let column = index;">
       <a class="collapsible-content-link" (click)="setActiveItem(row, column)">
         <img [src]="topic.image" class="collapsible-content-link__image" />
       </a>
@@ -12,21 +12,17 @@
 
   <div class="clearfix"></div>
 
-  <div *ngFor="let topic of content.topics; let column = index;">
+  <div *ngFor="let topic of topicRow.topics; let column = index;">
     <div *ngIf="getActiveItem().column == column && getActiveItem().row == row" [@shrinkOut]  class="collapsible-description">
 
       <img [src]="topic.image" class="collapsible-description__image" />
 
       <div class="collapsible-description__intro" *ngIf="false == isFullTextShown(topic)">
-        <div *ngFor="let topicText of topic.shortDescription">
-          <p *ngIf="filterTopic(topicText.filter)" aaTopic [topicText]="topicText"></p>
-        </div>
+        <p *ngFor="let text of topic.shortDescription" [innerHtml]="text"></p>
       </div>
 
       <div class="collapsible-description__text" *ngIf="isFullTextShown(topic)">
-        <div *ngFor="let topicText of topic.longDescription">
-          <p *ngIf="filterTopic(topicText.filter)" aaTopic [topicText]="topicText"></p>
-        </div>
+        <p *ngFor="let text of topic.longDescription" [innerHtml]="text"></p>
       </div>
 
       <div class="collapsible-description-actions">

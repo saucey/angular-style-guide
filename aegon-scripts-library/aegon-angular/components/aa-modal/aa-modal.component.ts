@@ -3,7 +3,6 @@ import {template} from "./template";
 import {AABaseComponent} from '../../lib/classes/AABaseComponent';
 import {defaultOptions} from "./defaultOptions";
 import {AAElementDirective} from '../../directives/aa-element/aa-element.directive';
-
 import * as libDom from "../../lib/dom";
 
 @Component({

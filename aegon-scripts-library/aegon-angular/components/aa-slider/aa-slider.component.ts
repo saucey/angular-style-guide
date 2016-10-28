@@ -67,7 +67,6 @@ export class AASliderComponent implements AfterViewInit, ControlValueAccessor {
     if (this.manualSlide || libUtil.equal(value, this.value)) {
       return;
     }
-    // console.log('aa-slider.writeValue', 'newvalue', this.value, '->', value);
     this.value = value;
     if (this.sliderElement) {
       // Update noUi slider
@@ -112,9 +111,10 @@ export class AASliderComponent implements AfterViewInit, ControlValueAccessor {
     });
     var self = this;
     sliderElement.noUiSlider.on('update', libUtil.throttle((values) => {
-      // console.log('nouislider update', values);
       self.sliderChange(values);
     }, THROTTLE_UPDATES));
+
+    this.setBackgroundRanges(this.options.ranges, this.options.range.max);
   }
 
   // Direct noUi slider change handler
@@ -144,5 +144,16 @@ export class AASliderComponent implements AfterViewInit, ControlValueAccessor {
     this.value = newValues;
     this.modelChange.emit(newValues);
     this.change.emit(newValues);
+  }
+
+  setBackgroundRanges (ranges : any[] = [], max: number) {
+
+    const rangesStrings:string[] = ranges.reduce((memo, range) => {
+
+      memo.push(`${range.color} ${range.start/max*100}%, ${range.color} ${range.end/max*100}%`);
+      return memo;
+    }, []);
+
+    this.sliderEl.nativeElement.style.background = `linear-gradient(90deg, ${rangesStrings.join(', ')})`;
   }
 }
