@@ -147,7 +147,7 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
   }
 
   editSection(val): any {
-    this.bbpage.hidePage();
+      this.bbpage.hidePage();
 
     for (let i = 1; i <= 5; i++) {
       this.visibility[i] = (val == i) ? 'show' : 'hidden';

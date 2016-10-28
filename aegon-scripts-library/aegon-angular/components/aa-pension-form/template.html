@@ -29,9 +29,9 @@
                                              (enter)="submitAmount()" [placeholder]="'min 25.000'">
                           </aa-input-number>
 
-                          <span class="error-message__wrapper" *ngIf="amountIsValid">
-                            <p class="error">
-                              Totaal bedrag moet minimaal €25.000 bedragen
+                          <span class="hint-message__wrapper" *ngIf="amountIsValid">
+                            <p class="hint">
+                              Minimaal €25.000
                             </p>
                           </span>
                         </div>
@@ -191,20 +191,20 @@
                                 <div class="inputs birthdate">
                                   <aa-input-date (modelChange)="validateAge($event, 1, 'partner', 'partner')" [(ngModel)]="pension['birthDateOfPartner']" class="aa-qq-aov__input" [setFocus]="setFocus"></aa-input-date>
 
-                                  <span class="error-message__wrapper" *ngIf="userAgeInvalid[1]">
-                                    <p class="error">
+                                  <span class="hint-message__wrapper" *ngIf="userAgeInvalid[1]">
+                                    <p class="hint">
                                       User age in is invalid
                                     </p>
                                   </span>
 
-                                  <span class="error-message__wrapper" *ngIf="userToYoung[1]">
-                                    <p class="error">
+                                  <span class="hint-message__wrapper" *ngIf="userToYoung[1]">
+                                    <p class="hint">
                                       User to young
                                     </p>
                                   </span>
 
-                                  <span class="error-message__wrapper" *ngIf="userToOld[1]">
-                                    <p class="error">
+                                  <span class="hint-message__wrapper" *ngIf="userToOld[1]">
+                                    <p class="hint">
                                       User to old
                                     </p>
                                   </span>
@@ -250,20 +250,20 @@
                         <div class="inputs birthdate">
                           <aa-input-date (modelChange)="validateAge($event, 2, 'user', 'user')" [(ngModel)]="pension['birthDate']" class="aa-qq-aov__input" [setFocus]="setFocus"></aa-input-date>
 
-                          <span class="error-message__wrapper" *ngIf="userAgeInvalid[2]">
-                            <p class="error">
+                          <span class="hint-message__wrapper" *ngIf="userAgeInvalid[2]">
+                            <p class="hint">
                               User age in is invalid
                             </p>
                           </span>
 
-                          <span class="error-message__wrapper" *ngIf="userToYoung[2]">
-                            <p class="error">
+                          <span class="hint-message__wrapper" *ngIf="userToYoung[2]">
+                            <p class="hint">
                               User to young
                             </p>
                           </span>
 
-                          <span class="error-message__wrapper" *ngIf="userToOld[2]">
-                            <p class="error">
+                          <span class="hint-message__wrapper" *ngIf="userToOld[2]">
+                            <p class="hint">
                               User to old
                             </p>
                           </span>

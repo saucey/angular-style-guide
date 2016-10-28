@@ -15,9 +15,14 @@
   margin-bottom: 30px;
 }
 
-.error-message__wrapper {
+.hint-message__wrapper {
   margin-top: 20px;
-  display: block;
+  display: inline-block;
+  margin-left: 20px;
+  .hint {
+    color: $lochmara_approx;
+    font-size: 20px;
+  }
 }
 
 .form-text__column__svg__logo {
