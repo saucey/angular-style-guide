@@ -1,5 +1,5 @@
 import { ProductAttributesService } from "../product-attributes.service";
-import { WiaInputUseCaseEnum } from "../../wia-page/models/wia-input-use-case.enum";
+import { WiaInputUseCaseEnum } from "../enums/wia-input-use-case.enum";
 /**
  * ProductAttributesServiceSpec created on 10/28/16 8:55 AM.
  *

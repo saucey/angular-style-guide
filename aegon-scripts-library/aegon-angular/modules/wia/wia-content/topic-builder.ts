@@ -5,20 +5,20 @@
  * @author Florian Popa <florian@webgenerals.com>
  */
 import { Injectable } from "@angular/core";
-import { WIAInputEntity } from "../wia-page/models/wia-input.entity";
-import { WiaTopicRow } from "./wia-content-entities/wia-topic-row.entity";
-import { WiaTopicEntity } from "./wia-content-entities/wia-topic.entity";
-import { WiaTopicDescriptionEntity } from "./wia-content-entities/wia-topic-description.entity";
-import { TopicRowEntity } from "./topic-entities/topic-row.entity";
-import { WiaInputUseCaseEnum } from "../wia-page/models/wia-input-use-case.enum";
+import { WIAInputModel } from "../wia-page/models/wia-input.model";
+import { WiaTopicRowModel } from "./models/wia-topic-row.model";
+import { WiaTopicModel } from "./models/wia-topic.model";
+import { WiaTopicDescriptionModel } from "./models/wia-topic-description.model";
+import { TopicRowModel } from "./models/topic-row.model";
+import { WiaInputUseCaseEnum } from "./enums/wia-input-use-case.enum";
 import { TopicDescriptionFilterService } from "./topic-description-filter.service";
 import { ProductAttributesService } from "./product-attributes.service";
 
 @Injectable()
 export class TopicBuilder {
 
-  private wiaInputData: WIAInputEntity;
-  private wiaTopicRowCollection: WiaTopicRow[];
+  private wiaInputData: WIAInputModel;
+  private wiaTopicRowCollection: WiaTopicRowModel[];
   private topicDescriptionFilterService: TopicDescriptionFilterService;
   private productAttributesService: ProductAttributesService;
 
@@ -28,9 +28,9 @@ export class TopicBuilder {
   }
 
   /**
-   * @param {WIAInputEntity} wiaInputData
+   * @param {WIAInputModel} wiaInputData
    */
-  public withWiaInputData(wiaInputData: WIAInputEntity): void {
+  public withWiaInputData(wiaInputData: WIAInputModel): void {
     this.wiaInputData = wiaInputData;
 
     if ('undefined' === typeof this.wiaInputData) {
@@ -43,26 +43,26 @@ export class TopicBuilder {
   }
 
   /**
-   * @param {Array<WiaTopicRow>} wiaContent
+   * @param {Array<WiaTopicRowModel>} wiaContent
    */
-  public withWiaContent(wiaContent: Array<WiaTopicRow>): void {
+  public withWiaContent(wiaContent: Array<WiaTopicRowModel>): void {
     this.wiaTopicRowCollection = wiaContent;
   }
 
-  public build(): Array<TopicRowEntity> {
+  public build(): Array<TopicRowModel> {
 
-    let topicRowCollection: Array<TopicRowEntity> = [];
+    let topicRowCollection: Array<TopicRowModel> = [];
 
     console.log('input at build time: ', this.wiaInputData);
 
-    this.wiaTopicRowCollection.forEach((topicRow: WiaTopicRow, rowIndex: number) => {
+    this.wiaTopicRowCollection.forEach((topicRow: WiaTopicRowModel, rowIndex: number) => {
 
       topicRowCollection[rowIndex] = {
         "title": topicRow.title,
         "topics": []
       };
 
-      topicRow.topics.forEach((topic: WiaTopicEntity, colIndex) => {
+      topicRow.topics.forEach((topic: WiaTopicModel, colIndex) => {
         topicRowCollection[rowIndex].topics[colIndex] = {
           "image": topic.image,
           "shortDescription": [],
@@ -80,13 +80,13 @@ export class TopicBuilder {
   /**
    * Filter the wia descriptions
    *
-   * @param {Array<WiaTopicDescriptionEntity>} list
+   * @param {Array<WiaTopicDescriptionModel>} list
    * @returns {Array<string>}
    */
-  private filterDescription(list: Array<WiaTopicDescriptionEntity>): Array<string> {
+  private filterDescription(list: Array<WiaTopicDescriptionModel>): Array<string> {
     let descriptionList: Array<string> = [];
 
-    list.forEach((description: WiaTopicDescriptionEntity, index) => {
+    list.forEach((description: WiaTopicDescriptionModel, index) => {
       if (false === this.topicDescriptionFilterService.isDescriptionFiltered(description, this.wiaInputData)) {
         let plainDescription = this
           .productAttributesService

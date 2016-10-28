@@ -1,5 +1,5 @@
 import { WiaPagePersonalizationService } from "../wia-page.personalization.service";
-import { WiaInputUseCaseEnum } from "../models/wia-input-use-case.enum";
+import { WiaInputUseCaseEnum } from "../../wia-content/enums/wia-input-use-case.enum";
 
 describe('CalculatorProductService', () => {
 

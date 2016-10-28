@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
 import { Http } from "@angular/http";
 import { Observable } from "rxjs/Observable";
-import { WIAInputEntity } from "../wia-page/models/wia-input.entity";
+import { WIAInputModel } from "../wia-page/models/wia-input.model";
 
-const productsMetadata = require('./datasets/components.json');
-const componentGroups = require('./datasets/componentsGroups.json');
-const mocks = require('./datasets/demo.json');
+const PRODUCTS_METADATA = require('./datasets/components.json');
+const COMPONENT_GROUPS = require('./datasets/componentsGroups.json');
+const MOCKS = require('./datasets/demo.json');
 
 @Injectable()
 export class CalculatorDataService {
@@ -14,7 +14,6 @@ export class CalculatorDataService {
   }
 
   private static extractComponentsFromProducts(products) {
-
     return products.map(el => el.components)
       .reduce(function (a, b) {
         return a.concat(b);
@@ -22,46 +21,40 @@ export class CalculatorDataService {
   }
 
   private static getColumnWidth(data, index: number) {
-
     return {
       0: 15,
       1: 15,
       2: data.periods.length === 3 ? 70 : 30,
       3: 40
     }[index];
-
   }
 
   // Sort by priority, for the same priority numbers use reverse order
   private static sortByPriority(items) {
-
     return items.reverse().sort((a, b) => a.priority < b.priority);
   }
 
   attachMetadata(items) {
-
     items.forEach((item: any) => {
-
-      item.meta = productsMetadata.find(el => el.id === item.id);
+      item.meta = PRODUCTS_METADATA.find(el => el.id === item.id);
     });
 
     return items;
   }
 
   parseRawData(data) {
-
     // demo only
     if (!data) {
       return;
     }
 
-    const res: any = {};
+    const RES: any = {};
 
     data.periods.forEach((val, index) => {
 
       if (val) {
 
-        res[index] = {
+        RES[index] = {
           id: index,
           amount: val.amount,
           label: val.label,
@@ -72,7 +65,7 @@ export class CalculatorDataService {
         };
       } else {
 
-        res[index] = {
+        RES[index] = {
           amount: 0,
           percentage: 0,
           width: 0,
@@ -82,20 +75,13 @@ export class CalculatorDataService {
 
     });
 
-    console.log('res', res);
-
-    return res;
+    return RES;
   }
 
-  getData(input: WIAInputEntity) {
-
-    //return Observable.of(rawData)
-    //return this.getAjaxData(input).map(data => data.json())
-
+  getData(input: WIAInputModel) {
     return Observable.of(this.getFromDataset(input))
       .map(this.parseRawData.bind(this))
       .map(response => {
-
         if (!response) {
           return;
         }
@@ -108,13 +94,10 @@ export class CalculatorDataService {
   }
 
   createOptionsKey(params) {
-
-    const products = params.products.sort((a, b) => {
-
+    const PRODUCTS = params.products.sort((a, b) => {
       // sort by string
       return a.id < b.id ? -1 : 1;
     }).map(product => {
-
       return [
         product.id,
         ...product.attrs.map(el => el.value)
@@ -126,76 +109,49 @@ export class CalculatorDataService {
       params.disability,
       params.usage,
       params.permDisability,
-      products
+      PRODUCTS
     ]
   }
 
   uniqueValues(value, index, self) {
-
     return self.indexOf(value) === index;
   }
 
-  getFromDataset(input: WIAInputEntity) {
-
-    const key = JSON.stringify(this.createOptionsKey(input));
-
-    if (mocks[key]) {
-
-
-      console.info('Got from dataset: ' + key, 'in', mocks);
-      return mocks[key];
+  getFromDataset(input: WIAInputModel) {
+    const OPTIONS_KEY = JSON.stringify(this.createOptionsKey(input));
+    if (MOCKS[OPTIONS_KEY]) {
+      return MOCKS[OPTIONS_KEY];
     } else {
 
-      console.error('Couldn\'t find result for key: ' + key, 'in', mocks)
     }
   }
 
-  // getAjaxData(input: WIAInputEntity) {
-  //
-  //   // Parameters obj-
-  //   let params: URLSearchParams = new URLSearchParams();
-  //   params.set('income', String(input.income));
-  //   params.set('permDisability', String(input.permDisability));
-  //   params.set('disability', String(input.disability));
-  //   params.set('usage', String(input.usage));
-  //   params.set('products', JSON.stringify(input.products));
-  //
-  //   console.info('Getting data for', input);
-  //
-  //   return this.http.get('http://localhost:8000', {
-  //     search: params
-  //   });
-  // }
-
   getLegendFromGraphData(graphData) {
-    const components = [];
-    const added = {};
+    const COMPONENTS = [];
+    const ADDED = {};
 
     [].concat(...Object.keys(graphData).map(key => graphData[key].bars))
       .filter(el => el.percentage > 0)
       .forEach(el => {
-
-        if (!added[el.id]) {
-
-          added[el.id] = true;
-          components.push(el);
+        if (!ADDED[el.id]) {
+          ADDED[el.id] = true;
+          COMPONENTS.push(el);
         }
       });
 
-    const res: any = {};
+    const RES: any = {};
+    const ENABLED_GROUPS = COMPONENTS.map(el => el.meta.type).filter(this.uniqueValues);
 
-    const enabledGroups = components.map(el => el.meta.type).filter(this.uniqueValues);
+    RES.items = COMPONENT_GROUPS.map(el => el.type).filter(type => ENABLED_GROUPS.indexOf(type) > -1).reverse();
+    RES.groups = {};
 
-    res.items = componentGroups.map(el => el.type).filter(type => enabledGroups.indexOf(type) > -1).reverse();
-    res.groups = {};
-
-    enabledGroups.forEach(groupId => {
-      res.groups[groupId] = {
-        items: components.filter(el => el.meta.type === groupId),
-        meta: componentGroups.find(el => el.type === groupId)
+    ENABLED_GROUPS.forEach(groupId => {
+      RES.groups[groupId] = {
+        items: COMPONENTS.filter(el => el.meta.type === groupId),
+        meta: COMPONENT_GROUPS.find(el => el.type === groupId)
       };
     });
 
-    return res;
+    return RES;
   }
 }

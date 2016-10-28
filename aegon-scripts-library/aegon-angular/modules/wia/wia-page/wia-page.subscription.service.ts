@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
-import { WIAInputEntity } from "./models/wia-input.entity";
+import { WIAInputModel } from "./models/wia-input.model";
 import { WiaPagePersonalizationService } from "./wia-page.personalization.service";
 import { WiaUrlStateManager } from "./wia-page.url-state.service";
 
@@ -11,7 +11,7 @@ export class WiaSubscriptionService {
   private wiaPagePersonalizationService: WiaPagePersonalizationService;
   private wiaUrlStateManager: WiaUrlStateManager;
 
-  public externalInput$: BehaviorSubject<WIAInputEntity>;
+  public externalInput$: BehaviorSubject<WIAInputModel>;
 
   constructor() {
 
@@ -32,7 +32,7 @@ export class WiaSubscriptionService {
     this.externalInput$.filter(el => el !== null).subscribe(callback);
   }
 
-  public emit (value: WIAInputEntity) {
+  public emit (value: WIAInputModel) {
     this.externalInput$.next(value);
   }
 
@@ -50,7 +50,7 @@ export class WiaSubscriptionService {
     });
   }
 
-  private getUrlConfiguration(): WIAInputEntity {
+  private getUrlConfiguration(): WIAInputModel {
 
     const code = this.wiaUrlStateManager.getUrlCode();
 

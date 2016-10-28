@@ -1,4 +1,4 @@
-import { WiaInputUseCaseEnum } from "../../wia-page/models/wia-input-use-case.enum";
+import { WiaInputUseCaseEnum } from "../enums/wia-input-use-case.enum";
 import { TopicDescriptionFilterService } from "../topic-description-filter.service";
 /**
  * TopicDescriptionFilterServiceSpec created on 10/27/16 10:38 AM.

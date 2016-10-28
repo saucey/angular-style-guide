@@ -1,5 +1,5 @@
-import { WIAInputEntity } from "../wia-page/models/wia-input.entity";
-import { WiaInputUseCaseEnum } from "../wia-page/models/wia-input-use-case.enum";
+import { WIAInputModel } from "../wia-page/models/wia-input.model";
+import { WiaInputUseCaseEnum } from "./enums/wia-input-use-case.enum";
 /**
  * ProductAttributesService created on 10/28/16 8:28 AM.
  *
@@ -26,10 +26,10 @@ export class ProductAttributesService {
    *
    * @param {string} descriptionText
    * @param {Array} filterList
-   * @param {WIAInputEntity} wiaInput
+   * @param {WIAInputModel} wiaInput
    * @returns {string}
    */
-  public findAndReplaceAttributes(descriptionText: string, filterList, wiaInput: WIAInputEntity): string {
+  public findAndReplaceAttributes(descriptionText: string, filterList, wiaInput: WIAInputModel): string {
     let inputUseCase = wiaInput.useCase;
     if (WiaInputUseCaseEnum.DEFAULT === inputUseCase || WiaInputUseCaseEnum.USER === inputUseCase) {
       return this.removePlaceholdersForDefaultAndUser(descriptionText, filterList);
@@ -61,10 +61,10 @@ export class ProductAttributesService {
    *
    * @param {string} descriptionText
    * @param {Array} filterList
-   * @param {WIAInputEntity} wiaInput
+   * @param {WIAInputModel} wiaInput
    * @returns {string}
    */
-  private replaceAttributeValuesForParticipants(descriptionText: string, filterList, wiaInput: WIAInputEntity): string {
+  private replaceAttributeValuesForParticipants(descriptionText: string, filterList, wiaInput: WIAInputModel): string {
     let plainDescription = descriptionText;
     for (let filter of filterList) {
       for (let product of wiaInput.products) {

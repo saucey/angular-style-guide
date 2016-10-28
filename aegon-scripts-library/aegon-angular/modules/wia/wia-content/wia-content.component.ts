@@ -42,7 +42,6 @@ export class WiaContentComponent extends AABaseComponent implements OnInit {
     this
       .topicService
       .getTopics(data => {
-        console.log(data);
         this.topicsCollection = data;
       });
   }

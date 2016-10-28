@@ -1,6 +1,6 @@
-import { WiaTopicDescriptionEntity } from "./wia-content-entities/wia-topic-description.entity";
-import { WiaInputUseCaseEnum } from "../wia-page/models/wia-input-use-case.enum";
-import { WIAInputEntity } from "../wia-page/models/wia-input.entity";
+import { WiaTopicDescriptionModel } from "./models/wia-topic-description.model";
+import { WiaInputUseCaseEnum } from "./enums/wia-input-use-case.enum";
+import { WIAInputModel } from "../wia-page/models/wia-input.model";
 
 /**
  * TopicDescriptionFilterService created on 10/27/16 2:49 PM.
@@ -13,11 +13,11 @@ export class TopicDescriptionFilterService {
   /**
    * Checks if the description should be shown/hidden
    *
-   * @param {WiaTopicDescriptionEntity} description
-   * @param {WIAInputEntity} wiaInput
+   * @param {WiaTopicDescriptionModel} description
+   * @param {WIAInputModel} wiaInput
    * @returns {boolean}
    */
-  public isDescriptionFiltered(description: WiaTopicDescriptionEntity, wiaInput: WIAInputEntity): boolean {
+  public isDescriptionFiltered(description: WiaTopicDescriptionModel, wiaInput: WIAInputModel): boolean {
     if (this.matchesUseCase(description, wiaInput) && this.matchesFilters(description, wiaInput)) {
       return false;
     } else {
@@ -28,11 +28,11 @@ export class TopicDescriptionFilterService {
   /**
    * Checks if the description filters match the current products selected
    *
-   * @param {WiaTopicDescriptionEntity} description
-   * @param {WIAInputEntity} wiaInput
+   * @param {WiaTopicDescriptionModel} description
+   * @param {WIAInputModel} wiaInput
    * @returns {boolean}
    */
-  public matchesFilters(description: WiaTopicDescriptionEntity, wiaInput: WIAInputEntity): boolean {
+  public matchesFilters(description: WiaTopicDescriptionModel, wiaInput: WIAInputModel): boolean {
     if (description.hasOwnProperty('filter') && typeof description.filter == 'object' && description.filter.length > 0 && (wiaInput.useCase === WiaInputUseCaseEnum.PARTICIPANT || wiaInput.useCase === WiaInputUseCaseEnum.USER)) {
       for (let productId of description.filter) {
         for (let product of wiaInput.products) {
@@ -53,11 +53,11 @@ export class TopicDescriptionFilterService {
   /**
    * Checks if the description applies to the current use case
    *
-   * @param {WiaTopicDescriptionEntity} description
-   * @param {WIAInputEntity} wiaInput
+   * @param {WiaTopicDescriptionModel} description
+   * @param {WIAInputModel} wiaInput
    * @returns {boolean}
    */
-  public matchesUseCase(description: WiaTopicDescriptionEntity, wiaInput: WIAInputEntity): boolean {
+  public matchesUseCase(description: WiaTopicDescriptionModel, wiaInput: WIAInputModel): boolean {
     if (description.hasOwnProperty('useCase') && description.useCase.length > 0) {
       let inputUseCase = wiaInput.useCase;
 

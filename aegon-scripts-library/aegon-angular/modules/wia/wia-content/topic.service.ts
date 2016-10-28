@@ -8,34 +8,27 @@
 import { Injectable } from "@angular/core";
 import { WiaContentService } from "./wia-content.service";
 import { WiaSubscriptionService } from "../wia-page/wia-page.subscription.service";
-import { WIAInputEntity } from "../wia-page/models/wia-input.entity";
+import { WIAInputModel } from "../wia-page/models/wia-input.model";
 import { TopicBuilder } from "./topic-builder";
-import { TopicRowEntity } from "./topic-entities/topic-row.entity";
 import { clone } from "../../../lib/util";
-import { WiaTopicRow } from "./wia-content-entities/wia-topic-row.entity";
-
 import { BehaviorSubject } from "rxjs";
 
 @Injectable()
 export class TopicService {
 
   private wiaContentService: WiaContentService;
-  private wiaInputData: WIAInputEntity;
+  private wiaInputData: WIAInputModel;
   private topicBuilder: TopicBuilder;
-  private wiaContentData: Array<WiaTopicRow>;
-
-  public data;
-  public topics$: BehaviorSubject<any[]>;
+  public  data;
+  public  topics$: BehaviorSubject<any[]>;
 
   constructor(wiaContentService: WiaContentService, wiaPageService: WiaSubscriptionService, topicBuilder: TopicBuilder) {
     this.wiaContentService = wiaContentService;
     this.topicBuilder = topicBuilder;
-
     this.topics$ = new BehaviorSubject(null);
 
     wiaPageService.subscribe(value => {
       this.wiaInputData = clone(value);
-
       this.build();
     });
 
@@ -48,8 +41,7 @@ export class TopicService {
       });
   }
 
-  public build () : void {
-
+  public build(): void {
     if (!this.data) {
       return;
     }
@@ -72,12 +64,10 @@ export class TopicService {
   /**
    * Retrieves and adapts the topic related data
    *
-   * @returns {Array<TopicRowEntity>}
+   * @param callback
+   * @returns {Subscription}
    */
-
-  // @TODO
   getTopics(callback) {
-
     return this.topics$.filter(el => el !== null).subscribe(callback);
   }
 }

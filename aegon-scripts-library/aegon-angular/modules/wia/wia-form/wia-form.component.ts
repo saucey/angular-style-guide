@@ -1,18 +1,18 @@
 import { Component, ElementRef, OnInit } from "@angular/core";
 import { AABaseComponent } from "../../../lib/classes/AABaseComponent";
-import { WIAInputEntity } from "../wia-page/models/wia-input.entity";
+import { WIAInputModel } from "../wia-page/models/wia-input.model";
 import { WiaSubscriptionService } from "../wia-page/wia-page.subscription.service";
 import { WiaPageProductsService } from "../wia-page/wia-page.products.service";
 import { WiaPagePersonalizationService } from "../wia-page/wia-page.personalization.service";
-import { ProductAttributeEntity } from "../wia-page/models/product-attribute.entity";
-import { WiaInputUseCaseEnum } from "../wia-page/models/wia-input-use-case.enum";
+import { ProductAttributeModel } from "../wia-page/models/product-attribute.model";
+import { WiaInputUseCaseEnum } from "../wia-content/enums/wia-input-use-case.enum";
 
-const template = require('./template.html');
+const FORM_TEMPLATE = require('./template.html');
 
 @Component({
   selector: 'aa-wia-form',
   providers: [WiaSubscriptionService, WiaPageProductsService, WiaPagePersonalizationService],
-  template: template
+  template: FORM_TEMPLATE
 })
 
 /**
@@ -58,21 +58,21 @@ export class WiaFormComponent extends AABaseComponent implements OnInit {
     return this.products.filter(el => el.selected);
   }
 
-  private serializeInput(): WIAInputEntity {
+  private serializeInput(): WIAInputModel {
 
-    const selectedProducts = this.getSelectedProducts();
+    const SELECTED_PRODUCTS = this.getSelectedProducts();
 
     return {
       useCase: WiaInputUseCaseEnum.USER,
       income: this.income,
-      products: selectedProducts.map(product => ({
+      products: SELECTED_PRODUCTS.map(product => ({
         id: product.id,
         attrs: product.attrs.map(attr => ({
           id: attr.id,
           value: +attr.value
         }))
       })),
-      productsIds: selectedProducts.map(el => el.id)
+      productsIds: SELECTED_PRODUCTS.map(el => el.id)
     }
   }
 
@@ -87,7 +87,7 @@ export class WiaFormComponent extends AABaseComponent implements OnInit {
 
   onCodeSubmit() {
 
-    const input: WIAInputEntity = this.wiaPagePersonalizationService.codeToInput(this.personalizationCode);
+    const input: WIAInputModel = this.wiaPagePersonalizationService.codeToInput(this.personalizationCode);
 
     this.wiaSubscriptionService.emit(input);
   }
@@ -116,10 +116,10 @@ export class WiaFormComponent extends AABaseComponent implements OnInit {
   /**
    * Checks if the product attribute is visible
    *
-   * @param {ProductAttributeEntity} productAttribute
+   * @param {ProductAttributeModel} productAttribute
    * @returns {boolean}
    */
-  public isProductAttributeVisible(productAttribute: ProductAttributeEntity) {
+  public isProductAttributeVisible(productAttribute: ProductAttributeModel) {
     if (productAttribute.hasOwnProperty('visible') && true === productAttribute.visible) {
       return true;
     } else {

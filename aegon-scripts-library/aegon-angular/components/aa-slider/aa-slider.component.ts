@@ -67,7 +67,6 @@ export class AASliderComponent implements AfterViewInit, ControlValueAccessor {
     if (this.manualSlide || libUtil.equal(value, this.value)) {
       return;
     }
-    // console.log('aa-slider.writeValue', 'newvalue', this.value, '->', value);
     this.value = value;
     if (this.sliderElement) {
       // Update noUi slider
@@ -112,7 +111,6 @@ export class AASliderComponent implements AfterViewInit, ControlValueAccessor {
     });
     var self = this;
     sliderElement.noUiSlider.on('update', libUtil.throttle((values) => {
-      // console.log('nouislider update', values);
       self.sliderChange(values);
     }, THROTTLE_UPDATES));
 

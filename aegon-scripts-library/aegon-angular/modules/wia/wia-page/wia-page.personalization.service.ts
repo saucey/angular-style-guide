@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { WIAInputEntity } from "./models/wia-input.entity";
+import { WIAInputModel } from "./models/wia-input.model";
 
 import {
   WGA_EXCED_Code,
@@ -9,8 +9,8 @@ import {
   WGA_AANV_Code,
   WIA_35MIN_Code,
   WIA_35MIN_Value
-} from "./models/personalization";
-import { WiaInputUseCaseEnum } from "./models/wia-input-use-case.enum";
+} from "./enums/personalization.enum";
+import { WiaInputUseCaseEnum } from "../wia-content/enums/wia-input-use-case.enum";
 
 @Injectable()
 export class WiaPagePersonalizationService {
@@ -43,17 +43,17 @@ export class WiaPagePersonalizationService {
     return this.incomeClasses.findIndex(el => el >= income);
   }
 
-  private getIncomeFromInput(input: WIAInputEntity): string {
+  private getIncomeFromInput(input: WIAInputModel): string {
 
     return this.to36(this.getIncomeClass(input.income));
   }
 
-  private getDisabilityFromInput(input: WIAInputEntity): string {
+  private getDisabilityFromInput(input: WIAInputModel): string {
 
     return this.to36(~~(input.disability / 10));
   }
 
-  private getUsageFromInput(input: WIAInputEntity): string {
+  private getUsageFromInput(input: WIAInputModel): string {
 
     if (input.permDisability) {
       return 'P'
@@ -63,7 +63,7 @@ export class WiaPagePersonalizationService {
   }
 
 
-  private getProductsFromInput(input: WIAInputEntity): string {
+  private getProductsFromInput(input: WIAInputModel): string {
 
     let finalString = ''; // array of final characters
     let substring = ''; // temporary variable to construct single code character from multiple digits
@@ -113,7 +113,7 @@ export class WiaPagePersonalizationService {
     return finalString.toUpperCase().replace(/O/g, 'Z');
   }
 
-  public inputToCode(input: WIAInputEntity): string {
+  public inputToCode(input: WIAInputModel): string {
 
     return [
       this.getIncomeFromInput(input),
@@ -123,7 +123,7 @@ export class WiaPagePersonalizationService {
     ].join('').toUpperCase().replace(/O/g, 'Z');
   }
 
-  public codeToInput(code: string): WIAInputEntity {
+  public codeToInput(code: string): WIAInputModel {
 
     const to10 = number => Number.parseInt(number, 35); // leave 'z' free to replace 'o's later
 

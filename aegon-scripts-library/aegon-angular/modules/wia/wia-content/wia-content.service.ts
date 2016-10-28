@@ -7,7 +7,7 @@
 
 import { Injectable } from "@angular/core";
 import { Http, Response } from "@angular/http";
-import { WiaTopicRow } from "./wia-content-entities/wia-topic-row.entity";
+import { WiaTopicRowModel } from "./models/wia-topic-row.model";
 import { Observable, Subject } from "rxjs";
 
 @Injectable()
@@ -20,9 +20,9 @@ export class WiaContentService {
   /**
    * Retrieves the Wia content
    *
-   * @returns {Observable<WiaTopicRow[]>}
+   * @returns {Observable<WiaTopicRowModel[]>}
    */
-  public getWiaContent(): Observable<WiaTopicRow[]> {
+  public getWiaContent(): Observable<WiaTopicRowModel[]> {
     return this
       .http
       .get(this.wiaContentUrl)

@@ -5,10 +5,10 @@ import { AABaseComponent } from "../../../lib/classes/AABaseComponent";
 import { CalculatorDataService } from "./wia-calculator-data.service";
 import { defaultOptions } from "./defaultOptions";
 import { WiaPagePersonalizationService } from "../wia-page/wia-page.personalization.service";
-import { WIAInputEntity } from "../wia-page/models/wia-input.entity";
+import { WIAInputModel } from "../wia-page/models/wia-input.model";
 import { WiaSubscriptionService } from "../wia-page/wia-page.subscription.service";
 import { WiaUrlStateManager } from "../wia-page/wia-page.url-state.service";
-import { WiaInputUseCaseEnum } from "../wia-page/models/wia-input-use-case.enum";
+import { WiaInputUseCaseEnum } from "../wia-content/enums/wia-input-use-case.enum";
 
 @Component({
   selector: 'aa-wia-calculator',
@@ -107,7 +107,7 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit {
     }
   };
 
-  public externalInput : WIAInputEntity;
+  public externalInput : WIAInputModel;
 
   public graphData : any[] = [];
   public legendData;
@@ -127,7 +127,7 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit {
     super.ngOnInit();
   }
 
-  public updateModel(value: WIAInputEntity) {
+  public updateModel(value: WIAInputModel) {
 
     if (!value) {
       return;
@@ -151,9 +151,9 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit {
     this.update();
   }
 
-  public getCurrentInput(): WIAInputEntity {
+  public getCurrentInput(): WIAInputModel {
 
-    const input : WIAInputEntity = {
+    const input : WIAInputModel = {
       income: this.externalInput.income,
       useCase: WiaInputUseCaseEnum.USER,
       disability: Math.round(this.disability.value / 10) * 10,
@@ -188,9 +188,6 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit {
 
         const {graphData, legendData} = data;
 
-        console.log('graphData', graphData);
-        console.log('legendData', legendData);
-
         this.graphData = [
           {
             suppressAmountLabels: true,
@@ -220,9 +217,6 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit {
   }
 
   public updatePermDisability(val) {
-
-    console.log('updatePermDisability', val, this.permanentDisability);
-
     this.permanentDisability = !this.permanentDisability;
     this.update();
   }

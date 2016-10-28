@@ -1,14 +1,14 @@
-import { ProductAttributeEntity } from "./product-attribute.entity";
+import { ProductAttributeModel } from "./product-attribute.model";
 /**
- * ProductEntity created on 10/17/16 4:12 PM.
+ * ProductModel created on 10/17/16 4:12 PM.
  *
  * @description Holds information regarding the product
  * @author Florian Popa <florian@webgenerals.com>
  */
-export interface ProductEntity {
+export interface ProductModel {
   id: string,
   endAge?: number,
   benefitIndex?: number,
-  attrs: Array<ProductAttributeEntity>,
+  attrs: Array<ProductAttributeModel>,
   label?: string
 }
