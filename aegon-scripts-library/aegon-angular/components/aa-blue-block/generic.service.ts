@@ -219,7 +219,7 @@ export class GenericService {
 		            }
 		          ],
 				"REKENFACTOREN": {
-					"IND_NETTO_PENSIOEN": "false"
+					"IND_NETTO_PENSIOEN": false
 			 	}
 		        }
 		      }
@@ -287,7 +287,7 @@ export class GenericService {
 		            }
 		          ],
 				"REKENFACTOREN": {
-					"IND_NETTO_PENSIOEN": "false"
+					"IND_NETTO_PENSIOEN": false
 			 	}
 		        }
 		      }
