@@ -1,0 +1,38 @@
+.aa-fnol-wrapper {
+  border: 1px solid $slightly_lighter_blue;
+	width: 100%;
+	margin: 10px 0;
+	position: relative;
+	@include rem('border-radius', 3);
+	}
+.fnol-question {
+  background-color: $orange;
+  width: 100px;
+  color: $white;
+  font-size: 1.5em;
+  padding: 15px 10px;
+  }
+.fnol-phone-call{
+  font-size: 1.5em;
+  padding: 15px 30px;
+  color: $blue;
+}
+.fnol-phone-content{
+  font-size: .78em;
+  color: $blue;
+}
+.arrow-right {
+  width: 0;
+  height: 0;
+  border-top: 30px solid transparent;
+  border-bottom: 30px solid transparent;
+  border-left: 30px solid $orange;
+  top: 0px;
+  right: -30px;
+}
+.pos-abs{
+  position:absolute;
+}
+.pos-rel{
+ position:relative;
+}
