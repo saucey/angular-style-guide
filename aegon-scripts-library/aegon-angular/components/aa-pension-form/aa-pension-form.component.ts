@@ -85,8 +85,8 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
     partner: 115,
   };
 
-  public hasPartner: string = this.pension['havePartner'] == "true" ? "show" :"hidden";
-  public partnerDob: string = this.pension['insurablePartner'] == "true" ? "show" :"hidden";
+  public hasPartner: string = this.pension['havePartner'] == true ? "show" :"hidden";
+  public partnerDob: string = this.pension['insurablePartner'] == true ? "show" :"hidden";
 
   public partnersDobReadable: any[] = [];
 
@@ -157,9 +157,9 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
   }
 
   btnValidationForUserPartner(): boolean {
-    if(this.pension['havePartner'] == "false") return false;
-    if(this.pension['havePartner'] == "true" && this.pension['insurablePartner'] == "false") return false;
-    if(this.pension['havePartner'] == "true" && this.pension['insurablePartner'] == "true" && this.isAgeValid[1] == undefined && this.pension['birthDateOfPartner'] !== undefined) return false;
+    if(this.pension['havePartner'] == false) return false;
+    if(this.pension['havePartner'] == true && this.pension['insurablePartner'] == false) return false;
+    if(this.pension['havePartner'] == true && this.pension['insurablePartner'] == true && this.isAgeValid[1] == undefined && this.pension['birthDateOfPartner'] !== undefined) return false;
 
     if(this.isAgeValid[1] == false) return false;
 
