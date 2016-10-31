@@ -26,7 +26,7 @@ export class AABlueBlockComponent extends AABaseComponent implements OnInit {
 
   //public serviceResArray: any = [1, 2, 3, 4, 5, 6];
   //public serviceResIterator = this.serviceResArray[Symbol.iterator]();
-  
+
   public  defaultOptions: any = defaultOptions;
 
   constructor(
@@ -42,7 +42,7 @@ export class AABlueBlockComponent extends AABaseComponent implements OnInit {
   ngOnInit():void {
     super.ngOnInit();
     if(this.data.options.callServiceOnInit) {
-      this.callService();   
+      this.callService();
     }
   }
 
@@ -72,17 +72,16 @@ export class AABlueBlockComponent extends AABaseComponent implements OnInit {
    */
   isString(obj: any): boolean {
     return typeof obj === "string";
-  }    
+  }
 
 
   /*
    * Check if is a string
    *
    */
-  callService(): any {    
-    this.genericService[this.data.options.template](this.data.options.serviceUrl, this.data.options.serviceCredentials)    
+  callService(): any {
+    this.genericService[this.data.options.template](this.data.options.serviceUrl, this.data.options.serviceCredentials)
       .then((data) => {
-        console.log("Data from component: ", data);
         this.updateValues(data);
       });
   }
@@ -114,15 +113,15 @@ export class AABlueBlockComponent extends AABaseComponent implements OnInit {
    *
    */
   showLoader() {
-    
+
   }
-  
+
   /*
    * Hides loader
    *
    */
   hideLoader() {
-    
+
   }
 
   private addClass(el, className) {

@@ -94,9 +94,7 @@ export class InterestsService {
 				"nid": 39121,
 				"tableid": "hypotheek-met-nhg",
 				"table": {
-					"16-20 jaar": {
-						"De hoogte van uw rente is...": 2.7
-					}
+					"Interest": 2.7
 				},
 				"footer": "De rentepercentages gelden per 20 juli 2016 tot publicatie van het nieuwe rentebericht en zijn onder voorbehoud van typefouten. \n"
 			}

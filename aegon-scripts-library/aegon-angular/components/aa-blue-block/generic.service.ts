@@ -47,7 +47,7 @@ export class GenericService {
     		let options = new RequestOptions({headers: headers});
 
 		let body:any = {
-		      "BScalculateRequest": {
+		      "BScalculateDIPRequest": {
 		        "AILHEADER": {
 		          "CLIENTID": "BS_PENSIOENOVEREENKOMST_ROA_Rest",
 		          "CORRELATIONID": "##DIP SS##"
@@ -65,7 +65,7 @@ export class GenericService {
 		            },
 		            "PENSIOENAANSPRAAK": {
 		              "IND_OUDERDOMSPENSIOEN": true,
-		              "IND_NABESTAANDENPENSIOEN": (pensionInfo.insurablePartner=="true") ? true : false,
+		              "IND_NABESTAANDENPENSIOEN": (pensionInfo.insurablePartner) ? true : false,
 		              "IND_HOOG_LAAGPENSIOEN": false,
 		              "IND_PREPENSIOEN": false,
 		              "BEGIN_DATUM_UITKERING": pensionInfo.startingDate,
@@ -85,8 +85,8 @@ export class GenericService {
 		        }
 		      }
 		    };
-		    if ((pensionInfo.insurablePartner=="true") ? true : false) {
-		      body['BScalculateRequest']['DOSSIER']['PARTIJ'].push(
+		    if (pensionInfo.insurablePartner) {
+		      body['BScalculateDIPRequest']['DOSSIER']['PARTIJ'].push(
 		        {
 		          "_AE_PERSOON": {
 		            "VOLGNUM": 2,
@@ -118,7 +118,7 @@ export class GenericService {
     		let options = new RequestOptions({headers: headers});
 
 		let body:any = {
-		      "BScalculateRequest": {
+		      "BScalculateDIPRequest": {
 		        "AILHEADER": {
 		          "CLIENTID": "BS_PENSIOENOVEREENKOMST_ROA_Rest",
 		          "CORRELATIONID": "##DIP SS##"
@@ -136,8 +136,8 @@ export class GenericService {
 		            },
 		            "PENSIOENAANSPRAAK": {
 		              "IND_OUDERDOMSPENSIOEN": true,
-		              "IND_NABESTAANDENPENSIOEN": (pensionInfo.insurablePartner=="true") ? true : false,
-		              "IND_HOOG_LAAGPENSIOEN": false,
+		              "IND_NABESTAANDENPENSIOEN": (pensionInfo.insurablePartner) ? true : false,
+		              "IND_HOOG_LAAGPENSIOEN": true,
 		              "IND_PREPENSIOEN": false,
 		              "BEGIN_DATUM_UITKERING": pensionInfo.startingDate,
 		              "DUUR_UITKERING_JAREN": 5,
@@ -156,8 +156,8 @@ export class GenericService {
 		        }
 		      }
 		    };
-		    if ((pensionInfo.insurablePartner=="true") ? true : false) {
-		      body['BScalculateRequest']['DOSSIER']['PARTIJ'].push(
+		    if (pensionInfo.insurablePartner) {
+		      body['BScalculateDIPRequest']['DOSSIER']['PARTIJ'].push(
 		        {
 		          "_AE_PERSOON": {
 		            "VOLGNUM": 2,
@@ -200,7 +200,7 @@ export class GenericService {
 		          "PENSIOENOVEREENKOMST": {
 				"PENSIOENAANSPRAAK": {
 		              "IND_OUDERDOMSPENSIOEN": true,
-		              "IND_NABESTAANDENPENSIOEN": (pensionInfo.insurablePartner=="true") ? true : false,
+		              "IND_NABESTAANDENPENSIOEN": (pensionInfo.insurablePartner) ? true : false,
 		              "BEGIN_DATUM_UITKERING": pensionInfo.startingDate,
 		              "IND_VARIABEL_NABESTAANDENPENSIOEN": vpuVariable
 		            },
@@ -224,7 +224,7 @@ export class GenericService {
 		        }
 		      }
 		    };
-		    if ((pensionInfo.insurablePartner=="true") ? true : false) {
+		    if (pensionInfo.insurablePartner) {
 		      body['BScalculateVPURequest']['DOSSIER']['PARTIJ'].push(
 		        {
 		          "_AE_PERSOON": {
@@ -268,7 +268,7 @@ export class GenericService {
 		          "PENSIOENOVEREENKOMST": {
 				"PENSIOENAANSPRAAK": {
 		              "IND_OUDERDOMSPENSIOEN": true,
-		              "IND_NABESTAANDENPENSIOEN": (pensionInfo.insurablePartner=="true") ? true : false,
+		              "IND_NABESTAANDENPENSIOEN": (pensionInfo.insurablePartner) ? true : false,
 		              "BEGIN_DATUM_UITKERING": pensionInfo.startingDate,
 		              "IND_VARIABEL_NABESTAANDENPENSIOEN": vpuVariable
 		            },
@@ -292,7 +292,7 @@ export class GenericService {
 		        }
 		      }
 		    };
-		    if ((pensionInfo.insurablePartner=="true") ? true : false) {
+		    if (pensionInfo.insurablePartner) {
 		      body['BScalculateVPURequest']['DOSSIER']['PARTIJ'].push(
 		        {
 		          "_AE_PERSOON": {
@@ -315,7 +315,7 @@ export class GenericService {
 	processResultDIP(highLow, data) {
 	  console.log("processResultDIP gets called", data);
 	  let response: any = {};
-	  let items: any[] = data['BScalculateResponse']['PENSIOENOVEREENKOMST']['PENSIOENAANSPRAAK'],
+	  let items: any[] = data['BScalculateDIPResponse']['DOSSIER']['PENSIOENOVEREENKOMST']['PENSIOENAANSPRAAK'],
 	    hlAmount = 0;
 	  if (!Array.isArray(items)) {
 	    items = [items];
@@ -327,17 +327,17 @@ export class GenericService {
 	    if (highLow) {
 	      if (s === 'OPLL') {
 	        hlAmount += parseFloat(value);
-	        response.after5YearsMine = "€ " + new AAMoneyPipe().transform(value, [true]);
+	        response.after5YearsMine = "€ " + new AAMoneyPipe().transform(value, []);
 	      } else if (s === 'OPT') {
 	        hlAmount += parseFloat(value);
 	      } else if (s === 'PPLL') {
-	        response.lifelongPartner = "€ " + new AAMoneyPipe().transform(value, [true]);
+	        response.lifelongPartner = "€ " + new AAMoneyPipe().transform(value, []);
 	      }
 	    } else {
 	      if (s === 'OPLL') {
-	        response.lifelongMine = "€ " + new AAMoneyPipe().transform(value, [true]);
+	        response.lifelongMine = "€ " + new AAMoneyPipe().transform(value, []);
 	      } else if (s === 'PPLL') {
-	        response.lifelongPartner = "€ " + new AAMoneyPipe().transform(value, [true]);
+	        response.lifelongPartner = "€ " + new AAMoneyPipe().transform(value, []);
 	      }
 	    }
 	  });
@@ -383,19 +383,19 @@ export class GenericService {
 
 	if(itemsPpll['BEDRAG']) {
 		if(vast) {
-			response.lifelongPartner = "€ " + new AAMoneyPipe().transform((itemsPpll['BEDRAG']/12), [true]);
+			response.lifelongPartner = "€ " + new AAMoneyPipe().transform((itemsPpll['BEDRAG']/12), []);
 		} else {
-			response.firstYearsPartner = "€ " + new AAMoneyPipe().transform((itemsPpll['BEDRAG']/12), [true]);
-			response.optimisticPartner = "€ " + new AAMoneyPipe().transform((itemsPpll['BEDRAG10JAAR_OPTIMISTISCH']/12), [true]);
-			response.neutralPartner = "€ " + new AAMoneyPipe().transform((itemsPpll['BEDRAG10JAAR_STANDAARD']/12), [true]);
-			response.pessimisticPartner = "€ " + new AAMoneyPipe().transform((itemsPpll['BEDRAG10JAAR_PESSIMISTISCH']/12), [true]);
+			response.firstYearsPartner = "€ " + new AAMoneyPipe().transform((itemsPpll['BEDRAG']/12), []);
+			response.optimisticPartner = "€ " + new AAMoneyPipe().transform((itemsPpll['BEDRAG10JAAR_OPTIMISTISCH']/12), []);
+			response.neutralPartner = "€ " + new AAMoneyPipe().transform((itemsPpll['BEDRAG10JAAR_STANDAARD']/12), []);
+			response.pessimisticPartner = "€ " + new AAMoneyPipe().transform((itemsPpll['BEDRAG10JAAR_PESSIMISTISCH']/12), []);
 		}
 	}
 
-	response.firstYearsMine = "€ " + new AAMoneyPipe().transform((itemsOpll['BEDRAG']/12), [true]);
-	response.optimisticMine = "€ " + new AAMoneyPipe().transform((itemsOpll['BEDRAG10JAAR_OPTIMISTISCH']/12), [true]);
-	response.neutralMine = "€ " + new AAMoneyPipe().transform((itemsOpll['BEDRAG10JAAR_STANDAARD']/12), [true]);
-	response.pessimisticMine = "€ " + new AAMoneyPipe().transform((itemsOpll['BEDRAG10JAAR_PESSIMISTISCH']/12), [true]);
+	response.firstYearsMine = "€ " + new AAMoneyPipe().transform((itemsOpll['BEDRAG']/12), []);
+	response.optimisticMine = "€ " + new AAMoneyPipe().transform((itemsOpll['BEDRAG10JAAR_OPTIMISTISCH']/12), []);
+	response.neutralMine = "€ " + new AAMoneyPipe().transform((itemsOpll['BEDRAG10JAAR_STANDAARD']/12), []);
+	response.pessimisticMine = "€ " + new AAMoneyPipe().transform((itemsOpll['BEDRAG10JAAR_PESSIMISTISCH']/12), []);
 
 	  let pensionInfo: any = clientStorage.session.getItem("pensionInfo");
 	  response.showButton = this.calculateFirst3Month(pensionInfo.startingDate);

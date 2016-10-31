@@ -1,9 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
+import { clone } from "../../../lib/util";
+const products = require('./datasets/products.json');
 
 const defaultProductsCombinations = require('./datasets/product-combinations.json');
 
 @Injectable()
-export class CalculatorProductsService {
+export class WiaPageProductsService {
 
   public productConfigurations;
 
@@ -12,25 +14,26 @@ export class CalculatorProductsService {
     this.productConfigurations = this.getProductsConfigurations(defaultProductsCombinations)
   }
 
-  public setProductConfigurations (configurations) {
+  public setProductConfigurations(configurations) {
     this.productConfigurations = configurations;
   }
 
 
-  private static allStrings (arrays) {
+  private static allStrings(arrays) {
     return !arrays.find(array => array.find(el => typeof el !== 'string'));
   };
 
-  private static flatten (arrays) {
+  private static flatten(arrays) {
     return arrays.reduce((memo, array) => memo.concat(...array), [])
   }
 
-  private static uniqe (array) {
+  private static uniqe(array) {
 
     return array.reverse().filter((e, i, arr) => arr.lastIndexOf(e) === i).reverse();
   }
 
-  private productsConfigurationsCompute (iArr) {
+  // Utility function expand nested array structure to flat one with all possible combinations
+  private productsConfigurationsCompute(iArr) {
     const res = [];
 
     for (let i = 0; i < iArr.length; i++) {
@@ -54,14 +57,14 @@ export class CalculatorProductsService {
       res.push(iArr);
     }
 
-    if (CalculatorProductsService.allStrings(res)) {
+    if (WiaPageProductsService.allStrings(res)) {
       return res;
     } else {
       return this.getProductsConfigurations(res);
     }
   };
 
-  public getProductsConfigurations (arrays) {
+  public getProductsConfigurations(arrays) {
 
     const res = [];
 
@@ -72,12 +75,17 @@ export class CalculatorProductsService {
     return res;
   }
 
-  public getAvailableProducts (selectedProducts) {
+  public getAvailableProducts(selectedProducts): string[] {
 
     const availableCombinations = this.productConfigurations.filter(combination => {
       return selectedProducts.every(selectedProduct => combination.indexOf(selectedProduct) > -1);
     });
 
-    return CalculatorProductsService.uniqe(CalculatorProductsService.flatten(availableCombinations));
+    return WiaPageProductsService.uniqe(WiaPageProductsService.flatten(availableCombinations));
+  }
+
+  public getProducts() {
+
+    return clone(products);
   }
 }

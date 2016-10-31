@@ -5,7 +5,7 @@
     "label": "Eerste jaar verzuim",
     "desc": "x",
     "hint": "",
-    "color": "#2985DB"
+    "color": "#D9EBF7"
   },
   {
     "type": "INCOME",
@@ -13,61 +13,61 @@
     "label": "Tweede jaar verzuim",
     "desc": "",
     "hint": "",
-    "color": "#79D3F0"
+    "color": "#D9EBF7"
   },
   {
-    "type": "GOV_01",
+    "type": "GOV",
     "id": "GOV_01",
     "label": "Inkomen na arbeidsongeschiktheid",
     "desc": "",
     "hint": "",
-    "color": "#54CE9C"
+    "color": "#A3EFDE"
   },
   {
-    "type": "GOV_02",
+    "type": "GOV",
     "id": "GOV_02",
     "label": "Wettelijke loongerelateerde WGA uitkering",
     "desc": "",
     "hint": "",
-    "color": "#9ACE88"
+    "color": "#A3EFDE"
   },
   {
-    "type": "GOV_02",
+    "type": "GOV",
     "id": "GOV_03",
     "label": "Wettelijke WGA vervolguitkering",
     "desc": "",
     "hint": "",
-    "color": "#b9c500"
+    "color": "#A3EFDE"
   },
   {
-    "type": "WGA_EXCED",
+    "type": "AEGON",
     "id": "WGA_01",
     "label": "Aegon Loongerelateerde WGA uitkering",
     "desc": "",
     "hint": "",
-    "color": "#978AB3"
+    "color": "#3395D4"
   },
   {
-    "type": "WGA_EXCED",
+    "type": "AEGON",
     "id": "WGA_02",
     "label": "Aegon WGA vervolguitkering",
     "desc": "",
     "hint": "",
-    "color": "#9375d5"
+    "color": "#3395D4"
   },
   {
-    "type": "WIA_01",
+    "type": "AEGON",
     "id": "WIA_01",
     "label": "WIA_01",
     "desc": "Income is ...",
     "hint": "It's that",
-    "color": "#DAC74A"
+    "color": "#3395D4"
   },
   {
-    "id": "EXT_01",
+    "id": "AEGON",
     "label": "EXT_01",
     "desc": "Income is ...",
     "hint": "It's that",
-    "color": "#DAa79A"
+    "color": "#3395D4"
   }
 ]

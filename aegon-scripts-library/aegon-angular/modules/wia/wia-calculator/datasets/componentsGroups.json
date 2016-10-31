@@ -1,7 +1,18 @@
 [
   {
     "type": "INCOME",
-    "label": "Loondoorbetaling Werkgever"
+    "label": "Loon",
+    "color": "#d9ebf7"
+  },
+  {
+    "type": "GOV",
+    "label": "Wettelijke Uitkering",
+    "color": "#A3EFDE"
+  },
+  {
+    "type": "AEGON",
+    "label": "Aegon uitkering",
+    "color": "#3395D4"
   },
   {
     "type": "GOV_01",

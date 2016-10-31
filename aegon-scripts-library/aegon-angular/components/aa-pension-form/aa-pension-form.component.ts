@@ -136,6 +136,7 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
   }
 
   editVisibility(val): any{
+
     if(this.step[val]) return 'hidden';
     return this.visibility[val] == 'show' ? 'hidden' : 'show';
   }
@@ -147,7 +148,8 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
   }
 
   editSection(val): any {
-    this.bbpage.hidePage();
+      // this.bbpage.hidePage();
+    if(this.isValidAmount() == true || this.btnValidationForUserPartner() !== false || this.btnValidationForUser() !== false) return false;
 
     for (let i = 1; i <= 5; i++) {
       this.visibility[i] = (val == i) ? 'show' : 'hidden';
@@ -243,10 +245,21 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
 
   submitForm(data): void {
     //this is were we need to set session and api call
+    console.log(data, 'pension');
+
+    if(data['havePartner'] == false){
+
+      data['insurablePartner'] = false;
+
+    }
+
     clientStorage.session.setItem("pensionInfo", data);
-    this.bbpage.initialize();
-    this.bbleft.callService();
-    this.bbright.callService();
+
+    if(this.options.initializeBlueBlocks) {
+      this.bbpage.initialize();
+      this.bbleft.callService();
+      this.bbright.callService();
+    }
   }
 
   testMethod(val: number): number {

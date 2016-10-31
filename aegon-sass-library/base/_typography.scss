@@ -40,17 +40,20 @@ h3 {
   @include rem('font-size', $large);
   @include rem('line-height', $line-height-large);
   color: $blue;
+  font-weight: normal;
   margin: 10px auto;
 }
 
 h4 {
   font-family: $font_normal;
+  font-weight: normal;
   @include rem('font-size', $medium);
   @include rem('line-height', $line-height-medium);
 }
 
 h5 {
   font-family: $font_light;
+  font-weight: normal;
   @include rem('font-size', $small);
 }
 

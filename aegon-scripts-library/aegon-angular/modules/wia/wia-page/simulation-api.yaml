@@ -1,0 +1,91 @@
+---
+swagger: '2.0'
+info:
+  title: WIA Simulations
+  description: WIA Simulations
+  version: 1.0.0
+host: host.example.com
+schemes:
+- http
+basePath: "/v1"
+produces:
+- application/json
+paths:
+  "/simulations":
+    get:
+      summary: Simulations dataset
+      description: 'Get simulations dataset subset for given income and products
+
+'
+      parameters:
+      - name: income
+        in: query
+        description: Income ammount
+        required: true
+        type: number
+        format: integer
+      - name: products
+        in: query
+        description: List of selected products
+        type: array
+        items:
+          type: string
+      responses:
+        '200':
+          description: An array of products
+          schema:
+            type: object
+            properties:
+              combination_id:
+                "$ref": "#/definitions/Simulation"
+        default:
+          description: Unexpected error
+          schema:
+            "$ref": "#/definitions/Error"
+definitions:
+  Simulation:
+    type: object
+    properties:
+      periods:
+        type: array
+        items:
+          "$ref": "#/definitions/Period"
+  Period:
+    type: object
+    properties:
+      label:
+        type: string
+      amount:
+        type: number
+      percentage:
+        type: number
+      products:
+        type: array
+        items:
+          "$ref": "#/definitions/Product"
+  Product:
+    type: object
+    properties:
+      components:
+        type: array
+        items:
+          "$ref": "#/definitions/Component"
+  Component:
+    type: object
+    properties:
+      id:
+        type: string
+      percentage:
+        type: number
+      amount:
+        type: number
+  Error:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      fields:
+        type: string
