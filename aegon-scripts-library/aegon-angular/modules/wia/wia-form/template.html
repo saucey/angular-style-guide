@@ -1,7 +1,7 @@
 <div class="wia_form" *ngIf="!submitted">
   <div class="messages messages--functional visible">
 
-    <div class="header">
+    <div class="header headline">
       Bekijk uw inkomen bij arbeidsongeschiktheid
     </div>
     <p class="content">
@@ -25,8 +25,12 @@
 
     <div *ngIf="step > 2" [@flyTop]="'in'">
 
+      <div class="header headline headline--margin">
+        Stel uw situatie in en bekijk uw inkomen bij arbeidsongeschiktheid
+      </div>
+
       <label class="wia_form__column_input">
-        <label class="header">Uw salaris, bruto per jaar</label>
+        <label>Uw salaris, bruto per jaar</label>
         <aa-input-number class="aa-input--euro aa-input--white" [(ngModel)]="income" [placeholder]="0" defaultValue=""></aa-input-number>
       </label>
 
@@ -34,7 +38,7 @@
         <div class="form-1" *ngIf="visiblePage === 1">
 
           <div class="wia_form__column_input">
-            <label class="header">De verzekeringscode van uw werkgever</label>
+            <label>De verzekeringscode van uw werkgever</label>
             <input class="input--white" type="text" [(ngModel)]="personalizationCode" placeholder="355A0"/>
           </div>
 
@@ -53,7 +57,7 @@
 
           <form (submit)="onProductFormSubmit($event)">
 
-            <label class="wia_form__products_label header">Het verzekeringsproduct dat u heeft:</label>
+            <label class="wia_form__products_label">Het verzekeringsproduct dat u heeft:</label>
 
             <div class="clearfix">
               <div *ngFor="let product of getProducts(); trackBy:trackById" class="product-group">

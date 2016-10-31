@@ -7,6 +7,10 @@
     background: none;
   }
 
+  label {
+    font-weight: normal;
+  }
+
   .wia_form__column_input {
     margin: 1em 0;
     > label {
@@ -78,14 +82,15 @@
     input {
       display: none;
     }
-
-    label {
-      font-weight: normal;
-    }
   }
 
   .header {
     font-weight: normal;
+    &.headline {
+      font-size: 1.05em;
+    }
+    &.headline--margin {
+      margin-top: 2em;
+    }
   }
-
 }
