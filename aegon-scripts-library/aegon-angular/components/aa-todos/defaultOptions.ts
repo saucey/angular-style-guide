@@ -4,13 +4,13 @@ export var defaultOptions = {
    */
 
   blok1title: "0 tot 3 maanden",
-  blok1description: "gecheckt, klik op een vraag hieronder en vink af wat je al hebt geregeld",
+  blok1description: "bekeken, klik op een vraag en vink af wat u al hebt geregeld",
   blok2title: "3 tot 6 maanden",
-  blok2description: "gecheckt, klik op een vraag hieronder en vink af wat je al hebt geregeld",
+  blok2description: "bekeken, klik op een vraag en vink af wat u al hebt geregeld",
   blok3title: "6 tot 9 maanden",
-  blok3description: "gecheckt, klik op een vraag hieronder en vink af wat je al hebt geregeld",
+  blok3description: "bekeken, klik op een vraag en vink af wat u al hebt geregeld",
   blok4title: "na de zwangerschap",
-  blok4description: "gecheckt, klik op een vraag hieronder en vink af wat je al hebt geregeld",
+  blok4description: "bekeken, klik op een vraag en vink af wat u al hebt geregeld",
   questions1: [
     {
       title: "Wilt u straks meer of minder werken?",
