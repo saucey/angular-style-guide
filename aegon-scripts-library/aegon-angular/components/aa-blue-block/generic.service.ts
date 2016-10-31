@@ -137,7 +137,7 @@ export class GenericService {
 		            "PENSIOENAANSPRAAK": {
 		              "IND_OUDERDOMSPENSIOEN": true,
 		              "IND_NABESTAANDENPENSIOEN": (pensionInfo.insurablePartner) ? true : false,
-		              "IND_HOOG_LAAGPENSIOEN": false,
+		              "IND_HOOG_LAAGPENSIOEN": true,
 		              "IND_PREPENSIOEN": false,
 		              "BEGIN_DATUM_UITKERING": pensionInfo.startingDate,
 		              "DUUR_UITKERING_JAREN": 5,
