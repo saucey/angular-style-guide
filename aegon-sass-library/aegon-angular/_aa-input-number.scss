@@ -48,17 +48,25 @@
   @include rem('top', 9);
 }
 
+.aa-input--white {
+  input[type=text] {
+    background: $white;
+  }
+}
+
 // Euro input style; add class higher up in the element tree somewhere
 .aa-input--euro {
   // Add prefix space to input
   .aa-input-number__prefix:before {
     content: "€";
+    font-weight: normal;
   }
   input {
     @include rem('padding-left', 30);
     @include rem('padding-right', 10);
   }
 }
+
 
 // Percentage input style
 .aa-input--percentage {

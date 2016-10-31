@@ -206,8 +206,6 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit {
             columns: [graphData[3]]
           }
         ];
-        
-        console.log('this', this);
 
         this.legendData = legendData;
       }

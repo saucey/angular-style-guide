@@ -34,3 +34,9 @@ label.radio {
     }
   }
 }
+
+.radio--white {
+  span.radio {
+    background: $white !important;
+  }
+}
