@@ -97,5 +97,451 @@ describe('CalculatorProductService', () => {
 
       expect(productService.getAvailableProducts(['1', '3'])).toEqual(['1', '2', '3']);
     });
-  })
+  });
+
+  describe('setDefaultAttributes', () => {
+
+    it('should add the missing attributes for WGA_EXCED', () => {
+      let productsList = [
+          {
+            "id": "WGA_EXCED",
+            "attrs": [
+              {
+                "id": "COVERAGE_RATE_WGA",
+                "value": 70
+              }
+            ]
+          }
+        ],
+        expectedProductsList = [
+          {
+            "id": "WGA_EXCED",
+            "attrs": [
+              {
+                "id": "COVERAGE_RATE_WGA",
+                "value": 70
+              },
+              {
+                "id": "END_AGE",
+                "label": "EindLeeftijd",
+                "value": 65,
+                "visible": false,
+                "options": [
+                  {
+                    "value": 65,
+                    "label": "65%"
+                  },
+                  {
+                    "value": 67,
+                    "label": "67%"
+                  },
+                  {
+                    "value": 70,
+                    "label": "70%"
+                  }
+                ]
+              },
+              {
+                "id": "BENEFIT_INDEX",
+                "label": "Indexering uitkering (Klim_srt)",
+                "value": "Geen",
+                "visible": false,
+                "options": [
+                  {
+                    "value": "Geen",
+                    "label": null
+                  },
+                  {
+                    "value": "CBS",
+                    "label": null
+                  },
+                  {
+                    "value": "2%",
+                    "label": null
+                  },
+                  {
+                    "value": "3%",
+                    "label": null
+                  }
+                ]
+              },
+              {
+                "id": "WAGE_DEFINITION",
+                "label": "Loonbegrip",
+                "value": "belastbaar loon boven de SV-loongrens",
+                "visible": false,
+                "options": [
+                  {
+                    "value": "belastbaar loon boven de SV-loongrens",
+                    "label": null
+                  },
+                  {
+                    "value": "belastbaar loon boven de SV-loongrens",
+                    "label": null
+                  }
+                ]
+              },
+              {
+                "id": "DEVIATED_MAXIMUM_WAGE",
+                "label": "Afwijkend Maximum Loon(Afw_maxln)",
+                "value": "125.000",
+                "visible": false,
+                "options": [
+                  {
+                    "value": "125.000",
+                    "label": null
+                  },
+                  {
+                    "value": "meer dan 125.000",
+                    "label": null
+                  }
+                ]
+              },
+              {
+                "id": "INSURED_AMOUNT",
+                "label": "Verzekerd Bedrag (Verz_bedr)",
+                "value": 0,
+                "visible": false,
+                "options": []
+              }
+            ]
+          }
+        ],
+        actualProductsList;
+
+      actualProductsList = productService.setDefaultAttributes(productsList);
+      expect(actualProductsList).toEqual(expectedProductsList);
+    });
+
+    it('should add the missing attributes for IVA_EXCED and WGA_AANV_UPGRADE', () => {
+      let productsList = [
+          {
+            "id": "IVA_EXCED",
+            "attrs": [
+              {
+                "id": "COVERAGE_RATE_IVA",
+                "value": 70
+              }
+            ]
+          },
+          {
+            "id": "WGA_AANV_UPGRADE",
+            "attrs": []
+          }
+        ],
+        expectedProductsList = [
+          {
+            "id": "IVA_EXCED",
+            "attrs": [
+              {
+                "id": "COVERAGE_RATE_IVA",
+                "value": 70
+              },
+              {
+                "id": "END_AGE",
+                "label": "EindLeeftijd",
+                "value": 65,
+                "visible": false,
+                "options": [
+                  {
+                    "value": 65,
+                    "label": "65%"
+                  },
+                  {
+                    "value": 67,
+                    "label": "67%"
+                  },
+                  {
+                    "value": 70,
+                    "label": "70%"
+                  }
+                ]
+              },
+              {
+                "id": "BENEFIT_INDEX",
+                "label": "Indexering uitkering (Klim_srt)",
+                "value": "Geen",
+                "visible": false,
+                "options": [
+                  {
+                    "value": "Geen",
+                    "label": null
+                  },
+                  {
+                    "value": "CBS",
+                    "label": null
+                  },
+                  {
+                    "value": "2%",
+                    "label": null
+                  },
+                  {
+                    "value": "3%",
+                    "label": null
+                  }
+                ]
+              },
+              {
+                "id": "WAGE_DEFINITION",
+                "label": "Loonbegrip",
+                "value": "belastbaar loon boven de SV-loongrens",
+                "visible": false,
+                "options": [
+                  {
+                    "value": "belastbaar loon boven de SV-loongrens",
+                    "label": null
+                  },
+                  {
+                    "value": "belastbaar loon boven de SV-loongrens",
+                    "label": null
+                  }
+                ]
+              },
+              {
+                "id": "DEVIATED_MAXIMUM_WAGE",
+                "label": "Afwijkend Maximum Loon(Afw_maxln)",
+                "value": "125.000",
+                "visible": false,
+                "options": [
+                  {
+                    "value": "125.000",
+                    "label": null
+                  },
+                  {
+                    "value": "meer dan 125.000",
+                    "label": null
+                  }
+                ]
+              },
+              {
+                "id": "INSURED_AMOUNT",
+                "label": "Verzekerd Bedrag (Verz_bedr)",
+                "value": 0,
+                "visible": false,
+                "options": []
+              }
+            ]
+          },
+          {
+            "id": "WGA_AANV_UPGRADE",
+            "attrs": [
+              {
+                "id": "END_AGE",
+                "label": "EindLeeftijd",
+                "value": 65,
+                "visible": false,
+                "options": [
+                  {
+                    "value": 65,
+                    "label": "65%"
+                  },
+                  {
+                    "value": 67,
+                    "label": "67%"
+                  },
+                  {
+                    "value": 70,
+                    "label": "70%"
+                  }
+                ]
+              },
+              {
+                "id": "BENEFIT_INDEX",
+                "label": "Indexering uitkering (Klim_srt)",
+                "value": "Geen",
+                "visible": false,
+                "options": [
+                  {
+                    "value": "Geen",
+                    "label": null
+                  },
+                  {
+                    "value": "CBS",
+                    "label": null
+                  },
+                  {
+                    "value": "2%",
+                    "label": null
+                  },
+                  {
+                    "value": "3%",
+                    "label": null
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        actualProductsList;
+
+      actualProductsList = productService.setDefaultAttributes(productsList);
+      expect(actualProductsList).toEqual(expectedProductsList);
+    });
+
+    it('should add the missing attributes for WGA_AANV_LIGHT and WGA_AANV_STANDARD', () => {
+      let productsList = [
+          {
+            "id": "WGA_AANV_LIGHT",
+            "attrs": [
+              {
+                "id": "END_AGE",
+                "value": 65
+              }
+            ]
+          },
+          {
+            "id": "WGA_AANV_STANDARD",
+            "attrs": [
+              {
+                "id": "END_AGE",
+                "value": 65
+              }
+            ]
+          }
+        ],
+        expectedProductsList = [
+          {
+            "id": "WGA_AANV_LIGHT",
+            "attrs": [
+              {
+                "id": "END_AGE",
+                "value": 65
+              },
+              {
+                "id": "BENEFIT_INDEX",
+                "label": "Indexering uitkering (Klim_srt)",
+                "value": "Geen",
+                "visible": false,
+                "options": [
+                  {
+                    "value": "Geen",
+                    "label": null
+                  },
+                  {
+                    "value": "CBS",
+                    "label": null
+                  },
+                  {
+                    "value": "2%",
+                    "label": null
+                  },
+                  {
+                    "value": "3%",
+                    "label": null
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "WGA_AANV_STANDARD",
+            "attrs": [
+              {
+                "id": "END_AGE",
+                "value": 65
+              },
+              {
+                "id": "BENEFIT_INDEX",
+                "label": "Indexering uitkering (Klim_srt)",
+                "value": "Geen",
+                "visible": false,
+                "options": [
+                  {
+                    "value": "Geen",
+                    "label": null
+                  },
+                  {
+                    "value": "CBS",
+                    "label": null
+                  },
+                  {
+                    "value": "2%",
+                    "label": null
+                  },
+                  {
+                    "value": "3%",
+                    "label": null
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        actualProductsList;
+
+      actualProductsList = productService.setDefaultAttributes(productsList);
+      expect(actualProductsList).toEqual(expectedProductsList);
+    });
+
+    it('should add the missing attributes for WIA_35MIN and WIA_35MIN_BODEM', () => {
+      let productsList = [
+          {
+            "id": "WIA_35MIN",
+            "attrs": []
+          },
+          {
+            "id": "WIA_35MIN_BODEM",
+            "attrs": []
+          }
+        ],
+        expectedProductsList = [
+          {
+            "id": "WIA_35MIN",
+            "attrs": [
+              {
+                "id": "BENEFIT_PERIOD",
+                "label": "Selecteer uitkeringsduur",
+                "value": 5,
+                "visible": true,
+                "options": [
+                  {
+                    "value": 5,
+                    "label": "5%"
+                  },
+                  {
+                    "value": 7.5,
+                    "label": "7.5%"
+                  },
+                  {
+                    "value": 10,
+                    "label": "10%"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "WIA_35MIN_BODEM",
+            "attrs": [
+              {
+                "id": "BENEFIT_PERIOD",
+                "label": "Selecteer uitkeringsduur",
+                "value": 5,
+                "visible": false,
+                "options": [
+                  {
+                    "value": 5,
+                    "label": "5"
+                  },
+                  {
+                    "value": 7.5,
+                    "label": "7.5"
+                  },
+                  {
+                    "value": 10,
+                    "label": "10"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        actualProductsList;
+
+      actualProductsList = productService.setDefaultAttributes(productsList);
+      expect(actualProductsList).toEqual(expectedProductsList);
+    });
+
+  });
+
 });

@@ -12,6 +12,7 @@ import { WIAInputModel } from "../wia-page/models/wia-input.model";
 import { TopicBuilder } from "./topic-builder";
 import { clone } from "../../../lib/util";
 import { BehaviorSubject } from "rxjs";
+import { WiaPageProductsService } from "../wia-page/wia-page.products.service";
 
 @Injectable()
 export class TopicService {
@@ -19,16 +20,19 @@ export class TopicService {
   private wiaContentService: WiaContentService;
   private wiaInputData: WIAInputModel;
   private topicBuilder: TopicBuilder;
-  public  data;
-  public  topics$: BehaviorSubject<any[]>;
+  private wiaPageProductsService: WiaPageProductsService;
+  public data;
+  public topics$: BehaviorSubject<any[]>;
 
-  constructor(wiaContentService: WiaContentService, wiaPageService: WiaSubscriptionService, topicBuilder: TopicBuilder) {
+  constructor(wiaContentService: WiaContentService, wiaPageService: WiaSubscriptionService, topicBuilder: TopicBuilder, wiaPageProductsService: WiaPageProductsService) {
     this.wiaContentService = wiaContentService;
     this.topicBuilder = topicBuilder;
+    this.wiaPageProductsService = wiaPageProductsService;
     this.topics$ = new BehaviorSubject(null);
 
     wiaPageService.subscribe(value => {
       this.wiaInputData = clone(value);
+      this.wiaInputData.products = this.wiaPageProductsService.setDefaultAttributes(this.wiaInputData.products);
       this.build();
     });
 
