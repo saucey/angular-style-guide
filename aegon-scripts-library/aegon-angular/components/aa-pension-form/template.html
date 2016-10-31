@@ -37,7 +37,7 @@
                         </div>
 
                         <button class="arrow button" type="button" (click)="goTo(1,2)" [disabled]="isValidAmount()">{{data.options.block1.box.btn}}</button>
-                        
+
                       </div>
                       <div class="col form-text__column">
                           <span class="form-text__icon icon-piggy-bank"></span>
@@ -109,10 +109,10 @@
           <div class="form-section__input__results">
 
             <span class="block">
-              <span *ngIf='pension["havePartner"] == "true" ' class="block">
+              <span *ngIf='pension["havePartner"] == true' class="block">
                 Ja, ik heb een partner
               </span>
-              <span *ngIf='pension["havePartner"] == "false" 'class="block">
+              <span *ngIf='pension["havePartner"] == false' class="block">
                 Nee, ik heb geen partner
               </span>
             </span>
@@ -156,13 +156,13 @@
 
                         <div class="white-radio-wrapper">
                           <label class="radio white-radio">
-                            <input type="radio" name="whofor" value="true" [(ngModel)]="pension['havePartner']" (change)="hasPartner = 'show'; initChangeHasPartner = true" />
+                            <input type="radio" name="whofor" [value]="true" [(ngModel)]="pension['havePartner']" (change)="hasPartner = 'show'; initChangeHasPartner = true" />
                             <span class="radio"></span>
                             <span class="label-text">{{data.options.block3.box.label1}}</span>
                           </label>
 
                           <label class="radio white-radio">
-                            <input type="radio" name="whofor" value="false" [(ngModel)]="pension['havePartner']" (change)="hasPartner = 'hidden'; initChangeHasPartner = false" />
+                            <input type="radio" name="whofor" [value]="false" [(ngModel)]="pension['havePartner']" (change)="hasPartner = 'hidden'; initChangeHasPartner = false" />
                             <span class="radio"></span>
                             <span class="label-text">{{data.options.block3.box.label2}}</span>
                           </label>
@@ -171,14 +171,14 @@
                           <span class="general-form__box__head">{{data.options.block3.box.title2}}</span>
                             <div class="white-radio-wrapper">
                               <label class="radio white-radio extended-text">
-                                <input type="radio" name="havePartner" value="true" [(ngModel)]="pension['insurablePartner']" (change)="partnerDob = 'show'; initChangeNoPolicy = false" />
+                                <input type="radio" name="havePartner" [value]="true" [(ngModel)]="pension['insurablePartner']" (change)="partnerDob = 'show'; initChangeNoPolicy = false" />
                                 <span class="radio"></span>
                                 <span class="label-text"><strong>{{data.options.block3.box.yesPartnerPension.label}}</strong></span>
                                 <span class="label-text">{{data.options.block3.box.yesPartnerPension.text}}</span>
                               </label>
 
                               <label class="radio white-radio extended-text">
-                                <input type="radio" name="havePartner" value="false" [(ngModel)]="pension['insurablePartner']" (change)="partnerDob = 'hidden'; initChangeNoPolicy = true " />
+                                <input type="radio" name="havePartner" [value]="false" [(ngModel)]="pension['insurablePartner']" (change)="partnerDob = 'hidden'; initChangeNoPolicy = true " />
                                 <span class="radio"></span>
                                 <span class="label-text"><strong>{{data.options.block3.box.noPartnerPension.label}}</strong></span>
                                 <span class="label-text">{{data.options.block3.box.noPartnerPension.text}}</span>

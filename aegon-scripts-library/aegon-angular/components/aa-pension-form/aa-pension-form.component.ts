@@ -245,6 +245,14 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
 
   submitForm(data): void {
     //this is were we need to set session and api call
+    console.log(data, 'pension');
+
+    if(data['havePartner'] == false){
+
+      data['insurablePartner'] = false;
+
+    }
+
     clientStorage.session.setItem("pensionInfo", data);
     // this.bbpage.initialize();
     // this.bbleft.callService();
