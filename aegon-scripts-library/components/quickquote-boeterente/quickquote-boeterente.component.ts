@@ -214,7 +214,7 @@ export class QuickQuoteBoeterenteComponent implements OnInit {
        */
       this.intstService.getMarketInterestRate({months: this.periodsLeft, nhg: this.nhg, lowest: true}).then((interests) => {
         this.newIntRate = interests;
-
+        console.log(interests);
         if(this.newIntRate < this.oldIntRate) {
           /* If valid if the new interest is lower than
            * the interest entered by the user.
