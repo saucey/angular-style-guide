@@ -63,6 +63,20 @@ label.checkbox {
   &.required {
     margin-top: 15px; //make space for the error message on top of the checkbox in case one needs to be displayed
   }
+
+  &.checkbox--white {
+    span.checkbox {
+      background: $white !important;
+    }
+  }
+
+  &.checkbox--disabled {
+    color: $darker_grey;
+    span.checkbox {
+      cursor: not-allowed;
+      background-color: $beige !important;
+    }
+  }
 }
 // Fix for native android browser.
 @-webkit-keyframes androidNative { 

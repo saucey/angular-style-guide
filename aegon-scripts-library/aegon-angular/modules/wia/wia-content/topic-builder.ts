@@ -53,8 +53,6 @@ export class TopicBuilder {
 
     let topicRowCollection: Array<TopicRowModel> = [];
 
-    console.log('input at build time: ', this.wiaInputData);
-
     this.wiaTopicRowCollection.forEach((topicRow: WiaTopicRowModel, rowIndex: number) => {
 
       topicRowCollection[rowIndex] = {

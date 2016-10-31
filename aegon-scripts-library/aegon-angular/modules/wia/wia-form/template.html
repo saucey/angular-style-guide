@@ -12,10 +12,10 @@
 
     <div *ngIf="step > 1" [@flyTop]="'in'">
       <div class="header">U wordt ziek en dan?</div>
-      <p>Bent u na 2 jaar nog steeds ziek? Dan bepaalt het UWV wat u nog kunt verdienen in dezelfde of een andere baan, ook al bent u ziek. Dat is de restverdiencapaciteit: het bedrag dat u nog kunt verdienen.</p>
+      <p>Als u (gedeeltelijk) arbeidsongeschikt wordt, ontvangt u eerst twee jaar lang een inkomen van uw werkgever. Dat is de loondoorbetaling door uw werkgever. Daarnaast moeten u en uw werkgever er alles aan doen om u weer aan het werk te krijgen.</p>
 
       <div class="header">Na de eerste 2 jaar</div>
-      <p>Als u (gedeeltelijk) arbeidsongeschikt wordt, ontvangt u eerst twee jaar lang een inkomen van uw werkgever. Dat is de loondoorbetaling door uw werkgever. Daarnaast moeten u en uw werkgever er alles aan doen om u weer aan het werk te krijgen.</p>
+      <p>Bent u na 2 jaar nog steeds ziek? Dan bepaalt het UWV wat u nog kunt verdienen in dezelfde of een andere baan, ook al bent u ziek. Dat is de restverdiencapaciteit: het bedrag dat u nog kunt verdienen.</p>
 
       <div class="header">Wat betekent dit voor u?</div>
       <p>Bekijk hoe uw inkomen verandert bij verschillende mate van arbeidsongeschiktheid. Vul eerst uw huidige salaris in en daarna eventueel uw arbeidsongeschiktheidverzekering.</p>
@@ -25,50 +25,67 @@
 
     <div *ngIf="step > 2" [@flyTop]="'in'">
 
-      <label>
-        Uw salaris, bruto per jaar
-        <aa-input-number class="aa-input--euro" [(ngModel)]="income" [placeholder]="0" defaultValue=""></aa-input-number>
+      <label class="wia_form__column_input">
+        <label class="header">Uw salaris, bruto per jaar</label>
+        <aa-input-number class="aa-input--euro aa-input--white" [(ngModel)]="income" [placeholder]="0" defaultValue=""></aa-input-number>
       </label>
 
       <div>
         <div class="form-1" *ngIf="visiblePage === 1">
-          <p>Stel uw persoonlijke situatie in en bereken hoe hoog uw inkomen is bij langdurige arbeidsongeschiktheid.</p>
 
-          <label>De verzekeringscode van uw werkgever</label>
-          <input type="text" [(ngModel)]="personalizationCode" placeholder="355A0"/>
-
-          <div>
-            <button class="button arrow" (click)="onCodeSubmit()">Verder</button>
+          <div class="wia_form__column_input">
+            <label class="header">De verzekeringscode van uw werkgever</label>
+            <input class="input--white" type="text" [(ngModel)]="personalizationCode" placeholder="355A0"/>
           </div>
 
           <ul class="arrow wia_form__products-switch">
             <li><a (click)="visiblePage = 2">Geen code? zelf verzekering kiezen</a></li>
           </ul>
+
+          <div>
+            <button class="button arrow" (click)="onCodeSubmit()" [disabled]="!income || !personalizationCode ||  personalizationCode === ''">Verder</button>
+          </div>
+
         </div>
 
 
         <div class="form-2" *ngIf="visiblePage === 2">
+
           <form (submit)="onProductFormSubmit($event)">
-            <p>Het verzekeringsproduct dat u heeft:</p>
-            <div *ngFor="let product of getProducts(); trackBy:trackById">
-              <label>
-                {{product.label}}
-                <input type="checkbox" name="wia-form-product-{{product.id}}"
-                       [(ngModel)]="product.selected"
-                       [disabled]="product.disabled"
-                       (change)="updateProduct(product, $event)">
-              </label>
-              <div class="product-attrs" [hidden]="!product.selected || !product.attrs?.length">
-                <ul>
-                  <div *ngFor="let attr of product.attrs; trackBy:trackById">
-                    <li *ngIf="isProductAttributeVisible(attr)">
-                      {{ attr.label }}
-                      <select class="no-dd" name="wia-form-selectProduct-{{attr.id}}" [(ngModel)]="attr.value">
-                        <option *ngFor="let option of attr.options; trackBy:trackByValue" value="{{ option.value }}">{{ option.label }}</option>
-                      </select>
+
+            <label class="wia_form__products_label header">Het verzekeringsproduct dat u heeft:</label>
+
+            <div class="clearfix">
+              <div *ngFor="let product of getProducts(); trackBy:trackById" class="product-group">
+
+                <label class="checkbox checkbox--white" [class.checkbox--disabled]="product.disabled">
+                  <input type="checkbox"
+                         [(ngModel)]="product.selected"
+                         [disabled]="product.disabled"
+                         (change)="updateProduct(product, $event)"
+                         name="'wia-form-product-{{product.id}}'">
+                  <span class="checkbox"></span>
+                  {{product.label}}
+                </label>
+
+                <div class="product-attrs" [class.hidden]="!product.selected || !product.attrs?.length">
+                  <ul>
+                    <li *ngFor="let attr of product.attrs; trackBy:trackById" >
+                      <div *ngIf="isProductAttributeVisible(attr)" class="product-attr">
+                        {{ attr.label }}
+
+                        <div class="products-attrs__radios clearfix">
+                          <div class="products-attrs__radio" *ngFor="let option of attr.options; trackBy:trackByValue">
+                            <aa-input-radio [name]="'wia-form-selectProduct-' + attr.id"
+                                            [(ngModel)]="attr.value"
+                                            class="radio--white"
+                                            [value]="option.value">{{option.label}}</aa-input-radio>
+                          </div>
+                        </div>
+                      </div>
                     </li>
-                  </div>
-                </ul>
+                  </ul>
+                </div>
               </div>
             </div>
 
@@ -76,7 +93,7 @@
               <li><a (click)="visiblePage = 1">Productcode ontvangen? Voer de code in</a></li>
             </ul>
 
-            <button class="button arrow">Verder</button>
+            <button class="button arrow" [disabled]="!income">Verder</button>
           </form>
 
         </div>

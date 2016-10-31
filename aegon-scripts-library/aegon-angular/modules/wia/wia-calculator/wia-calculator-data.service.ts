@@ -92,7 +92,7 @@ export class CalculatorDataService {
       console.log('product.attrs', product.attrs);
       return [
         product.id,
-        product.attrs[0].value //@TODO handle attributes dynamically
+        product.attrs.length ? product.attrs[0].value :  null //@TODO handle attributes dynamically
       ]
     });
 
