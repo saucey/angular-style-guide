@@ -315,7 +315,7 @@ export class GenericService {
 	processResultDIP(highLow, data) {
 	  console.log("processResultDIP gets called", data);
 	  let response: any = {};
-	  let items: any[] = data['BScalculateResponse']['PENSIOENOVEREENKOMST']['PENSIOENAANSPRAAK'],
+	  let items: any[] = data['BScalculateDIPResponse']['DOSSIER']['PENSIOENOVEREENKOMST']['PENSIOENAANSPRAAK'],
 	    hlAmount = 0;
 	  if (!Array.isArray(items)) {
 	    items = [items];
