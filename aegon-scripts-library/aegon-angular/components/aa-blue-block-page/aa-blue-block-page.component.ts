@@ -23,12 +23,12 @@ export class AABlueBlockPageComponent extends AABaseComponent implements OnInit 
   public pensionInfo: any = {};
   
   public pageIsHidden: boolean = true;
-  public hasTopContent: boolean;
-  public columnLeftIsHidden: boolean;
-  public columnRightIsHidden: boolean;
-  public hasLink: boolean;
-  public hasBottomContent: boolean;
-  public bottomContentEnabled: boolean;
+  public columnLeftIsHidden: boolean = false;
+  public columnRightIsHidden: boolean = false;
+  
+  public hasTopContent: boolean = true;
+  public hasLink: boolean = true;
+  public hasBottomContent: boolean = true;  
 
   constructor(private thisElement: ElementRef) {
     super(thisElement);
@@ -44,10 +44,10 @@ export class AABlueBlockPageComponent extends AABaseComponent implements OnInit 
     this.pensionInfo = this.getPensionInfo();
 
     if(this.isPensionInfoAvailable(this.pensionInfo)) {    
-      this.setPageStructure();
+      this.setPageStructure(this.options.page);
       this.showPage();
           
-    } else { if(this.options['start.redirect'] == true) this.redirectToStartPage(); }   
+    } else { if(this.data.options.start.redirect == true) this.redirectToStartPage(); }   
   }
 
   hidePage() {
@@ -71,7 +71,7 @@ export class AABlueBlockPageComponent extends AABaseComponent implements OnInit 
 
   // Redirect to start page (if it is not already there)
   redirectToStartPage() {
-    if(this.options['start.url'] !== window.location.href) window.location.href = this.options['start.url'];       
+    if(this.data.options.start.url !== window.location.href) window.location.href = this.data.options.start.url;       
   }
 
   // Check if the pension location is from Aegon or other insurance
@@ -89,23 +89,23 @@ export class AABlueBlockPageComponent extends AABaseComponent implements OnInit 
 	}
 
   // Set the page structure. Used by ngClass and ngIf in view 
-  setPageStructure() {      
+  setPageStructure(page: string) { 
 
-    // Top content
-    this.options['top.title'] ? this.hasTopContent = true: this.hasTopContent = false;
+    if(page === 'pensionForm') { 
+      this.hasLink = false;
+      this.hasBottomContent = false;
+    }
 
-    // Right column
-    this.options['right.hide'] == 'noInsurablePartner' ? this.columnRightIsHidden = true: this.columnRightIsHidden = false;    
-    console.info(this.options['right.hide']);
+    if(page === 'dip') { 
+      this.hasTopContent = false;
+      this.isPensionLocationAegon(this.pensionInfo.pensionLocation) && !this.isStartingDateWithin3Months(this.pensionInfo.startingDate) ? 
+        this.hasBottomContent = true : this.hasBottomContent = false;
+    }
 
-    // Link    
-    this.options['link.text'] && this.options['link.url'] ? this.hasLink = true : this.hasLink = false;
-
-    // Bottom content
-    this.options['bottom.title'] || this.options['bottom.text'] ? 
-      this.hasBottomContent = true: this.hasBottomContent = false;  
-    
-    this.isPensionLocationAegon(this.pensionInfo.pensionLocation) && this.isStartingDateWithin3Months(this.pensionInfo.startingDate) ? 
-      this.bottomContentEnabled = true : this.bottomContentEnabled = false
+    if(page === 'vpu') { 
+      this.hasTopContent = false;
+      !this.isStartingDateWithin3Months(this.pensionInfo.startingDate) ? this.hasBottomContent = true : this.hasBottomContent = false;
+      !this.pensionInfo.insurablePartner ? this.columnRightIsHidden = true : this.columnRightIsHidden = false;
+    } 
   }
 }

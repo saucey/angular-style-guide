@@ -28,9 +28,11 @@
     </div>
   </div>
   
-  <a *ngIf="hasLink" class="aa-bb-page__link" href="{{data.options.link.url}}">{{data.options.link.text}}</a>
-
-  <div *ngIf="hasBottomContent && bottomContentEnabled" class="aa-bb-page__bottomContent">
+  <div *ngIf="hasLink" class="aa-bb-page__link">
+    <a href="{{data.options.link.url}}">{{data.options.link.text}}</a>
+  </div>
+  
+  <div *ngIf="hasBottomContent" class="aa-bb-page__bottomContent">
     <h2>{{data.options.bottom.title}}</h2>
     <p>{{data.options.bottom.text}}</p>      
   </div>
