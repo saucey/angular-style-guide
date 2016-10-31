@@ -255,7 +255,7 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
 
     clientStorage.session.setItem("pensionInfo", data);
 
-    if(this.options.data.initializeBlueBlocks) {
+    if(this.options.initializeBlueBlocks) {
       this.bbpage.initialize();
       this.bbleft.callService();
       this.bbright.callService();
