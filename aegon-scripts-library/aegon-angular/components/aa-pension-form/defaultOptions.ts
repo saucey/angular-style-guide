@@ -78,5 +78,6 @@ export const defaultOptions = {
         text: "Meest gekozen ingangsdatum is 7 maanden na de pensioengerechtigde leeftijd",
         source: "Bron:Aegon",
       }
-  }
+  },
+  "initializeBlueBlocks" : false
 };
