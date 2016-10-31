@@ -47,7 +47,7 @@ export class GenericService {
     		let options = new RequestOptions({headers: headers});
 
 		let body:any = {
-		      "BScalculateRequest": {
+		      "BScalculateDIPRequest": {
 		        "AILHEADER": {
 		          "CLIENTID": "BS_PENSIOENOVEREENKOMST_ROA_Rest",
 		          "CORRELATIONID": "##DIP SS##"
@@ -86,7 +86,7 @@ export class GenericService {
 		      }
 		    };
 		    if ((pensionInfo.insurablePartner=="true") ? true : false) {
-		      body['BScalculateRequest']['DOSSIER']['PARTIJ'].push(
+		      body['BScalculateDIPRequest']['DOSSIER']['PARTIJ'].push(
 		        {
 		          "_AE_PERSOON": {
 		            "VOLGNUM": 2,
@@ -118,7 +118,7 @@ export class GenericService {
     		let options = new RequestOptions({headers: headers});
 
 		let body:any = {
-		      "BScalculateRequest": {
+		      "BScalculateDIPRequest": {
 		        "AILHEADER": {
 		          "CLIENTID": "BS_PENSIOENOVEREENKOMST_ROA_Rest",
 		          "CORRELATIONID": "##DIP SS##"
@@ -157,7 +157,7 @@ export class GenericService {
 		      }
 		    };
 		    if ((pensionInfo.insurablePartner=="true") ? true : false) {
-		      body['BScalculateRequest']['DOSSIER']['PARTIJ'].push(
+		      body['BScalculateDIPRequest']['DOSSIER']['PARTIJ'].push(
 		        {
 		          "_AE_PERSOON": {
 		            "VOLGNUM": 2,
