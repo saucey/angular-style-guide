@@ -21,8 +21,9 @@
 	}	
 
 	.aa-bb-page__column {
-		&.aa-bb-page__column--hidden { display: none; }
+		&.aa-bb-page__column--hidden { display: none !important; }
 	}
+
 	.aa-bb-page__leftContent,
 	.aa-bb-page__rightContent {
 		h3 {
@@ -40,6 +41,8 @@
 
 		p { line-height: 1.15; }
 	}
+
+	.aa-bb-page__link { margin: 10px 0 20px; }	
 
 	.aa-bb-page__bottomContent {
 		h2 {
