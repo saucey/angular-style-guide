@@ -24,6 +24,7 @@ export class AABlueBlockComponent extends AABaseComponent implements OnInit {
   initiated: boolean = false;
   finalized: boolean = false;
   public showError: boolean = false;
+  public callingService: boolean = false;
   public  defaultOptions: any = defaultOptions;
 
   constructor(
@@ -78,11 +79,18 @@ export class AABlueBlockComponent extends AABaseComponent implements OnInit {
    */
   callService(): any {
     this.showError=false;
+    this.callingService=true;
     this.genericService[this.data.options.template](this.data.options.serviceUrl, this.data.options.serviceCredentials)
       .then((data) => {
-        this.updateValues(data);
+        this.callingService=false;
+        try {
+          this.updateValues(data);
+        } catch(e) {
+          this.showError=true;   
+        }
       })
       .catch((error) => {
+        this.callingService=false;
         this.showError=true;
       })
   }
@@ -107,22 +115,6 @@ export class AABlueBlockComponent extends AABaseComponent implements OnInit {
     if(!this.data.options.button.forceShow) {
       this.data.options.button.show = data.showButton || this.data.options.button.show;
     }
-  }
-
-  /*
-   * Shows loader during calls
-   *
-   */
-  showLoader() {
-
-  }
-
-  /*
-   * Hides loader
-   *
-   */
-  hideLoader() {
-
   }
 
   private addClass(el, className) {

@@ -47,7 +47,8 @@ const declarations = [
     aaComp.AAQuizComponent,
     aaComp.AAEditableValueComponent,
     aaComp.AABlueBlockComponent,
-    aaComp.AATodosComponent
+    aaComp.AATodosComponent,
+    aaComp.AALoaderComponent
 ];
 
 //Exports
