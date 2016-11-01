@@ -496,15 +496,15 @@ describe('CalculatorProductService', () => {
                 "options": [
                   {
                     "value": 5,
-                    "label": "5%"
+                    "label": "5 jaar"
                   },
                   {
                     "value": 7.5,
-                    "label": "7.5%"
+                    "label": "7.5 jaar"
                   },
                   {
                     "value": 10,
-                    "label": "10%"
+                    "label": "10 jaar"
                   }
                 ]
               }
