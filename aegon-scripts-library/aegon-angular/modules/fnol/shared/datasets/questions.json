@@ -1,0 +1,32 @@
+[
+  {
+    "id": "Q1",
+    "type": "question",
+    "title": "How are you?",
+    "options": [
+      {
+        "label": "Good",
+        "next": "END1"
+      },
+      {
+        "label": "So so",
+        "next": "Q2"
+      }
+    ]
+  },
+  {
+    "id": "Q2",
+    "title": "Are you sure?",
+    "type": "endpoint",
+    "options": [
+      {
+        "label": "No",
+        "next": "END1"
+      },
+      {
+        "label": "yes",
+        "next": "END2"
+      }
+    ]
+  }
+]

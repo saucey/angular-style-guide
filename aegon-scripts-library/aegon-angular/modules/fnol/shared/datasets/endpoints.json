@@ -1,0 +1,18 @@
+[
+  {
+    "id": "END1",
+    "type": "phone",
+    "data": {
+      "number": "630100033",
+      "title": ""
+    }
+  },
+  {
+    "id": "END2",
+    "type": "link",
+    "data": {
+      "url": "/example/page",
+      "title": ""
+    }
+  }
+]
