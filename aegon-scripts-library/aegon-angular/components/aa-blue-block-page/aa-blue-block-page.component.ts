@@ -7,6 +7,8 @@ import {Component, ElementRef, Input, OnInit} from "@angular/core";
 import {AABaseComponent} from "../../lib/classes/AABaseComponent";
 import {defaultOptions} from "./defaultOptions";
 
+import {aegonTealium} from "../../lib/aegon_tealium";
+
 // Constants
 const template = require('./template.html');
 
@@ -105,11 +107,15 @@ export class AABlueBlockPageComponent extends AABaseComponent implements OnInit 
       // Pension location is Aegon
       if(this.isPensionLocationAegon(this.pensionInfo.pensionLocation)) {
         this.bottomContent = this.data.options.bottom;
+
+        this.sendTealiumTagging("direct_ingaand_pensioen", "direct_ingaand_pensioen", "direct_ingaand_pensioen");
       
       // Pension location is not Aegon
       } else {
         if(!this.isStartingDateWithin3Months(this.pensionInfo.startingDate)) {
           this.bottomContent = this.data.options.bottomVariant;
+
+          this.sendTealiumTagging("direct_ingaand_pensioen_aegon", "direct_ingaand_pensioen_aegon", "direct_ingaand_pensioen_aegon");
         
         } else { this.hasBottomContent = false; } 
       }
@@ -121,6 +127,30 @@ export class AABlueBlockPageComponent extends AABaseComponent implements OnInit 
       this.bottomContent = this.data.options.bottom;
       !this.isStartingDateWithin3Months(this.pensionInfo.startingDate) ? this.hasBottomContent = true : this.hasBottomContent = false;
       !this.pensionInfo.insurablePartner ? this.columnRightIsHidden = true : this.columnRightIsHidden = false;
+    
+      if(this.isPensionLocationAegon(this.pensionInfo.pensionLocation)) {
+        this.sendTealiumTagging("uitkerend_beleggingspensioen", "variabele_pensioenuitkering", "variabele_pensioenuitkering");
+      } else {
+        this.sendTealiumTagging("uitkerend_beleggingspensioen", "variabele_pensioenuitkering_aegon", "variabele_pensioenuitkering_aegon");
+      }
+
     } 
+  }
+
+  private sendTealiumTagging(_page_cat_2_name: string, _page_cat_5_product: string, _product_name: string) {
+    let tealiumObj: any = {
+      page_cat_1_type: 'product',
+      page_cat_2_name: _page_cat_2_name,
+      page_cat_3_section: "particulier",
+      page_cat_4_productgroup: 'pensioen',
+      page_cat_5_product: _page_cat_5_product,
+      product_name: [_product_name],
+      product_category: ['pensioen'],
+      event: "prodview"
+    }
+
+    aegonTealium(tealiumObj);
+
+    console.log("Tealium tag: ", tealiumObj);
   }
 }
