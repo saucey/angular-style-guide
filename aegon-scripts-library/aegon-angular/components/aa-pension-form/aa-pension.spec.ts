@@ -34,4 +34,12 @@ describe('AA Pension Form Component', () => {
     expect(comp.testMethod(1)).toEqual(1);
   });
 
+  it('User age validation the pass', () => {
+    expect(comp.validateAge('1950-11-11', 1, 50, 75)).toBeFalsy();
+  });
+
+  it('Partner age validation the pass', () => {
+    expect(comp.validateAge('2016-11-11', 1, 18, 115)).toBeFalsy();
+  });
+
 });
