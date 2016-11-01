@@ -22,7 +22,11 @@ export const defaultOptions = {
   bottom: {
     title: 'Bottom title',
     text: 'Bottom text'
-  }
+  },
+  bottomVariant: {
+    title: 'Bottom variant title',
+    text: 'Bottom variant text'
+  }  
 }
 
 

@@ -21,6 +21,7 @@ export class AABlueBlockPageComponent extends AABaseComponent implements OnInit 
 
   public defaultOptions: any = defaultOptions;
   public pensionInfo: any = {};
+  public bottomContent: any = {};
   
   public pageIsHidden: boolean = true;
   public columnLeftIsHidden: boolean = false;
@@ -91,19 +92,33 @@ export class AABlueBlockPageComponent extends AABaseComponent implements OnInit 
   // Set the page structure. Used by ngClass and ngIf in view 
   setPageStructure(page: string) { 
 
+    // Pension form page
     if(page === 'pensionForm') { 
       this.hasLink = false;
       this.hasBottomContent = false;
     }
 
+    // DIP page
     if(page === 'dip') { 
       this.hasTopContent = false;
-      this.isPensionLocationAegon(this.pensionInfo.pensionLocation) && !this.isStartingDateWithin3Months(this.pensionInfo.startingDate) ? 
-        this.hasBottomContent = true : this.hasBottomContent = false;
+      
+      // Pension location is Aegon
+      if(this.isPensionLocationAegon(this.pensionInfo.pensionLocation)) {
+        this.bottomContent = this.data.options.bottom;
+      
+      // Pension location is not Aegon
+      } else {
+        if(!this.isStartingDateWithin3Months(this.pensionInfo.startingDate)) {
+          this.bottomContent = this.data.options.bottomVariant;
+        
+        } else { this.hasBottomContent = false; } 
+      }
     }
 
-    if(page === 'vpu') { 
+    // VPU page
+    if(page === 'vpu') {       
       this.hasTopContent = false;
+      this.bottomContent = this.data.options.bottom;
       !this.isStartingDateWithin3Months(this.pensionInfo.startingDate) ? this.hasBottomContent = true : this.hasBottomContent = false;
       !this.pensionInfo.insurablePartner ? this.columnRightIsHidden = true : this.columnRightIsHidden = false;
     } 
