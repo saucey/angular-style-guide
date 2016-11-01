@@ -307,9 +307,7 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit, A
       event: _event
     }
 
-    aegonTealium({
-      
-    });
+    aegonTealium(tealiumObj);
 
     console.log("Tealium tag: ", tealiumObj);
   } 
