@@ -1,4 +1,5 @@
 <div class="aa-bb--wrapper" [class.padding-bottom-fix]="showButton()" attr.data-bb-template="{{data.options.template}}">
+  <aa-loader [hidden]="!callingService"></aa-loader>
   <div class="aa-bb--error-message" *ngIf="data.options.serviceErrorHandler.enabled" [hidden]="!showError" [innerHTML]="data.options.serviceErrorHandler.message">
   </div>
   <div class="aa-bb--inner-wrapper" [hidden]="data.options.serviceErrorHandler.enabled && showError">
