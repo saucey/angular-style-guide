@@ -119,4 +119,8 @@ export const defaultOptions = {
   "callServiceOnInit" : true,
   "serviceUrl" : "/services/US_RestGatewayWeb/rest/requestResponse/BS_PENSIOENOVEREENKOMST_ROA/calculate",
   "serviceCredentials": "FILL_ME_IN_AA_DATA",
+  "serviceErrorHandler" : {
+    "enabled" : true,
+    "message" : "Service niet beschikbaar, probeer het later opnieuw."
+  }
 };
