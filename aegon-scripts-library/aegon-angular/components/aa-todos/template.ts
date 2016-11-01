@@ -6,7 +6,7 @@ export const template = `
   <div id="faq" class="faq container_12 divider-line">
     <ul class="horizontal visible questions row-fluid">
       <!--faq items iteration start-->
-      <div *ngFor="let q of data.options.questions1"> 
+      <div *ngFor="let q of blok1questions"> 
         <li class="field-item">
           <label class="question">
             <input type="radio" name="show" value="0"/>
@@ -31,6 +31,7 @@ export const template = `
     </ul>
   </div>
   
+  <div *ngIf = "getBlok2Visible()">
   <h2 class="title">{{ data.options.blok2title }}</h2>
   <h3 class="title">{{ blok2aantalTodosChecked }} van {{ blok2aantalTodosTotaal }} {{ data.options.blok2description }}</h3>  
   <p></p>
@@ -38,7 +39,7 @@ export const template = `
   <div id="faq" class="faq container_12 divider-line">
     <ul class="horizontal visible questions row-fluid">
       <!--faq items iteration start-->
-      <div *ngFor="let q of data.options.questions2"> 
+      <div *ngFor="let q of blok2questions"> 
         <li class="field-item">
           <label class="question">
             <input type="radio" name="show" value="0"/>
@@ -62,7 +63,9 @@ export const template = `
       <!--faq items iteration end--> 
     </ul>
   </div>
+  </div>
   
+    <div *ngIf = "getBlok3Visible()">
     <h2 class="title">{{ data.options.blok3title }}</h2>
   <h3 class="title">{{ blok3aantalTodosChecked }} van {{ blok3aantalTodosTotaal }} {{ data.options.blok3description }}</h3>  
   <p></p>
@@ -70,7 +73,7 @@ export const template = `
   <div id="faq" class="faq container_12 divider-line">
     <ul class="horizontal visible questions row-fluid">
       <!--faq items iteration start-->
-      <div *ngFor="let q of data.options.questions3"> 
+      <div *ngFor="let q of blok3questions"> 
         <li class="field-item">
           <label class="question">
             <input type="radio" name="show" value="0"/>
@@ -94,8 +97,9 @@ export const template = `
       <!--faq items iteration end--> 
     </ul>
   </div>
-  
-  
+  </div>
+ 
+    <div *ngIf = "getBlok4Visible()">
     <h2 class="title">{{ data.options.blok4title }}</h2>
   <h3 class="title">{{ blok4aantalTodosChecked }} van {{ blok4aantalTodosTotaal }} {{ data.options.blok4description }}</h3>  
   <p></p>
@@ -103,7 +107,7 @@ export const template = `
   <div id="faq" class="faq container_12 divider-line">
     <ul class="horizontal visible questions row-fluid">
       <!--faq items iteration start-->
-      <div *ngFor="let q of data.options.questions4"> 
+      <div *ngFor="let q of blok4questions"> 
         <li class="field-item">
           <label class="question">
             <input type="radio" name="show" value="0"/>
@@ -127,7 +131,7 @@ export const template = `
       <!--faq items iteration end--> 
     </ul>
   </div>
-  
+  </div>
   
   
 `;
