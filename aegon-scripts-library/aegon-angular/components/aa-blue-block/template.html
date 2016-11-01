@@ -2,7 +2,7 @@
   <aa-loader [hidden]="!callingService"></aa-loader>
   <div class="aa-bb--error-message" *ngIf="data.options.serviceErrorHandler.enabled" [hidden]="!showError" [innerHTML]="data.options.serviceErrorHandler.message">
   </div>
-  <div class="aa-bb--inner-wrapper" [hidden]="data.options.serviceErrorHandler.enabled && showError">
+  <div class="aa-bb--inner-wrapper" [hidden]="(data.options.serviceErrorHandler.enabled && showError) || callingService">
     <div class="aa-bb--content container_12 aa-bb--inner-block-{{i}} aa-bb--inner-block-reference-{{block.showRules.dataReference}} aa-bb--block-fixed-height-{{block.fixedRowsHeight}}" [class.hide-block]="!block.showRules.onInit || block.showRules.alwaysShow" [class.hide-block-check]="!block.showRules.alwaysShow" *ngFor="let block of data.options[data.options.template]; let i = index;">
       <h3 class="aa-bb--content-title span12"> {{ block.boxTitle }} </h3>
       <div class="aa-bb--content-row" *ngFor="let blockValue of block.boxContent">
