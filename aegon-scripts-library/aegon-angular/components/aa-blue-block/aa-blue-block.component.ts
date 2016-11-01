@@ -23,10 +23,7 @@ export class AABlueBlockComponent extends AABaseComponent implements OnInit {
   // Used for tealium.
   initiated: boolean = false;
   finalized: boolean = false;
-
-  //public serviceResArray: any = [1, 2, 3, 4, 5, 6];
-  //public serviceResIterator = this.serviceResArray[Symbol.iterator]();
-
+  public showError: boolean = false;
   public  defaultOptions: any = defaultOptions;
 
   constructor(
@@ -80,10 +77,14 @@ export class AABlueBlockComponent extends AABaseComponent implements OnInit {
    *
    */
   callService(): any {
+    this.showError=false;
     this.genericService[this.data.options.template](this.data.options.serviceUrl, this.data.options.serviceCredentials)
       .then((data) => {
         this.updateValues(data);
-      });
+      })
+      .catch((error) => {
+        this.showError=true;
+      })
   }
 
   /*
