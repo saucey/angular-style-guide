@@ -1,4 +1,4 @@
-<h1>Stel uw pensioenproduction samen</h1>
+<h1>Stel uw pensioenproduct samen</h1>
 <h2 class="general-form__box__sub__header">Uw situatie: u gaat binnenkort met pensioen</h2>
     <ul class="number-form__list">
       <li class='number-form__list__section'>
@@ -123,21 +123,21 @@
               </span>
             </span>
 
-            <span *ngIf='hasPartner !== "hidden" || pension["havePartner"] == "true"' class="block">
+            <span *ngIf='hasPartner !== "hidden" || pension["havePartner"] == true' class="block">
               <span *ngIf='pension["insurablePartner"] == "true"'>
                 Ja, ik wil een partnerpensioen verzekeren
               </span>
 
-              <span *ngIf='pension["insurablePartner"] == "false" && initChangeHasPartner == true || pension["havePartner"] == "true" && pension["insurablePartner"] == "false"'>
+              <span *ngIf='pension["insurablePartner"] == false && initChangeHasPartner == true || pension["havePartner"] == true && pension["insurablePartner"] == false'>
                 Nee, ik wil geen partnerpensioen verzekeren
               </span>
             </span>
 
-            <span class="block" *ngIf='pension["insurablePartner"] !== "false" && hasPartner !== "hidden" && partnersDobReadable[1] !== "" && initChangeNoPolicy !== true && sessionPartnerDob == ""'>
+            <span class="block" *ngIf='pension["insurablePartner"] !== false && hasPartner !== "hidden" && partnersDobReadable[1] !== "" && initChangeNoPolicy !== true && sessionPartnerDob == ""'>
                Geboortedatum partner {{partnersDobReadable[1]}}
             </span>
 
-            <span *ngIf='sessionPartnerDob !== "" && initChangeHasPartner !== false && initChangeNoPolicy !== true && pension["havePartner"] !== "false" && pension["insurablePartner"] !== "false"'>
+            <span *ngIf='sessionPartnerDob !== "" && initChangeHasPartner !== false && initChangeNoPolicy !== true && pension["havePartner"] !== false && pension["insurablePartner"] !== false'>
               <span>Geboortedatum partner {{sessionPartnerDob| dateToReadableString}}</span>
             </span>
 
@@ -202,19 +202,19 @@
 
                                   <span class="hint-message__wrapper" *ngIf="userAgeInvalid[1]">
                                     <p class="hint">
-                                      User age in is invalid
+                                      Voer een geldige geboortedatum in
                                     </p>
                                   </span>
 
                                   <span class="hint-message__wrapper" *ngIf="userToYoung[1]">
                                     <p class="hint">
-                                      User to young
+                                      Leeftijd is te laag
                                     </p>
                                   </span>
 
                                   <span class="hint-message__wrapper" *ngIf="userToOld[1]">
                                     <p class="hint">
-                                      User to old
+                                      Leeftijd is te hoog
                                     </p>
                                   </span>
                                 </div>
@@ -264,19 +264,19 @@
 
                           <span class="hint-message__wrapper" *ngIf="userAgeInvalid[2]">
                             <p class="hint">
-                              User age in is invalid
+                              Voer een geldige geboortedatum in
                             </p>
                           </span>
 
                           <span class="hint-message__wrapper" *ngIf="userToYoung[2]">
                             <p class="hint">
-                              User to young
+                              Leeftijd is te laag
                             </p>
                           </span>
 
                           <span class="hint-message__wrapper" *ngIf="userToOld[2]">
                             <p class="hint">
-                              User to old
+                              Leeftijd is te hoog
                             </p>
                           </span>
 
