@@ -124,7 +124,7 @@
             </span>
 
             <span *ngIf='hasPartner !== "hidden" || pension["havePartner"] == true' class="block">
-              <span *ngIf='pension["insurablePartner"] == "true"'>
+              <span *ngIf='pension["insurablePartner"] == true'>
                 Ja, ik wil een partnerpensioen verzekeren
               </span>
 
@@ -134,11 +134,11 @@
             </span>
 
             <span class="block" *ngIf='pension["insurablePartner"] !== false && hasPartner !== "hidden" && partnersDobReadable[1] !== "" && initChangeNoPolicy !== true && sessionPartnerDob == ""'>
-               Geboortedatum partner {{partnersDobReadable[1]}}
+               Geboortedatum partner: {{partnersDobReadable[1]}}
             </span>
 
             <span *ngIf='sessionPartnerDob !== "" && initChangeHasPartner !== false && initChangeNoPolicy !== true && pension["havePartner"] !== false && pension["insurablePartner"] !== false'>
-              <span>Geboortedatum partner {{sessionPartnerDob| dateToReadableString}}</span>
+              <span>Geboortedatum partner: {{sessionPartnerDob| dateToReadableString}}</span>
             </span>
 
 
@@ -242,7 +242,7 @@
 
         <div [@visibility]="editVisibility(4)">
           <div class="form-section__input__results">
-            <span>Mijn geboortedatum {{pension['birthDate']| dateToReadableString}} </span>
+            <span>Mijn geboortedatum: {{pension['birthDate']| dateToReadableString}} </span>
             <!--<span class="edit" (click)="editSection(4)"> > Aanpassen</span>-->
             <ul class="arrow" (click)="editSection(4)">
               <li><span>Aanpassen</span></li>
