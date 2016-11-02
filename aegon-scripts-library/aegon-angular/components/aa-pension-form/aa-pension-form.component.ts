@@ -172,7 +172,9 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit, A
   }
 
   editSection(val): any {
-      // this.bbpage.hidePage();
+
+    this.bbpage.hidePage();
+
     if(this.isValidAmount() == true || this.btnValidationForUserPartner() !== false || this.btnValidationForUser() !== false) return false;
 
     for (let i = 1; i <= 5; i++) {
