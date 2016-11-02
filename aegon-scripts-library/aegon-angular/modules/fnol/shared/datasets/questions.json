@@ -1,31 +1,213 @@
 [
   {
-    "id": "Q1",
+    "id": "Q_POSSESSION_1",
     "type": "question",
-    "title": "How are you?",
+    "title": "Van wie zijn de beschadigde of vermiste spullen?",
     "options": [
       {
-        "label": "Good",
-        "next": "END1"
+        "label": "Van mij of iemand in mijn huishouden",
+        "next": "Q_POSSESSION_2"
       },
       {
-        "label": "So so",
-        "next": "Q2"
+        "label": "Van iemand anders",
+        "next": "END_POSSESSION_1"
       }
     ]
   },
   {
-    "id": "Q2",
-    "title": "Are you sure?",
-    "type": "endpoint",
+    "id": "Q_POSSESSION_2",
+    "title": "Wat is er met uw spullen gebeurd?",
+    "type": "question",
     "options": [
       {
-        "label": "No",
-        "next": "END1"
+        "label": "Beschadiging",
+        "next": "Q_POSSESSION_3"
       },
       {
-        "label": "yes",
-        "next": "END2"
+        "label": "Verlies of diefstal",
+        "next": "END_POSSESSION_2"
+      }
+    ]
+  },
+  {
+    "id": "Q_POSSESSION_3",
+    "title": "Kan de schade worden gerepareerd?",
+    "type": "question",
+    "options": [
+      {
+        "label": "Ja",
+        "next": "END_POSSESSION_3"
+      },
+      {
+        "label": "Nee",
+        "next": "END_POSSESSION_4"
+      },
+      {
+        "label": "Weet ik niet",
+        "next": "END_POSSESSION_5"
+      },
+      {
+        "label": "Schade is al gerepareerd",
+        "next": "END_POSSESSION_6"
+      }
+    ]
+  },
+  {
+    "id": "Q_HOME_1",
+    "title": "Waar is de schade opgetreden?",
+    "type": "question",
+    "options": [
+      {
+        "label": "Aan mijn huis",
+        "next": "Q_HOME_2"
+      },
+      {
+        "label": "Aan andermans huis",
+        "next": "END_HOME_1"
+      }
+    ]
+  },
+  {
+    "id": "Q_HOME_2",
+    "title": "Wat is er beschadigd?",
+    "type": "question",
+    "options": [
+      {
+        "label": "Het huis zelf (denk aan: ramen, gevel, dak, vloer, keuken of badkamer)",
+        "next": "Q_HOME_3"
+      },
+      {
+        "label": "Inrichting van mijn huis (denk aan: meubels of voorwerpen)",
+        "next": "END_HOME_2"
+      }
+    ]
+  },
+  {
+    "id": "Q_HOME_3",
+    "title": "Is de schade al hersteld?",
+    "type": "question",
+    "options": [
+      {
+        "label": "Ja",
+        "next": "END_HOME_3"
+      },
+      {
+        "label": "Nee",
+        "next": "END_HOME_4"
+      }
+    ]
+  },
+  
+  
+  
+  {
+    "id": "Q_TRAVEL_1",
+    "title": "Bent u op vakantie en heeft u directe hulp nodig?",
+    "type": "question",
+    "options": [
+      {
+        "label": "Ja",
+        "next": "END_TRAVEL_1"
+      },
+      {
+        "label": "Nee",
+        "next": "END_TRAVEL_2"
+      }
+    ]
+  },
+  
+  
+  {
+    "id": "Q_AUTO_1",
+    "title": "Wat is er gebeurd?",
+    "type": "question",
+    "options": [
+      {
+        "label": "Ruitschade",
+        "next": "Q_AUTO_4"
+      },
+      {
+        "label": "Ongeluk, aanrijding of beschadiging",
+        "next": "Q_AUTO_2"
+      },
+      {
+        "label": "Auto gestolen",
+        "next": "END_AUTO_1"
+      }
+    ]
+  },
+  {
+    "id": "Q_AUTO_2",
+    "title": "Is er een tegenpartij betrokken bij uw schade?",
+    "type": "question",
+    "options": [
+      {
+        "label": "Ja",
+        "next": "Q_AUTO_5"
+      },
+      {
+        "label": "Nee",
+        "next": "Q_AUTO_3"
+      }
+    ]
+  },
+  {
+    "id": "Q_AUTO_3",
+    "title": "Is er ook sprake van persoonlijk letsel?",
+    "type": "question",
+    "options": [
+      {
+        "label": "Ja",
+        "next": "END_AUTO_2"
+      },
+      {
+        "label": "Nee",
+        "next": "Q_AUTO_4"
+      }
+    ]
+  },
+  {
+    "id": "Q_AUTO_4",
+    "title": "Is de schade al hersteld?",
+    "type": "question",
+    "options": [
+      {
+        "label": "Ja",
+        "next": "END_AUTO_3"
+      },
+      {
+        "label": "Nee",
+        "next": "END_AUTO_4"
+      }
+    ]
+  },
+  {
+    "id": "Q_AUTO_5",
+    "title": "Is er ook sprake van persoonlijk letsel?",
+    "type": "question",
+    "options": [
+      {
+        "label": "Ja",
+        "next": "END_AUTO_5"
+      },
+      {
+        "label": "Nee",
+        "next": "Q_AUTO_6"
+      }
+    ]
+  },
+  {
+    "id": "Q_AUTO_6",
+    "title": "Is de schade al hersteld?",
+    "type": "question",
+    "options": [
+      {
+        "label": "Ja",
+        "next": "END_AUTO_6"
+      },
+      {
+        "label": "Nee",
+        "next": "END_AUTO_7"
       }
     ]
   }

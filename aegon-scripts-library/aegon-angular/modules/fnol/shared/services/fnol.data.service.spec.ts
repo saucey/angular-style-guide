@@ -58,7 +58,7 @@ describe('FNOL Data Service', () => {
     let fnolDataService: FNOLDataService;
 
     beforeEach(() => {
-        fnolDataService = new FNOLDataService(questions, endpoints);
+        fnolDataService = new FNOLDataService(questions, [], endpoints);
 
     });
 
@@ -73,7 +73,7 @@ describe('FNOL Data Service', () => {
         });
 
         it('is gets questions', () => {
-            expect(fnolDataService.getQuestions()).toEqual(questions);
+            expect(fnolDataService.getEndpoints()).toEqual(endpoints);
         });
 
     });
@@ -111,7 +111,7 @@ describe('FNOL Data Service', () => {
 
         it('is gets next with autodetect', () => {
 
-            expect(fnolDataService.getNext('Q1')).toEqual({
+            expect(fnolDataService.getStep('Q1')).toEqual({
                 "id": "Q1",
                 "type": "question",
                 "title": "How are you?",
@@ -127,7 +127,7 @@ describe('FNOL Data Service', () => {
                 ]
             });
 
-            expect(fnolDataService.getNext('END2')).toEqual({
+            expect(fnolDataService.getStep('END2')).toEqual({
                     "id": "END2",
                     "type": ("link" as EndpointType),
                     "data": {

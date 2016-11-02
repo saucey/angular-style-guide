@@ -1,27 +1,38 @@
-export type EndpointType = 'phone' | 'link' | 'download';
+export type EndpointType = 'generic' | 'auto' | 'redirect'
 
 export interface Endpoint {
     id: string,
-    type: EndpointType,
-    data?: any
+    type: EndpointType
 }
 
-export interface PhoneEndpoint extends Endpoint {
+export interface GenericEndpoint extends Endpoint {
     data: {
-        phone: string
+        title: string,
+        description: string,
+        list?: {
+            title: string,
+            items: string[]
+        },
+        button: {
+            phone?: string,
+            link?: string,
+        },
+        alert?: boolean,
+        bottomLink?: {
+            text: string,
+            url: string
+        }
     }
 }
 
-export interface LinkEndpoint extends Endpoint {
+export interface RedirectEndpoint extends Endpoint {
     data: {
-        url: string
+        category: string
     }
 }
 
-export interface DownloadEndpoint extends Endpoint {
-    data: {
-        file: string
-    }
+export interface AutoEndpoint extends Endpoint {
+
 }
 
 

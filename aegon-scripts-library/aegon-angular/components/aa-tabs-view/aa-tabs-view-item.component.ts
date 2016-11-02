@@ -9,9 +9,10 @@ const template = require('./aa-tabs-view-item.html');
 
 export class AATabsViewItemComponent {
 
-    @Input() title: string = '';
-    @Input() icon: string = '';
-    @Input() description: string = '';
+    @Input() id: string;
+    @Input() title: string;
+    @Input() icon: string;
+    @Input() description: string;
     @Input() active: boolean = false;
 
     private changeCallback : Function;

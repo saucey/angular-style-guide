@@ -1,0 +1,27 @@
+<h3 class="fnol-category__headline">
+    <span class="fnol-category__icon icon-{{category.icon}}"></span>
+    <span class="fnol-category__title">{{category.title}}</span>
+</h3>
+
+<p class="fnol-category__description" [innerHTML]="category.description"></p>
+
+<div class="fnol-category__questions">
+    <div class="fnol-category__question" *ngFor="let step of steps; trackBy:trackById; let i = index">
+        <div *ngIf="step.type === 'question'">
+            <label>{{step.title}}</label>
+
+            <div *ngFor="let option of step.options">
+                <aa-input-radio [name]="'fnol-question' + step.id"
+                                class="radio--white"
+                                (aaChange)="setNextStep(option.next, i)"
+                                [value]="option.next">{{option.label}}</aa-input-radio>
+            </div>
+
+        </div>
+        <fnol-endpoint *ngIf="step.type !== 'question'" [id]="step.id">
+
+        </fnol-endpoint>
+    </div>
+
+</div>
+

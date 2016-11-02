@@ -1,0 +1,8 @@
+<!--Styles temporary @Fixme-->
+<div style="border: 1px solid black;margin: 20px;padding:20px;">
+    [FNOL ENDPOINT FOR ID={{id}}]
+    Data:
+    <pre>{{ data | json }}</pre>
+
+    <button *ngIf="data.type === 'redirect'" (click)="setActiveById(data.data.category)">Redirect</button>
+</div>
