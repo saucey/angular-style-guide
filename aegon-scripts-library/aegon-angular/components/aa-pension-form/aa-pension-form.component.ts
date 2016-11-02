@@ -2,7 +2,7 @@
  * AOV quick quote
  */
 import {
-  Component, Input, EventEmitter, Output, OnInit, ElementRef, trigger, state, animate, transition, style, SimpleChanges
+  Component, Input, EventEmitter, Output, OnInit, ElementRef, trigger, state, animate, transition, style, SimpleChanges, AfterViewInit,
 } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {calculateAge} from "../../lib/date";
