@@ -8,7 +8,7 @@
 export interface WiaTopicDescriptionModel {
 
   useCase?: Array<string>,
-  filter: Array<string>,
+  filter: Array<string|Array<string>>,
   text: string,
 
 }
