@@ -185,7 +185,7 @@ export class GenericService {
 		    	});
 		}
 
-		let vpuVariable: boolean = true;
+		let vpuVariable: boolean = (pensionInfo.insurablePartner) ? true : false;
 
 		let headers = new Headers({'Content-Type': 'application/json', "Authorization" : `Basic ${serviceCredential}`});
     		let options = new RequestOptions({headers: headers});
@@ -200,7 +200,7 @@ export class GenericService {
 		          "PENSIOENOVEREENKOMST": {
 				"PENSIOENAANSPRAAK": {
 		              "IND_OUDERDOMSPENSIOEN": true,
-		              "IND_NABESTAANDENPENSIOEN": (pensionInfo.insurablePartner) ? true : false,
+		              "IND_NABESTAANDENPENSIOEN": false,
 		              "BEGIN_DATUM_UITKERING": pensionInfo.startingDate,
 		              "IND_VARIABEL_NABESTAANDENPENSIOEN": vpuVariable
 		            },
@@ -270,7 +270,7 @@ export class GenericService {
 		              "IND_OUDERDOMSPENSIOEN": true,
 		              "IND_NABESTAANDENPENSIOEN": (pensionInfo.insurablePartner) ? true : false,
 		              "BEGIN_DATUM_UITKERING": pensionInfo.startingDate,
-		              "IND_VARIABEL_NABESTAANDENPENSIOEN": vpuVariable
+		              "IND_VARIABEL_NABESTAANDENPENSIOEN": false
 		            },
 		            "STORTING_INLEG": {
 		              "KOOPSOM": pensionInfo.pensionAmount,
