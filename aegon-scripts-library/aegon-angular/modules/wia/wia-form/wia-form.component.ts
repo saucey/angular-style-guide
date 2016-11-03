@@ -50,7 +50,7 @@ export class WiaFormComponent extends AABaseComponent implements OnInit {
   public submitted = false;
   public personalizationCode: string = '';
 
-  public visiblePage: number = 1;
+  public visiblePage: number = 2;
 
   public step: number = 1;
 
@@ -72,6 +72,7 @@ export class WiaFormComponent extends AABaseComponent implements OnInit {
     this.wiaSubscriptionService.subscribe(() => {
       this.submitted = true;
     });
+
   }
 
   ngOnInit(): void {

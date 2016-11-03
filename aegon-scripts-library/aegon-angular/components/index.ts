@@ -19,6 +19,8 @@ export * from './aa-qq-mortgage/aa-qq-mortgage.component';
 export * from './aa-quiz/aa-quiz.component';
 export * from './aa-slider/aa-slider.component';
 export * from './aa-slider-input/aa-slider-input.component';
+export * from './aa-tabs-view/aa-tabs-view.component';
+export * from './aa-tabs-view/aa-tabs-view-item.component';
 export * from './aa-sticky/aa-sticky.component';
 export * from './aa-pension-form/aa-pension-form.component';
 export * from './aa-editable-value/aa-editable-value.component';

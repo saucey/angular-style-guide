@@ -1,208 +1,264 @@
 @font-face {
-	font-family: 'aegon_icons';
-	src:url('fonts/aegon_icons.eot?s8eqvi');
-	src:url('fonts/aegon_icons.eot?#iefixs8eqvi') format('embedded-opentype'),
-		url('fonts/aegon_icons.ttf?s8eqvi') format('truetype'),
-		url('fonts/aegon_icons.woff?s8eqvi') format('woff'),
-		url('fonts/aegon_icons.svg?s8eqvi#aegon_icons') format('svg');
-	font-weight: normal;
-	font-style: normal;
+  font-family: 'aegon_icons';
+  src:  url('fonts/aegon_icons.eot?3gc727');
+  src:  url('fonts/aegon_icons.eot?3gc727#iefix') format('embedded-opentype'),
+    url('fonts/aegon_icons.ttf?3gc727') format('truetype'),
+    url('fonts/aegon_icons.woff?3gc727') format('woff'),
+    url('fonts/aegon_icons.svg?3gc727#aegon_icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
 }
 
-[class^="aegon-icon"], [class*=" aegon-icon"] {
-	font-family: 'aegon_icons';
-	speak: none;
-	font-style: normal;
-	font-weight: normal;
-	font-variant: normal;
-	text-transform: none;
-	line-height: 1;
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'aegon_icons' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
 
-	/* Better Font Rendering =========== */
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.aegon-iconuniE600:before {
-	content: "\e600";
+.icon-uniE600:before {
+  content: "\e600";
 }
-.aegon-iconuniE601:before {
-	content: "\e601";
+.icon-uniE601:before {
+  content: "\e601";
 }
-.aegon-iconuniE602:before {
-	content: "\e602";
+.icon-uniE602:before {
+  content: "\e602";
 }
-.aegon-iconuniE603:before {
-	content: "\e603";
+.icon-uniE603:before {
+  content: "\e603";
 }
-.aegon-iconuniE604:before {
-	content: "\e604";
+.icon-uniE604:before {
+  content: "\e604";
 }
-.aegon-iconuniE605:before {
-	content: "\e605";
+.icon-uniE605:before {
+  content: "\e605";
 }
-.aegon-iconuniE606:before {
-	content: "\e606";
+.icon-uniE606:before {
+  content: "\e606";
 }
-.aegon-iconuniE607:before {
-	content: "\e607";
+.icon-uniE607:before {
+  content: "\e607";
 }
-.aegon-iconuniE608:before {
-	content: "\e608";
+.icon-uniE608:before {
+  content: "\e608";
 }
-.aegon-iconuniE609:before {
-	content: "\e609";
+.icon-uniE609:before {
+  content: "\e609";
 }
-.aegon-iconuniE60A:before {
-	content: "\e60a";
+.icon-uniE60A:before {
+  content: "\e60a";
 }
-.aegon-iconuniE60B:before {
-	content: "\e60b";
+.icon-uniE60B:before {
+  content: "\e60b";
 }
-.aegon-iconuniE60C:before {
-	content: "\e60c";
+.icon-uniE60C:before {
+  content: "\e60c";
 }
-.aegon-iconuniE60D:before {
-	content: "\e60d";
+.icon-uniE60D:before {
+  content: "\e60d";
 }
-.aegon-iconuniE60E:before {
-	content: "\e60e";
+.icon-uniE60E:before {
+  content: "\e60e";
 }
-.aegon-iconuniE60F:before {
-	content: "\e60f";
+.icon-uniE60F:before {
+  content: "\e60f";
 }
-.aegon-iconuniE610:before {
-	content: "\e610";
+.icon-uniE610:before {
+  content: "\e610";
 }
-.aegon-iconuniE611:before {
-	content: "\e611";
+.icon-uniE611:before {
+  content: "\e611";
 }
-.aegon-iconuniE612:before {
-	content: "\e612";
+.icon-uniE612:before {
+  content: "\e612";
 }
-.aegon-iconuniE613:before {
-	content: "\e613";
+.icon-uniE613:before {
+  content: "\e613";
 }
-.aegon-iconuniE614:before {
-	content: "\e614";
+.icon-uniE614:before {
+  content: "\e614";
 }
-.aegon-iconuniE615:before {
-	content: "\e615";
+.icon-uniE615:before {
+  content: "\e615";
 }
-.aegon-iconuniE616:before {
-	content: "\e616";
+.icon-uniE616:before {
+  content: "\e616";
 }
-.aegon-iconuniE617:before {
-	content: "\e617";
+.icon-uniE617:before {
+  content: "\e617";
 }
-.aegon-iconuniE618:before {
-	content: "\e618";
+.icon-uniE618:before {
+  content: "\e618";
 }
-.aegon-iconuniE619:before {
-	content: "\e619";
+.icon-uniE619:before {
+  content: "\e619";
 }
-.aegon-iconuniE61A:before {
-	content: "\e61a";
+.icon-uniE61A:before {
+  content: "\e61a";
 }
-.aegon-iconuniE61B:before {
-	content: "\e61b";
+.icon-uniE61C:before {
+  content: "\e61c";
 }
-.aegon-iconuniE61C:before {
-	content: "\e61c";
+.icon-uniE61D:before {
+  content: "\e61d";
 }
-.aegon-iconuniE61D:before {
-	content: "\e61d";
+.icon-uniE61E:before {
+  content: "\e61e";
 }
-.aegon-iconuniE61E:before {
-	content: "\e61e";
+.icon-uniE61F:before {
+  content: "\e61f";
 }
-.aegon-iconuniE61F:before {
-	content: "\e61f";
+.icon-uniE620:before {
+  content: "\e620";
 }
-.aegon-iconuniE620:before {
-	content: "\e620";
+.icon-uniE621:before {
+  content: "\e621";
 }
-.aegon-iconuniE621:before {
-	content: "\e621";
+.icon-uniE622:before {
+  content: "\e622";
 }
-.aegon-iconuniE622:before {
-	content: "\e622";
+.icon-uniE623:before {
+  content: "\e623";
 }
-.aegon-iconuniE623:before {
-	content: "\e623";
+.icon-uniE624:before {
+  content: "\e624";
 }
-.aegon-iconuniE624:before {
-	content: "\e624";
+.icon-uniE625:before {
+  content: "\e625";
 }
-.aegon-iconuniE625:before {
-	content: "\e625";
+.icon-uniE626:before {
+  content: "\e626";
 }
-.aegon-iconuniE626:before {
-	content: "\e626";
+.icon-uniE627:before {
+  content: "\e627";
 }
-.aegon-iconuniE627:before {
-	content: "\e627";
+.icon-uniE628:before {
+  content: "\e628";
 }
-.aegon-iconuniE628:before {
-	content: "\e628";
+.icon-uniE629:before {
+  content: "\e629";
 }
-.aegon-iconuniE629:before {
-	content: "\e629";
+.icon-uniE62A:before {
+  content: "\e62a";
 }
-.aegon-iconuniE62A:before {
-	content: "\e62a";
+.icon-uniE62B:before {
+  content: "\e62b";
 }
-.aegon-iconuniE62B:before {
-	content: "\e62b";
+.icon-uniE62C:before {
+  content: "\e62c";
 }
-.aegon-iconuniE62C:before {
-	content: "\e62c";
+.icon-uniE62D:before {
+  content: "\e62d";
 }
-.aegon-iconuniE62D:before {
-	content: "\e62d";
+.icon-uniE62E:before {
+  content: "\e62e";
 }
-.aegon-iconuniE62E:before {
-	content: "\e62e";
+.icon-uniE62F:before {
+  content: "\e62f";
 }
-.aegon-iconuniE62F:before {
-	content: "\e62f";
+.icon-uniE630:before {
+  content: "\e630";
 }
-.aegon-iconuniE630:before {
-	content: "\e630";
+.icon-uniE631:before {
+  content: "\e631";
 }
-.aegon-iconuniE631:before {
-	content: "\e631";
+.icon-uniE632:before {
+  content: "\e632";
 }
-.aegon-iconuniE632:before {
-	content: "\e632";
+.icon-uniE633:before {
+  content: "\e633";
 }
-.aegon-iconuniE633:before {
-	content: "\e633";
+.icon-uniE634:before {
+  content: "\e634";
 }
-.aegon-iconuniE634:before {
-	content: "\e634";
+.icon-uniE635:before {
+  content: "\e635";
 }
-.aegon-iconuniE635:before {
-	content: "\e635";
+.icon-uniE636:before {
+  content: "\e636";
 }
-.aegon-iconuniE636:before {
-	content: "\e636";
+.icon-uniE637:before {
+  content: "\e637";
 }
-.aegon-iconuniE637:before {
-	content: "\e637";
+.icon-uniE638:before {
+  content: "\e638";
 }
-.aegon-iconuniE638:before {
-	content: "\e638";
+.icon-uniE639:before {
+  content: "\e639";
 }
-.aegon-iconuniE639:before {
-	content: "\e639";
+.icon-uniE63A:before {
+  content: "\e63a";
 }
-.aegon-iconuniE63A:before {
-	content: "\e63a";
+.icon-skinnyArrow:before {
+  content: "\e63b";
 }
-.aegon-iconskinnyArrow:before {
-	content: "\e63b";
+.icon-close_X:before {
+  content: "\e63c";
 }
-.aegon-iconclose_X:before {
-	content: "\e63c";
+.icon-datepickericon:before {
+  content: "\e63d";
 }
+.icon-foldericon:before {
+  content: "\e63e";
+}
+.icon-info_black:before {
+  content: "\e800";
+}
+.icon-search:before {
+  content: "\e801";
+}
+.icon-info:before {
+  content: "\e802";
+}
+.icon-claimindienen3:before {
+  content: "\e900";
+}
+.icon-offreren3:before {
+  content: "\e901";
+}
+.icon-bubble:before {
+  content: "\e902";
+}
+.icon-plus_regular1:before {
+  content: "\e903";
+}
+.icon-plus_light:before {
+  content: "\e904";
+}
+.icon-muteren:before {
+  content: "\e905";
+}
+.icon-inzien:before {
+  content: "\e906";
+}
+.icon-contractdetails-salesforce:before {
+  content: "\e907";
+}
+.icon-Company-expanded:before {
+  content: "\e908";
+}
+.icon-whatsapp:before {
+  content: "\e909";
+}
+.icon-minus:before {
+  content: "\ea0b";
+}
+.icon-broken-window:before {
+  content: "\e90a";
+}
+.icon-desktop-phone:before {
+  content: "\e90b";
+}
+.icon-huis:before {
+  content: "\e90c";
+}
+

@@ -21,6 +21,8 @@ const declarations = [
     aaComp.AAInputDateComponent,
     aaComp.AAInputNumberComponent,
     aaComp.AAHighchartComponent,
+    aaComp.AATabsViewComponent,
+    aaComp.AATabsViewItemComponent,
     aaComp.AAStickyComponent,
     aaComp.AAModalComponent,
     aaComp.AACollapsibleTopicComponent,

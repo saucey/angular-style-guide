@@ -2,7 +2,7 @@
  * AOV quick quote
  */
 import {
-  Component, Input, EventEmitter, Output, OnInit, ElementRef, trigger, state, animate, transition, style, SimpleChanges, AfterViewInit,
+  Component, Input, EventEmitter, Output, OnInit, ElementRef, trigger, state, animate, transition, style, SimpleChanges, AfterViewInit
 } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {calculateAge} from "../../lib/date";
@@ -87,8 +87,8 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit, A
     partner: 115,
   };
 
-  public hasPartner: string = this.pension['havePartner'] == "true" ? "show" :"hidden";
-  public partnerDob: string = this.pension['insurablePartner'] == "true" ? "show" :"hidden";
+  public hasPartner: string = this.pension['havePartner'] == true ? "show" :"hidden";
+  public partnerDob: string = this.pension['insurablePartner'] == true ? "show" :"hidden";
 
   public partnersDobReadable: any[] = [];
 
@@ -172,7 +172,9 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit, A
   }
 
   editSection(val): any {
-      // this.bbpage.hidePage();
+
+    this.bbpage.hidePage();
+
     if(this.isValidAmount() == true || this.btnValidationForUserPartner() !== false || this.btnValidationForUser() !== false) return false;
 
     for (let i = 1; i <= 5; i++) {
@@ -181,9 +183,9 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit, A
   }
 
   btnValidationForUserPartner(): boolean {
-    if(this.pension['havePartner'] == "false") return false;
-    if(this.pension['havePartner'] == "true" && this.pension['insurablePartner'] == "false") return false;
-    if(this.pension['havePartner'] == "true" && this.pension['insurablePartner'] == "true" && this.isAgeValid[1] == undefined && this.pension['birthDateOfPartner'] !== undefined) return false;
+    if(this.pension['havePartner'] == false) return false;
+    if(this.pension['havePartner'] == true && this.pension['insurablePartner'] == false) return false;
+    if(this.pension['havePartner'] == true && this.pension['insurablePartner'] == true && this.isAgeValid[1] == undefined && this.pension['birthDateOfPartner'] !== undefined) return false;
 
     if(this.isAgeValid[1] == false) return false;
 

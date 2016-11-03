@@ -12,6 +12,7 @@ import { TopicBuilder } from "./topic-builder";
 import { WiaSubscriptionService } from "../wia-page/wia-page.subscription.service";
 import { TopicDescriptionFilterService } from "./topic-description-filter.service";
 import { ProductAttributesService } from "./product-attributes.service";
+import { WiaPageProductsService } from "../wia-page/wia-page.products.service";
 
 @Component({
   selector: 'aa-wia-content',
@@ -19,6 +20,7 @@ import { ProductAttributesService } from "./product-attributes.service";
     TopicService,
     TopicDescriptionFilterService,
     ProductAttributesService,
+    WiaPageProductsService,
     TopicBuilder,
     WiaSubscriptionService,
     WiaContentService

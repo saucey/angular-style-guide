@@ -1,4 +1,4 @@
-<h1>Stel uw pensioenproduction samen</h1>
+<!--<h1>Stel uw pensioenproduct samen</h1>-->
 <h2 class="general-form__box__sub__header">Uw situatie: u gaat binnenkort met pensioen</h2>
     <ul class="number-form__list">
       <li class='number-form__list__section'>
@@ -10,7 +10,10 @@
         <div [@visibility]="editVisibility(1)">
           <div class="form-section__input__results">
             <span>€ {{pension['pensionAmount']| money}}</span>
-            <span class="edit" (click)="editSection(1)"> > Aanpassen</span>
+            <!--<span class="edit" (click)="editSection(1)"> > Aanpassen</span>-->
+            <ul class="arrow" (click)="editSection(1)">
+              <li><span>Aanpassen</span></li>
+            </ul>
           </div>
         </div>
 
@@ -67,7 +70,10 @@
                 Zowel bij Aegon als bij andere verzekeraar(s) of pensioenfonds(en)
               </span>
             </span>
-            <span class="edit" (click)="editSection(2)"> > Aanpassen</span>
+            <!--<span class="edit" (click)="editSection(2)"> > Aanpassen</span>-->
+            <ul class="arrow" (click)="editSection(2)">
+              <li><span>Aanpassen</span></li>
+            </ul>
           </div>
         </div>
 
@@ -117,22 +123,22 @@
               </span>
             </span>
 
-            <span *ngIf='hasPartner !== "hidden" || pension["havePartner"] == "true"' class="block">
-              <span *ngIf='pension["insurablePartner"] == "true"'>
+            <span *ngIf='hasPartner !== "hidden" || pension["havePartner"] == true' class="block">
+              <span *ngIf='pension["insurablePartner"] == true'>
                 Ja, ik wil een partnerpensioen verzekeren
               </span>
 
-              <span *ngIf='pension["insurablePartner"] == "false" && initChangeHasPartner == true || pension["havePartner"] == "true" && pension["insurablePartner"] == "false"'>
+              <span *ngIf='pension["insurablePartner"] == false && initChangeHasPartner == true || pension["havePartner"] == true && pension["insurablePartner"] == false'>
                 Nee, ik wil geen partnerpensioen verzekeren
               </span>
             </span>
 
-            <span class="block" *ngIf='pension["insurablePartner"] !== "false" && hasPartner !== "hidden" && partnersDobReadable[1] !== "" && initChangeNoPolicy !== true && sessionPartnerDob == ""'>
-               Geboortedatum partner {{partnersDobReadable[1]}}
+            <span class="block" *ngIf='pension["insurablePartner"] !== false && hasPartner !== "hidden" && partnersDobReadable[1] !== "" && initChangeNoPolicy !== true && sessionPartnerDob == ""'>
+               Geboortedatum partner: {{partnersDobReadable[1]}}
             </span>
 
-            <span *ngIf='sessionPartnerDob !== "" && initChangeHasPartner !== false && initChangeNoPolicy !== true && pension["havePartner"] !== "false" && pension["insurablePartner"] !== "false"'>
-              <span>Geboortedatum partner {{sessionPartnerDob| dateToReadableString}}</span>
+            <span *ngIf='sessionPartnerDob !== "" && initChangeHasPartner !== false && initChangeNoPolicy !== true && pension["havePartner"] !== false && pension["insurablePartner"] !== false'>
+              <span>Geboortedatum partner: {{sessionPartnerDob| dateToReadableString}}</span>
             </span>
 
 
@@ -140,7 +146,10 @@
             <!--<p>{{initChangeNoPolicy}} | has partner, doesnt want to offer insurance</p>-->
 
             <!--<h1>{{pension['birthDateOfPartner']}}</h1>-->
-            <span class="edit" (click)="editSection(3)"> > Aanpassen</span>
+            <!--<span class="edit" (click)="editSection(3)"> > Aanpassen</span>-->
+            <ul class="arrow" (click)="editSection(3)">
+              <li><span>Aanpassen</span></li>
+            </ul>
 
           </div>
         </div>
@@ -193,19 +202,19 @@
 
                                   <span class="hint-message__wrapper" *ngIf="userAgeInvalid[1]">
                                     <p class="hint">
-                                      User age in is invalid
+                                      Voer een geldige geboortedatum in
                                     </p>
                                   </span>
 
                                   <span class="hint-message__wrapper" *ngIf="userToYoung[1]">
                                     <p class="hint">
-                                      User to young
+                                      Leeftijd is te laag
                                     </p>
                                   </span>
 
                                   <span class="hint-message__wrapper" *ngIf="userToOld[1]">
                                     <p class="hint">
-                                      User to old
+                                      Leeftijd is te hoog
                                     </p>
                                   </span>
                                 </div>
@@ -233,8 +242,11 @@
 
         <div [@visibility]="editVisibility(4)">
           <div class="form-section__input__results">
-            <span>Mijn geboortedatum {{pension['birthDate']| dateToReadableString}} </span>
-            <span class="edit" (click)="editSection(4)"> > Aanpassen</span>
+            <span>Mijn geboortedatum: {{pension['birthDate']| dateToReadableString}} </span>
+            <!--<span class="edit" (click)="editSection(4)"> > Aanpassen</span>-->
+            <ul class="arrow" (click)="editSection(4)">
+              <li><span>Aanpassen</span></li>
+            </ul>
           </div>
         </div>
 
@@ -252,19 +264,19 @@
 
                           <span class="hint-message__wrapper" *ngIf="userAgeInvalid[2]">
                             <p class="hint">
-                              User age in is invalid
+                              Voer een geldige geboortedatum in
                             </p>
                           </span>
 
                           <span class="hint-message__wrapper" *ngIf="userToYoung[2]">
                             <p class="hint">
-                              User to young
+                              Leeftijd is te laag
                             </p>
                           </span>
 
                           <span class="hint-message__wrapper" *ngIf="userToOld[2]">
                             <p class="hint">
-                              User to old
+                              Leeftijd is te hoog
                             </p>
                           </span>
 
@@ -290,7 +302,10 @@
         <div [@visibility]="editVisibility(5)">
           <div class="form-section__input__results">
             <span>{{pension['startingDate'] | dateToReadableString}}</span>
-            <span class="edit" (click)="editSection(5)"> > Aanpassen</span>
+            <!--<span class="edit" (click)="editSection(5)"> > Aanpassen</span>-->
+            <ul class="arrow" (click)="editSection(5)">
+              <li><span>Aanpassen</span></li>
+            </ul>
           </div>
         </div>
 

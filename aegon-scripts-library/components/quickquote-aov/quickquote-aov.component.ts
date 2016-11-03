@@ -159,7 +159,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
           <div class="field">
             <div class="label"></div>
             <div class="inputs">
-              <button class="button icon-right icon-calculator" [disabled]="pendingCount > 0" [ngClass]="{pending: pendingCount > 0}" (click)="submit()">
+              <button class="button icon-right icon-calculator tealium-step-03" [disabled]="pendingCount > 0" [ngClass]="{pending: pendingCount > 0}" (click)="submit()">
                 Bereken
               </button>
             </div>
@@ -281,7 +281,7 @@ var templateElem = (<HTMLTextAreaElement>document.querySelector('#quickQuoteAovT
         <div class="bigger" *ngIf="!showTotalAmount">
           <div class="row">
             <span class="label">Herkent u zich in deze bedragen?</span>
-            <button class="button icon-right icon-calculator" (click)="showTotalAmount = true; tealiumStep3(); tealiumStep4();">
+            <button class="button icon-right icon-calculator" (click)="showTotalAmount = true; tealiumStep4();">
               Bereken totaal
             </button>
           </div>
@@ -420,6 +420,7 @@ export class QuickQuoteAovComponent implements OnInit {
     this.nibudService.getReferenceCosts(body).then(
       data => {
         this.processResult(data);
+        this.tealiumStep3();
       },
       error => console.log(error)
     );
@@ -547,26 +548,28 @@ export class QuickQuoteAovComponent implements OnInit {
 
   private tealiumStep3() {
     this.tealium({
-       page_cat_2_name : 'bevestiging',
+       page_cat_2_name : 'berekening',
+       page_step : '03',
        step_name : 'qq-berekening-bevestiging',
        product_name : ["aov"],
        product_category : ["inkomensverzekeringen"],
-       page_step : '03',
-       event : 'qq_step_03'
+       event : 'qq_step_03',
+       form_name : 'qq:aov'
     });
     console.info("page_step : '03'","event : 'qq_step_03'");
   }
 
   private tealiumStep4() {
     this.tealium({
-       page_cat_2_name : 'bevestiging',
-       //step_name : 'qq-berekening-bevestiging',
+       page_cat_2_name : 'berekening',
+       step_name : 'qq-berekening-bevestiging',
+       page_step : '04',
        product_name : ["aov"],
        product_category : ["inkomensverzekeringen"],
-       page_step : '04',
-       event : 'event30'
+       event : 'qq_completed',
+       form_name : 'qq:aov'
     });
-    console.info("page_step : '04'","event : 'event30'");
+    console.info("page_step : '04'","event : 'qq_completed'");
   }
 
   /*

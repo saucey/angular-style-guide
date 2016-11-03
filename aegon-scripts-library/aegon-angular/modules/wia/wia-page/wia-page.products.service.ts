@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { clone } from "../../../lib/util";
-const products = require('./datasets/products.json');
+import { ProductModel } from "./models/product.model";
+const PRODUCTS = require('./datasets/products.json');
 
 const defaultProductsCombinations = require('./datasets/product-combinations.json');
 
@@ -85,7 +86,32 @@ export class WiaPageProductsService {
   }
 
   public getProducts() {
+    return clone(PRODUCTS);
+  }
 
-    return clone(products);
+  /**
+   * Sets the default attributes for each product in the list, if missing.
+   *
+   * @param Array<ProductModel> productsList
+   * @returns {Array<ProductModel>}
+   */
+  public setDefaultAttributes(productsList: Array<ProductModel>) {
+    let productsListWithDefaultAttributes: Array<ProductModel> = [],
+      defaultProducts = this.getProducts();
+
+    for (let product of productsList) {
+      let defaultProduct = defaultProducts.find(el => el.id === product.id);
+
+      for (let defaultAttribute of defaultProduct.attrs) {
+        let foundAttr = product.attrs.find(el => el.id === defaultAttribute.id);
+        if (!foundAttr) {
+           product.attrs.push(defaultAttribute);
+        }
+      }
+
+      productsListWithDefaultAttributes.push(product);
+    }
+
+    return productsListWithDefaultAttributes;
   }
 }

@@ -2,11 +2,11 @@ import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA }          from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
-import { AAPensionFormComponent } from './aa-pension-form.component';
-import { AAMoneyPipe } from '../../pipes/money.pipe';
-import { DateToReadableString } from '../../pipes/dateToReadableString.pipe';
+import { AAPensionFormComponent } from '../aa-pension-form.component';
+import { AAMoneyPipe } from '../../../pipes/money.pipe';
+import { DateToReadableString } from '../../../pipes/dateToReadableString.pipe';
 
-require('../../../modules/clientStorage.js');
+require('../../../../modules/clientStorage.js');
 
 describe('AA Pension Form Component', () => {
   let comp: AAPensionFormComponent;
@@ -32,6 +32,14 @@ describe('AA Pension Form Component', () => {
 
   it('should equal 1', () => {
     expect(comp.testMethod(1)).toEqual(1);
+  });
+
+  it('User age validation passes on false', () => {
+    expect(comp.validateAge('1950-11-11', 1, 'user', 'user')).toBeFalsy();
+  });
+
+  it('Partner age validation passes on false', () => {
+    expect(comp.validateAge('1995-11-11', 2, 'partner', 'partner')).toBeFalsy();
   });
 
 });

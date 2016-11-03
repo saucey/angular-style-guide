@@ -3,7 +3,94 @@
 .wia_form {
   margin: 2em 0;
 
+  li {
+    background: none;
+  }
+
+  label {
+    font-weight: normal;
+  }
+
+  .wia_form__column_input {
+    margin: 1em 0;
+    > label {
+      width: 50%;
+      float: left;
+      padding: 0.5em 0;
+    }
+    input {
+      width: 200px;
+      font-weight: normal;
+    }
+  }
+
+  .wia_form__products_label {
+    display: block;
+    margin: 0.5em 0;
+  }
+
   .wia_form__products-switch {
     margin: 1em 0;
+  }
+  .products-attrs__radios {
+    margin-top: 8px;
+  }
+  .products-attrs__radio {
+    float: left;
+    width: 33%;
+  }
+  .product-attrs {
+    > ul {
+      margin: 0;
+    }
+  }
+  .product-attr {
+    border-top: 1px solid $darker_grey;
+    padding-top: 5px;
+    margin-top: 18px;
+  }
+  .product-group {
+    float: left;
+    width: 50%;
+    min-width: 320px;
+    margin: 10px 0;
+
+    &:nth-child(odd) {
+      clear:both;
+      width: 46%;
+      margin-right: 4%;
+    }
+
+    label.checkbox {
+      margin-top: -4px;
+      padding-left: 40px;
+    }
+
+    span.checkbox {
+      margin-top: 3px;
+    }
+
+    label.radio {
+      margin: 0;
+      padding-left: 35px;
+    }
+
+    span.radio {
+      margin-top: 9px;
+    }
+
+    input {
+      display: none;
+    }
+  }
+
+  .header {
+    font-weight: normal;
+    &.headline {
+      font-size: 1.05em;
+    }
+    &.headline--margin {
+      margin-top: 2em;
+    }
   }
 }

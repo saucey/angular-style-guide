@@ -1,0 +1,117 @@
+.aa-tabs-view {
+
+  // not mobile (> 640px)
+  @media screen and (min-width: $rc-m-min-width) {
+    .aa-tabs-view-item {
+      display: none;
+    }
+    .aa-tabs-view-item--active {
+      display: block;
+    }
+
+    .aa-tabs-view-item__headline {
+      display: none;
+    }
+    .aa-tabs-view__block {
+      display: block;
+    }
+  }
+
+  .aa-tabs-view-item:not(.aa-tabs-view-item--active) .aa-tabs-view-item__content {
+    display: none;
+  }
+
+  .aa-tabs-view-item__content {
+    background: $pastel_light_blue;
+    padding: 1em;
+  }
+
+  .aa-tabs-view-item__title {
+    position: relative;
+  }
+
+  .aa-tabs-view-item__icon {
+    font-size: 2.2em;
+    float: left;
+    color: $blue;
+    line-height: 0.7em;
+    padding: 0.3em 0 0.3em 0.3em;
+  }
+
+  .aa-tabs-view-item__headline {
+    position: relative;
+    padding: 1em;
+    border-bottom: 1px solid $pastel_light_blue;
+    cursor: pointer;
+  }
+  .aa-tabs-view-item--active .aa-tabs-view-item__headline {
+    background: $pastel_light_blue;
+  }
+
+  .aa-tabs-view-item__desc {
+    font-size: 0.8em;
+    margin-top: -0.5em;
+    display: block;
+  }
+
+  .aa-tabs-view-item__title {
+    margin: 0;
+  }
+
+  .aa-tabs-view-item__arrow {
+    position: absolute;
+    right: 1em;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $blue;
+  }
+}
+
+.aa-tabs-view__block {
+  color: $fun_blue_approx;
+  float: left;
+  height: 9em;
+  text-align: center;
+  line-height: 1em;
+  box-shadow: 0 0 0 1px #D9EBF7 inset;
+  cursor: pointer;
+  display: none;
+  position: relative;
+
+  &:nth-child(n+2) {
+    box-shadow: 0 1px 0 0 $pastel_light_blue inset, -1px 0 0 0 $pastel_light_blue inset;
+
+    &.active:before {
+      padding: 0 1px 0 0;
+      transform: translate(-1px, -5px);
+    }
+  }
+
+  &.active {
+    background: $pastel_light_blue;
+    box-shadow: none !important;
+  }
+
+  &.active:before {
+    content: '';
+    background: $pastel_light_blue;
+    width: 100%;
+    height: 5px;
+    display: block;
+    transform: translateY(-5px);
+    position: absolute;
+    box-sizing: initial;
+  }
+
+  .aa-tabs-view__block-icon {
+    font-size: 4em;
+    padding: 0.7em 0 0;
+  }
+}
+
+.aa-tabs-view__block-title {
+  padding: 2em 0;
+  display: block;
+  font-weight: bold;
+}
+
