@@ -301,6 +301,21 @@ ul.number-form__list {
 }
 
 @media all and (max-width: 840px) {
+
+  .number-form__list__section {
+    .general-form__box__sub__header {
+      margin-left: 5px;
+      display: inline;
+    }
+  }
+
+  ul.number-form__list {
+    .number-form__list__numberCircle {
+      left: 0px;
+      position: relative;
+      dispLay: inline-block;
+    }
+  }
   /* demo 3 */
   .form-element-text__row {
     padding: 0px;
