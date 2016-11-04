@@ -108,15 +108,14 @@ export class AABlueBlockPageComponent extends AABaseComponent implements OnInit 
       if(this.isPensionLocationAegon(this.pensionInfo.pensionLocation)) {
         this.bottomContent = this.data.options.bottom;
 
-        this.sendTealiumTagging("direct_ingaand_pensioen", "direct_ingaand_pensioen", "direct_ingaand_pensioen");
+        this.sendTealiumTagging("direct_ingaand_pensioen_aegon", "direct_ingaand_pensioen_aegon", "direct_ingaand_pensioen_aegon");
       
       // Pension location is not Aegon
       } else {
+        this.sendTealiumTagging("direct_ingaand_pensioen", "direct_ingaand_pensioen", "direct_ingaand_pensioen");
+        
         if(!this.isStartingDateWithin3Months(this.pensionInfo.startingDate)) {
           this.bottomContent = this.data.options.bottomVariant;
-
-          this.sendTealiumTagging("direct_ingaand_pensioen_aegon", "direct_ingaand_pensioen_aegon", "direct_ingaand_pensioen_aegon");
-        
         } else { this.hasBottomContent = false; } 
       }
     }
@@ -129,9 +128,9 @@ export class AABlueBlockPageComponent extends AABaseComponent implements OnInit 
       !this.pensionInfo.insurablePartner ? this.columnRightIsHidden = true : this.columnRightIsHidden = false;
     
       if(this.isPensionLocationAegon(this.pensionInfo.pensionLocation)) {
-        this.sendTealiumTagging("uitkerend_beleggingspensioen", "variabele_pensioenuitkering", "variabele_pensioenuitkering");
-      } else {
         this.sendTealiumTagging("uitkerend_beleggingspensioen", "variabele_pensioenuitkering_aegon", "variabele_pensioenuitkering_aegon");
+      } else {
+        this.sendTealiumTagging("uitkerend_beleggingspensioen", "variabele_pensioenuitkering", "variabele_pensioenuitkering");
       }
 
     } 
