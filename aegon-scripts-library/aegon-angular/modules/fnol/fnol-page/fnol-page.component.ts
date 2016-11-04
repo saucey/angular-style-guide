@@ -1,9 +1,7 @@
 import {
-  Component, ElementRef, OnInit, OnChanges, Input,
-  trigger, state, animate, transition, style
+  Component
 } from '@angular/core';
 
-import { AABaseComponent } from "../../../lib/classes/AABaseComponent";
 import { FNOLDataService } from "../shared/services/fnol.data.service";
 import { Category } from "../shared/models/category.model";
 

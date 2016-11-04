@@ -3,7 +3,8 @@
     "id": "END_POSSESSION_1",
     "type": "redirect",
     "data": {
-      "category": "liability"
+      "category": "liability",
+      "label": "aansprakelijkheid"
     }
   },
   {

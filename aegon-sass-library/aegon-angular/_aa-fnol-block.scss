@@ -1,3 +1,5 @@
+/* These classes were for Fnol page structure */
+
 .aa-fnol-wrapper {
   border: 1px solid $slightly_lighter_blue;
 	width: 100%;
@@ -35,4 +37,25 @@
 }
 .pos-rel{
  position:relative;
+}
+
+/* These classes were for Fnol tabs component */
+
+.mr-top20{
+ margin-top:20px !important;
+}
+.fnol-category__headline{
+  font-size: 1.5em;
+  color: $blue;
+  font-weight:lighter;
+}
+.fnol-url-pass-button{
+  padding:20px 0 0 20px;
+}
+.fnol-category__questions{
+  padding:10px 0 0 10px;
+}
+.fnol-category__question{
+  margin:20px 0 0 0;
+  font-weight:normal;
 }

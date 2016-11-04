@@ -7,7 +7,7 @@ import { AAComponentsModule } from '../../aa.module';
 import { DeprecatedComponentsModule } from '../../deprecated-components.module';
 
 
-import { FNOLIntakeComponent } from './fnol-page/aa-fnol-intake.component';
+import { FNOLIntakeComponent } from './fnol-page/fnol-page.component';
 import { FNOLCategory } from './fnol-category/fnol-category.component';
 import { FNOLEndpoint } from './fnol-endpoint/fnol-endpoint.component';
 
