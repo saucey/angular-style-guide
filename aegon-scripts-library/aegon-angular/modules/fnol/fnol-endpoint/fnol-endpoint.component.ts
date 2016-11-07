@@ -13,7 +13,6 @@ const template = require('./template.html');
     template: template,
     providers: [
         FNOLDataService,
-        AATabsViewComponent,
         { provide: Parent, useExisting: forwardRef(() => AATabsViewComponent) }
     ]
 })
