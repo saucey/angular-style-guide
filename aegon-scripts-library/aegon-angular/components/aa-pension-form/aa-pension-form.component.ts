@@ -135,7 +135,25 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
     });
   }
 
-  editVisibility(val): any{
+  editVisibility(val): any {
+
+    // console.log(this.isValidAmount(), 'the amount');
+    // console.log(this.pension['pensionLocation'], 'pension location');
+    // console.log(this.btnValidationForUserPartner(), 'btn validation for user partner');
+    // console.log(this.btnValidationForUser(), 'btn validation for user');
+    // console.log(this.pension['startingDate'], 'the starting date');
+    // console.log(this.pension['pensionLocation'], 'the is valid amount!!!');
+
+    console.log(this.isValidAmount(), 'the amount to choose');
+    console.log(this.pension['pensionLocation'], 'the pension location');
+
+    if(this.isValidAmount() !== false) {
+      return true;
+    }
+
+    if(this.pension['pensionLocation'] == undefined){
+      return true;
+    }
 
     if(this.step[val]) return 'hidden';
     return this.visibility[val] == 'show' ? 'hidden' : 'show';
@@ -149,9 +167,7 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
 
   editSection(val): any {
 
-    this.bbpage.hidePage();
-
-    if(this.isValidAmount() == true || this.btnValidationForUserPartner() !== false || this.btnValidationForUser() !== false) return false;
+    // this.bbpage.hidePage();
 
     for (let i = 1; i <= 5; i++) {
       this.visibility[i] = (val == i) ? 'show' : 'hidden';
@@ -171,8 +187,8 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
 
     if(this.hasPartner == 'hidden' && this.initChangeHasPartner == false) return false;
 
-    //hidden the button validation
     return true;
+    //hidden the button validation
   }
 
   btnValidationForUser(): boolean {
@@ -247,8 +263,6 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
 
   submitForm(data): void {
     //this is were we need to set session and api call
-    console.log(data, 'pension');
-
     if(data['havePartner'] == false){
 
       data['insurablePartner'] = false;
