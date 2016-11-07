@@ -48,7 +48,8 @@ const declarations = [
     aaComp.AAEditableValueComponent,
     aaComp.AABlueBlockComponent,
     aaComp.AATodosComponent,
-    aaComp.AALoaderComponent
+    aaComp.AALoaderComponent,
+    aaComp.AAFAQComponent
 ];
 
 //Exports

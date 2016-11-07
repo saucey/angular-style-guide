@@ -1,9 +1,9 @@
 <div class="aa-tabs-view-item" [class.aa-tabs-view-item--active]="active">
     <div class="aa-tabs-view-item__headline clearfix" (click)="setActive(true)">
 
-        <span class="aa-tabs-view-item__icon icon-{{icon}}"></span>
+        <span class="aa-tabs-view-item__icon icon-{{icon}}" *ngIf="icon"></span>
         <h3 class="aa-tabs-view-item__title">{{title}}</h3>
-        <span class="aa-tabs-view-item__desc">{{description}}</span>
+        <span class="aa-tabs-view-item__desc" *ngIf="description">{{description}}</span>
         <span class="aa-tabs-view-item__arrow icon-arrow-down"></span>
     </div>
 

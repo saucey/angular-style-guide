@@ -1,0 +1,129 @@
+[
+  {
+    "id": "END_POSSESSION_1",
+    "type": "redirect",
+    "data": {
+      "category": "liability",
+      "label": "aansprakelijkheid"
+    }
+  },
+  {
+    "id": "END_POSSESSION_2",
+    "type": "generic",
+    "data": {}
+  },
+  {
+    "id": "END_POSSESSION_3",
+    "type": "phone",
+    "data": {}
+  },
+  {
+    "id": "END_POSSESSION_4",
+    "type": "generic",
+    "data": {}
+  },
+  {
+    "id": "END_POSSESSION_5",
+    "type": "generic",
+    "data": {}
+  },
+  {
+    "id": "END_POSSESSION_6",
+    "type": "generic",
+    "data": {}
+  },
+
+
+
+
+  {
+    "id": "END_HOME_1",
+    "type": "generic",
+    "data": {}
+  }, {
+    "id": "END_HOME_2",
+    "type": "generic",
+    "data": {}
+  }, {
+    "id": "END_HOME_3",
+    "type": "generic",
+    "data": {}
+  }, {
+    "id": "END_HOME_4",
+    "type": "generic",
+    "data": {}
+  },
+
+  
+  
+
+  {
+    "id": "END_AUTO_1",
+    "type": "generic",
+    "data": {}
+  }, {
+    "id": "END_AUTO_2",
+    "type": "generic",
+    "data": {}
+  }, {
+    "id": "END_AUTO_3",
+    "type": "generic",
+    "data": {}
+  }, {
+    "id": "END_AUTO_4",
+    "type": "generic",
+    "data": {}
+  }, {
+    "id": "END_AUTO_5",
+    "type": "generic",
+    "data": {}
+  }, {
+    "id": "END_AUTO_6",
+    "type": "generic",
+    "data": {}
+  }, {
+    "id": "END_AUTO_7",
+    "type": "generic",
+    "data": {}
+  }, 
+
+
+  {
+    "id": "END_TRAVEL_1",
+    "type": "generic",
+    "data": {}
+  },
+  {
+    "id": "END_TRAVEL_2",
+    "type": "generic",
+    "data": {}
+  },
+
+
+
+  {
+    "id": "END_LIABILITY_1",
+    "type": "generic",
+    "data": {
+      "title": "Zo meldt u uw schade",
+      "description": "Uw spullen zijn onherstelbaar beschadigd. U kunt dit het beste direct online melden",
+      "list": {
+        "title": "Voordelen online melden",
+        "items": [
+          "In alle rust zelf uw schade melden",
+          "Geld staat sneeler op uw rekening",
+          "Snelle afhandeling"
+        ]
+      },
+      "button": {
+        "url": "http://google.com",
+        "phone": null
+      },
+      "alert": null,
+      "bottomLink": {
+        "text": "Liever niet online melden? Neem dan contact met ons op",
+        "url": "http://google.com"
+      }
+    }
+  }
+]

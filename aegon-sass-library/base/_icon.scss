@@ -476,6 +476,9 @@ a.menu-5662:before {
 .icon-car-crash:before {
   content: $font_icons_car_crash;
 }
+.icon-auto:before {
+  content: $font_icons_auto;
+}
 // Do not apply icons to old aegon menu.
 // TODO: Refactor menu's in Drupal module 'aegon_menu' to adapt to ATDL.
 .submenu [class*='menu-'][class*='icon-']:before {

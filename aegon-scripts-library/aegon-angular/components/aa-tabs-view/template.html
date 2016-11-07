@@ -1,4 +1,4 @@
-<div class="aa-tabs-view">
+<div class="aa-tabs-view aa-tabs-view--{{theme}}" [attr.data-active]="active" [attr.data-active-index]="activeIndex">
   <div class="tabs-blocks">
     <div class="clearfix">
       <div class="aa-tabs-view__block" *ngFor="let item of tabs" (click)="setActive(item)"

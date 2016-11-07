@@ -1,0 +1,11 @@
+<!--redirection-->
+<div class="fnol-url-pass-button" *ngIf="data.type === 'redirect'">
+
+    <button class="button white arrow" (click)="setActiveById(data.data.category)">Ga verder bij {{data.data.label}}
+    </button>
+
+</div>
+
+<div *ngIf="data.type !== 'redirect'">
+    <pre>{{ data | json }}</pre>
+</div>
