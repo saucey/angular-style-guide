@@ -57,7 +57,7 @@
         <span class="number-form__list__numberCircle">2</span>
         <span class="general-form__box__sub__header">{{data.options.block2.title}}</span>
 
-        <div [@visibility]="editVisibility(2)">
+        <div [@visibility]="!pension['pensionLocation'] == false ? editVisibility(2) : 'hidden'">
           <div class="form-section__input__results">
             <span>
               <span *ngIf='pension["pensionLocation"] == "0" ' class="block">
