@@ -70,6 +70,10 @@
         display: block;
       }
     }
+    a {
+      color: $white;
+      font-weight: bold;
+    }
   }
   &.messages--functional {
     padding-left: 20px;

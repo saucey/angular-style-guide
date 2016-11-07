@@ -2,7 +2,8 @@ export type EndpointType = 'generic' | 'auto' | 'redirect'
 
 export interface Endpoint {
     id: string,
-    type: EndpointType
+    type: EndpointType,
+    data?: {}
 }
 
 export interface GenericEndpoint extends Endpoint {
