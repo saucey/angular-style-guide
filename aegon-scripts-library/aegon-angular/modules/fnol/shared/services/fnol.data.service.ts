@@ -1,15 +1,13 @@
 import { Injectable, Optional } from "@angular/core";
 import { Endpoint, Question, Category } from "../models";
 
-type Questions = Question[];
-type Endpoints = Endpoint[];
-type Categories = Category[];
+type Questions = Array<Question>;
+type Endpoints = Array<Endpoint>;
+type Categories = Array<Category>;
 
-const questionsData: Questions = require('../datasets/questions.json');
-const endpointsData: Endpoints = require('../datasets/endpoints.json');
-const categoriesData: Categories = require('../datasets/categories.json');
-
-console.log('questionsData', questionsData);
+const QUESTIONS_DATA: Questions = require('../datasets/questions.json');
+const ENDPOINTS_DATA: Endpoints = require('../datasets/endpoints.json');
+const CATEGORIES_DATA: Categories = require('../datasets/categories.json');
 
 @Injectable()
 export class FNOLDataService {
@@ -23,13 +21,12 @@ export class FNOLDataService {
                 @Optional() categories: Categories,
                 @Optional() endpoints: Endpoints) {
 
-        this.questions = questions || questionsData;
-        this.endpoints = endpoints || endpointsData;
-        this.categories = categories || categoriesData;
-
-        console.log('constructor', this);
+        this.questions = questions || QUESTIONS_DATA;
+        this.endpoints = endpoints || ENDPOINTS_DATA;
+        this.categories = categories || CATEGORIES_DATA;
     }
 
+    // Get element from collection by its id
     private getById<T>(elements: any[], id: string) : T {
         return elements.find(el => el.id === id);
     }

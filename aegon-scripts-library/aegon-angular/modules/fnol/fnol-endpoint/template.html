@@ -1,21 +1,11 @@
-<!--Styles temporary @Fixme-->
- <!--<div class="fnol-url-pass-button">
-  <button class="button white arrow">white arrow</button>
+<!--redirection-->
+<div class="fnol-url-pass-button" *ngIf="data.type === 'redirect'">
+
+    <button class="button white arrow" (click)="setActiveById(data.data.category)">Ga verder bij {{data.data.label}}
+    </button>
+
 </div>
 
-<div class="fnol-url-pass-button">
-    [FNOL ENDPOINT FOR ID={{id}}]
-    Data:
+<div *ngIf="data.type !== 'redirect'">
     <pre>{{ data | json }}</pre>
-
-    <button *ngIf="data.type === 'redirect'" (click)="setActiveById(data.data.category)">Redirect</button>
-
-    <button class="button white arrow" *ngIf="data.type === 'redirect'" (click)="tabs.setActiveById(data.data.category)">Redirect</button>
-</div> -->
-
-<!--redirection-->
-<div class="fnol-url-pass-button"  *ngIf="data.type === 'redirect'">
-
-   <button class="button white arrow" (click)="setActiveById(data.data.category)">Ga verder bij {{data.data.label}}</button>
-
 </div>

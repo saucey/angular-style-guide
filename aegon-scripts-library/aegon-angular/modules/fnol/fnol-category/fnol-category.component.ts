@@ -10,7 +10,7 @@ const template = require('./template.html');
     providers: [FNOLDataService]
 })
 
-export class FNOLCategory implements OnInit {
+export class FNOLCategoryComponent implements OnInit {
 
     @Input() id: string;
 
@@ -18,7 +18,7 @@ export class FNOLCategory implements OnInit {
     category: Category;
 
     // Visible steps - questions/endpoints
-    steps: Step[] = [];
+    steps: Array<Step> = [];
 
     constructor(private fnolDataService: FNOLDataService) {}
 

@@ -17,7 +17,7 @@ const template = require('./template.html');
     ]
 })
 
-export class FNOLEndpoint extends AABaseComponent {
+export class FNOLEndpointComponent extends AABaseComponent {
 
     @Input() id: string;
 

@@ -7,14 +7,14 @@ import { AAComponentsModule } from '../../aa.module';
 import { DeprecatedComponentsModule } from '../../deprecated-components.module';
 
 
-import { FNOLIntakeComponent } from './fnol-page/fnol-page.component';
-import { FNOLCategory } from './fnol-category/fnol-category.component';
-import { FNOLEndpoint } from './fnol-endpoint/fnol-endpoint.component';
+import { FNOLPageComponent } from './fnol-page/fnol-page.component';
+import { FNOLCategoryComponent } from './fnol-category/fnol-category.component';
+import { FNOLEndpointComponent } from './fnol-endpoint/fnol-endpoint.component';
 
 export const FNOLPageExports = [
-  FNOLIntakeComponent,
-  FNOLEndpoint,
-  FNOLCategory
+  FNOLPageComponent,
+  FNOLEndpointComponent,
+  FNOLCategoryComponent
 ];
 
 export const declarations = [

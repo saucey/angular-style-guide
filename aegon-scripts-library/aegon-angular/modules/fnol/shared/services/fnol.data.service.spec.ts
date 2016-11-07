@@ -1,7 +1,7 @@
 import { FNOLDataService } from "./fnol.data.service";
 import { EndpointType } from "../models/";
 
-const questions = [
+const QUESTIONS = [
     {
         "id": "Q1",
         "type": "question",
@@ -34,7 +34,7 @@ const questions = [
     }
 ];
 
-const endpoints = [
+const ENDPOINTS = [
     {
         "id": "END1",
         "type": ("phone" as EndpointType),
@@ -58,22 +58,22 @@ describe('FNOL Data Service', () => {
     let fnolDataService: FNOLDataService;
 
     beforeEach(() => {
-        fnolDataService = new FNOLDataService(questions, [], endpoints);
+        fnolDataService = new FNOLDataService(QUESTIONS, [], ENDPOINTS);
 
     });
 
-    describe('Getting questions/endpoints', () => {
+    describe('Getting QUESTIONS/ENDPOINTS', () => {
 
         it('is defined', () => {
             expect(fnolDataService).toBeDefined();
         });
 
-        it('is gets questions', () => {
-            expect(fnolDataService.getQuestions()).toEqual(questions);
+        it('is gets QUESTIONS', () => {
+            expect(fnolDataService.getQuestions()).toEqual(QUESTIONS);
         });
 
-        it('is gets questions', () => {
-            expect(fnolDataService.getEndpoints()).toEqual(endpoints);
+        it('is gets QUESTIONS', () => {
+            expect(fnolDataService.getEndpoints()).toEqual(ENDPOINTS);
         });
 
     });
@@ -98,7 +98,7 @@ describe('FNOL Data Service', () => {
             });
         });
 
-        it('is gets questions', () => {
+        it('is gets QUESTIONS', () => {
             expect(fnolDataService.getEndpoint('END1')).toEqual({
                 "id": "END1",
                 "type": "phone",

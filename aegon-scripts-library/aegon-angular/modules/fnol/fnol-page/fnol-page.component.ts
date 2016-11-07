@@ -2,26 +2,14 @@ import {
   Component
 } from '@angular/core';
 
-import { FNOLDataService } from "../shared/services/fnol.data.service";
-import { Category } from "../shared/models/category.model";
-
 const template = require('./template.html');
 
 @Component({
-  selector: 'aa-fnol-intake',
-  //template: 'I am from Test Name Display component XYZ'
+  selector: 'fnol-page',
   template: template,
-  providers: [FNOLDataService]
+  providers: []
 })
 
-export class FNOLIntakeComponent {
-
-  fnolCategories: Category[];
-
-  constructor(private fnolDataService: FNOLDataService) {
-
-    this.fnolCategories = this.fnolDataService.getCategories();
-  }
-
+export class FNOLPageComponent {
 }
 

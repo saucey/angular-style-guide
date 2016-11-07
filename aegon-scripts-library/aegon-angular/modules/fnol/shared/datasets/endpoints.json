@@ -86,8 +86,18 @@
     "type": "generic",
     "data": {}
   }, 
-  
 
+
+  {
+    "id": "END_TRAVEL_1",
+    "type": "generic",
+    "data": {}
+  },
+  {
+    "id": "END_TRAVEL_2",
+    "type": "generic",
+    "data": {}
+  },
 
 
 
