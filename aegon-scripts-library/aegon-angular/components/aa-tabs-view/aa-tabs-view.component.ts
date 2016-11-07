@@ -28,7 +28,9 @@ const template = require('./template.html');
 export class AATabsViewComponent extends AABaseComponent implements AfterContentInit, Parent {
 
     @Input() active: string;
+    @Input() activeIndex: string;
     @Input() options: any = {};
+    @Input() theme: string = 'square-blue';
     @ContentChildren(AATabsViewItemComponent) tabs;
 
     name = 'AATabsViewComponent';
@@ -39,6 +41,8 @@ export class AATabsViewComponent extends AABaseComponent implements AfterContent
     }
 
     setActive(tab: AATabsViewItemComponent) {
+        this.active = tab.id;
+        this.activeIndex = this.tabs.toArray().indexOf(tab) + 1;
         this.onActiveStateChange(tab);
     }
 
@@ -54,7 +58,9 @@ export class AATabsViewComponent extends AABaseComponent implements AfterContent
 
     ngAfterContentInit() {
 
-        this.setActiveById(this.active);
+        if (this.active) {
+            this.setActiveById(this.active);
+        }
 
         this.tabs.forEach((tab: AATabsViewItemComponent) => {
             tab.setChangeCallback(this.onActiveStateChange.bind(this));
