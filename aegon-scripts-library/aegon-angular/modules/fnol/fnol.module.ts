@@ -10,11 +10,13 @@ import { DeprecatedComponentsModule } from '../../deprecated-components.module';
 import { FNOLPageComponent } from './fnol-page/fnol-page.component';
 import { FNOLCategoryComponent } from './fnol-category/fnol-category.component';
 import { FNOLEndpointComponent } from './fnol-endpoint/fnol-endpoint.component';
+import { FNOLFAQComponent } from './fnol-faq/fnol-faq.component';
 
 export const FNOLPageExports = [
   FNOLPageComponent,
   FNOLEndpointComponent,
-  FNOLCategoryComponent
+  FNOLCategoryComponent,
+  FNOLFAQComponent
 ];
 
 export const declarations = [
