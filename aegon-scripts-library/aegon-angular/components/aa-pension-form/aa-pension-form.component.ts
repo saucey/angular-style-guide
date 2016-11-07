@@ -144,17 +144,6 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
     // console.log(this.pension['startingDate'], 'the starting date');
     // console.log(this.pension['pensionLocation'], 'the is valid amount!!!');
 
-    console.log(this.isValidAmount(), 'the amount to choose');
-    console.log(this.pension['pensionLocation'], 'the pension location');
-
-    if(this.isValidAmount() !== false) {
-      return true;
-    }
-
-    if(this.pension['pensionLocation'] == undefined){
-      return true;
-    }
-
     if(this.step[val]) return 'hidden';
     return this.visibility[val] == 'show' ? 'hidden' : 'show';
   }
