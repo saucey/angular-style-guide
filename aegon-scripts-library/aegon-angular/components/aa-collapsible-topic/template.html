@@ -5,7 +5,7 @@
   <div class="collapsible-content-icons">
     <div class="collapsible-content-icon" *ngFor="let topic of topicRow.topics; let column = index;">
       <a class="collapsible-content-link" (click)="setActiveItem(row, column)">
-        <img [src]="topic.image" class="collapsible-content-link__image" />
+        <img [src]="topic.image" class="collapsible-content-link__image" width="43" height="43"/>
       </a>
     </div>
   </div>
