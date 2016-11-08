@@ -122,19 +122,66 @@
   padding-left: 2em;
 }
 
+//Custom styling of FAQ for FNOL
+
 .fnol-faq {
   margin-top: 2em;
 
   h2 {
     font-size: 1.6em;
-    margin-bottom: -1em;
+    color: #3494d2;
+    margin-bottom: -10px;
   }
 
   .faq .title {
     font-weight: normal;
+    &:after{
+      font-family: $font_icons;
+      font-size: 12px;
+      float: right;
+      transform: rotate(90deg);
+      content:  $font_icons_arrow_right_skinny; //$font_icons_arrow_down
+      color: $blue;
+      margin: 7px 20px 0px 0px;
+    }
+  }
+
+   div.line {
+    height: 1px;
+    margin: 10px 0 0 0;
+    padding: 0;
+    border-bottom: 1px solid #cccccc !important;
   }
 
   .faq .field-item {
-    border-bottom-color: $slightly_darker_grey;
+    padding: 5px 0 5px 0;
+    border-bottom-color: #cccccc;
   }
+
+  input {
+    ~ [class^=thumbs_] {
+      color: $darker_grey;
+    }
+    ~ div.line {
+      display: none;
+    }
+    &:checked {
+      ~ [class^=thumbs_] {
+        color: $blue;
+      }
+      + .title {
+        &:after {
+          @include transform(rotate(-90deg) !important);
+        }
+      }
+      ~ .answer, ~ .feedback, ~ div.line {
+        display: block;
+      }
+      ~ .response {
+        display: block;
+      }
+    }
+  }
+
+
 }
