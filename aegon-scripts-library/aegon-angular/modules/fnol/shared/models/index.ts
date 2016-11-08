@@ -4,5 +4,6 @@ import { Endpoint } from "./endpoint.model";
 export * from './question.model';
 export * from './endpoint.model';
 export * from './category.model';
+export * from './faq.model';
 
 export type Step = Question | Endpoint;

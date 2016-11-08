@@ -3,24 +3,24 @@
 
   .aa-fnol-wrapper {
     border: 1px solid $slightly_lighter_blue;
-      width: 100%;
-      margin: 10px 0;
-      position: relative;
-      @include rem('border-radius', 3);
-      }
+    width: 100%;
+    margin: 10px 0;
+    position: relative;
+    @include rem('border-radius', 3);
+  }
   .fnol-question {
     background-color: $orange;
     width: 100px;
     color: $white;
     font-size: 1.5em;
     padding: 15px 10px;
-    }
-  .fnol-phone-call{
+  }
+  .fnol-phone-call {
     font-size: 1.5em;
     padding: 15px 30px;
     color: $blue;
   }
-  .fnol-phone-content{
+  .fnol-phone-content {
     font-size: .78em;
     color: $blue;
   }
@@ -33,31 +33,108 @@
     top: 0px;
     right: -30px;
   }
-  .pos-abs{
-    position:absolute;
+  .pos-abs {
+    position: absolute;
   }
-  .pos-rel{
-   position:relative;
+  .pos-rel {
+    position: relative;
   }
 
   /* These classes were for Fnol tabs component */
 
-  .mr-top20{
-   margin-top:20px !important;
+  .mr-top20 {
+    margin-top: 20px !important;
   }
-  .fnol-category__headline{
+  .fnol-category__headline {
     font-size: 1.5em;
     color: $blue;
-    font-weight:lighter;
+    font-weight: lighter;
+    display: none;
+
+    // not mobile (> 640px)
+    @media screen and (min-width: $rc-m-min-width) {
+      display: block;
+    }
   }
-  .fnol-url-pass-button{
-    padding:20px 0 0 20px;
+
+  .fnol-category__questions {
+    padding: 0.5em 0 0 0.5em;
   }
-  .fnol-category__questions{
-    padding:10px 0 0 10px;
+  .fnol-category__question {
+    margin: 1em 0 0 0;
+    font-weight: normal;
+    label {
+      margin: 0.6em 0;
+      font-weight: normal;
+    }
+    label.radio {
+      padding-left: 2em;
+      & > input {
+        display: none;
+      }
+    }
+    span.radio {
+      margin: 0.5em 0;
+    }
+
+    .fnol-category__question__title {
+      font-weight: 700;
+    }
   }
-  .fnol-category__question{
-    margin:20px 0 0 0;
-    font-weight:normal;
+  
+  // hide titles of embedded nodes (faqs)
+  .node__title {
+    display: none;
+  }
+  
+  //hide faq search
+  [id^=bc-generic_content-faqs_search] {
+    display: none;
+  }
+  
+  //disable voting for the current version
+  .question-vote {
+    display: none;
+  }
+}
+
+.fnol-endpoint {
+  .messages {
+    padding: 2em;
+  }
+}
+
+.fnol-endpoint__alert {
+  margin: 1em 0;
+}
+
+.fnol-endpoint__alert-icon {
+  font-size: 1.5em;
+  float: left;
+  margin: 0.5em 0.1em 0;
+}
+
+.fnol-endpoint__button {
+  margin: 1em 0;
+}
+
+.fnol-endpoint__button--redirect {
+  padding-left: 2em;
+}
+
+.fnol-faq {
+  margin-top: 2em;
+
+  h2 {
+    font-size: 1.6em;
+    margin-bottom: -1em;
+  }
+
+  .faq .title {
+    font-weight: normal;
+  }
+
+  .faq .field-item {
+    border-bottom-color: $slightly_darker_grey;
   }
 }

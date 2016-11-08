@@ -38,10 +38,15 @@
 
 // Square blue theme
 .aa-tabs-view.aa-tabs-view--square-blue {
+  
+  $aaTabsBlue: #EDF6FB;
 
   .aa-tabs-view-item__content {
-    background: $pastel_light_blue;
-    padding: 1em;
+    background: $aaTabsBlue;
+    padding: 0.5em;
+    @media screen and (min-width: $rc-m-min-width) {
+      padding: 2.5em;
+    }
   }
 
   .aa-tabs-view-item__title {
@@ -60,11 +65,11 @@
   .aa-tabs-view-item__headline {
     position: relative;
     padding: 1em;
-    border-bottom: 1px solid $pastel_light_blue;
+    border-bottom: 1px solid $aaTabsBlue;
     cursor: pointer;
   }
   .aa-tabs-view-item--active .aa-tabs-view-item__headline {
-    background: $pastel_light_blue;
+    background: $aaTabsBlue;
   }
 
   .aa-tabs-view-item__desc {
@@ -91,33 +96,33 @@
     height: 9em;
     text-align: center;
     line-height: 1em;
-    box-shadow: 0 0 0 1px #D9EBF7 inset;
+    box-shadow: 0 0 0 1px $aaTabsBlue inset;
     cursor: pointer;
     position: relative;
 
     &:nth-child(n+2) {
-      box-shadow: 0 1px 0 0 $pastel_light_blue inset, -1px 0 0 0 $pastel_light_blue inset, 0 -1px 0 0 $pastel_light_blue inset;
+      box-shadow: 0 1px 0 0 $aaTabsBlue inset, -1px 0 0 0 $aaTabsBlue inset, 0 -1px 0 0 $aaTabsBlue inset;
 
-      &.active:before {
+      &.aa-tabs-view__block--active:before {
         padding: 0 1px 0 0;
         transform: translate(-1px, -5px);
       }
     }
 
-    &.active {
-      background: $pastel_light_blue;
+    &.aa-tabs-view__block--active {
+      background: $aaTabsBlue;
       box-shadow: none !important;
-    }
 
-    &.active:before {
-      content: '';
-      background: $pastel_light_blue;
-      width: 100%;
-      height: 5px;
-      display: block;
-      transform: translateY(-5px);
-      position: absolute;
-      box-sizing: initial;
+      &:before {
+        content: '';
+        background: $aaTabsBlue;
+        width: 100%;
+        height: 5px;
+        display: block;
+        transform: translateY(-5px);
+        position: absolute;
+        box-sizing: initial;
+      }
     }
 
     .aa-tabs-view__block-icon {
@@ -196,7 +201,7 @@
       background: $bg3;
     }
 
-    &.active {
+    &.aa-tabs-view__block--active {
       padding-top: 0;
       .aa-tabs-view__block-title {
         padding-top: 0.3em + 0.3em;

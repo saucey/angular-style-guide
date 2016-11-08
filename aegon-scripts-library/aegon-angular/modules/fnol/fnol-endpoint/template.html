@@ -1,11 +1,87 @@
-<!--redirection-->
-<div class="fnol-url-pass-button" *ngIf="data.type === 'redirect'">
+<div class="fnol-endpoint">
+    <!--redirection-->
+    <div class="fnol-url-pass-button" *ngIf="endpoint.type === 'redirect'">
 
-    <button class="button white arrow" (click)="setActiveById(data.data.category)">Ga verder bij {{data.data.label}}
-    </button>
+        <button class="button white arrow fnol-endpoint__button fnol-endpoint__button--redirect"
+                (click)="setActiveById(endpoint.data.category)">Ga verder bij
+            {{endpoint.data.label}}
+        </button>
 
-</div>
+    </div>
 
-<div *ngIf="data.type !== 'redirect'">
-    <pre>{{ data | json }}</pre>
+    <div *ngIf="endpoint.type === 'generic'">
+        <div class="messages messages--attention visible">
+            <div class="wrap">
+                <div class="header">
+                    {{ endpoint.data.title }}
+                </div>
+
+                <p>{{ endpoint.data.description }}</p>
+
+                <div *ngIf="endpoint.data.alert" class="fnol-endpoint__alert">
+                    <span class="icon-tip fnol-endpoint__alert-icon"></span>
+                    Het is belangrijk dat u ook het Europees Schadeformulier invult en opstuurt. Nog niet gedaan?
+                    <a href="https://www.aegon.nl/file/8143/download?token=4wCIqCX_">Download het formulier</a> of
+                    <a href="https://www.mobielschademelden.nl">gebruik de schade-app</a> van het Verbond van Verzekeraars.
+                </div>
+
+                <div class="row-fluid">
+
+                    <div class="span5">
+                        <div>
+                            <a *ngIf="endpoint.data.button.url" [href]="endpoint.data.button.url"
+                               class="button orange arrow fnol-endpoint__button">Melt Direct</a>
+                            <a *ngIf="endpoint.data.button.phone"
+                               class="button orange icon-call fnol-endpoint__button">Bel {{ endpoint.data.button.phone }}</a>
+                        </div>
+                        <div *ngIf="endpoint.data.button.phone" >24/7 bereikbaar</div>
+                    </div>
+
+                    <div class="span7" *ngIf="endpoint.data.list">
+                        <span>{{ endpoint.data.list.title }}</span>
+                        <ul class="check bullets-white">
+                            <li *ngFor="let item of endpoint.data.list.items">{{ item }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ul class="arrow" *ngIf="endpoint.data.bottomLink">
+            <li><a [href]="endpoint.data.bottomLink.url">{{ endpoint.data.bottomLink.text }}</a></li>
+        </ul>
+    </div>
+
+    <div *ngIf="endpoint.type === 'auto'">
+        <div class="messages messages--attention visible">
+            <div class="wrap">
+                <div class="header">
+                    {{ endpoint.data.title }}
+                </div>
+
+                <p>{{ endpoint.data.description }}</p>
+
+                <p>
+                    Politie: bel <strong>0900 88 33</strong><br>
+                    Verzekeringsbureau Voertuigcriminaliteit (VBV): bel <strong>071 - 364 17 77</strong><br>
+                    Aegon: bel <strong>088 - 344 12 34</strong><br>
+                </p>
+
+
+                <strong>Vervangende auto</strong>
+                <div class="row-fluid">
+
+                    <div class="span7">
+                        <p>Met een all-risk autoverzekering van Aegon heeft u recht op een tijdelijke vervangende auto. Ga hiervoor naar een bij Aegon aangesloten schadehersteller bij u in de buurt. </p>
+                    </div>
+
+                    <div class="span5">
+                        <a href="#" class="button orange arrow fnol-endpoint__button">
+                            Vind schadehersteller
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>

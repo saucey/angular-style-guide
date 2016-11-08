@@ -21,7 +21,7 @@ export class FNOLEndpointComponent extends AABaseComponent {
 
     @Input() id: string;
 
-    data: Endpoint;
+    endpoint: Endpoint;
 
     constructor(private elementRef: ElementRef,
                 private fnolDataService: FNOLDataService,
@@ -38,7 +38,7 @@ export class FNOLEndpointComponent extends AABaseComponent {
     }
 
     ngOnInit() {
-        this.data = this.fnolDataService.getEndpoint(this.id)
+        this.endpoint = this.fnolDataService.getEndpoint(this.id)
     }
 }
 
