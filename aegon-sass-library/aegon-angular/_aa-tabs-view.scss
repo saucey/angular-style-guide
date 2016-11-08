@@ -43,7 +43,10 @@
 
   .aa-tabs-view-item__content {
     background: $aaTabsBlue;
-    padding: 2.5em;
+    padding: 0.5em;
+    @media screen and (min-width: $rc-m-min-width) {
+      padding: 2.5em;
+    }
   }
 
   .aa-tabs-view-item__title {
@@ -100,26 +103,26 @@
     &:nth-child(n+2) {
       box-shadow: 0 1px 0 0 $aaTabsBlue inset, -1px 0 0 0 $aaTabsBlue inset, 0 -1px 0 0 $aaTabsBlue inset;
 
-      &.active:before {
+      &.aa-tabs-view__block--active:before {
         padding: 0 1px 0 0;
         transform: translate(-1px, -5px);
       }
     }
 
-    &.active {
+    &.aa-tabs-view__block--active {
       background: $aaTabsBlue;
       box-shadow: none !important;
-    }
 
-    &.active:before {
-      content: '';
-      background: $aaTabsBlue;
-      width: 100%;
-      height: 5px;
-      display: block;
-      transform: translateY(-5px);
-      position: absolute;
-      box-sizing: initial;
+      &:before {
+        content: '';
+        background: $aaTabsBlue;
+        width: 100%;
+        height: 5px;
+        display: block;
+        transform: translateY(-5px);
+        position: absolute;
+        box-sizing: initial;
+      }
     }
 
     .aa-tabs-view__block-icon {
@@ -198,7 +201,7 @@
       background: $bg3;
     }
 
-    &.active {
+    &.aa-tabs-view__block--active {
       padding-top: 0;
       .aa-tabs-view__block-title {
         padding-top: 0.3em + 0.3em;
