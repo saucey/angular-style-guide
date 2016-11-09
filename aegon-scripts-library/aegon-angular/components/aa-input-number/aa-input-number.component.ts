@@ -111,8 +111,8 @@ export class AAInputNumberComponent implements ControlValueAccessor {
       return;
     }
 
-    if (event.srcElement['value']) {
-      let value = libFormat.parseNumber(event.srcElement['value']);
+    if (event.target.value) {
+      let value = libFormat.parseNumber(event.target.value);
       if (this.max && value >= this.max && kc >= 48 && kc <= 57) {
         // The value is already at its maximum, so don't allow input.
         event.preventDefault();
@@ -120,10 +120,15 @@ export class AAInputNumberComponent implements ControlValueAccessor {
       }
     }
 
-    if ((kc > 57 && kc < 96) || kc > 105 ) {
+    if ((kc > 57 && kc < 96) || kc > 105 || (event.shiftKey || event.altKey || event.ctrlKey) ) {
       // No numeric char, so cancel.
       event.preventDefault();
       return;
-    }
+    } 
+
+    //Fix for whitespaces
+    try {
+      event.target.value = event.target.value.replace(/^\s+|\s+$/g, "");
+    } catch(e) {}
   }
 }
