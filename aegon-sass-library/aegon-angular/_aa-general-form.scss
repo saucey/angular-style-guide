@@ -202,6 +202,10 @@ h2 {
     line-height: 1em;
     margin-bottom: 15px;
     display: block;
+
+    @media (max-width: 640px) {
+      font-size: 22px;
+    }
   }
 }
 
