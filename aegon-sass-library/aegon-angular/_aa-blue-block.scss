@@ -121,7 +121,10 @@
 
 		.aa-bb--content-value {
 			font-size: 22px;
-			text-align: right;
+
+			@media (min-width: 641px) {
+				text-align: right;			
+			}
 		}
 	}
 
