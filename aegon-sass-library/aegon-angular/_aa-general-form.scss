@@ -159,22 +159,27 @@ label.radio {
         //border: 1px solid red;
       }
     }
+
     > input[type="radio"] {
       &:checked + span.radio,
       &:checked + input[type="hidden"] + span.radio,
       &:checked ~ span.radio {
         background-color: white;
       }
+
       & + span.radio,
       & + input[type="hidden"] + span.radio,
-      & ~ span.label-text {
-        float: left;
+      & ~ span.label-text {        
         font-weight: 200;
       }
+
       & ~ span.label-text {
-        margin-top: -7px;
-        margin-left: 20px;
+        display: block;
+        padding-left: 20px;
+        position: relative;
+        top: -24px;
       }
+
       & ~ span.radio {
         background-color: white;
       }
