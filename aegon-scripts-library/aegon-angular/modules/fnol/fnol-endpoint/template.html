@@ -33,6 +33,8 @@
                                class="button orange arrow fnol-endpoint__button">Melt Direct</a>
                             <a *ngIf="endpoint.data.button.phone"
                                class="button orange icon-call fnol-endpoint__button">Bel {{ endpoint.data.button.phone }}</a>
+                            <a *ngIf="endpoint.data.button.repairShop"
+                               class="button orange arrow fnol-endpoint__button">Vind schadehersteller</a>
                         </div>
                         <div *ngIf="endpoint.data.button.phone" >24/7 bereikbaar</div>
                     </div>
