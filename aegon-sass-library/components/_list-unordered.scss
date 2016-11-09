@@ -50,6 +50,10 @@ ul li.minus {
 }
 
 
+ul.bullets-white li:before {
+  color: $white;
+}
+
 ul.bullet li:before {
   left: -22px;
   font-family: $font_bold;

@@ -1,13 +1,19 @@
 import { Injectable, Optional } from "@angular/core";
-import { Endpoint, Question, Category } from "../models";
+import { Endpoint, Question, Category, FAQItem } from "../models";
 
 type Questions = Array<Question>;
 type Endpoints = Array<Endpoint>;
 type Categories = Array<Category>;
+type FAQItems = Array<FAQItem>;
+
+interface FAQItemsObject {
+    [categoryId: string]: FAQItem[];
+}
 
 const QUESTIONS_DATA: Questions = require('../datasets/questions.json');
 const ENDPOINTS_DATA: Endpoints = require('../datasets/endpoints.json');
 const CATEGORIES_DATA: Categories = require('../datasets/categories.json');
+const FAQ_ITEMS_DATA: FAQItemsObject = require('../datasets/faq.json');
 
 @Injectable()
 export class FNOLDataService {
@@ -15,6 +21,7 @@ export class FNOLDataService {
     questions: Questions;
     categories: Categories;
     endpoints: Endpoints;
+    faqItems: FAQItemsObject;
 
     // Inject external data sources that can be mocked for unit tests
     constructor(@Optional() questions: Questions,
@@ -24,6 +31,7 @@ export class FNOLDataService {
         this.questions = questions || QUESTIONS_DATA;
         this.endpoints = endpoints || ENDPOINTS_DATA;
         this.categories = categories || CATEGORIES_DATA;
+        this.faqItems =  FAQ_ITEMS_DATA;
     }
 
     // Get element from collection by its id
@@ -43,6 +51,10 @@ export class FNOLDataService {
         return this.endpoints;
     }
 
+    getAllFAQItems(): FAQItemsObject{
+        return this.faqItems;
+    }
+
     getQuestion(id: string): Question {
         return this.getById<Question>(this.questions, id);
     }
@@ -53,6 +65,10 @@ export class FNOLDataService {
 
     getCategory(id: string): Category {
         return this.getById<Category>(this.categories, id);
+    }
+
+    getFAQItems(categoryId: string): FAQItems {
+        return this.faqItems[categoryId];
     }
 
     getStep(id: string) : Question | Endpoint {

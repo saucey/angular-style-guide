@@ -8,7 +8,7 @@
 <div class="fnol-category__questions">
     <div class="fnol-category__question" *ngFor="let step of steps; trackBy:trackById; let i = index">
         <div *ngIf="step.type === 'question'">
-            <label>{{step.title}}</label>
+            <span class="fnol-category__question__title">{{step.title}}</span>
 
             <div *ngFor="let option of step.options">
                 <aa-input-radio [name]="'fnol-question' + step.id"
