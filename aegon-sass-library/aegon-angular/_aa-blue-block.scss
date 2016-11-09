@@ -109,6 +109,9 @@
 		.aa-bb--content-title {
 			color: $white;
 			margin: 14px 0;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
 		}
 		
     .aa-bb--content-label {
@@ -125,6 +128,10 @@
 			@media (min-width: 641px) {
 				text-align: right;			
 			}
+
+			@media (min-width: 641px) and (max-width: 767px) {
+				font-size: 16px;
+			}						
 		}
 	}
 
@@ -134,11 +141,22 @@
    */
 
 	.aa-bb--footer {
+    bottom: 15px;
+		left: 15px;
 		position: absolute;
-    		bottom: 15px;
+		right: 15px;
+		
 		.button {
 			font-weight: bold;
+			overflow: hidden;
 			padding-right: 70px;
+			text-overflow: ellipsis;
+			white-space: nowrap;			
+
+			@media (max-width: 767px) {
+				display: block;
+				width: 100%;
+			}				
 		}
 
 		.aa-bb--caption {
