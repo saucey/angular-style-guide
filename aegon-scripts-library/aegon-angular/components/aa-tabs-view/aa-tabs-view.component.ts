@@ -32,6 +32,8 @@ export class AATabsViewComponent extends AABaseComponent implements AfterContent
     @Input() options: any = {};
     @Input() theme: string = 'square-blue';
     @ContentChildren(AATabsViewItemComponent) tabs;
+    
+    private changeCallbacks: Array<Function> = [];
 
     name = 'AATabsViewComponent';
 
@@ -40,7 +42,7 @@ export class AATabsViewComponent extends AABaseComponent implements AfterContent
         super(elementRef);
     }
 
-    setActive(tab: AATabsViewItemComponent) {
+    public setActive(tab: AATabsViewItemComponent) {
         this.active = tab.id;
         this.activeIndex = this.tabs.toArray().indexOf(tab) + 1;
         this.onActiveStateChange(tab);
@@ -50,13 +52,20 @@ export class AATabsViewComponent extends AABaseComponent implements AfterContent
         this.setActive(this.tabs.filter(el => el.id === id)[0])
     }
 
-    onActiveStateChange(tab) {
+    public onActiveStateChange(tab) {
 
         this.tabs.forEach((tab: AATabsViewItemComponent) => tab.setInactive());
         tab.setActive();
+        
+        this.changeCallbacks.forEach(func => func(tab));
+    }
+    
+    // Add callback to be notified about tab changes
+    public onTabChange(callback: Function): void {
+        this.changeCallbacks.push(callback);
     }
 
-    ngAfterContentInit() {
+    public ngAfterContentInit() {
 
         if (this.active) {
             this.setActiveById(this.active);

@@ -6,13 +6,6 @@
 
     <div class="aa-block-graph__space" [style.height.%]="100 - sumHeights(column.bars)"></div>
 
-    <!--<div class="aa-block-graph__space" [style.height.%]="100 - sumHeights(column.bars) - (data.subgraph ? 20 : 0)"></div>-->
-
-    <!--<div class="aa-block-graph__bar sub-chart" *ngIf="data.subgraph" [style.height.%]="20">-->
-      <!--<wia-calculator-graph [data]="subgraph"></wia-calculator-graph>-->
-    <!--</div>-->
-
-
     <div class="aa-block-graph__bar" *ngFor="let bar of column.bars; trackBy:trackById"
          [style.height.%]="bar.percentage">
       <div class="aa-block-graph__bar-block">

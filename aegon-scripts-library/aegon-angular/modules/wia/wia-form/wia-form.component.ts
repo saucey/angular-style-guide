@@ -69,8 +69,8 @@ export class WiaFormComponent extends AABaseComponent implements OnInit {
 
 
     // Form filled or personalization code sent => form submitted
-    this.wiaSubscriptionService.subscribe(() => {
-      this.submitted = true;
+    this.wiaSubscriptionService.externalInput$.subscribe((value) => {
+      this.submitted = !!value;
     });
 
   }
