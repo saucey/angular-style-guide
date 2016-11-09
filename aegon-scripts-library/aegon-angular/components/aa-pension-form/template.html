@@ -39,7 +39,9 @@
                           </span>
                         </div>
 
-                        <button class="arrow button" type="button" (click)="goTo(1,2)" [disabled]="isValidAmount()">{{data.options.block1.box.btn}}</button>
+                        <button *ngIf="!pension.sessionSet" class="arrow button" type="button" (click)="goTo(1,2)" [disabled]="isValidAmount()">{{data.options.block1.box.btn}}</button>
+
+                        <button *ngIf="pension.sessionSet" class="button icon-right icon-calculator" type="button" (click)="submitForm(pension); visibility[1] = 'hidden'" [disabled]="isValidAmount()">{{data.options.block5.box.btn}}</button>
 
                       </div>
                       <div class="col form-text__column">
@@ -100,8 +102,12 @@
                   <span class="label-text">{{data.options.block2.box.label3}}</span>
                 </label>
               </div>
-              <button class="arrow button" type="button" (click)="goTo(2,3)" [disabled]="!pension['pensionLocation']">{{data.options.block2.box.btn}}</button>
-          </div>
+
+              <button *ngIf="!pension.sessionSet" class="arrow button" type="button" (click)="goTo(2,3)" [disabled]="!pension['pensionLocation']">{{data.options.block2.box.btn}}</button>
+
+              <button *ngIf="pension.sessionSet" class="button icon-right icon-calculator" type="button" (click)="submitForm(pension); visibility[2] = 'hidden'" [disabled]="!pension['pensionLocation']">{{data.options.block5.box.btn}}</button>
+
+            </div>
         </div>
 
       </li>
@@ -141,12 +147,6 @@
               <span>Geboortedatum partner: {{sessionPartnerDob| dateToReadableString}}</span>
             </span>
 
-
-
-            <!--<p>{{initChangeNoPolicy}} | has partner, doesnt want to offer insurance</p>-->
-
-            <!--<h1>{{pension['birthDateOfPartner']}}</h1>-->
-            <!--<span class="edit" (click)="editSection(3)"> > Aanpassen</span>-->
             <ul class="arrow" (click)="editSection(3)">
               <li><span>Aanpassen</span></li>
             </ul>
@@ -222,7 +222,9 @@
                             </div>
                         </div>
                         <div>
-                          <button class="arrow button" type="button" (click)="goTo(3,4)" [disabled]="btnValidationForUserPartner()">{{data.options.block3.box.btn}}</button>
+                          <button *ngIf="!pension.sessionSet" class="arrow button" type="button" (click)="goTo(3,4)" [disabled]="btnValidationForUserPartner()">{{data.options.block3.box.btn}}</button>
+
+                          <button *ngIf="pension.sessionSet" class="button icon-right icon-calculator" type="button" (click)="submitForm(pension); visibility[3] = 'hidden'" [disabled]="btnValidationForUserPartner()">{{data.options.block5.box.btn}}</button>
                         </div>
                       </div>
                       <div class="col form-text__column">
@@ -282,7 +284,9 @@
 
                         </div>
 
-                        <button class="arrow button" type="button" (click)="goTo(4,5)" [disabled]="btnValidationForUser()">{{data.options.block4.box.btn}}</button>
+                        <button *ngIf="!pension.sessionSet" class="arrow button" type="button" (click)="goTo(4,5)" [disabled]="btnValidationForUser()">{{data.options.block4.box.btn}}</button>
+
+                        <button *ngIf="pension.sessionSet" class="button icon-right icon-calculator" type="button" (click)="submitForm(pension); visibility[4] = 'hidden'" [disabled]="btnValidationForUser()">{{data.options.block5.box.btn}}</button>
                       </div>
                       <div class="col form-text__column">
                           <span class="form-text__icon icon-calendar-date-2"></span>
