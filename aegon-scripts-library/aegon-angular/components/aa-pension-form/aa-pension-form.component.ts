@@ -38,7 +38,7 @@ const monthLabels: string[] = [
   ]
 })
 
-export class AAPensionFormComponent extends AABaseComponent implements OnInit, AfterViewInit {
+export class AAPensionFormComponent extends AABaseComponent implements OnInit{
 
   @Input() options: any = {};
   @Input() data: any = {};
@@ -123,7 +123,6 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit, A
         label = '1 ' + monthLabels[month - 1] + ' ' + year;
       this.startingDateChoices.push({value: value, label: label});
     }
-
   }
 
   changeStartingDate(value: string): void {
@@ -138,14 +137,6 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit, A
   }
 
   editVisibility(val): any {
-
-    // console.log(this.isValidAmount(), 'the amount');
-    // console.log(this.pension['pensionLocation'], 'pension location');
-    // console.log(this.btnValidationForUserPartner(), 'btn validation for user partner');
-    // console.log(this.btnValidationForUser(), 'btn validation for user');
-    // console.log(this.pension['startingDate'], 'the starting date');
-    // console.log(this.pension['pensionLocation'], 'the is valid amount!!!');
-
     if(this.step[val]) return 'hidden';
     return this.visibility[val] == 'show' ? 'hidden' : 'show';
   }
@@ -171,7 +162,7 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit, A
       case 5:
         this.sendTealiumTagging("06", "qq_completed");
         break;
-      
+
       default:
         // no Tealium tagging
         break;
@@ -179,6 +170,8 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit, A
   }
 
   editSection(val): any {
+
+    console.log(val, 'the value of');
 
     // this.bbpage.hidePage();
 
@@ -282,7 +275,12 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit, A
 
     }
 
+    data['sessionSet'] = true;
+
     clientStorage.session.setItem("pensionInfo", data);
+
+    console.log(data,'the new data submitted by session!!!');
+    console.log(this.options.initializeBlueBlocks, 'the options and initalize blue blocks!!1');
 
     if(this.options.initializeBlueBlocks) {
       this.bbpage.initialize();
@@ -315,5 +313,5 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit, A
     aegonTealium(tealiumObj);
 
     console.log("Tealium tag: ", tealiumObj);
-  } 
+  }
 }
