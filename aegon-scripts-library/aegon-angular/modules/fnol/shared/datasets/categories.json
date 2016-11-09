@@ -1,0 +1,37 @@
+[
+  {
+    "id": "possession",
+    "icon": "desktop-phone",
+    "description": "Uw Aegon inboedelverzekering vergoedt schade aan uw spullen zoals uw laptop, telefoon, meubilair of inrichting.<br/>Beantwoord de vragen en ontdek wat u voor uw schade het beste kunt doen.",
+    "title": "Inboedel",
+    "startingStep": "Q_POSSESSION_1"
+  },
+  {
+    "id": "home",
+    "icon": "house",
+    "description": "Uw Aegon opstalverzekering vergoedt schade aan uw huis zoals dak en gevel en dat deel van de inrichting dat vastzit aan uw huis zoals uw keuken of badkamer.<br/><br/>Beantwoord de vragen en ontdek wat u voor uw schade het beste kunt doen.",
+    "title": "Opstal",
+    "startingStep": "Q_HOME_1"
+  },
+  {
+    "id": "auto",
+    "icon": "auto",
+    "description": "Uw Aegon autoverzekering vergoedt schade aan of veroorzaakt met uw auto. Bijvoorbeeld door een ongeluk, inbraak, hagelbui, brand of storm. Wat precies vergoedt wordt is afhankelijk van uw dekking (WA, WA+ of Allrisk).<br/><br/>Beantwoord de vragen en ontdek wat u voor uw schade het beste kunt doen.",
+    "title": "Auto",
+    "startingStep": "Q_AUTO_1"
+  },
+  {
+    "id": "liability",
+    "icon": "schadeverzekeringen",
+    "description": "Uw Aegon verzekering vergoedt schade die u of een medeverzekerde heeft veroorzaakt aan andermans spullen.<br/><br/><strong>Let op</strong>: vraag de benadeelde eerst om de schade te melden op een eigen inboedel- of opstalverzekering. Daar krijgt de benadeelde vaak een hoger bedrag of zelfs de nieuwwaarde vergoed.",
+    "title": "Aansprakelijkheid",
+    "startingStep": "END_LIABILITY_1"
+  },
+  {
+    "id": "travel",
+    "icon": "suitcase",
+    "description": "Uw Aegon reisverzekering vergoedt schade tijdens uw vakantie of de kosten voor bijvoorbeeld annulering of vroegtijdige terugkeer. Ontdek wat u in uw geval het beste kunt doen.",
+    "title": "Reis",
+    "startingStep": "Q_TRAVEL_1"
+  }
+]

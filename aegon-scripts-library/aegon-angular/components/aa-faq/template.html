@@ -1,0 +1,40 @@
+<div>
+  <h2>{{title}}</h2>
+</div>
+
+<div id="faq" class="faq container_12 divider-line">
+  <ul class="horizontal visible questions row-fluid">
+    <!--faq items iteration start-->
+    <li class="field-item" *ngFor="let faq of data">
+      <label class="question">
+        <input type="radio" name="show" value="0"/>
+        <h3 class="title">{{faq.question}}</h3>
+        <div class="line"></div>
+        <div class="answer">
+          <div class="faq-answer-inner">
+            <div>
+              {{faq.answer}}
+            </div>
+          </div>
+          <div class="feedback">
+            <div class="line"></div>
+            <span class="intro">{{faq.feedbackTitle}}</span>
+            <label>
+              <input type="radio" name="feedback" value="1" class="element-hidden" />
+              <span class="thumbs_up">ja</span>
+            </label>
+            <label>
+              <input type="radio" name="feedback" value="0" class="element-hidden"/>
+              <span class="thumbs_down">nee</span>
+            </label>
+            <div class="content">
+              {{faq.feedbackContent}}
+            </div>
+          </div>
+        </div>
+      </label>
+    </li>
+
+    <!--faq items iteration end-->
+  </ul>
+</div>

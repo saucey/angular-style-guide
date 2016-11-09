@@ -2,7 +2,7 @@
  * AOV quick quote
  */
 import {
-  Component, Input, EventEmitter, Output, OnInit, ElementRef, trigger, state, animate, transition, style, SimpleChanges
+  Component, Input, EventEmitter, Output, OnInit, ElementRef, trigger, state, animate, transition, style, SimpleChanges, AfterViewInit
 } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {calculateAge} from "../../lib/date";
@@ -11,6 +11,8 @@ import {calculateAge} from "../../lib/date";
 import {AABaseComponent} from "../../lib/classes/AABaseComponent";
 import {defaultOptions} from "./defaultOptions";
 const template = require('./template.html');
+
+import {aegonTealium} from "../../lib/aegon_tealium";
 
 const monthLabels: string[] = [
   'januari', 'februari', 'maart', 'april', 'mei', 'juni',
@@ -143,6 +145,28 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit{
     this.step[current] = false;
     this.visibility[current] = "hidden";
     this.visibility[next] = "show";
+
+    switch (current) {
+      case 1:
+        this.sendTealiumTagging("02", "qq_start");
+        break;
+      case 2:
+        this.sendTealiumTagging("03", "qq_step_03");
+        break;
+      case 3:
+        this.sendTealiumTagging("04", "qq_step_04");
+        break;
+      case 4:
+        this.sendTealiumTagging("05", "qq_step_05");
+        break;
+      case 5:
+        this.sendTealiumTagging("06", "qq_completed");
+        break;
+
+      default:
+        // no Tealium tagging
+        break;
+    }
   }
 
   editSection(val): any {
@@ -267,5 +291,27 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit{
 
   testMethod(val: number): number {
     return val;
+  }
+
+  ngAfterViewInit() {
+    this.sendTealiumTagging("01", "qq_view");
+  }
+
+  private sendTealiumTagging(_step: string, _event: string) {
+    let tealiumObj: any = {
+      page_cat_1_type: 'quick_quotes',
+      page_cat_2_name: 'berekening',
+      page_cat_3_section: "particulier",
+      page_cat_4_productgroup: 'pensioen',
+      page_cat_5_product: "direct_ingaand_pensioen_berekenen",
+      product_name: ['direct_ingaand_pensioen_berekenen'],
+      product_category: ['pensioen'],
+      page_step: _step,
+      event: _event
+    }
+
+    aegonTealium(tealiumObj);
+
+    console.log("Tealium tag: ", tealiumObj);
   }
 }

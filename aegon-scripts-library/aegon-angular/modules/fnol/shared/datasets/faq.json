@@ -1,0 +1,122 @@
+{
+  "possession": [
+    {
+      "title":"FAQ Title",
+      "question":"possession 01?",
+      "answer":"Answer01",
+      "feedbackTitle":"feedback Title 01",
+      "feedbackContent":"feedback Content 01"
+    },
+
+    {
+      "question":"possession 02?",
+      "answer":"Answer02",
+      "feedbackTitle":"feedback Title 02",
+      "feedbackContent":"feedback Content 02"
+
+    },
+
+    {
+      "question":"possession 03?",
+      "answer":"Answer03",
+      "feedbackTitle":"feedback Title 03",
+      "feedbackContent":"feedback Content 03"
+    }
+  ],
+  "home": [
+    {
+      "title":"FAQ Title",
+      "question":"Home 01?",
+      "answer":"Answer01",
+      "feedbackTitle":"feedback Title 01",
+      "feedbackContent":"feedback Content 01"
+    },
+
+    {
+      "question":"Home 02?",
+      "answer":"Answer02",
+      "feedbackTitle":"feedback Title 02",
+      "feedbackContent":"feedback Content 02"
+
+    },
+
+    {
+      "question":"Home 03?",
+      "answer":"Answer03",
+      "feedbackTitle":"feedback Title 03",
+      "feedbackContent":"feedback Content 03"
+    }
+  ],
+  "auto": [
+    {
+      "title":"Veelgestelde vragen autoschade",
+      "question":"Wat is er gedekt onder de autoverzekering?",
+      "answer":"Answer01",
+      "feedbackTitle":"feedback Title 01",
+      "feedbackContent":"feedback Content 01"
+    },
+
+    {
+      "question":"Heeft mijn schade effect op mijn schade vrije jaren?",
+      "answer":"Answer02",
+      "feedbackTitle":"feedback Title 02",
+      "feedbackContent":"feedback Content 02"
+
+    },
+
+    {
+      "question":"Hoeveel schade vrije jaren heb ik?",
+      "answer":"Answer03",
+      "feedbackTitle":"feedback Title 03",
+      "feedbackContent":"feedback Content 03"
+    }
+  ],
+  "liability": [
+    {
+      "title":"liability",
+      "question":"liability 01?",
+      "answer":"Answer01",
+      "feedbackTitle":"feedback Title 01",
+      "feedbackContent":"feedback Content 01"
+    },
+
+    {
+      "question":"liability 02?",
+      "answer":"Answer02",
+      "feedbackTitle":"feedback Title 02",
+      "feedbackContent":"feedback Content 02"
+
+    },
+
+    {
+      "question":"liability 03?",
+      "answer":"Answer03",
+      "feedbackTitle":"feedback Title 03",
+      "feedbackContent":"feedback Content 03"
+    }
+  ],
+  "travel": [
+    {
+      "title":"Travel",
+      "question":"travel 01?",
+      "answer":"Answer01",
+      "feedbackTitle":"feedback Title 01",
+      "feedbackContent":"feedback Content 01"
+    },
+
+    {
+      "question":"travel 02?",
+      "answer":"Answer02",
+      "feedbackTitle":"feedback Title 02",
+      "feedbackContent":"feedback Content 02"
+
+    },
+
+    {
+      "question":"travel 03?",
+      "answer":"Answer03",
+      "feedbackTitle":"feedback Title 03",
+      "feedbackContent":"feedback Content 03"
+    }
+  ]
+}

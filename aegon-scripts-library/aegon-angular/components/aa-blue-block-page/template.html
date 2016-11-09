@@ -2,16 +2,38 @@
 
   <div *ngIf="hasTopContent" class="aa-bb-page__topContent">
     <h2>{{data.options.top.title}}</h2> 
-  </div>  
+  </div>
+
+  <div class="container_12 hidden-mobile"> 
+    <div class="row-fluid"> 
+      <div 
+        [ngClass]="{'aa-bb-page__column--hidden': columnLeftIsHidden}"
+        class="aa-bb-page__column span6 span6--block">
+        <div class="aa-bb-page__leftContent">
+          <h3>{{leftContent.title}}</h3>
+          <p>{{leftContent.text}}</p>
+        </div>          
+      </div>
+
+      <div 
+        [ngClass]="{'aa-bb-page__column--hidden': columnRightIsHidden}"
+        class="aa-bb-page__column span6 span6--block">
+        <div class="aa-bb-page__rightContent">
+          <h3>{{rightContent.title}}</h3>
+          <p>{{rightContent.text}}</p>  
+        </div>        
+      </div>  
+    </div> 
+  </div>
 
   <div class="container_12">
     <div class="row-fluid"> 
         <div 
           [ngClass]="{'aa-bb-page__column--hidden': columnLeftIsHidden}"
           class="aa-bb-page__column span6 span6--block">
-          <div class="aa-bb-page__leftContent">
-            <h3>{{data.options.left.title}}</h3>
-            <p>{{data.options.left.text}}</p>
+          <div class="aa-bb-page__leftContent visible-mobile">
+            <h3>{{leftContent.title}}</h3>
+            <p>{{leftContent.text}}</p>
           </div>          
           <ng-content select="[blue-block-left]"></ng-content>
         </div>
@@ -19,9 +41,9 @@
         <div 
           [ngClass]="{'aa-bb-page__column--hidden': columnRightIsHidden}"
           class="aa-bb-page__column span6 span6--block">
-          <div class="aa-bb-page__rightContent">
-            <h3>{{data.options.right.title}}</h3>
-            <p>{{data.options.right.text}}</p>  
+          <div class="aa-bb-page__rightContent visible-mobile">
+            <h3>{{rightContent.title}}</h3>
+            <p>{{rightContent.text}}</p>  
           </div>        
           <ng-content select="[blue-block-right]"></ng-content>
         </div>        

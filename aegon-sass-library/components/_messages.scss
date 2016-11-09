@@ -52,7 +52,10 @@
     }
   }
   &.messages--attention {
-    color: $white;
+    //Fix legacy css styles that makes all "p" and "li" black
+    &, & * {
+      color: $white;
+    }
     background-color: $blue;
     .header {
       margin-bottom: 5px;
@@ -69,6 +72,10 @@
       button {
         display: block;
       }
+    }
+    a {
+      color: $white;
+      font-weight: bold;
     }
   }
   &.messages--functional {

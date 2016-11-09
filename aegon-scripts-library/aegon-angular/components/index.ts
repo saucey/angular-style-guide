@@ -27,3 +27,5 @@ export * from './aa-editable-value/aa-editable-value.component';
 export * from './aa-blue-block/aa-blue-block.component';
 export * from './aa-todos/aa-todos.component';
 export * from './aa-collapsible-topic/aa-collapsible-topic.component';
+export * from './aa-loader/aa-loader.component';
+export * from './aa-faq/aa-faq.component';

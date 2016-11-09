@@ -12,7 +12,7 @@ describe('TopicDescriptionFilterServiceSpec', () => {
   let topicDescriptionFilterService: TopicDescriptionFilterService;
 
   beforeEach(() => {
-     topicDescriptionFilterService = new TopicDescriptionFilterService();
+    topicDescriptionFilterService = new TopicDescriptionFilterService();
   });
 
   it('should match the filters in the default case', () => {
@@ -385,6 +385,227 @@ describe('TopicDescriptionFilterServiceSpec', () => {
 
     let matchUseCase = topicDescriptionFilterService.isDescriptionFiltered(descriptionFilter, wiaInputData);
     expect(matchUseCase).toBeFalsy();
+  });
+
+  it('should not filter the logical and', () => {
+    let descriptionFilter = {
+      "useCase": [
+        "PARTICIPANT"
+      ],
+      "filter": [
+        [
+          "IVA_EXCED",
+          "WGA_EXCED"
+        ],
+        "WGA_AANV_STANDARD"
+      ],
+      "text": ""
+    };
+
+    let wiaInputData = {
+      useCase: WiaInputUseCaseEnum.PARTICIPANT,
+      income: null,
+      products: [
+        {
+          "id": "WGA_EXCED",
+          "label": "WGA-Excedentverzekering",
+          "desc": "",
+          "selected": false,
+          "attrs": []
+        },
+        {
+          "id": "IVA_EXCED",
+          "label": "IVA-Excedentverzekering",
+          "desc": "",
+          "selected": false,
+          "attrs": []
+        }
+      ]
+    };
+
+    let matchUseCase = topicDescriptionFilterService.isDescriptionFiltered(descriptionFilter, wiaInputData);
+    expect(matchUseCase).toBeFalsy();
+  });
+
+  it('should filter the logical and', () => {
+    let descriptionFilter = {
+      "useCase": [
+        "PARTICIPANT"
+      ],
+      "filter": [
+        [
+          "IVA_EXCED",
+          "WGA_EXCED"
+        ],
+        "WGA_AANV_STANDARD"
+      ],
+      "text": ""
+    };
+
+    let wiaInputData = {
+      useCase: WiaInputUseCaseEnum.PARTICIPANT,
+      income: null,
+      products: [
+        {
+          "id": "WGA_EXCED",
+          "label": "WGA-Excedentverzekering",
+          "desc": "",
+          "selected": false,
+          "attrs": []
+        }
+      ]
+    };
+
+    let matchUseCase = topicDescriptionFilterService.isDescriptionFiltered(descriptionFilter, wiaInputData);
+    expect(matchUseCase).toBeTruthy();
+  });
+
+  it('should match the product ids for logical OR', () => {
+    let filters = [
+        'IVA_EXCED',
+        'WGA_EXCED',
+        'WGA_AANV_STANDARD',
+        'WGA_AANV_UPGRADE'
+      ],
+      products = [
+        {
+          "id": "WGA_EXCED",
+          "attrs": []
+        }
+      ];
+
+    let matchedProductIds = topicDescriptionFilterService.areFiltersMatchingTheProducts(filters, products);
+    expect(matchedProductIds).toBeTruthy();
+  });
+
+  it('should match the product ids for logical AND', () => {
+    let filters = [
+        [
+          'IVA_EXCED',
+          'WGA_EXCED'
+        ]
+      ],
+      products = [
+        {
+          "id": "WGA_EXCED",
+          "attrs": []
+        },
+        {
+          "id": "IVA_EXCED",
+          "attrs": []
+        }
+      ];
+
+    let matchedProductIds = topicDescriptionFilterService.areFiltersMatchingTheProducts(filters, products);
+    expect(matchedProductIds).toBeTruthy();
+  });
+
+  it('should match the product ids for OR, not AND', () => {
+    let filters = [
+        [
+          'IVA_EXCED',
+          'WGA_EXCED'
+        ],
+        'WGA_AANV_STANDARD'
+      ],
+      products = [
+        {
+          "id": "WGA_EXCED",
+          "attrs": []
+        },
+        {
+          "id": "WGA_AANV_STANDARD",
+          "attrs": []
+        }
+      ];
+
+    let matchedProductIds = topicDescriptionFilterService.areFiltersMatchingTheProducts(filters, products);
+    expect(matchedProductIds).toBeTruthy();
+  });
+
+  it('should NOT match the product ids for logical AND', () => {
+    let filters = [
+        [
+          'IVA_EXCED',
+          'WGA_EXCED'
+        ]
+      ],
+      products = [
+        {
+          "id": "WGA_EXCED",
+          "attrs": []
+        },
+        {
+          "id": "WGA_AANV_STANDARD",
+          "attrs": []
+        }
+      ];
+
+    let matchedProductIds = topicDescriptionFilterService.areFiltersMatchingTheProducts(filters, products);
+    expect(matchedProductIds).toBeFalsy();
+  });
+
+  it('should NOT match the product ids for logical OR, neither AND', () => {
+    let filters = [
+        [
+          'IVA_EXCED',
+          'WGA_EXCED'
+        ],
+        'WGA_AANV_STANDARD'
+      ],
+      products = [
+        {
+          "id": "WGA_EXCED",
+          "attrs": []
+        },
+        {
+          "id": "WGA_AANV_LIGHT",
+          "attrs": []
+        }
+      ];
+
+    let matchedProductIds = topicDescriptionFilterService.areFiltersMatchingTheProducts(filters, products);
+    expect(matchedProductIds).toBeFalsy();
+  });
+
+  it('should NOT match the product ids for logical OR', () => {
+    let filters = [
+        'IVA_EXCED',
+        'WGA_EXCED',
+        'WGA_AANV_STANDARD'
+      ],
+      products = [
+        {
+          "id": "WGA_AANV_LIGHT",
+          "attrs": []
+        }
+      ];
+
+    let matchedProductIds = topicDescriptionFilterService.areFiltersMatchingTheProducts(filters, products);
+    expect(matchedProductIds).toBeFalsy();
+  });
+
+  it('should NOT match the product ids for logical AND, neither OR', () => {
+    let filters = [
+        [
+          'WGA_AANV_STANDARD',
+          'WGA_EXCED',
+        ],
+        'IVA_EXCED'
+      ],
+      products = [
+        {
+          "id": "WGA_EXCED",
+          "attrs": []
+        },
+        {
+          "id": "WGA_AANV_LIGHT",
+          "attrs": []
+        }
+      ];
+
+    let matchedProductIds = topicDescriptionFilterService.areFiltersMatchingTheProducts(filters, products);
+    expect(matchedProductIds).toBeFalsy();
   });
 
 });

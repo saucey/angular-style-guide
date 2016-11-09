@@ -56,8 +56,8 @@ a.icon-user-link:before {
   content: '\e609';
 }
 
-.icon-uniE610:before {
-  content: '\e610';
+.icon-uniE610:before, .icon-pencil:before {
+  content: $font_icons_pencil;
 }
 
 .icon-uniE611:before {
@@ -78,11 +78,11 @@ a.icon-user-link:before {
 .icon-uniE61A:before {
   content: '\e61a';
 }
-.icon-uniE61B:before {
-  content: '\e61b';
+.icon-uniE61B:before, .icon-broken-window {
+  content: $font_icons_broken_window;
 }
 .icon-uniE629:before {
-  content: '\e629';
+  content: $font_icons_producten;
 }
 .icon-uniE62A {
   content: '\e62a';
@@ -402,7 +402,6 @@ a.menu-5662:before {
 .icon-envelope:before {
   content:$font_icons_envelope;
 }
-
 .block--menu-menu-particulier .content a,
 .block--menu-menu-particulier .content [class*='icon-']:before,
 .home-top-banner .block--menu-menu-particulier .service-item [class*='icon-']{
@@ -427,23 +426,18 @@ a.menu-5662:before {
   float: left;
   width: 76%
 }
-
 .icon-minus:before {
   content: $font_icons_minus;
 }
-
 .icon-whatsapp:before {
   content: $font_icons_whatsapp;
 }
-
 .icon-suitcase:before {
   content: $font_icons_suitcase;
 }
-
 .icon-hammer:before {
   content: $font_icons_hammer;
 }
-
 .icon-verified {
   &:before {
     content: $font_icons_check;
@@ -455,8 +449,36 @@ a.menu-5662:before {
     @include rem('font-size', 12);
   }
 }
-
-
+.icon-desktop-phone:before {
+  content: $font_icons_desktop_phone;
+}
+.icon-house:before {
+  content: $font_icons_house;
+}
+.icon-scale:before {
+  content: $font_icons_scale;
+}
+.icon-paw:before {
+  content: $font_icons_paw;
+}
+.icon-chair:before {
+  content: $font_icons_chair;
+}
+.icon-dotted-car:before {
+  content: $font_icons_dotted_car;
+}
+.icon-broken-car:before {
+  content: $font_icons_broken_car;
+}
+.icon-repair-car:before {
+  content: $font_icons_repair_car;
+}
+.icon-car-crash:before {
+  content: $font_icons_car_crash;
+}
+.icon-auto:before {
+  content: $font_icons_auto;
+}
 // Do not apply icons to old aegon menu.
 // TODO: Refactor menu's in Drupal module 'aegon_menu' to adapt to ATDL.
 .submenu [class*='menu-'][class*='icon-']:before {
