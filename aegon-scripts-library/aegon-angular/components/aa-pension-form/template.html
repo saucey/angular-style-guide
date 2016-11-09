@@ -198,7 +198,7 @@
                                 <span class="general-form__box__head">{{data.options.block3.box.title3}}</span>
 
                                 <div class="inputs birthdate">
-                                  <aa-input-date (modelChange)="validateAge($event, 1, 'partner', 'partner')" [(ngModel)]="pension['birthDateOfPartner']" class="aa-qq-aov__input" [setFocus]="setFocus"></aa-input-date>
+                                  <aa-input-date (modelChange)="validateAge($event, 1, 'partner', 'partner')" [(ngModel)]="pension['birthDateOfPartner']" class="aa-input-date" [setFocus]="setFocus"></aa-input-date>
 
                                   <span class="hint-message__wrapper" *ngIf="userAgeInvalid[1]">
                                     <p class="hint">
@@ -262,7 +262,7 @@
                         <span class="general-form__box__head">{{data.options.block4.box.title}}</span>
 
                         <div class="inputs birthdate">
-                          <aa-input-date (modelChange)="validateAge($event, 2, 'user', 'user')" [(ngModel)]="pension['birthDate']" class="aa-qq-aov__input" [setFocus]="setFocus"></aa-input-date>
+                          <aa-input-date (modelChange)="validateAge($event, 2, 'user', 'user')" [(ngModel)]="pension['birthDate']" class="aa-input-date" [setFocus]="setFocus"></aa-input-date>
 
                           <span class="hint-message__wrapper" *ngIf="userAgeInvalid[2]">
                             <p class="hint">

@@ -100,7 +100,11 @@
 
 
 .inputs.number {
-  input {
+  .aa-input-number {
+    margin-right: 10px;
+  }
+
+  input {    
     width: 180px;
     background-color: white;
   }
@@ -108,7 +112,9 @@
 
 .inputs.birthdate {
   .aa-input-date {
+    margin-right: 10px;
     width: 180px;
+    
     input {
       background-color: white;
     }
