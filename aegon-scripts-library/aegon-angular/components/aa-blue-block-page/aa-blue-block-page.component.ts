@@ -100,6 +100,8 @@ export class AABlueBlockPageComponent extends AABaseComponent implements OnInit 
     if(page === 'pensionForm') { 
       this.hasLink = false;
       this.hasBottomContent = false;
+      this.leftContent = this.data.options.left;
+      this.rightContent = this.data.options.right;       
     }
 
     // DIP page
