@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'aegon_icons';
-  src:  url('fonts/aegon_icons.eot?3gc727');
-  src:  url('fonts/aegon_icons.eot?3gc727#iefix') format('embedded-opentype'),
-    url('fonts/aegon_icons.ttf?3gc727') format('truetype'),
-    url('fonts/aegon_icons.woff?3gc727') format('woff'),
-    url('fonts/aegon_icons.svg?3gc727#aegon_icons') format('svg');
+  src:  url('fonts/aegon_icons.eot?t1qhw4');
+  src:  url('fonts/aegon_icons.eot?t1qhw4#iefix') format('embedded-opentype'),
+    url('fonts/aegon_icons.ttf?t1qhw4') format('truetype'),
+    url('fonts/aegon_icons.woff?t1qhw4') format('woff'),
+    url('fonts/aegon_icons.svg?t1qhw4#aegon_icons') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -249,9 +249,6 @@
 .icon-whatsapp:before {
   content: "\e909";
 }
-.icon-minus:before {
-  content: "\ea0b";
-}
 .icon-broken-window:before {
   content: "\e90a";
 }
@@ -260,5 +257,17 @@
 }
 .icon-huis:before {
   content: "\e90c";
+}
+.icon-minus:before {
+  content: "\ea0b";
+}
+.icon-agenda-thin:before {
+  content: "\e99a";
+}
+.icon-share-thin:before {
+  content: "\ea64";
+}
+.icon-bar-chart-thin:before {
+  content: "\eb5d";
 }
 
