@@ -38,10 +38,8 @@
                             </p>
                           </span>
                         </div>
-
-                        <button *ngIf="!pension.sessionSet" class="arrow button" type="button" (click)="goTo(1,2)" [disabled]="isValidAmount()">{{data.options.block1.box.btn}}</button>
-
-                        <button *ngIf="pension.sessionSet" class="button icon-right icon-calculator" type="button" (click)="submitForm(pension); visibility[1] = 'hidden'" [disabled]="isValidAmount()">{{data.options.block5.box.btn}}</button>
+                        <button *ngIf="!pension.sessionSet" class="arrow button" type="button" (click)="goTo(1,2)" [disabled]="isInValidAmount()">{{data.options.block1.box.btn}}</button>
+                        <button *ngIf="pension.sessionSet" class="button icon-right icon-calculator" type="button" (click)="submitForm(pension); visibility[1] = 'hidden'" [disabled]="isInValidAmount()">{{data.options.block5.box.btn}}</button>
 
                       </div>
                       <div class="col form-text__column">

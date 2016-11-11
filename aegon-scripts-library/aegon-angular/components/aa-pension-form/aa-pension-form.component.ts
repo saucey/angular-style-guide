@@ -171,8 +171,6 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit{
 
   editSection(val): any {
 
-    console.log(val, 'the value of');
-
     // this.bbpage.hidePage();
 
     for (let i = 1; i <= 5; i++) {
@@ -213,7 +211,7 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit{
     return true;
   }
 
-  isValidAmount(): boolean {
+  isInValidAmount(): boolean {
 
     if(this.pension.pensionAmount!== undefined && this.pension.pensionAmount !== 0){
 
@@ -279,9 +277,6 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit{
 
     clientStorage.session.setItem("pensionInfo", data);
 
-    console.log(data,'the new data submitted by session!!!');
-    console.log(this.options.initializeBlueBlocks, 'the options and initalize blue blocks!!1');
-
     if(this.options.initializeBlueBlocks) {
       this.bbpage.initialize();
       this.bbleft.callService();
@@ -312,6 +307,5 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit{
 
     aegonTealium(tealiumObj);
 
-    console.log("Tealium tag: ", tealiumObj);
   }
 }
