@@ -31,8 +31,8 @@ export class ProductAttributesService {
    */
   public findAndReplaceAttributes(topicDescription: WiaTopicDescriptionModel, wiaInput: WIAInputModel): string {
     let inputUseCase = wiaInput.useCase,
-        descriptionText = this.replaceGenericPlaceholders(topicDescription, wiaInput),
-        filters = topicDescription.filter;
+      descriptionText = this.replaceGenericPlaceholders(topicDescription, wiaInput),
+      filters = topicDescription.filter;
 
     if (WiaInputUseCaseEnum.DEFAULT === inputUseCase || WiaInputUseCaseEnum.USER === inputUseCase) {
       return this.removePlaceholdersForDefaultAndUser(descriptionText, filters);
@@ -66,13 +66,7 @@ export class ProductAttributesService {
     let description = descriptionText;
 
     if (description.indexOf('%COV_RATE_IVA_PLACEHOLDER%') != -1) {
-      let found = false;
-      for (let product of products) {
-        if (product.id === 'IVA_EXCED') {
-          found = true;
-          break;
-        }
-      }
+      const found = !!products.find(el => el.id === 'IVA_EXCED');
 
       if (found && useCase === WiaInputUseCaseEnum.PARTICIPANT) {
         description = description.replace('%COV_RATE_IVA_PLACEHOLDER%', '<code> %COVERAGE_RATE_IVA%%</code>');
@@ -82,13 +76,7 @@ export class ProductAttributesService {
     }
 
     if (description.indexOf('%COV_RATE_WGA_PLACEHOLDER%') != -1) {
-      let found = false;
-      for (let product of products) {
-        if (product.id === 'WGA_EXCED') {
-          found = true;
-          break;
-        }
-      }
+      const found = !!products.find(el => el.id === 'WGA_EXCED');
 
       if (found && useCase === WiaInputUseCaseEnum.PARTICIPANT) {
         description = description.replace('%COV_RATE_WGA_PLACEHOLDER%', '<code> %COVERAGE_RATE_WGA%%</code>');
@@ -102,9 +90,9 @@ export class ProductAttributesService {
 
   private handleIvaWgaAanvQuery(descriptionText, products) {
     let hasIva = false,
-        hasWga = false,
-        hasAanv = false,
-        description = '<p>';
+      hasWga = false,
+      hasAanv = false,
+      description = '<p>';
 
     for (let product of products) {
       if (product.id === 'WGA_EXCED') {
@@ -152,7 +140,7 @@ export class ProductAttributesService {
 
   private searchAndReplaceUpgradeQueries(descriptionText, products) {
     let description = descriptionText,
-        hasUpgrade = false;
+      hasUpgrade = false;
 
     for (let product of products) {
       if (product.id === 'WGA_AANV_UPGRADE') {
