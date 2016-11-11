@@ -32,7 +32,7 @@
 }
 
 .form-section__input__results {
-  padding: 10px 30px 10px 20px;
+  padding: 10px 40px 10px 20px;
   background-color: #D9EBF7;
   border-radius: 5px;
   position: relative;
@@ -43,25 +43,40 @@
     font-weight: bold;
     display: block;
   }
+
   ul.arrow {
     position: absolute;
     top: 10px;
     right: 30px;
-    @media all and (max-width: 840px) {
-      right: 10px;
+    
+    @media (max-width: 840px) {
       cursor: pointer;
+      right: 15px;
     }
+
     li {
+
       &::before {
-        @media all and (max-width: 840px) {
-          font-size: 28px;
+        display: inline-block;
+        left: 0;
+        max-height: none;
+        max-width: none;
+
+        @media (max-width: 840px) {
+          font-size: 20px;
         }
+
+        @media (min-width: 841px) {
+          margin-right: 10px;
+        }        
       }
+      
       span {
         cursor: pointer;
         font-weight: normal;
         color: #3395d3;
-        @media all and (max-width: 840px) {
+        
+        @media (max-width: 840px) {
           display: none;
         }
       }
@@ -85,7 +100,11 @@
 
 
 .inputs.number {
-  input {
+  .aa-input-number {
+    margin-right: 10px;
+  }
+
+  input {    
     width: 180px;
     background-color: white;
   }
@@ -93,7 +112,9 @@
 
 .inputs.birthdate {
   .aa-input-date {
+    margin-right: 10px;
     width: 180px;
+    
     input {
       background-color: white;
     }
@@ -138,22 +159,27 @@ label.radio {
         //border: 1px solid red;
       }
     }
+
     > input[type="radio"] {
       &:checked + span.radio,
       &:checked + input[type="hidden"] + span.radio,
       &:checked ~ span.radio {
         background-color: white;
       }
+
       & + span.radio,
       & + input[type="hidden"] + span.radio,
-      & ~ span.label-text {
-        float: left;
+      & ~ span.label-text {        
         font-weight: 200;
       }
+
       & ~ span.label-text {
-        margin-top: -7px;
-        margin-left: 20px;
+        display: block;
+        padding-left: 20px;
+        position: relative;
+        top: -24px;
       }
+
       & ~ span.radio {
         background-color: white;
       }
@@ -176,6 +202,10 @@ h2 {
     line-height: 1em;
     margin-bottom: 15px;
     display: block;
+
+    @media (max-width: 640px) {
+      font-size: 22px;
+    }
   }
 }
 
@@ -188,6 +218,10 @@ h2 {
 ul.number-form__list {
   margin-top: 60px;
 
+  .general-form__box__sub__header {
+    padding-left: 40px;
+  }
+
   .number-form__list__section {
     background-color: white;
     @include rem('margin', 0, 0, 0);
@@ -197,8 +231,6 @@ ul.number-form__list {
 
   .number-form__list__numberCircle {
     position: absolute;
-    left: -40px;
-    z-index: 2000;
     top: -5px;
     border-radius: 50%;
     behavior: url(/sites/all/libraries/PIE/PIE.htc);
@@ -300,22 +332,15 @@ ul.number-form__list {
   }
 }
 
-@media all and (max-width: 840px) {
-
-  .number-form__list__section {
-    .general-form__box__sub__header {
-      margin-left: 5px;
-      display: inline;
-    }
-  }
+@media (max-width: 840px) {
 
   ul.number-form__list {
-    .number-form__list__numberCircle {
-      left: 0px;
-      position: relative;
-      dispLay: inline-block;
+    .general-form__box__sub__header {
+      padding-left: 36px;
+      font-size: 22px;
     }
   }
+
   /* demo 3 */
   .form-element-text__row {
     padding: 0px;
