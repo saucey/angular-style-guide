@@ -108,7 +108,16 @@ export function jsonAttribute(element:any, name: string) : any {
  * @returns {Object} New deep cloned object
  */
 export function clone(obj:any) : any {
+  // if object is a primitive - undefined, null, 0, empty string, just return it
+  if (!obj) {
+    return obj;
+  }
 	return JSON.parse(JSON.stringify(obj));
+}
+
+//Like "ivcisjg4-ysoiv64oi74g"
+export function generateCorrelationId () : string {
+  return Date.now().toString(36) + '-' + (Math.random()*10e18).toString(36);
 }
 
 /**

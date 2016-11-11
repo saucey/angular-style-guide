@@ -1,7 +1,5 @@
 import { Component, Input, ElementRef, OnInit, ViewChild, AfterViewInit } from "@angular/core";
-
 import { AABaseComponent } from "../../../lib/classes/AABaseComponent";
-
 import { CalculatorDataService } from "./wia-calculator-data.service";
 import { defaultOptions } from "./defaultOptions";
 import { WiaPagePersonalizationService } from "../wia-page/wia-page.personalization.service";
@@ -20,7 +18,9 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
   @Input() options: any = {};
   @Input() data: any = {};
 
-  @ViewChild(AATabsViewComponent) tabsView : AATabsViewComponent;
+  public simulationData: any = {};
+
+  @ViewChild(AATabsViewComponent) tabsView: AATabsViewComponent;
 
   public defaultOptions: any = defaultOptions;
   //visible tooltip id
@@ -124,10 +124,10 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
     }
   };
 
-  public externalInput : WIAInputModel;
+  public externalInput: WIAInputModel;
 
-  public graphData : any[] = [];
-  public legendData;
+  public graphData: any[] = [];
+  public legendData = {};
 
   // Ids for tabs view component
   public tabs = {
@@ -168,6 +168,7 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
   }
 
   public updateModel(value: WIAInputModel) {
+    console.log('updateModel', value);
 
     if (!value) {
       this.externalInput = null;
@@ -189,12 +190,18 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
       this.permanentDisability = value.permDisability;
     }
 
-    this.update();
+    const currentInput = this.getCurrentInput();
+
+    this.calculatorDataService.getData(currentInput).subscribe(data => {
+      this.simulationData = data;
+      this.update();
+    });
+
   }
 
   public getCurrentInput(): WIAInputModel {
 
-    const input : WIAInputModel = {
+    const input: WIAInputModel = {
       income: this.externalInput.income,
       useCase: WiaInputUseCaseEnum.USER,
       disability: Math.round(this.disability.value / 10) * 10,
@@ -216,41 +223,45 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
   }
 
   public update() {
-
+    console.log('update');
     const currentInput = this.getCurrentInput();
 
     const code = this.wiaPagePersonalizationService.inputToCode(currentInput);
     this.wiaUrlStateManager.setUrlCode(code);
 
-    this.calculatorDataService.getData(currentInput).subscribe(data => {
+    this.refresh()
+  }
 
-      // prevent crash in case data couldn't be found
-      if (data) {
+  public refresh() {
+    console.log('refresh');
+    console.log('getData', this.simulationData);
 
-        const {graphData, legendData} = data;
+    // prevent crash in case data couldn't be found
+    if (this.simulationData) {
 
-        this.graphData = [
-          {
-            suppressAmountLabels: true,
-            amountAnnual: graphData[0].amount,
-            amountMonthly: graphData[0].amount / 12,
-            columns: [graphData[0], graphData[1]]
-          },
-          {
-            amountAnnual: graphData[2].amount,
-            amountMonthly: graphData[2].amount / 12,
-            columns: [graphData[2]]
-          },
-          {
-            amountAnnual: graphData[3].amount,
-            amountMonthly: graphData[3].amount / 12,
-            columns: [graphData[3]]
-          }
-        ];
+      const {graphData, legendData} = this.simulationData;
 
-        this.legendData = legendData;
-      }
-    })
+      this.graphData = [
+        {
+          suppressAmountLabels: true,
+          columns: [graphData[1], graphData[2]]
+        },
+        {
+          columns: [graphData[3]]
+        },
+        {
+          columns: [graphData[4]]
+        }
+      ];
+
+      console.log(this.graphData);
+
+      this.legendData = {
+        1: legendData.includes(1),
+        2: legendData.includes(2),
+        3: legendData.includes(3)
+      };
+    }
   }
 
   public sliderUpdate(slider, val) {
@@ -271,7 +282,7 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
     this.permanentDisability = !this.permanentDisability;
     this.update();
   }
-  
+
   public getActiveTab(): string {
     if (this.disability.value < 35) {
       return this.tabs.first;
@@ -282,7 +293,7 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
     }
   }
 
-  public goBack () {
+  public goBack() {
     this.wiaSubscriptionService.emit(null);
   }
 

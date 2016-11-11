@@ -1,11 +1,15 @@
 import { Injectable } from "@angular/core";
-import { Http } from "@angular/http";
-import { Observable } from "rxjs/Observable";
+import { Http, URLSearchParams } from "@angular/http";
 import { WIAInputModel } from "../wia-page/models/wia-input.model";
+import { generateCorrelationId } from "../../../lib/util";
 
-const PRODUCTS_METADATA = require('./datasets/components.json');
-const COMPONENT_GROUPS = require('./datasets/componentsGroups.json');
-const MOCKS = require('./datasets/demo.json');
+const SIMULATION_API = '/sites/aegonnl/public_files/simulation.json';
+
+const CATEGORIES_MAP = {
+  Statutory: 1,
+  Salary: 2,
+  Aegon: 3
+};
 
 @Injectable()
 export class CalculatorDataService {
@@ -13,137 +17,109 @@ export class CalculatorDataService {
   constructor(private http: Http) {
   }
 
-  private static extractComponentsFromProducts(products) {
-    return products.map(el => el.components)
-      .reduce(function (a, b) {
-        return a.concat(b);
-      });
-  }
+  parseRawData(input: WIAInputModel, data) {
 
-  // Sort by priority, for the same priority numbers use reverse order
-  private static sortByPriority(items) {
-    return items.reverse().sort((a, b) => a.priority < b.priority);
-  }
-
-  attachMetadata(items) {
-    items.forEach((item: any) => {
-      item.meta = PRODUCTS_METADATA.find(el => el.id === item.id);
+    // sort items based on their category: statutory < salary < aegon
+    data.sort((a, b) => {
+      return CATEGORIES_MAP[a.componentId] < CATEGORIES_MAP[b.componentId];
     });
 
-    return items;
-  }
+    const result = data.reduce((res, item) => {
 
-  parseRawData(data) {
-    // demo only
-    if (!data) {
-      return;
-    }
+      item.id = `${item.componentId}-${item.productId}-${item.benefitId}`;
+      item.category = CATEGORIES_MAP[item.componentId];
+      item.percentage = item.amountYearly / input.income * 100;
 
-    const RES: any = {};
+      res[item.period].bars.push(item);
+      res[item.period].amountYearly += item.amountYearly;
+      res[item.period].amountMonthly += item.amountMonthly;
 
-    data.periods.forEach((val, index) => {
-
-      if (val) {
-
-        RES[index] = {
-          id: index,
-          amount: val.amount,
-          label: val.label,
-          percentage: val.percentage,
-          bars: CalculatorDataService.sortByPriority(
-            this.attachMetadata(CalculatorDataService.extractComponentsFromProducts(val.products))
-          )
-        };
-      } else {
-
-        RES[index] = {
-          amount: 0,
-          percentage: 0,
-          width: 0,
-          bars: []
-        };
+      return res;
+    }, {
+      1: {
+        bars: [],
+        amountYearly: 0,
+        amountMonthly: 0
+      },
+      2: {
+        bars: [],
+        amountYearly: 0,
+        amountMonthly: 0
+      },
+      3: {
+        bars: [],
+        amountYearly: 0,
+        amountMonthly: 0
+      },
+      4: {
+        bars: [],
+        amountYearly: 0,
+        amountMonthly: 0
       }
-
     });
 
-    return RES;
+    console.log('input', input);
+    console.log('results', result);
+    console.log('parseRawData', data);
+
+    return {
+      grouped: result,
+      initial: data
+    }
+  }
+
+ //Get product first attribute which is sent with the simulation request
+  private getProductDynamicAttr (productId: string, input: WIAInputModel): string {
+    const el = input.products.find(el => el.id === productId);
+    return el && el.attrs && el.attrs[0] ? el.attrs[0].value.toString() : 'true';
+  }
+
+  private generateSimulationQueryParams (input: WIAInputModel): URLSearchParams {
+
+    const params: URLSearchParams = new URLSearchParams();
+    params.set('income', input.income.toString());
+    params.set('correlationId', generateCorrelationId());
+
+    input.productsIds.forEach(productId => {
+      params.set(productId, this.getProductDynamicAttr(productId, input));
+    });
+
+    return params;
   }
 
   getData(input: WIAInputModel) {
-    return Observable.of(this.getFromDataset(input))
-      .map(this.parseRawData.bind(this))
-      .map(response => {
-        if (!response) {
-          return;
-        }
+
+    return this.http.get(SIMULATION_API, {
+      search: this.generateSimulationQueryParams(input)
+    })
+      .map(response => response.json())
+      .map(data => this.getFromDataset(input, data))
+      .map(data => this.parseRawData(input, data))
+      .map(({ grouped, initial }) => {
 
         return {
-          graphData: response,
-          legendData: this.getLegendFromGraphData(response)
+          graphData: grouped,
+          legendData: initial.map(el => el.category).filter(this.uniqueValues)
         }
       });
   }
 
-  createOptionsKey(params) {
-    const PRODUCTS = params.products.sort((a, b) => {
-      // sort by string
-      return a.id < b.id ? -1 : 1;
-    }).map(product => {
-      console.log('product.attrs', product.attrs);
-      return [
-        product.id,
-        product.attrs.length ? product.attrs[0].value :  null //@TODO handle attributes dynamically
-      ]
-    });
+  private createOptionsKey({disability, usage = null, permDisability = null} : WIAInputModel) {
 
-    return [
-      params.income,
-      params.disability,
-      params.usage,
-      params.permDisability,
-      PRODUCTS
-    ]
+    return `_${disability}-${usage}-${permDisability}`;
   }
 
-  uniqueValues(value, index, self) {
+  private uniqueValues(value, index, self) {
     return self.indexOf(value) === index;
   }
 
-  getFromDataset(input: WIAInputModel) {
-    const OPTIONS_KEY = JSON.stringify(this.createOptionsKey(input));
-    if (MOCKS[OPTIONS_KEY]) {
-      return MOCKS[OPTIONS_KEY];
+  private getFromDataset(input: WIAInputModel, data) {
+
+    const OPTIONS_KEY = this.createOptionsKey(input);
+    if (data[OPTIONS_KEY]) {
+      return data[OPTIONS_KEY];
     } else {
-      console.error('Couldn\'t find result for key: ' + OPTIONS_KEY, 'in', MOCKS)
+      console.error('Couldn\'t find result for key: ' + OPTIONS_KEY, 'in', data)
     }
-  }
-
-  getLegendFromGraphData(graphData) {
-    const COMPONENTS = [];
-    const ADDED = {};
-
-    [].concat(...Object.keys(graphData).map(key => graphData[key].bars))
-      .filter(el => el.percentage > 0)
-      .forEach(el => {
-        if (!ADDED[el.id]) {
-          ADDED[el.id] = true;
-          COMPONENTS.push(el);
-        }
-      });
-
-    const RES: any = {};
-    const ENABLED_GROUPS = COMPONENTS.map(el => el.meta.type).filter(this.uniqueValues);
-
-    RES.items = COMPONENT_GROUPS.map(el => el.type).filter(type => ENABLED_GROUPS.indexOf(type) > -1).reverse();
-    RES.groups = {};
-
-    ENABLED_GROUPS.forEach(groupId => {
-      RES.groups[groupId] = {
-        items: COMPONENTS.filter(el => el.meta.type === groupId),
-        meta: COMPONENT_GROUPS.find(el => el.type === groupId)
-      };
-    });
-
-    return RES;
   }
 }

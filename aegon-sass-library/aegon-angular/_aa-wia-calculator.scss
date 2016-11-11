@@ -10,9 +10,9 @@ $wiaBreakpoint: 800px;
 
 $wiaCalculatorBgColor: #F2F2F2;
 
-$wiaCalculatorLegendColor1: #D9EBF7;
-$wiaCalculatorLegendColor2: #3395D4;
-$wiaCalculatorLegendColor3: #005996;
+$wiaCalculatorCategory1Color: #D9EBF7;
+$wiaCalculatorCategory2Color: #3395D4;
+$wiaCalculatorCategory3Color: #005996;
 
 
 .wia_graph__legend {
@@ -23,12 +23,6 @@ $wiaCalculatorLegendColor3: #005996;
   margin-top: $wiaGraphLabelHeight + 2*$wiaGraphLabelMargin;
   position: relative;
   text-align: right;
-
-  @media (max-width: $wiaBreakpoint) {
-    float: none;
-    width: 100% !important;
-    height: $wiaChartHeightMobile + $wiaGraphLabelBottomHeight + $wiaGraphLabelMargin;
-  }
 }
 
 .wia_graph {
@@ -36,9 +30,17 @@ $wiaCalculatorLegendColor3: #005996;
   float: left;
   position: relative;
 
-  @media (max-width: $wiaBreakpoint) {
-    float: none;
-    width: 100% !important;
+  .aa-block-graph__bar {
+    &[data-category="1"] .aa-block-graph__bar-block-inner {
+      background: $wiaCalculatorCategory1Color;
+    }
+    &[data-category="2"] .aa-block-graph__bar-block-inner {
+
+      background: $wiaCalculatorCategory2Color;
+    }
+    &[data-category="3"] .aa-block-graph__bar-block-inner {
+      background: $wiaCalculatorCategory3Color;
+    }
   }
 }
 
@@ -145,7 +147,7 @@ $wiaCalculatorLegendColor3: #005996;
   > * {
     display: none;
   }
-  
+
   &.wia_graph__tooltip--active {
     display: block;
   }
@@ -272,18 +274,18 @@ $wiaCalculatorLegendColor3: #005996;
   }
 
   &:nth-child(1):before {
-    background: darken($wiaCalculatorLegendColor3, 10%);
-    border-left-color: $wiaCalculatorLegendColor3;
+    background: darken($wiaCalculatorCategory3Color, 10%);
+    border-left-color: $wiaCalculatorCategory3Color;
   }
 
   &:nth-child(2):before {
-    background: darken($wiaCalculatorLegendColor2, 10%);
-    border-left-color: $wiaCalculatorLegendColor2;
+    background: darken($wiaCalculatorCategory2Color, 10%);
+    border-left-color: $wiaCalculatorCategory2Color;
   }
 
   &:nth-child(3):before {
-    background: darken($wiaCalculatorLegendColor1, 10%);
-    border-left-color: $wiaCalculatorLegendColor1;
+    background: darken($wiaCalculatorCategory1Color, 10%);
+    border-left-color: $wiaCalculatorCategory1Color;
     padding-top: 8px;
   }
 }
@@ -299,7 +301,7 @@ $wiaCalculatorLegendColor3: #005996;
 .wia_calculator__tabs {
   position: relative;
   margin-top: 1em;
-  
+
   .wia_calculator__disability_slider {
     position: absolute;
     width: 100%;

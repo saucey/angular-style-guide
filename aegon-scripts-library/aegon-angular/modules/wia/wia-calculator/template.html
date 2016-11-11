@@ -7,11 +7,12 @@
       <span class="wia_graph__legend__guideline" [class.wia_graph__greyed-out]="showTooltip">Uw salaris</span>
 
       <ul class="wia_graph__legend__items">
-        <li *ngFor="let item of legendData?.items; let i = index"
-            [class.wia_graph__greyed-out]="showTooltip && showTooltip !== i + 4"
-            (mouseenter)='showTooltip = i + 4' (mouseleave)='showTooltip = 0'>
-          {{legendData.groups[item].meta.label}}
-        </li>
+        <li [class.wia_graph__greyed-out]="showTooltip && showTooltip !== 4" *ngIf="legendData[1]"
+            (mouseenter)='showTooltip = 4' (mouseleave)='showTooltip = 0'>Aegon uitkering</li>
+        <li [class.wia_graph__greyed-out]="showTooltip && showTooltip !== 5" *ngIf="legendData[2]"
+            (mouseenter)='showTooltip = 5' (mouseleave)='showTooltip = 0'>Wettelijke uitkering</li>
+        <li [class.wia_graph__greyed-out]="showTooltip && showTooltip !== 6" *ngIf="legendData[3]"
+            (mouseenter)='showTooltip = 6' (mouseleave)='showTooltip = 0'>Loon</li>
       </ul>
 
       <div class="wia_graph__legend__labels" [class.wia_graph__greyed-out]="showTooltip">
@@ -36,12 +37,12 @@
         <div class="wia_graph__bottom_label wia_graph__bottom_label--double">
           <div class="row-fluid">
             <div class="span6">
-              <strong>€{{ graphData[0]?.amountAnnual | money }}</strong>
-              <span>€{{ graphData[0]?.amountMonthly | money }}</span>
+              <strong>€{{ graphData[0]?.columns[0].amountYearly | money:true }}</strong>
+              <span>€{{ graphData[0]?.columns[0].amountMonthly| money }}</span>
             </div>
             <div class="span6">
-              <strong>€{{ graphData[0]?.amountAnnual | money }}</strong>
-              <span>€{{ graphData[0]?.amountMonthly | money }}</span>
+              <strong>€{{ graphData[0]?.columns[1].amountYearly | money:true }}</strong>
+              <span>€{{ graphData[0]?.columns[1].amountMonthly| money }}</span>
             </div>
           </div>
         </div>
@@ -59,8 +60,8 @@
         </div>
 
         <div class="wia_graph__bottom_label">
-          <strong>€{{ graphData[1]?.amountAnnual | money }}</strong>
-          <span>€{{ graphData[1]?.amountMonthly | money }}</span>
+          <strong>€{{ graphData[1]?.columns[0].amountYearly | money:true }}</strong>
+          <span>€{{ graphData[1]?.columns[0].amountMonthly | money:true }}</span>
         </div>
 
       </div>
@@ -77,8 +78,8 @@
         </div>
 
         <div class="wia_graph__bottom_label">
-          <strong>€{{ graphData[2]?.amountAnnual | money }}</strong>
-          <span>€{{ graphData[2]?.amountMonthly | money }}</span>
+          <strong>€{{ graphData[2]?.columns[0].amountYearly | money:true }}</strong>
+          <span>€{{ graphData[2]?.columns[0].amountMonthly| money }}</span>
         </div>
       </div>
 
