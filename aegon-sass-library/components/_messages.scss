@@ -180,8 +180,9 @@
       @include rem("font-size", 30);
     }
     &.messages--generic {
-      @include rem("padding-left", 50);
+      @include rem("padding", 23, 30, 23, 50);
       .icon {
+        top: 19px;
         left: 18px;
         @include rem("font-size", 22);        
         &:before {
