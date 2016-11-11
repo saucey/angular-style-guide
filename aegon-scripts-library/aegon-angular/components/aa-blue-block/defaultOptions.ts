@@ -6,7 +6,11 @@ export const defaultOptions = {
     "label" : "Vraag offerte aan",
     "show" : false,
     "forceShow" : false,
-    "url" : "/"
+    "url" : "/",
+    "saveDataOnClick" : {
+      "enabled" : true,
+      "key" : "pensionProduct"
+    }
   },
   "dipFixed" : [{
       "fixedRowsHeight" : 2,
@@ -115,9 +119,9 @@ export const defaultOptions = {
       "boxContent" : [{"label" : "Levenslang", "reference" : "lifelongPartner"}]
     } 
   ],
-  "template" : "dipFixed",
+  "template" : "vpuVariable",
   "callServiceOnInit" : true,
-  "serviceUrl" : "/services/US_RestGatewayWeb/rest/requestResponse/BS_PENSIOENOVEREENKOMST_ROA/calculate",
+  "serviceUrl" : "/api/vpuVariable",
   "serviceCredentials": "FILL_ME_IN_AA_DATA",
   "serviceErrorHandler" : {
     "enabled" : true,
