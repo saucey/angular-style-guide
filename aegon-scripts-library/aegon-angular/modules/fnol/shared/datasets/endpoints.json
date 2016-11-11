@@ -11,23 +11,23 @@
     "id": "END_POSSESSION_2",
     "type": "generic",
     "data": {
-      "title": "END_POSSESSION_2",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda blanditiis cumque et neque? Consequuntur doloribus error eum, laborum nemo quidem!",
+      "title": "Zo meldt u uw verlies of diefstal",
+      "description": "U bent spullen verloren of ze zijn gestolen. U kunt dit het beste online melden zodra u hiervan aangifte heeft gedaan bij de politie. Het bewijs van aangifte dient u mee te sturen bij uw melding.",
       "list": {
-        "title": "Consectetur adipisicing elit",
+        "title": "Voordelen online melden",
         "items": [
-          "Assumenda blanditiis cumque et neque?",
-          "laborum nemo quidem!",
-          "consectetur adipisicing elit.",
-          "Assumenda blanditiis cumque et neque"
+          "In alle rust zelf uw schade melden",
+          "Geld staat sneller op uw rekening",
+          "Snelle afhandeling"
         ]
       },
       "button": {
-        "phone": "00 00 00 000"
+        "phone": null,
+        "url": "#"
       },
       "bottomLink": {
-        "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-        "url": "http://google.com"
+        "text": "Liever niet online melden? Neem dan contact met ons op",
+        "url": "#"
       }
     }
   },
@@ -35,23 +35,22 @@
     "id": "END_POSSESSION_3",
     "type": "generic",
     "data": {
-      "title": "END_POSSESSION_3",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda blanditiis cumque et neque? Consequuntur doloribus error eum, laborum nemo quidem!",
+      "title": "Zo meldt u uw schade",
+      "description": "Er is iets uit uw inboedel beschadigd en het kan gerepareerd kan worden. U kunt het beste telefonisch contact opnemen met Aegon Schade Service.",
       "list": {
-        "title": "Consectetur adipisicing elit",
+        "title": "Voordelen Aegon Schade Service",
         "items": [
-          "Assumenda blanditiis cumque et neque?",
-          "laborum nemo quidem!",
-          "consectetur adipisicing elit.",
-          "Assumenda blanditiis cumque et neque"
+          "U hoeft zelf geen hersteller te zoeken",
+          "U hoeft niets voor te schieten",
+          "U betaalt minder of geen eigen risico"
         ]
       },
       "button": {
-        "phone": "00 00 00 000"
+        "phone": "088 344 00 00"
       },
       "bottomLink": {
-        "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-        "url": "http://google.com"
+        "text": "Wilt u geen gebruik maken van het herstelnetwerk van Aegon? Meld uw schade dan online.",
+        "url": "#"
       }
     }
 
@@ -60,23 +59,23 @@
     "id": "END_POSSESSION_4",
     "type": "generic",
     "data": {
-      "title": "END_POSSESSION_4",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda blanditiis cumque et neque? Consequuntur doloribus error eum, laborum nemo quidem!",
+      "title": "Zo meldt u uw schade",
+      "description": "Uw spullen zijn onherstelbaar beschadigd. U kunt dit het beste direct online melden.",
       "list": {
-        "title": "Consectetur adipisicing elit",
+        "title": "Voordelen online melden",
         "items": [
-          "Assumenda blanditiis cumque et neque?",
-          "laborum nemo quidem!",
-          "consectetur adipisicing elit.",
-          "Assumenda blanditiis cumque et neque"
+          "In alle rust zelf uw schade melden",
+          "Geld staat sneller op uw rekening",
+          "Snelle afhandeling"
         ]
       },
       "button": {
-        "phone": "00 00 00 000"
+        "phone": null,
+        "url": "#"
       },
       "bottomLink": {
-        "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-        "url": "http://google.com"
+        "text": "Liever niet online melden? Neem dan contact met ons op",
+        "url": "#"
       }
     }
 
@@ -85,23 +84,22 @@
     "id": "END_POSSESSION_5",
     "type": "generic",
     "data": {
-      "title": "END_POSSESSION_5",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda blanditiis cumque et neque? Consequuntur doloribus error eum, laborum nemo quidem!",
+      "title": "Zo meldt u uw schade",
+      "description": "Er is iets uit uw inboedel beschadigd en het kan gerepareerd kan worden. U kunt het beste telefonisch contact opnemen met Aegon Schade Service.",
       "list": {
-        "title": "Consectetur adipisicing elit",
+        "title": "Voordelen Aegon Schade Service",
         "items": [
-          "Assumenda blanditiis cumque et neque?",
-          "laborum nemo quidem!",
-          "consectetur adipisicing elit.",
-          "Assumenda blanditiis cumque et neque"
+          "U hoeft zelf geen hersteller te zoeken",
+          "U hoeft niets voor te schieten",
+          "U betaalt minder of geen eigen risico"
         ]
       },
       "button": {
-        "phone": "00 00 00 000"
+        "phone": "088 344 00 00"
       },
       "bottomLink": {
-        "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-        "url": "http://google.com"
+        "text": "Wilt u geen gebruik maken van het herstelnetwerk van Aegon? Meld uw schade dan online.",
+        "url": "#"
       }
     }
 
@@ -110,98 +108,64 @@
     "id": "END_POSSESSION_6",
     "type": "generic",
     "data": {
-      "title": "END_POSSESSION_6",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda blanditiis cumque et neque? Consequuntur doloribus error eum, laborum nemo quidem!",
+      "title": "Zo meldt u uw schade",
+      "description": "Uw heeft uw schade al laten herstellen. U kunt uw schade het beste direct online melden.",
       "list": {
-        "title": "Consectetur adipisicing elit",
+        "title": "Voordelen online melden",
         "items": [
-          "Assumenda blanditiis cumque et neque?",
-          "laborum nemo quidem!",
-          "consectetur adipisicing elit.",
-          "Assumenda blanditiis cumque et neque"
+          "In alle rust zelf uw schade melden",
+          "Geld staat sneller op uw rekening",
+          "Snelle afhandeling"
         ]
       },
       "button": {
-        "phone": "00 00 00 000"
+        "phone": null,
+        "url": "#"
       },
       "bottomLink": {
-        "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-        "url": "http://google.com"
+        "text": "Liever niet online melden? Neem dan contact met ons op",
+        "url": "#"
       }
     }
 
   },
   {
     "id": "END_HOME_1",
-    "type": "generic",
+    "type": "redirect",
     "data": {
-      "title": "END_HOME_1",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda blanditiis cumque et neque? Consequuntur doloribus error eum, laborum nemo quidem!",
-      "list": {
-        "title": "Consectetur adipisicing elit",
-        "items": [
-          "Assumenda blanditiis cumque et neque?",
-          "laborum nemo quidem!",
-          "consectetur adipisicing elit.",
-          "Assumenda blanditiis cumque et neque"
-        ]
-      },
-      "button": {
-        "phone": "00 00 00 000"
-      },
-      "bottomLink": {
-        "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-        "url": "http://google.com"
-      }
+      "category": "liability",
+      "label": "aansprakelijkheid"
     }
-
   },
   {
     "id": "END_HOME_2",
-    "type": "generic",
+    "type": "redirect",
     "data": {
-      "title": "END_HOME_2",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda blanditiis cumque et neque? Consequuntur doloribus error eum, laborum nemo quidem!",
-      "list": {
-        "title": "Consectetur adipisicing elit",
-        "items": [
-          "Assumenda blanditiis cumque et neque?",
-          "laborum nemo quidem!",
-          "consectetur adipisicing elit.",
-          "Assumenda blanditiis cumque et neque"
-        ]
-      },
-      "button": {
-        "phone": "00 00 00 000"
-      },
-      "bottomLink": {
-        "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-        "url": "http://google.com"
-      }
+      "category": "possession",
+      "label": "inboedel"
     }
-
   },
   {
     "id": "END_HOME_3",
     "type": "generic",
     "data": {
-      "title": "END_HOME_3",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda blanditiis cumque et neque? Consequuntur doloribus error eum, laborum nemo quidem!",
+      "title": "Zo meldt u uw schade",
+      "description": "Uw heeft uw schade al laten herstellen. U kunt uw schade het beste direct online melden.",
       "list": {
-        "title": "Consectetur adipisicing elit",
+        "title": "Voordelen online melden",
         "items": [
-          "Assumenda blanditiis cumque et neque?",
-          "laborum nemo quidem!",
-          "consectetur adipisicing elit.",
-          "Assumenda blanditiis cumque et neque"
+          "In alle rust zelf uw schade melden",
+          "Geld staat sneller op uw rekening",
+          "Snelle afhandeling"
         ]
       },
       "button": {
-        "phone": "00 00 00 000"
+        "phone": null,
+        "url": "#"
       },
       "bottomLink": {
-        "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-        "url": "http://google.com"
+        "text": "Liever niet online melden? Neem dan contact met ons op",
+        "url": "#"
       }
     }
 
@@ -211,12 +175,11 @@
     "type": "generic",
     "data": {
       "title": "Zo meldt u uw schade",
-      "description": "Er is zowel iets beschadigd in uw huis als aan uw huis. U kunt het beste telefonisch contact opnemen met de Aegon Schade Service.",
+      "description": "Voor de schade aan uw huis kunt u het beste telefonisch contact opnemen met het Aegon herstelnetwerk.",
       "list": {
         "title": "Voordelen Aegon Schade Service",
         "items": [
           "U hoeft zelf geen hersteller te zoeken",
-          "De hersteller stelt snel vast of uw schade hersteld kan worden",
           "U hoeft niets voor te schieten",
           "U betaalt minder of geen eigen risico"
         ]
@@ -226,7 +189,7 @@
       },
       "bottomLink": {
         "text": "Wilt u geen gebruik maken van de Aegon Schade Service? Meld uw schade dan online.",
-        "url": "http://google.com"
+        "url": "#"
       }
     }
   },
@@ -242,24 +205,13 @@
     "id": "END_AUTO_2",
     "type": "generic",
     "data": {
-      "title": "END_AUTO_2",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda blanditiis cumque et neque? Consequuntur doloribus error eum, laborum nemo quidem!",
-      "list": {
-        "title": "Consectetur adipisicing elit",
-        "items": [
-          "Assumenda blanditiis cumque et neque?",
-          "laborum nemo quidem!",
-          "consectetur adipisicing elit.",
-          "Assumenda blanditiis cumque et neque"
-        ]
-      },
+      "title": "Zo meldt u uw schade",
+      "description": "U heeft schade waarbij ook persoonlijk letsel is opgetreden. U kunt het beste direct telefonisch contact met ons opnemen.",
+      "list": null,
       "button": {
-        "phone": "00 00 00 000"
+        "phone": "088 344 00 00"
       },
-      "bottomLink": {
-        "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-        "url": "http://google.com"
-      }
+      "bottomLink": null
     }
 
   },
@@ -267,23 +219,23 @@
     "id": "END_AUTO_3",
     "type": "generic",
     "data": {
-      "title": "END_AUTO_3",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda blanditiis cumque et neque? Consequuntur doloribus error eum, laborum nemo quidem!",
+      "title": "Zo meldt u uw schade",
+      "description": "Uw heeft uw schade al laten herstellen. U kunt uw schade het beste direct online melden.",
       "list": {
-        "title": "Consectetur adipisicing elit",
+        "title": "Voordelen online melden",
         "items": [
-          "Assumenda blanditiis cumque et neque?",
-          "laborum nemo quidem!",
-          "consectetur adipisicing elit.",
-          "Assumenda blanditiis cumque et neque"
+          "In alle rust zelf uw schade melden",
+          "Geld staat sneller op uw rekening",
+          "Snelle afhandeling"
         ]
       },
       "button": {
-        "phone": "00 00 00 000"
+        "phone": null,
+        "url": "#"
       },
       "bottomLink": {
-        "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-        "url": "http://google.com"
+        "text": "Liever niet online melden? Neem dan contact met ons op",
+        "url": "#"
       }
     }
 
@@ -292,23 +244,22 @@
     "id": "END_AUTO_4",
     "type": "generic",
     "data": {
-      "title": "END_AUTO_4",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda blanditiis cumque et neque? Consequuntur doloribus error eum, laborum nemo quidem!",
+      "title": "Zo meldt u uw schade",
+      "description": "U heeft schade aan uw auto en die is nog niet gerepareerd. U kunt het beste contact opnemen met een bij Aegon aangesloten schadehersteller. De schadehersteller inventariseert de schade en meldt deze bij Aegon. Vervolgens bepaalt u zelf of u de schade wilt laten herstellen en of u de schade wil claimen.",
       "list": {
-        "title": "Consectetur adipisicing elit",
+        "title": "Voordelen Aegon schadeherstelnetwerk",
         "items": [
-          "Assumenda blanditiis cumque et neque?",
-          "laborum nemo quidem!",
-          "consectetur adipisicing elit.",
-          "Assumenda blanditiis cumque et neque"
+          "Gratis vervangend vervoer",
+          "Altijd een garage bij u in de buurt",
+          "U betaalt minder of geen eigen risico"
         ]
       },
       "button": {
-        "phone": "00 00 00 000"
+        "repairShop": true
       },
       "bottomLink": {
-        "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-        "url": "http://google.com"
+        "text": "Wilt u geen gebruik maken van het herstelnetwerk van Aegon? Meld uw schade dan online.",
+        "url": "#"
       }
     }
 
@@ -317,24 +268,14 @@
     "id": "END_AUTO_5",
     "type": "generic",
     "data": {
-      "title": "END_AUTO_5",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda blanditiis cumque et neque? Consequuntur doloribus error eum, laborum nemo quidem!",
-      "list": {
-        "title": "Consectetur adipisicing elit",
-        "items": [
-          "Assumenda blanditiis cumque et neque?",
-          "laborum nemo quidem!",
-          "consectetur adipisicing elit.",
-          "Assumenda blanditiis cumque et neque"
-        ]
-      },
+      "title": "Zo meldt u uw schade",
+      "description": "U heeft schade waarbij ook persoonlijk letsel is opgetreden. U kunt het beste direct telefonisch contact met ons opnemen.",
+      "list": null,
+      "alert": true,
       "button": {
-        "phone": "00 00 00 000"
+        "phone": "088 344 00 00"
       },
-      "bottomLink": {
-        "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-        "url": "http://google.com"
-      }
+      "bottomLink": null
     }
 
   },
@@ -342,23 +283,24 @@
     "id": "END_AUTO_6",
     "type": "generic",
     "data": {
-      "title": "END_AUTO_6",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda blanditiis cumque et neque? Consequuntur doloribus error eum, laborum nemo quidem!",
+      "title": "Zo meldt u uw schade",
+      "description": "Uw heeft uw schade al laten herstellen. U kunt uw schade het beste direct online melden.",
       "list": {
-        "title": "Consectetur adipisicing elit",
+        "title": "Voordelen online melden",
         "items": [
-          "Assumenda blanditiis cumque et neque?",
-          "laborum nemo quidem!",
-          "consectetur adipisicing elit.",
-          "Assumenda blanditiis cumque et neque"
+          "In alle rust zelf uw schade melden",
+          "Geld staat sneller op uw rekening",
+          "Snelle afhandeling"
         ]
       },
+      "alert": true,
       "button": {
-        "phone": "00 00 00 000"
+        "phone": null,
+        "url": "#"
       },
       "bottomLink": {
-        "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-        "url": "http://google.com"
+        "text": "Liever niet online melden? Neem dan contact met ons op",
+        "url": "#"
       }
     }
 
@@ -368,22 +310,21 @@
     "type": "generic",
     "data": {
       "title": "Zo meldt u uw schade",
-      "description": "@TODO",
+      "description": "U heeft schade aan uw auto en die is nog niet gerepareerd. U kunt het beste contact opnemen met een bij Aegon aangesloten schadehersteller. De schadehersteller inventariseert de schade en meldt deze bij Aegon. Vervolgens bepaalt u zelf of u de schade wilt laten herstellen en of u de schade wil claimen.",
       "list": {
-        "title": "@TODO",
+        "title": "Voordelen online melden",
         "items": [
-          "U @TODO zelf @TODO hersteller te zoeken",
-          "De @TODO stelt snel @TODO of uw schade @TODO kan worden",
-          "U @TODO niets voor te schieten",
-          "U @TODO minder of @TODO eigen risico"
+          "Gratis vervangend vervoer",
+          "Altijd een garage bij u in de buurt",
+          "U betaalt minder of geen eigen risico"
         ]
       },
       "alert": true,
       "button": {
-        "url": "#"
+        "repairShop": true
       },
       "bottomLink": {
-        "text": "Liever... @TODO",
+        "text": "Wilt u geen gebruik maken van het herstelnetwerk van Aegon? Meld uw schade dan online.",
         "url": "#"
       }
     }
@@ -392,24 +333,13 @@
     "id": "END_TRAVEL_1",
     "type": "generic",
     "data": {
-      "title": "END_TRAVEL_1",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda blanditiis cumque et neque? Consequuntur doloribus error eum, laborum nemo quidem!",
-      "list": {
-        "title": "Consectetur adipisicing elit",
-        "items": [
-          "Assumenda blanditiis cumque et neque?",
-          "laborum nemo quidem!",
-          "consectetur adipisicing elit.",
-          "Assumenda blanditiis cumque et neque"
-        ]
-      },
+      "title": "Neem contact met ons op",
+      "description": "Heeft u directe assistentie nodig dan kunt u op elk moment van de dag contact met ons opnemen. Wij helpen u graag verder.",
+      "list": null,
       "button": {
-        "phone": "00 00 00 000"
+        "phone": "008 344 00 00"
       },
-      "bottomLink": {
-        "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-        "url": "http://google.com"
-      }
+      "bottomLink": null
     }
 
   },
@@ -417,23 +347,23 @@
     "id": "END_TRAVEL_2",
     "type": "generic",
     "data": {
-      "title": "END_TRAVEL_2",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda blanditiis cumque et neque? Consequuntur doloribus error eum, laborum nemo quidem!",
+      "title": "Zo meldt u uw schade of claim",
+      "description": "Uw kunt uw schade of claim het beste online aan ons doorgeven.",
       "list": {
-        "title": "Consectetur adipisicing elit",
+        "title": "Voordelen online melden",
         "items": [
-          "Assumenda blanditiis cumque et neque?",
-          "laborum nemo quidem!",
-          "consectetur adipisicing elit.",
-          "Assumenda blanditiis cumque et neque"
+          "In alle rust zelf uw schade melden",
+          "Geld staat sneller op uw rekening",
+          "Snelle afhandeling"
         ]
       },
       "button": {
-        "phone": "00 00 00 000"
+        "phone": null,
+        "url": "#"
       },
       "bottomLink": {
-        "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-        "url": "http://google.com"
+        "text": "Liever niet online melden? Neem dan contact met ons op",
+        "url":   "#"
       }
     }
 
@@ -442,8 +372,8 @@
     "id": "END_LIABILITY_1",
     "type": "generic",
     "data": {
-      "title": "Zo meldt u uw schade",
-      "description": "Uw spullen zijn onherstelbaar beschadigd. U kunt dit het beste direct online melden",
+      "title": "Hoe kunt u het bsete uw schade melden?",
+      "description": "U kunt de veroorzaakte schade het beste online melden.",
       "list": {
         "title": "Voordelen online melden",
         "items": [
@@ -453,13 +383,13 @@
         ]
       },
       "button": {
-        "url": "http://google.com",
+        "url": "#",
         "phone": null
       },
       "alert": null,
       "bottomLink": {
         "text": "Liever niet online melden? Neem dan contact met ons op",
-        "url": "http://google.com"
+        "url": "#"
       }
     }
   }

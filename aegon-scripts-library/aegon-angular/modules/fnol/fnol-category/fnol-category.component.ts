@@ -56,14 +56,19 @@ export class FNOLCategoryComponent implements OnInit {
            })
         });
     }
-    
+
     scrollToLastQuestion () {
-        
+
         const $lastQuestion = this.elementRef.nativeElement.querySelector('.fnol-category__question:last-child');
         const positionFromTop = window.scrollY + $lastQuestion.getClientRects()[0].top;
-        
-        //position of a screen that contains entire lastQuestion element on the bottom of the window
-        const scrollPosition =  positionFromTop - window.innerHeight + $lastQuestion.scrollHeight;
+
+        //mobile view - scroll to beginning of the element
+        let scrollPosition =  positionFromTop;
+
+        if (window.innerHeight > $lastQuestion.scrollHeight) {
+          //position of a screen that contains entire lastQuestion element on the bottom of the window
+          scrollPosition =  positionFromTop - window.innerHeight + $lastQuestion.scrollHeight;
+        }
 
         //scroll only when element is outside of the viewport
         if (scrollPosition > window.scrollY) {

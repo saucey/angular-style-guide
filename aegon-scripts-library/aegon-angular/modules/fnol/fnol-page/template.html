@@ -4,13 +4,23 @@
     <div>
         <h1>Schade melden en declareren</h1>
     </div>
-    <div class="f-item-preview">
+  <div class="f-item-preview visible-mobile">
+    <p>Selecteer uw situatie en lees wat u het beste kunt doen</p>
+  </div>
+    <div class="f-item-preview visible-desktop">
         <p>Bij een ongeluk of schade wilt u goed en snel geholpen worden. Bent u hiervoor verzekerd bij Aegon? Selecteer
             dan hieronder uw verzekering en lees wat u het beste kunt doen.</p>
     </div>
 
+  <!-- for mobile -->
+  <div class="clearfix fnol-mobile-header-wrapper visible-mobile">
+       <div class="fnol-question icon-left icon-tip">Nood ?</div>
+       <div class="fnol-mobile-phone-num">BEL <button class="button icon-right icon-call">070 212 913809</button></div>
+  </div>
 
-    <div class="row-fluid aa-fnol-wrapper">
+
+  <!-- for desktop
+    <div class="row-fluid aa-fnol-wrapper hidden-mobile">
         <div class="span2 header fnol-question icon-left icon-tip pos-rel"><b>Nood ?</b>
             <div class="arrow-right pos-abs"></div>
         </div>
@@ -18,7 +28,19 @@
         <div class="span5 fnol-phone-content">Bel ons direct bij nood of grote schade zoals inbraak, brand, grote
             lekkages, overstroming, letsel of pech op vakantie.
         </div>
+    </div>  -->
+
+  <div class="aa-fnol-wrapper hidden-mobile clearfix">
+    <div class="header fnol-question icon-left icon-tip pos-rel"><b>Nood ?</b>
+      <div class="arrow-right pos-abs"></div>
     </div>
+    <div class="fnol-phone-call">Bel<span class="icon-left icon-call"><b>070 212 913809</b></span></div>
+    <div class="fnol-phone-content">Bel ons direct bij nood of grote schade zoals inbraak, brand, grote
+      lekkages, overstroming, letsel of pech op vakantie.
+    </div>
+  </div>
+
+
 
     <!-- fnol header ends -->
 

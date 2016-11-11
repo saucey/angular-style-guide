@@ -8,22 +8,6 @@
     position: relative;
     @include rem('border-radius', 3);
   }
-  .fnol-question {
-    background-color: $orange;
-    width: 100px;
-    color: $white;
-    font-size: 1.5em;
-    padding: 15px 10px;
-  }
-  .fnol-phone-call {
-    font-size: 1.5em;
-    padding: 15px 30px;
-    color: $blue;
-  }
-  .fnol-phone-content {
-    font-size: .78em;
-    color: $blue;
-  }
   .arrow-right {
     width: 0;
     height: 0;
@@ -81,17 +65,17 @@
       font-weight: 700;
     }
   }
-  
+
   // hide titles of embedded nodes (faqs)
   .node__title {
     display: none;
   }
-  
+
   //hide faq search
   [id^=bc-generic_content-faqs_search] {
     display: none;
   }
-  
+
   //disable voting for the current version
   .question-vote {
     display: none;
@@ -122,19 +106,174 @@
   padding-left: 2em;
 }
 
+//Custom styling of FAQ for FNOL
+
 .fnol-faq {
   margin-top: 2em;
 
   h2 {
     font-size: 1.6em;
-    margin-bottom: -1em;
+    color: #3494d2;
+    margin-bottom: -10px;
   }
 
   .faq .title {
     font-weight: normal;
+    &:after {
+      font-family: $font_icons;
+      font-size: 12px;
+      float: right;
+      transform: rotate(90deg);
+      content: $font_icons_arrow_right_skinny; //$font_icons_arrow_down
+      color: $blue;
+      margin: 7px 20px 0px 0px;
+    }
+  }
+
+  div.line {
+    height: 1px;
+    margin: 10px 0 0 0;
+    padding: 0;
+    border-bottom: 1px solid #cccccc !important;
   }
 
   .faq .field-item {
+    padding: 5px 0 5px 0;
     border-bottom-color: $slightly_darker_grey;
   }
+
+  input {
+    ~ [class^=thumbs_] {
+      color: $darker_grey;
+    }
+    ~ div.line {
+      display: none;
+    }
+    &:checked {
+      ~ [class^=thumbs_] {
+        color: $blue;
+      }
+      + .title {
+        &:after {
+          @include transform(rotate(-90deg) !important);
+        }
+      }
+      ~ .answer, ~ .feedback, ~ div.line {
+        display: block;
+      }
+      ~ .response {
+        display: block;
+      }
+    }
+  }
 }
+
+// mobile ( < 641px )
+@include breakpoint($brk-mobile) {
+
+  .fnol-page {
+    .fnol-question {
+      background-color: $orange;
+      width: 100%;
+      font-size: 1.2em;
+      padding: 10px 10px;
+      color: $white;
+      margin-bottom:10px;
+      text-align: center;
+    }
+    .fnol-mobile-header-wrapper{
+      margin-top:20px;
+      background: #D9EBF7;
+      padding: 10px;
+    }
+    .fnol-mobile-phone-num{
+      margin-left:25px;
+    }
+    .fnol-mobile-left{
+      float:left
+    }
+    .fnol-mobile-right{
+      float:left
+    }
+    .arrow-right {
+      width: 0;
+      border-bottom: 24px solid transparent;
+      height: 0;
+      border-top: 24px solid transparent;
+      border-left: 24px solid $orange;
+      top: 0px;
+      right: -24px;
+    }
+  }
+}
+
+// tablet ( > 640px && < 901px )
+@media screen and (min-width: $rc-m-min-width) and (max-width: $rc-m-max-width) {
+
+  .fnol-page {
+    .fnol-question {
+      background-color: $orange;
+      width: 18%;
+      color: $white;
+      font-size: .9em;
+      padding: 25px 5px;
+      float:left;
+      height: auto;
+    }
+    .fnol-phone-call {
+      font-size: .9em;
+      padding: 15px 0 15px 40px;
+      color: $blue;
+      float:left;
+      width: 42%;
+    }
+    .fnol-phone-content {
+      font-size: .78em;
+      color: $blue;
+      float:left;
+      width: 40%;
+      line-height: 18px;
+      padding-top:10px
+    }
+    .arrow-right {
+      width: 0;
+      height: 0;
+      border-top: 40px solid transparent;
+      border-bottom: 40px solid transparent;
+      border-left: 40px solid $orange;
+      top: -1px;
+      right: -38px;
+    }
+  }
+}
+
+// desktop ( > 900px )
+@include breakpoint($brk-ipad-portrait) {
+  .fnol-page {
+    .fnol-question {
+      background-color: $orange;
+      width: 15%;
+      color: $white;
+      font-size: 1.5em;
+      padding: 15px 10px;
+      float:left;
+      min-width:100px;
+    }
+    .fnol-phone-call {
+      font-size: 1.5em;
+      padding: 15px 0 15px 40px;
+      color: $blue;
+      float:left;
+      width: 36%;
+    }
+    .fnol-phone-content {
+      font-size: .78em;
+      color: $blue;
+      float:left;
+      width: 48%;
+      line-height: 18px;
+      padding-top:10px
+    }
+  }
+}
+
