@@ -1,0 +1,8 @@
+{
+  "filter": [
+    "WGA_AANV_STANDARD",
+    "WGA_AANV_UPGRADE"
+  ],
+  "placeholder": "UPGRADE_QUERY",
+  "text": "<p>Met de WGA-Aanvullingsverzekering%UPGRADE_PLACEHOLDER% krijgt u een uitkering als u volgens het UWV minimaal 35% arbeidsongeschikt bent, maar niet 80% of meer.</p>"
+}

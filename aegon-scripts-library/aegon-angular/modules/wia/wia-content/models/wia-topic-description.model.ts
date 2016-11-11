@@ -6,9 +6,8 @@
  */
 
 export interface WiaTopicDescriptionModel {
-
   useCase?: Array<string>,
   filter: Array<string|Array<string>>,
+  placeholder?: string,
   text: string,
-
 }
