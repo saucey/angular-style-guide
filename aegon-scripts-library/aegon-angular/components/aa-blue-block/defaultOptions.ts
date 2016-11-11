@@ -8,7 +8,7 @@ export const defaultOptions = {
     "forceShow" : false,
     "url" : "/",
     "saveDataOnClick" : {
-      "enabled" : true,
+      "enabled" : false,
       "key" : "pensionProduct"
     }
   },
@@ -119,9 +119,9 @@ export const defaultOptions = {
       "boxContent" : [{"label" : "Levenslang", "reference" : "lifelongPartner"}]
     } 
   ],
-  "template" : "vpuVariable",
+  "template" : "dipFixed",
   "callServiceOnInit" : true,
-  "serviceUrl" : "/api/vpuVariable",
+  "serviceUrl" : "/services/US_RestGatewayWeb/rest/requestResponse/BS_PENSIOENOVEREENKOMST_ROA/calculate",
   "serviceCredentials": "FILL_ME_IN_AA_DATA",
   "serviceErrorHandler" : {
     "enabled" : true,
