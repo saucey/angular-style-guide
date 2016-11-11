@@ -17,12 +17,18 @@ export class AATabsViewItemComponent {
 
     private changeCallback : Function;
 
-    setActive(notifyTabsView : boolean = false) {
-        this.active = true;
+    // if isMobile=true toggle if already active
+    setActive(notifyTabsView: boolean = false, isMobile: boolean = false) {
 
-        if (notifyTabsView) {
-            this.notifyTabsView();
+        if (isMobile && this.active) {
+            this.active = false;
+        } else {
+            this.active = true;
+            if (notifyTabsView) {
+              this.notifyTabsView();
+            }
         }
+
     }
 
     notifyTabsView() {
