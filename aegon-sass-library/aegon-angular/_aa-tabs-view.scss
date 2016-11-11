@@ -154,9 +154,9 @@
 // Square blue theme
 .aa-tabs-view.aa-tabs-view--grey {
 
-  $bg1: $grey;
-  $bg2: darken($grey, 10%);
-  $bg3: darken($grey, 20%);
+  $bg1: #E4E4E4;
+  $bg2: #D7D7D7;
+  $bg3: #C9C9C9;
 
   &[data-active-index="1"] .aa-tabs-view-item__content {
     background: $bg1;
@@ -202,17 +202,18 @@
     }
 
     &.aa-tabs-view__block--active {
-      padding-top: 0;
+      padding-top: 0.05em;
       .aa-tabs-view__block-title {
-        padding-top: 0.3em + 0.3em;
+        padding-top: 0.3em + 0.5em;
       }
     }
   }
 
   .aa-tabs-view__block-title {
-    padding: 0.3em 0;
+    padding: 0.5em 0;
     font-weight: bold;
     text-align: center;
+    font-size: 0.9em;
   }
 }
 
