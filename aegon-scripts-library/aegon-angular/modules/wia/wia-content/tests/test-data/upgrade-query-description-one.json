@@ -1,0 +1,8 @@
+{
+  "filter": [
+    "WGA_AANV_STANDARD",
+    "WGA_AANV_UPGRADE"
+  ],
+  "placeholder": "UPGRADE_QUERY",
+  "text": "<p>WGA-Aanvullingsverzekering%UPGRADE_PLACEHOLDER%.<br /> U kan langere tijd niet of minder werken. Dan komt uw inkomen in gevaar. Het UWV bepaalt hoeveel u nog wél kan werken en wat u daarmee nog kan verdienen. Dit noemen we uw ‘restverdiencapaciteit’. De hoogte van uw uitkering van het UWV hangt af van deze restverdiencapaciteit. En van wat u verdiende voordat u arbeidsongeschikt werd. Met de WGA-Aanvullingsverzekering%UPGRADE_PLACEHOLDER% krijgt u een uitkering als u volgens het UWV minimaal 35% arbeidsongeschikt bent, maar niet 80% of meer.</p>"
+}

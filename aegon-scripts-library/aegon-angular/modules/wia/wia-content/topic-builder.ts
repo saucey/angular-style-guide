@@ -89,8 +89,7 @@ export class TopicBuilder {
         let plainDescription = this
           .productAttributesService
           .findAndReplaceAttributes(
-            description.text,
-            description.filter,
+            description,
             this.wiaInputData
           );
         descriptionList.push(plainDescription);

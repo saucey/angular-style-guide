@@ -1,0 +1,56 @@
+{
+  "useCase": null,
+  "income": null,
+  "products": [
+    {
+      "id": "WGA_AANV_STANDARD",
+      "hidden": true,
+      "attrs": [
+        {
+          "id": "END_AGE",
+          "label": "EindLeeftijd",
+          "value": 65,
+          "visible": false,
+          "options": [
+            {
+              "value": 65,
+              "label": "65%"
+            },
+            {
+              "value": 67,
+              "label": "67%"
+            },
+            {
+              "value": 70,
+              "label": "70%"
+            }
+          ]
+        },
+        {
+          "id": "BENEFIT_INDEX",
+          "label": "Indexering uitkering (Klim_srt)",
+          "value": "Geen",
+          "visible": false,
+          "options": [
+            {
+              "value": "Geen",
+              "label": null
+            },
+            {
+              "value": "CBS",
+              "label": null
+            },
+            {
+              "value": "2%",
+              "label": null
+            },
+            {
+              "value": "3%",
+              "label": null
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
