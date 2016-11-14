@@ -111,7 +111,7 @@
     display: none;
   }
   .messages {
-    @include rem('margin', 10, 10, 35);
+    @include rem('margin', 10, 10, 25);
   }
   h2 {
     position: relative;
