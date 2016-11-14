@@ -28,7 +28,7 @@
                         <div class="inputs number">
 
                           <aa-input-number class="aa-input--euro" #amountInput prefix="€" [(ngModel)]="pension['pensionAmount']" [max]="99999999"
-                                             (focus)="amountTooSmall = false; amountInput.select()" (keyup)="isValidAmount()"
+                                             (focus)="amountTooSmall = false; amountInput.select()" (keyup)="isInValidAmount()"
                                              (enter)="submitAmount()" [placeholder]="'min 25.000'">
                           </aa-input-number>
 
