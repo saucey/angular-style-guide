@@ -327,17 +327,17 @@ export class GenericService {
 	    if (highLow) {
 	      if (s === 'OPLL') {
 	        hlAmount += parseFloat(value);
-	        response.after5YearsMine = "€ " + new AAMoneyPipe().transform(value, []);
+	        response.after5YearsMine = "€ " + new AAMoneyPipe().transform(value, [false, true]);
 	      } else if (s === 'OPT') {
 	        hlAmount += parseFloat(value);
 	      } else if (s === 'PPLL') {
-	        response.lifelongPartner = "€ " + new AAMoneyPipe().transform(value, []);
+	        response.lifelongPartner = "€ " + new AAMoneyPipe().transform(value, [false, true]);
 	      }
 	    } else {
 	      if (s === 'OPLL') {
-	        response.lifelongMine = "€ " + new AAMoneyPipe().transform(value, []);
+	        response.lifelongMine = "€ " + new AAMoneyPipe().transform(value, [false, true]);
 	      } else if (s === 'PPLL') {
-	        response.lifelongPartner = "€ " + new AAMoneyPipe().transform(value, []);
+	        response.lifelongPartner = "€ " + new AAMoneyPipe().transform(value, [false, true]);
 	      }
 	    }
 	  });
