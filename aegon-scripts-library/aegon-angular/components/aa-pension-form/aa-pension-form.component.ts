@@ -54,6 +54,7 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit{
   public amountTooSmall: boolean;
   public message: boolean = false;
   public age: number;
+  public sectionIndex: number;
   public initChangeHasPartner: boolean;
   public initChangeNoPolicy: boolean;
 
@@ -100,6 +101,7 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit{
     5: 'hidden'
   };
 
+
   constructor(
     private elementRef: ElementRef
   ) {
@@ -142,6 +144,9 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit{
   }
 
   goTo(current, next): any {
+
+    this.sectionIndex = next;
+
     this.step[current] = false;
     this.visibility[current] = "hidden";
     this.visibility[next] = "show";
@@ -170,8 +175,38 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit{
   }
 
   editSection(val): any {
+    //set a variable from here to find what index the section is on
+    if(this.sectionIndex == 1) {
+      if(this.isInValidAmount() !== false) {
+        return true;
+      }
+    }
 
-    // this.bbpage.hidePage();
+    if(this.sectionIndex == 2) {
+      if(this.pension['pensionLocation'] == undefined) {
+        return true;
+      }
+    }
+
+    if(this.sectionIndex == 3) {
+      if(this.btnValidationForUserPartner() !== false) {
+        return true;
+      }
+    }
+
+    if(this.sectionIndex == 4) {
+      if(this.btnValidationForUser() !== false){
+        return true;
+      }
+    }
+
+    if(this.sectionIndex == 5) {
+      if(this.pension['startingDate'] == undefined){
+        return true;
+      }
+    }
+
+    this.sectionIndex = val;
 
     for (let i = 1; i <= 5; i++) {
       this.visibility[i] = (val == i) ? 'show' : 'hidden';
