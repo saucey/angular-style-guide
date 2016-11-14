@@ -143,6 +143,9 @@ export class WiaPagePersonalizationService {
     // Permanent disability
     const permDisability = codeChars[2] === 'p';
 
+    // Personalization flag
+    const isPersonalized = codeChars[5] === 'p';
+    
     // Convert character to two digits number
     let WGAIVA = to10(codeChars[3]).toString();
     WGAIVA = WGAIVA.length === 1 ? '0' + WGAIVA : WGAIVA;
@@ -211,7 +214,7 @@ export class WiaPagePersonalizationService {
     }
 
     return {
-      useCase: WiaInputUseCaseEnum.PARTICIPANT,
+      useCase: isPersonalized ? WiaInputUseCaseEnum.PARTICIPANT : WiaInputUseCaseEnum.USER,
       income,
       disability,
       usage,
