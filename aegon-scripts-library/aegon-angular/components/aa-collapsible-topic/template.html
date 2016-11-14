@@ -2,7 +2,16 @@
 
   <h5 class="collapsible-row__title">{{ topicRow.title }}</h5>
 
-  <div class="collapsible-content-icons">
+  <div class="collapsible-row-mobile__actions">
+    <a (click)="showIconsOnMobile(row)">
+      <span class="icon-arrow-down"></span>
+    </a>
+    <a (click)="hideIconsOnMobile()">
+      <span class="icon-arrow-up"></span>
+    </a>
+  </div>
+
+  <div class="collapsible-content-icons" [ngClass]="{'mobile-icons-visible': showMobileIcons(row)}">
     <div class="collapsible-content-icon" *ngFor="let topic of topicRow.topics; let column = index;">
       <a class="collapsible-content-link" (click)="setActiveItem(row, column)">
         <img [src]="topic.image" class="collapsible-content-link__image" width="43" height="43"/>

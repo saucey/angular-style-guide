@@ -57,6 +57,7 @@ export class AACollapsibleTopicComponent implements OnInit {
   };
   public showFullText: boolean = false;
   public visibility: string = 'hidden';
+  public activeMobileRow = null;
 
   /**
    * Sets the active item by row and column
@@ -122,9 +123,31 @@ export class AACollapsibleTopicComponent implements OnInit {
     }
   }
 
-
   ngOnInit(): void {
-
   }
+
+  public showMobileIcons = (row) => {
+    if (row === this.activeMobileRow) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  /**
+   * Shows the icons when on mobile
+   *
+   * @param row
+   */
+  public showIconsOnMobile = (row) => {
+    this.activeMobileRow = row;
+  };
+
+  /**
+   * Hides the icons when on mobile
+   */
+  public hideIconsOnMobile = () => {
+    this.activeMobileRow = null;
+  };
 
 }

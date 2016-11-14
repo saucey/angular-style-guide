@@ -26,6 +26,14 @@
     vertical-align: middle;
   }
 
+  .collapsible-row-mobile__actions {
+    display: none;
+
+    @media screen and(max-width: $rc-m-min-width) {
+      display: block;
+    }
+  }
+
   .collapsible-content-icons {
     display: inline-block;
     float: right;
@@ -52,6 +60,14 @@
 
     .collapsible-content-link__image {
       max-height: $imageSize;
+    }
+
+    @media screen and(max-width: $rc-m-min-width) {
+      display: none;
+
+      &.mobile-icons-visible {
+        display: block;
+      }
     }
   }
 
