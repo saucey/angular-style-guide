@@ -168,7 +168,6 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
   }
 
   public updateModel(value: WIAInputModel) {
-    console.log('updateModel', value);
 
     if (!value) {
       this.externalInput = null;
@@ -223,7 +222,6 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
   }
 
   public update() {
-    console.log('update');
     const currentInput = this.getCurrentInput();
 
     const code = this.wiaPagePersonalizationService.inputToCode(currentInput);
@@ -233,11 +231,9 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
   }
 
   public refresh() {
-    console.log('refresh');
-    console.log('getData', this.simulationData);
 
     // prevent crash in case data couldn't be found
-    if (this.simulationData) {
+    if (this.simulationData && this.simulationData.graphData) {
 
       const {graphData, legendData} = this.simulationData;
 
@@ -254,8 +250,6 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
         }
       ];
 
-      console.log(this.graphData);
-
       this.legendData = {
         1: legendData.includes(1),
         2: legendData.includes(2),
@@ -264,13 +258,13 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
     }
   }
 
-  public sliderUpdate(slider, val) {
+  public sliderUpdate(slider, val, isInTabs = false) {
 
     if (slider.value !== val) {
 
       slider.value = val;
 
-      if (this.tabsView) {
+      if (this.tabsView && isInTabs) {
         this.tabsView.setActiveById(this.getActiveTab());
       }
 

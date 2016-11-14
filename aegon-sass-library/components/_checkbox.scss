@@ -64,9 +64,9 @@ label.checkbox {
     margin-top: 15px; //make space for the error message on top of the checkbox in case one needs to be displayed
   }
 
-  &.checkbox--white {
+  &.checkbox.checkbox.checkbox--white {
     span.checkbox {
-      background: $white !important;
+      background: $white;
     }
   }
 
@@ -79,7 +79,7 @@ label.checkbox {
   }
 }
 // Fix for native android browser.
-@-webkit-keyframes androidNative { 
-  from { fill: 0; } 
-  to { fill: 0.01; } 
+@-webkit-keyframes androidNative {
+  from { fill: 0; }
+  to { fill: 0.01; }
 }
