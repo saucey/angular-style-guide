@@ -33,34 +33,50 @@ export class CalculatorDataService {
       res[item.period].bars.push(item);
       res[item.period].amountYearly += item.amountYearly;
       res[item.period].amountMonthly += item.amountMonthly;
-
+      res[item.period].categoryYearlyAmounts[item.category] += item.amountYearly;
       return res;
     }, {
       1: {
         bars: [],
+        categoryYearlyAmounts: {
+          1: 0,
+          2: 0,
+          3: 0
+        },
         amountYearly: 0,
         amountMonthly: 0
       },
       2: {
         bars: [],
+        categoryYearlyAmounts: {
+          1: 0,
+          2: 0,
+          3: 0
+        },
         amountYearly: 0,
         amountMonthly: 0
       },
       3: {
         bars: [],
+        categoryYearlyAmounts: {
+          1: 0,
+          2: 0,
+          3: 0
+        },
         amountYearly: 0,
         amountMonthly: 0
       },
       4: {
         bars: [],
+        categoryYearlyAmounts: {
+          1: 0,
+          2: 0,
+          3: 0
+        },
         amountYearly: 0,
         amountMonthly: 0
       }
     });
-
-    console.log('input', input);
-    console.log('results', result);
-    console.log('parseRawData', data);
 
     return {
       grouped: result,
