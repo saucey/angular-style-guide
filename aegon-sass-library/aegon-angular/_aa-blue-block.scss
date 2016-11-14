@@ -120,10 +120,17 @@
       &.lighter-label {
 				font-weight: lighter;
 			}
+
+			@media (max-width: 640px) {
+				margin-bottom: 0;
+				min-height: 26px !important;			
+			}			
 		}
 
 		.aa-bb--content-value {
 			font-size: 22px;
+
+			&::first-letter { padding-right: 10px; }
 
 			@media (min-width: 641px) {
 				text-align: right;			
@@ -131,6 +138,8 @@
 
 			@media (min-width: 641px) and (max-width: 767px) {
 				font-size: 16px;
+
+				&::first-letter { padding-right: 0; }
 			}						
 		}
 	}
