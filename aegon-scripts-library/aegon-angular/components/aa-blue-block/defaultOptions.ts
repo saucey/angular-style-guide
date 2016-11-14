@@ -6,7 +6,11 @@ export const defaultOptions = {
     "label" : "Vraag offerte aan",
     "show" : false,
     "forceShow" : false,
-    "url" : "/"
+    "url" : "/",
+    "saveDataOnClick" : {
+      "enabled" : false,
+      "key" : "pensionProduct"
+    }
   },
   "dipFixed" : [{
       "fixedRowsHeight" : 2,

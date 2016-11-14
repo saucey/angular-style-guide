@@ -139,4 +139,57 @@ export class AABlueBlockComponent extends AABaseComponent implements OnInit {
       return !!el.className.match(new RegExp('(\\s|^)' + className + '(\\s|$)'))
   }
 
+  public buttonClickHandler() {
+    if(this.data.options.button.saveDataOnClick.enabled) {
+      clientStorage.session.setItem(this.data.options.button.saveDataOnClick.key, this.buildDataBeforeSave());
+    }
+    return true;
+  }
+
+  private buildDataBeforeSave() {
+    let data: Object = {
+      "template" : this.data.options.template,
+      "values" : this.buildValuesBeforeSave()
+    }
+    return data;
+  }
+
+  private buildValuesBeforeSave() {
+    let valueArray: any = [];
+    let blocks: any = document.querySelectorAll("div[data-bb-template=" +  this.data.options.template + "] .aa-bb--content:not(.hide-block)");
+
+    try {
+      for (let i = 0; i < blocks.length; i++) {
+        let labels: any = blocks[i].querySelectorAll(".aa-bb--content-label:not(.lighter-label)");
+        let blockArray: any = [];
+        for (let y = 0; y < labels.length; y++) {
+           let value: any = labels[y].nextElementSibling;
+           let obj: Object = {
+             "label" : labels[y].textContent
+           };
+           if(this.hasClass(value, "aa-bb--content-value")) {
+             obj["value"] = value.textContent;
+           } else {
+             let subArray: any = [];
+             let subLabels: any = labels[y].parentElement.querySelectorAll(".aa-bb--content-label.lighter-label");
+             let subValues: any = labels[y].parentElement.querySelectorAll(".aa-bb--content-value");
+             for (let j = 0; j < subLabels.length; j++) {
+               subArray.push({
+                 "label" : subLabels[j].textContent,
+                 "value" : subValues[j].textContent
+               });
+             }
+             obj["value"] = subArray;
+           }
+           blockArray.push(obj);
+        }
+        valueArray.push(blockArray);
+      }
+    } catch(er) {
+      valueArray = [];
+    }
+
+    return valueArray;
+  }
+
 }
