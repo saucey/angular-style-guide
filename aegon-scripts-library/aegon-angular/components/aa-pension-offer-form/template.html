@@ -1,5 +1,28 @@
-<aa-sticky [heading]="'Test heading'">
-  <p>Hai</p>
+<aa-sticky [heading]="'Sammenvatting'">
+  
+  <!-- Your pension and partner pension -->
+  <div *ngFor="let pension of pensionProduct.values">
+    <div>{{pension.title}}</div>
+    
+    <!-- Pension period -->
+    <div *ngFor="let period of pension">    
+      <div>{{period.label}}</div>
+      
+      <!-- if one value -->
+      <div *ngIf="isString(period.value)">
+        {{period.value}}
+      </div>
+
+      <!-- if multiple values -->
+      <ul *ngIf="!isString(period.value)">      
+        <li *ngFor="let value of period.value">
+          <div>{{value.label}}</div>
+          <div>{{value.value}}</div>
+        </li>
+      </ul>      
+    </div>
+    <hr />
+  </div>
 </aa-sticky>
 
 <div class="aa-pension-offer-form">
