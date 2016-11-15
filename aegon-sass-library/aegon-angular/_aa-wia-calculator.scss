@@ -279,6 +279,7 @@ $wiaCalculatorMobileBreakpoint: 850px;
   font-size: 1rem;
   line-height: 1em;
   word-spacing: 3em; // force words in new lines
+  background: none; // overwrite drupal mess
 
   &:before {
     content: '▸';
@@ -391,6 +392,14 @@ $wiaCalculatorMobileBreakpoint: 850px;
   }
 }
 
+// overwrite drupal styles
+.wia_calculator__mobile {
+  table, td, tr {
+    table-layout: auto !important;
+    border: none !important;
+    background: none !important;
+  }
+}
 
 .wia_calculator__summary {
   background: $grey;
