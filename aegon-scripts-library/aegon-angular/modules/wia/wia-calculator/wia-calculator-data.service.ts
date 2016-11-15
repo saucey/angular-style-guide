@@ -3,6 +3,7 @@ import { Http, URLSearchParams } from "@angular/http";
 import { WIAInputModel } from "../wia-page/models/wia-input.model";
 import { generateCorrelationId } from "../../../lib/util";
 import { Observable } from "rxjs";
+import { SimulationDataset, SimulationKey, Simulation } from "./models/simulation-dataset";
 
 const SIMULATION_API = '/sites/aegonnl/public_files/simulation.json';
 
@@ -15,8 +16,11 @@ const CATEGORIES_MAP = {
 @Injectable()
 export class CalculatorDataService {
 
-  // Simulation data for current input
-  simulationDataset: { [key:string]: any; } = {};
+  // Simulation data cache for current input
+  simulationDataset: { [key:string]: SimulationDataset; } = {};
+
+  // Pending requests
+  // In case getData methods is called multiple times only one request is send
   pendingRequests: { [key:string]: Observable<any>; } = {};
 
   constructor(private http: Http) {
@@ -114,7 +118,7 @@ export class CalculatorDataService {
     return params;
   }
 
-  getData(input: WIAInputModel) {
+  getData(input: WIAInputModel): Observable<SimulationDataset> {
 
     const inputKey = this.createRequestKey(input);
 
@@ -150,19 +154,11 @@ export class CalculatorDataService {
     return request;
   }
 
-  private parseSimulationResponse ({ grouped, initial }) {
-
-    return {
-      graphData: grouped,
-      legendData: initial.map(el => el.category).filter(this.uniqueValues)
-    }
-  }
-
-  private setDataset (key, data) {
+  private setDataset (key: SimulationKey, data: SimulationDataset): void {
     this.simulationDataset[key] = data;
   }
 
-  private createRequestKey (input) {
+  private createRequestKey (input: WIAInputModel): SimulationKey {
     const keyParts = [];
     keyParts.push(input.income);
 
@@ -180,14 +176,18 @@ export class CalculatorDataService {
 
       this.getData(input).subscribe(data => {
 
-        resolve(this.parseSimulationResponse(
-          this.parseRawData(input, this.getFromDataset(input, data))
-          ));
+        const scenarioData = this.getFromDataset(input, data);
+        const scenarioDataInPeriods = this.parseRawData(input, scenarioData);
+
+        resolve({
+          graphData: scenarioDataInPeriods.grouped,
+          legendData: scenarioDataInPeriods.initial.map(el => el.category).filter(this.uniqueValues)
+        });
       });
     });
   }
 
-  private createOptionsKey({disability, usage = null, permDisability = null} : WIAInputModel) {
+  private createOptionsKey({disability, usage = null, permDisability = null} : WIAInputModel): string {
 
     return `_${disability}-${usage}-${permDisability}`;
   }
@@ -196,7 +196,7 @@ export class CalculatorDataService {
     return self.indexOf(value) === index;
   }
 
-  private getFromDataset(input: WIAInputModel, data) {
+  private getFromDataset(input: WIAInputModel, data): Simulation {
 
     const OPTIONS_KEY = this.createOptionsKey(input);
     if (data[OPTIONS_KEY]) {
