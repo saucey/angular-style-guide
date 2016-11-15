@@ -167,33 +167,28 @@
     }
   }
 }
+// mobile (min-width 0px to max-width 640px)
 
-// mobile ( < 641px )
-@include breakpoint($brk-mobile) {
+@media screen and (min-width: $rc-s-min-width) and (max-width: $rc-s-max-width) {
 
   .fnol-page {
     .fnol-question {
-      background-color: $orange;
-      width: 100%;
-      font-size: 1.2em;
-      padding: 10px 10px;
-      color: $white;
-      margin-bottom:10px;
-      text-align: center;
+      width: 35%;
+      font-weight: 700;
+      padding: 10px 0 0 10px;
+      color: #3395d3 !important;
+      min-width: 100px;
     }
     .fnol-mobile-header-wrapper{
+      background:#D9EBF7;
       margin-top:20px;
-      background: #D9EBF7;
       padding: 10px;
-    }
-    .fnol-mobile-phone-num{
-      margin-left:25px;
     }
     .fnol-mobile-left{
       float:left
     }
     .fnol-mobile-right{
-      float:left
+      float:left;
     }
     .arrow-right {
       width: 0;
@@ -204,76 +199,88 @@
       top: 0px;
       right: -24px;
     }
+    .auto-para-spacer{
+      padding:10px 0px 10px 0px;
+    }
+
   }
+
 }
 
-// tablet ( > 640px && < 901px )
-@media screen and (min-width: $rc-m-min-width) and (max-width: $rc-m-max-width) {
+// tablet (min-width 641px to max-width 900px)
 
-  .fnol-page {
-    .fnol-question {
-      background-color: $orange;
-      width: 18%;
-      color: $white;
-      font-size: .9em;
-      padding: 25px 5px;
-      float:left;
-      height: auto;
-    }
-    .fnol-phone-call {
-      font-size: .9em;
-      padding: 15px 0 15px 40px;
-      color: $blue;
-      float:left;
-      width: 42%;
-    }
-    .fnol-phone-content {
-      font-size: .78em;
-      color: $blue;
-      float:left;
-      width: 40%;
-      line-height: 18px;
-      padding-top:10px
-    }
-    .arrow-right {
-      width: 0;
-      height: 0;
-      border-top: 40px solid transparent;
-      border-bottom: 40px solid transparent;
-      border-left: 40px solid $orange;
-      top: -1px;
-      right: -38px;
-    }
-  }
-}
-
-// desktop ( > 900px )
-@include breakpoint($brk-ipad-portrait) {
+@media screen and (min-width: 641px) and (max-width: 1200px) {
   .fnol-page {
     .fnol-question {
       background-color: $orange;
       width: 15%;
       color: $white;
-      font-size: 1.5em;
-      padding: 15px 10px;
+      font-size: 1em;
+      padding: .72em .65em;
       float:left;
-      min-width:100px;
+      min-width: 120px;
     }
     .fnol-phone-call {
-      font-size: 1.5em;
-      padding: 15px 0 15px 40px;
+      font-size: 1.2em;
+      padding: 0.7em 0 0 2em;
       color: $blue;
       float:left;
-      width: 36%;
+      width: auto;
     }
     .fnol-phone-content {
       font-size: .78em;
       color: $blue;
       float:left;
-      width: 48%;
+      width: 46%;
       line-height: 18px;
-      padding-top:10px
+      padding-top:10px;
+      display: none !important;
+    }
+    .arrow-right {
+      width: 0;
+      border-bottom: 28px solid transparent;
+      height: 0;
+      border-top: 28px solid transparent;
+      border-left: 28px solid $orange;
+      top: -1px;
+      right: -28px;
+    }
+    .width100per {
+      width: 100% !important;
+    }
+
+  }
+}
+
+// tablet (min-width 1201px to max-width 16000px)
+
+@media screen and (min-width: 1201px) and (max-width: 16000px) {
+  .fnol-page {
+    .fnol-question {
+      background-color: $orange;
+      width: 15%;
+      color: $white;
+      font-size: 1.2em;
+      padding: .72em .65em;
+      float:left;
+    }
+    .fnol-phone-call {
+      font-size: 1.3em;
+      padding: 0.7em 0 0 2.2em;
+      color: $blue;
+      float:left;
+      width: 38%;
+    }
+    .fnol-phone-content {
+      font-size: .78em;
+      color: $blue;
+      float:left;
+      width: 46%;
+      line-height: 18px;
+      padding-top:10px;
+
     }
   }
 }
+
 

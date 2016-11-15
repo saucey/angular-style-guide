@@ -1,0 +1,87 @@
+{
+  "retrieveLocatiesResponse": {
+    "PROCES": {
+      "STATUS": "00000",
+      "VOLGNUM": "1",
+      "STATUST": "2 record(s) available for this criteria"
+    },
+    "AILHEADER": {
+      "CLIENTID": "AEGON Autoherstelbedrijf zoeken",
+      "CORRELATIONID": "## AEGON Autoherstelbedrijf zoeken ## Thu Oct 25 16:20:39 CEST 2012 ##"
+    },
+    "PARTIJ": [
+      {
+        "_AE_ADRES": {
+          "PCODE": "9101 RA",
+          "TOEVOEG": true,
+          "PLAATS": "DOKKUM",
+          "_AE_STRAAL": "8",
+          "_AE_LOCATIEKENMERK": [
+            {
+              "WAARDE": "ja",
+              "NAAM": "Blikschade"
+            },
+            {
+              "WAARDE": "Nee",
+              "NAAM": "Glasschade"
+            },
+            {
+              "WAARDE": "4",
+              "NAAM": "Ranking"
+            }
+          ],
+          "GEOBRED": "53.3206875",
+          "STRAAT": "Bocksmeulen",
+          "_AE_LOCATIETYPE": "1",
+          "VOLGNUM": "1",
+          "GEOLENG": "6.0142280",
+          "HUISNR": "20"
+        },
+        "VOLGNUM": "859",
+        "EMAIL": "info@waddokkum.nl",
+        "ANAAM": "Wijnstra Autoschade Dokkum bv",
+        "TELNUM": "(0519) 22 11 96",
+        "_AE_ONDERNEMING": {
+          "_AE_BIJZONDERHEDEN": true,
+          "WEBSITE": "www.waddokkum.nl"
+        }
+      },
+      {
+        "_AE_ADRES": {
+          "PCODE": "9101 WZ",
+          "TOEVOEG": true,
+          "PLAATS": "DOKKUM",
+          "_AE_STRAAL": "8",
+          "_AE_LOCATIEKENMERK": [
+            {
+              "WAARDE": "ja",
+              "NAAM": "Blikschade"
+            },
+            {
+              "WAARDE": "ja",
+              "NAAM": "Glasschade"
+            },
+            {
+              "WAARDE": "4",
+              "NAAM": "Ranking"
+            }
+          ],
+          "GEOBRED": "53.3245535",
+          "STRAAT": "Hogedijken",
+          "_AE_LOCATIETYPE": "1",
+          "VOLGNUM": "1",
+          "GEOLENG": "6.0103372",
+          "HUISNR": "42"
+        },
+        "VOLGNUM": "860",
+        "EMAIL": true,
+        "ANAAM": "Hoogstra Autoschadespecialist",
+        "TELNUM": "(0519) 29 20 72",
+        "_AE_ONDERNEMING": {
+          "_AE_BIJZONDERHEDEN": true,
+          "WEBSITE": true
+        }
+      }
+    ]
+  }
+}

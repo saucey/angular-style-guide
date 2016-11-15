@@ -9,7 +9,9 @@ import {formatNumber} from "../lib/format";
 // Arguments: [round #digits]
 export class AAMoneyPipe implements PipeTransform {
   transform(value:number, args:any[]) : any {
-    var roundResult:boolean = args && args.length > 0 && args[0] === true;
+    var roundResult:boolean = args && args.length > 0 && args[0] === true,
+          forceDecimals:boolean = args && args.length > 0 && args[1] === true || false;
+    
     if (value === undefined) {
       return;
     }
@@ -17,6 +19,6 @@ export class AAMoneyPipe implements PipeTransform {
     if (roundResult) {
       value = Math.round(value);
     }
-    return formatNumber(value, !roundResult);
+    return formatNumber(value, !roundResult, forceDecimals);
   };
 }
