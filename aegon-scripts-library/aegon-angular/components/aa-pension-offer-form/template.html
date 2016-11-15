@@ -52,13 +52,64 @@
 </aa-sticky>
 
 <div class="aa-pension-offer-form">
-  <h2>{{data.options.subtitle}}</h3>
-  <h3>{{data.options.termsTitle}}</h4>
-  <ul>
+  <h2>{{data.options.subtitle}}</h2>
+  <h3>{{data.options.termsTitle}}</h3>
+  <ul class="bullet">
     <li *ngFor="let value of data.options.termsList">{{value}}</li>
   </ul>
-  <h3>{{data.options.yourDataTitle}}</h4>
+  <h3>{{data.options.yourDataTitle}}</h3>
   <p>
     {{data.options.yourDataText}}
   </p>
+  <form class="container_12">
+    <div class="form-input-row">
+      <label for="text-input" class="span4 form-input-label">Aanhef</label>
+      <div class="input-wrapper span8">
+        <label class="radio">
+          <input type="radio" name="sex" value="value1"/>
+          <span class="radio"></span>Heer
+        </label>
+        <label class="radio">
+          <input type="radio" checked name="sex" value="value2"/>
+          <span class="radio"></span>Mevrouw
+        </label>
+      </div>
+    </div>
+    <div class="form-input-row">
+      <label for="text-input" class="span4 form-input-label">Voorletters</label>
+      <div class="input-wrapper span8">
+        <input type="text" id="initials" name="initials" placeholder="" required title="" />
+      </div>
+    </div>
+    <div class="form-input-row">
+      <label for="text-input" class="span4 form-input-label">Tussenvoegsel</label>
+      <div class="input-wrapper span8">
+        <input type="text" id="lastnamePrefix" name="lastnamePrefix" placeholder="" required title="" />
+      </div>
+    </div>
+    <div class="form-input-row">
+      <label for="text-input" class="span4 form-input-label">Achternaam</label>
+      <div class="input-wrapper span8">
+        <input type="text" id="name" name="name" placeholder="" required title="" />
+      </div>
+    </div>
+    <div class="form-input-row">
+      <label for="text-input" class="span4 form-input-label">Mobielnumber</label>
+      <div class="input-wrapper span8">
+        <input type="number" id="mobile" name="mobile" placeholder="071234567" required title="" />
+      </div>
+    </div>
+    <div class="form-input-row">
+      <label for="text-input" class="span4 form-input-label">Email</label>
+      <div class="input-wrapper span8">
+        <input type="email" id="email" name="email" placeholder="Type your emailaddress" required title="Enter a valid email address" />
+      </div>
+    </div>
+    <div class="form-input-row">
+      <label class="span4 form-input-label"></label>
+      <div class="input-wrapper span8">
+        <button class="button arrow" type="submit">Verzenden</button>
+      </div>
+    </div>
+  </form>
 </div>
