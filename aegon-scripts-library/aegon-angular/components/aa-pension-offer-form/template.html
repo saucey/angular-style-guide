@@ -32,23 +32,27 @@
     <dd>&euro; {{pensionInfo.pensionAmount | money}}</dd>
 
     <dt>{{data.options.labels.pensionLocation}}</dt>
-    <dd>{{pensionInfo.pensionLocation}}</dd>
+    <dd>{{data.options.values.pensionLocation[pensionInfo.pensionLocation]}}</dd>
 
     <dt>{{data.options.labels.birthDate}}</dt>
-    <dd>{{pensionInfo.birthDate | date}}</dd>
+    <dd>{{pensionInfo.birthDate}}</dd>
 
-    <dt>{{data.options.labels.pensionStartDate}}</dt>
-    <dd>{{pensionInfo.pensionStartDate}}</dd>
+    <dt>{{data.options.labels.startingDate}}</dt>
+    <dd>{{pensionInfo.startingDate}}</dd>
 
     <dt>{{data.options.labels.pensionPartner}}</dt>
-    <dd>{{pensionInfo.insurablePartner}}</dd>
+    <dd>{{pensionInfo.insurablePartner ? 'Ja' : 'Nee'}}</dd>
 
     <dt>{{data.options.labels.birthDateOfPartner}}</dt>
     <dd>{{pensionInfo.birthDateOfPartner}}</dd>                              
   </dl>
   
-
-
+  <a 
+    *ngIf="data.options.link.text && data.options.link.url" 
+    href="data.options.link.url">
+    <span class="icon-skinnyarrow"></span>
+    {{data.options.link.text}}
+  </a>
 </aa-sticky>
 
 <div class="aa-pension-offer-form">
