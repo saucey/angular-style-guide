@@ -111,6 +111,6 @@ $slider_value_background: $slightly_lighter_blue;
 .slider__label--last {
   transform: none;
   right: 0;
-  left: initial;
+  left: inherit;
   margin-left: 0 !important;
 }
