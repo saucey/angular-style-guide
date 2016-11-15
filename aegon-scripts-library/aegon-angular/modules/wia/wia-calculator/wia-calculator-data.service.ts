@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { Http, URLSearchParams } from "@angular/http";
 import { WIAInputModel } from "../wia-page/models/wia-input.model";
 import { generateCorrelationId } from "../../../lib/util";
+import { Observable } from "rxjs";
 
 const SIMULATION_API = '/sites/aegonnl/public_files/simulation.json';
 
@@ -13,6 +14,10 @@ const CATEGORIES_MAP = {
 
 @Injectable()
 export class CalculatorDataService {
+
+  // Simulation data for current input
+  simulationDataset: { [key:string]: any; } = {};
+  pendingRequests: { [key:string]: Observable<any>; } = {};
 
   constructor(private http: Http) {
   }
@@ -84,10 +89,16 @@ export class CalculatorDataService {
     }
   }
 
- //Get product first attribute which is sent with the simulation request
+ //Get product dynamic (editable) attribute which is sent with the simulation request
   private getProductDynamicAttr (productId: string, input: WIAInputModel): string {
     const el = input.products.find(el => el.id === productId);
-    return el && el.attrs && el.attrs[0] ? el.attrs[0].value.toString() : 'true';
+    if (el && el.attrs) {
+      let dynamicAttr = el.attrs.find(attr => attr.visible);
+
+      return  dynamicAttr ? dynamicAttr.value.toString() : 'true';
+    }
+
+    return 'true';
   }
 
   private generateSimulationQueryParams (input: WIAInputModel): URLSearchParams {
@@ -105,19 +116,75 @@ export class CalculatorDataService {
 
   getData(input: WIAInputModel) {
 
-    return this.http.get(SIMULATION_API, {
-      search: this.generateSimulationQueryParams(input)
-    })
-      .map(response => response.json())
-      .map(data => this.getFromDataset(input, data))
-      .map(data => this.parseRawData(input, data))
-      .map(({ grouped, initial }) => {
+    const inputKey = this.createRequestKey(input);
 
-        return {
-          graphData: grouped,
-          legendData: initial.map(el => el.category).filter(this.uniqueValues)
-        }
+    // Resolve cached response
+    if (this.simulationDataset[inputKey]) {
+      return Observable.of(this.simulationDataset[inputKey])
+    }
+
+    // Resolve requests that are actually in progress
+    if (this.pendingRequests[inputKey]) {
+      return this.pendingRequests[inputKey];
+    }
+
+
+    const queryParams = this.generateSimulationQueryParams(input);
+    const request = this.http.get(SIMULATION_API, {
+      search: queryParams
+    })
+      .share()
+      .map(response => {
+
+        const json = response.json();
+
+        this.setDataset(inputKey, json);
+        this.pendingRequests[inputKey]= null;
+
+        return json;
       });
+
+
+    this.pendingRequests[inputKey] = request;
+
+    return request;
+  }
+
+  private parseSimulationResponse ({ grouped, initial }) {
+
+    return {
+      graphData: grouped,
+      legendData: initial.map(el => el.category).filter(this.uniqueValues)
+    }
+  }
+
+  private setDataset (key, data) {
+    this.simulationDataset[key] = data;
+  }
+
+  private createRequestKey (input) {
+    const keyParts = [];
+    keyParts.push(input.income);
+
+    input.productsIds.forEach(productId => {
+      keyParts.push(productId);
+      keyParts.push(this.getProductDynamicAttr(productId, input));
+    });
+
+    return JSON.stringify(keyParts);
+  }
+
+  public getScenario (input: WIAInputModel) {
+
+    return new Promise((resolve, reject) => {
+
+      this.getData(input).subscribe(data => {
+
+        resolve(this.parseSimulationResponse(
+          this.parseRawData(input, this.getFromDataset(input, data))
+          ));
+      });
+    });
   }
 
   private createOptionsKey({disability, usage = null, permDisability = null} : WIAInputModel) {
