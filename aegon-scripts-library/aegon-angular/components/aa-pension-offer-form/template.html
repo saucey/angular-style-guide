@@ -1,5 +1,54 @@
-<aa-sticky [heading]="'Test heading'">
-  <p>Hai</p>
+<aa-sticky [heading]="data.options.title" class="aa-sticky">
+  
+  <!-- Your pension and partner pension -->
+  <dl *ngFor="let pension of pensionProduct.values; let i = index;" class="aa-sticky__dataList">
+    <dt>{{data.options.labels.pension[i]}}</dt>
+    
+    <!-- Pension period -->
+    <dd *ngFor="let period of pension">    
+      <div class="aa-sticky__dataList__label">{{period.label}}</div>
+      
+      <!-- If one value -->
+      <div *ngIf="isString(period.value)" class="aa-sticky__dataList__value">
+        {{period.value}}
+      </div>
+
+      <!-- If value is a sub list -->
+      <template [ngIf]="!isString(period.value)">      
+        <div *ngFor="let subList of period.value" class="aa-sticky__dataList__subList">
+          <div class="aa-sticky__dataList__label">{{subList.label}}</div>
+          <div class="aa-sticky__dataList__value">{{subList.value}}</div>
+        </div>
+      </template>      
+    </dd>
+  </dl>
+  <div class="aa-sticky__helperText">{{data.options.helpers.grossPerMonth}}</div>
+
+  <dl class="aa-sticky__dataList aa-sticky__dataList--separate">
+    <dt>{{data.options.labels.pensionProduct}}</dt>
+    <dd>{{pensionProduct.template}}</dd>
+
+    <dt>{{data.options.labels.pensionAmount}}</dt>
+    <dd>&euro; {{pensionInfo.pensionAmount | money}}</dd>
+
+    <dt>{{data.options.labels.pensionLocation}}</dt>
+    <dd>{{pensionInfo.pensionLocation}}</dd>
+
+    <dt>{{data.options.labels.birthDate}}</dt>
+    <dd>{{pensionInfo.birthDate | date}}</dd>
+
+    <dt>{{data.options.labels.pensionStartDate}}</dt>
+    <dd>{{pensionInfo.pensionStartDate}}</dd>
+
+    <dt>{{data.options.labels.pensionPartner}}</dt>
+    <dd>{{pensionInfo.insurablePartner}}</dd>
+
+    <dt>{{data.options.labels.birthDateOfPartner}}</dt>
+    <dd>{{pensionInfo.birthDateOfPartner}}</dd>                              
+  </dl>
+  
+
+
 </aa-sticky>
 
 <div class="aa-pension-offer-form">
