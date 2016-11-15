@@ -46,16 +46,16 @@
 	 */
 
 	.aa-sticky__dataList {
+		line-height: 1.2;
 		margin-bottom: 20px;	
 
 		&.aa-sticky__dataList--separate {
-			border-top: 1px solid #000;
+			border-top: 1px solid #ccc;
 			padding-top: 20px;
 		}
 
 		dt {
-			font-weight: 700;
-			margin-bottom: 5px;
+			font-family: senticosansdtMedium;
 		}
 
 		dd {
@@ -63,7 +63,7 @@
 			overflow: hidden;
 
 			&:not(:last-child) {
-				margin-bottom: 6px;
+				margin-bottom: 12px;
 			}
 
 			// Global label and value
@@ -99,6 +99,5 @@
 
 	.aa-sticky__helperText {
 		font-style: italic;
-		font-weight: 700;
 	}		 
 }

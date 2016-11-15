@@ -12,9 +12,16 @@ export const defaultOptions = {
     pensionProduct: 'Uitkerend pensioenproduct',
     pensionAmount: 'Opgebouwd pensioenkapitaal',
     pensionLocation: 'Pensioen opgebouwd',
-    pensionStartDate: 'Startdatum uitkering',
     pensionPartner: 'Pensioen partner',
+    startingDate: 'Startdatum uitkering',
     birthDate: 'Geboortedatum',
     birthDateOfPartner: 'Geboortedatum partner'
-  } 
+  },
+  values: {
+    pensionLocation: ['Bij Aegon', 'Niet bij Aegon', 'Aegon en elders']
+  },
+  link: {
+    text: 'Uw gegevens aanpassen',
+    url: '/link-to-edit'
+  },  
 }
