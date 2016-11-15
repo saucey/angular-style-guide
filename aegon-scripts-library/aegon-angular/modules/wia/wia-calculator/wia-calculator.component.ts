@@ -143,6 +143,8 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
     third: 90
   };
 
+  private lastInput: WIAInputModel = null;
+
   constructor(thisElement: ElementRef,
               private wiaPagePersonalizationService: WiaPagePersonalizationService,
               private wiaSubscriptionService: WiaSubscriptionService,
@@ -163,11 +165,15 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
     this.tabsView.onTabChange(() => {
       if (this.getActiveTab() !== this.tabsView.active) {
         this.disability.value = this.disabilityCenters[this.tabs[this.tabsView.active]];
+
+        this.update();
       }
     });
   }
 
   public updateModel(value: WIAInputModel) {
+
+    window.scrollTo(0, 0);
 
     if (!value) {
       this.externalInput = null;
@@ -191,9 +197,11 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
 
     const currentInput = this.getCurrentInput();
 
-    this.calculatorDataService.getData(currentInput).subscribe(data => {
-      this.simulationData = data;
-      this.update();
+
+    this.calculatorDataService.getScenario(currentInput).then(scenario => {
+
+      this.simulationData = scenario;
+      this.refresh(currentInput);
     });
 
   }
@@ -203,34 +211,49 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
     const input: WIAInputModel = {
       income: this.externalInput.income,
       useCase: WiaInputUseCaseEnum.USER,
-      disability: Math.round(this.disability.value / 10) * 10,
+      permDisability: null,
+      usage: null,
+      disability: Math.round(this.disability.value / 5) * 5,
       products: this.externalInput.products,
       productsIds: this.externalInput.productsIds
     };
 
-    if (this.disability.value >= 80) {
+    if (input.disability >= 80) {
 
       input.permDisability = this.permanentDisability;
     }
 
-    if (this.disability.value < 80) {
+    if (input.disability < 80) {
 
-      input.usage = Math.round(this.usage.value / 10) * 10
+      input.usage = Math.round(this.usage.value / 5) * 5;
     }
 
     return input;
   }
 
   public update() {
+
     const currentInput = this.getCurrentInput();
+
+    // no changes, ignore update
+    if (this.lastInput && this.lastInput.usage === currentInput.usage
+      && this.lastInput.disability === currentInput.disability
+      && this.lastInput.permDisability === currentInput.permDisability) {
+      return;
+    }
+
+    this.lastInput = currentInput;
+
+    this.calculatorDataService.getScenario(currentInput).then(data => {
+      this.simulationData = data;
+      this.refresh(currentInput);
+    });
+  }
+
+  public refresh(currentInput: WIAInputModel) {
 
     const code = this.wiaPagePersonalizationService.inputToCode(currentInput);
     this.wiaUrlStateManager.setUrlCode(code);
-
-    this.refresh()
-  }
-
-  public refresh() {
 
     // prevent crash in case data couldn't be found
     if (this.simulationData && this.simulationData.graphData) {
