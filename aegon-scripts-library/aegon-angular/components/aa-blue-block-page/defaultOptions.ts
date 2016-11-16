@@ -39,8 +39,3 @@ export const defaultOptions = {
     text: 'Bottom variant text'
   }  
 }
-
-
-
- 
-
