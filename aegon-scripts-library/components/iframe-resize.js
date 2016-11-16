@@ -39,9 +39,10 @@
           var that = top.Drupal.behaviors.iframeResizeHeight;
           // Check if the target iframe is set.
           if( that.targerIframe ) {
-            var iframe = $(that.targerIframe);
+            var iframe = $(that.targerIframe),
+                origin = e.origin || e.originalEvent.origin;
             // Check if the domain is same as iframe src.
-            if(iframe.attr('src').indexOf(e.origin) === 0 && !isNaN(e.data)) {
+            if((iframe.attr('src').charAt(0) === '/' || iframe.attr('src').indexOf(origin) === 0) && !isNaN(e.data)) {
               that.resizeHeight(null, e.data);
             }
           }
@@ -101,7 +102,7 @@
       var newHeight = iframe[0].offsetHeight; 
       // Check second parameter.
       if(typeof height !== 'undefined' && !isNaN(height)) {
-        newHeight = height;
+        newHeight = Math.abs(+height);
       }
       else {
         // Attempt to read the body of the iframe.
