@@ -32,7 +32,7 @@ export class AABlueBlockPageComponent extends AABaseComponent implements OnInit 
   public columnRightIsHidden: boolean = false;
   
   public hasTopContent: boolean = true;
-  public hasLink: boolean = true;
+  public hasLinkList: boolean = true;
   public hasBottomContent: boolean = true;  
 
   constructor(private thisElement: ElementRef) {
@@ -98,7 +98,7 @@ export class AABlueBlockPageComponent extends AABaseComponent implements OnInit 
 
     // Pension form page
     if(page === 'pensionForm') { 
-      this.hasLink = false;
+      this.hasLinkList = false;
       this.hasBottomContent = false;
       this.leftContent = this.data.options.left;
       this.rightContent = this.data.options.right;       
