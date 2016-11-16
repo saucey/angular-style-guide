@@ -42,7 +42,13 @@
 		p { line-height: 1.15; }
 	}
 
-	.aa-bb-page__link { margin: 10px 0 20px; }	
+	.aa-bb-page__linkList { 
+		margin: 10px 0 20px;
+
+		li:not(:last-child) {
+			margin-bottom: 5px;
+		}
+	}	
 
 	.aa-bb-page__bottomContent {
 		h2 {

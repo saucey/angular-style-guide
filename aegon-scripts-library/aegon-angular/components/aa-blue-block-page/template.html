@@ -2,6 +2,7 @@
 
   <div *ngIf="hasTopContent" class="aa-bb-page__topContent">
     <h2>{{data.options.top.title}}</h2> 
+    <p *ngIf="data.options.top.text">{{data.options.top.text}}</p>
   </div>
 
   <div class="container_12 hidden-mobile"> 
@@ -50,9 +51,9 @@
     </div>
   </div>
   
-  <div *ngIf="hasLink" class="aa-bb-page__link">
-    <a href="{{data.options.link.url}}">{{data.options.link.text}}</a>
-  </div>
+  <ul *ngIf="hasLinkList" class="aa-bb-page__linkList">
+    <li *ngFor="let link of data.options.linkList"><a href="{{link.url}}">{{link.text}}</a></li>    
+  </ul>
   
   <div *ngIf="hasBottomContent" class="aa-bb-page__bottomContent">
     <h2>{{bottomContent.title}}</h2>
