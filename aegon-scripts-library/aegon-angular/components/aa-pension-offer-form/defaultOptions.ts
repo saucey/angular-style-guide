@@ -12,9 +12,6 @@ export const defaultOptions = {
   ],
   yourDataTitle: "Uw gegevens",
   yourDataText: "Na het versturen van uw aanvraag ontvangt de offerte binnen 5 dagen per brief bij u thuis. Uw adviseur neemt later contact met u op en kijkt samen met u wat het beste bij u past. Daarna kunt u een afspraak maken voor een persoonlijk gesprek.",
-  values: {
-    pensionLocation: ['Bij Aegon', 'Niet bij Aegon', 'Aegon en elders']
-  },
   sticky: {
     title: 'Samenvatting',
     helpers: {
@@ -29,6 +26,9 @@ export const defaultOptions = {
       startingDate: 'Startdatum uitkering',
       birthDate: 'Geboortedatum',
       birthDateOfPartner: 'Geboortedatum partner'
+    },
+    values: {
+      pensionLocation: ['Bij Aegon', 'Niet bij Aegon', 'Aegon en elders']
     },
     link: {
       text: 'Uw gegevens aanpassen',
