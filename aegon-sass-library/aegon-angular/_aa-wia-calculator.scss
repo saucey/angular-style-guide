@@ -265,9 +265,10 @@ $wiaCalculatorMobileBreakpoint: 850px;
 }
 .wia_graph__legend__items {
   position: absolute;
-  bottom: 50px;
+  bottom: 70px;
   left: 0;
   right: 0;
+  margin: 0;
 }
 
 .wia_graph__legend__guideline {
@@ -380,7 +381,7 @@ $wiaCalculatorMobileBreakpoint: 850px;
     }
 
     input {
-      width: 5rem;
+      width: 5rem !important;
     }
 
 
@@ -398,7 +399,7 @@ $wiaCalculatorMobileBreakpoint: 850px;
 }
 
 // overwrite drupal styles
-.wia_calculator__mobile {
+.wia_calculator_mobile {
   table, td, tr {
     table-layout: auto !important;
     border: none !important;
@@ -441,6 +442,7 @@ $wiaCalculatorMobileBreakpoint: 850px;
   background: $grey;
   padding: 0.5em 1em;
   max-width: 350px;
+  margin: 1em 0;
 
   table {
     width: 100%;
