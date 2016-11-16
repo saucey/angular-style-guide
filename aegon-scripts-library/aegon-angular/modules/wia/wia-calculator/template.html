@@ -27,7 +27,7 @@
     </div>
     <div class="clearfix wia_graph">
 
-      <div class="wia_graph__column">
+      <div [class.wia_graph__column--half]="graphData[2]?.columns[0].amountYearly === 0" class="wia_graph__column">
         <div class="wia_graph__top_label" [class.wia_graph__greyed-out]="showTooltip && showTooltip !== 1"
              (mouseenter)='showTooltip = 1' (mouseleave)='showTooltip = 0'>
           1e en 2e jaar
@@ -53,7 +53,8 @@
 
       </div>
 
-      <div class="wia_graph__column">
+      <div [class.wia_graph__column--half]="graphData[2]?.columns[0].amountYearly === 0"
+           class="wia_graph__column">
         <div class="wia_graph__top_label" [class.wia_graph__greyed-out]="showTooltip && showTooltip !== 2"
              (mouseenter)='showTooltip = 2' (mouseleave)='showTooltip = 0'>
           vanaf 3e jaar
@@ -71,7 +72,7 @@
 
       </div>
 
-      <div class="wia_graph__column">
+      <div class="wia_graph__column" *ngIf="graphData[2]?.columns[0].amountYearly > 0">
 
         <div class="wia_graph__top_label" [class.wia_graph__greyed-out]="showTooltip && showTooltip !== 3"
              (mouseenter)='showTooltip = 3' (mouseleave)='showTooltip = 0'>

@@ -198,6 +198,11 @@ $wiaCalculatorMobileBreakpoint: 850px;
     margin: $wiaGraphLabelMargin 0;
     padding: 50px 5px 5px;
   }
+
+  //overwrite column withs when only 2 columns are visible
+  &.wia_graph__column--half {
+    width: 50% !important;
+  }
 }
 
 .wia_graph__top_label {
