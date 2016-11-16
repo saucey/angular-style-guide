@@ -57,10 +57,14 @@
 
 <div class="aa-pension-offer-form">
   <h2>{{data.options.subtitle}}</h2>
-  <h3>{{data.options.termsTitle}}</h3>
-  <ul class="bullet">
-    <li *ngFor="let value of data.options.termsList">{{value}}</li>
-  </ul>
+  
+  <div class="aa-pension-offer-form--terms-wrapper" *ngIf="data.options.termsList">
+    <h3>{{data.options.termsTitle}}</h3>
+    <ul class="bullet" *ngIf="!isString(data.options.termsList)">
+      <li *ngFor="let value of data.options.termsList">{{value}}</li>
+    </ul>
+    <p [innerHTML]="data.options.termsList" *ngIf="isString(data.options.termsList)"></p>
+  </div>
   <h3>{{data.options.yourDataTitle}}</h3>
   <p>
     {{data.options.yourDataText}}
