@@ -52,6 +52,7 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit{
 
   public defaultOptions: any = defaultOptions;
   public amountTooSmall: boolean;
+  public aanpassenSet: boolean;
   public message: boolean = false;
   public age: number;
   public sectionIndex: number;
@@ -100,7 +101,6 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit{
     4: 'hidden',
     5: 'hidden'
   };
-
 
   constructor(
     private elementRef: ElementRef
@@ -184,24 +184,28 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit{
 
     if(this.sectionIndex == 2) {
       if(this.pension['pensionLocation'] == undefined) {
+        // this.aanpassenSet = true;
         return true;
       }
     }
 
     if(this.sectionIndex == 3) {
       if(this.btnValidationForUserPartner() !== false) {
+        // this.aanpassenSet = true;
         return true;
       }
     }
 
     if(this.sectionIndex == 4) {
       if(this.btnValidationForUser() !== false){
+        // this.aanpassenSet = true;
         return true;
       }
     }
 
     if(this.sectionIndex == 5) {
       if(this.pension['startingDate'] == undefined){
+        // this.aanpassenSet = true;
         return true;
       }
     }
@@ -214,36 +218,105 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit{
   }
 
   btnValidationForUserPartner(): boolean {
-    if(this.pension['havePartner'] == false) return false;
-    if(this.pension['havePartner'] == true && this.pension['insurablePartner'] == false) return false;
-    if(this.pension['havePartner'] == true && this.pension['insurablePartner'] == true && this.isAgeValid[1] == undefined && this.pension['birthDateOfPartner'] !== undefined) return false;
 
-    if(this.isAgeValid[1] == false) return false;
+    if(this.pension.sessionSet) {
 
-    if(this.initChangeNoPolicy == true) return false;
+      if(this.pension['havePartner'] == false) return false;
+      if(this.pension['havePartner'] == true && this.pension['insurablePartner'] == false) return false;
+      if(this.pension['havePartner'] == true && this.pension['insurablePartner'] == true && this.isAgeValid[1] == undefined && this.pension['birthDateOfPartner'] !== undefined) return false;
 
-    if(this.hasPartner == 'show') return true;
+      if(this.isAgeValid[1] == false) return false;
 
-    if(this.hasPartner == 'hidden' && this.initChangeHasPartner == false) return false;
+      if(this.initChangeNoPolicy == true) return false;
 
-    return true;
-    //hidden the button validation
+      if(this.hasPartner == 'show'){
+        this.aanpassenSet = true;
+        return true;
+
+      }
+
+      if(this.hasPartner == 'hidden' && this.initChangeHasPartner == false) return false;
+      this.aanpassenSet = true;
+      return true;
+    }
+
+    if(this.sectionIndex == 3) {
+      if(this.pension['havePartner'] == false) return false;
+      if(this.pension['havePartner'] == true && this.pension['insurablePartner'] == false) return false;
+      if(this.pension['havePartner'] == true && this.pension['insurablePartner'] == true && this.isAgeValid[1] == undefined && this.pension['birthDateOfPartner'] !== undefined) return false;
+
+      if(this.isAgeValid[1] == false) return false;
+
+      if(this.initChangeNoPolicy == true) return false;
+
+      if(this.hasPartner == 'show'){
+        this.aanpassenSet = true;
+        return true;
+
+      }
+
+      if(this.hasPartner == 'hidden' && this.initChangeHasPartner == false) return false;
+      this.aanpassenSet = true;
+      return true;
+    }
+
+  }
+
+  pensionLocation(val): boolean {
+
+    if(!val == true) {
+      this.aanpassenSet = true;
+    }
+
+    return !val;
+  }
+
+  pensionStartDate(val): boolean {
+
+    if(this.sectionIndex == 5) {
+      if (!val == true) {
+        this.aanpassenSet = true;
+      } else {
+        this.aanpassenSet = false;
+      }
+    }
+
+    return !val;
   }
 
   btnValidationForUser(): boolean {
+    if(this.pension.sessionSet) {
 
-    if(this.pension['birthDate'] !== "" && this.isAgeValid[2] == false ){
+      if(this.pension['birthDate'] !== "" && this.isAgeValid[2] == false ){
 
-      return false;
+        return false;
+      }
+
+      if(this.pension['birthDate'] !== "" && this.pension['birthDate'] !== undefined && this.isAgeValid[2] == undefined ){
+
+        return false;
+      }
+
+      //hide the button
+      this.aanpassenSet = true;
+      return true;
     }
 
-    if(this.pension['birthDate'] !== "" && this.pension['birthDate'] !== undefined && this.isAgeValid[2] == undefined ){
+    if(this.sectionIndex == 4) {
+      if (this.pension['birthDate'] !== "" && this.isAgeValid[2] == false) {
 
-      return false;
+        return false;
+      }
+
+      if (this.pension['birthDate'] !== "" && this.pension['birthDate'] !== undefined && this.isAgeValid[2] == undefined) {
+
+        return false;
+      }
+
+      //hide the button
+      this.aanpassenSet = true;
+      return true;
     }
-
-    //hide the button
-    return true;
   }
 
   isInValidAmount(): boolean {
@@ -252,6 +325,20 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit{
 
       this.amountTooSmall = this.pension.pensionAmount >= 25000;
       this.amountIsValid = !this.amountTooSmall;
+
+        if(!this.amountTooSmall){
+          this.aanpassenSet = true;
+        } else {
+          this.aanpassenSet = false;
+        }
+
+        if(this.pension.sessionSet) {
+        if(!this.amountTooSmall){
+          this.aanpassenSet = true;
+        } else {
+          this.aanpassenSet = false;
+        }
+      }
 
       return !this.amountTooSmall;
     }
