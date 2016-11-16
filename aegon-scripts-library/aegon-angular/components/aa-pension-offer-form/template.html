@@ -1,8 +1,8 @@
-<aa-sticky [heading]="data.options.title" class="aa-sticky">
+<aa-sticky [heading]="data.options.sticky.title" class="aa-sticky">
   
   <!-- Your pension and partner pension -->
   <dl *ngFor="let pension of pensionProduct.values; let i = index;" class="aa-sticky__dataList">
-    <dt>{{data.options.labels.pension[i]}}</dt>
+    <dt>{{data.options.sticky.labels.pension[i]}}</dt>
     
     <!-- Pension period -->
     <dd *ngFor="let period of pension">    
@@ -22,45 +22,49 @@
       </template>      
     </dd>
   </dl>
-  <div class="aa-sticky__helperText">{{data.options.helpers.grossPerMonth}}</div>
+  <div class="aa-sticky__helperText">{{data.options.sticky.helpers.grossPerMonth}}</div>
 
   <dl class="aa-sticky__dataList aa-sticky__dataList--separate">
-    <dt>{{data.options.labels.pensionProduct}}</dt>
+    <dt>{{data.options.sticky.labels.pensionProduct}}</dt>
     <dd>{{pensionProduct.template}}</dd>
 
-    <dt>{{data.options.labels.pensionAmount}}</dt>
+    <dt>{{data.options.sticky.labels.pensionAmount}}</dt>
     <dd>&euro; {{pensionInfo.pensionAmount | money}}</dd>
 
-    <dt>{{data.options.labels.pensionLocation}}</dt>
-    <dd>{{data.options.values.pensionLocation[pensionInfo.pensionLocation]}}</dd>
+    <dt>{{data.options.sticky.labels.pensionLocation}}</dt> 
+    <dd>{{data.options.sticky.values.pensionLocation[pensionInfo.pensionLocation]}}</dd>
 
-    <dt>{{data.options.labels.birthDate}}</dt>
+    <dt>{{data.options.sticky.labels.birthDate}}</dt>
     <dd>{{pensionInfo.birthDate}}</dd>
 
-    <dt>{{data.options.labels.startingDate}}</dt>
+    <dt>{{data.options.sticky.labels.startingDate}}</dt>
     <dd>{{pensionInfo.startingDate}}</dd>
 
-    <dt>{{data.options.labels.pensionPartner}}</dt>
+    <dt>{{data.options.sticky.labels.pensionPartner}}</dt>
     <dd>{{pensionInfo.insurablePartner ? 'Ja' : 'Nee'}}</dd>
 
-    <dt>{{data.options.labels.birthDateOfPartner}}</dt>
+    <dt>{{data.options.sticky.labels.birthDateOfPartner}}</dt>
     <dd>{{pensionInfo.birthDateOfPartner}}</dd>                              
   </dl>
   
   <a 
-    *ngIf="data.options.link.text && data.options.link.url" 
-    href="data.options.link.url">
+    *ngIf="data.options.sticky.link.text && data.options.sticky.link.url" 
+    href="data.options.sticky.link.url">
     <span class="icon-skinnyarrow"></span>
-    {{data.options.link.text}}
+    {{data.options.sticky.link.text}}
   </a>
 </aa-sticky>
 
 <div class="aa-pension-offer-form">
   <h2>{{data.options.subtitle}}</h2>
-  <h3>{{data.options.termsTitle}}</h3>
-  <ul class="bullet">
-    <li *ngFor="let value of data.options.termsList">{{value}}</li>
-  </ul>
+  
+  <div class="aa-pension-offer-form--terms-wrapper" *ngIf="data.options.termsList">
+    <h3>{{data.options.termsTitle}}</h3>
+    <ul class="bullet" *ngIf="!isString(data.options.termsList)">
+      <li *ngFor="let value of data.options.termsList">{{value}}</li>
+    </ul>
+    <p [innerHTML]="data.options.termsList" *ngIf="isString(data.options.termsList)"></p>
+  </div>
   <h3>{{data.options.yourDataTitle}}</h3>
   <p>
     {{data.options.yourDataText}}
