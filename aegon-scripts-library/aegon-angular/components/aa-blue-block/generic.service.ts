@@ -327,22 +327,22 @@ export class GenericService {
 	    if (highLow) {
 	      if (s === 'OPLL') {
 	        hlAmount += parseFloat(value);
-	        response.after5YearsMine = "€ " + new AAMoneyPipe().transform(value, []);
+	        response.after5YearsMine = "€ " + new AAMoneyPipe().transform(value, [false, true]);
 	      } else if (s === 'OPT') {
 	        hlAmount += parseFloat(value);
 	      } else if (s === 'PPLL') {
-	        response.lifelongPartner = "€ " + new AAMoneyPipe().transform(value, []);
+	        response.lifelongPartner = "€ " + new AAMoneyPipe().transform(value, [false, true]);
 	      }
 	    } else {
 	      if (s === 'OPLL') {
-	        response.lifelongMine = "€ " + new AAMoneyPipe().transform(value, []);
+	        response.lifelongMine = "€ " + new AAMoneyPipe().transform(value, [false, true]);
 	      } else if (s === 'PPLL') {
-	        response.lifelongPartner = "€ " + new AAMoneyPipe().transform(value, []);
+	        response.lifelongPartner = "€ " + new AAMoneyPipe().transform(value, [false, true]);
 	      }
 	    }
 	  });
 	  if (highLow) {
-	    response.first5YearsMine = "€ " + new AAMoneyPipe().transform(hlAmount, []);
+	    response.first5YearsMine = "€ " + new AAMoneyPipe().transform(hlAmount, [false, true]);
 	  }
 
 	  let pensionInfo: any = clientStorage.session.getItem("pensionInfo");
@@ -383,19 +383,19 @@ export class GenericService {
 
 	if(itemsPpll['BEDRAG']) {
 		if(vast) {
-			response.lifelongPartner = "€ " + new AAMoneyPipe().transform((itemsPpll['BEDRAG']/12), []);
+			response.lifelongPartner = "€ " + new AAMoneyPipe().transform((itemsPpll['BEDRAG']/12), [false, true]);
 		} else {
-			response.firstYearsPartner = "€ " + new AAMoneyPipe().transform((itemsPpll['BEDRAG']/12), []);
-			response.optimisticPartner = "€ " + new AAMoneyPipe().transform((itemsPpll['BEDRAG10JAAR_OPTIMISTISCH']/12), []);
-			response.neutralPartner = "€ " + new AAMoneyPipe().transform((itemsPpll['BEDRAG10JAAR_STANDAARD']/12), []);
-			response.pessimisticPartner = "€ " + new AAMoneyPipe().transform((itemsPpll['BEDRAG10JAAR_PESSIMISTISCH']/12), []);
+			response.firstYearsPartner = "€ " + new AAMoneyPipe().transform((itemsPpll['BEDRAG']/12), [false, true]);
+			response.optimisticPartner = "€ " + new AAMoneyPipe().transform((itemsPpll['BEDRAG10JAAR_OPTIMISTISCH']/12), [false, true]);
+			response.neutralPartner = "€ " + new AAMoneyPipe().transform((itemsPpll['BEDRAG10JAAR_STANDAARD']/12), [false, true]);
+			response.pessimisticPartner = "€ " + new AAMoneyPipe().transform((itemsPpll['BEDRAG10JAAR_PESSIMISTISCH']/12), [false, true]);
 		}
 	}
 
-	response.firstYearsMine = "€ " + new AAMoneyPipe().transform((itemsOpll['BEDRAG']/12), []);
-	response.optimisticMine = "€ " + new AAMoneyPipe().transform((itemsOpll['BEDRAG10JAAR_OPTIMISTISCH']/12), []);
-	response.neutralMine = "€ " + new AAMoneyPipe().transform((itemsOpll['BEDRAG10JAAR_STANDAARD']/12), []);
-	response.pessimisticMine = "€ " + new AAMoneyPipe().transform((itemsOpll['BEDRAG10JAAR_PESSIMISTISCH']/12), []);
+	response.firstYearsMine = "€ " + new AAMoneyPipe().transform((itemsOpll['BEDRAG']/12), [false, true]);
+	response.optimisticMine = "€ " + new AAMoneyPipe().transform((itemsOpll['BEDRAG10JAAR_OPTIMISTISCH']/12), [false, true]);
+	response.neutralMine = "€ " + new AAMoneyPipe().transform((itemsOpll['BEDRAG10JAAR_STANDAARD']/12), [false, true]);
+	response.pessimisticMine = "€ " + new AAMoneyPipe().transform((itemsOpll['BEDRAG10JAAR_PESSIMISTISCH']/12), [false, true]);
 
 	  let pensionInfo: any = clientStorage.session.getItem("pensionInfo");
 	  response.showButton = this.calculateFirst3Month(pensionInfo.startingDate);
