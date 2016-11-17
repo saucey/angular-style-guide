@@ -128,6 +128,9 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit{
   }
 
   changeStartingDate(value: string): void {
+
+    this.pension['startingDate'] = value;
+
     this.startingDate = value;
     // this.startingDateTooFar = false;
     this.startingDateChoices.some((date, index) => {
@@ -184,28 +187,24 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit{
 
     if(this.sectionIndex == 2) {
       if(this.pension['pensionLocation'] == undefined) {
-        // this.aanpassenSet = true;
         return true;
       }
     }
 
     if(this.sectionIndex == 3) {
       if(this.btnValidationForUserPartner() !== false) {
-        // this.aanpassenSet = true;
         return true;
       }
     }
 
     if(this.sectionIndex == 4) {
       if(this.btnValidationForUser() !== false){
-        // this.aanpassenSet = true;
         return true;
       }
     }
 
     if(this.sectionIndex == 5) {
       if(this.pension['startingDate'] == undefined){
-        // this.aanpassenSet = true;
         return true;
       }
     }
@@ -274,10 +273,15 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit{
   pensionStartDate(val): boolean {
 
     if(this.sectionIndex == 5) {
-      if (!val == true) {
-        this.aanpassenSet = true;
-      } else {
+      if(val !== undefined) {
+        //show
         this.aanpassenSet = false;
+        this.aanpassenSet = false;
+
+      } else {
+        //hide
+        this.aanpassenSet = true;
+
       }
     }
 

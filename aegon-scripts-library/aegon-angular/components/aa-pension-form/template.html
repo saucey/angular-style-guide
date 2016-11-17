@@ -322,7 +322,7 @@
                         <p>{{data.options.block5.box.text}}</p>
 
                         <div class="inputs select">
-                          <select [(ngModel)]="pension['startingDate']" class="no-dd" (change)="changeStartingDate($event.target.value)" required>
+                          <select class="no-dd" (change)="changeStartingDate($event.target.value)" required>
                             <option value="" disabled>Maak uw keuze</option>
                             <option *ngFor="let date of startingDateChoices" [value]="date.value">{{date.label}}</option>
                           </select>
@@ -342,3 +342,46 @@
         </div>
       </li>
     </ul>
+
+<!--<div style="background-color: #85BFE5; padding: 40px;">-->
+
+  <!--<div class="inputs select">-->
+    <!--<select class="no-dd" (change)="changeStartingDate($event.target.value)" required>-->
+      <!--<option value="">Maak uw keuze</option>-->
+      <!--<option *ngFor="let date of startingDateChoices" [value]="date.value">{{date.label}}</option>-->
+    <!--</select>-->
+  <!--</div>-->
+
+<!--</div>-->
+
+  <!--<div class="inputs select" [ngModel]="startingDate">-->
+    <!--<select name="" class="no-dd" (change)="changeStartingDate($event.target.value)" required>-->
+      <!--<option value="" disabled>Maak uw keuze</option>-->
+      <!--<option *ngFor="let date of startingDateChoices" [value]="date.value">{{date.label}}</option>-->
+    <!--</select>-->
+  <!--</div>-->
+
+  <!--<select name="" id="" [ngModel]="pension['startingDate']">-->
+    <!--<option value="">one</option>-->
+    <!--<option value="">two</option>-->
+    <!--<option value="">three</option>-->
+    <!--<option value="">four</option>-->
+  <!--</select>-->
+
+<!--</div>-->
+
+<!--<div class="quickquote angular">-->
+  <!--<div class="triangle"></div>-->
+  <!--<div class="calculation">-->
+
+      <!--<div class="field">-->
+        <!--<div class="inputs">-->
+          <!--<select [ngModel]="startingDate" (change)="changeStartingDate($event.target.value)" required>-->
+            <!--<option value="" disabled>Maak uw keuze</option>-->
+            <!--<option *ngFor="let date of startingDateChoices" [value]="date.value">{{date.label}}</option>-->
+          <!--</select>-->
+        <!--</div>-->
+      <!--</div>-->
+
+  <!--</div>-->
+<!--</div>-->
