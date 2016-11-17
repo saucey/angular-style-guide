@@ -104,6 +104,9 @@ $slider_value_background: $slightly_lighter_blue;
   position: absolute;
   left: 0;
   transform: translateX(-10px);
+  @media (max-width: 500px) {
+    font-size: 0.7em;
+  }
 }
 .slider__label--first {
   transform: none;
@@ -113,4 +116,7 @@ $slider_value_background: $slightly_lighter_blue;
   right: 0;
   left: inherit;
   margin-left: 0 !important;
+  @media (max-width: 500px) {
+    margin-right: -10px;
+  }
 }
