@@ -2,7 +2,7 @@
 .fnol-page {
 
   .aa-fnol-wrapper {
-    border: 1px solid $slightly_lighter_blue;
+    border: 1px solid #EDF6FB;
     width: 100%;
     margin: 10px 0;
     position: relative;
@@ -11,8 +11,8 @@
   .arrow-right {
     width: 0;
     height: 0;
-    border-top: 30px solid transparent;
-    border-bottom: 30px solid transparent;
+    border-top: 29px solid transparent;
+    border-bottom: 29px solid transparent;
     border-left: 30px solid $orange;
     top: 0px;
     right: -30px;
@@ -28,6 +28,9 @@
 
   .mr-top20 {
     margin-top: 20px !important;
+  }
+  .mr-top10{
+    margin-top: 10px
   }
   .fnol-category__headline {
     font-size: 1.5em;
@@ -182,7 +185,7 @@
     .fnol-mobile-header-wrapper{
       background:#D9EBF7;
       margin-top:20px;
-      padding: 10px;
+      padding: 10px 0 0 0;
     }
     .fnol-mobile-left{
       float:left
@@ -190,7 +193,7 @@
     .fnol-mobile-right{
       float:left;
     }
-    .arrow-right {
+   /* .arrow-right {
       width: 0;
       border-bottom: 24px solid transparent;
       height: 0;
@@ -198,7 +201,7 @@
       border-left: 24px solid $orange;
       top: 0px;
       right: -24px;
-    }
+    } */
     .auto-para-spacer{
       padding:10px 0px 10px 0px;
     }
@@ -238,9 +241,9 @@
     }
     .arrow-right {
       width: 0;
-      border-bottom: 28px solid transparent;
+      border-bottom: 26px solid transparent;
       height: 0;
-      border-top: 28px solid transparent;
+      border-top: 26px solid transparent;
       border-left: 28px solid $orange;
       top: -1px;
       right: -28px;
