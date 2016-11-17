@@ -215,6 +215,54 @@
       }
     }
   }
+
+  .fnol-repairshop-table-sort{width: 100%;}
+  .fnol-repairshop-table-sort th{border-bottom: solid 1px $grey;background: transparent !important;}
+  .fnol-repairshop-table-sort tr{border-bottom: solid 1px $grey;}
+  .fnol-repairshop-table-sort tr td{padding:10px 10px 10px 0px};
+  .fnol-repairshop-table-sort tr td.naam{width:20%;font-size: 1em;font-weight: bold; color: $blue;}
+  .fnol-repairshop-table-sort tr td.phone{width: 20%;}
+  .fnol-repairshop-table-sort tr td.address{width: 21%;}
+  .fnol-repairshop-table-sort tr td.rating{width: 17%;}
+  .fnol-repairshop-table-sort tr td.distance{width: 11%;}
+  .fnol-repairshop-table-sort tr td.location{width: 11%;}
+  .fnol-repairshop-table-sort .title_sort {
+
+    &:after {
+      font-family: $font_icons;
+      font-size: 12px;
+      float: right;
+      transform: rotate(90deg);
+      content: $font_icons_arrow_right_skinny;
+      color: $black;
+      margin: 3px 20px 0px 10px;
+    }
+  }
+
+  input {
+    ~ [class^=thumbs_] {
+      color: $darker_grey;
+    }
+    ~ div.line {
+      display: none;
+    }
+    &:checked {
+      ~ [class^=thumbs_] {
+        color: $blue;
+      }
+      + .title_sort {
+        &:after {
+          @include transform(rotate(-90deg) !important);
+        }
+      }
+      ~ .answer, ~ .feedback, ~ div.line {
+        display: block;
+      }
+      ~ .response {
+        display: block;
+      }
+    }
+  }
 }
 
 // mobile (min-width 0px to max-width 640px)
