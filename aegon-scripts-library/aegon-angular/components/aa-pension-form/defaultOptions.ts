@@ -13,6 +13,7 @@ export const defaultOptions = {
         source: "Bron:Aegon",
       }
   },
+
   block2: {
     title: "Waar is uw pensioenkapitaal opgebouwd",
     subTitle: "Om het juiste rendement te kunnen tonen dient u hier in te vullen bij welke verzekeraars of pensioenfondsen uw pensioen is opgebouwd.",
@@ -24,6 +25,8 @@ export const defaultOptions = {
         btn: "Volgende vraag",
       }
   },
+
+
   block3: {
     title: "Partnerpensioen meeverzekeren?",
     subTitle: "Heeft u een partner? En wilt u dat uw partner een pensioenuitkering krijgt na uw overlijden? Dan kunt u een partnerpensioen verzekeren. De uitkering is 70% van het pensioen dat u ontvangt.",
