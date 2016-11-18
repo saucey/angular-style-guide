@@ -4,7 +4,7 @@
         <h3 class="fnol-repairshop-subhead">U kunt deze tool gebruiken voor het vinden van een bij AEGON Schade Service aangesloten autoherstelbedrijf bij u in de buurt.</h3>
     </div>
 
-    <div class="messages fnol-repairshop-form">
+    <div class="fnol-repairshop-form">
         <div class="row-fluid fnol-repairshop-formSpacer">
             <div class="span4 txtBold">Postcode of plaatsnaam <span class="fnol-repairshop-mandatory">*</span></div>
             <div class="span8">
@@ -55,17 +55,29 @@
         </div>
     </div>
 
-    <div class="messages fnol-repairshop-result">
-        <div class="row-fluid">
-             <span>showing 50 results</span>
+    <div class="fnol-repairshop-result">
+        <div class="row-fluid result-text">
+             <span>Showing 50 results</span>
         </div>
         <div class="fnol-repairshop-table-sort row-fluid">
             <table class="">
                 <thead>
                 <tr>
-                    <th class="" colspan="3">Naam</th>
-                    <th class=""><span class="title_sort"><aa-hint text="Waardering"></aa-hint>Waardering</span></th>
-                    <th class=""><span class="title_sort">Afstand</span></th>
+                    <th colspan="3">
+                        <div class="title_pos">
+                            <span class="title_sort">Naam</span>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="title_pos">
+                            <span class="title_sort"><aa-hint text="Waardering"></aa-hint>Waardering</span>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="title_pos">
+                            <span class="title_sort">Afstand</span>
+                        </div>
+                    </th>
                     <th class=""></th>
                 </tr>
                 </thead>
@@ -77,12 +89,12 @@
                         <ul>
                             <li>Mercuriusweg</li>
                             <li>15 2516 AW Den Haag</li>
-                            <li><a href="#">info@autoschadehuis.nl</a></li>
+                            <li class="address-info-spacer"><span>info@autoschadehuis.nl</span></li>
                         </ul>
                     </td>
-                    <td class="rating">star</td>
+                    <td class="rating"><span class="rating-star">★★★★★</span></td>
                     <td class="distance">2 Km</td>
-                    <td class="location"><a href="location">Locatie</a></td>
+                    <td class="location"><a href="location"><span class="icon-arrow-location location-icon-pos"></span>Locatie</a></td>
                 </tr>
                 <tr>
                     <td class="naam">ASN Autoschade Service Karnekamp Amsterdam</td>
@@ -93,9 +105,9 @@
                             <li>1096 CJ AMSTERDAM</li>
                         </ul>
                     </td>
-                    <td class="rating">star</td>
+                    <td class="rating"><span class="rating-star">★★★</span></td>
                     <td class="distance">1 Km</td>
-                    <td class="location"><a href="location">Locatie</a></td>
+                    <td class="location"><a href="location"><span class="icon-arrow-location location-icon-pos"></span>Locatie</a></td>
                 </tr>
                 </tbody>
             </table>
