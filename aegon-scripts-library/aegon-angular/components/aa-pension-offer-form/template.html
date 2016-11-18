@@ -26,7 +26,13 @@
 
   <dl class="aa-sticky__dataList aa-sticky__dataList--separate">
     <dt>{{data.options.sticky.labels.pensionProduct}}</dt>
-    <dd>{{pensionProduct.template}}</dd>
+
+    <dd *ngIf="(pensionProduct.template=='vpuFixed' || pensionProduct.template=='vpuVariable')">
+      Uitkerend Beleggingspensioen
+    </dd>
+    <dd *ngIf="!(pensionProduct.template=='vpuFixed' || pensionProduct.template=='vpuVariable')">
+      Uitkerend Garantiepensioen
+    </dd>
 
     <dt>{{data.options.sticky.labels.pensionAmount}}</dt>
     <dd>&euro; {{pensionInfo.pensionAmount | money}}</dd>
