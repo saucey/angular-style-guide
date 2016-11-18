@@ -188,7 +188,7 @@
     </aa-tabs-view>
   </div>
 
-  <ul class="arrow">
+  <ul class="arrow wia_calculator__back_arrow">
     <li><a href="#" (click)="goBack()">Terug naar situatie instellen</a></li>
   </ul>
 
@@ -196,50 +196,6 @@
 
 <div class="wia_calculator_mobile aa-component" [class.hidden]="!externalInput">
 
-  <h4 class="hidden-desktop">Arbeidsongeschikt</h4>
-
-  <aa-slider-input class="aa-input--percentage wia_calculator__disability_slider"
-                   [(ngModel)]="disability.value"
-                   (modelChange)="sliderUpdate(disability, $event)"
-                   [sliderOptions]="disability.options">
-  </aa-slider-input>
-
-  <div *ngIf="disability.value < 80">
-    <h4 class="hidden-desktop">Benutting restverdiencapaciteit</h4>
-
-    <aa-slider-input class="aa-input--percentage"
-                     [(ngModel)]="usage.value"
-                     (modelChange)="sliderUpdate(usage, $event)"
-                     [sliderOptions]="usage.options">
-    </aa-slider-input>
-  </div>
-
-  <div class="class" *ngIf="disability.value >= 80">
-    <h4>Duurzaam arbeidsongeschikt</h4>
-
-    <aa-input-switch [(ngModel)]="permanentDisability" (modelChange)="updatePermDisability()"></aa-input-switch>
-  </div>
-
-  <a class="wia_calculator__mobile_help wia_calculator--aegon-blue" (click)="mobileHelpVisible = !mobileHelpVisible">
-    <span class="icon-help"></span>
-    <span class="wia_calculator__mobile_help_text">Lees meer over arbeidsongeschiktheid</span>
-  </a>
-
-  <div class="wia_calculator__mobile_help_content" *ngIf="mobileHelpVisible">
-
-    <h4>0%-35% arbeidsongeschikt</h4>
-    <p>
-      U bent arbeidsongeschikt verklaard. Het UWV bepaalt hoeveel u nog wél kan werken. Is de mate waarin u arbeidsongeschikt raakt minder dan 35% dan krijgt u geen uitkering van de overheid. Uw loon hangt af van hoeveel u nog blijft werken. Dat noemen we: benutting van uw restverdiencapaciteit
-    </p>
-
-    <h4>35%-80% arbeidsongeschikt</h4>
-    <p>U kan niet meer of minder werken. Het UWV bepaalt hoeveel u nog wél kan werken en wat u daarmee nog kan verdienen. Dit noemen we uw ‘restverdiencapaciteit’. Er wordt vervolgens gekeken naar uw benutting daarvan. Benut u minder dan 50% van uw ‘restverdiencapaciteit dan verliest u een groot gedeelte van uw wettelijke uitkering..</p>
-
-    <h4>80% 100% arbeidsongeschikt</h4>
-    <p>U kunt nagegoeg niet meer werken. Dan wordt u 80% of meer arbeidsongeschikt verklaard. Voor de uitkering van de overheid wordt er een verschil gemaakt tussen duurzaam en niet duurzaam arbeidsongeschikt. Als u langer dan 5 jaar nagenoeg niet kunt werken wordt er van duurzaam arbeidsongeschikt gesproken.</p>
-
-    <span class="wia_calculator--aegon-blue" (click)="mobileHelpVisible = false">Sluit</span>
-  </div>
 
   <div class="wia_calculator__summary">
     <div class="row-fluid">
@@ -272,8 +228,70 @@
     <span class="wia_calculator__summary_legend">Bedragen zijn bruto per jaar</span>
   </div>
 
+
+  <h4 class="hidden-desktop">Arbeidsongeschikt</h4>
+
+  <aa-slider-input class="aa-input--percentage wia_calculator__disability_slider"
+                   [(ngModel)]="disability.value"
+                   (modelChange)="sliderUpdate(disability, $event)"
+                   [sliderOptions]="disability.options">
+  </aa-slider-input>
+
+  <div *ngIf="disability.value < 80">
+    <h4 class="hidden-desktop">Benutting restverdiencapaciteit</h4>
+
+    <aa-slider-input class="aa-input--percentage"
+                     [(ngModel)]="usage.value"
+                     (modelChange)="sliderUpdate(usage, $event)"
+                     [sliderOptions]="usage.options">
+    </aa-slider-input>
+  </div>
+
+  <div class="class" *ngIf="disability.value >= 80">
+    <h4>Duurzaam arbeidsongeschikt</h4>
+
+    <aa-input-switch [(ngModel)]="permanentDisability" (modelChange)="updatePermDisability()"></aa-input-switch>
+  </div>
+
+  <a class="wia_calculator__mobile_help wia_calculator--aegon-blue" (click)="mobileHelpVisible = !mobileHelpVisible">
+    <span class="icon-help"></span>
+    <span class="wia_calculator__mobile_help_text">Lees meer over arbeidsongeschiktheid</span>
+  </a>
+
+  <div class="wia_calculator__mobile_help_content" *ngIf="mobileHelpVisible">
+
+    <h3>0%-35% arbeidsongeschikt</h3>
+    <p>
+      U bent arbeidsongeschikt verklaard. Het UWV bepaalt hoeveel u nog wél kan werken. Is de mate waarin u arbeidsongeschikt raakt minder dan 35% dan krijgt u geen uitkering van de overheid. Uw loon hangt af van hoeveel u nog blijft werken. Dat noemen we: benutting van uw restverdiencapaciteit
+    </p>
+
+    <h3>35%-80% arbeidsongeschikt</h3>
+    <p>U kan niet meer of minder werken. Het UWV bepaalt hoeveel u nog wél kan werken en wat u daarmee nog kan verdienen. Dit noemen we uw ‘restverdiencapaciteit’. Er wordt vervolgens gekeken naar uw benutting daarvan. Benut u minder dan 50% van uw ‘restverdiencapaciteit dan verliest u een groot gedeelte van uw wettelijke uitkering..</p>
+
+    <h3>80% 100% arbeidsongeschikt</h3>
+    <p>U kunt nagegoeg niet meer werken. Dan wordt u 80% of meer arbeidsongeschikt verklaard. Voor de uitkering van de overheid wordt er een verschil gemaakt tussen duurzaam en niet duurzaam arbeidsongeschikt. Als u langer dan 5 jaar nagenoeg niet kunt werken wordt er van duurzaam arbeidsongeschikt gesproken.</p>
+
+    <span class="wia_calculator--aegon-blue" (click)="mobileHelpVisible = false">Sluit</span>
+  </div>
+
   <h3>1e  jaar en 2e  jaar</h3>
   <p>In de eerste twee jaar dat u arbeidsongeschikt raakt betaalt uw werkgever uw salaris door. Dit is meestal 100% in het eerste jaar en 70% in het tweede jaar. Check bij uw werkgever wat voor u geldt.</p>
+
+
+  <div class="wia_calculator__summary_table wia_calculator__summary_table--three-column">
+    <table>
+      <tr>
+        <td>1e jaar</td>
+        <td>Loon</td>
+        <td>{{ graphData[0]?.columns[0].amountYearly | money:true }}</td>
+      </tr>
+      <tr>
+        <td>2e jaar</td>
+        <td>Loon</td>
+        <td>{{ graphData[0]?.columns[1].amountYearly | money:true }}</td>
+      </tr>
+    </table>
+  </div>
 
   <h3>Vanaf 3e jaar</h3>
   <p>Vanaf het 3e jaar krijgt u een zogenaamde loongerelateerde uitkering. Hoe langer u gewerkt heeft hoe langer u recht heeft op deze uitkering. Minimaal 3 maanden en maximaal 38 maanden (vanaf 2019 maximaal 24 maanden).</p>
@@ -332,7 +350,7 @@
   </div>
 
 
-  <ul class="arrow">
+  <ul class="arrow wia_calculator__back_arrow">
     <li><a href="#" (click)="goBack()">Terug naar situatie instellen</a></li>
   </ul>
 
