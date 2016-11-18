@@ -8,9 +8,9 @@ import { SimulationDataset, SimulationKey, Simulation } from "./models/simulatio
 const SIMULATION_API = '/sites/aegonnl/public_files/simulation.json';
 
 const CATEGORIES_MAP = {
-  Statutory: 1,
-  Salary: 2,
-  Aegon: 3
+  StatutoryBenefits: 1, //statutory
+  OwnIncomeBenefits: 2, //salary
+  InsuranceBenefits: 3 //aegon products
 };
 
 @Injectable()
@@ -34,6 +34,11 @@ export class CalculatorDataService {
     });
 
     const result = data.reduce((res, item) => {
+
+      //convert string to numbers
+      item.amountMonthly = +item.amountMonthly;
+      item.amountYearly = +item.amountYearly;
+      item.period = +item.period;
 
       item.id = `${item.componentId}-${item.productId}-${item.benefitId}`;
       item.category = CATEGORIES_MAP[item.componentId];
@@ -110,6 +115,7 @@ export class CalculatorDataService {
     const params: URLSearchParams = new URLSearchParams();
     params.set('income', input.income.toString());
     params.set('correlationId', generateCorrelationId());
+    params.set('clientId', 'Aegonnl');
 
     input.productsIds.forEach(productId => {
       params.set(productId, this.getProductDynamicAttr(productId, input));
