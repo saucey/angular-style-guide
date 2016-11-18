@@ -6,6 +6,7 @@
 import {Component, ElementRef, Input, OnInit} from '@angular/core';
 import {AABaseComponent} from '../../lib/classes/AABaseComponent';
 import {defaultOptions} from './defaultOptions';
+import {aegonTealium} from "../../lib/aegon_tealium";
 
 
 // Constants
@@ -26,7 +27,6 @@ export class AAPensionOfferConfirmationComponent extends AABaseComponent impleme
 
   constructor(private thisElement: ElementRef) {
     super(thisElement);
-    console.log('This is a copy of pension offer form. But it dont show anything on screen');
   }
 
   public ngOnInit() {
@@ -46,7 +46,18 @@ export class AAPensionOfferConfirmationComponent extends AABaseComponent impleme
     } else { 
       console.log('Go redirect!');
       if(this.data.options.start.redirect == true) this.redirectToStartPage(); 
-    }   
+    }
+
+    if(this.getProductTipe()=="Uitkerend Beleggingspensioen") {
+      this.sendTealiumTagging('offerte_aanvraag_uitkerend_beleggingspensioen', 'variabele_pensioenuitkering', 'variabele_pensioenuitkering', 2, 'offerte_aanvraag_uitkerend_beleggingspensioen', 'form_completed');
+    } else {
+      this.sendTealiumTagging('offerte_aanvraag_direct_ingaand_pensioen', 'direct_ingaand_pensioen', 'direct_ingaand_pensioen', 2, 'offerte_aanvraag_direct_ingaand_pensioen', 'form_completed');   
+    }
+
+    if(this.data.options.cleanSessionStorage) {
+      this.cleanSessionStorage(this.data.options.cleanSessionStorage);
+    }
+
   }
 
   // Get the session storage from an existing object or an empty object 
@@ -71,5 +82,37 @@ export class AAPensionOfferConfirmationComponent extends AABaseComponent impleme
   // Redirect to start page
   private redirectToStartPage():void {
      window.location.href = this.data.options.start.url;       
+  }
+
+  private cleanSessionStorage(items: any):void {
+    try {
+      items.forEach(function(key) {
+        clientStorage.session.removeItem(key);
+      });
+    } catch(err) {
+      console.info("Cannot clean storage!");
+    }
+  }
+
+  private sendTealiumTagging(_page_cat_2_name: string, _page_cat_5_product: string, _product_name: string, _page_step: number, _form_name: string, _event: string) {
+    let tealiumObj: any = {
+      page_cat_1_type: 'formulier',
+      page_cat_2_name: _page_cat_2_name,
+      page_cat_3_section: 'particulier',
+      page_cat_4_productgroup: 'pensioen',
+      page_cat_5_product: _page_cat_5_product,
+      page_step: _page_step,
+      form_name: _page_step,
+      product_name: [_product_name],
+      product_category: ['pensioen'],
+      event: _event
+    };
+    console.log('Tealium tagging: ', tealiumObj);
+    aegonTealium(tealiumObj);  
+  }
+
+  private getProductTipe() {
+    let template: string = this.pensionProduct["template"] || "";
+    return (template=="vpuFixed" || template=="vpuVariable") ? "Uitkerend Beleggingspensioen" : "Uitkerend Garantiepensioen";
   }
 }

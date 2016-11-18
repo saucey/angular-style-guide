@@ -1,5 +1,5 @@
 <div class="aa-pension-offer-confirmation">
-  <h2>{{data.options.subtitle}}</h2>
+  <h2 *ngIf="data.options.subtitle">{{data.options.subtitle}}</h2>
   
-  <div [innerHTML]="data.options.content"></div>
+  <div *ngIf="data.options.content" [innerHTML]="data.options.content"></div>
 </div>
