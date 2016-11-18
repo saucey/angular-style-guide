@@ -29,9 +29,9 @@ export const defaultOptions = {
     link: {
       text: 'Uw gegevens aanpassen',
       url: '/link-to-edit'
-    },
-    formLabels : {
-      telephon: 'Telefoon nummer'
     }
+  },
+  formLabels : {
+    telephon: 'Telefoon nummer'
   }
 }

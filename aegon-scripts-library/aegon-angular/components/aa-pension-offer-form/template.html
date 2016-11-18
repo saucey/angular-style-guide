@@ -43,7 +43,7 @@
     <dt>{{data.options.sticky.labels.pensionPartner}}</dt>
     <dd>{{pensionInfo.insurablePartner ? 'Ja' : 'Nee'}}</dd>
 
-    <dt>{{data.options.sticky.labels.birthDateOfPartner}}</dt>
+    <dt *ngIf="pensionInfo.insurablePartner">{{data.options.sticky.labels.birthDateOfPartner}}</dt>
     <dd>{{pensionInfo.birthDateOfPartner}}</dd>                              
   </dl>
   
