@@ -58,13 +58,11 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
   @Input() bbleft;
   @Input() bbright;
 
-  public pension: any = clientStorage.session.getItem("pensionInfo") || {startingDate: ""};
-
-  public sessionPartnerDob = this.pension['birthDateOfPartner'] || '';
+  public pension: any = clientStorage.session.getItem("pensionInfo") || {startingDate:"", birthDateOfPartner: ""};
 
   public defaultOptions: any = defaultOptions;
   public amountTooSmall: boolean;
-  public aanpassenSet: boolean;
+  public aanpassenButton: {} = {show: !!clientStorage.session.getItem("pensionInfo")};
   public message: boolean = false;
   public age: number;
   public sectionIndex: number = 1;
@@ -134,11 +132,18 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
         label = '1 ' + monthLabels[month - 1] + ' ' + year;
       this.startingDateChoices.push({value: value, label: label});
     }
+
+    // set default validation state for date inputs
+    if (this.pension['birthDateOfPartner']) {
+      this.validateAge(this.pension['birthDateOfPartner'], 1, 'partner', 'partner');
+    }
+
+    if (this.pension['birthDate']) {
+      this.validateAge(this.pension['birthDate'], 2, 'user', 'user');
+    }
   }
 
   changeStartingDate(value: string): void {
-
-    this.startingDate = value;
     // this.startingDateTooFar = false;
     this.startingDateChoices.some((date, index) => {
       if (date.value === value && index >= 3) {
@@ -146,6 +151,9 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
         return true;
       }
     });
+    // HACK: make Angular realise there has been change in `pensionStartingDate` which
+    // doesn't get registered for some reason
+    this.aanpassenButton['show'] = typeof value != 'undefined' && value != "";
   }
 
   editVisibility(val): any {
@@ -186,36 +194,6 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
 
   editSection(val): any {
     //set a variable from here to find what index the section is on
-    if (this.sectionIndex == 1) {
-      if (this.isInValidAmount() !== false) {
-        return true;
-      }
-    }
-
-    if (this.sectionIndex == 2) {
-      if (this.pension['pensionLocation'] == undefined) {
-        return true;
-      }
-    }
-
-    if (this.sectionIndex == 3) {
-      if (this.btnValidationForUserPartner() !== false) {
-        return true;
-      }
-    }
-
-    if (this.sectionIndex == 4) {
-      if (this.btnValidationForUser() !== false) {
-        return true;
-      }
-    }
-
-    if (this.sectionIndex == 5) {
-      if (this.pension['startingDate'] == "") {
-        return true;
-      }
-    }
-
     this.sectionIndex = val;
 
     for (let i = 1; i <= 5; i++) {
@@ -223,164 +201,120 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
     }
   }
 
-  btnValidationForUserPartner(): boolean {
-    const showAanpassenButton = true
-    if (this.sectionIndex != 3) {
-      return false;
+  isInValidAmount(): boolean {
+    if (this.sectionIndex == 1) {
+      if (this.pension.pensionAmount !== undefined && this.pension.pensionAmount !== 0) {
+
+        this.amountTooSmall = this.pension.pensionAmount >= this.defaultOptions.pensionAmountMin;
+        this.amountIsValid = !this.amountTooSmall;
+
+        return !this.amountTooSmall;
+      }
+
+      this.amountIsValid = false;
+      return true;
     }
+  }
+  /**
+   * Validates location, returns true if it's valid and shows the Aanpassen button
+   * @param val
+   * @returns {boolean}
+   */
+  pensionLocation(val): boolean {
+    if (this.sectionIndex == 2) {
+      this.aanpassenButton['show'] = false;
+      if (!val || typeof val == 'undefined') {
+        return false;
+      }
 
-    // by default, don't show the button
-    this.aanpassenSet = !showAanpassenButton
+      this.aanpassenButton['show'] = true;
+      return true;
+    }
+  }
 
-    if (this.pension.sessionSet) {
+  btnValidationForUserPartner(): boolean {
+    if (this.sectionIndex == 3) {
+      // by default, don't show the button
+      this.aanpassenButton['show'] = false
 
-      if (this.pension['havePartner'] == false) return false;
-      if (this.pension['havePartner'] == true && this.pension['insurablePartner'] == false) return false;
-      if (this.pension['havePartner'] == true && this.pension['insurablePartner'] == true && this.isAgeValid[1] == undefined && this.pension['birthDateOfPartner'] !== undefined) return false;
-
-      if (this.isAgeValid[1] == false) return false;
-
-      if (this.initChangeNoPolicy == true) return false;
-
-      if (this.hasPartner == 'show') {
-        // TODO: is this right?
-        this.aanpassenSet = showAanpassenButton;
+      if (this.pension['havePartner'] == undefined) return false;
+      if (this.pension['havePartner'] == false) {
+        this.aanpassenButton['show'] = true;
         return true;
       }
 
-      if (this.hasPartner == 'hidden' && this.initChangeHasPartner == false) return false;
-      this.aanpassenSet = showAanpassenButton;
+      if (this.pension['havePartner'] == true && this.pension['insurablePartner'] == false) {
+        this.aanpassenButton['show'] = true;
+        return true;
+      }
+
+      if (this.pension['havePartner'] == true && this.pension['insurablePartner'] == true && this.isAgeValid[1] == undefined && this.pension['birthDateOfPartner'] !== undefined) return false;
+
+      if (this.isAgeValid[1] == false) {
+        this.aanpassenButton['show'] = true;
+        return true;
+      }
+    }
+    // if (this.initChangeNoPolicy == true) return false;
+
+    // if (this.hasPartner == 'show') {
+    //   console.log(this.aanpassenButton, 'show')
+    //   this.aanpassenButton['show = false;
+    //   return false;
+    //
+    // }
+    //
+    // if (this.hasPartner == 'hidden' && this.initChangeHasPartner == false) return false;
+    //
+    // this.aanpassenButton['show = true;
+    // console.log(this.aanpassenButton, 'last')
+    // return true;
+  }
+
+  btnValidationForUser(): boolean {
+    if (this.sectionIndex == 4) {
+      this.aanpassenButton['show'] = false;
+
+      if (typeof this.pension['birthDate'] == 'undefined' || this.pension['birthDate'] == "") {
+        return false;
+      }
+
+      if (typeof this.isAgeValid[2] == 'undefined' || this.isAgeValid[2] == true) {
+        return false;
+      }
+
+      this.aanpassenButton['show'] = true;
       return true;
     }
-
-    if (this.pension['havePartner'] == false) return false;
-    if (this.pension['havePartner'] == true && this.pension['insurablePartner'] == false) return false;
-    if (this.pension['havePartner'] == true && this.pension['insurablePartner'] == true && this.isAgeValid[1] == undefined && this.pension['birthDateOfPartner'] !== undefined) return false;
-
-    if (this.isAgeValid[1] == false) return false;
-
-    if (this.initChangeNoPolicy == true) return false;
-
-    if (this.hasPartner == 'show') {
-      this.aanpassenSet = showAanpassenButton;
-      return true;
-
-    }
-
-    if (this.hasPartner == 'hidden' && this.initChangeHasPartner == false) return false;
-    this.aanpassenSet = showAanpassenButton;
-    return true;
-   }
-
-  pensionLocation(val): boolean {
-    if (this.sectionIndex != 2) {
-      return false;
-    }
-
-    this.aanpassenSet = !val;
-
-    return !val;
   }
 
   pensionStartDate(val): boolean {
     if (this.sectionIndex == 5) {
       if (val !== "") {
         //show
-        this.aanpassenSet = false;
-
+        this.aanpassenButton['show'] = true;
       } else {
         //hide
-        this.aanpassenSet = true;
-
+        this.aanpassenButton['show'] = false;
       }
-    }
 
-    return val == "";
+      return val !== "" && typeof val != 'undefined';
+    }
   }
 
-  btnValidationForUser(): boolean {
-    if (this.sectionIndex != 4) {
-      return false;
-    }
-
-    const showAanpassenButton = true
-    this.aanpassenSet = !showAanpassenButton;
-
-    if (this.pension.sessionSet) {
-
-      if (this.pension['birthDate'] !== "" && this.isAgeValid[2] == false) {
-
-        return false;
-      }
-
-      if (this.pension['birthDate'] !== "" && this.pension['birthDate'] !== undefined && this.isAgeValid[2] == undefined) {
-
-        return false;
-      }
-
-      //hide the button
-      this.aanpassenSet = showAanpassenButton;
-      return true;
-    }
-
-    if (this.pension['birthDate'] !== "" && this.isAgeValid[2] == false) {
-
-      return false;
-    }
-
-    if (this.pension['birthDate'] !== "" && this.pension['birthDate'] !== undefined && this.isAgeValid[2] == undefined) {
-
-      return false;
-    }
-
-    //hide the button
-    this.aanpassenSet = showAanpassenButton;
-    return true;
-  }
-
-  isInValidAmount(): boolean {
-    if (this.sectionIndex != 1) {
-      return false;
-    }
-
-    if (this.pension.pensionAmount !== undefined && this.pension.pensionAmount !== 0) {
-
-      this.amountTooSmall = this.pension.pensionAmount >= this.defaultOptions.pensionAmountMin;
-      this.amountIsValid = !this.amountTooSmall;
-
-      if (!this.amountTooSmall) {
-        this.aanpassenSet = true;
-      } else {
-        console.log("isInvalidAmount set to false")
-
-        this.aanpassenSet = false;
-      }
-
-      if (this.pension.sessionSet) {
-        if (!this.amountTooSmall) {
-          this.aanpassenSet = true;
-        } else {
-          console.log("isInValidAmount 2 set to false")
-
-          this.aanpassenSet = false;
-        }
-      }
-
-      return !this.amountTooSmall;
-    }
-
-    this.amountIsValid = false;
-    return true;
-
-  }
-
-
+  /**
+   * This returns true when the age is not valid.
+   * @param val
+   * @param index
+   * @param minAgeIndex
+   * @param maxAgeIndex
+   * @returns {boolean}
+   */
   validateAge(val, index, minAgeIndex, maxAgeIndex): any {
 
     this.age = calculateAge(val);
 
     this.partnersDobReadable[index] = new Date(val).toLocaleDateString('nl-NL', this.dateOptions);
-
     if (this.age == undefined) {
       this.userAgeInvalid[index] = true;
       this.userToYoung[index] = false;
