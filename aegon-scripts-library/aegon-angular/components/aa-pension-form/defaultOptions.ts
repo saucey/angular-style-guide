@@ -82,5 +82,6 @@ export const defaultOptions = {
         source: "Bron:Aegon",
       }
   },
-  "initializeBlueBlocks" : false
+  "initializeBlueBlocks" : false,
+  "pensionAmountMin": 25000
 };

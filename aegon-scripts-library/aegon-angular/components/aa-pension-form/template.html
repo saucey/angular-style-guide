@@ -1,6 +1,6 @@
 <!--<h1>Stel uw pensioenproduct samen</h1>-->
 <script src="defaultOptions.ts"></script><h2 class="general-form__box__sub__header">Uw situatie: u gaat binnenkort met pensioen</h2>
-
+  <h1>{{aanpassenSet}}</h1>
     <ul class="number-form__list">
       <li class='number-form__list__section'>
 
@@ -29,7 +29,7 @@
                         <div class="inputs number">
 
                           <aa-input-number class="aa-input--euro" #amountInput prefix="€" [(ngModel)]="pension['pensionAmount']" [max]="99999999"
-                                             (focus)="amountTooSmall = false; amountInput.select()" (keyup)="isInValidAmount()"
+                                             (focus)="amountTooSmall = false; amountInput.select()" (keyup)="isInValidAmount(1)"
                                              (enter)="submitAmount()" [placeholder]="'min 25.000'">
                           </aa-input-number>
 
@@ -39,8 +39,8 @@
                             </p>
                           </span>
                         </div>
-                        <button *ngIf="!pension.sessionSet" class="arrow button" type="button" (click)="goTo(1,2)" [disabled]="isInValidAmount()">{{data.options.block1.box.btn}}</button>
-                        <button *ngIf="pension.sessionSet" class="button icon-right icon-calculator" type="button" (click)="submitForm(pension); visibility[1] = 'hidden'" [disabled]="isInValidAmount()">{{data.options.block5.box.btn}}</button>
+                        <button *ngIf="!pension.sessionSet" class="arrow button" type="button" (click)="goTo(1,2)" [disabled]="isInValidAmount(2)">{{data.options.block1.box.btn}}</button>
+                        <button *ngIf="pension.sessionSet" class="button icon-right icon-calculator" type="button" (click)="submitForm(pension); visibility[1] = 'hidden'" [disabled]="isInValidAmount(3)">{{data.options.block5.box.btn}}</button>
 
                       </div>
                       <div class="col form-text__column">
@@ -322,7 +322,7 @@
                         <p>{{data.options.block5.box.text}}</p>
 
                         <div class="inputs select">
-                          <select class="no-dd" (change)="changeStartingDate($event.target.value)" required>
+                          <select class="no-dd" [(ngModel)]="pension['startingDate']" (change)="changeStartingDate($event.target.value)" required>
                             <option value="" disabled>Maak uw keuze</option>
                             <option *ngFor="let date of startingDateChoices" [value]="date.value">{{date.label}}</option>
                           </select>
