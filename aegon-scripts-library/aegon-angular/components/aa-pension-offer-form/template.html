@@ -26,7 +26,13 @@
 
   <dl class="aa-sticky__dataList aa-sticky__dataList--separate">
     <dt>{{data.options.sticky.labels.pensionProduct}}</dt>
-    <dd>{{pensionProduct.template}}</dd>
+
+    <dd *ngIf="(pensionProduct.template=='vpuFixed' || pensionProduct.template=='vpuVariable')">
+      Uitkerend Beleggingspensioen
+    </dd>
+    <dd *ngIf="!(pensionProduct.template=='vpuFixed' || pensionProduct.template=='vpuVariable')">
+      Uitkerend Garantiepensioen
+    </dd>
 
     <dt>{{data.options.sticky.labels.pensionAmount}}</dt>
     <dd>&euro; {{pensionInfo.pensionAmount | money}}</dd>
@@ -43,7 +49,7 @@
     <dt>{{data.options.sticky.labels.pensionPartner}}</dt>
     <dd>{{pensionInfo.insurablePartner ? 'Ja' : 'Nee'}}</dd>
 
-    <dt>{{data.options.sticky.labels.birthDateOfPartner}}</dt>
+    <dt *ngIf="pensionInfo.insurablePartner">{{data.options.sticky.labels.birthDateOfPartner}}</dt>
     <dd>{{pensionInfo.birthDateOfPartner}}</dd>                              
   </dl>
   
@@ -69,16 +75,16 @@
   <p>
     {{data.options.yourDataText}}
   </p>
-  <form class="container_12">
+  <form class="container_12" (click)="fireTealiumFormStarted()">
     <div class="form-input-row">
       <label for="text-input" class="span4 form-input-label">Aanhef</label>
       <div class="input-wrapper span8">
         <label class="radio">
-          <input type="radio" name="sex" value="value1"/>
+          <input type="radio" name="sex" value="value1" required />
           <span class="radio"></span>Heer
         </label>
         <label class="radio">
-          <input type="radio" checked name="sex" value="value2"/>
+          <input type="radio" name="sex" value="value2"/>
           <span class="radio"></span>Mevrouw
         </label>
       </div>
@@ -92,7 +98,7 @@
     <div class="form-input-row">
       <label for="text-input" class="span4 form-input-label">Tussenvoegsel</label>
       <div class="input-wrapper span8">
-        <input type="text" id="lastnamePrefix" name="lastnamePrefix" placeholder="" required title="" />
+        <input type="text" id="lastnamePrefix" name="lastnamePrefix" placeholder="" title="" />
       </div>
     </div>
     <div class="form-input-row">
@@ -102,7 +108,7 @@
       </div>
     </div>
     <div class="form-input-row">
-      <label for="text-input" class="span4 form-input-label">Mobielnumber</label>
+      <label for="text-input" class="span4 form-input-label">{{data.options.formLabels.telephon}}</label>
       <div class="input-wrapper span8">
         <input type="number" id="mobile" name="mobile" placeholder="071234567" required title="" />
       </div>
@@ -110,7 +116,7 @@
     <div class="form-input-row">
       <label for="text-input" class="span4 form-input-label">Email</label>
       <div class="input-wrapper span8">
-        <input type="email" id="email" name="email" placeholder="Type your emailaddress" required title="Enter a valid email address" />
+        <input type="email" id="email" name="email" placeholder="" required title="" />
       </div>
     </div>
     <div class="form-input-row">
