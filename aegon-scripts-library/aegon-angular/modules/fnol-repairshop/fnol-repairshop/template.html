@@ -1,4 +1,4 @@
-<h1>Vind Schadehersteller</h1>
+<h1 class="fnol-repairshop-page-title">Vind Schadehersteller</h1>
 <div class="fnol-repairshop">
     <div class="row-fluid">
         <h3 class="fnol-repairshop-subhead">U kunt deze tool gebruiken voor het vinden van een bij AEGON Schade Service aangesloten autoherstelbedrijf bij u in de buurt.</h3>
@@ -6,7 +6,7 @@
 
     <div class="fnol-repairshop-form">
         <div class="row-fluid fnol-repairshop-formSpacer">
-            <div class="span4 txtBold">Postcode of plaatsnaam <span class="fnol-repairshop-mandatory">*</span></div>
+            <div class="span4 txtBold nowrap">Postcode of plaatsnaam <span class="hidden-mobile fnol-repairshop-mandatory">*</span></div>
             <div class="span8">
                     <span class="">
                         <input type="text" class="">
@@ -15,7 +15,7 @@
         </div>
         <div class="row-fluid fnol-repairshop-formSpacer">
             <div class="span4 txtBold">Straal</div>
-            <div class="span8">
+            <div class="span8 clear-float">
                 <label class="radio">
                     <input type="radio" checked name="straal" value="straal_010"/>
                     <span class="radio"></span>0-10 km
@@ -31,8 +31,8 @@
             </div>
         </div>
         <div class="row-fluid fnol-repairshop-formSpacer">
-            <div class="span4 txtBold">Type schade <span class="fnol-repairshop-mandatory">*</span></div>
-            <div class="span6">
+            <div class="span4 txtBold">Type schade <span class="hidden-mobile fnol-repairshop-mandatory">*</span></div>
+            <div class="span8 clear-float">
                 <label class="radio">
                     <input type="radio" name="type_schade" value="alleen_ruitschade"/>
                     <span class="radio"></span>Alleen ruitschade
@@ -50,17 +50,17 @@
         <div class="row-fluid fnol-repairshop-formSpacer">
             <div class="span4"></div>
             <div class="span8">
-                <button class="button width150px icon-right icon-search">Zoeken</button>
+                <button class="button arrow width150px">Zoeken</button>
             </div>
         </div>
     </div>
 
-    <div class="fnol-repairshop-result">
+    <div class="fnol-repairshop-result visible-desktop hidden-tablet fnol-repairshop-hide-desktop">
         <div class="row-fluid result-text">
              <span>Showing 50 results</span>
         </div>
         <div class="fnol-repairshop-table-sort row-fluid">
-            <table class="">
+            <table>
                 <thead>
                 <tr>
                     <th colspan="3">
@@ -78,7 +78,7 @@
                             <span class="title_sort">Afstand</span>
                         </div>
                     </th>
-                    <th class=""></th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -109,6 +109,80 @@
                     <td class="distance">1 Km</td>
                     <td class="location"><a href="location"><span class="icon-arrow-location location-icon-pos"></span>Locatie</a></td>
                 </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="clearfloat hidden-desktop fnol-repairshop-show-tablet">
+        <div><a href="#"><span class="icon-skinnyarrow">Terug</span></a></div>
+        <div class="row-fluid fnol-repairshop-formSpacer">
+            <table class="fnol-repairshop-table-mobile-view">
+                <thead>
+                    <tr>
+                        <th>
+                            <div class="mob_title_pos">
+                                <span class="mob_title_sort"><aa-hint text="Waardering"></aa-hint>Waardering</span>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="float-right">
+                                <span class="mob_title_sort">Afstand</span>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="2" colspan="2" class="data-wrapper">
+                            <table class="row-fluid fnol-repairshop-table-mobile-data">
+                                <tbody>
+                                <tr>
+                                    <td class="mob_naam">Het AutoSchadehuis Den Haag</td>
+                                    <td class="mob_rating"><span class="mob-rating-star">★★★★★</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="mob_phone icon-phone">(020) 686 36 66</td>
+                                    <td class="mob_distance">2 Km</td>
+                                </tr>
+                                <tr colspan="2">
+                                    <td class="mob_address">
+                                        <ul>
+                                            <li>Joan Muyskenweg 14</li>
+                                            <li>1096 CJ AMSTERDAM</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr colspan="2">
+                                    <td class="mob_location"><a href="location"><span class="icon-arrow-location location-icon-pos"></span>Locatie</a></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <table class="row-fluid fnol-repairshop-table-mobile-data">
+                                <tbody>
+                                <tr>
+                                    <td class="mob_naam">Autoschadebedrijf Spoelstra bv</td>
+                                    <td class="mob_rating"><span class="mob-rating-star">★★★★★</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="mob_phone icon-phone">(070) 385 95 22</td>
+                                    <td class="mob_distance">2 Km</td>
+                                </tr>
+                                <tr colspan="2">
+                                    <td class="mob_address">
+                                        <ul>
+                                            <li>Joan Muyskenweg 14</li>
+                                            <li>1096 CJ AMSTERDAM</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr colspan="2">
+                                    <td class="mob_location"><a href="location"><span class="icon-arrow-location location-icon-pos"></span>Locatie</a></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+
                 </tbody>
             </table>
         </div>
