@@ -67,7 +67,7 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
   public sectionIndex: number = 1;
   public initChangeHasPartner: boolean;
   public initChangeNoPolicy: boolean;
-  public pensionAmountMin: number = this.defaultOptions.pensionAmountMin
+  public pensionAmountMin: number = this.defaultOptions.pensionAmountMin;
 
   public currentStep = 'step1';
   public dateOptions = {year: 'numeric', month: 'long', day: 'numeric'};
