@@ -28,9 +28,15 @@
                         <p>{{data.options.block1.box.text}}</p>
                         <div class="inputs number">
 
-                          <aa-input-number class="aa-input--euro" #amountInput prefix="€" [(ngModel)]="pension['pensionAmount']" [max]="99999999"
-                                             (focus)="amountTooSmall = false; amountInput.select()" (keyup)="isInValidAmount()"
-                                             (enter)="submitAmount()" [placeholder]="'min 25.000'">
+                          <aa-input-number 
+                            #amountInput 
+                            (focus)="amountTooSmall = false; amountInput.select();" 
+                            (keyup)="isInValidAmount()"
+                            (enter)="submitAmount()" 
+                            [placeholder]="'min 25.000'"
+                            [(ngModel)]="pension['pensionAmount']" 
+                            [max]="99999999"
+                            class="aa-input--euro">
                           </aa-input-number>
 
                           <span class="hint-message__wrapper" *ngIf="amountIsValid">
