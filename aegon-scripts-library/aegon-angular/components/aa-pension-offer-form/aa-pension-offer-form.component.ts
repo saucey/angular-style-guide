@@ -36,13 +36,12 @@ export class AAPensionOfferFormComponent extends AABaseComponent implements OnIn
   }
 
   // Get and check pension data, set page structure and call service from blue block component
-  private initialize():void {
+  public initialize():void {
     this.pensionInfo = this.getSessionStorage('pensionInfo');
     this.pensionProduct = this.getSessionStorage('pensionProduct');
 
     if(this.isObjectAvailable(this.pensionInfo) && this.isObjectAvailable(this.pensionProduct)) {    
       // Do some magic
-      console.dir(this.pensionProduct['values'][0]);
           
     } else { 
       console.log('Go redirect!');
@@ -57,7 +56,7 @@ export class AAPensionOfferFormComponent extends AABaseComponent implements OnIn
   }
 
   // Get the session storage from an existing object or an empty object 
-  private getSessionStorage(objectKey: string): Object {
+  public getSessionStorage(objectKey: string): Object {
     return clientStorage.session.getItem(objectKey) || {};
   }
 
@@ -67,7 +66,7 @@ export class AAPensionOfferFormComponent extends AABaseComponent implements OnIn
   }    
 
   // Check if input is an object and has at least one key
-  private isObjectAvailable(object: Object): boolean {
+  public isObjectAvailable(object: Object): boolean {
     let result = false;
 
     if(object.constructor === Object && Object.keys(object).length > 0) result = true;       
@@ -76,7 +75,7 @@ export class AAPensionOfferFormComponent extends AABaseComponent implements OnIn
   }  
 
   // Redirect to start page
-  private redirectToStartPage():void {
+  public redirectToStartPage():void {
      window.location.href = this.data.options.start.url;       
   }
 
