@@ -195,6 +195,8 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
     //set a variable from here to find what index the section is on
     this.sectionIndex = val;
 
+    // this.bbpage.hidePage();
+
     for (let i = 1; i <= 5; i++) {
       this.visibility[i] = (val == i) ? 'show' : 'hidden';
     }
@@ -207,9 +209,10 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
         this.amountTooSmall = this.pension.pensionAmount >= this.defaultOptions.pensionAmountMin;
         this.amountIsValid = !this.amountTooSmall;
 
+        this.aanpassenButton['show'] = this.amountTooSmall;
+
         return !this.amountTooSmall;
       }
-
       this.amountIsValid = false;
       return true;
     }
@@ -234,7 +237,7 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
   btnValidationForUserPartner(): boolean {
     if (this.sectionIndex == 3) {
       // by default, don't show the button
-      this.aanpassenButton['show'] = false
+      this.aanpassenButton['show'] = false;
 
       if (this.pension['havePartner'] == undefined) return false;
       if (this.pension['havePartner'] == false) {
@@ -254,20 +257,6 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
         return true;
       }
     }
-    // if (this.initChangeNoPolicy == true) return false;
-
-    // if (this.hasPartner == 'show') {
-    //   console.log(this.aanpassenButton, 'show')
-    //   this.aanpassenButton['show = false;
-    //   return false;
-    //
-    // }
-    //
-    // if (this.hasPartner == 'hidden' && this.initChangeHasPartner == false) return false;
-    //
-    // this.aanpassenButton['show = true;
-    // console.log(this.aanpassenButton, 'last')
-    // return true;
   }
 
   btnValidationForUser(): boolean {
