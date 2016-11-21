@@ -199,6 +199,10 @@
       }
       .collapsible-description__intro, .collapsible-description__text {
         width: 100%;
+        p {
+          margin: 0 0 10px;
+          text-align: justify;
+        }
       }
       .collapsible-description-actions {
         margin: 0;
