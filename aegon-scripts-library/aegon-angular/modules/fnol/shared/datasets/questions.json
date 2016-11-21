@@ -44,19 +44,19 @@
     "options": [
       {
         "label": "Ja",
-        "next": "END_POSSESSION_3"
-      },
-      {
-        "label": "Nee",
         "next": "END_POSSESSION_4"
       },
       {
-        "label": "Dat weet ik niet",
+        "label": "Nee",
         "next": "END_POSSESSION_5"
       },
       {
-        "label": "De schade is al gerepareerd",
+        "label": "Dat weet ik niet",
         "next": "END_POSSESSION_6"
+      },
+      {
+        "label": "De schade is al gerepareerd",
+        "next": "END_POSSESSION_3"
       }
     ]
   },
