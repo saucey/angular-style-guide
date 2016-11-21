@@ -12,7 +12,7 @@ import { AATabsViewComponent } from "../../../components/aa-tabs-view/aa-tabs-vi
 @Component({
   selector: 'aa-wia-calculator',
   template: require('./template.html'),
-  providers: [CalculatorDataService, WiaPagePersonalizationService, WiaUrlStateManager, WiaSubscriptionService]
+  providers: [WiaPagePersonalizationService, WiaUrlStateManager, WiaSubscriptionService]
 })
 export class WiaCalculatorComponent extends AABaseComponent implements OnInit, AfterViewInit {
   @Input() options: any = {};
@@ -126,8 +126,16 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
 
   public externalInput: WIAInputModel;
 
-  public graphData: any[] = [];
-  public legendData = {};
+  public graphDataPlaceholder = require('./datasets/calculator-placeholder-data.json');
+
+  public graphData: any = this.graphDataPlaceholder;
+
+  //default values as placeholder until real data is loaded
+  public legendData = {
+    1: true,
+    2: true,
+    3: true
+  };
 
   // Ids for tabs view component
   public tabs = {
