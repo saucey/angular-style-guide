@@ -2,33 +2,17 @@
 .fnol-page {
 
   .aa-fnol-wrapper {
-    border: 1px solid $slightly_lighter_blue;
+    border: 1px solid #EDF6FB;
     width: 100%;
     margin: 10px 0;
     position: relative;
     @include rem('border-radius', 3);
   }
-  .fnol-question {
-    background-color: $orange;
-    width: 100px;
-    color: $white;
-    font-size: 1.5em;
-    padding: 15px 10px;
-  }
-  .fnol-phone-call {
-    font-size: 1.5em;
-    padding: 15px 30px;
-    color: $blue;
-  }
-  .fnol-phone-content {
-    font-size: .78em;
-    color: $blue;
-  }
   .arrow-right {
     width: 0;
     height: 0;
-    border-top: 30px solid transparent;
-    border-bottom: 30px solid transparent;
+    border-top: 29px solid transparent;
+    border-bottom: 29px solid transparent;
     border-left: 30px solid $orange;
     top: 0px;
     right: -30px;
@@ -44,6 +28,9 @@
 
   .mr-top20 {
     margin-top: 20px !important;
+  }
+  .mr-top10{
+    margin-top: 10px
   }
   .fnol-category__headline {
     font-size: 1.5em;
@@ -81,17 +68,17 @@
       font-weight: 700;
     }
   }
-  
+
   // hide titles of embedded nodes (faqs)
   .node__title {
     display: none;
   }
-  
+
   //hide faq search
   [id^=bc-generic_content-faqs_search] {
     display: none;
   }
-  
+
   //disable voting for the current version
   .question-vote {
     display: none;
@@ -122,19 +109,183 @@
   padding-left: 2em;
 }
 
+//Custom styling of FAQ for FNOL
+
 .fnol-faq {
   margin-top: 2em;
 
   h2 {
     font-size: 1.6em;
-    margin-bottom: -1em;
+    color: #3494d2;
+    margin-bottom: -10px;
   }
 
   .faq .title {
     font-weight: normal;
+    &:after {
+      font-family: $font_icons;
+      font-size: 12px;
+      float: right;
+      transform: rotate(90deg);
+      content: $font_icons_arrow_right_skinny; //$font_icons_arrow_down
+      color: $blue;
+      margin: 7px 20px 0px 0px;
+    }
+  }
+
+  div.line {
+    height: 1px;
+    margin: 10px 0 0 0;
+    padding: 0;
+    border-bottom: 1px solid #cccccc !important;
   }
 
   .faq .field-item {
+    padding: 5px 0 5px 0;
     border-bottom-color: $slightly_darker_grey;
   }
+
+  input {
+    ~ [class^=thumbs_] {
+      color: $darker_grey;
+    }
+    ~ div.line {
+      display: none;
+    }
+    &:checked {
+      ~ [class^=thumbs_] {
+        color: $blue;
+      }
+      + .title {
+        &:after {
+          @include transform(rotate(-90deg) !important);
+        }
+      }
+      ~ .answer, ~ .feedback, ~ div.line {
+        display: block;
+      }
+      ~ .response {
+        display: block;
+      }
+    }
+  }
 }
+
+// mobile (min-width 0px to max-width 640px)
+
+@media screen and (min-width: $rc-s-min-width) and (max-width: $rc-s-max-width) {
+
+  .fnol-page {
+    .fnol-question {
+      width: 35%;
+      font-weight: 700;
+      padding: 10px 0 0 10px;
+      color: #3395d3 !important;
+      min-width: 100px;
+    }
+    .fnol-mobile-header-wrapper{
+      background:#D9EBF7;
+      margin-top:20px;
+      padding: 10px 0 0 0;
+    }
+    .fnol-mobile-left{
+      float:left
+    }
+    .fnol-mobile-right{
+      float:left;
+    }
+   /* .arrow-right {
+      width: 0;
+      border-bottom: 24px solid transparent;
+      height: 0;
+      border-top: 24px solid transparent;
+      border-left: 24px solid $orange;
+      top: 0px;
+      right: -24px;
+    } */
+    .auto-para-spacer{
+      padding:10px 0px 10px 0px;
+    }
+
+  }
+
+}
+
+// tablet (min-width 641px to max-width 900px)
+
+@media screen and (min-width: 641px) and (max-width: 1200px) {
+  .fnol-page {
+    .fnol-question {
+      background-color: $orange;
+      width: 15%;
+      color: $white;
+      font-size: 1em;
+      padding: .72em .65em;
+      float:left;
+      min-width: 120px;
+    }
+    .fnol-phone-call {
+      font-size: 1.2em;
+      padding: 0.7em 0 0 2em;
+      color: $blue;
+      float:left;
+      width: auto;
+    }
+    .fnol-phone-content {
+      font-size: .78em;
+      color: $blue;
+      float:left;
+      width: 46%;
+      line-height: 18px;
+      padding-top:10px;
+      display: none !important;
+    }
+    .arrow-right {
+      width: 0;
+      border-bottom: 26px solid transparent;
+      height: 0;
+      border-top: 26px solid transparent;
+      border-left: 28px solid $orange;
+      top: -1px;
+      right: -28px;
+    }
+    .width100per {
+      width: 100% !important;
+    }
+
+  }
+}
+
+// tablet (min-width 1201px to max-width 16000px)
+
+@media screen and (min-width: 1201px) and (max-width: 16000px) {
+  .fnol-page {
+    .fnol-question {
+      background-color: $orange;
+      width: 15%;
+      color: $white;
+      font-size: 1.2em;
+      padding: .72em .65em;
+      float:left;
+    }
+    .fnol-phone-call {
+      font-size: 1.3em;
+      padding: 0.7em 0 0 2.2em;
+      color: $blue;
+      float:left;
+      width: 38%;
+    }
+    .fnol-phone-content {
+      font-size: .78em;
+      color: $blue;
+      float:left;
+      width: 46%;
+      line-height: 18px;
+      padding-top:10px;
+
+    }
+  }
+
+
+}
+

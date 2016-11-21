@@ -38,7 +38,7 @@
 
 // Square blue theme
 .aa-tabs-view.aa-tabs-view--square-blue {
-  
+
   $aaTabsBlue: #EDF6FB;
 
   .aa-tabs-view-item__content {
@@ -64,18 +64,23 @@
 
   .aa-tabs-view-item__headline {
     position: relative;
-    padding: 1em;
+    padding: 1em 3em 1em 0em;
     border-bottom: 1px solid $aaTabsBlue;
     cursor: pointer;
   }
-  .aa-tabs-view-item--active .aa-tabs-view-item__headline {
-    background: $aaTabsBlue;
+  .aa-tabs-view-item--active {
+    .aa-tabs-view-item__headline {
+      background: $aaTabsBlue;
+    }
+    .aa-tabs-view-item__arrow:before {
+      transform: rotate(180deg);
+    }
   }
 
   .aa-tabs-view-item__desc {
     font-size: 0.8em;
-    margin-top: -0.5em;
     display: block;
+    line-height: 1em;
   }
 
   .aa-tabs-view-item__title {
@@ -88,6 +93,10 @@
     top: 50%;
     transform: translateY(-50%);
     color: $blue;
+    text-align: center;
+    &:before {
+      padding: 0;
+    }
   }
 
   .aa-tabs-view__block {
@@ -99,6 +108,11 @@
     box-shadow: 0 0 0 1px $aaTabsBlue inset;
     cursor: pointer;
     position: relative;
+    word-break: break-all;
+
+    @media screen and (max-width: $rc-l-min-width) {
+      font-size: 0.7em;
+    }
 
     &:nth-child(n+2) {
       box-shadow: 0 1px 0 0 $aaTabsBlue inset, -1px 0 0 0 $aaTabsBlue inset, 0 -1px 0 0 $aaTabsBlue inset;
@@ -132,7 +146,7 @@
   }
 
   .aa-tabs-view__block-title {
-    padding: 2em 0;
+    padding: 2em 0.1em;
     font-weight: bold;
   }
 }
@@ -140,9 +154,9 @@
 // Square blue theme
 .aa-tabs-view.aa-tabs-view--grey {
 
-  $bg1: $grey;
-  $bg2: darken($grey, 10%);
-  $bg3: darken($grey, 20%);
+  $bg1: #E4E4E4;
+  $bg2: #D7D7D7;
+  $bg3: #C9C9C9;
 
   &[data-active-index="1"] .aa-tabs-view-item__content {
     background: $bg1;
@@ -158,20 +172,6 @@
 
   .aa-tabs-view-item__content {
     padding: 0.5em;
-  }
-
-  .aa-tabs-view-item__title {
-  }
-
-  .aa-tabs-view-item__headline {
-
-  }
-  .aa-tabs-view-item--active .aa-tabs-view-item__headline {
-
-  }
-
-  .aa-tabs-view-item__title {
-
   }
 
   .aa-tabs-view-item__arrow {
@@ -202,17 +202,18 @@
     }
 
     &.aa-tabs-view__block--active {
-      padding-top: 0;
+      padding-top: 0.05em;
       .aa-tabs-view__block-title {
-        padding-top: 0.3em + 0.3em;
+        padding-top: 0.3em + 0.5em;
       }
     }
   }
 
   .aa-tabs-view__block-title {
-    padding: 0.3em 0;
+    padding: 0.5em 0;
     font-weight: bold;
     text-align: center;
+    font-size: 0.9em;
   }
 }
 

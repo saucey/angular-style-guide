@@ -6,19 +6,11 @@
 
     <div class="aa-block-graph__space" [style.height.%]="100 - sumHeights(column.bars)"></div>
 
-    <!--<div class="aa-block-graph__space" [style.height.%]="100 - sumHeights(column.bars) - (data.subgraph ? 20 : 0)"></div>-->
-
-    <!--<div class="aa-block-graph__bar sub-chart" *ngIf="data.subgraph" [style.height.%]="20">-->
-      <!--<wia-calculator-graph [data]="subgraph"></wia-calculator-graph>-->
-    <!--</div>-->
-
-
     <div class="aa-block-graph__bar" *ngFor="let bar of column.bars; trackBy:trackById"
-         [style.height.%]="bar.percentage">
+         [attr.data-category]="bar.category" [style.height.%]="bar.percentage">
       <div class="aa-block-graph__bar-block">
-        <div class="aa-block-graph__bar-block-inner" [style.backgroundColor]="bar.meta?.color"
-             [attr.data-hint]="bar.hint">
-          <span class="aa-block-graph-amount" [class.hidden]="!bar.amount || data.suppressAmountLabels">€{{bar.amount | money}}</span>
+        <div class="aa-block-graph__bar-block-inner">
+          <span class="aa-block-graph-amount" [class.hidden]="!bar.amountYearly || data.suppressAmountLabels">€{{bar.amountYearly | money}}</span>
         </div>
       </div>
     </div>

@@ -4,7 +4,7 @@
       <div class="aa-tabs-view__block" *ngFor="let item of tabs" (click)="setActive(item)"
            [class.aa-tabs-view__block--active]="item.active" [style.width.%]="100 / tabs.length">
         <div class="aa-tabs-view__block-icon icon-{{item.icon}}"></div>
-        <span class="aa-tabs-view__block-title">{{ item.title }}</span>
+        <span class="aa-tabs-view__block-title" [innerHtml]="item.title"></span>
       </div>
     </div>
   </div>

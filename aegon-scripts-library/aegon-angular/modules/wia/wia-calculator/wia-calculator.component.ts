@@ -1,7 +1,5 @@
-import { Component, Input, ElementRef, OnInit } from "@angular/core";
-
+import { Component, Input, ElementRef, OnInit, ViewChild, AfterViewInit } from "@angular/core";
 import { AABaseComponent } from "../../../lib/classes/AABaseComponent";
-
 import { CalculatorDataService } from "./wia-calculator-data.service";
 import { defaultOptions } from "./defaultOptions";
 import { WiaPagePersonalizationService } from "../wia-page/wia-page.personalization.service";
@@ -9,17 +7,24 @@ import { WIAInputModel } from "../wia-page/models/wia-input.model";
 import { WiaSubscriptionService } from "../wia-page/wia-page.subscription.service";
 import { WiaUrlStateManager } from "../wia-page/wia-page.url-state.service";
 import { WiaInputUseCaseEnum } from "../wia-content/enums/wia-input-use-case.enum";
+import { AATabsViewComponent } from "../../../components/aa-tabs-view/aa-tabs-view.component";
 
 @Component({
   selector: 'aa-wia-calculator',
   template: require('./template.html'),
-  providers: [CalculatorDataService, WiaPagePersonalizationService, WiaUrlStateManager, WiaSubscriptionService]
+  providers: [WiaPagePersonalizationService, WiaUrlStateManager, WiaSubscriptionService]
 })
-export class WiaCalculatorComponent extends AABaseComponent implements OnInit {
+export class WiaCalculatorComponent extends AABaseComponent implements OnInit, AfterViewInit {
   @Input() options: any = {};
   @Input() data: any = {};
 
+  public simulationData: any = {};
+
+  @ViewChild(AATabsViewComponent) tabsView: AATabsViewComponent;
+
   public defaultOptions: any = defaultOptions;
+  //visible tooltip id
+  public showTooltip: number = 0;
 
   public permanentDisability: boolean = false;
   public disability = {
@@ -36,34 +41,42 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit {
       ranges: [
         {
           start: 0,
-          end: 35,
-          color: '#B6D9EF'
+          end: 34.7,
+          color: '#FFFFFF'
         }, {
-          start: 35,
-          end: 80,
-          color: '#85BFE5'
+          start: 34.7,
+          end: 35.3,
+          color: 'transparent'
         }, {
-          start: 80,
+          start: 35.3,
+          end: 79.7,
+          color: '#FFFFFF'
+        }, {
+          start: 79.7,
+          end: 80.3,
+          color: 'transparent'
+        }, {
+          start: 80.3,
           end: 100,
-          color: '#3395D4'
+          color: '#FFFFFF'
         }
       ],
       labels: [
         {
           value: 0,
-          label: '0 %'
+          label: '0%'
         },
         {
           value: 35,
-          label: '35'
+          label: '35%'
         },
         {
           value: 80,
-          label: '80'
+          label: '80%'
         },
         {
           value: 100,
-          label: '100 %'
+          label: '100%'
         }
       ]
     }
@@ -82,35 +95,63 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit {
       ranges: [
         {
           start: 0,
-          end: 50,
-          color: '#85BFE5'
+          end: 49.3,
+          color: '#FFFFFF'
         }, {
-          start: 50,
+          start: 49.3,
+          end: 50.7,
+          color: 'transparent'
+        }, {
+          start: 50.7,
           end: 100,
-          color: '#3395D4'
+          color: '#FFFFFF'
         }
       ],
       labels: [
         {
           value: 0,
-          label: '0 %'
+          label: '0%'
         },
         {
           value: 50,
-          label: '50'
+          label: '50%'
         },
         {
           value: 100,
-          label: '100 %'
+          label: '100%'
         }
       ]
     }
   };
 
-  public externalInput : WIAInputModel;
+  public externalInput: WIAInputModel;
 
-  public graphData : any[] = [];
-  public legendData;
+  public graphDataPlaceholder = require('./datasets/calculator-placeholder-data.json');
+
+  public graphData: any = this.graphDataPlaceholder;
+
+  //default values as placeholder until real data is loaded
+  public legendData = {
+    1: true,
+    2: true,
+    3: true
+  };
+
+  // Ids for tabs view component
+  public tabs = {
+    first: 'first',
+    second: 'second',
+    third: 'third'
+  };
+
+  // Centers of disability ranges to be set after switching tabs
+  public disabilityCenters = {
+    first: 20,
+    second: 55,
+    third: 90
+  };
+
+  private lastInput: WIAInputModel = null;
 
   constructor(thisElement: ElementRef,
               private wiaPagePersonalizationService: WiaPagePersonalizationService,
@@ -120,16 +161,30 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit {
 
     super(thisElement);
 
-    wiaSubscriptionService.subscribe(value => this.updateModel(value));
+    wiaSubscriptionService.externalInput$.subscribe(value => this.updateModel(value));
   }
 
   ngOnInit(): void {
     super.ngOnInit();
   }
 
+  ngAfterViewInit(): void {
+
+    this.tabsView.onTabChange(() => {
+      if (this.getActiveTab() !== this.tabsView.active) {
+        this.disability.value = this.disabilityCenters[this.tabs[this.tabsView.active]];
+
+        this.update();
+      }
+    });
+  }
+
   public updateModel(value: WIAInputModel) {
 
+    window.scrollTo(0, 0);
+
     if (!value) {
+      this.externalInput = null;
       return;
     }
 
@@ -148,27 +203,37 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit {
       this.permanentDisability = value.permDisability;
     }
 
-    this.update();
+    const currentInput = this.getCurrentInput();
+
+
+    this.calculatorDataService.getScenario(currentInput).then(scenario => {
+
+      this.simulationData = scenario;
+      this.refresh(currentInput);
+    });
+
   }
 
   public getCurrentInput(): WIAInputModel {
 
-    const input : WIAInputModel = {
+    const input: WIAInputModel = {
       income: this.externalInput.income,
       useCase: WiaInputUseCaseEnum.USER,
-      disability: Math.round(this.disability.value / 10) * 10,
+      permDisability: null,
+      usage: null,
+      disability: Math.round(this.disability.value / 5) * 5,
       products: this.externalInput.products,
       productsIds: this.externalInput.productsIds
     };
 
-    if (this.disability.value >= 80) {
+    if (input.disability >= 80) {
 
       input.permDisability = this.permanentDisability;
     }
 
-    if (this.disability.value < 80) {
+    if (input.disability < 80) {
 
-      input.usage = Math.round(this.usage.value / 10) * 10
+      input.usage = Math.round(this.usage.value / 5) * 5;
     }
 
     return input;
@@ -178,52 +243,83 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit {
 
     const currentInput = this.getCurrentInput();
 
+    // no changes, ignore update
+    if (this.lastInput && this.lastInput.usage === currentInput.usage
+      && this.lastInput.disability === currentInput.disability
+      && this.lastInput.permDisability === currentInput.permDisability) {
+      return;
+    }
+
+    this.lastInput = currentInput;
+
+    this.calculatorDataService.getScenario(currentInput).then(data => {
+      this.simulationData = data;
+      this.refresh(currentInput);
+    });
+  }
+
+  public refresh(currentInput: WIAInputModel) {
+
     const code = this.wiaPagePersonalizationService.inputToCode(currentInput);
     this.wiaUrlStateManager.setUrlCode(code);
 
-    this.calculatorDataService.getData(currentInput).subscribe(data => {
+    // prevent crash in case data couldn't be found
+    if (this.simulationData && this.simulationData.graphData) {
 
-      // prevent crash in case data couldn't be found
-      if (data) {
+      const {graphData, legendData} = this.simulationData;
 
-        const {graphData, legendData} = data;
+      this.graphData = [
+        {
+          suppressAmountLabels: true,
+          columns: [graphData[1], graphData[2]]
+        },
+        {
+          columns: [graphData[3]]
+        },
+        {
+          columns: [graphData[4]]
+        }
+      ];
 
-        this.graphData = [
-          {
-            suppressAmountLabels: true,
-            amountAnnual: graphData[0].amount,
-            amountMonthly: graphData[0].amount / 12,
-            columns: [graphData[0], graphData[1]]
-          },
-          {
-            amountAnnual: graphData[2].amount,
-            amountMonthly: graphData[2].amount / 12,
-            columns: [graphData[2]]
-          },
-          {
-            amountAnnual: graphData[3].amount,
-            amountMonthly: graphData[3].amount / 12,
-            columns: [graphData[3]]
-          }
-        ];
-
-        this.legendData = legendData;
-      }
-    })
+      this.legendData = {
+        1: legendData.includes(1),
+        2: legendData.includes(2),
+        3: legendData.includes(3)
+      };
+    }
   }
 
-  public sliderUpdate(slider, val) {
+  public sliderUpdate(slider, val, isInTabs = false) {
 
     if (slider.value !== val) {
 
       slider.value = val;
+
+      if (this.tabsView && isInTabs) {
+        this.tabsView.setActiveById(this.getActiveTab());
+      }
+
       this.update();
     }
   }
 
-  public updatePermDisability(val) {
+  public updatePermDisability(): void {
     this.permanentDisability = !this.permanentDisability;
     this.update();
+  }
+
+  public getActiveTab(): string {
+    if (this.disability.value < 35) {
+      return this.tabs.first;
+    } else if (this.disability.value >= 35 && this.disability.value < 80) {
+      return this.tabs.second;
+    } else {
+      return this.tabs.third;
+    }
+  }
+
+  public goBack() {
+    this.wiaSubscriptionService.emit(null);
   }
 
   public trackById(index, item) {

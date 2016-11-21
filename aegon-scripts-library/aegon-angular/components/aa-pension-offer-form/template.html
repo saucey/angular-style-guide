@@ -1,0 +1,129 @@
+<aa-sticky [heading]="data.options.sticky.title" class="aa-sticky">
+  
+  <!-- Your pension and partner pension -->
+  <dl *ngFor="let pension of pensionProduct.values; let i = index;" class="aa-sticky__dataList">
+    <dt>{{data.options.sticky.labels.pension[i]}}</dt>
+    
+    <!-- Pension period -->
+    <dd *ngFor="let period of pension">    
+      <div class="aa-sticky__dataList__label">{{period.label}}</div>
+      
+      <!-- If one value -->
+      <div *ngIf="isString(period.value)" class="aa-sticky__dataList__value">
+        {{period.value}}
+      </div>
+
+      <!-- If value is a sub list -->
+      <template [ngIf]="!isString(period.value)">      
+        <div *ngFor="let subList of period.value" class="aa-sticky__dataList__subList">
+          <div class="aa-sticky__dataList__label">{{subList.label}}</div>
+          <div class="aa-sticky__dataList__value">{{subList.value}}</div>
+        </div>
+      </template>      
+    </dd>
+  </dl>
+  <div class="aa-sticky__helperText">{{data.options.sticky.helpers.grossPerMonth}}</div>
+
+  <dl class="aa-sticky__dataList aa-sticky__dataList--separate">
+    <dt>{{data.options.sticky.labels.pensionProduct}}</dt>
+
+    <dd *ngIf="(pensionProduct.template=='vpuFixed' || pensionProduct.template=='vpuVariable')">
+      Uitkerend Beleggingspensioen
+    </dd>
+    <dd *ngIf="!(pensionProduct.template=='vpuFixed' || pensionProduct.template=='vpuVariable')">
+      Uitkerend Garantiepensioen
+    </dd>
+
+    <dt>{{data.options.sticky.labels.pensionAmount}}</dt>
+    <dd>&euro; {{pensionInfo.pensionAmount | money}}</dd>
+
+    <dt>{{data.options.sticky.labels.pensionLocation}}</dt> 
+    <dd>{{data.options.sticky.values.pensionLocation[pensionInfo.pensionLocation]}}</dd>
+
+    <dt>{{data.options.sticky.labels.birthDate}}</dt>
+    <dd>{{pensionInfo.birthDate}}</dd>
+
+    <dt>{{data.options.sticky.labels.startingDate}}</dt>
+    <dd>{{pensionInfo.startingDate}}</dd>
+
+    <dt>{{data.options.sticky.labels.pensionPartner}}</dt>
+    <dd>{{pensionInfo.insurablePartner ? 'Ja' : 'Nee'}}</dd>
+
+    <dt *ngIf="pensionInfo.insurablePartner">{{data.options.sticky.labels.birthDateOfPartner}}</dt>
+    <dd>{{pensionInfo.birthDateOfPartner}}</dd>                              
+  </dl>
+  
+  <a 
+    *ngIf="data.options.sticky.link.text && data.options.sticky.link.url" 
+    href="data.options.sticky.link.url">
+    <span class="icon-skinnyarrow"></span>
+    {{data.options.sticky.link.text}}
+  </a>
+</aa-sticky>
+
+<div class="aa-pension-offer-form">
+  <h2>{{data.options.subtitle}}</h2>
+  
+  <div class="aa-pension-offer-form--terms-wrapper" *ngIf="data.options.termsList">
+    <h3>{{data.options.termsTitle}}</h3>
+    <ul class="bullet" *ngIf="!isString(data.options.termsList)">
+      <li *ngFor="let value of data.options.termsList">{{value}}</li>
+    </ul>
+    <p [innerHTML]="data.options.termsList" *ngIf="isString(data.options.termsList)"></p>
+  </div>
+  <h3>{{data.options.yourDataTitle}}</h3>
+  <p>
+    {{data.options.yourDataText}}
+  </p>
+  <form class="container_12" (click)="fireTealiumFormStarted()">
+    <div class="form-input-row">
+      <label for="text-input" class="span4 form-input-label">Aanhef</label>
+      <div class="input-wrapper span8">
+        <label class="radio">
+          <input type="radio" name="sex" value="value1" required />
+          <span class="radio"></span>Heer
+        </label>
+        <label class="radio">
+          <input type="radio" name="sex" value="value2"/>
+          <span class="radio"></span>Mevrouw
+        </label>
+      </div>
+    </div>
+    <div class="form-input-row">
+      <label for="text-input" class="span4 form-input-label">Voorletters</label>
+      <div class="input-wrapper span8">
+        <input type="text" id="initials" name="initials" placeholder="" required title="" />
+      </div>
+    </div>
+    <div class="form-input-row">
+      <label for="text-input" class="span4 form-input-label">Tussenvoegsel</label>
+      <div class="input-wrapper span8">
+        <input type="text" id="lastnamePrefix" name="lastnamePrefix" placeholder="" title="" />
+      </div>
+    </div>
+    <div class="form-input-row">
+      <label for="text-input" class="span4 form-input-label">Achternaam</label>
+      <div class="input-wrapper span8">
+        <input type="text" id="name" name="name" placeholder="" required title="" />
+      </div>
+    </div>
+    <div class="form-input-row">
+      <label for="text-input" class="span4 form-input-label">{{data.options.formLabels.telephon}}</label>
+      <div class="input-wrapper span8">
+        <input type="number" id="mobile" name="mobile" placeholder="071234567" required title="" />
+      </div>
+    </div>
+    <div class="form-input-row">
+      <label for="text-input" class="span4 form-input-label">Email</label>
+      <div class="input-wrapper span8">
+        <input type="email" id="email" name="email" placeholder="" required title="" />
+      </div>
+    </div>
+    <div class="form-input-row">
+      <label class="span4 form-input-label"></label>
+      <div class="input-wrapper span8">
+        <button class="button arrow" type="submit">Verzenden</button>
+      </div>
+    </div>
+  </form>
+</div>

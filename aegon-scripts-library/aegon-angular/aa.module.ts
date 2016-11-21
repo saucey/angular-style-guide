@@ -49,7 +49,9 @@ const declarations = [
     aaComp.AABlueBlockComponent,
     aaComp.AATodosComponent,
     aaComp.AALoaderComponent,
-    aaComp.AAFAQComponent
+    aaComp.AAFAQComponent,
+    aaComp.AAPensionOfferFormComponent,
+    aaComp.AAPensionOfferConfirmationComponent
 ];
 
 //Exports

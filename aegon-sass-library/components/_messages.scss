@@ -8,7 +8,6 @@
   .header {
     margin-bottom: 0.2em;
     font-family: $font_normal;
-    font-weight: bold;
     h3 {
       margin-top: 0;
     }
@@ -26,7 +25,7 @@
       color: $slightly_darker_blue;
     }
     .content {
-      margin-bottom: 20px;
+      color: $slightly_darker_blue;
     }
   }
   &.messages--status {
@@ -102,6 +101,13 @@
 // --------------------------------------------------
 
 @include breakpoint($brk-mobile) {
+  .messages {
+    &.messages--generic {
+      .icon {
+        display: none;
+      }
+    }
+  }
   &.messages--googleStatus {
     height: auto;
     padding-left: 20px;
@@ -173,21 +179,27 @@
 
       @include rem("font-size", 30);
     }
-    &.messages--generic {
+    &.pension123 {
       .icon:before {
-        color: $slightly_darker_blue;
+        content: $font_icons_old_man;
       }
-      &.pension123 {
-        .icon:before {
-          content: $font_icons_old_man;
-        }
-        .logo {
-          float: right;
-        }
+      .logo {
+        float: right;
       }
-      &.pension {
-        .icon:before {
-          content: $font_icons_chart;
+    }
+    &.pension {
+      .icon:before {
+        content: $font_icons_chart;
+      }
+    }    
+    &.messages--generic {
+      @include rem("padding", 20, 25, 20, 50);
+      .icon {
+        top: 16px;
+        left: 18px;
+        @include rem("font-size", 22);        
+        &:before {
+          color: $slightly_darker_blue;
         }
       }
       &.mortgage {
@@ -315,7 +327,24 @@
     }
   }
 }
-
+@include breakpoint($brk-ipad-portrait) {
+  .messages {
+    &.messages--generic {
+      .cta {
+        text-align: right;
+      }
+    }
+  }
+}
+@media screen and (max-width: $rc-m-max-width) {
+  .messages {
+    &.messages--generic {
+      .cta {
+        padding-top: 15px;
+      }
+    }
+  }
+}
 div.success {
   $width: 400px;
   position: fixed;

@@ -9,6 +9,7 @@ import { DeprecatedComponentsModule, DeprecatedComponentsModuleExports } from '.
 //Application modules
 import { WiaPageModule, WiaPageExports } from './modules/wia/wia.module';
 import { FNOLPageModule, FNOLPageExports } from './modules/fnol/fnol.module';
+import { FNOLRepairshopPageModule, FNOLRepairshopPageExports} from './modules/fnol-repairshop/fnol-repairshop.module';
 
 @NgModule({
     imports: [
@@ -18,14 +19,18 @@ import { FNOLPageModule, FNOLPageExports } from './modules/fnol/fnol.module';
         DeprecatedComponentsModule,
         
         WiaPageModule,
-        FNOLPageModule
+        FNOLPageModule,
+
+        FNOLRepairshopPageModule
     ],
     exports: [
         ...AAComponentsExports,
         ...DeprecatedComponentsModuleExports,
         
         ...WiaPageExports,
-        ...FNOLPageExports
+        ...FNOLPageExports,
+
+        ...FNOLRepairshopPageExports
     ],
     bootstrap: []
 })

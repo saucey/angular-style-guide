@@ -29,3 +29,5 @@ export * from './aa-todos/aa-todos.component';
 export * from './aa-collapsible-topic/aa-collapsible-topic.component';
 export * from './aa-loader/aa-loader.component';
 export * from './aa-faq/aa-faq.component';
+export * from './aa-pension-offer-form/aa-pension-offer-form.component';
+export * from './aa-pension-offer-confirmation/aa-pension-offer-confirmation.component';

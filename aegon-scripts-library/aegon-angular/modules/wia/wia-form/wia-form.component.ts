@@ -16,6 +16,7 @@ import { WiaPageProductsService } from "../wia-page/wia-page.products.service";
 import { WiaPagePersonalizationService } from "../wia-page/wia-page.personalization.service";
 import { ProductAttributeModel } from "../wia-page/models/product-attribute.model";
 import { WiaInputUseCaseEnum } from "../wia-content/enums/wia-input-use-case.enum";
+import { CalculatorDataService } from "../wia-calculator/wia-calculator-data.service";
 
 const FORM_TEMPLATE = require('./template.html');
 
@@ -54,12 +55,16 @@ export class WiaFormComponent extends AABaseComponent implements OnInit {
 
   public step: number = 1;
 
+  //is form submitted and there is a pending request
+  public pending: boolean = false;
+
   public options = {
     title: 'Uw persoonlijke situatie instellen'
   };
 
   constructor(private elementRef: ElementRef,
               private wiaPageProductsService: WiaPageProductsService,
+              private calculatorDataService: CalculatorDataService,
               private wiaPagePersonalizationService: WiaPagePersonalizationService,
               private wiaSubscriptionService: WiaSubscriptionService) {
 
@@ -69,8 +74,8 @@ export class WiaFormComponent extends AABaseComponent implements OnInit {
 
 
     // Form filled or personalization code sent => form submitted
-    this.wiaSubscriptionService.subscribe(() => {
-      this.submitted = true;
+    this.wiaSubscriptionService.externalInput$.subscribe((value) => {
+      this.submitted = !!value;
     });
 
   }
@@ -104,18 +109,26 @@ export class WiaFormComponent extends AABaseComponent implements OnInit {
 
   onProductFormSubmit(event) {
 
+    this.pending = true;
     event.preventDefault();
 
     const payload = this.serializeInput();
 
-    this.wiaSubscriptionService.emit(payload);
+    this.calculatorDataService.getData(payload).subscribe(() => {
+      this.pending = false;
+      this.wiaSubscriptionService.emit(payload);
+    });
   }
 
   onCodeSubmit() {
 
+    this.pending = true;
     const input: WIAInputModel = this.wiaPagePersonalizationService.codeToInput(this.personalizationCode);
 
-    this.wiaSubscriptionService.emit(input);
+    this.calculatorDataService.getData(input).subscribe(() => {
+      this.pending = false;
+      this.wiaSubscriptionService.emit(input);
+    });
   }
 
   public trackById(index, el) {

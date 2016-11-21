@@ -154,6 +154,7 @@ export class AASliderComponent implements AfterViewInit, ControlValueAccessor {
       return memo;
     }, []);
 
+    this.sliderEl.nativeElement.setAttribute('style', 'box-shadow:none !important'); //hacky way to force important
     this.sliderEl.nativeElement.style.background = `linear-gradient(90deg, ${rangesStrings.join(', ')})`;
   }
 }

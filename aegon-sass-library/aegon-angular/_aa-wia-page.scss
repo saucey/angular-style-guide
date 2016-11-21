@@ -1,8 +1,38 @@
 @import "./aa-wia-calculator";
 
+$wiaFormMobileBreakpoint: 550px;
+$wiaFormTableBreakpoint: $wiaFormMobileBreakpoint + 1px;
+
 .wia_form {
+  font-size: $medium;
   margin: 2em 0;
 
+  @media (max-width: $wiaFormMobileBreakpoint) {
+    .wia_form--hidden-mobile {
+      display: none;
+    }
+
+    .messages {
+      padding: 0;
+      background: none;
+    }
+    .checkbox--white .checkbox, .aa-input--white input, .radio--white span.radio, .input--white  {
+      background: $grey !important;
+    }
+    .wia_form__column_input label, .wia_form__products_label {
+      font-weight: bold;
+    }
+  }
+
+
+  .wia_form__step {
+    @media (min-width: $wiaFormTableBreakpoint) {
+      display: none;
+    }
+    &.wia_form__step--visible {
+      display: block;
+    }
+  }
   li {
     background: none;
   }
@@ -13,14 +43,17 @@
 
   .wia_form__column_input {
     margin: 1em 0;
-    > label {
-      width: 50%;
-      float: left;
-      padding: 0.5em 0;
-    }
-    input {
-      width: 200px;
-      font-weight: normal;
+    display: block;
+    @media (min-width: $wiaFormTableBreakpoint) {
+      > label {
+        width: 50%;
+        float: left;
+        padding: 0.5em 0;
+      }
+      input {
+        width: 200px;
+        font-weight: normal;
+      }
     }
   }
 
@@ -43,23 +76,38 @@
     > ul {
       margin: 0;
     }
+    li {
+      padding: 0;
+    }
+    @media (max-width: $wiaFormMobileBreakpoint) {
+      margin-left: 2.3em;
+      .product-attr {
+        padding-top: 0;
+        margin-top: 0;
+      }
+    }
   }
   .product-attr {
-    border-top: 1px solid $darker_grey;
+    border-top: 1px solid $dark_grey;
     padding-top: 5px;
     margin-top: 18px;
   }
   .product-group {
-    float: left;
-    width: 50%;
-    min-width: 320px;
-    margin: 10px 0;
 
-    &:nth-child(odd) {
-      clear:both;
-      width: 46%;
-      margin-right: 4%;
+    margin: 0.5em 0 1em;
+
+    @media (min-width: $wiaFormTableBreakpoint) {
+      float: left;
+      width: 50%;
+      min-width: 320px;
+
+      &:nth-child(odd) {
+        clear:both;
+        width: 46%;
+        margin-right: 4%;
+      }
     }
+
 
     label.checkbox {
       margin-top: -4px;
@@ -92,5 +140,9 @@
     &.headline--margin {
       margin-top: 2em;
     }
+  }
+
+  .aa-input--euro {
+    display: block;
   }
 }

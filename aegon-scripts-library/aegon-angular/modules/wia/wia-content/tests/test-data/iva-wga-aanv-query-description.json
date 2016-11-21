@@ -1,0 +1,12 @@
+{
+  "useCase": [
+    "PARTICIPANT"
+  ],
+  "filter": [
+    "IVA_EXCED",
+    "WGA_EXCED",
+    "WGA_AANV_STANDARD"
+  ],
+  "placeholder": "IVA_WGA_AANV_QUERY",
+  "text": ""
+}

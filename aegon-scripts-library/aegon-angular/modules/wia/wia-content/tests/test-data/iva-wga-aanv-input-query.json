@@ -1,0 +1,330 @@
+{
+  "useCase": null,
+  "income": null,
+  "products": [
+    {
+      "id": "WGA_EXCED",
+      "label": "WGA-Excedentverzekering",
+      "desc": "",
+      "selected": false,
+      "attrs": [
+        {
+          "id": "COVERAGE_RATE_WGA",
+          "label": "Selecteer dekkingsgraad",
+          "value": 70,
+          "visible": true,
+          "options": [
+            {
+              "value": 70,
+              "label": "70%"
+            },
+            {
+              "value": 75,
+              "label": "75%"
+            },
+            {
+              "value": 80,
+              "label": "80%"
+            }
+          ]
+        },
+        {
+          "id": "END_AGE",
+          "label": "EindLeeftijd",
+          "value": 65,
+          "visible": false,
+          "options": [
+            {
+              "value": 65,
+              "label": "65%"
+            },
+            {
+              "value": 67,
+              "label": "67%"
+            },
+            {
+              "value": 70,
+              "label": "70%"
+            }
+          ]
+        },
+        {
+          "id": "BENEFIT_INDEX",
+          "label": "Indexering uitkering (Klim_srt)",
+          "value": "Geen",
+          "visible": false,
+          "options": [
+            {
+              "value": "Geen",
+              "label": null
+            },
+            {
+              "value": "CBS",
+              "label": null
+            },
+            {
+              "value": "2%",
+              "label": null
+            },
+            {
+              "value": "3%",
+              "label": null
+            }
+          ]
+        },
+        {
+          "id": "WAGE_DEFINITION",
+          "label": "Loonbegrip",
+          "value": "belastbaar loon boven de SV-loongrens",
+          "visible": false,
+          "options": [
+            {
+              "value": "belastbaar loon boven de SV-loongrens",
+              "label": null
+            },
+            {
+              "value": "belastbaar loon boven de SV-loongrens",
+              "label": null
+            }
+          ]
+        },
+        {
+          "id": "DEVIATED_MAXIMUM_WAGE",
+          "label": "Afwijkend Maximum Loon(Afw_maxln)",
+          "value": "125.000",
+          "visible": false,
+          "options": [
+            {
+              "value": "125.000",
+              "label": null
+            },
+            {
+              "value": "meer dan 125.000",
+              "label": null
+            }
+          ]
+        },
+        {
+          "id": "INSURED_AMOUNT",
+          "label": "Verzekerd Bedrag (Verz_bedr)",
+          "value": 0,
+          "visible": false,
+          "options": []
+        }
+      ]
+    },
+    {
+      "id": "IVA_EXCED",
+      "label": "IVA-Excedentverzekering",
+      "desc": "",
+      "selected": false,
+      "attrs": [
+        {
+          "id": "COVERAGE_RATE_IVA",
+          "label": "Selecteer dekkingsgraad",
+          "value": 70,
+          "visible": true,
+          "options": [
+            {
+              "value": 70,
+              "label": "70%"
+            },
+            {
+              "value": 75,
+              "label": "75%"
+            },
+            {
+              "value": 80,
+              "label": "80%"
+            }
+          ]
+        },
+        {
+          "id": "END_AGE",
+          "label": "EindLeeftijd",
+          "value": 65,
+          "visible": false,
+          "options": [
+            {
+              "value": 65,
+              "label": "65%"
+            },
+            {
+              "value": 67,
+              "label": "67%"
+            },
+            {
+              "value": 70,
+              "label": "70%"
+            }
+          ]
+        },
+        {
+          "id": "BENEFIT_INDEX",
+          "label": "Indexering uitkering (Klim_srt)",
+          "value": "Geen",
+          "visible": false,
+          "options": [
+            {
+              "value": "Geen",
+              "label": null
+            },
+            {
+              "value": "CBS",
+              "label": null
+            },
+            {
+              "value": "2%",
+              "label": null
+            },
+            {
+              "value": "3%",
+              "label": null
+            }
+          ]
+        },
+        {
+          "id": "WAGE_DEFINITION",
+          "label": "Loonbegrip",
+          "value": "belastbaar loon boven de SV-loongrens",
+          "visible": false,
+          "options": [
+            {
+              "value": "belastbaar loon boven de SV-loongrens",
+              "label": null
+            },
+            {
+              "value": "belastbaar loon boven de SV-loongrens",
+              "label": null
+            }
+          ]
+        },
+        {
+          "id": "DEVIATED_MAXIMUM_WAGE",
+          "label": "Afwijkend Maximum Loon(Afw_maxln)",
+          "value": "125.000",
+          "visible": false,
+          "options": [
+            {
+              "value": "125.000",
+              "label": null
+            },
+            {
+              "value": "meer dan 125.000",
+              "label": null
+            }
+          ]
+        },
+        {
+          "id": "INSURED_AMOUNT",
+          "label": "Verzekerd Bedrag (Verz_bedr)",
+          "value": 0,
+          "visible": false,
+          "options": []
+        }
+      ]
+    },
+    {
+      "id": "WGA_AANV_LIGHT",
+      "label": "WGA-Aanvullingsverzekering light",
+      "desc": "",
+      "selected": false,
+      "attrs": [
+        {
+          "id": "END_AGE",
+          "label": "EindLeeftijd",
+          "value": 65,
+          "visible": false,
+          "options": [
+            {
+              "value": 65,
+              "label": "65%"
+            },
+            {
+              "value": 67,
+              "label": "67%"
+            },
+            {
+              "value": 70,
+              "label": "70%"
+            }
+          ]
+        },
+        {
+          "id": "BENEFIT_INDEX",
+          "label": "Indexering uitkering (Klim_srt)",
+          "value": "Geen",
+          "visible": false,
+          "options": [
+            {
+              "value": "Geen",
+              "label": null
+            },
+            {
+              "value": "CBS",
+              "label": null
+            },
+            {
+              "value": "2%",
+              "label": null
+            },
+            {
+              "value": "3%",
+              "label": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "WGA_AANV_STANDARD",
+      "hidden": true,
+      "attrs": [
+        {
+          "id": "END_AGE",
+          "label": "EindLeeftijd",
+          "value": 65,
+          "visible": false,
+          "options": [
+            {
+              "value": 65,
+              "label": "65%"
+            },
+            {
+              "value": 67,
+              "label": "67%"
+            },
+            {
+              "value": 70,
+              "label": "70%"
+            }
+          ]
+        },
+        {
+          "id": "BENEFIT_INDEX",
+          "label": "Indexering uitkering (Klim_srt)",
+          "value": "Geen",
+          "visible": false,
+          "options": [
+            {
+              "value": "Geen",
+              "label": null
+            },
+            {
+              "value": "CBS",
+              "label": null
+            },
+            {
+              "value": "2%",
+              "label": null
+            },
+            {
+              "value": "3%",
+              "label": null
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

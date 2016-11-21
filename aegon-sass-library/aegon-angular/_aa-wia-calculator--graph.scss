@@ -35,7 +35,7 @@
   }
 
   .aa-block-graph__bar, .aa-block-graph__space, .aa-block-graph__bar-wrapper, .aa-block-graph__col {
-    transition: all 300ms ease-in-out;
+    transition: all 200ms ease-in-out;
     overflow: hidden;
   }
 
@@ -47,4 +47,5 @@
     top: 50%;
     transform: translate(-50%, -50%);
   }
+
 }

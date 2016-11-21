@@ -125,10 +125,5 @@ export class AAInputNumberComponent implements ControlValueAccessor {
       event.preventDefault();
       return;
     } 
-
-    //Fix for whitespaces
-    try {
-      (<HTMLInputElement>event.target).value = (<HTMLInputElement>event.target).value.replace(/^\s+|\s+$/g, "");
-    } catch(e) {}
   }
 }

@@ -13,7 +13,7 @@ import { Observable, Subject } from "rxjs";
 @Injectable()
 export class WiaContentService {
 
-  private wiaContentUrl = '/sites/aegonnl/public_files/wia.json';
+  private wiaContentUrl = '/sites/aegonnl/public_files/wia.json?' + Math.floor((Math.random() * 10000) + 1);
 
   constructor(private http: Http) {}
 

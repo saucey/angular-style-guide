@@ -327,7 +327,8 @@
   },
   {
     "id": "WGA_AANV_STANDARD",
-    "hidden": true,
+    "label": "WGA-Aanvullingsverzekering standard",
+    "desc": "",
     "attrs": [
       {
         "id": "END_AGE",
@@ -390,10 +391,6 @@
           {
             "value": 5,
             "label": "5 jaar"
-          },
-          {
-            "value": 7.5,
-            "label": "7.5 jaar"
           },
           {
             "value": 10,
