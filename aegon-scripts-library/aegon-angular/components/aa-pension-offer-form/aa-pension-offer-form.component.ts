@@ -41,10 +41,9 @@ export class AAPensionOfferFormComponent extends AABaseComponent implements OnIn
     this.pensionProduct = this.getSessionStorage('pensionProduct');
 
     if(this.isObjectAvailable(this.pensionInfo) && this.isObjectAvailable(this.pensionProduct)) {    
-      // Do some magic
+      // Code block when session storage is available
           
     } else { 
-      console.log('Go redirect!');
       if(this.data.options.start.redirect == true) this.redirectToStartPage(); 
     }  
 
