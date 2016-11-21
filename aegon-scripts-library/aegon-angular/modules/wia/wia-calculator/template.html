@@ -2,7 +2,7 @@
 
   <h3>Wat gebeurt er bij arbeidsongeschiktheid?</h3>
   <p>Bekijk uw inkomen bij verschillende arbeidsongeschiktheid percentages door de slider te bewegen.</p>
-  <div class="clearfix wia_calculator__graph">
+  <div class="clearfix wia_calculator__graph" [class.wia_graph--loading]="graphData === graphDataPlaceholder">
     <div class="wia_graph__legend">
       <span class="wia_graph__legend__guideline" [class.wia_graph__greyed-out]="showTooltip">Uw salaris</span>
 
@@ -194,8 +194,13 @@
 
 </div>
 
-<div class="wia_calculator_mobile aa-component" [class.hidden]="!externalInput">
+<div class="progress-loader wia_calculator_mobile_loader"
+     [class.wia_calculator_mobile_loader--loading]="graphData === graphDataPlaceholder">
+  <div class="chart-holder loading"></div>
+</div>
 
+<div class="wia_calculator_mobile aa-component" [class.hidden]="!externalInput"
+     [class.wia_calculator_mobile--loading]="graphData === graphDataPlaceholder">
 
   <div class="wia_calculator__summary">
     <div class="row-fluid">

@@ -4,6 +4,7 @@ $wiaFormMobileBreakpoint: 550px;
 $wiaFormTableBreakpoint: $wiaFormMobileBreakpoint + 1px;
 
 .wia_form {
+  font-size: $medium;
   margin: 2em 0;
 
   @media (max-width: $wiaFormMobileBreakpoint) {

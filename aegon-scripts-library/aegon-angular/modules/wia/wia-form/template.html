@@ -53,7 +53,11 @@
           </ul>
 
           <div>
-            <button class="button arrow" (click)="onCodeSubmit()" [disabled]="!income || !personalizationCode ||  personalizationCode === ''">Verder</button>
+            <button class="button arrow"  [class.pending]="pending"
+                    (click)="onCodeSubmit()"
+                    [disabled]="!income || !personalizationCode ||  personalizationCode === '' || pending">
+              Verder
+            </button>
           </div>
 
         </div>
@@ -103,7 +107,7 @@
               <li><a (click)="visiblePage = 1">Productcode ontvangen? Voer de code in</a></li>
             </ul>
 
-            <button class="button arrow" [disabled]="!income">Verder</button>
+            <button class="button arrow" [class.pending]="pending" [disabled]="!income || pending" >Verder</button>
           </form>
 
         </div>

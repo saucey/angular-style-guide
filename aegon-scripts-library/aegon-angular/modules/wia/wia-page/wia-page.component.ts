@@ -1,8 +1,9 @@
 import { Component } from "@angular/core";
+import { CalculatorDataService } from "../wia-calculator/wia-calculator-data.service";
 
 @Component({
   selector: 'aa-wia-page',
-  providers: [],
+  providers: [CalculatorDataService],
   template: '<ng-content></ng-content>'
 })
 
