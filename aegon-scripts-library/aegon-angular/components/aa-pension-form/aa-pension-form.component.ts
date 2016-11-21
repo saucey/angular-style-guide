@@ -59,7 +59,6 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
   @Input() bbright;
 
   public pension: any = clientStorage.session.getItem("pensionInfo") || {startingDate:"", birthDateOfPartner: ""};
-
   public defaultOptions: any = defaultOptions;
   public amountTooSmall: boolean;
   public aanpassenButton: {} = {show: !!clientStorage.session.getItem("pensionInfo")};
