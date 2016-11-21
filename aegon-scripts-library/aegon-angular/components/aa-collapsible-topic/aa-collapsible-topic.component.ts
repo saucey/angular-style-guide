@@ -17,6 +17,8 @@ import {
   transition,
   style
 } from "@angular/core";
+import { WiaTopicDescriptionModel } from "../../modules/wia/wia-content/models/wia-topic-description.model";
+import { WiaTopicModel } from "../../modules/wia/wia-content/models/wia-topic.model";
 
 @Component({
   selector: 'aa-collapsible-topic',
@@ -57,14 +59,15 @@ export class AACollapsibleTopicComponent implements OnInit {
   };
   public showFullText: boolean = false;
   public visibility: string = 'hidden';
+  public activeMobileRow = null;
 
   /**
    * Sets the active item by row and column
    *
-   * @param row
-   * @param column
+   * @param {string} row
+   * @param {string} column
    */
-  public setActiveItem = (row, column) => {
+  public setActiveItem (row: string, column: string): void {
     this.setShowFullText(false);
     if (this.activeItem.row === row && this.activeItem.column === column) {
       this.activeItem.row = null;
@@ -80,26 +83,41 @@ export class AACollapsibleTopicComponent implements OnInit {
    *
    * @returns {Object}
    */
-  public getActiveItem = () => {
+  public getActiveItem(): Object {
     return this.activeItem;
+  }
+
+  /**
+   * Verifies if there is an active item on the current row but, not at the current column
+   *
+   * @param {string} row
+   * @param {string} column
+   * @returns {boolean}
+   */
+  public checkIfThereIsAnActiveItem (row: string, column: string): boolean {
+    if (null !== this.activeItem.row && null !== this.activeItem.column && row === this.activeItem.row && column !== this.activeItem.column) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   /**
    * Checks if the full description is shown
    *
-   * @param description
+   * @param {WiaTopicModel} description
    * @returns {boolean}
    */
-  public isFullTextShown = (description) => {
+  public isFullTextShown (description: WiaTopicModel): boolean {
     return this.showFullText && this.isDescriptionTextValid(description);
   }
 
   /**
    * Changes the visibility of the description
    *
-   * @param showFullText
+   * @param {boolean} showFullText
    */
-  public setShowFullText = (showFullText) => {
+  public setShowFullText (showFullText: boolean) {
     this.showFullText = showFullText;
     if (showFullText) {
       this.visibility = 'shown';
@@ -111,10 +129,10 @@ export class AACollapsibleTopicComponent implements OnInit {
   /**
    * Checks if the description has the text property and value
    *
-   * @param description
+   * @param {WiaTopicModel} description
    * @returns {boolean}
    */
-  public isDescriptionTextValid = (description) => {
+  public isDescriptionTextValid (description: WiaTopicModel): boolean {
     if (description.hasOwnProperty('longDescription') && typeof description.longDescription != 'undefined' && description.longDescription != null && description.longDescription.length > 0) {
       return true;
     } else {
@@ -122,9 +140,35 @@ export class AACollapsibleTopicComponent implements OnInit {
     }
   }
 
-
   ngOnInit(): void {
-
   }
 
+  /**
+   * Shows the mobile icons for the specified row
+   *
+   * @param {string} row
+   * @returns {boolean}
+   */
+  public showMobileIcons = (row: string): boolean => {
+    if (row === this.activeMobileRow) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  /**
+   * Shows the icons when on mobile
+   *
+   * @param {string} row
+   */
+  public showIconsOnMobile = (row: string) => {
+    this.setActiveItem(null, null);
+
+    if (row === this.activeMobileRow) {
+      this.activeMobileRow = null;
+    } else {
+      this.activeMobileRow = row;
+    }
+  }
 }

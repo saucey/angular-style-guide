@@ -1,5 +1,6 @@
 <!--<h1>Stel uw pensioenproduct samen</h1>-->
-<h2 class="general-form__box__sub__header">Uw situatie: u gaat binnenkort met pensioen</h2>
+<script src="defaultOptions.ts"></script><h2 class="general-form__box__sub__header">Uw situatie: u gaat binnenkort met pensioen</h2>
+
     <ul class="number-form__list">
       <li class='number-form__list__section'>
 
@@ -11,7 +12,7 @@
           <div class="form-section__input__results">
             <span>€ {{pension['pensionAmount']| money}}</span>
             <!--<span class="edit" (click)="editSection(1)"> > Aanpassen</span>-->
-            <ul class="arrow" (click)="editSection(1)">
+            <ul class="arrow" *ngIf="!aanpassenSet" (click)="editSection(1)">
               <li><span>Aanpassen</span></li>
             </ul>
           </div>
@@ -43,7 +44,7 @@
 
                       </div>
                       <div class="col form-text__column">
-                          <span class="form-text__icon icon-piggy-bank"></span>
+                          <span class="form-text__icon icon-uniE611 "></span>
                           <span class="header">{{data.options.block1.socialProofing.title}}</span>
                           <span class="content">{{data.options.block1.socialProofing.text}}</span>
                           <span class="brand">{{data.options.block1.socialProofing.source}}</span>
@@ -71,7 +72,7 @@
               </span>
             </span>
             <!--<span class="edit" (click)="editSection(2)"> > Aanpassen</span>-->
-            <ul class="arrow" (click)="editSection(2)">
+            <ul class="arrow" *ngIf="!aanpassenSet" (click)="editSection(2)">
               <li><span>Aanpassen</span></li>
             </ul>
           </div>
@@ -101,9 +102,9 @@
                 </label>
               </div>
 
-              <button *ngIf="!pension.sessionSet" class="arrow button" type="button" (click)="goTo(2,3)" [disabled]="!pension['pensionLocation']">{{data.options.block2.box.btn}}</button>
+              <button *ngIf="!pension.sessionSet" class="arrow button" type="button" (click)="goTo(2,3)" [disabled]="pensionLocation(pension['pensionLocation'])">{{data.options.block2.box.btn}}</button>
 
-              <button *ngIf="pension.sessionSet" class="button icon-right icon-calculator" type="button" (click)="submitForm(pension); visibility[2] = 'hidden'" [disabled]="!pension['pensionLocation']">{{data.options.block5.box.btn}}</button>
+              <button *ngIf="pension.sessionSet" class="button icon-right icon-calculator" type="button" (click)="submitForm(pension); visibility[2] = 'hidden'" [disabled]="pensionLocation(pension['pensionLocation'])">{{data.options.block5.box.btn}}</button>
 
             </div>
         </div>
@@ -145,7 +146,7 @@
               <span>Geboortedatum partner: {{sessionPartnerDob| dateToReadableString}}</span>
             </span>
 
-            <ul class="arrow" (click)="editSection(3)">
+            <ul class="arrow" *ngIf="!aanpassenSet" (click)="editSection(3)">
               <li><span>Aanpassen</span></li>
             </ul>
 
@@ -185,7 +186,7 @@
                               </label>
 
                               <label class="radio white-radio extended-text">
-                                <input type="radio" name="havePartner" [value]="false" [(ngModel)]="pension['insurablePartner']" (change)="partnerDob = 'hidden'; initChangeNoPolicy = true " />
+                                <input type="radio" name="havePartner" [value]="false" [(ngModel)]="pension['insurablePartner']" (change)="partnerDob = 'hidden'; initChangeNoPolicy = true" />
                                 <span class="radio"></span>
                                 <span class="label-text"><strong>{{data.options.block3.box.noPartnerPension.label}}</strong></span>
                                 <span class="label-text">{{data.options.block3.box.noPartnerPension.text}}</span>
@@ -226,7 +227,7 @@
                         </div>
                       </div>
                       <div class="col form-text__column">
-                          <span class="form-text__icon icon-calendar-date-2"></span>
+                          <span class="form-text__icon icon-uniE609"></span>
                           <span class="header">{{data.options.block3.socialProofing.title}}</span>
                           <span class="content">{{data.options.block3.socialProofing.text}}</span>
                           <span class="brand">{{data.options.block3.socialProofing.source}}</span>
@@ -244,7 +245,7 @@
           <div class="form-section__input__results">
             <span>Mijn geboortedatum: {{pension['birthDate']| dateToReadableString}} </span>
             <!--<span class="edit" (click)="editSection(4)"> > Aanpassen</span>-->
-            <ul class="arrow" (click)="editSection(4)">
+            <ul class="arrow" *ngIf="!aanpassenSet" (click)="editSection(4)">
               <li><span>Aanpassen</span></li>
             </ul>
           </div>
@@ -287,7 +288,7 @@
                         <button *ngIf="pension.sessionSet" class="button icon-right icon-calculator" type="button" (click)="submitForm(pension); visibility[4] = 'hidden'" [disabled]="btnValidationForUser()">{{data.options.block5.box.btn}}</button>
                       </div>
                       <div class="col form-text__column">
-                          <span class="form-text__icon icon-calendar-date-2"></span>
+                          <span class="form-text__icon icon-uniE60A"></span>
                           <span class="header">{{data.options.block4.socialProofing.title}}</span>
                           <span class="content">{{data.options.block4.socialProofing.text}}</span>
                           <span class="brand">{{data.options.block4.socialProofing.source}}</span>
@@ -305,7 +306,7 @@
           <div class="form-section__input__results">
             <span>{{pension['startingDate'] | dateToReadableString}}</span>
             <!--<span class="edit" (click)="editSection(5)"> > Aanpassen</span>-->
-            <ul class="arrow" (click)="editSection(5)">
+            <ul class="arrow" *ngIf="!aanpassenSet" (click)="editSection(5)">
               <li><span>Aanpassen</span></li>
             </ul>
           </div>
@@ -321,17 +322,17 @@
                         <p>{{data.options.block5.box.text}}</p>
 
                         <div class="inputs select">
-                          <select [(ngModel)]="pension['startingDate']" class="no-dd" (change)="changeStartingDate($event.target.value)" required>
+                          <select class="no-dd" (change)="changeStartingDate($event.target.value)" required>
                             <option value="" disabled>Maak uw keuze</option>
                             <option *ngFor="let date of startingDateChoices" [value]="date.value">{{date.label}}</option>
                           </select>
                         </div>
 
-                        <button class="button icon-right icon-calculator" type="button" (click)="goTo(5); submitForm(pension)" [disabled]="!pension['startingDate']">{{data.options.block5.box.btn}}</button>
+                        <button class="button icon-right icon-calculator" type="button" (click)="goTo(5); submitForm(pension)" [disabled]="pensionStartDate(pension['startingDate'])">{{data.options.block5.box.btn}}</button>
 
                       </div>
                       <div class="col form-text__column">
-                          <span class="form-text__icon icon-piggy-bank">{{data.options.block5.socialProofing.title}}</span>
+                          <span class="form-text__icon icon-info">{{data.options.block5.socialProofing.title}}</span>
                           <span class="content">{{data.options.block5.socialProofing.text}}</span>
                           <span class="brand">{{data.options.block5.socialProofing.source}}</span>
                       </div>
@@ -341,3 +342,46 @@
         </div>
       </li>
     </ul>
+
+<!--<div style="background-color: #85BFE5; padding: 40px;">-->
+
+  <!--<div class="inputs select">-->
+    <!--<select class="no-dd" (change)="changeStartingDate($event.target.value)" required>-->
+      <!--<option value="">Maak uw keuze</option>-->
+      <!--<option *ngFor="let date of startingDateChoices" [value]="date.value">{{date.label}}</option>-->
+    <!--</select>-->
+  <!--</div>-->
+
+<!--</div>-->
+
+  <!--<div class="inputs select" [ngModel]="startingDate">-->
+    <!--<select name="" class="no-dd" (change)="changeStartingDate($event.target.value)" required>-->
+      <!--<option value="" disabled>Maak uw keuze</option>-->
+      <!--<option *ngFor="let date of startingDateChoices" [value]="date.value">{{date.label}}</option>-->
+    <!--</select>-->
+  <!--</div>-->
+
+  <!--<select name="" id="" [ngModel]="pension['startingDate']">-->
+    <!--<option value="">one</option>-->
+    <!--<option value="">two</option>-->
+    <!--<option value="">three</option>-->
+    <!--<option value="">four</option>-->
+  <!--</select>-->
+
+<!--</div>-->
+
+<!--<div class="quickquote angular">-->
+  <!--<div class="triangle"></div>-->
+  <!--<div class="calculation">-->
+
+      <!--<div class="field">-->
+        <!--<div class="inputs">-->
+          <!--<select [ngModel]="startingDate" (change)="changeStartingDate($event.target.value)" required>-->
+            <!--<option value="" disabled>Maak uw keuze</option>-->
+            <!--<option *ngFor="let date of startingDateChoices" [value]="date.value">{{date.label}}</option>-->
+          <!--</select>-->
+        <!--</div>-->
+      <!--</div>-->
+
+  <!--</div>-->
+<!--</div>-->

@@ -7,7 +7,7 @@ import { AAComponentsModule } from '../../aa.module';
 import { DeprecatedComponentsModule } from '../../deprecated-components.module';
 
 
-import { FNOLRepairshopComponent } from '../fnol-repairshop/fnol-repairshop.component';
+import { FNOLRepairshopComponent } from './fnol-repairshop/fnol-repairshop.component';
 
 export const FNOLRepairshopPageExports = [
   FNOLRepairshopComponent

@@ -5,7 +5,8 @@ export const defaultOptions = {
     redirect: false
   },
   top: {
-    title: 'Top title'
+    title: 'Top title',
+    text: 'Top text'
   },
   left: {
     title: 'Left title',
@@ -23,10 +24,12 @@ export const defaultOptions = {
     title: 'Right variant title',
     text: 'Right variant text'
   },  
-  link: {
-    text: 'Link to switch service',
-    url: '/link-to-other-service'
-  },
+  linkList: [
+    {
+      text: 'Array of links',
+      url: '/array-of-links'
+    }
+  ],
   bottom: {
     title: 'Bottom title',
     text: 'Bottom text'
@@ -36,8 +39,3 @@ export const defaultOptions = {
     text: 'Bottom variant text'
   }  
 }
-
-
-
- 
-

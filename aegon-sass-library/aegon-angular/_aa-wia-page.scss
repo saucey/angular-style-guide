@@ -75,6 +75,9 @@ $wiaFormTableBreakpoint: $wiaFormMobileBreakpoint + 1px;
     > ul {
       margin: 0;
     }
+    li {
+      padding: 0;
+    }
     @media (max-width: $wiaFormMobileBreakpoint) {
       margin-left: 2.3em;
       .product-attr {
@@ -136,5 +139,9 @@ $wiaFormTableBreakpoint: $wiaFormMobileBreakpoint + 1px;
     &.headline--margin {
       margin-top: 2em;
     }
+  }
+
+  .aa-input--euro {
+    display: block;
   }
 }

@@ -13,6 +13,10 @@
     border-top: none;
   }
 
+  @media screen and(max-width: $rc-m-min-width) {
+    position: relative;
+  }
+
   .collapsible-row__title {
     color: #20201e;
     display: inline-block;
@@ -24,6 +28,45 @@
     height: $rowHeight;
     line-height: $rowHeight;
     vertical-align: middle;
+  }
+
+  .collapsible-row-mobile__actions {
+    display: none;
+    height: 70px;
+    line-height: 70px;
+    width: 100%;
+    text-align: right;
+    position: absolute;
+    &:hover {
+      cursor: pointer;
+      cursor: hand;
+    }
+
+    @media screen and(max-width: $rc-m-min-width) {
+      display: block;
+    }
+
+    &:after {
+      padding: 0;
+      margin: 0 auto;
+      color: $blue;
+      display: inline-block;
+      font-family: "aegon_icons";
+      content: "\e600";
+      transition: -webkit-transform 0.2s ease;
+      transition: transform 0.2s ease;
+      vertical-align: bottom;
+      font-size: 0.9375rem;
+      font-weight: normal;
+      transform: rotate(90deg);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    &.close-mobile-actions {
+      &:after {
+        transform: rotate(270deg);
+      }
+    }
   }
 
   .collapsible-content-icons {
@@ -48,10 +91,36 @@
         cursor: pointer;
         cursor: hand;
       }
+
+      &.gray-content-link {
+        opacity: 0.25;
+      }
     }
 
     .collapsible-content-link__image {
-      max-height: $imageSize;
+      height: $imageSize;
+    }
+
+    @media screen and(max-width: $rc-m-min-width) {
+      display: none;
+
+      &.mobile-icons-visible {
+        display: block;
+        width: 100%;
+        height: auto;
+        line-height: inherit;
+
+        .collapsible-content-link {
+          width: 108px;
+          height: 108px;
+          margin: 10px;
+        }
+
+        .collapsible-content-link__image {
+          width: 108px;
+          height: 108px;
+        }
+      }
     }
   }
 
@@ -122,6 +191,18 @@
       font-size: 0.9375rem;
       font-weight: normal;
       -webkit-font-smoothing: antialiased;
+    }
+
+    @media screen and(max-width: $rc-m-min-width) {
+      .collapsible-description__image {
+        display: none;
+      }
+      .collapsible-description__intro, .collapsible-description__text {
+        width: 100%;
+      }
+      .collapsible-description-actions {
+        margin: 0;
+      }
     }
   }
 

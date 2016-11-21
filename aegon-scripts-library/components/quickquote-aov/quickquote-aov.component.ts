@@ -548,26 +548,34 @@ export class QuickQuoteAovComponent implements OnInit {
 
   private tealiumStep3() {
     this.tealium({
+       page_cat_1_type : 'quick quotes',
        page_cat_2_name : 'berekening',
+       page_cat_3_section : 'zakelijk',
+       page_cat_4_productgroup : 'inkomensverzekeringen',
+       page_cat_5_product : 'aov',
        page_step : '03',
        step_name : 'qq-berekening-bevestiging',
        product_name : ["aov"],
        product_category : ["inkomensverzekeringen"],
        event : 'qq_step_03',
-       form_name : 'qq:aov'
+       form_name : 'aov'
     });
     console.info("page_step : '03'","event : 'qq_step_03'");
   }
 
   private tealiumStep4() {
     this.tealium({
+       page_cat_1_type : 'quick quotes',
        page_cat_2_name : 'berekening',
+       page_cat_3_section : 'zakelijk',
+       page_cat_4_productgroup : 'inkomensverzekeringen',
+       page_cat_5_product : 'aov',
        step_name : 'qq-berekening-bevestiging',
        page_step : '04',
        product_name : ["aov"],
        product_category : ["inkomensverzekeringen"],
        event : 'qq_completed',
-       form_name : 'qq:aov'
+       form_name : 'aov'
     });
     console.info("page_step : '04'","event : 'qq_completed'");
   }

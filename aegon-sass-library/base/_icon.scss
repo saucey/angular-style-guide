@@ -346,6 +346,11 @@ a.menu-5662:before {
 .icon-arrow-down:before {
   content: $font_icons_arrow_down;
 }
+.icon-arrow-up:before {
+  content: $font_icons_arrow_down;
+  transform: rotate(180deg);
+  padding: 0;
+}
 .icon-tip:before {
   content: $font_icons_tip;
 }
