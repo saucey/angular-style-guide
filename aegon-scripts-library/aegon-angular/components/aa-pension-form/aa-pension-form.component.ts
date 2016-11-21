@@ -67,6 +67,7 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
   public sectionIndex: number = 1;
   public initChangeHasPartner: boolean;
   public initChangeNoPolicy: boolean;
+  public pensionAmountMin: number = this.defaultOptions.pensionAmountMin
 
   public currentStep = 'step1';
   public dateOptions = {year: 'numeric', month: 'long', day: 'numeric'};
@@ -206,7 +207,7 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
     if (this.sectionIndex == 1) {
       if (this.pension.pensionAmount !== undefined && this.pension.pensionAmount !== 0) {
 
-        this.amountTooSmall = this.pension.pensionAmount >= this.defaultOptions.pensionAmountMin;
+        this.amountTooSmall = this.pension.pensionAmount >= this.pensionAmountMin;
         this.amountIsValid = !this.amountTooSmall;
 
         this.aanpassenButton['show'] = this.amountTooSmall;
