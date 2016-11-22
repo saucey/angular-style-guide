@@ -1,6 +1,5 @@
 <!--<h1>Stel uw pensioenproduct samen</h1>-->
 <script src="defaultOptions.ts"></script><h2 class="general-form__box__sub__header">Uw situatie: u gaat binnenkort met pensioen</h2>
-  <h1>aanpassenButton['show: {{aanpassenButton['show']}}</h1>
     <ul class="number-form__list">
       <li class='number-form__list__section'>
 
@@ -30,12 +29,12 @@
 
                           <aa-input-number class="aa-input--euro" #amountInput prefix="€" [(ngModel)]="pension['pensionAmount']" [max]="99999999"
                                              (focus)="amountTooSmall = false; amountInput.select()" (keyup)="isInValidAmount()"
-                                             (enter)="submitAmount()" [placeholder]="'min 25.000'">
+                                             (enter)="submitAmount()" [placeholder]="pensionAmountMin">
                           </aa-input-number>
 
                           <span class="hint-message__wrapper" *ngIf="amountIsValid">
                             <p class="hint">
-                              Minimaal €25.000
+                              Minimaal €{{pensionAmountMin}}
                             </p>
                           </span>
                         </div>
