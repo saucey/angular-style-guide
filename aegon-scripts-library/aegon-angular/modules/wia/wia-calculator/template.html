@@ -203,7 +203,7 @@
 
 </div>
 
-<div class="progress-loader wia_calculator_mobile_loader"
+<div class="progress-loader wia_calculator_mobile_loader" [class.hidden]="!externalInput"
      [class.wia_calculator_mobile_loader--loading]="graphData === graphDataPlaceholder">
   <div class="chart-holder loading"></div>
 </div>

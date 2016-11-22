@@ -54,7 +54,7 @@ export class WiaSubscriptionService {
 
     const code = this.wiaUrlStateManager.getUrlCode();
 
-    if (code) {
+    if (this.wiaPagePersonalizationService.isCodeValid(code)) {
       return this.wiaPagePersonalizationService.codeToInput(code);
     }
 

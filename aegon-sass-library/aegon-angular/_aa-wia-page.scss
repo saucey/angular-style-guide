@@ -50,6 +50,9 @@ $wiaFormTableBreakpoint: $wiaFormMobileBreakpoint + 1px;
         float: left;
         padding: 0.5em 0;
       }
+      div {
+        float: left;
+      }
       input {
         width: 200px;
         font-weight: normal;
@@ -143,6 +146,11 @@ $wiaFormTableBreakpoint: $wiaFormMobileBreakpoint + 1px;
   }
 
   .aa-input--euro {
+    display: block;
+  }
+  .wia_form__error {
+    color: red;
+    font-size: 0.9em;
     display: block;
   }
 }

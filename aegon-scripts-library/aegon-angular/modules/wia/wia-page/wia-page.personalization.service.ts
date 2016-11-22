@@ -37,6 +37,11 @@ export class WiaPagePersonalizationService {
 
   private to36 = number => (+number).toString(35); // leave 'z' free to replace 'o's later
 
+  public isCodeValid(code: string): boolean {
+
+    return code && (code.length === 5 || code.length === 6);
+  }
+
   public getIncomeClass(income: number): number {
 
     // get first index that is big enough for given income
@@ -145,7 +150,7 @@ export class WiaPagePersonalizationService {
 
     // Personalization flag
     const isPersonalized = codeChars[5] === 'p';
-    
+
     // Convert character to two digits number
     let WGAIVA = to10(codeChars[3]).toString();
     WGAIVA = WGAIVA.length === 1 ? '0' + WGAIVA : WGAIVA;
