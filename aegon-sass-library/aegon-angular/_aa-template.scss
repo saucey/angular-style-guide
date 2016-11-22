@@ -20,6 +20,10 @@ aa-template.aa-template--loading {
   margin: 15px;
 }
 
+aa-template.aa-template--loading > * {
+  display: none;
+}
+
 // Loading text
 aa-template.aa-template--loading:after, .aa-loading:after {
   content: 'Bezig met laden...';
