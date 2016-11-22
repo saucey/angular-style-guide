@@ -254,7 +254,7 @@ $wiaCalculatorMobileBreakpoint: 850px;
   padding: 1.2em 0.5em 0;
   line-height: 1.3em;
   height: $wiaGraphLabelBottomHeight;
-  > * {
+  * {
     display: block;
   }
   &:not(.wia_graph__bottom_label--double) {
