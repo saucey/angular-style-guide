@@ -55,7 +55,7 @@
   
   <a 
     *ngIf="data.options.sticky.link.text && data.options.sticky.link.url" 
-    href="data.options.sticky.link.url">
+    href="{{data.options.sticky.link.url}}">
     <span class="icon-skinnyarrow"></span>
     {{data.options.sticky.link.text}}
   </a>

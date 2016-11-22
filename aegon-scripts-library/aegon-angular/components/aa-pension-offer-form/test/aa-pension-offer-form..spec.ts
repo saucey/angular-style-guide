@@ -3,6 +3,8 @@ import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {AAPensionOfferFormComponent} from "../aa-pension-offer-form.component";
+import {AAMoneyPipe} from "../../../pipes/money.pipe";
+
 require('../../../../modules/clientStorage');
 
 describe('AA Pension Offer Form Component', () => {
@@ -16,7 +18,7 @@ describe('AA Pension Offer Form Component', () => {
   beforeEach(async(()  => {
     TestBed.configureTestingModule({
       imports: [CommonModule, FormsModule],
-      declarations: [AAPensionOfferFormComponent],
+      declarations: [AAPensionOfferFormComponent, AAMoneyPipe],
       schemas:      [NO_ERRORS_SCHEMA]
     })
     .compileComponents()
