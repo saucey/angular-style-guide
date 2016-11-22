@@ -83,5 +83,5 @@ export const defaultOptions = {
       }
   },
   "initializeBlueBlocks" : false,
-  "pensionAmountMin": 55000
+  "pensionAmountMin": 25000
 };

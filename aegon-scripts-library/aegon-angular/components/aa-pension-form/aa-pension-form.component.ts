@@ -196,7 +196,7 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
     //set a variable from here to find what index the section is on
     this.sectionIndex = val;
 
-    // this.bbpage.hidePage();
+    this.bbpage.hidePage();
 
     for (let i = 1; i <= 5; i++) {
       this.visibility[i] = (val == i) ? 'show' : 'hidden';
