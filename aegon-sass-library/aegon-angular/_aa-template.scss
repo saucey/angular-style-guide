@@ -20,8 +20,12 @@ aa-template.aa-template--loading {
   margin: 15px;
 }
 
+
 aa-template.aa-template--loading > * {
   display: none;
+}
+aa-template.aa-template--loaded > * {
+  display: block;
 }
 
 // Loading text
