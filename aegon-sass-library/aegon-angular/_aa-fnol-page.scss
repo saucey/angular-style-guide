@@ -7,6 +7,7 @@
     margin: 10px 0;
     position: relative;
     @include rem('border-radius', 3);
+    overflow:hidden;
   }
   .arrow-right {
     width: 0;
@@ -219,7 +220,7 @@
 
 }
 
-// tablet (min-width 641px to max-width 900px)
+// tablet (min-width 641px to max-width 1200px)
 
 @media screen and (min-width: 641px) and (max-width: 1200px) {
   .fnol-page {
@@ -250,9 +251,9 @@
     }
     .arrow-right {
       width: 0;
-      border-bottom: 27px solid transparent;
+      border-bottom: 26px solid transparent;
       height: 0;
-      border-top: 27px solid transparent;
+      border-top: 26px solid transparent;
       border-left: 28px solid $orange;
       top: 0;
       right: -28px;
@@ -270,7 +271,7 @@
   .fnol-page {
     .fnol-question {
       background-color: $orange;
-      width: 15%;
+      width: 18%;
       color: $white;
       font-size: 1.2em;
       padding: .72em .65em;
@@ -281,13 +282,13 @@
       padding: 0.7em 0 0 2.2em;
       color: $blue;
       float:left;
-      width: 38%;
+      width: 36%;
     }
     .fnol-phone-content {
       font-size: .78em;
       color: $blue;
       float:left;
-      width: 41%;
+      width: 46%;
       line-height: 18px;
       padding-top:10px;
 
