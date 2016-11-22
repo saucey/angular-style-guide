@@ -329,6 +329,7 @@
     "id": "WGA_AANV_STANDARD",
     "label": "WGA-Aanvullingsverzekering standard",
     "desc": "",
+    "hidden": true,
     "attrs": [
       {
         "id": "END_AGE",
@@ -385,12 +386,16 @@
       {
         "id": "BENEFIT_PERIOD",
         "label": "Selecteer uitkeringsduur",
-        "value": 5,
+        "value": 7.5,
         "visible": true,
         "options": [
           {
             "value": 5,
             "label": "5 jaar"
+          },
+          {
+            "value": 7.5,
+            "label": "7.5 jaar"
           },
           {
             "value": 10,
@@ -409,20 +414,12 @@
       {
         "id": "BENEFIT_PERIOD",
         "label": "Selecteer uitkeringsduur",
-        "value": 5,
+        "value": 7.5,
         "visible": false,
         "options": [
           {
-            "value": 5,
-            "label": "5"
-          },
-          {
             "value": 7.5,
-            "label": "7.5"
-          },
-          {
-            "value": 10,
-            "label": "10"
+            "label": "7.5 jaar"
           }
         ]
       }
