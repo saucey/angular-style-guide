@@ -101,14 +101,23 @@
           Tot uw pensioenleeftijd krijgt u in principe de WGA-loonaanvulling. Benut u echter minder dan 50% van uw verdiencapaciteit dan verandert deze in een WGA-vervolguitkering gebaseerd op het minimumloon. Samen met het loon dat u nog verdient vormt dit uw inkomen. Hoe meer u werkt, hoe hoger uw totale inkomen is.
         </div>
         <div [class.wia_graph__tooltip_content--active]="showTooltip === 4">
-          Lorem ipsum dolor sit amet, consecerit sapiente temporibus ut voluptas voluptatem?
+          Uw werkgever kan een verzekering voor u sluiten. U bent verzekerd met de WGA-Aanvullingsverzekering. Daarmee krijgt u een uitkering als u volgens het UWV minimaal 35% arbeidsongeschikt bent, maar niet 80% of meer. Wij vullen uw inkomen aan tot minimaal 70% van het inkomen dat u had voordat u arbeidsongeschikt wer.
         </div>
         <div [class.wia_graph__tooltip_content--active]="showTooltip === 5">
-          A, animi cumque ducimus ex explicabo, inventore, itaque labore laboriosam magnam modi neque odio quam quasi
-          quo quos ratione reiciendis reprehenderit sapiente temporibus ut voluptas voluptatem?
+          Bent u na twee jaar ziekte volgens het UWV 35% of meer arbeidsongeschikt? Dan komt uin de WIA. De WIA is de Wet werk en inkomen naar arbeidsvermogen. Via die wet krijgt u een uitkering. De WIA is onder te verdelen in twee regelingen:
+
+          <ul>
+            <li>U bent minimaal 35% arbeidsongeschikt, maar niet minimaal 80% duurzaam. U krijgt dan een WGA-uitkering. De hoogte van uw WGA-uitkering hangt af van hoeveel u nog wel werkt ten opzichte van uw restverdiencapaciteit.</li>
+            <li>U bent minimaal 80% duurzaam arbeidsongeschikt. U krijgt dan een IVA-uitkering. U bent duurzaam arbeidsongeschikt als u door arbeidsongeschiktheid niet of nauwelijks kunt werken en er geen of maar een kleine kans is dat u herstel.</li>
+          </ul>
+
+          Bent u na twee jaar ziekte volgens het UWV minimaal 15 arbeidsongeschikt, maar minder dan 35%? Dan krijgt u geen WIA-uitkering. U zoekt dan in overleg met uw werkgever passend werk. Met dit passend werk verdient u mogelijk minde
+
         </div>
         <div [class.wia_graph__tooltip_content--active]="showTooltip === 6">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, non!
+          In de eerste twee jaar wordt uw loon doorbetaald door uw werkgever. Meestal is dit 100% in het eerste jaar en 70% in het tweede jaar.
+          Check bij uw werkgever wat voor u geldt. Het loon dat u na de eerste twee jaar verdiend komt voor een gedeelte bovenop de uitkering van de overheid.
+          Hoe meer u werkt hoe hoger uw totale inkomen is.
         </div>
       </div>
 
@@ -194,7 +203,7 @@
 
 </div>
 
-<div class="progress-loader wia_calculator_mobile_loader"
+<div class="progress-loader wia_calculator_mobile_loader" [class.hidden]="!externalInput"
      [class.wia_calculator_mobile_loader--loading]="graphData === graphDataPlaceholder">
   <div class="chart-holder loading"></div>
 </div>

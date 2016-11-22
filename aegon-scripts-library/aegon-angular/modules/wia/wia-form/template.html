@@ -35,17 +35,23 @@
         Stel uw situatie in en bekijk uw inkomen bij arbeidsongeschiktheid
       </div>
 
-      <label class="wia_form__column_input">
+      <label class="wia_form__column_input clearfix">
         <label>Uw salaris, bruto per jaar</label>
-        <aa-input-number class="aa-input--euro aa-input--white" [(ngModel)]="income" [placeholder]="0" defaultValue=""></aa-input-number>
+        <div>
+          <aa-input-number class="aa-input--euro aa-input--white" [(ngModel)]="income" [placeholder]="0" defaultValue=""></aa-input-number>
+          <span class="wia_form__error" *ngIf="!incomeValid">Provided value is not valid</span>
+        </div>
       </label>
 
       <div>
         <div class="form-1" *ngIf="visiblePage === 1">
 
-          <div class="wia_form__column_input">
+          <div class="wia_form__column_input clearfix">
             <label>De verzekeringscode van uw werkgever</label>
-            <input class="input--white" type="text" [(ngModel)]="personalizationCode" placeholder="355A0"/>
+            <div>
+              <input class="input--white" type="text" [(ngModel)]="personalizationCode" placeholder="355A0"/>
+              <span class="wia_form__error" *ngIf="!codeValid">Provided code is incorrect</span>
+            </div>
           </div>
 
           <ul class="arrow wia_form__products-switch">

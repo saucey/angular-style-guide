@@ -55,6 +55,9 @@ export class WiaFormComponent extends AABaseComponent implements OnInit {
 
   public step: number = 1;
 
+  public incomeValid: boolean = true;
+  public codeValid: boolean = true;
+
   //is form submitted and there is a pending request
   public pending: boolean = false;
 
@@ -107,11 +110,21 @@ export class WiaFormComponent extends AABaseComponent implements OnInit {
     }
   }
 
-  onProductFormSubmit(event) {
+  private validate () {
+    this.incomeValid = this.income !== '' && this.income <= 125000;
+    this.codeValid = this.wiaPagePersonalizationService.isCodeValid(this.personalizationCode);
+  }
 
-    this.pending = true;
+  onProductFormSubmit(event) {
     event.preventDefault();
 
+    this.validate();
+
+    if (this.incomeValid === false) {
+      return;
+    }
+
+    this.pending = true;
     const payload = this.serializeInput();
 
     this.calculatorDataService.getData(payload).subscribe(() => {
@@ -121,6 +134,12 @@ export class WiaFormComponent extends AABaseComponent implements OnInit {
   }
 
   onCodeSubmit() {
+
+    this.validate();
+
+    if (this.incomeValid === false || this.codeValid === false) {
+      return;
+    }
 
     this.pending = true;
     const input: WIAInputModel = this.wiaPagePersonalizationService.codeToInput(this.personalizationCode);
