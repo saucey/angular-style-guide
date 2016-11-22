@@ -29,6 +29,9 @@
   .mr-top20 {
     margin-top: 20px !important;
   }
+  .mr-top50 {
+    margin-top: 50px !important;
+  }
   .mr-top10{
     margin-top: 10px
   }
@@ -83,6 +86,11 @@
   .question-vote {
     display: none;
   }
+
+  .aa-template--loading .node--generic-content--node-embed {
+    display:none;
+  }
+
 }
 
 .fnol-endpoint {
@@ -242,11 +250,11 @@
     }
     .arrow-right {
       width: 0;
-      border-bottom: 26px solid transparent;
+      border-bottom: 27px solid transparent;
       height: 0;
-      border-top: 26px solid transparent;
+      border-top: 27px solid transparent;
       border-left: 28px solid $orange;
-      top: -1px;
+      top: 0;
       right: -28px;
     }
     .width100per {
@@ -279,7 +287,7 @@
       font-size: .78em;
       color: $blue;
       float:left;
-      width: 46%;
+      width: 41%;
       line-height: 18px;
       padding-top:10px;
 
