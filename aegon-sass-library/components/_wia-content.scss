@@ -152,6 +152,18 @@
       line-height: 28px;
     }
 
+    .collapsible-description__intro, .collapsible-description__text {
+      p {
+        margin: 0 0 10px;
+        text-align: left;
+      }
+
+      .title-text {
+        text-align: start;
+        font-weight: bold;
+      }
+    }
+
     .collapsible-description-actions {
       margin-left: 95px;
 
@@ -199,10 +211,6 @@
       }
       .collapsible-description__intro, .collapsible-description__text {
         width: 100%;
-        p {
-          margin: 0 0 10px;
-          text-align: justify;
-        }
       }
       .collapsible-description-actions {
         margin: 0;
