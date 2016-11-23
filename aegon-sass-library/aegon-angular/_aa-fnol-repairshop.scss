@@ -167,6 +167,21 @@
     min-width: 0 !important;
     padding-right: 0 !important;
   }
+  .fnol-repairshop__star--1:before {
+    content:"★";
+  }
+  .fnol-repairshop__star--2:before {
+    content:"★★";
+  }
+  .fnol-repairshop__star--3:before {
+    content:"★★★";
+  }
+  .fnol-repairshop__star--4:before {
+    content:"★★★★";
+  }
+  .fnol-repairshop__star--5:before {
+      content:"★★★★★";
+  }
 }
 
 // mobile (min-width 0px to max-width 640px)
@@ -326,14 +341,14 @@
   .fnol-repairshop {
     label.radio {
       position: relative;
-      display: inline-block;
+      display: block;
       width: auto;
       margin-top: $elements_radio_top;
       padding-right: 15px;
       padding-left: 18px;
       text-align: left;
       white-space: nowrap;
-      line-height: $elements_radio_line-height;
+      line-height:23px;
       > input[type="radio"] {
         top: $elements_radio_top;
         left: 5px;

@@ -25,10 +25,7 @@ export class FnolRepairshopService {
 
     const items = data.retrieveLocatiesResponse.PARTIJ;
 
-    console.log('parseResponseData', data);
-
     return items.map(item => {
-
       return {
         name: item.ANAAM,
         mail: item.EMAIL,
@@ -40,7 +37,7 @@ export class FnolRepairshopService {
           houseNumber: item._AE_ADRES.HUISNR,
           postCode: item._AE_ADRES.PCODE,
           city: item._AE_ADRES.PLAATS,
-          street: item._AE_ADRES._AE_STRAAL,
+          street: item._AE_ADRES.STRAAT,
           radius: item._AE_ADRES._AE_STRAAL,
           type: item._AE_ADRES._AE_LOCATIETYPE,
         },
