@@ -5,7 +5,7 @@ import { FNOLRepairshopResponse, FNOLRepairshopInput, FNOLRepairshopResults } fr
 import { generateCorrelationId } from "../../../../lib/util";
 
 
-const SIMULATION_API = '/sites/aegonnl/public_files/fnol.results.json';
+const SIMULATION_API = '/sites/aegonnl/public_files/fnol-results.json';
 
 
 @Injectable()
