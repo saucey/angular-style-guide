@@ -82,7 +82,7 @@ export class AAPensionOfferConfirmationComponent extends AABaseComponent impleme
      window.location.href = this.data.options.start.url;       
   }
 
-  // Clean 
+  // Clean session storage
   private cleanSessionStorage(items: any):void {
     try {
       items.forEach(function(key) {
