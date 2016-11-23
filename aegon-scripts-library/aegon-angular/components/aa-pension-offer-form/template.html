@@ -41,17 +41,17 @@
     <dd>{{data.options.sticky.values.pensionLocation[pensionInfo.pensionLocation]}}</dd>
 
     <dt>{{data.options.sticky.labels.birthDate}}</dt>
-    <dd>{{pensionInfo.birthDate}}</dd>
+    <dd>{{pensionInfo.birthDate | dateToReadableString}}</dd>
 
     <dt>{{data.options.sticky.labels.startingDate}}</dt>
-    <dd>{{pensionInfo.startingDate}}</dd>
+    <dd>{{pensionInfo.startingDate | dateToReadableString}}</dd>
 
     <dt>{{data.options.sticky.labels.pensionPartner}}</dt>
     <dd>{{pensionInfo.insurablePartner ? 'Ja' : 'Nee'}}</dd>
 
     <template [ngIf]="pensionInfo.insurablePartner">
       <dt>{{data.options.sticky.labels.birthDateOfPartner}}</dt>
-      <dd>{{pensionInfo.birthDateOfPartner}}</dd>  
+      <dd>{{pensionInfo.birthDateOfPartner | dateToReadableString}}</dd>  
     </template>                            
   </dl>
   
