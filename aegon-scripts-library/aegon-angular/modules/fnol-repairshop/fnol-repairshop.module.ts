@@ -16,6 +16,9 @@ export const FNOLRepairshopPageExports = [
 export const declarations = [
     ...FNOLRepairshopPageExports
 ];
+import {
+    Component, NgModule
+} from '@angular/core';
 
 @NgModule({
   imports: [

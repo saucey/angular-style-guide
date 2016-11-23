@@ -1,29 +1,53 @@
 import {
-  Component
+    Component, Input
 } from '@angular/core';
-import { FnolRepairshopService } from "../shared/services/fnol.data.service";
+
+import {FnolRepairshopService} from "../shared/services/fnol.data.service";
 
 const template = require('./template.html');
 
 @Component({
-  selector: 'fnol-repairshop',
-  template: template,
-  providers: [FnolRepairshopService]
+    selector: 'fnol-repairshop',
+    template: template,
+    providers: [FnolRepairshopService]
 })
-
 export class FNOLRepairshopComponent {
 
-  constructor (private fnolRepairshopService: FnolRepairshopService) {
+    public isHideRepairshopResults: boolean = true;
+    public isHideMobileRepairshopResults: boolean = true;
+    public isMobileView: boolean = false;
+    public parties = [];
 
-    this.fnolRepairshopService.getData({
-      location: 'XXX',
-      radius: 100,
-      type: 'ZZZ'
-    }).subscribe(results => {
+    public repairshop = {
+        postcode: null,
+        distance: null,
+        damage: null
+    };
 
-      console.log('Parsed data: ', results);
-    })
-  }
+    constructor(private fnolRepairshopService: FnolRepairshopService) {}
+
+    public repairshopFormSubmit() {
+        this
+            .fnolRepairshopService
+            .getData({
+                location: this.repairshop.postcode,
+                radius: this.repairshop.distance,
+                type: this.repairshop.damage
+            })
+            .subscribe(results => {
+                this.parties = results;
+                this.getRepairshopSearchData();
+            });
+    }
+
+    getRepairshopSearchData() {
+        this.isHideRepairshopResults = false;
+        this.isHideMobileRepairshopResults = false;
+    }
+
+    hideMobileResults() {
+        this.isHideMobileRepairshopResults = true;
+    }
 
 }
 
