@@ -34,34 +34,32 @@ export class AAPensionOfferConfirmationComponent extends AABaseComponent impleme
     this.initialize();
   }
 
-  // Get and check pension data, set page structure and call service from blue block component
+  // Get and check pension data
   private initialize():void {
     this.pensionInfo = this.getSessionStorage('pensionInfo');
     this.pensionProduct = this.getSessionStorage('pensionProduct');
 
     if(this.isObjectAvailable(this.pensionInfo) && this.isObjectAvailable(this.pensionProduct)) {    
-      // Do some magic
-      console.dir(this.pensionProduct['values'][0]);
-          
-    } else { 
-      console.log('Go redirect!');
+      
+      // If session storage is available it can be removed because 
+      // the visitor is at the end of the process
+      if(this.data.options.cleanSessionStorage.length) {
+        this.cleanSessionStorage(this.data.options.cleanSessionStorage);
+      }          
+      
+    } else {       
       if(this.data.options.start.redirect == true) this.redirectToStartPage(); 
     }
 
-    if(this.getProductTipe()=="Uitkerend Beleggingspensioen") {
+    if(this.getProductType()=="Uitkerend Beleggingspensioen") {
       this.sendTealiumTagging('offerte_aanvraag_uitkerend_beleggingspensioen', 'variabele_pensioenuitkering', 'variabele_pensioenuitkering', 2, 'offerte_aanvraag_uitkerend_beleggingspensioen', 'form_completed');
     } else {
       this.sendTealiumTagging('offerte_aanvraag_direct_ingaand_pensioen', 'direct_ingaand_pensioen', 'direct_ingaand_pensioen', 2, 'offerte_aanvraag_direct_ingaand_pensioen', 'form_completed');   
     }
-
-    if(this.data.options.cleanSessionStorage) {
-      this.cleanSessionStorage(this.data.options.cleanSessionStorage);
-    }
-
   }
 
   // Get the session storage from an existing object or an empty object 
-  private getSessionStorage(objectKey: string): Object {
+  public getSessionStorage(objectKey: string): Object {
     return clientStorage.session.getItem(objectKey) || {};
   }
 
@@ -71,7 +69,7 @@ export class AAPensionOfferConfirmationComponent extends AABaseComponent impleme
   }    
 
   // Check if input is an object and has at least one key
-  private isObjectAvailable(object: Object): boolean {
+  public isObjectAvailable(object: Object): boolean {
     let result = false;
 
     if(object.constructor === Object && Object.keys(object).length > 0) result = true;       
@@ -84,6 +82,7 @@ export class AAPensionOfferConfirmationComponent extends AABaseComponent impleme
      window.location.href = this.data.options.start.url;       
   }
 
+  // Clean 
   private cleanSessionStorage(items: any):void {
     try {
       items.forEach(function(key) {
@@ -111,7 +110,7 @@ export class AAPensionOfferConfirmationComponent extends AABaseComponent impleme
     aegonTealium(tealiumObj);  
   }
 
-  private getProductTipe() {
+  private getProductType() {
     let template: string = this.pensionProduct["template"] || "";
     return (template=="vpuFixed" || template=="vpuVariable") ? "Uitkerend Beleggingspensioen" : "Uitkerend Garantiepensioen";
   }

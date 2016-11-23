@@ -5,6 +5,5 @@ export const defaultOptions = {
   },
   subtitle: false,
   content: false,
-  // This can be an array of key
-  cleanSessionStorage: false
+  cleanSessionStorage: []
 }
