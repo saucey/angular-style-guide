@@ -51,7 +51,7 @@ export class AAPensionOfferConfirmationComponent extends AABaseComponent impleme
       if(this.data.options.start.redirect == true) this.redirectToStartPage(); 
     }
 
-    if(this.getProductType()=="Uitkerend Beleggingspensioen") {
+    if(this.getProductTipe()=="Uitkerend Beleggingspensioen") {
       this.sendTealiumTagging('offerte_aanvraag_uitkerend_beleggingspensioen', 'variabele_pensioenuitkering', 'variabele_pensioenuitkering', 2, 'offerte_aanvraag_uitkerend_beleggingspensioen', 'form_completed');
     } else {
       this.sendTealiumTagging('offerte_aanvraag_direct_ingaand_pensioen', 'direct_ingaand_pensioen', 'direct_ingaand_pensioen', 2, 'offerte_aanvraag_direct_ingaand_pensioen', 'form_completed');   
@@ -106,11 +106,11 @@ export class AAPensionOfferConfirmationComponent extends AABaseComponent impleme
       product_category: ['pensioen'],
       event: _event
     };
-    console.log('Tealium tagging: ', tealiumObj);
+    // console.log('Tealium tagging: ', tealiumObj);
     aegonTealium(tealiumObj);  
   }
 
-  private getProductType() {
+  private getProductTipe() {
     let template: string = this.pensionProduct["template"] || "";
     return (template=="vpuFixed" || template=="vpuVariable") ? "Uitkerend Beleggingspensioen" : "Uitkerend Garantiepensioen";
   }
