@@ -41,17 +41,17 @@
     <dd>{{data.options.sticky.values.pensionLocation[pensionInfo.pensionLocation]}}</dd>
 
     <dt>{{data.options.sticky.labels.birthDate}}</dt>
-    <dd>{{pensionInfo.birthDate}}</dd>
+    <dd>{{pensionInfo.birthDate | dateToReadableString}}</dd>
 
     <dt>{{data.options.sticky.labels.startingDate}}</dt>
-    <dd>{{pensionInfo.startingDate}}</dd>
+    <dd>{{pensionInfo.startingDate | dateToReadableString}}</dd>
 
     <dt>{{data.options.sticky.labels.pensionPartner}}</dt>
     <dd>{{pensionInfo.insurablePartner ? 'Ja' : 'Nee'}}</dd>
 
     <template [ngIf]="pensionInfo.insurablePartner">
       <dt>{{data.options.sticky.labels.birthDateOfPartner}}</dt>
-      <dd>{{pensionInfo.birthDateOfPartner}}</dd>  
+      <dd>{{pensionInfo.birthDateOfPartner | dateToReadableString}}</dd>  
     </template>                            
   </dl>
   
@@ -77,54 +77,59 @@
   <p>
     {{data.options.yourDataText}}
   </p>
-  <form class="container_12" (click)="fireTealiumFormStarted()">
-    <div class="form-input-row">
-      <label for="text-input" class="span4 form-input-label">Aanhef</label>
-      <div class="input-wrapper span8">
-        <label class="radio">
-          <input type="radio" name="sex" value="value1" required />
-          <span class="radio"></span>Heer
-        </label>
-        <label class="radio">
-          <input type="radio" name="sex" value="value2"/>
-          <span class="radio"></span>Mevrouw
-        </label>
+  
+  <form 
+    class="container_12" 
+    (click)="fireTealiumFormStarted()" 
+    name={{data.options.form.name}}
+     #f="ngForm" (ngSubmit)="save(f.value, f.valid)" novalidate>
+    
+    <div class="form-input-row" *ngFor="let list of data.options.form.inputList">
+      <label class="span4 form-input-label" *ngIf="list.inputs!=undefined">
+        {{list.label}}
+        <span *ngIf="list.inputs[0].required">*</span>
+      </label>
+
+      <div class="input-container" *ngIf="list.inputs!=undefined">
+        <div class="input-wrapper span{{input.width}}" *ngFor="let input of list.inputs">
+          <input
+            *ngIf="input.type=='text' || input.type=='email' || input.type=='number' || input.type=='password'"
+            type="{{input.type}}"
+            name="{{input.name}}"
+            placeholder="{{input.placeholder}}"
+            [attr.required]="input.required ? true : null"
+            [attr.pattern]="input.pattern ? input.pattern : null"
+            [attr.value]="input.session ? null : input.value"
+            [attr.data-session-object]="input.session ? input.session.object : null"
+            [attr.data-session-key]="input.session ? input.session.key : null" />
+          <label 
+            class="radio" 
+            *ngIf="input.type=='radio'">
+            <input 
+              type="{{input.type}}"
+              name="{{input.name}}"
+              [attr.required]="input.required ? true : null"
+              value="{{input.value}}"
+              [attr.checked]="input.checked ? 'checked' : null"
+            />
+            <span class="radio"></span>{{input.label}}
+          </label>
+        </div>
       </div>
+
+      <input *ngIf="list.type=='hidden'"
+        type="{{list.type}}"
+        name="{{list.name}}"
+        [attr.value]="list.session ? null : list.value"
+        [attr.data-session-object]="list.session ? list.session.object : null"
+        [attr.data-session-key]="list.session ? list.session.key : null" />
     </div>
+
     <div class="form-input-row">
-      <label for="text-input" class="span4 form-input-label">Voorletters</label>
-      <div class="input-wrapper span8">
-        <input type="text" id="initials" name="initials" placeholder="" required title="" />
-      </div>
-    </div>
-    <div class="form-input-row">
-      <label for="text-input" class="span4 form-input-label">Tussenvoegsel</label>
-      <div class="input-wrapper span8">
-        <input type="text" id="lastnamePrefix" name="lastnamePrefix" placeholder="" title="" />
-      </div>
-    </div>
-    <div class="form-input-row">
-      <label for="text-input" class="span4 form-input-label">Achternaam</label>
-      <div class="input-wrapper span8">
-        <input type="text" id="name" name="name" placeholder="" required title="" />
-      </div>
-    </div>
-    <div class="form-input-row">
-      <label for="text-input" class="span4 form-input-label">{{data.options.formLabels.telephon}}</label>
-      <div class="input-wrapper span8">
-        <input type="number" id="mobile" name="mobile" placeholder="071234567" required title="" />
-      </div>
-    </div>
-    <div class="form-input-row">
-      <label for="text-input" class="span4 form-input-label">Email</label>
-      <div class="input-wrapper span8">
-        <input type="email" id="email" name="email" placeholder="" required title="" />
-      </div>
-    </div>
-    <div class="form-input-row">
-      <label class="span4 form-input-label"></label>
-      <div class="input-wrapper span8">
-        <button class="button arrow" type="submit">Verzenden</button>
+      <div class="input-wrapper span12 submit-form-button--wrapper">
+        <button class="button arrow" type="submit">
+          {{data.options.form.submitButton.label}}
+        </button>
       </div>
     </div>
   </form>

@@ -112,4 +112,13 @@ export class AAPensionOfferFormComponent extends AABaseComponent implements OnIn
 
     this.form_started = true;
    }
+
+    save(model: any, isValid: boolean) {
+        // check if model is valid
+        // if valid, call API to save customer
+        console.log(model, isValid);
+        console.log('Redirect to ', this.data.options.form.redirectUrl);
+        location.href = this.data.options.form.redirectUrl;
+        return false;
+    }
 }
