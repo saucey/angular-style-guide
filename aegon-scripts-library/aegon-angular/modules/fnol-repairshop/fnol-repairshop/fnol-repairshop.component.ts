@@ -37,6 +37,7 @@ export class FNOLRepairshopComponent {
             .subscribe(results => {
                 this.parties = results;
                 this.getRepairshopSearchData();
+                this.hideMobileInputForm();
             });
     }
 
@@ -47,6 +48,13 @@ export class FNOLRepairshopComponent {
 
     hideMobileResults() {
         this.isHideMobileRepairshopResults = true;
+        this.isMobileView = false;
+    }
+
+// if click mobile view search button then form component hide show only result component
+
+    hideMobileInputForm() {
+       this.isMobileView = true;
     }
 
 }

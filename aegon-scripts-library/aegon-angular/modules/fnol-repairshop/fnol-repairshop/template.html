@@ -1,5 +1,5 @@
 <h1 class="fnol-repairshop-page-title">Vind Schadehersteller</h1>
-<div class="fnol-repairshop">
+<div class="fnol-repairshop aa-component">
     <div [hidden]="isMobileView">
     <div class="row-fluid">
         <h3 class="fnol-repairshop-subhead">U kunt deze tool gebruiken voor het vinden van een bij AEGON Schade Service
@@ -7,13 +7,12 @@
     </div>
         <form novalidate>
             <div class="fnol-repairshop-form">
-
                 <div class="row-fluid fnol-repairshop-formSpacer">
                     <div class="span4 txtBold nowrap">Postcode of plaatsnaam <span
                             class="hidden-mobile fnol-repairshop-mandatory">*</span></div>
                     <div class="span8">
                     <span class="">
-                        <input id="repairshop_postcode" type="text" class="" name="repairshop.postcode" [(ngModel)]="repairshop.postcode">
+                        <input id="repairshop_postcode" type="text" class="fnol-repairshop-txtbox" name="repairshop.postcode" [(ngModel)]="repairshop.postcode">
                     </span>
                     </div>
                 </div>
@@ -43,19 +42,22 @@
                             <input type="radio" name="repairshop.damage" value="WINDOW" [(ngModel)]="repairshop.damage"/>
                             <span class="radio"></span>Alleen ruitschade
                         </label>
-                        <label class="radio">
+                        <label class="radio_longtext">
                             <input type="radio" name="repairshop.damage" value="BODY" [(ngModel)]="repairshop.damage"/>
-                            <span class="radio"></span>Alleen ruitschade aan carrosserie
+                            <span class="radio_longtext"></span>Alleen ruitschade aan carrosserie
                         </label>
-                        <label class="radio">
+                        <label class="radio_longtext">
                             <input type="radio" name="repairshop.damage" value="SHEET_AND_GLASS" [(ngModel)]="repairshop.damage"/>
-                            <span class="radio"></span>Schade aan plaatwerk en ruitschade
+                            <span class="radio_longtext"></span>Schade aan plaatwerk en ruitschade
                         </label>
                     </div>
                 </div>
                 <div class="row-fluid fnol-repairshop-formSpacer">
                     <div class="span4"></div>
-                    <div class="span8">
+                    <div class="span8 visible-desktop">
+                        <button type="button" class="button arrow width150px" (click)="repairshopFormSubmit()">Zoeken</button>
+                    </div>
+                    <div class="span8 fnol-repairshop-hide-mobile-search-button">
                         <button type="button" class="button arrow width150px" (click)="repairshopFormSubmit()">Zoeken</button>
                     </div>
                 </div>
@@ -92,11 +94,10 @@
                 </thead>
                 <tbody>
                 <tr *ngFor="let party of parties">
-                    <!-- must refactor during code review to English -->
-                    <td class="naam">{{ party.name }}</td>
+                    <td class="name">{{ party.name }}</td>
                     <td class="phone icon-phone">{{ party.phone }}</td>
                     <td class="address">
-                        <ul>
+                        <ul class="fnol-repairshop-address-list">
                             <li>{{ party.address.street }}</li>
                             <li>{{party.address.houseNumber}} {{ party.address.postCode }}{{ party.address.city }}</li>
                             <li class="address-info-spacer"><span>{{ party.mail }}</span></li>
@@ -112,8 +113,22 @@
                 </tbody>
             </table>
         </div>
+        <div class="row-fluid">
+            <div class="fnol-repairshop_pagination">
+                <ul class="pager">
+                    <li class="pager-current first">1</li>
+                    <li class="pager-item"><a title="Go to page 2" href="#">2</a></li>
+                    <li class="pager-item"><a title="Go to page 3" href="#">3</a></li>
+                    <li class="pager-item"><a title="Go to page 4" href="#">4</a></li>
+                    <li class="pager-item"><a title="Go to page 5" href="#">5</a></li>
+                    <li class="pager-next"><a title="Go to next page" href="#">next ›</a></li>
+                    <li class="pager-last last"><a title="Go to last page" href="#">last »</a></li>
+                </ul>
+            </div>
+        </div>
     </div>
-    <div class="clearfloat hidden-desktop fnol-repairshop-show-tablet" [hidden]="isHideMobileRepairshopResults">
+    <div class="clearfloat fnol-repairshop-show-tablet" [hidden]="isHideMobileRepairshopResults">
+
         <div><a href="#" (click)="hideMobileResults()"><span class="icon-skinnyarrow">Terug</span></a></div>
         <div class="row-fluid fnol-repairshop-formSpacer">
             <table class="fnol-repairshop-table-mobile-view">
@@ -137,7 +152,7 @@
                         <table class="row-fluid fnol-repairshop-table-mobile-data" *ngFor="let party of parties">
                             <tbody>
                             <tr>
-                                <td class="mob_naam">{{ party.name }}</td>
+                                <td class="mob_name">{{ party.name }}</td>
                                 <td class="mob_rating"><span class="rating-star fnol-repairshop__star--{{party.ranking}}"></span></td>
                             </tr>
                             <tr>
@@ -163,5 +178,6 @@
                 </tbody>
             </table>
         </div>
+
     </div>
 </div>
