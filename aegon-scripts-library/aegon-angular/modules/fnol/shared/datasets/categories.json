@@ -11,8 +11,8 @@
   {
     "id": "home",
     "icon": "house",
-    "description": "Uw Aegon opstalverzekering vergoedt schade aan uw huis zoals dak en gevel en dat deel van de inrichting dat vastzit aan uw huis zoals uw keuken of badkamer.<br/><br/>Beantwoord de vragen en ontdek wat u voor uw schade het beste kunt doen.",
-    "descriptiontablet": "Uw Aegon opstalverzekering vergoedt schade aan uw huis zoals dak en gevel en dat deel van de inrichting dat vastzit aan uw huis zoals uw keuken of badkamer.<br/><br/>Beantwoord de vragen en ontdek wat u voor uw schade het beste kunt doen.",
+    "description": "Uw opstalverzekering vergoedt schade aan uw huis. Bijvoorbeeld aan het dak of de gevel. Maar ook aan dingen die vastzitten aan uw huis, zoals uw keuken of badkamer.<br/><br/>Beantwoord de vragen en ontdek wat u voor uw schade het beste kunt doen.",
+    "descriptiontablet": "Uw opstalverzekering vergoedt schade aan uw huis. Bijvoorbeeld aan het dak of de gevel. Maar ook aan dingen die vastzitten aan uw huis, zoals uw keuken of badkamer.<br/><br/>Beantwoord de vragen en ontdek wat u voor uw schade het beste kunt doen.",
     "descriptionmobile": "Voor schade aan uw huis. Bijvoorbeeld aan het dak of de gevel. Maar ook voor schade aan dingen die vastzitten aan uw huis, zoals uw keuken of badkamer.",
     "title": "Opstal",
     "startingStep": "Q_HOME_1"
