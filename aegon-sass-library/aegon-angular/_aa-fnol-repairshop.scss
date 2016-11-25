@@ -124,6 +124,7 @@
   }
   .fnol-repairshop-table-sort table{
     width: auto;
+    border-top: none;
   }
   .fnol-repairshop-table-sort table thead tr th {
     border-top: none;
@@ -179,7 +180,7 @@
 
   }
 
-  .fnol-repairshop-address-list ul li {
+  .fnol-repairshop-address-list li {
     background: none;
     list-style-type: none;
     color: $black;

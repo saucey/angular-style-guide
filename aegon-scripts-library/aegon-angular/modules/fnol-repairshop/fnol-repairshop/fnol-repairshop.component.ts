@@ -37,7 +37,7 @@ export class FNOLRepairshopComponent {
             .subscribe(results => {
                 this.parties = results;
                 this.getRepairshopSearchData();
-                this.hideMobileInputForm();
+                //this.hideMobileInputForm();
             });
     }
 
