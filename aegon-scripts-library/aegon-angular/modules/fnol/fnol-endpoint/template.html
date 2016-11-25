@@ -16,7 +16,7 @@
                     {{ endpoint.data.title }}
                 </div>
 
-                <p>{{ endpoint.data.description }}</p>
+                <p [innerHTML]="endpoint.data.description"></p>
 
                 <div *ngIf="endpoint.data.alert" class="fnol-endpoint__alert">
                     <span class="icon-tip fnol-endpoint__alert-icon"></span>
@@ -34,7 +34,7 @@
                                class="button orange arrow fnol-endpoint__button">Meld uw schade online</a>
                             <a *ngIf="endpoint.data.button.phone"
                                href="tel:{{ endpoint.data.button.phone }}"
-                               class="button orange icon-call fnol-endpoint__button">Bel {{ endpoint.data.button.phone }}</a>
+                               class="button orange icon-right icon-call fnol-endpoint__button">Bel {{ endpoint.data.button.phone }}</a>
                             <a *ngIf="endpoint.data.button.repairShop"
                                href="https://www.aegon.nl/particulier/klantenservice/schade-melden/schade-melden-autoverzekering/schadehersteller-zoeken"
                                class="button orange arrow fnol-endpoint__button">Vind schadehersteller</a>

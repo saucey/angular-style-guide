@@ -27,6 +27,11 @@
 
   /* These classes were for Fnol tabs component */
 
+  .fnol-message-grey{
+    background: #F2F2F2;
+  }
+
+
   .mr-top20 {
     margin-top: 20px !important;
   }
@@ -37,9 +42,11 @@
     margin-top: 10px
   }
   .fnol-category__headline {
-    font-size: 1.5em;
+   /* font-size: 1.5em;
+      font-weight: lighter;
+    */
+    font:normal 26px/28px 'senticosansdtlight',Arial,Verdana,sans-serif;
     color: $blue;
-    font-weight: lighter;
     display: none;
 
     // not mobile (> 640px)
