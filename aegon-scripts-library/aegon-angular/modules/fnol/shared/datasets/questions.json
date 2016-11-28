@@ -44,7 +44,7 @@
     "options": [
       {
         "label": "Ja",
-        "next": "END_POSSESSION_4"
+        "next": "END_POSSESSION_6"
       },
       {
         "label": "Nee",
@@ -52,7 +52,7 @@
       },
       {
         "label": "Dat weet ik niet",
-        "next": "END_POSSESSION_6"
+        "next": "END_POSSESSION_4"
       },
       {
         "label": "De schade is al gerepareerd",
