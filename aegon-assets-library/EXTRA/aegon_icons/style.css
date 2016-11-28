@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'aegon_icons';
-  src:  url('fonts/aegon_icons.eot?t1qhw4');
-  src:  url('fonts/aegon_icons.eot?t1qhw4#iefix') format('embedded-opentype'),
-    url('fonts/aegon_icons.ttf?t1qhw4') format('truetype'),
-    url('fonts/aegon_icons.woff?t1qhw4') format('woff'),
-    url('fonts/aegon_icons.svg?t1qhw4#aegon_icons') format('svg');
+  src:  url('fonts/aegon_icons.eot?o97msl');
+  src:  url('fonts/aegon_icons.eot?o97msl#iefix') format('embedded-opentype'),
+    url('fonts/aegon_icons.ttf?o97msl') format('truetype'),
+    url('fonts/aegon_icons.woff?o97msl') format('woff'),
+    url('fonts/aegon_icons.svg?o97msl#aegon_icons') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -258,16 +258,28 @@
 .icon-huis:before {
   content: "\e90c";
 }
-.icon-minus:before {
-  content: "\ea0b";
-}
 .icon-agenda-thin:before {
   content: "\e99a";
+}
+.icon-minus:before {
+  content: "\ea0b";
 }
 .icon-share-thin:before {
   content: "\ea64";
 }
 .icon-bar-chart-thin:before {
   content: "\eb5d";
+}
+.icon-write:before {
+  content: "\e9e5";
+}
+.icon-check-square:before {
+  content: "\e9f8";
+}
+.icon-file-upload:before {
+  content: "\eabb";
+}
+.icon-file:before {
+  content: "\eac2";
 }
 
