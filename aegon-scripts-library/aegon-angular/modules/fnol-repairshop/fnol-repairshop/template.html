@@ -101,7 +101,7 @@
                             <li>{{ party.address.street }}</li>
                             <li>{{party.address.houseNumber}} {{ party.address.postCode }}{{ party.address.city }}</li>
                             <li class="address-info-spacer"><span>{{ party.mail }}</span></li>
-                        </ul>
+                    </ul>
                     </td>
                     <td class="rating">
                         <span class="rating-star fnol-repairshop__star--{{party.ranking}}"></span>
@@ -161,9 +161,10 @@
                             </tr>
                             <tr colspan="2">
                                 <td class="mob_address">
-                                    <ul>
+                                    <ul class="fnol-repairshop-address-list">
                                         <li>{{ party.address.street }}</li>
                                         <li>{{party.address.houseNumber}} {{ party.address.postCode }}{{ party.address.city }}</li>
+                                        <li class="address-info-spacer"><span>{{ party.mail }}</span></li>
                                     </ul>
                                 </td>
                             </tr>
