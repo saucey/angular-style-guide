@@ -147,7 +147,7 @@
     "type": "generic",
     "data": {
       "title": "Zo meldt u uw schade",
-      "description": "Uw heeft de schade al laten repareren. U kunt uw schade het beste online melden.",
+      "description": "U heeft de schade al laten repareren. U kunt uw schade het beste online melden.",
       "list": {
         "title": "Voordelen online melden",
         "items": [
@@ -304,7 +304,7 @@
     "type": "generic",
     "data": {
       "title": "Zo meldt u uw schade",
-      "description": "Uw heeft uw schade al laten herstellen. U kunt uw schade het beste direct online melden.",
+      "description": "U heeft uw schade al laten herstellen. U kunt uw schade het beste direct online melden.",
       "list": {
         "title": "Voordelen online melden",
         "items": [
@@ -330,7 +330,7 @@
     "type": "generic",
     "data": {
       "title": "Zo meldt u uw schade",
-      "description": "U heeft schade aan uw auto en die is nog niet gerepareerd. U kunt het beste contact opnemen met een bij Aegon aangesloten schadehersteller. De schadehersteller inventariseert de schade en meldt deze bij Aegon. Vervolgens bepaalt u zelf of u de schade wilt laten herstellen en of u de schade wil claimen.",
+      "description": "U heeft schade aan uw auto en die schade is nog niet gerepareerd. U kunt het beste contact opnemen met een bij Aegon aangesloten schadehersteller. <br/><br/> De schadehersteller bekijkt de schade, waarna u besluit of u de schade wilt laten repareren. Dit is vaak afhankelijk van het schadebedrag, uw eigen risico en de gevolgen voor uw schadevrije jaren. Zelf melden van de schade bij Aegon is niet nodig. Dit doet de hersteller voor u als u de schade wilt laten repareren.",
       "list": {
         "title": "Voordelen van het schadeherstelnetwerk van Aegon",
         "items": [
