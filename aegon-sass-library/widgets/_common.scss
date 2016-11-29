@@ -109,6 +109,14 @@
       margin-left: 0;
     }
   }
+  .data {
+    .details {
+      margin-top:20px;
+      ~ .details {
+        margin-top:0;
+      }
+    }
+  }
 }
 // fix for mijn betalingen
 #aegon_mijnViewClaims_webapp_container {
