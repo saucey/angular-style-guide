@@ -3,12 +3,12 @@
 $wiaFormMobileBreakpoint: 550px;
 $wiaFormTableBreakpoint: $wiaFormMobileBreakpoint + 1px;
 
-.wia_form {
+.wia-form {
   font-size: $medium;
   margin: 2em 0;
 
   @media (max-width: $wiaFormMobileBreakpoint) {
-    .wia_form--hidden-mobile {
+    .wia-form--hidden-mobile {
       display: none;
     }
 
@@ -16,20 +16,19 @@ $wiaFormTableBreakpoint: $wiaFormMobileBreakpoint + 1px;
       padding: 0;
       background: none;
     }
-    .checkbox--white .checkbox, .aa-input--white input, .radio--white span.radio, .input--white  {
+    .checkbox--white .checkbox, .aa-input--white input, .radio--white span.radio, .input--white {
       background: $grey !important;
     }
-    .wia_form__column_input label, .wia_form__products_label {
+    .wia-form__column_input label, .wia-form__products_label {
       font-weight: bold;
     }
   }
 
-
-  .wia_form__step {
+  .wia-form__step {
     @media (min-width: $wiaFormTableBreakpoint) {
       display: none;
     }
-    &.wia_form__step--visible {
+    &.wia-form__step--visible {
       display: block;
     }
   }
@@ -41,7 +40,7 @@ $wiaFormTableBreakpoint: $wiaFormMobileBreakpoint + 1px;
     font-weight: normal;
   }
 
-  .wia_form__column_input {
+  .wia-form__column_input {
     margin: 1em 0;
     display: block;
     @media (min-width: $wiaFormTableBreakpoint) {
@@ -60,12 +59,12 @@ $wiaFormTableBreakpoint: $wiaFormMobileBreakpoint + 1px;
     }
   }
 
-  .wia_form__products_label {
+  .wia-form__products_label {
     display: block;
     margin: 0.5em 0;
   }
 
-  .wia_form__products-switch {
+  .wia-form__products-switch {
     margin: 1em 0;
   }
   .products-attrs__radios {
@@ -105,12 +104,11 @@ $wiaFormTableBreakpoint: $wiaFormMobileBreakpoint + 1px;
       min-width: 320px;
 
       &:nth-child(odd) {
-        clear:both;
+        clear: both;
         width: 46%;
         margin-right: 4%;
       }
     }
-
 
     label.checkbox {
       margin-top: -4px;
@@ -135,22 +133,23 @@ $wiaFormTableBreakpoint: $wiaFormMobileBreakpoint + 1px;
     }
   }
 
-  .header {
-    font-weight: normal;
-    &.headline {
-      font-size: 1.05em;
-    }
-    &.headline--margin {
-      margin-top: 2em;
-    }
-  }
-
   .aa-input--euro {
     display: block;
   }
-  .wia_form__error {
+  .wia-form__error {
     color: red;
     font-size: 0.9em;
     display: block;
   }
+}
+
+.wia-form__induction {
+
+  @media (max-width: $wiaFormMobileBreakpoint) {
+    display: none;
+  }
+}
+
+.wia-form__induction__header {
+  font-weight: 700;
 }

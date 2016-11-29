@@ -15,25 +15,17 @@ import { WiaInputUseCaseEnum } from "../wia-content/enums/wia-input-use-case.enu
 @Injectable()
 export class WiaPagePersonalizationService {
 
-  public incomeClasses = [
-    5000,
-    15000,
-    25000,
-    35000,
-    45000,
-    55000,
-    65000,
-    75000,
-    85000,
-    95000,
-    105000,
-    115000,
-    125000
-  ];
+  public incomeClasses = [];
 
   constructor() {
+    this.generateIncomeClasses();
   }
 
+  private generateIncomeClasses () {
+    for (let i = 1; i <= 35; i++) {
+      this.incomeClasses.push(i * 15000)
+    }
+  }
 
   private to36 = number => (+number).toString(35); // leave 'z' free to replace 'o's later
 
@@ -55,7 +47,7 @@ export class WiaPagePersonalizationService {
 
   private getDisabilityFromInput(input: WIAInputModel): string {
 
-    return this.to36(~~(input.disability / 10));
+    return this.to36(~~(input.disability / 5));
   }
 
   private getUsageFromInput(input: WIAInputModel): string {
@@ -63,7 +55,7 @@ export class WiaPagePersonalizationService {
     if (input.permDisability) {
       return 'P'
     } else {
-      return this.to36(~~(input.usage / 10))
+      return this.to36(~~(input.usage / 5))
     }
   }
 
@@ -140,10 +132,10 @@ export class WiaPagePersonalizationService {
     const income = this.incomeClasses[to10(codeChars[0])];
 
     // Disability
-    const disability = to10(codeChars[1]) * 10;
+    const disability = to10(codeChars[1]) * 5;
 
     // Usage
-    const usage = codeChars[2] === 'p' ? 50 : to10(codeChars[2]) * 10;
+    const usage = codeChars[2] === 'p' ? 50 : to10(codeChars[2]) * 5;
 
     // Permanent disability
     const permDisability = codeChars[2] === 'p';
