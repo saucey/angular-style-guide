@@ -6,16 +6,20 @@ import {FnolRepairshopService} from "../shared/services/fnol.data.service";
 
 const template = require('./template.html');
 
+const INFO_FORM: string = 'info_form';
+const RESULT_MOBILE: string = 'result_mobile';
+
 @Component({
     selector: 'fnol-repairshop',
     template: template,
     providers: [FnolRepairshopService]
 })
+
 export class FNOLRepairshopComponent {
 
     public isHideRepairshopResults: boolean = true;
     public isHideMobileRepairshopResults: boolean = true;
-    public isMobileView: boolean = false;
+    public getItemShown: string = INFO_FORM;
     public parties = [];
 
     public repairshop = {
@@ -37,24 +41,18 @@ export class FNOLRepairshopComponent {
             .subscribe(results => {
                 this.parties = results;
                 this.getRepairshopSearchData();
-                //this.hideMobileInputForm();
+                this.getItemShown = RESULT_MOBILE;
             });
     }
 
     getRepairshopSearchData() {
-        this.isHideRepairshopResults = false;
-        this.isHideMobileRepairshopResults = false;
+       this.isHideRepairshopResults = false;
+       this.isHideMobileRepairshopResults = false;
     }
 
     hideMobileResults() {
         this.isHideMobileRepairshopResults = true;
-        this.isMobileView = false;
-    }
-
-// if click mobile view search button then form component hide show only result component
-
-    hideMobileInputForm() {
-       this.isMobileView = true;
+        this.getItemShown = INFO_FORM;
     }
 
 }
