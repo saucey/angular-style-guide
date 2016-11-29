@@ -1,10 +1,10 @@
-export const defaultOptions = {
-  start: {
-    url: '/page-to-redirect-when-no-session-storage',
-    redirect: false
-  },
-  subtitle: false,
-  content: false,
-  // This can be an array of key
-  cleanSessionStorage: false
-}
+<div class="sticky-wrapper">
+  <div class="img"></div>
+  <div class="sticky-inner-wrapper">
+      <p class="title">{{title}}</p>
+      <p class="general-text freetext">{{freetext}}</p>
+      <p class="general-text hourstext">{{hourstext | replace : {'[[fromHours]]': dateFrom, '[[toHours]]': dateTo} }}</p>
+      <div><span class="telephone">{{telephone}}</span></div>
+      <div><span class="startchatlabel">{{startchatlabel}}</span></div>
+  </div>
+</div>

@@ -31,3 +31,4 @@ export * from './aa-loader/aa-loader.component';
 export * from './aa-faq/aa-faq.component';
 export * from './aa-pension-offer-form/aa-pension-offer-form.component';
 export * from './aa-pension-offer-confirmation/aa-pension-offer-confirmation.component';
+export * from './aa-contact-sticky/aa-contact-sticky.component';

@@ -16,4 +16,6 @@ export const defaultOptions = {
   },
   phoneNumber: '088 344 12 34',
   startChatLabel: 'Start chat'
-}
+};
+
+
