@@ -14,6 +14,7 @@
   Drupal.behaviors.personalDetailsWidget = {
     attach: function (context) {
       Drupal.behaviors.tooltip.activate("#personal_details_widget");
+      Drupal.behaviors.tooltip.activate("#persoonsgegevensVerficationwidget");
 
       var Validation = Drupal.behaviors.validation;
       var formSelector = "form[name=personal_details_form]";
@@ -95,9 +96,9 @@
                   $streetField_ca.val(response.retrieveAddressResponse._AE_ADRES.STRAAT);
                   $cityField_ca.val(response.retrieveAddressResponse._AE_ADRES.PLAATS);
                   removeAttr('ca');
-                }  
+                }
               }
-              
+
               if (response.retrieveAddressResponse.PROCES.STATUS !== "0100") {
                 if(type !== 'ca') {
                   $streetField.val('');
@@ -105,8 +106,8 @@
                 } else {
                   $streetField_ca.val('');
                   $cityField_ca.val('');
-                } 
-              } 
+                }
+              }
           },
           error: function(response){
               console.log('Error:' + response);
@@ -114,7 +115,7 @@
         });
       };
 
-      
+
       $('#personal_details_widget input[rel^=address-lookup]', context).change(function(){
         if ($zipcodeField.val().length > 0 && $housenumberField.val().length > 0) {
           getAddress();
