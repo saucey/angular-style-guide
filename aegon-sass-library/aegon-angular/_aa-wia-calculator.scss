@@ -10,13 +10,13 @@ $wiaBreakpoint: 800px;
 
 $wiaCalculatorBgColor: #F2F2F2;
 
-$wiaCalculatorCategory1Color: #D9EBF7;
-$wiaCalculatorCategory2Color: #3395D4;
-$wiaCalculatorCategory3Color: #005996;
+$wiaCalculatorCategorySalary: #D9EBF7;
+$wiaCalculatorCategoryStatutory: #A4EFDE;
+$wiaCalculatorCategoryAegon: #0079C5;
 
 $wiaCalculatorMobileBreakpoint: 850px;
 
-.wia_graph__legend {
+.wia-graph__legend {
   width: 20%;
   height: $wiaChartHeight + $wiaGraphLabelBottomHeight + $wiaGraphLabelMargin;
   float: left;
@@ -26,27 +26,27 @@ $wiaCalculatorMobileBreakpoint: 850px;
   text-align: right;
 }
 
-.wia_graph {
+.wia-graph {
   width: 80%;
   float: left;
   position: relative;
 
   .aa-block-graph__bar {
     &[data-category="1"] .aa-block-graph__bar-block-inner {
-      background: $wiaCalculatorCategory1Color;
+      background: $wiaCalculatorCategorySalary;
     }
     &[data-category="2"] .aa-block-graph__bar-block-inner {
 
-      background: $wiaCalculatorCategory2Color;
+      background: $wiaCalculatorCategoryStatutory;
     }
     &[data-category="3"] .aa-block-graph__bar-block-inner {
-      background: $wiaCalculatorCategory3Color;
+      background: $wiaCalculatorCategoryAegon;
     }
   }
 }
 
-.wia_graph__greyed-out {
-  opacity: 0.4;
+.wia-graph__greyed-out {
+  opacity: 0.2;
 }
 
 .wia_calculator_mobile {
@@ -80,6 +80,7 @@ $wiaCalculatorMobileBreakpoint: 850px;
 
 .wia_calculator__extra_inputs {
 
+  clear: both;
   .wia_calculator__extra_input_label {
     font-weight: 700;
     margin-top: 1em;
@@ -88,6 +89,16 @@ $wiaCalculatorMobileBreakpoint: 850px;
   > * {
     display: block;
   }
+
+  &.wia_calculator__extra_inputs--center > * {
+    padding-top: 1em;
+  }
+
+  .wia_calculator__extra_inputs__desc {
+    font-size: 0.9em;
+    padding-left: 2em;
+    padding-top: 0.5em;
+  }
 }
 
 .wia_calculator__coverages {
@@ -95,7 +106,7 @@ $wiaCalculatorMobileBreakpoint: 850px;
   margin-bottom: 30px;
 }
 
-.wia_graph--loading, .wia_calculator_mobile--loading {
+.wia-graph--loading, .wia_calculator_mobile--loading {
   opacity: 0.4;
   pointer-events: none;
 }
@@ -148,7 +159,7 @@ $wiaCalculatorMobileBreakpoint: 850px;
   }
 }
 
-.wia_graph__chart {
+.wia-graph__chart {
   height: $wiaChartHeight;
 
   @media (max-width: $wiaBreakpoint) {
@@ -156,7 +167,7 @@ $wiaCalculatorMobileBreakpoint: 850px;
   }
 }
 
-.wia_graph__tooltip {
+.wia-graph__tooltip {
   display: none;
   position: absolute;
   background: #fff;
@@ -172,15 +183,19 @@ $wiaCalculatorMobileBreakpoint: 850px;
     display: none;
   }
 
-  &.wia_graph__tooltip--active {
+  &.wia-graph__tooltip--active {
     display: block;
+    * {
+      font-size: 1em !important;
+      line-height: 1em !important;
+    }
   }
-  .wia_graph__tooltip_content--active {
+  .wia-graph__tooltip_content--active {
     display: block;
   }
 }
 
-.wia_graph__column {
+.wia-graph__column {
   float: left;
   padding: 0 0 0 6px;
 
@@ -215,54 +230,41 @@ $wiaCalculatorMobileBreakpoint: 850px;
   > * {
     background: $white;
     margin: $wiaGraphLabelMargin 0;
-    padding: 50px 5px 5px;
+    padding: 30px 5px 5px;
   }
 
   //overwrite column withs when only 2 columns are visible
-  &.wia_graph__column--half {
-    width: 50% !important;
+  &.wia-graph__column--rest-second {
+    width: 70% !important;
+  }
+  &.wia-graph__column--rest-third {
+    width: 65% !important;
   }
 }
 
-.wia_graph__top_label {
+.wia-graph__top_label {
   font-weight: 700;
   font-size: 0.9em;
   text-align: center;
   padding: 10px 0;
   height: $wiaGraphLabelHeight;
-  position: relative;
-
-  &:before {
-    content: '▾';
-    display: block;
-    position: absolute;
-    color: #8a8a8a;
-    font-size: 0.5em;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background: #e5e5e5;
-    height: 8px;
-    line-height: 8px;
-    text-align: center;
-  }
 }
 
-.wia_graph__bottom_label {
+.wia-graph__bottom_label {
   font-size: 0.9em;
-  text-align: left;
-  padding: 1.2em 0.5em 0;
+  text-align: right;
+  padding: 1em 1em 0 0;
   line-height: 1.3em;
   height: $wiaGraphLabelBottomHeight;
   * {
     display: block;
   }
-  &:not(.wia_graph__bottom_label--double) {
+  &:not(.wia-graph__bottom_label--double) {
     padding-left: 34%;
   }
 }
 
-.wia_graph__legend__labels {
+.wia-graph__legend__labels {
   padding: 7px;
   bottom: 0;
   position: absolute;
@@ -282,38 +284,39 @@ $wiaCalculatorMobileBreakpoint: 850px;
     display: block;
   }
 }
-.wia_graph__legend__items {
+.wia-graph__legend__items {
   position: absolute;
-  bottom: 70px;
+  bottom: 90px;
   left: 0;
   right: 0;
   margin: 0;
 }
 
-.wia_graph__legend__guideline {
+.wia-graph__legend__guideline {
   position: absolute;
   right: 10px;
-  top: 32px;
+  top: 12px;
+  font-size: 0.85em;
 }
 
-.wia_graph__legend__items li {
-  margin: 15px 0;
+.wia-graph__legend__items li {
+  height: 50px;
   font-weight: 700;
-  padding: 0.5em 1.2em;
+  padding: 0 0 0 2.5em;
   position: relative;
   font-size: 1rem;
   line-height: 1em;
-  word-spacing: 3em; // force words in new lines
-  background: none; // overwrite drupal mess
+  background: none;
+  text-align: left;
 
   &:before {
-    content: '▸';
+    content: '';
     display: block;
-    width: 15px;
+    width: 25px;
     position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
+    left: 5px;
+    bottom: 10px;
+    top: 10px;
     border-left: 5px solid;
     color: #fff;
     font-size: 0.6em;
@@ -322,23 +325,25 @@ $wiaCalculatorMobileBreakpoint: 850px;
   }
 
   &:nth-child(1):before {
-    background: darken($wiaCalculatorCategory3Color, 10%);
-    border-left-color: $wiaCalculatorCategory3Color;
+    background: $wiaCalculatorCategoryAegon;
   }
 
   &:nth-child(2):before {
-    background: darken($wiaCalculatorCategory2Color, 10%);
-    border-left-color: $wiaCalculatorCategory2Color;
+    background: $wiaCalculatorCategoryStatutory;
   }
 
   &:nth-child(3):before {
-    background: darken($wiaCalculatorCategory1Color, 10%);
-    border-left-color: $wiaCalculatorCategory1Color;
-    padding-top: 8px;
+    background: $wiaCalculatorCategorySalary;
+  }
+  span {
+    position: absolute;
+    top: 50%;
+    display: block;
+    transform: translateY(-50%);
   }
 }
 
-.wia_graph__legend__help {
+.wia-graph__legend__help {
   cursor: pointer;
   position: absolute;
   left: 10px;
@@ -351,11 +356,7 @@ $wiaCalculatorMobileBreakpoint: 850px;
   margin-top: 1em;
 
   .wia_calculator__disability_slider {
-    position: absolute;
-    width: 100%;
-    z-index: 10;
-    top: 3em;
-    padding: 0 1rem;
+
   }
 
   .aa-tabs-view__block {
@@ -402,13 +403,6 @@ $wiaCalculatorMobileBreakpoint: 850px;
       width: 5rem !important;
     }
 
-
-    .noUi-target.noUi-background {
-      background: $blue !important;
-      .noUi-origin {
-        background: $grey !important;
-      }
-    }
   }
 
   .wia_calculator_mobile h3 {
@@ -486,10 +480,13 @@ $wiaCalculatorMobileBreakpoint: 850px;
       font-size: 1.1em;
     }
   }
-  &.wia_calculator__summary_table--three-column td {
-    width: 33%;
+  &.wia_calculator__summary_table--four-columns td {
+    width: 25%;
+    &:nth-child(3) {
+      text-align: center;
+    }
   }
-  &:not(.wia_calculator__summary_table--three-column) tr:last-child  td {
+  &:not(.wia_calculator__summary_table--four-columns) tr:last-child  td {
     border-top: 1px solid $dark_grey;
     padding-top: 0.5em;
     font-size: 1.15em;
@@ -519,8 +516,79 @@ $wiaCalculatorMobileBreakpoint: 850px;
   }
 }
 .wia_calculator__back_arrow {
-  margin: 1em 0;
   li {
+    &:before {
+      transform: rotate(180deg);
+      transform-origin: center;
+      display: inline-block !important;
+      max-height: inherit !important;
+      left: -10px !important;
+    }
+  }
+}
+
+.wia_calculator, .wia_calculator_mobile {
+
+  .noUi-target.noUi-background {
+    background: $blue !important;
+    .noUi-origin {
+      background: $grey !important;
+    }
+  }
+}
+
+@keyframes leftIn {
+  from {
+    background-color: red;
+    transform: translateX(-30%);
+  }
+  to {
+    background-color: yellow;
+  }
+}
+
+.wia_calculator__range_descriptions {
+  width: 100%;
+  overflow: hidden;
+}
+
+.wia_calculator__range_descriptions__headline {
+  margin-bottom: 0.2em;
+}
+
+.wia_calculator__range_descriptions__wrapper {
+  width: 300%;
+  overflow: hidden;
+  transition: all ease-in-out 300ms;
+  &[data-active="1"] {
+    margin-left: 0;
+  }
+  &[data-active="2"] {
+    margin-left: -100%;
+  }
+  &[data-active="3"] {
+    margin-left: -200%;
+  }
+}
+
+.wia_calculator__range_descriptions__wrapper > * {
+  width: 33.3333333%;
+  float: left;
+}
+
+@media (max-width: 1200px) {
+  .wia_calculator__extra_inputs__desc {
+    width: 100% !important;
+    float: none !important;
+    clear: both;
+    padding: 0 !important;
     margin: 0 !important;
+  }
+  .wia_calculator__extra_inputs:not(.wia_calculator__extra_inputs--center) {
+    .span4, .span8 {
+      float: none !important;
+      width: 100%;
+      margin: 0;
+    }
   }
 }

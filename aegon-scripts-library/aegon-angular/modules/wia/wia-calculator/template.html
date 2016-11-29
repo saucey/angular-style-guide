@@ -2,43 +2,46 @@
 
   <h3>Wat gebeurt er bij arbeidsongeschiktheid?</h3>
   <p>Bekijk uw inkomen bij verschillende arbeidsongeschiktheid percentages door de slider te bewegen.</p>
-  <div class="clearfix wia_calculator__graph" [class.wia_graph--loading]="graphData === graphDataPlaceholder">
-    <div class="wia_graph__legend">
-      <span class="wia_graph__legend__guideline" [class.wia_graph__greyed-out]="showTooltip">Uw salaris</span>
+  <div class="clearfix wia_calculator__graph" [class.wia-graph--loading]="graphData === graphDataPlaceholder">
+    <div class="wia-graph__legend">
+      <span class="wia-graph__legend__guideline" [class.wia-graph__greyed-out]="showTooltip">Uw salaris</span>
 
-      <ul class="wia_graph__legend__items">
-        <li [class.wia_graph__greyed-out]="showTooltip && showTooltip !== 4" *ngIf="legendData[1]"
-            (mouseenter)='showTooltip = 4' (mouseleave)='showTooltip = 0'>Aegon uitkering
+      <ul class="wia-graph__legend__items">
+        <li [class.wia-graph__greyed-out]="showTooltip && showTooltip !== 4" *ngIf="legendData[1]"
+            (mouseenter)='showTooltip = 4' (mouseleave)='showTooltip = 0'>
+            <span>Aegon uitkering</span>
         </li>
-        <li [class.wia_graph__greyed-out]="showTooltip && showTooltip !== 5" *ngIf="legendData[2]"
-            (mouseenter)='showTooltip = 5' (mouseleave)='showTooltip = 0'>Wettelijke uitkering
+        <li [class.wia-graph__greyed-out]="showTooltip && showTooltip !== 5" *ngIf="legendData[2]"
+            (mouseenter)='showTooltip = 5' (mouseleave)='showTooltip = 0'>
+          <span>Wettelijke uitkering</span>
         </li>
-        <li [class.wia_graph__greyed-out]="showTooltip && showTooltip !== 6" *ngIf="legendData[3]"
-            (mouseenter)='showTooltip = 6' (mouseleave)='showTooltip = 0'>Loon
+        <li [class.wia-graph__greyed-out]="showTooltip && showTooltip !== 6" *ngIf="legendData[3]"
+            (mouseenter)='showTooltip = 6' (mouseleave)='showTooltip = 0'>
+            <span>Loon</span>
         </li>
       </ul>
 
-      <div class="wia_graph__legend__labels" [class.wia_graph__greyed-out]="showTooltip">
+      <div class="wia-graph__legend__labels" [class.wia-graph__greyed-out]="showTooltip">
         <strong>Totaal</strong>
         <span>bruto per jaar</span>
         <span>bruto per maand</span>
       </div>
 
     </div>
-    <div class="clearfix wia_graph">
+    <div class="clearfix wia-graph">
 
-      <div [class.wia_graph__column--half]="graphData[2]?.columns[0].amountYearly === 0" class="wia_graph__column">
-        <div class="wia_graph__top_label" [class.wia_graph__greyed-out]="showTooltip && showTooltip !== 1"
+      <div class="wia-graph__column">
+        <div class="wia-graph__top_label" [class.wia-graph__greyed-out]="showTooltip && showTooltip !== 1"
              (mouseenter)='showTooltip = 1' (mouseleave)='showTooltip = 0'>
           1e en 2e jaar
         </div>
 
-        <div class="wia_graph__chart">
+        <div class="wia-graph__chart">
           <wia-calculator-graph class="wia-calculator-graph" [data]='graphData[0]'
                                 *ngIf="graphData[0]"></wia-calculator-graph>
         </div>
 
-        <div class="wia_graph__bottom_label wia_graph__bottom_label--double">
+        <div class="wia-graph__bottom_label wia-graph__bottom_label--double">
           <div class="row-fluid">
             <div class="span6">
               <strong>€{{ graphData[0]?.columns[0].amountYearly | money:true }}</strong>
@@ -53,57 +56,68 @@
 
       </div>
 
-      <div [class.wia_graph__column--half]="graphData[2]?.columns[0].amountYearly === 0"
-           class="wia_graph__column">
-        <div class="wia_graph__top_label" [class.wia_graph__greyed-out]="showTooltip && showTooltip !== 2"
+      <div [class.wia-graph__column--rest-second]="graphData[2]?.columns[0].amountYearly === 0"
+           class="wia-graph__column" *ngIf="graphData[1]?.columns[0].amountYearly > 0">
+        <div class="wia-graph__top_label" [class.wia-graph__greyed-out]="showTooltip && showTooltip !== 2"
              (mouseenter)='showTooltip = 2' (mouseleave)='showTooltip = 0'>
           vanaf 3e jaar
         </div>
 
-        <div class="wia_graph__chart">
+        <div class="wia-graph__chart">
           <wia-calculator-graph class="wia-calculator-graph" [data]='graphData[1]'
                                 *ngIf="graphData[1]"></wia-calculator-graph>
         </div>
 
-        <div class="wia_graph__bottom_label">
+        <div class="wia-graph__bottom_label">
           <strong>€{{ graphData[1]?.columns[0].amountYearly | money:true }}</strong>
           <span>€{{ graphData[1]?.columns[0].amountMonthly | money:true }}</span>
         </div>
 
       </div>
 
-      <div class="wia_graph__column" *ngIf="graphData[2]?.columns[0].amountYearly > 0">
+      <div class="wia-graph__column"
+           [class.wia-graph__column--rest-third]="graphData[1]?.columns[0].amountYearly === 0"
+           *ngIf="graphData[2]?.columns[0].amountYearly > 0">
 
-        <div class="wia_graph__top_label" [class.wia_graph__greyed-out]="showTooltip && showTooltip !== 3"
+        <div class="wia-graph__top_label" [class.wia-graph__greyed-out]="showTooltip && showTooltip !== 3"
              (mouseenter)='showTooltip = 3' (mouseleave)='showTooltip = 0'>
           tot pensioen leeftijd
         </div>
 
-        <div class="wia_graph__chart">
+        <div class="wia-graph__chart">
           <wia-calculator-graph class="wia-calculator-graph" [data]='graphData[2]'
                                 *ngIf="graphData[2]"></wia-calculator-graph>
         </div>
 
-        <div class="wia_graph__bottom_label">
+        <div class="wia-graph__bottom_label">
           <strong>€{{ graphData[2]?.columns[0].amountYearly | money:true }}</strong>
           <span>€{{ graphData[2]?.columns[0].amountMonthly| money }}</span>
         </div>
       </div>
 
-      <div class="wia_graph__tooltip" [class.wia_graph__tooltip--active]="showTooltip">
-        <div [class.wia_graph__tooltip_content--active]="showTooltip === 1">
-          In de eerste twee jaar dat u arbeidsongeschikt raakt betaalt uw werkgever uw salaris door. Dit is meestal 100% in het eerste jaar en 70% in het tweede jaar. Check bij uw werkgever wat voor u geldt.
+      <div class="wia-graph__tooltip" [class.wia-graph__tooltip--active]="showTooltip">
+        <div [class.wia-graph__tooltip_content--active]="showTooltip === 1">
+          In de eerste twee jaar dat u arbeidsongeschikt bent, betaalt uw werkgever uw salaris door. Dit is
+          meestal 100% in het eerste jaar en 70% in het tweede jaar. Check bij uw werkgever wat voor u
+          geldt.
         </div>
-        <div [class.wia_graph__tooltip_content--active]="showTooltip === 2">
-          Vanaf het 3e jaar krijgt u een zogenaamde loongerelateerde uitkering. Hoe langer u gewerkt heeft hoe langer u recht heeft op deze uitkering. Minimaal 3 maanden en maximaal 38 maanden (vanaf 2019 maximaal 24 maanden).
+        <div [class.wia-graph__tooltip_content--active]="showTooltip === 2">
+          Vanaf het 3e jaar krijgt u een zogenaamde loongerelateerde uitkering. Hoe langer u gewerkt heeft
+          hoe langer u recht heeft op deze uitkering. Minimaal 3 maanden en maximaal 24 maanden.
         </div>
-        <div [class.wia_graph__tooltip_content--active]="showTooltip === 3">
-          Tot uw pensioenleeftijd krijgt u in principe de WGA-loonaanvulling. Benut u echter minder dan 50% van uw verdiencapaciteit dan verandert deze in een WGA-vervolguitkering gebaseerd op het minimumloon. Samen met het loon dat u nog verdient vormt dit uw inkomen. Hoe meer u werkt, hoe hoger uw totale inkomen is.
+        <div [class.wia-graph__tooltip_content--active]="showTooltip === 3">
+          Tot uw pensioenleeftijd krijgt u in principe de WGA-loonaanvulling. Benut u echter minder dan 50%
+          van uw verdiencapaciteit dan verandert deze in een WGA-vervolguitkering gebaseerd op het
+          minimumloon. Samen met het loon dat u nog verdient, is dit uw inkomen. Hoe meer u werkt, hoe
+          hoger uw totale inkomen is.
         </div>
-        <div [class.wia_graph__tooltip_content--active]="showTooltip === 4">
-          Uw werkgever kan een verzekering voor u sluiten. U bent verzekerd met de WGA-Aanvullingsverzekering. Daarmee krijgt u een uitkering als u volgens het UWV minimaal 35% arbeidsongeschikt bent, maar niet 80% of meer. Wij vullen uw inkomen aan tot minimaal 70% van het inkomen dat u had voordat u arbeidsongeschikt wer.
+        <div [class.wia-graph__tooltip_content--active]="showTooltip === 4">
+          Het deel van uw inkomen dat u van Aegon ontvangt wanneer uw werkgever aanvullende
+          verzekeringen heeft afgesloten. Of dit deel wordt uitgekeerd en hoe hoog deze uitkering is verschilt
+          per situatie en per afgesloten verzekering. In de eerste stap van deze tool kunt u aangeven welke
+          verzekeringen voor u van toepassing zijn.
         </div>
-        <div [class.wia_graph__tooltip_content--active]="showTooltip === 5">
+        <div [class.wia-graph__tooltip_content--active]="showTooltip === 5">
           Bent u na twee jaar ziekte volgens het UWV 35% of meer arbeidsongeschikt? Dan komt uin de WIA. De WIA is de Wet werk en inkomen naar arbeidsvermogen. Via die wet krijgt u een uitkering. De WIA is onder te verdelen in twee regelingen:
 
           <ul>
@@ -114,10 +128,12 @@
           Bent u na twee jaar ziekte volgens het UWV minimaal 15 arbeidsongeschikt, maar minder dan 35%? Dan krijgt u geen WIA-uitkering. U zoekt dan in overleg met uw werkgever passend werk. Met dit passend werk verdient u mogelijk minde
 
         </div>
-        <div [class.wia_graph__tooltip_content--active]="showTooltip === 6">
-          In de eerste twee jaar wordt uw loon doorbetaald door uw werkgever. Meestal is dit 100% in het eerste jaar en 70% in het tweede jaar.
-          Check bij uw werkgever wat voor u geldt. Het loon dat u na de eerste twee jaar verdiend komt voor een gedeelte bovenop de uitkering van de overheid.
-          Hoe meer u werkt hoe hoger uw totale inkomen is.
+        <div [class.wia-graph__tooltip_content--active]="showTooltip === 6">
+          Het loon is het deel van uw inkomen dat u krijgt van uw werkgever. In de eerste twee jaar wordt uw
+          loon doorbetaald door uw werkgever. Meestal is dit 100% in het eerste jaar en 70% in het tweede
+          jaar. Check bij uw werkgever wat voor u geldt. Het loon dat u na de eerste twee jaar verdient, komt
+          voor een gedeelte bovenop de uitkering van de overheid. Hoe meer u werkt, hoe hoger uw totale
+          inkomen is.
         </div>
       </div>
 
@@ -126,75 +142,75 @@
   </div>
 
   <div class="wia_calculator__tabs">
-    <aa-slider class="aa-input--percentage wia_calculator__disability_slider"
-               [(ngModel)]="disability.value"
-               (modelChange)="sliderUpdate(disability, $event, true)"
-               [options]="disability.options">
-    </aa-slider>
 
-    <aa-tabs-view theme="grey" [active]="getActiveTab()">
 
-      <aa-tabs-view-item [id]="tabs.first" title="0%-35% <span class='visible-desktop'>arbeidsongeschikt</span>">
+    <div class="row-fluid wia_calculator__extra_inputs">
+      <div class="span4 wia_calculator__extra_input_label">
+        Arbeidsongeschiktheid <aa-hint text="Geef aan in welke mate u arbeidsongeschikt bent. Dit is het deel dat u niet meer kunt werken. In het geval van arbeidsongeschiktheid wordt dit percentage vastgesteld door het UWV."></aa-hint>
+      </div>
+      <div class="span8">
+        <aa-slider class="aa-input--percentage wia_calculator__disability_slider"
+                   [(ngModel)]="disability.value"
+                   (modelChange)="sliderUpdate(disability, $event, true)"
+                   [options]="disability.options">
+        </aa-slider>
+      </div>
+    </div>
 
-        <h4 class="hidden-desktop">Arbeidsongeschikt</h4>
 
-        <p>U bent arbeidsongeschikt verklaard. Het UWV bepaalt hoeveel u nog wél kan werken. Is de mate waarin u
-          arbeidsongeschikt raakt minder dan 35% dan krijgt u geen uitkering van de overheid. Uw loon hangt af van
-          hoeveel u nog blijft werken. Dat noemen we: benutting van uw restverdiencapaciteit.</p>
+    <div class="row-fluid wia_calculator__extra_inputs " [class.hidden]="disability.value >= 80">
+      <div class="span4 wia_calculator__extra_input_label">
+        Benutting restverdiencapaciteit: <aa-hint text="Geef aan welk deel van de restverdiencapaciteit daadwerkelijk benut wordt. De restverdiencapaciteit is het deel dat u nog kunt werken op basis van de vastgestelde arbeidsongeschiktheid. Is uw restverdiencapaciteit bijvoorbeeld vastgesteld op 2 dagen per week, maar kunt u voor maar 1 dag per week werk vinden? Dan is de benutting van uw restverdiencapaciteit 50%."></aa-hint>
+      </div>
+      <div class="span8">
+        <aa-slider class="aa-input--percentage"
+                   [(ngModel)]="usage.value"
+                   (modelChange)="sliderUpdate(usage, $event, true)"
+                   [options]="usage.options">
+        </aa-slider>
+      </div>
+    </div>
 
-        <div class="row-fluid wia_calculator__extra_inputs">
-          <div class="span5 wia_calculator__extra_input_label">
-            Benutting restverdiencapaciteit:
-          </div>
-          <div class="span7">
-            <aa-slider class="aa-input--percentage"
-                       [(ngModel)]="usage.value"
-                       (modelChange)="sliderUpdate(usage, $event, true)"
-                       [options]="usage.options">
-            </aa-slider>
-          </div>
+    <div class="row-fluid wia_calculator__extra_inputs wia_calculator__extra_inputs--center" [class.hidden]="disability.value < 80">
+      <div class="span5 wia_calculator__bold">
+        Duurzaam arbeidsongeschikt <aa-hint text="Geef aan of er sprake van duurzame arbeidsongeschiktheid. Dit is het geval bij geen of
+een zeer geringe kans op herstel."></aa-hint>
+      </div>
+      <div class="span1">
+        <aa-input-switch [(ngModel)]="permanentDisability" (modelChange)="updatePermDisability()"></aa-input-switch>
+      </div>
+      <div class="span6 wia_calculator__extra_inputs__desc">
+        Geef aan of er sprake van duurzame arbeidsongeschiktheid.<br/>
+        Dit is het geval bij geen of een zeer geringe kans op herstel.
+      </div>
+    </div>
+
+    <div class="wia_calculator__range_descriptions">
+
+      <div class="wia_calculator__range_descriptions__wrapper" [attr.data-active]="getActiveTab()">
+        <div>
+          <h4 class="wia_calculator__range_descriptions__headline">0-35% arbeidsongeschikt</h4>
+          <p>U bent arbeidsongeschikt verklaard. Het UWV bepaalt hoeveel u nog wél kan werken. Is de mate waarin u
+            arbeidsongeschikt raakt minder dan 35% dan krijgt u geen uitkering van de overheid. Uw loon hangt af van
+            hoeveel u nog blijft werken. Dat noemen we: benutting van uw restverdiencapaciteit.</p>
         </div>
-      </aa-tabs-view-item>
 
-      <aa-tabs-view-item [id]="tabs.second" title="35%-80% <span class='visible-desktop'>arbeidsongeschikt</span>">
-
-        <h4 class="hidden-desktop">Arbeidsongeschikt</h4>
-
-        <p>U kan niet meer of minder werken. Het UWV bepaalt hoeveel u nog wél kan werken en wat u daarmee nog kan
-          verdienen. Dit noemen we uw ‘restverdiencapaciteit’. Er wordt vervolgens gekeken naar uw benutting daarvan.
-          Benut u minder dan 50% van uw ‘restverdiencapaciteit dan verliest u een groot gedeelte van uw wettelijke
-          uitkering.</p>
-
-        <div class="row-fluid wia_calculator__extra_inputs">
-          <div class="span5 wia_calculator__extra_input_label">
-            Benutting restverdiencapaciteit:
-          </div>
-          <div class="span7">
-            <aa-slider class="aa-input--percentage"
-                       [(ngModel)]="usage.value"
-                       (modelChange)="sliderUpdate(usage, $event, true)"
-                       [options]="usage.options">
-            </aa-slider>
-          </div>
+        <div>
+          <h4 class="wia_calculator__range_descriptions__headline">35-80% arbeidsongeschikt</h4>
+          <p>U kan niet meer of minder werken. Het UWV bepaalt hoeveel u nog wél kan werken en wat u daarmee nog kan
+            verdienen. Dit noemen we uw ‘restverdiencapaciteit’. Er wordt vervolgens gekeken naar uw benutting daarvan.
+            Benut u minder dan 50% van uw ‘restverdiencapaciteit dan verliest u een groot gedeelte van uw wettelijke
+            uitkering.</p>
         </div>
-      </aa-tabs-view-item>
 
-      <aa-tabs-view-item [id]="tabs.third" title="80%-100%">
-        <p>U kunt nagegoeg niet meer werken. Dan wordt u 80% of meer arbeidsongeschikt verklaard. Voor de uitkering van
-          de overheid wordt er een verschil gemaakt tussen duurzaam en niet duurzaam arbeidsongeschikt. Als u langer dan
-          5 jaar nagenoeg niet kunt werken wordt er van duurzaam arbeidsongeschikt gesproken.</p>
-
-        <div class="row-fluid wia_calculator__extra_inputs">
-          <div class="span5 wia_calculator__bold">
-            Duurzaam arbeidsongeschikt
-          </div>
-          <div class="span7">
-            <aa-input-switch [(ngModel)]="permanentDisability" (modelChange)="updatePermDisability()"></aa-input-switch>
-          </div>
+        <div>
+          <h4 class="wia_calculator__range_descriptions__headline">80-100% arbeidsongeschikt</h4>
+          <p>U kunt nagegoeg niet meer werken. Dan wordt u 80% of meer arbeidsongeschikt verklaard. Voor de uitkering van
+            de overheid wordt er een verschil gemaakt tussen duurzaam en niet duurzaam arbeidsongeschikt. Als u langer dan
+            5 jaar nagenoeg niet kunt werken wordt er van duurzaam arbeidsongeschikt gesproken.</p>
         </div>
-      </aa-tabs-view-item>
-
-    </aa-tabs-view>
+      </div>
+    </div>
   </div>
 
   <ul class="arrow wia_calculator__back_arrow">
@@ -243,7 +259,7 @@
   </div>
 
 
-  <h4 class="hidden-desktop">Arbeidsongeschikt</h4>
+  <h4 class="hidden-desktop">Arbeidsongeschik</h4>
 
   <aa-slider-input class="aa-input--percentage wia_calculator__disability_slider"
                    [(ngModel)]="disability.value"
@@ -251,7 +267,7 @@
                    [sliderOptions]="disability.options">
   </aa-slider-input>
 
-  <div *ngIf="disability.value < 80">
+  <div [class.hidden]="disability.value >= 80">
     <h4 class="hidden-desktop">Benutting restverdiencapaciteit</h4>
 
     <aa-slider-input class="aa-input--percentage"
@@ -261,7 +277,7 @@
     </aa-slider-input>
   </div>
 
-  <div class="class" *ngIf="disability.value >= 80">
+  <div class="class" [class.hidden]="disability.value < 80">
     <h4>Duurzaam arbeidsongeschikt</h4>
 
     <aa-input-switch [(ngModel)]="permanentDisability" (modelChange)="updatePermDisability()"></aa-input-switch>
@@ -292,16 +308,18 @@
   <p>In de eerste twee jaar dat u arbeidsongeschikt raakt betaalt uw werkgever uw salaris door. Dit is meestal 100% in het eerste jaar en 70% in het tweede jaar. Check bij uw werkgever wat voor u geldt.</p>
 
 
-  <div class="wia_calculator__summary_table wia_calculator__summary_table--three-column">
+  <div class="wia_calculator__summary_table wia_calculator__summary_table--four-columns">
     <table>
       <tr>
         <td>1e jaar</td>
         <td>Loon</td>
+        <td>€</td>
         <td>{{ graphData[0]?.columns[0].amountYearly | money:true }}</td>
       </tr>
       <tr>
         <td>2e jaar</td>
         <td>Loon</td>
+        <td>€</td>
         <td>{{ graphData[0]?.columns[1].amountYearly | money:true }}</td>
       </tr>
     </table>

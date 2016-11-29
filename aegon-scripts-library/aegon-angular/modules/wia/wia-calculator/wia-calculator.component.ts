@@ -7,7 +7,6 @@ import { WIAInputModel } from "../wia-page/models/wia-input.model";
 import { WiaSubscriptionService } from "../wia-page/wia-page.subscription.service";
 import { WiaUrlStateManager } from "../wia-page/wia-page.url-state.service";
 import { WiaInputUseCaseEnum } from "../wia-content/enums/wia-input-use-case.enum";
-import { AATabsViewComponent } from "../../../components/aa-tabs-view/aa-tabs-view.component";
 
 @Component({
   selector: 'aa-wia-calculator',
@@ -19,8 +18,6 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
   @Input() data: any = {};
 
   public simulationData: any = {};
-
-  @ViewChild(AATabsViewComponent) tabsView: AATabsViewComponent;
 
   public defaultOptions: any = defaultOptions;
   //visible tooltip id
@@ -38,29 +35,6 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
         min: 0,
         max: 100
       },
-      ranges: [
-        {
-          start: 0,
-          end: 34.7,
-          color: '#FFFFFF'
-        }, {
-          start: 34.7,
-          end: 35.3,
-          color: 'transparent'
-        }, {
-          start: 35.3,
-          end: 79.7,
-          color: '#FFFFFF'
-        }, {
-          start: 79.7,
-          end: 80.3,
-          color: 'transparent'
-        }, {
-          start: 80.3,
-          end: 100,
-          color: '#FFFFFF'
-        }
-      ],
       labels: [
         {
           value: 0,
@@ -92,21 +66,6 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
         min: 0,
         max: 100
       },
-      ranges: [
-        {
-          start: 0,
-          end: 49.3,
-          color: '#FFFFFF'
-        }, {
-          start: 49.3,
-          end: 50.7,
-          color: 'transparent'
-        }, {
-          start: 50.7,
-          end: 100,
-          color: '#FFFFFF'
-        }
-      ],
       labels: [
         {
           value: 0,
@@ -137,20 +96,6 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
     3: true
   };
 
-  // Ids for tabs view component
-  public tabs = {
-    first: 'first',
-    second: 'second',
-    third: 'third'
-  };
-
-  // Centers of disability ranges to be set after switching tabs
-  public disabilityCenters = {
-    first: 20,
-    second: 55,
-    third: 90
-  };
-
   private lastInput: WIAInputModel = null;
 
   constructor(thisElement: ElementRef,
@@ -170,13 +115,6 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
 
   ngAfterViewInit(): void {
 
-    this.tabsView.onTabChange(() => {
-      if (this.getActiveTab() !== this.tabsView.active) {
-        this.disability.value = this.disabilityCenters[this.tabs[this.tabsView.active]];
-
-        this.update();
-      }
-    });
   }
 
   public updateModel(value: WIAInputModel) {
@@ -270,7 +208,6 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
 
       this.graphData = [
         {
-          suppressAmountLabels: true,
           columns: [graphData[1], graphData[2]]
         },
         {
@@ -289,15 +226,11 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
     }
   }
 
-  public sliderUpdate(slider, val, isInTabs = false) {
+  public sliderUpdate(slider, val) {
 
     if (slider.value !== val) {
 
       slider.value = val;
-
-      if (this.tabsView && isInTabs) {
-        this.tabsView.setActiveById(this.getActiveTab());
-      }
 
       this.update();
     }
@@ -310,11 +243,11 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
 
   public getActiveTab(): string {
     if (this.disability.value < 35) {
-      return this.tabs.first;
+      return '1';
     } else if (this.disability.value >= 35 && this.disability.value < 80) {
-      return this.tabs.second;
+      return '2';
     } else {
-      return this.tabs.third;
+      return '3';
     }
   }
 

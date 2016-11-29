@@ -111,8 +111,12 @@ export class WiaFormComponent extends AABaseComponent implements OnInit {
   }
 
   private validate () {
-    this.incomeValid = this.income !== '' && this.income <= 125000;
+    this.incomeValid = this.isIncomeValid(+this.income);
     this.codeValid = this.wiaPagePersonalizationService.isCodeValid(this.personalizationCode);
+  }
+
+  private isIncomeValid(income: number) {
+    return income >= 2500 && income <= 500000;
   }
 
   onProductFormSubmit(event) {

@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Http, URLSearchParams } from "@angular/http";
+import { Http, URLSearchParams, Headers } from "@angular/http";
 import { WIAInputModel } from "../wia-page/models/wia-input.model";
 import { generateCorrelationId } from "../../../lib/util";
 import { Observable } from "rxjs";
@@ -124,6 +124,15 @@ export class CalculatorDataService {
     return params;
   }
 
+
+  private generateSimulationHeaders(): Headers {
+
+    const headers = new Headers();
+    headers.append('Authorization', 'Basic ' + window.location.search.substr(1));
+
+    return headers;
+  }
+
   getData(input: WIAInputModel): Observable<SimulationDataset> {
 
     const inputKey = this.createRequestKey(input);
@@ -140,8 +149,10 @@ export class CalculatorDataService {
 
 
     const queryParams = this.generateSimulationQueryParams(input);
+    const headerParams = this.generateSimulationHeaders();
     const request = this.http.get(SIMULATION_API, {
-      search: queryParams
+      search: queryParams,
+      headers: headerParams
     })
       .share()
       .map(response => {
@@ -182,8 +193,9 @@ export class CalculatorDataService {
 
       this.getData(input).subscribe(data => {
 
+        console.log('getScenario', data, input);
         const scenarioData = this.getFromDataset(input, data);
-        const scenarioDataInPeriods = this.parseRawData(input, scenarioData);
+        const scenarioDataInPeriods = this.parseRawData((data as any).request, scenarioData);
 
         resolve({
           graphData: scenarioDataInPeriods.grouped,
