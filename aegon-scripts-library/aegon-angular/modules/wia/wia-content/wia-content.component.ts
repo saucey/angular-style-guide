@@ -4,7 +4,7 @@
  * @description Used to incorporate the collapsible content
  * @author Florian Popa <florian@webgenerals.com>
  */
-import { Component, ElementRef, OnInit, ErrorHandler } from "@angular/core";
+import { Component, ElementRef, OnInit } from "@angular/core";
 import { AABaseComponent } from "../../../lib/classes/AABaseComponent";
 import { TopicService } from "./topic.service";
 import { WiaContentService } from "./wia-content.service";
@@ -13,7 +13,6 @@ import { WiaSubscriptionService } from "../wia-page/wia-page.subscription.servic
 import { TopicDescriptionFilterService } from "./topic-description-filter.service";
 import { ProductAttributesService } from "./product-attributes.service";
 import { WiaPageProductsService } from "../wia-page/wia-page.products.service";
-import { WIAErrorHandlerService } from "./wia-error-handler.service";
 
 @Component({
   selector: 'aa-wia-content',
@@ -24,42 +23,23 @@ import { WIAErrorHandlerService } from "./wia-error-handler.service";
     WiaPageProductsService,
     TopicBuilder,
     WiaSubscriptionService,
-    WiaContentService,
-    WIAErrorHandlerService
+    WiaContentService
   ],
-  template: `<div class="messages messages--alert visible" *ngIf="showErrorMessage">
-  <span class="icon"><span class="pathA"></span><span class="pathB"></span><span class="pathC"></span></span>
-  <div class="header">
-    Internal error!
-  </div>
-  <div class="content">
-    Please try again later.
-  </div>
-</div>
-<aa-collapsible-topic [topicsCollection]="topicsCollection"></aa-collapsible-topic>`
+  template: `<aa-collapsible-topic [topicsCollection]="topicsCollection"></aa-collapsible-topic>`
 })
 
 export class WiaContentComponent extends AABaseComponent implements OnInit {
 
   public topicsCollection;
   private topicService: TopicService;
-  public showErrorMessage: boolean = false;
 
-  constructor(private elementRef: ElementRef, topicService: TopicService, private wiaErrorHandlerService: WIAErrorHandlerService) {
+  constructor(private elementRef: ElementRef, topicService: TopicService) {
     super(elementRef);
     this.topicService = topicService;
   }
 
   ngOnInit(): void {
     super.ngOnInit();
-
-    this
-      .wiaErrorHandlerService
-      .subscribe(error => {
-        if (null !== error) {
-          this.showErrorMessage = true;
-        }
-      });
 
     this
       .topicService
