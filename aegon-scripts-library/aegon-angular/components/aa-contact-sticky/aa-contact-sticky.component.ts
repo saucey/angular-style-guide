@@ -37,12 +37,11 @@ export class AAContactSticky extends AABaseComponent implements OnInit {
     super.ngOnInit();
     this.initialize();
     // console.log(defaultOptions, 'the options');
-    var today = new Date();
+    let today: any = new Date();
     today = today.getDay();
     var hour = defaultOptions.hours.days[today];
     this.dateFrom = hour.from;
     this.dateTo = hour.to;
-    console.log(hour, 'the hours from the date this is!!!');
   }
 
   private initialize():void {
