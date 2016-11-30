@@ -131,3 +131,19 @@ input[type=radio] {
 input.input--white {
   background: $white;
 }
+
+.aa-input-validation--error {
+  &:before {
+    content: 'Error message goes here';
+    position: absolute;
+    z-index: 10;
+    top: -1em;
+    margin-top: -6px;
+    font-size: 0.85em;
+    color: red;
+  }
+
+  input {
+    border: 1px solid red;
+  }
+}
