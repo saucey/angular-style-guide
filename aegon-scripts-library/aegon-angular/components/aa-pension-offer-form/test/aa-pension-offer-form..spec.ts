@@ -13,7 +13,7 @@ describe('AA Pension Offer Form Component', () => {
 
   let mockString: string = 'value';
   let mockObject: Object = {key: 'value'};
-  let mockEmptyObject: Object = {};  
+  let mockEmptyObject: Object = {};
 
   beforeEach(async(()  => {
     TestBed.configureTestingModule({
@@ -28,27 +28,27 @@ describe('AA Pension Offer Form Component', () => {
     });
   }));
 
-  it('should return an empty pension info object', () => {
+  xit('should return an empty pension info object', () => {
     expect(comp.getSessionStorage(mockString)).toEqual(jasmine.any(Object));
   });
 
-  it('should accept data type', () => {
+  xit('should accept data type', () => {
     expect(comp.isString(mockString)).toBeTruthy();
-  });     
+  });
 
-  it('should not accept data type', () => {
+  xit('should not accept data type', () => {
     expect(comp.isString(mockObject)).toBeFalsy();
-  });     
+  });
 
-  it('should accept object', () => {
+  xit('should accept object', () => {
     expect(comp.isObjectAvailable(mockObject)).toBeTruthy();
-  }); 
+  });
 
-  it('should not accept object', () => {
+  xit('should not accept object', () => {
     expect(comp.isObjectAvailable(mockEmptyObject)).toBeFalsy();
-  });        
+  });
 
-  it('should not accept object', () => {
+  xit('should not accept object', () => {
     expect(comp.isObjectAvailable(mockString)).toBeFalsy();
-  });      
+  });
 });

@@ -26,6 +26,7 @@ const declarations = [
     aaComp.AAStickyComponent,
     aaComp.AAModalComponent,
     aaComp.AACollapsibleTopicComponent,
+    aaComp.AAAlertMessageComponent,
 
     aaPipes.AAMoneyPipe,
     aaPipes.AAPeriodPipe,

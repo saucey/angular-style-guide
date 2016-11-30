@@ -1,4 +1,4 @@
-import { NgModule } from "@angular/core";
+import { NgModule, ErrorHandler } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 import { HttpModule } from "@angular/http";
@@ -11,6 +11,7 @@ import { WiaCalculatorGraphComponent } from "./wia-calculator-graph/wia-calculat
 import { WiaContentComponent } from "./wia-content/wia-content.component";
 import { WiaFormComponent } from "./wia-form/wia-form.component";
 import { WiaPageComponent } from "./wia-page/wia-page.component";
+import { WIAErrorHandlerService } from "./wia-content/wia-error-handler.service";
 
 export const WiaPageExports = [
   WiaCalculatorComponent,
@@ -34,7 +35,12 @@ export const declarations = [
     DeprecatedComponentsModule
   ],
   declarations,
-  exports: WiaPageExports
+  exports: WiaPageExports,
+  providers: [
+    {
+      provide: ErrorHandler, useClass: WIAErrorHandlerService
+    }
+  ]
 })
 export class WiaPageModule {
 }
