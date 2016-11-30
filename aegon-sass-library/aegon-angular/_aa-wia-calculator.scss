@@ -31,6 +31,11 @@ $wiaCalculatorMobileBreakpoint: 850px;
   float: left;
   position: relative;
 
+  //reset drupa styles
+  ul, li {
+    background: none;
+  }
+
   .aa-block-graph__bar {
     &[data-category="1"] .aa-block-graph__bar-block-inner {
       background: $wiaCalculatorCategorySalary;
@@ -46,7 +51,7 @@ $wiaCalculatorMobileBreakpoint: 850px;
 }
 
 .wia-graph__greyed-out {
-  opacity: 0.2;
+  opacity: 1;
 }
 
 .wia_calculator_mobile {
@@ -167,37 +172,70 @@ $wiaCalculatorMobileBreakpoint: 850px;
   }
 }
 
-.wia-graph__tooltip {
+.wia-graph__tooltip_content {
   display: none;
   position: absolute;
-  background: #fff;
-  top: 55px;
-  left: 6px;
-  right: 0;
-  bottom: 5px;
+  z-index: 200;
+  background: $slightly_lighter_blue;
   padding: 1em;
-  z-index: 100;
-  opacity: 0.95;
+  left: -10%;
+  right: -10%;
+  &, * {
+    font-weight: normal;
+    font-size: 1rem !important;
+    line-height: 1rem !important;
+  }
+  ul {
+    margin: 0.5em 0;
+  }
+  li {
+    list-style: initial;
+    margin: 0.5em 1em;
+  }
+  &:before {
+    content: '';
+    width: 0;
+    height: 0;
+    position: absolute;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #99CAE9;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
 
-  > * {
-    display: none;
+.wia-graph__tooltip_content--left {
+  left: 106%;
+  right: -300%;
+  &:before {
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid #99CAE9;
+    border-left: none;
+    top: inherit;
+    transform: none;
+    left: -10px;
   }
+}
+.wia-graph__tooltip_content--center {
+  transform: translateY(-50%);
+  top: 50%;
+  &:before {
+    top: 50%;
+    transform: translateY(-0.5em);
+  }
+}
 
-  &.wia-graph__tooltip--active {
-    display: block;
-    * {
-      font-size: 1em !important;
-      line-height: 1em !important;
-    }
-  }
-  .wia-graph__tooltip_content--active {
-    display: block;
-  }
+.wia-graph__tooltip_content--active {
+  display: block;
 }
 
 .wia-graph__column {
   float: left;
   padding: 0 0 0 6px;
+  position: relative;
 
   @media (max-width: $wiaBreakpoint) {
     float: none;
@@ -227,12 +265,6 @@ $wiaCalculatorMobileBreakpoint: 850px;
     }
   }
 
-  > * {
-    background: $white;
-    margin: $wiaGraphLabelMargin 0;
-    padding: 30px 5px 5px;
-  }
-
   //overwrite column withs when only 2 columns are visible
   &.wia-graph__column--rest-second {
     width: 70% !important;
@@ -242,6 +274,12 @@ $wiaCalculatorMobileBreakpoint: 850px;
   }
 }
 
+.wia-graph__top_label, .wia-graph__chart, .wia-graph__bottom_label {
+  background: $white;
+  margin: $wiaGraphLabelMargin 0;
+  padding: 30px 5px 5px;
+}
+
 .wia-graph__top_label {
   font-weight: 700;
   font-size: 0.9em;
@@ -249,6 +287,7 @@ $wiaCalculatorMobileBreakpoint: 850px;
   padding: 10px 0;
   height: $wiaGraphLabelHeight;
 }
+
 
 .wia-graph__bottom_label {
   font-size: 0.9em;
@@ -299,7 +338,7 @@ $wiaCalculatorMobileBreakpoint: 850px;
   font-size: 0.85em;
 }
 
-.wia-graph__legend__items li {
+.wia-graph__legend__item {
   height: 50px;
   font-weight: 700;
   padding: 0 0 0 2.5em;

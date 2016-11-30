@@ -7,17 +7,38 @@
       <span class="wia-graph__legend__guideline" [class.wia-graph__greyed-out]="showTooltip">Uw salaris</span>
 
       <ul class="wia-graph__legend__items">
-        <li [class.wia-graph__greyed-out]="showTooltip && showTooltip !== 4" *ngIf="legendData[1]"
+        <li class="wia-graph__legend__item" [class.wia-graph__greyed-out]="showTooltip && showTooltip !== 4" *ngIf="legendData[1]"
             (mouseenter)='showTooltip = 4' (mouseleave)='showTooltip = 0'>
             <span>Aegon uitkering</span>
+            <div class="wia-graph__tooltip_content wia-graph__tooltip_content--left" [class.wia-graph__tooltip_content--active]="showTooltip === 4">
+              Het deel van uw inkomen dat u van Aegon ontvangt wanneer uw werkgever aanvullende
+              verzekeringen heeft afgesloten. Of dit deel wordt uitgekeerd en hoe hoog deze uitkering is verschilt
+              per situatie en per afgesloten verzekering. In de eerste stap van deze tool kunt u aangeven welke
+              verzekeringen voor u van toepassing zijn.
+            </div>
         </li>
-        <li [class.wia-graph__greyed-out]="showTooltip && showTooltip !== 5" *ngIf="legendData[2]"
+        <li class="wia-graph__legend__item" [class.wia-graph__greyed-out]="showTooltip && showTooltip !== 5" *ngIf="legendData[2]"
             (mouseenter)='showTooltip = 5' (mouseleave)='showTooltip = 0'>
           <span>Wettelijke uitkering</span>
+          <div class="wia-graph__tooltip_content wia-graph__tooltip_content--left wia-graph__tooltip_content--center" [class.wia-graph__tooltip_content--active]="showTooltip === 5">
+            De wettelijke uitkering is het deel van uw inkomen dat door de overheid wordt aangevuld. Dit gebeurd op basis van de WIA (Wet werk en inkomen naar arbeidsvermogen). Deze uitkering krijgt u als u na twee jaar ziekte 35% of meer arbeidsongeschikt bent. De WIA bestaat uit twee regelingen
+
+            <ul>
+              <li>WGA uitkering: u bent minimaal 35% arbeidsongeschikt, maar niet minimaal 80% duurzaam. De hoogte van de uitkering hangt af van hoeveel u nog wel werkt ten opzichte van uw restverdiencapacitei.</li>
+              <li>IVA-uitkering: u bent minimaal 80% duurzaam arbeidsongeschikt. U bent duurzaam arbeidsongeschikt als u door arbeidsongeschiktheid niet of nauwelijks kunt werken en er geen of maar een kleine kans is dat u herste.</li>
+            </ul>
+          </div>
         </li>
-        <li [class.wia-graph__greyed-out]="showTooltip && showTooltip !== 6" *ngIf="legendData[3]"
+        <li class="wia-graph__legend__item" [class.wia-graph__greyed-out]="showTooltip && showTooltip !== 6" *ngIf="legendData[3]"
             (mouseenter)='showTooltip = 6' (mouseleave)='showTooltip = 0'>
             <span>Loon</span>
+            <div class="wia-graph__tooltip_content wia-graph__tooltip_content--left" [class.wia-graph__tooltip_content--active]="showTooltip === 6">
+              Het loon is het deel van uw inkomen dat u krijgt van uw werkgever. In de eerste twee jaar wordt uw
+              loon doorbetaald door uw werkgever. Meestal is dit 100% in het eerste jaar en 70% in het tweede
+              jaar. Check bij uw werkgever wat voor u geldt. Het loon dat u na de eerste twee jaar verdient, komt
+              voor een gedeelte bovenop de uitkering van de overheid. Hoe meer u werkt, hoe hoger uw totale
+              inkomen is.
+            </div>
         </li>
       </ul>
 
@@ -36,12 +57,18 @@
           1e en 2e jaar
         </div>
 
-        <div class="wia-graph__chart">
+        <div class="wia-graph__tooltip_content" [class.wia-graph__tooltip_content--active]="showTooltip === 1">
+          In de eerste twee jaar dat u arbeidsongeschikt bent, betaalt uw werkgever uw salaris door. Dit is
+          meestal 100% in het eerste jaar en 70% in het tweede jaar. Check bij uw werkgever wat voor u
+          geldt.
+        </div>
+
+        <div class="wia-graph__chart" [class.wia-graph__greyed-out]="showTooltip">
           <wia-calculator-graph class="wia-calculator-graph" [data]='graphData[0]'
                                 *ngIf="graphData[0]"></wia-calculator-graph>
         </div>
 
-        <div class="wia-graph__bottom_label wia-graph__bottom_label--double">
+        <div class="wia-graph__bottom_label wia-graph__bottom_label--double"  [class.wia-graph__greyed-out]="showTooltip">
           <div class="row-fluid">
             <div class="span6">
               <strong>€{{ graphData[0]?.columns[0].amountYearly | money:true }}</strong>
@@ -63,12 +90,17 @@
           vanaf 3e jaar
         </div>
 
-        <div class="wia-graph__chart">
+        <div class="wia-graph__tooltip_content" [class.wia-graph__tooltip_content--active]="showTooltip === 2">
+          Vanaf het 3e jaar krijgt u een zogenaamde loongerelateerde uitkering. Hoe langer u gewerkt heeft
+          hoe langer u recht heeft op deze uitkering. Minimaal 3 maanden en maximaal 24 maanden.
+        </div>
+
+        <div class="wia-graph__chart" [class.wia-graph__greyed-out]="showTooltip">
           <wia-calculator-graph class="wia-calculator-graph" [data]='graphData[1]'
                                 *ngIf="graphData[1]"></wia-calculator-graph>
         </div>
 
-        <div class="wia-graph__bottom_label">
+        <div class="wia-graph__bottom_label" [class.wia-graph__greyed-out]="showTooltip">
           <strong>€{{ graphData[1]?.columns[0].amountYearly | money:true }}</strong>
           <span>€{{ graphData[1]?.columns[0].amountMonthly | money:true }}</span>
         </div>
@@ -84,56 +116,21 @@
           tot pensioen leeftijd
         </div>
 
-        <div class="wia-graph__chart">
-          <wia-calculator-graph class="wia-calculator-graph" [data]='graphData[2]'
-                                *ngIf="graphData[2]"></wia-calculator-graph>
-        </div>
-
-        <div class="wia-graph__bottom_label">
-          <strong>€{{ graphData[2]?.columns[0].amountYearly | money:true }}</strong>
-          <span>€{{ graphData[2]?.columns[0].amountMonthly| money }}</span>
-        </div>
-      </div>
-
-      <div class="wia-graph__tooltip" [class.wia-graph__tooltip--active]="showTooltip">
-        <div [class.wia-graph__tooltip_content--active]="showTooltip === 1">
-          In de eerste twee jaar dat u arbeidsongeschikt bent, betaalt uw werkgever uw salaris door. Dit is
-          meestal 100% in het eerste jaar en 70% in het tweede jaar. Check bij uw werkgever wat voor u
-          geldt.
-        </div>
-        <div [class.wia-graph__tooltip_content--active]="showTooltip === 2">
-          Vanaf het 3e jaar krijgt u een zogenaamde loongerelateerde uitkering. Hoe langer u gewerkt heeft
-          hoe langer u recht heeft op deze uitkering. Minimaal 3 maanden en maximaal 24 maanden.
-        </div>
-        <div [class.wia-graph__tooltip_content--active]="showTooltip === 3">
+        <div class="wia-graph__tooltip_content" [class.wia-graph__tooltip_content--active]="showTooltip === 3">
           Tot uw pensioenleeftijd krijgt u in principe de WGA-loonaanvulling. Benut u echter minder dan 50%
           van uw verdiencapaciteit dan verandert deze in een WGA-vervolguitkering gebaseerd op het
           minimumloon. Samen met het loon dat u nog verdient, is dit uw inkomen. Hoe meer u werkt, hoe
           hoger uw totale inkomen is.
         </div>
-        <div [class.wia-graph__tooltip_content--active]="showTooltip === 4">
-          Het deel van uw inkomen dat u van Aegon ontvangt wanneer uw werkgever aanvullende
-          verzekeringen heeft afgesloten. Of dit deel wordt uitgekeerd en hoe hoog deze uitkering is verschilt
-          per situatie en per afgesloten verzekering. In de eerste stap van deze tool kunt u aangeven welke
-          verzekeringen voor u van toepassing zijn.
+
+        <div class="wia-graph__chart" [class.wia-graph__greyed-out]="showTooltip">
+          <wia-calculator-graph class="wia-calculator-graph" [data]='graphData[2]'
+                                *ngIf="graphData[2]"></wia-calculator-graph>
         </div>
-        <div [class.wia-graph__tooltip_content--active]="showTooltip === 5">
-          Bent u na twee jaar ziekte volgens het UWV 35% of meer arbeidsongeschikt? Dan komt uin de WIA. De WIA is de Wet werk en inkomen naar arbeidsvermogen. Via die wet krijgt u een uitkering. De WIA is onder te verdelen in twee regelingen:
 
-          <ul>
-            <li>U bent minimaal 35% arbeidsongeschikt, maar niet minimaal 80% duurzaam. U krijgt dan een WGA-uitkering. De hoogte van uw WGA-uitkering hangt af van hoeveel u nog wel werkt ten opzichte van uw restverdiencapaciteit.</li>
-            <li>U bent minimaal 80% duurzaam arbeidsongeschikt. U krijgt dan een IVA-uitkering. U bent duurzaam arbeidsongeschikt als u door arbeidsongeschiktheid niet of nauwelijks kunt werken en er geen of maar een kleine kans is dat u herstel.</li>
-          </ul>
-
-          Bent u na twee jaar ziekte volgens het UWV minimaal 15 arbeidsongeschikt, maar minder dan 35%? Dan krijgt u geen WIA-uitkering. U zoekt dan in overleg met uw werkgever passend werk. Met dit passend werk verdient u mogelijk minde
-
-        </div>
-        <div [class.wia-graph__tooltip_content--active]="showTooltip === 6">
-          Het loon is het deel van uw inkomen dat u krijgt van uw werkgever. In de eerste twee jaar wordt uw
-          loon doorbetaald door uw werkgever. Meestal is dit 100% in het eerste jaar en 70% in het tweede
-          jaar. Check bij uw werkgever wat voor u geldt. Het loon dat u na de eerste twee jaar verdient, komt
-          voor een gedeelte bovenop de uitkering van de overheid. Hoe meer u werkt, hoe hoger uw totale
-          inkomen is.
+        <div class="wia-graph__bottom_label" [class.wia-graph__greyed-out]="showTooltip">
+          <strong>€{{ graphData[2]?.columns[0].amountYearly | money:true }}</strong>
+          <span>€{{ graphData[2]?.columns[0].amountMonthly| money }}</span>
         </div>
       </div>
 
