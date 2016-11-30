@@ -159,7 +159,7 @@
     "options": [
       {
         "label": "Ja",
-        "next": "Q_AUTO_5"
+        "next": "Q_AUTO_3"
       },
       {
         "label": "Nee",

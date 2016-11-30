@@ -2,8 +2,8 @@
   {
     "id": "possession",
     "icon": "desktop-phone",
-    "description": "Uw inboedelverzekering vergoedt schade aan uw spullen. Bijvoorbeeld aan uw meubels, laptop of telefoon.<br/>Beantwoord de vragen en ontdek wat u het beste kunt doen.",
-    "descriptiontablet": "Uw inboedelverzekering vergoedt schade aan uw spullen. Bijvoorbeeld aan uw meubels, laptop of telefoon.<br/>Beantwoord de vragen en ontdek wat u het beste kunt doen.",
+    "description": "Uw inboedelverzekering vergoedt schade aan uw spullen. Bijvoorbeeld aan uw meubels, laptop of telefoon.<br/><br/>Beantwoord de vragen en ontdek wat u het beste kunt doen.",
+    "descriptiontablet": "Uw inboedelverzekering vergoedt schade aan uw spullen. Bijvoorbeeld aan uw meubels, laptop of telefoon.<br/><br/>Beantwoord de vragen en ontdek wat u het beste kunt doen.",
     "descriptionmobile": "Voor schade aan uw spullen. Bijvoorbeeld aan uw meubels, laptop of telefoon.",
     "title": "Inboedel",
     "startingStep": "Q_POSSESSION_1"
