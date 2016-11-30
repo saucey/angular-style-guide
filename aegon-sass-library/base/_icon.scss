@@ -490,6 +490,18 @@ a.menu-5662:before {
 .icon-share-thin:before {
   content: $font_icons_share_thin;
 }
+.icon-write-thin:before {
+  content: $font_icons_write_thin;
+}
+.icon-check-square-thin:before {
+  content: $font_icons_check_square_thin;
+}
+.icon-file-thin:before {
+  content: $font_icons_file_thin;
+}
+.icon-file-upload-thin:before {
+  content: $font_icons_file_upload_thin;
+}
 // Do not apply icons to old aegon menu.
 // TODO: Refactor menu's in Drupal module 'aegon_menu' to adapt to ATDL.
 .submenu [class*='menu-'][class*='icon-']:before {
