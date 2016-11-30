@@ -43,6 +43,7 @@ const declarations = [
     aaComp.AAQQSummaryComponent,
     aaComp.AAQQMortgageComponent,
     aaComp.AAPensionFormComponent,
+    aaComp.AAContactSticky,
     aaComp.AALeadformComponent,
     aaComp.AAQuizComponent,
     aaComp.AAEditableValueComponent,
