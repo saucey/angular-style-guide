@@ -137,7 +137,7 @@ $wiaFormTableBreakpoint: $wiaFormMobileBreakpoint + 1px;
     display: block;
   }
   .wia-form__error {
-    color: red;
+    color: $dark_red;
     font-size: 0.9em;
     display: block;
   }

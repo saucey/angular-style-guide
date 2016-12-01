@@ -198,13 +198,11 @@ export class CalculatorDataService {
         const scenarioData = this.getFromDataset(input, data);
         const scenarioDataInPeriods = this.parseRawData((data as any).request, scenarioData);
 
-        console.log('getScenario', data, input, scenarioDataInPeriods);
-
         resolve({
           graphData: scenarioDataInPeriods.grouped,
           legendData: scenarioDataInPeriods.initial.map(el => el.category).filter(this.uniqueValues)
         });
-      });
+      }, error => reject(error));
     });
   }
 

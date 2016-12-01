@@ -78,7 +78,9 @@ export class WiaFormComponent extends AABaseComponent implements OnInit {
 
     // Form filled or personalization code sent => form submitted
     this.wiaSubscriptionService.externalInput$.subscribe((value) => {
-      this.submitted = !!value;
+      this.submitted = !!value; //if value is null - show form
+    }, () => {
+      this.submitted = true; //if error occurred -  hide form
     });
 
   }
@@ -134,6 +136,12 @@ export class WiaFormComponent extends AABaseComponent implements OnInit {
     this.calculatorDataService.getData(payload).subscribe(() => {
       this.pending = false;
       this.wiaSubscriptionService.emit(payload);
+    }, err => {
+      this.submitted = true;
+      this.wiaSubscriptionService.externalInput$.error({
+        type: 'response',
+        details: err
+      })
     });
   }
 
