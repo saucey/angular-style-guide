@@ -211,6 +211,14 @@ export class CalculatorDataService {
     return `_${disability}-${usage}-${permDisability}`;
   }
 
+  //unoptimized format of data
+  //we have to handle it until the final version is implemented
+  //optimized version assumed usage of nulls, and inclusion of only unique scenarios
+  private createTemporaryOptionKey({disability, usage = null, permDisability = null} : WIAInputModel): string {
+
+    return `_${disability}-${usage ? usage : 0}-${permDisability ? true : false}`;
+  }
+
   private uniqueValues(value, index, self) {
     return self.indexOf(value) === index;
   }
@@ -218,8 +226,11 @@ export class CalculatorDataService {
   private getFromDataset(input: WIAInputModel, data): Simulation {
 
     const OPTIONS_KEY = this.createOptionsKey(input);
+    const OPTIONS_KEY_TEMPORARY = this.createTemporaryOptionKey(input);
     if (data[OPTIONS_KEY]) {
       return data[OPTIONS_KEY];
+    } else if (data[OPTIONS_KEY_TEMPORARY]) {
+      return data[OPTIONS_KEY_TEMPORARY];
     } else {
       console.error('Couldn\'t find result for key: ' + OPTIONS_KEY, 'in', data)
     }
