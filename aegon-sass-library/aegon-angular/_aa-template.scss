@@ -8,7 +8,7 @@ aa-template {
   display: none;
 }
 
-aa-template.aa-template--loading {
+aa-template.aa-template--loading, .aa-template__loading {
   display: block;
   height: 70px;
   background-color: $grey;

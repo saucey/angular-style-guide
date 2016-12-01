@@ -576,16 +576,6 @@ $wiaCalculatorMobileBreakpoint: 850px;
   }
 }
 
-@keyframes leftIn {
-  from {
-    background-color: red;
-    transform: translateX(-30%);
-  }
-  to {
-    background-color: yellow;
-  }
-}
-
 .wia_calculator__range_descriptions {
   width: 100%;
   overflow: hidden;
@@ -630,4 +620,8 @@ $wiaCalculatorMobileBreakpoint: 850px;
       margin: 0;
     }
   }
+}
+
+.wia_calculator__loader, .wia_calculator__error {
+  margin: 2rem 0 3rem;
 }

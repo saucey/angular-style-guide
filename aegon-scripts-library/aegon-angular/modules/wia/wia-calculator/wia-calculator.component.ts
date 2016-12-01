@@ -84,10 +84,9 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
   };
 
   public externalInput: WIAInputModel;
+  public error = null;
 
-  public graphDataPlaceholder = require('./datasets/calculator-placeholder-data.json');
-
-  public graphData: any = this.graphDataPlaceholder;
+  public graphData: any = null;
 
   //default values as placeholder until real data is loaded
   public legendData = {
@@ -106,7 +105,14 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
 
     super(thisElement);
 
-    wiaSubscriptionService.externalInput$.subscribe(value => this.updateModel(value));
+    wiaSubscriptionService.externalInput$.subscribe(
+      value => this.updateModel(value),
+      err => {
+        this.error = {
+          type: err.type,
+          details: err
+        }
+      });
   }
 
   ngOnInit(): void {
@@ -126,17 +132,16 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
       return;
     }
 
+    this.error = null;
     this.externalInput = value;
 
-    //@TODO extend it instead of using ifs
+    //Update local model with received input
     if (typeof value.disability !== 'undefined') {
       this.disability.value = value.disability;
     }
-
     if (typeof value.usage !== 'undefined') {
       this.usage.value = value.usage;
     }
-
     if (typeof value.permDisability !== 'undefined') {
       this.permanentDisability = value.permDisability;
     }
@@ -148,6 +153,11 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
 
       this.simulationData = scenario;
       this.refresh(currentInput);
+    }).catch(err => {
+      this.error = {
+        type: 'response',
+        details: err
+      };
     });
 
   }

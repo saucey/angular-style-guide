@@ -1,8 +1,28 @@
-<div class="wia_calculator aa-component" [class.hidden]="!externalInput">
+<!--Mobile loader-->
+<div class="progress-loader wia_calculator_mobile_loader" [class.hidden]="!externalInput">
+  <div class="chart-holder loading"></div>
+</div>
+
+<!--Desktop loader-->
+<div class="wia_calculator__loader aa-template__loading aa-loading" *ngIf="externalInput && !graphData && !error"></div>
+
+<!--Error message-->
+<div class="wia_calculator__error messages messages--alert" *ngIf="error">
+  <span class="icon"><span class="pathA"></span><span class="pathB"></span><span class="pathC"></span></span>
+  <div class="header" *ngIf="error.type === 'code'">
+    De code is niet geldig. Probeer het nogmaals of vul uw situatie handmatig in.
+  </div>
+  <div class="header" *ngIf="error.type !== 'code'">
+    De service is tijdelijk niet beschikbaar. Probeer het later nog eens.
+  </div>
+</div>
+
+<!--Desktop View-->
+<div class="wia_calculator aa-component" *ngIf="externalInput && graphData">
 
   <h3>Wat gebeurt er bij arbeidsongeschiktheid?</h3>
   <p>Bekijk uw inkomen bij verschillende arbeidsongeschiktheid percentages door de slider te bewegen.</p>
-  <div class="clearfix wia_calculator__graph" [class.wia-graph--loading]="graphData === graphDataPlaceholder">
+  <div class="clearfix wia_calculator__graph">
     <div class="wia-graph__legend">
       <span class="wia-graph__legend__guideline" [class.wia-graph__greyed-out]="showTooltip">Uw salaris</span>
 
@@ -216,13 +236,8 @@ een zeer geringe kans op herstel."></aa-hint>
 
 </div>
 
-<div class="progress-loader wia_calculator_mobile_loader" [class.hidden]="!externalInput"
-     [class.wia_calculator_mobile_loader--loading]="graphData === graphDataPlaceholder">
-  <div class="chart-holder loading"></div>
-</div>
-
-<div class="wia_calculator_mobile aa-component" [class.hidden]="!externalInput"
-     [class.wia_calculator_mobile--loading]="graphData === graphDataPlaceholder">
+<!--Mobile View-->
+<div class="wia_calculator_mobile aa-component" *ngIf="externalInput && graphData">
 
   <div class="wia_calculator__summary">
     <div class="row-fluid">

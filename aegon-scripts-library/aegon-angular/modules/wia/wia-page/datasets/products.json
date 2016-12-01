@@ -385,16 +385,12 @@
       {
         "id": "BENEFIT_PERIOD",
         "label": "Selecteer uitkeringsduur",
-        "value": 7.5,
+        "value": 5,
         "visible": true,
         "options": [
           {
             "value": 5,
             "label": "5 jaar"
-          },
-          {
-            "value": 7.5,
-            "label": "7.5 jaar"
           },
           {
             "value": 10,
