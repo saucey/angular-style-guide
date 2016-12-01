@@ -110,6 +110,9 @@
     }
   }
   .data {
+    &.edit {
+      margin-top:0;
+    }
     .details {
       margin-top:20px;
       ~ .details {
