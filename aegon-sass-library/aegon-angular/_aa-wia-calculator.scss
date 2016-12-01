@@ -69,6 +69,10 @@ $wiaCalculatorMobileBreakpoint: 850px;
     margin: 20px 0 15px 0;
   }
 
+  a {
+    cursor: pointer;
+  }
+
   .wia-calculator-graph {
     position: relative;
     &:before {
@@ -191,6 +195,7 @@ $wiaCalculatorMobileBreakpoint: 850px;
   li {
     list-style: initial;
     margin: 0.5em 1em;
+    background: none;
   }
   &:before {
     content: '';
@@ -555,7 +560,9 @@ $wiaCalculatorMobileBreakpoint: 850px;
   }
 }
 .wia_calculator__back_arrow {
+  margin: 1em 0;
   li {
+    padding: 0;
     &:before {
       transform: rotate(180deg);
       transform-origin: center;
@@ -622,13 +629,4 @@ $wiaCalculatorMobileBreakpoint: 850px;
 
 .wia_calculator__loader, .wia_calculator__error {
   margin: 2rem 0 3rem;
-}
-
-.wia_calculator__back_arrow {
-  ul {
-    margin: 1em 0;
-  }
-  li {
-    padding: 0;
-  }
 }
