@@ -189,14 +189,13 @@
     </div>
 
     <div class="row-fluid wia_calculator__extra_inputs wia_calculator__extra_inputs--center" [class.hidden]="disability.value < 80">
-      <div class="span5 wia_calculator__bold">
-        Duurzaam arbeidsongeschikt <aa-hint text="Geef aan of er sprake van duurzame arbeidsongeschiktheid. Dit is het geval bij geen of
-een zeer geringe kans op herstel."></aa-hint>
+      <div class="span4 wia_calculator__bold">
+        Duurzaam arbeidsongeschikt
       </div>
       <div class="span1">
         <aa-input-switch [(ngModel)]="permanentDisability" (modelChange)="updatePermDisability()"></aa-input-switch>
       </div>
-      <div class="span6 wia_calculator__extra_inputs__desc">
+      <div class="span7 wia_calculator__extra_inputs__desc">
         Geef aan of er sprake van duurzame arbeidsongeschiktheid.<br/>
         Dit is het geval bij geen of een zeer geringe kans op herstel.
       </div>

@@ -170,8 +170,8 @@ export class WiaFormComponent extends AABaseComponent implements OnInit {
     return el.value;
   }
 
-  public getProducts () {
-    return this.products.filter(el => !el.hidden);
+  public getProducts (column) {
+    return this.products.filter(el => !el.hidden && (column ? el.column === column : true));
   }
 
   public updateProduct(product) {

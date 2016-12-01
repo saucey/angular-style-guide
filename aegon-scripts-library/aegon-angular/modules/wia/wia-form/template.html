@@ -4,9 +4,9 @@
 
     <div class="wia-form__step wia-form__step--visible">
 
-      <div class="header headline headline--margin wia-form--hidden-mobile">
+      <h3 class="wia-form--hidden-mobile">
         Stel uw situatie in en bekijk uw inkomen bij arbeidsongeschiktheid
-      </div>
+      </h3>
 
       <label class="wia-form__column_input clearfix">
         <label>Uw salaris, bruto per jaar</label>
@@ -48,39 +48,42 @@
 
             <label class="wia-form__products_label">Het verzekeringsproduct dat u heeft:</label>
 
-            <div class="clearfix">
-              <div *ngFor="let product of getProducts(); trackBy:trackById" class="product-group">
+            <div class="row-fluid">
+              <div class="wia-form__products_column" *ngFor="let i of [1,2]">
+                <div *ngFor="let product of getProducts(i); trackBy:trackById" class="product-group">
 
-                <label class="checkbox checkbox--white" [class.checkbox--disabled]="product.disabled">
-                  <input type="checkbox"
-                         [(ngModel)]="product.selected"
-                         [disabled]="product.disabled"
-                         (change)="updateProduct(product, $event)"
-                         name="'wia-form-product-{{product.id}}'">
-                  <span class="checkbox"></span>
-                  {{product.label}}
-                </label>
+                  <label class="checkbox checkbox--white" [class.checkbox--disabled]="product.disabled">
+                    <input type="checkbox"
+                           [(ngModel)]="product.selected"
+                           [disabled]="product.disabled"
+                           (change)="updateProduct(product, $event)"
+                           name="'wia-form-product-{{product.id}}'">
+                    <span class="checkbox"></span>
+                    {{product.label}}
+                  </label>
 
-                <div class="product-attrs" [class.hidden]="!product.selected || !product.attrs?.length">
-                  <ul>
-                    <li *ngFor="let attr of product.attrs; trackBy:trackById" >
-                      <div *ngIf="isProductAttributeVisible(attr)" class="product-attr">
-                        {{ attr.label }}
+                  <div class="product-attrs" [class.hidden]="!product.selected || !product.attrs?.length">
+                    <ul>
+                      <li *ngFor="let attr of product.attrs; trackBy:trackById" >
+                        <div *ngIf="isProductAttributeVisible(attr)" class="product-attr">
+                          {{ attr.label }}
 
-                        <div class="products-attrs__radios clearfix">
-                          <div class="products-attrs__radio" *ngFor="let option of attr.options; trackBy:trackByValue">
-                            <aa-input-radio [name]="'wia-form-selectProduct-' + attr.id"
-                                            [(ngModel)]="attr.value"
-                                            class="radio--white"
-                                            [value]="option.value">{{option.label}}</aa-input-radio>
+                          <div class="products-attrs__radios clearfix">
+                            <div class="products-attrs__radio" *ngFor="let option of attr.options; trackBy:trackByValue">
+                              <aa-input-radio [name]="'wia-form-selectProduct-' + attr.id"
+                                              [(ngModel)]="attr.value"
+                                              class="radio--white"
+                                              [value]="option.value">{{option.label}}</aa-input-radio>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </li>
-                  </ul>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
+
 
             <ul class="arrow wia-form__products-switch">
               <li><a (click)="visiblePage = 1">Productcode ontvangen? Voer de code in</a></li>
