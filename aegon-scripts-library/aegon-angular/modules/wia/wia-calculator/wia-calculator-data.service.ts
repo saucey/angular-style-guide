@@ -37,7 +37,8 @@ export class CalculatorDataService {
 
       //convert string to numbers
       item.amountMonthly = +item.amountMonthly;
-      item.amountYearly = +item.amountYearly;
+      item.amountAnnualy = +item.amountAnnualy;
+      item.amountYearly = +item.amountAnnualy;
       item.period = +item.period;
 
       item.id = `${item.componentId}-${item.productId}-${item.benefitId}`;
@@ -194,9 +195,10 @@ export class CalculatorDataService {
 
       this.getData(input).subscribe(data => {
 
-        console.log('getScenario', data, input);
         const scenarioData = this.getFromDataset(input, data);
         const scenarioDataInPeriods = this.parseRawData((data as any).request, scenarioData);
+
+        console.log('getScenario', data, input, scenarioDataInPeriods);
 
         resolve({
           graphData: scenarioDataInPeriods.grouped,
