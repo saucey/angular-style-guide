@@ -21,6 +21,10 @@ $wiaFormTableBreakpoint: $wiaFormMobileBreakpoint + 1px;
     padding: 0;
   }
 
+  a {
+    cursor: pointer;
+  }
+
   @media (max-width: $wiaFormMobileBreakpoint) {
     .wia-form--hidden-mobile {
       display: none;
@@ -107,7 +111,7 @@ $wiaFormTableBreakpoint: $wiaFormMobileBreakpoint + 1px;
     margin-top: 18px;
   }
 
-  @media (min-width: $wiaFormTableBreakpoint) {
+  @media (min-width: 1000px) {
     .wia-form__products_column {
       float: left;
       width: 48%;

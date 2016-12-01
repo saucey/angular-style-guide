@@ -11,8 +11,9 @@
       <label class="wia-form__column_input clearfix">
         <label>Uw salaris, bruto per jaar</label>
         <div>
-          <aa-input-number class="aa-input--euro aa-input--white" [(ngModel)]="income" [placeholder]="0" defaultValue=""></aa-input-number>
           <span class="wia-form__error" *ngIf="!incomeValid">Vul een waarde in tussen €2,500 en  €500,000.</span>
+          <aa-input-number class="aa-input--euro aa-input--white" [class.aa-input-validation--error]="!incomeValid"
+                           [(ngModel)]="income" [placeholder]="0" defaultValue=""></aa-input-number>
         </div>
       </label>
 
@@ -21,9 +22,9 @@
 
           <div class="wia-form__column_input clearfix">
             <label>De verzekeringscode van uw werkgever</label>
-            <div>
+            <div [class.aa-input-validation--error]="!codeValid">
+              <span class="wia-form__error" *ngIf="!codeValid">De ingevoerde code is niet geldig.<br/> Probeer het nogmaals of vul uw situatie handmatig in.</span>
               <input class="input--white" type="text" [(ngModel)]="personalizationCode" placeholder="355A0"/>
-              <span class="wia-form__error" *ngIf="!codeValid">De ingevoerde code is niet geldig. Probeer het nogmaals of vul uw situatie handmatig in.</span>
             </div>
           </div>
 
