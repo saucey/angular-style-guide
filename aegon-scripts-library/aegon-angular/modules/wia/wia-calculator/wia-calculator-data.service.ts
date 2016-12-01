@@ -5,7 +5,7 @@ import { generateCorrelationId } from "../../../lib/util";
 import { Observable } from "rxjs";
 import { SimulationDataset, SimulationKey, Simulation } from "./models/simulation-dataset";
 
-const SIMULATION_API = '/sites/aegonnl/public_files/simulation.json';
+const SIMULATION_API = '/services/TS_WIAWeb/rest/simulate';
 
 const CATEGORIES_MAP = {
   StatutoryBenefits: 1, //statutory
@@ -128,6 +128,7 @@ export class CalculatorDataService {
   private generateSimulationHeaders(): Headers {
 
     const headers = new Headers();
+    //temporary solution until Drupal implementation of auth token is done
     headers.append('Authorization', 'Basic ' + window.location.search.substr(1));
 
     return headers;
