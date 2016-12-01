@@ -26,8 +26,8 @@ export class AAContactSticky extends AABaseComponent implements OnInit {
   public hourstext: string  = defaultOptions.hours.text;
   public telephone: string  = defaultOptions.phoneNumber;
   public startchatlabel: string  = defaultOptions.startChatLabel;
-  public dateFrom: string;
-  public dateTo: string;
+  public dateFrom: any;
+  public dateTo: any;
 
   constructor(private thisElement: ElementRef) {
     super(thisElement);
@@ -40,8 +40,8 @@ export class AAContactSticky extends AABaseComponent implements OnInit {
     let today: any = new Date();
     today = today.getDay();
     var hour = defaultOptions.hours.days[today];
-    this.dateFrom = hour.from;
-    this.dateTo = hour.to;
+    // this.dateFrom = hour.from;
+    // this.dateTo = hour.to;
   }
 
   private initialize():void {

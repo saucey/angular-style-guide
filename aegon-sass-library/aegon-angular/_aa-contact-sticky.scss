@@ -3,6 +3,7 @@
 .sticky-wrapper {
   background-color: #eeebe5;
   width: 30%;
+
   .img {
     background-image: url($image_path + 'Medium-AEC.jpg');
     width: 100%;
@@ -10,23 +11,24 @@
     background-repeat: no-repeat;
     background-size: contain;
   }
+
+  .sticky-inner-wrapper {
+    padding: 20px;
+  }
+
+  .title {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  .general-text {
+    margin-bottom: 20px;
+    line-height: 18px;
+  }
+
+  .startchatlabel, .telephone {
+    color: #1067be;
+    font-weight: bold;
+  }
 }
 
-.sticky-inner-wrapper {
-  padding: 20px;
-}
-
-.title {
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-.general-text {
-  margin-bottom: 20px;
-  line-height: 18px;
-}
-
-.startchatlabel, .telephone {
-  color: #1067be;
-  font-weight: bold;
-}
