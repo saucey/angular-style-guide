@@ -1,0 +1,12 @@
+.contact-form {
+  .contact-form__section {
+    border-top: 1px solid $lighter_grey;
+    .contact-form__row {
+      padding: 15px 0;
+      border-bottom: 1px solid $lighter_grey;
+    }
+  }
+  .contact-form__personal-details {
+    padding: 25px;
+  }
+}
