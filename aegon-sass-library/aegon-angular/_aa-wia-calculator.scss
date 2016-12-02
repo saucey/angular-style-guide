@@ -368,15 +368,15 @@ $wiaCalculatorMobileBreakpoint: 850px;
     padding-top: 15px;
   }
 
-  &:nth-child(1):before {
+  &.wia-graph__legend__item--aegon:before {
     background: $wiaCalculatorCategoryAegon;
   }
 
-  &:nth-child(2):before {
+  &.wia-graph__legend__item--statutory:before {
     background: $wiaCalculatorCategoryStatutory;
   }
 
-  &:nth-child(3):before {
+  &.wia-graph__legend__item--salary:before {
     background: $wiaCalculatorCategorySalary;
   }
   span {

@@ -27,7 +27,7 @@
       <span class="wia-graph__legend__guideline" [class.wia-graph__greyed-out]="showTooltip">Uw salaris</span>
 
       <ul class="wia-graph__legend__items">
-        <li class="wia-graph__legend__item" [class.wia-graph__greyed-out]="showTooltip && showTooltip !== 4" *ngIf="legendData[1]"
+        <li class="wia-graph__legend__item wia-graph__legend__item--aegon" [class.wia-graph__greyed-out]="showTooltip && showTooltip !== 4" *ngIf="legendData[3]"
             (mouseenter)='showTooltip = 4' (mouseleave)='showTooltip = 0'>
             <span>Aegon uitkering</span>
             <div class="wia-graph__tooltip_content wia-graph__tooltip_content--left" [class.wia-graph__tooltip_content--active]="showTooltip === 4">
@@ -37,7 +37,7 @@
               verzekeringen voor u van toepassing zijn.
             </div>
         </li>
-        <li class="wia-graph__legend__item" [class.wia-graph__greyed-out]="showTooltip && showTooltip !== 5" *ngIf="legendData[2]"
+        <li class="wia-graph__legend__item wia-graph__legend__item--statutory" [class.wia-graph__greyed-out]="showTooltip && showTooltip !== 5" *ngIf="legendData[2]"
             (mouseenter)='showTooltip = 5' (mouseleave)='showTooltip = 0'>
           <span>Wettelijke uitkering</span>
           <div class="wia-graph__tooltip_content wia-graph__tooltip_content--left wia-graph__tooltip_content--center" [class.wia-graph__tooltip_content--active]="showTooltip === 5">
@@ -49,7 +49,7 @@
             </ul>
           </div>
         </li>
-        <li class="wia-graph__legend__item" [class.wia-graph__greyed-out]="showTooltip && showTooltip !== 6" *ngIf="legendData[3]"
+        <li class="wia-graph__legend__item wia-graph__legend__item--salary" [class.wia-graph__greyed-out]="showTooltip && showTooltip !== 6" *ngIf="legendData[1]"
             (mouseenter)='showTooltip = 6' (mouseleave)='showTooltip = 0'>
             <span>Loon</span>
             <div class="wia-graph__tooltip_content wia-graph__tooltip_content--left" [class.wia-graph__tooltip_content--active]="showTooltip === 6">

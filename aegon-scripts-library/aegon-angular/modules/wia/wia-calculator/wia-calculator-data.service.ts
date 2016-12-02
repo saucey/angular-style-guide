@@ -8,8 +8,8 @@ import { SimulationDataset, SimulationKey, Simulation } from "./models/simulatio
 const SIMULATION_API = '/services/TS_WIAWeb/rest/simulate';
 
 const CATEGORIES_MAP = {
-  StatutoryBenefits: 1, //statutory
-  OwnIncomeBenefits: 2, //salary
+  OwnIncomeBenefits: 1, //salary
+  StatutoryBenefits: 2, //statutory
   InsuranceBenefits: 3 //aegon products
 };
 
@@ -196,6 +196,10 @@ export class CalculatorDataService {
       this.getData(input).subscribe(data => {
 
         const scenarioData = this.getFromDataset(input, data);
+
+        //temporary to allow people view raw service response
+        console.log(scenarioData);
+
         const scenarioDataInPeriods = this.parseRawData((data as any).request, scenarioData);
 
         resolve({
