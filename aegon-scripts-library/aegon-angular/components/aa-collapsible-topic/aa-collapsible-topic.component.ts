@@ -19,6 +19,7 @@ import {
 } from "@angular/core";
 import { WiaTopicDescriptionModel } from "../../modules/wia/wia-content/models/wia-topic-description.model";
 import { WiaTopicModel } from "../../modules/wia/wia-content/models/wia-topic.model";
+import { WIATealiumService } from "../../modules/wia/wia-page/wia-tealium.service";
 
 @Component({
   selector: 'aa-collapsible-topic',
@@ -53,6 +54,8 @@ export class AACollapsibleTopicComponent implements OnInit {
   @Input()
   topicsCollection: string[];
 
+  constructor (private wiaTealiumService: WIATealiumService) {}
+
   public activeItem = {
     row: null,
     column: null
@@ -75,6 +78,9 @@ export class AACollapsibleTopicComponent implements OnInit {
     } else {
       this.activeItem.row = row;
       this.activeItem.column = column;
+      this
+        .wiaTealiumService
+        .wiaClickOnSymbolIcon();
     }
   }
 
@@ -120,6 +126,9 @@ export class AACollapsibleTopicComponent implements OnInit {
   public setShowFullText (showFullText: boolean) {
     this.showFullText = showFullText;
     if (showFullText) {
+      this
+        .wiaTealiumService
+        .wiaClickOnReadMore();
       this.visibility = 'shown';
     } else {
       this.visibility = 'hidden';

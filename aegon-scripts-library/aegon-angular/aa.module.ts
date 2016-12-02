@@ -33,6 +33,7 @@ const declarations = [
     aaPipes.AAReplacePipe,
     aaPipes.AAReverseDateStringPipe,
     aaPipes.DateToReadableString,
+    aaPipes.OrderBy,
 
     aaComp.AADataComponent,
     aaComp.AACssComponent,

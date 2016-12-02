@@ -17,6 +17,7 @@ import { WiaPagePersonalizationService } from "../wia-page/wia-page.personalizat
 import { ProductAttributeModel } from "../wia-page/models/product-attribute.model";
 import { WiaInputUseCaseEnum } from "../wia-content/enums/wia-input-use-case.enum";
 import { CalculatorDataService } from "../wia-calculator/wia-calculator-data.service";
+import { WIATealiumService } from "../wia-page/wia-tealium.service";
 
 const FORM_TEMPLATE = require('./template.html');
 
@@ -69,7 +70,8 @@ export class WiaFormComponent extends AABaseComponent implements OnInit {
               private wiaPageProductsService: WiaPageProductsService,
               private calculatorDataService: CalculatorDataService,
               private wiaPagePersonalizationService: WiaPagePersonalizationService,
-              private wiaSubscriptionService: WiaSubscriptionService) {
+              private wiaSubscriptionService: WiaSubscriptionService,
+              private wiaTealiumService: WIATealiumService) {
 
     super(elementRef);
 
@@ -152,6 +154,10 @@ export class WiaFormComponent extends AABaseComponent implements OnInit {
     if (this.incomeValid === false || this.codeValid === false) {
       return;
     }
+
+    this
+      .wiaTealiumService
+      .wiaFirstInteractionWithTool();
 
     this.pending = true;
     const input: WIAInputModel = this.wiaPagePersonalizationService.codeToInput(this.personalizationCode);

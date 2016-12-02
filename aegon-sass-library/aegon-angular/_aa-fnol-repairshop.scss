@@ -16,6 +16,9 @@
   .fnol-repairshop-formSpacer {
     margin: 1em 0 1em 0;
   }
+  .fnol-repairshop-form__BtnSpacer {
+    margin: 4em 0 1em 0;
+  }
   .txtBold {
     font-weight: bold;
   }
@@ -35,14 +38,12 @@
   label {
     font-weight: normal;
   }
+  .fnol-repairshop-formLabel {
+    display: inline-block;
+    font-weight: bold;
+  }
   .float-right {
     float: right;
-  }
-  .fnol-repairshop input[type=text],
-  .fnol-repairshop input[type=email],
-  .fnol-repairshop input[type=number] {
-    font-family: inherit;
-    font-size: 18px;
   }
   .fnol-repairshop-txtbox {
     height: 44px;
@@ -55,6 +56,8 @@
     border-radius: $elements_border_radius;
     outline: 0;
     background-color: $beige;
+    font-family: inherit;
+    font-size: 18px;
   }
   label.radio {
     position: relative;
@@ -184,8 +187,6 @@
   .address-info-spacer {
     margin: 10px 0 0 0;
   }
-  .fnol-repairshop-address-list {
-  }
   .fnol-repairshop-address-list li {
     background: none;
     list-style-type: none;
@@ -193,6 +194,9 @@
   }
   .title_pos {
     float:left;
+  }
+  .title_pos a, .mob_title_pos a, .mob_title_right a {
+    cursor: pointer;
   }
   .rating-star {
     color: $orange;
@@ -202,8 +206,8 @@
     font-size: 1.4em;
   }
   .result-text {
-   font-weight: bold;
-   padding: 0 0 25px 0;
+    font-weight: bold;
+    padding: 0 0 25px 0;
   }
   .fnol-repairshop-table-sort .title_sort, .fnol-repairshop-table-mobile-view .mob_title_sort {
 
@@ -215,7 +219,17 @@
       content: $font_icons_arrow_right_skinny;
       color: $black;
       margin: 3px 20px 0px 10px;
+      cursor: pointer;
     }
+
+    &.sort-desc {
+      &:after {
+        @include transform(rotate(-90deg) !important);
+        position: relative;
+        bottom: 3px;
+      }
+    }
+
   }
 
   input {
@@ -265,7 +279,7 @@
     content:"★★★★";
   }
   .fnol-repairshop__star--5:before {
-      content:"★★★★★";
+    content:"★★★★★";
   }
   .fnol-repairshop_pagination ul.pager {
     text-align: center;
@@ -298,7 +312,7 @@
     line-height: 26px;
   }
 
-    // MOBILE VIEW
+  // MOBILE VIEW
   .fnol-repairshop-table-mobile-view {
     width: 100%;
     border-top: none;
@@ -309,14 +323,14 @@
   .fnol-repairshop-table-mobile-view tr td.data-wrapper {
     padding: 0px 0px 0px 0px;
   }
-  .fnol-repairshop-table-mobile-view table thead tr th {
+  .fnol-repairshop-table-mobile-view thead tr th {
     border-top: none;
     font-weight: bold;
     padding: 0px;
     color: $black;
     border-right: none;
   }
-  .fnol-repairshop-table-mobile-view table tbody tr td {
+  .fnol-repairshop-table-mobile-view tbody tr td {
     padding:0px;
     color: $black;
     border-right: none;
@@ -340,6 +354,7 @@
     border-collapse: initial;
     border-top: solid 5px $grey;
     border-bottom: solid 5px $grey;
+    table-layout: auto;
   }
   .fnol-repairshop-table-mobile-data tbody {
     width: 100%;
@@ -354,15 +369,13 @@
   .fnol-repairshop-table-mobile-data tr td {
     padding:10px 10px 10px 0px;
   }
-  .fnol-repairshop-mob-address-list {  }
-
   .fnol-repairshop-mob-address-list li {
     background: none;
     list-style-type: none;
     color: $black;
   }
   .fnol-repairshop-table-mobile-data tr td.mob_name {
-    width:92%;
+    width:79%;
     font-size: 1em;
     font-weight: bold;
     color: $blue;
@@ -370,12 +383,14 @@
   }
   .fnol-repairshop-table-mobile-data tr td.mob_rating {
     width:20%;
+    text-align: right;
   }
   .fnol-repairshop-table-mobile-data tr td.mob_phone {
     font-weight: bold;
   }
   .fnol-repairshop-table-mobile-data tr td.mob_distance {
     font-weight: bold;
+    text-align: right;
   }
   .fnol-repairshop-table-mobile-data tr td.mob_address{  }
   .fnol-repairshop-table-mobile-data tr td.mob_location{
@@ -384,6 +399,32 @@
   .mob-rating-star {
     color: $orange;
     font-size: 1.5em;
+  }
+  .fnol-repairshop__errorMsg {
+    color: $dark_red;
+    margin: 0px;
+  }
+  .fnol-repairshop-table-mobile-view .mob_title_sort {
+
+    &:after {
+      font-family: $font_icons;
+      font-size: 12px;
+      float: right;
+      transform: rotate(90deg);
+      content: $font_icons_arrow_right_skinny;
+      color: $black;
+      margin: 1px 20px 0px 10px;
+      cursor: pointer;
+    }
+
+    &.sort-desc {
+      &:after {
+        @include transform(rotate(-90deg) !important);
+        position: relative;
+        bottom: 0px;
+      }
+    }
+
   }
 }
 
@@ -403,7 +444,7 @@
       font-size: 0.75em;
     }
     .fnol-repairshop-table-sort tr td.phone {
-      font-size: 0.72em;
+      font-size: 0.7em;
     }
     .fnol-repairshop-table-sort tr td.address {
     }
@@ -432,6 +473,14 @@
         content: $font_icons_arrow_right_skinny;
         color: $black;
         margin: 3px 0px 0px 5px;
+      }
+
+      &.sort-desc {
+        &:after {
+          @include transform(rotate(-90deg) !important);
+          position: relative;
+          bottom: 3px;
+        }
       }
     }
     .fnol-repairshop-table-sort table thead tr th {
@@ -478,6 +527,18 @@
 
 }
 
+@media screen and (min-width: 900px) and (max-width: $rc-l-max-width) {
+  .fnol-repairshop {
+    .fnol-repairshop__formLblAlign {
+      text-align: right;
+    }
+    .fnol-repairshop__formRadioLblAlign {
+      text-align: right;
+      margin: 18px 0px 0px 0px;
+    }
+  }
+}
+
 // mobile form Show Hide
 @media screen and (max-width: 900px) {
   .fnol-repairshop {
@@ -517,7 +578,7 @@
           box-shadow: 0 0 0 4px $white inset, 0 0 0 20px $blue inset;
         }
         & + span.radio_longtext,
-        & + input[type="hidden"] + span.radio,
+        & + input[type="hidden"] + span.radio_longtext,
         & ~ span.radio_longtext {
           position: absolute;
           top: 0px;
@@ -534,4 +595,3 @@
     }
   }
 }
-
