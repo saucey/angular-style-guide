@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
-import { Http, URLSearchParams } from "@angular/http";
+import { Http, URLSearchParams, Headers } from "@angular/http";
 import { Observable } from "rxjs";
 import { FNOLRepairshopResponse, FNOLRepairshopInput, FNOLRepairshopResults } from "../models";
 import { generateCorrelationId } from "../../../../lib/util";
 
 
-const SIMULATION_API = '/sites/aegonnl/public_files/fnol-results.json';
+const SIMULATION_API = '/services/US_RestGatewayWeb/rest/requestResponse/BS_UtillitiesPostalArea_03/retrieveLocaties';
 
 
 @Injectable()
@@ -47,23 +47,77 @@ export class FnolRepairshopService {
     });
   }
 
+  private generateSimulationRequestPayload(input: FNOLRepairshopInput): any {
+
+    return {
+        retrieveLocatiesRequest: {
+        AILHEADER: { CLIENTID: 'Aegon.nl' },
+        PARTIJ: [
+          {
+            _AE_ROL: 'VP',
+            _AE_ADRES: {
+              VOLGNUM: '1',
+              PCODE: input.location,
+              HUISNR: '365',
+              STRAAT: 'newtonstraat',
+              PLAATS: input.location,
+              _AE_LOCATIETYPE: '1'
+            }
+          },
+          {
+            _AE_ADRES: {
+              _AE_LOCATIETYPE: '1',
+              _AE_LOCATIEKENMERK: [
+                {
+                  NAAM: 'Blikschade',
+                  WAARDE: 'Nee'
+                },
+                {
+                  NAAM: 'Glasschade',
+                  WAARDE: 'Ja'
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+
   private generateSimulationQueryParams(input: FNOLRepairshopInput): URLSearchParams {
 
     const params: URLSearchParams = new URLSearchParams();
 
-    params.set('location', input.location);
-    params.set('radius', input.radius.toString());
-    params.set('type', input.type);
     params.set('correlationId', generateCorrelationId());
 
     return params;
   }
 
+  private generateSimulationHeaders(): Headers {
+
+    let auth = window.location.search.substr(1);
+
+    try {
+      auth = (window as any).Drupal.settings.qqService.http_authorization;
+    } catch (err) {
+      console.error(err);
+    }
+    const headers = new Headers();
+
+    headers.append('Authorization', 'Basic ' + auth);
+
+    return headers;
+  }
+
+
   getRawData(input: FNOLRepairshopInput): Observable<FNOLRepairshopResponse> {
 
+    const requestPayload = this.generateSimulationRequestPayload(input);
+    const headerParams = this.generateSimulationHeaders();
     const queryParams = this.generateSimulationQueryParams(input);
 
-    return this.http.get(SIMULATION_API, {
+    return this.http.post(SIMULATION_API, requestPayload, {
+        headers: headerParams,
         search: queryParams
       })
       .map(response => response.json());
