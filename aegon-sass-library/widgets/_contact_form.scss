@@ -1,4 +1,7 @@
 .contact-form {
+  label {
+    font-weight: normal;
+  }
   .contact-form__section {
     border-top: 1px solid $lighter_grey;
     .contact-form__row {
@@ -8,5 +11,66 @@
   }
   .contact-form__personal-details {
     padding: 25px;
+  }
+  .contact-form__input-text {
+    height: 25px;
+    padding: 3px 2px;
+    border-width: 0 0 1px 0;
+    border-color: $pebble_grey;
+    border-radius: 0;
+  }
+  .contact-form__textarea {
+    height: 175px;
+  }
+  .contact-form__input-text, .contact-form__textarea {
+    width: 100%;
+  }
+  .contact-form__input-text_disabled {
+  }
+  // Editable field.
+  .contact-form__editable-field {
+    position: relative;
+    display:block;
+    padding-right: 30px;
+    margin-bottom:20px;
+    .editable-field__input-text:not(.invalid),
+    .editable-field__save {
+      opacity: 0;
+      filter:alpha(opacity=0);
+    }
+    .editable-field__save {
+      position: absolute;
+      right: 0;
+      bottom: 1px;
+    }
+    .errorText {
+      position: absolute;
+      top: 110%;
+    }
+    .editable-field__field-value {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 2px;
+      z-index: 2;
+    }
+
+    &.editable-field--edit,
+    &.invalid {
+      .editable-field__field-value {
+        display: none;
+      }
+      .editable-field__input-text {
+        opacity: 1;
+        filter:alpha(opacity=100);
+      }
+    }
+
+    &.editable-field--editing {
+      .editable-field__save {
+        opacity: 1;
+        filter:alpha(opacity=100);
+      }
+    }
   }
 }

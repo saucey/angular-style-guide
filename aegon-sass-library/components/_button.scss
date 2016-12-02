@@ -52,6 +52,10 @@ button,
   &:active {
     opacity: inherit;
   }
+  &.inline {
+    margin: 0;
+    padding: 0;
+  }
   &.right {
     margin-left: 10px;
   }

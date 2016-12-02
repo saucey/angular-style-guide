@@ -1,0 +1,25 @@
+label.file-upload {
+  position: relative;
+  display: inline-block;
+  width: auto;
+  font-weight: normal;
+  color: $slightly_darker_blue;
+  cursor: pointer;
+  > input[type="file"] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+  }
+  > .icon-file-upload-thin:before {
+    width: 40px;
+    background-color: $blue;
+    color: $white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 40px;
+    padding: 0;
+  }
+}
