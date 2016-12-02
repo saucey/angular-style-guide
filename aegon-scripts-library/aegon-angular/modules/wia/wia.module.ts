@@ -12,6 +12,7 @@ import { WiaContentComponent } from "./wia-content/wia-content.component";
 import { WiaFormComponent } from "./wia-form/wia-form.component";
 import { WiaPageComponent } from "./wia-page/wia-page.component";
 import { WIAErrorHandlerService } from "./wia-content/wia-error-handler.service";
+import { WiaPageProductsService } from "./wia-page/wia-page.products.service";
 
 export const WiaPageExports = [
   WiaCalculatorComponent,
@@ -37,6 +38,7 @@ export const declarations = [
   declarations,
   exports: WiaPageExports,
   providers: [
+    WiaPageProductsService,
     {
       provide: ErrorHandler, useClass: WIAErrorHandlerService
     }
