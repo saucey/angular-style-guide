@@ -51,7 +51,10 @@ export class FnolRepairshopService {
 
     return {
         retrieveLocatiesRequest: {
-        AILHEADER: { CLIENTID: 'Aegon.nl' },
+        AILHEADER: {
+          CLIENTID: 'Aegon.nl',
+          CORRELATIONID: '##' + generateCorrelationId()
+        },
         PARTIJ: [
           {
             _AE_ROL: 'VP',
@@ -84,15 +87,6 @@ export class FnolRepairshopService {
     }
   }
 
-  private generateSimulationQueryParams(input: FNOLRepairshopInput): URLSearchParams {
-
-    const params: URLSearchParams = new URLSearchParams();
-
-    params.set('correlationId', generateCorrelationId());
-
-    return params;
-  }
-
   private generateSimulationHeaders(): Headers {
 
     let auth = window.location.search.substr(1);
@@ -114,11 +108,9 @@ export class FnolRepairshopService {
 
     const requestPayload = this.generateSimulationRequestPayload(input);
     const headerParams = this.generateSimulationHeaders();
-    const queryParams = this.generateSimulationQueryParams(input);
 
     return this.http.post(SIMULATION_API, requestPayload, {
-        headers: headerParams,
-        search: queryParams
+        headers: headerParams
       })
       .map(response => response.json());
   }
