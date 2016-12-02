@@ -4,6 +4,7 @@ import { WIAInputModel } from "../wia-page/models/wia-input.model";
 import { generateCorrelationId } from "../../../lib/util";
 import { Observable } from "rxjs";
 import { SimulationDataset, SimulationKey, Simulation } from "./models/simulation-dataset";
+import { WiaPageProductsService } from "../wia-page/wia-page.products.service";
 
 const SIMULATION_API = '/services/TS_WIAWeb/rest/simulate';
 
@@ -23,7 +24,7 @@ export class CalculatorDataService {
   // In case getData methods is called multiple times only one request is send
   pendingRequests: { [key:string]: Observable<any>; } = {};
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private wiaPageProductsService: WiaPageProductsService) {
   }
 
   parseRawData(input: WIAInputModel, data) {
@@ -99,13 +100,21 @@ export class CalculatorDataService {
     }
   }
 
+  private getProductAttribute(productId: string) {
+    const el = this.wiaPageProductsService.getProducts().find(el => el.id === productId);
+
+    if (el && el.attrs) {
+      return el.attrs.find(attr => attr.visible);
+    }
+  }
+
  //Get product dynamic (editable) attribute which is sent with the simulation request
   private getProductDynamicAttr (productId: string, input: WIAInputModel): string {
     const el = input.products.find(el => el.id === productId);
-    if (el && el.attrs) {
-      let dynamicAttr = el.attrs.find(attr => attr.visible);
+    const productAttr = this.getProductAttribute(productId);
 
-      return  dynamicAttr ? dynamicAttr.value.toString() : 'true';
+    if (productAttr) {
+      return el.attrs.find(attr => attr.id === productAttr.id).value.toString();
     }
 
     return 'true';
