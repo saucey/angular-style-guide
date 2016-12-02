@@ -7,6 +7,7 @@ import { WIAInputModel } from "../wia-page/models/wia-input.model";
 import { WiaSubscriptionService } from "../wia-page/wia-page.subscription.service";
 import { WiaUrlStateManager } from "../wia-page/wia-page.url-state.service";
 import { WiaInputUseCaseEnum } from "../wia-content/enums/wia-input-use-case.enum";
+import { WIATealiumService } from "../wia-page/wia-tealium.service";
 
 @Component({
   selector: 'aa-wia-calculator',
@@ -101,7 +102,8 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
               private wiaPagePersonalizationService: WiaPagePersonalizationService,
               private wiaSubscriptionService: WiaSubscriptionService,
               private wiaUrlStateManager: WiaUrlStateManager,
-              private calculatorDataService: CalculatorDataService) {
+              private calculatorDataService: CalculatorDataService,
+              private wiaTealiumService: WIATealiumService) {
 
     super(thisElement);
 
@@ -134,6 +136,10 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
 
     this.error = null;
     this.externalInput = value;
+
+    this
+      .wiaTealiumService
+      .wiaToolResultPresented();
 
     //Update local model with received input
     if (typeof value.disability !== 'undefined') {
