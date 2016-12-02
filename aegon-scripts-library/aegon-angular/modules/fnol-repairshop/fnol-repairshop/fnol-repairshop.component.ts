@@ -19,8 +19,14 @@ export class FNOLRepairshopComponent {
 
     public isHideRepairshopResults: boolean = true;
     public isHideMobileRepairshopResults: boolean = true;
+    public isShowPaginateInfo: boolean = false;
     public getItemShown: string = INFO_FORM;
     public parties = [];
+    public sortedBy = 'ranking';
+  // address.radius
+  // name
+    public sortDirection = 'DESC';
+    // DESC
 
     public repairshop = {
         postcode: null,
@@ -41,6 +47,7 @@ export class FNOLRepairshopComponent {
             .subscribe(results => {
                 this.parties = results;
                 this.getRepairshopSearchData();
+                this.showPaginateInfo();
                 this.getItemShown = RESULT_MOBILE;
             });
     }
@@ -54,6 +61,29 @@ export class FNOLRepairshopComponent {
         this.isHideMobileRepairshopResults = true;
         this.getItemShown = INFO_FORM;
     }
+
+    showPaginateInfo() {
+      if (this.parties.length >= 10){
+        this.isShowPaginateInfo = true;
+      }else{
+        this.isShowPaginateInfo = false;
+      }
+    }
+
+    public sortByKey(sortProperty) {
+      if (this.sortedBy === sortProperty) {
+        if (this.sortDirection === 'ASC') {
+          this.sortDirection = 'DESC';
+        } else {
+          this.sortDirection = 'ASC';
+        }
+      } else {
+        this.sortedBy = sortProperty;
+        this.sortDirection = 'ASC';
+      }
+    }
+
+
 
 }
 

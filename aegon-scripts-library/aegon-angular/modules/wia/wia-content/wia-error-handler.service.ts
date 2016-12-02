@@ -32,6 +32,7 @@ export class WIAErrorHandlerService implements ErrorHandler {
    * @param {Object} error
    */
   handleError(error: any): void {
+    console.log('An error has been encountered: ', error);
     this.emit(error);
   }
 
