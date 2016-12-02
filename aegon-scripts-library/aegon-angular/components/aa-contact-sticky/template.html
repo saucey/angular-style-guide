@@ -1,10 +1,10 @@
 <div class="sticky-wrapper">
-  <div class="img"></div>
+  <div class="sticky-wrapper__img"></div>
   <div class="sticky-inner-wrapper">
-      <p class="title">{{title}}</p>
-      <p class="general-text freetext">{{freetext}}</p>
-      <p class="general-text hourstext">{{hourstext | replace : {'[[fromHours]]': dateFrom, '[[toHours]]': dateTo} }}</p>
-      <div><span class="telephone">{{telephone}}</span></div>
-      <div><span class="startchatlabel">{{startchatlabel}}</span></div>
+      <p class="sticky-inner-wrapper__title">{{title}}</p>
+      <p class="sticky-inner-wrapper__general-text sticky-inner-wrapper__freetext">{{freetext}}</p>
+      <p class="sticky-inner-wrapper__general-text sticky-inner-wrapper__hourstext">{{hourstext | replace : {'[[fromHours]]': dateFrom, '[[toHours]]': dateTo} }}</p>
+      <div><span class="sticky-inner-wrapper__telephone">{{telephone}}</span></div>
+      <div><span class="sticky-inner-wrapper__startchatlabel">{{startchatlabel}}</span></div>
   </div>
 </div>
