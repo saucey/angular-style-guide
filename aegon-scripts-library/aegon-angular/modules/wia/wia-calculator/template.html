@@ -107,7 +107,7 @@
            class="wia-graph__column" *ngIf="graphData[1]?.columns[0].amountYearly > 0">
         <div class="wia-graph__top_label" [class.wia-graph__greyed-out]="showTooltip && showTooltip !== 2"
              (mouseenter)='showTooltip = 2' (mouseleave)='showTooltip = 0'>
-          vanaf 3e jaar
+          {{getPeriodTitles()[0]}}
         </div>
 
         <div class="wia-graph__tooltip_content" [class.wia-graph__tooltip_content--active]="showTooltip === 2">
@@ -133,7 +133,7 @@
 
         <div class="wia-graph__top_label" [class.wia-graph__greyed-out]="showTooltip && showTooltip !== 3"
              (mouseenter)='showTooltip = 3' (mouseleave)='showTooltip = 0'>
-          tot pensioen leeftijd
+          {{getPeriodTitles()[1]}}
         </div>
 
         <div class="wia-graph__tooltip_content" [class.wia-graph__tooltip_content--active]="showTooltip === 3">
@@ -336,7 +336,7 @@
     </table>
   </div>
 
-  <h3>Vanaf 3e jaar</h3>
+  <h3>{{getPeriodTitles()[0]}}</h3>
   <p>Vanaf het 3e jaar krijgt u een zogenaamde loongerelateerde uitkering. Hoe langer u gewerkt heeft hoe langer u recht heeft op deze uitkering. Minimaal 3 maanden en maximaal 38 maanden (vanaf 2019 maximaal 24 maanden).</p>
 
   <div class="wia_calculator__summary_table">
@@ -364,7 +364,7 @@
     </table>
   </div>
 
-  <h3>Tot pensioen leeftijd</h3>
+  <h3>{{getPeriodTitles()[1]}}</h3>
   <p>Tot uw pensioenleeftijd krijgt u in principe de WGA-loonaanvulling. Benut u echter minder dan 50% van uw verdiencapaciteit dan verandert deze in een WGA-vervolguitkering gebaseerd op het minimumloon. Samen met het loon dat u nog verdient vormt dit uw inkomen. Hoe meer u werkt, hoe hoger uw totale inkomen is.</p>
 
   <div class="wia_calculator__summary_table">

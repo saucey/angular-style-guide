@@ -135,11 +135,10 @@ export class CalculatorDataService {
   }
 
 
-  private generateSimulationHeaders(): Headers {
+  private generateSimulationHeaders(authToken: string): Headers {
 
     const headers = new Headers();
-    //temporary solution until Drupal implementation of auth token is done
-    headers.append('Authorization', 'Basic ' + window.location.search.substr(1));
+    headers.append('Authorization', 'Basic ' + authToken);
 
     return headers;
   }
@@ -159,8 +158,18 @@ export class CalculatorDataService {
     }
 
 
+    let authToken;
+
+    try {
+      authToken = (window as any).Drupal.settings.qqService.http_authorization;
+    } catch (err) {}
+
+    if (!authToken) {
+      return Observable.throw({ type: 'response', message: 'Auth token is missing'});
+    }
+
     const queryParams = this.generateSimulationQueryParams(input);
-    const headerParams = this.generateSimulationHeaders();
+    const headerParams = this.generateSimulationHeaders(authToken);
     const request = this.http.get(SIMULATION_API, {
       search: queryParams,
       headers: headerParams
