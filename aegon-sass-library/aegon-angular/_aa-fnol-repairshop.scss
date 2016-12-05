@@ -232,6 +232,13 @@
 
   }
 
+  .normalClass {
+    border: solid 1px green;
+  }
+  .errorClass {
+    border: solid 1px $dark_red;
+  }
+
   input {
     ~ [class^=thumbs_] {
       color: $darker_grey;

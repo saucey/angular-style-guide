@@ -16,8 +16,8 @@
                     <p [hidden]="postcode.valid || postcode.pristine" class="fnol-repairshop__errorMsg">
                         Dit veld is verplicht
                       </p>
-                    <span class="">
-                        <input id="repairshop_postcode" type="text" class="fnol-repairshop-txtbox" name="postcode" [(ngModel)]="repairshop.postcode" required #postcode="ngModel">
+                    <span>
+                        <input id="repairshop_postcode" type="text" class="fnol-repairshop-txtbox" [ngClass]="{'errorClass': postcode.invalid && postcode.dirty}" name="postcode" [(ngModel)]="repairshop.postcode" required #postcode="ngModel">
                     </span>
                     </div>
                 </div>
@@ -26,15 +26,15 @@
                     <div class="span4 txtBold fnol-repairshop__formRadioLblAlign">Straal</div>
                     <div class="span8 clear-float">
                         <label class="radio">
-                            <input type="radio" checked="checked" name="distance" value="KM010" [(ngModel)]="repairshop.distance"/>
+                            <input type="radio" checked="checked" name="distance" [value]="10" [(ngModel)]="repairshop.distance"/>
                             <span class="radio"></span>0-10 km
                         </label>
                         <label class="radio">
-                            <input type="radio" name="distance" value="KM020" [(ngModel)]="repairshop.distance"/>
+                            <input type="radio" name="distance" [value]="20" [(ngModel)]="repairshop.distance"/>
                             <span class="radio"></span>0-20 km
                         </label>
                         <label class="radio">
-                            <input type="radio" name="distance" value="KM050" [(ngModel)]="repairshop.distance"/>
+                            <input type="radio" name="distance" [value]="50" [(ngModel)]="repairshop.distance"/>
                             <span class="radio"></span>0-50 km
                         </label>
                     </div>
@@ -47,15 +47,15 @@
                         Dit veld is verplicht
                       </p>
                         <label class="radio">
-                            <input type="radio" name="damage" value="WINDOW" [(ngModel)]="repairshop.damage" required #damage="ngModel" />
+                            <input type="radio" name="damage" value="WINDOW" [(ngModel)]="repairshop.damage" required #damage="ngModel" [ngClass]="{'errorClass': damage.invalid && damage.dirty}" />
                             <span class="radio"></span>Alleen ruitschade
                         </label>
                         <label class="radio_longtext">
-                            <input type="radio" name="damage" value="BODY" [(ngModel)]="repairshop.damage"/>
+                            <input type="radio" name="damage" value="BODY" [(ngModel)]="repairshop.damage" [ngClass]="{'errorClass': damage.invalid && damage.dirty}" />
                             <span class="radio_longtext"></span>Alleen ruitschade aan carrosserie
                         </label>
                         <label class="radio_longtext">
-                            <input type="radio" name="damage" value="SHEET_AND_GLASS" [(ngModel)]="repairshop.damage"/>
+                            <input type="radio" name="damage" value="SHEET_AND_GLASS" [(ngModel)]="repairshop.damage" [ngClass]="{'errorClass': damage.invalid && damage.dirty}" />
                             <span class="radio_longtext"></span>Schade aan plaatwerk en ruitschade
                         </label>
                     </div>
