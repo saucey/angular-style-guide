@@ -1,15 +1,17 @@
 
 .sticky-wrapper {
   background-color: #eeebe5;
-  width: 30%;
+  width: 100%;
 }
 
 .sticky-wrapper__img {
   background-image: url($image_path + 'Medium-AEC.jpg');
   width: 100%;
-  height: 180px;
+  height: 220px;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
+  background-position: center;
+
 }
 
 .sticky-inner-wrapper {
