@@ -273,6 +273,9 @@ $wiaCalculatorMobileBreakpoint: 850px;
   //overwrite column withs when only 2 columns are visible
   &.wia-graph__column--rest-second {
     width: 70% !important;
+    @media (max-width: 1000px) {
+      width: 65% !important;
+    }
   }
   &.wia-graph__column--rest-third {
     width: 65% !important;
@@ -289,8 +292,13 @@ $wiaCalculatorMobileBreakpoint: 850px;
   font-weight: 700;
   font-size: 0.9em;
   text-align: center;
-  padding: 10px 0;
   height: $wiaGraphLabelHeight;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  word-break: break-all;
+  line-height: 1em;
 }
 
 
