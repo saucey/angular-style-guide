@@ -175,7 +175,7 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
       useCase: WiaInputUseCaseEnum.USER,
       permDisability: null,
       usage: null,
-      disability: Math.round(this.disability.value / 5) * 5,
+      disability: this.roundToFives(this.disability.value),
       products: this.externalInput.products,
       productsIds: this.externalInput.productsIds
     };
@@ -187,7 +187,7 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
 
     if (input.disability < 80) {
 
-      input.usage = Math.round(this.usage.value / 5) * 5;
+      input.usage = this.roundToFives(this.usage.value);
     }
 
     return input;
@@ -258,13 +258,55 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
   }
 
   public getActiveTab(): string {
-    if (this.disability.value < 35) {
+    if (this.roundToFives(this.disability.value) < 35) {
       return '1';
-    } else if (this.disability.value >= 35 && this.disability.value < 80) {
+    } else if (this.roundToFives(this.disability.value) >= 35 && this.roundToFives(this.disability.value) < 80) {
       return '2';
     } else {
       return '3';
     }
+  }
+
+  public getPeriodTitles() {
+
+    const titles = [
+      'vanaf 3e jaar tot max 5e jaar',
+      'tot pensioen leeftijd'
+    ];
+
+    if (!this.externalInput) {
+      return titles;
+    }
+
+    if (this.roundToFives(this.disability.value) < 35) {
+      if (this.externalInput.productsIds.indexOf('WIA_35MIN_BODEM') > -1) {
+        titles[0] = 'vanaf 3e jaar tot max  9.5 jaar';
+      }
+      if (this.externalInput.productsIds.indexOf('WIA_35MIN') > -1) {
+
+        let value = this.externalInput.products.find(el => el.id === 'WIA_35MIN').attrs[0].value;
+        if (value === 5) {
+          titles[0] = 'vanaf 3e jaar tot max 5e jaar';
+        } else if (value === 10)  {
+          titles[0] = 'vanaf 3e jaar tot max 12 jaar';
+        }
+      }
+    }
+
+    if (this.roundToFives(this.disability.value) >= 80) {
+
+      if (this.permanentDisability) {
+        titles[1] = 'Tot uw pensioenleeftijd krijgt u een IVA-uitkering van de overheid';
+      } else {
+        titles[1] = 'Tot uw pensioenleeftijd krijgt u de WGA-loonaanvulling';
+      }
+    }
+
+    return titles;
+  }
+
+  private roundToFives (value: number) {
+    return Math.round(value / 5) * 5;
   }
 
   public goBack() {

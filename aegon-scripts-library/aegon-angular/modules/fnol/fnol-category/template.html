@@ -9,7 +9,7 @@
 
 <div class="fnol-category__questions mr-bot50">
     <div class="fnol-category__question" *ngFor="let step of steps; trackBy:trackById; let i = index">
-        <div *ngIf="step.type === 'question'">
+        <div *ngIf="step.type === 'question'" [id]="step.id">
             <span class="fnol-category__question__title">{{step.title}}</span>
 
             <div *ngFor="let option of step.options">
