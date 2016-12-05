@@ -131,7 +131,7 @@
 
         level3 = menu.find('.mobile-level3.' + targetLevel3Class);
 
-        // If the related level3 is present do stuff and block the normal 
+        // If the related level3 is present do stuff and block the normal
         // behaviour of the link
         if (level3.length > 0) {
 
@@ -173,7 +173,6 @@
         //To check the width of the screen
         jQuery('#portraitwidth').val(jQuery(window).width());
         check_screen_size();
-        check_inpage_navigation();
         checkspace_costelement();
         check_retinaimage();
         document_download_properties();
@@ -399,17 +398,6 @@
             jQuery('.pbb-view div.sm:gt(2)').hide();
             jQuery('.pbb-sm a').attr('numitems', '2');
           break;
-        }
-    }
-
-
-    /**
-     * Check In-page navigation block existence
-     */
-    function check_inpage_navigation(){
-        var $in_length = jQuery("div.inpage-navigation").length;
-        if($in_length === 0 ){
-            jQuery("section.content").addClass("fullwidth");
         }
     }
 

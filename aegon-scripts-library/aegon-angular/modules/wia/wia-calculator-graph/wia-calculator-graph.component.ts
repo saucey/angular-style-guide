@@ -46,6 +46,10 @@ export class WiaCalculatorGraphComponent implements OnChanges {
         }
       });
 
+      bars.forEach(bar => {
+        bar.percentage = bar.percentage ? Math.max(bar.percentage, 10) : 0; //Minimal percentage value is 10 to ensure correct UI
+      });
+
       column.bars = mergedBars;
     });
   }

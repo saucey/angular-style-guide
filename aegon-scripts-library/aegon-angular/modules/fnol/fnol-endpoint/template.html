@@ -12,7 +12,7 @@
     <div *ngIf="endpoint.type === 'generic'">
         <div class="messages messages--attention visible">
             <div class="wrap">
-                <div class="header">
+                <div class="header font-medium">
                     {{ endpoint.data.title }}
                 </div>
 
@@ -43,7 +43,7 @@
                     </div>
 
                     <div class="span7" *ngIf="endpoint.data.list">
-                        <span>{{ endpoint.data.list.title }}</span>
+                        <span class="font-medium">{{ endpoint.data.list.title }}</span>
                         <ul class="check bullets-white">
                             <li *ngFor="let item of endpoint.data.list.items">{{ item }}</li>
                         </ul>
@@ -59,7 +59,7 @@
     <div *ngIf="endpoint.type === 'auto'">
         <div class="messages messages--attention visible">
             <div class="wrap">
-                <div class="header">
+                <div class="header font-medium">
                     {{ endpoint.data.title }}
                 </div>
 

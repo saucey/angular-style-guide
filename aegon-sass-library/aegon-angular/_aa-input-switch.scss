@@ -14,33 +14,36 @@
   left: 0;
   right: 0;
   bottom: 0;
-  border: 1px solid #979797;
-  box-shadow: 0px 0px 1px 0px #7f7f7f inset;
   transition: .4s;
   border-radius: 34px;
+  background: #fff;
+  border: 1px solid #bebebe;
 }
 
 .aa-input-switch .aa-input-switch__slider:before {
   position: absolute;
   content: "";
-  height: 30px;
-  width: 30px;
-  left: -1px;
-  bottom: -1px;
-  background-color: white;
+  height: 24px;
+  width: 24px;
+  left: 3px;
+  bottom: 2px;
   transition: .4s;
   border-radius: 50%;
-  box-shadow: 0px 1px 4px 0px #555;
+  background: #bebebe;
 }
 
 .aa-input-switch input:checked + .aa-input-switch__slider {
-  background-color: #2196F3;
+  background-color: $blue;
+  border-color: transparent;
+  &:before {
+    background: #fff;
+  }
 }
 
 .aa-input-switch input:focus + .aa-input-switch__slider {
-  box-shadow: 0 0 1px #2196F3;
+  box-shadow: 0 0 1px $blue;
 }
 
 .aa-input-switch input:checked + .aa-input-switch__slider:before {
-  transform: translateX(22px);
+  transform: translateX(21px);
 }

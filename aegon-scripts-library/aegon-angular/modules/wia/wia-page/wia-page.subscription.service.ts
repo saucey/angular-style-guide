@@ -29,7 +29,7 @@ export class WiaSubscriptionService {
 
   public subscribe (callback) {
 
-    this.externalInput$.filter(el => el !== null).subscribe(callback);
+    this.externalInput$.filter(el => el !== null).subscribe(callback, () => {});
   }
 
   public emit (value: WIAInputModel) {
@@ -38,7 +38,16 @@ export class WiaSubscriptionService {
 
   private initSubscriptions () {
 
-    this.externalInput$ = new BehaviorSubject(this.getUrlConfiguration());
+    const urlConfiguration = this.getUrlConfiguration();
+    this.externalInput$ = new BehaviorSubject(urlConfiguration);
+
+    if (this.hasUrlConfiguration() && urlConfiguration === null) {
+
+      this.externalInput$.error({
+        type: 'code',
+        message: 'Invalid Personalization Code'
+      });
+    }
 
     // Update url every time new input is emitted
     this.externalInput$.subscribe(newInput => {
@@ -47,7 +56,12 @@ export class WiaSubscriptionService {
         const code = this.wiaPagePersonalizationService.inputToCode(newInput);
         this.wiaUrlStateManager.setUrlCode(code);
       }
-    });
+    }, () => {});
+  }
+
+  private hasUrlConfiguration(): boolean {
+
+    return !!this.wiaUrlStateManager.getUrlCode();
   }
 
   private getUrlConfiguration(): WIAInputModel {

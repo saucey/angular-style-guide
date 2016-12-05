@@ -81,5 +81,5 @@ describe('AA Pension Form Component', () => {
     expect(comp.isInValidAmount()).toBe(true)
   });
 
-
+  var test = 'test';
 });

@@ -17,6 +17,7 @@ import { WiaPagePersonalizationService } from "../wia-page/wia-page.personalizat
 import { ProductAttributeModel } from "../wia-page/models/product-attribute.model";
 import { WiaInputUseCaseEnum } from "../wia-content/enums/wia-input-use-case.enum";
 import { CalculatorDataService } from "../wia-calculator/wia-calculator-data.service";
+import { WIATealiumService } from "../wia-page/wia-tealium.service";
 
 const FORM_TEMPLATE = require('./template.html');
 
@@ -69,7 +70,8 @@ export class WiaFormComponent extends AABaseComponent implements OnInit {
               private wiaPageProductsService: WiaPageProductsService,
               private calculatorDataService: CalculatorDataService,
               private wiaPagePersonalizationService: WiaPagePersonalizationService,
-              private wiaSubscriptionService: WiaSubscriptionService) {
+              private wiaSubscriptionService: WiaSubscriptionService,
+              private wiaTealiumService: WIATealiumService) {
 
     super(elementRef);
 
@@ -78,7 +80,9 @@ export class WiaFormComponent extends AABaseComponent implements OnInit {
 
     // Form filled or personalization code sent => form submitted
     this.wiaSubscriptionService.externalInput$.subscribe((value) => {
-      this.submitted = !!value;
+      this.submitted = !!value; //if value is null - show form
+    }, () => {
+      this.submitted = true; //if error occurred -  hide form
     });
 
   }
@@ -111,8 +115,12 @@ export class WiaFormComponent extends AABaseComponent implements OnInit {
   }
 
   private validate () {
-    this.incomeValid = this.income !== '' && this.income <= 125000;
+    this.incomeValid = this.isIncomeValid(+this.income);
     this.codeValid = this.wiaPagePersonalizationService.isCodeValid(this.personalizationCode);
+  }
+
+  private isIncomeValid(income: number) {
+    return income >= 2500 && income <= 500000;
   }
 
   onProductFormSubmit(event) {
@@ -130,6 +138,12 @@ export class WiaFormComponent extends AABaseComponent implements OnInit {
     this.calculatorDataService.getData(payload).subscribe(() => {
       this.pending = false;
       this.wiaSubscriptionService.emit(payload);
+    }, err => {
+      this.submitted = true;
+      this.wiaSubscriptionService.externalInput$.error({
+        type: 'response',
+        details: err
+      })
     });
   }
 
@@ -140,6 +154,10 @@ export class WiaFormComponent extends AABaseComponent implements OnInit {
     if (this.incomeValid === false || this.codeValid === false) {
       return;
     }
+
+    this
+      .wiaTealiumService
+      .wiaFirstInteractionWithTool();
 
     this.pending = true;
     const input: WIAInputModel = this.wiaPagePersonalizationService.codeToInput(this.personalizationCode);
@@ -158,8 +176,8 @@ export class WiaFormComponent extends AABaseComponent implements OnInit {
     return el.value;
   }
 
-  public getProducts () {
-    return this.products.filter(el => !el.hidden);
+  public getProducts (column) {
+    return this.products.filter(el => !el.hidden && (column ? el.column === column : true));
   }
 
   public updateProduct(product) {

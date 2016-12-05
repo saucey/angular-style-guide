@@ -26,12 +26,14 @@ const declarations = [
     aaComp.AAStickyComponent,
     aaComp.AAModalComponent,
     aaComp.AACollapsibleTopicComponent,
+    aaComp.AAAlertMessageComponent,
 
     aaPipes.AAMoneyPipe,
     aaPipes.AAPeriodPipe,
     aaPipes.AAReplacePipe,
     aaPipes.AAReverseDateStringPipe,
     aaPipes.DateToReadableString,
+    aaPipes.OrderBy,
 
     aaComp.AADataComponent,
     aaComp.AACssComponent,
@@ -43,6 +45,7 @@ const declarations = [
     aaComp.AAQQSummaryComponent,
     aaComp.AAQQMortgageComponent,
     aaComp.AAPensionFormComponent,
+    aaComp.AAContactSticky,
     aaComp.AALeadformComponent,
     aaComp.AAQuizComponent,
     aaComp.AAEditableValueComponent,
