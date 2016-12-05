@@ -95,23 +95,23 @@
           <input
             *ngIf="input.type=='text' || input.type=='email' || input.type=='number' || input.type=='password'"
             type="{{input.type}}"
-            name="{{input.name}}"
             placeholder="{{input.placeholder}}"
+            name="{{input.name}}"
             [attr.required]="input.required ? true : null"
             [attr.pattern]="input.pattern ? input.pattern : null"
-            [attr.value]="input.session ? null : input.value"
-            [attr.data-session-object]="input.session ? input.session.object : null"
-            [attr.data-session-key]="input.session ? input.session.key : null" />
+            [(ngModel)]="formData[input.name] = (input.storage) ? getDataFromStorage(input.storage.type, input.storage.object, input.storage.key) : input.value"
+            [value]="formData[input.name]" />
           <label 
             class="radio" 
             *ngIf="input.type=='radio'">
             <input 
               type="{{input.type}}"
               name="{{input.name}}"
+              [attr.name]="input.name"
               [attr.required]="input.required ? true : null"
-              value="{{input.value}}"
               [attr.checked]="input.checked ? 'checked' : null"
-            />
+              [(ngModel)]="formData[input.name]"
+              (click)="formData[input.name] = input.value" />
             <span class="radio"></span>{{input.label}}
           </label>
         </div>
@@ -120,9 +120,8 @@
       <input *ngIf="list.type=='hidden'"
         type="{{list.type}}"
         name="{{list.name}}"
-        [attr.value]="list.session ? null : list.value"
-        [attr.data-session-object]="list.session ? list.session.object : null"
-        [attr.data-session-key]="list.session ? list.session.key : null" />
+        [(ngModel)]="formData[list.name] = (list.storage) ? getDataFromStorage(list.storage.type, list.storage.object, list.storage.key) : list.value"
+        [value]="formData[list.name]" />
     </div>
 
     <div class="form-input-row">
