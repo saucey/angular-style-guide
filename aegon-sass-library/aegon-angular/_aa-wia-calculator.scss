@@ -36,16 +36,45 @@ $wiaCalculatorMobileBreakpoint: 850px;
     background: none;
   }
 
+  .aa-block-graph__bar-block-inner {
+    &:before {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      z-index: 10;
+      display: none;
+      font-size: 0.6em;
+      color: #666;
+      line-height: 1em;
+    }
+    &:hover:before {
+      display: block;
+    }
+  }
+
   .aa-block-graph__bar {
     &[data-category="1"] .aa-block-graph__bar-block-inner {
       background: $wiaCalculatorCategorySalary;
+      &:before {
+        content: 'Loon';
+        background: $wiaCalculatorCategorySalary;
+      }
     }
     &[data-category="2"] .aa-block-graph__bar-block-inner {
-
       background: $wiaCalculatorCategoryStatutory;
+      &:before {
+        content: 'Wettelijke uitkering';
+        background: $wiaCalculatorCategoryStatutory;
+      }
     }
     &[data-category="3"] .aa-block-graph__bar-block-inner {
       background: $wiaCalculatorCategoryAegon;
+      &:before {
+        content: 'Aegon uitlering';
+        color: #fff;
+        background: $wiaCalculatorCategoryAegon;
+      }
     }
   }
 }
@@ -293,11 +322,10 @@ $wiaCalculatorMobileBreakpoint: 850px;
   font-size: 0.9em;
   text-align: center;
   height: $wiaGraphLabelHeight;
-  padding: 0;
+  padding: 0 0.5em;
   display: flex;
   align-items: center;
   justify-content: center;
-  word-break: break-all;
   line-height: 1em;
 }
 

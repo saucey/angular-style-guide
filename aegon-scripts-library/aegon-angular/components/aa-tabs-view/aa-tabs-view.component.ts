@@ -20,6 +20,8 @@ import { Parent } from "../../lib/classes/AAParent";
 
 const template = require('./template.html');
 
+declare const jQuery;
+
 @Component({
     selector: 'aa-tabs-view',
     template: template
@@ -28,17 +30,20 @@ const template = require('./template.html');
 export class AATabsViewComponent extends AABaseComponent implements AfterContentInit, Parent {
 
     @Input() active: string;
+
+    //scroll tabs section to view when tabs content is outside of viewport
+    @Input() scrollToView: boolean = true;
     @Input() activeIndex: string;
     @Input() options: any = {};
     @Input() theme: string = 'square-blue';
     @ContentChildren(AATabsViewItemComponent) tabs;
-    
+
     private changeCallbacks: Array<Function> = [];
 
     name = 'AATabsViewComponent';
 
 
-    constructor(elementRef: ElementRef) {
+    constructor(private elementRef: ElementRef) {
         super(elementRef);
     }
 
@@ -46,6 +51,10 @@ export class AATabsViewComponent extends AABaseComponent implements AfterContent
         this.active = tab.id;
         this.activeIndex = this.tabs.toArray().indexOf(tab) + 1;
         this.onActiveStateChange(tab);
+
+        if (this.scrollToView) {
+          this.scrollToViewAction();
+        }
     }
 
     public setActiveById(id: string) {
@@ -56,13 +65,29 @@ export class AATabsViewComponent extends AABaseComponent implements AfterContent
 
         this.tabs.forEach((tab: AATabsViewItemComponent) => tab.setInactive());
         tab.setActive();
-        
+
         this.changeCallbacks.forEach(func => func(tab));
     }
-    
+
     // Add callback to be notified about tab changes
     public onTabChange(callback: Function): void {
         this.changeCallbacks.push(callback);
+    }
+
+    private scrollToViewAction () {
+      const $tabs = this.elementRef.nativeElement.querySelector('.aa-tabs-view');
+      const positionFromTop = window.scrollY + $tabs.getClientRects()[0].top;
+      const EXTRA_SPACE = 50;
+
+      //mobile view - scroll to beginning of the element
+      let scrollPosition =  positionFromTop - EXTRA_SPACE;
+
+      //scroll only when element is outside of the viewport
+      if (scrollPosition > window.scrollY) {
+        jQuery('html,body').animate({
+          scrollTop: scrollPosition
+        })
+      }
     }
 
     public ngAfterContentInit() {

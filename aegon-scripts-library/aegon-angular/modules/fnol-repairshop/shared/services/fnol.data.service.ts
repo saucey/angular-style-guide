@@ -6,7 +6,9 @@ import { generateCorrelationId } from "../../../../lib/util";
 
 
 const SIMULATION_API = '/services/US_RestGatewayWeb/rest/requestResponse/BS_UtillitiesPostalArea_03/retrieveLocaties';
-
+const GLASS_DAMAGE = 'GLASS';
+const BODY_DAMAGE = 'BODY';
+const GLASS_AND_BODY_DAMAGE = 'GLASS_AND_BODY';
 
 @Injectable()
 export class FnolRepairshopService {
@@ -47,6 +49,47 @@ export class FnolRepairshopService {
     });
   }
 
+  /**
+   * Creates the repairshop damage object
+   *
+   * @param input
+   * @returns {Object}
+   */
+  private createRepairshopDamageObject(input: FNOLRepairshopInput): Object {
+    let damageObject = {
+      _AE_ADRES: {
+        _AE_LOCATIETYPE: '1',
+        _AE_LOCATIEKENMERK: []
+      }
+    },
+    blikschade = {
+      NAAM: 'Blikschade',
+      WAARDE: 'Nee'
+    },
+    glasschade = {
+      NAAM: 'Glasschade',
+      WAARDE: 'Nee'
+    };
+
+    switch (input.type) {
+      case GLASS_DAMAGE:
+        glasschade.WAARDE = 'Ja';
+        break;
+      case BODY_DAMAGE:
+        blikschade.WAARDE = 'Ja';
+        break;
+      case GLASS_AND_BODY_DAMAGE:
+        glasschade.WAARDE = 'Ja';
+        blikschade.WAARDE = 'Ja';
+        break;
+    }
+
+    damageObject._AE_ADRES._AE_LOCATIEKENMERK.push(blikschade);
+    damageObject._AE_ADRES._AE_LOCATIEKENMERK.push(glasschade);
+
+    return damageObject;
+  }
+
   private generateSimulationRequestPayload(input: FNOLRepairshopInput): any {
 
     return {
@@ -64,24 +107,11 @@ export class FnolRepairshopService {
               HUISNR: '365',
               STRAAT: 'newtonstraat',
               PLAATS: input.location,
+              _AE_STRAAL: input.radius,
               _AE_LOCATIETYPE: '1'
             }
           },
-          {
-            _AE_ADRES: {
-              _AE_LOCATIETYPE: '1',
-              _AE_LOCATIEKENMERK: [
-                {
-                  NAAM: 'Blikschade',
-                  WAARDE: 'Nee'
-                },
-                {
-                  NAAM: 'Glasschade',
-                  WAARDE: 'Ja'
-                }
-              ]
-            }
-          }
+          this.createRepairshopDamageObject(input)
         ]
       }
     }
@@ -116,9 +146,10 @@ export class FnolRepairshopService {
   }
 
   getData(input: FNOLRepairshopInput): Observable<FNOLRepairshopResults> {
-
-    return this.getRawData(input)
-      .map(data => this.parseResponseData(data));
+      return this
+        .getRawData(input)
+        .map(data => this.parseResponseData(data));
   }
+
 
 }
