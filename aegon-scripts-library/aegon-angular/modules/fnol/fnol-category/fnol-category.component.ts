@@ -61,18 +61,19 @@ export class FNOLCategoryComponent implements OnInit {
 
         const $lastQuestion = this.elementRef.nativeElement.querySelector('.fnol-category__question:last-child');
         const positionFromTop = window.scrollY + $lastQuestion.getClientRects()[0].top;
+        const EXTRA_SPACE = 100;
 
         //mobile view - scroll to beginning of the element
         let scrollPosition =  positionFromTop;
 
         if (window.innerHeight > $lastQuestion.scrollHeight) {
           //position of a screen that contains entire lastQuestion element on the bottom of the window
-          scrollPosition =  positionFromTop - window.innerHeight + $lastQuestion.scrollHeight;
+          scrollPosition =  positionFromTop - window.innerHeight + $lastQuestion.scrollHeight + EXTRA_SPACE;
         }
 
         //scroll only when element is outside of the viewport
         if (scrollPosition > window.scrollY) {
-            jQuery(window.document.body).animate({
+            jQuery('html,body').animate({
                 scrollTop: scrollPosition
             })
         }
