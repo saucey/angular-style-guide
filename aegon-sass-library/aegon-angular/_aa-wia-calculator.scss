@@ -293,11 +293,10 @@ $wiaCalculatorMobileBreakpoint: 850px;
   font-size: 0.9em;
   text-align: center;
   height: $wiaGraphLabelHeight;
-  padding: 0;
+  padding: 0 0.5em;
   display: flex;
   align-items: center;
   justify-content: center;
-  word-break: break-all;
   line-height: 1em;
 }
 
