@@ -48,12 +48,8 @@
   }
 
   .messages ul {
-    margin: 0 0 0 0.4em;
+    margin: 0;
     padding: 0;
-  }
-
-  .messages ul li {
-    margin-left:0;
   }
 
   .mr-top20 {
@@ -135,7 +131,11 @@
   .header{
     font-size:$large;
   }
+}
 
+
+.fnol-endpoint__bottom_link {
+  padding: 0;
 }
 
 .fnol-endpoint__alert {
@@ -272,6 +272,7 @@
       padding: .30em;
       float:left;
       min-width: 120px;
+      height: 100%;
       font-family: 'senticosansdtlight',Arial,Verdana,sans-serif;
     }
     .fnol-phone-call {
@@ -317,6 +318,7 @@
       float:left;
       font-family: 'senticosansdtlight',Arial,Verdana,sans-serif;
       font-size: 1.2em;
+      height: 100%;
     }
     .fnol-phone-call {
       font-size: 1.3em;
