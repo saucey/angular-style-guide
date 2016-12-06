@@ -222,7 +222,10 @@ export class CalculatorDataService {
 
         resolve({
           graphData: scenarioDataInPeriods.grouped,
-          legendData: scenarioDataInPeriods.initial.map(el => el.category).filter(this.uniqueValues)
+          legendData: scenarioDataInPeriods.initial
+            .filter(el => el.amountYearly > 0)
+            .map(el => el.category)
+            .filter(this.uniqueValues)
         });
       }, error => reject(error));
     });

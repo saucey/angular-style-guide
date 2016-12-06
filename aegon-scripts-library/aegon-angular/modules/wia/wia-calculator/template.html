@@ -150,7 +150,7 @@
 
         <div class="wia-graph__bottom_label" [class.wia-graph__greyed-out]="showTooltip">
           <strong>€{{ graphData[2]?.columns[0].amountYearly | money:true }}</strong>
-          <span>€{{ graphData[2]?.columns[0].amountMonthly| money }}</span>
+          <span>€{{ graphData[2]?.columns[0].amountMonthly| money:true }}</span>
         </div>
       </div>
 
