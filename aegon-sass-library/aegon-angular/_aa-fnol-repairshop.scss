@@ -19,8 +19,14 @@
   .fnol-repairshop-form__BtnSpacer {
     margin: 4em 0 1em 0;
   }
+  .fnol-repairshop-result {
+
+  }
   .txtBold {
     font-weight: bold;
+  }
+  .txtNormal {
+    font-weight: Normal;
   }
   .nowrap {
     white-space: nowrap;
@@ -144,7 +150,7 @@
   }
   .fnol-repairshop-table-sort table thead tr th {
     border-top: none;
-    font-weight: bold;
+    font-weight: normal;
     padding: 0px;
     color: $black;
     border-right: none;
@@ -197,6 +203,7 @@
   }
   .title_pos a, .mob_title_pos a, .mob_title_right a {
     cursor: pointer;
+    color: $black;
   }
   .rating-star {
     color: $orange;
@@ -215,7 +222,7 @@
       font-family: $font_icons;
       font-size: 12px;
       float: right;
-      transform: rotate(90deg);
+      transform: rotate(-90deg);
       content: $font_icons_arrow_right_skinny;
       color: $black;
       margin: 3px 20px 0px 10px;
@@ -224,7 +231,7 @@
 
     &.sort-desc {
       &:after {
-        @include transform(rotate(-90deg) !important);
+        @include transform(rotate(90deg) !important);
         position: relative;
         bottom: 3px;
       }
@@ -232,10 +239,7 @@
 
   }
 
-  .normalClass {
-    border: solid 1px green;
-  }
-  .errorClass {
+  .fnol-repairshop-error-border {
     border: solid 1px $dark_red;
   }
 
@@ -417,7 +421,7 @@
       font-family: $font_icons;
       font-size: 12px;
       float: right;
-      transform: rotate(90deg);
+      transform: rotate(-90deg);
       content: $font_icons_arrow_right_skinny;
       color: $black;
       margin: 1px 20px 0px 10px;
@@ -426,13 +430,26 @@
 
     &.sort-desc {
       &:after {
-        @include transform(rotate(-90deg) !important);
+        @include transform(rotate(90deg) !important);
         position: relative;
         bottom: 0px;
       }
     }
 
   }
+
+
+
+  .fnol-repairshop-drupal-elems {
+    .node__title {
+      display: none;
+    }
+
+    [id^=bc-generic_content-faqs_search] {
+      display: none;
+    }
+  }
+
 }
 
 // Custom Tablet Portrait and Landscape break point
@@ -476,7 +493,7 @@
         font-family: $font_icons;
         font-size: 10px;
         float: right;
-        transform: rotate(90deg);
+        transform: rotate(-90deg);
         content: $font_icons_arrow_right_skinny;
         color: $black;
         margin: 3px 0px 0px 5px;
@@ -484,7 +501,7 @@
 
       &.sort-desc {
         &:after {
-          @include transform(rotate(-90deg) !important);
+          @include transform(rotate(90deg) !important);
           position: relative;
           bottom: 3px;
         }

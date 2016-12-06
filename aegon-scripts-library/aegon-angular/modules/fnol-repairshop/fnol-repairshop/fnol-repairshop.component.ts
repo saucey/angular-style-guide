@@ -24,6 +24,7 @@ export class FNOLRepairshopComponent {
   public parties = [];
   public sortedBy = 'ranking';
   public sortDirection = 'DESC';
+  public loadingResults = false;
 
 
   public repairshop = {
@@ -36,6 +37,8 @@ export class FNOLRepairshopComponent {
   }
 
   public repairshopFormSubmit() {
+    this.loadingResults = true;
+
     this
       .fnolRepairshopService
       .getData({
@@ -48,6 +51,7 @@ export class FNOLRepairshopComponent {
         this.getRepairshopSearchData();
         this.showPaginateInfo();
         this.getItemShown = RESULT_MOBILE;
+        this.loadingResults = false;
       });
   }
 

@@ -17,7 +17,7 @@
                         Dit veld is verplicht
                       </p>
                     <span>
-                        <input id="repairshop_postcode" type="text" class="fnol-repairshop-txtbox" [ngClass]="{'errorClass': postcode.invalid && postcode.dirty}" name="postcode" [(ngModel)]="repairshop.postcode" required #postcode="ngModel">
+                        <input id="repairshop_postcode" type="text" class="fnol-repairshop-txtbox" [ngClass]="{'fnol-repairshop-error-border': postcode.invalid && postcode.dirty}" name="postcode" [(ngModel)]="repairshop.postcode" required #postcode="ngModel">
                     </span>
                     </div>
                 </div>
@@ -47,15 +47,15 @@
                         Dit veld is verplicht
                       </p>
                         <label class="radio">
-                            <input type="radio" name="damage" value="WINDOW" [(ngModel)]="repairshop.damage" required #damage="ngModel" [ngClass]="{'errorClass': damage.invalid && damage.dirty}" />
+                            <input type="radio" name="damage" value="GLASS" [(ngModel)]="repairshop.damage" required #damage="ngModel" [ngClass]="{'fnol-repairshop-error-border': damage.invalid && damage.dirty}" />
                             <span class="radio"></span>Alleen ruitschade
                         </label>
                         <label class="radio_longtext">
-                            <input type="radio" name="damage" value="BODY" [(ngModel)]="repairshop.damage" [ngClass]="{'errorClass': damage.invalid && damage.dirty}" />
+                            <input type="radio" name="damage" value="BODY" [(ngModel)]="repairshop.damage" [ngClass]="{'fnol-repairshop-error-border': damage.invalid && damage.dirty}" />
                             <span class="radio_longtext"></span>Alleen ruitschade aan carrosserie
                         </label>
                         <label class="radio_longtext">
-                            <input type="radio" name="damage" value="SHEET_AND_GLASS" [(ngModel)]="repairshop.damage" [ngClass]="{'errorClass': damage.invalid && damage.dirty}" />
+                            <input type="radio" name="damage" value="GLASS_AND_BODY" [(ngModel)]="repairshop.damage" [ngClass]="{'fnol-repairshop-error-border': damage.invalid && damage.dirty}" />
                             <span class="radio_longtext"></span>Schade aan plaatwerk en ruitschade
                         </label>
                     </div>
@@ -63,7 +63,7 @@
                 <div class="row-fluid fnol-repairshop-form__BtnSpacer">
                     <div class="span4"></div>
                     <div class="span8">
-                        <button type="button" class="button arrow width150px" (click)="repairshopFormSubmit()" [disabled]="!infoForm.form.valid">Zoeken</button>
+                        <button type="button" class="button arrow width150px" (click)="repairshopFormSubmit()" [disabled]="!infoForm.form.valid" [ngClass]="{'pending': loadingResults}">Zoeken</button>
                     </div>
                 </div>
             </div>
@@ -140,7 +140,7 @@
                     <th colspan="3">
                         <div class="title_pos">
                           <a (click)="sortByKey('name')">
-                            <span class="title_sort" [ngClass]="{'sort-desc': 'DESC' === sortDirection && 'name' === sortedBy, 'sort-asc': 'ASC' === sortDirection && 'name' === sortedBy}">Naam</span>
+                            <span class="title_sort" [ngClass]="{'sort-desc': 'DESC' === sortDirection && 'name' === sortedBy, 'sort-asc': 'ASC' === sortDirection && 'name' === sortedBy, 'txtBold': 'name' === sortedBy}">Naam</span>
                           </a>
 
                         </div>
@@ -148,14 +148,14 @@
                     <th>
                         <div class="title_pos">
                           <a (click)="sortByKey('ranking')">
-                            <span class="title_sort" [ngClass]="{'sort-desc': 'DESC' === sortDirection && 'ranking' === sortedBy, 'sort-asc': 'ASC' === sortDirection && 'ranking' === sortedBy}"><aa-hint text="Waardering"></aa-hint>Waardering</span>
+                            <span class="title_sort" [ngClass]="{'sort-desc': 'DESC' === sortDirection && 'ranking' === sortedBy, 'sort-asc': 'ASC' === sortDirection && 'ranking' === sortedBy, 'txtBold': 'ranking' === sortedBy}"><aa-hint text="Waardering"></aa-hint>Waardering</span>
                           </a>
                         </div>
                     </th>
                     <th>
                         <div class="title_pos">
                           <a (click)="sortByKey('address.radius')">
-                            <span class="title_sort" [ngClass]="{'sort-desc': 'DESC' === sortDirection && 'address.radius' === sortedBy, 'sort-asc': 'ASC' === sortDirection && 'address.radius' === sortedBy}">Afstand</span>
+                            <span class="title_sort" [ngClass]="{'sort-desc': 'DESC' === sortDirection && 'address.radius' === sortedBy, 'sort-asc': 'ASC' === sortDirection && 'address.radius' === sortedBy, 'txtBold': 'address.radius' === sortedBy}">Afstand</span>
                           </a>
                         </div>
                     </th>
@@ -164,13 +164,16 @@
                 </thead>
                 <tbody>
                 <tr *ngFor="let party of parties | orderBy:sortedBy:sortDirection">
-                    <td class="name">{{ party.name }}</td>
+                  <td class="name">
+                    <a *ngIf="true != party.website" href="http://{{party.website}}" target="_blank">{{ party.name }}</a>
+                    <a *ngIf="true == party.website">{{ party.name }}</a>
+                  </td>
                     <td class="phone icon-phone txtBold">{{ party.phone }}</td>
                     <td class="address">
                         <ul class="fnol-repairshop-address-list">
                             <li>{{ party.address.street }}</li>
                             <li>{{party.address.houseNumber}} {{ party.address.postCode }}{{ party.address.city }}</li>
-                            <li class="address-info-spacer"><span>{{ party.mail }}</span></li>
+                            <li class="address-info-spacer"><span *ngIf="true != party.mail">{{ party.mail }}</span></li>
                     </ul>
                     </td>
                     <td class="rating">
