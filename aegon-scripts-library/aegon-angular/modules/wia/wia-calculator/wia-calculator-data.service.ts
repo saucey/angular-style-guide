@@ -31,7 +31,7 @@ export class CalculatorDataService {
 
     // sort items based on their category: statutory < salary < aegon
     data.sort((a, b) => {
-      return CATEGORIES_MAP[a.componentId] < CATEGORIES_MAP[b.componentId];
+      return CATEGORIES_MAP[b.componentId] - CATEGORIES_MAP[a.componentId];
     });
 
     const result = data.reduce((res, item) => {
