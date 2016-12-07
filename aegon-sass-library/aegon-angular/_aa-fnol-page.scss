@@ -1,3 +1,5 @@
+$fnolAegonBlue: #0077C8;
+
 /* These classes were for Fnol page structure */
 .fnol-page {
 
@@ -69,7 +71,7 @@
       font-weight: lighter;
     */
     font:normal 26px/28px 'senticosansdtlight',Arial,Verdana,sans-serif;
-    color: $blue;
+    color: $fnolAegonBlue;
     display: none;
 
     // not mobile (> 640px)
@@ -78,9 +80,6 @@
     }
   }
 
-  .fnol-category__questions {
-    padding: 0.5em 0 0 0.5em;
-  }
   .fnol-category__question {
     margin: 1em 0 0 0;
     font-weight: normal;
@@ -104,7 +103,7 @@
   }
 
   // hide titles of embedded nodes (faqs)
-  .node__title {
+  .node__title, .element-title {
     display: none;
   }
 
@@ -122,9 +121,16 @@
     display:none;
   }
 
+  .fnol-category__questions {
+    margin-bottom: 75px;
+  }
+
 }
 
 .fnol-endpoint {
+  li {
+    padding: 0;
+  }
   .messages {
     padding: 2em;
   }
@@ -150,6 +156,7 @@
 
 .fnol-endpoint__button {
   margin: 1em 0;
+  font-weight: 500 !important;
 }
 
 .fnol-endpoint__button--redirect {
@@ -175,7 +182,7 @@
       float: right;
       transform: rotate(90deg);
       content: $font_icons_arrow_right_skinny; //$font_icons_arrow_down
-      color: $blue;
+      color: $fnolAegonBlue;
       margin: 7px 20px 0px 0px;
     }
   }
@@ -201,7 +208,7 @@
     }
     &:checked {
       ~ [class^=thumbs_] {
-        color: $blue;
+        color: $fnolAegonBlue;
       }
       + .title {
         &:after {
@@ -277,7 +284,7 @@
     }
     .fnol-phone-call {
       font-size: 1.2em;
-      color: $blue;
+      color: $fnolAegonBlue;
       float:left;
       width: auto;
       display: flex;
@@ -322,7 +329,7 @@
     }
     .fnol-phone-call {
       font-size: 1.3em;
-      color: $blue;
+      color: $fnolAegonBlue;
       float:left;
       width: 36%;
       display: flex;
@@ -332,7 +339,7 @@
     }
     .fnol-phone-content {
       font-size: .78em;
-      color: $blue;
+      color: $fnolAegonBlue;
       float: right;
       width: 46%;
       line-height: 18px;
@@ -348,3 +355,14 @@
   }
 }
 
+@media (max-width: 1000px) {
+  .fnol-endpoint {
+    .span5, .span7 {
+      float: none !important;
+      width: 100% !important;
+    }
+    .span5 + .span7 {
+      margin-top: 1em;
+    }
+  }
+}
