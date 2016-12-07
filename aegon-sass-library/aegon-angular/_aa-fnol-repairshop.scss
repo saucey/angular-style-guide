@@ -1,6 +1,9 @@
 /* These classes were for Fnol Repairshop page  */
 .fnol-repairshop {
 
+  $senticoSansdtRegular: 'senticosansdtregular', Arial, Verdana, sans-serif;
+  $senticoSansdtLight: 'senticosansdtlight',Arial,Verdana,sans-serif;
+
   .fnol-repairshop-form,
   .fnol-repairshop-result {
     background: transparent;
@@ -20,13 +23,13 @@
     margin: 4em 0 0 0;
   }
   .txtBold {
-    font-family: 'senticosansdtregular', Arial, Verdana, sans-serif;
+    font-family: $senticoSansdtRegular;
   }
   .txtNormal {
-    font-family: 'senticosansdtlight',Arial,Verdana,sans-serif;
+    font-family: $senticoSansdtLight;
   }
   .fnol-repairshop-sort__txtBold {
-    font-family: 'senticosansdtregular', Arial, Verdana, sans-serif;
+    font-family: $senticoSansdtRegular;
     font-weight: bold;
   }
   .nowrap {
@@ -41,7 +44,7 @@
   .fnol-repairshop-subhead {
     color: $black;
     font-size:18px;
-    font-family: 'senticosansdtlight',Arial,Verdana,sans-serif;
+    font-family: $senticoSansdtLight;
   }
   label {
     font-weight: normal;
@@ -214,7 +217,7 @@
     font-size: 1.4em;
   }
   .result-text {
-    font-family: 'senticosansdtregular', Arial, Verdana, sans-serif;
+    font-family: $senticoSansdtRegular;
     font-weight: bold;
     padding: 0 0 25px 0;
   }
