@@ -307,7 +307,7 @@
     </p>
 
     <h3>35%-80% arbeidsongeschikt</h3>
-    <p>U kan niet meer of minder werken. Het UWV bepaalt hoeveel u nog wél kan werken en wat u daarmee nog kan verdienen. Dit noemen we uw ‘restverdiencapaciteit’. Er wordt vervolgens gekeken naar uw benutting daarvan. Benut u minder dan 50% van uw ‘restverdiencapaciteit dan verliest u een groot gedeelte van uw wettelijke uitkering..</p>
+    <p>U kan niet meer of minder werken. Het UWV bepaalt hoeveel u nog wél kan werken en wat u daarmee nog kan verdienen. Dit noemen we uw ‘restverdiencapaciteit’. Er wordt vervolgens gekeken naar uw benutting daarvan. Benut u minder dan 50% van uw ‘restverdiencapaciteit dan verliest u een groot gedeelte van uw wettelijke uitkering.</p>
 
     <h3>80% 100% arbeidsongeschikt</h3>
     <p>U kunt nagegoeg niet meer werken. Dan wordt u 80% of meer arbeidsongeschikt verklaard. Voor de uitkering van de overheid wordt er een verschil gemaakt tussen duurzaam en niet duurzaam arbeidsongeschikt. Als u langer dan 5 jaar nagenoeg niet kunt werken wordt er van duurzaam arbeidsongeschikt gesproken.</p>
@@ -344,7 +344,7 @@
       <tr *ngIf="legendData[1]">
         <td>Aegon uitlering</td>
         <td>€</td>
-        <td class="wia_calculator--aegon-blue">{{ graphData[1]?.columns[0].categoryYearlyAmounts[1] | money:true }}</td>
+        <td class="wia_calculator--aegon-blue">{{ graphData[1]?.columns[0].categoryYearlyAmounts[3] | money:true }}</td>
       </tr>
       <tr *ngIf="legendData[2]">
         <td>Wettelijke uitkering</td>
@@ -354,7 +354,7 @@
       <tr *ngIf="legendData[3]">
         <td>Loon</td>
         <td>€</td>
-        <td>{{ graphData[1]?.columns[0].categoryYearlyAmounts[3] | money:true }}</td>
+        <td>{{ graphData[1]?.columns[0].categoryYearlyAmounts[1] | money:true }}</td>
       </tr>
       <tr>
         <td>Totaal</td>
@@ -372,7 +372,7 @@
       <tr *ngIf="legendData[1]">
         <td>Aegon uitlering</td>
         <td>€</td>
-        <td class="wia_calculator--aegon-blue">{{ graphData[2]?.columns[0].categoryYearlyAmounts[1] | money:true }}</td>
+        <td class="wia_calculator--aegon-blue">{{ graphData[2]?.columns[0].categoryYearlyAmounts[3] | money:true }}</td>
       </tr>
       <tr *ngIf="legendData[2]">
         <td>Wettelijke uitkering</td>
@@ -382,7 +382,7 @@
       <tr *ngIf="legendData[3]">
         <td>Loon</td>
         <td>€</td>
-        <td>{{ graphData[2]?.columns[0].categoryYearlyAmounts[3] | money:true }}</td>
+        <td>{{ graphData[2]?.columns[0].categoryYearlyAmounts[1] | money:true }}</td>
       </tr>
       <tr>
         <td>Totaal</td>
