@@ -1,6 +1,9 @@
 /* These classes were for Fnol Repairshop page  */
 .fnol-repairshop {
 
+  $senticoSansdtRegular: 'senticosansdtregular', Arial, Verdana, sans-serif;
+  $senticoSansdtLight: 'senticosansdtlight',Arial,Verdana,sans-serif;
+
   .fnol-repairshop-form,
   .fnol-repairshop-result {
     background: transparent;
@@ -16,17 +19,18 @@
   .fnol-repairshop-formSpacer {
     margin: 1em 0 1em 0;
   }
-  .fnol-repairshop-form__BtnSpacer {
-    margin: 4em 0 1em 0;
-  }
-  .fnol-repairshop-result {
-
+  .fnol-repairshop-form__spacer {
+    margin: 4em 0 0 0;
   }
   .txtBold {
-    font-weight: bold;
+    font-family: $senticoSansdtRegular;
   }
   .txtNormal {
-    font-weight: Normal;
+    font-family: $senticoSansdtLight;
+  }
+  .fnol-repairshop-sort__txtBold {
+    font-family: $senticoSansdtRegular;
+    font-weight: bold;
   }
   .nowrap {
     white-space: nowrap;
@@ -40,13 +44,13 @@
   .fnol-repairshop-subhead {
     color: $black;
     font-size:18px;
+    font-family: $senticoSansdtLight;
   }
   label {
     font-weight: normal;
   }
   .fnol-repairshop-formLabel {
     display: inline-block;
-    font-weight: bold;
   }
   .float-right {
     float: right;
@@ -213,6 +217,7 @@
     font-size: 1.4em;
   }
   .result-text {
+    font-family: $senticoSansdtRegular;
     font-weight: bold;
     padding: 0 0 25px 0;
   }
@@ -225,7 +230,7 @@
       transform: rotate(-90deg);
       content: $font_icons_arrow_right_skinny;
       color: $black;
-      margin: 3px 20px 0px 10px;
+      margin: 0px 20px 0px 10px;
       cursor: pointer;
     }
 
@@ -233,7 +238,7 @@
       &:after {
         @include transform(rotate(90deg) !important);
         position: relative;
-        bottom: 3px;
+        bottom: -3px;
       }
     }
 
@@ -397,7 +402,7 @@
     text-align: right;
   }
   .fnol-repairshop-table-mobile-data tr td.mob_phone {
-    font-weight: bold;
+    /* font-weight: bold; */
   }
   .fnol-repairshop-table-mobile-data tr td.mob_distance {
     font-weight: bold;
@@ -496,14 +501,14 @@
         transform: rotate(-90deg);
         content: $font_icons_arrow_right_skinny;
         color: $black;
-        margin: 3px 0px 0px 5px;
+        margin: 0px 0px 0px 5px;
       }
 
       &.sort-desc {
         &:after {
           @include transform(rotate(90deg) !important);
           position: relative;
-          bottom: 3px;
+          bottom: -3px;
         }
       }
     }

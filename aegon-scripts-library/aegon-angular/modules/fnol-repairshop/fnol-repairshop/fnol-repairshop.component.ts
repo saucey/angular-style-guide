@@ -26,7 +26,6 @@ export class FNOLRepairshopComponent {
   public sortDirection = 'DESC';
   public loadingResults = false;
 
-
   public repairshop = {
     postcode: null,
     distance: 10,
