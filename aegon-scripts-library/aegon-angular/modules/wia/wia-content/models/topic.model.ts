@@ -8,6 +8,7 @@
 export interface TopicModel {
 
   image: string;
+  imageName: string;
   shortDescription: Array<string>;
   longDescription: Array<string>;
 
