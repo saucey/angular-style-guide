@@ -191,16 +191,12 @@
         </div>
         <div class="row-fluid">
             <div class="fnol-repairshop_pagination">
-                <ul class="pager">
-                    <li class="pager-item"><a title="Go to first page" href="#">» first</a></li>
-                    <li class="pager-next"><a title="Go to previous page" href="#">› previous</a></li>
-                    <li class="pager-current first">1</li>
-                    <li class="pager-item"><a title="Go to page 2" href="#">2</a></li>
-                    <li class="pager-item"><a title="Go to page 3" href="#">3</a></li>
-                    <li class="pager-item"><a title="Go to page 4" href="#">4</a></li>
-                    <li class="pager-item"><a title="Go to page 5" href="#">5</a></li>
-                    <li class="pager-next"><a title="Go to next page" href="#">next ›</a></li>
-                    <li class="pager-last last"><a title="Go to last page" href="#">last »</a></li>
+                <ul *ngIf="pager.pages && pager.pages.length" class="pager">
+                    <li [ngClass]="{disabled:pager.currentPage === 1}" class="pager-item"><a (click)="setPage(1)" title="Go to first page">» first</a></li>
+                    <li [ngClass]="{disabled:pager.currentPage === 1}" class="pager-next"><a (click)="setPage(pager.currentPage - 1)" title="Go to previous page">› previous</a></li>
+                    <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}" class="pager-current first"><a (click)="setPage(page)">{{page}}</a></li>
+                    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="pager-next"><a (click)="setPage(pager.currentPage + 1)" title="Go to next page">next ›</a></li>
+                    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="pager-last last"><a (click)="setPage(pager.totalPages)" title="Go to last page">last »</a></li>
                 </ul>
             </div>
         </div>
