@@ -80,9 +80,6 @@ $fnolAegonBlue: #0077C8;
     }
   }
 
-  .fnol-category__questions {
-    padding: 0.5em 0 0 0.5em;
-  }
   .fnol-category__question {
     margin: 1em 0 0 0;
     font-weight: normal;
@@ -124,9 +121,16 @@ $fnolAegonBlue: #0077C8;
     display:none;
   }
 
+  .fnol-category__questions {
+    margin-bottom: 75px;
+  }
+
 }
 
 .fnol-endpoint {
+  li {
+    padding: 0;
+  }
   .messages {
     padding: 2em;
   }
@@ -351,3 +355,14 @@ $fnolAegonBlue: #0077C8;
   }
 }
 
+@media (max-width: 1000px) {
+  .fnol-endpoint {
+    .span5, .span7 {
+      float: none !important;
+      width: 100% !important;
+    }
+    .span5 + .span7 {
+      margin-top: 1em;
+    }
+  }
+}
