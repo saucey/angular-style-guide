@@ -13,11 +13,11 @@
                     <div class="span4 txtBold nowrap fnol-repairshop__formLblAlign"><label class="fnol-repairshop-formLabel" for="repairshop_postcode">Postcode of plaatsnaam <span
                             class="hidden-mobile fnol-repairshop-mandatory">*</span></label></div>
                     <div class="span8">
-                    <p [hidden]="postcode.valid || postcode.pristine" class="fnol-repairshop__errorMsg">
+                    <p [hidden]="postcodeValid || postcode.pristine" class="fnol-repairshop__errorMsg">
                         Dit veld is verplicht
                       </p>
                     <span>
-                        <input id="repairshop_postcode" type="text" class="fnol-repairshop-txtbox" [ngClass]="{'fnol-repairshop-error-border': postcode.invalid && postcode.dirty}" name="postcode" [(ngModel)]="repairshop.postcode" required #postcode="ngModel" pattern="^[1-9][0-9]{3}\s?[a-zA-Z]{2}$">
+                        <input id="repairshop_postcode" type="text" class="fnol-repairshop-txtbox" [ngClass]="{'fnol-repairshop-error-border': postcode.invalid && postcode.dirty}" name="postcode" [(ngModel)]="repairshop.postcode" required #postcode="ngModel" (ngModelChange)="updatePostcode($event, infoForm)">
                     </span>
                     </div>
                 </div>

@@ -25,6 +25,7 @@ export class FNOLRepairshopComponent {
   public sortedBy = 'ranking';
   public sortDirection = 'DESC';
   public loadingResults = false;
+  public postcodeValid = true;
 
   public repairshop = {
     postcode: null,
@@ -52,6 +53,14 @@ export class FNOLRepairshopComponent {
         this.getItemShown = RESULT_MOBILE;
         this.loadingResults = false;
       });
+  }
+
+  public updatePostcode(value, infoForm) {
+    if (/^[1-9][0-9]{3}\s?[a-zA-Z]{2}$/.test(value) || /^(?=(\s*[a-zA-Z]){1,25}$).*$/.test(value)) {
+      this.postcodeValid = true;
+    } else {
+      this.postcodeValid = false;
+    }
   }
 
   getRepairshopSearchData() {
