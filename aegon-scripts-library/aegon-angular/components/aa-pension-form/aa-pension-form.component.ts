@@ -118,16 +118,21 @@ export class AAPensionFormComponent extends AABaseComponent implements OnInit {
 
   ngOnInit() {
     super.ngOnInit();
-    let date: Date = new Date(),
-      year: number = date.getFullYear(),
+    
+    let date: Date = new Date();
+    date.setMonth(date.getMonth() + this.data.options.startingMonthIndex);
+
+    let year: number = date.getFullYear(),
       month: number = date.getMonth() + 1;
-    for (let i: number = 0; i < 12; i++) {
+
+    for (let i: number = 0; i < 12 -(this.data.options.startingMonthIndex); i++) {
       if (month === 12) {
         month = 1;
         year += 1;
       } else {
         month += 1;
       }
+
       let value = year + '-' + (month < 10 ? '0' : '') + month + '-01',
         label = '1 ' + monthLabels[month - 1] + ' ' + year;
       this.startingDateChoices.push({value: value, label: label});
