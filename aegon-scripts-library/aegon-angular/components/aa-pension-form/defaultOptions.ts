@@ -83,5 +83,6 @@ export const defaultOptions = {
       }
   },
   "initializeBlueBlocks" : false,
-  "pensionAmountMin": 25000
+  "pensionAmountMin": 25000,
+  "startingMonthIndex" : 0
 };

@@ -103,8 +103,8 @@
 
       </div>
 
-      <div [class.wia-graph__column--rest-second]="graphData[2]?.columns[0].amountYearly === 0"
-           class="wia-graph__column" *ngIf="graphData[1]?.columns[0].amountYearly > 0">
+      <div [class.wia-graph__column--rest-second]="!isColumnVisible(4)"
+           class="wia-graph__column" *ngIf="isColumnVisible(3)">
         <div class="wia-graph__top_label" [class.wia-graph__greyed-out]="showTooltip && showTooltip !== 2"
              (mouseenter)='showTooltip = 2' (mouseleave)='showTooltip = 0'>
           {{getPeriodTitles()[0]}}
@@ -128,8 +128,9 @@
       </div>
 
       <div class="wia-graph__column"
-           [class.wia-graph__column--rest-third]="graphData[1]?.columns[0].amountYearly === 0"
-           *ngIf="graphData[2]?.columns[0].amountYearly > 0">
+
+           [class.wia-graph__column--rest-third]="!isColumnVisible(3)"
+           *ngIf="isColumnVisible(4)">
 
         <div class="wia-graph__top_label" [class.wia-graph__greyed-out]="showTooltip && showTooltip !== 3"
              (mouseenter)='showTooltip = 3' (mouseleave)='showTooltip = 0'>
@@ -137,10 +138,7 @@
         </div>
 
         <div class="wia-graph__tooltip_content" [class.wia-graph__tooltip_content--active]="showTooltip === 3">
-          Tot uw pensioenleeftijd krijgt u in principe de WGA-loonaanvulling. Benut u echter minder dan 50%
-          van uw verdiencapaciteit dan verandert deze in een WGA-vervolguitkering gebaseerd op het
-          minimumloon. Samen met het loon dat u nog verdient, is dit uw inkomen. Hoe meer u werkt, hoe
-          hoger uw totale inkomen is.
+          {{ getLastPeriodTooltip() }}
         </div>
 
         <div class="wia-graph__chart" [class.wia-graph__greyed-out]="showTooltip">
@@ -168,6 +166,8 @@
       <div class="span8">
         <aa-slider class="aa-input--percentage wia_calculator__disability_slider"
                    [(ngModel)]="disability.value"
+                   [hint]="true"
+                   [hintPostfix]="'%'"
                    (modelChange)="sliderUpdate(disability, $event, true)"
                    [options]="disability.options">
         </aa-slider>
@@ -180,8 +180,10 @@
         Benutting restverdiencapaciteit: <aa-hint text="Geef aan welk deel van de restverdiencapaciteit daadwerkelijk benut wordt. De restverdiencapaciteit is het deel dat u nog kunt werken op basis van de vastgestelde arbeidsongeschiktheid. Is uw restverdiencapaciteit bijvoorbeeld vastgesteld op 2 dagen per week, maar kunt u voor maar 1 dag per week werk vinden? Dan is de benutting van uw restverdiencapaciteit 50%."></aa-hint>
       </div>
       <div class="span8">
-        <aa-slider class="aa-input--percentage"
+        <aa-slider class="aa-input--percentage wia_calculator__usage_slider"
                    [(ngModel)]="usage.value"
+                   [hint]="true"
+                   [hintPostfix]="'%'"
                    (modelChange)="sliderUpdate(usage, $event, true)"
                    [options]="usage.options">
         </aa-slider>
@@ -281,7 +283,7 @@
   <div [class.hidden]="disability.value >= 80">
     <h4 class="hidden-desktop">Benutting restverdiencapaciteit</h4>
 
-    <aa-slider-input class="aa-input--percentage"
+    <aa-slider-input class="aa-input--percentage wia_calculator__usage_slider"
                      [(ngModel)]="usage.value"
                      (modelChange)="sliderUpdate(usage, $event)"
                      [sliderOptions]="usage.options">
@@ -307,7 +309,7 @@
     </p>
 
     <h3>35%-80% arbeidsongeschikt</h3>
-    <p>U kan niet meer of minder werken. Het UWV bepaalt hoeveel u nog wél kan werken en wat u daarmee nog kan verdienen. Dit noemen we uw ‘restverdiencapaciteit’. Er wordt vervolgens gekeken naar uw benutting daarvan. Benut u minder dan 50% van uw ‘restverdiencapaciteit dan verliest u een groot gedeelte van uw wettelijke uitkering..</p>
+    <p>U kan niet meer of minder werken. Het UWV bepaalt hoeveel u nog wél kan werken en wat u daarmee nog kan verdienen. Dit noemen we uw ‘restverdiencapaciteit’. Er wordt vervolgens gekeken naar uw benutting daarvan. Benut u minder dan 50% van uw ‘restverdiencapaciteit dan verliest u een groot gedeelte van uw wettelijke uitkering.</p>
 
     <h3>80% 100% arbeidsongeschikt</h3>
     <p>U kunt nagegoeg niet meer werken. Dan wordt u 80% of meer arbeidsongeschikt verklaard. Voor de uitkering van de overheid wordt er een verschil gemaakt tussen duurzaam en niet duurzaam arbeidsongeschikt. Als u langer dan 5 jaar nagenoeg niet kunt werken wordt er van duurzaam arbeidsongeschikt gesproken.</p>
@@ -344,7 +346,7 @@
       <tr *ngIf="legendData[1]">
         <td>Aegon uitlering</td>
         <td>€</td>
-        <td class="wia_calculator--aegon-blue">{{ graphData[1]?.columns[0].categoryYearlyAmounts[1] | money:true }}</td>
+        <td class="wia_calculator--aegon-blue">{{ graphData[1]?.columns[0].categoryYearlyAmounts[3] | money:true }}</td>
       </tr>
       <tr *ngIf="legendData[2]">
         <td>Wettelijke uitkering</td>
@@ -354,7 +356,7 @@
       <tr *ngIf="legendData[3]">
         <td>Loon</td>
         <td>€</td>
-        <td>{{ graphData[1]?.columns[0].categoryYearlyAmounts[3] | money:true }}</td>
+        <td>{{ graphData[1]?.columns[0].categoryYearlyAmounts[1] | money:true }}</td>
       </tr>
       <tr>
         <td>Totaal</td>
@@ -372,7 +374,7 @@
       <tr *ngIf="legendData[1]">
         <td>Aegon uitlering</td>
         <td>€</td>
-        <td class="wia_calculator--aegon-blue">{{ graphData[2]?.columns[0].categoryYearlyAmounts[1] | money:true }}</td>
+        <td class="wia_calculator--aegon-blue">{{ graphData[2]?.columns[0].categoryYearlyAmounts[3] | money:true }}</td>
       </tr>
       <tr *ngIf="legendData[2]">
         <td>Wettelijke uitkering</td>
@@ -382,7 +384,7 @@
       <tr *ngIf="legendData[3]">
         <td>Loon</td>
         <td>€</td>
-        <td>{{ graphData[2]?.columns[0].categoryYearlyAmounts[3] | money:true }}</td>
+        <td>{{ graphData[2]?.columns[0].categoryYearlyAmounts[1] | money:true }}</td>
       </tr>
       <tr>
         <td>Totaal</td>

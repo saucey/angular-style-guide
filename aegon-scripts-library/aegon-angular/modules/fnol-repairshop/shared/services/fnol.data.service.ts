@@ -118,8 +118,7 @@ export class FnolRepairshopService {
   }
 
   private generateSimulationHeaders(): Headers {
-
-    let auth = window.location.search.substr(1);
+    let auth;
 
     try {
       auth = (window as any).Drupal.settings.qqService.http_authorization;

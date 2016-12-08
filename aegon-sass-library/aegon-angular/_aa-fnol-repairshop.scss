@@ -1,6 +1,9 @@
 /* These classes were for Fnol Repairshop page  */
 .fnol-repairshop {
 
+  $senticoSansdtRegular: 'senticosansdtregular', Arial, Verdana, sans-serif;
+  $senticoSansdtLight: 'senticosansdtlight',Arial,Verdana,sans-serif;
+
   .fnol-repairshop-form,
   .fnol-repairshop-result {
     background: transparent;
@@ -14,19 +17,20 @@
     font-size: 1.5em;
   }
   .fnol-repairshop-formSpacer {
-    margin: 1em 0 1em 0;
+    margin: 2em 0 1em 0;
   }
-  .fnol-repairshop-form__BtnSpacer {
-    margin: 4em 0 1em 0;
-  }
-  .fnol-repairshop-result {
-
+  .fnol-repairshop-form__spacer {
+    margin: 4em 0 0 0;
   }
   .txtBold {
-    font-weight: bold;
+    font-family: $senticoSansdtRegular;
   }
   .txtNormal {
-    font-weight: Normal;
+    font-family: $senticoSansdtLight;
+  }
+  .fnol-repairshop-sort__txtBold {
+    font-family: $senticoSansdtRegular;
+    font-weight: bold;
   }
   .nowrap {
     white-space: nowrap;
@@ -34,19 +38,22 @@
   .width150px {
     width: 150px;
   }
+  .margintop_20px {
+    margin-top: 20px;
+  }
   .fnol-repairshop-mandatory {
     color: $red;
   }
   .fnol-repairshop-subhead {
     color: $black;
     font-size:18px;
+    font-family: $senticoSansdtLight;
   }
   label {
     font-weight: normal;
   }
   .fnol-repairshop-formLabel {
     display: inline-block;
-    font-weight: bold;
   }
   .float-right {
     float: right;
@@ -69,7 +76,8 @@
     position: relative;
     display: block;
     width: auto;
-    margin-top: 25px;
+    margin-top: 8px;
+    margin-bottom: 25px;
     padding-right: 15px;
     padding-left: 18px;
     text-align: left;
@@ -99,6 +107,10 @@
         border-radius: $elements_radio_height / 2;
         background-color: $beige;
       }
+    }
+
+    &:last-of-type {
+      margin-bottom: 0;
     }
   }
   label.radio_longtext {
@@ -213,6 +225,7 @@
     font-size: 1.4em;
   }
   .result-text {
+    font-family: $senticoSansdtRegular;
     font-weight: bold;
     padding: 0 0 25px 0;
   }
@@ -225,7 +238,7 @@
       transform: rotate(-90deg);
       content: $font_icons_arrow_right_skinny;
       color: $black;
-      margin: 3px 20px 0px 10px;
+      margin: 0px 20px 0px 10px;
       cursor: pointer;
     }
 
@@ -233,7 +246,7 @@
       &:after {
         @include transform(rotate(90deg) !important);
         position: relative;
-        bottom: 3px;
+        bottom: -3px;
       }
     }
 
@@ -397,7 +410,7 @@
     text-align: right;
   }
   .fnol-repairshop-table-mobile-data tr td.mob_phone {
-    font-weight: bold;
+    /* font-weight: bold; */
   }
   .fnol-repairshop-table-mobile-data tr td.mob_distance {
     font-weight: bold;
@@ -496,14 +509,14 @@
         transform: rotate(-90deg);
         content: $font_icons_arrow_right_skinny;
         color: $black;
-        margin: 3px 0px 0px 5px;
+        margin: 0px 0px 0px 5px;
       }
 
       &.sort-desc {
         &:after {
           @include transform(rotate(90deg) !important);
           position: relative;
-          bottom: 3px;
+          bottom: -3px;
         }
       }
     }
@@ -558,7 +571,7 @@
     }
     .fnol-repairshop__formRadioLblAlign {
       text-align: right;
-      margin: 18px 0px 0px 0px;
+      margin: 0px 0px 0px 0px;
     }
   }
 }
