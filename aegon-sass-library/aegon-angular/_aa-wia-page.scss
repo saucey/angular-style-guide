@@ -91,6 +91,9 @@ $wiaFormTableBreakpoint: $wiaFormMobileBreakpoint + 1px;
     width: 33%;
   }
   .product-attrs {
+
+    margin-left: 2.3em;
+
     > ul {
       margin: 0;
     }
@@ -98,7 +101,6 @@ $wiaFormTableBreakpoint: $wiaFormMobileBreakpoint + 1px;
       padding: 0;
     }
     @media (max-width: $wiaFormMobileBreakpoint) {
-      margin-left: 2.3em;
       .product-attr {
         padding-top: 0;
         margin-top: 0;

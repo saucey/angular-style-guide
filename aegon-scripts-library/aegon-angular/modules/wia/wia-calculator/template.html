@@ -103,8 +103,8 @@
 
       </div>
 
-      <div [class.wia-graph__column--rest-second]="graphData[2]?.columns[0].amountYearly === 0"
-           class="wia-graph__column" *ngIf="graphData[1]?.columns[0].amountYearly > 0">
+      <div [class.wia-graph__column--rest-second]="!isColumnVisible(4)"
+           class="wia-graph__column" *ngIf="isColumnVisible(3)">
         <div class="wia-graph__top_label" [class.wia-graph__greyed-out]="showTooltip && showTooltip !== 2"
              (mouseenter)='showTooltip = 2' (mouseleave)='showTooltip = 0'>
           {{getPeriodTitles()[0]}}
@@ -128,8 +128,9 @@
       </div>
 
       <div class="wia-graph__column"
-           [class.wia-graph__column--rest-third]="graphData[1]?.columns[0].amountYearly === 0"
-           *ngIf="graphData[2]?.columns[0].amountYearly > 0">
+
+           [class.wia-graph__column--rest-third]="!isColumnVisible(3)"
+           *ngIf="isColumnVisible(4)">
 
         <div class="wia-graph__top_label" [class.wia-graph__greyed-out]="showTooltip && showTooltip !== 3"
              (mouseenter)='showTooltip = 3' (mouseleave)='showTooltip = 0'>
@@ -137,10 +138,7 @@
         </div>
 
         <div class="wia-graph__tooltip_content" [class.wia-graph__tooltip_content--active]="showTooltip === 3">
-          Tot uw pensioenleeftijd krijgt u in principe de WGA-loonaanvulling. Benut u echter minder dan 50%
-          van uw verdiencapaciteit dan verandert deze in een WGA-vervolguitkering gebaseerd op het
-          minimumloon. Samen met het loon dat u nog verdient, is dit uw inkomen. Hoe meer u werkt, hoe
-          hoger uw totale inkomen is.
+          {{ getLastPeriodTooltip() }}
         </div>
 
         <div class="wia-graph__chart" [class.wia-graph__greyed-out]="showTooltip">
@@ -168,6 +166,8 @@
       <div class="span8">
         <aa-slider class="aa-input--percentage wia_calculator__disability_slider"
                    [(ngModel)]="disability.value"
+                   [hint]="true"
+                   [hintPostfix]="'%'"
                    (modelChange)="sliderUpdate(disability, $event, true)"
                    [options]="disability.options">
         </aa-slider>
@@ -180,8 +180,10 @@
         Benutting restverdiencapaciteit: <aa-hint text="Geef aan welk deel van de restverdiencapaciteit daadwerkelijk benut wordt. De restverdiencapaciteit is het deel dat u nog kunt werken op basis van de vastgestelde arbeidsongeschiktheid. Is uw restverdiencapaciteit bijvoorbeeld vastgesteld op 2 dagen per week, maar kunt u voor maar 1 dag per week werk vinden? Dan is de benutting van uw restverdiencapaciteit 50%."></aa-hint>
       </div>
       <div class="span8">
-        <aa-slider class="aa-input--percentage"
+        <aa-slider class="aa-input--percentage wia_calculator__usage_slider"
                    [(ngModel)]="usage.value"
+                   [hint]="true"
+                   [hintPostfix]="'%'"
                    (modelChange)="sliderUpdate(usage, $event, true)"
                    [options]="usage.options">
         </aa-slider>
@@ -281,7 +283,7 @@
   <div [class.hidden]="disability.value >= 80">
     <h4 class="hidden-desktop">Benutting restverdiencapaciteit</h4>
 
-    <aa-slider-input class="aa-input--percentage"
+    <aa-slider-input class="aa-input--percentage wia_calculator__usage_slider"
                      [(ngModel)]="usage.value"
                      (modelChange)="sliderUpdate(usage, $event)"
                      [sliderOptions]="usage.options">
