@@ -29,11 +29,6 @@
         // Keyup event on input.
         inputText.on('keyup', function() {
           var inputVal = $(this).val();
-          if(inputVal !== '') {
-            $(this).parent().addClass('editable-field--editing');
-          } else {
-            $(this).parent().removeClass('editable-field--editing');
-          }
           inputValue.text(inputVal);
         });
         // Edit button click event.

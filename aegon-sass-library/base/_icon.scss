@@ -502,6 +502,11 @@ a.menu-5662:before {
 .icon-file-upload-thin:before {
   content: $font_icons_file_upload_thin;
 }
+.icon-x:before {
+  content: $font_icons_plus_light;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
 // Do not apply icons to old aegon menu.
 // TODO: Refactor menu's in Drupal module 'aegon_menu' to adapt to ATDL.
 .submenu [class*='menu-'][class*='icon-']:before {
