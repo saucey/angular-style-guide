@@ -126,7 +126,7 @@
 
     <div class="form-input-row">
       <div class="input-wrapper span12 submit-form-button--wrapper">
-        <button class="button arrow" type="submit">
+        <button class="button arrow" type="submit"  [disabled]="callingService">
           {{data.options.form.submitButton.label}}
         </button>
       </div>
