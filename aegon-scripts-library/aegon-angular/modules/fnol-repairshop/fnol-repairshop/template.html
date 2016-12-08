@@ -13,7 +13,7 @@
                       <label class="fnol-repairshop-formLabel" for="repairshop_postcode">Postcode of plaatsnaam<span class="hidden-mobile fnol-repairshop-mandatory">*</span>
                       </label>
                     </div>
-                    <div class="span8">
+                    <div class="span8 paddingLeft0px">
                       <p *ngIf="formSubmitted && isPostcodeEmpty(repairshop.postcode)" class="fnol-repairshop__errorMsg">Dit veld is verplicht</p>
                       <p *ngIf="formSubmitted && false === isPostcodeValid(repairshop.postcode) &&  false === isPostcodeEmpty(postcode)" class="fnol-repairshop__errorMsg">Postcode of plaatsnaam niet bekend</p>
                       <span>
@@ -78,7 +78,7 @@
       <table class="fnol-repairshop-table-mobile-view">
         <thead>
         <tr>
-          <th>
+          <th class="rhs_head_width">
             <div class="mob_title_pos">
               <a (click)="sortByKey('ranking')">
                 <span class="mob_title_sort" [ngClass]="{'sort-desc': 'DESC' === sortDirection && 'ranking' === sortedBy, 'sort-asc': 'ASC' === sortDirection && 'ranking' === sortedBy, 'fnol-repairshop-sort__txtBold': 'ranking' === sortedBy}">Waardering</span>
@@ -175,8 +175,8 @@
                     <td class="phone icon-phone txtBold">{{ party.phone }}</td>
                     <td class="address">
                         <ul class="fnol-repairshop-address-list">
-                            <li>{{ party.address.street }}</li>
-                            <li>{{party.address.houseNumber}} {{ party.address.postCode }}{{ party.address.city }}</li>
+                            <li>{{ party.address.street }}&nbsp;{{party.address.houseNumber}}</li>
+                            <li>{{ party.address.postCode }}&nbsp;{{ party.address.city }}</li>
                             <li class="address-info-spacer"><span *ngIf="true != party.mail">{{ party.mail }}</span></li>
                     </ul>
                     </td>
