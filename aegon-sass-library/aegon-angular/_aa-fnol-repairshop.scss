@@ -17,7 +17,7 @@
     font-size: 1.5em;
   }
   .fnol-repairshop-formSpacer {
-    margin: 1em 0 1em 0;
+    margin: 2em 0 1em 0;
   }
   .fnol-repairshop-form__spacer {
     margin: 4em 0 0 0;
@@ -37,6 +37,9 @@
   }
   .width150px {
     width: 150px;
+  }
+  .margintop_20px {
+    margin-top: 20px;
   }
   .fnol-repairshop-mandatory {
     color: $red;
@@ -73,7 +76,8 @@
     position: relative;
     display: block;
     width: auto;
-    margin-top: 25px;
+    margin-top: 8px;
+    margin-bottom: 25px;
     padding-right: 15px;
     padding-left: 18px;
     text-align: left;
@@ -103,6 +107,10 @@
         border-radius: $elements_radio_height / 2;
         background-color: $beige;
       }
+    }
+
+    &:last-of-type {
+      margin-bottom: 0;
     }
   }
   label.radio_longtext {
@@ -563,7 +571,7 @@
     }
     .fnol-repairshop__formRadioLblAlign {
       text-align: right;
-      margin: 18px 0px 0px 0px;
+      margin: 0px 0px 0px 0px;
     }
   }
 }
