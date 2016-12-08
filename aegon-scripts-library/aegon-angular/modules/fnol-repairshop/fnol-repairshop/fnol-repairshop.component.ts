@@ -2,7 +2,7 @@ import {
   Component, Input
 } from '@angular/core';
 
-import {FnolRepairshopService} from "../shared/services/fnol.data.service";
+import { FnolRepairshopService } from "../shared/services/fnol.data.service";
 
 const template = require('./template.html');
 
@@ -26,6 +26,7 @@ export class FNOLRepairshopComponent {
   public sortDirection = 'DESC';
   public loadingResults = false;
   public postcodeValid = true;
+  public formSubmitted = false;
 
   public repairshop = {
     postcode: null,
@@ -38,6 +39,7 @@ export class FNOLRepairshopComponent {
 
   public repairshopFormSubmit() {
     this.loadingResults = true;
+    this.formSubmitted = true;
 
     this
       .fnolRepairshopService
@@ -55,11 +57,31 @@ export class FNOLRepairshopComponent {
       });
   }
 
-  public updatePostcode(value, infoForm) {
-    if (/^[1-9][0-9]{3}\s?[a-zA-Z]{2}$/.test(value) || /^(?=(\s*[a-zA-Z]){1,25}$).*$/.test(value)) {
-      this.postcodeValid = true;
+  /**
+   * Checks if the postcode is empty or null
+   *
+   * @param {string|null} postcode
+   * @returns {boolean}
+   */
+  public isPostcodeEmpty(postcode): boolean {
+    if ('undefined' === typeof postcode || null === postcode || 0 === postcode.length) {
+      return true;
     } else {
-      this.postcodeValid = false;
+      return false;
+    }
+  }
+
+  /**
+   * Checks if the postcode is valid
+   *
+   * @param {string} postcode
+   * @returns {boolean}
+   */
+  public isPostcodeValid(postcode): boolean {
+    if (/^[1-9][0-9]{3}\s?[a-zA-Z]{2}$/.test(postcode) || /^(?=(\s*[a-zA-Z]){1,25}$).*$/.test(postcode)) {
+      return true;
+    } else {
+      return false;
     }
   }
 
