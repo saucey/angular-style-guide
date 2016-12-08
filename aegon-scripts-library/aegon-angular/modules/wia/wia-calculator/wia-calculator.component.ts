@@ -1,4 +1,4 @@
-import { Component, Input, ElementRef, OnInit, ViewChild, AfterViewInit } from "@angular/core";
+import { Component, Input, ElementRef, OnInit, AfterViewInit } from "@angular/core";
 import { AABaseComponent } from "../../../lib/classes/AABaseComponent";
 import { CalculatorDataService } from "./wia-calculator-data.service";
 import { defaultOptions } from "./defaultOptions";
@@ -271,7 +271,7 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
 
     const titles = [
       'vanaf 3e jaar tot max 5e jaar',
-      'tot pensioen leeftijd'
+      'tot uw pensioenleeftijd'
     ];
 
     if (!this.externalInput) {
@@ -279,33 +279,60 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
     }
 
     if (this.roundToFives(this.disability.value) < 35) {
+
       if (this.externalInput.productsIds.indexOf('WIA_35MIN_BODEM') > -1) {
-        titles[0] = 'vanaf 3e jaar tot max  9.5 jaar';
-      }
-      if (this.externalInput.productsIds.indexOf('WIA_35MIN') > -1) {
+        titles[0] = 'vanaf 3e jaar tot het 10.5e jaar';
+      } else if (this.externalInput.productsIds.indexOf('WIA_35MIN') > -1) {
 
         let value = this.externalInput.products.find(el => el.id === 'WIA_35MIN').attrs[0].value;
         if (value === 5) {
-          titles[0] = 'vanaf 3e jaar tot max 5e jaar';
-        } else if (value === 10)  {
-          titles[0] = 'vanaf 3e jaar tot max 12 jaar';
+          titles[0] = 'vanaf 3e jaar tot het 8e jaar';
+        } else if (value === 10) {
+          titles[0] = 'vanaf 3e jaar tot het 13e jaar';
         }
-      }
-    }
-
-    if (this.roundToFives(this.disability.value) >= 80) {
-
-      if (this.permanentDisability) {
-        titles[1] = 'Tot uw pensioenleeftijd krijgt u een IVA-uitkering van de overheid';
       } else {
-        titles[1] = 'Tot uw pensioenleeftijd krijgt u de WGA-loonaanvulling';
+        titles[1] = 'tot uw pensioenleeftijd krijgt u geen uitkering';
       }
     }
 
     return titles;
   }
 
-  private roundToFives (value: number) {
+  public getLastPeriodTooltip() {
+
+    if (this.roundToFives(this.disability.value) >= 80) {
+
+      if (this.permanentDisability) {
+        return 'Tot uw pensioenleeftijd krijgt u een IVAuitkering van de overheid'
+      } else {
+        return 'Tot uw pensioenleeftijd krijgt u de WGAloonaanvulling';
+      }
+    }
+
+    return `Tot uw pensioenleeftijd krijgt u in principe de WGA-loonaanvulling. Benut u echter minder dan 50%
+    van uw verdiencapaciteit dan verandert deze in een WGA-vervolguitkering gebaseerd op het
+    minimumloon. Samen met het loon dat u nog verdient, is dit uw inkomen. Hoe meer u werkt, hoe
+    hoger uw totale inkomen is.`;
+  }
+
+  public isColumnVisible(column: number) {
+
+    if (column === 3) {
+      //hide third column when disability<35% and no WIA35 OR BODEM products
+      if (this.roundToFives(this.disability.value) < 35 && this.externalInput.productsIds.indexOf('WIA_35MIN') === -1
+        && this.externalInput.productsIds.indexOf('WIA_35MIN_BODEM') === -1) {
+        return false;
+      }
+
+      if (this.roundToFives(this.disability.value) >= 80 && this.permanentDisability) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  private roundToFives(value: number) {
     return Math.round(value / 5) * 5;
   }
 
