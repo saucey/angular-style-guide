@@ -1,4 +1,33 @@
 export const defaultOptions = {
+  annuityInterestDefault: 0.05,
+  annuityInterests: [],
+  interests: [],
+  income: {
+    'initial': 2500,
+    'min': 200,
+    'p25': 1000,
+    'p50': 2000,
+    'p75': 3000,
+    'max': 7500
+  },
+  incomePartner: {
+    'initial': 0,
+    'min': 0,
+    'p25': 1000,
+    'p50': 2000,
+    'p75': 3000,
+    'max': 7500
+  },
+  interestYears: {
+    'initial': 2,
+    'min': 2,
+    'p25': 5,
+    'p50': 10,
+    'p75': 15,
+    'max': 28    
+  },
+
+  
   title: 'Bereken uw maximale hypotheek',
   
   incomeLabel: 'Vul hier uw bruto maandinkomen in',
