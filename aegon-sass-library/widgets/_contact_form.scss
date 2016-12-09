@@ -49,11 +49,16 @@
     position: absolute;
     top: 110%;
   }
+  .lighter_grey {
+    .editable-field__save {
+      background-color: $lighter_grey;
+    }
+  }
   // Editable field.
   .contact-form__editable-field {
     position: relative;
-    display:block;
-    padding-right: 30px;
+    display:flex;
+    padding-right: 22%;
     margin-bottom:20px;
     .editable-field__input-text:not(.invalid),
     .editable-field__save {
@@ -61,9 +66,10 @@
       filter:alpha(opacity=0);
     }
     .editable-field__save {
+      height: 100%;
       position: absolute;
       right: 0;
-      bottom: 1px;
+      bottom: -1px;
     }
     .editable-field__field-value {
       display: block;
@@ -114,5 +120,11 @@
 }
 /* Mobile specific */
 @include breakpoint($brk-mobile) {
-
+  .contact_form_widget {
+    .contact-form.row-fluid {
+      .contact-form__personal-details {
+        margin-bottom: 20px;
+      }
+    }
+  }
 }

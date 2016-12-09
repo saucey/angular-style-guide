@@ -18,11 +18,12 @@
       width: 40px;
       line-height: 40px;
     }
-    .file-upload__remove:before {
-      width: 22px;
-      font-size: 12px;
-      line-height: 22px;
-      margin-left: 15px;
+    .file-upload__remove {
+      &:before {
+        width: 22px;
+        font-size: 12px;
+        line-height: 22px;
+      }
     }
     .file-upload__upload-btn:before,
     > .icon-x:before,
@@ -55,20 +56,35 @@
         display: block;
       }
     }
+    &.file-upload__input--uploaded {
+      display: block;
+      overflow: hidden;
+      padding-right: 30px;
+      > input[type="file"] {
+        top: 105%;
+      }
+      > * {
+        vertical-align: middle;
+      }
+      .file-upload__name {
+        max-width: 85%;
+        display: inline-block;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        &:before {
+          padding:0;
+          text-align: center;
+        }
+      }
+    }
+    &.file-upload__input--invalid {
+      color: $dark_red;
+      cursor: default;
+    }
   }
   .file-upload__list{
     padding: 10px 5px;
     transition: all 500ms ease-in-out;
-    .file-upload__input--uploaded {
-      display: block;
-      overflow: hidden;
-      > input[type="file"] {
-        top: 105%;
-      }
-      .file-upload__name::before {
-        padding:0;
-        text-align: center;
-      }
-    }
   }
 }
