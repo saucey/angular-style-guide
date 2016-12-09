@@ -9,6 +9,7 @@ import { WiaTopicDescriptionModel } from "./wia-topic-description.model";
 export interface WiaTopicModel {
 
   image: string,
+  imageName: string,
   shortDescription: Array<WiaTopicDescriptionModel>,
   longDescription: Array<WiaTopicDescriptionModel>,
 

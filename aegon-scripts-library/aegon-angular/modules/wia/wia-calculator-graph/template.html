@@ -10,7 +10,7 @@
          [attr.data-category]="bar.category" [style.height.%]="bar.percentage">
       <div class="aa-block-graph__bar-block">
         <div class="aa-block-graph__bar-block-inner">
-          <span class="aa-block-graph-amount" [class.hidden]="!bar.amountYearly || data.suppressAmountLabels">€{{bar.amountYearly | money}}</span>
+          <span class="aa-block-graph-amount" [class.hidden]="!bar.amountYearly || data.suppressAmountLabels">€{{bar.amountYearly | money:true}}</span>
         </div>
       </div>
     </div>

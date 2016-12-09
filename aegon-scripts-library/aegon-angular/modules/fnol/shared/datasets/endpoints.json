@@ -12,13 +12,13 @@
     "type": "generic",
     "data": {
       "title": "Zo meldt u uw verlies of diefstal",
-      "description": "U bent spullen verloren of ze zijn gestolen. U kunt dit het beste online melden zodra u hiervan aangifte heeft gedaan bij de politie. Het bewijs van aangifte dient u mee te sturen bij uw melding.",
+      "description": "U bent iets kwijt. Of uw spullen zijn gestolen. Doe dan eerst aangifte bij de politie. U krijgt dan een bewijs van aangifte. Met dit bewijs kunt u uw schade online melden.",
       "list": {
         "title": "Voordelen online melden",
         "items": [
-          "In alle rust zelf uw schade melden",
-          "Geld staat sneller op uw rekening",
-          "Snelle afhandeling"
+          "U kunt uw schade meteen melden",
+          "Waar en wanneer het u uitkomt",
+          "Het geld staat sneller op uw rekening"
         ]
       },
       "button": {
@@ -27,7 +27,7 @@
       },
       "bottomLink": {
         "text": "Liever niet online melden? Neem dan contact met ons op",
-        "url": "#"
+        "url": "https://www.aegon.nl/particulier/klantenservice?cmp=seb00120&k=aegon%20contact"
       }
     }
   },
@@ -36,37 +36,13 @@
     "type": "generic",
     "data": {
       "title": "Zo meldt u uw schade",
-      "description": "Er is iets uit uw inboedel beschadigd en het kan gerepareerd kan worden. U kunt het beste telefonisch contact opnemen met Aegon Schade Service.",
-      "list": {
-        "title": "Voordelen Aegon Schade Service",
-        "items": [
-          "U hoeft zelf geen hersteller te zoeken",
-          "U hoeft niets voor te schieten",
-          "U betaalt minder of geen eigen risico"
-        ]
-      },
-      "button": {
-        "phone": "088 344 00 00"
-      },
-      "bottomLink": {
-        "text": "Wilt u geen gebruik maken van het herstelnetwerk van Aegon? Meld uw schade dan online.",
-        "url": "#"
-      }
-    }
-
-  },
-  {
-    "id": "END_POSSESSION_4",
-    "type": "generic",
-    "data": {
-      "title": "Zo meldt u uw schade",
-      "description": "Uw spullen zijn onherstelbaar beschadigd. U kunt dit het beste direct online melden.",
+      "description": "U heeft uw schade al laten repareren. U kunt uw schade het beste online melden.",
       "list": {
         "title": "Voordelen online melden",
         "items": [
-          "In alle rust zelf uw schade melden",
-          "Geld staat sneller op uw rekening",
-          "Snelle afhandeling"
+          "U kunt uw schade meteen melden",
+          "Waar en wanneer het u uitkomt",
+          "Het geld staat sneller op uw rekening"
         ]
       },
       "button": {
@@ -75,7 +51,30 @@
       },
       "bottomLink": {
         "text": "Liever niet online melden? Neem dan contact met ons op",
-        "url": "#"
+        "url": "https://www.aegon.nl/particulier/klantenservice?cmp=seb00120&k=aegon%20contact"
+      }
+    }
+  },
+  {
+    "id": "END_POSSESSION_4",
+    "type": "generic",
+    "data": {
+      "title": "Zo meldt u uw schade",
+      "description": "Uw spullen zijn beschadigd. En u weet niet zeker of ze nog gerepareerd kunnen worden. U kunt dan het beste even bellen met de Aegon Schade Service.",
+      "list": {
+        "title": "Voordelen Aegon Schade Service",
+        "items": [
+          "U verzekert zichzelf van een deskundige hersteller",
+          "Afhankelijk van de situatie betaalt u minder of geen eigen risico",
+          "U hoeft niets voor te schieten"
+        ]
+      },
+      "button": {
+        "phone": "088 344 00 00"
+      },
+      "bottomLink": {
+        "text": "Wilt u geen gebruik maken van het herstelnetwerk van Aegon? Meld uw schade dan online.",
+        "url": "https://www.aegon.nl/particulier/klantenservice/schade-melden/online-schade-melden"
       }
     }
 
@@ -85,37 +84,13 @@
     "type": "generic",
     "data": {
       "title": "Zo meldt u uw schade",
-      "description": "Er is iets uit uw inboedel beschadigd en u twijfelt of dat nog gerepareerd kan worden. U kunt het beste telefonisch contact opnemen met Aegon Schade Service.",
-      "list": {
-        "title": "Voordelen Aegon Schade Service",
-        "items": [
-          "U hoeft zelf geen hersteller te zoeken",
-          "U hoeft niets voor te schieten",
-          "U betaalt minder of geen eigen risico"
-        ]
-      },
-      "button": {
-        "phone": "088 344 00 00"
-      },
-      "bottomLink": {
-        "text": "Wilt u geen gebruik maken van het herstelnetwerk van Aegon? Meld uw schade dan online.",
-        "url": "#"
-      }
-    }
-
-  },
-  {
-    "id": "END_POSSESSION_6",
-    "type": "generic",
-    "data": {
-      "title": "Zo meldt u uw schade",
-      "description": "U heeft uw schade al laten herstellen. U kunt uw schade het beste direct online melden.",
+      "description": "Uw spullen zijn onherstelbaar beschadigd. Ze kunnen niet meer worden gerepareerd. U kunt dit het beste online melden.",
       "list": {
         "title": "Voordelen online melden",
         "items": [
-          "In alle rust zelf uw schade melden",
-          "Geld staat sneller op uw rekening",
-          "Snelle afhandeling"
+          "U kunt uw schade meteen melden",
+          "Waar en wanneer het u uitkomt",
+          "Het geld staat sneller op uw rekening"
         ]
       },
       "button": {
@@ -124,11 +99,33 @@
       },
       "bottomLink": {
         "text": "Liever niet online melden? Neem dan contact met ons op",
-        "url": "#"
+        "url": "https://www.aegon.nl/particulier/klantenservice?cmp=seb00120&k=aegon%20contact"
       }
     }
-
   },
+  {
+  "id": "END_POSSESSION_6",
+  "type": "generic",
+  "data": {
+    "title": "Zo meldt u uw schade",
+    "description": "Uw spullen zijn beschadigd. Maar reparatie is nog mogelijk. U kunt dan het beste even bellen met de Aegon Schade Service.",
+    "list": {
+      "title": "Voordelen Aegon Schade Service",
+      "items": [
+        "U verzekert zichzelf van een deskundige hersteller",
+        "Afhankelijk van de situatie betaalt u minder of geen eigen risico",
+        "U hoeft niets voor te schieten"
+      ]
+    },
+    "button": {
+      "phone": "088 344 00 00"
+    },
+    "bottomLink": {
+      "text": "Wilt u geen gebruik maken van het herstelnetwerk van Aegon? Meld uw schade dan online.",
+      "url": "https://www.aegon.nl/particulier/klantenservice/schade-melden/online-schade-melden"
+    }
+  }
+},
   {
     "id": "END_HOME_1",
     "type": "redirect",
@@ -150,13 +147,13 @@
     "type": "generic",
     "data": {
       "title": "Zo meldt u uw schade",
-      "description": "U heeft uw schade al laten herstellen. U kunt uw schade het beste direct online melden.",
+      "description": "U heeft de schade al laten repareren. U kunt uw schade het beste online melden.",
       "list": {
         "title": "Voordelen online melden",
         "items": [
-          "In alle rust zelf uw schade melden",
-          "Geld staat sneller op uw rekening",
-          "Snelle afhandeling"
+          "U kunt uw schade meteen melden",
+          "Waar en wanneer het u uitkomt",
+          "Het geld staat sneller op uw rekening"
         ]
       },
       "button": {
@@ -165,7 +162,7 @@
       },
       "bottomLink": {
         "text": "Liever niet online melden? Neem dan contact met ons op",
-        "url": "#"
+        "url": "https://www.aegon.nl/particulier/klantenservice?cmp=seb00120&k=aegon%20contact"
       }
     }
 
@@ -175,13 +172,13 @@
     "type": "generic",
     "data": {
       "title": "Zo meldt u uw schade",
-      "description": "Voor de schade aan uw huis kunt u het beste telefonisch contact opnemen met het Aegon herstelnetwerk.",
+      "description": "U heeft de schade nog niet laten repareren. U kunt het beste even bellen met de Aegon Schade Service.",
       "list": {
         "title": "Voordelen Aegon Schade Service",
         "items": [
-          "U hoeft zelf geen hersteller te zoeken",
-          "U hoeft niets voor te schieten",
-          "U betaalt minder of geen eigen risico"
+          "U verzekert zichzelf van een deskundige hersteller",
+          "Afhankelijk van de situatie betaalt u minder of geen eigen risico",
+          "U hoeft niets voor te schieten"
         ]
       },
       "button": {
@@ -202,10 +199,9 @@
       "list": {
         "title": "Voordelen Aegon Schade Service",
         "items": [
-          "U hoeft zelf geen hersteller te zoeken",
-          "De hersteller stelt snel vast of uw schade hersteld kan worden",
-          "U hoeft niets voor te schieten",
-          "U betaalt minder of geen eigen risico"
+          "U verzekert zichzelf van een deskundige hersteller",
+          "Afhankelijk van de situatie betaalt u minder of geen eigen risico",
+          "U hoeft niets voor te schieten"
         ]
       },
       "button": {
@@ -213,7 +209,7 @@
       },
       "bottomLink": {
         "text": "Wilt u geen gebruik maken van het herstelnetwerk van Aegon? Meld uw schade dan online.",
-        "url": "#"
+        "url": "https://www.aegon.nl/particulier/klantenservice/schade-melden/online-schade-melden"
       }
     }
   },
@@ -230,7 +226,7 @@
     "type": "generic",
     "data": {
       "title": "Zo meldt u uw schade",
-      "description": "U heeft schade waarbij ook persoonlijk letsel is opgetreden. U kunt het beste direct telefonisch contact met ons opnemen.",
+      "description": "U heeft schade én er is iemand gewond geraakt. U kunt ons het beste even bellen. Wij helpen u dan verder.",
       "list": null,
       "button": {
         "phone": "088 344 00 00"
@@ -244,13 +240,13 @@
     "type": "generic",
     "data": {
       "title": "Zo meldt u uw schade",
-      "description": "U heeft uw schade al laten herstellen. U kunt uw schade het beste direct online melden.",
+      "description": "U heeft uw schade al laten repareren. U kunt uw schade het beste online melden.",
       "list": {
         "title": "Voordelen online melden",
         "items": [
-          "In alle rust zelf uw schade melden",
-          "Geld staat sneller op uw rekening",
-          "Snelle afhandeling"
+          "U kunt uw schade meteen melden",
+          "Waar en wanneer het u uitkomt",
+          "Het geld staat sneller op uw rekening"
         ]
       },
       "button": {
@@ -259,7 +255,7 @@
       },
       "bottomLink": {
         "text": "Liever niet online melden? Neem dan contact met ons op",
-        "url": "#"
+        "url": "https://www.aegon.nl/particulier/klantenservice?cmp=seb00120&k=aegon%20contact"
       }
     }
 
@@ -269,11 +265,11 @@
     "type": "generic",
     "data": {
       "title": "Zo meldt u uw schade",
-      "description": "U heeft schade aan uw auto en die is nog niet gerepareerd. U kunt het beste contact opnemen met een bij Aegon aangesloten schadehersteller. De schadehersteller inventariseert de schade en meldt deze bij Aegon. Vervolgens bepaalt u zelf of u de schade wilt laten herstellen en of u de schade wil claimen.",
+      "description": "U heeft schade aan uw auto en die schade is nog niet gerepareerd. U kunt het beste contact opnemen met een bij Aegon aangesloten schadehersteller.<br/><br/> De schadehersteller bekijkt de schade, waarna u besluit of u de schade wilt laten repareren. Dit is vaak afhankelijk van het schadebedrag, uw eigen risico en de gevolgen voor uw schadevrije jaren. Zelf melden van de schade bij Aegon is niet nodig. Dit doet de hersteller voor u als u de schade wilt laten repareren.",
       "list": {
-        "title": "Voordelen Aegon schadeherstelnetwerk",
+        "title": "Voordelen van het schadeherstelnetwerk van Aegon",
         "items": [
-          "Gratis vervangend vervoer",
+          "Gratis vervangend vervoer in veel gevallen",
           "Altijd een garage bij u in de buurt",
           "U betaalt minder of geen eigen risico"
         ]
@@ -283,7 +279,7 @@
       },
       "bottomLink": {
         "text": "Wilt u geen gebruik maken van het herstelnetwerk van Aegon? Meld uw schade dan online.",
-        "url": "#"
+        "url": "https://www.aegon.nl/particulier/klantenservice/schade-melden/online-schade-melden"
       }
     }
 
@@ -308,13 +304,13 @@
     "type": "generic",
     "data": {
       "title": "Zo meldt u uw schade",
-      "description": "Uw heeft uw schade al laten herstellen. U kunt uw schade het beste direct online melden.",
+      "description": "U heeft uw schade al laten herstellen. U kunt uw schade het beste direct online melden.",
       "list": {
         "title": "Voordelen online melden",
         "items": [
-          "In alle rust zelf uw schade melden",
-          "Geld staat sneller op uw rekening",
-          "Snelle afhandeling"
+          "U kunt uw schade meteen melden",
+          "Waar en wanneer het u uitkomt",
+          "Het geld staat sneller op uw rekening"
         ]
       },
       "alert": true,
@@ -324,7 +320,7 @@
       },
       "bottomLink": {
         "text": "Liever niet online melden? Neem dan contact met ons op",
-        "url": "#"
+        "url": "https://www.aegon.nl/particulier/klantenservice?cmp=seb00120&k=aegon%20contact"
       }
     }
 
@@ -334,11 +330,11 @@
     "type": "generic",
     "data": {
       "title": "Zo meldt u uw schade",
-      "description": "U heeft schade aan uw auto en die is nog niet gerepareerd. U kunt het beste contact opnemen met een bij Aegon aangesloten schadehersteller. De schadehersteller inventariseert de schade en meldt deze bij Aegon. Vervolgens bepaalt u zelf of u de schade wilt laten herstellen en of u de schade wil claimen.",
+      "description": "U heeft schade aan uw auto en die schade is nog niet gerepareerd. U kunt het beste contact opnemen met een bij Aegon aangesloten schadehersteller. <br/><br/> De schadehersteller bekijkt de schade, waarna u besluit of u de schade wilt laten repareren. Dit is vaak afhankelijk van het schadebedrag, uw eigen risico en de gevolgen voor uw schadevrije jaren. Zelf melden van de schade bij Aegon is niet nodig. Dit doet de hersteller voor u als u de schade wilt laten repareren.",
       "list": {
-        "title": "Voordelen online melden",
+        "title": "Voordelen van het schadeherstelnetwerk van Aegon",
         "items": [
-          "Gratis vervangend vervoer",
+          "Gratis vervangend vervoer in veel gevallen",
           "Altijd een garage bij u in de buurt",
           "U betaalt minder of geen eigen risico"
         ]
@@ -349,7 +345,7 @@
       },
       "bottomLink": {
         "text": "Wilt u geen gebruik maken van het herstelnetwerk van Aegon? Meld uw schade dan online.",
-        "url": "#"
+        "url": "https://www.aegon.nl/particulier/klantenservice/schade-melden/online-schade-melden"
       }
     }
   },
@@ -358,7 +354,7 @@
     "type": "generic",
     "data": {
       "title": "Neem contact met ons op",
-      "description": "Heeft u directe assistentie nodig dan kunt u op elk moment van de dag contact met ons opnemen. Wij helpen u graag verder.",
+      "description": "Heeft u meteen hulp nodig? U kunt ons dag en nacht bellen. Wij helpen u graag verder.",
       "list": null,
       "button": {
         "phone": "008 344 00 00"
@@ -376,9 +372,9 @@
       "list": {
         "title": "Voordelen online melden",
         "items": [
-          "In alle rust zelf uw schade melden",
-          "Geld staat sneller op uw rekening",
-          "Snelle afhandeling"
+          "U kunt uw schade meteen melden",
+          "Waar en wanneer het u uitkomt",
+          "Het geld staat sneller op uw rekening"
         ]
       },
       "button": {
@@ -387,7 +383,7 @@
       },
       "bottomLink": {
         "text": "Liever niet online melden? Neem dan contact met ons op",
-        "url":   "#"
+        "url":   "https://www.aegon.nl/particulier/klantenservice?cmp=seb00120&k=aegon%20contact"
       }
     }
 
@@ -396,14 +392,14 @@
     "id": "END_LIABILITY_1",
     "type": "generic",
     "data": {
-      "title": "Hoe kunt u het bsete uw schade melden?",
-      "description": "U kunt de veroorzaakte schade het beste online melden.",
+      "title": "Hoe kunt u de schade melden?",
+      "description": "U kunt de schade het beste online melden",
       "list": {
         "title": "Voordelen online melden",
         "items": [
-          "In alle rust zelf uw schade melden",
-          "Geld staat sneller op uw rekening",
-          "Snelle afhandeling"
+          "U kunt uw schade meteen melden",
+          "Waar en wanneer het u uitkomt",
+          "Het geld staat sneller op uw rekening"
         ]
       },
       "button": {
@@ -413,7 +409,7 @@
       "alert": null,
       "bottomLink": {
         "text": "Liever niet online melden? Neem dan contact met ons op",
-        "url": "#"
+        "url": "https://www.aegon.nl/particulier/klantenservice?cmp=seb00120&k=aegon%20contact"
       }
     }
   }

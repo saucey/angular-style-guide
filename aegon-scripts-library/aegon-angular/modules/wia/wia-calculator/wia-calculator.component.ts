@@ -1,4 +1,4 @@
-import { Component, Input, ElementRef, OnInit, ViewChild, AfterViewInit } from "@angular/core";
+import { Component, Input, ElementRef, OnInit, AfterViewInit } from "@angular/core";
 import { AABaseComponent } from "../../../lib/classes/AABaseComponent";
 import { CalculatorDataService } from "./wia-calculator-data.service";
 import { defaultOptions } from "./defaultOptions";
@@ -7,12 +7,12 @@ import { WIAInputModel } from "../wia-page/models/wia-input.model";
 import { WiaSubscriptionService } from "../wia-page/wia-page.subscription.service";
 import { WiaUrlStateManager } from "../wia-page/wia-page.url-state.service";
 import { WiaInputUseCaseEnum } from "../wia-content/enums/wia-input-use-case.enum";
-import { AATabsViewComponent } from "../../../components/aa-tabs-view/aa-tabs-view.component";
+import { WIATealiumService } from "../wia-page/wia-tealium.service";
 
 @Component({
   selector: 'aa-wia-calculator',
   template: require('./template.html'),
-  providers: [CalculatorDataService, WiaPagePersonalizationService, WiaUrlStateManager, WiaSubscriptionService]
+  providers: [WiaPagePersonalizationService, WiaUrlStateManager, WiaSubscriptionService]
 })
 export class WiaCalculatorComponent extends AABaseComponent implements OnInit, AfterViewInit {
   @Input() options: any = {};
@@ -20,11 +20,13 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
 
   public simulationData: any = {};
 
-  @ViewChild(AATabsViewComponent) tabsView: AATabsViewComponent;
-
   public defaultOptions: any = defaultOptions;
   //visible tooltip id
   public showTooltip: number = 0;
+
+  //state flag indicating dragging in progress to highlight certain elements at that time
+  public sliderDragInProgress: boolean = false;
+  public sliderDragInProgressTimeout: number;
 
   public permanentDisability: boolean = false;
   public disability = {
@@ -38,29 +40,6 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
         min: 0,
         max: 100
       },
-      ranges: [
-        {
-          start: 0,
-          end: 34.7,
-          color: '#FFFFFF'
-        }, {
-          start: 34.7,
-          end: 35.3,
-          color: 'transparent'
-        }, {
-          start: 35.3,
-          end: 79.7,
-          color: '#FFFFFF'
-        }, {
-          start: 79.7,
-          end: 80.3,
-          color: 'transparent'
-        }, {
-          start: 80.3,
-          end: 100,
-          color: '#FFFFFF'
-        }
-      ],
       labels: [
         {
           value: 0,
@@ -92,21 +71,6 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
         min: 0,
         max: 100
       },
-      ranges: [
-        {
-          start: 0,
-          end: 49.3,
-          color: '#FFFFFF'
-        }, {
-          start: 49.3,
-          end: 50.7,
-          color: 'transparent'
-        }, {
-          start: 50.7,
-          end: 100,
-          color: '#FFFFFF'
-        }
-      ],
       labels: [
         {
           value: 0,
@@ -125,35 +89,38 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
   };
 
   public externalInput: WIAInputModel;
+  public error = null;
 
-  public graphData: any[] = [];
-  public legendData = {};
+  public graphData: any = null;
 
-  // Ids for tabs view component
-  public tabs = {
-    first: 'first',
-    second: 'second',
-    third: 'third'
-  };
-
-  // Centers of disability ranges to be set after switching tabs
-  public disabilityCenters = {
-    first: 20,
-    second: 55,
-    third: 90
+  //default values as placeholder until real data is loaded
+  public legendData = {
+    1: true,
+    2: true,
+    3: true
   };
 
   private lastInput: WIAInputModel = null;
 
-  constructor(thisElement: ElementRef,
+  constructor(private elementRef: ElementRef,
               private wiaPagePersonalizationService: WiaPagePersonalizationService,
               private wiaSubscriptionService: WiaSubscriptionService,
               private wiaUrlStateManager: WiaUrlStateManager,
-              private calculatorDataService: CalculatorDataService) {
+              private calculatorDataService: CalculatorDataService,
+              private wiaTealiumService: WIATealiumService) {
 
-    super(thisElement);
+    super(elementRef);
 
-    wiaSubscriptionService.externalInput$.subscribe(value => this.updateModel(value));
+    wiaSubscriptionService.externalInput$.subscribe(
+      value => {
+        this.updateModel(value);
+      },
+      err => {
+        this.error = {
+          type: err.type,
+          details: err
+        }
+      });
   }
 
   ngOnInit(): void {
@@ -162,13 +129,6 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
 
   ngAfterViewInit(): void {
 
-    this.tabsView.onTabChange(() => {
-      if (this.getActiveTab() !== this.tabsView.active) {
-        this.disability.value = this.disabilityCenters[this.tabs[this.tabsView.active]];
-
-        this.update();
-      }
-    });
   }
 
   public updateModel(value: WIAInputModel) {
@@ -180,17 +140,20 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
       return;
     }
 
+    this.error = null;
     this.externalInput = value;
 
-    //@TODO extend it instead of using ifs
+    this
+      .wiaTealiumService
+      .wiaToolResultPresented();
+
+    //Update local model with received input
     if (typeof value.disability !== 'undefined') {
       this.disability.value = value.disability;
     }
-
     if (typeof value.usage !== 'undefined') {
       this.usage.value = value.usage;
     }
-
     if (typeof value.permDisability !== 'undefined') {
       this.permanentDisability = value.permDisability;
     }
@@ -202,6 +165,11 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
 
       this.simulationData = scenario;
       this.refresh(currentInput);
+    }).catch(err => {
+      this.error = {
+        type: 'response',
+        details: err
+      };
     });
 
   }
@@ -213,7 +181,7 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
       useCase: WiaInputUseCaseEnum.USER,
       permDisability: null,
       usage: null,
-      disability: Math.round(this.disability.value / 5) * 5,
+      disability: this.roundToFives(this.disability.value),
       products: this.externalInput.products,
       productsIds: this.externalInput.productsIds
     };
@@ -225,7 +193,7 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
 
     if (input.disability < 80) {
 
-      input.usage = Math.round(this.usage.value / 5) * 5;
+      input.usage = this.roundToFives(this.usage.value);
     }
 
     return input;
@@ -262,7 +230,6 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
 
       this.graphData = [
         {
-          suppressAmountLabels: true,
           columns: [graphData[1], graphData[2]]
         },
         {
@@ -281,17 +248,21 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
     }
   }
 
-  public sliderUpdate(slider, val, isInTabs = false) {
+  public sliderUpdate(slider, val) {
 
     if (slider.value !== val) {
 
       slider.value = val;
 
-      if (this.tabsView && isInTabs) {
-        this.tabsView.setActiveById(this.getActiveTab());
-      }
-
       this.update();
+
+      this.sliderDragInProgress = true;
+
+      clearTimeout(this.sliderDragInProgressTimeout);
+
+      this.sliderDragInProgressTimeout = setTimeout(() => {
+        this.sliderDragInProgress = false;
+      }, 500);
     }
   }
 
@@ -301,17 +272,86 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
   }
 
   public getActiveTab(): string {
-    if (this.disability.value < 35) {
-      return this.tabs.first;
-    } else if (this.disability.value >= 35 && this.disability.value < 80) {
-      return this.tabs.second;
+    if (this.roundToFives(this.disability.value) < 35) {
+      return '1';
+    } else if (this.roundToFives(this.disability.value) >= 35 && this.roundToFives(this.disability.value) < 80) {
+      return '2';
     } else {
-      return this.tabs.third;
+      return '3';
     }
   }
 
+  public getPeriodTitles() {
+
+    const titles = [
+      'vanaf 3e jaar tot max 5e jaar',
+      'tot uw pensioenleeftijd'
+    ];
+
+    if (!this.externalInput) {
+      return titles;
+    }
+
+    if (this.roundToFives(this.disability.value) < 35) {
+
+      if (this.externalInput.productsIds.indexOf('WIA_35MIN_BODEM') > -1) {
+        titles[0] = 'vanaf 3e jaar tot het 10.5e jaar';
+      } else if (this.externalInput.productsIds.indexOf('WIA_35MIN') > -1) {
+
+        let value = this.externalInput.products.find(el => el.id === 'WIA_35MIN').attrs[0].value;
+        if (value === 5) {
+          titles[0] = 'vanaf 3e jaar tot het 8e jaar';
+        } else if (value === 10) {
+          titles[0] = 'vanaf 3e jaar tot het 13e jaar';
+        }
+      } else {
+        titles[1] = 'tot uw pensioenleeftijd krijgt u geen uitkering';
+      }
+    }
+
+    return titles;
+  }
+
+  public getLastPeriodTooltip() {
+
+    if (this.roundToFives(this.disability.value) >= 80) {
+
+      if (this.permanentDisability) {
+        return 'Tot uw pensioenleeftijd krijgt u een IVAuitkering van de overheid'
+      } else {
+        return 'Tot uw pensioenleeftijd krijgt u de WGAloonaanvulling';
+      }
+    }
+
+    return `Tot uw pensioenleeftijd krijgt u in principe de WGA-loonaanvulling. Benut u echter minder dan 50%
+    van uw verdiencapaciteit dan verandert deze in een WGA-vervolguitkering gebaseerd op het
+    minimumloon. Samen met het loon dat u nog verdient, is dit uw inkomen. Hoe meer u werkt, hoe
+    hoger uw totale inkomen is.`;
+  }
+
+  public isColumnVisible(column: number) {
+
+    if (column === 3) {
+      //hide third column when disability<35% and no WIA35 OR BODEM products
+      if (this.roundToFives(this.disability.value) < 35 && this.externalInput.productsIds.indexOf('WIA_35MIN') === -1
+        && this.externalInput.productsIds.indexOf('WIA_35MIN_BODEM') === -1) {
+        return false;
+      }
+
+      if (this.roundToFives(this.disability.value) >= 80 && this.permanentDisability) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  private roundToFives(value: number) {
+    return Math.round(value / 5) * 5;
+  }
+
   public goBack() {
-    this.wiaSubscriptionService.emit(null);
+    this.wiaSubscriptionService.emit(null, true);
   }
 
   public trackById(index, item) {

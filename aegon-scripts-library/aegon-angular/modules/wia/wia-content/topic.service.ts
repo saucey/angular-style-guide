@@ -46,6 +46,7 @@ export class TopicService {
   }
 
   public build(): void {
+
     if (!this.data) {
       return;
     }

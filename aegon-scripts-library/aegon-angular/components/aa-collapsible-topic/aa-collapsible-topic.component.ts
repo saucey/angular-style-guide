@@ -19,6 +19,7 @@ import {
 } from "@angular/core";
 import { WiaTopicDescriptionModel } from "../../modules/wia/wia-content/models/wia-topic-description.model";
 import { WiaTopicModel } from "../../modules/wia/wia-content/models/wia-topic.model";
+import { WIATealiumService } from "../../modules/wia/wia-page/wia-tealium.service";
 
 @Component({
   selector: 'aa-collapsible-topic',
@@ -53,6 +54,8 @@ export class AACollapsibleTopicComponent implements OnInit {
   @Input()
   topicsCollection: string[];
 
+  constructor (private wiaTealiumService: WIATealiumService) {}
+
   public activeItem = {
     row: null,
     column: null
@@ -67,14 +70,20 @@ export class AACollapsibleTopicComponent implements OnInit {
    * @param {string} row
    * @param {string} column
    */
-  public setActiveItem (row: string, column: string): void {
-    this.setShowFullText(false);
+  public setActiveItem (row: string, column: string, title: string, imageName: string): void {
+    this.setShowFullText(false, null, null);
     if (this.activeItem.row === row && this.activeItem.column === column) {
       this.activeItem.row = null;
       this.activeItem.column = null;
     } else {
       this.activeItem.row = row;
       this.activeItem.column = column;
+
+      if (null !== title && null !== imageName) {
+        this
+          .wiaTealiumService
+          .wiaClickOnSymbolIcon(title, imageName);
+      }
     }
   }
 
@@ -117,9 +126,12 @@ export class AACollapsibleTopicComponent implements OnInit {
    *
    * @param {boolean} showFullText
    */
-  public setShowFullText (showFullText: boolean) {
+  public setShowFullText (showFullText: boolean, title: string, imageName: string) {
     this.showFullText = showFullText;
     if (showFullText) {
+      this
+        .wiaTealiumService
+        .wiaClickOnReadMore(title, imageName);
       this.visibility = 'shown';
     } else {
       this.visibility = 'hidden';
@@ -163,7 +175,7 @@ export class AACollapsibleTopicComponent implements OnInit {
    * @param {string} row
    */
   public showIconsOnMobile = (row: string) => {
-    this.setActiveItem(null, null);
+    this.setActiveItem(null, null, null, null);
 
     if (row === this.activeMobileRow) {
       this.activeMobileRow = null;

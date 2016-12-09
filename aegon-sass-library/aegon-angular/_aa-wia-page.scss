@@ -3,11 +3,30 @@
 $wiaFormMobileBreakpoint: 550px;
 $wiaFormTableBreakpoint: $wiaFormMobileBreakpoint + 1px;
 
-.wia_form {
+.wia-form {
+  font-size: $medium;
   margin: 2em 0;
 
+  .messages {
+    background: #f2f2f2;
+    padding: 2rem 2.5rem 2.5rem;
+  }
+
+  h3 {
+    margin-bottom: 1.5em;
+  }
+
+  li {
+    background: none;
+    padding: 0;
+  }
+
+  a {
+    cursor: pointer;
+  }
+
   @media (max-width: $wiaFormMobileBreakpoint) {
-    .wia_form--hidden-mobile {
+    .wia-form--hidden-mobile {
       display: none;
     }
 
@@ -15,32 +34,28 @@ $wiaFormTableBreakpoint: $wiaFormMobileBreakpoint + 1px;
       padding: 0;
       background: none;
     }
-    .checkbox--white .checkbox, .aa-input--white input, .radio--white span.radio, .input--white  {
+    .checkbox--white .checkbox, .aa-input--white input, .radio--white span.radio, .input--white {
       background: $grey !important;
     }
-    .wia_form__column_input label, .wia_form__products_label {
+    .wia-form__column_input label, .wia-form__products_label {
       font-weight: bold;
     }
   }
 
-
-  .wia_form__step {
+  .wia-form__step {
     @media (min-width: $wiaFormTableBreakpoint) {
       display: none;
     }
-    &.wia_form__step--visible {
+    &.wia-form__step--visible {
       display: block;
     }
-  }
-  li {
-    background: none;
   }
 
   label {
     font-weight: normal;
   }
 
-  .wia_form__column_input {
+  .wia-form__column_input {
     margin: 1em 0;
     display: block;
     @media (min-width: $wiaFormTableBreakpoint) {
@@ -49,20 +64,24 @@ $wiaFormTableBreakpoint: $wiaFormMobileBreakpoint + 1px;
         float: left;
         padding: 0.5em 0;
       }
+      div {
+        float: left;
+      }
       input {
         width: 200px;
         font-weight: normal;
+        font-size: 1rem;
       }
     }
   }
 
-  .wia_form__products_label {
+  .wia-form__products_label {
     display: block;
     margin: 0.5em 0;
   }
 
-  .wia_form__products-switch {
-    margin: 1em 0;
+  .wia-form__products-switch {
+    margin: 0.5em 0 1.5em;
   }
   .products-attrs__radios {
     margin-top: 8px;
@@ -72,6 +91,9 @@ $wiaFormTableBreakpoint: $wiaFormMobileBreakpoint + 1px;
     width: 33%;
   }
   .product-attrs {
+
+    margin-left: 2.3em;
+
     > ul {
       margin: 0;
     }
@@ -79,7 +101,6 @@ $wiaFormTableBreakpoint: $wiaFormMobileBreakpoint + 1px;
       padding: 0;
     }
     @media (max-width: $wiaFormMobileBreakpoint) {
-      margin-left: 2.3em;
       .product-attr {
         padding-top: 0;
         margin-top: 0;
@@ -91,23 +112,20 @@ $wiaFormTableBreakpoint: $wiaFormMobileBreakpoint + 1px;
     padding-top: 5px;
     margin-top: 18px;
   }
+
+  @media (min-width: 1000px) {
+    .wia-form__products_column {
+      float: left;
+      width: 48%;
+    }
+    .wia-form__products_column + .wia-form__products_column {
+      padding-left: 2em;
+    }
+  }
+
   .product-group {
 
     margin: 0.5em 0 1em;
-
-    @media (min-width: $wiaFormTableBreakpoint) {
-      float: left;
-      width: 50%;
-      min-width: 320px;
-
-      &:nth-child(odd) {
-        clear:both;
-        width: 46%;
-        margin-right: 4%;
-      }
-    }
-
-
     label.checkbox {
       margin-top: -4px;
       padding-left: 40px;
@@ -131,17 +149,23 @@ $wiaFormTableBreakpoint: $wiaFormMobileBreakpoint + 1px;
     }
   }
 
-  .header {
-    font-weight: normal;
-    &.headline {
-      font-size: 1.05em;
-    }
-    &.headline--margin {
-      margin-top: 2em;
-    }
-  }
-
   .aa-input--euro {
     display: block;
   }
+  .wia-form__error {
+    color: $dark_red;
+    font-size: 0.9em;
+    display: block;
+  }
+}
+
+.wia-form__induction {
+
+  @media (max-width: $wiaFormMobileBreakpoint) {
+    display: none;
+  }
+}
+
+.wia-form__induction__header {
+  font-weight: 700;
 }

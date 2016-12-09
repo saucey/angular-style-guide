@@ -1,3 +1,6 @@
+$fnolAegonBlue: #0077C8;
+
+
 // Behaviour
 .aa-tabs-view {
 
@@ -39,7 +42,7 @@
 // Square blue theme
 .aa-tabs-view.aa-tabs-view--square-blue {
 
-  $aaTabsBlue: #EDF6FB;
+  $aaTabsBlue: #E5F1F9;
 
   .aa-tabs-view-item__content {
     background: $aaTabsBlue;
@@ -56,7 +59,7 @@
   .aa-tabs-view-item__icon {
     font-size: 2.2em;
     float: left;
-    color: $blue;
+    color: $fnolAegonBlue;
     line-height: 0.7em;
     padding: 0.3em 0 0.3em 0.3em;
     text-align: center;
@@ -92,7 +95,7 @@
     right: 1em;
     top: 50%;
     transform: translateY(-50%);
-    color: $blue;
+    color: $fnolAegonBlue;
     text-align: center;
     &:before {
       padding: 0;
@@ -100,7 +103,7 @@
   }
 
   .aa-tabs-view__block {
-    color: $fun_blue_approx;
+    color: $fnolAegonBlue;
     float: left;
     height: 9em;
     text-align: center;

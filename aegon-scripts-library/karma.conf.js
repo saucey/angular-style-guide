@@ -60,6 +60,8 @@ module.exports = function(config) {
         // See: http://karma-runner.github.io/0.13/config/configuration-file.html
         singleRun: true,
 
+        browserNoActivityTimeout: 100000,
+
         // List of browsers that karma uses and captures
         //
         // See: http://karma-runner.github.io/0.13/config/browsers.html

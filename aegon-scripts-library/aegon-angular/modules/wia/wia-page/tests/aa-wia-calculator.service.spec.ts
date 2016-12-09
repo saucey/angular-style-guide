@@ -7,36 +7,49 @@ describe('CalculatorProductService', () => {
 
   const cases = [
     {
-      label: 'works for basicInputNoProducts',
+      label: 'works for basicInputNoProducts #1',
       input: {
         useCase: WiaInputUseCaseEnum.USER,
-        income: 5000,
+        income: 15000,
+        disability: 5,
+        usage: 5,
+        permDisability: false,
+        products: [],
+        productsIds: []
+      },
+      code: '01100'
+    },
+    {
+      label: 'works for basicInputNoProducts #2',
+      input: {
+        useCase: WiaInputUseCaseEnum.USER,
+        income: 15000,
         disability: 50,
         usage: 50,
         permDisability: false,
         products: [],
         productsIds: []
       },
-      code: '05500'
+      code: '0AA00'
     },
     {
-      label: 'works for basicInputNoProducts #2',
+      label: 'works for basicInputNoProducts #3',
       input: {
         useCase: WiaInputUseCaseEnum.USER,
-        income: 35000,
+        income: 45000,
         disability: 100,
         usage: 50,
         permDisability: true,
         products: [],
         productsIds: []
       },
-      code: '3AP00'
+      code: '2KP00'
     },
     {
       label: 'works for IVA_EXCED',
       input: {
         useCase: WiaInputUseCaseEnum.USER,
-        income: 35000,
+        income: 45000,
         disability: 100,
         usage: 50,
         permDisability: true,
@@ -53,13 +66,13 @@ describe('CalculatorProductService', () => {
         ],
         productsIds: ['IVA_EXCED']
       },
-      code: '3AP10'
+      code: '2KP10'
     },
     {
       label: 'works for WGA_EXCED',
       input: {
         useCase: WiaInputUseCaseEnum.USER,
-        income: 35000,
+        income: 45000,
         disability: 100,
         usage: 50,
         permDisability: true,
@@ -76,13 +89,13 @@ describe('CalculatorProductService', () => {
         ],
         productsIds: ['WGA_EXCED']
       },
-      code: '3APA0'
+      code: '2KPA0'
     },
     {
       label: 'works for IVA_EXCED with non default coverage',
       input: {
         useCase: WiaInputUseCaseEnum.USER,
-        income: 35000,
+        income: 45000,
         disability: 100,
         usage: 50,
         permDisability: true,
@@ -99,13 +112,13 @@ describe('CalculatorProductService', () => {
         ],
         productsIds: ['IVA_EXCED']
       },
-      code: '3AP30'
+      code: '2KP30'
     },
     {
       label: 'works for IVA_EXCED and WGA_EXCED',
       input: {
         useCase: WiaInputUseCaseEnum.USER,
-        income: 35000,
+        income: 45000,
         disability: 100,
         usage: 50,
         permDisability: true,
@@ -131,13 +144,13 @@ describe('CalculatorProductService', () => {
         ],
         productsIds: ['WGA_EXCED', 'IVA_EXCED']
       },
-      code: '3APB0'
+      code: '2KPB0'
     },
     {
       label: 'works for WIA_35MIN_BODEM',
       input: {
         useCase: WiaInputUseCaseEnum.USER,
-        income: 35000,
+        income: 45000,
         disability: 100,
         usage: 50,
         permDisability: true,
@@ -149,13 +162,13 @@ describe('CalculatorProductService', () => {
         ],
         productsIds: ['WIA_35MIN_BODEM']
       },
-      code: '3AP01'
+      code: '2KP01'
     },
     {
       label: 'works for WIA_35MIN',
       input: {
         useCase: WiaInputUseCaseEnum.USER,
-        income: 35000,
+        income: 45000,
         disability: 100,
         usage: 50,
         permDisability: true,
@@ -172,20 +185,20 @@ describe('CalculatorProductService', () => {
         ],
         productsIds: ['WIA_35MIN']
       },
-      code: '3AP03'
+      code: '2KP03'
     },
     {
       label: 'works for edge values',
       input: {
         useCase: WiaInputUseCaseEnum.USER,
-        income: 125000,
+        income: 510000,
         disability: 100,
         usage: 100,
         permDisability: false,
         products: [],
         productsIds: []
       },
-      code: 'CAA00'
+      code: 'XKK00'
     }
   ];
 
@@ -221,8 +234,8 @@ describe('CalculatorProductService', () => {
 
       expect(wiaPagePersonalizationService.codeToInput('3AP10P')).toEqual({
         useCase: WiaInputUseCaseEnum.PARTICIPANT,
-        income: 35000,
-        disability: 100,
+        income: 60000,
+        disability: 50,
         usage: 50,
         permDisability: true,
         products: [

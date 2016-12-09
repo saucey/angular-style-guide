@@ -81,19 +81,19 @@ p {
 
 // font families
 .font_normal {
-  font-family: $font_normal;
+  font-family: $font_normal !important;
 }
 
 .font-light {
-  font-family: $font_light;
+  font-family: $font_light !important;
 }
 
 .font-medium {
-  font-family: $font_medium;
+  font-family: $font_medium !important;
 }
 
 .font-bold {
-  font-family: $font_bold;
+  font-family: $font_bold !important;
 }
 
 //

@@ -4,6 +4,7 @@
     "label": "WGA-Excedentverzekering",
     "desc": "",
     "selected": false,
+    "column": 1,
     "attrs": [
       {
         "id": "COVERAGE_RATE_WGA",
@@ -115,6 +116,7 @@
     "label": "IVA-Excedentverzekering",
     "desc": "",
     "selected": false,
+    "column": 2,
     "attrs": [
       {
         "id": "COVERAGE_RATE_IVA",
@@ -222,62 +224,11 @@
     ]
   },
   {
-    "id": "WGA_AANV_UPGRADE",
-    "label": "WGA-Aanvullingsverzekering upgrade",
-    "desc": "",
-    "selected": false,
-    "attrs": [
-      {
-        "id": "END_AGE",
-        "label": "EindLeeftijd",
-        "value": 65,
-        "visible": false,
-        "options": [
-          {
-            "value": 65,
-            "label": "65%"
-          },
-          {
-            "value": 67,
-            "label": "67%"
-          },
-          {
-            "value": 70,
-            "label": "70%"
-          }
-        ]
-      },
-      {
-        "id": "BENEFIT_INDEX",
-        "label": "Indexering uitkering (Klim_srt)",
-        "value": "Geen",
-        "visible": false,
-        "options": [
-          {
-            "value": "Geen",
-            "label": null
-          },
-          {
-            "value": "CBS",
-            "label": null
-          },
-          {
-            "value": "2%",
-            "label": null
-          },
-          {
-            "value": "3%",
-            "label": null
-          }
-        ]
-      }
-    ]
-  },
-  {
     "id": "WGA_AANV_LIGHT",
     "label": "WGA-Aanvullingsverzekering light",
     "desc": "",
     "selected": false,
+    "column": 1,
     "attrs": [
       {
         "id": "END_AGE",
@@ -327,7 +278,62 @@
   },
   {
     "id": "WGA_AANV_STANDARD",
-    "hidden": true,
+    "label": "WGA-Aanvullingsverzekering",
+    "desc": "",
+    "column": 1,
+    "attrs": [
+      {
+        "id": "END_AGE",
+        "label": "EindLeeftijd",
+        "value": 65,
+        "visible": false,
+        "options": [
+          {
+            "value": 65,
+            "label": "65%"
+          },
+          {
+            "value": 67,
+            "label": "67%"
+          },
+          {
+            "value": 70,
+            "label": "70%"
+          }
+        ]
+      },
+      {
+        "id": "BENEFIT_INDEX",
+        "label": "Indexering uitkering (Klim_srt)",
+        "value": "Geen",
+        "visible": false,
+        "options": [
+          {
+            "value": "Geen",
+            "label": null
+          },
+          {
+            "value": "CBS",
+            "label": null
+          },
+          {
+            "value": "2%",
+            "label": null
+          },
+          {
+            "value": "3%",
+            "label": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "WGA_AANV_UPGRADE",
+    "label": "WGA-Aanvullingsverzekering upgrade",
+    "desc": "",
+    "selected": false,
+    "column": 1,
     "attrs": [
       {
         "id": "END_AGE",
@@ -380,6 +386,7 @@
     "label": "WIA-35minverzekering",
     "desc": "",
     "selected": false,
+    "column": 2,
     "attrs": [
       {
         "id": "BENEFIT_PERIOD",
@@ -390,10 +397,6 @@
           {
             "value": 5,
             "label": "5 jaar"
-          },
-          {
-            "value": 7.5,
-            "label": "7,5 jaar"
           },
           {
             "value": 10,
@@ -408,24 +411,17 @@
     "label": "WIA-Bodemverzekering",
     "desc": "",
     "selected": false,
+    "column": 2,
     "attrs": [
       {
         "id": "BENEFIT_PERIOD",
         "label": "Selecteer uitkeringsduur",
-        "value": 5,
+        "value": 7.5,
         "visible": false,
         "options": [
           {
-            "value": 5,
-            "label": "5"
-          },
-          {
             "value": 7.5,
-            "label": "7.5"
-          },
-          {
-            "value": 10,
-            "label": "10"
+            "label": "7.5 jaar"
           }
         ]
       }

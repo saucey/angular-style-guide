@@ -18,6 +18,7 @@
     "IVA_EXCED",
     "WGA_EXCED",
     [
+      "WGA_AANV_STANDARD",
       "WGA_AANV_UPGRADE",
       "WGA_AANV_LIGHT"
     ],
@@ -29,6 +30,7 @@
   [
     "IVA_EXCED",
     [
+      "WGA_AANV_STANDARD",
       "WGA_AANV_UPGRADE",
       "WGA_AANV_LIGHT"
     ],
@@ -40,6 +42,7 @@
   [
     "IVA_EXCED",
     [
+      "WGA_AANV_STANDARD",
       "WGA_AANV_UPGRADE",
       "WGA_AANV_LIGHT"
     ]
@@ -64,6 +67,7 @@
   [
     "WGA_EXCED",
     [
+      "WGA_AANV_STANDARD",
       "WGA_AANV_UPGRADE",
       "WGA_AANV_LIGHT"
     ]
@@ -71,6 +75,7 @@
   [
     "WGA_EXCED",
     [
+      "WGA_AANV_STANDARD",
       "WGA_AANV_UPGRADE",
       "WGA_AANV_LIGHT"
     ],
@@ -94,6 +99,16 @@
   ],
   [
     "WGA_AANV_LIGHT",
+    [
+      "WIA_35MIN",
+      "WIA_35MIN_BODEM"
+    ]
+  ],
+  [
+    "WGA_AANV_STANDARD"
+  ],
+  [
+    "WGA_AANV_STANDARD",
     [
       "WIA_35MIN",
       "WIA_35MIN_BODEM"

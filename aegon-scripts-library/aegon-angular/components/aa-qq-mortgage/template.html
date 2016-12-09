@@ -5,13 +5,21 @@
     
     <div class="field">
       <div class="inputs slider">
-        <aegon-slider (click)="submitAmount()" (change)="calculate()" prefix="€" [range]="{
-          'min': [  200 ],
-          '25%': [  1000 ],
-          '50%': [ 2000 ],
-          '75%': [  3000 ],
-          'max': [ 7500 ]
-        }" [initial]="2500" label="{{data.options.incomeLabel}}" helpText="{{data.options.incomeHelpText}}" [(ngModel)]="incomeValue" >
+        <aegon-slider 
+          (change)="calculate()" 
+          (click)="submitAmount()" 
+          [(ngModel)]="incomeValue"
+          [initial]="data.options.income.initial" 
+          [range]="{
+            'min': [data.options.income.min],
+            '25%': [data.options.income.p25],
+            '50%': [data.options.income.p50],
+            '75%': [data.options.income.p75],
+            'max': [data.options.income.max]
+            }" 
+          helpText="{{data.options.incomeHelpText}}"
+          label="{{data.options.incomeLabel}}" 
+          prefix="€">
         </aegon-slider>
       </div>
     </div>
@@ -23,18 +31,27 @@
           <aegon-checkbox (change)="calculate()" [(ngModel)]="vacationMoney">{{data.options.incomeVacationMoneyLabel}}</aegon-checkbox>
         </div>
       </div>
+     
       <div class="field">
         <div class="inputs slider">
-          <aegon-slider prefix="€" placeholder="0" [range]="{
-            'min': [    0 ],
-            '25%': [ 1000 ],
-            '50%': [ 2000 ],
-            '75%': [ 3000 ],
-            'max': [ 7500 ]
-          }" [initial]="0" label="{{data.options.incomePartnerLabel}}" helpText="{{data.options.incomePartnerHelpText}}" (change)="calculate()" [(ngModel)]="incomePartnerValue" >
+          <aegon-slider 
+            (change)="calculate()" 
+            [(ngModel)]="incomePartnerValue"
+            [initial]="data.options.incomePartner.initial" 
+            [range]="{
+              'min': [data.options.incomePartner.min],
+              '25%': [data.options.incomePartner.p25],
+              '50%': [data.options.incomePartner.p50],
+              '75%': [data.options.incomePartner.p75],
+              'max': [data.options.incomePartner.max]
+              }" 
+            helpText="{{data.options.incomePartnerHelpText}}" 
+            label="{{data.options.incomePartnerLabel}}" 
+            prefix="€">
           </aegon-slider>
         </div>
       </div>
+
       <div class="field">
         <div class="inputs right">
           <aegon-checkbox (change)="calculate()" [(ngModel)]="extraMonthPartner">{{data.options.incomePartnerExtraMonthLabel}}</aegon-checkbox>
@@ -43,13 +60,20 @@
       </div>
       <div class="field">
         <div class="inputs slider">
-          <aegon-slider suffix="jaar" [range]="{
-            'min': [  2 ],
-            '25%': [  5 ],
-            '50%': [ 10 ],
-            '75%': [ 15 ],
-            'max': [ 28 ]
-          }" [initial]="2" (change)="calculate()" label="{{data.options.interestYearsLabel}}" helpText="{{data.options.interestYearsHelpText}}" [(ngModel)]="interestYears">
+          <aegon-slider 
+            (change)="calculate()" 
+            [(ngModel)]="interestYears"
+            [initial]="data.options.interestYears.initial" 
+            [range]="{
+              'min': [data.options.interestYears.min],
+              '25%': [data.options.interestYears.p25],
+              '50%': [data.options.interestYears.p50],
+              '75%': [data.options.interestYears.p75],
+              'max': [data.options.interestYears.max]
+              }" 
+            helpText="{{data.options.interestYearsHelpText}}" 
+            label="{{data.options.interestYearsLabel}}" 
+            suffix="jaar">
           </aegon-slider>
         </div>
       </div>
@@ -62,10 +86,17 @@
       </div>
       <div *ngIf="playWithMortgage" class="field">
         <div class="inputs slider">
-          <aegon-slider prefix="€" [range]="{
-            'min': [ 0 ],
-            'max': [ calculatedValue ]
-          }" [initial]="calculatedValue" (change)="monthlyPayment = getMonthlyPayment()" label="{{data.options.playValueLabel}}" helpText="{{data.options.playValueHelpText}}" [(ngModel)]="playValue" >
+          <aegon-slider 
+            (change)="monthlyPayment = getMonthlyPayment()" 
+            [(ngModel)]="playValue"
+            [initial]="calculatedValue" 
+            [range]="{
+              'min': [0],
+              'max': [calculatedValue]
+            }" 
+            helpText="{{data.options.playValueHelpText}}" 
+            label="{{data.options.playValueLabel}}" 
+            prefix="€">
           </aegon-slider>
         </div>
       </div>

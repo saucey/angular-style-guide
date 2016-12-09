@@ -2,35 +2,45 @@
   {
     "id": "possession",
     "icon": "desktop-phone",
-    "description": "Uw Aegon inboedelverzekering vergoedt schade aan uw spullen zoals uw laptop, telefoon, meubilair of inrichting.<br/>Beantwoord de vragen en ontdek wat u voor uw schade het beste kunt doen.",
+    "description": "Uw inboedelverzekering vergoedt schade aan uw spullen. Bijvoorbeeld aan uw meubels, laptop of telefoon.<br/><br/>Beantwoord de vragen en ontdek wat u het beste kunt doen.",
+    "descriptiontablet": "Uw inboedelverzekering vergoedt schade aan uw spullen. Bijvoorbeeld aan uw meubels, laptop of telefoon.<br/><br/>Beantwoord de vragen en ontdek wat u het beste kunt doen.",
+    "descriptionmobile": "Voor schade aan uw spullen. Bijvoorbeeld aan uw meubels, laptop of telefoon.",
     "title": "Inboedel",
     "startingStep": "Q_POSSESSION_1"
   },
   {
     "id": "home",
     "icon": "house",
-    "description": "Uw Aegon opstalverzekering vergoedt schade aan uw huis zoals dak en gevel en dat deel van de inrichting dat vastzit aan uw huis zoals uw keuken of badkamer.<br/><br/>Beantwoord de vragen en ontdek wat u voor uw schade het beste kunt doen.",
+    "description": "Uw opstalverzekering vergoedt schade aan uw huis. Bijvoorbeeld aan het dak of de gevel. Maar ook aan dingen die vastzitten aan uw huis, zoals uw keuken of badkamer.<br/><br/>Beantwoord de vragen en ontdek wat u voor uw schade het beste kunt doen.",
+    "descriptiontablet": "Uw opstalverzekering vergoedt schade aan uw huis. Bijvoorbeeld aan het dak of de gevel. Maar ook aan dingen die vastzitten aan uw huis, zoals uw keuken of badkamer.<br/><br/>Beantwoord de vragen en ontdek wat u voor uw schade het beste kunt doen.",
+    "descriptionmobile": "Voor schade aan uw huis. Bijvoorbeeld aan het dak of de gevel. Maar ook voor schade aan dingen die vastzitten aan uw huis, zoals uw keuken of badkamer.",
     "title": "Opstal",
     "startingStep": "Q_HOME_1"
   },
   {
     "id": "auto",
     "icon": "auto",
-    "description": "Uw Aegon autoverzekering vergoedt schade aan of veroorzaakt met uw auto. Bijvoorbeeld door een ongeluk, inbraak, hagelbui, brand of storm. Wat precies vergoedt wordt is afhankelijk van uw dekking (WA, WA+ of Allrisk).<br/><br/>Beantwoord de vragen en ontdek wat u voor uw schade het beste kunt doen.",
+    "description": "Uw autoverzekering vergoedt schade aan uw auto. En schade die u met uw auto veroorzaakt heeft. Wat er precies wordt vergoed? Dat hangt af van uw dekking. Heeft u WA, WA+ of Allrisk?<br/><br/>Beantwoord de vragen en ontdek wat u voor uw schade het beste kunt doen.",
+    "descriptiontablet": "Uw autoverzekering vergoedt schade aan uw auto. En schade die u met uw auto veroorzaakt heeft. Wat er precies wordt vergoed? Dat hangt af van uw dekking. Heeft u WA, WA+ of Allrisk?<br/><br/>Beantwoord de vragen en ontdek wat u voor uw schade het beste kunt doen.",
+    "descriptionmobile": "Voor schade aan uw auto. En voor schade die u met uw auto veroorzaakt heeft. Uw vergoeding hangt af van uw dekking.",
     "title": "Auto",
     "startingStep": "Q_AUTO_1"
   },
   {
     "id": "liability",
     "icon": "schadeverzekeringen",
-    "description": "Uw Aegon verzekering vergoedt schade die u of een medeverzekerde heeft veroorzaakt aan andermans spullen.<br/><br/><strong>Let op</strong>: vraag de benadeelde eerst om de schade te melden op een eigen inboedel- of opstalverzekering. Daar krijgt de benadeelde vaak een hoger bedrag of zelfs de nieuwwaarde vergoed.",
+    "description": "Heeft u of een medeverzekerde schade veroorzaakt aan de spullen van iemand anders? Uw aansprakelijkheidsverzekering vergoedt deze schade vaak.<br/><br/><strong>Let op</strong>: Heeft de persoon bij wie u schade heeft veroorzaakt een inboedel- of opstalverzekering? Laat hem of haar de schade dan melden bij de eigen verzekeraar. Het kan namelijk zijn dat deze verzekeraar een hoger bedrag uitkeert. Of zelfs de nieuwwaarde vergoedt.",
+    "descriptiontablet": "Heeft u of een medeverzekerde schade veroorzaakt aan de spullen van iemand anders? Uw aansprakelijkheidsverzekering vergoedt deze schade vaak.<br/><br/><strong>Let op</strong>: Heeft de persoon bij wie u schade heeft veroorzaakt een inboedel- of opstalverzekering? Laat hem of haar de schade dan melden bij de eigen verzekeraar. Het kan namelijk zijn dat deze verzekeraar een hoger bedrag uitkeert. Of zelfs de nieuwwaarde vergoedt.",
+    "descriptionmobile": "Heeft u of een medeverzekerde schade veroorzaakt aan de spullen van iemand anders? Uw aansprakelijkheidsverzekering vergoedt deze schade vaak.",
     "title": "Aansprakelijkheid",
     "startingStep": "END_LIABILITY_1"
   },
   {
     "id": "travel",
     "icon": "suitcase",
-    "description": "Uw Aegon reisverzekering vergoedt schade tijdens uw vakantie of de kosten voor bijvoorbeeld annulering of vroegtijdige terugkeer. Ontdek wat u in uw geval het beste kunt doen.",
+    "description": "Uw reisverzekering vergoedt schade die u tijdens uw vakantie heeft opgelopen. Maar ook de kosten voor bijvoorbeeld annulering of een vroegtijdige terugkeer. Ontdek wat u in uw geval het beste kunt doen.",
+    "descriptiontablet": "Uw reisverzekering vergoedt schade die u tijdens uw vakantie heeft opgelopen. Maar ook de kosten voor bijvoorbeeld annulering of een vroegtijdige terugkeer. Ontdek wat u in uw geval het beste kunt doen.",
+    "descriptionmobile": "Voor schade tijdens uw vakantie. En bij annulering of een vroegtijdige terugkeer.",
     "title": "Reis",
     "startingStep": "Q_TRAVEL_1"
   }

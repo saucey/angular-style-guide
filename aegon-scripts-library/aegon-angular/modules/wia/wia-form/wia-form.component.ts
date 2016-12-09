@@ -16,8 +16,12 @@ import { WiaPageProductsService } from "../wia-page/wia-page.products.service";
 import { WiaPagePersonalizationService } from "../wia-page/wia-page.personalization.service";
 import { ProductAttributeModel } from "../wia-page/models/product-attribute.model";
 import { WiaInputUseCaseEnum } from "../wia-content/enums/wia-input-use-case.enum";
+import { CalculatorDataService } from "../wia-calculator/wia-calculator-data.service";
+import { WIATealiumService } from "../wia-page/wia-tealium.service";
 
 const FORM_TEMPLATE = require('./template.html');
+
+declare const jQuery;
 
 @Component({
   selector: 'aa-wia-form',
@@ -54,14 +58,22 @@ export class WiaFormComponent extends AABaseComponent implements OnInit {
 
   public step: number = 1;
 
+  public incomeValid: boolean = true;
+  public codeValid: boolean = true;
+
+  //is form submitted and there is a pending request
+  public pending: boolean = false;
+
   public options = {
     title: 'Uw persoonlijke situatie instellen'
   };
 
   constructor(private elementRef: ElementRef,
               private wiaPageProductsService: WiaPageProductsService,
+              private calculatorDataService: CalculatorDataService,
               private wiaPagePersonalizationService: WiaPagePersonalizationService,
-              private wiaSubscriptionService: WiaSubscriptionService) {
+              private wiaSubscriptionService: WiaSubscriptionService,
+              private wiaTealiumService: WIATealiumService) {
 
     super(elementRef);
 
@@ -70,7 +82,18 @@ export class WiaFormComponent extends AABaseComponent implements OnInit {
 
     // Form filled or personalization code sent => form submitted
     this.wiaSubscriptionService.externalInput$.subscribe((value) => {
-      this.submitted = !!value;
+      this.submitted = !!value; //if value is null - show form
+      if (this.submitted) {
+        this.incomeValid = true;
+        this.codeValid = true;
+      }
+
+      if (this.wiaSubscriptionService.navigationMessage) {
+        this.scrollToForm();
+      }
+
+    }, () => {
+      this.submitted = true; //if error occurred -  hide form
     });
 
   }
@@ -102,20 +125,58 @@ export class WiaFormComponent extends AABaseComponent implements OnInit {
     }
   }
 
-  onProductFormSubmit(event) {
+  private validateIncome () {
+    this.incomeValid = this.isIncomeValid(+this.income);
+  }
 
+  private isIncomeValid(income: number) {
+    return income >= 2500 && income <= 500000;
+  }
+
+  onProductFormSubmit(event) {
     event.preventDefault();
 
+    this.validateIncome();
+
+    if (this.incomeValid === false) {
+      return;
+    }
+
+    this.pending = true;
     const payload = this.serializeInput();
 
-    this.wiaSubscriptionService.emit(payload);
+    this.calculatorDataService.getData(payload).subscribe(() => {
+      this.pending = false;
+      this.wiaSubscriptionService.emit(payload, true);
+    }, err => {
+      this.submitted = true;
+      this.wiaSubscriptionService.externalInput$.error({
+        type: 'response',
+        details: err
+      })
+    });
   }
 
   onCodeSubmit() {
 
+    this.validateIncome();
+    this.codeValid = this.wiaPagePersonalizationService.isCodeValid(this.personalizationCode);
+
+    if (!this.incomeValid || !this.codeValid) {
+      return;
+    }
+
+    this
+      .wiaTealiumService
+      .wiaFirstInteractionWithTool();
+
+    this.pending = true;
     const input: WIAInputModel = this.wiaPagePersonalizationService.codeToInput(this.personalizationCode);
 
-    this.wiaSubscriptionService.emit(input);
+    this.calculatorDataService.getData(input).subscribe(() => {
+      this.pending = false;
+      this.wiaSubscriptionService.emit(input, true);
+    });
   }
 
   public trackById(index, el) {
@@ -126,8 +187,8 @@ export class WiaFormComponent extends AABaseComponent implements OnInit {
     return el.value;
   }
 
-  public getProducts () {
-    return this.products.filter(el => !el.hidden);
+  public getProducts (column) {
+    return this.products.filter(el => !el.hidden && (column ? el.column === column : true));
   }
 
   public updateProduct(product) {
@@ -141,6 +202,24 @@ export class WiaFormComponent extends AABaseComponent implements OnInit {
     this.products.forEach((el: any) => {
       el.disabled = availableProducts.indexOf(el.id) === -1;
     });
+  }
+
+  public setActivePage (formId: number) {
+    this.visiblePage = formId;
+
+    if (this.visiblePage === 1) {
+      this.products = this.wiaPageProductsService.getProducts();
+    }
+  }
+
+  private scrollToForm () {
+    const PADDING = 20;
+    const calculatorRect = this.elementRef.nativeElement.getBoundingClientRect();
+    const position = window.scrollY + calculatorRect.top - PADDING;
+
+    jQuery('html,body').animate({
+      scrollTop: position
+    })
   }
 
   /**

@@ -3,11 +3,13 @@
     <span class="fnol-category__title">{{category.title}}</span>
 </h3>
 
-<p class="fnol-category__description" [innerHTML]="category.description"></p>
+<p class="fnol-category__description visible-desktop" [innerHTML]="category.description"></p>
+<p class="fnol-category__description visible-tablet" [innerHTML]="category.descriptiontablet"></p>
+<p class="fnol-category__description visible-mobile" [innerHTML]="category.descriptionmobile"></p>
 
 <div class="fnol-category__questions">
     <div class="fnol-category__question" *ngFor="let step of steps; trackBy:trackById; let i = index">
-        <div *ngIf="step.type === 'question'">
+        <div *ngIf="step.type === 'question'" [id]="step.id">
             <span class="fnol-category__question__title">{{step.title}}</span>
 
             <div *ngFor="let option of step.options">
@@ -23,6 +25,7 @@
 
         </fnol-endpoint>
     </div>
-
 </div>
+
+
 

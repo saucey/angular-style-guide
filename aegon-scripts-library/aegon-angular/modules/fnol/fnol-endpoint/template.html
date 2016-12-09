@@ -12,11 +12,11 @@
     <div *ngIf="endpoint.type === 'generic'">
         <div class="messages messages--attention visible">
             <div class="wrap">
-                <div class="header">
+                <div class="header font-medium">
                     {{ endpoint.data.title }}
                 </div>
 
-                <p>{{ endpoint.data.description }}</p>
+                <p [innerHTML]="endpoint.data.description"></p>
 
                 <div *ngIf="endpoint.data.alert" class="fnol-endpoint__alert">
                     <span class="icon-tip fnol-endpoint__alert-icon"></span>
@@ -31,19 +31,19 @@
                         <div>
                             <a *ngIf="endpoint.data.button.url"
                                href="https://www.aegon.nl/particulier/klantenservice/schade-melden/online-schade-melden"
-                               class="button orange arrow fnol-endpoint__button">Meld Direct</a>
+                               class="button orange arrow fnol-endpoint__button">Meld uw schade online</a>
                             <a *ngIf="endpoint.data.button.phone"
                                href="tel:{{ endpoint.data.button.phone }}"
-                               class="button orange icon-call fnol-endpoint__button">Bel {{ endpoint.data.button.phone }}</a>
+                               class="button orange icon-right icon-call fnol-endpoint__button">Bel {{ endpoint.data.button.phone }}</a>
                             <a *ngIf="endpoint.data.button.repairShop"
                                href="https://www.aegon.nl/particulier/klantenservice/schade-melden/schade-melden-autoverzekering/schadehersteller-zoeken"
                                class="button orange arrow fnol-endpoint__button">Vind schadehersteller</a>
                         </div>
-                        <div class="mr-top10" *ngIf="endpoint.data.button.phone" >24/7 bereikbaar</div>
+                        <div class="mr-top10" *ngIf="endpoint.data.button.phone" >Dag en nacht bereikbaar</div>
                     </div>
 
                     <div class="span7" *ngIf="endpoint.data.list">
-                        <span>{{ endpoint.data.list.title }}</span>
+                        <span class="font-medium">{{ endpoint.data.list.title }}</span>
                         <ul class="check bullets-white">
                             <li *ngFor="let item of endpoint.data.list.items">{{ item }}</li>
                         </ul>
@@ -52,14 +52,14 @@
             </div>
         </div>
         <ul class="arrow" *ngIf="endpoint.data.bottomLink">
-            <li><a [href]="endpoint.data.bottomLink.url">{{ endpoint.data.bottomLink.text }}</a></li>
+            <li class="fnol-endpoint__bottom_link"><a [href]="endpoint.data.bottomLink.url">{{ endpoint.data.bottomLink.text }}</a></li>
         </ul>
     </div>
 
     <div *ngIf="endpoint.type === 'auto'">
         <div class="messages messages--attention visible">
             <div class="wrap">
-                <div class="header">
+                <div class="header font-medium">
                     {{ endpoint.data.title }}
                 </div>
 
@@ -76,7 +76,7 @@
                 <div class="row-fluid">
 
                     <div class="span7">
-                        <p>Met een all-risk autoverzekering van Aegon heeft u recht op een tijdelijke vervangende auto. Ga hiervoor naar een bij Aegon aangesloten schadehersteller bij u in de buurt. </p>
+                        <p>Heeft u een autoverzekering met allriskdekking? Dan heeft u recht op een tijdelijke vervangende auto. Ga hiervoor naar een bij Aegon aangesloten schadehersteller bij u in de buurt.</p>
                     </div>
 
                     <div class="span5 width100per">
