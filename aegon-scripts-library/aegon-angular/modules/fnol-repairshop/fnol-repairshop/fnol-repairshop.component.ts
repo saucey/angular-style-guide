@@ -89,6 +89,20 @@ export class FNOLRepairshopComponent {
     }
   }
 
+  /**
+   * Checks if damage field is unselected
+   *
+   * @param {string} damage
+   * @returns {boolean}
+   */
+  public isDamageUnselected(damage): boolean {
+    if ('undefined' === typeof damage || null === damage || 0 === damage.length) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   getRepairshopSearchData() {
     this.isHideRepairshopResults = false;
     this.isHideMobileRepairshopResults = false;

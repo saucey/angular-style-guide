@@ -1,78 +1,93 @@
 <! -- Info Form inputs -->
 <div class="fnol-repairshop aa-component">
 
-    <div class="fnol-repairshop-form-input" [ngClass]="{'form-visible-mobile': getItemShown == 'info_form'}">
+  <div class="fnol-repairshop-form-input" [ngClass]="{'form-visible-mobile': getItemShown == 'info_form'}">
     <div class="row-fluid">
-        <h3 class="fnol-repairshop-subhead">U kunt deze tool gebruiken voor het vinden van een bij AEGON Schade Service aangesloten autoherstelbedrijf bij u in de buurt.</h3>
+      <h3 class="fnol-repairshop-subhead">U kunt deze tool gebruiken voor het vinden van een bij AEGON Schade Service
+        aangesloten autoherstelbedrijf bij u in de buurt.</h3>
     </div>
 
-        <form name="infoForm" novalidate #infoForm="ngForm">
-            <div class="fnol-repairshop-form">
-                <div class="row-fluid fnol-repairshop-formSpacer">
-                    <div class="span4 txtBold nowrap fnol-repairshop__formLblAlign">
-                      <label class="fnol-repairshop-formLabel" for="repairshop_postcode">Postcode of plaatsnaam<span class="hidden-mobile fnol-repairshop-mandatory">*</span>
-                      </label>
-                    </div>
-                    <div class="span8 paddingLeft0px">
-                      <p *ngIf="formSubmitted && isPostcodeEmpty(repairshop.postcode)" class="fnol-repairshop__errorMsg">Dit veld is verplicht</p>
-                      <p *ngIf="formSubmitted && false === isPostcodeValid(repairshop.postcode) &&  false === isPostcodeEmpty(postcode)" class="fnol-repairshop__errorMsg">Postcode of plaatsnaam niet bekend</p>
-                      <span>
-                          <input id="repairshop_postcode" type="text" class="fnol-repairshop-txtbox" [ngClass]="{'fnol-repairshop-error-border': formSubmitted && (isPostcodeEmpty(repairshop.postcode) || false === isPostcodeValid(repairshop.postcode))}" name="postcode" [(ngModel)]="repairshop.postcode" required #postcode="ngModel">
+    <form name="infoForm" novalidate #infoForm="ngForm">
+      <div class="fnol-repairshop-form">
+        <div class="row-fluid fnol-repairshop-formSpacer">
+          <div class="span4 txtBold nowrap fnol-repairshop__formLblAlign">
+            <label class="fnol-repairshop-formLabel" for="repairshop_postcode">Postcode of plaatsnaam<span
+              class="hidden-mobile fnol-repairshop-mandatory">*</span>
+            </label>
+          </div>
+          <div class="span8 paddingLeft0px">
+            <p *ngIf="formSubmitted && isPostcodeEmpty(repairshop.postcode)" class="fnol-repairshop__errorMsg">Dit veld
+              is verplicht</p>
+            <p
+              *ngIf="formSubmitted && false === isPostcodeValid(repairshop.postcode) &&  false === isPostcodeEmpty(postcode)"
+              class="fnol-repairshop__errorMsg">Postcode of plaatsnaam niet bekend</p>
+            <span>
+                          <input id="repairshop_postcode" type="text" class="fnol-repairshop-txtbox"
+                                 [ngClass]="{'fnol-repairshop-error-border': formSubmitted && (isPostcodeEmpty(repairshop.postcode) || false === isPostcodeValid(repairshop.postcode))}"
+                                 name="postcode" [(ngModel)]="repairshop.postcode" required #postcode="ngModel">
                       </span>
-                    </div>
-                </div>
+          </div>
+        </div>
 
-                <div class="row-fluid fnol-repairshop-formSpacer">
-                    <div class="span4 txtBold fnol-repairshop__formRadioLblAlign">Straal</div>
-                    <div class="span8 clear-float">
-                        <label class="radio">
-                            <input type="radio" checked="checked" name="distance" [value]="10" [(ngModel)]="repairshop.distance"/>
-                            <span class="radio"></span>0-10 km
-                        </label>
-                        <label class="radio">
-                            <input type="radio" name="distance" [value]="20" [(ngModel)]="repairshop.distance"/>
-                            <span class="radio"></span>0-20 km
-                        </label>
-                        <label class="radio">
-                            <input type="radio" name="distance" [value]="50" [(ngModel)]="repairshop.distance"/>
-                            <span class="radio"></span>0-50 km
-                        </label>
-                    </div>
-                </div>
+        <div class="row-fluid fnol-repairshop-formSpacer">
+          <div class="span4 txtBold fnol-repairshop__formRadioLblAlign">Straal</div>
+          <div class="span8 clear-float">
+            <label class="radio">
+              <input type="radio" checked="checked" name="distance" [value]="10" [(ngModel)]="repairshop.distance"/>
+              <span class="radio"></span>0-10 km
+            </label>
+            <label class="radio">
+              <input type="radio" name="distance" [value]="20" [(ngModel)]="repairshop.distance"/>
+              <span class="radio"></span>0-20 km
+            </label>
+            <label class="radio">
+              <input type="radio" name="distance" [value]="50" [(ngModel)]="repairshop.distance"/>
+              <span class="radio"></span>0-50 km
+            </label>
+          </div>
+        </div>
 
-                <div class="row-fluid fnol-repairshop-formSpacer">
-                    <div class="span4 txtBold fnol-repairshop__formRadioLblAlign">
-                      Type schade <span class="hidden-mobile fnol-repairshop-mandatory">*</span></div>
-                    <div class="span8 clear-float" ngClass="">
-                      <p [hidden]="false === formSubmitted && (damage.valid || damage.pristine)" class="fnol-repairshop__errorMsg">
-                        Dit veld is verplicht
-                      </p>
-                        <label class="radio">
-                            <input type="radio" name="damage" value="GLASS" [(ngModel)]="repairshop.damage" required #damage="ngModel" [ngClass]="{'fnol-repairshop-error-border': formSubmitted && damage.invalid && damage.dirty}" />
-                            <span class="radio"></span>Alleen ruitschade
-                        </label>
-                        <label class="radio_longtext">
-                            <input type="radio" name="damage" value="BODY" [(ngModel)]="repairshop.damage" [ngClass]="{'fnol-repairshop-error-border': formSubmitted && damage.invalid && damage.dirty}" />
-                            <span class="radio_longtext"></span>Alleen ruitschade aan carrosserie
-                        </label>
-                        <label class="radio_longtext">
-                            <input type="radio" name="damage" value="GLASS_AND_BODY" [(ngModel)]="repairshop.damage" [ngClass]="{'fnol-repairshop-error-border': formSubmitted && damage.invalid && damage.dirty}" />
-                            <span class="radio_longtext"></span>Schade aan plaatwerk en ruitschade
-                        </label>
-                    </div>
-                </div>
-                <div class="row-fluid fnol-repairshop-form__spacer">
-                    <div class="span4"></div>
-                    <div class="span8">
-                        <button type="button" class="button arrow width150px" (click)="repairshopFormSubmit()" [ngClass]="{'pending': loadingResults}">Zoeken</button>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
+        <div class="row-fluid fnol-repairshop-formSpacer">
+          <div class="span4 txtBold fnol-repairshop__formRadioLblAlign">
+            Type schade <span class="hidden-mobile fnol-repairshop-mandatory">*</span></div>
+          <div class="span8 clear-float" ngClass="">
 
-  <! -- Result view Mobile  -->
-  <div class="hidden-desktop fnol-repairshop-info-mobile" [hidden]="isHideMobileRepairshopResults" [ngClass]="{'info-visible-mobile': getItemShown == 'result_mobile'}">
+
+            <p *ngIf="formSubmitted && isDamageUnselected(repairshop.damage)" class="fnol-repairshop__errorMsg">Dit veld
+              is verplicht</p>
+
+            <label class="radio">
+              <input type="radio" name="damage" value="GLASS" [(ngModel)]="repairshop.damage" required #damage="ngModel"
+                     [ngClass]="{'fnol-repairshop-error-border': formSubmitted && damage.invalid && damage.dirty}"/>
+              <span class="radio"></span>Alleen ruitschade
+            </label>
+            <label class="radio_longtext">
+              <input type="radio" name="damage" value="BODY" [(ngModel)]="repairshop.damage"
+                     [ngClass]="{'fnol-repairshop-error-border': formSubmitted && damage.invalid && damage.dirty}"/>
+              <span class="radio_longtext"></span>Alleen ruitschade aan carrosserie
+            </label>
+            <label class="radio_longtext">
+              <input type="radio" name="damage" value="GLASS_AND_BODY" [(ngModel)]="repairshop.damage"
+                     [ngClass]="{'fnol-repairshop-error-border': formSubmitted && damage.invalid && damage.dirty}"/>
+              <span class="radio_longtext"></span>Schade aan plaatwerk en ruitschade
+            </label>
+          </div>
+        </div>
+        <div class="row-fluid fnol-repairshop-form__spacer">
+          <div class="span4"></div>
+          <div class="span8">
+            <button type="button" class="button arrow width150px" (click)="repairshopFormSubmit()"
+                    [ngClass]="{'pending': loadingResults}">Zoeken
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <! -- Result view Mobile -->
+  <div class="hidden-desktop fnol-repairshop-info-mobile" [hidden]="isHideMobileRepairshopResults"
+       [ngClass]="{'info-visible-mobile': getItemShown == 'result_mobile'}">
     <div><a href="#" (click)="hideMobileResults()"><span class="icon-skinnyarrow">Terug</span></a></div>
     <div class="row-fluid fnol-repairshop-formSpacer">
       <table class="fnol-repairshop-table-mobile-view">
@@ -81,14 +96,16 @@
           <th class="rhs_head_width">
             <div class="mob_title_pos">
               <a (click)="sortByKey('ranking')">
-                <span class="mob_title_sort" [ngClass]="{'sort-desc': 'DESC' === sortDirection && 'ranking' === sortedBy, 'sort-asc': 'ASC' === sortDirection && 'ranking' === sortedBy, 'fnol-repairshop-sort__txtBold': 'ranking' === sortedBy}">Waardering</span>
+                <span class="mob_title_sort"
+                      [ngClass]="{'sort-desc': 'DESC' === sortDirection && 'ranking' === sortedBy, 'sort-asc': 'ASC' === sortDirection && 'ranking' === sortedBy, 'fnol-repairshop-sort__txtBold': 'ranking' === sortedBy}">Waardering</span>
               </a>
             </div>
           </th>
           <th>
             <div class="mob_title_right">
               <a (click)="sortByKey('address.radius')">
-                <span class="mob_title_sort" [ngClass]="{'sort-desc': 'DESC' === sortDirection && 'address.radius' === sortedBy, 'sort-asc': 'ASC' === sortDirection && 'address.radius' === sortedBy, 'fnol-repairshop-sort__txtBold': 'address.radius' === sortedBy}">Afstand</span>
+                <span class="mob_title_sort"
+                      [ngClass]="{'sort-desc': 'DESC' === sortDirection && 'address.radius' === sortedBy, 'sort-asc': 'ASC' === sortDirection && 'address.radius' === sortedBy, 'fnol-repairshop-sort__txtBold': 'address.radius' === sortedBy}">Afstand</span>
               </a>
             </div>
           </th>
@@ -121,7 +138,9 @@
               </tr>
               <tr colspan="2">
                 <td class="mob_location">
-                  <a href="https://www.google.nl/maps?q={{ party.address.street}}+{{party.address.houseNumber}},+{{party.address.city}}=nl" target="_blank"><span class="icon-arrow-location location-icon-pos"></span>Locatie</a></td>
+                  <a
+                    href="https://www.google.nl/maps?q={{ party.address.street}}+{{party.address.houseNumber}},+{{party.address.city}}=nl"
+                    target="_blank"><span class="icon-arrow-location location-icon-pos"></span>Locatie</a></td>
               </tr>
               </tbody>
             </table>
@@ -132,65 +151,70 @@
     </div>
   </div>
 
-   <! -- Result view Desktop -->
-    <div class="fnol-repairshop-result fnol-repairshop-form__spacer visible-desktop" [hidden]="isHideRepairshopResults">
-        <div class="row-fluid result-text">
-          <span>Toont {{ this.parties.length }} resultaten <span *ngIf="isShowPaginateInfo">(10 per pagina)</span></span>
-        </div>
-        <div class="fnol-repairshop-table-sort row-fluid">
-            <table>
-                <thead>
-                <tr>
-                    <th colspan="3">
-                        <div class="title_pos">
-                          <a (click)="sortByKey('name')">
-                            <span class="title_sort" [ngClass]="{'sort-desc': 'DESC' === sortDirection && 'name' === sortedBy, 'sort-asc': 'ASC' === sortDirection && 'name' === sortedBy, 'fnol-repairshop-sort__txtBold': 'name' === sortedBy}">Naam</span>
-                          </a>
-
-                        </div>
-                    </th>
-                    <th>
-                        <div class="title_pos">
-                          <a (click)="sortByKey('ranking')">
-                            <span class="title_sort" [ngClass]="{'sort-desc': 'DESC' === sortDirection && 'ranking' === sortedBy, 'sort-asc': 'ASC' === sortDirection && 'ranking' === sortedBy, 'fnol-repairshop-sort__txtBold': 'ranking' === sortedBy}">Waardering</span>
-                          </a>
-                        </div>
-                    </th>
-                    <th>
-                        <div class="title_pos">
-                          <a (click)="sortByKey('address.radius')">
-                            <span class="title_sort" [ngClass]="{'sort-desc': 'DESC' === sortDirection && 'address.radius' === sortedBy, 'sort-asc': 'ASC' === sortDirection && 'address.radius' === sortedBy, 'fnol-repairshop-sort__txtBold': 'address.radius' === sortedBy}">Afstand</span>
-                          </a>
-                        </div>
-                    </th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let party of parties | paginate: { itemsPerPage: 10, currentPage: p }">
-                  <td class="name">
-                    <a *ngIf="true != party.website" href="http://{{party.website}}" target="_blank">{{ party.name }}</a>
-                    <a *ngIf="true == party.website">{{ party.name }}</a>
-                  </td>
-                    <td class="phone icon-phone txtBold">{{ party.phone }}</td>
-                    <td class="address">
-                        <ul class="fnol-repairshop-address-list">
-                            <li>{{ party.address.street }}&nbsp;{{party.address.houseNumber}}</li>
-                            <li>{{ party.address.postCode }}&nbsp;{{ party.address.city }}</li>
-                            <li class="address-info-spacer"><span *ngIf="true != party.mail">{{ party.mail }}</span></li>
-                    </ul>
-                    </td>
-                    <td class="rating">
-                        <span class="rating-star fnol-repairshop__star--{{party.ranking}}"></span>
-                    </td>
-                    <td class="distance">{{ party.address.radius }} Km</td>
-                    <td class="location"><a href="https://www.google.nl/maps?q={{ party.address.street}}+{{party.address.houseNumber}},+{{party.address.city}}=nl" target="_blank"><span class="icon-arrow-location location-icon-pos"></span>Locatie</a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <pagination-controls (pageChange)="p = $event" autoHide="true"></pagination-controls>
+  <! -- Result view Desktop -->
+  <div class="fnol-repairshop-result fnol-repairshop-form__spacer visible-desktop" [hidden]="isHideRepairshopResults">
+    <div class="row-fluid result-text">
+      <span>Toont {{ this.parties.length }} resultaten <span *ngIf="isShowPaginateInfo">(10 per pagina)</span></span>
     </div>
+    <div class="fnol-repairshop-table-sort row-fluid">
+      <table>
+        <thead>
+        <tr>
+          <th colspan="3">
+            <div class="title_pos">
+              <a (click)="sortByKey('name')">
+                <span class="title_sort"
+                      [ngClass]="{'sort-desc': 'DESC' === sortDirection && 'name' === sortedBy, 'sort-asc': 'ASC' === sortDirection && 'name' === sortedBy, 'fnol-repairshop-sort__txtBold': 'name' === sortedBy}">Naam</span>
+              </a>
+
+            </div>
+          </th>
+          <th>
+            <div class="title_pos">
+              <a (click)="sortByKey('ranking')">
+                <span class="title_sort"
+                      [ngClass]="{'sort-desc': 'DESC' === sortDirection && 'ranking' === sortedBy, 'sort-asc': 'ASC' === sortDirection && 'ranking' === sortedBy, 'fnol-repairshop-sort__txtBold': 'ranking' === sortedBy}">Waardering</span>
+              </a>
+            </div>
+          </th>
+          <th>
+            <div class="title_pos">
+              <a (click)="sortByKey('address.radius')">
+                <span class="title_sort"
+                      [ngClass]="{'sort-desc': 'DESC' === sortDirection && 'address.radius' === sortedBy, 'sort-asc': 'ASC' === sortDirection && 'address.radius' === sortedBy, 'fnol-repairshop-sort__txtBold': 'address.radius' === sortedBy}">Afstand</span>
+              </a>
+            </div>
+          </th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let party of parties | paginate: { itemsPerPage: 10, currentPage: p }">
+          <td class="name">
+            <a *ngIf="true != party.website" href="http://{{party.website}}" target="_blank">{{ party.name }}</a>
+            <a *ngIf="true == party.website">{{ party.name }}</a>
+          </td>
+          <td class="phone icon-phone txtBold">{{ party.phone }}</td>
+          <td class="address">
+            <ul class="fnol-repairshop-address-list">
+              <li>{{ party.address.street }}&nbsp;{{party.address.houseNumber}}</li>
+              <li>{{ party.address.postCode }}&nbsp;{{ party.address.city }}</li>
+              <li class="address-info-spacer"><span *ngIf="true != party.mail">{{ party.mail }}</span></li>
+            </ul>
+          </td>
+          <td class="rating">
+            <span class="rating-star fnol-repairshop__star--{{party.ranking}}"></span>
+          </td>
+          <td class="distance">{{ party.address.radius }} Km</td>
+          <td class="location"><a
+            href="https://www.google.nl/maps?q={{ party.address.street}}+{{party.address.houseNumber}},+{{party.address.city}}=nl"
+            target="_blank"><span class="icon-arrow-location location-icon-pos"></span>Locatie</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <pagination-controls (pageChange)="p = $event" autoHide="true"></pagination-controls>
+  </div>
 
 </div>
