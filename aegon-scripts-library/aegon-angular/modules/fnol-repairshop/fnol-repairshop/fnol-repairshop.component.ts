@@ -3,6 +3,7 @@ import {
 } from '@angular/core';
 
 import { FnolRepairshopService } from "../shared/services/fnol.data.service";
+import { OrderBy } from "../../../pipes/orderBy.pipe";
 
 const template = require('./template.html');
 
@@ -12,7 +13,10 @@ const RESULT_MOBILE: string = 'result_mobile';
 @Component({
   selector: 'fnol-repairshop',
   template: template,
-  providers: [FnolRepairshopService]
+  providers: [
+    FnolRepairshopService,
+    OrderBy
+  ]
 })
 
 export class FNOLRepairshopComponent {
@@ -25,7 +29,6 @@ export class FNOLRepairshopComponent {
   public sortedBy = 'ranking';
   public sortDirection = 'DESC';
   public loadingResults = false;
-  public postcodeValid = true;
   public formSubmitted = false;
 
   public repairshop = {
@@ -34,7 +37,7 @@ export class FNOLRepairshopComponent {
     damage: null
   };
 
-  constructor(private fnolRepairshopService: FnolRepairshopService) {
+  constructor(private fnolRepairshopService: FnolRepairshopService, private orderByPipe: OrderBy) {
   }
 
   public repairshopFormSubmit() {
@@ -54,6 +57,7 @@ export class FNOLRepairshopComponent {
         this.showPaginateInfo();
         this.getItemShown = RESULT_MOBILE;
         this.loadingResults = false;
+        this.orderByPipe.transform(this.parties, this.sortedBy, this.sortDirection);
       });
   }
 
@@ -114,6 +118,8 @@ export class FNOLRepairshopComponent {
       this.sortedBy = sortProperty;
       this.sortDirection = 'ASC';
     }
+
+    this.orderByPipe.transform(this.parties, this.sortedBy, this.sortDirection);
   }
 }
 

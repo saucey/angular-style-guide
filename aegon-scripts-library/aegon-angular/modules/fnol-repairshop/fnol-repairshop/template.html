@@ -167,7 +167,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let party of parties | orderBy:sortedBy:sortDirection | paginate: { itemsPerPage: 10, currentPage: p }">
+                <tr *ngFor="let party of parties | paginate: { itemsPerPage: 10, currentPage: p }">
                   <td class="name">
                     <a *ngIf="true != party.website" href="http://{{party.website}}" target="_blank">{{ party.name }}</a>
                     <a *ngIf="true == party.website">{{ party.name }}</a>
