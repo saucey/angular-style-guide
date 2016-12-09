@@ -137,3 +137,9 @@ input.input--white {
     border: 1px solid $dark_red;
   }
 }
+.aa-input-required-asterisk {
+  &:after {
+    color: $dark_red;
+    content: '*';
+  }
+}

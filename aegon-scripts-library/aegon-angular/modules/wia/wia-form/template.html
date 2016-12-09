@@ -9,7 +9,7 @@
       </h3>
 
       <label class="wia-form__column_input clearfix">
-        <label>Uw salaris, bruto per jaar</label>
+        <label class="aa-input-required-asterisk">Uw salaris, bruto per jaar</label>
         <div>
           <span class="wia-form__error" *ngIf="!incomeValid">Vul een waarde in tussen €2,500 en  €500,000.</span>
           <aa-input-number class="aa-input--euro aa-input--white" [class.aa-input-validation--error]="!incomeValid"
@@ -21,21 +21,21 @@
         <div class="form-1" *ngIf="visiblePage === 1">
 
           <div class="wia-form__column_input clearfix">
-            <label>De verzekeringscode van uw werkgever</label>
+            <label class="aa-input-required-asterisk">De verzekeringscode van uw werkgever</label>
             <div [class.aa-input-validation--error]="!codeValid">
               <span class="wia-form__error" *ngIf="!codeValid">De ingevoerde code is niet geldig.<br/> Probeer het nogmaals of vul uw situatie handmatig in.</span>
               <input class="input--white" type="text" [(ngModel)]="personalizationCode" placeholder="355A0"/>
             </div>
           </div>
 
-          <ul class="arrow wia-form__products-switch">
-            <li><a (click)="visiblePage = 2">Geen code? zelf verzekering kiezen</a></li>
+          <ul class="arrow arrow--skinny wia-form__products-switch">
+            <li><a (click)="setActivePage(2)">Geen code? zelf verzekering kiezen</a></li>
           </ul>
 
           <div>
             <button class="button arrow"  [class.pending]="pending"
                     (click)="onCodeSubmit()"
-                    [disabled]="!income || !personalizationCode ||  personalizationCode === '' || pending">
+                    [disabled]="pending">
               Verder
             </button>
           </div>
@@ -86,11 +86,11 @@
             </div>
 
 
-            <ul class="arrow wia-form__products-switch">
-              <li><a (click)="visiblePage = 1">Productcode ontvangen? Voer de code in</a></li>
+            <ul class="arrow arrow--skinny wia-form__products-switch">
+              <li><a (click)="setActivePage(1)">Productcode ontvangen? Voer de code in</a></li>
             </ul>
 
-            <button class="button arrow" [class.pending]="pending" [disabled]="!income || pending" >Verder</button>
+            <button class="button arrow" [class.pending]="pending" [disabled]="pending" >Verder</button>
           </form>
 
         </div>
