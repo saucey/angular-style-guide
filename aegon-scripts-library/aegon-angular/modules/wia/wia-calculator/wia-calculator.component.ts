@@ -24,6 +24,10 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
   //visible tooltip id
   public showTooltip: number = 0;
 
+  //state flag indicating dragging in progress to highlight certain elements at that time
+  public sliderDragInProgress: boolean = false;
+  public sliderDragInProgressTimeout: number;
+
   public permanentDisability: boolean = false;
   public disability = {
     value: 50,
@@ -251,6 +255,14 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
       slider.value = val;
 
       this.update();
+
+      this.sliderDragInProgress = true;
+
+      clearTimeout(this.sliderDragInProgressTimeout);
+
+      this.sliderDragInProgressTimeout = setTimeout(() => {
+        this.sliderDragInProgress = false;
+      }, 500);
     }
   }
 
