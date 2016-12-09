@@ -572,7 +572,14 @@ $wiaCalculatorMobileBreakpoint: 850px;
 
 .wia_calculator--aegon-blue {
   color: $blue;
+  transition: none;
 }
+
+.wia_calculator--aegon-blue-animate {
+
+  transition: all 500ms linear;
+}
+
 .wia_calculator__bold {
   font-weight: bold;
 }

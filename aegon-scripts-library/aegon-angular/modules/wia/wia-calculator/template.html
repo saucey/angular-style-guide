@@ -253,11 +253,13 @@
         <td>2e jaar</td>
         <td>€{{ graphData[0]?.columns[1].amountYearly | money:true }}</td>
       </tr>
-      <tr>
+      <tr class="wia_calculator--aegon-blue-animate" [class.wia_calculator--aegon-blue]="sliderDragInProgress">
         <td class="wia_calculator__summary_bottom">Vanaf 3e jaar</td>
-        <td class="wia_calculator__summary_bottom">€{{ graphData[1]?.columns[0].amountYearly | money:true }}</td>
+        <td class="wia_calculator__summary_bottom">
+          €{{ graphData[1]?.columns[0].amountYearly | money:true }}
+        </td>
       </tr>
-      <tr>
+      <tr class="wia_calculator--aegon-blue-animate" [class.wia_calculator--aegon-blue]="sliderDragInProgress">
         <td>Tot pensioenleeftijd</td>
         <td>€{{ graphData[2]?.columns[0].amountYearly | money:true }}</td>
       </tr>
@@ -290,11 +292,6 @@
 
     <aa-input-switch [(ngModel)]="permanentDisability" (modelChange)="updatePermDisability()"></aa-input-switch>
   </div>
-
-  <a class="wia_calculator__mobile_help wia_calculator--aegon-blue" (click)="mobileHelpVisible = !mobileHelpVisible">
-    <span class="icon-help"></span>
-    <span class="wia_calculator__mobile_help_text">Lees meer over arbeidsongeschiktheid</span>
-  </a>
 
   <div class="wia_calculator__mobile_help_content" *ngIf="mobileHelpVisible">
 
@@ -389,6 +386,11 @@
     </table>
   </div>
 
+
+  <a class="wia_calculator__mobile_help wia_calculator--aegon-blue" (click)="mobileHelpVisible = !mobileHelpVisible">
+    <span class="icon-help"></span>
+    <span class="wia_calculator__mobile_help_text">Lees meer over arbeidsongeschiktheid</span>
+  </a>
 
   <ul class="arrow wia_calculator__back_arrow">
     <li><a href="#" (click)="goBack()">Terug naar situatie instellen</a></li>
