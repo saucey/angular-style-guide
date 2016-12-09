@@ -23,7 +23,7 @@ export class AAQQMortgageComponent extends AABaseComponent implements OnInit {
   @Input() options: any = {};
   @Input() data: any = {};
   
-  incomeValue:  number;
+  incomeValue: number;
   incomePartnerValue: number;
   interestYears: number;
   keyIncome: number;
@@ -37,6 +37,8 @@ export class AAQQMortgageComponent extends AABaseComponent implements OnInit {
   playValue: number;
   calculatedValue: number = 0;
   monthlyPayment: number = 0;
+  irGroup1: Array<number> = [];
+  irGroup2: Array<number> = [];
 
   @ViewChild('interest') interestRef: ElementRef;
 
@@ -45,14 +47,20 @@ export class AAQQMortgageComponent extends AABaseComponent implements OnInit {
   }
 
   ngOnInit() {
-    super.ngOnInit();    
+    super.ngOnInit();
+    this.createInterestRatesArrays();    
   }
 
   getNumberRoundedToHundreds(value): number {
     return (100 * Math.round(value / 100));
   }
 
-  calculate(): void {
+  createInterestRatesArrays(): void {
+    for(let key in this.data.options.irGroup1) this.irGroup1.push(this.data.options.irGroup1[key]);
+    for(let key in this.data.options.irGroup2) this.irGroup2.push(this.data.options.irGroup2[key]);    
+  }
+
+  calculate(): void {        
     if(this.incomeValue) {
       let yearSalary = this.getTotalYearSalary(this.incomeValue, this.extraMonth, this.vacationMoney);
       let yearSalaryPartner = this.getTotalYearSalary(this.incomePartnerValue, this.extraMonthPartner, this.vacationMoneyPartner);
@@ -92,14 +100,15 @@ export class AAQQMortgageComponent extends AABaseComponent implements OnInit {
       this.keyIncome = incomeHigher + ((togetherIncome - incomeHigher) / 2);
       return this.keyIncome;
     }
+
     return yearSalary;
   }
 
   getCalculatedAnnuity(): number {
     this.interest = this.data.options.annuityInterestDefault;
 
-    if(this.interestYears >= 10 && this.data.options.annuityInterests.length) {      
-      let interestPercentage = this.data.options.annuityInterests[this.interestYears - 10];
+    if(this.interestYears >= 10) {      
+      let interestPercentage = this.irGroup2[this.interestYears - 10];
       this.interest = interestPercentage / 100;      
     }
     
@@ -116,9 +125,9 @@ export class AAQQMortgageComponent extends AABaseComponent implements OnInit {
     let matrixCol: number = 0;
     let matrixRow: number = 0;
     
-    for(let i = this.data.options.interests.length - 1; i >= 0; i--) {
+    for(let i = this.irGroup1.length - 1; i >= 0; i--) {
       
-      if(interestPercentage >= this.data.options.interests[i]) {
+      if(interestPercentage >= this.irGroup1[i]) {
         matrixCol = i + 1;
         break;
       }
