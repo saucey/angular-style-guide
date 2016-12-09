@@ -3,7 +3,7 @@
 
   <div class="fnol-repairshop-form-input" [ngClass]="{'form-visible-mobile': getItemShown == 'info_form'}">
     <div class="row-fluid">
-      <h3 class="fnol-repairshop-subhead">U kunt deze tool gebruiken voor het vinden van een bij AEGON Schade Service
+      <h3 class="fnol-repairshop-subhead">U kunt deze tool gebruiken voor het vinden van een bij Aegon Schade Service
         aangesloten autoherstelbedrijf bij u in de buurt.</h3>
     </div>
 
@@ -56,7 +56,7 @@
             <p *ngIf="formSubmitted && isDamageUnselected(repairshop.damage)" class="fnol-repairshop__errorMsg">Dit veld
               is verplicht</p>
 
-            <label class="radio">
+            <label class="radio mob_view__btmMargin">
               <input type="radio" name="damage" value="GLASS" [(ngModel)]="repairshop.damage" required #damage="ngModel"
                      [ngClass]="{'fnol-repairshop-error-border': formSubmitted && damage.invalid && damage.dirty}"/>
               <span class="radio"></span>Alleen ruitschade
@@ -130,8 +130,8 @@
               <tr colspan="2">
                 <td class="mob_address">
                   <ul class="fnol-repairshop-mob-address-list">
-                    <li>{{ party.address.street }}</li>
-                    <li>{{party.address.houseNumber}} {{ party.address.postCode }}{{ party.address.city }}</li>
+                    <li>{{ party.address.street }}&nbsp;{{party.address.houseNumber}}</li>
+                    <li>{{ party.address.postCode }}&nbsp;{{ party.address.city }}</li>
                     <li class="address-info-spacer"><span *ngIf="true != party.mail">{{ party.mail }}</span></li>
                   </ul>
                 </td>

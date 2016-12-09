@@ -41,24 +41,29 @@ export class FNOLRepairshopComponent {
   }
 
   public repairshopFormSubmit() {
-    this.loadingResults = true;
+    this.isHideRepairshopResults = true;
     this.formSubmitted = true;
 
-    this
-      .fnolRepairshopService
-      .getData({
-        location: this.repairshop.postcode,
-        radius: this.repairshop.distance,
-        type: this.repairshop.damage
-      })
-      .subscribe(results => {
-        this.parties = results;
-        this.getRepairshopSearchData();
-        this.showPaginateInfo();
-        this.getItemShown = RESULT_MOBILE;
-        this.loadingResults = false;
-        this.orderByPipe.transform(this.parties, this.sortedBy, this.sortDirection);
-      });
+    // fields are valid
+    if (false === this.isPostcodeEmpty(this.repairshop.postcode) && this.isPostcodeValid(this.repairshop.postcode) && false === this.isDamageUnselected(this.repairshop.damage)) {
+      this.loadingResults = true;
+
+      this
+        .fnolRepairshopService
+        .getData({
+          location: this.repairshop.postcode,
+          radius: this.repairshop.distance,
+          type: this.repairshop.damage
+        })
+        .subscribe(results => {
+          this.parties = results;
+          this.getRepairshopSearchData();
+          this.showPaginateInfo();
+          this.getItemShown = RESULT_MOBILE;
+          this.loadingResults = false;
+          this.orderByPipe.transform(this.parties, this.sortedBy, this.sortDirection);
+        });
+    }
   }
 
   /**
