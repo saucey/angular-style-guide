@@ -113,12 +113,34 @@ export class AAPensionOfferFormComponent extends AABaseComponent implements OnIn
     this.form_started = true;
    }
 
-    save(model: any, isValid: boolean) {
-        // check if model is valid
-        // if valid, call API to save customer
-        console.log(model, isValid);
-        console.log('Redirect to ', this.data.options.form.redirectUrl);
-        location.href = this.data.options.form.redirectUrl;
-        return false;
+  public formData: Object = {};
+
+  public getDataFromStorage(storage: string, object: string, key: string): any {
+    console.log(storage, object, key);
+    var item: any = "";
+    try {
+      item = clientStorage[storage].getItem(object)[key];
+    } catch(err) {
+      console.log("Can't get data from storage: ", err);
     }
+    return item;
+  }
+
+  save(model: any, isValid: boolean) {
+      // check if model is valid
+      // if valid, call API to save customer
+      for (let key in model) {
+        if(model[key]===undefined) {
+          console.log("Undefined", this.thisElement.nativeElement.querySelector);
+        } 
+      }
+      console.log('formData', this.formData);
+      console.log('model', model);
+      //location.href = this.data.options.form.redirectUrl;
+      return false;
+  }
+
+  isValid(regExp: any, required: boolean): boolean {
+    return false;
+  }
 }

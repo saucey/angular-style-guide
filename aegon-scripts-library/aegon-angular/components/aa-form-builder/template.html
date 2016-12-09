@@ -1,0 +1,75 @@
+<div class="aa-form-builder" [hidden]="showThankYouMessage">
+  <p [innerHTML]="data.options.introText" *ngIf="isString(data.options.introText)"></p>
+  <form 
+    class="container_12" 
+    (click)="fireTealiumFormStarted" 
+    name={{data.options.name}}
+     #f="ngForm" (ngSubmit)="save(f.value, f.valid)" novalidate>
+    
+    <div class="form-input-row" *ngFor="let list of data.options.inputList">
+      <label class="span4 form-input-label" *ngIf="list.inputs!=undefined">
+        {{list.label}}
+        <span *ngIf="list.inputs[0].required">*</span>
+      </label>
+
+      <div class="input-container" *ngIf="list.inputs!=undefined">
+        <div class="input-wrapper span{{input.width}}" *ngFor="let input of list.inputs">
+          <input
+            *ngIf="input.type=='text' || input.type=='email' || input.type=='number' || input.type=='password'"
+            type="{{input.type}}"
+            placeholder="{{input.placeholder}}"
+            name="{{input.name}}"
+            [attr.required]="input.required ? true : null"
+            [attr.pattern]="input.pattern ? input.pattern : null"
+            [(ngModel)]="formData[input.name] = (input.storage) ? getDataFromStorage(input.storage.type, input.storage.object, input.storage.key) : input.value"
+            [value]="formData[input.name]"
+            [disabled]="callingService" />
+          <label 
+            class="radio" 
+            *ngIf="input.type=='radio'">
+            <input 
+              type="{{input.type}}"
+              name="{{input.name}}"
+              [attr.name]="input.name"
+              [attr.required]="input.required ? true : null"
+              [attr.checked]="input.checked ? 'checked' : null"
+              [(ngModel)]="formData[input.name]"
+              (click)="formData[input.name] = input.value"
+              [disabled]="callingService" />
+            <span class="radio"></span>{{input.label}}
+          </label>
+        </div>
+      </div>
+
+      <input *ngIf="list.type=='hidden'"
+        type="{{list.type}}"
+        name="{{list.name}}"
+        [(ngModel)]="formData[list.name] = (list.storage) ? getDataFromStorage(list.storage.type, list.storage.object, list.storage.key) : list.value"
+        [value]="formData[list.name]" />
+    </div>
+    
+    <div class="form-input-row" *ngIf="isString(data.options.middleText)">
+      <div class="input-wrapper span12">
+        <p [innerHTML]="data.options.middleText"></p>
+      </div>
+    </div>
+
+    <div class="form-input-row">
+      <div class="input-wrapper span12 submit-form-button--wrapper">
+        <button class="button arrow" type="submit"  [disabled]="callingService" [class.pending]="callingService">
+          {{data.options.submitButton.label}}
+        </button>
+      </div>
+    </div>
+  </form>
+  <p [innerHTML]="data.options.bottomText" *ngIf="isString(data.options.bottomText)"></p>
+</div>
+<div class="messages messages--status"  *ngIf="isString(data.options.thankYouMessage)" [hidden]="!showThankYouMessage">
+  {{data.options.thankYouMessage}}
+</div>
+<div class="messages messages--error" *ngIf="data.options.serviceErrorMessage" [hidden]="!showError">
+  <span class="icon"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>
+  <div class="content">
+    {{data.options.serviceErrorMessage}}
+  </div>
+</div>
