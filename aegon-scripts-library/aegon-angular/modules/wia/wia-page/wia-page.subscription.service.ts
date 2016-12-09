@@ -13,6 +13,9 @@ export class WiaSubscriptionService {
 
   public externalInput$: BehaviorSubject<WIAInputModel>;
 
+  //indicate if last emitted value was a navigation change
+  public navigationMessage: boolean = false;
+
   constructor() {
 
     if (!WiaSubscriptionService.singleton) {
@@ -32,7 +35,9 @@ export class WiaSubscriptionService {
     this.externalInput$.filter(el => el !== null).subscribe(callback, () => {});
   }
 
-  public emit (value: WIAInputModel) {
+  // navigation flag indicates that change was emmitted by back button
+  public emit (value: WIAInputModel, navigation: boolean = false) {
+    this.navigationMessage = navigation;
     this.externalInput$.next(value);
   }
 

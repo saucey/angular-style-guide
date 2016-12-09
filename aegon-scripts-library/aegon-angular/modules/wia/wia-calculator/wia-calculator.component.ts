@@ -24,6 +24,10 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
   //visible tooltip id
   public showTooltip: number = 0;
 
+  //state flag indicating dragging in progress to highlight certain elements at that time
+  public sliderDragInProgress: boolean = false;
+  public sliderDragInProgressTimeout: number;
+
   public permanentDisability: boolean = false;
   public disability = {
     value: 50,
@@ -98,17 +102,19 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
 
   private lastInput: WIAInputModel = null;
 
-  constructor(thisElement: ElementRef,
+  constructor(private elementRef: ElementRef,
               private wiaPagePersonalizationService: WiaPagePersonalizationService,
               private wiaSubscriptionService: WiaSubscriptionService,
               private wiaUrlStateManager: WiaUrlStateManager,
               private calculatorDataService: CalculatorDataService,
               private wiaTealiumService: WIATealiumService) {
 
-    super(thisElement);
+    super(elementRef);
 
     wiaSubscriptionService.externalInput$.subscribe(
-      value => this.updateModel(value),
+      value => {
+        this.updateModel(value);
+      },
       err => {
         this.error = {
           type: err.type,
@@ -249,6 +255,14 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
       slider.value = val;
 
       this.update();
+
+      this.sliderDragInProgress = true;
+
+      clearTimeout(this.sliderDragInProgressTimeout);
+
+      this.sliderDragInProgressTimeout = setTimeout(() => {
+        this.sliderDragInProgress = false;
+      }, 500);
     }
   }
 
@@ -337,7 +351,7 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
   }
 
   public goBack() {
-    this.wiaSubscriptionService.emit(null);
+    this.wiaSubscriptionService.emit(null, true);
   }
 
   public trackById(index, item) {

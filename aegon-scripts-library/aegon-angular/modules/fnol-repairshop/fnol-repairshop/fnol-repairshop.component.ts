@@ -3,6 +3,7 @@ import {
 } from '@angular/core';
 
 import { FnolRepairshopService } from "../shared/services/fnol.data.service";
+import { OrderBy } from "../../../pipes/orderBy.pipe";
 
 const template = require('./template.html');
 
@@ -12,7 +13,10 @@ const RESULT_MOBILE: string = 'result_mobile';
 @Component({
   selector: 'fnol-repairshop',
   template: template,
-  providers: [FnolRepairshopService]
+  providers: [
+    FnolRepairshopService,
+    OrderBy
+  ]
 })
 
 export class FNOLRepairshopComponent {
@@ -25,7 +29,6 @@ export class FNOLRepairshopComponent {
   public sortedBy = 'ranking';
   public sortDirection = 'DESC';
   public loadingResults = false;
-  public postcodeValid = true;
   public formSubmitted = false;
 
   public repairshop = {
@@ -34,27 +37,33 @@ export class FNOLRepairshopComponent {
     damage: null
   };
 
-  constructor(private fnolRepairshopService: FnolRepairshopService) {
+  constructor(private fnolRepairshopService: FnolRepairshopService, private orderByPipe: OrderBy) {
   }
 
   public repairshopFormSubmit() {
-    this.loadingResults = true;
+    this.isHideRepairshopResults = true;
     this.formSubmitted = true;
 
-    this
-      .fnolRepairshopService
-      .getData({
-        location: this.repairshop.postcode,
-        radius: this.repairshop.distance,
-        type: this.repairshop.damage
-      })
-      .subscribe(results => {
-        this.parties = results;
-        this.getRepairshopSearchData();
-        this.showPaginateInfo();
-        this.getItemShown = RESULT_MOBILE;
-        this.loadingResults = false;
-      });
+    // fields are valid
+    if (false === this.isPostcodeEmpty(this.repairshop.postcode) && this.isPostcodeValid(this.repairshop.postcode) && false === this.isDamageUnselected(this.repairshop.damage)) {
+      this.loadingResults = true;
+
+      this
+        .fnolRepairshopService
+        .getData({
+          location: this.repairshop.postcode,
+          radius: this.repairshop.distance,
+          type: this.repairshop.damage
+        })
+        .subscribe(results => {
+          this.parties = results;
+          this.getRepairshopSearchData();
+          this.showPaginateInfo();
+          this.getItemShown = RESULT_MOBILE;
+          this.loadingResults = false;
+          this.orderByPipe.transform(this.parties, this.sortedBy, this.sortDirection);
+        });
+    }
   }
 
   /**
@@ -79,6 +88,20 @@ export class FNOLRepairshopComponent {
    */
   public isPostcodeValid(postcode): boolean {
     if (/^[1-9][0-9]{3}\s?[a-zA-Z]{2}$/.test(postcode) || /^(?=(\s*[a-zA-Z]){1,25}$).*$/.test(postcode)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  /**
+   * Checks if damage field is unselected
+   *
+   * @param {string} damage
+   * @returns {boolean}
+   */
+  public isDamageUnselected(damage): boolean {
+    if ('undefined' === typeof damage || null === damage || 0 === damage.length) {
       return true;
     } else {
       return false;
@@ -114,6 +137,8 @@ export class FNOLRepairshopComponent {
       this.sortedBy = sortProperty;
       this.sortDirection = 'ASC';
     }
+
+    this.orderByPipe.transform(this.parties, this.sortedBy, this.sortDirection);
   }
 }
 

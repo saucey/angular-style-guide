@@ -66,10 +66,13 @@ $fnolAegonBlue: #0077C8;
   .mr-top10{
     margin-top: 10px
   }
+
+  .fnol-faq-titles{
+    font:normal 26px/28px 'senticosansdtlight',Arial,Verdana,sans-serif;
+    color: $fnolAegonBlue;
+  }
+
   .fnol-category__headline {
-   /* font-size: 1.5em;
-      font-weight: lighter;
-    */
     font:normal 26px/28px 'senticosansdtlight',Arial,Verdana,sans-serif;
     color: $fnolAegonBlue;
     display: none;
@@ -258,8 +261,23 @@ $fnolAegonBlue: #0077C8;
       margin-top: -3px;
       left: 54px;
     }
+    .fnol-faq-titles{
+      font:normal 18px/28px 'senticosansdtregular',Arial,Verdana,sans-serif;
+    }
   }
+}
 
+@media screen and (min-width: 0px) and (max-width: 320px) {
+  .fnol-page {
+    .fnol-question {
+      width: 35%;
+      font-weight: 700;
+      padding: 7px 10px;
+      color: #3395d3 !important;
+      font-size: small;
+      min-width: 90px;
+    }
+  }
 }
 
 .fnol-phone-call {

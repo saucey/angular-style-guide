@@ -23,11 +23,11 @@ export class AAQQMortgageComponent extends AABaseComponent implements OnInit {
   @Input() options: any = {};
   @Input() data: any = {};
   
-  incomeValue:  number;
+  incomeValue: number;
   incomePartnerValue: number;
   interestYears: number;
   keyIncome: number;
-  interest: number;
+  interest: number
   step: number = 1;
   extraMonth: boolean = false;
   vacationMoney: boolean = false;
@@ -37,36 +37,40 @@ export class AAQQMortgageComponent extends AABaseComponent implements OnInit {
   playValue: number;
   calculatedValue: number = 0;
   monthlyPayment: number = 0;
+  irGroup1: Array<number> = [];
+  irGroup2: Array<number> = [];
 
   @ViewChild('interest') interestRef: ElementRef;
 
-  constructor(
-    private thisElement: ElementRef,
-    private http: Http
-  ) { 
+  constructor(private thisElement: ElementRef, private http: Http) { 
     super(thisElement); 
   }
 
   ngOnInit() {
     super.ngOnInit();
+    this.createInterestRatesArrays();    
   }
 
-  roundHundreds(value): number {
+  getNumberRoundedToHundreds(value): number {
     return (100 * Math.round(value / 100));
   }
 
-  calculate(): void {
-    if (this.incomeValue) {
-      var yearSalary = this.yearSalaryCalculation(this.incomeValue, this.extraMonth, this.vacationMoney),
-          yearSalaryPartner = this.yearSalaryCalculation(this.incomePartnerValue, this.extraMonthPartner, this.vacationMoneyPartner),
-          togetherIncome = yearSalary + yearSalaryPartner,
-          highestSalaryVar = this.highestSalary(yearSalary,yearSalaryPartner),
-          annuitiesFactorVar = this.annuitiesFactor();
-          this.keyIncome = this.getKeyIncome(highestSalaryVar, togetherIncome, yearSalary);
-      var woonquoteBox1Var = this.woonquoteBox1();
-      this.playWithMortgage = false;
-      this.playValue = this.calculatedValue = this.roundHundreds((togetherIncome * woonquoteBox1Var / 12) * annuitiesFactorVar);
+  createInterestRatesArrays(): void {
+    for(let key in this.data.options.irGroup1) this.irGroup1.push(this.data.options.irGroup1[key]);
+    for(let key in this.data.options.irGroup2) this.irGroup2.push(this.data.options.irGroup2[key]);    
+  }
 
+  calculate(): void {        
+    if(this.incomeValue) {
+      let yearSalary = this.getTotalYearSalary(this.incomeValue, this.extraMonth, this.vacationMoney);
+      let yearSalaryPartner = this.getTotalYearSalary(this.incomePartnerValue, this.extraMonthPartner, this.vacationMoneyPartner);
+      let togetherIncome = yearSalary + yearSalaryPartner;
+      let highestSalaryVar = this.getHighestSalary(yearSalary,yearSalaryPartner);
+      let annuitiesFactorVar = this.getCalculatedAnnuity();      
+      this.keyIncome = this.getKeyIncome(highestSalaryVar, togetherIncome, yearSalary);
+      let woonquoteBox = this.getCalculateWoonquoteBox();
+      this.playWithMortgage = false;
+      this.playValue = this.calculatedValue = this.getNumberRoundedToHundreds((togetherIncome * woonquoteBox / 12) * annuitiesFactorVar);
       this.monthlyPayment = this.getMonthlyPayment();
     }
   }
@@ -74,21 +78,20 @@ export class AAQQMortgageComponent extends AABaseComponent implements OnInit {
   getMonthlyPayment(): number {
     let monthlyInterest = this.interest / 12;
     let pow = Math.pow((1 + monthlyInterest), -360);
+
     return Math.round((monthlyInterest / (1 - pow)) * this.playValue);
   }
 
-  yearSalaryCalculation(salary: number = 0, extraMonth: boolean, vacationMoney: boolean): number {
-    var yearSalary = salary * 12;
-    if (extraMonth) {
-      yearSalary = salary * 13;
-    }
-    if (vacationMoney) {
-      yearSalary = yearSalary * 1.08;
-    }
+  getTotalYearSalary(salary: number = 0, extraMonth: boolean, vacationMoney: boolean): number {
+    let yearSalary = salary * 12;
+    
+    if(extraMonth) yearSalary = salary * 13;
+    if(vacationMoney) yearSalary = yearSalary * 1.08;
+    
     return yearSalary;
   }
 
-  highestSalary(salary1: number, salary2: number): number {
+  getHighestSalary(salary1: number, salary2: number): number {
     return (salary1 => salary2) ? salary1 : salary2;
   }
 
@@ -97,53 +100,54 @@ export class AAQQMortgageComponent extends AABaseComponent implements OnInit {
       this.keyIncome = incomeHigher + ((togetherIncome - incomeHigher) / 2);
       return this.keyIncome;
     }
+
     return yearSalary;
   }
 
-  annuitiesFactor(): number {
-    var interestElement = this.interestRef.nativeElement.getAttribute('data-interest');
-    this.interest = 0.05;
-    if (this.interestYears >= 10 && interestElement !== undefined) {
-      let interestRaw = JSON.parse("[" + interestElement + "]");
-      let interestPercentage = interestRaw[this.interestYears -10];
-      this.interest = interestPercentage / 100;
+  getCalculatedAnnuity(): number {
+    this.interest = this.data.options.annuityInterestDefault;
+
+    if(this.interestYears >= 10) {      
+      let interestPercentage = this.irGroup2[this.interestYears - 10];
+      this.interest = interestPercentage / 100;      
     }
-    let duration = 30,
-        monthlyInterest = this.interest / 12,
-        durationCalculation = duration * 12,
-        pow = Math.pow((1 / (1 + monthlyInterest)),durationCalculation);
-    var annuity = (1 - pow) / monthlyInterest;
-    return annuity;
+    
+    let duration = 30;
+    let monthlyInterest = this.interest / 12;
+    let durationCalculation = duration * 12;
+    let pow = Math.pow((1 / (1 + monthlyInterest)), durationCalculation);
+    
+    return (1 - pow) / monthlyInterest;
   }
 
-  woonquoteBox1() {
-    var interestPercentage = this.interest *100;
-    var matrixCol: number = 0;
-    for (let i = interestCols.length - 1; i >= 0; i--) {
-      if (interestPercentage >= interestCols[i]) {
+  getCalculateWoonquoteBox() {
+    let interestPercentage = this.interest * 100;
+    let matrixCol: number = 0;
+    let matrixRow: number = 0;
+    
+    for(let i = this.irGroup1.length - 1; i >= 0; i--) {
+      
+      if(interestPercentage >= this.irGroup1[i]) {
         matrixCol = i + 1;
         break;
       }
     }
-    var matrixRow: number = 0;
-    for (let i = keyIncomeRows.length - 1; i >= 0; i--) {
-      if (this.keyIncome >= keyIncomeRows[i]) {
+    
+    for(let i = keyIncomeRows.length - 1; i >= 0; i--) {
+      
+      if(this.keyIncome >= keyIncomeRows[i]) {
         matrixRow = i + 1;
         break;
       }
     }
-    var result = percMatrix[matrixRow][matrixCol] / 100;
-    return result;
+
+    return percMatrix[matrixRow][matrixCol] / 100;
   }
 
   submitAmount(): void {
     this.step += 1;
   }
 }
-
-const interestCols = [
-  2.501, 3.001, 3.501, 4.001, 4.501, 5.001, 5.501, 6.001, 6.501, 7.001, 7.501
-];
 
 const keyIncomeRows = [
   19500, 20000, 20500, 21000, 21500, 22000, 22500, 23000, 23500, 24000, 24500, 25000, 26000, 27000, 28000, 29000, 30000,

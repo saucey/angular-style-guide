@@ -50,7 +50,7 @@ export class GenericService {
 		      "BScalculateDIPRequest": {
 		        "AILHEADER": {
 		          "CLIENTID": "BS_PENSIOENOVEREENKOMST_ROA_Rest",
-		          "CORRELATIONID": "QQDIP_"+new Date().getTime()
+		          "CORRELATIONID": "##QQDIP_"+new Date().getTime() + "##"
 		        },
 		        "DOSSIER": {
 		          "REKENFACTOREN": {
@@ -121,7 +121,7 @@ export class GenericService {
 		      "BScalculateDIPRequest": {
 		        "AILHEADER": {
 		          "CLIENTID": "BS_PENSIOENOVEREENKOMST_ROA_Rest",
-		          "CORRELATIONID": "QQDIP_"+new Date().getTime()
+		          "CORRELATIONID": "##QQDIP_"+new Date().getTime() + "##"
 		        },
 		        "DOSSIER": {
 		          "REKENFACTOREN": {
@@ -194,7 +194,7 @@ export class GenericService {
 		      "BScalculateVPURequest": {
 		        "AILHEADER": {
 		          "CLIENTID": "AEGONNL",
-		          "CORRELATIONID": "QQVPU_"+new Date().getTime()
+		          "CORRELATIONID": "##QQVPU_"+new Date().getTime() + "##"
 		        },
 		        "DOSSIER": {		          
 		          "PENSIOENOVEREENKOMST": {
@@ -262,7 +262,7 @@ export class GenericService {
 		      "BScalculateVPURequest": {
 		        "AILHEADER": {
 		          "CLIENTID": "AEGONNL",
-		          "CORRELATIONID": "QQVPU_"+new Date().getTime()
+		          "CORRELATIONID": "##QQVPU_"+new Date().getTime() + "##"
 		        },
 		        "DOSSIER": {		          
 		          "PENSIOENOVEREENKOMST": {

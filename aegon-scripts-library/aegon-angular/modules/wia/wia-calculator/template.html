@@ -7,7 +7,7 @@
 <div class="wia_calculator__loader aa-template__loading aa-loading" *ngIf="externalInput && !graphData && !error"></div>
 
 <!--Error message-->
-<div class="wia_calculator__error messages messages--alert" *ngIf="error">
+<div class="wia_calculator__error messages messages--alert" *ngIf="error && !externalInput">
   <span class="icon"><span class="pathA"></span><span class="pathB"></span><span class="pathC"></span></span>
   <div class="header" *ngIf="error.type === 'code'">
     De code is niet geldig. Probeer het nogmaals of vul uw situatie handmatig in.
@@ -161,7 +161,8 @@
 
     <div class="row-fluid wia_calculator__extra_inputs">
       <div class="span4 wia_calculator__extra_input_label">
-        Arbeidsongeschiktheid <aa-hint text="Geef aan in welke mate u arbeidsongeschikt bent. Dit is het deel dat u niet meer kunt werken. In het geval van arbeidsongeschiktheid wordt dit percentage vastgesteld door het UWV."></aa-hint>
+        <h4 class="wia_calculator__extra_input_title">Arbeidsongeschiktheid</h4>
+         <aa-hint text="Geef aan in welke mate u arbeidsongeschikt bent. Dit is het deel dat u niet meer kunt werken. In het geval van arbeidsongeschiktheid wordt dit percentage vastgesteld door het UWV."></aa-hint>
       </div>
       <div class="span8">
         <aa-slider class="aa-input--percentage wia_calculator__disability_slider"
@@ -177,7 +178,9 @@
 
     <div class="row-fluid wia_calculator__extra_inputs " [class.hidden]="disability.value >= 80">
       <div class="span4 wia_calculator__extra_input_label">
-        Benutting restverdiencapaciteit: <aa-hint text="Geef aan welk deel van de restverdiencapaciteit daadwerkelijk benut wordt. De restverdiencapaciteit is het deel dat u nog kunt werken op basis van de vastgestelde arbeidsongeschiktheid. Is uw restverdiencapaciteit bijvoorbeeld vastgesteld op 2 dagen per week, maar kunt u voor maar 1 dag per week werk vinden? Dan is de benutting van uw restverdiencapaciteit 50%."></aa-hint>
+
+        <h4 class="wia_calculator__extra_input_title">Benutting restverdiencapaciteit</h4>
+        <aa-hint text="Geef aan welk deel van de restverdiencapaciteit daadwerkelijk benut wordt. De restverdiencapaciteit is het deel dat u nog kunt werken op basis van de vastgestelde arbeidsongeschiktheid. Is uw restverdiencapaciteit bijvoorbeeld vastgesteld op 2 dagen per week, maar kunt u voor maar 1 dag per week werk vinden? Dan is de benutting van uw restverdiencapaciteit 50%."></aa-hint>
       </div>
       <div class="span8">
         <aa-slider class="aa-input--percentage wia_calculator__usage_slider"
@@ -191,8 +194,8 @@
     </div>
 
     <div class="row-fluid wia_calculator__extra_inputs wia_calculator__extra_inputs--center" [class.hidden]="disability.value < 80">
-      <div class="span4 wia_calculator__bold">
-        Duurzaam arbeidsongeschikt
+      <div class="span4">
+        <h4 class="wia_calculator__extra_input_title">Duurzaam arbeidsongeschikt</h4>
       </div>
       <div class="span1">
         <aa-input-switch [(ngModel)]="permanentDisability" (modelChange)="updatePermDisability()"></aa-input-switch>
@@ -231,7 +234,7 @@
     </div>
   </div>
 
-  <ul class="arrow wia_calculator__back_arrow">
+  <ul class="arrow arrow--skinny wia_calculator__back_arrow">
     <li><a href="#" (click)="goBack()">Terug naar situatie instellen</a></li>
   </ul>
 
@@ -241,32 +244,26 @@
 <div class="wia_calculator_mobile aa-component" *ngIf="externalInput && graphData">
 
   <div class="wia_calculator__summary">
-    <div class="row-fluid">
-      <div class="span5">
-        <table>
-          <tr>
-            <td>1e jaar</td>
-            <td>€{{ graphData[0]?.columns[0].amountYearly | money:true }}</td>
-          </tr>
-          <tr>
-            <td>2e jaar</td>
-            <td>€{{ graphData[0]?.columns[1].amountYearly | money:true }}</td>
-          </tr>
-        </table>
-      </div>
-      <div class="span7">
-        <table>
-          <tr>
-            <td>Vanaf 3e jaar</td>
-            <td>€{{ graphData[1]?.columns[0].amountYearly | money:true }}</td>
-          </tr>
-          <tr>
-            <td>Tot pensioenleeftijd</td>
-            <td>€{{ graphData[2]?.columns[0].amountYearly | money:true }}</td>
-          </tr>
-        </table>
-      </div>
-    </div>
+    <table>
+      <tr>
+        <td>1e jaar</td>
+        <td>€{{ graphData[0]?.columns[0].amountYearly | money:true }}</td>
+      </tr>
+      <tr>
+        <td>2e jaar</td>
+        <td>€{{ graphData[0]?.columns[1].amountYearly | money:true }}</td>
+      </tr>
+      <tr class="wia_calculator--aegon-blue-animate" [class.wia_calculator--aegon-blue]="sliderDragInProgress">
+        <td class="wia_calculator__summary_bottom">Vanaf 3e jaar</td>
+        <td class="wia_calculator__summary_bottom">
+          €{{ graphData[1]?.columns[0].amountYearly | money:true }}
+        </td>
+      </tr>
+      <tr class="wia_calculator--aegon-blue-animate" [class.wia_calculator--aegon-blue]="sliderDragInProgress">
+        <td>Tot pensioenleeftijd</td>
+        <td>€{{ graphData[2]?.columns[0].amountYearly | money:true }}</td>
+      </tr>
+    </table>
 
     <span class="wia_calculator__summary_legend">Bedragen zijn bruto per jaar</span>
   </div>
@@ -295,11 +292,6 @@
 
     <aa-input-switch [(ngModel)]="permanentDisability" (modelChange)="updatePermDisability()"></aa-input-switch>
   </div>
-
-  <a class="wia_calculator__mobile_help wia_calculator--aegon-blue" (click)="mobileHelpVisible = !mobileHelpVisible">
-    <span class="icon-help"></span>
-    <span class="wia_calculator__mobile_help_text">Lees meer over arbeidsongeschiktheid</span>
-  </a>
 
   <div class="wia_calculator__mobile_help_content" *ngIf="mobileHelpVisible">
 
@@ -344,7 +336,7 @@
   <div class="wia_calculator__summary_table">
     <table>
       <tr *ngIf="legendData[1]">
-        <td>Aegon uitlering</td>
+        <td>Aegon uitkering</td>
         <td>€</td>
         <td class="wia_calculator--aegon-blue">{{ graphData[1]?.columns[0].categoryYearlyAmounts[3] | money:true }}</td>
       </tr>
@@ -372,7 +364,7 @@
   <div class="wia_calculator__summary_table">
     <table>
       <tr *ngIf="legendData[1]">
-        <td>Aegon uitlering</td>
+        <td>Aegon uitkering</td>
         <td>€</td>
         <td class="wia_calculator--aegon-blue">{{ graphData[2]?.columns[0].categoryYearlyAmounts[3] | money:true }}</td>
       </tr>
@@ -394,6 +386,11 @@
     </table>
   </div>
 
+
+  <a class="wia_calculator__mobile_help wia_calculator--aegon-blue" (click)="mobileHelpVisible = !mobileHelpVisible">
+    <span class="icon-help"></span>
+    <span class="wia_calculator__mobile_help_text">Lees meer over arbeidsongeschiktheid</span>
+  </a>
 
   <ul class="arrow wia_calculator__back_arrow">
     <li><a href="#" (click)="goBack()">Terug naar situatie instellen</a></li>
