@@ -329,10 +329,28 @@
       }
     }
   }
+
+  // pagination classes
+
+  .fnol-repairshop_pagination{
+    text-align: center;
+  }
   .fnol-repairshop_pagination ul li {
     font-family: inherit;
-    font-size: 18px;
+    font-size: 17px !important;
     line-height: 26px;
+    cursor: pointer;
+  }
+  .ng2-pagination a{
+    color:#3395d3 !important;
+  }
+  .ng2-pagination li.current{
+    border-radius:50% !important;
+    color:#fff !important;
+    background-color: #3395d3 !important;
+  }
+  .ng2-pagination li a:hover{
+    background: none !important;
   }
 
   // MOBILE VIEW

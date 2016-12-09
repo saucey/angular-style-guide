@@ -9,9 +9,11 @@ import { DeprecatedComponentsModule } from '../../deprecated-components.module';
 
 import { FNOLRepairshopComponent } from './fnol-repairshop/fnol-repairshop.component';
 import { Ng2PaginationModule } from "ng2-pagination";
+import { PaginationControlsComponent } from './fnol-repairshop-pager/fnol-pagination.component';
 
 export const FNOLRepairshopPageExports = [
-  FNOLRepairshopComponent
+  FNOLRepairshopComponent,
+  PaginationControlsComponent
 ];
 
 export const declarations = [

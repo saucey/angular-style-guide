@@ -5,6 +5,7 @@ import {
 import { FnolRepairshopService } from "../shared/services/fnol.data.service";
 import { OrderBy } from "../../../pipes/orderBy.pipe";
 
+
 const template = require('./template.html');
 
 const INFO_FORM: string = 'info_form';
@@ -141,4 +142,5 @@ export class FNOLRepairshopComponent {
     this.orderByPipe.transform(this.parties, this.sortedBy, this.sortDirection);
   }
 }
+
 
