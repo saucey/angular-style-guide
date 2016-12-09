@@ -31,7 +31,7 @@ export class WiaPagePersonalizationService {
 
   public isCodeValid(code: string): boolean {
 
-    return code && (code.length === 5 || code.length === 6);
+    return !!(code && (code.length === 5 || code.length === 6));
   }
 
   public getIncomeClass(income: number): number {

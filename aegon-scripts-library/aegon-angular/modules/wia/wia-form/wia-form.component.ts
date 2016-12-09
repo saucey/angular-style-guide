@@ -21,6 +21,8 @@ import { WIATealiumService } from "../wia-page/wia-tealium.service";
 
 const FORM_TEMPLATE = require('./template.html');
 
+declare const jQuery;
+
 @Component({
   selector: 'aa-wia-form',
   providers: [WiaSubscriptionService, WiaPageProductsService, WiaPagePersonalizationService],
@@ -81,6 +83,15 @@ export class WiaFormComponent extends AABaseComponent implements OnInit {
     // Form filled or personalization code sent => form submitted
     this.wiaSubscriptionService.externalInput$.subscribe((value) => {
       this.submitted = !!value; //if value is null - show form
+      if (this.submitted) {
+        this.incomeValid = true;
+        this.codeValid = true;
+      }
+
+      if (this.wiaSubscriptionService.navigationMessage) {
+        this.scrollToForm();
+      }
+
     }, () => {
       this.submitted = true; //if error occurred -  hide form
     });
@@ -114,9 +125,8 @@ export class WiaFormComponent extends AABaseComponent implements OnInit {
     }
   }
 
-  private validate () {
+  private validateIncome () {
     this.incomeValid = this.isIncomeValid(+this.income);
-    this.codeValid = this.wiaPagePersonalizationService.isCodeValid(this.personalizationCode);
   }
 
   private isIncomeValid(income: number) {
@@ -126,7 +136,7 @@ export class WiaFormComponent extends AABaseComponent implements OnInit {
   onProductFormSubmit(event) {
     event.preventDefault();
 
-    this.validate();
+    this.validateIncome();
 
     if (this.incomeValid === false) {
       return;
@@ -137,7 +147,7 @@ export class WiaFormComponent extends AABaseComponent implements OnInit {
 
     this.calculatorDataService.getData(payload).subscribe(() => {
       this.pending = false;
-      this.wiaSubscriptionService.emit(payload);
+      this.wiaSubscriptionService.emit(payload, true);
     }, err => {
       this.submitted = true;
       this.wiaSubscriptionService.externalInput$.error({
@@ -149,9 +159,10 @@ export class WiaFormComponent extends AABaseComponent implements OnInit {
 
   onCodeSubmit() {
 
-    this.validate();
+    this.validateIncome();
+    this.codeValid = this.wiaPagePersonalizationService.isCodeValid(this.personalizationCode);
 
-    if (this.incomeValid === false || this.codeValid === false) {
+    if (!this.incomeValid || !this.codeValid) {
       return;
     }
 
@@ -164,7 +175,7 @@ export class WiaFormComponent extends AABaseComponent implements OnInit {
 
     this.calculatorDataService.getData(input).subscribe(() => {
       this.pending = false;
-      this.wiaSubscriptionService.emit(input);
+      this.wiaSubscriptionService.emit(input, true);
     });
   }
 
@@ -191,6 +202,24 @@ export class WiaFormComponent extends AABaseComponent implements OnInit {
     this.products.forEach((el: any) => {
       el.disabled = availableProducts.indexOf(el.id) === -1;
     });
+  }
+
+  public setActivePage (formId: number) {
+    this.visiblePage = formId;
+
+    if (this.visiblePage === 1) {
+      this.products = this.wiaPageProductsService.getProducts();
+    }
+  }
+
+  private scrollToForm () {
+    const PADDING = 20;
+    const calculatorRect = this.elementRef.nativeElement.getBoundingClientRect();
+    const position = window.scrollY + calculatorRect.top - PADDING;
+
+    jQuery('html,body').animate({
+      scrollTop: position
+    })
   }
 
   /**

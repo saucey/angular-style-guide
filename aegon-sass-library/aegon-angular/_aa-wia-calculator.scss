@@ -71,7 +71,7 @@ $wiaCalculatorMobileBreakpoint: 850px;
     &[data-category="3"] .aa-block-graph__bar-block-inner {
       background: $wiaCalculatorCategoryAegon;
       &:before {
-        content: 'Aegon uitlering';
+        content: 'Aegon uitkering';
         color: #fff;
         background: $wiaCalculatorCategoryAegon;
       }
@@ -137,6 +137,11 @@ $wiaCalculatorMobileBreakpoint: 850px;
     padding-left: 2em;
     padding-top: 0.5em;
   }
+}
+
+.wia_calculator__extra_input_title {
+  margin: 0;
+  display: inline;
 }
 
 .wia_calculator__coverages {
@@ -307,7 +312,11 @@ $wiaCalculatorMobileBreakpoint: 850px;
     }
   }
   &.wia-graph__column--rest-third {
-    width: 65% !important;
+    width: 70% !important;
+
+    @media (max-width: 1000px) {
+      width: 65% !important;
+    }
   }
 }
 
@@ -513,6 +522,10 @@ $wiaCalculatorMobileBreakpoint: 850px;
       display: block;
     }
   }
+
+  .wia_calculator__summary_bottom {
+    padding-top: 1em;
+  }
 }
 
 .wia_calculator__summary_table {
@@ -532,7 +545,6 @@ $wiaCalculatorMobileBreakpoint: 850px;
     }
     &:nth-child(2) {
       width: 10%;
-      font-size: 1.1em;
     }
     &:nth-child(3) {
       width: 25%;
@@ -628,7 +640,7 @@ $wiaCalculatorMobileBreakpoint: 850px;
   float: left;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1250px) {
   .wia_calculator__extra_inputs__desc {
     width: 100% !important;
     float: none !important;
@@ -639,7 +651,10 @@ $wiaCalculatorMobileBreakpoint: 850px;
   .wia_calculator__extra_inputs [class*="span"] {
     float: none !important;
     width: 100% !important;
-    margin: 0;
+    margin: 0 !important;
+  }
+  .wia_calculator__tabs {
+    margin-top: 1em;
   }
 }
 
