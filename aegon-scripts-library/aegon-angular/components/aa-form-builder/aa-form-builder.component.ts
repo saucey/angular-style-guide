@@ -38,11 +38,10 @@ export class AAFormBuilderComponent extends AABaseComponent implements OnInit {
 
   // Get and check pension data, set page structure and call service from blue block component
   public initialize():void {
-  
+    
   }
 
   public getDataFromStorage(storage: string, object: string, key: string): any {
-    console.log(storage, object, key);
     var item: any = "";
     try {
       item = clientStorage[storage].getItem(object)[key];

@@ -78,58 +78,5 @@
     {{data.options.yourDataText}}
   </p>
   
-  <form 
-    class="container_12" 
-    (click)="fireTealiumFormStarted()" 
-    name={{data.options.form.name}}
-     #f="ngForm" (ngSubmit)="save(f.value, f.valid)" novalidate>
-    
-    <div class="form-input-row" *ngFor="let list of data.options.form.inputList">
-      <label class="span4 form-input-label" *ngIf="list.inputs!=undefined">
-        {{list.label}}
-        <span *ngIf="list.inputs[0].required">*</span>
-      </label>
-
-      <div class="input-container" *ngIf="list.inputs!=undefined">
-        <div class="input-wrapper span{{input.width}}" *ngFor="let input of list.inputs">
-          <input
-            *ngIf="input.type=='text' || input.type=='email' || input.type=='number' || input.type=='password'"
-            type="{{input.type}}"
-            placeholder="{{input.placeholder}}"
-            name="{{input.name}}"
-            [attr.required]="input.required ? true : null"
-            [attr.pattern]="input.pattern ? input.pattern : null"
-            [(ngModel)]="formData[input.name] = (input.storage) ? getDataFromStorage(input.storage.type, input.storage.object, input.storage.key) : input.value"
-            [value]="formData[input.name]" />
-          <label 
-            class="radio" 
-            *ngIf="input.type=='radio'">
-            <input 
-              type="{{input.type}}"
-              name="{{input.name}}"
-              [attr.name]="input.name"
-              [attr.required]="input.required ? true : null"
-              [attr.checked]="input.checked ? 'checked' : null"
-              [(ngModel)]="formData[input.name]"
-              (click)="formData[input.name] = input.value" />
-            <span class="radio"></span>{{input.label}}
-          </label>
-        </div>
-      </div>
-
-      <input *ngIf="list.type=='hidden'"
-        type="{{list.type}}"
-        name="{{list.name}}"
-        [(ngModel)]="formData[list.name] = (list.storage) ? getDataFromStorage(list.storage.type, list.storage.object, list.storage.key) : list.value"
-        [value]="formData[list.name]" />
-    </div>
-
-    <div class="form-input-row">
-      <div class="input-wrapper span12 submit-form-button--wrapper">
-        <button class="button arrow" type="submit"  [disabled]="callingService">
-          {{data.options.form.submitButton.label}}
-        </button>
-      </div>
-    </div>
-  </form>
+  <aa-form-builder  [options]="data.options.form"></aa-form-builder>
 </div>

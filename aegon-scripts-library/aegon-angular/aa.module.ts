@@ -50,7 +50,8 @@ const declarations = [
     aaComp.AATodosComponent,
     aaComp.AALoaderComponent,
     aaComp.AAFAQComponent,
-    aaComp.AAPensionOfferFormComponent
+    aaComp.AAPensionOfferFormComponent,
+    aaComp.AAFormBuilderComponent
 ];
 
 //Exports
