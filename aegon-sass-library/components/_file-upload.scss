@@ -24,12 +24,36 @@
       line-height: 22px;
       margin-left: 15px;
     }
-    .icon-file-upload-thin:before, > .icon-x:before {
+    .file-upload__upload-btn:before,
+    > .icon-x:before,
+    .file-upload__upload-btn--uploading{
       background-color: $blue;
       color: $white;
       border-radius: 50%;
       text-align: center;
       padding: 0;
+    }
+    .file-upload__upload-btn {
+      &.file-upload__upload-btn--uploading {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        background: url($image_path + 'spinner.gif') center center no-repeat $blue;
+        background-size: 50%;
+        opacity:0.4;
+        vertical-align: middle;
+      }
+    }
+    .file-upload__uploading-msg {
+      display: none;
+    }
+    &.file-upload__input--uploading {
+      .file-upload__upload-msg {
+        display: none;
+      }
+      .file-upload__uploading-msg {
+        display: block;
+      }
     }
   }
   .file-upload__list{

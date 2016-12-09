@@ -1,5 +1,6 @@
 /**
- * Example JavaScript component
+ * File Upload plugin
+ * Using Drupal API.
  */
 // Closure with jQuery support
 (function(Drupal, $) {
@@ -46,7 +47,7 @@
       });
       // Input file change.
       inputFile.on('change', function() {
-        that.imageHandler.readfiles(this.files, imgCallback);
+        that.imageHandler.readfiles(this, imgCallback);
       });
     },
     getFileListItem: function(file) {
@@ -85,9 +86,9 @@
     },
     /**
      * Functions to handle images.
-      */
+     */
     imageHandler: {
-      /*
+      /**
        * Checks for browser support
        */
       tests: {
@@ -114,17 +115,29 @@
        * @param files: array with files
        * @param callback: a function to run after the file is read.
        */
-      readfiles: function(files, callback) {
-        console.log('reading files', this);
-        if(files.length > 0){
+      readfiles: function(input, callback) {
+        $(input).addClass('file-upload__input--uploading');
+        console.log('reading files', input);
+        if(input.files.length > 0){
+          var files = input.files;
           // var formData = this.tests.formdata ? new FormData() : null;
           // attach the file to the global variable
           for (var i = 0; i < files.length; i++) {
-            this.previewfile(files[i], callback);
+            var name = files[i].name;
+            var fileExt = name.substring(name.lastIndexOf('.'), name.length);
+            console.log('file extension: ', fileExt, this.acceptedTypes.indexOf(fileExt));
+            if(this.acceptedTypes.indexOf(fileExt) === -1) {
+              //@todo ask Jaap what to do.
+
+            }
+            else {
+              this.previewfile(files[i], callback);
+            }
           }
         }
+        $(input).removeClass('file-upload__input--uploading');
       },
-      /*
+      /**
        * Handles a file information
        *
        * @param file: a file object
@@ -142,7 +155,7 @@
 
           reader.readAsDataURL(file);
         } else {
-          // We need to do something if it's not valid file format
+          // @todo handle filereader compatibility.
           console.log(file);
         }
       }
