@@ -41,6 +41,9 @@
   .margintop_20px {
     margin-top: 20px;
   }
+  .paddingLeft0px {
+    padding-left: 0px;
+  }
   .fnol-repairshop-mandatory {
     color: $red;
   }
@@ -226,7 +229,6 @@
   }
   .result-text {
     font-family: $senticoSansdtRegular;
-    font-weight: bold;
     padding: 0 0 25px 0;
   }
   .fnol-repairshop-table-sort .title_sort, .fnol-repairshop-table-mobile-view .mob_title_sort {
@@ -354,6 +356,9 @@
     color: $black;
     border-right: none;
   }
+  .fnol-repairshop-table-mobile-view thead tr th.rhs_head_width {
+    width: 75%;
+  }
   .fnol-repairshop-table-mobile-view tbody tr td {
     padding:0px;
     color: $black;
@@ -368,10 +373,10 @@
     border-bottom: solid 1px $grey;
   }
   .mob_title_pos {
-    float: left;
+    float: right;
   }
   .mob_title_right {
-    float: right; margin:0px 0px 0px 0px;
+    float: right; margin:0px -16px 0px 0px;
   }
   .fnol-repairshop-table-mobile-data {
     width: 100%;
@@ -451,16 +456,14 @@
 
   }
 
+  // hide titles of embedded nodes (faqs)
+  .node__title {
+    display: none;
+  }
 
-
-  .fnol-repairshop-drupal-elems {
-    .node__title {
-      display: none;
-    }
-
-    [id^=bc-generic_content-faqs_search] {
-      display: none;
-    }
+  //hide faq search
+  [id^=bc-generic_content-faqs_search] {
+    display: none;
   }
 
 }
