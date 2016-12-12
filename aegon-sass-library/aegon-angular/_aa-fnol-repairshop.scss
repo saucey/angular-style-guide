@@ -334,6 +334,7 @@
 
   .fnol-repairshop_pagination{
     text-align: center;
+    margin: 15px 0px 50px 0px;
   }
   .fnol-repairshop_pagination ul li {
     font-family: inherit;
@@ -418,6 +419,7 @@
     background: none;
     list-style-type: none;
     color: $black;
+    padding: 0px;
   }
   .fnol-repairshop-table-mobile-data tr td.mob_name {
     width:79%;
@@ -591,6 +593,7 @@
   .fnol-repairshop {
     .fnol-repairshop__formLblAlign {
       text-align: right;
+      margin-bottom: 10px;
     }
     .fnol-repairshop__formRadioLblAlign {
       text-align: right;
