@@ -101,7 +101,7 @@ export class AAFormBuilderComponent extends AABaseComponent implements OnInit {
             this.showThankYouMessage = true;
           }
           if(this.data.options.redirectUrl) {
-            location.href = this.data.options.form.redirectUrl;
+            location.href = this.data.options.redirectUrl;
           }
         } catch(e) {
           this.showError=true;   
