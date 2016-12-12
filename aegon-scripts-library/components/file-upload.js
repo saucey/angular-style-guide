@@ -205,7 +205,7 @@
        * @returns {boolean}
        */
       isValidType: function(fileName) {
-        var fileExt = fileName.substring(name.lastIndexOf('.'), name.length);
+        var fileExt = fileName.substring(fileName.lastIndexOf('.'), fileName.length);
 
         return this.acceptedTypes.indexOf(fileExt) > -1;
       },
