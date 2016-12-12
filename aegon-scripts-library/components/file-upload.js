@@ -109,19 +109,24 @@
      * @param $filesTypes: list of files extension including the dot.
      */
     fileTypes: function($filesTypes) {
-      var acceptedTypes = $filesTypes.replace(/\s/g, '');
-      acceptedTypes = acceptedTypes.split(',');
+      if($filesTypes === 'default') {
+        this.imageHandler.acceptedTypes = this.imageHandler.defaultTypes;
+      }
+      else {
+        var acceptedTypes = $filesTypes.replace(/\s/g, '');
+        acceptedTypes = acceptedTypes.split(',');
 
-      if(acceptedTypes.length) {
-        // Each file type should contain the extension
-        // prefixed by a dot.
-        for(var i=0;i<acceptedTypes.length;i++) {
-          if(acceptedTypes[i].indexOf('.') !== 0) {
-            acceptedTypes.splice(i, 1);
+        if(acceptedTypes.length) {
+          // Each file type should contain the extension
+          // prefixed by a dot.
+          for(var i=0;i<acceptedTypes.length;i++) {
+            if(acceptedTypes[i].indexOf('.') !== 0) {
+              acceptedTypes.splice(i, 1);
+            }
           }
-        }
 
-        this.imageHandler.acceptedTypes = acceptedTypes;
+          this.imageHandler.acceptedTypes = acceptedTypes;
+        }
       }
     },
     /**
@@ -139,7 +144,11 @@
       /**
        * Array with the accepted file types
        */
-      acceptedTypes: [
+      acceptedTypes: [],
+      /**
+       * Array with the default accepted types.
+       */
+      defaultTypes: [
         '.pdf',
         '.doc',
         '.docx',
@@ -157,6 +166,13 @@
        */
       readfiles: function(input, callback, callbackErr) {
         $(input).addClass('file-upload__input--uploading');
+        // Validates accept value.
+        if($(input).attr('accept') && $(input).attr('accept') !== '') {
+          Drupal.behaviors.fileUpload.fileTypes($(input).attr('accept'));
+        }
+        else {
+          Drupal.behaviors.fileUpload.fileTypes('default');
+        }
         // Check support for fileReader API.
         if (this.tests.filereader === true) {
           if(input.files.length > 0){
@@ -205,7 +221,7 @@
        * @returns {boolean}
        */
       isValidType: function(fileName) {
-        var fileExt = fileName.substring(name.lastIndexOf('.'), name.length);
+        var fileExt = fileName.substring(fileName.lastIndexOf('.'), fileName.length);
 
         return this.acceptedTypes.indexOf(fileExt) > -1;
       },
