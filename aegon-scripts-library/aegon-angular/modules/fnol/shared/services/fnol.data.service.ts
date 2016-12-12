@@ -75,10 +75,10 @@ export class FNOLDataService {
 
         if (id.startsWith('Q')) {
             return this.getQuestion(id);
-            
+
         } else if (id.startsWith('END')) {
             return this.getEndpoint(id);
-            
+
         } else {
             throw new Error ('Couldn\'t find item for id:' + id);
         }
