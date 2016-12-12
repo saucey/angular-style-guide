@@ -15,5 +15,6 @@ export const defaultOptions = {
   serviceErrorMessage : false,
   serviceOkPath: "",
   serviceOkValue: "",
-  serviceKoPath: ""
+  serviceKoPath: "",
+  serviceOkCheckOnlyIfExists : false
 }

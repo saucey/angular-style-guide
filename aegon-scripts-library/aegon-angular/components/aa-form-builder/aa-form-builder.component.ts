@@ -80,7 +80,13 @@ export class AAFormBuilderComponent extends AABaseComponent implements OnInit {
       .then((data) => {
         this.callingService=false;
         try {
-          if(this.formBuilderService.getPropByPath(data, this.data.options.serviceOkPath)!=this.data.options.serviceOkValue) {
+          let serviceOkPath = this.formBuilderService.getPropByPath(data, this.data.options.serviceOkPath);
+          if(this.data.options.serviceOkCheckOnlyIfExists) {
+            if(serviceOkPath==null) {
+              this.showError=true; 
+              return false;  
+            }
+          } else if(serviceOkPath!=this.data.options.serviceOkValue) {
             this.showError=true; 
             return false;
           }
