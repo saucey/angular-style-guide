@@ -1,6 +1,5 @@
 export const defaultOptions = {
   name: 'form_name',
-  redirectUrl: '/template-aa-pension-offer-confirmation.html',
   inputList: [],
   submitButton: {
     serviceUrl: 'https://www.test.aegon.nl/data/thund/thund/dip',
@@ -10,7 +9,11 @@ export const defaultOptions = {
   middleText: false,
   bottomText: false,
   thankYouMessage: false,
+  redirectUrl: false,
   serviceRequest: false,
-  serviceCredentials: "FILL_ME_IN_AA_DATA",
-  serviceErrorMessage : false
+  serviceCredentials: "CREDENTIAL_HERE",
+  serviceErrorMessage : false,
+  serviceOkPath: "",
+  serviceOkValue: "",
+  serviceKoPath: ""
 }

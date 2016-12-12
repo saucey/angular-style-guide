@@ -84,4 +84,15 @@ export class FormBuilderService {
       } else
         obj[prop[0]] = value;
   }
+
+  getPropByPath(obj, prop, defval){
+      if (typeof defval == 'undefined') defval = null;
+      prop = prop.split('.');
+      for (var i = 0; i < prop.length; i++) {
+          if(typeof obj[prop[i]] == 'undefined')
+              return defval;
+          obj = obj[prop[i]];
+      }
+      return obj;
+  }
 }

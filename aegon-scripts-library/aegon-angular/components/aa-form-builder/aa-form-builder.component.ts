@@ -64,9 +64,7 @@ export class AAFormBuilderComponent extends AABaseComponent implements OnInit {
   save(model: any, isValid: boolean) {
       if(!this.isValid())
         return false;
-
       this.callService(model);
-      //location.href = this.data.options.form.redirectUrl;
       return false;
   }
 
@@ -82,9 +80,16 @@ export class AAFormBuilderComponent extends AABaseComponent implements OnInit {
       .then((data) => {
         this.callingService=false;
         try {
+          if(this.formBuilderService.getPropByPath(data, this.data.options.serviceOkPath)!=this.data.options.serviceOkValue) {
+            this.showError=true; 
+            return false;
+          }
           this.serviceCallBack(data);
           if(this.data.options.thankYouMessage) {
             this.showThankYouMessage = true;
+          }
+          if(this.data.options.redirectUrl) {
+            location.href = this.data.options.form.redirectUrl;
           }
         } catch(e) {
           this.showError=true;   
