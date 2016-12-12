@@ -19,6 +19,9 @@
       .input-wrapper {
         input[type=text], input[type=email], input[type=number], input[type=password] {
           width: 100%;
+          &.ng-dirty.ng-invalid {
+            border: 2px solid #bb5450;
+          }
         }
         span.radio {
           top: -10px !important;

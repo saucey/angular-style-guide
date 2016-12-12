@@ -62,7 +62,7 @@ export class AAFormBuilderComponent extends AABaseComponent implements OnInit {
   } 
 
   save(model: any, isValid: boolean) {
-      if(!this.isValid())
+      if(!this.isValid(model, isValid))
         return false;
       try {
         let timestamp = new Date().getTime();
@@ -74,8 +74,8 @@ export class AAFormBuilderComponent extends AABaseComponent implements OnInit {
       return false;
   }
 
-  isValid(): boolean {
-    return true;
+  isValid(model, isValid): boolean {
+    return isValid;
   }
 
   callService(model): any {
