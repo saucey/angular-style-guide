@@ -4,6 +4,7 @@ import { Category, Step } from "../shared/models";
 import { clone } from "../../../lib/util";
 import { Parent } from "../../../lib/classes/AAParent";
 import { AATabsViewComponent } from "../../../components/aa-tabs-view/aa-tabs-view.component";
+import { FNOLTealiumService } from "../fnol-page/fnol-tealium.service";
 
 const template = require('./template.html');
 
@@ -30,7 +31,9 @@ export class FNOLCategoryComponent implements OnInit {
     constructor(private elementRef: ElementRef,
                 private _ngZone: NgZone,
                 private tabsView: Parent,
-                private fnolDataService: FNOLDataService) {}
+                private fnolDataService: FNOLDataService,
+                private fnolTealiumService: FNOLTealiumService
+    ) {}
 
     ngOnInit() {
         this.init();
@@ -38,7 +41,34 @@ export class FNOLCategoryComponent implements OnInit {
       if (this.tabsView) {
         (this.tabsView as AATabsViewComponent).onTabChange((tab) => {
           if (this.category.id === tab.id) {
-            //reset form every time tab is changed
+            switch (this.category.id) {
+              case 'possession':
+                  this
+                    .fnolTealiumService
+                    .clickDamageCategoryInboedel();
+                break;
+              case 'home':
+                  this
+                    .fnolTealiumService
+                    .clickDamageCategoryOpstal();
+                break;
+              case 'auto':
+                this
+                  .fnolTealiumService
+                  .clickDamageCategoryAuto();
+                break;
+              case 'liability':
+                  this
+                    .fnolTealiumService
+                    .clickDamageCategoryAansprakelijkheid();
+                break;
+              case 'travel':
+                this
+                  .fnolTealiumService
+                  .clickDamageCategoryReis();
+                break;
+            }
+
             this.init();
           }
         })
@@ -72,6 +102,35 @@ export class FNOLCategoryComponent implements OnInit {
                this.scrollToLastQuestion();
            })
         });
+
+        this.triggerTealiumForEndpoints(nextStepId);
+    }
+
+    private triggerTealiumForEndpoints(stepId) {
+        if (stepId.indexOf('END_POSSESSION') !== -1) {
+          console.log('inboedel');
+          this.fnolTealiumService.endOfFunnelReachedForInboedel();
+        }
+
+        if (stepId.indexOf('END_HOME') !== -1) {
+          console.log('opstal');
+          this.fnolTealiumService.endOfFunnelReachedForOpstal();
+        }
+
+        if (stepId.indexOf('END_AUTO') !== -1) {
+          console.log('auto');
+          this.fnolTealiumService.endOfFunnelReachedForAuto();
+        }
+
+        if (stepId.indexOf('END_TRAVEL') !== -1) {
+          console.log('aansprakelijkheid');
+          this.fnolTealiumService.endOfFunnelReachedForAansprakelijkheid();
+        }
+
+        if (stepId.indexOf('END_LIABILITY') !== -1) {
+          console.log('reis');
+          this.fnolTealiumService.endOfFunnelReachedForReis();
+        }
     }
 
     scrollToLastQuestion () {
