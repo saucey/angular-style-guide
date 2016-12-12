@@ -66,7 +66,7 @@ export class AAFormBuilderComponent extends AABaseComponent implements OnInit {
         return false;
       try {
         let timestamp = new Date().getTime();
-        this.formBuilderService.assign(this.data.options.serviceRequest, this.data.options.correlationIdPath, this.data.options.correlationIdPrefix+timestamp);
+        this.formBuilderService.assign(this.data.options.serviceRequest, this.data.options.correlationIdPath, "##"+this.data.options.correlationIdPrefix+timestamp+"##");
       } catch(err) {
         console.log(err);
       }
