@@ -39,7 +39,7 @@
     margin-top: 2em;
   }
   .paddingLeft0px {
-    padding-left: 0px;
+    padding-left: 0px !important;
   }
   .fnol-repairshop-mandatory {
     color: $red;
@@ -373,7 +373,7 @@
     border-right: none;
   }
   .fnol-repairshop-table-mobile-view thead tr th.rhs_head_width {
-    width: 75%;
+    width: 71%;
   }
   .fnol-repairshop-table-mobile-view tbody tr td {
     padding:0px;
@@ -424,14 +424,14 @@
     font-size: 1em;
     font-weight: bold;
     color: $blue;
-    padding: 10px 0px 10px 0px;
+    padding: 10px 0px 15px 0px;
   }
   .fnol-repairshop-table-mobile-data tr td.mob_rating {
     width:20%;
     text-align: right;
   }
   .fnol-repairshop-table-mobile-data tr td.mob_phone {
-    /* font-weight: bold; */
+    padding: 0px 0px 5px 0px;
   }
   .fnol-repairshop-table-mobile-data tr td.mob_distance {
     font-weight: bold;
@@ -439,7 +439,7 @@
   }
   .fnol-repairshop-table-mobile-data tr td.mob_address{  }
   .fnol-repairshop-table-mobile-data tr td.mob_location{
-    padding: 0px 0px 10px 0px;
+    padding: 10px 0px 10px 0px;
   }
   .mob-rating-star {
     color: $orange;
@@ -473,7 +473,7 @@
   }
 
   // hide titles of embedded nodes (faqs)
-  .node__title {
+  h2.node__title {
     display: none;
   }
 
@@ -518,6 +518,8 @@
       list-style-type: none;
       color: $black;
       font-size: 0.72em;
+      margin: 0px;
+      padding: 0px;
     }
     .fnol-repairshop-table-sort .title_sort {
 
