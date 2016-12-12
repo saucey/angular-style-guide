@@ -35,7 +35,7 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
     label: 'Arbeidsongeschiktheidspercentage',
     options: {
       start: 50,
-      step: 1,
+      step: 5,
       range: {
         min: 0,
         max: 100
@@ -66,7 +66,7 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
     label: 'Benutting restverdiencapaciteit',
     options: {
       start: 50,
-      step: 1,
+      step: 5,
       range: {
         min: 0,
         max: 100
@@ -119,7 +119,9 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
         this.error = {
           type: err.type,
           details: err
-        }
+        };
+
+        console.error(this.error);
       });
   }
 
@@ -132,8 +134,6 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
   }
 
   public updateModel(value: WIAInputModel) {
-
-    window.scrollTo(0, 0);
 
     if (!value) {
       this.externalInput = null;
@@ -170,6 +170,8 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
         type: 'response',
         details: err
       };
+
+      console.error(this.error);
     });
 
   }
@@ -241,9 +243,9 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
       ];
 
       this.legendData = {
-        1: legendData.includes(1),
-        2: legendData.includes(2),
-        3: legendData.includes(3)
+        1: legendData.indexOf(1) > -1,
+        2: legendData.indexOf(2) > -1,
+        3: legendData.indexOf(3) > -1
       };
     }
   }
