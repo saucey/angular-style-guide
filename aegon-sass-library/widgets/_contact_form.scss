@@ -15,6 +15,20 @@
       }
     }
   }
+  input.invalid,
+  textarea.invalid,
+  select.invalid {
+    border-color: $dark_red;
+    ~ .errorText {
+      display:block;
+    }
+  }
+  .contact-form__detail {
+    > .errorText {
+      position: static;
+      padding-top: 2px;
+    }
+  }
   .actions {
     border-top: 1px solid $lighter_grey;
     .cancel {
