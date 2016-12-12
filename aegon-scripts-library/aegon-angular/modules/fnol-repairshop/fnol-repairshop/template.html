@@ -3,8 +3,7 @@
 
   <div class="fnol-repairshop-form-input" [ngClass]="{'form-visible-mobile': getItemShown == 'info_form'}">
     <div class="row-fluid">
-      <h3 class="fnol-repairshop-subhead">U kunt deze tool gebruiken voor het vinden van een bij Aegon Schade Service
-        aangesloten autoherstelbedrijf bij u in de buurt.</h3>
+      <h3 class="fnol-repairshop-subhead">U kunt deze tool gebruiken voor het vinden van een bij Aegon Schade Service aangesloten autoherstelbedrijf bij u in de buurt.</h3>
     </div>
 
     <form name="infoForm" novalidate #infoForm="ngForm">
@@ -125,7 +124,7 @@
               <tbody>
               <tr>
                 <td class="mob_name">
-                  <a *ngIf="true != party.website" href="http://{{party.website}}" target="_blank">{{ party.name }}</a>
+                  <a *ngIf="true != party.website" href="http://{{party.website}}" (click)="triggerTealiumForGoToVendorWebsite()" target="_blank">{{ party.name }}</a>
                   <a *ngIf="true == party.website">{{ party.name }}</a>
                 </td>
                 <td class="mob_rating"><span class="rating-star fnol-repairshop__star--{{party.ranking}}"></span></td>
@@ -147,6 +146,7 @@
                 <td class="mob_location">
                   <a
                     href="https://www.google.nl/maps?q={{ party.address.street}}+{{party.address.houseNumber}},+{{party.address.city}}=nl"
+                    (click)="triggerTealiumForGoToMap()"
                     target="_blank"><span class="icon-arrow-location location-icon-pos"></span>Locatie</a></td>
               </tr>
               </tbody>
@@ -198,7 +198,7 @@
         <tbody>
         <tr *ngFor="let party of parties | paginate: { itemsPerPage: 10, currentPage: p }">
           <td class="name">
-            <a *ngIf="true != party.website" href="http://{{party.website}}" target="_blank">{{ party.name }}</a>
+            <a *ngIf="true != party.website" (click)="triggerTealiumForGoToVendorWebsite()" href="http://{{party.website}}" target="_blank">{{ party.name }}</a>
             <a *ngIf="true == party.website">{{ party.name }}</a>
           </td>
           <td class="phone icon-phone txtBold">{{ party.phone }}</td>
@@ -214,6 +214,7 @@
           </td>
           <td class="distance">{{ party.address.radius }} Km</td>
           <td class="location"><a
+            (click)="triggerTealiumForGoToMap()"
             href="https://www.google.nl/maps?q={{ party.address.street}}+{{party.address.houseNumber}},+{{party.address.city}}=nl"
             target="_blank"><span class="icon-arrow-location location-icon-pos"></span>Locatie</a>
           </td>

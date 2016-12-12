@@ -1,9 +1,10 @@
 import {
-  Component, Input
+  Component, Input, AfterViewInit
 } from '@angular/core';
 
 import { FnolRepairshopService } from "../shared/services/fnol.data.service";
 import { OrderBy } from "../../../pipes/orderBy.pipe";
+import { FNOLRepairshopTealiumService } from "../shared/services/fnol-repairshop-tealium.service";
 
 
 const template = require('./template.html');
@@ -16,11 +17,12 @@ const RESULT_MOBILE: string = 'result_mobile';
   template: template,
   providers: [
     FnolRepairshopService,
-    OrderBy
+    OrderBy,
+    FNOLRepairshopTealiumService
   ]
 })
 
-export class FNOLRepairshopComponent {
+export class FNOLRepairshopComponent implements AfterViewInit {
 
   public isHideRepairshopResults: boolean = true;
   public isHideMobileRepairshopResults: boolean = true;
@@ -38,10 +40,20 @@ export class FNOLRepairshopComponent {
     damage: null
   };
 
-  constructor(private fnolRepairshopService: FnolRepairshopService, private orderByPipe: OrderBy) {
+  constructor(
+    private fnolRepairshopService: FnolRepairshopService,
+    private orderByPipe: OrderBy,
+    private fnolRepairshopTealiumService: FNOLRepairshopTealiumService
+  ) {
   }
 
   public repairshopFormSubmit() {
+    if (false === this.formSubmitted) {
+      this
+        .fnolRepairshopTealiumService
+        .firstInteractionWithTool();
+    }
+
     this.isHideRepairshopResults = true;
     this.formSubmitted = true;
 
@@ -63,6 +75,7 @@ export class FNOLRepairshopComponent {
           this.getItemShown = RESULT_MOBILE;
           this.loadingResults = false;
           this.orderByPipe.transform(this.parties, this.sortedBy, this.sortDirection);
+          this.fnolRepairshopTealiumService.searchPerformed();
         });
     }
   }
@@ -140,6 +153,24 @@ export class FNOLRepairshopComponent {
     }
 
     this.orderByPipe.transform(this.parties, this.sortedBy, this.sortDirection);
+  }
+
+  ngAfterViewInit(): void {
+    this
+      .fnolRepairshopTealiumService
+      .toolLoaded();
+  }
+
+  triggerTealiumForGoToVendorWebsite() {
+    this
+      .fnolRepairshopTealiumService
+      .clickOnWebsiteLinkForSearchResult();
+  }
+
+  triggerTealiumForGoToMap() {
+    this
+      .fnolRepairshopTealiumService
+      .clickOnLocationIconForSearchResult();
   }
 }
 
