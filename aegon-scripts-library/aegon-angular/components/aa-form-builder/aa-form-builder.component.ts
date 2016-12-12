@@ -64,6 +64,12 @@ export class AAFormBuilderComponent extends AABaseComponent implements OnInit {
   save(model: any, isValid: boolean) {
       if(!this.isValid())
         return false;
+      try {
+        let timestamp = new Date().getTime();
+        this.formBuilderService.assign(this.data.options.serviceRequest, this.data.options.correlationIdPath, this.data.options.correlationIdPrefix+timestamp);
+      } catch(err) {
+        console.log(err);
+      }
       this.callService(model);
       return false;
   }
@@ -80,7 +86,7 @@ export class AAFormBuilderComponent extends AABaseComponent implements OnInit {
       .then((data) => {
         this.callingService=false;
         try {
-          let serviceOkPath = this.formBuilderService.getPropByPath(data, this.data.options.serviceOkPath);
+          let serviceOkPath = this.formBuilderService.getPropByPath(data, this.data.options.serviceOkPath, null);
           if(this.data.options.serviceOkCheckOnlyIfExists) {
             if(serviceOkPath==null) {
               this.showError=true; 

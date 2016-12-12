@@ -16,5 +16,7 @@ export const defaultOptions = {
   serviceOkPath: "",
   serviceOkValue: "",
   serviceKoPath: "",
-  serviceOkCheckOnlyIfExists : false
+  serviceOkCheckOnlyIfExists : false,
+  correlationIdPath: "",
+  correlationIdPrefix : ""
 }
