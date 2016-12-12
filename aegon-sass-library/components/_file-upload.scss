@@ -1,0 +1,90 @@
+.file-upload {
+  .file-upload__input {
+    position: relative;
+    display: inline-block;
+    width: auto;
+    font-weight: normal;
+    color: $slightly_darker_blue;
+    cursor: pointer;
+    > input[type="file"] {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      opacity: 0;
+    }
+    .icon-file-upload-thin:before {
+      width: 40px;
+      line-height: 40px;
+    }
+    .file-upload__remove {
+      &:before {
+        width: 22px;
+        font-size: 12px;
+        line-height: 22px;
+      }
+    }
+    .file-upload__upload-btn:before,
+    > .icon-x:before,
+    .file-upload__upload-btn--uploading{
+      background-color: $blue;
+      color: $white;
+      border-radius: 50%;
+      text-align: center;
+      padding: 0;
+    }
+    .file-upload__upload-btn {
+      &.file-upload__upload-btn--uploading {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        background: url($image_path + 'spinner.gif') center center no-repeat $blue;
+        background-size: 50%;
+        opacity:0.4;
+        vertical-align: middle;
+      }
+    }
+    .file-upload__uploading-msg {
+      display: none;
+    }
+    &.file-upload__input--uploading {
+      .file-upload__upload-msg {
+        display: none;
+      }
+      .file-upload__uploading-msg {
+        display: block;
+      }
+    }
+    &.file-upload__input--uploaded {
+      display: block;
+      overflow: hidden;
+      padding-right: 30px;
+      > input[type="file"] {
+        top: 105%;
+      }
+      > * {
+        vertical-align: middle;
+      }
+      .file-upload__name {
+        max-width: 85%;
+        display: inline-block;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        &:before {
+          padding:0;
+          text-align: center;
+        }
+      }
+    }
+    &.file-upload__input--invalid {
+      color: $dark_red;
+      cursor: default;
+    }
+  }
+  .file-upload__list{
+    padding: 10px 5px;
+    transition: all 500ms ease-in-out;
+  }
+}

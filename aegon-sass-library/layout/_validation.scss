@@ -56,7 +56,8 @@ select {
     }
   }
 }
-input.blurred {
+input.blurred,
+textarea.blurred {
   &.invalid {
     border-color: $red;
     & ~ .errorText {
@@ -68,7 +69,7 @@ input.blurred {
     }
   }
 }
-input, select {
+input, select, textarea {
   &~ .errorText {
     line-height: $errorText_line-height;
     font-size: $small;
