@@ -214,8 +214,7 @@ export class WiaFormComponent extends AABaseComponent implements OnInit {
 
   private scrollToForm () {
     const PADDING = 20;
-    const calculatorRect = this.elementRef.nativeElement.getBoundingClientRect();
-    const position = window.scrollY + calculatorRect.top - PADDING;
+    const position = jQuery(this.elementRef.nativeElement).offset().top - PADDING;
 
     jQuery('html,body').animate({
       scrollTop: position

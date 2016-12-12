@@ -136,7 +136,8 @@ export class FNOLCategoryComponent implements OnInit {
     scrollToLastQuestion () {
 
         const $lastQuestion = this.elementRef.nativeElement.querySelector('.fnol-category__question:last-child');
-        const positionFromTop = window.scrollY + $lastQuestion.getClientRects()[0].top;
+        const positionFromTop = jQuery($lastQuestion).offset().top;
+
         const EXTRA_SPACE = 100;
 
         //mobile view - scroll to beginning of the element
