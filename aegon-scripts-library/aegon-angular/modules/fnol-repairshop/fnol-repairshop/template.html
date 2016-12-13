@@ -14,7 +14,7 @@
               class="hidden-mobile fnol-repairshop-mandatory">*</span>
             </label>
           </div>
-          <div class="span8 paddingLeft0px">
+          <div class="span8 mob_control_alignment">
             <p *ngIf="formSubmitted && isPostcodeEmpty(repairshop.postcode)" class="fnol-repairshop__errorMsg">Dit veld
               is verplicht</p>
             <p
@@ -30,7 +30,7 @@
 
         <div class="row-fluid fnol-repairshop-formSpacer">
           <div class="span4 txtBold fnol-repairshop__formRadioLblAlign">Straal</div>
-          <div class="span8 clear-float">
+          <div class="span8 clear-float mob_control_alignment">
             <label class="radio">
               <input type="radio" checked="checked" name="distance" [value]="10" [(ngModel)]="repairshop.distance"/>
               <span class="radio"></span>0-10 km
@@ -49,7 +49,7 @@
         <div class="row-fluid fnol-repairshop-formSpacer">
           <div class="span4 txtBold fnol-repairshop__formRadioLblAlign">
             Type schade <span class="hidden-mobile fnol-repairshop-mandatory">*</span></div>
-          <div class="span8 clear-float" ngClass="">
+          <div class="span8 clear-float mob_control_alignment">
 
 
             <p *ngIf="formSubmitted && isDamageUnselected(repairshop.damage)" class="fnol-repairshop__errorMsg">Dit veld

@@ -38,9 +38,6 @@
   .marginTop_2em {
     margin-top: 2em;
   }
-  .paddingLeft0px {
-    padding-left: 0px !important;
-  }
   .fnol-repairshop-mandatory {
     color: $red;
   }
@@ -356,6 +353,10 @@
   }
 
   // MOBILE VIEW
+
+  .mob_control_alignment {
+    padding-left: 0px !important;
+  }
   .fnol-repairshop-table-mobile-view {
     width: 100%;
     border-top: none;
@@ -700,6 +701,21 @@
     }
     label.mob_view__btmMargin {
       margin-bottom: 0px;
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .fnol-repairshop {
+    .fnol-repairshop-formLabel {
+      display: inline-block;
+      margin-bottom: 5px !important;
+    }
+    .fnol-repairshop__formRadioLblAlign {
+      margin-bottom: 10px !important;
+    }
+    .mob_control_alignment {
+      margin-left: 0px !important;
     }
   }
 }
