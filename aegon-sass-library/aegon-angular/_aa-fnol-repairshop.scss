@@ -335,20 +335,23 @@
   }
   .fnol-repairshop_pagination ul li {
     font-family: inherit;
-    font-size: 17px !important;
+    font-size: 18px !important;
     line-height: 26px;
     cursor: pointer;
     background: none;
+    display: inline-block;
+    margin-left:20px;
   }
-  .ng2-pagination a{
+  .custom-pagination a{
     color:#3395d3 !important;
   }
-  .ng2-pagination li.current{
+  .custom-pagination li.current div span{
     border-radius:50% !important;
     color:#fff !important;
     background-color: #3395d3 !important;
+    padding: 3px 6px;
   }
-  .ng2-pagination li a:hover{
+  .custom-pagination li a:hover{
     background: none !important;
   }
 
