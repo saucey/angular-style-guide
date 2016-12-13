@@ -120,7 +120,8 @@ export class AAFormBuilderComponent extends AABaseComponent implements OnInit {
 
   fireTealiumFormInit() {
     try {
-      this.sendTealiumTagging(this.data.options.tealiumTagging.formInit, 'formInit');
+      if(this.data.options.tealiumTagging.formInit)
+        this.sendTealiumTagging(this.data.options.tealiumTagging.formInit, 'formInit');
     } catch(err) {
 
     }
@@ -130,7 +131,8 @@ export class AAFormBuilderComponent extends AABaseComponent implements OnInit {
     if(this.form_started)
        return;
     try {
-      this.sendTealiumTagging(this.data.options.tealiumTagging.formStarted, 'formStarted');
+      if(this.data.options.tealiumTagging.formStarted)
+        this.sendTealiumTagging(this.data.options.tealiumTagging.formStarted, 'formStarted');
     } catch(err) {
       
     }
@@ -140,7 +142,8 @@ export class AAFormBuilderComponent extends AABaseComponent implements OnInit {
 
   fireTealiumFormSubmitted() {
     try {
-      this.sendTealiumTagging(this.data.options.tealiumTagging.formSubmitted, 'formSubmitted');
+      if(this.data.options.tealiumTagging.formSubmitted)
+        this.sendTealiumTagging(this.data.options.tealiumTagging.formSubmitted, 'formSubmitted');
     } catch(err) {
       
     }
