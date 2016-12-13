@@ -5,10 +5,9 @@ import {
 import { FnolRepairshopService } from "../shared/services/fnol.data.service";
 import { OrderBy } from "../../../pipes/orderBy.pipe";
 import { FNOLRepairshopTealiumService } from "../shared/services/fnol-repairshop-tealium.service";
-
+import { PaginationInstance } from "ng2-pagination";
 
 const template = require('./template.html');
-
 const INFO_FORM: string = 'info_form';
 const RESULT_MOBILE: string = 'result_mobile';
 
@@ -33,6 +32,12 @@ export class FNOLRepairshopComponent implements AfterViewInit {
   public sortDirection = 'DESC';
   public loadingResults = false;
   public formSubmitted = false;
+
+  public config: PaginationInstance = {
+    id: 'repairshop',
+    itemsPerPage: 10,
+    currentPage: 1
+  };
 
   public repairshop = {
     postcode: null,
