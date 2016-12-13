@@ -8,9 +8,11 @@ import { DeprecatedComponentsModule } from '../../deprecated-components.module';
 
 
 import { FNOLRepairshopComponent } from './fnol-repairshop/fnol-repairshop.component';
+import { Ng2PaginationModule } from "ng2-pagination";
+
 
 export const FNOLRepairshopPageExports = [
-  FNOLRepairshopComponent
+  FNOLRepairshopComponent  
 ];
 
 export const declarations = [
@@ -24,6 +26,7 @@ export const declarations = [
     HttpModule,
     ReactiveFormsModule,
     AAComponentsModule,
+    Ng2PaginationModule,
     DeprecatedComponentsModule
   ],
   declarations,

@@ -1,0 +1,144 @@
+.contact-form {
+  label {
+    font-weight: normal;
+  }
+  .contact-form__section {
+    .contact-form__row {
+      position: relative;
+      padding: 15px 0;
+      &:first-child {
+        padding-top: 0;
+      }
+      .errorText {
+        top: auto;
+        bottom: 0;
+      }
+    }
+  }
+  input.invalid,
+  textarea.invalid,
+  select.invalid {
+    border-color: $dark_red;
+    ~ .errorText {
+      display:block;
+    }
+  }
+  .contact-form__detail {
+    > .errorText {
+      position: static;
+      padding-top: 2px;
+    }
+  }
+  .actions {
+    border-top: 1px solid $lighter_grey;
+    .cancel {
+      margin-left: 30px;
+    }
+  }
+  .contact-form__personal-details > div {
+    padding: 25px;
+  }
+  .contact-form__input-text {
+    height: 25px;
+  }
+  .contact-form__input-text,
+  .contact-form__select {
+    padding: 3px 2px;
+    border-width: 0 0 1px 0;
+    border-color: $pebble_grey;
+    border-radius: 0;
+  }
+  .contact-form__textarea {
+    height: 175px;
+  }
+  .contact-form__select {
+    height: 33px;
+  }
+  .contact-form__input-text,
+  .contact-form__textarea,
+  .contact-form__select {
+    width: 100%;
+  }
+  .errorText {
+    position: absolute;
+    top: 110%;
+  }
+  .lighter_grey {
+    .editable-field__save {
+      background-color: $lighter_grey;
+    }
+  }
+  // Editable field.
+  .contact-form__editable-field {
+    position: relative;
+    display:flex;
+    padding-right: 22%;
+    margin-bottom:20px;
+    .editable-field__input-text:not(.invalid),
+    .editable-field__save {
+      opacity: 0;
+      filter:alpha(opacity=0);
+    }
+    .editable-field__save {
+      height: 100%;
+      position: absolute;
+      right: 0;
+      bottom: -1px;
+    }
+    .editable-field__field-value {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 2px;
+      z-index: 2;
+    }
+
+    &.editable-field--edit,
+    &.invalid {
+      .editable-field__field-value {
+        display: none;
+      }
+      .editable-field__input-text {
+        opacity: 1;
+        filter:alpha(opacity=100);
+      }
+      .editable-field__save {
+        opacity: 1;
+        filter:alpha(opacity=100);
+      }
+    }
+  }
+}
+/* Screen > mobile */
+@include breakpoint($brk-tablet) {
+  .contact_form_widget {
+    .contact-form.row-fluid {
+      .span6 {
+        width: 50%;
+      }
+      .contact-form__section.span6 {
+        left: -50%;
+        margin-left: 0;
+      }
+      .contact-form__personal-details {
+        right: -50%;
+        padding-left: 7%;
+      }
+      .contact-form__personal-details,
+      .contact-form__section {
+        position: relative;
+      }
+    }
+
+  }
+}
+/* Mobile specific */
+@include breakpoint($brk-mobile) {
+  .contact_form_widget {
+    .contact-form.row-fluid {
+      .contact-form__personal-details {
+        margin-bottom: 20px;
+      }
+    }
+  }
+}

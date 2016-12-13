@@ -32,6 +32,11 @@ export const defaultOptions = {
     }
   },
   form : {
+    tealiumTagging: {
+      formInit: {},
+      formStarted: {},
+      formSubmitted: {}
+    },
     name: 'form_name',
     redirectUrl: '/template-aa-pension-offer-confirmation.html',
     inputList: [
@@ -45,56 +50,56 @@ export const defaultOptions = {
       {
         label: 'Voorletters',
         inputs: [
-          { width: 3, type: 'text', placeholder: '', name: 'vorletters', required: true, pattern: '[a-zA-Z]+', value: '', error: 'Error message', session: false }
+          { width: 3, type: 'text', placeholder: '', name: 'voorl', required: true, pattern: '[a-zA-Z]+', value: '', error: 'Error message', storage: false }
         ]
       },
       {
         label: 'Tussenvoegsel',
         inputs: [
-          { width: 3, type: 'text', placeholder: '', name: 'vorletters', pattern: '[a-zA-Z]+', value: '', error: 'Error message', session: false }
+          { width: 3, type: 'text', placeholder: '', name: 'voorv', pattern: '[a-zA-Z]+', value: '', error: 'Error message', storage: false }
         ]
       },
       {
         label: 'Achternaam',
         inputs: [
-          { width: 7, type: 'text', placeholder: '', name: 'achternaam', required: true, pattern: '[a-zA-Z]+', value: '', error: 'Error message', session: false }
+          { width: 7, type: 'text', placeholder: '', name: 'anaam', required: true, pattern: '[a-zA-Z]+', value: '', error: 'Error message', storage: false }
         ]
       },
       {
         label: 'Postcode',
         inputs: [
-          { width: 5, type: 'text', placeholder: '', name: 'achternaam', required: true, pattern: '[a-zA-Z]+', value: '', error: 'Error message', session: false }
+          { width: 5, type: 'text', placeholder: '', name: 'pcode', required: true, pattern: '[a-zA-Z]+', value: '', error: 'Error message', storage: false }
         ]
       },
       {
         label: 'Huisnummer- en toevoeging',
         inputs: [
-          { width: 3, type: 'text', placeholder: '', name: 'achternaam', required: true, pattern: '[a-zA-Z]+', value: '', error: 'Error message', session: false },
-          { width: 3, type: 'text', placeholder: '', name: 'achternaam', required: false, pattern: '[a-zA-Z]+', value: '', error: 'Error message', session: false }
+          { width: 3, type: 'text', placeholder: '', name: 'huisnr', required: true, pattern: '[a-zA-Z]+', value: '', error: 'Error message', storage: false },
+          { width: 3, type: 'text', placeholder: '', name: 'toevoeg', required: false, pattern: '[a-zA-Z]+', value: '', error: 'Error message', storage: false }
         ]
       },
       {
         label: 'Straat',
         inputs: [
-          { width: 7, type: 'text', placeholder: '', name: 'achternaam', required: true, pattern: '[a-zA-Z]+', value: '', error: 'Error message', session: false }
+          { width: 7, type: 'text', placeholder: '', name: 'straat', required: true, pattern: '[a-zA-Z]+', value: '', error: 'Error message', storage: false }
         ]
       },
       {
         label: 'Plaats',
         inputs: [
-          { width: 7, type: 'text', placeholder: '', name: 'achternaam', required: true, pattern: '[a-zA-Z]+', value: '', error: 'Error message', session: false }
+          { width: 7, type: 'text', placeholder: '', name: 'plaats', required: true, pattern: '[a-zA-Z]+', value: '', error: 'Error message', storage: false }
         ]
       },
       {
         label: 'Telefoonummer',
         inputs: [
-          { width: 7, type: 'text', placeholder: '', name: 'achternaam', required: true, pattern: '[0-9]+', value: '', error: 'Error message', session: false }
+          { width: 7, type: 'text', placeholder: '', name: 'telnum', required: true, pattern: '[0-9]+', value: '', error: 'Error message', storage: false }
         ]
       },
       {
         label: 'E-mailadres',
         inputs: [
-          { width: 7, type: 'email', placeholder: '', name: 'email', required: true,  value: '', error: 'Error message', session: false }
+          { width: 7, type: 'email', placeholder: '', name: 'to', required: true,  value: '', error: 'Error message', storage: false }
         ]
       }
     ],

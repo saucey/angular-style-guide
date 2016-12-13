@@ -147,7 +147,7 @@ describe('CalculatorProductService', () => {
       code: '2KPB0'
     },
     {
-      label: 'works for WIA_35MIN_BODEM',
+      label: 'works for WIA_BODEM',
       input: {
         useCase: WiaInputUseCaseEnum.USER,
         income: 45000,
@@ -156,11 +156,11 @@ describe('CalculatorProductService', () => {
         permDisability: true,
         products: [
           {
-            id: 'WIA_35MIN_BODEM',
+            id: 'WIA_BODEM',
             attrs: []
           }
         ],
-        productsIds: ['WIA_35MIN_BODEM']
+        productsIds: ['WIA_BODEM']
       },
       code: '2KP01'
     },

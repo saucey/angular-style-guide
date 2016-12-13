@@ -31,7 +31,7 @@ export class CalculatorDataService {
 
     // sort items based on their category: statutory < salary < aegon
     data.sort((a, b) => {
-      return CATEGORIES_MAP[a.componentId] < CATEGORIES_MAP[b.componentId];
+      return CATEGORIES_MAP[b.componentId] - CATEGORIES_MAP[a.componentId];
     });
 
     const result = data.reduce((res, item) => {
@@ -222,7 +222,10 @@ export class CalculatorDataService {
 
         resolve({
           graphData: scenarioDataInPeriods.grouped,
-          legendData: scenarioDataInPeriods.initial.map(el => el.category).filter(this.uniqueValues)
+          legendData: scenarioDataInPeriods.initial
+            .filter(el => el.amountYearly > 0)
+            .map(el => el.category)
+            .filter(this.uniqueValues)
         });
       }, error => reject(error));
     });

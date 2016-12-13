@@ -70,17 +70,20 @@ export class AACollapsibleTopicComponent implements OnInit {
    * @param {string} row
    * @param {string} column
    */
-  public setActiveItem (row: string, column: string): void {
-    this.setShowFullText(false);
+  public setActiveItem (row: string, column: string, title: string, imageName: string): void {
+    this.setShowFullText(false, null, null);
     if (this.activeItem.row === row && this.activeItem.column === column) {
       this.activeItem.row = null;
       this.activeItem.column = null;
     } else {
       this.activeItem.row = row;
       this.activeItem.column = column;
-      this
-        .wiaTealiumService
-        .wiaClickOnSymbolIcon();
+
+      if (null !== title && null !== imageName) {
+        this
+          .wiaTealiumService
+          .wiaClickOnSymbolIcon(title, imageName);
+      }
     }
   }
 
@@ -123,12 +126,12 @@ export class AACollapsibleTopicComponent implements OnInit {
    *
    * @param {boolean} showFullText
    */
-  public setShowFullText (showFullText: boolean) {
+  public setShowFullText (showFullText: boolean, title: string, imageName: string) {
     this.showFullText = showFullText;
     if (showFullText) {
       this
         .wiaTealiumService
-        .wiaClickOnReadMore();
+        .wiaClickOnReadMore(title, imageName);
       this.visibility = 'shown';
     } else {
       this.visibility = 'hidden';
@@ -172,7 +175,7 @@ export class AACollapsibleTopicComponent implements OnInit {
    * @param {string} row
    */
   public showIconsOnMobile = (row: string) => {
-    this.setActiveItem(null, null);
+    this.setActiveItem(null, null, null, null);
 
     if (row === this.activeMobileRow) {
       this.activeMobileRow = null;

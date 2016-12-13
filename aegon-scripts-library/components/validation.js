@@ -288,8 +288,8 @@
       },
       integer: /^\d*$/,
       text: /^\w*$/,
-      // ^([A-Z0-9_][\-A-Z0-9_\.]*@[A-Z0-9_][\-\.A-Z0-9_]+\.[A-Z]{2,8})?$/i.
-      email: /^[A-Z0-9]([\w\.\-]*[A-Z0-9])*@([A-Z0-9]([\w\.\-]*[A-Z0-9]|[A-Z0-9])*\.)[A-Z]{2,}$/i,
+      /* ^([A-Z0-9_][\-A-Z0-9_\.]*@[A-Z0-9_][\-\.A-Z0-9_]+\.[A-Z]{2,8})?$/i.*/
+      email: /^[a-zA-Z0-9]([\w\.\-]*[a-zA-Z0-9])*@([a-zA-Z0-9]([\w\.\-]*[a-zA-Z0-9]|[a-zA-Z0-9])*\.)[a-zA-Z]{2,8}$/i,
       phone: function (val) {
         // This needs to be implemented as a function, since validVal has a problem with the following regex
         /* Empty|International numbers|Local numbers.

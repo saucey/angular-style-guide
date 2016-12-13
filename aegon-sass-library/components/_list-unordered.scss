@@ -76,6 +76,11 @@ ul li.arrow {
     content: $font_icons_arrow_right;
   }
 }
+ul.arrow.arrow--skinny li {
+  &:before {
+    content: $font_icons_arrow_right_skinny;
+  }
+}
 
 ul.check li,
 ul li.check,

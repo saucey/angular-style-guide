@@ -54,6 +54,7 @@ const declarations = [
     aaComp.AALoaderComponent,
     aaComp.AAFAQComponent,
     aaComp.AAPensionOfferFormComponent,
+    aaComp.AAFormBuilderComponent,
     aaComp.AAPensionOfferConfirmationComponent
 ];
 

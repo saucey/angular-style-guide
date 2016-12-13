@@ -40,6 +40,8 @@ export class AASliderComponent implements AfterViewInit, ControlValueAccessor {
   @Input() options: any = DEFAULT_SLIDER_OPTIONS;
   // Show hint values above slider handles or not
   @Input() hint: Boolean = false;
+  //value appended to hint text
+  @Input() hintPostfix: string = '';
   // ngModel change event
   @Output() modelChange: any = new EventEmitter();
   // Change event
@@ -134,10 +136,10 @@ export class AASliderComponent implements AfterViewInit, ControlValueAccessor {
     // Update hints
     if (this.hint) {
       if (parsedLower !== undefined && this.lowerHandle) {
-        this.lowerHandle.attr('data-value', parsedLower);
+        this.lowerHandle.attr('data-value', parsedLower + this.hintPostfix);
       }
       if (parsedUpper !== undefined && this.upperHandle) {
-        this.upperHandle.attr('data-value', parsedUpper);
+        this.upperHandle.attr('data-value', parsedUpper + this.hintPostfix);
       }
     }
     // Emit value

@@ -1,4 +1,4 @@
-import { Component, Input, ElementRef, OnInit, ViewChild, AfterViewInit } from "@angular/core";
+import { Component, Input, ElementRef, OnInit, AfterViewInit } from "@angular/core";
 import { AABaseComponent } from "../../../lib/classes/AABaseComponent";
 import { CalculatorDataService } from "./wia-calculator-data.service";
 import { defaultOptions } from "./defaultOptions";
@@ -24,6 +24,10 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
   //visible tooltip id
   public showTooltip: number = 0;
 
+  //state flag indicating dragging in progress to highlight certain elements at that time
+  public sliderDragInProgress: boolean = false;
+  public sliderDragInProgressTimeout: number;
+
   public permanentDisability: boolean = false;
   public disability = {
     value: 50,
@@ -31,7 +35,7 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
     label: 'Arbeidsongeschiktheidspercentage',
     options: {
       start: 50,
-      step: 1,
+      step: 5,
       range: {
         min: 0,
         max: 100
@@ -62,7 +66,7 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
     label: 'Benutting restverdiencapaciteit',
     options: {
       start: 50,
-      step: 1,
+      step: 5,
       range: {
         min: 0,
         max: 100
@@ -98,22 +102,26 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
 
   private lastInput: WIAInputModel = null;
 
-  constructor(thisElement: ElementRef,
+  constructor(private elementRef: ElementRef,
               private wiaPagePersonalizationService: WiaPagePersonalizationService,
               private wiaSubscriptionService: WiaSubscriptionService,
               private wiaUrlStateManager: WiaUrlStateManager,
               private calculatorDataService: CalculatorDataService,
               private wiaTealiumService: WIATealiumService) {
 
-    super(thisElement);
+    super(elementRef);
 
     wiaSubscriptionService.externalInput$.subscribe(
-      value => this.updateModel(value),
+      value => {
+        this.updateModel(value);
+      },
       err => {
         this.error = {
           type: err.type,
           details: err
-        }
+        };
+
+        console.error(this.error);
       });
   }
 
@@ -126,8 +134,6 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
   }
 
   public updateModel(value: WIAInputModel) {
-
-    window.scrollTo(0, 0);
 
     if (!value) {
       this.externalInput = null;
@@ -164,6 +170,8 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
         type: 'response',
         details: err
       };
+
+      console.error(this.error);
     });
 
   }
@@ -235,9 +243,9 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
       ];
 
       this.legendData = {
-        1: legendData.includes(1),
-        2: legendData.includes(2),
-        3: legendData.includes(3)
+        1: legendData.indexOf(1) > -1,
+        2: legendData.indexOf(2) > -1,
+        3: legendData.indexOf(3) > -1
       };
     }
   }
@@ -249,6 +257,14 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
       slider.value = val;
 
       this.update();
+
+      this.sliderDragInProgress = true;
+
+      clearTimeout(this.sliderDragInProgressTimeout);
+
+      this.sliderDragInProgressTimeout = setTimeout(() => {
+        this.sliderDragInProgress = false;
+      }, 500);
     }
   }
 
@@ -271,7 +287,7 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
 
     const titles = [
       'vanaf 3e jaar tot max 5e jaar',
-      'tot pensioen leeftijd'
+      'tot uw pensioenleeftijd'
     ];
 
     if (!this.externalInput) {
@@ -279,38 +295,65 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
     }
 
     if (this.roundToFives(this.disability.value) < 35) {
-      if (this.externalInput.productsIds.indexOf('WIA_35MIN_BODEM') > -1) {
-        titles[0] = 'vanaf 3e jaar tot max  9.5 jaar';
-      }
-      if (this.externalInput.productsIds.indexOf('WIA_35MIN') > -1) {
+
+      if (this.externalInput.productsIds.indexOf('WIA_BODEM') > -1) {
+        titles[0] = 'vanaf 3e jaar tot het 10.5e jaar';
+      } else if (this.externalInput.productsIds.indexOf('WIA_35MIN') > -1) {
 
         let value = this.externalInput.products.find(el => el.id === 'WIA_35MIN').attrs[0].value;
         if (value === 5) {
-          titles[0] = 'vanaf 3e jaar tot max 5e jaar';
-        } else if (value === 10)  {
-          titles[0] = 'vanaf 3e jaar tot max 12 jaar';
+          titles[0] = 'vanaf 3e jaar tot het 8e jaar';
+        } else if (value === 10) {
+          titles[0] = 'vanaf 3e jaar tot het 13e jaar';
         }
-      }
-    }
-
-    if (this.roundToFives(this.disability.value) >= 80) {
-
-      if (this.permanentDisability) {
-        titles[1] = 'Tot uw pensioenleeftijd krijgt u een IVA-uitkering van de overheid';
       } else {
-        titles[1] = 'Tot uw pensioenleeftijd krijgt u de WGA-loonaanvulling';
+        titles[1] = 'tot uw pensioenleeftijd krijgt u geen uitkering';
       }
     }
 
     return titles;
   }
 
-  private roundToFives (value: number) {
+  public getLastPeriodTooltip() {
+
+    if (this.roundToFives(this.disability.value) >= 80) {
+
+      if (this.permanentDisability) {
+        return 'Tot uw pensioenleeftijd krijgt u een IVAuitkering van de overheid'
+      } else {
+        return 'Tot uw pensioenleeftijd krijgt u de WGAloonaanvulling';
+      }
+    }
+
+    return `Tot uw pensioenleeftijd krijgt u in principe de WGA-loonaanvulling. Benut u echter minder dan 50%
+    van uw verdiencapaciteit dan verandert deze in een WGA-vervolguitkering gebaseerd op het
+    minimumloon. Samen met het loon dat u nog verdient, is dit uw inkomen. Hoe meer u werkt, hoe
+    hoger uw totale inkomen is.`;
+  }
+
+  public isColumnVisible(column: number) {
+
+    if (column === 3) {
+      //hide third column when disability<35% and no WIA35 OR BODEM products
+      if (this.roundToFives(this.disability.value) < 35 && this.externalInput.productsIds.indexOf('WIA_35MIN') === -1
+        && this.externalInput.productsIds.indexOf('WIA_BODEM') === -1) {
+        return false;
+      }
+
+      if (this.roundToFives(this.disability.value) >= 80 && this.permanentDisability) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  private roundToFives(value: number) {
     return Math.round(value / 5) * 5;
   }
 
   public goBack() {
-    this.wiaSubscriptionService.emit(null);
+    this.wiaSubscriptionService.emit(null, true);
   }
 
   public trackById(index, item) {

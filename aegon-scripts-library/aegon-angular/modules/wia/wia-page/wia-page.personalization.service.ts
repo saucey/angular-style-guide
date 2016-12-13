@@ -31,7 +31,7 @@ export class WiaPagePersonalizationService {
 
   public isCodeValid(code: string): boolean {
 
-    return code && (code.length === 5 || code.length === 6);
+    return !!(code && (code.length === 5 || code.length === 6));
   }
 
   public getIncomeClass(income: number): number {
@@ -93,11 +93,11 @@ export class WiaPagePersonalizationService {
     }
 
     //35MIN
-    const WIA_35MIN_BODEM = input.products.find(el => el.id === 'WIA_35MIN_BODEM');
+    const WIA_BODEM = input.products.find(el => el.id === 'WIA_BODEM');
     const WIA_35MIN: any = input.products.find(el => el.id === 'WIA_35MIN');
 
     //IVA_EXCED
-    if (WIA_35MIN_BODEM) {
+    if (WIA_BODEM) {
       substring += WIA_35MIN_Value.Boden;
     } else if (WIA_35MIN) {
       substring += WIA_35MIN_Code[WIA_35MIN_Value[WIA_35MIN.attrs[0].value]];
@@ -193,7 +193,7 @@ export class WiaPagePersonalizationService {
     if (WIA_35MIN_Code[MIN35] !== 'Off') {
       if (WIA_35MIN_Code[MIN35] === 'Boden') {
         products.push({
-          id: 'WIA_35MIN_BODEM',
+          id: 'WIA_BODEM',
           attrs: []
         })
       } else {

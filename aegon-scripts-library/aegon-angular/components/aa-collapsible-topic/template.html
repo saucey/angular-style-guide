@@ -6,7 +6,7 @@
 
   <div class="collapsible-content-icons" [@shrinkOut] [ngClass]="{'mobile-icons-visible': showMobileIcons(row)}">
     <div class="collapsible-content-icon" *ngFor="let topic of topicRow.topics; let column = index;">
-      <a class="collapsible-content-link" (click)="setActiveItem(row, column)" [ngClass]="{'gray-content-link': checkIfThereIsAnActiveItem(row, column)}">
+      <a class="collapsible-content-link" (click)="setActiveItem(row, column, topicRow.title, topic.imageName)" [ngClass]="{'gray-content-link': checkIfThereIsAnActiveItem(row, column)}">
         <img [src]="topic.image" class="collapsible-content-link__image" />
       </a>
     </div>
@@ -28,8 +28,8 @@
       </div>
 
       <div class="collapsible-description-actions">
-        <a (click)="setActiveItem(null, null)" class="action_close">Sluit</a>
-        <a (click)="setShowFullText(true)" *ngIf="'hidden' == visibility && isDescriptionTextValid(topic)" class="action_show">Lees meer</a>
+        <a (click)="setActiveItem(null, null, null, null)" class="action_close">Sluit</a>
+        <a (click)="setShowFullText(true, topicRow.title, topic.imageName)" *ngIf="'hidden' == visibility && isDescriptionTextValid(topic)" class="action_show">Lees meer</a>
       </div>
     </div>
   </div>

@@ -11,7 +11,7 @@
     "WGA_EXCED",
     [
       "WIA_35MIN",
-      "WIA_35MIN_BODEM"
+      "WIA_BODEM"
     ]
   ],
   [
@@ -24,7 +24,7 @@
     ],
     [
       "WIA_35MIN",
-      "WIA_35MIN_BODEM"
+      "WIA_BODEM"
     ]
   ],
   [
@@ -36,7 +36,7 @@
     ],
     [
       "WIA_35MIN",
-      "WIA_35MIN_BODEM"
+      "WIA_BODEM"
     ]
   ],
   [
@@ -51,7 +51,7 @@
     "IVA_EXCED",
     [
       "WIA_35MIN",
-      "WIA_35MIN_BODEM"
+      "WIA_BODEM"
     ]
   ],
   [
@@ -61,7 +61,7 @@
     "WGA_EXCED",
     [
       "WIA_35MIN",
-      "WIA_35MIN_BODEM"
+      "WIA_BODEM"
     ]
   ],
   [
@@ -81,7 +81,7 @@
     ],
     [
       "WIA_35MIN",
-      "WIA_35MIN_BODEM"
+      "WIA_BODEM"
     ]
   ],
   [
@@ -91,7 +91,7 @@
     "WGA_AANV_UPGRADE",
     [
       "WIA_35MIN",
-      "WIA_35MIN_BODEM"
+      "WIA_BODEM"
     ]
   ],
   [
@@ -101,7 +101,7 @@
     "WGA_AANV_LIGHT",
     [
       "WIA_35MIN",
-      "WIA_35MIN_BODEM"
+      "WIA_BODEM"
     ]
   ],
   [
@@ -111,13 +111,13 @@
     "WGA_AANV_STANDARD",
     [
       "WIA_35MIN",
-      "WIA_35MIN_BODEM"
+      "WIA_BODEM"
     ]
   ],
   [
     "WIA_35MIN"
   ],
   [
-    "WIA_35MIN_BODEM"
+    "WIA_BODEM"
   ]
 ]

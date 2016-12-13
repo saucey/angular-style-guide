@@ -2,9 +2,13 @@
   <div class="sticky-wrapper__img"></div>
   <div class="sticky-inner-wrapper">
       <p class="sticky-inner-wrapper__title">{{title}}</p>
-      <p class="sticky-inner-wrapper__general-text sticky-inner-wrapper__freetext">{{freetext}}</p>
-      <p class="sticky-inner-wrapper__general-text sticky-inner-wrapper__hourstext">{{hourstext | replace : {'[[fromHours]]': dateFrom, '[[toHours]]': dateTo} }}</p>
-      <div><span class="icon-call sticky-inner-wrapper__telephone">{{telephone}}</span></div>
-      <div><span class="icon-chat sticky-inner-wrapper__startchatlabel">{{startchatlabel}}</span></div>
+      <p class="sticky-inner-wrapper__general-text sticky-inner-wrapper__freetext">{{text}}</p>      
+      <p class="sticky-inner-wrapper__general-text sticky-inner-wrapper__hourstext">
+        {{hoursText | replace : {'[[fromHours]]': fromHours, '[[toHours]]': toHours} }}
+      </p>
+      
+      <ul *ngFor="let contact of data.options.contactOptions;" class="sticky-inner-wrapper__contactList">
+        <li><a class="{{contact.class}}" href="{{contact.href}}">{{contact.text}}</a></li>
+      </ul>
   </div>
 </div>

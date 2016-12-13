@@ -14,12 +14,19 @@
     font-size: 1.5em;
   }
   .fnol-repairshop-formSpacer {
-    margin: 1em 0 1em 0;
+    margin: 2em 0 1em 0;
   }
-  .fnol-repairshop-form__BtnSpacer {
-    margin: 4em 0 1em 0;
+  .fnol-repairshop-form__spacer {
+    margin: 4em 0 0 0;
   }
   .txtBold {
+    font-family: $font_normal;
+  }
+  .txtNormal {
+    font-family: $font_light;
+  }
+  .fnol-repairshop-sort__txtBold {
+    font-family: $font_normal;
     font-weight: bold;
   }
   .nowrap {
@@ -28,19 +35,22 @@
   .width150px {
     width: 150px;
   }
+  .marginTop_2em {
+    margin-top: 2em;
+  }
   .fnol-repairshop-mandatory {
     color: $red;
   }
   .fnol-repairshop-subhead {
     color: $black;
     font-size:18px;
+    font-family: $font_light;
   }
   label {
     font-weight: normal;
   }
   .fnol-repairshop-formLabel {
     display: inline-block;
-    font-weight: bold;
   }
   .float-right {
     float: right;
@@ -63,7 +73,8 @@
     position: relative;
     display: block;
     width: auto;
-    margin-top: 25px;
+    margin-top: 8px;
+    margin-bottom: 25px;
     padding-right: 15px;
     padding-left: 18px;
     text-align: left;
@@ -93,6 +104,10 @@
         border-radius: $elements_radio_height / 2;
         background-color: $beige;
       }
+    }
+
+    &:last-of-type {
+      margin-bottom: 0;
     }
   }
   label.radio_longtext {
@@ -144,7 +159,7 @@
   }
   .fnol-repairshop-table-sort table thead tr th {
     border-top: none;
-    font-weight: bold;
+    font-weight: normal;
     padding: 0px;
     color: $black;
     border-right: none;
@@ -197,6 +212,7 @@
   }
   .title_pos a, .mob_title_pos a, .mob_title_right a {
     cursor: pointer;
+    color: $black;
   }
   .rating-star {
     color: $orange;
@@ -206,7 +222,7 @@
     font-size: 1.4em;
   }
   .result-text {
-    font-weight: bold;
+    font-family: $font_normal;
     padding: 0 0 25px 0;
   }
   .fnol-repairshop-table-sort .title_sort, .fnol-repairshop-table-mobile-view .mob_title_sort {
@@ -215,21 +231,25 @@
       font-family: $font_icons;
       font-size: 12px;
       float: right;
-      transform: rotate(90deg);
+      transform: rotate(-90deg);
       content: $font_icons_arrow_right_skinny;
       color: $black;
-      margin: 3px 20px 0px 10px;
+      margin: 0px 20px 0px 10px;
       cursor: pointer;
     }
 
     &.sort-desc {
       &:after {
-        @include transform(rotate(-90deg) !important);
+        @include transform(rotate(90deg) !important);
         position: relative;
-        bottom: 3px;
+        bottom: -3px;
       }
     }
 
+  }
+
+  .fnol-repairshop-error-border {
+    border: solid 1px $dark_red;
   }
 
   input {
@@ -306,13 +326,40 @@
       }
     }
   }
+
+  // pagination classes
+
+  .fnol-repairshop_pagination{
+    text-align: center;
+    margin: 15px 0px 50px 0px;
+  }
   .fnol-repairshop_pagination ul li {
     font-family: inherit;
-    font-size: 18px;
+    font-size: 18px !important;
     line-height: 26px;
+    cursor: pointer;
+    background: none;
+    display: inline-block;
+    margin-left:20px;
+  }
+  .custom-pagination a{
+    color:#3395d3 !important;
+  }
+  .custom-pagination li.current div span{
+    border-radius:50% !important;
+    color:#fff !important;
+    background-color: #3395d3 !important;
+    padding: 3px 6px;
+  }
+  .custom-pagination li a:hover{
+    background: none !important;
   }
 
   // MOBILE VIEW
+
+  .mob_control_alignment {
+    padding-left: 0px !important;
+  }
   .fnol-repairshop-table-mobile-view {
     width: 100%;
     border-top: none;
@@ -330,6 +377,9 @@
     color: $black;
     border-right: none;
   }
+  .fnol-repairshop-table-mobile-view thead tr th.rhs_head_width {
+    width: 71%;
+  }
   .fnol-repairshop-table-mobile-view tbody tr td {
     padding:0px;
     color: $black;
@@ -344,10 +394,10 @@
     border-bottom: solid 1px $grey;
   }
   .mob_title_pos {
-    float: left;
+    float: right;
   }
   .mob_title_right {
-    float: right; margin:0px 0px 0px 0px;
+    float: right; margin:0px -16px 0px 0px;
   }
   .fnol-repairshop-table-mobile-data {
     width: 100%;
@@ -373,20 +423,21 @@
     background: none;
     list-style-type: none;
     color: $black;
+    padding: 0px;
   }
   .fnol-repairshop-table-mobile-data tr td.mob_name {
     width:79%;
     font-size: 1em;
     font-weight: bold;
     color: $blue;
-    padding: 10px 0px 10px 0px;
+    padding: 10px 0px 15px 0px;
   }
   .fnol-repairshop-table-mobile-data tr td.mob_rating {
     width:20%;
     text-align: right;
   }
   .fnol-repairshop-table-mobile-data tr td.mob_phone {
-    font-weight: bold;
+    padding: 0px 0px 5px 0px;
   }
   .fnol-repairshop-table-mobile-data tr td.mob_distance {
     font-weight: bold;
@@ -394,7 +445,7 @@
   }
   .fnol-repairshop-table-mobile-data tr td.mob_address{  }
   .fnol-repairshop-table-mobile-data tr td.mob_location{
-    padding: 0px 0px 10px 0px;
+    padding: 10px 0px 10px 0px;
   }
   .mob-rating-star {
     color: $orange;
@@ -410,7 +461,7 @@
       font-family: $font_icons;
       font-size: 12px;
       float: right;
-      transform: rotate(90deg);
+      transform: rotate(-90deg);
       content: $font_icons_arrow_right_skinny;
       color: $black;
       margin: 1px 20px 0px 10px;
@@ -419,13 +470,24 @@
 
     &.sort-desc {
       &:after {
-        @include transform(rotate(-90deg) !important);
+        @include transform(rotate(90deg) !important);
         position: relative;
         bottom: 0px;
       }
     }
 
   }
+
+  // hide titles of embedded nodes (faqs)
+  h2.node__title {
+    display: none;
+  }
+
+  //hide faq search
+  [id^=bc-generic_content-faqs_search] {
+    display: none;
+  }
+
 }
 
 // Custom Tablet Portrait and Landscape break point
@@ -462,6 +524,8 @@
       list-style-type: none;
       color: $black;
       font-size: 0.72em;
+      margin: 0px;
+      padding: 0px;
     }
     .fnol-repairshop-table-sort .title_sort {
 
@@ -469,17 +533,17 @@
         font-family: $font_icons;
         font-size: 10px;
         float: right;
-        transform: rotate(90deg);
+        transform: rotate(-90deg);
         content: $font_icons_arrow_right_skinny;
         color: $black;
-        margin: 3px 0px 0px 5px;
+        margin: 0px 0px 0px 5px;
       }
 
       &.sort-desc {
         &:after {
-          @include transform(rotate(-90deg) !important);
+          @include transform(rotate(90deg) !important);
           position: relative;
-          bottom: 3px;
+          bottom: -3px;
         }
       }
     }
@@ -524,17 +588,20 @@
       font-size: 0.8em;
     }
   }
-
+  .fnol-repairshop__errorMsg {
+    font-size: 1em;
+  }
 }
 
 @media screen and (min-width: 900px) and (max-width: $rc-l-max-width) {
   .fnol-repairshop {
     .fnol-repairshop__formLblAlign {
       text-align: right;
+      margin-bottom: 10px;
     }
     .fnol-repairshop__formRadioLblAlign {
       text-align: right;
-      margin: 18px 0px 0px 0px;
+      margin: 0px 0px 0px 0px;
     }
   }
 }
@@ -557,6 +624,48 @@
 // Radio control text word wrapper
 @media screen and (max-width: 400px) {
   .fnol-repairshop {
+
+    label.radio {
+      position: relative;
+      display: block;
+      width: auto;
+      margin-top: 8px;
+      margin-bottom: 25px;
+      padding-right: 15px;
+      padding-left: 18px;
+      text-align: left;
+      white-space: normal;
+      line-height: $elements_radio_line-height;
+      > input[type="radio"] {
+        top: $elements_radio_top;
+        left: 5px;
+        opacity: 0;
+        &:checked + span.radio,
+        &:checked + input[type="hidden"] + span.radio,
+        &:checked ~ span.radio {
+          background-color: $beige;
+          box-shadow: 0 0 0 4px $white inset, 0 0 0 20px $blue inset;
+        }
+        & + span.radio,
+        & + input[type="hidden"] + span.radio,
+        & ~ span.radio {
+          position: absolute;
+          top: -8px;
+          left: -3px;
+          display: inline-block;
+          width: $elements_radio_height - 2;
+          height: $elements_radio_height - 2;
+          cursor: pointer;
+          border: $elements_border;
+          border-radius: $elements_radio_height / 2;
+          background-color: $beige;
+        }
+      }
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+
     label.radio_longtext {
       position: relative;
       display: inline-flex;
@@ -592,6 +701,24 @@
           background-color: $beige;
         }
       }
+    }
+    label.mob_view__btmMargin {
+      margin-bottom: 0px;
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .fnol-repairshop {
+    .fnol-repairshop-formLabel {
+      display: inline-block;
+      margin-bottom: 5px !important;
+    }
+    .fnol-repairshop__formRadioLblAlign {
+      margin-bottom: 10px !important;
+    }
+    .mob_control_alignment {
+      margin-left: 0px !important;
     }
   }
 }

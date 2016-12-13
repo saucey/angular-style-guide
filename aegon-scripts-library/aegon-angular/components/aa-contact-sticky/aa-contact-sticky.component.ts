@@ -17,17 +17,15 @@ const template = require('./template.html');
 })
 
 export class AAContactSticky extends AABaseComponent implements OnInit {
-  // @Input() data: any = {};
-  // @Input() options: any = {};
+  @Input() data: any = {};
+  @Input() options: any = {};
 
   public defaultOptions: any = defaultOptions;
   public title: string  = defaultOptions.title;
-  public freetext: string  = defaultOptions.freeText;
-  public hourstext: string  = defaultOptions.hours.text;
-  public telephone: string  = defaultOptions.phoneNumber;
-  public startchatlabel: string  = defaultOptions.startChatLabel;
-  public dateFrom: any;
-  public dateTo: any;
+  public text: string  = defaultOptions.text;
+  public hoursText: string  = defaultOptions.hours.availabeText;
+  public fromHours: string = '';
+  public toHours: string = '';
 
   constructor(private thisElement: ElementRef) {
     super(thisElement);
@@ -35,16 +33,17 @@ export class AAContactSticky extends AABaseComponent implements OnInit {
 
   public ngOnInit() {
     super.ngOnInit();
-    this.initialize();
-    // console.log(defaultOptions, 'the options');
-    let today: any = new Date();
-    today = today.getDay();
-    var hour = defaultOptions.hours.days[today];
-    // this.dateFrom = hour.from;
-    // this.dateTo = hour.to;
-  }
+    this.getHoursTextForToday();
+  } 
+    
 
-  private initialize():void {
+  private getHoursTextForToday():void {
+    let today: any = new Date().getDay();
 
+    if(defaultOptions.hours.days[today]) {
+      this.fromHours = defaultOptions.hours.days[today]['from'];
+      this.toHours = defaultOptions.hours.days[today]['to'];
+    
+    } else { this.hoursText = defaultOptions.hours.notAvailabeText; }
   }
 }

@@ -63,6 +63,7 @@ export class TopicBuilder {
       topicRow.topics.forEach((topic: WiaTopicModel, colIndex) => {
         topicRowCollection[rowIndex].topics[colIndex] = {
           "image": topic.image,
+          "imageName": topic.imageName,
           "shortDescription": [],
           "longDescription": []
         };

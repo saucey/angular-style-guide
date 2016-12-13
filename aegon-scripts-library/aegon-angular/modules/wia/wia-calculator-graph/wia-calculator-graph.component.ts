@@ -56,6 +56,8 @@ export class WiaCalculatorGraphComponent implements OnChanges {
 
   public sumHeights(bars: Array<BarConfig>): number {
 
-    return bars.reduce((sum, bar) => sum + bar.percentage, 0)
+    const height = bars.reduce((sum, bar) => sum + bar.percentage, 0);
+
+    return Math.min(height, 100);
   }
 }

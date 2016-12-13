@@ -36,16 +36,45 @@ $wiaCalculatorMobileBreakpoint: 850px;
     background: none;
   }
 
+  .aa-block-graph__bar-block-inner {
+    &:before {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      z-index: 10;
+      display: none;
+      font-size: 0.6em;
+      color: #666;
+      line-height: 1em;
+    }
+    &:hover:before {
+      display: block;
+    }
+  }
+
   .aa-block-graph__bar {
     &[data-category="1"] .aa-block-graph__bar-block-inner {
       background: $wiaCalculatorCategorySalary;
+      &:before {
+        content: 'Loon';
+        background: $wiaCalculatorCategorySalary;
+      }
     }
     &[data-category="2"] .aa-block-graph__bar-block-inner {
-
       background: $wiaCalculatorCategoryStatutory;
+      &:before {
+        content: 'Wettelijke uitkering';
+        background: $wiaCalculatorCategoryStatutory;
+      }
     }
     &[data-category="3"] .aa-block-graph__bar-block-inner {
       background: $wiaCalculatorCategoryAegon;
+      &:before {
+        content: 'Aegon uitkering';
+        color: #fff;
+        background: $wiaCalculatorCategoryAegon;
+      }
     }
   }
 }
@@ -108,6 +137,11 @@ $wiaCalculatorMobileBreakpoint: 850px;
     padding-left: 2em;
     padding-top: 0.5em;
   }
+}
+
+.wia_calculator__extra_input_title {
+  margin: 0;
+  display: inline;
 }
 
 .wia_calculator__coverages {
@@ -278,7 +312,11 @@ $wiaCalculatorMobileBreakpoint: 850px;
     }
   }
   &.wia-graph__column--rest-third {
-    width: 65% !important;
+    width: 70% !important;
+
+    @media (max-width: 1000px) {
+      width: 65% !important;
+    }
   }
 }
 
@@ -290,14 +328,13 @@ $wiaCalculatorMobileBreakpoint: 850px;
 
 .wia-graph__top_label {
   font-weight: 700;
-  font-size: 0.9em;
+  font-size: 0.85em;
   text-align: center;
   height: $wiaGraphLabelHeight;
-  padding: 0;
+  padding: 0 0.5em;
   display: flex;
   align-items: center;
   justify-content: center;
-  word-break: break-all;
   line-height: 1em;
 }
 
@@ -403,31 +440,11 @@ $wiaCalculatorMobileBreakpoint: 850px;
   transform: translateY(-50%);
 }
 
-.wia_calculator__tabs {
-  position: relative;
-  margin-top: 1em;
-
-  .wia_calculator__disability_slider {
-
-  }
-
-  .aa-tabs-view__block {
-    &:nth-child(1) {
-      width: 35% !important; //fallback
-      width: calc((100% - 2rem) * 0.35 + 1rem) !important;
+.wia_calculator__disability_slider, .wia_calculator__usage_slider {
+  .noUi-handle:not(.noUi-active) {
+    &:before, &:after {
+      display: none !important;
     }
-    &:nth-child(2) {
-      width: 45% !important; //fallback
-      width: calc((100% - 2rem) * 0.45) !important;
-    }
-    &:nth-child(3) {
-      width: 20% !important; //fallback
-      width: calc((100% - 2rem) * 0.20 + 1rem) !important;
-    }
-  }
-
-  .aa-tabs-view-item__content {
-    padding-top: 4em !important;
   }
 }
 
@@ -437,24 +454,24 @@ $wiaCalculatorMobileBreakpoint: 850px;
   }
   .wia_calculator_mobile {
     display: block;
-  }
-  .aa-slider-input {
-    .aa-slider-input__header {
-      display: block;
-      margin: -0.5em 0;
-      label, .aa-slider-input__hint {
-        display: none;
+
+    .aa-slider-input {
+      .aa-slider-input__header {
+        display: block;
+        margin: -0.5em 0;
+        label, .aa-slider-input__hint {
+          display: none;
+        }
+      }
+
+      .aa-slider-input__slider {
+        margin-top: -1.5rem;
+      }
+
+      input {
+        width: 5rem !important;
       }
     }
-
-    .aa-slider-input__slider {
-      margin-top: -1.5rem;
-    }
-
-    input {
-      width: 5rem !important;
-    }
-
   }
 
   .wia_calculator_mobile h3 {
@@ -505,6 +522,10 @@ $wiaCalculatorMobileBreakpoint: 850px;
       display: block;
     }
   }
+
+  .wia_calculator__summary_bottom {
+    padding-top: 1em;
+  }
 }
 
 .wia_calculator__summary_table {
@@ -524,7 +545,6 @@ $wiaCalculatorMobileBreakpoint: 850px;
     }
     &:nth-child(2) {
       width: 10%;
-      font-size: 1.1em;
     }
     &:nth-child(3) {
       width: 25%;
@@ -552,7 +572,14 @@ $wiaCalculatorMobileBreakpoint: 850px;
 
 .wia_calculator--aegon-blue {
   color: $blue;
+  transition: none;
 }
+
+.wia_calculator--aegon-blue-animate {
+
+  transition: all 500ms linear;
+}
+
 .wia_calculator__bold {
   font-weight: bold;
 }
@@ -620,7 +647,7 @@ $wiaCalculatorMobileBreakpoint: 850px;
   float: left;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1250px) {
   .wia_calculator__extra_inputs__desc {
     width: 100% !important;
     float: none !important;
@@ -631,7 +658,10 @@ $wiaCalculatorMobileBreakpoint: 850px;
   .wia_calculator__extra_inputs [class*="span"] {
     float: none !important;
     width: 100% !important;
-    margin: 0;
+    margin: 0 !important;
+  }
+  .wia_calculator__tabs {
+    margin-top: 1em;
   }
 }
 

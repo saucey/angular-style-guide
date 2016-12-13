@@ -34,6 +34,7 @@
                                class="button orange arrow fnol-endpoint__button">Meld uw schade online</a>
                             <a *ngIf="endpoint.data.button.phone"
                                href="tel:{{ endpoint.data.button.phone }}"
+                               (click)="triggerTealiumForEndpointCall(endpoint.id)"
                                class="button orange icon-right icon-call fnol-endpoint__button">Bel {{ endpoint.data.button.phone }}</a>
                             <a *ngIf="endpoint.data.button.repairShop"
                                href="https://www.aegon.nl/particulier/klantenservice/schade-melden/schade-melden-autoverzekering/schadehersteller-zoeken"
@@ -52,7 +53,7 @@
             </div>
         </div>
         <ul class="arrow" *ngIf="endpoint.data.bottomLink">
-            <li><a [href]="endpoint.data.bottomLink.url">{{ endpoint.data.bottomLink.text }}</a></li>
+            <li class="fnol-endpoint__bottom_link"><a [href]="endpoint.data.bottomLink.url">{{ endpoint.data.bottomLink.text }}</a></li>
         </ul>
     </div>
 
