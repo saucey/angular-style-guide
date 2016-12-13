@@ -1,15 +1,14 @@
 <div class="aa-form-builder" [hidden]="showThankYouMessage">
   <p [innerHTML]="data.options.introText" *ngIf="isString(data.options.introText)"></p>
   <form 
-    class="container_12" 
-    (click)="fireTealiumFormStarted" 
+    class="container_12 aa-form-builder--form" 
+    (click)="fireTealiumFormStarted()" 
     name={{data.options.name}}
      #f="ngForm" (ngSubmit)="save(f.value, f.valid)" novalidate>
-    
     <div class="form-input-row" *ngFor="let list of data.options.inputList">
       <label class="span4 form-input-label" *ngIf="list.inputs!=undefined">
         {{list.label}}
-        <span *ngIf="list.inputs[0].required">*</span>
+        <span *ngIf="list.inputs[0].required" class="aa-form-builder--mandatory-star">*</span>
       </label>
 
       <div class="input-container" *ngIf="list.inputs!=undefined">
@@ -19,11 +18,12 @@
             type="{{input.type}}"
             placeholder="{{input.placeholder}}"
             name="{{input.name}}"
-            [attr.required]="input.required ? true : null"
-            [attr.pattern]="input.pattern ? input.pattern : null"
+            [required]="input.required"
+            [pattern]="input.pattern"
             [(ngModel)]="formData[input.name] = (input.storage) ? getDataFromStorage(input.storage.type, input.storage.object, input.storage.key) : input.value"
             [value]="formData[input.name]"
-            [disabled]="callingService" />
+            [disabled]="callingService"
+            [class.aa-form-builder--submitted]="f.submitted" />
           <label 
             class="radio" 
             *ngIf="input.type=='radio'">
@@ -31,13 +31,21 @@
               type="{{input.type}}"
               name="{{input.name}}"
               [attr.name]="input.name"
-              [attr.required]="input.required ? true : null"
+              [required]="input.required"
               [attr.checked]="input.checked ? 'checked' : null"
               [(ngModel)]="formData[input.name]"
               (click)="formData[input.name] = input.value"
-              [disabled]="callingService" />
+              [disabled]="callingService"
+              [class.aa-form-builder--submitted]="f.submitted" />
             <span class="radio"></span>{{input.label}}
           </label>
+        </div>
+        <div
+          class="form-builder--error-wrapper span12"
+          *ngIf="f.controls[list.inputs[0].name]?.dirty || f.submitted" 
+          [hidden]="f.controls[list.inputs[0].name]?.valid">
+          <div *ngIf="f.controls[list.inputs[0].name]?.errors?.required" class="control-label">{{data.options.formValidationRequired}}</div>
+          <div *ngIf="f.controls[list.inputs[0].name]?.errors?.pattern" class="control-label">{{list.inputs[0].error}}</div>
         </div>
       </div>
 

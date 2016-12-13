@@ -43,7 +43,7 @@ export class AAFormBuilderComponent extends AABaseComponent implements OnInit {
 
   // Get and check pension data, set page structure and call service from blue block component
   public initialize():void {
-    
+    this.fireTealiumFormInit();
   }
 
   public getDataFromStorage(storage: string, object: string, key: string): any {
@@ -62,7 +62,7 @@ export class AAFormBuilderComponent extends AABaseComponent implements OnInit {
   } 
 
   save(model: any, isValid: boolean) {
-      if(!this.isValid())
+      if(!this.isValid(model, isValid))
         return false;
       try {
         let timestamp = new Date().getTime();
@@ -74,13 +74,14 @@ export class AAFormBuilderComponent extends AABaseComponent implements OnInit {
       return false;
   }
 
-  isValid(): boolean {
-    return true;
+  isValid(model, isValid): boolean {
+    return isValid;
   }
 
   callService(model): any {
     this.showError=false;
     this.callingService=true;
+    this.fireTealiumFormSubmitted();
 
     this.formBuilderService.call(this.data.options.submitButton.serviceUrl, this.data.options.serviceCredentials, model, this.data.options.serviceRequest)
       .then((data) => {
@@ -116,4 +117,42 @@ export class AAFormBuilderComponent extends AABaseComponent implements OnInit {
   serviceCallBack(data) {
     // callback code here
   }
+
+  fireTealiumFormInit() {
+    try {
+      if(this.data.options.tealiumTagging.formInit)
+        this.sendTealiumTagging(this.data.options.tealiumTagging.formInit, 'formInit');
+    } catch(err) {
+
+    }
+  }
+
+  fireTealiumFormStarted() {
+    if(this.form_started)
+       return;
+    try {
+      if(this.data.options.tealiumTagging.formStarted)
+        this.sendTealiumTagging(this.data.options.tealiumTagging.formStarted, 'formStarted');
+    } catch(err) {
+      
+    }
+    
+    this.form_started = true;
+  }
+
+  fireTealiumFormSubmitted() {
+    try {
+      if(this.data.options.tealiumTagging.formSubmitted)
+        this.sendTealiumTagging(this.data.options.tealiumTagging.formSubmitted, 'formSubmitted');
+    } catch(err) {
+      
+    }
+  }
+
+  private sendTealiumTagging(tealObj: any, event: string) {
+    let tealiumObj: any = tealObj || {};
+    console.log('Tealium tagging '+event+': ', tealiumObj);
+    aegonTealium(tealiumObj);  
+  }
+
 }

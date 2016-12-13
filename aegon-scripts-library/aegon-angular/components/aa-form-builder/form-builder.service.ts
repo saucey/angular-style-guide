@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers, RequestOptions, Response} from "@angular/http";
 import {Observable} from 'rxjs/Observable';
+import {ReactiveFormsModule} from '@angular/forms'
 
 @Injectable()
 export class FormBuilderService {
@@ -34,11 +35,6 @@ export class FormBuilderService {
   }
 
   public call(serviceUrl: string, serviceCredential: string, reqData: any, reqBody: any): Promise<any> {
-
-    /*return new Promise((resolve) => {
-      resolve({});
-    });*/
-
     let headers = new Headers({
       "Content-Type": "application/json",
       "Authorization" : `Basic ${serviceCredential}`
