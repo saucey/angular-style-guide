@@ -18,5 +18,6 @@ export const defaultOptions = {
   serviceKoPath: "",
   serviceOkCheckOnlyIfExists : false,
   correlationIdPath: "",
-  correlationIdPrefix : ""
+  correlationIdPrefix : "",
+  formValidationRequired: "Invullen van dit veld is verplicht."
 }

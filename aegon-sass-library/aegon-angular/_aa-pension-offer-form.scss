@@ -2,40 +2,50 @@
   max-width: 650px;
 }
 
-.form-input-row {
-    overflow: auto;
-      label.form-input-label {
-        margin-top: 10px;
-        line-height: 44px;
-        @media (max-width: 640px) {
-          width: 100%;
-        }
-        @media (min-width: 641px) {
-          margin-left: 0 !important;
-        }
-      }
-    .input-container {    
-      margin-top: 10px;
-      .input-wrapper {
-        input[type=text], input[type=email], input[type=number], input[type=password] {
-          width: 100%;
-          &.ng-dirty.ng-invalid {
-            border: 2px solid #bb5450;
+form.aa-form-builder--form{
+  .form-input-row {
+      overflow: auto;
+        label.form-input-label {
+          margin-top: 10px;
+          line-height: 44px;
+          span.aa-form-builder--mandatory-star {
+            color: #bb5450;
+          }
+          @media (max-width: 640px) {
+            width: 100%;
+          }
+          @media (min-width: 641px) {
+            margin-left: 0 !important;
           }
         }
-        span.radio {
-          top: -10px !important;
-          margin-left: 3px;
+      .input-container {    
+        margin-top: 10px;
+        .input-wrapper {
+          input[type=text], input[type=email], input[type=number], input[type=password] {
+            width: 100%;
+            &.ng-dirty.ng-invalid, &.aa-form-builder--submitted.ng-invalid {
+              border: 2px solid #bb5450;
+            }
+          }
+          span.radio {
+            top: -10px !important;
+            margin-left: 3px;
+          }
+        }
+        .form-builder--error-wrapper {
+          text-align: center;
+          color: #bb5450;
+          min-height: 0;
+        }
+      }
+      .submit-form-button--wrapper {
+        text-align: center;
+        button {
+          margin-top: 30px;
+          @media (max-width: 640px) {
+            width: 100%;
+          }
         }
       }
     }
-    .submit-form-button--wrapper {
-      text-align: center;
-      button {
-        margin-top: 30px;
-        @media (max-width: 640px) {
-          width: 100%;
-        }
-      }
-    }
-  }
+}
