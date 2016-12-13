@@ -5,11 +5,18 @@
 form.aa-form-builder--form{
   .form-input-row {
       overflow: auto;
+
         label.form-input-label {
           margin-top: 10px;
-          line-height: 44px;
-          span.aa-form-builder--mandatory-star {
+          display: flex;
+          align-items: center;
+          height: 44px;
+          line-height: 1;
+          &.aa-form-builder--mandatory-star::after {
+            content: "*";
             color: #bb5450;
+            margin-right: 35px;
+            margin-left: 5px;
           }
           @media (max-width: 640px) {
             width: 100%;
@@ -36,6 +43,7 @@ form.aa-form-builder--form{
           text-align: center;
           color: #bb5450;
           min-height: 0;
+          margin-left: 0 !important;
         }
       }
       .submit-form-button--wrapper {

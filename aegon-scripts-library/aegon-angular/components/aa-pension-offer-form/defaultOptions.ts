@@ -32,6 +32,11 @@ export const defaultOptions = {
     }
   },
   form : {
+    tealiumTagging: {
+      formInit: {},
+      formStarted: {},
+      formSubmitted: {}
+    },
     name: 'form_name',
     redirectUrl: '/template-aa-pension-offer-confirmation.html',
     inputList: [
@@ -96,8 +101,7 @@ export const defaultOptions = {
         inputs: [
           { width: 7, type: 'email', placeholder: '', name: 'to', required: true,  value: '', error: 'Error message', storage: false }
         ]
-      },
-      { type: 'hidden', name: 'nascosto', value: 'ciao', storage: {type: 'session', object: 'obj', key: 'k'} }
+      }
     ],
     submitButton: {
       serviceUrl: 'https://www.test.aegon.nl/data/thund/thund/dip',

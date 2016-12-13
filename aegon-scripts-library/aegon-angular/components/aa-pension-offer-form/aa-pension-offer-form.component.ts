@@ -46,12 +46,13 @@ export class AAPensionOfferFormComponent extends AABaseComponent implements OnIn
     } else { 
       if(this.data.options.start.redirect == true) this.redirectToStartPage(); 
     }  
-
     if(this.getProductTipe()=="Uitkerend Beleggingspensioen") {
-      this.sendTealiumTagging('offerte_aanvraag_uitkerend_beleggingspensioen', 'variabele_pensioenuitkering', 'variabele_pensioenuitkering', 0, 'offerte_aanvraag_uitkerend_beleggingspensioen', 'form_view');
+      this.data.options.form.tealiumTagging.formInit = this.getTealiumObj('offerte_aanvraag_uitkerend_beleggingspensioen', 'variabele_pensioenuitkering', 'variabele_pensioenuitkering', 0, 'offerte_aanvraag_uitkerend_beleggingspensioen', 'form_view');
     } else {
-      this.sendTealiumTagging('offerte_aanvraag_direct_ingaand_pensioen', 'direct_ingaand_pensioen', 'direct_ingaand_pensioen', 0, 'offerte_aanvraag_direct_ingaand_pensioen', 'form_view');   
+      this.data.options.form.tealiumTagging.formInit = this.getTealiumObj('offerte_aanvraag_direct_ingaand_pensioen', 'direct_ingaand_pensioen', 'direct_ingaand_pensioen', 0, 'offerte_aanvraag_direct_ingaand_pensioen', 'form_view');   
     }
+    this.setTealiumFormStarted();
+    this.data.options.form.tealiumTagging.formSubmitted = false;
   }
 
   // Get the session storage from an existing object or an empty object 
@@ -83,7 +84,7 @@ export class AAPensionOfferFormComponent extends AABaseComponent implements OnIn
     return (template=="vpuFixed" || template=="vpuVariable") ? "Uitkerend Beleggingspensioen" : "Uitkerend Garantiepensioen";
   }
 
-  private sendTealiumTagging(_page_cat_2_name: string, _page_cat_5_product: string, _product_name: string, _page_step: number, _form_name: string, _event: string) {
+  private getTealiumObj(_page_cat_2_name: string, _page_cat_5_product: string, _product_name: string, _page_step: number, _form_name: string, _event: string) {
     let tealiumObj: any = {
       page_cat_1_type: 'formulier',
       page_cat_2_name: _page_cat_2_name,
@@ -96,51 +97,14 @@ export class AAPensionOfferFormComponent extends AABaseComponent implements OnIn
       product_category: ['pensioen'],
       event: _event
     };
-    console.log('Tealium tagging: ', tealiumObj);
-    aegonTealium(tealiumObj);  
+    return tealiumObj;
   }
 
-  fireTealiumFormStarted() {
-    if(this.form_started)
-       return;
-
+  setTealiumFormStarted() {
     if(this.getProductTipe()=="Uitkerend Beleggingspensioen") {
-      this.sendTealiumTagging('offerte_aanvraag_uitkerend_beleggingspensioen', 'variabele_pensioenuitkering', 'variabele_pensioenuitkering', 1, 'offerte_aanvraag_uitkerend_beleggingspensioen', 'form_started');
+      this.data.options.form.tealiumTagging.formStarted = this.getTealiumObj('offerte_aanvraag_uitkerend_beleggingspensioen', 'variabele_pensioenuitkering', 'variabele_pensioenuitkering', 1, 'offerte_aanvraag_uitkerend_beleggingspensioen', 'form_started');
     } else {
-      this.sendTealiumTagging('offerte_aanvraag_direct_ingaand_pensioen', 'direct_ingaand_pensioen', 'direct_ingaand_pensioen', 1, 'offerte_aanvraag_direct_ingaand_pensioen', 'form_started');   
+      this.data.options.form.tealiumTagging.formStarted = this.getTealiumObj('offerte_aanvraag_direct_ingaand_pensioen', 'direct_ingaand_pensioen', 'direct_ingaand_pensioen', 1, 'offerte_aanvraag_direct_ingaand_pensioen', 'form_started');   
     }
-
-    this.form_started = true;
    }
-
-  public formData: Object = {};
-
-  public getDataFromStorage(storage: string, object: string, key: string): any {
-    console.log(storage, object, key);
-    var item: any = "";
-    try {
-      item = clientStorage[storage].getItem(object)[key];
-    } catch(err) {
-      console.log("Can't get data from storage: ", err);
-    }
-    return item;
-  }
-
-  save(model: any, isValid: boolean) {
-      // check if model is valid
-      // if valid, call API to save customer
-      for (let key in model) {
-        if(model[key]===undefined) {
-          console.log("Undefined", this.thisElement.nativeElement.querySelector);
-        } 
-      }
-      console.log('formData', this.formData);
-      console.log('model', model);
-      //location.href = this.data.options.form.redirectUrl;
-      return false;
-  }
-
-  isValid(regExp: any, required: boolean): boolean {
-    return false;
-  }
 }

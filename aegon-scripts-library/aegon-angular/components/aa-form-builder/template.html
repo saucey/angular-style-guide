@@ -6,9 +6,9 @@
     name={{data.options.name}}
      #f="ngForm" (ngSubmit)="save(f.value, f.valid)" novalidate>
     <div class="form-input-row" *ngFor="let list of data.options.inputList">
-      <label class="span4 form-input-label" *ngIf="list.inputs!=undefined">
+      <label class="span4 form-input-label" *ngIf="list.inputs!=undefined" 
+        [class.aa-form-builder--mandatory-star]="list.inputs[0].required">
         {{list.label}}
-        <span *ngIf="list.inputs[0].required" class="aa-form-builder--mandatory-star">*</span>
       </label>
 
       <div class="input-container" *ngIf="list.inputs!=undefined">
