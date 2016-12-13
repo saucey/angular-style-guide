@@ -2,7 +2,7 @@
   <p [innerHTML]="data.options.introText" *ngIf="isString(data.options.introText)"></p>
   <form 
     class="container_12 aa-form-builder--form" 
-    (click)="fireTealiumFormStarted" 
+    (click)="fireTealiumFormStarted()" 
     name={{data.options.name}}
      #f="ngForm" (ngSubmit)="save(f.value, f.valid)" novalidate>
     <div class="form-input-row" *ngFor="let list of data.options.inputList">

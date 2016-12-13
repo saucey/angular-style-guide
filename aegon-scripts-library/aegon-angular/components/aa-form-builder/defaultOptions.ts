@@ -19,5 +19,10 @@ export const defaultOptions = {
   serviceOkCheckOnlyIfExists : false,
   correlationIdPath: "",
   correlationIdPrefix : "",
-  formValidationRequired: "Invullen van dit veld is verplicht."
+  formValidationRequired: "Invullen van dit veld is verplicht.",
+  tealiumTagging: {
+    formInit: {},
+    formStarted: {},
+    formSubmitted: {}
+  }
 }
