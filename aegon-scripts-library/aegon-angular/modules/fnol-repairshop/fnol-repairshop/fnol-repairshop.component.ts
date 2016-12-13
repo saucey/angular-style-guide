@@ -5,10 +5,9 @@ import {
 import { FnolRepairshopService } from "../shared/services/fnol.data.service";
 import { OrderBy } from "../../../pipes/orderBy.pipe";
 import { FNOLRepairshopTealiumService } from "../shared/services/fnol-repairshop-tealium.service";
-
+import { PaginationInstance } from "ng2-pagination";
 
 const template = require('./template.html');
-
 const INFO_FORM: string = 'info_form';
 const RESULT_MOBILE: string = 'result_mobile';
 
@@ -33,6 +32,12 @@ export class FNOLRepairshopComponent implements AfterViewInit {
   public sortDirection = 'DESC';
   public loadingResults = false;
   public formSubmitted = false;
+
+  public config: PaginationInstance = {
+    id: 'repairshop',
+    itemsPerPage: 10,
+    currentPage: 1
+  };
 
   public repairshop = {
     postcode: null,
@@ -101,7 +106,7 @@ export class FNOLRepairshopComponent implements AfterViewInit {
    * @returns {boolean}
    */
   public isPostcodeValid(postcode): boolean {
-    if (/^[1-9][0-9]{3}\s?[a-zA-Z]{2}$/.test(postcode) || /^(?=(\s*[a-zA-Z]){1,25}$).*$/.test(postcode)) {
+    if (/^[1-9][0-9]{3}\s?[a-zA-Z]{2}$/.test(postcode) || /^(?=(\s*[a-zA-Z]){1,25}$).*$/.test(postcode) || /^[1-9][0-9]{3}/.test(postcode)) {
       return true;
     } else {
       return false;
