@@ -131,7 +131,9 @@
               </tr>
               <tr>
                 <td class="mob_phone icon-phone txtBold">{{ party.phone }}</td>
-                <td class="mob_distance">{{ party.address.radius }} Km</td>
+                <td class="mob_distance">
+                  <span *ngIf="party.address.radius">{{ party.address.radius }} Km</span>
+                </td>
               </tr>
               <tr colspan="2">
                 <td class="mob_address">
@@ -212,7 +214,9 @@
           <td class="rating">
             <span class="rating-star fnol-repairshop__star--{{party.ranking}}"></span>
           </td>
-          <td class="distance">{{ party.address.radius }} Km</td>
+          <td class="distance">
+            <span *ngIf="party.address.radius">{{ party.address.radius }} Km</span>
+          </td>
           <td class="location"><a
             (click)="triggerTealiumForGoToMap()"
             href="https://www.google.nl/maps?q={{ party.address.street}}+{{party.address.houseNumber}},+{{party.address.city}}=nl"

@@ -106,7 +106,7 @@ export class FNOLRepairshopComponent implements AfterViewInit {
    * @returns {boolean}
    */
   public isPostcodeValid(postcode): boolean {
-    if (/^[1-9][0-9]{3}\s?[a-zA-Z]{2}$/.test(postcode) || /^(?=(\s*[a-zA-Z]){1,25}$).*$/.test(postcode)) {
+    if (/^[1-9][0-9]{3}\s?[a-zA-Z]{2}$/.test(postcode) || /^(?=(\s*[a-zA-Z]){1,25}$).*$/.test(postcode) || /^[1-9][0-9]{3}/.test(postcode)) {
       return true;
     } else {
       return false;
