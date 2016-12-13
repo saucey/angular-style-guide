@@ -296,7 +296,7 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
 
     if (this.roundToFives(this.disability.value) < 35) {
 
-      if (this.externalInput.productsIds.indexOf('WIA_35MIN_BODEM') > -1) {
+      if (this.externalInput.productsIds.indexOf('WIA_BODEM') > -1) {
         titles[0] = 'vanaf 3e jaar tot het 10.5e jaar';
       } else if (this.externalInput.productsIds.indexOf('WIA_35MIN') > -1) {
 
@@ -336,7 +336,7 @@ export class WiaCalculatorComponent extends AABaseComponent implements OnInit, A
     if (column === 3) {
       //hide third column when disability<35% and no WIA35 OR BODEM products
       if (this.roundToFives(this.disability.value) < 35 && this.externalInput.productsIds.indexOf('WIA_35MIN') === -1
-        && this.externalInput.productsIds.indexOf('WIA_35MIN_BODEM') === -1) {
+        && this.externalInput.productsIds.indexOf('WIA_BODEM') === -1) {
         return false;
       }
 

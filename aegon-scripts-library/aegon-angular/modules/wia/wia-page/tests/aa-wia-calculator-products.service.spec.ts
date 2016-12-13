@@ -473,14 +473,14 @@ describe('CalculatorProductService', () => {
       expect(actualProductsList).toEqual(expectedProductsList);
     });
 
-    xit('should add the missing attributes for WIA_35MIN and WIA_35MIN_BODEM', () => {
+    xit('should add the missing attributes for WIA_35MIN and WIA_BODEM', () => {
       let productsList = [
           {
             "id": "WIA_35MIN",
             "attrs": []
           },
           {
-            "id": "WIA_35MIN_BODEM",
+            "id": "WIA_BODEM",
             "attrs": []
           }
         ],
@@ -511,7 +511,7 @@ describe('CalculatorProductService', () => {
             ]
           },
           {
-            "id": "WIA_35MIN_BODEM",
+            "id": "WIA_BODEM",
             "attrs": [
               {
                 "id": "BENEFIT_PERIOD",
