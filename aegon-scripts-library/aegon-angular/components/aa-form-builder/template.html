@@ -5,7 +5,6 @@
     (click)="fireTealiumFormStarted" 
     name={{data.options.name}}
      #f="ngForm" (ngSubmit)="save(f.value, f.valid)" novalidate>
-    
     <div class="form-input-row" *ngFor="let list of data.options.inputList">
       <label class="span4 form-input-label" *ngIf="list.inputs!=undefined">
         {{list.label}}
